@@ -37,6 +37,9 @@ class OPCUAServer:
         await self._time_node.set_read_only()
         await self._running_node.set_read_only()
         await self._real_time_factor_node.set_writable()
+        await simulation.add_method(self._namespace_index, "Start", self._start_method)
+        await simulation.add_method(self._namespace_index, "Stop", self._stop_method)
+        await simulation.add_method(self._namespace_index, "Reset", self._reset_method)
         measurements = await tep.add_object(self._namespace_index, "Measurements")
         for index, value in enumerate(self.simulator.get_measurements(), start=1):
             node = await measurements.add_variable(self._namespace_index, f"XMEAS{index}", float(value))
@@ -49,6 +52,15 @@ class OPCUAServer:
             self._mv_nodes.append(node)
         await self._server.start()
         await self.update(False)
+
+    async def _start_method(self, parent):
+        await self.start_simulation()
+
+    async def _stop_method(self, parent):
+        await self.stop_simulation()
+
+    async def _reset_method(self, parent):
+        await self.reset_simulation()
 
     async def update(self, running=False):
         await self._time_node.write_value(float(self.simulator.get_time_hours()))
@@ -109,3 +121,9 @@ class OPCUAServer:
         if self._server is not None:
             await self._server.stop()
             self._server = None
+
+    async def run(self):
+        if self._server is None:
+            await self.start()
+        while True:
+            await asyncio.sleep(1.0)
