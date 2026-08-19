@@ -63,6 +63,34 @@ class SimulationRecordingSession:
             **kwargs,
         )
 
+    def start(self):
+        """Record that the simulation run started."""
+        return self.record_event(
+            "SimulationStarted",
+            "Run",
+            source="simulation",
+        )
+
+    def complete(self):
+        """Record that the simulation run completed."""
+        return self.record_event(
+            "SimulationCompleted",
+            "Run",
+            source="simulation",
+        )
+
+    def reset(self):
+        """Record that the simulation was reset.
+
+        The session does not call the simulator's reset method. This keeps
+        lifecycle recording separate from simulator control.
+        """
+        return self.record_event(
+            "SimulationReset",
+            "Run",
+            source="simulation",
+        )
+
     def save(self, metadata: dict | None = None) -> dict:
         """Persist the current run and return the created file paths."""
         return self.storage.write_run(
