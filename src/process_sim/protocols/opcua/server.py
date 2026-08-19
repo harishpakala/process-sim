@@ -3,10 +3,16 @@
 from __future__ import annotations
 
 import asyncio
+from typing import Callable
 
 
 class OPCUAServer:
-    """Expose a process simulator through an OPC UA server."""
+    """Expose a process simulator through an OPC UA server.
+
+    ``event_callback`` is an optional integration hook for recording semantic
+    OPC UA events without making the OPC UA protocol layer depend on the
+    recording package. It is called when an OPC UA client changes an XMV value.
+    """
 
     def __init__(
         self,
@@ -15,6 +21,7 @@ class OPCUAServer:
         namespace_uri="urn:process-sim:opcua",
         real_time_factor=1.0,
         update_interval_seconds=1.0,
+        event_callback: Callable[[int, float, float], None] | None = None,
     ):
         if real_time_factor <= 0:
             raise ValueError("real_time_factor must be > 0")
@@ -24,6 +31,7 @@ class OPCUAServer:
         self.simulator = simulator
         self.endpoint = endpoint
         self.namespace_uri = namespace_uri
+        self.event_callback = event_callback
         self._server = None
         self._namespace_index = None
         self._time_node = None
@@ -31,6 +39,7 @@ class OPCUAServer:
         self._real_time_factor_node = None
         self._measurement_nodes = []
         self._mv_nodes = []
+        self._last_synced_mvs = []
         self._simulation_task = None
         self._real_time_factor = float(real_time_factor)
         self._update_interval_seconds = float(update_interval_seconds)
@@ -66,6 +75,7 @@ class OPCUAServer:
             node = await mvs.add_variable(self._namespace_index, f"XMV{index}", float(value))
             await node.set_writable()
             self._mv_nodes.append(node)
+        self._last_synced_mvs = [float(value) for value in self.simulator.get_manipulated_variables()]
 
         await self._server.start()
         await self.update(False)
@@ -89,9 +99,14 @@ class OPCUAServer:
             await node.write_value(float(value))
 
     async def _sync_manipulated_variables(self):
-        """Apply OPC UA XMV writes to the simulator before each step."""
+        """Apply OPC UA XMV writes and report client-driven changes."""
         for index, node in enumerate(self._mv_nodes, start=1):
-            self.simulator.set_manipulated_variable(index, float(await node.read_value()))
+            value = float(await node.read_value())
+            previous = self._last_synced_mvs[index - 1]
+            if value != previous and self.event_callback is not None:
+                self.event_callback(index, previous, value)
+            self._last_synced_mvs[index - 1] = value
+            self.simulator.set_manipulated_variable(index, value)
 
     async def _simulation_loop(self):
         try:
@@ -124,6 +139,7 @@ class OPCUAServer:
     async def reset_simulation(self):
         await self.stop_simulation()
         self.simulator.reset()
+        self._last_synced_mvs = [float(value) for value in self.simulator.get_manipulated_variables()]
         await self.update(False)
 
     async def set_real_time_factor(self, value):
