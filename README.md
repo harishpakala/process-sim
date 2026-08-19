@@ -8,7 +8,7 @@ The project deliberately separates the **reference process model** from the surr
 
 ## Current status
 
-**Phase 1 foundation complete; Phase 3 fault/scenario foundation implemented; Phase 4 OPC UA initial integration complete; Phase 5 recording foundation implemented.**
+**The implementation currently spans Phases 1, 3, 4, and 5. The complete roadmap contains 10 detailed phases organized under four higher-level architectural pillars.**
 
 Implemented today:
 
@@ -37,6 +37,43 @@ Implemented today:
 - OPC UA operator XMV changes routable into the canonical event log
 
 The implementation deliberately advances across phases where useful. The roadmap describes the **target architecture and research direction**, not a strict sequential implementation order.
+
+## Four architectural pillars
+
+The 10 detailed implementation phases are grouped into four higher-level architectural and research pillars:
+
+1. **Digital Twin & Simulation** — Phases 1–4
+2. **Data & Temporal Infrastructure** — Phase 5
+3. **Semantic Digital Thread** — Phases 6–7
+4. **Industrial Intelligence** — Phases 8–10
+
+The four-pillar view communicates the overall architecture; the 10-phase roadmap below remains the detailed engineering plan.
+
+```text
+                INDUSTRIAL AI
+                     │
+             ┌───────┴────────┐
+             │ 4. Intelligence│
+             │ GraphRAG / AI  │
+             └───────┬────────┘
+                     │
+          ┌──────────┴──────────┐
+          │ 3. Semantic         │
+          │ Digital Thread      │
+          │ AAS / eCl@ss / QUDT │
+          │ DEXPI / ECAD / BOM  │
+          └──────────┬──────────┘
+                     │
+          ┌──────────┴──────────┐
+          │ 2. Temporal Data    │
+          │ TSDB + Events + TKG │
+          └──────────┬──────────┘
+                     │
+          ┌──────────┴──────────┐
+          │ 1. Digital Twin     │
+          │ TEP / Faults / OPCUA│
+          └─────────────────────┘
+```
 
 ## Research foundation
 
@@ -442,7 +479,7 @@ Parquet is the current portable intermediate format, not the final production hi
 
 ## Roadmap
 
-The project uses ten architectural phases. The phases are **not a rigid waterfall**; the implementation advances across them where doing so establishes useful foundations.
+The project uses **ten detailed implementation phases**, grouped into the four architectural pillars above. The phases are **not a rigid waterfall**; the implementation advances across them where doing so establishes useful foundations.
 
 ### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
 
@@ -512,5 +549,120 @@ Next:
 
 - semantic engineering names and units
 - OPC UA EUInformation and quality/status/timestamps
-- subscriptions and client integration tests
-- process...
+- richer alarms and events
+- external SCADA/HMI integration tests
+- security and deployment configuration
+
+### Phase 5 — Time-Series and Temporal Knowledge Infrastructure — RECORDING FOUNDATION IMPLEMENTED
+
+Implemented foundation:
+
+- canonical `Observation` and `Event` models
+- `SimulationRecorder`
+- run manifests and provenance
+- storage-neutral recording session
+- Parquet persistence
+- observation/event separation
+- operator and fault lifecycle event recording
+
+Next:
+
+- historian/time-series backend integration
+- temporal event model expansion
+- temporal knowledge graph schema
+- event-to-observation correlation
+- historical query and replay interfaces
+
+### Phase 6 — Engineering & Semantic Digital Thread — PLANNED
+
+- AAS submodel templates
+- domain template governance and validation
+- eCl@ss classification
+- QUDT quantity kinds and units
+- OWL/SHACL semantic foundation
+- deterministic semantic lifting
+- DEXPI/P&ID integration
+- ECAD integration
+- cross-domain asset identity
+- engineering provenance
+
+The guiding workflow is **model first → semantically annotate → validate → lift → integrate → reason**.
+
+### Phase 7 — BOM & Enterprise Integration — PLANNED
+
+- EBOM, MBOM, service/spare BOM
+- material and asset master data
+- ERP references
+- manufacturer and supplier part identities
+- quantities, positions, revisions, lifecycle/status
+- enterprise-to-engineering identity resolution
+- cross-domain digital-thread relationships
+
+### Phase 8 — Web SCADA / HMI — PLANNED
+
+- browser-based operational interface
+- live process visualization
+- trends and historical views
+- alarms and events
+- scenario controls
+- operator actions
+- engineering-name and semantic metadata integration
+
+### Phase 9 — Knowledge Graph & GraphRAG — PLANNED
+
+- industrial knowledge graph
+- temporal knowledge graph
+- SPARQL and engineering queries
+- competency-question-driven reasoning
+- graph-based retrieval
+- GraphRAG over engineering, operational, and enterprise context
+- evidence and provenance-aware answers
+
+### Phase 10 — Industrial AI Platform — PLANNED
+
+- industrial agents
+- fault diagnosis and root-cause reasoning
+- temporal reasoning over process behavior
+- engineering-aware recommendations
+- evidence-backed operational assistance
+- controlled agent actions
+- benchmarked evaluation against time-series-only and graph-enhanced baselines
+
+## Research direction
+
+The strongest research direction is not simply to build a larger SCADA or simulation platform. The intended contribution is a **provenance-aware industrial digital thread** that connects:
+
+```text
+Engineering Models
+       │
+       ├── DEXPI / P&ID
+       ├── ECAD
+       ├── BOM
+       └── ERP
+              │
+              ▼
+       Semantic Digital Thread
+              │
+              ▼
+       Process Simulation
+              │
+              ▼
+       Telemetry + Events + Faults
+              │
+              ▼
+       Temporal Knowledge Graph
+              │
+              ▼
+       GraphRAG / Industrial AI
+```
+
+The TEP should serve as a controlled, reproducible experimental environment. Future evaluation should compare time-series-only retrieval against combinations of time-series data, engineering knowledge, temporal events, and provenance-aware graph reasoning.
+
+The intended evaluation questions include:
+
+1. Does temporal knowledge improve operational-context retrieval compared with time-series-only retrieval?
+2. Do engineering relationships plus telemetry improve fault and root-cause identification?
+3. Does explicit provenance reduce unsupported or unverifiable AI conclusions?
+4. Can the same semantic identity connect engineering, enterprise, simulation, and operational representations consistently?
+
+The long-term goal is an industrial platform in which **simulation, digital-thread integration, temporal data, semantic reasoning, and industrial AI form one reproducible architecture rather than separate systems**.
