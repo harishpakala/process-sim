@@ -1,0 +1,11 @@
+scenario: reactor_sensor_drift
+metadata:
+  purpose: controlled_sensor_fault_benchmark
+  random_seed: 42
+faults:
+  - id: reactor-temperature-drift
+    type: drift
+    target: XMEAS9
+    magnitude: 2.0
+    start: 1.0
+    duration: 0.5
