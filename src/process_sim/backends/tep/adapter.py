@@ -44,25 +44,31 @@ class TEPAdapter:
         self.fault_event_sink = fault_event_sink
         self._active_fault_ids: set[str] = set()
         self._fault_managed_idvs: set[int] = set()
+        self._fault_previous_idvs: dict[int, int] = {}
 
     @property
     def backend(self) -> str:
         return self.simulator.backend
 
+    @property
+    def random_seed(self) -> Optional[int]:
+        """Expose the configured seed when the native simulator provides it."""
+        return getattr(self.simulator, "random_seed", None)
+
     def reset(self) -> None:
         self.simulator.initialize()
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
+        self._fault_previous_idvs.clear()
 
     def step(self, n_steps: int = 1) -> bool:
-        """Advance using native TEP steps, applying scheduled process faults first."""
+        """Advance using native TEP steps with fault state synchronized first."""
         if n_steps < 1:
             raise ValueError("n_steps must be >= 1")
         result = False
         for _ in range(n_steps):
-            self._apply_process_disturbance_faults()
+            self.sync_faults()
             result = self.simulator.step(n_steps=1)
-            self._publish_fault_lifecycle_events()
         return result
 
     def get_time_hours(self) -> float:
@@ -106,6 +112,7 @@ class TEPAdapter:
     def clear_disturbances(self) -> None:
         self.simulator.clear_disturbances()
         self._fault_managed_idvs.clear()
+        self._fault_previous_idvs.clear()
 
     def get_disturbances(self):
         return self.simulator.get_disturbances()
@@ -120,6 +127,17 @@ class TEPAdapter:
             self.fault_event_sink = fault_event_sink
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
+        self._fault_previous_idvs.clear()
+
+    def sync_faults(self) -> None:
+        """Apply scheduled process faults and emit lifecycle events at current time.
+
+        Synchronization occurs before a native simulator step. This makes a
+        fault scheduled at time ``t`` effective for the step beginning at ``t``
+        and records activation/deactivation at the actual simulation boundary.
+        """
+        self._apply_process_disturbance_faults()
+        self._publish_fault_lifecycle_events()
 
     def _process_disturbance_index(self, fault) -> int:
         """Resolve a fault target to a native 1-based TEP IDV index.
@@ -151,12 +169,13 @@ class TEPAdapter:
         ]
         active_idvs = {self._process_disturbance_index(fault) for fault in active_faults}
 
-        # Only clear IDVs previously owned by this fault layer. This avoids
-        # overwriting manually configured/native disturbances on other IDVs.
-        for index in self._fault_managed_idvs - active_idvs:
-            self.simulator.set_disturbance(index, 0)
+        for index in sorted(active_idvs - self._fault_managed_idvs):
+            self._fault_previous_idvs[index] = int(self.get_disturbances()[index - 1])
 
-        for index in active_idvs:
+        for index in sorted(self._fault_managed_idvs - active_idvs):
+            self.simulator.set_disturbance(index, self._fault_previous_idvs.pop(index, 0))
+
+        for index in sorted(active_idvs):
             self.simulator.set_disturbance(index, 1)
 
         self._fault_managed_idvs = active_idvs
