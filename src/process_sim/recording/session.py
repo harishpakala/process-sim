@@ -57,6 +57,20 @@ class SimulationRecordingSession:
             self.simulator.get_time_hours(), *args, **kwargs
         )
 
+    def record_fault_event(self, event: dict):
+        """Record a FaultManager lifecycle event through the canonical event model."""
+        return self.recorder.record_event(
+            event.get("simulation_time_hours", self.simulator.get_time_hours()),
+            event["event_type"],
+            event["target"],
+            source="fault-manager",
+            metadata={
+                "fault_id": event["fault_id"],
+                "fault_type": event["fault_type"],
+                **event.get("metadata", {}),
+            },
+        )
+
     def start(self):
         """Record that the simulation run started and timestamp its manifest."""
         self.manifest.start()
