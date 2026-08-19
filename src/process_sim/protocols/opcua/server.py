@@ -31,7 +31,7 @@ class OPCUAServer:
     def __init__(
         self,
         simulator,
-        endpoint: str = "opc.tcp://0.0.0.0:4840/process-sim/",
+        endpoint: str = "opc.tcp://0.0.0.0:4841/process-sim/",
         namespace_uri: str = "urn:process-sim:opcua",
     ) -> None:
         self.simulator = simulator
