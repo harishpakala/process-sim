@@ -1,0 +1,11 @@
+scenario: reactor_sensor_bias
+metadata:
+  description: Reactor temperature sensor bias experiment
+  random_seed: 42
+faults:
+  - id: reactor-temperature-bias
+    type: bias
+    target: XMEAS9
+    magnitude: 5.0
+    start: 1.0
+    duration: 0.5
