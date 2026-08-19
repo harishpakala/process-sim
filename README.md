@@ -2,11 +2,11 @@
 
 `process-sim` is an open industrial process simulation and digital-twin platform. It starts with the Tennessee Eastman Process (TEP) as the scientific reference model and is designed to evolve into an industrial knowledge, temporal-data, and AI platform.
 
-The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, semantic modeling, and future AI foundations around it.
+The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
 
 ## Current status
 
-**Phase 1 foundation complete; Phase 4 OPC UA integration implemented; Phase 5 recording foundation started.**
+**Phase 1 foundation complete; Phase 4 OPC UA initial integration complete; Phase 5 recording foundation implemented; Phase 3 fault injection foundation now implemented.**
 
 Implemented today:
 
@@ -20,10 +20,47 @@ Implemented today:
 - OPC UA XMEAS/XMV exposure and XMV write bridge
 - canonical `Observation` and `Event` models
 - `SimulationRecorder`
+- `RunManifest` for simulation provenance
 - Parquet persistence with one directory per simulation run
 - recording and inspection examples
+- `Fault`, `FaultType`, and `FaultManager` primitives
+- bias, drift, stuck, and process-disturbance fault definitions
+- fault activation/deactivation lifecycle events
+- FaultManager integration with TEP XMEAS/XMV publication
+- fault lifecycle events routable into the canonical recorder
+- OPC UA operator XMV changes routable into the canonical event log
 
-The implementation has deliberately started Phase 5 before all Phase 2/3 capabilities are complete. The roadmap below describes the **target architecture and remaining work**, not a strict sequential implementation order.
+The implementation deliberately advances across phases where useful. The roadmap below describes the **target architecture and remaining work**, not a strict sequential implementation order.
+
+## Current architecture
+
+```text
+                           process-sim
+                                │
+                ┌───────────────┼────────────────┐
+                │               │                │
+           TEPAdapter      FaultManager       OPC UA
+                │               │                │
+                └───────────────┼────────────────┘
+                                │
+                           Simulation
+                                │
+                     ┌──────────┴──────────┐
+                     │                     │
+                Observations            Events
+                     │                     │
+                     └──────────┬──────────┘
+                                ▼
+                        Recording Session
+                                │
+                    ┌───────────┴───────────┐
+                    ▼                       ▼
+               Parquet data          Run Manifest
+                    │                       │
+                    └───────────┬───────────┘
+                                ▼
+                     future TSDB / Temporal KG
+```
 
 ## Current OPC UA namespace
 
@@ -49,9 +86,69 @@ Application namespace URI:
 urn:process-sim:opcua
 ```
 
-The current development server uses `opc.tcp://0.0.0.0:4841/process-sim/` because port 4840 was already occupied in the development environment.
+The development server currently uses `opc.tcp://0.0.0.0:4841/process-sim/` because port 4840 was occupied in the development environment.
 
-OPC UA does not own the deterministic process clock. The server provides an asynchronous integration boundary, while simulation orchestration remains responsible for advancing the model.
+## Fault injection foundation
+
+The first FaultManager layer is now part of the platform core:
+
+```text
+FaultManager
+    │
+    ├── Bias
+    ├── Drift
+    ├── Stuck
+    └── Process disturbance
+```
+
+Faults contain an ID, type, target, timing, magnitude/value, and metadata. They can be scheduled and queried by simulation time.
+
+Signal-level faults currently operate at the TEP adapter boundary:
+
+```text
+TEP process model
+       │
+       ▼
+   TEPAdapter
+       │
+       ▼
+ FaultManager
+   /       \
+XMEAS      XMV
+sensor    actuator
+faults     faults
+```
+
+Process disturbances are intentionally kept separate from generic signal transformation. The next fault increment will connect scenario-managed process disturbances to native TEP IDVs.
+
+Fault lifecycle events currently include:
+
+```text
+FaultActivated
+FaultDeactivated
+```
+
+They can be recorded through the same canonical `Event` model used for simulation lifecycle and operator events.
+
+## Run provenance
+
+Each recording run has a `RunManifest` containing:
+
+```text
+Run
+├── run_id
+├── simulator
+├── backend
+├── backend_version
+├── random_seed
+├── real_time_factor
+├── scenario
+├── started_at
+├── completed_at
+└── metadata
+```
+
+This provides the foundation for reproducible scenario and fault experiments.
 
 ## Recording foundation
 
@@ -65,17 +162,15 @@ Simulation
     └── Events ────────► SimulationRecorder ──► event log / future Temporal KG
 ```
 
-Canonical records contain run identity, deterministic simulation time, wall-clock recording time, variable/event identity, value or event semantics, source, and provenance metadata.
-
-`Observation` is used for values such as XMEAS and XMV. TEP XMEAS observations now carry engineering units from the reference mapping. XMV units remain unset until a sufficiently authoritative source is identified rather than inventing units.
+`Observation` is used for values such as XMEAS and XMV. TEP XMEAS observations carry engineering units from the reference mapping. XMV units remain unset until an authoritative source is identified.
 
 `Event` is reserved for semantically meaningful occurrences such as operator actions, faults, alarms, controller transitions, and simulation lifecycle changes.
 
-The recorder does not control or slow the simulator. It is intentionally pull-based in the current implementation: callers decide when to capture a snapshot.
+The recorder does not control or slow the simulator. It is intentionally pull-based: callers decide when to capture a snapshot.
 
 ## Recording a TEP run
 
-Install the recording dependencies first:
+Install the recording dependencies:
 
 ```bash
 pip install -r requirements-recording.txt
@@ -93,7 +188,7 @@ Record a one-hour Python-backend run:
 python examples/record_tep_run.py --hours 1
 ```
 
-Record less frequently, for example every 10 native steps:
+Record every 10 native steps:
 
 ```bash
 python examples/record_tep_run.py --hours 1 --interval 10
@@ -116,42 +211,27 @@ data/
         └── events.parquet
 ```
 
-The current Parquet layout is an **intermediate portable storage format**, not the final production historian architecture.
+Parquet is the current portable intermediate format, not the final production historian architecture.
 
 ## Temporal data strategy
 
-A central architectural decision is to separate high-frequency numerical telemetry from semantic temporal knowledge.
-
-### Time-series/data layer
-
-Use a time-series store or efficient analytical files for large volumes of numeric observations:
+High-frequency numerical telemetry belongs in a time-series/analytical data layer. Semantic relationships, events, states, provenance, and temporal context belong in the Temporal Knowledge Graph.
 
 ```text
-XMEAS9 @ 120.0 h = 121.6 deg C
-XMEAS9 @ 120.1 h = 121.7 deg C
-XMEAS9 @ 120.2 h = 121.8 deg C
+Time-series layer
+XMEAS9 @ t = 120.0 h = 121.6 deg C
+XMEAS9 @ t = 120.1 h = 121.7 deg C
 ...
+
+Temporal KG
+Operator ──changed──► XMV10
+XMV10 ──affects──► Reactor Cooling
+Fault ──activatedAt──► simulation time
 ```
 
-Parquet is the current portable format. A production TSDB/historian will be selected after actual workload and query requirements are understood.
+GraphDB should **not become the historian**. High-frequency telemetry remains in an efficient data store while the graph provides semantic context and references to underlying data.
 
-### Temporal Knowledge Graph
-
-Use the graph for entities, relationships, events, states, provenance, and temporal context:
-
-```text
-Operator
-   │
-   └── changed ──► XMV10
-                       │
-                       └── affects ──► Reactor Cooling
-                                           │
-                                           └── related to ──► Reactor Temperature
-```
-
-The Knowledge Graph should **not become the historian**. High-frequency telemetry remains in the appropriate data store, while the graph provides semantic context and references to the underlying data.
-
-### Observation vs event
+## Observation vs event
 
 ```text
 OBSERVATIONS
@@ -161,31 +241,29 @@ OBSERVATIONS
 
 EVENTS
 123.0 h   Operator changed XMV10: 16 → 20
-125.4 h   Controller saturated
-128.1 h   Reactor temperature alarm activated
+125.4 h   FaultActivated: reactor temperature bias
+128.1 h   FaultDeactivated: reactor temperature bias
 ```
 
 Events should be generated by the subsystem where they occur, preserving causality and provenance, rather than inferred by repeatedly polling the graph.
 
 ## Roadmap
 
-The project uses ten architectural phases. The phases are **not a rigid waterfall**; implementation can advance in one area while foundations in another are still being completed.
+The project uses ten architectural phases. The phases are **not a rigid waterfall**.
 
 ### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
 
-- preserve ProfBraatz as the scientific reference
-- define the simulator boundary
-- provide the TEP adapter
-- establish deterministic stepping and run identity
-- expose measurements, manipulated variables, states, and disturbances
-- establish canonical observations/events
-- maintain TEP engineering mappings and measurement units
+- ProfBraatz scientific reference
+- backend-independent simulator boundary
+- TEP adapter
+- deterministic stepping and seeded runs
+- measurements, manipulated variables, states, and disturbances
+- engineering mappings and XMEAS units
+- canonical observations/events
 
-Remaining Phase 1 work is primarily deeper validation and reproducibility tooling.
+Remaining work is deeper numerical validation and reproducibility tooling.
 
-### Phase 2 — Industrial Twin Core — IN PROGRESS / NEXT
-
-Build the platform-independent orchestration layer:
+### Phase 2 — Industrial Twin Core — IN PROGRESS
 
 - canonical plant and asset model
 - equipment, instruments, tags, and functional relationships
@@ -194,18 +272,32 @@ Build the platform-independent orchestration layer:
 - lifecycle and run management
 - experiment metadata
 - operating states and state transitions
-- event generation at source
+- source-generated events
 - fault/scenario integration
 
-The core must remain independent of TEP so future process models can become additional backends.
+The core remains independent of TEP so future process models can become additional backends.
 
-### Phase 3 — Fault Injection and Scenario Engineering — NEXT MAJOR CAPABILITY
+### Phase 3 — Fault Injection and Scenario Engineering — FOUNDATION IMPLEMENTED
 
-Turn the simulator into a controlled industrial experimentation laboratory.
+Implemented:
 
-Planned fault types include sensor bias/drift/noise, stuck sensors, actuator failure and saturation, valve faults, process disturbances, parameter changes, controller faults, and communication faults.
+- `Fault` model
+- `FaultType`
+- `FaultManager`
+- bias, drift, stuck, and process-disturbance definitions
+- scheduled activation windows
+- XMEAS/XMV signal fault application
+- `FaultActivated` / `FaultDeactivated` events
 
-Fault activation and clearance will generate explicit `FaultEvent` records and become part of scenario provenance.
+Next:
+
+- YAML/JSON scenario definitions
+- scenario validation
+- native TEP IDV process-disturbance integration
+- noise and saturation faults
+- actuator/sensor failure modes
+- controller and communication faults
+- scenario provenance and reproducible fault experiments
 
 ### Phase 4 — OPC UA Integration — INITIAL IMPLEMENTATION COMPLETE
 
@@ -219,39 +311,41 @@ Implemented:
 - configurable real-time factor
 - explicit XMV write bridge
 - asynchronous simulation loop
+- operator XMV event integration
 
-Next OPC UA work:
+Next:
 
-- semantic engineering names alongside raw XMEAS/XMV names
-- richer unit metadata and OPC UA EUInformation
-- quality/status/timestamps
+- semantic engineering names and units
+- OPC UA EUInformation and quality/status/timestamps
 - subscriptions and client integration tests
 - process/equipment hierarchy
-- fault/scenario controls
+- FaultManager scenario controls
+- native process-disturbance controls
 
-### Phase 5 — Time-Series and Temporal Knowledge Infrastructure — STARTED
+### Phase 5 — Time-Series and Temporal Knowledge Infrastructure — IMPLEMENTATION STARTED
 
-The recording foundation is implemented; the production data architecture remains ahead.
-
-**Current:**
+Implemented:
 
 - canonical Observation/Event models
-- run identity and provenance
+- engineering units for XMEAS observations
 - in-memory recorder
-- Parquet storage
-- TEP recording example
-- observation units for XMEAS
+- Parquet persistence
+- run manifests/provenance
+- simulation lifecycle events
+- operator events
+- fault lifecycle events
+- TEP recording and inspection examples
 
-**Next:**
+Next:
 
-- simulation lifecycle events such as `SimulationStarted` and `SimulationCompleted`
-- richer event generation for operator/fault/controller actions
-- run metadata and scenario manifests
-- evaluate TSDB/historian choices using real workload requirements
-- temporal KG schema and event/relationship model
-- references between graph entities and time-series data
+- evaluate production TSDB/historian choices using real workload requirements
+- temporal KG schema
+- event/relationship model
+- graph-to-time-series references
+- quality/status/timestamp model
+- retention and archival strategy
 
-GraphDB remains the semantic authority; it is not intended to store every 1-second numeric sample as RDF.
+GraphDB remains the semantic authority and is not intended to store every 1-second numeric sample as RDF.
 
 ### Phase 6 — Engineering and Digital Thread Integration
 
@@ -320,7 +414,7 @@ Build an AI assistant capable of reasoning over operational data, temporal event
 8. **Source-generated events** — event provenance is preserved at the source.
 9. **Traceability** — engineering, operational, simulation, fault, BOM, and AI results retain provenance.
 10. **Temporal first-class design** — simulation time, wall time, run identity, and event time are explicit.
-11. **Reproducibility** — deterministic configurations and random seeds are recorded.
+11. **Reproducibility** — deterministic configurations, random seeds, scenarios, and faults are recorded.
 12. **Backend independence** — TEP is the first process backend, not the permanent boundary.
 13. **AI-ready by design** — semantic and temporal foundations precede GraphRAG and agents.
 14. **Incremental implementation** — every increment should leave a usable, testable foundation.
@@ -346,11 +440,15 @@ process-sim/
 │       ├── core/
 │       ├── backends/
 │       │   └── tep/
+│       ├── faults/
+│       │   ├── models.py
+│       │   └── manager.py
 │       ├── protocols/
 │       │   └── opcua/
 │       └── recording/
 │           ├── models.py
 │           ├── recorder.py
+│           ├── run.py
 │           ├── parquet.py
 │           └── session.py
 └── tests/
