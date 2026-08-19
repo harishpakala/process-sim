@@ -1,0 +1,5 @@
+scenario: baseline
+metadata:
+  purpose: controlled_baseline
+  random_seed: 42
+faults: []
