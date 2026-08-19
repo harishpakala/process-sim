@@ -14,6 +14,7 @@ from pathlib import Path
 from process_sim.backends.tep import TEPAdapter
 from process_sim.recording import (
     ParquetStorage,
+    RunManifest,
     SimulationRecorder,
     SimulationRecordingSession,
 )
@@ -21,30 +22,10 @@ from process_sim.recording import (
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Record a TEP simulation run")
-    parser.add_argument(
-        "--hours",
-        type=float,
-        default=1.0,
-        help="Simulation duration in hours (default: 1.0)",
-    )
-    parser.add_argument(
-        "--interval",
-        type=int,
-        default=1,
-        help="Record every N simulation steps (default: 1)",
-    )
-    parser.add_argument(
-        "--seed",
-        type=int,
-        default=42,
-        help="TEP random seed (default: 42)",
-    )
-    parser.add_argument(
-        "--backend",
-        choices=("python", "fortran"),
-        default="python",
-        help="TEP numerical backend (default: python)",
-    )
+    parser.add_argument("--hours", type=float, default=1.0)
+    parser.add_argument("--interval", type=int, default=1)
+    parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--backend", choices=("python", "fortran"), default="python")
     args = parser.parse_args()
 
     if args.hours <= 0:
@@ -52,39 +33,39 @@ def main() -> None:
     if args.interval < 1:
         parser.error("--interval must be at least 1")
 
-    simulator = TEPAdapter(
-        backend=args.backend,
-        random_seed=args.seed,
-    )
+    simulator = TEPAdapter(backend=args.backend, random_seed=args.seed)
     simulator.reset()
 
     recorder = SimulationRecorder()
-    storage = ParquetStorage(Path("data") / "runs")
+    manifest = RunManifest(
+        run_id=recorder.run_id,
+        simulator="TEP",
+        backend=simulator.backend,
+        random_seed=args.seed,
+        real_time_factor=1.0,
+        metadata={"native_step_seconds": 1},
+    )
     session = SimulationRecordingSession(
         simulator=simulator,
         recorder=recorder,
-        storage=storage,
+        storage=ParquetStorage(Path("data") / "runs"),
+        manifest=manifest,
     )
 
     session.start()
-    # Record the initialized state at simulation time zero.
     session.record_snapshot()
 
     total_steps = int(args.hours * 3600)
     for step in range(1, total_steps + 1):
         simulator.step()
-
         if step % args.interval == 0 or step == total_steps:
             session.record_snapshot()
 
     session.complete()
     paths = session.save(
         metadata={
-            "backend": simulator.backend,
             "duration_hours": args.hours,
-            "random_seed": args.seed,
             "record_interval_steps": args.interval,
-            "native_step_seconds": 1,
         }
     )
 
