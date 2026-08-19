@@ -15,17 +15,9 @@ from .mapping import DISTURBANCE_NAMES
 class TEPAdapter:
     """Adapter for ``tep.TEPSimulator``.
 
-    Parameters
-    ----------
-    backend:
-        ``"fortran"``, ``"python"`` or ``None`` for the ProfBraatz package's
-        automatic backend selection.
-    random_seed:
-        Seed passed unchanged to the underlying simulator.
-    fault_manager:
-        Optional fault manager used to transform published XMEAS/XMV values.
-    fault_event_sink:
-        Optional callback receiving fault lifecycle event dictionaries.
+    Sensor and actuator faults are signal transformations. Process-disturbance
+    faults are different: they are translated to the native TEP IDV interface
+    before each simulator step and therefore affect the process model itself.
     """
 
     def __init__(
@@ -51,31 +43,32 @@ class TEPAdapter:
         self.fault_manager = fault_manager
         self.fault_event_sink = fault_event_sink
         self._active_fault_ids: set[str] = set()
+        self._fault_managed_idvs: set[int] = set()
 
     @property
     def backend(self) -> str:
-        """Return the backend selected by the ProfBraatz simulator."""
         return self.simulator.backend
 
     def reset(self) -> None:
-        """Reset to the simulator's initialized steady-state condition."""
         self.simulator.initialize()
         self._active_fault_ids.clear()
+        self._fault_managed_idvs.clear()
 
     def step(self, n_steps: int = 1) -> bool:
-        """Advance by ``n_steps`` of the TEP simulator's native 1-second step."""
+        """Advance using native TEP steps, applying scheduled process faults first."""
         if n_steps < 1:
             raise ValueError("n_steps must be >= 1")
-        result = self.simulator.step(n_steps=n_steps)
-        self._publish_fault_lifecycle_events()
+        result = False
+        for _ in range(n_steps):
+            self._apply_process_disturbance_faults()
+            result = self.simulator.step(n_steps=1)
+            self._publish_fault_lifecycle_events()
         return result
 
     def get_time_hours(self) -> float:
-        """Return current simulation time in hours."""
         return float(self.simulator.time)
 
     def get_measurements(self):
-        """Return the 41 current XMEAS values, including active sensor faults."""
         measurements = list(self.simulator.get_measurements())
         if self.fault_manager is None:
             return measurements
@@ -86,7 +79,6 @@ class TEPAdapter:
         ]
 
     def get_manipulated_variables(self):
-        """Return the 12 current XMV values, including active actuator faults."""
         values = list(self.simulator.get_manipulated_vars())
         if self.fault_manager is None:
             return values
@@ -97,17 +89,14 @@ class TEPAdapter:
         ]
 
     def get_states(self):
-        """Return the 50 current process states."""
         return self.simulator.get_states()
 
     def set_manipulated_variable(self, index: int, value: float) -> None:
-        """Set XMV ``index`` using the ProfBraatz 1-based API."""
         if not 1 <= index <= 12:
             raise IndexError("XMV index must be in the range 1..12")
         self.simulator.set_mv(index, value)
 
     def set_disturbance(self, index: int, value: int = 1) -> None:
-        """Set IDV ``index`` using the ProfBraatz 1-based API."""
         if not 1 <= index <= 20:
             raise IndexError("IDV index must be in the range 1..20")
         if value not in (0, 1):
@@ -115,11 +104,10 @@ class TEPAdapter:
         self.simulator.set_disturbance(index, value)
 
     def clear_disturbances(self) -> None:
-        """Disable all IDVs."""
         self.simulator.clear_disturbances()
+        self._fault_managed_idvs.clear()
 
     def get_disturbances(self):
-        """Return the 20-element IDV vector."""
         return self.simulator.get_disturbances()
 
     def configure_faults(
@@ -127,11 +115,51 @@ class TEPAdapter:
         fault_manager: FaultManager,
         fault_event_sink: Optional[Callable[[dict], None]] = None,
     ) -> None:
-        """Attach a fault manager and optional lifecycle-event callback."""
         self.fault_manager = fault_manager
         if fault_event_sink is not None:
             self.fault_event_sink = fault_event_sink
         self._active_fault_ids.clear()
+        self._fault_managed_idvs.clear()
+
+    def _process_disturbance_index(self, fault) -> int:
+        """Resolve a fault target to a native 1-based TEP IDV index.
+
+        Accepted targets are ``IDV1``..``IDV20`` or ``idv_1``..``idv_20``.
+        ``metadata.idv_index`` is also accepted so scenarios can use a semantic
+        target name while retaining the native TEP mapping explicitly.
+        """
+        target = str(fault.target).strip().upper().replace("_", "")
+        if target.startswith("IDV") and target[3:].isdigit():
+            index = int(target[3:])
+        else:
+            index = int(fault.metadata.get("idv_index", 0))
+        if not 1 <= index <= 20:
+            raise ValueError(
+                f"process disturbance fault {fault.fault_id!r} must identify IDV1..IDV20"
+            )
+        return index
+
+    def _apply_process_disturbance_faults(self) -> None:
+        """Translate active process faults into the native TEP IDV vector."""
+        if self.fault_manager is None:
+            return
+
+        active_faults = [
+            fault
+            for fault in self.fault_manager.active_faults(self.get_time_hours())
+            if fault.fault_type is FaultType.PROCESS_DISTURBANCE
+        ]
+        active_idvs = {self._process_disturbance_index(fault) for fault in active_faults}
+
+        # Only clear IDVs previously owned by this fault layer. This avoids
+        # overwriting manually configured/native disturbances on other IDVs.
+        for index in self._fault_managed_idvs - active_idvs:
+            self.simulator.set_disturbance(index, 0)
+
+        for index in active_idvs:
+            self.simulator.set_disturbance(index, 1)
+
+        self._fault_managed_idvs = active_idvs
 
     def _publish_fault_lifecycle_events(self) -> None:
         if self.fault_manager is None or self.fault_event_sink is None:
@@ -169,10 +197,12 @@ class TEPAdapter:
         disturbances: Optional[Dict[int, Tuple[float, int]]] = None,
         record_interval: int = 1,
     ):
-        """Run a batch simulation using the existing ProfBraatz API.
+        """Run the native ProfBraatz batch simulation.
 
         ``disturbances`` uses the native TEP convention:
-        ``{idv_index: (time_hours, value)}``.
+        ``{idv_index: (time_hours, value)}``. For process-disturbance faults
+        managed by ``FaultManager``, use ``step()`` so the scheduled fault layer
+        is applied before each native TEP step.
         """
         return self.simulator.simulate(
             duration_hours=duration_hours,
@@ -181,12 +211,10 @@ class TEPAdapter:
         )
 
     def active_disturbances(self):
-        """Return active 1-based IDV indices."""
         return self.simulator.get_active_disturbances()
 
     @staticmethod
     def disturbance_name(index: int) -> str:
-        """Return a documented semantic name when one is available."""
         if not 1 <= index <= 20:
             raise IndexError("IDV index must be in the range 1..20")
         return DISTURBANCE_NAMES.get(index, f"idv_{index}_unknown")
