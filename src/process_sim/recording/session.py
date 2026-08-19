@@ -6,6 +6,7 @@ from typing import Any
 
 from .parquet import ParquetStorage
 from .recorder import SimulationRecorder
+from .run import RunManifest
 
 
 class SimulationRecordingSession:
@@ -20,10 +21,12 @@ class SimulationRecordingSession:
         simulator: Any,
         recorder: SimulationRecorder | None = None,
         storage: ParquetStorage | None = None,
+        manifest: RunManifest | None = None,
     ) -> None:
         self.simulator = simulator
         self.recorder = recorder or SimulationRecorder()
         self.storage = storage or ParquetStorage()
+        self.manifest = manifest or RunManifest(run_id=self.recorder.run_id)
 
     def record_snapshot(self) -> None:
         """Record the simulator's current XMEAS and XMV values.
@@ -34,9 +37,6 @@ class SimulationRecordingSession:
         engineering unit for the valve/actuator values.
         """
         simulation_time = self.simulator.get_time_hours()
-
-        # Keep TEP-specific metadata at the backend boundary rather than
-        # making the generic recorder aware of XMEAS/XMV terminology.
         from process_sim.backends.tep.mapping import MEASUREMENT_UNITS
 
         for index, value in enumerate(self.simulator.get_measurements(), start=1):
@@ -48,54 +48,38 @@ class SimulationRecordingSession:
             )
 
         for index, value in enumerate(self.simulator.get_manipulated_variables(), start=1):
-            self.recorder.record_observation(
-                simulation_time,
-                f"XMV{index}",
-                value,
-            )
+            self.recorder.record_observation(simulation_time, f"XMV{index}", value)
 
     def record_event(self, *args, **kwargs):
         """Record a semantic event associated with the current simulation time."""
         kwargs.setdefault("source", "simulation")
         return self.recorder.record_event(
-            self.simulator.get_time_hours(),
-            *args,
-            **kwargs,
+            self.simulator.get_time_hours(), *args, **kwargs
         )
 
     def start(self):
-        """Record that the simulation run started."""
-        return self.record_event(
-            "SimulationStarted",
-            "Run",
-            source="simulation",
-        )
+        """Record that the simulation run started and timestamp its manifest."""
+        self.manifest.start()
+        return self.record_event("SimulationStarted", "Run", source="simulation")
 
     def complete(self):
-        """Record that the simulation run completed."""
-        return self.record_event(
-            "SimulationCompleted",
-            "Run",
-            source="simulation",
-        )
+        """Record completion and timestamp the run manifest."""
+        self.manifest.complete()
+        return self.record_event("SimulationCompleted", "Run", source="simulation")
 
     def reset(self):
-        """Record that the simulation was reset.
-
-        The session does not call the simulator's reset method. This keeps
-        lifecycle recording separate from simulator control.
-        """
-        return self.record_event(
-            "SimulationReset",
-            "Run",
-            source="simulation",
-        )
+        """Record that the simulation was reset without controlling the simulator."""
+        return self.record_event("SimulationReset", "Run", source="simulation")
 
     def save(self, metadata: dict | None = None) -> dict:
-        """Persist the current run and return the created file paths."""
+        """Persist observations, events, and the run manifest."""
+        manifest_metadata = dict(self.manifest.metadata)
+        if metadata:
+            manifest_metadata.update(metadata)
+        self.manifest.metadata = manifest_metadata
         return self.storage.write_run(
             self.recorder.run_id,
             self.recorder.observations(),
             self.recorder.events(),
-            metadata=metadata,
+            metadata=self.manifest.to_dict(),
         )
