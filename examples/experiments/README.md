@@ -55,6 +55,49 @@ python examples/run_experiment.py \
 The experiment seed is passed to `TEPAdapter`, and the resulting run manifest
 contains the experiment specification and ground-truth declaration.
 
+## Ground-truth validation
+
+`ExperimentValidator` currently validates the deterministic part of the ground
+truth: fault lifecycle identity and exact simulation-time boundaries.
+
+```text
+Declared ground truth
+        │
+        ▼
+ExperimentValidator
+        ▲
+        │
+Recorded events.parquet
+```
+
+For a scheduled fault, the validator checks:
+
+- activation event exists
+- fault type and target match
+- activation time matches the declared start time
+- deactivation event exists when a duration is declared
+- deactivation time matches start + duration
+
+It intentionally does **not** yet claim that an affected process variable
+changed by a particular amount. That quantitative layer should be established
+from controlled experiments rather than assumed in the fixture.
+
+## Initial benchmark matrix
+
+`benchmark_matrix.yaml` defines the first benchmark families:
+
+1. normal baseline
+2. sensor bias
+3. sensor drift
+4. actuator stuck
+5. process disturbance
+6. combined faults
+
+The corresponding scenario fixtures live under `examples/scenarios/`. The
+matrix is a benchmark specification, not yet an automated batch executor.
+Repeated seeds are the next dimension to add after the single-run path is
+validated.
+
 ## Ground truth
 
 The first fixture records:
@@ -72,16 +115,21 @@ The model deliberately does **not** claim numerical response magnitudes yet.
 Those quantitative expectations should be established from controlled runs and
 validated before becoming benchmark assertions.
 
-## Planned benchmark families
+## Research progression
 
-1. normal baseline
-2. sensor bias
-3. sensor drift
-4. actuator fault
-5. process disturbance
-6. combined faults
-7. repeated seeds
+The benchmark should evolve in stages:
 
-The long-term benchmark should therefore evolve from declarative labels into
-validated temporal response metrics, while keeping the original experiment
-configuration and provenance immutable.
+```text
+1. deterministic fault lifecycle
+              ↓
+2. variable-level response detection
+              ↓
+3. temporal response metrics
+              ↓
+4. multi-fault attribution
+              ↓
+5. cross-domain / semantic reasoning
+```
+
+The original experiment configuration and provenance should remain immutable as
+benchmark evidence is derived from each run.
