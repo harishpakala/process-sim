@@ -40,6 +40,7 @@ class TEPAdapter:
             kwargs["backend"] = backend
 
         self.simulator = TEPSimulator(**kwargs)
+        self._random_seed = random_seed
         self.fault_manager = fault_manager
         self.fault_event_sink = fault_event_sink
         self._active_fault_ids: set[str] = set()
@@ -52,8 +53,7 @@ class TEPAdapter:
 
     @property
     def random_seed(self) -> Optional[int]:
-        """Expose the configured seed when the native simulator provides it."""
-        return getattr(self.simulator, "random_seed", None)
+        return self._random_seed
 
     def reset(self) -> None:
         self.simulator.initialize()
