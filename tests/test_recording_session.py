@@ -30,14 +30,36 @@ def test_record_snapshot_captures_xmeas_and_xmv():
     assert observations[2].value == 1.0
 
 
+def test_lifecycle_events_use_current_simulation_time():
+    session = SimulationRecordingSession(
+        FakeSimulator(),
+        recorder=SimulationRecorder(run_id="run-lifecycle"),
+    )
+
+    session.start()
+    session.complete()
+    session.reset()
+
+    events = session.recorder.events()
+    assert [event.event_type for event in events] == [
+        "SimulationStarted",
+        "SimulationCompleted",
+        "SimulationReset",
+    ]
+    assert all(event.subject == "Run" for event in events)
+    assert all(event.simulation_time_hours == 1.5 for event in events)
+    assert all(event.source == "simulation" for event in events)
+
+
 def test_save_persists_recorded_run(tmp_path: Path):
     session = SimulationRecordingSession(
         FakeSimulator(),
         recorder=SimulationRecorder(run_id="run-session"),
         storage=ParquetStorage(tmp_path / "runs"),
     )
+    session.start()
     session.record_snapshot()
-    session.record_event("SimulationStarted", "Run")
+    session.complete()
 
     paths = session.save(metadata={"backend": "fake"})
 
