@@ -69,6 +69,7 @@ class TEPAdapter:
         for _ in range(n_steps):
             self.sync_faults()
             result = self.simulator.step(n_steps=1)
+            self._publish_fault_lifecycle_events()
         return result
 
     def get_time_hours(self) -> float:
@@ -134,7 +135,7 @@ class TEPAdapter:
 
         Synchronization occurs before a native simulator step. This makes a
         fault scheduled at time ``t`` effective for the step beginning at ``t``
-        and records activation/deactivation at the actual simulation boundary.
+        and records activation at the actual simulation boundary.
         """
         self._apply_process_disturbance_faults()
         self._publish_fault_lifecycle_events()
