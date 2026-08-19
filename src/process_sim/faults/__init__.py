@@ -2,5 +2,6 @@
 
 from .manager import FaultManager
 from .models import Fault, FaultType
+from .scenario import Scenario
 
-__all__ = ["Fault", "FaultManager", "FaultType"]
+__all__ = ["Fault", "FaultManager", "FaultType", "Scenario"]
