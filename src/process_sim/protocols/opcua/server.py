@@ -1,31 +1,17 @@
-"""OPC UA server adapter for a process-sim simulator.
-
-The server is deliberately independent of the TEP implementation. It exposes
-raw TEP variables first; semantic engineering names can be added by a later
-namespace layer without changing the simulator backend.
-"""
+"""OPC UA server adapter for a process-sim simulator."""
 
 from __future__ import annotations
 
+import asyncio
 from typing import Optional
 
 
 class OPCUAServer:
     """Expose a process simulator through an OPC UA server.
 
-    The first implementation provides a small, stable namespace containing:
-    ``Simulation.TimeHours``, ``Simulation.Running``, ``Measurements.XMEAS1..41``
-    and ``ManipulatedVariables.XMV1..12``.
-
-    Parameters
-    ----------
-    simulator:
-        Object implementing the process-sim simulator boundary. A TEPAdapter
-        can be passed directly.
-    endpoint:
-        OPC UA endpoint URL, e.g. ``opc.tcp://0.0.0.0:4840/process-sim/``.
-    namespace_uri:
-        Stable application namespace URI.
+    The namespace contains raw TEP variables first. Simulation stepping is
+    explicit and configurable so OPC UA clients never become a synchronous
+    dependency of the process model.
     """
 
     def __init__(
@@ -47,7 +33,7 @@ class OPCUAServer:
     async def start(self) -> None:
         """Start the OPC UA server and publish the current simulator values."""
         try:
-            from asyncua import Server, ua
+            from asyncua import Server
         except ImportError as exc:
             raise ImportError(
                 "OPCUAServer requires 'asyncua'. Install it with "
@@ -81,6 +67,7 @@ class OPCUAServer:
             node = await measurements.add_variable(
                 self._namespace_index, f"XMEAS{index}", float(value)
             )
+            await node.set_read_only()
             self._measurement_nodes.append(node)
 
         mvs = await tep.add_object(self._namespace_index, "ManipulatedVariables")
@@ -115,6 +102,44 @@ class OPCUAServer:
         for node, value in zip(self._mv_nodes, mvs):
             await node.write_value(float(value))
 
+    async def step(self, n_steps: int = 1) -> None:
+        """Advance the simulator and immediately publish the new state."""
+        if self._server is None:
+            raise RuntimeError("OPC UA server is not started")
+        if n_steps < 1:
+            raise ValueError("n_steps must be >= 1")
+
+        self.simulator.step(n_steps=n_steps)
+        await self.update(running=True)
+
+    async def run_simulation(
+        self,
+        real_time_factor: float = 1.0,
+        update_interval_seconds: float = 1.0,
+    ) -> None:
+        """Run the simulator continuously while publishing OPC UA values.
+
+        The TEP model advances in one-second simulation increments. At 1x,
+        one simulation second is published per wall-clock second. Higher
+        real-time factors run proportionally faster.
+        """
+        if self._server is None:
+            await self.start()
+        if real_time_factor <= 0:
+            raise ValueError("real_time_factor must be > 0")
+        if update_interval_seconds <= 0:
+            raise ValueError("update_interval_seconds must be > 0")
+
+        steps_per_update = max(
+            1,
+            int(round(update_interval_seconds * real_time_factor)),
+        )
+
+        while True:
+            self.simulator.step(n_steps=steps_per_update)
+            await self.update(running=True)
+            await asyncio.sleep(update_interval_seconds)
+
     async def stop(self) -> None:
         """Stop the OPC UA server if it is running."""
         if self._server is not None:
@@ -122,15 +147,9 @@ class OPCUAServer:
             self._server = None
 
     async def run(self) -> None:
-        """Keep the OPC UA server alive until cancelled.
-
-        This method intentionally does not advance the simulator. A later
-        simulation-clock component will own stepping and call ``update()``.
-        """
+        """Keep the OPC UA server alive without advancing the simulator."""
         if self._server is None:
             await self.start()
-
-        import asyncio
 
         while True:
             await asyncio.sleep(1.0)
