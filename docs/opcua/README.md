@@ -4,7 +4,7 @@ The OPC UA layer is an asynchronous integration boundary around the simulator. I
 
 ## Status
 
-**Initial OPC UA integration is implemented.**
+**Initial OPC UA integration is implemented and fault/event integration has started.**
 
 The current implementation provides:
 
@@ -17,6 +17,7 @@ The current implementation provides:
 - 12 raw XMV variables
 - explicit OPC UA writes for XMV values
 - asynchronous simulation loop
+- operator XMV changes connected to canonical event recording
 
 The development endpoint currently uses port **4841** because port 4840 was occupied in the development environment:
 
@@ -56,7 +57,13 @@ Raw XMEAS/XMV identifiers are intentionally retained because they provide a stab
               ▼                     ▼
        TEP simulation          SCADA / HMI / clients
               │
-              └──── deterministic simulation clock
+       ┌──────┴──────┐
+       │             │
+ FaultManager     Recorder
+       │             │
+       └──────┬──────┘
+              ▼
+       fault/event history
 ```
 
 OPC UA clients do not synchronously own the simulation timestep. Writes are synchronized explicitly into the simulator, and the simulation loop remains independent of external clients.
@@ -75,62 +82,40 @@ The repository includes the OPC UA server entry point under `process_sim.protoco
 
 The server is constructed with a simulator and can be configured with a real-time factor and update interval. A real-time factor of `1.0` corresponds to approximately real-time execution for the 1-second native TEP step.
 
-A minimal integration pattern is:
+## Fault and event boundary
 
-```python
-import asyncio
+Fault logic is not embedded in the OPC UA protocol implementation. The current architecture is:
 
-from process_sim.backends.tep import TEPAdapter
-from process_sim.protocols.opcua import OPCUAServer
-
-
-async def main():
-    simulator = TEPAdapter(random_seed=123)
-    simulator.reset()
-
-    server = OPCUAServer(
-        simulator,
-        endpoint="opc.tcp://0.0.0.0:4841/process-sim/",
-        namespace_uri="urn:process-sim:opcua",
-        real_time_factor=1.0,
-        update_interval_seconds=1.0,
-    )
-    await server.start()
-
-    try:
-        await server.start_simulation()
-        while True:
-            await asyncio.sleep(1.0)
-    finally:
-        await server.stop()
-
-
-asyncio.run(main())
+```text
+OPC UA client
+     │
+     │ XMV write
+     ▼
+ OPC UA adapter
+     │
+     ▼
+ TEPAdapter ◄──── FaultManager
+     │                 │
+     │                 ├── Bias
+     │                 ├── Drift
+     │                 ├── Stuck
+     │                 └── Process disturbance
+     │
+     ├── measurements
+     └── manipulated variables
 ```
 
-## Current design boundary
+The `FaultManager` can transform published XMEAS/XMV values and emits lifecycle events through an optional event sink. Current lifecycle events are `FaultActivated` and `FaultDeactivated`.
 
-The OPC UA layer is responsible for:
+The initial process-disturbance fault type is deliberately not applied as a generic signal transformation; process disturbances belong at the process-model boundary and will be integrated with TEP IDVs in the next fault/scenario increment.
 
-- industrial protocol exposure
-- lifecycle methods
-- simulation status publication
-- reading operator/client XMV writes
-- publishing current XMEAS/XMV values
+## Recording integration
 
-It is **not** responsible for:
-
-- TEP process equations
-- scientific model validation
-- persistent historical storage
-- GraphDB transactions in the simulation timestep
-- long-term event inference
-
-Recording is a separate subsystem and samples the simulator directly rather than polling OPC UA.
+Recording remains independent of OPC UA. The live server can connect operator XMV writes to `SimulationRecordingSession`, producing canonical `ManipulatedVariableChanged` events. Fault lifecycle events can likewise be routed through the recording session without making the recorder depend on OPC UA.
 
 ## Units and semantic metadata
 
-The TEP reference mapping now contains authoritative engineering units for all 41 XMEAS measurements. The recording layer uses those units when creating canonical observations.
+The TEP reference mapping contains authoritative engineering units for all 41 XMEAS measurements. The recording layer uses those units when creating canonical observations.
 
 The OPC UA namespace still exposes raw XMEAS/XMV variables. The next metadata step is to expose engineering names and units through OPC UA metadata, ideally using standard OPC UA engineering-unit conventions such as `EUInformation` where appropriate.
 
@@ -147,6 +132,7 @@ XMV units are intentionally not invented until a sufficiently authoritative refe
 - real-time-factor control
 - explicit XMV write synchronization
 - asynchronous simulation loop
+- operator XMV event integration
 
 ### Next OPC UA work
 
@@ -154,11 +140,11 @@ XMV units are intentionally not invented until a sufficiently authoritative refe
 2. **Quality and timestamps** — expose OPC UA status/quality and simulation versus wall-clock timestamps where appropriate.
 3. **Subscriptions and client integration tests** — verify monitored-item behavior and write/read semantics with an OPC UA client.
 4. **Process/equipment hierarchy** — organize reactor, separator, stripper, compressor, utilities, instruments, and tags without removing the raw XMEAS/XMV layer.
-5. **Fault/scenario controls** — integrate with the planned Phase 3 FaultManager using explicit methods/events rather than embedding fault logic in the protocol adapter.
-6. **Operational events** — connect operator actions and communication/data-quality events to the canonical event recorder.
+5. **Fault/scenario controls** — expose FaultManager scenarios through explicit methods/events rather than embedding fault logic in the protocol adapter.
+6. **Process disturbances** — connect scenario-managed faults to the native TEP IDV interface.
 
 ## Relationship to the project roadmap
 
-OPC UA corresponds to **Phase 4 — OPC UA Integration** in the root project roadmap. The initial implementation is complete; the remaining work is semantic enrichment, interoperability testing, hierarchy, and integration with the broader event/fault architecture.
+OPC UA corresponds to **Phase 4 — OPC UA Integration**. The initial implementation is complete; the remaining work is semantic enrichment, interoperability testing, hierarchy, and integration with the broader fault/scenario architecture.
 
 Phase 5 recording is intentionally independent of OPC UA. This prevents the historian/temporal-data path from becoming coupled to a particular client protocol.
