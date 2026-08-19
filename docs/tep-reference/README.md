@@ -6,9 +6,9 @@ The ProfBraatz implementation is treated as the **scientific/reference baseline*
 
 ## Current status
 
-**Phase 1 foundation is implemented and integrated into the current platform.**
+**Phase 1 foundation is implemented; fault/scenario integration is now underway.**
 
-The repository now has:
+The repository currently has:
 
 - a backend-independent simulator boundary
 - a TEP adapter around the ProfBraatz `tep` package
@@ -18,9 +18,12 @@ The repository now has:
 - authoritative measurement units for XMEAS1–XMEAS41
 - OPC UA integration as a separate protocol boundary
 - canonical observation/event recording
+- run manifests and provenance metadata
 - Parquet persistence for recorded runs
+- a first-class FaultManager supporting bias, drift, stuck, and process-disturbance fault types
+- fault activation/deactivation events routed into the canonical recording model
 
-The remaining TEP-reference work is primarily deeper numerical validation, reproducibility tooling, and documenting the boundary between the scientific reference and higher-level orchestration.
+The remaining TEP-reference work is primarily deeper numerical validation, reproducibility tooling, and integrating process-disturbance faults with the native TEP IDV interface.
 
 ## 1. Reference source
 
@@ -32,17 +35,7 @@ Public fork reviewed as a secondary copy/reference:
 
 - https://github.com/jkitchin/tennessee-eastman-profbraatz
 
-`process-sim` does **not** depend on `tep-studio` and does not use it as a reference.
-
-The reference repository contains three important Fortran programs/files:
-
-| File | Role |
-|---|---|
-| `teprob.f` | Core TEP process equations, initialization, process utilities, measurements and disturbance handling |
-| `temain.f` | Original/open-loop demonstration program with a simple controller example and Euler integrator |
-| `temain_mod.f` | Modified closed-loop plant-wide control demonstration with multiple controllers and fault/disturbance experiments |
-
-Historical training/testing datasets such as `d00.dat` through `d21.dat` and corresponding `_te` files are useful reference material but must not be assumed to represent the complete live simulator interface.
+`process-sim` does not reimplement the scientific model. The adapter remains the platform boundary around the reference package.
 
 ## 2. Reference model dimensions
 
@@ -56,19 +49,7 @@ The reference process model declares:
 - **12 XMV manipulated variables**
 - **20 IDV disturbance slots**
 
-The core process evaluator is:
-
-```fortran
-CALL TEFUNC(NN,TIME,YY,YP)
-```
-
-Initialization is performed through:
-
-```fortran
-CALL TEINIT(NN,TIME,YY,YP)
-```
-
-`process-sim` preserves these scientific dimensions at the adapter boundary.
+The core process evaluator is `TEFUNC`; initialization is performed through `TEINIT`. `process-sim` preserves these scientific dimensions at the adapter boundary.
 
 ## 3. Manipulated variables — XMV
 
@@ -87,80 +68,15 @@ CALL TEINIT(NN,TIME,YY,YP)
 | XMV11 | Condenser cooling-water flow |
 | XMV12 | Agitator speed |
 
-The model interface exposes all 12 variables even though historical dataset descriptions sometimes contain only 11 XMV columns.
-
-### Historical dataset discrepancy
-
-Some historical documentation describes an observation vector as:
-
-```text
-41 XMEAS + 11 XMV = 52 columns
-```
-
-The live model declares and uses **12 XMV variables**. `process-sim` therefore distinguishes:
-
-- **live model interface:** 41 XMEAS + 12 XMV
-- **historical ML dataset schema:** 41 XMEAS + 11 XMV where applicable
-
-The missing historical XMV must not be silently treated as absent from the scientific model.
+The live model exposes all 12 variables even though historical datasets sometimes contain only 11 XMV columns.
 
 ## 4. Process measurements — XMEAS
 
 The 41 measurements are mapped in `src/process_sim/backends/tep/mapping.py`.
 
-### Continuous measurements
+XMEAS1–XMEAS22 are continuous process measurements. XMEAS23–XMEAS28 are reactor-feed composition measurements, XMEAS29–XMEAS36 are purge-gas composition measurements, and XMEAS37–XMEAS41 are product composition measurements. The platform mapping contains authoritative units for all 41 measurements and propagates them into recorded `Observation` records.
 
-| Index | Description | Unit |
-|---:|---|---|
-| XMEAS1 | A feed, stream 1 | kscmh |
-| XMEAS2 | D feed, stream 2 | kg/hr |
-| XMEAS3 | E feed, stream 3 | kg/hr |
-| XMEAS4 | A and C feed, stream 4 | kscmh |
-| XMEAS5 | Recycle flow, stream 8 | kscmh |
-| XMEAS6 | Reactor feed rate, stream 6 | kscmh |
-| XMEAS7 | Reactor pressure | kPa gauge |
-| XMEAS8 | Reactor level | % |
-| XMEAS9 | Reactor temperature | deg C |
-| XMEAS10 | Purge rate, stream 9 | kscmh |
-| XMEAS11 | Product separator temperature | deg C |
-| XMEAS12 | Product separator level | % |
-| XMEAS13 | Product separator pressure | kPa gauge |
-| XMEAS14 | Product separator underflow, stream 10 | m3/hr |
-| XMEAS15 | Stripper level | % |
-| XMEAS16 | Stripper pressure | kPa gauge |
-| XMEAS17 | Stripper underflow, stream 11 | m3/hr |
-| XMEAS18 | Stripper temperature | deg C |
-| XMEAS19 | Stripper steam flow | kg/hr |
-| XMEAS20 | Compressor work | kW |
-| XMEAS21 | Reactor cooling-water outlet temperature | deg C |
-| XMEAS22 | Separator cooling-water outlet temperature | deg C |
-
-### Sampled composition measurements
-
-**Reactor feed analysis, stream 6**
-
-- XMEAS23–XMEAS28: components A–F
-- unit: mol%
-- sampling frequency: 0.1 hr
-- dead time: 0.1 hr
-
-**Purge gas analysis, stream 9**
-
-- XMEAS29–XMEAS36: components A–H
-- unit: mol%
-- sampling frequency: 0.1 hr
-- dead time: 0.1 hr
-
-**Product analysis, stream 11**
-
-- XMEAS37–XMEAS41: components D–H
-- unit: mol%
-- sampling frequency: 0.25 hr
-- dead time: 0.25 hr
-
-These units are now part of the platform-facing TEP measurement mapping and are propagated into recorded `Observation` records.
-
-XMV units are intentionally not asserted here unless supported by an authoritative reference source.
+XMV units remain unset until a sufficiently authoritative source is identified rather than inventing engineering units.
 
 ## 5. Disturbances — IDV
 
@@ -189,88 +105,46 @@ The core source declares `IDV(1..20)`.
 | 19 | Not documented in source | Unknown |
 | 20 | Not documented in source | Unknown |
 
-### Disturbance-count discrepancy
-
-`temain_mod.f` mentions **21 programmed disturbances**, while the visible `IDV` common block and core process source expose `IDV(1..20)`.
-
-`process-sim` therefore exposes **20 IDV slots** and does not invent an IDV21 interface. Resolving the historical discrepancy remains a reference-data investigation item.
+`process-sim` exposes 20 IDV slots and does not invent an IDV21 interface. The historical discrepancy between a comment mentioning 21 disturbances and the visible `IDV(1..20)` declaration remains a reference-data investigation item.
 
 ## 6. Simulation time and integration
 
-The reference examples use:
+The reference examples use `DELTAT = 1. / 3600.`, representing a **1-second integration step expressed in hours**. `TEPAdapter` preserves this native stepping behavior rather than rewriting the equations.
 
-```fortran
-DELTAT = 1. / 3600.
-```
+## 7. Fault injection boundary
 
-This represents a **1-second integration step expressed in hours**.
-
-The original example performs an Euler-style update:
+Fault injection now sits around the scientific reference model rather than inside its equations:
 
 ```text
-TEFUNC -> derivative
-TIME = TIME + DELTAT
-YY = YY + YP * DELTAT
+                 TEP reference model
+                        │
+                    TEPAdapter
+                        │
+                 FaultManager
+                  /     |      \
+               XMEAS   XMV     IDV
+                 │      │       │
+              sensor  actuator process
+               faults  faults  disturbances
 ```
 
-The modified closed-loop example also uses 1-second increments.
+Current signal-level mechanisms:
 
-The current ProfBraatz Python simulator exposes this native stepping behavior directly. `TEPAdapter` translates the package API into the `process-sim` simulator boundary rather than rewriting the equations.
+- **bias** — additive offset
+- **drift** — time-dependent additive change
+- **stuck** — forces a configured signal value
+- **process disturbance** — first-class scheduled fault, intentionally not yet applied as a generic signal transformation
 
-The platform keeps **simulation time in hours at the TEP boundary** because that matches the reference model. Higher-level platform APIs may later expose explicit seconds or another canonical time representation where useful.
+Fault lifecycle events currently include:
 
-## 7. Open-loop vs closed-loop reference
+- `FaultActivated`
+- `FaultDeactivated`
 
-### `temain.f`
+These events can be passed to `SimulationRecordingSession.record_fault_event()` and persisted with the run's other events.
 
-Useful for understanding the simplest model execution path:
+The architectural boundary is deliberate: sensor and actuator faults can be represented as signal transformations, while process disturbances must eventually enter through the TEP model's native IDV mechanism.
 
-```text
-TEINIT
-  |
-  v
-controller example
-  |
-  v
-TEFUNC
-  |
-  v
-Euler integration
-```
-
-It contains a simple example PI controller and demonstrates direct manipulated-variable changes.
-
-### `temain_mod.f`
-
-This is the more relevant reference executable for plant-wide closed-loop behavior. It contains controller parameter blocks, setpoints, manipulated-variable initialization, disturbance flags, output generation, and measurement randomness/noise handling.
-
-It remains a **scientific/reference executable**, not the definition of the `process-sim` platform API.
-
-## 8. Controller boundary
-
-The TEP reference contains multiple controller structures. `process-sim` intentionally keeps controller orchestration above the minimum process-model interface.
-
-```text
-Process model
-    |
-    +-- measurements
-    +-- manipulated variables
-    +-- disturbances
-    +-- state/reset
-```
-
-Controllers may later be supplied by:
-
-- reference controllers
-- Python control logic
-- OPC UA clients
-- SCADA logic
-- MPC/optimization services
-- AI agents
-
-This separation is important for the Industrial Twin Core and fault/scenario architecture.
-
-## 9. Current process-sim execution model
+## 8. Current execution model
 
 ```text
                   +------------------+
@@ -280,53 +154,44 @@ This separation is important for the Industrial Twin Core and fault/scenario arc
                            |
                      TEPAdapter
                            |
-                           v
-                  +------------------+
-                  | ProcessSimulator |
-                  +--------+---------+
-                           |
-             +-------------+-------------+
-             |             |             |
-             v             v             v
-          Recorder       OPC UA       future DWSIM
-             |
-        Parquet / TSDB
+                 +---------+---------+
+                 |                   |
+           FaultManager          Recorder
+                 |                   |
+          XMEAS / XMV          Parquet / future TSDB
+                 |
+          Fault lifecycle events
 ```
 
-The adapter is responsible for translation and platform integration, not scientific reinterpretation.
+The adapter remains responsible for translation and platform integration, not scientific reinterpretation.
 
-## 10. Current Python boundary
+## 9. Run provenance
 
-The current generic protocol is intentionally small and backend-independent:
+Recorded runs now have a `RunManifest` containing run identity and provenance such as:
 
-```python
-class ProcessSimulator:
-    def reset(self) -> None:
-        ...
-
-    def step(self, n_steps: int = 1) -> bool:
-        ...
-
-    def get_time_hours(self) -> float:
-        ...
-
-    def get_measurements(self):
-        ...
-
-    def get_manipulated_variables(self):
-        ...
-
-    def set_manipulated_variable(self, index: int, value: float) -> None:
-        ...
+```text
+run_id
+simulator
+backend
+random_seed
+real_time_factor
+scenario
+started_at
+completed_at
+metadata
 ```
 
-TEP-specific capabilities such as states and IDV manipulation remain behind the TEP adapter.
+This is the foundation for reproducible fault/scenario experiments. Future manifests will add richer scenario definitions, initial conditions, and configuration fingerprints.
+
+## 10. Controller boundary
+
+Controllers remain above the minimum process-model interface. They may later be supplied by reference controllers, Python control logic, OPC UA clients, SCADA logic, MPC/optimization services, or AI agents.
+
+This separation is important for the Industrial Twin Core and fault/scenario architecture.
 
 ## 11. Mapping strategy
 
-Two naming layers are maintained.
-
-### Raw/reference names
+Raw/reference names remain stable:
 
 ```text
 XMEAS1 ... XMEAS41
@@ -334,9 +199,7 @@ XMV1   ... XMV12
 IDV1   ... IDV20
 ```
 
-### Engineering names
-
-Examples include:
+Engineering names can be layered on top, for example:
 
 ```text
 XMEAS9  -> reactor_temperature
@@ -345,59 +208,32 @@ XMEAS8  -> reactor_level
 XMV10   -> reactor_cooling_water_flow
 ```
 
-Raw names remain available for scientific validation. Engineering names and units form the beginning of the platform semantic layer and can later feed the Industrial Knowledge Graph and OPC UA metadata.
+Raw names remain available for scientific validation; engineering names and units form the beginning of the platform semantic layer.
 
 ## 12. Validation strategy
 
-The original plan was to compare `TEPSimulator` and `TEPAdapter` numerically. Because the adapter is intentionally a thin wrapper around the same ProfBraatz implementation, such a comparison is largely tautological at this stage.
+Comparing `TEPSimulator` and `TEPAdapter` numerically is largely tautological because the adapter is intentionally a thin wrapper around the same ProfBraatz implementation.
 
-Therefore the current validation strategy is:
-
-### Interface validation
-
-Confirm that the adapter can:
-
-- initialize/reset the model
-- advance native simulation steps
-- read 41 measurements
-- read 12 manipulated variables
-- preserve ordering
-- report simulation time
-- manipulate documented IDV slots
-
-### Scientific/reference validation
-
-Treat the ProfBraatz implementation as the reference scientific baseline. A separate regression dataset becomes valuable once `process-sim` adds orchestration, clocking, fault injection, transformations, or other behavior that could diverge from the backend.
-
-### Dataset validation
-
-Keep the historical 52-column versus live 53-variable distinction explicit:
-
-```text
-live snapshot = 41 XMEAS + 12 XMV = 53 variables
-historical dataset described in some sources = 41 XMEAS + 11 XMV = 52 columns
-```
-
-Do not silently discard XMV12.
+Current validation therefore emphasizes interface integrity, reference-model behavior, deterministic seeds, measurement ordering, and explicit live-versus-historical dataset differences. A separate numerical regression dataset becomes more valuable once `process-sim` adds transformations, orchestration, and fault injection that can diverge from the backend.
 
 ## 13. Reproducibility
 
-Simulation runs should record enough information to reproduce an experiment:
+A reproducible experiment should capture:
 
 ```text
 SimulationRun
   +-- run_id
   +-- backend
-  +-- backend/version information
   +-- random_seed
   +-- initial conditions
-  +-- input configuration
-  +-- disturbance configuration
+  +-- scenario
+  +-- fault configuration
   +-- native timestep
   +-- duration
+  +-- recording configuration
 ```
 
-The recording foundation already persists `run_id` and run metadata. Future scenario manifests and lifecycle events will extend this provenance model.
+The current run manifest and event log provide the first implementation of this provenance model.
 
 ## 14. What we should NOT do
 
@@ -411,22 +247,24 @@ The project should continue to avoid:
 - inventing missing disturbance definitions
 - assuming historical dataset columns equal the complete live process interface
 - coupling recording to OPC UA client polling
+- applying process disturbances as arbitrary signal transformations
 - adding AI before the semantic and temporal foundations are sufficiently stable
 
 ## 15. Relationship to the roadmap
 
-The TEP reference work is the foundation of **Phase 1 — TEP Reference and Python Simulation Integration**.
+The TEP reference remains the foundation of **Phase 1 — TEP Reference and Python Simulation Integration**.
 
-The next major platform capabilities are:
+The major active platform layers are now:
 
 1. **Phase 2 — Industrial Twin Core:** canonical assets, identity, orchestration, lifecycle, states, and source-generated events.
-2. **Phase 3 — Fault Injection and Scenario Engineering:** first-class faults, scenarios, and fault events.
-3. **Phase 5 — Time-Series and Temporal Knowledge Infrastructure:** the recording foundation is already started; next steps are lifecycle events, production time-series evaluation, and Temporal KG modeling.
+2. **Phase 3 — Fault Injection and Scenario Engineering:** the first FaultManager layer is implemented; scenario definitions and native IDV integration remain next.
+3. **Phase 4 — OPC UA Integration:** initial implementation is complete and operator event integration is underway.
+4. **Phase 5 — Time-Series and Temporal Knowledge Infrastructure:** recording, units, events, Parquet persistence, and run provenance are implemented; production TSDB and Temporal KG work remains.
 
-OPC UA is already implemented as the initial **Phase 4** integration layer and will continue to mature independently through semantic metadata, subscriptions, hierarchy, and fault/event integration.
+These phases are architectural milestones, not a strict sequential implementation order.
 
 ## 16. Related documentation
 
 - `docs/tep-reference/USAGE.md` — practical TEP adapter usage
 - `docs/opcua/README.md` — current OPC UA architecture and roadmap
-- root `README.md` — overall project status, architecture, recording workflow, and ten-phase roadmap
+- root `README.md` — overall project status and ten-phase roadmap
