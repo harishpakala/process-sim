@@ -35,3 +35,6 @@ Thumbs.db
 # Local configuration / secrets
 .env
 .env.*
+
+# Generated simulation data
+data/
