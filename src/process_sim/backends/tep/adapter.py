@@ -62,14 +62,14 @@ class TEPAdapter:
         self._fault_previous_idvs.clear()
 
     def step(self, n_steps: int = 1) -> bool:
-        """Advance using native TEP steps with fault state synchronized first."""
+        """Advance using native TEP steps with fault state synchronized at boundaries."""
         if n_steps < 1:
             raise ValueError("n_steps must be >= 1")
         result = False
         for _ in range(n_steps):
             self.sync_faults()
             result = self.simulator.step(n_steps=1)
-            self._publish_fault_lifecycle_events()
+            self.sync_faults()
         return result
 
     def get_time_hours(self) -> float:
@@ -131,12 +131,7 @@ class TEPAdapter:
         self._fault_previous_idvs.clear()
 
     def sync_faults(self) -> None:
-        """Apply scheduled process faults and emit lifecycle events at current time.
-
-        Synchronization occurs before a native simulator step. This makes a
-        fault scheduled at time ``t`` effective for the step beginning at ``t``
-        and records activation at the actual simulation boundary.
-        """
+        """Apply scheduled process faults and emit lifecycle events at current time."""
         self._apply_process_disturbance_faults()
         self._publish_fault_lifecycle_events()
 
