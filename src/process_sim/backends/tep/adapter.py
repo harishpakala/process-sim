@@ -5,7 +5,9 @@ TEPSimulator API into the process-sim boundary and keeps TEP-specific details
 out of the rest of the platform.
 """
 
-from typing import Dict, Optional, Tuple
+from typing import Callable, Dict, Optional, Tuple
+
+from process_sim.faults import FaultManager, FaultType
 
 from .mapping import DISTURBANCE_NAMES
 
@@ -20,9 +22,19 @@ class TEPAdapter:
         automatic backend selection.
     random_seed:
         Seed passed unchanged to the underlying simulator.
+    fault_manager:
+        Optional fault manager used to transform published XMEAS/XMV values.
+    fault_event_sink:
+        Optional callback receiving fault lifecycle event dictionaries.
     """
 
-    def __init__(self, backend: Optional[str] = None, random_seed: Optional[int] = None):
+    def __init__(
+        self,
+        backend: Optional[str] = None,
+        random_seed: Optional[int] = None,
+        fault_manager: Optional[FaultManager] = None,
+        fault_event_sink: Optional[Callable[[dict], None]] = None,
+    ):
         try:
             from tep import TEPSimulator
         except ImportError as exc:
@@ -36,6 +48,9 @@ class TEPAdapter:
             kwargs["backend"] = backend
 
         self.simulator = TEPSimulator(**kwargs)
+        self.fault_manager = fault_manager
+        self.fault_event_sink = fault_event_sink
+        self._active_fault_ids: set[str] = set()
 
     @property
     def backend(self) -> str:
@@ -45,24 +60,41 @@ class TEPAdapter:
     def reset(self) -> None:
         """Reset to the simulator's initialized steady-state condition."""
         self.simulator.initialize()
+        self._active_fault_ids.clear()
 
     def step(self, n_steps: int = 1) -> bool:
         """Advance by ``n_steps`` of the TEP simulator's native 1-second step."""
         if n_steps < 1:
             raise ValueError("n_steps must be >= 1")
-        return self.simulator.step(n_steps=n_steps)
+        result = self.simulator.step(n_steps=n_steps)
+        self._publish_fault_lifecycle_events()
+        return result
 
     def get_time_hours(self) -> float:
         """Return current simulation time in hours."""
         return float(self.simulator.time)
 
     def get_measurements(self):
-        """Return the 41 current XMEAS values in reference ordering."""
-        return self.simulator.get_measurements()
+        """Return the 41 current XMEAS values, including active sensor faults."""
+        measurements = list(self.simulator.get_measurements())
+        if self.fault_manager is None:
+            return measurements
+        time_hours = self.get_time_hours()
+        return [
+            self.fault_manager.apply(f"XMEAS{index}", value, time_hours)
+            for index, value in enumerate(measurements, start=1)
+        ]
 
     def get_manipulated_variables(self):
-        """Return the 12 current XMV values in reference ordering."""
-        return self.simulator.get_manipulated_vars()
+        """Return the 12 current XMV values, including active actuator faults."""
+        values = list(self.simulator.get_manipulated_vars())
+        if self.fault_manager is None:
+            return values
+        time_hours = self.get_time_hours()
+        return [
+            self.fault_manager.apply(f"XMV{index}", value, time_hours)
+            for index, value in enumerate(values, start=1)
+        ]
 
     def get_states(self):
         """Return the 50 current process states."""
@@ -89,6 +121,47 @@ class TEPAdapter:
     def get_disturbances(self):
         """Return the 20-element IDV vector."""
         return self.simulator.get_disturbances()
+
+    def configure_faults(
+        self,
+        fault_manager: FaultManager,
+        fault_event_sink: Optional[Callable[[dict], None]] = None,
+    ) -> None:
+        """Attach a fault manager and optional lifecycle-event callback."""
+        self.fault_manager = fault_manager
+        if fault_event_sink is not None:
+            self.fault_event_sink = fault_event_sink
+        self._active_fault_ids.clear()
+
+    def _publish_fault_lifecycle_events(self) -> None:
+        if self.fault_manager is None or self.fault_event_sink is None:
+            return
+        active = {
+            fault.fault_id: fault
+            for fault in self.fault_manager.active_faults(self.get_time_hours())
+        }
+        current_ids = set(active)
+        for fault_id in sorted(current_ids - self._active_fault_ids):
+            fault = active[fault_id]
+            self.fault_event_sink(self._fault_event("FaultActivated", fault))
+        for fault_id in sorted(self._active_fault_ids - current_ids):
+            fault = next(
+                (item for item in self.fault_manager.faults() if item.fault_id == fault_id),
+                None,
+            )
+            if fault is not None:
+                self.fault_event_sink(self._fault_event("FaultDeactivated", fault))
+        self._active_fault_ids = current_ids
+
+    def _fault_event(self, event_type: str, fault) -> dict:
+        return {
+            "event_type": event_type,
+            "fault_id": fault.fault_id,
+            "fault_type": fault.fault_type.value,
+            "target": fault.target,
+            "simulation_time_hours": self.get_time_hours(),
+            "metadata": dict(fault.metadata),
+        }
 
     def simulate(
         self,
