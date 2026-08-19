@@ -1,8 +1,26 @@
 # Tennessee Eastman Process Reference
 
-This document is the working technical specification for **Phase 1** of `process-sim`.
+This document is the technical reference for the TEP backend used by `process-sim`.
 
-The purpose is to understand the reference Tennessee Eastman Process (TEP) implementation before designing the Python adapter. We intentionally treat the reference implementation as a scientific baseline rather than rewriting its process equations into Python at this stage.
+The ProfBraatz implementation is treated as the **scientific/reference baseline**. `process-sim` does not reimplement the TEP process equations; it wraps the existing simulator through `TEPAdapter` and builds platform capabilities around it.
+
+## Current status
+
+**Phase 1 foundation is implemented and integrated into the current platform.**
+
+The repository now has:
+
+- a backend-independent simulator boundary
+- a TEP adapter around the ProfBraatz `tep` package
+- deterministic seeded simulation support
+- raw XMEAS/XMV/IDV access
+- engineering mappings
+- authoritative measurement units for XMEAS1–XMEAS41
+- OPC UA integration as a separate protocol boundary
+- canonical observation/event recording
+- Parquet persistence for recorded runs
+
+The remaining TEP-reference work is primarily deeper numerical validation, reproducibility tooling, and documenting the boundary between the scientific reference and higher-level orchestration.
 
 ## 1. Reference source
 
@@ -16,7 +34,7 @@ Public fork reviewed as a secondary copy/reference:
 
 `process-sim` does **not** depend on `tep-studio` and does not use it as a reference.
 
-The upstream repository contains three important Fortran programs/files:
+The reference repository contains three important Fortran programs/files:
 
 | File | Role |
 |---|---|
@@ -24,11 +42,9 @@ The upstream repository contains three important Fortran programs/files:
 | `temain.f` | Original/open-loop demonstration program with a simple controller example and Euler integrator |
 | `temain_mod.f` | Modified closed-loop plant-wide control demonstration with multiple controllers and fault/disturbance experiments |
 
-The repository also contains historical training/testing datasets such as `d00.dat` through `d21.dat` and corresponding `_te` files.
+Historical training/testing datasets such as `d00.dat` through `d21.dat` and corresponding `_te` files are useful reference material but must not be assumed to represent the complete live simulator interface.
 
-## 2. What the reference implementation actually contains
-
-### 2.1 Process state
+## 2. Reference model dimensions
 
 The reference process model declares:
 
@@ -36,6 +52,9 @@ The reference process model declares:
 - state vector `YY(1..50)`
 - derivative vector `YP(1..50)`
 - simulation time in **hours** inside the Fortran process routines
+- **41 XMEAS measurements**
+- **12 XMV manipulated variables**
+- **20 IDV disturbance slots**
 
 The core process evaluator is:
 
@@ -49,23 +68,9 @@ Initialization is performed through:
 CALL TEINIT(NN,TIME,YY,YP)
 ```
 
-The source documentation explicitly notes that additional states can be appended to the state vector, but `process-sim` should **not** extend the scientific model in Phase 1.
-
-### 2.2 Public process variables
-
-The reference implementation exposes two important common blocks:
-
-```text
-XMEAS(1..41)   process measurements
-XMV(1..12)     manipulated variables
-IDV(1..20)     disturbance flags
-```
-
-This gives us the natural first boundary for the Python adapter.
+`process-sim` preserves these scientific dimensions at the adapter boundary.
 
 ## 3. Manipulated variables — XMV
-
-The reference source defines 12 manipulated variables:
 
 | Index | Meaning |
 |---:|---|
@@ -82,28 +87,28 @@ The reference source defines 12 manipulated variables:
 | XMV11 | Condenser cooling-water flow |
 | XMV12 | Agitator speed |
 
-The first three feed descriptions are marked in the source as having corrected ordering.
+The model interface exposes all 12 variables even though historical dataset descriptions sometimes contain only 11 XMV columns.
 
-### Important dataset discrepancy
+### Historical dataset discrepancy
 
-The historical dataset description in the upstream README says that an observation vector contains:
+Some historical documentation describes an observation vector as:
 
 ```text
 41 XMEAS + 11 XMV = 52 columns
 ```
 
-However, the Fortran model declares **12 XMV variables**. The closed-loop output program also writes manipulated variables 1 through 12.
+The live model declares and uses **12 XMV variables**. `process-sim` therefore distinguishes:
 
-Therefore `process-sim` must **not silently assume that the historical 52-column datasets represent all model inputs**. We will explicitly distinguish:
+- **live model interface:** 41 XMEAS + 12 XMV
+- **historical ML dataset schema:** 41 XMEAS + 11 XMV where applicable
 
-- the model interface: 41 measurements + 12 manipulated variables
-- the historical ML dataset schema: 41 measurements + 11 manipulated variables
-
-This is an important validation item for Phase 1.
+The missing historical XMV must not be silently treated as absent from the scientific model.
 
 ## 4. Process measurements — XMEAS
 
-### 4.1 Continuous measurements
+The 41 measurements are mapped in `src/process_sim/backends/tep/mapping.py`.
+
+### Continuous measurements
 
 | Index | Description | Unit |
 |---:|---|---|
@@ -130,49 +135,36 @@ This is an important validation item for Phase 1.
 | XMEAS21 | Reactor cooling-water outlet temperature | deg C |
 | XMEAS22 | Separator cooling-water outlet temperature | deg C |
 
-### 4.2 Sampled measurements
-
-The remaining measurements are composition analyses.
+### Sampled composition measurements
 
 **Reactor feed analysis, stream 6**
 
-- XMEAS23: component A
-- XMEAS24: component B
-- XMEAS25: component C
-- XMEAS26: component D
-- XMEAS27: component E
-- XMEAS28: component F
-
-Sampling frequency: **0.1 hr** with **0.1 hr dead time**.
+- XMEAS23–XMEAS28: components A–F
+- unit: mol%
+- sampling frequency: 0.1 hr
+- dead time: 0.1 hr
 
 **Purge gas analysis, stream 9**
 
-- XMEAS29: component A
-- XMEAS30: component B
-- XMEAS31: component C
-- XMEAS32: component D
-- XMEAS33: component E
-- XMEAS34: component F
-- XMEAS35: component G
-- XMEAS36: component H
-
-Sampling frequency: **0.1 hr** with **0.1 hr dead time**.
+- XMEAS29–XMEAS36: components A–H
+- unit: mol%
+- sampling frequency: 0.1 hr
+- dead time: 0.1 hr
 
 **Product analysis, stream 11**
 
-- XMEAS37: component D
-- XMEAS38: component E
-- XMEAS39: component F
-- XMEAS40: component G
-- XMEAS41: component H
+- XMEAS37–XMEAS41: components D–H
+- unit: mol%
+- sampling frequency: 0.25 hr
+- dead time: 0.25 hr
 
-Sampling frequency: **0.25 hr** with **0.25 hr dead time**.
+These units are now part of the platform-facing TEP measurement mapping and are propagated into recorded `Observation` records.
+
+XMV units are intentionally not asserted here unless supported by an authoritative reference source.
 
 ## 5. Disturbances — IDV
 
 The core source declares `IDV(1..20)`.
-
-The documented disturbances are:
 
 | IDV | Description | Category |
 |---:|---|---|
@@ -197,35 +189,23 @@ The documented disturbances are:
 | 19 | Not documented in source | Unknown |
 | 20 | Not documented in source | Unknown |
 
-### Important disturbance-count discrepancy
+### Disturbance-count discrepancy
 
-`temain_mod.f` says that there are **21 programmed disturbances**, while the visible `IDV` common block is declared as `IDV(20)` and `teprob.f` documents IDV1 through IDV20.
+`temain_mod.f` mentions **21 programmed disturbances**, while the visible `IDV` common block and core process source expose `IDV(1..20)`.
 
-We therefore record **20 explicit IDV slots in the core model** and treat the statement about 21 disturbances as an item requiring further source/data investigation rather than inventing an IDV21 interface.
+`process-sim` therefore exposes **20 IDV slots** and does not invent an IDV21 interface. Resolving the historical discrepancy remains a reference-data investigation item.
 
 ## 6. Simulation time and integration
 
-The reference examples make an important distinction between process time and output sampling.
-
-### Original demonstration
-
-`temain.f` uses:
+The reference examples use:
 
 ```fortran
 DELTAT = 1. / 3600.
 ```
 
-This is a **1-second integration step expressed in hours**.
+This represents a **1-second integration step expressed in hours**.
 
-The original example calls:
-
-```text
-CONTRL
-OUTPUT
-INTGTR
-```
-
-and `INTGTR` performs a simple Euler update:
+The original example performs an Euler-style update:
 
 ```text
 TEFUNC -> derivative
@@ -233,31 +213,13 @@ TIME = TIME + DELTAT
 YY = YY + YP * DELTAT
 ```
 
-### Modified closed-loop demonstration
+The modified closed-loop example also uses 1-second increments.
 
-`temain_mod.f` also sets:
+The current ProfBraatz Python simulator exposes this native stepping behavior directly. `TEPAdapter` translates the package API into the `process-sim` simulator boundary rather than rewriting the equations.
 
-```fortran
-DELTAT = 1. / 3600.
-```
-
-and uses 1-second simulation increments. It contains a substantially larger closed-loop controller implementation.
-
-### Design decision for process-sim
-
-The Python API should expose time in a clear, explicit unit, preferably seconds at the platform boundary:
-
-```python
-step(dt_seconds: float)
-```
-
-The TEP adapter will convert to the model's native hour-based time representation.
-
-This keeps the rest of the industrial platform independent of the historical Fortran convention.
+The platform keeps **simulation time in hours at the TEP boundary** because that matches the reference model. Higher-level platform APIs may later expose explicit seconds or another canonical time representation where useful.
 
 ## 7. Open-loop vs closed-loop reference
-
-We should preserve both reference modes conceptually.
 
 ### `temain.f`
 
@@ -276,32 +238,17 @@ TEFUNC
 Euler integration
 ```
 
-It contains a simple example PI controller for stripper level and directly modifies XMV10 as an example disturbance.
+It contains a simple example PI controller and demonstrates direct manipulated-variable changes.
 
 ### `temain_mod.f`
 
-This is the more relevant starting point for the industrial digital-twin use case because it provides a plant-wide closed-loop control configuration.
+This is the more relevant reference executable for plant-wide closed-loop behavior. It contains controller parameter blocks, setpoints, manipulated-variable initialization, disturbance flags, output generation, and measurement randomness/noise handling.
 
-It contains:
+It remains a **scientific/reference executable**, not the definition of the `process-sim` platform API.
 
-- 50 process states
-- 1-second integration step
-- multiple controller parameter blocks
-- multiple setpoints
-- manipulated-variable initialization
-- disturbance flags
-- output files for measurements and manipulated variables
-- measurement noise/randomness handling
+## 8. Controller boundary
 
-However, it should still be treated as a **reference executable/example**, not as the Python API design.
-
-## 8. Controller architecture observed in the reference
-
-The modified program uses multiple controller common blocks, including controller gains, integral times and previous-error state.
-
-This tells us that the TEP adapter should eventually be able to expose controller context, but we should not make controller internals part of the minimum process-model interface.
-
-Phase 1 boundary:
+The TEP reference contains multiple controller structures. `process-sim` intentionally keeps controller orchestration above the minimum process-model interface.
 
 ```text
 Process model
@@ -312,88 +259,72 @@ Process model
     +-- state/reset
 ```
 
-Controller orchestration can be layered above it.
+Controllers may later be supplied by:
 
-This is important because future controllers may be:
-
-- reference Fortran controllers
-- Python controllers
+- reference controllers
+- Python control logic
 - OPC UA clients
 - SCADA logic
+- MPC/optimization services
 - AI agents
-- MPC or optimization services
 
-## 9. Reference execution model
+This separation is important for the Industrial Twin Core and fault/scenario architecture.
 
-The first target abstraction is:
+## 9. Current process-sim execution model
 
 ```text
                   +------------------+
                   |  TEP reference   |
-                  |  Fortran model   |
+                  | ProfBraatz/tep   |
                   +--------+---------+
                            |
-                    TEINIT / TEFUNC
-                           |
-                           v
-                  +------------------+
-                  |  TEP adapter     |
-                  +--------+---------+
+                     TEPAdapter
                            |
                            v
                   +------------------+
                   | ProcessSimulator |
-                  | Python interface |
-                  +------------------+
+                  +--------+---------+
                            |
              +-------------+-------------+
              |             |             |
              v             v             v
-          scenarios      OPC UA       future DWSIM
+          Recorder       OPC UA       future DWSIM
+             |
+        Parquet / TSDB
 ```
 
-The adapter is responsible for translation and orchestration, not scientific reinterpretation.
+The adapter is responsible for translation and platform integration, not scientific reinterpretation.
 
-## 10. Proposed Python boundary
+## 10. Current Python boundary
 
-The first generic interface should remain small:
+The current generic protocol is intentionally small and backend-independent:
 
 ```python
 class ProcessSimulator:
     def reset(self) -> None:
         ...
 
-    def step(self, dt_seconds: float) -> None:
+    def step(self, n_steps: int = 1) -> bool:
         ...
 
-    def get_time(self) -> float:
+    def get_time_hours(self) -> float:
         ...
 
-    def get_measurements(self) -> dict[str, float]:
+    def get_measurements(self):
         ...
 
-    def get_manipulated_variables(self) -> dict[str, float]:
+    def get_manipulated_variables(self):
         ...
 
-    def set_manipulated_variable(self, name: str, value: float) -> None:
+    def set_manipulated_variable(self, index: int, value: float) -> None:
         ...
 ```
 
-A lower-level TEP-specific interface may additionally expose:
-
-```python
-get_state()
-set_disturbance(index, enabled)
-get_disturbances()
-get_raw_xmeas()
-get_raw_xmv()
-```
-
-Those details should remain behind the TEP backend where possible.
+TEP-specific capabilities such as states and IDV manipulation remain behind the TEP adapter.
 
 ## 11. Mapping strategy
 
-We should maintain two naming layers.
+Two naming layers are maintained.
 
 ### Raw/reference names
 
@@ -405,218 +336,97 @@ IDV1   ... IDV20
 
 ### Engineering names
 
-For example:
+Examples include:
 
 ```text
-XMEAS9  -> reactor.temperature
-XMEAS7  -> reactor.pressure
-XMEAS8  -> reactor.level
-XMV10   -> reactor.cooling_water_flow
+XMEAS9  -> reactor_temperature
+XMEAS7  -> reactor_pressure
+XMEAS8  -> reactor_level
+XMV10   -> reactor_cooling_water_flow
 ```
 
-The raw mapping must remain available for validation because the Fortran reference speaks in XMEAS/XMV/IDV terminology.
-
-The engineering mapping belongs in a separate mapping layer so that it can later feed the Industrial Knowledge Graph.
+Raw names remain available for scientific validation. Engineering names and units form the beginning of the platform semantic layer and can later feed the Industrial Knowledge Graph and OPC UA metadata.
 
 ## 12. Validation strategy
 
-Validation is the most important Phase 1 deliverable.
+The original plan was to compare `TEPSimulator` and `TEPAdapter` numerically. Because the adapter is intentionally a thin wrapper around the same ProfBraatz implementation, such a comparison is largely tautological at this stage.
 
-We should establish a reference test matrix before adding OPC UA or GraphDB.
+Therefore the current validation strategy is:
 
-### Level 1 — Interface validation
+### Interface validation
 
-Confirm that the Python adapter can:
+Confirm that the adapter can:
 
-- initialize the model
-- reset the model
-- advance one second
+- initialize/reset the model
+- advance native simulation steps
 - read 41 measurements
 - read 12 manipulated variables
-- preserve variable ordering
-- report simulation time correctly
+- preserve ordering
+- report simulation time
+- manipulate documented IDV slots
 
-### Level 2 — Numerical trajectory validation
+### Scientific/reference validation
 
-Run identical initial conditions and inputs through the reference and adapter and compare selected trajectories.
+Treat the ProfBraatz implementation as the reference scientific baseline. A separate regression dataset becomes valuable once `process-sim` adds orchestration, clocking, fault injection, transformations, or other behavior that could diverge from the backend.
 
-At minimum:
+### Dataset validation
 
-- reactor temperature
-- reactor pressure
-- reactor level
-- separator level
-- stripper level
-- compressor work
-- cooling-water temperatures
-- selected composition measurements
+Keep the historical 52-column versus live 53-variable distinction explicit:
 
-The comparison should report:
+```text
+live snapshot = 41 XMEAS + 12 XMV = 53 variables
+historical dataset described in some sources = 41 XMEAS + 11 XMV = 52 columns
+```
 
-- absolute error
-- relative error where meaningful
-- maximum error
-- RMS error
-- timestamp of maximum deviation
+Do not silently discard XMV12.
 
-### Level 3 — Disturbance validation
+## 13. Reproducibility
 
-Run selected documented IDV cases and verify that the adapter reproduces the expected qualitative and quantitative response.
-
-Start with:
-
-- IDV1
-- IDV2
-- IDV4
-- IDV6
-- IDV13
-- IDV14
-- IDV15
-
-Random disturbances should be tested separately because reproducibility requires explicit treatment of the reference random-number behavior.
-
-### Level 4 — Dataset validation
-
-Verify the relationship between historical files and the live model interface.
-
-In particular, resolve why the historical 52-column observation vector contains 11 XMV values while the process model declares 12.
-
-Do not discard XMV12 without documenting the reason.
-
-## 13. Reproducibility requirements
-
-The reference source contains stochastic measurement/process behavior.
-
-The source documentation states that the random number used for measurement noise must be changed to obtain different noise sequences.
-
-For `process-sim`, we should instead make randomness explicit:
+Simulation runs should record enough information to reproduce an experiment:
 
 ```text
 SimulationRun
+  +-- run_id
+  +-- backend
+  +-- backend/version information
   +-- random_seed
-  +-- reference_model_version
-  +-- initial_conditions
-  +-- input_configuration
-  +-- disturbance_configuration
-  +-- timestep
+  +-- initial conditions
+  +-- input configuration
+  +-- disturbance configuration
+  +-- native timestep
+  +-- duration
 ```
 
-A simulation run must be reproducible whenever the same deterministic configuration and seed are supplied.
+The recording foundation already persists `run_id` and run metadata. Future scenario manifests and lifecycle events will extend this provenance model.
 
-## 14. What we should NOT do yet
+## 14. What we should NOT do
 
-Phase 1 should explicitly avoid:
+The project should continue to avoid:
 
 - translating all 50 process equations into Python
-- changing the scientific equations for convenience
-- putting OPC UA calls inside the process equations
+- changing scientific equations for convenience
+- putting OPC UA calls inside process equations
 - putting GraphDB calls inside the simulation timestep
-- introducing a hard-coded SCADA plant model
+- treating GraphDB as a high-frequency historian
 - inventing missing disturbance definitions
 - assuming historical dataset columns equal the complete live process interface
-- adding AI before the reference behavior is validated
+- coupling recording to OPC UA client polling
+- adding AI before the semantic and temporal foundations are sufficiently stable
 
-## 15. Proposed Phase 1 repository structure
+## 15. Relationship to the roadmap
 
-As implementation begins, the project can evolve toward:
+The TEP reference work is the foundation of **Phase 1 — TEP Reference and Python Simulation Integration**.
 
-```text
-process-sim/
-├── README.md
-├── .project
-├── .pydevproject
-├── src/
-│   └── process_sim/
-│       ├── __init__.py
-│       ├── core/
-│       │   └── simulator.py
-│       └── backends/
-│           └── tep/
-│               ├── __init__.py
-│               ├── adapter.py
-│               ├── mapping.py
-│               ├── reference.py
-│               └── validation.py
-├── tests/
-│   └── tep/
-├── docs/
-│   └── tep-reference/
-│       └── README.md
-└── scenarios/
-```
+The next major platform capabilities are:
 
-The actual Fortran reference source should remain clearly separated from the Python implementation if/when it is vendored into the repository. Its copyright and license notices must be preserved.
+1. **Phase 2 — Industrial Twin Core:** canonical assets, identity, orchestration, lifecycle, states, and source-generated events.
+2. **Phase 3 — Fault Injection and Scenario Engineering:** first-class faults, scenarios, and fault events.
+3. **Phase 5 — Time-Series and Temporal Knowledge Infrastructure:** the recording foundation is already started; next steps are lifecycle events, production time-series evaluation, and Temporal KG modeling.
 
-## 16. Phase 1 milestones
+OPC UA is already implemented as the initial **Phase 4** integration layer and will continue to mature independently through semantic metadata, subscriptions, hierarchy, and fault/event integration.
 
-### M1 — Source inventory
+## 16. Related documentation
 
-- [x] Identify reference repository
-- [x] Identify `teprob.f`
-- [x] Identify `temain.f`
-- [x] Identify `temain_mod.f`
-- [x] Record 50-state model boundary
-- [x] Record XMEAS/XMV/IDV interfaces
-- [x] Record integration convention
-- [x] Record known source/documentation discrepancies
-
-### M2 — Build a reference runner
-
-- [ ] Establish reproducible Fortran build
-- [ ] Run the original example
-- [ ] Run the modified closed-loop example
-- [ ] Capture reference trajectories
-- [ ] Store metadata for each reference run
-
-### M3 — Python adapter
-
-- [ ] Define `ProcessSimulator`
-- [ ] Implement TEP adapter
-- [ ] Implement reset/step
-- [ ] Implement XMEAS/XMV access
-- [ ] Implement basic disturbance access
-
-### M4 — Validation harness
-
-- [ ] Compare Python adapter with reference outputs
-- [ ] Add numerical tolerances
-- [ ] Add regression tests
-- [ ] Add selected disturbance cases
-- [ ] Document unresolved differences
-
-### M5 — Stable Phase 1 API
-
-- [ ] Freeze initial simulator interface
-- [ ] Add engineering variable mappings
-- [ ] Add run metadata
-- [ ] Add deterministic seed/configuration handling
-- [ ] Only then begin Industrial Twin Core work
-
-## 17. Key conclusions from the source inspection
-
-The initial inspection changes and strengthens our implementation plan in several ways:
-
-1. **The TEP model is already naturally adapter-friendly.** `TEINIT` and `TEFUNC` provide a clear process boundary.
-2. **The process has 50 states**, so the Python layer should not pretend the 41 measurements are the process state.
-3. **There are 41 measurements and 12 manipulated variables** at the model boundary.
-4. **The historical ML datasets use 52 columns**, creating an 11-XMV dataset convention that must be treated separately.
-5. **The core disturbance vector has 20 declared entries**, despite the modified program's statement about 21 disturbances.
-6. **The reference simulation uses a one-second integration step expressed in hours.**
-7. **The modified closed-loop program is substantially richer than the original demonstration**, and is the better source for understanding plant-wide controller behavior.
-8. **The Python architecture should wrap the reference rather than replace it initially.**
-9. **Validation must precede OPC UA, SCADA, GraphDB and AI integration.**
-10. **The adapter boundary should preserve raw XMEAS/XMV/IDV semantics while providing a separate engineering naming layer.**
-
-## 18. References
-
-- Original ProfBraatz repository: https://github.com/camaramm/tennessee-eastman-profBraatz
-- Public fork/reference copy: https://github.com/jkitchin/tennessee-eastman-profbraatz
-- Downs & Vogel, *A Plant-Wide Industrial Process Control Problem*, Computers & Chemical Engineering 17 (1993), 245–255: https://doi.org/10.1016/0098-1354(93)80018-I
-- Russell, Chiang & Braatz, *Data-driven Techniques for Fault Detection and Diagnosis in Chemical Processes*, Springer, 2000: https://doi.org/10.1007/978-1-4471-0409-4
-- Chiang, Russell & Braatz, *Fault Detection and Diagnosis in Industrial Systems*, Springer, 2001: https://doi.org/10.1007/978-1-4471-0347-9
-
-## Status
-
-**Phase 1 — reference inspection complete at the documentation level.**
-
-The next engineering task is to create a reproducible reference runner and capture baseline trajectories. Only after those trajectories are available should the Python TEP adapter be implemented and validated.
+- `docs/tep-reference/USAGE.md` — practical TEP adapter usage
+- `docs/opcua/README.md` — current OPC UA architecture and roadmap
+- root `README.md` — overall project status, architecture, recording workflow, and ten-phase roadmap
