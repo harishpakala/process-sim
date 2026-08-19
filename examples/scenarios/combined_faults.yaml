@@ -1,0 +1,17 @@
+scenario: combined_faults
+metadata:
+  purpose: controlled_combined_fault_benchmark
+  random_seed: 42
+faults:
+  - id: reactor-temperature-bias
+    type: bias
+    target: XMEAS9
+    magnitude: 5.0
+    start: 1.0
+    duration: 0.5
+  - id: reactor-cooling-stuck
+    type: stuck
+    target: XMV10
+    value: 50.0
+    start: 1.5
+    duration: 0.5
