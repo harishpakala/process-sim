@@ -6,7 +6,7 @@ The project deliberately separates the **reference process model** from the surr
 
 ## Current status
 
-**Phase 1 foundation complete; Phase 4 OPC UA initial integration complete; Phase 5 recording foundation implemented; Phase 3 fault injection foundation now implemented.**
+**Phase 1 foundation complete; Phase 3 fault/scenario foundation implemented; Phase 4 OPC UA initial integration complete; Phase 5 recording foundation implemented.**
 
 Implemented today:
 
@@ -27,21 +27,42 @@ Implemented today:
 - bias, drift, stuck, and process-disturbance fault definitions
 - fault activation/deactivation lifecycle events
 - FaultManager integration with TEP XMEAS/XMV publication
+- native TEP IDV integration for scenario-managed process disturbances
+- YAML/JSON scenario definitions
+- executable `ScenarioRunner` connecting faults, TEP, recording, and provenance
+- scenario execution example
 - fault lifecycle events routable into the canonical recorder
 - OPC UA operator XMV changes routable into the canonical event log
 
 The implementation deliberately advances across phases where useful. The roadmap below describes the **target architecture and remaining work**, not a strict sequential implementation order.
+
+## Python code size
+
+The current repository contains approximately **1,850 lines of Python** across the platform implementation, tests, and examples. This is an approximate source-size count and excludes the external ProfBraatz TEP reference package, documentation, YAML configuration, and generated run data.
+
+The approximate split is:
+
+| Area | Python LOC |
+|---|---:|
+| `src/process_sim/` | ~1,350 |
+| `tests/` | ~315 |
+| `examples/` | ~175 |
+| **Total** | **~1,850** |
+
+This number is intentionally tracked as an engineering-size indicator rather than as a product metric; it will change as the architecture becomes more complete.
 
 ## Current architecture
 
 ```text
                            process-sim
                                 │
-                ┌───────────────┼────────────────┐
-                │               │                │
-           TEPAdapter      FaultManager       OPC UA
-                │               │                │
-                └───────────────┼────────────────┘
+                ┌───────────────┼────────────────────┐
+                │               │                    │
+           TEPAdapter      FaultManager           OPC UA
+                │               │                    │
+                └───────────────┼────────────────────┘
+                                │
+                         ScenarioRunner
                                 │
                            Simulation
                                 │
@@ -88,47 +109,83 @@ urn:process-sim:opcua
 
 The development server currently uses `opc.tcp://0.0.0.0:4841/process-sim/` because port 4840 was occupied in the development environment.
 
-## Fault injection foundation
+## Fault and scenario engineering
 
-The first FaultManager layer is now part of the platform core:
+The fault layer is now connected to the TEP adapter and scenario execution path:
 
 ```text
-FaultManager
-    │
-    ├── Bias
-    ├── Drift
-    ├── Stuck
-    └── Process disturbance
+Scenario YAML / JSON
+        │
+        ▼
+   ScenarioRunner
+        │
+   ┌────┴──────────┐
+   ▼               ▼
+FaultManager    RunManifest
+   │
+   ├── Bias ─────────────► XMEAS signal transformation
+   ├── Drift ────────────► XMEAS/XMV signal transformation
+   ├── Stuck ────────────► XMEAS/XMV signal transformation
+   └── Process disturbance ─► native TEP IDV1..IDV20
+                                      │
+                                      ▼
+                                TEP process model
 ```
 
 Faults contain an ID, type, target, timing, magnitude/value, and metadata. They can be scheduled and queried by simulation time.
 
-Signal-level faults currently operate at the TEP adapter boundary:
+Signal-level faults operate at the TEP adapter boundary. Process disturbances are intentionally different: they are synchronized to the TEP model's native IDV interface rather than being simulated as measurement or actuator offsets.
 
-```text
-TEP process model
-       │
-       ▼
-   TEPAdapter
-       │
-       ▼
- FaultManager
-   /       \
-XMEAS      XMV
-sensor    actuator
-faults     faults
-```
-
-Process disturbances are intentionally kept separate from generic signal transformation. The next fault increment will connect scenario-managed process disturbances to native TEP IDVs.
-
-Fault lifecycle events currently include:
+Fault lifecycle events include:
 
 ```text
 FaultActivated
 FaultDeactivated
 ```
 
-They can be recorded through the same canonical `Event` model used for simulation lifecycle and operator events.
+They are routed into the canonical `Event` model and persisted in `events.parquet`.
+
+### Scenario definition
+
+Scenarios can be stored as YAML or JSON. For example:
+
+```yaml
+scenario: reactor_sensor_and_process_fault
+metadata:
+  random_seed: 42
+faults:
+  - id: reactor-temperature-bias
+    type: bias
+    target: XMEAS9
+    magnitude: 5.0
+    start: 1.0
+    duration: 0.5
+  - id: process-disturbance
+    type: process_disturbance
+    target: IDV6
+    start: 1.5
+    duration: 0.25
+```
+
+The scenario runner turns this definition into one reproducible recorded experiment:
+
+```text
+Scenario
+   ↓
+FaultManager
+   ↓
+TEPAdapter
+   ↓
+SimulationRecordingSession
+   ↓
+observations.parquet + events.parquet + metadata.json
+```
+
+Run a scenario with:
+
+```bash
+python examples/run_scenario.py examples/scenarios/reactor_sensor_and_process_fault.yaml --hours 2 --seed 42
+```
 
 ## Run provenance
 
@@ -287,17 +344,19 @@ Implemented:
 - bias, drift, stuck, and process-disturbance definitions
 - scheduled activation windows
 - XMEAS/XMV signal fault application
+- native TEP IDV1..IDV20 process-disturbance integration
+- YAML/JSON scenario loading
+- `ScenarioRunner`
 - `FaultActivated` / `FaultDeactivated` events
+- run provenance for scenario experiments
 
 Next:
 
-- YAML/JSON scenario definitions
-- scenario validation
-- native TEP IDV process-disturbance integration
-- noise and saturation faults
+- scenario schema validation and richer scheduling semantics
+- noise, saturation, intermittent, and combined fault modes
 - actuator/sensor failure modes
 - controller and communication faults
-- scenario provenance and reproducible fault experiments
+- scenario libraries and experiment comparison
 
 ### Phase 4 — OPC UA Integration — INITIAL IMPLEMENTATION COMPLETE
 
@@ -320,7 +379,7 @@ Next:
 - subscriptions and client integration tests
 - process/equipment hierarchy
 - FaultManager scenario controls
-- native process-disturbance controls
+- richer native process-disturbance controls
 
 ### Phase 5 — Time-Series and Temporal Knowledge Infrastructure — IMPLEMENTATION STARTED
 
@@ -335,6 +394,7 @@ Implemented:
 - operator events
 - fault lifecycle events
 - TEP recording and inspection examples
+- scenario-driven recorded experiments
 
 Next:
 
@@ -434,7 +494,11 @@ process-sim/
 │       └── USAGE.md
 ├── examples/
 │   ├── record_tep_run.py
-│   └── inspect_tep_run.py
+│   ├── inspect_tep_run.py
+│   ├── run_scenario.py
+│   └── scenarios/
+│       ├── reactor_sensor_bias.yaml
+│       └── reactor_sensor_and_process_fault.yaml
 ├── src/
 │   └── process_sim/
 │       ├── core/
@@ -442,7 +506,10 @@ process-sim/
 │       │   └── tep/
 │       ├── faults/
 │       │   ├── models.py
-│       │   └── manager.py
+│       │   ├── manager.py
+│       │   └── scenario.py
+│       ├── scenarios/
+│       │   └── runner.py
 │       ├── protocols/
 │       │   └── opcua/
 │       └── recording/
@@ -452,6 +519,10 @@ process-sim/
 │           ├── parquet.py
 │           └── session.py
 └── tests/
+    ├── test_faults.py
+    ├── test_tep_faults.py
+    ├── test_scenarios.py
+    └── ...
 ```
 
-See `docs/opcua/` for the OPC UA integration, `docs/tep-reference/` for the scientific/reference model, and `examples/` for the current recording workflow.
+See `docs/opcua/` for the OPC UA integration, `docs/tep-reference/` for the scientific/reference model, and `examples/` for the current recording and scenario workflows.
