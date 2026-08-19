@@ -66,6 +66,7 @@ def main() -> None:
         storage=storage,
     )
 
+    session.start()
     # Record the initialized state at simulation time zero.
     session.record_snapshot()
 
@@ -76,6 +77,7 @@ def main() -> None:
         if step % args.interval == 0 or step == total_steps:
             session.record_snapshot()
 
+    session.complete()
     paths = session.save(
         metadata={
             "backend": simulator.backend,
@@ -90,6 +92,7 @@ def main() -> None:
     print(f"Run ID: {recorder.run_id}")
     print(f"Simulation time: {simulator.get_time_hours():.6f} h")
     print(f"Snapshots: {len(recorder.observations()) // 53}")
+    print(f"Events: {len(recorder.events())}")
     for name, path in paths.items():
         print(f"{name}: {path}")
 
