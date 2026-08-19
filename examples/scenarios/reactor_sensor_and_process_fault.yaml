@@ -1,0 +1,17 @@
+scenario: reactor_sensor_and_process_fault
+metadata:
+  description: Combined sensor bias and native TEP process disturbance
+  random_seed: 42
+faults:
+  - id: reactor-temperature-bias
+    type: bias
+    target: XMEAS9
+    magnitude: 5.0
+    start: 1.0
+    duration: 0.5
+
+  - id: feed-composition-disturbance
+    type: process_disturbance
+    target: IDV6
+    start: 1.5
+    duration: 0.25
