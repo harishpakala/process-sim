@@ -53,6 +53,38 @@ def test_tep_adapter_batch_simulation():
     assert result.states.shape[1] == 50
 
 
+def test_sensor_fault_is_visible_to_native_controller_input():
+    manager = FaultManager()
+    manager.add(
+        Fault(
+            fault_id="reactor-temperature-bias",
+            fault_type=FaultType.BIAS,
+            target="XMEAS9",
+            magnitude=5.0,
+            start_time_hours=0.0,
+            duration_hours=1.0 / 3600.0,
+        )
+    )
+    sim = TEPAdapter(random_seed=123, fault_manager=manager)
+    sim.reset()
+
+    class SpyController:
+        def __init__(self):
+            self.received_xmeas = None
+
+        def calculate(self, xmeas, xmv, step):
+            self.received_xmeas = list(xmeas)
+            return xmv
+
+    spy = SpyController()
+    sim.simulator.controller = spy
+    native_xmeas9 = float(sim.simulator.get_measurements()[8])
+
+    sim.step()
+
+    assert spy.received_xmeas[8] == pytest.approx(native_xmeas9 + 5.0)
+
+
 def test_fault_lifecycle_events_are_emitted_at_simulation_boundaries():
     manager = FaultManager()
     manager.add(
