@@ -120,39 +120,50 @@ affected:    XMEAS9
 related:     XMV10, XMEAS21
 ```
 
-## Next experimental layer: variable response analysis
+## Variable-level response analysis
 
-The immediate next step is to quantify the response around the known fault
-window:
+The first quantitative analysis is now implemented as:
 
-```text
-                 fault window
-                     │
-                     ▼
-XMEAS9   ────────────████████████────────────
-                     1.0       1.5 h
-
-XMV10    ────────────────────────────────────
-                     ?
-
-XMEAS21  ────────────────────────────────────
-                     ?
+```bash
+python examples/analyze_fault_response.py \
+  --run-id 3972cf14-1e97-4259-a758-5d9f2ef6026c \
+  --root data/runs \
+  --target XMEAS9 \
+  --related XMV10 XMEAS21
 ```
 
-The analysis should compare pre-fault, fault, and post-fault windows and report
-at least:
+The script uses the declared fault start/end times and reports descriptive
+statistics over configurable pre-fault, fault, and post-fault windows. The
+default windows are 0.25 h before activation and 0.25 h after deactivation.
 
-- baseline mean and standard deviation
-- fault-window mean and standard deviation
-- measured change / bias magnitude
-- onset and recovery timing
-- response latency where applicable
-- settling or recovery behavior
-- related-variable response for `XMV10` and `XMEAS21`
+It reports:
 
-The first implementation should be descriptive and deterministic. Statistical
-or causal claims should only be added after repeated controlled runs support
-them.
+- sample count
+- mean
+- standard deviation
+- median
+- fault-minus-pre mean change
+- post-minus-pre mean change
+- post-minus-fault mean change
+
+An optional `--baseline-run-id` can later be supplied to compare the same
+simulation-time windows against a no-fault run. This is the preferred next
+step for estimating the response attributable to the injected fault rather
+than relying only on within-run differences.
+
+Example:
+
+```bash
+python examples/analyze_fault_response.py \
+  --run-id <fault-run-id> \
+  --baseline-run-id <baseline-run-id> \
+  --root data/runs \
+  --target XMEAS9 \
+  --related XMV10 XMEAS21
+```
+
+The analysis is intentionally descriptive. A single run should not be used to
+make causal claims or establish a general fault-response magnitude.
 
 ## Initial benchmark matrix
 
@@ -177,9 +188,9 @@ The benchmark should evolve in stages:
 ```text
 1. deterministic fault lifecycle          [ACHIEVED]
               ↓
-2. variable-level response detection      [NEXT]
+2. variable-level response detection      [IMPLEMENTED]
               ↓
-3. temporal response metrics
+3. quantitative temporal response metrics [NEXT]
               ↓
 4. repeated-seed / benchmark aggregation
               ↓
