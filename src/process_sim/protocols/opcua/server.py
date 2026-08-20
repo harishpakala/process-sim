@@ -3,15 +3,17 @@
 from __future__ import annotations
 
 import asyncio
+import json
 from typing import Callable
+
+from process_sim.faults import Fault, FaultManager, FaultType
 
 
 class OPCUAServer:
     """Expose a process simulator through an OPC UA server.
 
-    ``event_callback`` is an optional integration hook for recording semantic
-    OPC UA events without making the OPC UA protocol layer depend on the
-    recording package. It is called when an OPC UA client changes an XMV value.
+    The server owns the OPC UA contract only. Fault semantics remain in
+    :class:`FaultManager` and are applied by the simulator adapter.
     """
 
     def __init__(
@@ -22,6 +24,8 @@ class OPCUAServer:
         real_time_factor=1.0,
         update_interval_seconds=1.0,
         event_callback: Callable[[int, float, float], None] | None = None,
+        fault_manager: FaultManager | None = None,
+        fault_event_callback: Callable[[dict], None] | None = None,
     ):
         if real_time_factor <= 0:
             raise ValueError("real_time_factor must be > 0")
@@ -32,29 +36,43 @@ class OPCUAServer:
         self.endpoint = endpoint
         self.namespace_uri = namespace_uri
         self.event_callback = event_callback
+        self.fault_manager = fault_manager or FaultManager()
+        self.fault_event_callback = fault_event_callback
         self._server = None
         self._namespace_index = None
         self._time_node = None
         self._running_node = None
         self._real_time_factor_node = None
+        self._fault_count_node = None
         self._measurement_nodes = []
         self._mv_nodes = []
-        self._last_synced_mvs = []
         self._simulation_task = None
         self._real_time_factor = float(real_time_factor)
         self._update_interval_seconds = float(update_interval_seconds)
+        self._last_synced_mvs = []
+
+        configure_faults = getattr(self.simulator, "configure_faults", None)
+        if callable(configure_faults):
+            configure_faults(self.fault_manager, self._handle_fault_event)
 
     async def start(self):
-        from asyncua import Server
+        from asyncua import Server, ua
+
         self._server = Server()
         await self._server.init()
         self._server.set_endpoint(self.endpoint)
         self._namespace_index = await self._server.register_namespace(self.namespace_uri)
         tep = await self._server.nodes.objects.add_object(self._namespace_index, "TEP")
         simulation = await tep.add_object(self._namespace_index, "Simulation")
-        self._time_node = await simulation.add_variable(self._namespace_index, "TimeHours", float(self.simulator.get_time_hours()))
-        self._running_node = await simulation.add_variable(self._namespace_index, "Running", False)
-        self._real_time_factor_node = await simulation.add_variable(self._namespace_index, "RealTimeFactor", self._real_time_factor)
+        self._time_node = await simulation.add_variable(
+            self._namespace_index, "TimeHours", float(self.simulator.get_time_hours())
+        )
+        self._running_node = await simulation.add_variable(
+            self._namespace_index, "Running", False
+        )
+        self._real_time_factor_node = await simulation.add_variable(
+            self._namespace_index, "RealTimeFactor", self._real_time_factor
+        )
         await self._time_node.set_read_only()
         await self._running_node.set_read_only()
         await self._real_time_factor_node.set_writable()
@@ -62,43 +80,232 @@ class OPCUAServer:
         await simulation.add_method(self._namespace_index, "Stop", self._stop_method)
         await simulation.add_method(self._namespace_index, "Reset", self._reset_method)
 
+        fault_management = await tep.add_object(
+            self._namespace_index, "FaultManagement"
+        )
+        self._fault_count_node = await fault_management.add_variable(
+            self._namespace_index, "FaultCount", len(self.fault_manager.faults())
+        )
+        await self._fault_count_node.set_read_only()
+        await fault_management.add_method(
+            self._namespace_index,
+            "InjectFault",
+            self._inject_fault_method,
+            [
+                ua.VariantType.String,
+                ua.VariantType.String,
+                ua.VariantType.String,
+                ua.VariantType.Double,
+                ua.VariantType.Double,
+                ua.VariantType.Double,
+            ],
+            [ua.VariantType.Boolean],
+        )
+        await fault_management.add_method(
+            self._namespace_index,
+            "ClearFault",
+            self._clear_fault_method,
+            [ua.VariantType.String],
+            [ua.VariantType.Boolean],
+        )
+        await fault_management.add_method(
+            self._namespace_index,
+            "ClearAllFaults",
+            self._clear_all_faults_method,
+            [],
+            [ua.VariantType.Boolean],
+        )
+        await fault_management.add_method(
+            self._namespace_index,
+            "ListFaults",
+            self._list_faults_method,
+            [],
+            [ua.VariantType.String],
+        )
+
         measurements = await tep.add_object(self._namespace_index, "Measurements")
         self._measurement_nodes = []
         for index, value in enumerate(self.simulator.get_measurements(), start=1):
-            node = await measurements.add_variable(self._namespace_index, f"XMEAS{index}", float(value))
+            node = await measurements.add_variable(
+                self._namespace_index, f"XMEAS{index}", float(value)
+            )
             await node.set_read_only()
             self._measurement_nodes.append(node)
 
         mvs = await tep.add_object(self._namespace_index, "ManipulatedVariables")
         self._mv_nodes = []
-        for index, value in enumerate(self.simulator.get_manipulated_variables(), start=1):
-            node = await mvs.add_variable(self._namespace_index, f"XMV{index}", float(value))
+        for index, value in enumerate(
+            self.simulator.get_manipulated_variables(), start=1
+        ):
+            node = await mvs.add_variable(
+                self._namespace_index, f"XMV{index}", float(value)
+            )
             await node.set_writable()
             self._mv_nodes.append(node)
-        self._last_synced_mvs = [float(value) for value in self.simulator.get_manipulated_variables()]
+        self._last_synced_mvs = [
+            float(value) for value in self.simulator.get_manipulated_variables()
+        ]
 
         await self._server.start()
         await self.update(False)
 
     async def _start_method(self, parent):
         await self.start_simulation()
+        return True
 
     async def _stop_method(self, parent):
         await self.stop_simulation()
+        return True
 
     async def _reset_method(self, parent):
         await self.reset_simulation()
+        return True
+
+    async def _inject_fault_method(
+        self, parent, fault_id, fault_type, target, magnitude, value, duration_hours
+    ):
+        return self.inject_fault(
+            str(fault_id),
+            str(fault_type),
+            str(target),
+            float(magnitude),
+            float(value),
+            float(duration_hours),
+        )
+
+    async def _clear_fault_method(self, parent, fault_id):
+        return self.clear_fault(str(fault_id))
+
+    async def _clear_all_faults_method(self, parent):
+        return self.clear_all_faults()
+
+    async def _list_faults_method(self, parent):
+        return self.list_faults()
+
+    def inject_fault(
+        self,
+        fault_id: str,
+        fault_type: str,
+        target: str,
+        magnitude: float = 0.0,
+        value: float = 0.0,
+        duration_hours: float = 0.0,
+    ) -> bool:
+        """Inject an operator fault at the current simulation boundary.
+
+        ``duration_hours == 0`` means the fault remains active until explicitly
+        cleared. A positive duration schedules deactivation from the current
+        simulation time. ``value`` is used by stuck faults; ``magnitude`` is
+        used by bias, drift, and process-disturbance faults.
+        """
+        fault_kind = FaultType(str(fault_type).strip().lower())
+        if not fault_id.strip():
+            raise ValueError("fault_id must not be empty")
+        if not target.strip():
+            raise ValueError("target must not be empty")
+        if duration_hours < 0:
+            raise ValueError("duration_hours must be >= 0")
+
+        start = float(self.simulator.get_time_hours())
+        duration = None if duration_hours == 0 else float(duration_hours)
+        metadata = {"injection_source": "opcua", "operator_injected": True}
+        if fault_kind is FaultType.PROCESS_DISTURBANCE:
+            metadata["idv_index"] = self._resolve_idv_index(target)
+
+        fault = Fault(
+            fault_id=fault_id.strip(),
+            fault_type=fault_kind,
+            target=target.strip(),
+            magnitude=float(magnitude),
+            value=float(value) if fault_kind is FaultType.STUCK else None,
+            start_time_hours=start,
+            duration_hours=duration,
+            metadata=metadata,
+        )
+        self.fault_manager.add(fault)
+        self._refresh_fault_count()
+        self._emit_operator_fault_event("FaultInjected", fault)
+        return True
+
+    def clear_fault(self, fault_id: str) -> bool:
+        """Clear an operator fault immediately and emit provenance metadata."""
+        fault = self.fault_manager.remove(fault_id)
+        self._refresh_fault_count()
+        self._emit_operator_fault_event("FaultCleared", fault)
+        sync_faults = getattr(self.simulator, "sync_faults", None)
+        if callable(sync_faults):
+            sync_faults()
+        return True
+
+    def clear_all_faults(self) -> bool:
+        """Clear all configured operator faults."""
+        for fault_id in [fault.fault_id for fault in self.fault_manager.faults()]:
+            self.clear_fault(fault_id)
+        return True
+
+    def list_faults(self) -> str:
+        """Return the configured fault set as a stable JSON string."""
+        faults = []
+        for fault in self.fault_manager.faults():
+            faults.append(
+                {
+                    "fault_id": fault.fault_id,
+                    "fault_type": fault.fault_type.value,
+                    "target": fault.target,
+                    "magnitude": fault.magnitude,
+                    "value": fault.value,
+                    "start_time_hours": fault.start_time_hours,
+                    "duration_hours": fault.duration_hours,
+                    "metadata": dict(fault.metadata),
+                }
+            )
+        return json.dumps(faults, sort_keys=True)
+
+    def _resolve_idv_index(self, target: str) -> int:
+        normalized = target.strip().upper().replace("_", "")
+        if not normalized.startswith("IDV") or not normalized[3:].isdigit():
+            raise ValueError("process disturbance target must be IDV1..IDV20")
+        index = int(normalized[3:])
+        if not 1 <= index <= 20:
+            raise ValueError("process disturbance target must be IDV1..IDV20")
+        return index
+
+    def _refresh_fault_count(self) -> None:
+        if self._fault_count_node is not None:
+            try:
+                loop = asyncio.get_running_loop()
+            except RuntimeError:
+                return
+            loop.create_task(self._fault_count_node.write_value(len(self.fault_manager.faults())))
+
+    def _emit_operator_fault_event(self, event_type: str, fault: Fault) -> None:
+        event = {
+            "event_type": event_type,
+            "fault_id": fault.fault_id,
+            "fault_type": fault.fault_type.value,
+            "target": fault.target,
+            "simulation_time_hours": float(self.simulator.get_time_hours()),
+            "metadata": dict(fault.metadata),
+        }
+        if self.fault_event_callback is not None:
+            self.fault_event_callback(event)
+
+    def _handle_fault_event(self, event: dict) -> None:
+        if self.fault_event_callback is not None:
+            self.fault_event_callback(event)
 
     async def update(self, running=False):
         await self._time_node.write_value(float(self.simulator.get_time_hours()))
         await self._running_node.write_value(bool(running))
         await self._real_time_factor_node.write_value(float(self._real_time_factor))
+        if self._fault_count_node is not None:
+            await self._fault_count_node.write_value(len(self.fault_manager.faults()))
         for node, value in zip(self._measurement_nodes, self.simulator.get_measurements()):
             await node.write_value(float(value))
         for node, value in zip(self._mv_nodes, self.simulator.get_manipulated_variables()):
             await node.write_value(float(value))
 
-    async def _sync_manipulated_variables(self):
+    async def sync_manipulated_variables(self):
         """Apply OPC UA XMV writes and report client-driven changes."""
         for index, node in enumerate(self._mv_nodes, start=1):
             value = float(await node.read_value())
@@ -111,8 +318,11 @@ class OPCUAServer:
     async def _simulation_loop(self):
         try:
             while True:
-                await self._sync_manipulated_variables()
-                steps = max(1, int(round(self._update_interval_seconds * self._real_time_factor)))
+                await self.sync_manipulated_variables()
+                steps = max(
+                    1,
+                    int(round(self._update_interval_seconds * self._real_time_factor)),
+                )
                 self.simulator.step(n_steps=steps)
                 await self.update(True)
                 await asyncio.sleep(self._update_interval_seconds)
@@ -139,7 +349,12 @@ class OPCUAServer:
     async def reset_simulation(self):
         await self.stop_simulation()
         self.simulator.reset()
-        self._last_synced_mvs = [float(value) for value in self.simulator.get_manipulated_variables()]
+        configure_faults = getattr(self.simulator, "configure_faults", None)
+        if callable(configure_faults):
+            configure_faults(self.fault_manager, self._handle_fault_event)
+        self._last_synced_mvs = [
+            float(value) for value in self.simulator.get_manipulated_variables()
+        ]
         await self.update(False)
 
     async def set_real_time_factor(self, value):
