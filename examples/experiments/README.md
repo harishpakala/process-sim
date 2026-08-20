@@ -55,6 +55,41 @@ python examples/run_experiment.py \
 The experiment seed is passed to `TEPAdapter`, and the resulting run manifest
 contains the experiment specification and ground-truth declaration.
 
+## Paired multi-seed replication
+
+For the controlled fault benchmark, the preferred next step after validating a
+single run is to repeat the **same fault experiment and a matching no-fault
+baseline at several seeds**. The replication runner automates that pairing and
+keeps the experimental protocol fixed while changing only the random seed.
+
+```bash
+python examples/run_replication.py \
+  examples/experiments/reactor_cooling_bias_001.yaml \
+  examples/scenarios/reactor_sensor_bias.yaml \
+  examples/scenarios/reactor_no_fault.yaml \
+  --seeds 42 43 44 45 46 \
+  --output data/runs \
+  --summary data/replications/reactor_cooling_bias.csv
+```
+
+For every seed, the runner:
+
+1. creates a seed-specific fault experiment in memory;
+2. creates a paired no-fault baseline with the same seed and duration;
+3. runs both through `ExperimentRunner` and `TEPAdapter`;
+4. aligns observations on `simulation_time_hours`;
+5. calculates mean delta, MAE, RMSE, maximum absolute delta, and time of the
+   maximum deviation for the fault and post-fault windows; and
+6. writes a CSV summary plus a JSON manifest containing the paired run IDs.
+
+No seed-specific YAML files are required. The original experiment fixture
+remains the source of truth for fault definition, duration, and expected ground
+truth.
+
+The summary contains one row per seed and measured variable, including the
+fault run ID and baseline run ID. This makes the output directly usable for a
+later statistical aggregation step.
+
 ## Verified first experiment
 
 The first controlled experiment has been executed and inspected successfully.
@@ -122,7 +157,7 @@ related:     XMV10, XMEAS21
 
 ## Variable-level response analysis
 
-The first quantitative analysis is now implemented as:
+The first quantitative analysis is implemented as:
 
 ```bash
 python examples/analyze_fault_response.py \
@@ -146,10 +181,10 @@ It reports:
 - post-minus-pre mean change
 - post-minus-fault mean change
 
-An optional `--baseline-run-id` can later be supplied to compare the same
-simulation-time windows against a no-fault run. This is the preferred next
-step for estimating the response attributable to the injected fault rather
-than relying only on within-run differences.
+An optional `--baseline-run-id` compares the same simulation-time windows
+against a no-fault run. This is the preferred single-pair analysis because it
+separates ordinary trajectory variation from the fault-versus-baseline
+trajectory difference.
 
 Example:
 
@@ -176,10 +211,10 @@ make causal claims or establish a general fault-response magnitude.
 5. process disturbance
 6. combined faults
 
-The corresponding scenario fixtures live under `examples/scenarios/`. The
-matrix is a benchmark specification, not yet an automated batch executor.
-Repeated seeds are the next dimension after the single-run analysis path is
-validated.
+The corresponding scenario fixtures live under `examples/scenarios/`.
+Repeated-seed execution is now automated for the first controlled benchmark;
+statistical aggregation across the resulting replication rows is the next
+analysis step.
 
 ## Research progression
 
@@ -190,9 +225,9 @@ The benchmark should evolve in stages:
               ↓
 2. variable-level response detection      [IMPLEMENTED]
               ↓
-3. quantitative temporal response metrics [NEXT]
+3. paired fault-vs-baseline analysis      [IMPLEMENTED]
               ↓
-4. repeated-seed / benchmark aggregation
+4. repeated-seed benchmark aggregation    [IMPLEMENTED]
               ↓
 5. multi-fault attribution
               ↓
