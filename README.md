@@ -8,46 +8,71 @@ The project deliberately separates the **reference process model** from the surr
 
 ## Current status
 
-**The implementation currently spans Phases 1, 3, 4, and 5. The complete roadmap contains 10 detailed phases organized under four higher-level architectural pillars.**
+**The implementation currently spans Phases 1, 3, 4, and 5. The current branch also contains the first reproducible controlled-experiment framework on top of the recording infrastructure.** The complete roadmap contains 10 detailed phases organized under four architectural pillars.
 
-Implemented today:
+Implemented and verified at the platform level:
 
 - ProfBraatz TEP exposed through `TEPAdapter`
 - backend-independent `ProcessSimulator` boundary
 - deterministic seeded TEP simulation control
 - 41 XMEAS measurements, 12 XMV manipulated variables, and 20 IDV disturbance slots
-- TEP engineering names and authoritative measurement units
-- asynchronous OPC UA server integration
+- authoritative XMEAS engineering units
+- asynchronous OPC UA integration
 - simulation lifecycle controls and configurable real-time factor
 - OPC UA XMEAS/XMV exposure and XMV write bridge
 - canonical `Observation` and `Event` models
-- `SimulationRecorder`
-- `RunManifest` for simulation provenance
-- Parquet persistence with one directory per simulation run
+- `SimulationRecorder` and `RunManifest`
+- Parquet persistence with one directory per run
 - recording and inspection examples
-- `Fault`, `FaultType`, and `FaultManager` primitives
+- `Fault`, `FaultType`, and `FaultManager`
 - bias, drift, stuck, and process-disturbance fault definitions
-- fault activation/deactivation lifecycle events
-- FaultManager integration with TEP XMEAS/XMV publication
+- scheduled fault activation/deactivation lifecycle events
 - native TEP IDV integration for scenario-managed process disturbances
 - YAML/JSON scenario definitions
-- executable `ScenarioRunner` connecting faults, TEP, recording, and provenance
-- scenario execution example
-- fault lifecycle events routable into the canonical recorder
-- OPC UA operator XMV changes routable into the canonical event log
+- executable `ScenarioRunner`
+- fault lifecycle events and OPC UA operator XMV changes in the canonical event log
+- declarative `Experiment` / `GroundTruth` models and `ExperimentRunner`
+- experiment provenance persisted in run metadata
+- initial benchmark matrix and controlled experiment fixtures
 
-The implementation deliberately advances across phases where useful. The roadmap describes the **target architecture and research direction**, not a strict sequential implementation order.
+### First controlled experiment result
+
+Experiment `reactor_cooling_bias_001` has now been executed end-to-end and inspected successfully:
+
+```text
+Run:              3972cf14-1e97-4259-a758-5d9f2ef6026c
+Scenario:         reactor_sensor_bias
+Seed:             42
+Simulated time:   0.0 → 2.0 h
+Native timestep:  1 s
+Variables:        53
+Observation rows: 381,653
+Event rows:       4
+```
+
+The recorded lifecycle is:
+
+```text
+0.0 h   SimulationStarted
+1.0 h   FaultActivated     XMEAS9
+1.5 h   FaultDeactivated   XMEAS9
+2.0 h   SimulationCompleted
+```
+
+The experiment therefore establishes the **deterministic execution and temporal ground-truth layer**: the declared fault identity and boundaries are present in the persisted event log at the expected simulation times. The observation count is consistent with 7,201 snapshots × 53 variables when recording every native step.
+
+This does **not yet establish a quantitative process-response result**. The next experimental layer is to measure the response of `XMEAS9` and its related variables such as `XMV10` and `XMEAS21` during pre-fault, fault, and post-fault windows.
+
+Simulation time is accelerated; the 2-hour experiment does not run for two hours of wall-clock time. The `real_time_factor` is currently unset for this experiment path.
+
+The implementation deliberately advances across phases where useful. The roadmap describes the target architecture and research direction, not a strict sequential implementation order.
 
 ## Four architectural pillars
-
-The 10 detailed implementation phases are grouped into four higher-level architectural and research pillars:
 
 1. **Digital Twin & Simulation** — Phases 1–4
 2. **Data & Temporal Infrastructure** — Phase 5
 3. **Semantic Digital Thread** — Phases 6–7
 4. **Industrial Intelligence** — Phases 8–10
-
-The four-pillar view communicates the overall architecture; the 10-phase roadmap below remains the detailed engineering plan.
 
 ```text
                 INDUSTRIAL AI
@@ -77,148 +102,51 @@ The four-pillar view communicates the overall architecture; the 10-phase roadmap
 
 ## Research foundation
 
-The semantic-modeling strategy of `process-sim` is grounded in the author's accepted ONTO:NEXUS workshop paper, part of MODELS 2026. The paper establishes the semantic-lifting foundation that this project is intended to extend into a broader industrial digital-thread and temporal-reasoning platform.
+The semantic-modeling strategy is grounded in the author's **accepted but not yet published** ONTO:NEXUS workshop paper, part of MODELS 2026:
 
 > **From Asset Administration Shells to Knowledge Graphs: Rule-Based Semantic Lifting for Cross-Domain Reasoning in Cyber-Physical Systems**  
 > Harish Kumar Pakala, Bianca Wiesmayr, Christian Diedrich  
 > DOI: https://doi.org/10.1145/3837062.3839557
 
-The paper is **accepted but not yet published**. It should be treated as the research foundation for the semantic-lifting direction, rather than as a description of the complete `process-sim` platform.
+The paper establishes the semantic-lifting foundation that `process-sim` is intended to extend into a broader industrial digital-thread and temporal-reasoning platform.
 
-## Strategic direction: model first, then lift and reason
+## Strategic direction
 
-The long-term strategy is to establish **proper domain submodel templates first**, semantically annotate and validate those templates using established semantic vocabularies, and only then perform semantic lifting into an ontology-driven knowledge graph.
-
-The central principle is:
+The long-term strategy is:
 
 > **Model first → semantically annotate → validate → lift → integrate → reason.**
 
-The knowledge graph is not intended to replace the authoritative engineering, business, or operational source models. It is a **semantically lifted, queryable, reasoning-oriented representation** derived from those sources.
-
-The planned pipeline is:
+The knowledge graph is not intended to replace authoritative engineering, business, or operational source models. It is a semantically lifted, queryable, reasoning-oriented representation derived from those sources.
 
 ```text
-DOMAIN DATA SOURCES
 DEXPI | ECAD | ERP | BOM | Operations
         │
         ▼
 AAS SUBMODEL TEMPLATES
-structure + cardinality + semantics + identity
         │
         ▼
-SEMANTIC GROUNDING AND VALIDATION
+SEMANTIC GROUNDING + VALIDATION
 ECLASS + QUDT + SHACL
         │
         ▼
 SEMANTIC LIFTING
-AAS Templates → OWL classes / properties / SHACL shapes
-AAS Instances → RDF individuals / relationships / provenance
+AAS → OWL / SHACL / RDF
         │
         ▼
-CROSS-DOMAIN INDUSTRIAL KNOWLEDGE GRAPH
+CROSS-DOMAIN INDUSTRIAL KG
         │
         ▼
-TEMPORAL CONTEXT + ENGINEERING REASONING
+TEMPORAL + ENGINEERING REASONING
         │
         ▼
 SPARQL / RULES / GRAPHRAG / AI AGENTS
 ```
 
-### Template-first semantic modeling
-
-Each major industrial domain should first have a well-defined submodel template before instances are lifted into the KG. The intended template families include:
-
-- **DEXPI / P&ID** — process equipment, piping, instrumentation, connectivity, functional relationships
-- **ECAD** — electrical assets, PLC/I/O relationships, signals, endpoints, control topology
-- **ERP** — asset/material/master-data references, lifecycle information, procurement context
-- **BOM** — EBOM, MBOM, service/spare BOM, quantities, positions, revisions, lifecycle/status, manufacturer and supplier part numbers
-- **Operations** — telemetry, alarms, events, states, observations, runs, provenance, and temporal context
-
-Templates should make structure and semantics explicit rather than relying on downstream graph construction to infer them.
-
-### Semantic annotations
-
-Semantic annotation is intended to distinguish at least three complementary dimensions:
-
-- **Classification** — eCl@ss concepts for equipment/material/product classification
-- **Quantity kind** — QUDT concepts describing what a measured quantity represents
-- **Unit** — QUDT units for engineering quantities
-
-For example, an operational observation may ultimately be represented conceptually as:
-
-```text
-Observation_123
-    ├── hasQuantityKind ──► QUDT temperature quantity kind
-    ├── hasUnit ──────────► QUDT degree-Celsius unit
-    └── hasValue ─────────► 78.4
-```
-
-The exact semantic identifiers should be authoritative references rather than locally invented labels.
-
-### Semantic lifting
-
-Semantic lifting is a reusable platform capability rather than a one-off transformation for a single domain:
-
-```text
-AAS Submodel Template
-        │
-        ├──► OWL class / properties
-        └──► SHACL validation shape
-
-AAS Submodel Instance
-        │
-        ├──► RDF individuals
-        ├──► semantic references
-        ├──► cross-domain relationships
-        └──► provenance
-```
-
-The lifting layer should preserve structural constraints, semantic roles, relationships, deterministic resource identity, and source provenance.
-
-## Cross-domain identity and the digital thread
-
-Canonical identity is a central design problem. The goal is to connect representations of the same real-world asset across engineering, enterprise, and operational systems:
-
-```text
-DEXPI:P-101
-     ↕
-ECAD:P-101
-     ↕
-BOM:P-101
-     ↕
-ERP:Material_1000234
-     ↕
-OPC-UA:P-101
-     ↕
-Process-simulation representation
-```
-
-The KG should therefore provide relationships between source-system identities while preserving those original identifiers and their provenance. Identity resolution should be explicit and deterministic, not an implicit string-matching side effect of graph loading.
-
-The intended digital-thread flow is:
-
-```text
-DEXPI + ECAD + BOM + ERP
-            │
-            ▼
-     Semantic Digital Thread
-            │
-            ▼
-     Process Simulation / TEP
-            │
-            ▼
-       OPC UA + Events
-            │
-            ▼
-      Temporal Knowledge
-            │
-            ▼
-      Reasoning / GraphRAG
-```
+Template families planned for the digital thread include DEXPI/P&ID, ECAD, ERP, BOM, and Operations. Canonical identity and provenance are first-class design concerns.
 
 ## Temporal data strategy
 
-High-frequency numerical telemetry belongs in a time-series or analytical data layer. Semantic relationships, events, states, provenance, and temporal context belong in the Temporal Knowledge Graph.
+High-frequency numerical telemetry belongs in a time-series or analytical layer. Semantic relationships, events, states, provenance, and temporal context belong in a Temporal Knowledge Graph.
 
 ```text
 Time-series layer
@@ -232,40 +160,7 @@ XMV10 ──affects──► Reactor Cooling
 Fault ──activatedAt──► simulation time
 ```
 
-`GraphDB` should **not become the historian**. Millions of raw high-frequency samples should remain in an efficient time-series/analytical store. The graph should represent selected semantic observations, events, relationships, temporal states, provenance, and references back to the underlying numerical data.
-
-The intended storage evolution is:
-
-```text
-SimulationRecorder
-       │
-       ├── MemoryStorage
-       └── FileStorage
-              └── Parquet
-
-Future
-
-SimulationRecorder
-       ├── Parquet / historical storage
-       ├── Time-Series / historian storage
-       └── Temporal Knowledge Graph
-```
-
-## Observation vs event
-
-```text
-OBSERVATIONS
-123.0 h   XMV10 = 16.0
-123.1 h   XMV10 = 16.2
-123.2 h   XMV10 = 16.8
-
-EVENTS
-123.0 h   Operator changed XMV10: 16 → 20
-125.4 h   FaultActivated: reactor temperature bias
-128.1 h   FaultDeactivated: reactor temperature bias
-```
-
-Events should be generated by the subsystem where they occur, preserving causality and provenance, rather than inferred by repeatedly polling the graph.
+`GraphDB` should not become the historian. Raw high-frequency samples should remain in efficient analytical storage; the graph should represent selected semantic observations, events, relationships, temporal states, provenance, and references to numerical data.
 
 ## Current architecture
 
@@ -278,7 +173,7 @@ Events should be generated by the subsystem where they occur, preserving causali
                 │               │                    │
                 └───────────────┼────────────────────┘
                                 │
-                         ScenarioRunner
+                 ScenarioRunner / ExperimentRunner
                                 │
                            Simulation
                                 │
@@ -299,35 +194,7 @@ Events should be generated by the subsystem where they occur, preserving causali
                      future TSDB / Temporal KG
 ```
 
-## Current OPC UA namespace
-
-```text
-Objects
-└── TEP
-    ├── Simulation
-    │   ├── TimeHours
-    │   ├── Running
-    │   ├── RealTimeFactor
-    │   ├── Start()
-    │   ├── Stop()
-    │   └── Reset()
-    ├── Measurements
-    │   └── XMEAS1 ... XMEAS41
-    └── ManipulatedVariables
-        └── XMV1 ... XMV12
-```
-
-Application namespace URI:
-
-```text
-urn:process-sim:opcua
-```
-
-The development server currently uses `opc.tcp://0.0.0.0:4841/process-sim/` because port 4840 was occupied in the development environment.
-
 ## Fault and scenario engineering
-
-The fault layer is connected to the TEP adapter and scenario execution path:
 
 ```text
 Scenario YAML / JSON
@@ -348,13 +215,9 @@ FaultManager    RunManifest
                                 TEP process model
 ```
 
-Faults contain an ID, type, target, timing, magnitude/value, and metadata. They can be scheduled and queried by simulation time.
+Signal-level faults operate at the TEP adapter boundary. Process disturbances are synchronized to the TEP model's native IDV interface.
 
-Signal-level faults operate at the TEP adapter boundary. Process disturbances are intentionally different: they are synchronized to the TEP model's native IDV interface rather than being simulated as measurement or actuator offsets.
-
-### Scenario definition
-
-Scenarios can be stored as YAML or JSON. For example:
+Example:
 
 ```yaml
 scenario: reactor_sensor_and_process_fault
@@ -374,25 +237,62 @@ faults:
     duration: 0.25
 ```
 
-The scenario runner turns this definition into one reproducible recorded experiment:
+## Controlled experiments
+
+Experiments add scientific context around scenario execution:
 
 ```text
-Scenario
-   ↓
-FaultManager
-   ↓
-TEPAdapter
-   ↓
-SimulationRecordingSession
-   ↓
-observations.parquet + events.parquet + metadata.json
+Experiment YAML / JSON
+        │
+        ├── Scenario ───────► ScenarioRunner
+        │                         │
+        └── Ground Truth         TEPAdapter
+                                  │
+                                  ▼
+                         Recording Session
+                                  │
+                         observations + events
+                                  │
+                                  ▼
+                             Run Manifest
 ```
 
-Run a scenario with:
+The experiment layer is intentionally thin. `ScenarioRunner` remains the owner of simulation orchestration, fault synchronization, recording cadence, storage, and simulator provenance. `ExperimentRunner` adds experiment identity, declared ground truth, and benchmark metadata.
 
-```bash
-python examples/run_scenario.py examples/scenarios/reactor_sensor_and_process_fault.yaml --hours 2 --seed 42
-```
+Current fixture:
+
+`examples/experiments/reactor_cooling_bias_001.yaml`
+
+Current benchmark families:
+
+1. normal baseline
+2. sensor bias
+3. sensor drift
+4. actuator stuck
+5. process disturbance
+6. combined faults
+
+The benchmark matrix is a specification, not yet an automated batch executor.
+
+### Evidence status
+
+The current experiment evidence establishes:
+
+- reproducible experiment configuration
+- persisted experiment and ground-truth metadata
+- complete observation coverage for the configured duration
+- fault activation and deactivation events at exact declared simulation boundaries
+- simulation lifecycle events and provenance
+
+Still to be established experimentally:
+
+- quantitative sensor-response magnitude
+- baseline/fault/recovery statistics
+- response latency and settling behavior
+- controller response in related variables
+- multi-seed repeatability
+- fault-attribution and detection metrics
+- comparisons across benchmark families
 
 ## Run provenance
 
@@ -412,25 +312,7 @@ Run
 └── metadata
 ```
 
-This provides the foundation for reproducible scenario and fault experiments.
-
-## Recording foundation
-
-`process-sim` separates **continuous observations** from **discrete semantic events**.
-
-```text
-Simulation
-    │
-    ├── Observations ──► SimulationRecorder ──► Parquet / future TSDB
-    │
-    └── Events ────────► SimulationRecorder ──► event log / future Temporal KG
-```
-
-`Observation` is used for values such as XMEAS and XMV. TEP XMEAS observations carry engineering units from the reference mapping. XMV units remain unset until an authoritative source is identified.
-
-`Event` is reserved for semantically meaningful occurrences such as operator actions, faults, alarms, controller transitions, and simulation lifecycle changes.
-
-The recorder does not control or slow the simulator. It is intentionally pull-based: callers decide when to capture a snapshot.
+Experiment metadata and declared ground truth are persisted under the run metadata for reproducibility.
 
 ## Recording a TEP run
 
@@ -440,7 +322,7 @@ Install the recording dependencies:
 pip install -r requirements-recording.txt
 ```
 
-Because the project currently uses a `src/` layout, either configure `process-sim/src` in PyDev or set `PYTHONPATH` in a terminal. For example in PowerShell:
+For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
 
 ```powershell
 $env:PYTHONPATH="$PWD\src"
@@ -458,10 +340,19 @@ Record every 10 native steps:
 python examples/record_tep_run.py --hours 1 --interval 10
 ```
 
-Inspect the latest run:
+Inspect a run:
 
 ```bash
-python examples/inspect_tep_run.py
+python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
+```
+
+Run the controlled experiment fixture:
+
+```bash
+python examples/run_experiment.py \
+  examples/experiments/reactor_cooling_bias_001.yaml \
+  examples/scenarios/reactor_sensor_bias.yaml \
+  --output data/runs
 ```
 
 Each run is stored as:
@@ -479,9 +370,11 @@ Parquet is the current portable intermediate format, not the final production hi
 
 ## Roadmap
 
-The project uses **ten detailed implementation phases**, grouped into the four architectural pillars above. The phases are **not a rigid waterfall**; the implementation advances across them where doing so establishes useful foundations.
+The ten phases are grouped into the four architectural pillars. They are not a rigid waterfall; implementation advances where a foundation supports the research program.
 
 ### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
+
+Completed foundation:
 
 - ProfBraatz scientific reference
 - backend-independent simulator boundary
@@ -491,49 +384,45 @@ The project uses **ten detailed implementation phases**, grouped into the four a
 - engineering mappings and XMEAS units
 - canonical observations/events
 
-Remaining work is deeper numerical validation and reproducibility tooling.
+Next: deeper numerical validation and reproducibility tooling.
 
 ### Phase 2 — Industrial Twin Core — IN PROGRESS
 
+Target:
+
 - canonical plant and asset model
 - equipment, instruments, tags, and functional relationships
-- canonical identifiers and source-system identifiers
+- canonical and source-system identifiers
 - deterministic simulation clock/orchestration
 - lifecycle and run management
-- experiment metadata
 - operating states and state transitions
 - source-generated events
-- fault/scenario integration
-
-The core remains independent of TEP so future process models can become additional backends.
+- richer asset relationships independent of TEP
 
 ### Phase 3 — Fault Injection and Scenario Engineering — FOUNDATION IMPLEMENTED
 
-Implemented:
+Completed:
 
-- `Fault` model
-- `FaultType`
-- `FaultManager`
+- `Fault`, `FaultType`, `FaultManager`
 - bias, drift, stuck, and process-disturbance definitions
 - scheduled activation windows
 - XMEAS/XMV signal fault application
-- native TEP IDV1..IDV20 process-disturbance integration
+- native TEP IDV1..IDV20 integration
 - YAML/JSON scenario loading
 - `ScenarioRunner`
-- `FaultActivated` / `FaultDeactivated` events
-- run provenance for scenario experiments
+- fault lifecycle events
+- scenario run provenance
 
 Next:
 
-- scenario schema validation and richer scheduling semantics
+- schema validation and richer scheduling semantics
 - noise, saturation, intermittent, and combined fault modes
-- actuator/sensor failure modes
 - controller and communication faults
 - scenario libraries and experiment comparison
 
 ### Phase 4 — OPC UA Integration — INITIAL IMPLEMENTATION COMPLETE
 
-Implemented:
+Completed:
 
 - stable application namespace
 - TEP object
@@ -541,7 +430,7 @@ Implemented:
 - simulation time and running state
 - Start/Stop/Reset methods
 - configurable real-time factor
-- explicit XMV write bridge
+- XMV write bridge
 - asynchronous simulation loop
 - operator XMV event integration
 
@@ -553,9 +442,9 @@ Next:
 - external SCADA/HMI integration tests
 - security and deployment configuration
 
-### Phase 5 — Time-Series and Temporal Knowledge Infrastructure — RECORDING FOUNDATION IMPLEMENTED
+### Phase 5 — Time-Series, Experiments, and Temporal Knowledge Infrastructure — FOUNDATION IMPLEMENTED
 
-Implemented foundation:
+Completed foundation:
 
 - canonical `Observation` and `Event` models
 - `SimulationRecorder`
@@ -564,14 +453,21 @@ Implemented foundation:
 - Parquet persistence
 - observation/event separation
 - operator and fault lifecycle event recording
+- declarative experiment definitions
+- experiment/ground-truth provenance
+- initial benchmark matrix
+- first end-to-end controlled experiment with exact temporal ground-truth events
 
 Next:
 
+- automated quantitative response analysis
+- baseline/fault/recovery metrics
+- multi-seed experiment execution
+- automated benchmark aggregation
 - historian/time-series backend integration
 - temporal event model expansion
-- temporal knowledge graph schema
 - event-to-observation correlation
-- historical query and replay interfaces
+- temporal knowledge graph schema and replay/query interfaces
 
 ### Phase 6 — Engineering & Semantic Digital Thread — PLANNED
 
@@ -628,41 +524,29 @@ The guiding workflow is **model first → semantically annotate → validate →
 - controlled agent actions
 - benchmarked evaluation against time-series-only and graph-enhanced baselines
 
-## Research direction
+## Research progression
 
-The strongest research direction is not simply to build a larger SCADA or simulation platform. The intended contribution is a **provenance-aware industrial digital thread** that connects:
+The research sequence is intentionally evidence-driven:
 
 ```text
-Engineering Models
-       │
-       ├── DEXPI / P&ID
-       ├── ECAD
-       ├── BOM
-       └── ERP
-              │
-              ▼
-       Semantic Digital Thread
-              │
-              ▼
-       Process Simulation
-              │
-              ▼
-       Telemetry + Events + Faults
-              │
-              ▼
-       Temporal Knowledge Graph
-              │
-              ▼
-       GraphRAG / Industrial AI
+Controlled Digital Twin
+        ↓
+Reproducible Operational Data
+        ↓
+Semantically Integrated Digital Thread
+        ↓
+Temporal + Engineering Reasoning
+        ↓
+Evidence-Grounded Industrial AI
 ```
 
-The TEP should serve as a controlled, reproducible experimental environment. Future evaluation should compare time-series-only retrieval against combinations of time-series data, engineering knowledge, temporal events, and provenance-aware graph reasoning.
+For the immediate experimental program, the next step is **variable-level response analysis** of controlled fault runs before expanding into semantic reasoning or GraphRAG.
 
-The intended evaluation questions include:
+The intended evaluation questions are:
 
 1. Does temporal knowledge improve operational-context retrieval compared with time-series-only retrieval?
 2. Do engineering relationships plus telemetry improve fault and root-cause identification?
 3. Does explicit provenance reduce unsupported or unverifiable AI conclusions?
 4. Can the same semantic identity connect engineering, enterprise, simulation, and operational representations consistently?
 
-The long-term goal is an industrial platform in which **simulation, digital-thread integration, temporal data, semantic reasoning, and industrial AI form one reproducible architecture rather than separate systems**.
+The TEP should remain a controlled, reproducible experimental environment while the platform grows toward a provenance-aware industrial digital thread.

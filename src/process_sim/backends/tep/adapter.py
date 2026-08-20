@@ -12,12 +12,36 @@ from process_sim.faults import FaultManager, FaultType
 from .mapping import DISTURBANCE_NAMES
 
 
+class _FaultAwareController:
+    """Inject scheduled sensor faults into the native controller input path."""
+
+    def __init__(self, controller, adapter: "TEPAdapter"):
+        self._controller = controller
+        self._adapter = adapter
+
+    def calculate(self, xmeas, xmv, step):
+        if self._adapter.fault_manager is None:
+            faulted_xmeas = xmeas
+        else:
+            time_hours = self._adapter.get_time_hours()
+            faulted_xmeas = [
+                self._adapter.fault_manager.apply(
+                    f"XMEAS{index}", value, time_hours
+                )
+                for index, value in enumerate(xmeas, start=1)
+            ]
+        return self._controller.calculate(faulted_xmeas, xmv, step)
+
+    def reset(self):
+        return self._controller.reset()
+
+
 class TEPAdapter:
     """Adapter for ``tep.TEPSimulator``.
 
-    Sensor and actuator faults are signal transformations. Process-disturbance
-    faults are different: they are translated to the native TEP IDV interface
-    before each simulator step and therefore affect the process model itself.
+    Sensor faults are applied both to recorded observations and to the native
+    closed-loop controller input path. Process-disturbance faults are translated
+    to the native TEP IDV interface before each simulator step.
     """
 
     def __init__(
@@ -46,6 +70,7 @@ class TEPAdapter:
         self._active_fault_ids: set[str] = set()
         self._fault_managed_idvs: set[int] = set()
         self._fault_previous_idvs: dict[int, int] = {}
+        self._controller_delegate = None
 
     @property
     def backend(self) -> str:
@@ -57,16 +82,29 @@ class TEPAdapter:
 
     def reset(self) -> None:
         self.simulator.initialize()
+        self._controller_delegate = None
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
         self._fault_previous_idvs.clear()
+        self._ensure_fault_aware_controller()
+
+    def _ensure_fault_aware_controller(self) -> None:
+        """Wrap the current native controller after simulator initialization."""
+        controller = getattr(self.simulator, "controller", None)
+        if controller is None or isinstance(controller, _FaultAwareController):
+            return
+        self._controller_delegate = controller
+        self.simulator.controller = _FaultAwareController(controller, self)
 
     def step(self, n_steps: int = 1) -> bool:
-        """Advance using native TEP steps with fault state synchronized at boundaries."""
+        """Advance using native TEP steps with faults synchronized at boundaries."""
         if n_steps < 1:
             raise ValueError("n_steps must be >= 1")
         result = False
         for _ in range(n_steps):
+            if not getattr(self.simulator, "initialized", False):
+                self.simulator.initialize()
+            self._ensure_fault_aware_controller()
             self.sync_faults()
             result = self.simulator.step(n_steps=1)
             self.sync_faults()
@@ -129,6 +167,7 @@ class TEPAdapter:
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
         self._fault_previous_idvs.clear()
+        self._ensure_fault_aware_controller()
 
     def sync_faults(self) -> None:
         """Apply scheduled process faults and emit lifecycle events at current time."""
@@ -136,12 +175,7 @@ class TEPAdapter:
         self._publish_fault_lifecycle_events()
 
     def _process_disturbance_index(self, fault) -> int:
-        """Resolve a fault target to a native 1-based TEP IDV index.
-
-        Accepted targets are ``IDV1``..``IDV20`` or ``idv_1``..``idv_20``.
-        ``metadata.idv_index`` is also accepted so scenarios can use a semantic
-        target name while retaining the native TEP mapping explicitly.
-        """
+        """Resolve a fault target to a native 1-based TEP IDV index."""
         target = str(fault.target).strip().upper().replace("_", "")
         if target.startswith("IDV") and target[3:].isdigit():
             index = int(target[3:])
@@ -212,13 +246,7 @@ class TEPAdapter:
         disturbances: Optional[Dict[int, Tuple[float, int]]] = None,
         record_interval: int = 1,
     ):
-        """Run the native ProfBraatz batch simulation.
-
-        ``disturbances`` uses the native TEP convention:
-        ``{idv_index: (time_hours, value)}``. For process-disturbance faults
-        managed by ``FaultManager``, use ``step()`` so the scheduled fault layer
-        is applied before each native TEP step.
-        """
+        """Run the native ProfBraatz batch simulation."""
         return self.simulator.simulate(
             duration_hours=duration_hours,
             disturbances=disturbances,

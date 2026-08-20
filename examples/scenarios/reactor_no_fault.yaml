@@ -1,0 +1,4 @@
+scenario: reactor_no_fault
+metadata:
+  description: Baseline no-fault reactor experiment
+faults: []

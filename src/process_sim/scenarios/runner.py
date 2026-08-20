@@ -64,7 +64,12 @@ class ScenarioRunner:
             sync()
 
     def run(self, duration_hours: float, record_interval_steps: int = 1) -> dict:
-        """Run the scenario and persist the complete recorded run."""
+        """Run the scenario and persist the complete recorded run.
+
+        Returns a stable run-result dictionary containing the run identifier
+        and paths to the persisted artifacts. This keeps callers independent
+        of the storage implementation's internal return shape.
+        """
         if duration_hours < 0:
             raise ValueError("duration_hours must be >= 0")
         if record_interval_steps < 1:
@@ -84,10 +89,15 @@ class ScenarioRunner:
         # including a fault whose duration ends at the end of the run.
         self._sync_faults()
         self.session.complete()
-        return self.session.save(
+        paths = self.session.save(
             metadata={
                 "duration_hours": duration_hours,
                 "native_step_seconds": 1,
                 "record_interval_steps": record_interval_steps,
             }
         )
+        return {
+            "run_id": self.recorder.run_id,
+            "paths": paths,
+            "metadata": self.manifest.to_dict(),
+        }
