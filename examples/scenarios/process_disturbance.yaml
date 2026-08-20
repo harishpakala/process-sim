@@ -1,0 +1,11 @@
+scenario: process_disturbance
+metadata:
+  purpose: controlled_process_disturbance_benchmark
+  random_seed: 42
+faults:
+  - id: process-disturbance-idv6
+    type: process_disturbance
+    target: IDV6
+    value: 1.0
+    start: 1.0
+    duration: 0.5

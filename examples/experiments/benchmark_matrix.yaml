@@ -1,0 +1,65 @@
+experiments:
+  - id: baseline_001
+    scenario: baseline
+    seed: 42
+    duration_hours: 1
+    expected:
+      affected: []
+
+  - id: reactor_sensor_bias_001
+    scenario: reactor_sensor_bias
+    seed: 42
+    duration_hours: 2
+    expected:
+      fault:
+        type: bias
+        target: XMEAS9
+        start: 1.0
+        duration: 0.5
+      affected:
+        - XMEAS9
+
+  - id: reactor_sensor_drift_001
+    scenario: reactor_sensor_drift
+    seed: 42
+    duration_hours: 2
+    expected:
+      fault:
+        type: drift
+        target: XMEAS9
+        start: 1.0
+        duration: 0.5
+      affected:
+        - XMEAS9
+
+  - id: actuator_stuck_001
+    scenario: actuator_stuck
+    seed: 42
+    duration_hours: 2
+    expected:
+      fault:
+        type: stuck
+        target: XMV10
+        start: 1.0
+        duration: 0.5
+      affected:
+        - XMV10
+
+  - id: process_disturbance_001
+    scenario: process_disturbance
+    seed: 42
+    duration_hours: 2
+    expected:
+      fault:
+        type: process_disturbance
+        target: IDV6
+        start: 1.0
+        duration: 0.5
+
+  - id: combined_faults_001
+    scenario: combined_faults
+    seed: 42
+    duration_hours: 2
+    expected:
+      metadata:
+        status: fixture_for_combined_fault_experiment

@@ -1,0 +1,11 @@
+scenario: actuator_stuck
+metadata:
+  purpose: controlled_actuator_fault_benchmark
+  random_seed: 42
+faults:
+  - id: reactor-cooling-stuck
+    type: stuck
+    target: XMV10
+    value: 50.0
+    start: 1.0
+    duration: 0.5
