@@ -90,6 +90,47 @@ The summary contains one row per seed and measured variable, including the
 fault run ID and baseline run ID. This makes the output directly usable for a
 later statistical aggregation step.
 
+## Fault-magnitude response sweep
+
+After repeated-seed replication, the next controlled experiment varies the
+**fault magnitude** while preserving the same fault timing, duration, simulator,
+paired-baseline protocol, and measured variables. The first planned sweep is
+`+1`, `+5`, and `+10` sensor-bias units over seeds `42`, `43`, and `44`.
+
+The sweep runner is:
+
+```bash
+python examples/run_fault_magnitude_sweep.py \
+  examples/experiments/reactor_cooling_bias_001.yaml \
+  examples/scenarios/reactor_sensor_bias.yaml \
+  examples/scenarios/reactor_no_fault.yaml \
+  --magnitudes 1 5 10 \
+  --seeds 42 43 44 \
+  --output data/runs \
+  --summary data/replications/reactor_cooling_bias_magnitude_sweep.csv
+```
+
+For each magnitude/seed pair it runs one fault experiment and one matching
+no-fault baseline. The detailed output contains:
+
+- mean delta
+- MAE
+- RMSE
+- maximum absolute delta
+- time of maximum absolute delta
+- integrated absolute error (IAE)
+- integrated squared error (ISE)
+- paired run IDs and seed/magnitude provenance
+
+The aggregate output reports mean, standard deviation, minimum, maximum, and
+coefficient of variation across seeds for each magnitude and measured variable.
+The JSON manifest records the complete sweep design and all generated run IDs.
+
+This experiment is intended to answer whether the observed closed-loop response
+is not only reproducible, but also systematically distinguishable as the fault
+magnitude changes. It is a response-characterization experiment, not by itself
+a causal proof.
+
 ## Verified first experiment
 
 The first controlled experiment has been executed and inspected successfully.
@@ -213,8 +254,8 @@ make causal claims or establish a general fault-response magnitude.
 
 The corresponding scenario fixtures live under `examples/scenarios/`.
 Repeated-seed execution is now automated for the first controlled benchmark;
-statistical aggregation across the resulting replication rows is the next
-analysis step.
+the magnitude sweep extends that benchmark into a response-characterization
+matrix.
 
 ## Research progression
 
@@ -227,12 +268,19 @@ The benchmark should evolve in stages:
               ↓
 3. paired fault-vs-baseline analysis      [IMPLEMENTED]
               ↓
-4. repeated-seed benchmark aggregation    [IMPLEMENTED]
+4. repeated-seed replication              [IMPLEMENTED]
               ↓
-5. multi-fault attribution
+5. fault-magnitude response sweep         [IMPLEMENTED]
               ↓
-6. cross-domain / semantic reasoning
+6. multi-fault attribution
+              ↓
+7. cross-domain / semantic reasoning
 ```
+
+The magnitude sweep is the final planned experiment family for closing the
+initial controlled-response benchmark. Its execution and scientific results
+must be completed and inspected before claiming this phase as empirically
+validated.
 
 The original experiment configuration and provenance should remain immutable as
 benchmark evidence is derived from each run.
