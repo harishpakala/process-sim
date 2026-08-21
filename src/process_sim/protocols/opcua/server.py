@@ -57,9 +57,9 @@ class OPCUAServer:
         await self._time_node.set_read_only()
         await self._running_node.set_read_only()
         await self._real_time_factor_node.set_writable()
-        await simulation.add_method(self._namespace_index, "Start", self._start_method)
-        await simulation.add_method(self._namespace_index, "Stop", self._stop_method)
-        await simulation.add_method(self._namespace_index, "Reset", self._reset_method)
+        await simulation.add_method(self._namespace_index, "Start", self._start_method, [], [ua.VariantType.Boolean])
+        await simulation.add_method(self._namespace_index, "Stop", self._stop_method, [], [ua.VariantType.Boolean])
+        await simulation.add_method(self._namespace_index, "Reset", self._reset_method, [], [ua.VariantType.Boolean])
         fault_management = await tep.add_object(self._namespace_index, "FaultManagement")
         self._fault_count_node = await fault_management.add_variable(self._namespace_index, "FaultCount", len(self.fault_manager.faults()))
         await self._fault_count_node.set_read_only()
@@ -97,18 +97,18 @@ class OPCUAServer:
 
     async def _start_method(self, parent):
         await self.start_simulation()
-        return True
+        return [True]
 
     async def _stop_method(self, parent):
         await self.stop_simulation()
-        return True
+        return [True]
 
     async def _reset_method(self, parent):
         await self.reset_simulation()
-        return True
+        return [True]
 
     async def _inject_fault_method(self, parent, fault_id, fault_type, target, magnitude, value, duration_hours):
-        return self.inject_fault(
+        result = self.inject_fault(
             self._normalize_text_argument(fault_id),
             self._normalize_text_argument(fault_type),
             self._normalize_text_argument(target),
@@ -116,15 +116,16 @@ class OPCUAServer:
             float(self._unwrap_method_argument(value)),
             float(self._unwrap_method_argument(duration_hours)),
         )
+        return [result]
 
     async def _clear_fault_method(self, parent, fault_id):
-        return self.clear_fault(self._normalize_text_argument(fault_id))
+        return [self.clear_fault(self._normalize_text_argument(fault_id))]
 
     async def _clear_all_faults_method(self, parent):
-        return self.clear_all_faults()
+        return [self.clear_all_faults()]
 
     async def _list_faults_method(self, parent):
-        return self.list_faults()
+        return [self.list_faults()]
 
     def inject_fault(self, fault_id: str, fault_type: str, target: str, magnitude: float = 0.0, value: float = 0.0, duration_hours: float = 0.0) -> bool:
         fault_id = self._normalize_text_argument(fault_id)
