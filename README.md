@@ -8,7 +8,7 @@ The project deliberately separates the **reference process model** from the surr
 
 ## Current status
 
-**The implementation currently spans Phases 1, 3, 4, and 5. The current branch also contains the first reproducible controlled-experiment framework on top of the recording infrastructure.** The complete roadmap contains 10 detailed phases organized under four architectural pillars.
+The implementation currently spans the simulation, fault/scenario, OPC UA, recording, and controlled-experiment foundations. The complete roadmap contains 10 phases organized under four architectural pillars.
 
 Implemented and verified at the platform level:
 
@@ -20,6 +20,10 @@ Implemented and verified at the platform level:
 - asynchronous OPC UA integration
 - simulation lifecycle controls and configurable real-time factor
 - OPC UA XMEAS/XMV exposure and XMV write bridge
+- OPC UA fault-management contract: `InjectFault`, `ClearFault`, `ClearAllFaults`, and `ListFaults`
+- operator fault provenance through OPC UA metadata
+- fault lifecycle status reporting: `registered`, `active`, and `expired`
+- fault lifecycle events including `FaultInjected`, `FaultActivated`, `FaultDeactivated`, and `FaultCleared` in the platform event path
 - canonical `Observation` and `Event` models
 - `SimulationRecorder` and `RunManifest`
 - Parquet persistence with one directory per run
@@ -30,14 +34,93 @@ Implemented and verified at the platform level:
 - native TEP IDV integration for scenario-managed process disturbances
 - YAML/JSON scenario definitions
 - executable `ScenarioRunner`
-- fault lifecycle events and OPC UA operator XMV changes in the canonical event log
 - declarative `Experiment` / `GroundTruth` models and `ExperimentRunner`
 - experiment provenance persisted in run metadata
-- initial benchmark matrix and controlled experiment fixtures
+- paired fault/baseline replication runner
+- fault-magnitude sweep tooling with RMSE, MAE, peak error, IAE, and ISE metrics
+- initial controlled benchmark fixtures and reproducibility evidence
 
-### First controlled experiment result
+## OPC UA and industrial automation architecture
 
-Experiment `reactor_cooling_bias_001` has now been executed end-to-end and inspected successfully:
+The operational integration follows an industrial automation-pyramid concept. The SCADA/HMI layer is intended to interact with the process through OPC UA rather than calling simulator internals directly.
+
+```text
+SCADA / HMI
+     │
+     │ OPC UA
+     ▼
+OPC UA operational layer
+     │
+     ├── Simulation lifecycle
+     ├── Measurements / manipulated variables
+     └── Fault management
+     │
+     ▼
+Controller / control system
+     │
+     ▼
+TEP process / digital twin
+     │
+     ├──────────────► Observations
+     │
+     └──────────────► Events / provenance
+                              │
+                              ▼
+                    Parquet / future historian
+```
+
+Current endpoint:
+
+```text
+opc.tcp://0.0.0.0:4841/process-sim/
+```
+
+Port `4841` is the current application configuration because the conventional OPC UA port `4840` was already occupied in the development environment. Deployment configuration may choose another available port.
+
+### Current OPC UA contract
+
+```text
+TEP
+├── Simulation
+│   ├── TimeHours
+│   ├── Running
+│   ├── RealTimeFactor
+│   ├── Start()
+│   ├── Stop()
+│   └── Reset()
+├── FaultManagement
+│   ├── FaultCount
+│   ├── InjectFault(...)
+│   ├── ClearFault(faultId)
+│   ├── ClearAllFaults()
+│   └── ListFaults()
+├── Measurements
+│   └── XMEAS1 ... XMEAS41
+└── ManipulatedVariables
+    └── XMV1 ... XMV12
+```
+
+An OPC UA fault injection carries fault identity, type, target, magnitude/value, duration, and operator provenance. Faults remain registered after expiry so that lifecycle information remains queryable rather than being silently deleted.
+
+Example lifecycle:
+
+```text
+registered
+    │ start time reached
+    ▼
+active
+    │ duration elapsed
+    ▼
+expired
+```
+
+For an indefinite fault, the status remains `active` until the operator explicitly clears it.
+
+The declarative scenario/experiment path remains the authoritative path for reproducible scientific benchmarks. OPC UA fault injection is the operator-facing operational path. Both paths feed the same fault-management and provenance model.
+
+## First controlled experiment
+
+Experiment `reactor_cooling_bias_001` was executed end-to-end and inspected successfully before the controller-path correction. It established the deterministic execution and temporal ground-truth layer:
 
 ```text
 Run:              3972cf14-1e97-4259-a758-5d9f2ef6026c
@@ -50,7 +133,7 @@ Observation rows: 381,653
 Event rows:       4
 ```
 
-The recorded lifecycle is:
+The recorded lifecycle was:
 
 ```text
 0.0 h   SimulationStarted
@@ -59,13 +142,69 @@ The recorded lifecycle is:
 2.0 h   SimulationCompleted
 ```
 
-The experiment therefore establishes the **deterministic execution and temporal ground-truth layer**: the declared fault identity and boundaries are present in the persisted event log at the expected simulation times. The observation count is consistent with 7,201 snapshots × 53 variables when recording every native step.
+This established reproducible experiment configuration, persisted ground truth, exact temporal fault boundaries, complete observation coverage, and run provenance. It did **not** establish closed-loop process propagation because the scheduled sensor fault was initially applied only to the recorded measurement path.
 
-This does **not yet establish a quantitative process-response result**. The next experimental layer is to measure the response of `XMEAS9` and its related variables such as `XMV10` and `XMEAS21` during pre-fault, fault, and post-fault windows.
+## Closed-loop fault propagation benchmark
 
-Simulation time is accelerated; the 2-hour experiment does not run for two hours of wall-clock time. The `real_time_factor` is currently unset for this experiment path.
+The controller path was subsequently corrected so scheduled sensor faults are injected into the native TEP controller measurement input before controller calculations, while the same fault remains visible in recorded observations.
 
-The implementation deliberately advances across phases where useful. The roadmap describes the target architecture and research direction, not a strict sequential implementation order.
+The relevant control relationship is:
+
+```text
+XMEAS9 reactor-temperature measurement
+        │
+        ▼
+Controller 18
+        │
+        ▼
+reactor-temperature cascade setpoint
+        │
+        ▼
+Controller 10
+        │
+        ▼
+XMV10 reactor cooling-water flow
+        │
+        ▼
+TEP process dynamics
+        │
+        ▼
+XMEAS21 reactor cooling-water outlet temperature
+```
+
+A paired fault-versus-baseline experiment then showed substantial deviations in `XMV10` and `XMEAS21` during the fault window and persistent post-fault response. Across five independent seeds (42–46), the observed response was highly repeatable.
+
+Representative five-seed ranges:
+
+| Variable | Fault RMSE | Fault peak absolute deviation | Post RMSE |
+|---|---:|---:|---:|
+| XMEAS9 | 1.324–1.335 | 5.000 | 2.826–2.845 |
+| XMV10 | 21.617–22.101 | 58.987–60.381 | 21.673–22.637 |
+| XMEAS21 | 4.840–4.917 | 10.471–10.641 | 4.236–4.404 |
+
+These results support the reproducibility of the **observed closed-loop response** across seeds. They are empirical benchmark evidence, not a formal causal proof.
+
+## Fault-magnitude sweep
+
+A three-magnitude × three-seed paired benchmark was also executed for sensor-bias magnitudes of `1`, `5`, and `10`.
+
+Selected aggregate results:
+
+| Magnitude | Variable | Fault RMSE mean | Fault IAE mean | Fault ISE mean | Post RMSE mean |
+|---:|---|---:|---:|---:|---:|
+| 1 | XMEAS9 | 0.324 | 0.119 | 0.052 | 0.400 |
+| 1 | XMV10 | 9.320 | 3.420 | 43.435 | 11.478 |
+| 1 | XMEAS21 | 1.837 | 0.701 | 1.687 | 2.131 |
+| 5 | XMEAS9 | 1.328 | 0.491 | 0.878 | 2.837 |
+| 5 | XMV10 | 21.873 | 9.600 | 239.139 | 22.120 |
+| 5 | XMEAS21 | 4.881 | 2.037 | 11.910 | 4.315 |
+| 10 | XMEAS9 | 3.335 | 1.290 | 5.546 | 12.073 |
+| 10 | XMV10 | 28.946 | 12.854 | 418.897 | 41.059 |
+| 10 | XMEAS21 | 7.149 | 2.798 | 25.552 | 0.607 |
+
+The sweep demonstrates a reproducible magnitude-dependent response, but the response is not simply linear. In particular, `XMV10` error increases strongly while its maximum deviation appears bounded at the larger fault magnitudes. This behavior is now a specific research question rather than an assumption.
+
+Issue #2 tracks the formal characterization of this response relationship, including scaling, nonlinearity/saturation, and post-fault recovery.
 
 ## Four architectural pillars
 
@@ -197,25 +336,26 @@ Fault ──activatedAt──► simulation time
 ## Fault and scenario engineering
 
 ```text
-Scenario YAML / JSON
-        │
-        ▼
-   ScenarioRunner
-        │
-   ┌────┴──────────┐
-   ▼               ▼
-FaultManager    RunManifest
-   │
-   ├── Bias ─────────────► XMEAS signal transformation
-   ├── Drift ────────────► XMEAS/XMV signal transformation
-   ├── Stuck ────────────► XMEAS/XMV signal transformation
-   └── Process disturbance ─► native TEP IDV1..IDV20
-                                      │
-                                      ▼
-                                TEP process model
+Scenario YAML / JSON             SCADA / HMI
+        │                            │
+        ▼                            │ OPC UA
+   ScenarioRunner                    ▼
+        │                      OPC UA FaultManagement
+        └──────────────┐             │
+                       ▼             ▼
+                    FaultManager / lifecycle
+                             │
+              ┌──────────────┼───────────────┐
+              ▼              ▼               ▼
+           XMEAS/XMV     native IDV      provenance
+           signal faults  process faults  + events
+              │              │               │
+              └──────────────┴───────────────┘
+                             ▼
+                        TEP process model
 ```
 
-Signal-level faults operate at the TEP adapter boundary. Process disturbances are synchronized to the TEP model's native IDV interface.
+Signal-level faults operate at the TEP adapter boundary. Process disturbances are synchronized to the TEP model's native IDV interface. Both declarative and OPC UA paths preserve fault identity and temporal provenance.
 
 Example:
 
@@ -272,27 +412,32 @@ Current benchmark families:
 5. process disturbance
 6. combined faults
 
-The benchmark matrix is a specification, not yet an automated batch executor.
+The benchmark tooling now includes paired fault/baseline replication and fault-magnitude sweeps. Formal response characterization is tracked separately so that empirical results are not overstated.
 
 ### Evidence status
 
-The current experiment evidence establishes:
+The current evidence establishes:
 
 - reproducible experiment configuration
 - persisted experiment and ground-truth metadata
-- complete observation coverage for the configured duration
-- fault activation and deactivation events at exact declared simulation boundaries
-- simulation lifecycle events and provenance
+- complete observation coverage for configured durations
+- fault activation/deactivation at exact declared simulation boundaries
+- OPC UA fault registration, listing, provenance, and lifecycle status transitions
+- observed closed-loop response in expected controller/process variables
+- repeatability across five random seeds for the controlled sensor-bias benchmark
+- magnitude-dependent response across three fault magnitudes and three seeds
 
-Still to be established experimentally:
+Still to be established:
 
-- quantitative sensor-response magnitude
-- baseline/fault/recovery statistics
-- response latency and settling behavior
-- controller response in related variables
-- multi-seed repeatability
+- formal scaling/nonlinearity characterization
+- response latency and settling-time characterization
+- explanation of the apparent `XMV10` peak-deviation bound
+- broader fault-family comparisons
 - fault-attribution and detection metrics
-- comparisons across benchmark families
+- temporal-KG reasoning benchmarks
+- comparisons against time-series-only and graph-enhanced AI baselines
+
+These distinctions are intentional: **implemented**, **executed**, and **scientifically validated** are treated as different evidence levels.
 
 ## Run provenance
 
@@ -355,6 +500,38 @@ python examples/run_experiment.py \
   --output data/runs
 ```
 
+Run the five-seed replication benchmark:
+
+```powershell
+python examples/run_replication.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --seeds 42 43 44 45 46 `
+  --output data/runs `
+  --summary data/replications/reactor_cooling_bias.csv
+```
+
+Run the fault-magnitude sweep:
+
+```powershell
+python examples/run_fault_magnitude_sweep.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --magnitudes 1 5 10 `
+  --seeds 42 43 44 `
+  --output data/runs
+```
+
+Start the OPC UA server:
+
+```bash
+python examples/run_opcua_server.py
+```
+
+The default endpoint is `opc.tcp://0.0.0.0:4841/process-sim/`. The launcher supports configurable endpoint, seed, real-time factor, and update interval options.
+
 Each run is stored as:
 
 ```text
@@ -374,8 +551,6 @@ The ten phases are grouped into the four architectural pillars. They are not a r
 
 ### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
 
-Completed foundation:
-
 - ProfBraatz scientific reference
 - backend-independent simulator boundary
 - TEP adapter
@@ -384,11 +559,7 @@ Completed foundation:
 - engineering mappings and XMEAS units
 - canonical observations/events
 
-Next: deeper numerical validation and reproducibility tooling.
-
 ### Phase 2 — Industrial Twin Core — IN PROGRESS
-
-Target:
 
 - canonical plant and asset model
 - equipment, instruments, tags, and functional relationships
@@ -420,7 +591,7 @@ Next:
 - controller and communication faults
 - scenario libraries and experiment comparison
 
-### Phase 4 — OPC UA Integration — INITIAL IMPLEMENTATION COMPLETE
+### Phase 4 — OPC UA Integration — FAULT-MANAGEMENT FOUNDATION COMPLETE
 
 Completed:
 
@@ -433,16 +604,21 @@ Completed:
 - XMV write bridge
 - asynchronous simulation loop
 - operator XMV event integration
+- OPC UA fault injection and clearing methods
+- operator fault provenance
+- fault listing and lifecycle status (`registered` / `active` / `expired`)
+- integration with the shared fault manager
 
 Next:
 
+- expose richer lifecycle notifications as first-class OPC UA Events
 - semantic engineering names and units
 - OPC UA EUInformation and quality/status/timestamps
 - richer alarms and events
 - external SCADA/HMI integration tests
 - security and deployment configuration
 
-### Phase 5 — Time-Series, Experiments, and Temporal Knowledge Infrastructure — FOUNDATION IMPLEMENTED
+### Phase 5 — Time-Series, Experiments, and Temporal Knowledge Infrastructure — EXPERIMENT FOUNDATION IMPLEMENTED
 
 Completed foundation:
 
@@ -455,15 +631,15 @@ Completed foundation:
 - operator and fault lifecycle event recording
 - declarative experiment definitions
 - experiment/ground-truth provenance
+- paired fault/baseline replication tooling
+- fault-magnitude sweep tooling
 - initial benchmark matrix
-- first end-to-end controlled experiment with exact temporal ground-truth events
+- controlled closed-loop response experiments
 
 Next:
 
-- automated quantitative response analysis
-- baseline/fault/recovery metrics
-- multi-seed experiment execution
-- automated benchmark aggregation
+- formal fault-response characterization
+- automated benchmark aggregation and statistical analysis
 - historian/time-series backend integration
 - temporal event model expansion
 - event-to-observation correlation
@@ -504,6 +680,8 @@ The guiding workflow is **model first → semantically annotate → validate →
 - operator actions
 - engineering-name and semantic metadata integration
 
+The intended operational path is **SCADA/HMI → OPC UA → control/process layer**, not direct access to simulator internals.
+
 ### Phase 9 — Knowledge Graph & GraphRAG — PLANNED
 
 - industrial knowledge graph
@@ -540,7 +718,7 @@ Temporal + Engineering Reasoning
 Evidence-Grounded Industrial AI
 ```
 
-For the immediate experimental program, the next step is **variable-level response analysis** of controlled fault runs before expanding into semantic reasoning or GraphRAG.
+The immediate research task is **formal characterization of the fault-magnitude response relationship**. This should be completed before expanding the platform into semantic reasoning or GraphRAG benchmarks.
 
 The intended evaluation questions are:
 
