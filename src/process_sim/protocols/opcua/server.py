@@ -175,8 +175,40 @@ class OPCUAServer:
             self.clear_fault(fault_id)
         return True
 
+    def _fault_status(self, fault: Fault, simulation_time_hours: float | None = None) -> str:
+        """Return the OPC UA-facing lifecycle state for a registered fault."""
+        current_time = float(
+            self.simulator.get_time_hours()
+            if simulation_time_hours is None
+            else simulation_time_hours
+        )
+        if current_time < fault.start_time_hours:
+            return "registered"
+        if fault.duration_hours is None:
+            return "active"
+        if current_time < fault.start_time_hours + fault.duration_hours:
+            return "active"
+        return "expired"
+
     def list_faults(self) -> str:
-        return json.dumps([{"fault_id": f.fault_id, "fault_type": f.fault_type.value, "target": f.target, "magnitude": f.magnitude, "value": f.value, "start_time_hours": f.start_time_hours, "duration_hours": f.duration_hours, "metadata": dict(f.metadata)} for f in self.fault_manager.faults()], sort_keys=True)
+        current_time = float(self.simulator.get_time_hours())
+        return json.dumps(
+            [
+                {
+                    "fault_id": fault.fault_id,
+                    "fault_type": fault.fault_type.value,
+                    "target": fault.target,
+                    "magnitude": fault.magnitude,
+                    "value": fault.value,
+                    "start_time_hours": fault.start_time_hours,
+                    "duration_hours": fault.duration_hours,
+                    "status": self._fault_status(fault, current_time),
+                    "metadata": dict(fault.metadata),
+                }
+                for fault in self.fault_manager.faults()
+            ],
+            sort_keys=True,
+        )
 
     def _resolve_idv_index(self, target: str) -> int:
         normalized = target.strip().upper().replace("_", "")
