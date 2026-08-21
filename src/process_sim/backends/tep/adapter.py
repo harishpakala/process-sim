@@ -7,6 +7,8 @@ out of the rest of the platform.
 
 from typing import Callable, Dict, Optional, Tuple
 
+import numpy as np
+
 from process_sim.faults import FaultManager, FaultType
 
 from .mapping import DISTURBANCE_NAMES
@@ -114,24 +116,30 @@ class TEPAdapter:
         return float(self.simulator.time)
 
     def get_measurements(self):
-        measurements = list(self.simulator.get_measurements())
+        measurements = np.asarray(self.simulator.get_measurements(), dtype=float)
         if self.fault_manager is None:
             return measurements
         time_hours = self.get_time_hours()
-        return [
-            self.fault_manager.apply(f"XMEAS{index}", value, time_hours)
-            for index, value in enumerate(measurements, start=1)
-        ]
+        return np.asarray(
+            [
+                self.fault_manager.apply(f"XMEAS{index}", value, time_hours)
+                for index, value in enumerate(measurements, start=1)
+            ],
+            dtype=float,
+        )
 
     def get_manipulated_variables(self):
-        values = list(self.simulator.get_manipulated_vars())
+        values = np.asarray(self.simulator.get_manipulated_vars(), dtype=float)
         if self.fault_manager is None:
             return values
         time_hours = self.get_time_hours()
-        return [
-            self.fault_manager.apply(f"XMV{index}", value, time_hours)
-            for index, value in enumerate(values, start=1)
-        ]
+        return np.asarray(
+            [
+                self.fault_manager.apply(f"XMV{index}", value, time_hours)
+                for index, value in enumerate(values, start=1)
+            ],
+            dtype=float,
+        )
 
     def get_states(self):
         return self.simulator.get_states()
