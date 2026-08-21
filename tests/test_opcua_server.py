@@ -82,6 +82,30 @@ async def test_update_publishes_current_values():
         await server.stop()
 
 
+@pytest.mark.asyncio
+async def test_opcua_method_unwraps_variant_arguments():
+    from asyncua import ua
+
+    simulator = FakeSimulator()
+    server = OPCUAServer(simulator)
+
+    assert await server._inject_fault_method(
+        None,
+        ua.Variant("operator-bias-variant", ua.VariantType.String),
+        ua.Variant("bias", ua.VariantType.String),
+        ua.Variant("XMEAS9", ua.VariantType.String),
+        ua.Variant(5.0, ua.VariantType.Double),
+        ua.Variant(0.0, ua.VariantType.Double),
+        ua.Variant(0.5, ua.VariantType.Double),
+    )
+
+    configured = json.loads(server.list_faults())
+    assert configured[0]["fault_id"] == "operator-bias-variant"
+    assert configured[0]["magnitude"] == 5.0
+    assert configured[0]["duration_hours"] == 0.5
+
+
+
 def test_opcua_fault_injection_and_clear():
     simulator = FakeSimulator()
     events = []
