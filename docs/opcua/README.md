@@ -4,7 +4,7 @@ The OPC UA layer is an asynchronous integration boundary around the simulator. I
 
 ## Status
 
-**Initial OPC UA integration is implemented and fault/event integration has started.**
+**Initial OPC UA integration and the first operator fault-management contract are implemented.**
 
 The current implementation provides:
 
@@ -18,6 +18,8 @@ The current implementation provides:
 - explicit OPC UA writes for XMV values
 - asynchronous simulation loop
 - operator XMV changes connected to canonical event recording
+- explicit OPC UA fault-management methods
+- operator fault provenance and lifecycle callbacks
 
 The development endpoint currently uses port **4841** because port 4840 was occupied in the development environment:
 
@@ -37,6 +39,12 @@ Objects
     │   ├── Start()
     │   ├── Stop()
     │   └── Reset()
+    ├── FaultManagement
+    │   ├── FaultCount
+    │   ├── InjectFault(...)
+    │   ├── ClearFault(faultId)
+    │   ├── ClearAllFaults()
+    │   └── ListFaults()
     ├── Measurements
     │   └── XMEAS1 ... XMEAS41
     └── ManipulatedVariables
@@ -56,17 +64,17 @@ Raw XMEAS/XMV identifiers are intentionally retained because they provide a stab
               │                     │
               ▼                     ▼
        TEP simulation          SCADA / HMI / clients
-              │
-       ┌──────┴──────┐
-       │             │
- FaultManager     Recorder
+              │                     │
+       ┌──────┴──────┐              │ OPC UA commands
+       │             │              │
+ FaultManager     Recorder ◄────────┘
        │             │
        └──────┬──────┘
               ▼
        fault/event history
 ```
 
-OPC UA clients do not synchronously own the simulation timestep. Writes are synchronized explicitly into the simulator, and the simulation loop remains independent of external clients.
+The OPC UA boundary is the intended operational interface for a future SCADA/HMI. The HMI should not call simulator internals directly. Fault commands cross the OPC UA boundary, enter the canonical `FaultManager`, and are then applied by the simulator adapter at the process boundary.
 
 ## Install
 
@@ -82,36 +90,88 @@ The repository includes the OPC UA server entry point under `process_sim.protoco
 
 The server is constructed with a simulator and can be configured with a real-time factor and update interval. A real-time factor of `1.0` corresponds to approximately real-time execution for the 1-second native TEP step.
 
-## Fault and event boundary
+## Fault-management contract
 
-Fault logic is not embedded in the OPC UA protocol implementation. The current architecture is:
+The operational fault boundary is intentionally explicit rather than exposing Python objects or simulator internals to OPC UA clients.
+
+### InjectFault
 
 ```text
-OPC UA client
-     │
-     │ XMV write
-     ▼
- OPC UA adapter
-     │
-     ▼
- TEPAdapter ◄──── FaultManager
-     │                 │
-     │                 ├── Bias
-     │                 ├── Drift
-     │                 ├── Stuck
-     │                 └── Process disturbance
-     │
-     ├── measurements
-     └── manipulated variables
+InjectFault(
+    faultId,
+    faultType,
+    target,
+    magnitude,
+    value,
+    durationHours
+)
 ```
 
-The `FaultManager` can transform published XMEAS/XMV values and emits lifecycle events through an optional event sink. Current lifecycle events are `FaultActivated` and `FaultDeactivated`.
+Semantics:
 
-The initial process-disturbance fault type is deliberately not applied as a generic signal transformation; process disturbances belong at the process-model boundary and will be integrated with TEP IDVs in the next fault/scenario increment.
+- `faultId` uniquely identifies the operator fault.
+- `faultType` is one of `bias`, `drift`, `stuck`, or `process_disturbance`.
+- `target` identifies the signal or process disturbance, such as `XMEAS9` or `IDV6`.
+- `magnitude` is used by bias, drift, and process-disturbance faults.
+- `value` is used by stuck faults.
+- `durationHours == 0` means the fault remains active until explicitly cleared.
+- a positive duration starts at the current simulation-time boundary.
+- operator injection is tagged with `injection_source=opcua` and `operator_injected=true`.
 
-## Recording integration
+### ClearFault / ClearAllFaults
 
-Recording remains independent of OPC UA. The live server can connect operator XMV writes to `SimulationRecordingSession`, producing canonical `ManipulatedVariableChanged` events. Fault lifecycle events can likewise be routed through the recording session without making the recorder depend on OPC UA.
+`ClearFault(faultId)` removes a configured fault immediately and emits a `FaultCleared` provenance event. `ClearAllFaults()` performs the same operation for every configured fault.
+
+Scheduled lifecycle transitions remain distinct:
+
+```text
+FaultInjected
+      ↓
+FaultActivated
+      ↓
+FaultDeactivated
+```
+
+An operator clearing a fault before its scheduled end is represented explicitly as:
+
+```text
+FaultInjected
+      ↓
+FaultCleared
+```
+
+This distinction preserves the difference between an experiment-defined lifecycle and an operator intervention.
+
+### ListFaults / FaultCount
+
+`ListFaults()` returns the configured fault set as JSON for diagnostics and HMI integration. `FaultCount` provides a simple read-only count for clients.
+
+### Process disturbances
+
+Process-disturbance faults are mapped to the native TEP IDV interface. The OPC UA contract accepts `IDV1` through `IDV20` and records the resolved `idv_index` in fault metadata. The fault is not applied as a generic measurement transformation.
+
+## Recording and provenance
+
+Fault lifecycle and operator events remain independent of OPC UA. The server exposes callback hooks so a recording session can route them into canonical events without making the recorder depend on the protocol implementation.
+
+This preserves the intended separation:
+
+```text
+SCADA / HMI
+     │ OPC UA
+     ▼
+FaultManagement
+     ▼
+FaultManager
+     ▼
+TEPAdapter
+     ├── measurements
+     ├── controller input path
+     ├── process disturbances
+     └── event/provenance sink
+```
+
+The declarative YAML/JSON scenario path remains the authoritative path for reproducible benchmark design. OPC UA fault injection is the operator-facing operational path.
 
 ## Units and semantic metadata
 
@@ -133,6 +193,10 @@ XMV units are intentionally not invented until a sufficiently authoritative refe
 - explicit XMV write synchronization
 - asynchronous simulation loop
 - operator XMV event integration
+- first OPC UA fault-management contract
+- operator fault injection/clear operations
+- process-disturbance mapping to TEP IDVs
+- fault provenance callback integration
 
 ### Next OPC UA work
 
@@ -140,11 +204,11 @@ XMV units are intentionally not invented until a sufficiently authoritative refe
 2. **Quality and timestamps** — expose OPC UA status/quality and simulation versus wall-clock timestamps where appropriate.
 3. **Subscriptions and client integration tests** — verify monitored-item behavior and write/read semantics with an OPC UA client.
 4. **Process/equipment hierarchy** — organize reactor, separator, stripper, compressor, utilities, instruments, and tags without removing the raw XMEAS/XMV layer.
-5. **Fault/scenario controls** — expose FaultManager scenarios through explicit methods/events rather than embedding fault logic in the protocol adapter.
-6. **Process disturbances** — connect scenario-managed faults to the native TEP IDV interface.
+5. **SCADA/HMI integration** — build the operator interface entirely through the OPC UA contract.
+6. **Security and deployment configuration** — move beyond the development endpoint and define authentication, certificates, endpoint policy, and deployment configuration.
 
 ## Relationship to the project roadmap
 
-OPC UA corresponds to **Phase 4 — OPC UA Integration**. The initial implementation is complete; the remaining work is semantic enrichment, interoperability testing, hierarchy, and integration with the broader fault/scenario architecture.
+OPC UA corresponds to **Phase 4 — OPC UA Integration**. The initial operational contract is now implemented; the remaining work is semantic enrichment, interoperability testing, hierarchy, SCADA/HMI integration, and deployment/security hardening.
 
-Phase 5 recording is intentionally independent of OPC UA. This prevents the historian/temporal-data path from becoming coupled to a particular client protocol.
+Phase 5 recording remains independent of OPC UA. This prevents the historian/temporal-data path from becoming coupled to a particular client protocol.
