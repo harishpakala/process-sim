@@ -123,25 +123,30 @@ async def main() -> None:
     )
 
     async with client:
+        namespace_index = await client.get_namespace_index("urn:process-sim:opcua")
         objects = client.nodes.objects
-        tep = await objects.get_child(["2:TEP"])
-        simulation = await tep.get_child(["2:Simulation"])
-        measurements = await tep.get_child(["2:Measurements"])
-        manipulated_variables = await tep.get_child(["2:ManipulatedVariables"])
+        tep = await objects.get_child([f"{namespace_index}:TEP"])
+        simulation = await tep.get_child([f"{namespace_index}:Simulation"])
+        measurements = await tep.get_child([f"{namespace_index}:Measurements"])
+        manipulated_variables = await tep.get_child(
+            [f"{namespace_index}:ManipulatedVariables"]
+        )
 
-        control_mode = await simulation.get_child(["2:ControlMode"]).read_value()
+        control_mode = await simulation.get_child(
+            [f"{namespace_index}:ControlMode"]
+        ).read_value()
         if control_mode != "external_opcua":
             raise RuntimeError(
                 "process-sim is not in external_opcua control mode; "
                 "start examples/run_opcua_server.py first"
             )
 
-        time_node = await simulation.get_child(["2:TimeHours"])
-        running_node = await simulation.get_child(["2:Running"])
-        start_node = await simulation.get_child(["2:Start"])
-        stop_node = await simulation.get_child(["2:Stop"])
-        xmeas9 = await measurements.get_child(["2:XMEAS9"])
-        xmv10 = await manipulated_variables.get_child(["2:XMV10"])
+        time_node = await simulation.get_child([f"{namespace_index}:TimeHours"])
+        running_node = await simulation.get_child([f"{namespace_index}:Running"])
+        start_node = await simulation.get_child([f"{namespace_index}:Start"])
+        stop_node = await simulation.get_child([f"{namespace_index}:Stop"])
+        xmeas9 = await measurements.get_child([f"{namespace_index}:XMEAS9"])
+        xmv10 = await manipulated_variables.get_child([f"{namespace_index}:XMV10"])
 
         running = await running_node.read_value()
         if not running:
