@@ -132,9 +132,10 @@ async def main() -> None:
             [f"{namespace_index}:ManipulatedVariables"]
         )
 
-        control_mode = await simulation.get_child(
+        control_mode_node = await simulation.get_child(
             [f"{namespace_index}:ControlMode"]
-        ).read_value()
+        )
+        control_mode = await control_mode_node.read_value()
         if control_mode != "external_opcua":
             raise RuntimeError(
                 "process-sim is not in external_opcua control mode; "
