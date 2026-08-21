@@ -16,6 +16,12 @@ class OPCUAServer:
 
     The server owns the OPC UA contract only. Fault semantics remain in
     :class:`FaultManager` and are applied by the simulator adapter.
+
+    For operational use, manipulated variables are externally owned: the
+    simulator runs in manual-control mode and OPC UA clients provide the
+    control actions by writing the XMV nodes. The native TEP closed-loop
+    controller remains available to non-OPC-UA benchmark paths as a reference
+    controller.
     """
 
     def __init__(self, simulator, endpoint="opc.tcp://0.0.0.0:4841/process-sim/", namespace_uri="urn:process-sim:opcua", real_time_factor=1.0, update_interval_seconds=1.0, event_callback: Callable[[int, float, float], None] | None = None, fault_manager: FaultManager | None = None, fault_event_callback: Callable[[dict], None] | None = None):
@@ -33,6 +39,7 @@ class OPCUAServer:
         self._namespace_index = None
         self._time_node = None
         self._running_node = None
+        self._control_mode_node = None
         self._real_time_factor_node = None
         self._fault_count_node = None
         self._measurement_nodes = []
@@ -45,6 +52,11 @@ class OPCUAServer:
         if callable(configure_faults):
             configure_faults(self.fault_manager, self._handle_fault_event)
 
+    def _control_mode_name(self) -> str:
+        if getattr(self.simulator, "external_control", False):
+            return "external_opcua"
+        return "native"
+
     async def start(self):
         from asyncua import Server
         self._server = Server()
@@ -55,9 +67,11 @@ class OPCUAServer:
         simulation = await tep.add_object(self._namespace_index, "Simulation")
         self._time_node = await simulation.add_variable(self._namespace_index, "TimeHours", float(self.simulator.get_time_hours()))
         self._running_node = await simulation.add_variable(self._namespace_index, "Running", False)
+        self._control_mode_node = await simulation.add_variable(self._namespace_index, "ControlMode", self._control_mode_name())
         self._real_time_factor_node = await simulation.add_variable(self._namespace_index, "RealTimeFactor", self._real_time_factor)
         await self._time_node.set_read_only()
         await self._running_node.set_read_only()
+        await self._control_mode_node.set_read_only()
         await self._real_time_factor_node.set_writable()
         await simulation.add_method(self._namespace_index, "Start", self._start_method, [], [ua.VariantType.Boolean])
         await simulation.add_method(self._namespace_index, "Stop", self._stop_method, [], [ua.VariantType.Boolean])
@@ -258,6 +272,8 @@ class OPCUAServer:
             await self._time_node.write_value(float(self.simulator.get_time_hours()))
         if self._running_node is not None:
             await self._running_node.write_value(bool(running))
+        if self._control_mode_node is not None:
+            await self._control_mode_node.write_value(self._control_mode_name())
         if self._real_time_factor_node is not None:
             await self._real_time_factor_node.write_value(self._real_time_factor)
         if self._measurement_nodes:
@@ -298,8 +314,11 @@ class OPCUAServer:
             await asyncio.sleep(self._update_interval_seconds)
             steps = max(1, int(round(self._update_interval_seconds * self._real_time_factor)))
             for _ in range(steps):
+                # External controllers own XMV writes. Apply the latest OPC UA
+                # values before each process step so the command affects the
+                # immediately following integration step.
+                await self.sync_manipulated_variables()
                 self.simulator.step()
-            await self.sync_manipulated_variables()
             await self.update(True)
 
     async def run(self):

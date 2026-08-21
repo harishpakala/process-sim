@@ -42,31 +42,49 @@ class TEPAdapter:
     """Adapter for ``tep.TEPSimulator``.
 
     Sensor faults are applied both to recorded observations and to the native
-    closed-loop controller input path. Process-disturbance faults are translated
-    to the native TEP IDV interface before each simulator step.
+    closed-loop controller input path when the simulator is running in its
+    native closed-loop mode. In OPC UA operational mode the adapter uses the
+    TEP manual-control mode, so manipulated variables are owned by the
+    external OPC UA client rather than by an in-process controller.
+
+    Process-disturbance faults are translated to the native TEP IDV interface
+    before each simulator step.
     """
 
     def __init__(
         self,
         backend: Optional[str] = None,
         random_seed: Optional[int] = None,
+        control_mode: str = "closed_loop",
         fault_manager: Optional[FaultManager] = None,
         fault_event_sink: Optional[Callable[[dict], None]] = None,
     ):
         try:
-            from tep import TEPSimulator
+            from tep import ControlMode, TEPSimulator
         except ImportError as exc:
             raise ImportError(
                 "TEPAdapter requires the ProfBraatz 'tep' package. "
                 "Install it with 'pip install -e .' in the TEP repository."
             ) from exc
 
-        kwargs = {"random_seed": random_seed}
+        try:
+            tep_control_mode = ControlMode(control_mode)
+        except ValueError as exc:
+            valid_modes = ", ".join(mode.value for mode in ControlMode)
+            raise ValueError(
+                f"control_mode must be one of: {valid_modes}"
+            ) from exc
+
+        kwargs = {
+            "random_seed": random_seed,
+            "control_mode": tep_control_mode,
+        }
         if backend is not None:
             kwargs["backend"] = backend
 
         self.simulator = TEPSimulator(**kwargs)
         self._random_seed = random_seed
+        self._control_mode = control_mode
         self.fault_manager = fault_manager
         self.fault_event_sink = fault_event_sink
         self._active_fault_ids: set[str] = set()
@@ -82,16 +100,29 @@ class TEPAdapter:
     def random_seed(self) -> Optional[int]:
         return self._random_seed
 
+    @property
+    def control_mode(self) -> str:
+        """Return the TEP control mode used by this adapter."""
+        return self._control_mode
+
+    @property
+    def external_control(self) -> bool:
+        """Whether manipulated variables are intended to be externally owned."""
+        return self._control_mode == "manual"
+
     def reset(self) -> None:
         self.simulator.initialize()
         self._controller_delegate = None
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
         self._fault_previous_idvs.clear()
-        self._ensure_fault_aware_controller()
+        if not self.external_control:
+            self._ensure_fault_aware_controller()
 
     def _ensure_fault_aware_controller(self) -> None:
         """Wrap the current native controller after simulator initialization."""
+        if self.external_control:
+            return
         controller = getattr(self.simulator, "controller", None)
         if controller is None or isinstance(controller, _FaultAwareController):
             return
@@ -106,7 +137,8 @@ class TEPAdapter:
         for _ in range(n_steps):
             if not getattr(self.simulator, "initialized", False):
                 self.simulator.initialize()
-            self._ensure_fault_aware_controller()
+            if not self.external_control:
+                self._ensure_fault_aware_controller()
             self.sync_faults()
             result = self.simulator.step(n_steps=1)
             self.sync_faults()
@@ -175,7 +207,8 @@ class TEPAdapter:
         self._active_fault_ids.clear()
         self._fault_managed_idvs.clear()
         self._fault_previous_idvs.clear()
-        self._ensure_fault_aware_controller()
+        if not self.external_control:
+            self._ensure_fault_aware_controller()
 
     def sync_faults(self) -> None:
         """Apply scheduled process faults and emit lifecycle events at current time."""

@@ -36,7 +36,9 @@ async def main() -> None:
     )
     args = parser.parse_args()
 
-    simulator = TEPAdapter(random_seed=args.seed)
+    # OPC UA is the operational control boundary. The TEP backend therefore
+    # runs in manual mode and accepts XMV commands only through OPC UA.
+    simulator = TEPAdapter(random_seed=args.seed, control_mode="manual")
     server = OPCUAServer(
         simulator,
         endpoint=args.endpoint,
@@ -46,6 +48,8 @@ async def main() -> None:
 
     await server.start()
     print(f"OPC UA server started: {args.endpoint}", flush=True)
+    print("Control mode: external_opcua", flush=True)
+    print("Write TEP/ManipulatedVariables/XMV1..XMV12 from an external controller.", flush=True)
     print("Press Ctrl+C to stop.", flush=True)
 
     try:

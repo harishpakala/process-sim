@@ -85,6 +85,25 @@ def test_sensor_fault_is_visible_to_native_controller_input():
     assert spy.received_xmeas[8] == pytest.approx(native_xmeas9 + 5.0)
 
 
+def test_external_control_mode_uses_manual_tep_control():
+    sim = TEPAdapter(random_seed=123, control_mode="manual")
+    sim.reset()
+
+    assert sim.control_mode == "manual"
+    assert sim.external_control is True
+    assert sim.simulator.control_mode.value == "manual"
+
+    sim.set_manipulated_variable(10, 25.0)
+    sim.step()
+
+    assert sim.get_manipulated_variables()[9] == pytest.approx(25.0)
+
+
+def test_invalid_control_mode_is_rejected():
+    with pytest.raises(ValueError, match="control_mode"):
+        TEPAdapter(random_seed=123, control_mode="not-a-mode")
+
+
 def test_fault_lifecycle_events_are_emitted_at_simulation_boundaries():
     manager = FaultManager()
     manager.add(
