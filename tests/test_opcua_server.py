@@ -3,6 +3,7 @@ import json
 
 import pytest
 
+from process_sim.faults import Fault, FaultType
 from process_sim.protocols.opcua import OPCUAServer
 
 
@@ -89,7 +90,7 @@ async def test_opcua_method_unwraps_variant_arguments():
     simulator = FakeSimulator()
     server = OPCUAServer(simulator)
 
-    assert await server._inject_fault_method(
+    result = await server._inject_fault_method(
         None,
         ua.Variant("operator-bias-variant", ua.VariantType.String),
         ua.Variant("bias", ua.VariantType.String),
@@ -98,12 +99,12 @@ async def test_opcua_method_unwraps_variant_arguments():
         ua.Variant(0.0, ua.VariantType.Double),
         ua.Variant(0.5, ua.VariantType.Double),
     )
+    assert result[0].Value is True
 
     configured = json.loads(server.list_faults())
     assert configured[0]["fault_id"] == "operator-bias-variant"
     assert configured[0]["magnitude"] == 5.0
     assert configured[0]["duration_hours"] == 0.5
-
 
 
 def test_opcua_fault_injection_and_clear():
@@ -126,12 +127,53 @@ def test_opcua_fault_injection_and_clear():
     assert configured[0]["fault_id"] == "operator-bias-1"
     assert configured[0]["start_time_hours"] == 0.0
     assert configured[0]["duration_hours"] == 0.5
+    assert configured[0]["status"] == "active"
     assert configured[0]["metadata"]["injection_source"] == "opcua"
     assert events[0]["event_type"] == "FaultInjected"
 
     assert server.clear_fault("operator-bias-1")
     assert json.loads(server.list_faults()) == []
     assert events[-1]["event_type"] == "FaultCleared"
+
+
+def test_opcua_fault_status_transitions():
+    simulator = FakeSimulator()
+    server = OPCUAServer(simulator)
+
+    server.fault_manager.add(
+        Fault(
+            fault_id="future-fault",
+            fault_type=FaultType.BIAS,
+            target="XMEAS9",
+            magnitude=5.0,
+            start_time_hours=1.0,
+            duration_hours=0.5,
+        )
+    )
+
+    simulator.time = 0.5
+    assert json.loads(server.list_faults())[0]["status"] == "registered"
+
+    simulator.time = 1.0
+    assert json.loads(server.list_faults())[0]["status"] == "active"
+
+    simulator.time = 1.5
+    assert json.loads(server.list_faults())[0]["status"] == "expired"
+
+    simulator.time = 2.0
+    assert json.loads(server.list_faults())[0]["status"] == "expired"
+
+
+def test_opcua_indefinite_fault_remains_active():
+    simulator = FakeSimulator()
+    server = OPCUAServer(simulator)
+
+    server.inject_fault("indefinite-bias", "bias", "XMEAS9", magnitude=5.0)
+
+    simulator.time = 10.0
+    configured = json.loads(server.list_faults())
+    assert configured[0]["status"] == "active"
+    assert configured[0]["duration_hours"] is None
 
 
 def test_opcua_process_disturbance_maps_to_idv():
