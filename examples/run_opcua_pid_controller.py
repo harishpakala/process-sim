@@ -4,6 +4,11 @@ This example deliberately contains no process-sim Python API calls. The
 controller reads XMEAS9 and XMV10 over OPC UA and writes XMV10 back over OPC UA.
 It is intended as a small external-control reference that can later be
 replaced by a simulated PLC runtime, MATLAB/Simulink, or an MPC implementation.
+
+The default controller action is reverse acting. This matches the experimentally
+characterized TEP response in which increasing XMV10 decreases XMEAS21 and the
+reactor temperature XMEAS9. Therefore, when XMEAS9 falls below its setpoint, the
+controller must reduce XMV10 rather than increase it.
 """
 
 from __future__ import annotations
@@ -25,6 +30,7 @@ class PIDController:
         kd: float,
         output_min: float,
         output_max: float,
+        reverse_action: bool = True,
     ) -> None:
         if output_min >= output_max:
             raise ValueError("output_min must be smaller than output_max")
@@ -34,6 +40,7 @@ class PIDController:
         self.kd = float(kd)
         self.output_min = float(output_min)
         self.output_max = float(output_max)
+        self.reverse_action = bool(reverse_action)
         self._integral = 0.0
         self._previous_error: float | None = None
 
@@ -53,19 +60,24 @@ class PIDController:
             else (error - self._previous_error) / dt_seconds
         )
 
+        action = -1.0 if self.reverse_action else 1.0
         raw_output = (
             current_output
-            + self.kp * error
-            + self.ki * integral_candidate
-            + self.kd * derivative
+            + action
+            * (
+                self.kp * error
+                + self.ki * integral_candidate
+                + self.kd * derivative
+            )
         )
         output = min(self.output_max, max(self.output_min, raw_output))
 
-        # Basic conditional integration prevents the integral term from
-        # accumulating while the output is pinned at a limit in the same
-        # direction as the control error.
-        saturated_high = output >= self.output_max and error > 0
-        saturated_low = output <= self.output_min and error < 0
+        # For reverse-acting control, a positive error commands a lower output
+        # and a negative error commands a higher output. Prevent integral
+        # accumulation while the output is pinned in the direction of the
+        # current control error.
+        saturated_high = output >= self.output_max and action * error > 0
+        saturated_low = output <= self.output_min and action * error < 0
         if not (saturated_high or saturated_low):
             self._integral = integral_candidate
 
@@ -94,6 +106,11 @@ async def main() -> None:
     parser.add_argument("--output-min", type=float, default=0.0, help="Minimum XMV10 command")
     parser.add_argument("--output-max", type=float, default=100.0, help="Maximum XMV10 command")
     parser.add_argument(
+        "--direct-action",
+        action="store_true",
+        help="Use direct-acting PID instead of the experimentally characterized reverse action",
+    )
+    parser.add_argument(
         "--cycle-seconds",
         type=float,
         default=1.0,
@@ -120,6 +137,7 @@ async def main() -> None:
         kd=args.kd,
         output_min=args.output_min,
         output_max=args.output_max,
+        reverse_action=not args.direct_action,
     )
 
     async with client:
@@ -158,6 +176,7 @@ async def main() -> None:
         print("Controller: external PLC-style PID")
         print(f"Setpoint: XMEAS9 = {args.setpoint:.3f} deg C")
         print("Actuator: XMV10")
+        print(f"Action: {'direct' if args.direct_action else 'reverse'}")
 
         try:
             while True:
