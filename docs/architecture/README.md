@@ -83,7 +83,7 @@ GraphRAG and AI are deliberately positioned after semantic modeling, validation,
 
 ## Automation-pyramid operational architecture
 
-The operational interface follows an industrial automation-pyramid concept. The SCADA/HMI is an operational consumer of the process interface; it should not directly call simulator internals.
+The operational interface follows an industrial automation-pyramid concept. SCADA/HMI and control systems are external consumers of the process interface; they should not directly call simulator internals.
 
 ```text
 ┌──────────────────────────────────────────────────────┐
@@ -98,13 +98,13 @@ The operational interface follows an industrial automation-pyramid concept. The 
 │  Process variables · Commands · Events · Alarms     │
 │  Fault-management interface · Operator actions      │
 └─────────────────────────┬────────────────────────────┘
-                          │
+                          │ OPC UA
                           ▼
 ┌──────────────────────────────────────────────────────┐
-│             Controller / Control-System Layer        │
-│  PID / cascade control · Interlocks · Control logic │
+│          External Control / Automation Layer         │
+│  Simulated PLC · PID · MPC · Other control systems  │
 └─────────────────────────┬────────────────────────────┘
-                          │
+                          │ OPC UA
                           ▼
 ┌──────────────────────────────────────────────────────┐
 │                Process / Digital Twin                │
@@ -119,6 +119,33 @@ The operational interface follows an industrial automation-pyramid concept. The 
 │  Operator actions · Provenance                       │
 └──────────────────────────────────────────────────────┘
 ```
+
+### OPC UA is the control boundary
+
+For operational control, `process-sim` does **not** embed the experimental PID/MPC/controller implementation inside the digital twin. The OPC UA server starts the TEP backend in manual-control mode and exposes the manipulated variables as writable `XMV1..XMV12` nodes. An external controller owns those writes.
+
+The control loop is therefore:
+
+```text
+External PID / MPC / simulated PLC
+              │
+              │ OPC UA write
+              ▼
+           XMV1..XMV12
+              │
+              ▼
+        TEP digital twin
+              │
+              │ OPC UA read
+              ▼
+          XMEAS1..XMEAS41
+              │
+              └──────────────► external controller
+```
+
+This keeps the process model independent from the controller implementation and allows the same digital twin to be controlled by different external systems without changing the plant model. The OPC UA `Simulation/ControlMode` node reports `external_opcua` for this operational mode.
+
+The native TEP closed-loop controller remains available as a **reference controller for non-OPC-UA benchmark paths**. It is not the controller used by the OPC UA operational launcher.
 
 The intended operational fault path is:
 
@@ -149,12 +176,14 @@ The current OPC UA implementation provides the initial operational interface:
 - TEP process object
 - 41 XMEAS measurement nodes
 - 12 XMV manipulated-variable nodes
+- read-only operational `Simulation/ControlMode` status
 - simulation time and running state
 - Start/Stop/Reset methods
 - configurable real-time factor
-- XMV write bridge
+- XMV write bridge owned by the external controller
 - asynchronous simulation loop
 - operator XMV event integration
+- fault-management interface
 
 Current endpoint:
 
@@ -174,7 +203,7 @@ The next OPC UA layer will establish a stable contract for:
 - external SCADA/HMI integration tests
 - security and deployment configuration
 
-The HMI should consume this contract over OPC UA rather than calling Python simulator APIs directly.
+The HMI and external controller should consume this contract over OPC UA rather than calling Python simulator APIs directly.
 
 ## Fault entry paths
 
@@ -246,6 +275,8 @@ Controlled Digital Twin
 Reproducible Operational Data
         ↓
 OPC UA Operational Interface
+        ↓
+External Control / Automation
         ↓
 SCADA/HMI + Fault Injection
         ↓
