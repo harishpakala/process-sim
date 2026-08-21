@@ -14,6 +14,7 @@ class FakeSimulator:
         self.mvs = [float(i) for i in range(1, 13)]
         self.writes = {}
         self.fault_manager = None
+        self.external_control = True
 
     def get_time_hours(self):
         return self.time
@@ -50,6 +51,7 @@ async def test_opcua_namespace_and_values():
         assert len(server._measurement_nodes) == 41
         assert len(server._mv_nodes) == 12
         assert await server._time_node.read_value() == 0.0
+        assert await server._control_mode_node.read_value() == "external_opcua"
         assert await server._measurement_nodes[8].read_value() == 9.0
         assert await server._mv_nodes[9].read_value() == 10.0
 
@@ -78,6 +80,7 @@ async def test_update_publishes_current_values():
 
         assert await server._time_node.read_value() == 1.5
         assert await server._running_node.read_value() is True
+        assert await server._control_mode_node.read_value() == "external_opcua"
         assert await server._measurement_nodes[8].read_value() == 123.0
     finally:
         await server.stop()
