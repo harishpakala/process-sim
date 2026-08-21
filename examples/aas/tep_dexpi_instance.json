@@ -2,267 +2,28 @@
   "modelType": "Submodel",
   "id": "https://example.org/sm/tep-dexpi-instance",
   "idShort": "TEP_DEXPI",
-  "semanticId": {
-    "type": "ExternalReference",
-    "keys": [
-      {
-        "type": "GlobalReference",
-        "value": "https://example.org/smt/dexpi"
-      }
-    ]
-  },
+  "semanticId": {"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/smt/dexpi"}]},
   "submodelElements": [
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "Equipments",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "Reactor",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-R-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "R-001"
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/Equipment/Reactor"
-              }
-            ]
-          }
-        },
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "ProductCondenser",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-C-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "C-001"
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/Equipment/ProductCondenser"
-              }
-            ]
-          }
-        },
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "VaporLiquidSeparator",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-V-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "V-001"
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/Equipment/VaporLiquidSeparator"
-              }
-            ]
-          }
-        },
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "RecycleCompressor",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-K-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "K-001"
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/Equipment/RecycleCompressor"
-              }
-            ]
-          }
-        },
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "ProductStripper",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-S-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "S-001"
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/Equipment/ProductStripper"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "InstrumentationFunctions",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "ReactorTemperature",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-TT-001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "TT-001"
-            },
-            {
-              "modelType": "SubmodelElementCollection",
-              "idShort": "MeasuredVariable",
-              "value": [
-                {
-                  "modelType": "Property",
-                  "idShort": "ValueType",
-                  "valueType": "xs:string",
-                  "value": "xs:float"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "Unit",
-                  "valueType": "xs:string",
-                  "value": "https://qudt.org/vocab/unit/DEG_C"
-                }
-              ],
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
-                  }
-                ]
-              }
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/InstrumentationFunction/TemperatureMeasurement"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "ActuatingFunctions",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "ReactorCoolingWater",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "TEP-CV-010"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "CV-010"
-            },
-            {
-              "modelType": "SubmodelElementCollection",
-              "idShort": "ActuatedVariable",
-              "value": [
-                {
-                  "modelType": "Property",
-                  "idShort": "ValueType",
-                  "valueType": "xs:string",
-                  "value": "xs:float"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "Unit",
-                  "valueType": "xs:string",
-                  "value": "https://qudt.org/vocab/unit/PERCENT"
-                }
-              ]
-            }
-          ],
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://example.org/eclass/TEP/ActuatingFunction/ReactorCoolingWater"
-              }
-            ]
-          }
-        }
-      ]
-    }
+    {"modelType":"SubmodelElementCollection","idShort":"Equipments","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"Reactor","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/Equipment/Reactor"}]},"value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-R-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"R-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"ProductCondenser","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/Equipment/ProductCondenser"}]},"value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-C-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"C-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"VaporLiquidSeparator","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/Equipment/VaporLiquidSeparator"}]},"value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-V-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"V-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"RecycleCompressor","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/Equipment/RecycleCompressor"}]},"value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-K-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"K-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"ProductStripper","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/Equipment/ProductStripper"}]},"value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-S-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"S-001"}]}
+    ]},
+    {"modelType":"SubmodelElementCollection","idShort":"InstrumentationFunctions","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"ReactorTemperature","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/InstrumentationFunction/TemperatureMeasurement"}]},"value":[
+        {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-TT-001"},
+        {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"TT-001"},
+        {"modelType":"SubmodelElementCollection","idShort":"MeasuredVariable","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/Temperature"}]},"value":[{"modelType":"Property","idShort":"ValueType","valueType":"xs:string","value":"xs:float"},{"modelType":"Property","idShort":"Unit","valueType":"xs:string","value":"https://qudt.org/vocab/unit/DEG_C"}]}
+      ]}
+    ]},
+    {"modelType":"SubmodelElementCollection","idShort":"ActuatingFunctions","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"ReactorCoolingWater","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/eclass/TEP/ActuatingFunction/ReactorCoolingWater"}]},"value":[
+        {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-CV-010"},
+        {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"CV-010"},
+        {"modelType":"SubmodelElementCollection","idShort":"ActuatedVariable","value":[{"modelType":"Property","idShort":"ValueType","valueType":"xs:string","value":"xs:float"},{"modelType":"Property","idShort":"Unit","valueType":"xs:string","value":"https://qudt.org/vocab/unit/PERCENT"}]}
+      ]}
+    ]}
   ]
 }
