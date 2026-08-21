@@ -6,6 +6,8 @@ import asyncio
 import json
 from typing import Callable
 
+from asyncua import ua
+
 from process_sim.faults import Fault, FaultManager, FaultType
 
 
@@ -44,7 +46,7 @@ class OPCUAServer:
             configure_faults(self.fault_manager, self._handle_fault_event)
 
     async def start(self):
-        from asyncua import Server, ua
+        from asyncua import Server
         self._server = Server()
         await self._server.init()
         self._server.set_endpoint(self.endpoint)
@@ -95,17 +97,25 @@ class OPCUAServer:
             value = value[1:-1].strip()
         return value
 
+    @staticmethod
+    def _boolean_output(value: bool):
+        return [ua.Variant(bool(value), ua.VariantType.Boolean)]
+
+    @staticmethod
+    def _string_output(value: str):
+        return [ua.Variant(str(value), ua.VariantType.String)]
+
     async def _start_method(self, parent):
         await self.start_simulation()
-        return [True]
+        return self._boolean_output(True)
 
     async def _stop_method(self, parent):
         await self.stop_simulation()
-        return [True]
+        return self._boolean_output(True)
 
     async def _reset_method(self, parent):
         await self.reset_simulation()
-        return [True]
+        return self._boolean_output(True)
 
     async def _inject_fault_method(self, parent, fault_id, fault_type, target, magnitude, value, duration_hours):
         result = self.inject_fault(
@@ -116,16 +126,18 @@ class OPCUAServer:
             float(self._unwrap_method_argument(value)),
             float(self._unwrap_method_argument(duration_hours)),
         )
-        return [result]
+        return self._boolean_output(result)
 
     async def _clear_fault_method(self, parent, fault_id):
-        return [self.clear_fault(self._normalize_text_argument(fault_id))]
+        result = self.clear_fault(self._normalize_text_argument(fault_id))
+        return self._boolean_output(result)
 
     async def _clear_all_faults_method(self, parent):
-        return [self.clear_all_faults()]
+        result = self.clear_all_faults()
+        return self._boolean_output(result)
 
     async def _list_faults_method(self, parent):
-        return [self.list_faults()]
+        return self._string_output(self.list_faults())
 
     def inject_fault(self, fault_id: str, fault_type: str, target: str, magnitude: float = 0.0, value: float = 0.0, duration_hours: float = 0.0) -> bool:
         fault_id = self._normalize_text_argument(fault_id)
