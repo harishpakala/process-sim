@@ -15,7 +15,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "3",
+              "value": "",
               "qualifiers": [
                 {
                   "semanticId": {
@@ -37,7 +37,161 @@
               "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
-              "value": "3",
+              "value": "",
+              "qualifiers": [
+                {
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  },
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                  }
+                ]
+              },
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+              }
+            ]
+          },
+          "type": "Cardinality",
+          "valueType": "xs:string",
+          "value": "One"
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "InstrumentationFunctions",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "InstrumentationFunction",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "",
+              "qualifiers": [
+                {
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  },
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "",
+              "qualifiers": [
+                {
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  },
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One"
+                }
+              ]
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "MeasuredVariable",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ValueType",
+                  "valueType": "xs:string",
+                  "value": "",
+                  "qualifiers": [
+                    {
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                          }
+                        ]
+                      },
+                      "type": "Cardinality",
+                      "valueType": "xs:string",
+                      "value": "One"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Unit",
+                  "valueType": "xs:string",
+                  "value": "",
+                  "qualifiers": [
+                    {
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                          }
+                        ]
+                      },
+                      "type": "Cardinality",
+                      "valueType": "xs:string",
+                      "value": "One"
+                    }
+                  ]
+                }
+              ],
               "qualifiers": [
                 {
                   "semanticId": {
@@ -103,7 +257,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "3",
+              "value": "",
               "qualifiers": [
                 {
                   "semanticId": {
@@ -125,7 +279,7 @@
               "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
-              "value": "3",
+              "value": "",
               "qualifiers": [
                 {
                   "semanticId": {
@@ -144,10 +298,54 @@
               ]
             },
             {
-              "modelType": "Property",
-              "idShort": "value",
-              "valueType": "xs:string",
-              "value": "3",
+              "modelType": "SubmodelElementCollection",
+              "idShort": "ActuatedVariable",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ValueType",
+                  "valueType": "xs:string",
+                  "value": "",
+                  "qualifiers": [
+                    {
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                          }
+                        ]
+                      },
+                      "type": "Cardinality",
+                      "valueType": "xs:string",
+                      "value": "One"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Unit",
+                  "valueType": "xs:string",
+                  "value": "",
+                  "qualifiers": [
+                    {
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                          }
+                        ]
+                      },
+                      "type": "Cardinality",
+                      "valueType": "xs:string",
+                      "value": "One"
+                    }
+                  ]
+                }
+              ],
               "qualifiers": [
                 {
                   "semanticId": {
@@ -197,117 +395,7 @@
           },
           "type": "Cardinality",
           "valueType": "xs:string",
-          "value": "ZeroToOne"
-        }
-      ]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "InstrumentationFunctions",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "InstrumentationFunction",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "3",
-              "qualifiers": [
-                {
-                  "semanticId": {
-                    "type": "ExternalReference",
-                    "keys": [
-                      {
-                        "type": "GlobalReference",
-                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                      }
-                    ]
-                  },
-                  "type": "Cardinality",
-                  "valueType": "xs:string",
-                  "value": "One"
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
-              "idShort": "LocalId",
-              "valueType": "xs:string",
-              "value": "3",
-              "qualifiers": [
-                {
-                  "semanticId": {
-                    "type": "ExternalReference",
-                    "keys": [
-                      {
-                        "type": "GlobalReference",
-                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                      }
-                    ]
-                  },
-                  "type": "Cardinality",
-                  "valueType": "xs:string",
-                  "value": "One"
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
-              "idShort": "value",
-              "valueType": "xs:string",
-              "value": "3",
-              "qualifiers": [
-                {
-                  "semanticId": {
-                    "type": "ExternalReference",
-                    "keys": [
-                      {
-                        "type": "GlobalReference",
-                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                      }
-                    ]
-                  },
-                  "type": "Cardinality",
-                  "valueType": "xs:string",
-                  "value": "One"
-                }
-              ]
-            }
-          ],
-          "qualifiers": [
-            {
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                  }
-                ]
-              },
-              "type": "Cardinality",
-              "valueType": "xs:string",
-              "value": "ZeroToMany"
-            }
-          ]
-        }
-      ],
-      "qualifiers": [
-        {
-          "semanticId": {
-            "type": "ExternalReference",
-            "keys": [
-              {
-                "type": "GlobalReference",
-                "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-              }
-            ]
-          },
-          "type": "Cardinality",
-          "valueType": "xs:string",
-          "value": "ZeroToOne"
+          "value": "One"
         }
       ]
     }
