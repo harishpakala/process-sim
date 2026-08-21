@@ -149,6 +149,16 @@ class OPCUAServer:
         await self._server.start()
         await self.update(False)
 
+    @staticmethod
+    def _unwrap_method_argument(value):
+        """Return the Python value from an asyncua Variant argument.
+
+        asyncua passes OPC UA method inputs to server callbacks as ``ua.Variant``
+        objects. Internal/direct calls may still pass ordinary Python values, so
+        both forms are accepted.
+        """
+        return getattr(value, "Value", value)
+
     async def _start_method(self, parent):
         await self.start_simulation()
         return True
@@ -165,16 +175,16 @@ class OPCUAServer:
         self, parent, fault_id, fault_type, target, magnitude, value, duration_hours
     ):
         return self.inject_fault(
-            str(fault_id),
-            str(fault_type),
-            str(target),
-            float(magnitude),
-            float(value),
-            float(duration_hours),
+            str(self._unwrap_method_argument(fault_id)),
+            str(self._unwrap_method_argument(fault_type)),
+            str(self._unwrap_method_argument(target)),
+            float(self._unwrap_method_argument(magnitude)),
+            float(self._unwrap_method_argument(value)),
+            float(self._unwrap_method_argument(duration_hours)),
         )
 
     async def _clear_fault_method(self, parent, fault_id):
-        return self.clear_fault(str(fault_id))
+        return self.clear_fault(str(self._unwrap_method_argument(fault_id)))
 
     async def _clear_all_faults_method(self, parent):
         return self.clear_all_faults()
@@ -263,87 +273,90 @@ class OPCUAServer:
 
     def _resolve_idv_index(self, target: str) -> int:
         normalized = target.strip().upper().replace("_", "")
-        if not normalized.startswith("IDV") or not normalized[3:].isdigit():
-            raise ValueError("process disturbance target must be IDV1..IDV20")
-        index = int(normalized[3:])
+        if not normalized.startswith("IDV"):
+            raise ValueError("process_disturbance target must be IDV1..IDV20")
+        try:
+            index = int(normalized[3:])
+        except ValueError as exc:
+            raise ValueError("process_disturbance target must be IDV1..IDV20") from exc
         if not 1 <= index <= 20:
-            raise ValueError("process disturbance target must be IDV1..IDV20")
+            raise ValueError("process_disturbance target must be IDV1..IDV20")
         return index
 
-    def _refresh_fault_count(self) -> None:
-        if self._fault_count_node is not None:
-            try:
-                loop = asyncio.get_running_loop()
-            except RuntimeError:
-                return
-            loop.create_task(self._fault_count_node.write_value(len(self.fault_manager.faults())))
+    def _refresh_fault_count(self):
+        if self._fault_count_node is None:
+            return
+        count = len(self.fault_manager.faults())
+        try:
+            loop = asyncio.get_running_loop()
+        except RuntimeError:
+            return
+        loop.create_task(self._fault_count_node.write_value(count))
 
-    def _emit_operator_fault_event(self, event_type: str, fault: Fault) -> None:
-        event = {
-            "event_type": event_type,
-            "fault_id": fault.fault_id,
-            "fault_type": fault.fault_type.value,
-            "target": fault.target,
-            "simulation_time_hours": float(self.simulator.get_time_hours()),
-            "metadata": dict(fault.metadata),
-        }
+    def _emit_operator_fault_event(self, event_type: str, fault: Fault):
+        if self.fault_event_callback is None:
+            return
+        self.fault_event_callback(
+            {
+                "event_type": event_type,
+                "fault_id": fault.fault_id,
+                "fault_type": fault.fault_type.value,
+                "target": fault.target,
+                "simulation_time_hours": self.simulator.get_time_hours(),
+                "metadata": dict(fault.metadata),
+            }
+        )
+
+    def _handle_fault_event(self, event):
         if self.fault_event_callback is not None:
             self.fault_event_callback(event)
-
-    def _handle_fault_event(self, event: dict) -> None:
-        if self.fault_event_callback is not None:
-            self.fault_event_callback(event)
-
-    async def update(self, running=False):
-        await self._time_node.write_value(float(self.simulator.get_time_hours()))
-        await self._running_node.write_value(bool(running))
-        await self._real_time_factor_node.write_value(float(self._real_time_factor))
-        if self._fault_count_node is not None:
-            await self._fault_count_node.write_value(len(self.fault_manager.faults()))
-        for node, value in zip(self._measurement_nodes, self.simulator.get_measurements()):
-            await node.write_value(float(value))
-        for node, value in zip(self._mv_nodes, self.simulator.get_manipulated_variables()):
-            await node.write_value(float(value))
 
     async def sync_manipulated_variables(self):
-        """Apply OPC UA XMV writes and report client-driven changes."""
+        """Apply operator-written XMV values to the simulator."""
+        if not self._mv_nodes:
+            return
         for index, node in enumerate(self._mv_nodes, start=1):
             value = float(await node.read_value())
             previous = self._last_synced_mvs[index - 1]
-            if value != previous and self.event_callback is not None:
-                self.event_callback(index, previous, value)
-            self._last_synced_mvs[index - 1] = value
+            if value == previous:
+                continue
             self.simulator.set_manipulated_variable(index, value)
+            self._last_synced_mvs[index - 1] = value
+            if self.event_callback is not None:
+                self.event_callback(index, previous, value)
 
-    async def _simulation_loop(self):
-        try:
-            while True:
-                await self.sync_manipulated_variables()
-                steps = max(
-                    1,
-                    int(round(self._update_interval_seconds * self._real_time_factor)),
-                )
-                self.simulator.step(n_steps=steps)
-                await self.update(True)
-                await asyncio.sleep(self._update_interval_seconds)
-        except asyncio.CancelledError:
-            if self._server is not None:
-                await self.update(False)
-            raise
+    async def update(self, running: bool):
+        """Publish simulator state to OPC UA nodes."""
+        if self._time_node is not None:
+            await self._time_node.write_value(float(self.simulator.get_time_hours()))
+        if self._running_node is not None:
+            await self._running_node.write_value(bool(running))
+        if self._real_time_factor_node is not None:
+            await self._real_time_factor_node.write_value(self._real_time_factor)
+        if self._measurement_nodes:
+            measurements = self.simulator.get_measurements()
+            for node, value in zip(self._measurement_nodes, measurements):
+                await node.write_value(float(value))
+        if self._mv_nodes:
+            measurements = self.simulator.get_manipulated_variables()
+            for node, value in zip(self._mv_nodes, measurements):
+                await node.write_value(float(value))
 
     async def start_simulation(self):
-        if self._simulation_task is None or self._simulation_task.done():
-            self._simulation_task = asyncio.create_task(self._simulation_loop())
-        await self.update(True)
+        if self._simulation_task is not None and not self._simulation_task.done():
+            return
+        self._simulation_task = asyncio.create_task(self._simulation_loop())
 
     async def stop_simulation(self):
-        task, self._simulation_task = self._simulation_task, None
-        if task is not None and not task.done():
-            task.cancel()
-            try:
-                await task
-            except asyncio.CancelledError:
-                pass
+        task = self._simulation_task
+        if task is None:
+            return
+        self._simulation_task = None
+        task.cancel()
+        try:
+            await task
+        except asyncio.CancelledError:
+            pass
         await self.update(False)
 
     async def reset_simulation(self):
@@ -357,21 +370,23 @@ class OPCUAServer:
         ]
         await self.update(False)
 
-    async def set_real_time_factor(self, value):
-        value = float(value)
-        if value <= 0:
-            raise ValueError("real_time_factor must be > 0")
-        self._real_time_factor = value
-        await self._real_time_factor_node.write_value(value)
-
-    async def stop(self):
-        await self.stop_simulation()
-        if self._server is not None:
-            await self._server.stop()
-            self._server = None
+    async def _simulation_loop(self):
+        while True:
+            await asyncio.sleep(self._update_interval_seconds)
+            steps = max(1, int(round(self._update_interval_seconds * self._real_time_factor)))
+            for _ in range(steps):
+                self.simulator.step()
+            await self.sync_manipulated_variables()
+            await self.update(True)
 
     async def run(self):
-        if self._server is None:
-            await self.start()
-        while True:
-            await asyncio.sleep(1.0)
+        await self.start()
+        await self.start_simulation()
+        try:
+            while True:
+                await asyncio.sleep(1.0)
+        except asyncio.CancelledError:
+            pass
+        finally:
+            await self.stop_simulation()
+            await self._server.stop()
