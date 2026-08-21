@@ -64,12 +64,7 @@ class ScenarioRunner:
             sync()
 
     def run(self, duration_hours: float, record_interval_steps: int = 1) -> dict:
-        """Run the scenario and persist the complete recorded run.
-
-        Returns a stable run-result dictionary containing the run identifier
-        and paths to the persisted artifacts. This keeps callers independent
-        of the storage implementation's internal return shape.
-        """
+        """Run the scenario and persist the complete recorded run."""
         if duration_hours < 0:
             raise ValueError("duration_hours must be >= 0")
         if record_interval_steps < 1:
@@ -85,8 +80,6 @@ class ScenarioRunner:
             if step_number % record_interval_steps == 0:
                 self.session.record_snapshot()
 
-        # Flush lifecycle transitions at the exact final simulation boundary,
-        # including a fault whose duration ends at the end of the run.
         self._sync_faults()
         self.session.complete()
         paths = self.session.save(
@@ -96,8 +89,15 @@ class ScenarioRunner:
                 "record_interval_steps": record_interval_steps,
             }
         )
+
+        # Keep the direct artifact keys for compatibility with existing callers,
+        # while retaining the normalized paths/manifest structure used by the
+        # experiment framework.
         return {
             "run_id": self.recorder.run_id,
+            "observations": paths["observations"],
+            "events": paths["events"],
+            "metadata": paths["metadata"],
             "paths": paths,
-            "metadata": self.manifest.to_dict(),
+            "manifest": self.manifest.to_dict(),
         }
