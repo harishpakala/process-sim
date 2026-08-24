@@ -3,55 +3,8 @@
   "id": "https://example.org/sm/dexpi",
   "idShort": "DEXPI",
   "submodelElements": [
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "Equipments",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "Equipment",
-          "value": [
-            {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},
-            {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""}
-          ],
-          "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-        }
-      ],
-      "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "InstrumentationFunctions",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "InstrumentationFunction",
-          "value": [
-            {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},
-            {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""},
-            {"modelType":"Property","idShort":"MeasuredVariable","valueType":"xs:float","value":""}
-          ],
-          "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-        }
-      ],
-      "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "ActuatingFunctions",
-      "value": [
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "ActuatingFunction",
-          "value": [
-            {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},
-            {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""},
-            {"modelType":"Property","idShort":"ActuatedVariable","valueType":"xs:float","value":""}
-          ],
-          "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-        }
-      ],
-      "qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]
-    }
+    {"modelType":"SubmodelElementCollection","idShort":"Equipments","value":[{"modelType":"SubmodelElementCollection","idShort":"Equipment","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]},
+    {"modelType":"SubmodelElementCollection","idShort":"InstrumentationFunctions","value":[{"modelType":"SubmodelElementCollection","idShort":"InstrumentationFunction","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""},{"modelType":"Property","idShort":"MeasuredVariable","valueType":"xs:float","value":""}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]},
+    {"modelType":"SubmodelElementCollection","idShort":"ActuatingFunctions","value":[{"modelType":"SubmodelElementCollection","idShort":"ActuatingFunction","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":""},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":""},{"modelType":"Property","idShort":"ActuatedVariable","valueType":"xs:float","value":""}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"ZeroToMany","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]}],"qualifiers":[{"type":"Cardinality","valueType":"xs:string","value":"One","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"}]}}]}
   ]
 }
