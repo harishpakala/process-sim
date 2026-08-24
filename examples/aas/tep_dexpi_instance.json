@@ -2,51 +2,28 @@
   "modelType": "Submodel",
   "id": "https://example.org/sm/tep-dexpi-instance",
   "idShort": "TEP_DEXPI",
-  "semanticId": {
-    "type": "ExternalReference",
-    "keys": [{"type": "GlobalReference", "value": "https://example.org/smt/dexpi"}]
-  },
+  "semanticId": {"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://example.org/smt/dexpi"}]},
   "submodelElements": [
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "Equipments",
-      "value": [
-        {"modelType":"SubmodelElementCollection","idShort":"Reactor","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-R-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"R-001"}]},
-        {"modelType":"SubmodelElementCollection","idShort":"ProductCondenser","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-C-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"C-001"}]},
-        {"modelType":"SubmodelElementCollection","idShort":"VaporLiquidSeparator","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-V-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"V-001"}]},
-        {"modelType":"SubmodelElementCollection","idShort":"RecycleCompressor","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-K-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"K-001"}]},
-        {"modelType":"SubmodelElementCollection","idShort":"ProductStripper","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-S-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"S-001"}]}
-      ]
-    },
-    {
-      "modelType": "SubmodelElementCollection",
-      "idShort": "InstrumentationFunctions",
-      "value": [
-        {
-          "modelType":"SubmodelElementCollection",
-          "idShort":"ReactorTemperature",
-          "value":[
-            {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-TT-001"},
-            {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"TT-001"},
-            {"modelType":"SubmodelElementCollection","idShort":"MeasuredVariable","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/Temperature"}]},"value":[{"modelType":"Property","idShort":"ValueType","valueType":"xs:string","value":"xs:float"},{"modelType":"Property","idShort":"Unit","valueType":"xs:string","value":"https://qudt.org/vocab/unit/DEG_C"}]}
-          ]
-        }
-      ]
-    },
-    {
-      "modelType":"SubmodelElementCollection",
-      "idShort":"ActuatingFunctions",
-      "value":[
-        {
-          "modelType":"SubmodelElementCollection",
-          "idShort":"ReactorCoolingWater",
-          "value":[
-            {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-CV-010"},
-            {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"CV-010"},
-            {"modelType":"SubmodelElementCollection","idShort":"ActuatedVariable","value":[{"modelType":"Property","idShort":"ValueType","valueType":"xs:string","value":"xs:float"},{"modelType":"Property","idShort":"Unit","valueType":"xs:string","value":"https://qudt.org/vocab/unit/PERCENT"}]}
-          ]
-        }
-      ]
-    }
+    {"modelType":"SubmodelElementCollection","idShort":"Equipments","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"Reactor","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-R-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"R-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"ProductCondenser","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-C-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"C-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"VaporLiquidSeparator","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-V-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"V-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"RecycleCompressor","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-K-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"K-001"}]},
+      {"modelType":"SubmodelElementCollection","idShort":"ProductStripper","value":[{"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-S-001"},{"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"S-001"}]}
+    ]},
+    {"modelType":"SubmodelElementCollection","idShort":"InstrumentationFunctions","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"ReactorTemperature","value":[
+        {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-TT-001"},
+        {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"TT-001"},
+        {"modelType":"Property","idShort":"MeasuredVariable","valueType":"xs:float","value":"120.4","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/Temperature"},{"type":"GlobalReference","value":"https://qudt.org/vocab/unit/DEG_C"}]}}
+      ]}
+    ]},
+    {"modelType":"SubmodelElementCollection","idShort":"ActuatingFunctions","value":[
+      {"modelType":"SubmodelElementCollection","idShort":"ReactorCoolingWater","value":[
+        {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-CV-010"},
+        {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"CV-010"},
+        {"modelType":"Property","idShort":"ActuatedVariable","valueType":"xs:float","value":"0","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/VolumeFlowRate"},{"type":"GlobalReference","value":"https://qudt.org/vocab/unit/PERCENT"}]}}
+      ]}
+    ]}
   ]
 }
