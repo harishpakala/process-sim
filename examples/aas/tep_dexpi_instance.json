@@ -22,7 +22,7 @@
       {"modelType":"SubmodelElementCollection","idShort":"ReactorCoolingWater","value":[
         {"modelType":"Property","idShort":"AssetIdentifier","valueType":"xs:string","value":"TEP-CV-010"},
         {"modelType":"Property","idShort":"LocalId","valueType":"xs:string","value":"CV-010"},
-        {"modelType":"Property","idShort":"ActuatedVariable","valueType":"xs:float","value":"0","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/VolumeFlowRate"},{"type":"GlobalReference","value":"https://qudt.org/vocab/unit/PERCENT"}]}}
+        {"modelType":"Property","idShort":"ActuatedVariable","valueType":"xs:float","value":"0","semanticId":{"type":"ExternalReference","keys":[{"type":"GlobalReference","value":"https://qudt.org/vocab/quantitykind/Dimensionless"},{"type":"GlobalReference","value":"https://qudt.org/vocab/unit/PERCENT"}]}}
       ]}
     ]}
   ]
