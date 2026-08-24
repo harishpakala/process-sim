@@ -19,6 +19,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "Reactor",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -37,6 +44,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "ProductCondenser",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -55,6 +69,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "VaporLiquidSeparator",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -73,6 +94,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "RecycleCompressor",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -91,6 +119,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "ProductStripper",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -115,6 +150,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "ReactorTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
@@ -158,6 +200,13 @@
         {
           "modelType": "SubmodelElementCollection",
           "idShort": "ReactorCoolingWater",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
           "value": [
             {
               "modelType": "Property",
