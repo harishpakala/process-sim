@@ -1,0 +1,19 @@
+Serial Number,Sensor Type,Source,ID,PLC Mapping
+1,Flow,A,FI-1001,I10.2
+2,Flow,D,FI-1002,I10.3
+3,Flow,E,FI-1003,I10.4
+4,Flow,C,FI-1004,I10.5
+6,Flow,Reactor,FI-1101,I10.6
+,Temperature,Reactor,TI-1101,I10.14
+12,Temperature,Reactor,TI-1103,I10.15
+,Pressure,Reactor,PI-1101,I10.19
+,Level,Reactor,LI-1101,I10.0
+,Temperature,Condensor,TI-1202,I10.7
+,Pressure,Seperator,PI-1301,I10.8
+,Level,Seperator,LI-1301,I10.9
+,Temperature,Seperator,TI-1301,I10.10
+,Flow,Seperator,FI-1301,I10.11
+,Pressure,Stripper,LI-1501,I10.12
+,Level,Stripper,PI-1501,I10.13
+,Temperature,Stripper,TI-1501,I10.16
+,Flow,Stripper,FI-1501,I10.17
