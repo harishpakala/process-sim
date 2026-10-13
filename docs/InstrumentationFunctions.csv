@@ -1,19 +1,23 @@
-Serial Number,Sensor Type,Source,ID,PLC Mapping
-1,Flow,A,FI-1001,I10.2
-2,Flow,D,FI-1002,I10.3
-3,Flow,E,FI-1003,I10.4
-4,Flow,C,FI-1004,I10.5
-6,Flow,Reactor,FI-1101,I10.6
-,Temperature,Reactor,TI-1101,I10.14
-12,Temperature,Reactor,TI-1103,I10.15
-,Pressure,Reactor,PI-1101,I10.19
-,Level,Reactor,LI-1101,I10.0
-,Temperature,Condensor,TI-1202,I10.7
-,Pressure,Seperator,PI-1301,I10.8
-,Level,Seperator,LI-1301,I10.9
-,Temperature,Seperator,TI-1301,I10.10
-,Flow,Seperator,FI-1301,I10.11
-,Pressure,Stripper,LI-1501,I10.12
-,Level,Stripper,PI-1501,I10.13
-,Temperature,Stripper,TI-1501,I10.16
-,Flow,Stripper,FI-1501,I10.17
+Serial Number,Sensor Type,Source,ID,PLC Mapping,Company,Order Number,Positive Terminal,Negative Terminal,PLC Endpoint
+XMEAS1,Flow,Feed A flow rate,FI-1001,I10.3,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS2,Flow,Feed D flow rate,FI-1002,I10.4,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS3,Flow,Feed E flow rate,FI-1003,I10.5,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS4,Flow,Feed A and C flow rate,FI-1004,I10.6,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS5,Flow,Recycle Flow rate,FI-1006,I10.8,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS6,Flow,Reactor Feed Flow rate,FI-1101,I10.9,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS7,Pressure,Reactor Pressure,PI-1101,I10.19,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS8,Level,Reactor level,LI-1101,I10.0,IFM,LW2720,L+,L-,Out1
+XMEAS9,Temperature,Reactor temperature,TI-1101,I10.13,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS10,Flow,Purge Flow rate,FI-1005,I10.7,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS11,Temperature,Seperator temperature,TI-1301,I10.16,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS12,Level,Separator liquid level,LI-1301,I10.1,IFM,LW2720,L+,L-,Out1
+XMEAS13,Pressure,Seperator Pressure,PI-1301,I10.20,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS14,Flow,Seperator underflow rate,FI-1301,I10.10,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS15,Level,Stripper level,LI-1501,I10.2,IFM,LW2720,L+,L-,Out1
+XMEAS16,Pressure,Stripper Pressure,PI-1501,I10.18,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS17,Flow,Stripper underflow,FI-1501,I10.11,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS18,Temperature,Stripper temperature,TI-1501,I10.17,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS19,Flow,Stripper stream flow,FI-1502,I10.12,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
+XMEAS20,Joule,Compressor work,JI-1401,I10.21,Schneider,A9MEM3555,D1/+,DO/-,DO
+XMEAS21,Temperature,Reactor cooling water outlet temperature,TI-1103,I10.14,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS22,Temperature,separator cooling water outlet temperature,TI-1202,I10.15,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
