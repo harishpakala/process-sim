@@ -18,6 +18,6 @@ XMEAS16,Pressure,Stripper Pressure,PI-1501,I10.18,SMC,PSH-L2-01-W,BN/DC (+),BU/D
 XMEAS17,Flow,Stripper underflow,FI-1501,I10.11,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
 XMEAS18,Temperature,Stripper temperature,TI-1501,I10.17,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
 XMEAS19,Flow,Stripper stream flow,FI-1502,I10.12,SMC,PFMV505-1,BN/DC (+),BN/DC (-),BK/OUT
-XMEAS20,Joule,Compressor work,JI-1401,I10.21,Schneider,A9MEM3555,D1/+,DO/-,DO
+XMEAS20,Power,Compressor work,JI-1401,I10.21,Schneider,A9MEM3555,D1/+,DO/-,DO
 XMEAS21,Temperature,Reactor cooling water outlet temperature,TI-1103,I10.14,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
-XMEAS22,Temperature,separator cooling water outlet temperature,TI-1202,I10.15,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
+XMEAS22,Temperature,Condenser cooling water outlet temperature,TI-1202,I10.15,SMC,PSH-L2-01-W,BN/DC (+),BU/DC (-),Out1
