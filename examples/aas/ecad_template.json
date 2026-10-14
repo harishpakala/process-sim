@@ -1,0 +1,219 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/ecad-template",
+  "idShort": "ECAD",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Devices",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Device",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "ConnectionPoints",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Signal_terminal",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LocalId",
+                      "valueType": "xs:string",
+                      "value": "terminal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Role",
+                      "valueType": "xs:string",
+                      "value": "Signal"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "ontoConcept",
+                      "valueType": "xs:string",
+                      "value": "EndPoint",
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/ontoConcept/1/0"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "qualifiers": [
+                {
+                  "type": "ontoConcept",
+                  "valueType": "xs:string",
+                  "value": "ConnectionPoints",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/ontoConcept/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Device",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/ontoConcept/1/0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "ElectricalNets",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ElectricalNet",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": ""
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "ElectricalNet",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/ontoConcept/1/0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Schematics",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SchematicsConnection",
+          "value": [
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "isConnectedTo",
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/tep-ecad-instance"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Devices"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Device"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "ConnectionPoints"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Signal_terminal"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/tep-ecad-instance"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Devices"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "PLCBox"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "ConnectionPoints"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "InputChannel_I10_0"
+                  }
+                ]
+              }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "SchematicsConnections",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/ontoConcept/1/0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
