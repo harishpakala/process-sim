@@ -1,0 +1,107 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/product-catalog-instance-example",
+  "idShort": "ProductCatalogExample",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Products",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DemoProduct",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/assets/demo-product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "ExampleManufacturer"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "DEMO-001"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "SupplyVoltage",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "value",
+                      "valueType": "xs:double",
+                      "value": "24.0"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "TechnicalProperty"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "OutputType",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "value",
+                      "valueType": "xs:string",
+                      "value": "Digital"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "TechnicalProperty"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "HasDisplay",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "value",
+                      "valueType": "xs:boolean",
+                      "value": "true"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "TechnicalProperty"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
