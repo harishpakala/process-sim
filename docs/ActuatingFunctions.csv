@@ -1,17 +1,17 @@
-Serial Number,Sensor Type,Source,ID,PLC Mapping,Company,Order Number,Positive Terminal,Negative Terminal,PLC Endpoint
-,Valve,Feed A Control Valve,CV-1001,Q10.0,Siemens,S55264-V193,x1,,x2
-,Valve,Feed D Control Valve,CV-1002,Q10.1,Siemens,S55264-V193,x1,,x2
-,Valve,Feed E Control Valve,CV-1003,Q10.2,Siemens,S55264-V193,x1,,x2
-,Valve,Feed A and C Control Valve,CV-1004,Q10.3,Siemens,S55264-V193,x1,,x2
-,Valve,Purge Flow Control Valve,CV-1005,Q10.4,Siemens,S55264-V193,x1,,x2
-,Valve,Recycle Flow Control Valve,CV-1006,Q10.5,Siemens,S55264-V193,x1,,x2
-,Valve,Reactor CWR Control Valve,CV-1101,Q10.6,Siemens,S55264-V193,x1,,x2
-,Valve,Condensor Outlet Control Valve,CV-1201,Q10.7,Siemens,S55264-V193,x1,,x2
-,Valve,Stripper Inlet Control Valve,CV-1301,Q10.8,Siemens,S55264-V193,x1,,x2
-,Valve,Compressor Control Valve,CV-1401,Q10.9,Siemens,S55264-V193,x1,,x2
-,Valve,Product Outlet Control Valve,CV-1501,Q10.10,Siemens,S55264-V193,x1,,x2
-,Valve,Stripper stream feed Control Valve,CV-1502,Q10.11,Siemens,S55264-V193,x1,,x2
-,Motor,Stirrer Motor -Reactor,M1,Q10.12,Rittal,3244100,1,,2
-,Motor,Pump Motor - Stripper,M-1301,Q10.13,Rittal,3244100,1,,2
-,Motor,Pump Motor - Compressor,M-1401,Q10.14,Rittal,3244100,1,,2
-,Motor,Pump Motor - Product,M-1501,Q10.15,Rittal,3244100,1,,2
+Device Type,Description,Tag,PLC Mapping,Reported Manufacturer,Reported Part/Order Number (verify),Positive Terminal,Negative Terminal,PLC Endpoint
+Valve,Feed A Control Valve,CV-1001,Q10.0,Siemens,S55264-V193,x1,,x2
+Valve,Feed D Control Valve,CV-1002,Q10.1,Siemens,S55264-V193,x1,,x2
+Valve,Feed E Control Valve,CV-1003,Q10.2,Siemens,S55264-V193,x1,,x2
+Valve,Feed A and C Control Valve,CV-1004,Q10.3,Siemens,S55264-V193,x1,,x2
+Valve,Purge Flow Control Valve,CV-1005,Q10.4,Siemens,S55264-V193,x1,,x2
+Valve,Recycle Flow Control Valve,CV-1006,Q10.5,Siemens,S55264-V193,x1,,x2
+Valve,Reactor Cooling Water Return (CWR) Control Valve,CV-1101,Q10.6,Siemens,S55264-V193,x1,,x2
+Valve,Condenser Outlet Control Valve,CV-1201,Q10.7,Siemens,S55264-V193,x1,,x2
+Valve,Stripper Inlet Control Valve,CV-1301,Q10.8,Siemens,S55264-V193,x1,,x2
+Valve,Compressor Control Valve,CV-1401,Q10.9,Siemens,S55264-V193,x1,,x2
+Valve,Product Outlet Control Valve,CV-1501,Q10.10,Siemens,S55264-V193,x1,,x2
+Valve,Stripper Stream Feed Control Valve,CV-1502,Q10.11,Siemens,S55264-V193,x1,,x2
+Motor,Reactor Stirrer Motor,M1,Q10.12,Rittal,3244100,1,,2
+Motor,Stripper Pump Motor,M-1301,Q10.13,Rittal,3244100,1,,2
+Motor,Compressor Pump Motor,M-1401,Q10.14,Rittal,3244100,1,,2
+Motor,Product Pump Motor,M-1501,Q10.15,Rittal,3244100,1,,2
