@@ -142,58 +142,80 @@
           "idShort": "SchematicsConnection",
           "value": [
             {
-              "modelType": "RelationshipElement",
-              "idShort": "isConnectedTo",
-              "first": {
-                "type": "ModelReference",
-                "keys": [
-                  {
-                    "type": "Submodel",
-                    "value": "https://example.org/sm/tep-ecad-instance"
+              "modelType": "SubmodelElementCollection",
+              "idShort": "Connection",
+              "value": [
+                {
+                  "modelType": "RelationshipElement",
+                  "idShort": "isConnectedTo",
+                  "first": {
+                    "type": "ModelReference",
+                    "keys": [
+                      {
+                        "type": "Submodel",
+                        "value": "https://example.org/sm/tep-ecad-instance"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Devices"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Device"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "ConnectionPoints"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Signal_terminal"
+                      }
+                    ]
                   },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "Devices"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "Device"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "ConnectionPoints"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "Signal_terminal"
+                  "second": {
+                    "type": "ModelReference",
+                    "keys": [
+                      {
+                        "type": "Submodel",
+                        "value": "https://example.org/sm/tep-ecad-instance"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Devices"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "PLCBox"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "ConnectionPoints"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "InputChannel_I10_0"
+                      }
+                    ]
                   }
-                ]
-              },
-              "second": {
-                "type": "ModelReference",
-                "keys": [
-                  {
-                    "type": "Submodel",
-                    "value": "https://example.org/sm/tep-ecad-instance"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "Devices"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "PLCBox"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "ConnectionPoints"
-                  },
-                  {
-                    "type": "SubmodelElementCollection",
-                    "value": "InputChannel_I10_0"
+                }
+              ],
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "ZeroToMany",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
                   }
-                ]
-              }
+                }
+              ]
             }
           ],
           "qualifiers": [
