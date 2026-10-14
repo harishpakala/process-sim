@@ -32,7 +32,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive__",
+                  "idShort": "SupplyPositive",
                   "value": [
                     {
                       "modelType": "Property",
@@ -66,7 +66,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn__",
+                  "idShort": "SupplyReturn",
                   "value": [
                     {
                       "modelType": "Property",
@@ -150,7 +150,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_1L_",
+                  "idShort": "SupplyPositive_1L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -184,7 +184,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_1L_",
+                  "idShort": "SupplyReturn_1L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -1818,7 +1818,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -1852,7 +1852,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2000,7 +2000,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2034,7 +2034,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2182,7 +2182,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2216,7 +2216,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2364,7 +2364,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2398,7 +2398,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2546,7 +2546,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2580,7 +2580,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2728,7 +2728,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2762,7 +2762,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2910,7 +2910,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -2944,7 +2944,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3092,7 +3092,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_L_",
+                  "idShort": "SupplyPositive_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3126,7 +3126,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_L_",
+                  "idShort": "SupplyReturn_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3274,7 +3274,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3308,7 +3308,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3456,7 +3456,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3490,7 +3490,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3638,7 +3638,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3672,7 +3672,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3820,7 +3820,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_L_",
+                  "idShort": "SupplyPositive_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -3854,7 +3854,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_L_",
+                  "idShort": "SupplyReturn_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4002,7 +4002,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4036,7 +4036,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4184,7 +4184,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4218,7 +4218,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4366,7 +4366,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_L_",
+                  "idShort": "SupplyPositive_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4400,7 +4400,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_L_",
+                  "idShort": "SupplyReturn_L",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4548,7 +4548,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4582,7 +4582,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4730,7 +4730,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4764,7 +4764,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4912,7 +4912,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -4946,7 +4946,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5094,7 +5094,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5128,7 +5128,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BN_DC____",
+                  "idShort": "SupplyReturn_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5276,7 +5276,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_D1__",
+                  "idShort": "SupplyPositive_D1",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5310,7 +5310,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_DO__",
+                  "idShort": "SupplyReturn_DO",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5458,7 +5458,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5492,7 +5492,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5640,7 +5640,7 @@
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyPositive_BN_DC____",
+                  "idShort": "SupplyPositive_BN_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -5674,7 +5674,7 @@
                 },
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyReturn_BU_DC____",
+                  "idShort": "SupplyReturn_BU_DC",
                   "value": [
                     {
                       "modelType": "Property",
@@ -8244,7 +8244,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive__"
+                        "value": "SupplyPositive"
                       }
                     ]
                   },
@@ -8296,7 +8296,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn__"
+                        "value": "SupplyReturn"
                       }
                     ]
                   },
@@ -8348,7 +8348,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_1L_"
+                        "value": "SupplyPositive_1L"
                       }
                     ]
                   },
@@ -8400,7 +8400,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_1L_"
+                        "value": "SupplyReturn_1L"
                       }
                     ]
                   },
@@ -8452,7 +8452,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -8504,7 +8504,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -8616,7 +8616,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -8668,7 +8668,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -8780,7 +8780,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -8832,7 +8832,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -8944,7 +8944,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -8996,7 +8996,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -9108,7 +9108,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -9160,7 +9160,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -9272,7 +9272,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -9324,7 +9324,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -9436,7 +9436,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -9488,7 +9488,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -9600,7 +9600,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_L_"
+                        "value": "SupplyPositive_L"
                       }
                     ]
                   },
@@ -9652,7 +9652,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_L_"
+                        "value": "SupplyReturn_L"
                       }
                     ]
                   },
@@ -9764,7 +9764,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -9816,7 +9816,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -9928,7 +9928,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -9980,7 +9980,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -10092,7 +10092,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -10144,7 +10144,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -10256,7 +10256,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_L_"
+                        "value": "SupplyPositive_L"
                       }
                     ]
                   },
@@ -10308,7 +10308,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_L_"
+                        "value": "SupplyReturn_L"
                       }
                     ]
                   },
@@ -10420,7 +10420,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -10472,7 +10472,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -10584,7 +10584,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -10636,7 +10636,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -10748,7 +10748,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_L_"
+                        "value": "SupplyPositive_L"
                       }
                     ]
                   },
@@ -10800,7 +10800,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_L_"
+                        "value": "SupplyReturn_L"
                       }
                     ]
                   },
@@ -10912,7 +10912,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -10964,7 +10964,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -11076,7 +11076,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -11128,7 +11128,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -11240,7 +11240,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -11292,7 +11292,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -11404,7 +11404,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -11456,7 +11456,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BN_DC____"
+                        "value": "SupplyReturn_BN_DC"
                       }
                     ]
                   },
@@ -11568,7 +11568,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_D1__"
+                        "value": "SupplyPositive_D1"
                       }
                     ]
                   },
@@ -11620,7 +11620,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_DO__"
+                        "value": "SupplyReturn_DO"
                       }
                     ]
                   },
@@ -11732,7 +11732,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -11784,7 +11784,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
@@ -11896,7 +11896,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyPositive_BN_DC____"
+                        "value": "SupplyPositive_BN_DC"
                       }
                     ]
                   },
@@ -11948,7 +11948,7 @@
                       },
                       {
                         "type": "SubmodelElementCollection",
-                        "value": "SupplyReturn_BU_DC____"
+                        "value": "SupplyReturn_BU_DC"
                       }
                     ]
                   },
