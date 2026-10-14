@@ -1,7 +1,7 @@
 {
   "modelType": "Submodel",
-  "id": "https://example.org/sm/product-catalog-instance-example",
-  "idShort": "ProductCatalogExample",
+  "id": "https://example.org/sm/tep-product-catalog-instance",
+  "idShort": "TEP_ProductCatalog",
   "submodelElements": [
     {
       "modelType": "SubmodelElementCollection",
@@ -9,88 +9,66 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "DemoProduct",
+          "idShort": "SMC_PFMV505_1",
           "value": [
             {
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/assets/demo-product"
+              "value": "https://example.org/product-types/SMC_PFMV505_1"
             },
             {
               "modelType": "Property",
               "idShort": "ManufacturerName",
               "valueType": "xs:string",
-              "value": "ExampleManufacturer"
+              "value": "SMC"
             },
             {
               "modelType": "Property",
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
-              "value": "DEMO-001"
+              "value": "PFMV505-1"
             },
             {
               "modelType": "SubmodelElementCollection",
               "idShort": "TechnicalProperties",
-              "value": [
-                {
-                  "modelType": "SubmodelElementCollection",
-                  "idShort": "SupplyVoltage",
-                  "value": [
-                    {
-                      "modelType": "Property",
-                      "idShort": "value",
-                      "valueType": "xs:double",
-                      "value": "24.0"
-                    }
-                  ],
-                  "qualifiers": [
-                    {
-                      "type": "OntoConcept",
-                      "valueType": "xs:string",
-                      "value": "TechnicalProperty"
-                    }
-                  ]
-                },
-                {
-                  "modelType": "SubmodelElementCollection",
-                  "idShort": "OutputType",
-                  "value": [
-                    {
-                      "modelType": "Property",
-                      "idShort": "value",
-                      "valueType": "xs:string",
-                      "value": "Digital"
-                    }
-                  ],
-                  "qualifiers": [
-                    {
-                      "type": "OntoConcept",
-                      "valueType": "xs:string",
-                      "value": "TechnicalProperty"
-                    }
-                  ]
-                },
-                {
-                  "modelType": "SubmodelElementCollection",
-                  "idShort": "HasDisplay",
-                  "value": [
-                    {
-                      "modelType": "Property",
-                      "idShort": "value",
-                      "valueType": "xs:boolean",
-                      "value": "true"
-                    }
-                  ],
-                  "qualifiers": [
-                    {
-                      "type": "OntoConcept",
-                      "valueType": "xs:string",
-                      "value": "TechnicalProperty"
-                    }
-                  ]
-                }
-              ]
+              "value": []
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SMC_PSH_L2_01_W",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": []
             }
           ],
           "qualifiers": [
