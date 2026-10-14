@@ -5,15 +5,15 @@
   "submodelElements": [
     {
       "modelType": "SubmodelElementCollection",
-      "idShort": "hasProducts",
+      "idShort": "Products",
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "hasProduct",
+          "idShort": "Product",
           "value": [
             {
               "modelType": "SubmodelElementCollection",
-              "idShort": "hasProductIdentity",
+              "idShort": "ProductIdentity",
               "value": [
                 {
                   "modelType": "Property",
@@ -145,7 +145,7 @@
             },
             {
               "modelType": "SubmodelElementCollection",
-              "idShort": "hasClassification",
+              "idShort": "Classification",
               "value": [
                 {
                   "modelType": "Property",
@@ -233,11 +233,11 @@
             },
             {
               "modelType": "SubmodelElementCollection",
-              "idShort": "hasTechnicalProperties",
+              "idShort": "TechnicalProperties",
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "hasTechnicalProperty",
+                  "idShort": "TechnicalProperty",
                   "value": [
                     {
                       "modelType": "Property",
@@ -423,11 +423,11 @@
             },
             {
               "modelType": "SubmodelElementCollection",
-              "idShort": "hasDocumentation",
+              "idShort": "Documentation",
               "value": [
                 {
                   "modelType": "SubmodelElementCollection",
-                  "idShort": "hasDocument",
+                  "idShort": "Document",
                   "value": [
                     {
                       "modelType": "Property",
