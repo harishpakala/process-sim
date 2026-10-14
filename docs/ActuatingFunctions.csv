@@ -1,4 +1,4 @@
-Device Type,Description,Tag,PLC Mapping,Reported Manufacturer,Reported Part/Order Number (verify),Positive Terminal,Negative Terminal,PLC Endpoint
+Device Type,Description,Tag,PLC Mapping,Manufacturer,Part Number,Positive Terminal,Negative Terminal,PLC Endpoint
 Valve,Feed A Control Valve,CV-1001,Q10.0,Siemens,S55264-V193,x1,,x2
 Valve,Feed D Control Valve,CV-1002,Q10.1,Siemens,S55264-V193,x1,,x2
 Valve,Feed E Control Valve,CV-1003,Q10.2,Siemens,S55264-V193,x1,,x2
