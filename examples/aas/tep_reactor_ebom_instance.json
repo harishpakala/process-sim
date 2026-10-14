@@ -1,0 +1,552 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-reactor-ebom-instance",
+  "idShort": "TEP_Reactor_EBOM",
+  "submodelElements": [
+    {
+      "modelType": "Property",
+      "idShort": "RootAssemblyIdentifier",
+      "valueType": "xs:string",
+      "value": "TEP-Reactor-System"
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Assemblies",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorSystem",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-Reactor-System"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyDescription",
+              "valueType": "xs:string",
+              "value": "Reactor system engineering scope"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "BOMLines",
+              "value": []
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Assembly"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorEquipment",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-ReactorEquipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentAssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-Reactor-System"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyDescription",
+              "valueType": "xs:string",
+              "value": "Reactor vessel and associated process equipment"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "BOMLines",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_001",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-001"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/TEP-R-001"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "Reactor"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "R-001"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "ConfirmedDEXPI"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Assembly"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorInstrumentation",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-ReactorInstrumentation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentAssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-Reactor-System"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyDescription",
+              "valueType": "xs:string",
+              "value": "Reactor measurement functions"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "BOMLines",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_002",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-002"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/TI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorTemperature"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "TI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_003",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-003"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/PI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorPressure"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "PI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_004",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-004"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/LI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorLevel"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "LI_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_005",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-005"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/FI_106"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorFeedFlow"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "FI_106"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_006",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-006"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/TI_104"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorCoolingWaterOutletTemperature"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "TI_104"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Assembly"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-ReactorControl"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentAssemblyIdentifier",
+              "valueType": "xs:string",
+              "value": "TEP-Reactor-System"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyDescription",
+              "valueType": "xs:string",
+              "value": "Reactor-associated control functions"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "BOMLines",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_007",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-007"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/VC_110"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "ReactorCoolingWaterValve"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "VC_110"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                },
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "Line_008",
+                  "value": [
+                    {
+                      "modelType": "Property",
+                      "idShort": "LineIdentifier",
+                      "valueType": "xs:string",
+                      "value": "RS-008"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentIdentifier",
+                      "valueType": "xs:string",
+                      "value": "https://aas.example.com/SC_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "ComponentDescription",
+                      "valueType": "xs:string",
+                      "value": "AgitatorSpeedControl"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringTag",
+                      "valueType": "xs:string",
+                      "value": "SC_101"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "EngineeringSource",
+                      "valueType": "xs:string",
+                      "value": "TEP_DEXPI"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "RequirementStatus",
+                      "valueType": "xs:string",
+                      "value": "FunctionOnly"
+                    }
+                  ],
+                  "qualifiers": [
+                    {
+                      "type": "OntoConcept",
+                      "valueType": "xs:string",
+                      "value": "BOMLine"
+                    }
+                  ]
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Assembly"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
