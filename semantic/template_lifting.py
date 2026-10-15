@@ -855,19 +855,34 @@ def main(domain,template_file):
 if __name__ == "__main__":
     import argparse
     from pathlib import Path
-    parser = argparse.ArgumentParser(description="Lift any AAS Submodel template to RDF/SHACL.")
-    parser.add_argument("--input", required=True, type=Path, help="AAS template JSON file")
-    parser.add_argument("--domain", required=True, help="Namespace domain: dexpi, ecad, productcatalog, ...")
-    parser.add_argument("--output", type=Path, help="Write Turtle locally")
-    parser.add_argument("--push", action="store_true", help="Publish template graph to GraphDB")
+    from semantic.config import TARGETS, OUTPUT
+
+    parser = argparse.ArgumentParser(description="Lift all configured AAS templates, or select one.")
+    parser.add_argument("--input", type=Path, help="Single template JSON; omit to lift all configured templates")
+    parser.add_argument("--domain", help="Domain for --input")
+    parser.add_argument("--output", type=Path, help="Single Turtle output path")
+    parser.add_argument("--push", action="store_true", help="Publish to GraphDB (off by default)")
     args = parser.parse_args()
-    with args.input.open(encoding="utf-8") as stream:
-        model = json.load(stream)
-    template = aas_jsonization.submodel_from_jsonable(model)
-    graph = build_template_graph(template, args.domain)
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        graph.serialize(destination=str(args.output), format="turtle")
-    print(f"Template {template.id}: {len(graph)} triples")
-    if args.push:
-        push_graph_to_graphdb(graph, compute_uri(template.id))
+    if args.input and not args.domain:
+        parser.error("--domain is required when --input is supplied")
+    if args.output and not args.input:
+        parser.error("--output requires --input; default batch outputs go to out/semantic")
+    jobs = [(args.domain, args.input)] if args.input else [(domain, template) for domain, template, _ in TARGETS]
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    failures = []
+    for domain, filename in jobs:
+        try:
+            with filename.open(encoding="utf-8") as stream:
+                template = aas_jsonization.submodel_from_jsonable(json.load(stream))
+            graph = build_template_graph(template, domain)
+            destination = args.output or OUTPUT / f"{domain}-template.ttl"
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            graph.serialize(destination=str(destination), format="turtle")
+            print(f"[OK] {domain}: {len(graph)} template triples -> {destination}")
+            if args.push:
+                push_graph_to_graphdb(graph, compute_uri(template.id))
+        except Exception as exc:
+            failures.append((domain, str(exc)))
+            print(f"[FAILED] {domain}: {exc}")
+    if failures:
+        raise SystemExit(f"{len(failures)} template lifting job(s) failed")
