@@ -1,0 +1,199 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/product-catalog-template",
+  "idShort": "ProductCatalog",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Products",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Product",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "ZeroToOne",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "ZeroToOne",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "SubmodelElementCollection",
+                  "idShort": "TechnicalProperty",
+                  "value": [],
+                  "qualifiers": [
+                    {
+                      "type": "Cardinality",
+                      "valueType": "xs:string",
+                      "value": "ZeroToMany",
+                      "semanticId": {
+                        "type": "ExternalReference",
+                        "keys": [
+                          {
+                            "type": "GlobalReference",
+                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+              ],
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "Cardinality",
+          "valueType": "xs:string",
+          "value": "One",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
