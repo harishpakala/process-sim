@@ -1,3 +1,16 @@
+## Run all three domains without arguments
+
+From the repository root:
+
+```bash
+python3.12 -m semantic.template_lifting
+python3.12 -m semantic.instance_lifting
+```
+
+The default targets are defined in `semantic/config.py` and include DEXPI, ECAD and ProductCatalog. Turtle outputs are written to `out/semantic/{domain}-template.ttl` and `out/semantic/{domain}-instance.ttl`. Defaults do **not** push to GraphDB or run SHACL validation; use `--push` or `--validate` explicitly. Existing single-target CLI arguments remain supported.
+
+Note: scripts use absolute paths derived from their package location, so inputs resolve regardless of the working directory, but execute as modules from the repository root to make the package importable.
+
 # Generic AAS semantic lifting (SAFSL integration)
 
 Adapted from [SAFSL Compiler Tool Chain](https://github.com/harishpakala/SAFSL_Compiler_Tool_Chain), Apache-2.0. The original lifting implementation is preserved in structure and extended with a domain namespace and command-line entry points.
