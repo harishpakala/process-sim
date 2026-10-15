@@ -51,3 +51,12 @@
 .graph-inspector .panel-title{padding:12px 14px;margin:0;background:#102138}
 .graph-inspector h2{display:flex;align-items:center;gap:8px}
 .graph-inspector .catalog-property{margin:0}
+
+
+/* GraphDB-style RDF preview */
+.graph-rdf-scroll{overflow:auto;max-height:680px}
+.graph-rdf-node{touch-action:none}
+.graph-rdf-node circle{fill:#234c63;stroke:#7ac4ce;stroke-width:1.8}
+.graph-rdf-node .graph-rdf-property{fill:#344d69;stroke:#93aacb}
+.graph-rdf-node .graph-rdf-literal{fill:#42505c;stroke:#d0b889}
+.graph-rdf-node.graph-node-active circle,.graph-rdf-node:focus-visible circle{stroke:#f1c16e;stroke-width:3}
