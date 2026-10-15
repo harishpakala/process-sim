@@ -5,7 +5,7 @@ import catalog from '../data/product_catalog.json'
 
 type Element = { modelType: string; idShort: string; value?: string | Element[] }
 type Product = { idShort: string; value: Element[] }
-const products = (catalog.submodelElements[0].value as Product[]).map(product => {
+const products = (catalog.submodelElements[0].value as unknown as Product[]).map(product => {
   const field = (name: string) => product.value.find(item => item.idShort === name)?.value
   const properties = (field('TechnicalProperties') as Element[] | undefined) ?? []
   const property = (name: string) => String(properties.find(item => item.idShort === name)?.value ?? '')
