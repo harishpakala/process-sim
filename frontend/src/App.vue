@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import ProductCatalog from './components/ProductCatalog.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
 const sections = [
  {name:'ENGINEERING',items:['DEXPI Explorer','ECAD Explorer','Engineering BOM','Product Catalog']},
@@ -62,6 +63,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
      </div>
      <section class="panel"><div class="panel-title"><h2>Simulation quick controls</h2><span class="pill amber-pill">UI PREVIEW ONLY</span></div><div class="control-row"><button class="primary" @click="demoRunning=!demoRunning"><Play :size="16"/> {{demoRunning?'Pause preview':'Run preview'}}</button><button class="secondary" @click="demoRunning=false"><RotateCcw :size="16"/> Reset</button><span>These controls do not execute TEP.</span></div></section>
     </template>
+    <template v-else-if="active==='Product Catalog'"><ProductCatalog /></template>
     <template v-else-if="graphView">
      <div class="tabs"><button :class="{selected:view==='Engineering'}" @click="view='Engineering'">Engineering view</button><button :class="{selected:view==='Knowledge Graph'}" @click="view='Knowledge Graph'">Knowledge graph</button></div>
      <section class="panel placeholder"><component :is="view==='Knowledge Graph'?Network:active==='ECAD Explorer'?CircuitBoard:Workflow" :size="42"/><h2>{{active}} · {{view}}</h2><p>{{view==='Knowledge Graph'?'GraphDB RDF graph visualization with Cytoscape.js will appear here.':'Domain-specific engineering data will appear here after API integration.'}}</p><span class="pill amber-pill">Not connected</span></section>
@@ -73,7 +75,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
      <section class="panel"><h2>TEP simulation session</h2><p class="subdued">Future FastAPI service will manage process-sim TEPAdapter sessions.</p><div class="control-row"><button class="primary" @click="demoRunning=!demoRunning"><Play :size="16"/> {{demoRunning?'Pause preview':'Run preview'}}</button><button class="secondary" @click="demoRunning=false"><RotateCcw :size="16"/> Reset</button><span class="pill amber-pill">Demo state only</span></div></section>
     </template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
-    <section class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
+    <section v-if="active!=='Product Catalog'" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
   </main>
  </div>
