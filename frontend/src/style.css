@@ -29,3 +29,25 @@
 .catalog-disclaimer{font-size:11px;margin:8px 0 20px}
 @media(max-width:1050px){.catalog-layout{grid-template-columns:1fr}.catalog-list{position:static}.catalog-results{max-height:320px}}
 @media(max-width:600px){.catalog-identifiers{grid-template-columns:1fr}.catalog-property{grid-template-columns:1fr;gap:5px}}
+
+
+/* AAS-derived knowledge graph, separate from the unchanged snapshot detail layout. */
+.product-knowledge{min-width:0}
+.graph-toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.graph-toolbar .secondary{padding:8px 11px;font-size:12px}
+.graph-explanation{font-size:12px;margin:13px 0}
+.graph-filters{display:flex;flex-wrap:wrap;gap:13px;margin:15px 0;color:#b9cee0;font-size:12px}
+.graph-filters label{display:flex;align-items:center;gap:6px;cursor:pointer}
+.graph-filters input{accent-color:#47c7c3}
+.graph-canvas{background:#0b1829;border:1px solid #294159;border-radius:12px;overflow:auto}
+.product-graph-svg{width:100%;height:auto;min-width:500px;display:block}
+.graph-node{cursor:pointer;outline:none}
+.graph-node rect{fill:#20384c;stroke:#628ca4;stroke-width:1.5}
+.graph-node .graph-node-product{fill:#125b68;stroke:#5ce5e0;stroke-width:2}
+.graph-node .graph-node-manufacturer{fill:#30415b}
+.graph-node .graph-node-category{fill:#36465a}
+.graph-node-active rect,.graph-node:focus-visible rect{stroke:#f1c16e;stroke-width:3}
+.graph-inspector{margin-top:15px;border:1px solid #294159;border-radius:10px;overflow:hidden}
+.graph-inspector .panel-title{padding:12px 14px;margin:0;background:#102138}
+.graph-inspector h2{display:flex;align-items:center;gap:8px}
+.graph-inspector .catalog-property{margin:0}
