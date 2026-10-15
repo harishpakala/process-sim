@@ -6,6 +6,53 @@
 
 The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
 
+## Current development milestone — Semantic Digital Thread prototype (October 2026)
+
+The active integration milestone is **Phase 6 — Engineering & Semantic Digital Thread**, with early user-interface work from Phases 8 and 9. This is a prototype milestone, **not** completion of the full semantic digital thread or the GraphRAG phase.
+
+| Phase | Roadmap status | Implemented in the current milestone | Still required |
+|---|---|---|---|
+| 1 — TEP reference integration | Foundation complete | TEP adapter, deterministic simulation boundary, engineering measurements | Ongoing maintenance |
+| 2 — Industrial twin core | In progress | Simulation lifecycle and run context | Canonical cross-domain plant/asset model, operating-state semantics |
+| 3 — Faults and scenarios | Foundation implemented | Fault manager, scenarios, lifecycle events and native disturbances | Extended fault families, schema validation and comparisons |
+| 4 — OPC UA | Fault-management foundation complete | Simulation controls, XMEAS/XMV and fault-management methods | OPC UA events, security, engineering metadata and external HMI verification |
+| 5 — Temporal data and experiments | Experiment foundation implemented | Parquet recording, provenance, controlled experiments, replication and sweeps | Historian/TSDB, temporal KG and expanded benchmarks |
+| **6 — Engineering & Semantic Digital Thread** | **Prototype implemented; integration/validation in progress** | AAS templates and example instances for DEXPI, ECAD and ProductCatalog; configurable RDF template/instance lifting scripts; ProductCatalog engineering audit | Run and verify RDF generation and SHACL validation end to end; GraphDB ingestion; cross-domain identity and provenance; QUDT/eCl@ss enrichment |
+| 7 — BOM and enterprise | Planned | ProductCatalog manufacturer/part-number source data is a preliminary input | Enterprise master data, EBOM/MBOM, ERP integration and identity resolution |
+| **8 — Web SCADA / HMI** | **Frontend prototype; operational integration pending** | TEP NEXUS Vue/Vite navigation and engineering ProductCatalog explorer | Live OPC UA-backed SCADA, trends, alarms, authenticated operational actions |
+| **9 — Knowledge Graph & GraphRAG** | **Graph visualization prototype only** | GraphDB-style ProductCatalog explorer with labeled AAS-derived relationships, pan/zoom, node dragging, expansion and node-property side pane | Live RDF/SPARQL query API, actual ontology predicates, cross-domain KG, reasoning and GraphRAG |
+| 10 — Industrial AI | Planned | No production agent or industrial AI capabilities established | Agent architecture, evidence-backed recommendations, safety and benchmark evaluation |
+
+### What the ProductCatalog UI demonstrates
+
+The existing **Technical details** view remains a searchable **local AAS JSON snapshot** with manufacturer filtering, product identifiers, technical properties and documentation links. Its **Knowledge graph** tab provides a GraphDB-style interactive **preview derived from that same JSON**. Resource links are rendered as edges; scalar fields such as `hasAssetIdentifier` appear in a selected-node properties pane. The graph supports wheel zoom, drag-to-pan, draggable nodes and fit-to-screen.
+
+**Important evidence boundary:** The graph is not connected to GraphDB, does not execute SPARQL and does not display verified lifted RDF predicates. The semantic lifting scripts are present, but their existence alone does not establish successful RDF/SHACL/GraphDB integration or browser-tested operation.
+
+Run the frontend from the repository root:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Run the semantic lifting entry points separately with Python 3.12 and the required dependencies:
+
+```bash
+python3.12 -m semantic.template_lifting
+python3.12 -m semantic.instance_lifting
+```
+
+By default, these generate local Turtle files in `out/semantic/`; validation and GraphDB upload require explicit `--validate` and `--push` flags. See [semantic/README.md](semantic/README.md) and [frontend/README.md](frontend/README.md).
+
+### Next acceptance milestones
+
+1. Execute the three-domain semantic lifting pipeline and record reproducible RDF/SHACL results.
+2. Establish GraphDB repository ingestion and SPARQL queries, then replace the AAS-derived graph preview with verified RDF nodes and predicates.
+3. Establish stable identifiers and provenance linking ProductCatalog, DEXPI and ECAD.
+4. Integrate the UI with live industrial/operational services and add frontend build, interaction and integration tests.
+
 ## Current status
 
 The implementation currently spans the simulation, fault/scenario, OPC UA, recording, and controlled-experiment foundations. The complete roadmap contains 10 phases organized under four architectural pillars.
@@ -645,7 +692,7 @@ Next:
 - event-to-observation correlation
 - temporal knowledge graph schema and replay/query interfaces
 
-### Phase 6 — Engineering & Semantic Digital Thread — PLANNED
+### Phase 6 — Engineering & Semantic Digital Thread — PROTOTYPE IMPLEMENTED; INTEGRATION IN PROGRESS
 
 - AAS submodel templates
 - domain template governance and validation
@@ -670,7 +717,7 @@ The guiding workflow is **model first → semantically annotate → validate →
 - enterprise-to-engineering identity resolution
 - cross-domain digital-thread relationships
 
-### Phase 8 — Web SCADA / HMI — PLANNED
+### Phase 8 — Web SCADA / HMI — FRONTEND PROTOTYPE; LIVE INTEGRATION PLANNED
 
 - browser-based operational interface
 - live process visualization
@@ -682,7 +729,7 @@ The guiding workflow is **model first → semantically annotate → validate →
 
 The intended operational path is **SCADA/HMI → OPC UA → control/process layer**, not direct access to simulator internals.
 
-### Phase 9 — Knowledge Graph & GraphRAG — PLANNED
+### Phase 9 — Knowledge Graph & GraphRAG — VISUALIZATION PROTOTYPE; RDF/GRAPHRAG PLANNED
 
 - industrial knowledge graph
 - temporal knowledge graph

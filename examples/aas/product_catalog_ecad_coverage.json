@@ -1,0 +1,408 @@
+{
+  "source": "examples/aas/tep_ecad_instance.json",
+  "catalog": "examples/aas/product_catalog_instance.json",
+  "scope": "All 40 ECAD devices",
+  "verificationPolicy": "Manufacturer and part number are transcribed from ECAD only, not independently confirmed against manufacturer documentation. Catalog records are product types, not installed assets. TechnicalProperties remain empty until supported by verified specifications.",
+  "mappings": [
+    {
+      "ecadDevice": "DCPowerSupply",
+      "ecadAssetIdentifier": "https://aas.example.com/DC-PSU-1",
+      "deviceType": null,
+      "manufacturer": null,
+      "partNumber": null,
+      "productCatalogIdentifier": null,
+      "status": "unresolved",
+      "reason": "ECAD device does not specify Manufacturer and PartNumber"
+    },
+    {
+      "ecadDevice": "PLCBox",
+      "ecadAssetIdentifier": "https://aas.example.com/K1",
+      "deviceType": null,
+      "manufacturer": null,
+      "partNumber": null,
+      "productCatalogIdentifier": null,
+      "status": "unresolved",
+      "reason": "ECAD device does not specify Manufacturer and PartNumber"
+    },
+    {
+      "ecadDevice": "FI_1001",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1001",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1002",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1002",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1003",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1003",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1004",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1004",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1006",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1006",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1101",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1101",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "PI_1101",
+      "ecadAssetIdentifier": "https://aas.example.com/PI-1101",
+      "deviceType": "Pressure",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "LI_1101",
+      "ecadAssetIdentifier": "https://aas.example.com/LI-1101",
+      "deviceType": "Level",
+      "manufacturer": "IFM",
+      "partNumber": "LW2720",
+      "productCatalogIdentifier": "https://example.org/product-types/IFM_LW2720",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "TI_1101",
+      "ecadAssetIdentifier": "https://aas.example.com/TI-1101",
+      "deviceType": "Temperature",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "requires_review",
+      "reason": "ECAD assigns same part number to pressure and temperature devices; suitability not independently verified"
+    },
+    {
+      "ecadDevice": "FI_1005",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1005",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "TI_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/TI-1301",
+      "deviceType": "Temperature",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "requires_review",
+      "reason": "ECAD assigns same part number to pressure and temperature devices; suitability not independently verified"
+    },
+    {
+      "ecadDevice": "LI_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/LI-1301",
+      "deviceType": "Level",
+      "manufacturer": "IFM",
+      "partNumber": "LW2720",
+      "productCatalogIdentifier": "https://example.org/product-types/IFM_LW2720",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "PI_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/PI-1301",
+      "deviceType": "Pressure",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1301",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "LI_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/LI-1501",
+      "deviceType": "Level",
+      "manufacturer": "IFM",
+      "partNumber": "LW2720",
+      "productCatalogIdentifier": "https://example.org/product-types/IFM_LW2720",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "PI_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/PI-1501",
+      "deviceType": "Pressure",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "FI_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1501",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "TI_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/TI-1501",
+      "deviceType": "Temperature",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "requires_review",
+      "reason": "ECAD assigns same part number to pressure and temperature devices; suitability not independently verified"
+    },
+    {
+      "ecadDevice": "FI_1502",
+      "ecadAssetIdentifier": "https://aas.example.com/FI-1502",
+      "deviceType": "Flow",
+      "manufacturer": "SMC",
+      "partNumber": "PFMV505-1",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PFMV505_1",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "JI_1401",
+      "ecadAssetIdentifier": "https://aas.example.com/JI-1401",
+      "deviceType": "Power",
+      "manufacturer": "Schneider",
+      "partNumber": "A9MEM3555",
+      "productCatalogIdentifier": "https://example.org/product-types/Schneider_A9MEM3555",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "TI_1103",
+      "ecadAssetIdentifier": "https://aas.example.com/TI-1103",
+      "deviceType": "Temperature",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "requires_review",
+      "reason": "ECAD assigns same part number to pressure and temperature devices; suitability not independently verified"
+    },
+    {
+      "ecadDevice": "TI_1202",
+      "ecadAssetIdentifier": "https://aas.example.com/TI-1202",
+      "deviceType": "Temperature",
+      "manufacturer": "SMC",
+      "partNumber": "PSH-L2-01-W",
+      "productCatalogIdentifier": "https://example.org/product-types/SMC_PSH_L2_01_W",
+      "status": "requires_review",
+      "reason": "ECAD assigns same part number to pressure and temperature devices; suitability not independently verified"
+    },
+    {
+      "ecadDevice": "CV_1001",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1001",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1002",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1002",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1003",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1003",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1004",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1004",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1005",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1005",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1006",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1006",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1101",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1101",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1201",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1201",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1301",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1401",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1401",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1501",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "CV_1502",
+      "ecadAssetIdentifier": "https://aas.example.com/CV-1502",
+      "deviceType": "Valve",
+      "manufacturer": "Siemens",
+      "partNumber": "S55264-V193",
+      "productCatalogIdentifier": "https://example.org/product-types/Siemens_S55264_V193",
+      "status": "source_declared",
+      "reason": null
+    },
+    {
+      "ecadDevice": "M1",
+      "ecadAssetIdentifier": "https://aas.example.com/M1",
+      "deviceType": "Motor",
+      "manufacturer": "Rittal",
+      "partNumber": "3244100",
+      "productCatalogIdentifier": "https://example.org/product-types/Rittal_3244100",
+      "status": "requires_review",
+      "reason": "ECAD identifies a Rittal part as a motor; product category/suitability not independently verified"
+    },
+    {
+      "ecadDevice": "M_1301",
+      "ecadAssetIdentifier": "https://aas.example.com/M-1301",
+      "deviceType": "Motor",
+      "manufacturer": "Rittal",
+      "partNumber": "3244100",
+      "productCatalogIdentifier": "https://example.org/product-types/Rittal_3244100",
+      "status": "requires_review",
+      "reason": "ECAD identifies a Rittal part as a motor; product category/suitability not independently verified"
+    },
+    {
+      "ecadDevice": "M_1401",
+      "ecadAssetIdentifier": "https://aas.example.com/M-1401",
+      "deviceType": "Motor",
+      "manufacturer": "Rittal",
+      "partNumber": "3244100",
+      "productCatalogIdentifier": "https://example.org/product-types/Rittal_3244100",
+      "status": "requires_review",
+      "reason": "ECAD identifies a Rittal part as a motor; product category/suitability not independently verified"
+    },
+    {
+      "ecadDevice": "M_1501",
+      "ecadAssetIdentifier": "https://aas.example.com/M-1501",
+      "deviceType": "Motor",
+      "manufacturer": "Rittal",
+      "partNumber": "3244100",
+      "productCatalogIdentifier": "https://example.org/product-types/Rittal_3244100",
+      "status": "requires_review",
+      "reason": "ECAD identifies a Rittal part as a motor; product category/suitability not independently verified"
+    }
+  ]
+}
