@@ -78,3 +78,12 @@
 .graph-relationship button{border:0;background:transparent;text-align:left;color:#5ce5e0;padding:0;font-size:12px;overflow-wrap:anywhere}
 .graph-sidepane .empty{padding:0 15px}
 @media(max-width:1100px){.graph-workspace{grid-template-columns:1fr}.graph-sidepane{max-height:400px}}
+
+
+/* GraphDB-style pan-and-zoom viewport; the inspector stays stationary. */
+.graph-workspace .graph-canvas.graph-rdf-scroll{height:610px;max-height:none;overflow:hidden;position:relative;cursor:grab}
+.graph-workspace .graph-canvas.graph-rdf-scroll:active{cursor:grabbing}
+.graph-pan-svg{display:block;width:100%;height:100%;touch-action:none;user-select:none}
+.graph-pan-svg .graph-rdf-node{cursor:move}
+.graph-navigation-hint{font-size:11px;color:#91a9bd;margin:0 0 10px}
+@media(max-width:700px){.graph-workspace .graph-canvas.graph-rdf-scroll{height:440px}}
