@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { ExternalLink, Package, Search, Database, Network, FileText } from 'lucide-vue-next'
 import catalog from '../data/product_catalog.json'
+import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
 type Element = { modelType: string; idShort: string; value?: string | Element[] }
 type Product = { idShort: string; value: Element[] }
@@ -71,7 +72,7 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
             </div>
             <template v-if="sourceLinks.length"><h2 class="catalog-section-title">Documentation & provenance</h2><div class="catalog-links"><a v-for="link in sourceLinks" :key="link.name" :href="link.value" target="_blank" rel="noopener noreferrer"><ExternalLink :size="14"/> {{ label(link.name) }}</a></div></template>
           </template>
-          <div v-else class="placeholder catalog-graph"><Network :size="42"/><h2>Semantic graph not connected</h2><p>This product is available in the local AAS catalog. GraphDB-backed relationships will appear here after RDF ingestion and API integration.</p><span class="pill amber-pill">Offline preview</span></div>
+          <ProductKnowledgeGraph v-else :key="selected.id" :product="selected" />
         </template>
         <div v-else class="placeholder"><Package :size="38"/><h2>No product selected</h2></div>
       </section>
