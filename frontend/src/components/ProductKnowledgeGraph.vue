@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Network, RotateCcw, ZoomIn, ZoomOut } from 'lucide-vue-next'
+import { Network, RotateCcw, ZoomIn, ZoomOut, Maximize2 } from 'lucide-vue-next'
 import catalog from '../data/product_catalog.json'
 
 type AasElement = { idShort: string; modelType: string; value?: string | AasElement[] }
@@ -13,6 +13,10 @@ const nodes = ref<GraphNode[]>([])
 const edges = ref<GraphEdge[]>([])
 const focused = ref('')
 const zoom = ref(1)
+const pan = ref({ x: 0, y: 0 })
+const canvas = ref<SVGSVGElement | null>(null)
+const panning = ref<{ x: number; y: number } | null>(null)
+const viewportTransform = computed(() => `translate(${pan.value.x} ${pan.value.y}) scale(${zoom.value})`)
 const allProducts = ref(false)
 const dragging = ref<{ id: string; x: number; y: number } | null>(null)
 const get = (id: string) => nodes.value.find(n => n.id === id)
@@ -74,6 +78,7 @@ function reset() {
   nodes.value = []
   edges.value = []
   zoom.value = 1
+  pan.value = { x: 0, y: 0 }
   node('catalog', catalog.idShort || 'ProductCatalog', 'Submodel', 105, 290, [
     { predicate: 'rdf:type', value: 'Submodel' },
     { predicate: 'id', value: String(catalog.id) }
@@ -92,12 +97,52 @@ function move(event: PointerEvent) {
   if (!dragging.value) return
   const current = get(dragging.value.id)
   if (!current) return
-  const svg = (event.currentTarget as SVGElement).ownerSVGElement
-  const factor = 1100 / (svg?.getBoundingClientRect().width || 1100)
+  const svg = canvas.value
+  const factor = 1100 / (svg?.getBoundingClientRect().width || 1100) / zoom.value
   current.x = Math.max(60, Math.min(1040, current.x + (event.clientX - dragging.value.x) * factor))
   current.y = Math.max(50, Math.min(690, current.y + (event.clientY - dragging.value.y) * factor))
   dragging.value.x = event.clientX
   dragging.value.y = event.clientY
+}
+function point(event: PointerEvent | WheelEvent) {
+  const rect = canvas.value?.getBoundingClientRect()
+  if (!rect) return { x: 550, y: 370 }
+  return { x: (event.clientX - rect.left) * 1100 / rect.width, y: (event.clientY - rect.top) * 740 / rect.height }
+}
+function zoomAt(next: number, anchor = { x: 550, y: 370 }) {
+  const target = Math.max(0.35, Math.min(2.5, next))
+  const ratio = target / zoom.value
+  pan.value = { x: anchor.x - (anchor.x - pan.value.x) * ratio, y: anchor.y - (anchor.y - pan.value.y) * ratio }
+  zoom.value = target
+}
+function wheel(event: WheelEvent) {
+  event.preventDefault()
+  zoomAt(zoom.value * Math.exp(-event.deltaY * 0.001), point(event))
+}
+function beginPan(event: PointerEvent) {
+  if (event.button !== 0 || event.target !== canvas.value && (event.target as Element).tagName.toLowerCase() !== 'rect') return
+  panning.value = { x: event.clientX, y: event.clientY }
+  canvas.value?.setPointerCapture(event.pointerId)
+}
+function pointerMove(event: PointerEvent) {
+  if (!panning.value) return
+  const rect = canvas.value?.getBoundingClientRect()
+  if (!rect) return
+  pan.value = {
+    x: pan.value.x + (event.clientX - panning.value.x) * 1100 / rect.width,
+    y: pan.value.y + (event.clientY - panning.value.y) * 740 / rect.height
+  }
+  panning.value = { x: event.clientX, y: event.clientY }
+}
+function endPan() { panning.value = null }
+function fit() {
+  if (!nodes.value.length) return
+  const xs = nodes.value.map(n => n.x), ys = nodes.value.map(n => n.y)
+  const left = Math.min(...xs) - 65, right = Math.max(...xs) + 65
+  const top = Math.min(...ys) - 65, bottom = Math.max(...ys) + 65
+  const next = Math.min(2.5, 1000 / Math.max(1, right-left), 650 / Math.max(1, bottom-top))
+  zoom.value = next
+  pan.value = { x: 550 - (left+right)/2*next, y: 370 - (top+bottom)/2*next }
 }
 reset()
 </script>
@@ -111,25 +156,30 @@ reset()
     <p class="graph-explanation">Resource relationships appear as labeled edges. Scalar attributes such as hasAssetIdentifier are displayed in the selected node's side panel rather than as separate graph nodes. Labels are derived from AAS fields, not confirmed RDF predicates.</p>
     <div class="graph-filters">
       <label><input v-model="allProducts" type="checkbox" @change="reset"/> Show all eight products</label>
-      <button class="secondary" aria-label="Zoom out" @click="zoom=Math.max(.6,+(zoom-.1).toFixed(1))"><ZoomOut :size="14"/></button>
+      <button class="secondary" aria-label="Zoom out" @click="zoomAt(zoom/1.2)"><ZoomOut :size="14"/></button>
       <span>{{ Math.round(zoom*100) }}%</span>
-      <button class="secondary" aria-label="Zoom in" @click="zoom=Math.min(1.6,+(zoom+.1).toFixed(1))"><ZoomIn :size="14"/></button>
+      <button class="secondary" aria-label="Fit graph to screen" @click="fit"><Maximize2 :size="14"/> Fit to screen</button>
+      <button class="secondary" aria-label="Zoom in" @click="zoomAt(zoom*1.2)"><ZoomIn :size="14"/></button>
     </div>
+      <div class="graph-navigation-hint">Scroll to zoom · Drag empty space to pan · Drag nodes to reposition</div>
     <div class="graph-workspace">
       <div class="graph-canvas graph-rdf-scroll" role="group" :aria-label="'ProductCatalog resource graph for ' + product.id">
-        <svg viewBox="0 0 1100 740" :width="1100*zoom" :height="740*zoom" role="img">
+        <svg ref="canvas" viewBox="0 0 1100 740" width="100%" height="100%" role="img" class="graph-pan-svg" @wheel="wheel" @pointerdown="beginPan" @pointermove="pointerMove" @pointerup="endPan" @pointercancel="endPan">
           <defs><marker id="product-rdf-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="#598fa8"/></marker></defs>
+          <rect width="1100" height="740" fill="transparent" />
+          <g :transform="viewportTransform">
           <g v-for="e in edges" :key="e.from+'|'+e.to">
             <template v-if="get(e.from) && get(e.to)">
               <line :x1="get(e.from)!.x" :y1="get(e.from)!.y" :x2="get(e.to)!.x" :y2="get(e.to)!.y" stroke="#598fa8" stroke-width="1.5" marker-end="url(#product-rdf-arrow)"/>
               <text :x="(get(e.from)!.x+get(e.to)!.x)/2" :y="(get(e.from)!.y+get(e.to)!.y)/2-8" fill="#8edbd9" font-size="10" text-anchor="middle" stroke="#0b1829" stroke-width="3" paint-order="stroke">{{ e.predicate }}</text>
             </template>
           </g>
-          <g v-for="n in nodes" :key="n.id" class="graph-node graph-rdf-node" :class="{'graph-node-active':focused===n.id}" tabindex="0" role="button" :aria-label="n.kind+': '+n.label" @click="expand(n.id)" @keydown.enter.prevent="expand(n.id)" @pointerdown="start($event,n)" @pointermove="move" @pointerup="dragging=null" @pointercancel="dragging=null">
+          <g v-for="n in nodes" :key="n.id" class="graph-node graph-rdf-node" :class="{'graph-node-active':focused===n.id}" tabindex="0" role="button" :aria-label="n.kind+': '+n.label" @click="expand(n.id)" @keydown.enter.prevent="expand(n.id)" @pointerdown.stop="start($event,n)" @pointermove.stop="move" @pointerup.stop="dragging=null" @pointercancel.stop="dragging=null">
             <circle :cx="n.x" :cy="n.y" r="46" class="graph-rdf-resource"/>
             <text :x="n.x" :y="n.y-3" fill="#effaff" text-anchor="middle" font-size="10" font-weight="600" pointer-events="none">{{ n.label.length>17?n.label.slice(0,16)+'…':n.label }}</text>
             <text :x="n.x" :y="n.y+12" fill="#b5d5e2" text-anchor="middle" font-size="9" pointer-events="none">{{ n.kind }}</text>
             <title>{{ n.label }}</title>
+          </g>
           </g>
         </svg>
       </div>
