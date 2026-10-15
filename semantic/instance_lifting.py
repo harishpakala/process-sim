@@ -953,26 +953,42 @@ def infer_repeatable_collections(template):
 if __name__ == "__main__":
     import argparse
     from pathlib import Path
+    from semantic.config import TARGETS, OUTPUT
     from semantic.template_lifting import build_template_graph
-    parser = argparse.ArgumentParser(description="Lift an AAS instance to RDF, with optional SHACL validation.")
-    parser.add_argument("--input", required=True, type=Path)
-    parser.add_argument("--domain", required=True)
-    parser.add_argument("--template", required=True, type=Path, help="Matching AAS template JSON")
-    parser.add_argument("--output", type=Path, help="Write Turtle locally")
-    parser.add_argument("--validate", action="store_true", help="Validate locally against template SHACL")
-    parser.add_argument("--push", action="store_true", help="Publish instance to GraphDB")
+
+    parser = argparse.ArgumentParser(description="Lift all configured AAS instances, or select one.")
+    parser.add_argument("--input", type=Path, help="Single instance JSON; omit to lift all configured instances")
+    parser.add_argument("--domain", help="Domain for --input")
+    parser.add_argument("--template", type=Path, help="Matching template for --input")
+    parser.add_argument("--output", type=Path, help="Single Turtle output path")
+    parser.add_argument("--validate", action="store_true", help="Run local SHACL validation")
+    parser.add_argument("--push", action="store_true", help="Publish to GraphDB (off by default)")
     args = parser.parse_args()
-    with args.template.open(encoding="utf-8") as stream:
-        template = aas_jsonization.submodel_from_jsonable(json.load(stream))
-    REPEATABLE_COLLECTIONS.update(infer_repeatable_collections(template))
-    instance = load_submodel(str(args.input))
-    graph = build_instance_graph(instance, args.domain, template.id)
-    if args.validate:
-        template_graph = build_template_graph(template, args.domain)
-        validate_instance(graph, template_graph, compute_uri(instance.id, ""))
-    if args.output:
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        graph.serialize(destination=str(args.output), format="turtle")
-    print(f"Instance {instance.id}: {len(graph)} triples")
-    if args.push:
-        push_graph_to_graphdb(graph, compute_uri(instance.id))
+    if args.input and (not args.domain or not args.template):
+        parser.error("--input requires --domain and --template")
+    if (args.domain or args.template or args.output) and not args.input:
+        parser.error("--domain, --template, and --output require --input")
+    jobs = [(args.domain, args.template, args.input)] if args.input else list(TARGETS)
+    OUTPUT.mkdir(parents=True, exist_ok=True)
+    failures = []
+    for domain, template_file, instance_file in jobs:
+        try:
+            with template_file.open(encoding="utf-8") as stream:
+                template = aas_jsonization.submodel_from_jsonable(json.load(stream))
+            REPEATABLE_COLLECTIONS.clear()
+            REPEATABLE_COLLECTIONS.update(infer_repeatable_collections(template))
+            instance = load_submodel(str(instance_file))
+            graph = build_instance_graph(instance, domain, template.id)
+            if args.validate:
+                validate_instance(graph, build_template_graph(template, domain), compute_uri(instance.id, ""))
+            destination = args.output or OUTPUT / f"{domain}-instance.ttl"
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            graph.serialize(destination=str(destination), format="turtle")
+            print(f"[OK] {domain}: {len(graph)} instance triples -> {destination}")
+            if args.push:
+                push_graph_to_graphdb(graph, compute_uri(instance.id))
+        except Exception as exc:
+            failures.append((domain, str(exc)))
+            print(f"[FAILED] {domain}: {exc}")
+    if failures:
+        raise SystemExit(f"{len(failures)} instance lifting job(s) failed")
