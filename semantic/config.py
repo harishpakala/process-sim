@@ -1,0 +1,10 @@
+"""Built-in semantic lifting targets; run scripts without command-line arguments."""
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+TARGETS = (
+    ("dexpi", ROOT / "semantic/templates/dexpi_template.json", ROOT / "examples/aas/tep_dexpi_instance.json"),
+    ("ecad", ROOT / "semantic/templates/ecad_template.json", ROOT / "examples/aas/tep_ecad_instance.json"),
+    ("productcatalog", ROOT / "semantic/templates/product_catalog_template.json", ROOT / "examples/aas/product_catalog_instance.json"),
+)
+OUTPUT = ROOT / "out" / "semantic"
