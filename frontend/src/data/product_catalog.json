@@ -1,0 +1,705 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-product-catalog-instance",
+  "idShort": "TEP_ProductCatalog",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Products",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SMC_PFMV505_1",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SMC_PFMV505_1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Minute-flow sensor"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicableFluid",
+                  "valueType": "xs:string",
+                  "value": "Dry air or nitrogen"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedFlowRange",
+                  "valueType": "xs:string",
+                  "value": "0 to 0.5 L/min"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AnalogOutput",
+                  "valueType": "xs:string",
+                  "value": "1 to 5 V DC (nonlinear)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "value": "±5% full scale"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ResponseTime",
+                  "valueType": "xs:string",
+                  "value": "≤5 ms"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProofPressure",
+                  "valueType": "xs:string",
+                  "value": "500 kPa"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://static.smc.eu/pdf/PFMV5-PFGV301_EU.pdf"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SMC_PSH_L2_01_W",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Condensation checker / digital temperature and humidity switch"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "OutputConfiguration",
+                  "valueType": "xs:string",
+                  "value": "IO-Link / switching output 1 + switching output 2"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProcessConnection",
+                  "valueType": "xs:string",
+                  "value": "R 1/8"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Cable",
+                  "valueType": "xs:string",
+                  "value": "2 m waterproof lead wire with connector"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "OutputVariantNote",
+                  "valueType": "xs:string",
+                  "value": "L2 variant; do not infer analog output from RT variant"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://static.smc.eu/pdf/PSH_EU.pdf"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "IFM_LW2720",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_LW2720"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "LW2720"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Non-contact radar level sensor"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasuringPrinciple",
+                  "valueType": "xs:string",
+                  "value": "FMCW radar, 80 GHz"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "10 m"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "value": "±2 mm"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SupplyVoltage",
+                  "valueType": "xs:string",
+                  "value": "18 to 30 V DC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AnalogOutput",
+                  "valueType": "xs:string",
+                  "value": "4 to 20 mA"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "IO-Link"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PressureRating",
+                  "valueType": "xs:string",
+                  "value": "8 bar"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MediumTemperature",
+                  "valueType": "xs:string",
+                  "value": "−40 to 150 °C (see derating diagram)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RecommendedMedia",
+                  "valueType": "xs:string",
+                  "value": "Water and hydrous media"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Protection",
+                  "valueType": "xs:string",
+                  "value": "IP68 / IP69K"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.ifm.com/gb/en/product/LW2720"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Schneider_A9MEM3555",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Schneider_A9MEM3555"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Schneider"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "A9MEM3555"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Three-phase electrical energy meter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentSensorType",
+                  "valueType": "xs:string",
+                  "value": "Rogowski coil"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "Modbus RS485"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeteringPurpose",
+                  "valueType": "xs:string",
+                  "value": "Electrical power and energy monitoring"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.se.com/de/de/product/A9MEM3555/"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Siemens_S55264_V193",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Siemens_S55264_V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Pressure-independent control valve body"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerModel",
+                  "valueType": "xs:string",
+                  "value": "VPP46.25F3.6Q"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalSize",
+                  "valueType": "xs:string",
+                  "value": "DN25"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumOperatingPressure",
+                  "valueType": "xs:string",
+                  "value": "2500 kPa"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "IntendedApplication",
+                  "valueType": "xs:string",
+                  "value": "HVAC / room and zone control"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActuatorNote",
+                  "valueType": "xs:string",
+                  "value": "Actuator must be specified separately"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://de.rs-online.com/web/p/druckunabhangige-steuerventile-picv/0636071"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Rittal_3244100",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Rittal_3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Rittal"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "3244100"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Enclosure filter-fan assembly"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedVoltage",
+                  "valueType": "xs:string",
+                  "value": "230 V AC single-phase"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Frequency",
+                  "valueType": "xs:string",
+                  "value": "50 / 60 Hz"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AirFlowStandardFilter",
+                  "valueType": "xs:string",
+                  "value": "700 / 770 m³/h at 50 / 60 Hz"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PowerConsumption",
+                  "valueType": "xs:string",
+                  "value": "95 / 135 W at 50 / 60 Hz"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "IngressProtection",
+                  "valueType": "xs:string",
+                  "value": "IP54 with standard filter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "OperatingTemperature",
+                  "valueType": "xs:string",
+                  "value": "−30 to 55 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.rittal.com/com-en/products/PG20231215KLI101/PG20231215KLI102/PG20240718KLI001/PRO0299?variantId=3244100"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SMC_PSE550",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SMC_PSE550"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSE550"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Low differential-pressure sensor"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedDifferentialPressure",
+                  "valueType": "xs:string",
+                  "value": "0 to 2 kPa"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "OperatingPressure",
+                  "valueType": "xs:string",
+                  "value": "−50 to 50 kPa"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProofPressure",
+                  "valueType": "xs:string",
+                  "value": "65 kPa"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SupplyVoltage",
+                  "valueType": "xs:string",
+                  "value": "12 to 24 V DC ±10%"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AnalogOutput",
+                  "valueType": "xs:string",
+                  "value": "1 to 5 V DC (PSE550); 4 to 20 mA for PSE550-28"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "value": "±1% full scale"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Protection",
+                  "valueType": "xs:string",
+                  "value": "IP40"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicableFluid",
+                  "valueType": "xs:string",
+                  "value": "Air, inert and nonflammable gases"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://static.smc.eu/binaries/content/assets/smc_global/product-documentation/operation-manuals/en/om_pse550_omg0009en-d.pdf"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PXC_2938581",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/PXC_2938581"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Phoenix Contact"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "2938581"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "DIN-rail DC power supply"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerModel",
+                  "valueType": "xs:string",
+                  "value": "QUINT-PS-100-240AC/24DC/5"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalACInput",
+                  "valueType": "xs:string",
+                  "value": "100 to 240 V AC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ACInputRange",
+                  "valueType": "xs:string",
+                  "value": "85 to 264 V AC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalOutputVoltage",
+                  "valueType": "xs:string",
+                  "value": "24 V DC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputCurrent",
+                  "valueType": "xs:string",
+                  "value": "5 A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputPower",
+                  "valueType": "xs:string",
+                  "value": "120 W"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PowerBoostCurrent",
+                  "valueType": "xs:string",
+                  "value": "7.5 A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Efficiency",
+                  "valueType": "xs:string",
+                  "value": ">89%"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.phoenixcontact.com/ro-ro/produse/power-supply-quint-ps-100-240ac24dc-5-2938581"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
