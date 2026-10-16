@@ -28,7 +28,7 @@ async function load() {
   } catch (e) { error.value = e instanceof Error ? e.message : 'Unable to query GraphDB.' }
   finally { loading.value = false }
 }
-watch(() => props.product.uri, load, { immediate: true })
+watch(() => props.product.uri, () => { positions.value = {}; void load() }, { immediate: true })
 const technicalPredicate = 'https://example.org/productcatalog/hasTechnicalProperties'
 const technicalUris = computed(() => new Set(triples.value.filter(t =>
   t.subject === props.product.uri && t.predicate === technicalPredicate && t.resource
@@ -39,13 +39,46 @@ const nodes = computed(() => {
     id,
     label: id === props.product.uri ? props.product.partNumber : triples.value.find(t => t.subject === id && localName(t.predicate) === 'label')?.object || 'TechnicalProperties',
     kind: id === props.product.uri ? 'Product (SMC)' : 'TechnicalProperties (SMC)',
-    x: 210 + i * 350, y: 280,
+    x: positions.value[id]?.x ?? 210 + i * 350, y: positions.value[id]?.y ?? 280,
     attributes: triples.value.filter(t => t.subject === id && !t.resource).map(t => ({ name: localName(t.predicate).replace(/^has/, ''), value: t.object })),
   }))
 })
 const edges = computed(() => triples.value.filter(t =>
   t.subject === props.product.uri && t.predicate === technicalPredicate && t.resource
 ).map(t => ({from:t.subject,to:t.object,label:localName(t.predicate)})))
+const positions = ref<Record<string, { x: number; y: number }>>({})
+const dragging = ref<{ id: string; pointerId: number; offsetX: number; offsetY: number } | null>(null)
+function svgPoint(event: PointerEvent): { x: number; y: number } | null {
+  const element = event.currentTarget as SVGGElement
+  const svg = element.ownerSVGElement
+  const matrix = svg?.getScreenCTM()
+  if (!svg || !matrix) return null
+  const point = svg.createSVGPoint()
+  point.x = event.clientX
+  point.y = event.clientY
+  const converted = point.matrixTransform(matrix.inverse())
+  return { x: converted.x, y: converted.y }
+}
+function startDrag(event: PointerEvent, id: string, x: number, y: number) {
+  if (event.button !== 0) return
+  const point = svgPoint(event)
+  if (!point) return
+  focused.value = id
+  dragging.value = { id, pointerId: event.pointerId, offsetX: point.x - x, offsetY: point.y - y }
+  ;(event.currentTarget as SVGGElement).setPointerCapture(event.pointerId)
+}
+function moveDrag(event: PointerEvent) {
+  if (!dragging.value || dragging.value.pointerId !== event.pointerId) return
+  const point = svgPoint(event)
+  if (!point) return
+  positions.value[dragging.value.id] = {
+    x: Math.max(70, Math.min(730, point.x - dragging.value.offsetX)),
+    y: Math.max(70, Math.min(580, point.y - dragging.value.offsetY)),
+  }
+}
+function endDrag(event: PointerEvent) {
+  if (dragging.value?.pointerId === event.pointerId) dragging.value = null
+}
 const selected = computed(() => nodes.value.find(n => n.id === focused.value) || nodes.value[0])
 const node = (id: string) => nodes.value.find(n => n.id === id)
 const connections = computed(() => edges.value.filter(e => e.from === selected.value?.id || e.to === selected.value?.id))
@@ -54,7 +87,7 @@ const connections = computed(() => edges.value.filter(e => e.from === selected.v
 <template>
   <div class="product-knowledge">
     <div class="graph-toolbar"><span class="pill amber-pill">GraphDB AAS · SPARQL</span></div>
-    <p class="graph-explanation">Product and TechnicalProperties collections are separate RDF nodes. Select either node to inspect its semantically lifted properties.</p>
+    <p class="graph-explanation">Product and TechnicalProperties collections are separate RDF nodes. Drag nodes to reposition them; select either node to inspect its semantically lifted properties.</p>
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }} <button class="secondary" type="button" @click="load">Retry</button></p>
     <div v-if="!loading && !error" class="graph-workspace">
@@ -67,7 +100,7 @@ const connections = computed(() => edges.value.filter(e => e.from === selected.v
               <text :x="(node(e.from)!.x+node(e.to)!.x)/2" :y="(node(e.from)!.y+node(e.to)!.y)/2-12" text-anchor="middle" font-size="11" fill="#8edbd9" stroke="#0b1829" stroke-width="3" paint-order="stroke">{{ e.label }}</text>
             </template>
           </g>
-          <g v-for="n in nodes" :key="n.id" class="graph-node graph-rdf-node" :class="{'graph-node-active':selected?.id===n.id}" tabindex="0" role="button" :aria-label="n.kind+': '+n.label" @click="focused=n.id" @keydown.enter.prevent="focused=n.id" @keydown.space.prevent="focused=n.id">
+          <g v-for="n in nodes" :key="n.id" class="graph-node graph-rdf-node" :class="{'graph-node-active':selected?.id===n.id}" tabindex="0" role="button" style="touch-action: none; cursor: grab" @pointerdown="startDrag($event, n.id, n.x, n.y)" @pointermove="moveDrag" @pointerup="endDrag" @pointercancel="endDrag" :aria-label="n.kind+': '+n.label" @click="focused=n.id" @keydown.enter.prevent="focused=n.id" @keydown.space.prevent="focused=n.id">
             <circle :cx="n.x" :cy="n.y" r="64" class="graph-rdf-resource"/>
             <text :x="n.x" :y="n.y-5" fill="#effaff" text-anchor="middle" font-size="11" font-weight="600" pointer-events="none">{{ n.label.length>19?n.label.slice(0,18)+'…':n.label }}</text>
             <text :x="n.x" :y="n.y+13" fill="#b5d5e2" text-anchor="middle" font-size="10" pointer-events="none">{{ n.kind }}</text>
