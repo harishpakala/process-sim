@@ -8,6 +8,7 @@ const triples = ref<Triple[]>([])
 const loading = ref(false)
 const error = ref('')
 const focused = ref('')
+const positions = ref<Record<string, { x: number; y: number }>>({})
 async function load() {
   loading.value = true
   error.value = ''
@@ -46,7 +47,6 @@ const nodes = computed(() => {
 const edges = computed(() => triples.value.filter(t =>
   t.subject === props.product.uri && t.predicate === technicalPredicate && t.resource
 ).map(t => ({from:t.subject,to:t.object,label:localName(t.predicate)})))
-const positions = ref<Record<string, { x: number; y: number }>>({})
 const dragging = ref<{ id: string; pointerId: number; offsetX: number; offsetY: number } | null>(null)
 function svgPoint(event: PointerEvent): { x: number; y: number } | null {
   const element = event.currentTarget as SVGGElement
