@@ -36,6 +36,7 @@ type GraphNode = { id: string; label: string; kind: string; x: number; y: number
 type GraphEdge = { from: string; to: string; label: string }
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 const focused = ref('')
+const positions = ref<Record<string, { x: number; y: number }>>({})
 watch(() => props.asset.id, () => { focused.value = props.asset.id })
 const graph = computed(() => {
   const assetId = props.asset.id
@@ -56,7 +57,6 @@ const graph = computed(() => {
   })
   return {nodes,edges}
 })
-const positions = ref<Record<string, { x: number; y: number }>>({})
 const dragging = ref<{ id: string; pointerId: number; offsetX: number; offsetY: number } | null>(null)
 function svgPoint(event: PointerEvent): { x: number; y: number } | null {
   const element = event.currentTarget as SVGGElement
