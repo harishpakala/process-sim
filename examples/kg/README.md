@@ -2,7 +2,7 @@
 
 GraphDB SPARQL repository: `http://pakala:7200/repositories/AAS`.
 
-Both **AssetInventoryStatus Knowledge graph** and **ProductCatalog** (product list, details and graph) now query RDF via SPARQL. The AssetInventory *list and non-KG status detail* still use local AAS JSON; only its KG tab uses RDF. ProductCatalog does not use bundled JSON.
+**AssetInventory** (asset explorer, search, counters, status details, product links and graph) and **ProductCatalog** (product explorer, details and graph) now query RDF via SPARQL. Neither component reads bundled AAS JSON. The KG is the sole UI data source.
 
 ## Required deployment
 
