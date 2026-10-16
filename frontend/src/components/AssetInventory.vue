@@ -16,6 +16,8 @@ const filtered = computed(() => {
 })
 const selected = computed(() => filtered.value.find(asset => asset.id === selectedId.value) ?? filtered.value[0])
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
+const statusKeys = ['ModelingStatus', 'LifecycleStatus', 'InstallationStatus', 'OperationalStatus', 'MaintenanceStatus']
+const statusLabel = (value: string) => readable(value || 'Unknown')
 </script>
 <template>
  <section class="catalog asset-inventory">
@@ -37,12 +39,17 @@ const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
    </section>
    <section class="panel catalog-detail" v-if="selected">
     <div class="panel-title"><div><h2>{{ selected.fields.AssetName }}</h2><p>{{ selected.fields.EquipmentTag }} · {{ selected.fields.AssetType }}</p></div><span class="pill">AAS ASSET</span></div>
+    <h2 class="catalog-section-title">Asset status</h2>
     <div class="catalog-properties">
-     <div v-for="(value,key) in selected.fields" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
+     <div v-for="key in statusKeys" :key="key" class="catalog-property"><span>{{ readable(key) }}</span><span>{{ statusLabel(selected.fields[key]) }}</span></div>
     </div>
-    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Existing DEXPI example tags are reused where matched; unmapped signals retain XMEAS/XMV identifiers. DEXPI-to-ECAD reconciliation is pending.</p>
+    <h2 class="catalog-section-title">Engineering & identification</h2>
+    <div class="catalog-properties">
+     <div v-for="(value,key) in Object.fromEntries(Object.entries(selected.fields).filter(([key]) => !statusKeys.includes(key)))" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
+    </div>
+    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Engineering tags and descriptions use the project engineering tables where available; DEXPI-to-ECAD identity reconciliation is pending. Statuses are reference-data placeholders, not live plant readings.</p>
    </section>
   </div>
-  <p class="catalog-disclaimer">Offline AssetInventory prototype · five modeled process units and 53 logical simulation signals · not a verified physical plant inventory or live GraphDB view.</p>
+  <p class="catalog-disclaimer">Offline AssetInventory prototype · engineering-defined positions and logical TEP signals · installation, maintenance and live operating status are not verified.</p>
  </section>
 </template>
