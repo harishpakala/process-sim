@@ -5,8 +5,10 @@ import { selectTriples, KG_TYPE, KG_VOCAB, localName, type Triple } from '../lib
 import AssetStatusKnowledgeGraph from './AssetStatusKnowledgeGraph.vue'
 
 type AssetRecord = { id: string; fields: Record<string, string> }
-const assetType = 'https://example.org/tep/kg/SimulatedAsset'
-const productType = 'https://example.org/tep/kg/ProductType'
+const assetType = 'https://example.org/assetinventory/Asset'
+const assetNS = 'https://example.org/assetinventory/'
+const productNS = 'https://example.org/productcatalog/'
+const productType = 'https://example.org/productcatalog/Product'
 const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const triples = ref<Triple[]>([])
 const loading = ref(false)
@@ -21,15 +23,15 @@ const assets = computed<AssetRecord[]>(() => {
     const fields: Record<string, string> = { AssetId: id }
     const own = triples.value.filter(t => t.subject === id)
     for (const t of own) {
-      if (t.predicate.startsWith(KG_VOCAB)) {
-        if (t.predicate === KG_VOCAB + 'hasProductType') fields.ProductReference = t.object
-        else if (t.predicate === KG_VOCAB + 'hasOperationalSignal') fields.OperationalSignalIRI = t.object
-        else if (t.predicate === KG_VOCAB + 'hasAssetInventoryStatus') fields.StatusReference = t.object
-        else fields[localName(t.predicate)] = t.object
+      if (t.predicate.startsWith(assetNS)) {
+        if (t.predicate === assetNS + 'hasProductReference') fields.ProductReference = t.object
+        else if (t.predicate === assetNS + 'hasOperationalReference') fields.OperationalSignalIRI = t.object
+        else if (t.predicate === assetNS + 'hasAssetInventoryStatus') fields.StatusReference = t.object
+        else fields[localName(t.predicate).replace(/^has/, '')] = t.object
       }
     }
     if (fields.StatusReference) {
-      for (const t of triples.value.filter(t => t.subject === fields.StatusReference && t.predicate.startsWith(KG_VOCAB))) {
+      for (const t of triples.value.filter(t => t.subject === fields.StatusReference && t.predicate.startsWith(assetNS) || t.predicate.startsWith(productNS))) {
         fields[localName(t.predicate)] = t.object
       }
     }
@@ -52,12 +54,14 @@ async function load() {
   error.value = ''
   try {
     const data = await selectTriples(`SELECT ?s ?p ?o WHERE {
-      { ?s a <${assetType}> ; ?p ?o . }
-      UNION { ?asset a <${assetType}> ; <${KG_VOCAB}hasAssetInventoryStatus> ?s . ?s ?p ?o . }
-      UNION { ?s a <${productType}> ; ?p ?o . }
+      GRAPH ?g {
+        { ?s a <${assetType}> ; ?p ?o . }
+        UNION { ?s a <${productType}> ; ?p ?o . }
+        UNION { ?s <${productNS}hasManufacturerPartNumber> ?part ; ?p ?o . }
+      }
     } LIMIT 20000`)
     triples.value = data
-    if (!assets.value.length) error.value = 'No SimulatedAsset resources found in the AAS repository. Import the asset RDF dataset.'
+    if (!assets.value.length) error.value = 'No lifted Asset resources found. Check the AssetInventory named graph and SPARQL query.'
   } catch (e) {
     triples.value = []
     error.value = e instanceof Error ? e.message : 'Unable to query GraphDB AAS.'
