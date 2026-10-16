@@ -12,17 +12,18 @@ const query = ref('')
 const manufacturer = ref('All')
 const selectedId = ref('')
 const tab = ref<'Details' | 'Knowledge Graph'>('Details')
-const productType = 'https://example.org/tep/kg/ProductType'
+const productType = 'https://example.org/productcatalog/Product'
+const productNS = 'https://example.org/productcatalog/'
 const products = computed<Product[]>(() => {
-  const uris = [...new Set(triples.value.filter(t => t.predicate === KG_TYPE && t.object === productType).map(t => t.subject))]
+  const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'hasManufacturerPartNumber').map(t => t.subject))]
   return uris.map(uri => {
     const statements = triples.value.filter(t => t.subject === uri && !t.resource)
-    const get = (key: string) => statements.find(t => localName(t.predicate) === key)?.object || ''
+    const get = (key: string) => statements.find(t => localName(t.predicate) === 'has' + key)?.object || ''
     return {
       id: localName(uri), uri,
       manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'),
       assetId: uri, category: get('ProductCategory') || 'Uncategorized',
-      properties: statements.filter(t => t.predicate.startsWith(KG_VOCAB) && !['ManufacturerName','ManufacturerPartNumber'].includes(localName(t.predicate))).map(t => ({ name: localName(t.predicate), value: t.object })),
+      properties: statements.filter(t => t.predicate.startsWith(productNS) && !['ManufacturerName','ManufacturerPartNumber'].includes(localName(t.predicate))).map(t => ({ name: localName(t.predicate).replace(/^has/, ''), value: t.object })),
     }
   })
 })
@@ -30,8 +31,8 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { ?s a <${productType}> ; ?p ?o . } LIMIT 5000`)
-    if (!products.value.length) error.value = 'No ProductType resources were found in the AAS Knowledge Graph. Import the product RDF triples first.'
+    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { ?s <${productNS}hasManufacturerPartNumber> ?part ; ?p ?o . } } LIMIT 5000`)
+    if (!products.value.length) error.value = 'No lifted product resources found in the ProductCatalog named graph.'
   } catch (e) { triples.value = []; error.value = e instanceof Error ? e.message : 'Unable to query Knowledge Graph.' }
   finally { loading.value = false }
 }
