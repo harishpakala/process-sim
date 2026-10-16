@@ -53,6 +53,18 @@
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-R-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -102,6 +114,18 @@
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-C-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -151,6 +175,18 @@
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-V-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -200,6 +236,18 @@
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-K-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -249,6 +297,18 @@
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-S-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -279,7 +339,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS1"
+              "value": "FI_101"
             },
             {
               "modelType": "Property",
@@ -304,6 +364,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -334,7 +406,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS2"
+              "value": "FI_102"
             },
             {
               "modelType": "Property",
@@ -359,6 +431,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -389,7 +473,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS3"
+              "value": "FI_103"
             },
             {
               "modelType": "Property",
@@ -414,6 +498,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -444,7 +540,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS4"
+              "value": "FI_104"
             },
             {
               "modelType": "Property",
@@ -469,6 +565,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -499,7 +607,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS5"
+              "value": "FI_105"
             },
             {
               "modelType": "Property",
@@ -524,6 +632,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -554,7 +674,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS6"
+              "value": "FI_106"
             },
             {
               "modelType": "Property",
@@ -579,6 +699,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -609,7 +741,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS7"
+              "value": "PI_101"
             },
             {
               "modelType": "Property",
@@ -634,6 +766,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -664,7 +808,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS8"
+              "value": "LI_101"
             },
             {
               "modelType": "Property",
@@ -689,6 +833,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -719,7 +875,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS9"
+              "value": "TI_101"
             },
             {
               "modelType": "Property",
@@ -744,6 +900,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -774,7 +942,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS10"
+              "value": "FI_107"
             },
             {
               "modelType": "Property",
@@ -799,6 +967,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -829,7 +1009,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS11"
+              "value": "TI_102"
             },
             {
               "modelType": "Property",
@@ -854,6 +1034,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -884,7 +1076,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS12"
+              "value": "LI_102"
             },
             {
               "modelType": "Property",
@@ -909,6 +1101,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -939,7 +1143,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS13"
+              "value": "PI_102"
             },
             {
               "modelType": "Property",
@@ -964,6 +1168,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -994,7 +1210,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS14"
+              "value": "FI_108"
             },
             {
               "modelType": "Property",
@@ -1019,6 +1235,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1049,7 +1277,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS15"
+              "value": "LI_103"
             },
             {
               "modelType": "Property",
@@ -1074,6 +1302,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1104,7 +1344,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS16"
+              "value": "PI_103"
             },
             {
               "modelType": "Property",
@@ -1129,6 +1369,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1159,7 +1411,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS17"
+              "value": "FI_109"
             },
             {
               "modelType": "Property",
@@ -1184,6 +1436,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1214,7 +1478,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS18"
+              "value": "TI_103"
             },
             {
               "modelType": "Property",
@@ -1239,6 +1503,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1269,7 +1545,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS19"
+              "value": "FI_110"
             },
             {
               "modelType": "Property",
@@ -1294,6 +1570,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1324,7 +1612,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS20"
+              "value": "JI_101"
             },
             {
               "modelType": "Property",
@@ -1349,6 +1637,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/JI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1379,7 +1679,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS21"
+              "value": "TI_104"
             },
             {
               "modelType": "Property",
@@ -1404,6 +1704,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -1434,7 +1746,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMEAS22"
+              "value": "TI_105"
             },
             {
               "modelType": "Property",
@@ -1459,6 +1771,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2534,7 +2858,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV1"
+              "value": "VC_101"
             },
             {
               "modelType": "Property",
@@ -2559,6 +2883,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2589,7 +2925,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV2"
+              "value": "VC_102"
             },
             {
               "modelType": "Property",
@@ -2614,6 +2950,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2644,7 +2992,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV3"
+              "value": "VC_103"
             },
             {
               "modelType": "Property",
@@ -2669,6 +3017,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2699,7 +3059,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV4"
+              "value": "VC_104"
             },
             {
               "modelType": "Property",
@@ -2724,6 +3084,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2754,7 +3126,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV5"
+              "value": "VC_105"
             },
             {
               "modelType": "Property",
@@ -2779,6 +3151,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2809,7 +3193,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV6"
+              "value": "VC_106"
             },
             {
               "modelType": "Property",
@@ -2834,6 +3218,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2864,7 +3260,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV7"
+              "value": "VC_107"
             },
             {
               "modelType": "Property",
@@ -2889,6 +3285,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2919,7 +3327,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV8"
+              "value": "VC_108"
             },
             {
               "modelType": "Property",
@@ -2944,6 +3352,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -2974,7 +3394,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV9"
+              "value": "VC_109"
             },
             {
               "modelType": "Property",
@@ -2999,6 +3419,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -3029,7 +3461,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV10"
+              "value": "VC_110"
             },
             {
               "modelType": "Property",
@@ -3054,6 +3486,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -3084,7 +3528,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV11"
+              "value": "VC_111"
             },
             {
               "modelType": "Property",
@@ -3109,6 +3553,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_111"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         },
@@ -3139,7 +3595,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "XMV12"
+              "value": "SC_101"
             },
             {
               "modelType": "Property",
@@ -3164,6 +3620,18 @@
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/SC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "TEP DEXPI example"
             }
           ]
         }
