@@ -31,12 +31,12 @@ async function load() {
   } catch (e) { error.value = e instanceof Error ? e.message : 'Knowledge Graph query failed.' }
   finally { loading.value = false }
 }
-watch(() => props.asset.id, () => { positions.value = {}; void load() }, { immediate: true })
 type GraphNode = { id: string; label: string; kind: string; x: number; y: number; attributes: { name: string; value: string }[] }
 type GraphEdge = { from: string; to: string; label: string }
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 const focused = ref('')
 const positions = ref<Record<string, { x: number; y: number }>>({})
+watch(() => props.asset.id, () => { positions.value = {}; void load() }, { immediate: true })
 watch(() => props.asset.id, () => { focused.value = props.asset.id })
 const graph = computed(() => {
   const assetId = props.asset.id
