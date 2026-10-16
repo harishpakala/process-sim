@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Network } from 'lucide-vue-next'
-import { selectTriples, iri, KG_VOCAB } from '../lib/sparql'
+import { selectTriples, iri, localName } from '../lib/sparql'
 
 type AssetRecord = { id: string; fields: Record<string, string> }
 const props = defineProps<{ asset: AssetRecord }>()
 const loading = ref(false)
 const error = ref('')
 const triples = ref<{ subject: string; predicate: string; object: string; resource: boolean }[]>([])
-const base = KG_VOCAB
-const statusUri = 'https://example.org/tep/status/'
+const domain = 'https://example.org/assetinventory/'
 async function load() {
   const assetId = props.asset.fields.AssetId
   triples.value = []
@@ -17,7 +16,16 @@ async function load() {
   if (!assetId || !/^https?:\/\//.test(assetId)) { error.value = 'No valid asset IRI is available.'; return }
   loading.value = true
   try {
-    const query = `SELECT ?s ?p ?o WHERE { VALUES ?asset { <${iri(assetId).slice(1,-1)}> } { BIND(?asset AS ?s) ?s ?p ?o } UNION { ?asset <${base}hasAssetInventoryStatus> ?s . ?s ?p ?o } UNION { ?asset ?link ?s . FILTER(?link IN (<${base}hasProductType>, <${base}hasOperationalSignal>)) ?s ?p ?o } } LIMIT 250`
+    const query = `SELECT ?s ?p ?o WHERE {
+      GRAPH ?g {
+        { BIND(${iri(assetId)} AS ?s) ?s ?p ?o }
+        UNION {
+          ${iri(assetId)} ?link ?s .
+          FILTER(isIRI(?s) && STRSTARTS(STR(?link), "${domain}"))
+          ?s ?p ?o .
+        }
+      }
+    } LIMIT 500`
     triples.value = await selectTriples(query)
     if (!triples.value.length) error.value = 'No RDF statements found for this asset in the KG.'
   } catch (e) { error.value = e instanceof Error ? e.message : 'Knowledge Graph query failed.' }
@@ -31,21 +39,22 @@ const focused = ref('')
 watch(() => props.asset.id, () => { focused.value = props.asset.fields.AssetId })
 const graph = computed(() => {
   const assetId = props.asset.fields.AssetId
-  const resources = new Set([assetId])
+  const resources = new Set<string>([assetId])
+  const edges: GraphEdge[] = []
   for (const t of triples.value) {
-    resources.add(t.subject)
-    if (t.resource && [base+'hasAssetInventoryStatus', base+'hasProductType', base+'hasOperationalSignal'].includes(t.predicate)) resources.add(t.object)
+    if (t.subject === assetId) resources.add(t.subject)
+    if (t.subject === assetId && t.resource && t.predicate.startsWith(domain)) {
+      resources.add(t.object)
+      edges.push({from:assetId,to:t.object,label:localName(t.predicate)})
+    }
   }
   const ids = [...resources]
-  const positions = [[170,230],[490,230],[170,455],[490,455]]
   const nodes: GraphNode[] = ids.map((id, i) => {
-    const attributes = triples.value.filter(t => t.subject === id && !t.resource).map(t => ({ name: t.predicate.split(/[/#]/).pop() || t.predicate, value: t.object }))
-    const kind = id === assetId ? 'SimulatedAsset' : id.startsWith(statusUri) ? 'AssetInventoryStatus' : id.includes('/signals/') ? 'TEP Signal' : 'ProductType'
-    const label = attributes.find(a => ['EquipmentTag','ManufacturerPartNumber','signalId'].includes(a.name))?.value || (kind === 'AssetInventoryStatus' ? 'AssetInventoryStatus' : id.split('/').pop() || id)
-    return { id, label, kind, x: positions[i % positions.length][0] + Math.floor(i/4)*130, y: positions[i % positions.length][1], attributes }
+    const attributes = triples.value.filter(t => t.subject === id && !t.resource).map(t => ({name:localName(t.predicate),value:t.object}))
+    const label = attributes.find(a => ['EquipmentTag','AssetName','label'].includes(a.name))?.value || localName(id)
+    return {id,label,kind:id===assetId?'Asset':'AAS linked resource',x:170+(i%3)*215,y:150+Math.floor(i/3)*155,attributes}
   })
-  const edges: GraphEdge[] = triples.value.filter(t => t.resource && resources.has(t.object) && [base+'hasAssetInventoryStatus',base+'hasProductType',base+'hasOperationalSignal'].includes(t.predicate)).map(t => ({ from: t.subject, to: t.object, label: t.predicate.slice(base.length) }))
-  return { nodes, edges }
+  return {nodes,edges}
 })
 const selected = computed(() => graph.value.nodes.find(n => n.id === focused.value) || graph.value.nodes[0])
 const node = (id: string) => graph.value.nodes.find(n => n.id === id)
@@ -84,6 +93,6 @@ const connections = computed(() => graph.value.edges.filter(e => e.from === sele
         <div v-for="edge in connections" :key="edge.from+edge.to" class="graph-relationship"><small>{{ edge.label }}</small><button type="button" @click="focused=edge.from === selected.id ? edge.to : edge.from">{{ node(edge.from === selected.id ? edge.to : edge.from)?.label }}</button></div>
       </aside>
     </div>
-    <p class="catalog-disclaimer">SPARQL-backed RDF view. The KG repository must contain asset, status, product and signal triples; this view does not read AAS JSON.</p>
+    <p class="catalog-disclaimer">SPARQL-backed RDF view. This view shows RDF statements and relationships produced by AAS semantic lifting; it does not read AAS JSON.</p>
   </div>
 </template>
