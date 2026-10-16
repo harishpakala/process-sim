@@ -39,7 +39,7 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
       <div class="metric"><Package :size="18"/><small>CATALOG PRODUCTS</small><strong>{{ products.length }}</strong></div>
       <div class="metric"><Database :size="18"/><small>MANUFACTURERS</small><strong>{{ manufacturers.length }}</strong></div>
       <div class="metric"><FileText :size="18"/><small>TECHNICAL PROPERTIES</small><strong>{{ products.reduce((sum, product) => sum + product.properties.length, 0) }}</strong></div>
-      <div class="metric"><Network :size="18"/><small>DATA SOURCE</small><strong>AAS JSON snapshot</strong></div>
+      
     </div>
     <div class="catalog-layout">
       <section class="panel catalog-list">
