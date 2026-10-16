@@ -1755,7 +1755,7 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Stripper steam flow"
+              "value": "Stripper stream flow"
             },
             {
               "modelType": "Property",
