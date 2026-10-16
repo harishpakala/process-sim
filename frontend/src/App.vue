@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
+import { KG_ENDPOINT } from './lib/sparql'
 import ProductCatalog from './components/ProductCatalog.vue'
 import AssetInventory from './components/AssetInventory.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
@@ -14,6 +15,24 @@ const active=ref('Overview')
 const selected=ref('R-001')
 const view=ref<'Engineering'|'Knowledge Graph'>('Engineering')
 const demoRunning=ref(false)
+const graphdbStatus=ref<'checking'|'connected'|'disconnected'>('checking')
+const graphdbError=ref('')
+async function checkGraphDB() {
+ graphdbStatus.value='checking'
+ graphdbError.value=''
+ try {
+  const url=KG_ENDPOINT+(KG_ENDPOINT.includes('?')?'&':'?')+new URLSearchParams({query:'ASK { ?s ?p ?o }'})
+  const response=await fetch(url,{headers:{Accept:'application/sparql-results+json'}})
+  if(!response.ok) throw new Error('HTTP '+response.status)
+  const result=await response.json()
+  if(typeof result.boolean!=='boolean') throw new Error('Unexpected SPARQL response')
+  graphdbStatus.value='connected'
+ } catch(e) {
+  graphdbStatus.value='disconnected'
+  graphdbError.value=e instanceof Error?e.message:String(e)
+ }
+}
+onMounted(()=>{void checkGraphDB()})
 const search=ref('')
 const assets=[{tag:'R-001',name:'Reactor',kind:'Equipment'},{tag:'C-001',name:'Condenser',kind:'Equipment'},{tag:'V-001',name:'Separator',kind:'Equipment'},{tag:'K-001',name:'Compressor',kind:'Equipment'},{tag:'S-001',name:'Stripper',kind:'Equipment'}]
 const filtered=computed(()=>assets.filter(a=>(a.tag+' '+a.name).toLowerCase().includes(search.value.toLowerCase())))
@@ -39,11 +58,11 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
   <main class="main">
    <header class="topbar"><div class="breadcrumb">TEP / <span>{{active}}</span></div><div class="top-actions"><span class="pill muted">PROTOTYPE</span><Settings2 :size="18"/></div></header>
    <div class="content">
-    <div class="page-heading"><div><div class="eyebrow">INDUSTRIAL INTELLIGENCE WORKSPACE</div><h1>{{active}}</h1><p>Engineering, simulation and semantic knowledge in one workspace.</p></div><div class="offline"><span class="status-dot amber"/> Services disconnected</div></div>
+    <div class="page-heading"><div><div class="eyebrow">INDUSTRIAL INTELLIGENCE WORKSPACE</div><h1>{{active}}</h1><p>Engineering, simulation and semantic knowledge in one workspace.</p></div><div class="offline"><span class="status-dot amber"/> GraphDB {{graphdbStatus}} · Simulation preview</div></div>
     <template v-if="active==='Overview'||active==='Plant Monitor'">
      <div class="metric-grid">
       <div class="metric"><Activity :size="18"/><small>SIMULATION</small><strong>{{demoRunning?'Preview running':'Not connected'}}</strong></div>
-      <div class="metric"><Network :size="18"/><small>KNOWLEDGE GRAPH</small><strong>GraphDB · Not connected</strong></div>
+      <div class="metric"><Network :size="18"/><small>KNOWLEDGE GRAPH</small><strong :title="graphdbError">GraphDB · {{graphdbStatus==='connected'?'Connected':graphdbStatus==='checking'?'Checking…':'Not connected'}}</strong><button class="secondary" type="button" @click="checkGraphDB">Retry</button></div>
       <div class="metric"><Factory :size="18"/><small>ENGINEERING</small><strong>DEXPI / ECAD</strong></div>
       <div class="metric"><ShieldCheck :size="18"/><small>VALIDATION</small><strong>Not checked</strong></div>
      </div>
