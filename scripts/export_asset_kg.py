@@ -57,6 +57,12 @@ def main():
             signal = BASE + "signals/" + quote(a["OperationalReference"], safe="")
             lines.append(triple(subject, "hasOperationalSignal", signal, True))
             lines.append(triple(signal, "signalId", a["OperationalReference"]))
+        status_id = "https://example.org/tep/status/" + quote(a.get("OperationalReference") or a["AssetId"].rsplit("/", 1)[-1], safe="")
+        lines.append(triple(subject, "hasAssetInventoryStatus", status_id, True))
+        lines.append(triple(status_id, "rdfType", BASE + "AssetInventoryStatus", True))
+        for status_key in ("ModelingStatus", "SimulationStatus", "MonitoringStatus", "FaultInjectionStatus", "FaultDetectionStatus"):
+            if a.get(status_key):
+                lines.append(triple(status_id, status_key, a[status_key]))
         product = a.get("ProductReference")
         if product:
             if product not in ids:
