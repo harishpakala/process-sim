@@ -1,30 +1,30 @@
 # Generated from the AAS JSON examples; not evidence of a deployed GraphDB.
 
-<https://example.org/product-types/SMC_PFMV505_1> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/SMC_PFMV505_1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/SMC_PFMV505_1> <https://example.org/tep/kg/vocab/ManufacturerName> "SMC" .
 <https://example.org/product-types/SMC_PFMV505_1> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "PFMV505-1" .
-<https://example.org/product-types/SMC_PSH_L2_01_W> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/SMC_PSH_L2_01_W> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/SMC_PSH_L2_01_W> <https://example.org/tep/kg/vocab/ManufacturerName> "SMC" .
 <https://example.org/product-types/SMC_PSH_L2_01_W> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "PSH-L2-01-W" .
-<https://example.org/product-types/IFM_LW2720> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/IFM_LW2720> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/IFM_LW2720> <https://example.org/tep/kg/vocab/ManufacturerName> "IFM" .
 <https://example.org/product-types/IFM_LW2720> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "LW2720" .
-<https://example.org/product-types/Schneider_A9MEM3555> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/Schneider_A9MEM3555> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/Schneider_A9MEM3555> <https://example.org/tep/kg/vocab/ManufacturerName> "Schneider" .
 <https://example.org/product-types/Schneider_A9MEM3555> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "A9MEM3555" .
-<https://example.org/product-types/Siemens_S55264_V193> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/Siemens_S55264_V193> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/Siemens_S55264_V193> <https://example.org/tep/kg/vocab/ManufacturerName> "Siemens" .
 <https://example.org/product-types/Siemens_S55264_V193> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "S55264-V193" .
-<https://example.org/product-types/Rittal_3244100> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/Rittal_3244100> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/Rittal_3244100> <https://example.org/tep/kg/vocab/ManufacturerName> "Rittal" .
 <https://example.org/product-types/Rittal_3244100> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "3244100" .
-<https://example.org/product-types/SMC_PSE550> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/SMC_PSE550> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/SMC_PSE550> <https://example.org/tep/kg/vocab/ManufacturerName> "SMC" .
 <https://example.org/product-types/SMC_PSE550> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "PSE550" .
-<https://example.org/product-types/PXC_2938581> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/ProductType> .
+<https://example.org/product-types/PXC_2938581> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/ProductType> .
 <https://example.org/product-types/PXC_2938581> <https://example.org/tep/kg/vocab/ManufacturerName> "Phoenix Contact" .
 <https://example.org/product-types/PXC_2938581> <https://example.org/tep/kg/vocab/ManufacturerPartNumber> "2938581" .
-<https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_Reactor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/AssetName> "Reactor" .
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/EquipmentTag> "R-001" .
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/AssetType> "SimulatedEquipment" .
@@ -33,7 +33,7 @@
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/MonitoringStatus> "NotConfigured" .
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/FaultInjectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_Reactor> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
-<https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_Condenser> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/AssetName> "Condenser" .
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/EquipmentTag> "C-001" .
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/AssetType> "SimulatedEquipment" .
@@ -42,7 +42,7 @@
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/MonitoringStatus> "NotConfigured" .
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/FaultInjectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_Condenser> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
-<https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_Separator> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/AssetName> "Product separator" .
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/EquipmentTag> "V-001" .
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/AssetType> "SimulatedEquipment" .
@@ -51,7 +51,7 @@
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/MonitoringStatus> "NotConfigured" .
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/FaultInjectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_Separator> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
-<https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_Compressor> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/AssetName> "Recycle compressor" .
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/EquipmentTag> "K-001" .
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/AssetType> "SimulatedEquipment" .
@@ -60,7 +60,7 @@
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/MonitoringStatus> "NotConfigured" .
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/FaultInjectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_Compressor> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
-<https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_Stripper> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/AssetName> "Stripper" .
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/EquipmentTag> "S-001" .
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/AssetType> "SimulatedEquipment" .
@@ -69,7 +69,7 @@
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/MonitoringStatus> "NotConfigured" .
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/FaultInjectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_Stripper> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
-<https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/AssetName> "Feed A flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1001" .
 <https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -82,7 +82,7 @@
 <https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS1> .
 <https://example.org/tep/kg/signals/XMEAS1> <https://example.org/tep/kg/vocab/signalId> "XMEAS1" .
 <https://example.org/tep/assets/TEP_XMEAS1> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/AssetName> "Feed D flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1002" .
 <https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -95,7 +95,7 @@
 <https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS2> .
 <https://example.org/tep/kg/signals/XMEAS2> <https://example.org/tep/kg/vocab/signalId> "XMEAS2" .
 <https://example.org/tep/assets/TEP_XMEAS2> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/AssetName> "Feed E flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1003" .
 <https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -108,7 +108,7 @@
 <https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS3> .
 <https://example.org/tep/kg/signals/XMEAS3> <https://example.org/tep/kg/vocab/signalId> "XMEAS3" .
 <https://example.org/tep/assets/TEP_XMEAS3> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/AssetName> "Feed A and C flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1004" .
 <https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -121,7 +121,7 @@
 <https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS4> .
 <https://example.org/tep/kg/signals/XMEAS4> <https://example.org/tep/kg/vocab/signalId> "XMEAS4" .
 <https://example.org/tep/assets/TEP_XMEAS4> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/AssetName> "Recycle flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1006" .
 <https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -134,7 +134,7 @@
 <https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS5> .
 <https://example.org/tep/kg/signals/XMEAS5> <https://example.org/tep/kg/vocab/signalId> "XMEAS5" .
 <https://example.org/tep/assets/TEP_XMEAS5> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/AssetName> "Reactor feed flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1101" .
 <https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -147,7 +147,7 @@
 <https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS6> .
 <https://example.org/tep/kg/signals/XMEAS6> <https://example.org/tep/kg/vocab/signalId> "XMEAS6" .
 <https://example.org/tep/assets/TEP_XMEAS6> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/AssetName> "Reactor pressure" .
 <https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/EquipmentTag> "PI-1101" .
 <https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -160,7 +160,7 @@
 <https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS7> .
 <https://example.org/tep/kg/signals/XMEAS7> <https://example.org/tep/kg/vocab/signalId> "XMEAS7" .
 <https://example.org/tep/assets/TEP_XMEAS7> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSE550> .
-<https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/AssetName> "Reactor level" .
 <https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/EquipmentTag> "LI-1101" .
 <https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -173,7 +173,7 @@
 <https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS8> .
 <https://example.org/tep/kg/signals/XMEAS8> <https://example.org/tep/kg/vocab/signalId> "XMEAS8" .
 <https://example.org/tep/assets/TEP_XMEAS8> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/IFM_LW2720> .
-<https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/AssetName> "Reactor temperature" .
 <https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/EquipmentTag> "TI-1101" .
 <https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -186,7 +186,7 @@
 <https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS9> .
 <https://example.org/tep/kg/signals/XMEAS9> <https://example.org/tep/kg/vocab/signalId> "XMEAS9" .
 <https://example.org/tep/assets/TEP_XMEAS9> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSH_L2_01_W> .
-<https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/AssetName> "Purge flow rate" .
 <https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1005" .
 <https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -199,7 +199,7 @@
 <https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS10> .
 <https://example.org/tep/kg/signals/XMEAS10> <https://example.org/tep/kg/vocab/signalId> "XMEAS10" .
 <https://example.org/tep/assets/TEP_XMEAS10> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/AssetName> "Separator temperature" .
 <https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/EquipmentTag> "TI-1301" .
 <https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -212,7 +212,7 @@
 <https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS11> .
 <https://example.org/tep/kg/signals/XMEAS11> <https://example.org/tep/kg/vocab/signalId> "XMEAS11" .
 <https://example.org/tep/assets/TEP_XMEAS11> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSH_L2_01_W> .
-<https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/AssetName> "Separator liquid level" .
 <https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/EquipmentTag> "LI-1301" .
 <https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -225,7 +225,7 @@
 <https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS12> .
 <https://example.org/tep/kg/signals/XMEAS12> <https://example.org/tep/kg/vocab/signalId> "XMEAS12" .
 <https://example.org/tep/assets/TEP_XMEAS12> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/IFM_LW2720> .
-<https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS13> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/AssetName> "Separator pressure" .
 <https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/EquipmentTag> "PI-1301" .
 <https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -238,7 +238,7 @@
 <https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS13> .
 <https://example.org/tep/kg/signals/XMEAS13> <https://example.org/tep/kg/vocab/signalId> "XMEAS13" .
 <https://example.org/tep/assets/TEP_XMEAS13> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSE550> .
-<https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS14> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/AssetName> "Separator underflow rate" .
 <https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1301" .
 <https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -251,7 +251,7 @@
 <https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS14> .
 <https://example.org/tep/kg/signals/XMEAS14> <https://example.org/tep/kg/vocab/signalId> "XMEAS14" .
 <https://example.org/tep/assets/TEP_XMEAS14> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS15> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/AssetName> "Stripper level" .
 <https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/EquipmentTag> "LI-1501" .
 <https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -264,7 +264,7 @@
 <https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS15> .
 <https://example.org/tep/kg/signals/XMEAS15> <https://example.org/tep/kg/vocab/signalId> "XMEAS15" .
 <https://example.org/tep/assets/TEP_XMEAS15> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/IFM_LW2720> .
-<https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS16> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/AssetName> "Stripper pressure" .
 <https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/EquipmentTag> "PI-1501" .
 <https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -277,7 +277,7 @@
 <https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS16> .
 <https://example.org/tep/kg/signals/XMEAS16> <https://example.org/tep/kg/vocab/signalId> "XMEAS16" .
 <https://example.org/tep/assets/TEP_XMEAS16> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSE550> .
-<https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS17> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/AssetName> "Stripper underflow" .
 <https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1501" .
 <https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -290,7 +290,7 @@
 <https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS17> .
 <https://example.org/tep/kg/signals/XMEAS17> <https://example.org/tep/kg/vocab/signalId> "XMEAS17" .
 <https://example.org/tep/assets/TEP_XMEAS17> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS18> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/AssetName> "Stripper temperature" .
 <https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/EquipmentTag> "TI-1501" .
 <https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -303,7 +303,7 @@
 <https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS18> .
 <https://example.org/tep/kg/signals/XMEAS18> <https://example.org/tep/kg/vocab/signalId> "XMEAS18" .
 <https://example.org/tep/assets/TEP_XMEAS18> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSH_L2_01_W> .
-<https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS19> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/AssetName> "Stripper stream flow" .
 <https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/EquipmentTag> "FI-1502" .
 <https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -316,7 +316,7 @@
 <https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS19> .
 <https://example.org/tep/kg/signals/XMEAS19> <https://example.org/tep/kg/vocab/signalId> "XMEAS19" .
 <https://example.org/tep/assets/TEP_XMEAS19> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PFMV505_1> .
-<https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS20> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/AssetName> "Compressor work" .
 <https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/EquipmentTag> "JI-1401" .
 <https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -329,7 +329,7 @@
 <https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS20> .
 <https://example.org/tep/kg/signals/XMEAS20> <https://example.org/tep/kg/vocab/signalId> "XMEAS20" .
 <https://example.org/tep/assets/TEP_XMEAS20> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Schneider_A9MEM3555> .
-<https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS21> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/AssetName> "Reactor cooling-water outlet temperature" .
 <https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/EquipmentTag> "TI-1103" .
 <https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -342,7 +342,7 @@
 <https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS21> .
 <https://example.org/tep/kg/signals/XMEAS21> <https://example.org/tep/kg/vocab/signalId> "XMEAS21" .
 <https://example.org/tep/assets/TEP_XMEAS21> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSH_L2_01_W> .
-<https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS22> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/AssetName> "Separator cooling-water outlet temperature" .
 <https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/EquipmentTag> "TI-1202" .
 <https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -355,7 +355,7 @@
 <https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS22> .
 <https://example.org/tep/kg/signals/XMEAS22> <https://example.org/tep/kg/vocab/signalId> "XMEAS22" .
 <https://example.org/tep/assets/TEP_XMEAS22> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/SMC_PSH_L2_01_W> .
-<https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS23> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/AssetName> "Component A in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS23" .
 <https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -366,7 +366,7 @@
 <https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS23> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS23> .
 <https://example.org/tep/kg/signals/XMEAS23> <https://example.org/tep/kg/vocab/signalId> "XMEAS23" .
-<https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS24> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/AssetName> "Component B in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS24" .
 <https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -377,7 +377,7 @@
 <https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS24> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS24> .
 <https://example.org/tep/kg/signals/XMEAS24> <https://example.org/tep/kg/vocab/signalId> "XMEAS24" .
-<https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS25> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/AssetName> "Component C in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS25" .
 <https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -388,7 +388,7 @@
 <https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS25> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS25> .
 <https://example.org/tep/kg/signals/XMEAS25> <https://example.org/tep/kg/vocab/signalId> "XMEAS25" .
-<https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS26> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/AssetName> "Component D in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS26" .
 <https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -399,7 +399,7 @@
 <https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS26> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS26> .
 <https://example.org/tep/kg/signals/XMEAS26> <https://example.org/tep/kg/vocab/signalId> "XMEAS26" .
-<https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS27> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/AssetName> "Component E in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS27" .
 <https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -410,7 +410,7 @@
 <https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS27> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS27> .
 <https://example.org/tep/kg/signals/XMEAS27> <https://example.org/tep/kg/vocab/signalId> "XMEAS27" .
-<https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS28> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/AssetName> "Component F in reactor feed" .
 <https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS28" .
 <https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -421,7 +421,7 @@
 <https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS28> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS28> .
 <https://example.org/tep/kg/signals/XMEAS28> <https://example.org/tep/kg/vocab/signalId> "XMEAS28" .
-<https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS29> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/AssetName> "Component A in purge" .
 <https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS29" .
 <https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -432,7 +432,7 @@
 <https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS29> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS29> .
 <https://example.org/tep/kg/signals/XMEAS29> <https://example.org/tep/kg/vocab/signalId> "XMEAS29" .
-<https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS30> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/AssetName> "Component B in purge" .
 <https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS30" .
 <https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -443,7 +443,7 @@
 <https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS30> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS30> .
 <https://example.org/tep/kg/signals/XMEAS30> <https://example.org/tep/kg/vocab/signalId> "XMEAS30" .
-<https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS31> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/AssetName> "Component C in purge" .
 <https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS31" .
 <https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -454,7 +454,7 @@
 <https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS31> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS31> .
 <https://example.org/tep/kg/signals/XMEAS31> <https://example.org/tep/kg/vocab/signalId> "XMEAS31" .
-<https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS32> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/AssetName> "Component D in purge" .
 <https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS32" .
 <https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -465,7 +465,7 @@
 <https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS32> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS32> .
 <https://example.org/tep/kg/signals/XMEAS32> <https://example.org/tep/kg/vocab/signalId> "XMEAS32" .
-<https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS33> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/AssetName> "Component E in purge" .
 <https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS33" .
 <https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -476,7 +476,7 @@
 <https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS33> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS33> .
 <https://example.org/tep/kg/signals/XMEAS33> <https://example.org/tep/kg/vocab/signalId> "XMEAS33" .
-<https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS34> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/AssetName> "Component F in purge" .
 <https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS34" .
 <https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -487,7 +487,7 @@
 <https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS34> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS34> .
 <https://example.org/tep/kg/signals/XMEAS34> <https://example.org/tep/kg/vocab/signalId> "XMEAS34" .
-<https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS35> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/AssetName> "Component G in purge" .
 <https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS35" .
 <https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -498,7 +498,7 @@
 <https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS35> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS35> .
 <https://example.org/tep/kg/signals/XMEAS35> <https://example.org/tep/kg/vocab/signalId> "XMEAS35" .
-<https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS36> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/AssetName> "Component H in purge" .
 <https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS36" .
 <https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -509,7 +509,7 @@
 <https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS36> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS36> .
 <https://example.org/tep/kg/signals/XMEAS36> <https://example.org/tep/kg/vocab/signalId> "XMEAS36" .
-<https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS37> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/AssetName> "Component D in product" .
 <https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS37" .
 <https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -520,7 +520,7 @@
 <https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS37> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS37> .
 <https://example.org/tep/kg/signals/XMEAS37> <https://example.org/tep/kg/vocab/signalId> "XMEAS37" .
-<https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS38> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/AssetName> "Component E in product" .
 <https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS38" .
 <https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -531,7 +531,7 @@
 <https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS38> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS38> .
 <https://example.org/tep/kg/signals/XMEAS38> <https://example.org/tep/kg/vocab/signalId> "XMEAS38" .
-<https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS39> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/AssetName> "Component F in product" .
 <https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS39" .
 <https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -542,7 +542,7 @@
 <https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS39> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS39> .
 <https://example.org/tep/kg/signals/XMEAS39> <https://example.org/tep/kg/vocab/signalId> "XMEAS39" .
-<https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS40> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/AssetName> "Component G in product" .
 <https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS40" .
 <https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -553,7 +553,7 @@
 <https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS40> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS40> .
 <https://example.org/tep/kg/signals/XMEAS40> <https://example.org/tep/kg/vocab/signalId> "XMEAS40" .
-<https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMEAS41> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/AssetName> "Component H in product" .
 <https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/EquipmentTag> "XMEAS41" .
 <https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/AssetType> "LogicalMeasurement" .
@@ -564,7 +564,7 @@
 <https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_XMEAS41> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMEAS41> .
 <https://example.org/tep/kg/signals/XMEAS41> <https://example.org/tep/kg/vocab/signalId> "XMEAS41" .
-<https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV1> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/AssetName> "Feed D Control Valve" .
 <https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1002" .
 <https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -577,7 +577,7 @@
 <https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV1> .
 <https://example.org/tep/kg/signals/XMV1> <https://example.org/tep/kg/vocab/signalId> "XMV1" .
 <https://example.org/tep/assets/TEP_XMV1> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV2> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/AssetName> "Feed E Control Valve" .
 <https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1003" .
 <https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -590,7 +590,7 @@
 <https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV2> .
 <https://example.org/tep/kg/signals/XMV2> <https://example.org/tep/kg/vocab/signalId> "XMV2" .
 <https://example.org/tep/assets/TEP_XMV2> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV3> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/AssetName> "Feed A Control Valve" .
 <https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1001" .
 <https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -603,7 +603,7 @@
 <https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV3> .
 <https://example.org/tep/kg/signals/XMV3> <https://example.org/tep/kg/vocab/signalId> "XMV3" .
 <https://example.org/tep/assets/TEP_XMV3> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV4> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/AssetName> "Feed A and C Control Valve" .
 <https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1004" .
 <https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -616,7 +616,7 @@
 <https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV4> .
 <https://example.org/tep/kg/signals/XMV4> <https://example.org/tep/kg/vocab/signalId> "XMV4" .
 <https://example.org/tep/assets/TEP_XMV4> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV5> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/AssetName> "Recycle Flow Control Valve" .
 <https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1006" .
 <https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -629,7 +629,7 @@
 <https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV5> .
 <https://example.org/tep/kg/signals/XMV5> <https://example.org/tep/kg/vocab/signalId> "XMV5" .
 <https://example.org/tep/assets/TEP_XMV5> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV6> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/AssetName> "Purge Flow Control Valve" .
 <https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1005" .
 <https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -642,7 +642,7 @@
 <https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV6> .
 <https://example.org/tep/kg/signals/XMV6> <https://example.org/tep/kg/vocab/signalId> "XMV6" .
 <https://example.org/tep/assets/TEP_XMV6> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV7> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/AssetName> "Stripper Inlet Control Valve" .
 <https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1301" .
 <https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -655,7 +655,7 @@
 <https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV7> .
 <https://example.org/tep/kg/signals/XMV7> <https://example.org/tep/kg/vocab/signalId> "XMV7" .
 <https://example.org/tep/assets/TEP_XMV7> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV8> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/AssetName> "Product Outlet Control Valve" .
 <https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1501" .
 <https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -668,7 +668,7 @@
 <https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV8> .
 <https://example.org/tep/kg/signals/XMV8> <https://example.org/tep/kg/vocab/signalId> "XMV8" .
 <https://example.org/tep/assets/TEP_XMV8> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV9> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/AssetName> "Stripper Stream Feed Control Valve" .
 <https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1502" .
 <https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -681,7 +681,7 @@
 <https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV9> .
 <https://example.org/tep/kg/signals/XMV9> <https://example.org/tep/kg/vocab/signalId> "XMV9" .
 <https://example.org/tep/assets/TEP_XMV9> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV10> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/AssetName> "Reactor Cooling Water Return (CWR) Control Valve" .
 <https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1101" .
 <https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -694,7 +694,7 @@
 <https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV10> .
 <https://example.org/tep/kg/signals/XMV10> <https://example.org/tep/kg/vocab/signalId> "XMV10" .
 <https://example.org/tep/assets/TEP_XMV10> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV11> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/AssetName> "Condenser Outlet Control Valve" .
 <https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1201" .
 <https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/AssetType> "LogicalManipulatedVariable" .
@@ -707,7 +707,7 @@
 <https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV11> .
 <https://example.org/tep/kg/signals/XMV11> <https://example.org/tep/kg/vocab/signalId> "XMV11" .
 <https://example.org/tep/assets/TEP_XMV11> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Siemens_S55264_V193> .
-<https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_XMV12> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/AssetName> "Reactor Stirrer Motor" .
 <https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/EquipmentTag> "M1" .
 <https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/AssetType> "LogicalMotorControl" .
@@ -720,7 +720,7 @@
 <https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/hasOperationalSignal> <https://example.org/tep/kg/signals/XMV12> .
 <https://example.org/tep/kg/signals/XMV12> <https://example.org/tep/kg/vocab/signalId> "XMV12" .
 <https://example.org/tep/assets/TEP_XMV12> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Rittal_3244100> .
-<https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_M_1301> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/AssetName> "Stripper Pump Motor" .
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/EquipmentTag> "M-1301" .
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/AssetType> "IllustrativeMotor" .
@@ -731,7 +731,7 @@
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/PLCMapping> "Q10.13" .
 <https://example.org/tep/assets/TEP_M_1301> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Rittal_3244100> .
-<https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_M_1401> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/AssetName> "Compressor Pump Motor" .
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/EquipmentTag> "M-1401" .
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/AssetType> "IllustrativeMotor" .
@@ -742,7 +742,7 @@
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/PLCMapping> "Q10.14" .
 <https://example.org/tep/assets/TEP_M_1401> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Rittal_3244100> .
-<https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_M_1501> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/AssetName> "Product Pump Motor" .
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/EquipmentTag> "M-1501" .
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/AssetType> "IllustrativeMotor" .
@@ -753,7 +753,7 @@
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/FaultDetectionStatus> "NotEvaluated" .
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/PLCMapping> "Q10.15" .
 <https://example.org/tep/assets/TEP_M_1501> <https://example.org/tep/kg/vocab/hasProductType> <https://example.org/product-types/Rittal_3244100> .
-<https://example.org/tep/assets/TEP_CV_1401> <https://example.org/tep/kg/vocab/rdfType> <https://example.org/tep/kg/SimulatedAsset> .
+<https://example.org/tep/assets/TEP_CV_1401> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.org/tep/kg/SimulatedAsset> .
 <https://example.org/tep/assets/TEP_CV_1401> <https://example.org/tep/kg/vocab/AssetName> "Compressor Control Valve" .
 <https://example.org/tep/assets/TEP_CV_1401> <https://example.org/tep/kg/vocab/EquipmentTag> "CV-1401" .
 <https://example.org/tep/assets/TEP_CV_1401> <https://example.org/tep/kg/vocab/AssetType> "IllustrativeControlValve" .
