@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Network } from 'lucide-vue-next'
-import { selectTriples, iri, KG_VOCAB, localName, type Triple } from '../lib/sparql'
+import { selectTriples, iri, localName, type Triple } from '../lib/sparql'
 
 const props = defineProps<{ product: { uri: string; partNumber: string } }>()
 const triples = ref<Triple[]>([])
@@ -14,23 +14,38 @@ async function load() {
   triples.value = []
   try {
     const product = iri(props.product.uri)
-    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { { BIND(${product} AS ?s) ?s ?p ?o } UNION { ?s <${KG_VOCAB}hasProductType> ${product} . ?s ?p ?o } } LIMIT 500`)
+    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE {
+      GRAPH ?g {
+        { VALUES ?s { ${product} } ?s ?p ?o }
+        UNION {
+          ${product} <https://example.org/productcatalog/hasTechnicalProperties> ?s .
+          ?s ?p ?o .
+        }
+      }
+    } LIMIT 500`)
     if (!triples.value.length) error.value = 'No triples found for this product in GraphDB AAS.'
     focused.value = props.product.uri
   } catch (e) { error.value = e instanceof Error ? e.message : 'Unable to query GraphDB.' }
   finally { loading.value = false }
 }
 watch(() => props.product.uri, load, { immediate: true })
+const technicalPredicate = 'https://example.org/productcatalog/hasTechnicalProperties'
+const technicalUris = computed(() => new Set(triples.value.filter(t =>
+  t.subject === props.product.uri && t.predicate === technicalPredicate && t.resource
+).map(t => t.object)))
 const nodes = computed(() => {
-  const ids = [...new Set([props.product.uri, ...triples.value.map(t => t.subject)])]
+  const ids = [props.product.uri, ...technicalUris.value]
   return ids.map((id, i) => ({
-    id, label: id === props.product.uri ? props.product.partNumber : triples.value.find(t => t.subject === id && localName(t.predicate) === 'EquipmentTag')?.object || localName(id),
-    kind: id === props.product.uri ? 'ProductType' : 'SimulatedAsset',
-    x: 155 + (i % 3) * 215, y: 160 + Math.floor(i / 3) * 160,
-    attributes: triples.value.filter(t => t.subject === id && !t.resource).map(t => ({ name: localName(t.predicate), value: t.object })),
+    id,
+    label: id === props.product.uri ? props.product.partNumber : triples.value.find(t => t.subject === id && localName(t.predicate) === 'label')?.object || 'TechnicalProperties',
+    kind: id === props.product.uri ? 'Product (SMC)' : 'TechnicalProperties (SMC)',
+    x: 210 + i * 350, y: 280,
+    attributes: triples.value.filter(t => t.subject === id && !t.resource).map(t => ({ name: localName(t.predicate).replace(/^has/, ''), value: t.object })),
   }))
 })
-const edges = computed(() => triples.value.filter(t => t.predicate === KG_VOCAB + 'hasProductType' && t.object === props.product.uri).map(t => ({ from: t.subject, to: t.object, label: 'hasProductType' })))
+const edges = computed(() => triples.value.filter(t =>
+  t.subject === props.product.uri && t.predicate === technicalPredicate && t.resource
+).map(t => ({from:t.subject,to:t.object,label:localName(t.predicate)})))
 const selected = computed(() => nodes.value.find(n => n.id === focused.value) || nodes.value[0])
 const node = (id: string) => nodes.value.find(n => n.id === id)
 const connections = computed(() => edges.value.filter(e => e.from === selected.value?.id || e.to === selected.value?.id))
@@ -39,7 +54,7 @@ const connections = computed(() => edges.value.filter(e => e.from === selected.v
 <template>
   <div class="product-knowledge">
     <div class="graph-toolbar"><span class="pill amber-pill">GraphDB AAS · SPARQL</span></div>
-    <p class="graph-explanation">Product resources, RDF properties and asset relationships are queried from the Knowledge Graph, not AAS JSON.</p>
+    <p class="graph-explanation">Product and TechnicalProperties collections are separate RDF nodes. Select either node to inspect its semantically lifted properties.</p>
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }} <button class="secondary" type="button" @click="load">Retry</button></p>
     <div v-if="!loading && !error" class="graph-workspace">
