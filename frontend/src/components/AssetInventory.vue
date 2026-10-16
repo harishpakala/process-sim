@@ -2,12 +2,14 @@
 import { computed, ref } from 'vue'
 import { Factory, Search, Network, Database } from 'lucide-vue-next'
 import inventory from '../data/asset_inventory.json'
-type Field = { idShort: string; value?: string }
+import catalog from '../data/product_catalog.json'
+type Field = { idShort: string; value?: string; modelType?: string }
 type Asset = { idShort: string; value: Field[] }
 const assets = (inventory.submodelElements[0].value as Asset[]).map(asset => ({
   id: asset.idShort,
   fields: Object.fromEntries(asset.value.map(field => [field.idShort, field.value ?? ''])) as Record<string,string>
 }))
+const products = Object.fromEntries((catalog.submodelElements[0].value as Asset[]).map(product => { const fields = Object.fromEntries(product.value.filter(field => field.modelType === 'Property').map(field => [field.idShort, field.value ?? ''])) as Record<string,string>; return [fields.AssetIdentifier, fields] })) as Record<string,Record<string,string>>
 const query = ref('')
 const selectedId = ref(assets[0]?.id ?? '')
 const filtered = computed(() => {
@@ -16,7 +18,7 @@ const filtered = computed(() => {
 })
 const selected = computed(() => filtered.value.find(asset => asset.id === selectedId.value) ?? filtered.value[0])
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
-const statusKeys = ['ModelingStatus', 'LifecycleStatus', 'InstallationStatus', 'OperationalStatus', 'MaintenanceStatus']
+const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const statusLabel = (value: string) => readable(value || 'Unknown')
 </script>
 <template>
@@ -43,13 +45,20 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
     <div class="catalog-properties">
      <div v-for="key in statusKeys" :key="key" class="catalog-property"><span>{{ readable(key) }}</span><span>{{ statusLabel(selected.fields[key]) }}</span></div>
     </div>
+    <h2 class="catalog-section-title">Product catalog</h2>
+    <div class="catalog-properties" v-if="selected.fields.ProductReference && products[selected.fields.ProductReference]">
+     <div class="catalog-property"><span>Manufacturer</span><span>{{ products[selected.fields.ProductReference].ManufacturerName }}</span></div>
+     <div class="catalog-property"><span>Part number</span><span>{{ products[selected.fields.ProductReference].ManufacturerPartNumber }}</span></div>
+     <div class="catalog-property"><span>Product ID</span><span class="catalog-wrap">{{ selected.fields.ProductReference }}</span></div>
+    </div>
+    <p v-else class="catalog-disclaimer">No matching product type is defined for this simulated asset.</p>
     <h2 class="catalog-section-title">Engineering & identification</h2>
     <div class="catalog-properties">
      <div v-for="(value,key) in Object.fromEntries(Object.entries(selected.fields).filter(([key]) => !statusKeys.includes(key)))" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
     </div>
-    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Engineering tags and descriptions use the project engineering tables where available; DEXPI-to-ECAD identity reconciliation is pending. Statuses are reference-data placeholders, not live plant readings.</p>
+    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Engineering tags and descriptions use the project engineering tables where available; DEXPI-to-ECAD identity reconciliation is pending. Simulation, monitoring and fault statuses are placeholders until connected to runtime services.</p>
    </section>
   </div>
-  <p class="catalog-disclaimer">Offline AssetInventory prototype · engineering-defined positions and logical TEP signals · installation, maintenance and live operating status are not verified.</p>
+  <p class="catalog-disclaimer">Offline AssetInventory prototype · engineering-defined positions and logical TEP signals · simulation and monitoring states are not connected to live runtime services.</p>
  </section>
 </template>
