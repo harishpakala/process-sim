@@ -15,18 +15,18 @@ const tab = ref<'Details' | 'Knowledge Graph'>('Details')
 const productType = 'https://example.org/productcatalog/Product'
 const productNS = 'https://example.org/productcatalog/'
 const products = computed<Product[]>(() => {
-  const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'ManufacturerPartNumber').map(t => t.subject))]
+  const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'hasManufacturerPartNumber').map(t => t.subject))]
   return uris.map(uri => {
     const own = triples.value.filter(t => t.subject === uri)
-    const get = (key: string) => own.find(t => t.predicate === productNS + key)?.object || ''
-    const technicalUris = own.filter(t => t.predicate === productNS + 'TechnicalProperties' && t.resource).map(t => t.object)
+    const get = (key: string) => own.find(t => t.predicate === productNS + 'has' + key)?.object || ''
+    const technicalUris = own.filter(t => t.predicate === productNS + 'hasTechnicalProperties' && t.resource).map(t => t.object)
     const technical = triples.value.filter(t => technicalUris.includes(t.subject) && t.predicate.startsWith(productNS) && !t.resource)
-    const technicalGet = (key: string) => technical.find(t => t.predicate === productNS + key)?.object || ''
+    const technicalGet = (key: string) => technical.find(t => t.predicate === productNS + 'has' + key)?.object || ''
     return {
       id: localName(uri), uri,
       manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'),
       assetId: get('AssetIdentifier'), category: technicalGet('ProductCategory') || 'Uncategorized',
-      properties: technical.filter(t => t.predicate !== productNS + 'ProductCategory').map(t => ({name:localName(t.predicate),value:t.object})),
+      properties: technical.filter(t => t.predicate !== productNS + 'hasProductCategory').map(t => ({name:localName(t.predicate).replace(/^has/, ''),value:t.object})),
     }
   })
 })
@@ -34,7 +34,7 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { { ?s <${productNS}ManufacturerPartNumber> ?part ; ?p ?o . } UNION { ?product <${productNS}ManufacturerPartNumber> ?part ; <${productNS}TechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
+    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { { ?s <${productNS}hasManufacturerPartNumber> ?part ; ?p ?o . } UNION { ?product <${productNS}hasManufacturerPartNumber> ?part ; <${productNS}hasTechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
     if (!products.value.length) error.value = 'No lifted product resources found in the ProductCatalog named graph.'
   } catch (e) { triples.value = []; error.value = e instanceof Error ? e.message : 'Unable to query Knowledge Graph.' }
   finally { loading.value = false }
