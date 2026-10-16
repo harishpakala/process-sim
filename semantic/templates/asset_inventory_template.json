@@ -45,11 +45,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "LifecycleStatus",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string"
             },
@@ -70,17 +65,22 @@
             },
             {
               "modelType": "Property",
-              "idShort": "InstallationStatus",
+              "idShort": "SimulationStatus",
               "valueType": "xs:string"
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalStatus",
+              "idShort": "MonitoringStatus",
               "valueType": "xs:string"
             },
             {
               "modelType": "Property",
-              "idShort": "MaintenanceStatus",
+              "idShort": "FaultInjectionStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FaultDetectionStatus",
               "valueType": "xs:string"
             }
           ]
