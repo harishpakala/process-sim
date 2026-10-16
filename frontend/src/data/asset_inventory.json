@@ -333,13 +333,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "A feed flow"
+              "value": "Feed A flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_101"
+              "value": "FI-1001"
             },
             {
               "modelType": "Property",
@@ -367,15 +367,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_101"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -400,13 +412,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "D feed flow"
+              "value": "Feed D flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_102"
+              "value": "FI-1002"
             },
             {
               "modelType": "Property",
@@ -434,15 +446,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_102"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -467,13 +491,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "E feed flow"
+              "value": "Feed E flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_103"
+              "value": "FI-1003"
             },
             {
               "modelType": "Property",
@@ -501,15 +525,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_103"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -534,13 +570,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "A and C feed flow"
+              "value": "Feed A and C flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_104"
+              "value": "FI-1004"
             },
             {
               "modelType": "Property",
@@ -568,15 +604,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_104"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -601,13 +649,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Recycle flow"
+              "value": "Recycle flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_105"
+              "value": "FI-1006"
             },
             {
               "modelType": "Property",
@@ -635,15 +683,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_105"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -668,13 +728,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Reactor feed rate"
+              "value": "Reactor feed flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_106"
+              "value": "FI-1101"
             },
             {
               "modelType": "Property",
@@ -702,15 +762,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_106"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -741,7 +813,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "PI_101"
+              "value": "PI-1101"
             },
             {
               "modelType": "Property",
@@ -769,15 +841,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_101"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSE550"
             }
           ]
         },
@@ -808,7 +892,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "LI_101"
+              "value": "LI-1101"
             },
             {
               "modelType": "Property",
@@ -836,15 +920,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_101"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.0"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "LW2720"
             }
           ]
         },
@@ -875,7 +971,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI_101"
+              "value": "TI-1101"
             },
             {
               "modelType": "Property",
@@ -903,15 +999,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_101"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
             }
           ]
         },
@@ -936,13 +1044,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Purge rate"
+              "value": "Purge flow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_107"
+              "value": "FI-1005"
             },
             {
               "modelType": "Property",
@@ -970,15 +1078,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_107"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -1003,13 +1123,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Product separator temperature"
+              "value": "Separator temperature"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI_102"
+              "value": "TI-1301"
             },
             {
               "modelType": "Property",
@@ -1037,15 +1157,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_102"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
             }
           ]
         },
@@ -1070,13 +1202,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Product separator level"
+              "value": "Separator liquid level"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "LI_102"
+              "value": "LI-1301"
             },
             {
               "modelType": "Property",
@@ -1104,15 +1236,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_102"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "LW2720"
             }
           ]
         },
@@ -1137,13 +1281,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Product separator pressure"
+              "value": "Separator pressure"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "PI_102"
+              "value": "PI-1301"
             },
             {
               "modelType": "Property",
@@ -1171,15 +1315,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_102"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSE550"
             }
           ]
         },
@@ -1204,13 +1360,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Product separator underflow"
+              "value": "Separator underflow rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_108"
+              "value": "FI-1301"
             },
             {
               "modelType": "Property",
@@ -1238,15 +1394,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_108"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -1277,7 +1445,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "LI_103"
+              "value": "LI-1501"
             },
             {
               "modelType": "Property",
@@ -1305,15 +1473,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_103"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "LW2720"
             }
           ]
         },
@@ -1344,7 +1524,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "PI_103"
+              "value": "PI-1501"
             },
             {
               "modelType": "Property",
@@ -1372,15 +1552,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_103"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSE550"
             }
           ]
         },
@@ -1411,7 +1603,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_109"
+              "value": "FI-1501"
             },
             {
               "modelType": "Property",
@@ -1439,15 +1631,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_109"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -1478,7 +1682,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI_103"
+              "value": "TI-1501"
             },
             {
               "modelType": "Property",
@@ -1506,15 +1710,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_103"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
             }
           ]
         },
@@ -1545,7 +1761,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FI_110"
+              "value": "FI-1502"
             },
             {
               "modelType": "Property",
@@ -1573,15 +1789,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_110"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PFMV505-1"
             }
           ]
         },
@@ -1612,7 +1840,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "JI_101"
+              "value": "JI-1401"
             },
             {
               "modelType": "Property",
@@ -1640,15 +1868,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/JI_101"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Schneider"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "A9MEM3555"
             }
           ]
         },
@@ -1679,7 +1919,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI_104"
+              "value": "TI-1103"
             },
             {
               "modelType": "Property",
@@ -1707,15 +1947,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_104"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
             }
           ]
         },
@@ -1746,7 +1998,7 @@
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI_105"
+              "value": "TI-1202"
             },
             {
               "modelType": "Property",
@@ -1774,15 +2026,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_105"
+              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "I10.15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "SMC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PSH-L2-01-W"
             }
           ]
         },
@@ -2852,13 +3116,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "D feed valve"
+              "value": "Feed D Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_101"
+              "value": "CV-1002"
             },
             {
               "modelType": "Property",
@@ -2886,15 +3150,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_101"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -2919,13 +3195,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "E feed valve"
+              "value": "Feed E Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_102"
+              "value": "CV-1003"
             },
             {
               "modelType": "Property",
@@ -2953,15 +3229,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_102"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -2986,13 +3274,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "A feed valve"
+              "value": "Feed A Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_103"
+              "value": "CV-1001"
             },
             {
               "modelType": "Property",
@@ -3020,15 +3308,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_103"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.0"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3053,13 +3353,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "A and C feed valve"
+              "value": "Feed A and C Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_104"
+              "value": "CV-1004"
             },
             {
               "modelType": "Property",
@@ -3087,15 +3387,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_104"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3120,13 +3432,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Compressor recycle valve"
+              "value": "Recycle Flow Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_105"
+              "value": "CV-1006"
             },
             {
               "modelType": "Property",
@@ -3154,15 +3466,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_105"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3187,13 +3511,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Purge valve"
+              "value": "Purge Flow Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_106"
+              "value": "CV-1005"
             },
             {
               "modelType": "Property",
@@ -3221,15 +3545,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_106"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3254,13 +3590,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Separator pot liquid flow valve"
+              "value": "Stripper Inlet Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_107"
+              "value": "CV-1301"
             },
             {
               "modelType": "Property",
@@ -3288,15 +3624,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_107"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3321,13 +3669,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Stripper liquid product flow valve"
+              "value": "Product Outlet Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_108"
+              "value": "CV-1501"
             },
             {
               "modelType": "Property",
@@ -3355,15 +3703,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_108"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3388,13 +3748,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Stripper steam valve"
+              "value": "Stripper Stream Feed Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_109"
+              "value": "CV-1502"
             },
             {
               "modelType": "Property",
@@ -3422,15 +3782,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_109"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3455,13 +3827,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Reactor cooling-water flow valve"
+              "value": "Reactor Cooling Water Return (CWR) Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_110"
+              "value": "CV-1101"
             },
             {
               "modelType": "Property",
@@ -3489,15 +3861,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_110"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3522,13 +3906,13 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Condenser cooling-water flow valve"
+              "value": "Condenser Outlet Control Valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "VC_111"
+              "value": "CV-1201"
             },
             {
               "modelType": "Property",
@@ -3556,15 +3940,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_111"
+              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "PLCMapping",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "Q10.7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
             }
           ]
         },
@@ -3589,19 +3985,19 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Agitator speed"
+              "value": "Reactor Stirrer Motor"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "SC_101"
+              "value": "M1"
             },
             {
               "modelType": "Property",
               "idShort": "AssetType",
               "valueType": "xs:string",
-              "value": "LogicalManipulatedVariable"
+              "value": "LogicalMotorControl"
             },
             {
               "modelType": "Property",
@@ -3623,15 +4019,319 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/SC_101"
+              "value": "docs/ActuatingFunctions.csv"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "value": "Q10.12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Rittal"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "3244100"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_M_1301",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_M_1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper Pump Motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "M-1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "IllustrativeMotor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Engineering example"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "value": "Q10.13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Rittal"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "3244100"
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringSource",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "docs/ActuatingFunctions.csv"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_M_1401",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_M_1401"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Compressor Pump Motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "M-1401"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "IllustrativeMotor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Engineering example"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "value": "Q10.14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Rittal"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "docs/ActuatingFunctions.csv"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_M_1501",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_M_1501"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product Pump Motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "M-1501"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "IllustrativeMotor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Engineering example"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "value": "Q10.15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Rittal"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "docs/ActuatingFunctions.csv"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_CV_1401",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_CV_1401"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Compressor Control Valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "CV-1401"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "IllustrativeControlValve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Engineering example"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "value": "Q10.9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "value": "Siemens"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringSource",
+              "valueType": "xs:string",
+              "value": "docs/ActuatingFunctions.csv"
             }
           ]
         }
