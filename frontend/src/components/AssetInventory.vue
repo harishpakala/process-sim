@@ -10,8 +10,11 @@ const assets = (inventory.submodelElements[0].value as Asset[]).map(asset => ({
 }))
 const query = ref('')
 const selectedId = ref(assets[0]?.id ?? '')
-const filtered = computed(() => assets.filter(asset => Object.values(asset.fields).join(' ').toLowerCase().includes(query.value.toLowerCase())))
-const selected = computed(() => assets.find(asset => asset.id === selectedId.value))
+const filtered = computed(() => {
+ const term = query.value.trim().toLocaleLowerCase()
+ return assets.filter(asset => [asset.id, ...Object.values(asset.fields)].join(' ').toLocaleLowerCase().includes(term))
+})
+const selected = computed(() => filtered.value.find(asset => asset.id === selectedId.value) ?? filtered.value[0])
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 </script>
 <template>
@@ -24,7 +27,7 @@ const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
   <div class="catalog-layout">
    <section class="panel catalog-list">
     <div class="panel-title"><div><h2>Asset explorer</h2><p>TEP asset-instance reference inventory</p></div><span class="pill">{{ filtered.length }} / {{ assets.length }}</span></div>
-    <label class="search"><Search :size="16"/><input v-model="query" aria-label="Search assets" placeholder="Search tags, signals, assets..."/></label>
+    <label class="search"><Search :size="16"/><input v-model="query" aria-label="Search assets" placeholder="Search tags, signals, assets..."/></label><button v-if="query" class="secondary" type="button" @click="query=''">Clear search</button>
     <div class="catalog-results">
      <button v-for="asset in filtered" :key="asset.id" class="asset-row catalog-item" :class="{highlight:selectedId===asset.id}" @click="selectedId=asset.id">
       <span class="asset-icon"><Factory :size="17"/></span><span><strong>{{ asset.fields.EquipmentTag }}</strong><small>{{ asset.fields.AssetName }}</small><small>{{ asset.fields.AssetType }}</small></span>
@@ -37,9 +40,9 @@ const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
     <div class="catalog-properties">
      <div v-for="(value,key) in selected.fields" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
     </div>
-    <p class="catalog-disclaimer">Engineering and operational references are identifiers only; cross-domain identity resolution and live OPC UA verification are pending.</p>
+    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Missing engineering references are deliberately not invented.</p>
    </section>
   </div>
-  <p class="catalog-disclaimer">Offline AssetInventory prototype · synthetic TEP asset identities · not a verified physical plant inventory or live GraphDB view.</p>
+  <p class="catalog-disclaimer">Offline AssetInventory prototype · five modeled process units and 53 logical simulation signals · not a verified physical plant inventory or live GraphDB view.</p>
  </section>
 </template>
