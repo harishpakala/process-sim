@@ -44,7 +44,7 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
    <section class="panel catalog-detail" v-if="selected">
     <div class="panel-title"><div><h2>{{ selected.fields.AssetName }}</h2><p>{{ selected.fields.EquipmentTag }} · {{ selected.fields.AssetType }}</p></div><span class="pill">AAS ASSET</span></div>
     <div class="tabs"><button :class="{selected:detailTab==='Status'}" @click="detailTab='Status'">Asset status</button><button :class="{selected:detailTab==='Knowledge Graph'}" @click="detailTab='Knowledge Graph'">Knowledge graph</button></div>
-    <AssetStatusKnowledgeGraph v-if="detailTab==='Knowledge Graph'" :asset="selected" :product="products[selected.fields.ProductReference]" />
+    <AssetStatusKnowledgeGraph v-if="detailTab==='Knowledge Graph'" :asset="selected" />
     <template v-else>
     <h2 class="catalog-section-title">Asset status</h2>
     <div class="catalog-properties">
