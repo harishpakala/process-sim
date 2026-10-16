@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { Factory, Search, Network, Database } from 'lucide-vue-next'
+import { Factory, Search, Network, Package } from 'lucide-vue-next'
 import inventory from '../data/asset_inventory.json'
 import catalog from '../data/product_catalog.json'
 type Field = { idShort: string; value?: string; modelType?: string }
@@ -26,7 +26,7 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
   <div class="metric-grid">
    <div class="metric"><Factory :size="18"/><small>ASSET INSTANCES</small><strong>{{ assets.length }}</strong></div>
    <div class="metric"><Network :size="18"/><small>OPERATIONAL SIGNALS</small><strong>{{ assets.filter(a => a.fields.OperationalReference).length }}</strong></div>
-   <div class="metric"><Database :size="18"/><small>DATA SOURCE</small><strong>AAS JSON snapshot</strong></div>
+   <div class="metric"><Package :size="18"/><small>PRODUCT TYPES</small><strong>{{ new Set(assets.map(a => a.fields.ProductReference).filter(ref => ref && products[ref])).size }}</strong></div>
   </div>
   <div class="catalog-layout">
    <section class="panel catalog-list">
