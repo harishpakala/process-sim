@@ -28,7 +28,7 @@ def literal(value):
 
 
 def triple(subject, predicate, obj, resource=False):
-    return f"{iri(subject)} {iri(PRED + predicate)} {iri(obj) if resource else literal(obj)} ."
+    return f"{iri(subject)} {iri(("http://www.w3.org/1999/02/22-rdf-syntax-ns#type" if predicate == "rdfType" else PRED + predicate))} {iri(obj) if resource else literal(obj)} ."
 
 
 def main():
