@@ -1,0 +1,251 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-asset-inventory",
+  "idShort": "AssetInventory",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Assets",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_Reactor",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_Reactor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "TEP reactor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "R-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP reactor section"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/equipment/R-001"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_ReactorTemperatureSensor",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_ReactorTemperatureSensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor temperature measurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "TI-REACTOR"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "Sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "Reactor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/instruments/XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS9"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_CoolingWaterActuator",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_CoolingWaterActuator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor cooling-water manipulated variable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "FC-COOLING"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "Actuator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "Reactor cooling circuit"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/instruments/XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV10"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_CoolingOutletTemperatureSensor",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_CoolingOutletTemperatureSensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Cooling-water outlet temperature measurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "TI-COOLING"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "Sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "Reactor cooling circuit"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/instruments/XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS21"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
