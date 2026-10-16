@@ -10,7 +10,7 @@ const error = ref('')
 const triples = ref<{ subject: string; predicate: string; object: string; resource: boolean }[]>([])
 const domain = 'https://example.org/assetinventory/'
 async function load() {
-  const assetId = props.asset.fields.AssetId
+  const assetId = props.asset.id
   triples.value = []
   error.value = ''
   if (!assetId || !/^https?:\/\//.test(assetId)) { error.value = 'No valid asset IRI is available.'; return }
@@ -18,7 +18,7 @@ async function load() {
   try {
     const query = `SELECT ?s ?p ?o WHERE {
       GRAPH ?g {
-        { BIND(${iri(assetId)} AS ?s) ?s ?p ?o }
+        { VALUES ?s { ${iri(assetId)} } ?s ?p ?o }
         UNION {
           ${iri(assetId)} ?link ?s .
           FILTER(isIRI(?s) && STRSTARTS(STR(?link), "${domain}"))
@@ -31,14 +31,14 @@ async function load() {
   } catch (e) { error.value = e instanceof Error ? e.message : 'Knowledge Graph query failed.' }
   finally { loading.value = false }
 }
-watch(() => props.asset.fields.AssetId, load, { immediate: true })
+watch(() => props.asset.id, load, { immediate: true })
 type GraphNode = { id: string; label: string; kind: string; x: number; y: number; attributes: { name: string; value: string }[] }
 type GraphEdge = { from: string; to: string; label: string }
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 const focused = ref('')
-watch(() => props.asset.id, () => { focused.value = props.asset.fields.AssetId })
+watch(() => props.asset.id, () => { focused.value = props.asset.id })
 const graph = computed(() => {
-  const assetId = props.asset.fields.AssetId
+  const assetId = props.asset.id
   const resources = new Set<string>([assetId])
   const edges: GraphEdge[] = []
   for (const t of triples.value) {
