@@ -27,11 +27,11 @@ const assets = computed<AssetRecord[]>(() => {
         if (t.predicate === assetNS + 'hasProductReference') fields.ProductReference = t.object
         else if (t.predicate === assetNS + 'hasOperationalReference') fields.OperationalSignalIRI = t.object
         else if (t.predicate === assetNS + 'hasAssetInventoryStatus') fields.StatusReference = t.object
-        else fields[localName(t.predicate).replace(/^has/, '')] = t.object
+        else { const key = localName(t.predicate).replace(/^has/, ''); if (key !== 'AssetId') fields[key] = t.object }
       }
     }
     if (fields.StatusReference) {
-      for (const t of triples.value.filter(t => t.subject === fields.StatusReference && t.predicate.startsWith(assetNS) || t.predicate.startsWith(productNS))) {
+      for (const t of triples.value.filter(t => t.subject === fields.StatusReference && (t.predicate.startsWith(assetNS) || t.predicate.startsWith(productNS)))) {
         fields[localName(t.predicate)] = t.object
       }
     }
