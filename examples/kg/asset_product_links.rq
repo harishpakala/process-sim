@@ -1,0 +1,13 @@
+PREFIX tep: <https://example.org/tep/kg/vocab/>
+
+# Every linked simulated asset, its product type and optional signal.
+SELECT ?asset ?product ?signal WHERE {
+  ?asset tep:hasProductType ?product .
+  OPTIONAL { ?asset tep:hasOperationalSignal ?signal . }
+}
+ORDER BY ?asset
+
+# Count assets linked to each catalog product.
+# SELECT ?product (COUNT(?asset) AS ?assetCount) WHERE {
+#   ?asset tep:hasProductType ?product .
+# } GROUP BY ?product ORDER BY DESC(?assetCount)
