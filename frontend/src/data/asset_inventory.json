@@ -28,7 +28,7 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "TEP reactor"
+              "value": "Reactor"
             },
             {
               "modelType": "Property",
@@ -40,31 +40,25 @@
               "modelType": "Property",
               "idShort": "AssetType",
               "valueType": "xs:string",
-              "value": "Equipment"
+              "value": "SimulatedEquipment"
             },
             {
               "modelType": "Property",
               "idShort": "Location",
               "valueType": "xs:string",
-              "value": "TEP reactor section"
+              "value": "TEP process"
             },
             {
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
               "value": "Simulation reference"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/equipment/R-001"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "TEP_ReactorTemperatureSensor",
+          "idShort": "TEP_Condenser",
           "qualifiers": [
             {
               "type": "ontoConcept",
@@ -77,31 +71,227 @@
               "modelType": "Property",
               "idShort": "AssetId",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_ReactorTemperatureSensor"
+              "value": "https://example.org/tep/assets/TEP_Condenser"
             },
             {
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Reactor temperature measurement"
+              "value": "Condenser"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI-REACTOR"
+              "value": "C-001"
             },
             {
               "modelType": "Property",
               "idShort": "AssetType",
               "valueType": "xs:string",
-              "value": "Sensor"
+              "value": "SimulatedEquipment"
             },
             {
               "modelType": "Property",
               "idShort": "Location",
               "valueType": "xs:string",
-              "value": "Reactor"
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_Separator",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_Separator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product separator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "V-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "SimulatedEquipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_Compressor",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_Compressor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Recycle compressor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "K-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "SimulatedEquipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_Stripper",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_Stripper"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "S-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "SimulatedEquipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP process"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS1",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "A feed flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
             },
             {
               "modelType": "Property",
@@ -111,9 +301,443 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "OperationalReference",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/instruments/XMEAS9"
+              "value": "XMEAS1"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS2",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "D feed flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS2"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS3",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "E feed flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS3"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS4",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "A and C feed flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS4"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS5",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Recycle flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS5"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS6",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor feed rate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS6"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS7",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor pressure"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS7"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS8",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor level"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS8"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS9",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor temperature"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
             },
             {
               "modelType": "Property",
@@ -125,7 +749,7 @@
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "TEP_CoolingWaterActuator",
+          "idShort": "TEP_XMEAS10",
           "qualifiers": [
             {
               "type": "ontoConcept",
@@ -138,31 +762,31 @@
               "modelType": "Property",
               "idShort": "AssetId",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_CoolingWaterActuator"
+              "value": "https://example.org/tep/assets/TEP_XMEAS10"
             },
             {
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Reactor cooling-water manipulated variable"
+              "value": "Purge rate"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "FC-COOLING"
+              "value": "XMEAS10"
             },
             {
               "modelType": "Property",
               "idShort": "AssetType",
               "valueType": "xs:string",
-              "value": "Actuator"
+              "value": "LogicalMeasurement"
             },
             {
               "modelType": "Property",
               "idShort": "Location",
               "valueType": "xs:string",
-              "value": "Reactor cooling circuit"
+              "value": "TEP simulation"
             },
             {
               "modelType": "Property",
@@ -172,9 +796,2258 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "OperationalReference",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/instruments/XMV10"
+              "value": "XMEAS10"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS11",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product separator temperature"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS11"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS12",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product separator level"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS12"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS13",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product separator pressure"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS13"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS14",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Product separator underflow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS14"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS15",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper level"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS15"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS16",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper pressure"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS16"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS17",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper underflow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS17"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS18",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper temperature"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS18"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS19",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper steam flow"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS19"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS20",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Compressor work"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS20"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS21",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor cooling-water outlet temperature"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS21"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS22",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Separator cooling-water outlet temperature"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS22"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS23",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS23"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component A in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS23"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS23"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS24",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS24"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component B in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS24"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS24"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS25",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS25"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component C in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS25"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS25"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS26",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS26"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component D in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS26"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS26"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS27",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS27"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component E in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS27"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS27"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS28",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS28"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component F in reactor feed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS28"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS28"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS29",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS29"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component A in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS29"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS29"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS30",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS30"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component B in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS30"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS30"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS31",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS31"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component C in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS31"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS31"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS32",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS32"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component D in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS32"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS32"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS33",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS33"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component E in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS33"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS33"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS34",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS34"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component F in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS34"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS34"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS35",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS35"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component G in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS35"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS35"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS36",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS36"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component H in purge"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS36"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS36"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS37",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS37"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component D in product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS37"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS37"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS38",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS38"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component E in product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS38"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS38"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS39",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS39"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component F in product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS39"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS39"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS40",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS40"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component G in product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS40"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS40"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMEAS41",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMEAS41"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Component H in product"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMEAS41"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalMeasurement"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP simulation"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMEAS41"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV1",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "D feed valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV1"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV2",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "E feed valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV2"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV3",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "A feed valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV3"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV4",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "A and C feed valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV4"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV5",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Compressor recycle valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV5"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV6",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Purge valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV6"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV7",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Separator pot liquid flow valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV7"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV8",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper liquid product flow valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV8"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV9",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper steam valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string",
+              "value": "XMV9"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV10",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Reactor cooling-water flow valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
             },
             {
               "modelType": "Property",
@@ -186,7 +3059,7 @@
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "TEP_CoolingOutletTemperatureSensor",
+          "idShort": "TEP_XMV11",
           "qualifiers": [
             {
               "type": "ontoConcept",
@@ -199,31 +3072,31 @@
               "modelType": "Property",
               "idShort": "AssetId",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_CoolingOutletTemperatureSensor"
+              "value": "https://example.org/tep/assets/TEP_XMV11"
             },
             {
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Cooling-water outlet temperature measurement"
+              "value": "Condenser cooling-water flow valve"
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
               "valueType": "xs:string",
-              "value": "TI-COOLING"
+              "value": "XMV11"
             },
             {
               "modelType": "Property",
               "idShort": "AssetType",
               "valueType": "xs:string",
-              "value": "Sensor"
+              "value": "LogicalManipulatedVariable"
             },
             {
               "modelType": "Property",
               "idShort": "Location",
               "valueType": "xs:string",
-              "value": "Reactor cooling circuit"
+              "value": "TEP control model"
             },
             {
               "modelType": "Property",
@@ -233,15 +3106,64 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "OperationalReference",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/instruments/XMEAS21"
+              "value": "XMV11"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_XMV12",
+          "qualifiers": [
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Asset"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Agitator speed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string",
+              "value": "XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "LogicalManipulatedVariable"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string",
+              "value": "TEP control model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LifecycleStatus",
+              "valueType": "xs:string",
+              "value": "Simulation reference"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
-              "value": "XMEAS21"
+              "value": "XMV12"
             }
           ]
         }
