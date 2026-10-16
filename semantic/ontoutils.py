@@ -53,6 +53,7 @@ semanticDict["ECAD"] = Namespace(
 )
 
 semanticDict["PRODUCTCATALOG"] = Namespace("https://example.org/productcatalog/")
+semanticDict["ASSETINVENTORY"] = Namespace("https://example.org/assetinventory/")
 
 semanticDict["DEXPI"] = Namespace(
     "https://example.org/dexpi/"
