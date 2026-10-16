@@ -87,3 +87,9 @@
 .graph-pan-svg .graph-rdf-node{cursor:move}
 .graph-navigation-hint{font-size:11px;color:#91a9bd;margin:0 0 10px}
 @media(max-width:700px){.graph-workspace .graph-canvas.graph-rdf-scroll{height:440px}}
+
+/* Fixed-height AssetInventory explorer; only records scroll, not the whole pane. */
+.asset-inventory .catalog-list{position:static;display:flex;flex-direction:column;height:560px;min-height:0}
+.asset-inventory .catalog-results{flex:1;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
+.asset-inventory .catalog-detail{max-height:560px;overflow-y:auto}
+@media(max-width:1050px){.asset-inventory .catalog-list{height:420px}.asset-inventory .catalog-detail{max-height:520px}}
