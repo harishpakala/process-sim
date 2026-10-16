@@ -18,7 +18,7 @@ const selected = computed(() => filtered.value.find(asset => asset.id === select
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 </script>
 <template>
- <section class="catalog">
+ <section class="catalog asset-inventory">
   <div class="metric-grid">
    <div class="metric"><Factory :size="18"/><small>ASSET INSTANCES</small><strong>{{ assets.length }}</strong></div>
    <div class="metric"><Network :size="18"/><small>OPERATIONAL SIGNALS</small><strong>{{ assets.filter(a => a.fields.OperationalReference).length }}</strong></div>
@@ -40,7 +40,7 @@ const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
     <div class="catalog-properties">
      <div v-for="(value,key) in selected.fields" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
     </div>
-    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Missing engineering references are deliberately not invented.</p>
+    <p class="catalog-disclaimer">Engineering reference: identifier of the matching DEXPI/ECAD engineering element, if verified. Operational reference: TEP signal ID. Existing DEXPI example tags are reused where matched; unmapped signals retain XMEAS/XMV identifiers. DEXPI-to-ECAD reconciliation is pending.</p>
    </section>
   </div>
   <p class="catalog-disclaimer">Offline AssetInventory prototype · five modeled process units and 53 logical simulation signals · not a verified physical plant inventory or live GraphDB view.</p>
