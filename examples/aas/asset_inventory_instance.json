@@ -52,7 +52,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -62,9 +62,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -113,7 +131,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -123,9 +141,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -174,7 +210,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -184,9 +220,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -235,7 +289,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -245,9 +299,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -296,7 +368,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -306,9 +378,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "TEP DEXPI example"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -357,19 +447,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -388,6 +472,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -436,19 +544,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -467,6 +569,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -515,19 +641,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -546,6 +666,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -594,19 +738,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -625,6 +763,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -673,19 +835,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -704,6 +860,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -752,19 +932,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -783,6 +957,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -831,19 +1029,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -862,6 +1054,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSE550"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -910,19 +1126,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -941,6 +1151,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "LW2720"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -989,19 +1223,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1020,6 +1248,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1068,19 +1320,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1099,6 +1345,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1147,19 +1417,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1178,6 +1442,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1226,19 +1514,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1257,6 +1539,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "LW2720"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1305,19 +1611,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS13"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1336,6 +1636,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSE550"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1384,19 +1708,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS14"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1415,6 +1733,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1463,19 +1805,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS15"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1494,6 +1830,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "LW2720"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1542,19 +1902,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS16"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1573,6 +1927,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSE550"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1621,19 +1999,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS17"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1652,6 +2024,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1700,19 +2096,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS18"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1731,6 +2121,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1779,19 +2193,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS19"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1810,6 +2218,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PFMV505-1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1858,19 +2290,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS20"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1889,6 +2315,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "A9MEM3555"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -1937,19 +2387,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS21"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -1968,6 +2412,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2016,19 +2484,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS22"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/InstrumentationFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -2047,6 +2509,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSH-L2-01-W"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2095,13 +2581,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS23"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2150,13 +2660,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS24"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2205,13 +2739,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS25"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2260,13 +2818,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS26"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2315,13 +2897,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS27"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2370,13 +2976,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS28"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2425,13 +3055,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS29"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2480,13 +3134,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS30"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2535,13 +3213,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS31"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2590,13 +3292,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS32"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2645,13 +3371,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS33"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2700,13 +3450,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS34"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2755,13 +3529,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS35"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2810,13 +3608,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS36"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2865,13 +3687,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS37"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2920,13 +3766,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS38"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -2975,13 +3845,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS39"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3030,13 +3924,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS40"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3085,13 +4003,37 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMEAS41"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "SimulationOnly"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3140,19 +4082,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3171,6 +4107,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3219,19 +4179,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3250,6 +4204,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3298,19 +4276,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3329,6 +4301,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3377,19 +4373,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3408,6 +4398,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3456,19 +4470,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3487,6 +4495,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3535,19 +4567,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3566,6 +4592,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3614,19 +4664,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3645,6 +4689,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3693,19 +4761,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3724,6 +4786,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3772,19 +4858,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3803,6 +4883,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3851,19 +4955,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3882,6 +4980,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -3930,19 +5052,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -3961,6 +5077,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "S55264-V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -4009,19 +5149,13 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Simulation reference"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
               "valueType": "xs:string",
               "value": "XMV12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringSource",
-              "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
             },
             {
               "modelType": "Property",
@@ -4040,6 +5174,30 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string",
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "NotConnected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -4088,7 +5246,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Engineering example"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -4110,9 +5268,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -4161,7 +5337,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Engineering example"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -4183,9 +5359,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -4234,7 +5428,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Engineering example"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -4256,9 +5450,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         },
@@ -4307,7 +5519,7 @@
               "modelType": "Property",
               "idShort": "LifecycleStatus",
               "valueType": "xs:string",
-              "value": "Engineering example"
+              "value": "NotVerified"
             },
             {
               "modelType": "Property",
@@ -4329,9 +5541,27 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringSource",
+              "idShort": "ModelingStatus",
               "valueType": "xs:string",
-              "value": "docs/ActuatingFunctions.csv"
+              "value": "EngineeringDefined"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationStatus",
+              "valueType": "xs:string",
+              "value": "NotVerified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalStatus",
+              "valueType": "xs:string",
+              "value": "Unknown"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MaintenanceStatus",
+              "valueType": "xs:string",
+              "value": "NotAvailable"
             }
           ]
         }
