@@ -1,16 +1,15 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
 import { Network } from 'lucide-vue-next'
+import { selectTriples, iri, KG_VOCAB } from '../lib/sparql'
 
 type AssetRecord = { id: string; fields: Record<string, string> }
 const props = defineProps<{ asset: AssetRecord }>()
 const loading = ref(false)
 const error = ref('')
 const triples = ref<{ subject: string; predicate: string; object: string; resource: boolean }[]>([])
-const endpoint = import.meta.env.VITE_KG_SPARQL_ENDPOINT || '/kg/repositories/tep'
-const base = 'https://example.org/tep/kg/vocab/'
+const base = KG_VOCAB
 const statusUri = 'https://example.org/tep/status/'
-const escapeIri = (s: string) => s.replace(/[<>"{}|^`\\]/g, '')
 async function load() {
   const assetId = props.asset.fields.AssetId
   triples.value = []
@@ -18,11 +17,8 @@ async function load() {
   if (!assetId || !/^https?:\/\//.test(assetId)) { error.value = 'No valid asset IRI is available.'; return }
   loading.value = true
   try {
-    const query = `SELECT ?s ?p ?o WHERE { VALUES ?asset { <${escapeIri(assetId)}> } { BIND(?asset AS ?s) ?s ?p ?o } UNION { ?asset <${base}hasAssetInventoryStatus> ?s . ?s ?p ?o } UNION { ?asset ?link ?s . FILTER(?link IN (<${base}hasProductType>, <${base}hasOperationalSignal>)) ?s ?p ?o } } LIMIT 250`
-    const response = await fetch(endpoint + (endpoint.includes('?') ? '&' : '?') + new URLSearchParams({ query }), { headers: { Accept: 'application/sparql-results+json' } })
-    if (!response.ok) throw new Error(`SPARQL endpoint returned HTTP ${response.status}`)
-    const json = await response.json()
-    triples.value = (json.results?.bindings || []).map((row: any) => ({ subject: row.s.value, predicate: row.p.value, object: row.o.value, resource: row.o.type === 'uri' }))
+    const query = `SELECT ?s ?p ?o WHERE { VALUES ?asset { <${iri(assetId).slice(1,-1)}> } { BIND(?asset AS ?s) ?s ?p ?o } UNION { ?asset <${base}hasAssetInventoryStatus> ?s . ?s ?p ?o } UNION { ?asset ?link ?s . FILTER(?link IN (<${base}hasProductType>, <${base}hasOperationalSignal>)) ?s ?p ?o } } LIMIT 250`
+    triples.value = await selectTriples(query)
     if (!triples.value.length) error.value = 'No RDF statements found for this asset in the KG.'
   } catch (e) { error.value = e instanceof Error ? e.message : 'Knowledge Graph query failed.' }
   finally { loading.value = false }
