@@ -1,9 +1,17 @@
-import { defineConfig } from "vite";
-import vue from "@vitejs/plugin-vue";
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
 
-// Development-only proxy: browser requests /kg/repositories/tep -> GraphDB.
-// Override VITE_KG_SPARQL_ENDPOINT in the frontend environment for deployments.
+// Local dev: /kg/repositories/AAS -> http://pakala:7200/repositories/AAS.
+// For production, configure the same reverse proxy route on the web server.
 export default defineConfig({
   plugins: [vue()],
-  server: { proxy: { "/kg": { target: process.env.GRAPHDB_URL || "http://localhost:7200", changeOrigin: true, rewrite: path => path.replace(/^\/kg/, "") } } }
-});
+  server: {
+    proxy: {
+      '/kg': {
+        target: process.env.GRAPHDB_URL || 'http://pakala:7200',
+        changeOrigin: true,
+        rewrite: path => path.replace(/^\/kg/, ''),
+      },
+    },
+  },
+})
