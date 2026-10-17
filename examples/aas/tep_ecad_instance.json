@@ -27,6 +27,12 @@
               "value": "https://aas.example.com/DC-PSU-1"
             },
             {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "DC-PSU-1"
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "ConnectionPoints",
               "value": [
@@ -45,6 +51,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "+"
                     }
                   ],
                   "qualifiers": [
@@ -79,6 +91,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "-"
                     }
                   ],
                   "qualifiers": [
@@ -145,6 +163,12 @@
               "value": "https://aas.example.com/K1"
             },
             {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "K1"
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "ConnectionPoints",
               "value": [
@@ -163,6 +187,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1L+"
                     }
                   ],
                   "qualifiers": [
@@ -197,6 +227,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1L-"
                     }
                   ],
                   "qualifiers": [
@@ -1831,6 +1867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -1865,6 +1907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -1899,6 +1947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2013,6 +2067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2047,6 +2107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2081,6 +2147,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2195,6 +2267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2229,6 +2307,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2263,6 +2347,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2377,6 +2467,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2411,6 +2507,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2445,6 +2547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2559,6 +2667,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2593,6 +2707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2627,6 +2747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2741,6 +2867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2775,6 +2907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2809,6 +2947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -2923,6 +3067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -2957,6 +3107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -2991,6 +3147,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -3105,6 +3267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L+"
                     }
                   ],
                   "qualifiers": [
@@ -3139,6 +3307,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L-"
                     }
                   ],
                   "qualifiers": [
@@ -3173,6 +3347,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -3287,6 +3467,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -3321,6 +3507,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -3355,6 +3547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -3469,6 +3667,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -3503,6 +3707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -3537,6 +3747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -3651,6 +3867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -3685,6 +3907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -3719,6 +3947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -3833,6 +4067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L+"
                     }
                   ],
                   "qualifiers": [
@@ -3867,6 +4107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L-"
                     }
                   ],
                   "qualifiers": [
@@ -3901,6 +4147,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -4015,6 +4267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -4049,6 +4307,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -4083,6 +4347,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -4197,6 +4467,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -4231,6 +4507,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -4265,6 +4547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -4379,6 +4667,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L+"
                     }
                   ],
                   "qualifiers": [
@@ -4413,6 +4707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "L-"
                     }
                   ],
                   "qualifiers": [
@@ -4447,6 +4747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -4561,6 +4867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -4595,6 +4907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -4629,6 +4947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -4743,6 +5067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -4777,6 +5107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -4811,6 +5147,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -4925,6 +5267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -4959,6 +5307,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -4993,6 +5347,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -5107,6 +5467,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -5141,6 +5507,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -5175,6 +5547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BK/OUT"
                     }
                   ],
                   "qualifiers": [
@@ -5289,6 +5667,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "D1/+"
                     }
                   ],
                   "qualifiers": [
@@ -5323,6 +5707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "DO/-"
                     }
                   ],
                   "qualifiers": [
@@ -5357,6 +5747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "DO"
                     }
                   ],
                   "qualifiers": [
@@ -5471,6 +5867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -5505,6 +5907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -5539,6 +5947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -5653,6 +6067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BN/DC (+)"
                     }
                   ],
                   "qualifiers": [
@@ -5687,6 +6107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyReturn"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "BU/DC (-)"
                     }
                   ],
                   "qualifiers": [
@@ -5721,6 +6147,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "Out1"
                     }
                   ],
                   "qualifiers": [
@@ -5835,6 +6267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -5869,6 +6307,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -5983,6 +6427,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6017,6 +6467,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6131,6 +6587,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6165,6 +6627,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6279,6 +6747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6313,6 +6787,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6427,6 +6907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6461,6 +6947,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6575,6 +7067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6609,6 +7107,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6723,6 +7227,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6757,6 +7267,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -6871,6 +7387,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -6905,6 +7427,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -7019,6 +7547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -7053,6 +7587,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -7167,6 +7707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -7201,6 +7747,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -7315,6 +7867,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -7349,6 +7907,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -7463,6 +8027,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x1"
                     }
                   ],
                   "qualifiers": [
@@ -7497,6 +8067,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "x2"
                     }
                   ],
                   "qualifiers": [
@@ -7611,6 +8187,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1"
                     }
                   ],
                   "qualifiers": [
@@ -7645,6 +8227,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "2"
                     }
                   ],
                   "qualifiers": [
@@ -7759,6 +8347,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1"
                     }
                   ],
                   "qualifiers": [
@@ -7793,6 +8387,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "2"
                     }
                   ],
                   "qualifiers": [
@@ -7907,6 +8507,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1"
                     }
                   ],
                   "qualifiers": [
@@ -7941,6 +8547,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "2"
                     }
                   ],
                   "qualifiers": [
@@ -8055,6 +8667,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "SupplyPositive"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "1"
                     }
                   ],
                   "qualifiers": [
@@ -8089,6 +8707,12 @@
                       "idShort": "Role",
                       "valueType": "xs:string",
                       "value": "Signal"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Address",
+                      "valueType": "xs:string",
+                      "value": "2"
                     }
                   ],
                   "qualifiers": [
