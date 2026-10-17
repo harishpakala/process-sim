@@ -1,16 +1,14 @@
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// Local dev: /kg/repositories/AAS -> http://localhost:7200/repositories/AAS.
-// For production, configure the same reverse proxy route on the web server.
+// Browser only calls Python. GraphDB endpoint stays server-side.
 export default defineConfig({
   plugins: [vue()],
   server: {
     proxy: {
-      '/kg': {
-        target: process.env.GRAPHDB_URL || 'http://localhost:7200',
+      '/api': {
+        target: process.env.PROCESS_SIM_API_URL || 'http://127.0.0.1:8000',
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/kg/, ''),
       },
     },
   },
