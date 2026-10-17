@@ -45,11 +45,19 @@ def check(template, instance, path="", issues=None):
         if name in template_by_id:
             continue
         concepts = {q.get("value") for q in element.get("qualifiers", []) if q.get("type", "").lower() in ("ontoconcept", "ontologyconcept")}
-        matches = [candidate for candidate in repeatable if candidate.get("modelType") == element.get("modelType") and (candidate.get("idShort") in concepts or len(repeatable) == 1)]
+        matches = [candidate for candidate in repeatable
+                   if candidate.get("modelType") == element.get("modelType")
+                   and candidate.get("idShort") in concepts]
+        # Only use a single generic placeholder when no semantic annotation
+        # exists. Never override an explicit, conflicting ontoConcept.
+        if not concepts and len(repeatable) == 1 and element.get("modelType") == repeatable[0].get("modelType"):
+            matches = repeatable
         if len(matches) == 1:
             check(matches[0], element, path + "/" + name, issues)
+        elif len(matches) > 1:
+            issues.append(f"{path}/{name}: ambiguous ontoConcept mapping {sorted(concepts)}")
         else:
-            issues.append(f"{path}/{name}: not declared by template")
+            issues.append(f"{path}/{name}: not declared by template (ontoConcept={sorted(concepts)})")
     return issues
 
 def main():
