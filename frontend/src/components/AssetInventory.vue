@@ -29,7 +29,7 @@ async function refreshLive(){
 onMounted(()=>{void refreshLive();liveTimer=setInterval(()=>void refreshLive(),4000)})
 onUnmounted(()=>{if(liveTimer)clearInterval(liveTimer)})
 function signalValue(reference:string){
- const match=reference.toUpperCase().match(/(?:^|[^A-Z])X(MEAS|MV)[-_]?(\\d+)(?!\\d)/)
+ const match=reference.toUpperCase().match(/(?:^|[^A-Z])X(MEAS|MV)[-_]?(\d+)(?!\d)/)
  if(!match||!live.value)return null
  const index=Number(match[2])-1
  const values=match[1]==='MEAS'?live.value.measurements:live.value.manipulatedVariables
