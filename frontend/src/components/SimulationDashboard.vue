@@ -56,15 +56,12 @@ async function refresh() {
  if (loading.value) return
  loading.value=true
  try {
-  const response=await fetch('/api/simulation/status')
+  const response=await fetch('/api/simulation/history')
   const body=await response.json()
   if (!response.ok) throw new Error(body.error || 'Simulation API unavailable')
-  const snap=body as Snapshot
-  const time=Number(snap.simulation.TimeHours)
-  const last=samples.value[samples.value.length-1]
-  if(last && time<last.time) { samples.value=[]; faultEvents.value=[] }
-  if(Number.isFinite(time) && (!last || time!==last.time)) samples.value=[...samples.value,{time,measurements:[...snap.measurements],manipulatedVariables:[...snap.manipulatedVariables]}].slice(-300)
-  data.value=snap
+  if(!body.snapshot)throw new Error(body.error||'Waiting for OPC UA historian')
+  samples.value=body.samples
+  data.value=body.snapshot as Snapshot
   error.value=''
  } catch(e) { data.value=null;error.value=e instanceof Error?e.message:String(e) }
  finally {loading.value=false}
@@ -101,7 +98,7 @@ onUnmounted(()=>{if(timer)clearInterval(timer)})
    </div>
   </section>
   <section class="panel">
-   <div class="panel-title"><div><h2>Live process trend</h2><p>Select any of the 41 XMEAS or 12 XMV variables</p></div><span class="pill">2 s polling · 300 samples</span></div>
+   <div class="panel-title"><div><h2>Live process trend</h2><p>Select any of the 41 XMEAS or 12 XMV variables</p></div><span class="pill">2 s collection · 1800 samples</span></div>
    <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:end;margin-bottom:16px">
     <label style="display:grid;gap:6px;flex:1;min-width:250px"><small>PROCESS VARIABLE</small>
      <select v-model="selected" style="padding:10px;border:1px solid #b8c6d0;border-radius:8px;background:transparent;color:inherit">
@@ -109,7 +106,7 @@ onUnmounted(()=>{if(timer)clearInterval(timer)})
      </select>
     </label>
     <div><small>CURRENT VALUE</small><strong style="display:block;font-size:22px">{{trend.length?fmt(trend[trend.length-1].y):'—'}} {{unit}}</strong></div>
-    <button class="secondary" @click="samples=[]">Clear history</button>
+    <button class="secondary" @click="samples=[]" disabled title="History is now managed by the Python API">History managed by Python</button>
    </div>
    <div v-if="trend.length" style="overflow-x:auto">
     <svg viewBox="0 0 760 290" role="img" :aria-label="'Trend for '+selected" style="width:100%;min-width:440px;height:auto">
@@ -137,7 +134,7 @@ onUnmounted(()=>{if(timer)clearInterval(timer)})
     <span>Markers appear within the collected time window; hover for details.</span>
    </div>
    <p v-if="eventError" class="subdued">Fault event annotations unavailable: {{eventError}}</p>
-   <p class="subdued">History is stored only in this browser session. Switching variables preserves collected samples.</p>
+   <p class="subdued">History is collected in the Python API while you navigate between pages; it resets when the Python API restarts.</p>
   </section>
  </div>
 </template>
