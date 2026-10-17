@@ -35,8 +35,8 @@ async function load() {
       GRAPH ?g {
         ?s ?p ?o .
         FILTER(isIRI(?o) && ?s != ?o)
-        ?s a ?st .
-        ?o a ?ot .
+        GRAPH ?gs { ?s a ?st } .
+        GRAPH ?go { ?o a ?ot } .
         FILTER(
           (STRSTARTS(STR(?st), "https://example.org/dexpi/") ||
            STRSTARTS(STR(?st), "https://example.org/ecad/") ||
