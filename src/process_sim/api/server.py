@@ -22,6 +22,10 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == "/api/simulation/history":
+            from process_sim.api.historian import history
+            self.send_json(200, history())
+            return
         if self.path == "/api/simulation/fault-events":
             from process_sim.api.fault_events import list_events
             self.send_json(200, {"events": list_events()})
@@ -156,6 +160,8 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     host = os.environ.get("PROCESS_SIM_API_HOST", "127.0.0.1")
     port = int(os.environ.get("PROCESS_SIM_API_PORT", "8000"))
+    from process_sim.api.historian import start
+    start()
     server = ThreadingHTTPServer((host, port), Handler)
     print(f"TEP NEXUS API listening at http://{host}:{port}", flush=True)
     try:
