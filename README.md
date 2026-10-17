@@ -17,11 +17,45 @@ The active integration milestone is **Phase 6 — Engineering & Semantic Digital
 | 3 — Faults and scenarios | Foundation implemented | Fault manager, scenarios, lifecycle events and native disturbances | Extended fault families, schema validation and comparisons |
 | 4 — OPC UA | Fault-management foundation complete | Simulation controls, XMEAS/XMV and fault-management methods | OPC UA events, security, engineering metadata and external HMI verification |
 | 5 — Temporal data and experiments | Experiment foundation implemented | Parquet recording, provenance, controlled experiments, replication and sweeps | Historian/TSDB, temporal KG and expanded benchmarks |
-| **6 — Engineering & Semantic Digital Thread** | **Prototype implemented; integration/validation in progress** | AAS templates and example instances for DEXPI, ECAD and ProductCatalog; configurable RDF template/instance lifting scripts; ProductCatalog engineering audit | Run and verify RDF generation and SHACL validation end to end; GraphDB ingestion; cross-domain identity and provenance; QUDT/eCl@ss enrichment |
+| **6 — Engineering & Semantic Digital Thread** | **Prototype implemented; integration/validation in progress** | AAS templates and example instances for DEXPI, ECAD and ProductCatalog; configurable RDF template/instance lifting scripts; ProductCatalog engineering audit | RDF-level completeness audit and repeatable CI validation; GraphDB ingestion; cross-domain identity and provenance; QUDT/eCl@ss enrichment |
 | 7 — BOM and enterprise | Planned | ProductCatalog manufacturer/part-number source data is a preliminary input | Enterprise master data, EBOM/MBOM, ERP integration and identity resolution |
 | **8 — Web SCADA / HMI** | **Frontend prototype; operational integration pending** | TEP NEXUS Vue/Vite navigation and engineering ProductCatalog explorer | Live OPC UA-backed SCADA, trends, alarms, authenticated operational actions |
 | **9 — Knowledge Graph & GraphRAG** | **Graph visualization prototype only** | GraphDB-style ProductCatalog explorer with labeled AAS-derived relationships, pan/zoom, node dragging, expansion and node-property side pane | Live RDF/SPARQL query API, actual ontology predicates, cross-domain KG, reasoning and GraphRAG |
 | 10 — Industrial AI | Planned | No production agent or industrial AI capabilities established | Agent architecture, evidence-backed recommendations, safety and benchmark evaluation |
+
+### Semantic lifting and validation status (October 2026)
+
+The four configured AAS template/instance pairs are lifted using `scripts/import_knowledge_graph.py` and the paths in [`semantic/config.py`](semantic/config.py). In particular, ECAD validation uses [`semantic/templates/ecad_template.json`](semantic/templates/ecad_template.json), **not** the separate `examples/aas/ecad_template.json` file. Template cardinalities are converted to SHACL shapes; instance `ontoConcept` qualifiers determine semantic RDF classes and collection predicates while instance `idShort` values preserve element identity.
+
+A local run reported **`Conforms: True` for all four domains**, with the following output. These triple counts document that reported run and are not asserted to be the counts for every later revision.
+
+| Domain | Template triples | Instance triples | SHACL result |
+|---|---:|---:|---|
+| DEXPI | 134 | 638 | Conforms: True |
+| ECAD | 227 | 96 | Conforms: True |
+| ProductCatalog | 95 | 422 | Conforms: True |
+| AssetInventory | 136 | 3,270 | Conforms: True |
+
+**Important:** The 96-triple ECAD result was produced before the larger ECAD dataset was restored. The user subsequently reported successful validation after the restoration, but the new full-instance RDF triple count has not been recorded here. Do not use 96 as the expected size of the current ECAD RDF graph.
+
+The current ECAD AAS source contains **40 devices**, **100 standard `EndPoint` collections**, **40 PLC `PLCEndPoint` collections**, **102 schematic relationships**, and **2 electrical nets**. Only `PLCBox` uses `PLCEndPoint`; other devices use `EndPoint`. Both endpoint types are declared `ZeroToMany` in the active ECAD template. The `ElectricalNets` collection is retained in the ECAD instance even though it is not defined in the active ECAD template; SHACL conformance alone does not certify that every source collection is modeled by a shape.
+
+Source-JSON consistency checks also found:
+
+- All **102** ECAD schematic relationship endpoints resolve to existing ECAD instance elements.
+- All **38 of 38** ECAD devices with manufacturer part numbers match a ProductCatalog part number.
+- All **5 of 5** AssetInventory `EngineeringReference` values checked match DEXPI `AssetIdentifier` values.
+- The DEXPI source includes **5 equipment**, **22 instrumentation functions**, and **12 actuating functions**. ProductCatalog contains **8 products**, and AssetInventory contains **62 assets**.
+
+These are **source-level checks**, not proof that every AAS element or every cross-domain relationship is represented in the lifted RDF. RDF-level completeness (including all 140 ECAD endpoints and 102 connections), explicit cross-domain RDF links, GraphDB ingestion, and provenance remain outstanding verification work.
+
+To regenerate and validate locally:
+
+```bash
+python3 scripts/import_knowledge_graph.py --validate
+```
+
+The script writes domain-specific template and instance Turtle files to `out/semantic/`; add `--push` only when GraphDB publication is intended.
 
 ### What the ProductCatalog UI demonstrates
 
@@ -48,7 +82,7 @@ By default, these generate local Turtle files in `out/semantic/`; validation and
 
 ### Next acceptance milestones
 
-1. Execute the three-domain semantic lifting pipeline and record reproducible RDF/SHACL results.
+1. Automate four-domain RDF/SHACL validation in CI and audit RDF lifting completeness against the source AAS instances.
 2. Establish GraphDB repository ingestion and SPARQL queries, then replace the AAS-derived graph preview with verified RDF nodes and predicates.
 3. Establish stable identifiers and provenance linking ProductCatalog, DEXPI and ECAD.
 4. Integrate the UI with live industrial/operational services and add frontend build, interaction and integration tests.
