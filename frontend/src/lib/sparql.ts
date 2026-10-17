@@ -4,7 +4,10 @@ export const KG_VOCAB = 'https://example.org/tep/kg/vocab/'
 export const KG_TYPE = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
 export async function selectTriples(query: string): Promise<Triple[]> {
   const response = await fetch(KG_ENDPOINT + (KG_ENDPOINT.includes('?') ? '&' : '?') + new URLSearchParams({ query }), { headers: { Accept: 'application/sparql-results+json' } })
-  if (!response.ok) throw new Error(`SPARQL endpoint returned HTTP ${response.status} (${KG_ENDPOINT}). Confirm GraphDB repository AAS exists and the /kg reverse proxy is configured.`)
+  if (!response.ok) {
+    const detail = (await response.text()).slice(0, 900)
+    throw new Error(`GraphDB SPARQL HTTP ${response.status} (${KG_ENDPOINT}): ${detail || 'No response details'}`)
+  }
   const data = await response.json()
   if (!Array.isArray(data?.results?.bindings)) throw new Error('GraphDB did not return SPARQL JSON bindings.')
   return data.results.bindings.map((row: Record<string, { type: string; value: string }>) => ({
