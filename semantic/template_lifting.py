@@ -40,6 +40,7 @@ from semantic.ontoutils import (
     build_path,
     map_xsd_datatype,
     get_cardinality,
+    get_ontology_concept,
     make_shape_label,
     make_node_shape_label,
     add_cardinality_constraints,
@@ -459,9 +460,10 @@ def lift_smc(
         element.id_short,
     )
 
+    concept = get_ontology_concept(element) or element.id_short
     property_uri = make_semantic_predicate(
         domain,
-        element.id_short,
+        concept,
     )
 
     shape_uri = compute_uri(
@@ -488,7 +490,7 @@ def lift_smc(
             property_uri,
             RDFS.label,
             Literal(
-                "has" + element.id_short
+                "has" + concept
             ),
         )
     )
