@@ -49,3 +49,32 @@ The Python API is a development bridge and has no authentication. Keep it
 bound to loopback and do not expose operator methods to untrusted networks.
 This integration has not been verified against a running OPC UA server in
 the user's environment.
+
+## Fault injection and management
+
+Open **Simulation > Faults & Disturbances**. The UI calls the Python API,
+which forwards operations to the existing OPC UA `TEP/FaultManagement` methods:
+
+| HTTP endpoint | OPC UA method |
+| --- | --- |
+| `GET /api/simulation/faults` | `ListFaults()` |
+| `POST /api/simulation/faults` with `{"action":"inject",...}` | `InjectFault(...)` |
+| `POST /api/simulation/faults` with `{"action":"clear","faultId":"..."}` | `ClearFault(...)` |
+| `POST /api/simulation/faults` with `{"action":"clear_all"}` | `ClearAllFaults()` |
+
+Example injection payload:
+
+```json
+{"action":"inject","faultId":"trial-1","faultType":"process_disturbance","target":"IDV1","magnitude":1.0,"value":0.0,"durationHours":0.5}
+```
+
+Fault types: `process_disturbance` (IDV1–IDV20), `bias`,
+`drift`, and `stuck` (XMEAS1–XMEAS41 or XMV1–XMV12).
+Duration zero means indefinite. The UI polls the fault list every
+four seconds and displays active, registered, and expired states as
+reported by the OPC UA server.
+
+**Safety:** These are live commands to the simulator. The API is bound
+to loopback by default and has no authentication; do not expose it
+to an untrusted network. The OPC UA server owns fault lifecycle,
+state and validation. No new fault model has been introduced.
