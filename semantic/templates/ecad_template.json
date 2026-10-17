@@ -85,6 +85,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    },
+                    {
+                      "type": "ontoConcept",
+                      "valueType": "xs:string",
+                      "value": "EndPoint"
                     }
                   ]
                 },
@@ -123,6 +128,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    },
+                    {
+                      "type": "ontoConcept",
+                      "valueType": "xs:string",
+                      "value": "PLCEndPoint"
                     }
                   ]
                 }
@@ -141,6 +151,11 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
+                },
+                {
+                  "type": "ontoConcept",
+                  "valueType": "xs:string",
+                  "value": "ConnectionPoints"
                 }
               ]
             }
@@ -159,6 +174,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Device"
             }
           ]
         }
@@ -267,6 +287,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    },
+                    {
+                      "type": "ontoConcept",
+                      "valueType": "xs:string",
+                      "value": "EndPoint"
                     }
                   ]
                 },
@@ -301,6 +326,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    },
+                    {
+                      "type": "ontoConcept",
+                      "valueType": "xs:string",
+                      "value": "PLCEndPoint"
                     }
                   ]
                 }
@@ -319,6 +349,11 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
+                },
+                {
+                  "type": "ontoConcept",
+                  "valueType": "xs:string",
+                  "value": "ConnectionPoints"
                 }
               ]
             }
@@ -337,6 +372,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "Symbol"
             }
           ]
         }
@@ -439,6 +479,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToOne"
+            },
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "SchematicsConnections"
             }
           ]
         }
@@ -487,6 +532,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "ontoConcept",
+              "valueType": "xs:string",
+              "value": "ElectricalNet"
             }
           ]
         }
