@@ -3,6 +3,7 @@ import { computed, onMounted, ref } from 'vue'
 import { KG_ENDPOINT } from './lib/sparql'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
+import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
 import AssetInventory from './components/AssetInventory.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
 const sections = [
@@ -84,6 +85,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
      </div>
      <section class="panel"><div class="panel-title"><h2>Simulation quick controls</h2><span class="pill amber-pill">UI PREVIEW ONLY</span></div><div class="control-row"><button class="primary" @click="demoRunning=!demoRunning"><Play :size="16"/> {{demoRunning?'Pause preview':'Run preview'}}</button><button class="secondary" @click="demoRunning=false"><RotateCcw :size="16"/> Reset</button><span>These controls do not execute TEP.</span></div></section>
     </template>
+    <template v-else-if="active==='Traceability'"><TraceabilityExplorer /></template>
     <template v-else-if="active==='Product Catalog'"><ProductCatalog /></template>
     <template v-else-if="active==='Asset Inventory'"><AssetInventory /></template>
     <template v-else-if="graphView"><EngineeringRdfGraph :domain="active==='ECAD Explorer'?'ecad':'dexpi'" /></template>
