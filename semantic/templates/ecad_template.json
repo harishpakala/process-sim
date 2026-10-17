@@ -89,7 +89,7 @@
                       },
                       "type": "Cardinality",
                       "valueType": "xs:string",
-                      "value": "ZeroToOne"
+                      "value": "ZeroToMany"
                     }
                   ]
                 },
@@ -123,7 +123,7 @@
                       },
                       "type": "Cardinality",
                       "valueType": "xs:string",
-                      "value": "ZeroToOne"
+                      "value": "ZeroToMany"
                     }
                   ]
                 }
@@ -367,60 +367,60 @@
           "modelType": "SubmodelElementCollection",
           "idShort": "Connections",
           "value": [
-			{
-			              "idShort": "isConnectedTo",
-			              "first": {
-			                "type": "ModelReference",
-			                "keys": [
-			                  {
-			                    "type": "Submodel",
-			                    "value": "https://example.org/smi/ecad25"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "Devices"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "LI"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "ConnectionPoints"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "TA1_2_Out2"
-			                  }
-			                ]
-			              },
-			              "second": {
-			                "type": "ModelReference",
-			                "keys": [
-			                  {
-			                    "type": "Submodel",
-			                    "value": "https://example.org/smi/ecad25"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "Devices"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "PLCBox"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "ConnectionPoints"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "D0_0"
-			                  }
-			                ]
-			              },
-			              "modelType": "RelationshipElement"
-			            }            
+            {
+              "idShort": "isConnectedTo",
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/smi/ecad25"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Devices"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "LI"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "ConnectionPoints"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "TA1_2_Out2"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/smi/ecad25"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Devices"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "PLCBox"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "ConnectionPoints"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "D0_0"
+                  }
+                ]
+              },
+              "modelType": "RelationshipElement"
+            }
           ],
           "qualifiers": [
             {
