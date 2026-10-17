@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { KG_ENDPOINT } from './lib/sparql'
 import ProductCatalog from './components/ProductCatalog.vue'
+import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import AssetInventory from './components/AssetInventory.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
 const sections = [
@@ -85,10 +86,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
     </template>
     <template v-else-if="active==='Product Catalog'"><ProductCatalog /></template>
     <template v-else-if="active==='Asset Inventory'"><AssetInventory /></template>
-    <template v-else-if="graphView">
-     <div class="tabs"><button :class="{selected:view==='Engineering'}" @click="view='Engineering'">Engineering view</button><button :class="{selected:view==='Knowledge Graph'}" @click="view='Knowledge Graph'">Knowledge graph</button></div>
-     <section class="panel placeholder"><component :is="view==='Knowledge Graph'?Network:active==='ECAD Explorer'?CircuitBoard:Workflow" :size="42"/><h2>{{active}} · {{view}}</h2><p>{{view==='Knowledge Graph'?'GraphDB RDF graph visualization with Cytoscape.js will appear here.':'Domain-specific engineering data will appear here after API integration.'}}</p><span class="pill amber-pill">Not connected</span></section>
-    </template>
+    <template v-else-if="graphView"><EngineeringRdfGraph :domain="active==='ECAD Explorer'?'ecad':'dexpi'" /></template>
     <template v-else-if="active==='AI Query'">
      <section class="panel ai"><BrainCircuit :size="38"/><h2>Ask your Digital Twin</h2><p>Future answers will be grounded in GraphDB queries and controlled process-sim tools, with visible evidence and provenance.</p><textarea placeholder="e.g. Which reactor instruments appear in the engineering BOM?" disabled></textarea><span class="pill amber-pill">LLM integration pending</span></section>
     </template>
