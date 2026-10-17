@@ -8,10 +8,6 @@ const loading = ref(false)
 const error = ref('')
 const search = ref('')
 const selected = ref('')
-const types: Record<string, string[]> = {
-  dexpi: ['Equipment', 'InstrumentationFunction', 'ActuatingFunction'],
-  ecad: ['Device', 'EndPoint', 'PLCEndPoint', 'ElectricalNet', 'Connections']
-}
 const namespace = computed(() => 'https://example.org/' + props.domain + '/')
 const rdfType = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
 const labelPredicate = 'http://www.w3.org/2000/01/rdf-schema#label'
@@ -22,8 +18,16 @@ async function load() {
   triples.value = []
   selected.value = ''
   try {
-    const classes = types[props.domain].map(t => '<' + namespace.value + t + '>').join(' ')
-    const query = 'SELECT ?s ?p ?o WHERE { GRAPH ?g { ?s a ?class . VALUES ?class { ' + classes + ' } ?s ?p ?o . } } LIMIT 5000'
+    // Query domain predicates as well as domain-typed subjects. The AAS hierarchy
+    // and schematic links often originate on wrapper collections, not leaf classes.
+    const ns = namespace.value
+    const query = `SELECT DISTINCT ?s ?p ?o WHERE {
+      GRAPH ?g {
+        ?s ?p ?o .
+        FILTER(STRSTARTS(STR(?p), "${ns}") ||
+          (?p = <${rdfType}> && STRSTARTS(STR(?o), "${ns}")))
+      }
+    } LIMIT 12000`
     triples.value = await selectTriples(query)
     if (!triples.value.length) error.value = 'No matching RDF resources in GraphDB. Import the lifted instance graphs first.'
   } catch (e) {
@@ -36,8 +40,21 @@ watch(() => props.domain, () => { void load() }, { immediate: true })
 const subjects = computed(() => [...new Set(triples.value.map(t => t.subject))])
 const kind = (id: string) => localName(triples.value.find(t => t.subject === id && t.predicate === rdfType && t.object.startsWith(namespace.value))?.object || 'Resource')
 const label = (id: string) => triples.value.find(t => t.subject === id && t.predicate === labelPredicate)?.object || localName(id)
-const filtered = computed(() => subjects.value.filter(id => (label(id) + ' ' + kind(id)).toLowerCase().includes(search.value.toLowerCase())))
-const visible = computed(() => filtered.value.slice(0, 65))
+const resources = computed(() => new Set([...subjects.value, ...triples.value.filter(t => t.resource && t.predicate !== rdfType).map(t => t.object)]))
+const filtered = computed(() => [...resources.value].filter(id => (label(id) + ' ' + kind(id)).toLowerCase().includes(search.value.toLowerCase())))
+const visible = computed(() => {
+  const initial = filtered.value.slice(0, 55)
+  if (selected.value && !initial.includes(selected.value)) initial.unshift(selected.value)
+  const ids = new Set(initial)
+  // Keep the selected resource's immediate neighbors in view.
+  if (selected.value) for (const t of triples.value) {
+    if (!t.resource || t.predicate === rdfType) continue
+    if (t.subject === selected.value) ids.add(t.object)
+    if (t.object === selected.value) ids.add(t.subject)
+    if (ids.size >= 95) break
+  }
+  return [...ids]
+})
 const focus = computed(() => selected.value || visible.value[0] || '')
 const attributes = computed(() => triples.value.filter(t => t.subject === focus.value && !t.resource))
 const outgoing = computed(() => triples.value.filter(t => t.subject === focus.value && t.resource && t.predicate !== rdfType))
@@ -50,7 +67,7 @@ function coords(id: string) {
 }
 function choose(id: string) {
   selected.value = id
-  if (!visible.value.includes(id)) search.value = label(id)
+  // Selected neighbors remain visible without changing the search filter.
 }
 </script>
 
@@ -64,7 +81,7 @@ function choose(id: string) {
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }}</p>
     <template v-if="!loading && !error">
-      <p class="catalog-disclaimer">Showing {{ visible.length }} of {{ subjects.length }} returned RDF subjects (query limit: 5,000 triples). The diagram represents RDF relationships, not inferred piping or electrical geometry.</p>
+      <p class="catalog-disclaimer">Showing {{ visible.length }} of {{ subjects.length }} returned RDF subjects (query limit: 12,000 triples). Showing {{ edges.length }} visible RDF relationships. The diagram represents RDF relationships, not inferred piping or electrical geometry.</p>
       <div class="graph-workspace">
         <div class="graph-canvas graph-rdf-scroll" role="group" :aria-label="domain + ' RDF graph'">
           <svg viewBox="0 0 940 720" width="100%" height="100%" role="img">
