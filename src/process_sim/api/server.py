@@ -64,7 +64,13 @@ class Handler(BaseHTTPRequestHandler):
                 result = asyncio.run(fault_command(action, payload))
                 if result["success"]:
                     from process_sim.api.fault_events import record
-                    now = float(asyncio.run(snapshot())["simulation"]["TimeHours"])
+                    try:
+                        now = float(asyncio.run(snapshot())["simulation"]["TimeHours"])
+                    except Exception:
+                        now = None
+                    if now is None:
+                        self.send_json(200, {**result, "warning": "Fault operation succeeded but event timestamp could not be recorded"})
+                        return
                     if action == "clear_all":
                         for fault in before["faults"]:
                             record("clear", fault["fault_id"], now, fault.get("target", ""))
