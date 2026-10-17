@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
 import EngineeringRdfGraph from './EngineeringRdfGraph.vue'
 import { Factory, Search, Network, Package } from 'lucide-vue-next'
 import { selectTriples, KG_TYPE, KG_VOCAB, localName, type Triple } from '../lib/sparql'
@@ -10,6 +10,38 @@ const assetType = 'https://example.org/assetinventory/Asset'
 const assetNS = 'https://example.org/assetinventory/'
 const productNS = 'https://example.org/productcatalog/'
 const productType = 'https://example.org/productcatalog/Product'
+type LiveSnapshot = {simulation:{Running:boolean;TimeHours:number};measurements:number[];manipulatedVariables:number[]}
+type LiveFault = {fault_id:string;fault_type:string;target:string;status:string}
+const live = ref<LiveSnapshot|null>(null)
+const liveFaults = ref<LiveFault[]>([])
+const liveError = ref('')
+let liveTimer:ReturnType<typeof setInterval>|undefined
+async function refreshLive(){
+ try{
+  const [h,f]=await Promise.all([fetch('/api/simulation/history'),fetch('/api/simulation/faults')])
+  const history=await h.json(),faults=await f.json()
+  if(!h.ok||!history.snapshot)throw new Error(history.error||'Simulation unavailable')
+  live.value=history.snapshot
+  liveFaults.value=f.ok?faults.faults:[]
+  liveError.value=f.ok?'':'Fault listing unavailable'
+ }catch(e){live.value=null;liveFaults.value=[];liveError.value=e instanceof Error?e.message:String(e)}
+}
+onMounted(()=>{void refreshLive();liveTimer=setInterval(()=>void refreshLive(),4000)})
+onUnmounted(()=>{if(liveTimer)clearInterval(liveTimer)})
+function signalValue(reference:string){
+ const match=reference.toUpperCase().match(/(?:^|[^A-Z])X(MEAS|MV)[-_]?(\\d+)(?!\\d)/)
+ if(!match||!live.value)return null
+ const index=Number(match[2])-1
+ const values=match[1]==='MEAS'?live.value.measurements:live.value.manipulatedVariables
+ return index>=0&&index<values.length?{name:'X'+match[1]+(index+1),value:values[index]}:null
+}
+const selectedSignal=computed(()=>selected.value?signalValue(selected.value.fields.OperationalReference||selected.value.fields.OperationalSignalIRI||''):null)
+const relatedFaults=computed(()=>selectedSignal.value?liveFaults.value.filter(f=>f.target.toUpperCase()===selectedSignal.value?.name):[])
+const runtimeStatus=computed(()=>{
+ if(!live.value)return 'Unknown'
+ if(relatedFaults.value.some(f=>f.status==='active'))return 'Signal fault active'
+ return live.value.simulation.Running?'Running (signal not verified)':'Stopped'
+})
 const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
@@ -114,7 +146,17 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
     <div class="tabs"><button :class="{selected:detailTab==='Status'}" @click="detailTab='Status'">Asset status</button><button :class="{selected:detailTab==='Knowledge Graph'}" @click="detailTab='Knowledge Graph'">Knowledge graph</button></div>
     <AssetStatusKnowledgeGraph v-if="detailTab==='Knowledge Graph'" :key="selected.id" :asset="selected" />
     <template v-else>
-     <h2 class="catalog-section-title">Asset status</h2>
+     <h2 class="catalog-section-title">Live operational state</h2>
+     <div class="catalog-properties">
+      <div class="catalog-property"><span>Runtime status</span><strong>{{runtimeStatus}}</strong></div>
+      <div class="catalog-property"><span>Simulator time</span><span>{{live?live.simulation.TimeHours.toFixed(3)+' h':'Unavailable'}}</span></div>
+      <div class="catalog-property"><span>Mapped OPC UA signal</span><span>{{selectedSignal?.name||'Not mapped / unverified'}}</span></div>
+      <div class="catalog-property"><span>Live signal value</span><strong>{{selectedSignal?selectedSignal.value.toFixed(3):'—'}}</strong></div>
+      <div class="catalog-property"><span>Direct signal faults</span><span>{{relatedFaults.filter(f=>f.status==='active').length}}</span></div>
+     </div>
+     <p v-if="liveError" class="catalog-disclaimer">{{liveError}}</p>
+     <p class="catalog-disclaimer">Runtime status describes simulator state and directly matched signal faults only. No asset-level process alarm limits or process-disturbance impact mapping have been validated.</p>
+     <h2 class="catalog-section-title">Engineering lifecycle status (GraphDB)</h2>
      <div class="catalog-properties">
       <div v-for="key in statusKeys" :key="key" class="catalog-property"><span>{{ readable(key) }}</span><span>{{ statusLabel(selected.fields[key]) }}</span></div>
      </div>
@@ -129,11 +171,11 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
      <div class="catalog-properties">
       <div v-for="(value,key) in Object.fromEntries(Object.entries(selected.fields).filter(([key]) => !statusKeys.includes(key)))" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
      </div>
-     <p class="catalog-disclaimer">Engineering associations are RDF references, not evidence of verified physical installation. Simulation, monitoring and fault states are research placeholders unless runtime services update the KG.</p>
+     <p class="catalog-disclaimer">Engineering associations are RDF references, not evidence of verified physical installation. GraphDB lifecycle status is engineering metadata; live operational state is calculated separately and is not written to GraphDB.</p>
     </template>
    </section>
   </div>
-  <p class="catalog-disclaimer">AssetInventory list, counters, statuses, product references and KG visualization are queried from GraphDB repository AAS. No bundled AAS JSON fallback; real-time synchronization is not implemented.</p>
+  <p class="catalog-disclaimer">AssetInventory list, counters, statuses, product references and KG visualization are queried from GraphDB repository AAS. Live OPC UA status is shown separately where an existing operational signal reference can be resolved.</p>
  </section>
   </template>
 </template>
