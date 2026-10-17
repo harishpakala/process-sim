@@ -22,6 +22,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == "/api/simulation/faults":
+            try:
+                from process_sim.api.opcua_client import faults_list
+                self.send_json(200, asyncio.run(faults_list()))
+            except Exception as exc:
+                self.send_json(503, {"error": f"OPC UA fault listing failed: {exc}"})
+            return
         if self.path == "/api/simulation/status":
             try:
                 from process_sim.api.opcua_client import snapshot
@@ -35,6 +42,26 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if self.path == "/api/simulation/faults":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(400, {"error": "Invalid request length"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict):
+                    raise ValueError("Expected a JSON object")
+                from process_sim.api.opcua_client import fault_command
+                action = payload.get("action")
+                if action not in ("inject", "clear", "clear_all"):
+                    raise ValueError("Unsupported fault action")
+                result = asyncio.run(fault_command(action, payload))
+                self.send_json(200 if result["success"] else 502, result)
+            except (ValueError, TypeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"OPC UA fault command failed: {exc}"})
+            return
         if self.path == "/api/simulation/control":
             try:
                 length = int(self.headers.get("Content-Length", "0"))
