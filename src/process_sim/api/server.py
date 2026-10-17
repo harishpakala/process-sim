@@ -7,6 +7,7 @@ front of this API before any public deployment.
 """
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -21,12 +22,35 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == "/api/simulation/status":
+            try:
+                from process_sim.api.opcua_client import snapshot
+                self.send_json(200, asyncio.run(snapshot()))
+            except Exception as exc:
+                self.send_json(503, {"connected": False, "error": f"OPC UA unavailable: {exc}"})
+            return
         if self.path != "/api/health":
             self.send_json(404, {"error": "Not found"})
             return
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if self.path == "/api/simulation/control":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 1024:
+                    self.send_json(400, {"error": "Invalid request length"})
+                    return
+                action = json.loads(self.rfile.read(length)).get("action")
+                if action not in ("Start", "Stop", "Reset"):
+                    self.send_json(400, {"error": "Unsupported simulation action"})
+                    return
+                from process_sim.api.opcua_client import control
+                result = asyncio.run(control(action))
+                self.send_json(200 if result["success"] else 502, result)
+            except Exception as exc:
+                self.send_json(503, {"error": f"OPC UA command failed: {exc}"})
+            return
         if self.path != "/api/kg/select":
             self.send_json(404, {"error": "Not found"})
             return
