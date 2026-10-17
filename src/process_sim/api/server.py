@@ -22,6 +22,10 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if self.path == "/api/simulation/fault-events":
+            from process_sim.api.fault_events import list_events
+            self.send_json(200, {"events": list_events()})
+            return
         if self.path == "/api/simulation/faults":
             try:
                 from process_sim.api.opcua_client import faults_list
@@ -55,7 +59,18 @@ class Handler(BaseHTTPRequestHandler):
                 action = payload.get("action")
                 if action not in ("inject", "clear", "clear_all"):
                     raise ValueError("Unsupported fault action")
+                from process_sim.api.opcua_client import snapshot, faults_list
+                before = asyncio.run(faults_list()) if action != "inject" else {"faults": []}
                 result = asyncio.run(fault_command(action, payload))
+                if result["success"]:
+                    from process_sim.api.fault_events import record
+                    now = float(asyncio.run(snapshot())["simulation"]["TimeHours"])
+                    if action == "clear_all":
+                        for fault in before["faults"]:
+                            record("clear", fault["fault_id"], now, fault.get("target", ""))
+                    else:
+                        known = next((f for f in before["faults"] if f["fault_id"] == payload.get("faultId")), None)
+                        record(action, payload.get("faultId", ""), now, payload.get("target", "") or (known or {}).get("target", ""))
                 self.send_json(200 if result["success"] else 502, result)
             except (ValueError, TypeError) as exc:
                 self.send_json(400, {"error": str(exc)})
