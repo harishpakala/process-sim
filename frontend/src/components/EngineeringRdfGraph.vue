@@ -88,13 +88,20 @@ async function load() {
   root.value = ''
   resetView()
   try {
-    const classes = props.domain === 'dexpi' ? ['Equipment', 'InstrumentationFunction', 'ActuatingFunction'] : ['Device', 'ElectricalNet', 'Connections']
-    const values = classes.map(name => iri(namespace.value + name)).join(' ')
+    // The AAS Submodel root is typed aas:Submodel, not a domain Equipment/Device.
+    // Resolve it by its lifted rdfs:label (TEP_DEXPI / TEP_ECAD).
+    const rootLabel = props.domain === 'dexpi' ? 'TEP_DEXPI' : 'TEP_ECAD'
     const rows = await selectTriples(`SELECT ?s ?p ?o WHERE {
-      GRAPH ?g { ?s a ?o . VALUES ?o { ${values} } BIND(<${rdfType}> AS ?p) }
+      GRAPH ?g {
+        ?s a <https://example.org/aas/Submodel> ;
+           <${labelPredicate}> ?name .
+        FILTER(STR(?name) = "${rootLabel}")
+        BIND(<${rdfType}> AS ?p)
+        BIND(<https://example.org/aas/Submodel> AS ?o)
+      }
     } LIMIT 1`)
     if (token !== generation) return
-    if (!rows.length) { error.value = 'No matching RDF instance found in GraphDB.'; return }
+    if (!rows.length) { error.value = 'No AAS Submodel root named ' + rootLabel + ' found in GraphDB.'; return }
     root.value = rows[0].subject
     selected.value = root.value
     await neighbors(root.value, token)
