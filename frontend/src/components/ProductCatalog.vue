@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import EngineeringRdfGraph from './EngineeringRdfGraph.vue'
 import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-next'
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
 type Product = { id: string; uri: string; manufacturer: string; partNumber: string; assetId: string; category: string; properties: { name: string; value: string }[] }
 const triples = ref<Triple[]>([])
+const domainGraphOpen = ref(false)
 const loading = ref(false)
 const error = ref('')
 const query = ref('')
@@ -52,6 +54,9 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
 </script>
 
 <template>
+  <div class="graph-toolbar" style="display:flex;gap:8px;margin-bottom:12px"><button type="button" class="secondary" :aria-pressed="domainGraphOpen" @click="domainGraphOpen=!domainGraphOpen">{{ domainGraphOpen ? 'Show catalog details' : 'Domain Knowledge Graph' }}</button></div>
+  <EngineeringRdfGraph v-if="domainGraphOpen" domain="productcatalog" />
+  <template v-else>
   <section class="catalog">
     <p v-if="loading" role="status">Loading products from GraphDB AAS…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }} <button class="secondary" type="button" @click="load">Retry</button></p>
@@ -99,4 +104,5 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
     </div>
     <p class="catalog-disclaimer">ProductCatalog is queried from the GraphDB AAS RDF repository. This is a snapshot query, not live AAS synchronization.</p>
   </section>
+  </template>
 </template>
