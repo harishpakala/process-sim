@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue'
+import EngineeringRdfGraph from './EngineeringRdfGraph.vue'
 import { Factory, Search, Network, Package } from 'lucide-vue-next'
 import { selectTriples, KG_TYPE, KG_VOCAB, localName, type Triple } from '../lib/sparql'
 import AssetStatusKnowledgeGraph from './AssetStatusKnowledgeGraph.vue'
@@ -11,6 +12,7 @@ const productNS = 'https://example.org/productcatalog/'
 const productType = 'https://example.org/productcatalog/Product'
 const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const triples = ref<Triple[]>([])
+const domainGraphOpen = ref(false)
 const loading = ref(false)
 const error = ref('')
 const query = ref('')
@@ -84,6 +86,9 @@ const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 const statusLabel = (value: string) => readable(value || 'Unknown')
 </script>
 <template>
+  <div class="graph-toolbar" style="display:flex;gap:8px;margin-bottom:12px"><button type="button" class="secondary" :aria-pressed="domainGraphOpen" @click="domainGraphOpen=!domainGraphOpen">{{ domainGraphOpen ? 'Show catalog details' : 'Domain Knowledge Graph' }}</button></div>
+  <EngineeringRdfGraph v-if="domainGraphOpen" domain="assetinventory" />
+  <template v-else>
  <section class="catalog asset-inventory">
   <p v-if="loading" role="status">Loading AssetInventory from GraphDB AAS…</p>
   <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }} <button class="secondary" type="button" @click="load">Retry</button></p>
@@ -130,4 +135,5 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
   </div>
   <p class="catalog-disclaimer">AssetInventory list, counters, statuses, product references and KG visualization are queried from GraphDB repository AAS. No bundled AAS JSON fallback; real-time synchronization is not implemented.</p>
  </section>
+  </template>
 </template>
