@@ -91,20 +91,24 @@ async function load() {
     triples.value = result
     const ids = [...new Set([...result.flatMap(t => [t.subject, t.object]), ...referenceTriples.value.map(t => t.subject), ...resolvedReferences.value.flatMap(r => [r.source, r.target])])]
     if (ids.length) {
-      const values = ids.map(id => '<' + id + '>').join(' ')
-      const meta = await selectTriples(`SELECT ?s ?p ?o WHERE {
-        GRAPH ?g { VALUES ?s { ${values} }
-          { ?s a ?o . BIND(<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) }
-          UNION
-          { ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o .
-            BIND(<http://www.w3.org/2000/01/rdf-schema#label> AS ?p) }
-        }
-      } LIMIT 6000`)
       const types: Record<string, string> = {}
       const names: Record<string, string> = {}
-      for (const t of meta) {
-        if (t.predicate.endsWith('#type') && domains.some(d => t.object.startsWith(namespace+d+'/'))) types[t.subject] = t.object
-        if (t.predicate.endsWith('#label')) names[t.subject] = t.object
+      // Batch metadata lookups to avoid oversized GET URLs and GraphDB HTTP 400.
+      for (let i = 0; i < ids.length; i += 30) {
+        const values = ids.slice(i, i + 30).map(id => '<' + id + '>').join(' ')
+        const meta = await selectTriples(`SELECT ?s ?p ?o WHERE {
+          VALUES ?s { ${values} }
+          GRAPH ?g {
+            { ?s a ?o . BIND(<http://www.w3.org/1999/02/22-rdf-syntax-ns#type> AS ?p) }
+            UNION
+            { ?s <http://www.w3.org/2000/01/rdf-schema#label> ?o .
+              BIND(<http://www.w3.org/2000/01/rdf-schema#label> AS ?p) }
+          }
+        } LIMIT 1000`)
+        for (const t of meta) {
+          if (t.predicate.endsWith('#type') && domains.some(d => t.object.startsWith(namespace+d+'/'))) types[t.subject] = t.object
+          if (t.predicate.endsWith('#label')) names[t.subject] = t.object
+        }
       }
       typeMap.value = types
       labels.value = names
