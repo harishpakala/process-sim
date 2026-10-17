@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { selectTriples, localName, iri, type Triple } from '../lib/sparql'
 
-const props = defineProps<{ domain: 'dexpi' | 'ecad' }>()
+const props = defineProps<{ domain: 'dexpi' | 'ecad' | 'productcatalog' | 'assetinventory' }>()
 const namespace = computed(() => 'https://example.org/' + props.domain + '/')
 const rdfType = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
 const labelPredicate = 'http://www.w3.org/2000/01/rdf-schema#label'
@@ -90,7 +90,8 @@ async function load() {
   try {
     // The AAS Submodel root is typed aas:Submodel, not a domain Equipment/Device.
     // Resolve it by its lifted rdfs:label (TEP_DEXPI / TEP_ECAD).
-    const rootLabel = props.domain === 'dexpi' ? 'TEP_DEXPI' : 'TEP_ECAD'
+    const rootLabels: Record<string, string> = { dexpi: 'TEP_DEXPI', ecad: 'TEP_ECAD', productcatalog: 'TEP_ProductCatalog', assetinventory: 'AssetInventory' }
+    const rootLabel = rootLabels[props.domain]
     const rows = await selectTriples(`SELECT ?s ?p ?o WHERE {
       GRAPH ?g {
         ?s a <https://example.org/aas/Submodel> ;
@@ -138,7 +139,7 @@ async function focusOn(id: string) {
 }
 function nodeColor(id: string) {
   const type = kind(id)
-  const colors: Record<string, string> = { Equipment: '#0e7490', InstrumentationFunction: '#7c3aed', ActuatingFunction: '#b45309', Device: '#0369a1', EndPoint: '#0f766e', PLCEndPoint: '#15803d', ConnectionPoints: '#0d9488', Connections: '#a16207', ElectricalNet: '#be185d' }
+  const colors: Record<string, string> = { Equipment: '#0e7490', InstrumentationFunction: '#7c3aed', ActuatingFunction: '#b45309', Device: '#0369a1', EndPoint: '#0f766e', PLCEndPoint: '#15803d', ConnectionPoints: '#0d9488', Connections: '#a16207', ElectricalNet: '#be185d', Product: '#7c3aed', Asset: '#0f766e', TechnicalProperties: '#b45309', AssetInventoryStatus: '#be185d' }
   return colors[type] || '#475569'
 }
 function layoutGraph(center: string) {
