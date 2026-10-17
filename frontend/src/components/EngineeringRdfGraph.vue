@@ -20,6 +20,7 @@ const zoom = ref(1)
 const svgRef = ref<SVGSVGElement | null>(null)
 let gesture: { id: string; x: number; y: number; originX: number; originY: number; moved: boolean } | null = null
 let suppressClick = false
+let captureTarget: Element | null = null
 let generation = 0
 
 const known = computed(() => new Set([root.value, ...triples.value.map(t => t.subject), ...triples.value.filter(t => t.resource && t.predicate !== rdfType).map(t => t.object)].filter(Boolean)))
@@ -141,9 +142,13 @@ function resetView() {
 }
 function pointerDown(event: PointerEvent, id = '') {
   if (event.button !== 0) return
+  suppressClick = false
   const point = coords(id)
   gesture = { id, x: event.clientX, y: event.clientY, originX: id ? point.x : pan.value.x, originY: id ? point.y : pan.value.y, moved: false }
-  svgRef.value?.setPointerCapture(event.pointerId)
+  // Capture on the actual node, not the SVG root: root capture retargets
+  // click/dblclick to the canvas and prevents expansion.
+  captureTarget = event.currentTarget as Element
+  if ('setPointerCapture' in captureTarget) (captureTarget as Element & { setPointerCapture(id: number): void }).setPointerCapture(event.pointerId)
 }
 function pointerMove(event: PointerEvent) {
   if (!gesture || !svgRef.value) return
@@ -165,14 +170,17 @@ function pointerUp(event: PointerEvent) {
     // A drag must not accidentally select or expand a node.
   }
   gesture = null
-  if (svgRef.value?.hasPointerCapture(event.pointerId)) svgRef.value.releasePointerCapture(event.pointerId)
+  if (captureTarget && 'hasPointerCapture' in captureTarget && (captureTarget as Element & { hasPointerCapture(id: number): boolean }).hasPointerCapture(event.pointerId)) (captureTarget as Element & { releasePointerCapture(id: number): void }).releasePointerCapture(event.pointerId)
+  captureTarget = null
 }
 function selectNode(id: string) {
   if (suppressClick) { suppressClick = false; return }
   selected.value = id
 }
 function doubleClickNode(id: string) {
-  if (suppressClick) { suppressClick = false; return }
+  // A double-click is an explicit expansion gesture; never let a previous
+  // drag's click-suppression flag swallow it.
+  suppressClick = false
   void toggle(id)
 }
 function wheel(event: WheelEvent) {
