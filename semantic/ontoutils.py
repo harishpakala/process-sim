@@ -586,9 +586,9 @@ def get_ontology_concept(
 
     for qualifier in element.qualifiers:
 
-        if qualifier.type in (
-            "ontoConcept",
-            "OntologyConcept",
+        if str(qualifier.type).lower() in (
+            "ontoconcept",
+            "ontologyconcept",
         ):
 
             if qualifier.value is None:
