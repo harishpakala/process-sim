@@ -30,22 +30,22 @@ def check(template, instance, path="", issues=None):
     template_by_id = {e.get("idShort"): e for e in expected}
     actual_by_id = {e.get("idShort"): e for e in actual}
     repeatable = [e for e in expected if cardinality(e) in ("ZeroToMany", "OneToMany")]
+    concept_matches = {e.get("idShort"): 0 for e in expected}
     for name, element in template_by_id.items():
         if name in actual_by_id:
+            concept_matches[name] += 1
             matched = actual_by_id[name]
             if matched.get("modelType") != element.get("modelType"):
                 issues.append(f"{path}/{name}: expected {element.get('modelType')}, got {matched.get('modelType')}")
             elif element.get("modelType") == "SubmodelElementCollection":
                 check(element, matched, path + "/" + name, issues)
-        elif cardinality(element) in ("One", "OneToMany"):
-            # Repeatable placeholders may have concrete instance idShort values.
-            if element not in repeatable or not actual:
-                issues.append(f"{path}/{name}: missing required element")
+        # Required cardinality is checked after matching concrete elements by
+        # ontoConcept, so placeholder names do not produce false missing errors.
     for name, element in actual_by_id.items():
         if name in template_by_id:
             continue
         concepts = {q.get("value") for q in element.get("qualifiers", []) if q.get("type", "").lower() in ("ontoconcept", "ontologyconcept")}
-        matches = [candidate for candidate in repeatable
+        matches = [candidate for candidate in expected
                    if candidate.get("modelType") == element.get("modelType")
                    and candidate.get("idShort") in concepts]
         # Only use a single generic placeholder when no semantic annotation
@@ -53,11 +53,19 @@ def check(template, instance, path="", issues=None):
         if not concepts and len(repeatable) == 1 and element.get("modelType") == repeatable[0].get("modelType"):
             matches = repeatable
         if len(matches) == 1:
+            concept_matches[matches[0].get("idShort")] += 1
             check(matches[0], element, path + "/" + name, issues)
         elif len(matches) > 1:
             issues.append(f"{path}/{name}: ambiguous ontoConcept mapping {sorted(concepts)}")
         else:
             issues.append(f"{path}/{name}: not declared by template (ontoConcept={sorted(concepts)})")
+    for name, template_element in template_by_id.items():
+        count = concept_matches[name]
+        rule = cardinality(template_element)
+        if rule in ("One", "OneToMany") and count == 0:
+            issues.append(f"{path}/{name}: missing required element")
+        if rule in ("One", "ZeroToOne") and count > 1:
+            issues.append(f"{path}/{name}: {count} matching elements exceed {rule} cardinality")
     return issues
 
 def main():
