@@ -13,6 +13,7 @@ const labels = ref<Record<string, string>>({})
 const typeMap = ref<Record<string, string>>({})
 const status = ref('')
 const referenceTriples = ref<Triple[]>([])
+const resolvedReferences = ref<{source:string;predicate:string;value:string;target:string;domain:string}[]>([])
 const domainOf = (id: string) => {
   const type = typeMap.value[id] || ''
   const match = domains.find(d => type.startsWith(namespace + d + '/'))
@@ -29,6 +30,7 @@ async function load() {
   error.value = ''
   status.value = ''
   referenceTriples.value = []
+  resolvedReferences.value = []
   try {
     // Only asserted RDF IRI links are considered; matching names never create edges.
     // Fetch class declarations for both ends so a link is shown only when
@@ -56,6 +58,35 @@ async function load() {
         FILTER(REGEX(STR(?p), "(EngineeringReference|ProductReference|OperationalReference)$", "i"))
       }
     } LIMIT 3000`)
+    // Resolve literal reference values only through exact RDF identifier values.
+    // Do not guess from labels or substrings; preserve the original evidence.
+    if (referenceTriples.value.length) {
+      const values = [...new Set(referenceTriples.value.map(t => t.object).filter(v => /^https?:\\/\\//.test(v)))]
+      const found: {source:string;predicate:string;value:string;target:string;domain:string}[] = []
+      for (let i = 0; i < values.length; i += 80) {
+        const batch = values.slice(i, i + 80)
+        const quoted = batch.map(v => JSON.stringify(v)).join(' ')
+        const matches = await selectTriples(`SELECT DISTINCT ?s ?p ?o WHERE {
+          VALUES ?value { ${quoted} }
+          GRAPH ?g {
+            ?s ?p ?o .
+            FILTER(isLiteral(?o) && STR(?o) = STR(?value))
+            FILTER(REGEX(STR(?p), "(Identifier|Reference|AssetId|id)$", "i"))
+          }
+          GRAPH ?gt { ?s a ?type }
+          FILTER(STRSTARTS(STR(?type), "https://example.org/dexpi/") ||
+                 STRSTARTS(STR(?type), "https://example.org/ecad/") ||
+                 STRSTARTS(STR(?type), "https://example.org/productcatalog/") ||
+                 STRSTARTS(STR(?type), "https://example.org/assetinventory/"))
+        } LIMIT 1000`)
+        for (const m of matches) {
+          for (const ref of referenceTriples.value.filter(t => t.object === m.object && t.subject !== m.subject)) {
+            found.push({source:ref.subject,predicate:ref.predicate,value:ref.object,target:m.subject,domain:localName(m.predicate)})
+          }
+        }
+      }
+      resolvedReferences.value = [...new Map(found.map(r => [r.source+'|'+r.predicate+'|'+r.target,r])).values()]
+    }
     triples.value = result
     const ids = [...new Set(result.flatMap(t => [t.subject, t.object]))]
     if (ids.length) {
@@ -82,6 +113,7 @@ async function load() {
     error.value = e instanceof Error ? e.message : String(e)
     triples.value = []
     referenceTriples.value = []
+    resolvedReferences.value = []
   } finally { loading.value = false }
 }
 onMounted(() => { void load() })
@@ -109,6 +141,7 @@ onMounted(() => { void load() })
         <aside class="graph-sidepane"><h2>Resource details</h2><template v-if="selected"><strong>{{ label(selected) }}</strong><p class="catalog-wrap">{{ selected }}</p><p>Domain: {{ domainOf(selected) }}</p><p>Class: {{ localName(typeMap[selected] || '') }}</p><p>{{ connected.length }} visible verified relationships</p></template><p v-else>Select a resource to filter its verified relationships.</p></aside>
       </div>
       <p v-else-if="crossLinks.length" class="catalog-disclaimer">No relationships match the current filter.</p>
+      <section class="panel" v-if="resolvedReferences.length"><h2>Resolved reference paths</h2><p class="catalog-disclaimer">Each path matches an exact identifier literal on a typed RDF resource. This is a validated reference mapping, not an asserted object-property edge.</p><div v-for="(r,i) in resolvedReferences" :key="i" class="graph-relationship" style="margin-bottom:12px"><strong class="catalog-wrap">{{ r.source }}</strong><span>→ {{ localName(r.predicate) }} ({{ r.value }}) →</span><strong class="catalog-wrap">{{ r.target }}</strong></div></section>
       <section class="panel" v-if="referenceTriples.length"><h2>Declared cross-domain references</h2><p class="catalog-disclaimer">These values are present in RDF as literal reference properties. They are not asserted resource-to-resource edges.</p><div v-for="(t,i) in referenceTriples" :key="i" class="graph-relationship"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap">{{ t.subject }}</strong><span class="catalog-wrap">→ {{ t.object }}</span></div></section>
     </template>
   </section>
