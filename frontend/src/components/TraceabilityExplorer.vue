@@ -12,6 +12,7 @@ const selected = ref('')
 const labels = ref<Record<string, string>>({})
 const typeMap = ref<Record<string, string>>({})
 const status = ref('')
+const referenceTriples = ref<Triple[]>([])
 const domainOf = (id: string) => {
   const type = typeMap.value[id] || ''
   const match = domains.find(d => type.startsWith(namespace + d + '/'))
@@ -27,6 +28,7 @@ async function load() {
   loading.value = true
   error.value = ''
   status.value = ''
+  referenceTriples.value = []
   try {
     // Only asserted RDF IRI links are considered; matching names never create edges.
     // Fetch class declarations for both ends so a link is shown only when
@@ -49,6 +51,11 @@ async function load() {
       FILTER(STRBEFORE(STRAFTER(STR(?st), "https://example.org/"), "/") !=
              STRBEFORE(STRAFTER(STR(?ot), "https://example.org/"), "/"))
     } LIMIT 3000`)
+    referenceTriples.value = await selectTriples(`SELECT DISTINCT ?s ?p ?o WHERE {
+      GRAPH ?g { ?s ?p ?o . FILTER(isLiteral(?o))
+        FILTER(REGEX(STR(?p), "(EngineeringReference|ProductReference|OperationalReference)$", "i"))
+      }
+    } LIMIT 3000`)
     triples.value = result
     const ids = [...new Set(result.flatMap(t => [t.subject, t.object]))]
     if (ids.length) {
@@ -70,10 +77,11 @@ async function load() {
       typeMap.value = types
       labels.value = names
     } else { typeMap.value = {}; labels.value = {} }
-    status.value = result.length ? 'Verified RDF links only' : 'No cross-domain RDF links found. Domain graphs may exist independently; mappings must be asserted before traceability can be shown.'
+    status.value = result.length ? 'Verified RDF resource links found.' : 'No direct cross-domain RDF resource links matched. Reference properties are shown separately below.'
   } catch (e) {
     error.value = e instanceof Error ? e.message : String(e)
     triples.value = []
+    referenceTriples.value = []
   } finally { loading.value = false }
 }
 onMounted(() => { void load() })
@@ -82,7 +90,7 @@ onMounted(() => { void load() })
 <template>
   <section class="panel">
     <div class="panel-title"><div><h2>Cross-domain Traceability Explorer</h2><p>DEXPI · ECAD · ProductCatalog · AssetInventory</p></div><button class="secondary" type="button" @click="load">Refresh RDF links</button></div>
-    <p class="catalog-disclaimer">Only explicitly asserted, cross-domain RDF resource relationships are displayed. No links are inferred from matching names.</p>
+    <p class="catalog-disclaimer">Only explicitly asserted, cross-domain RDF resource relationships are displayed. Literal reference properties are listed separately and are not claimed as resolved RDF edges.</p>
     <p v-if="loading" role="status">Querying GraphDB for verified cross-domain links…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }}</p>
     <p v-if="status" role="status">{{ status }}</p>
@@ -101,6 +109,7 @@ onMounted(() => { void load() })
         <aside class="graph-sidepane"><h2>Resource details</h2><template v-if="selected"><strong>{{ label(selected) }}</strong><p class="catalog-wrap">{{ selected }}</p><p>Domain: {{ domainOf(selected) }}</p><p>Class: {{ localName(typeMap[selected] || '') }}</p><p>{{ connected.length }} visible verified relationships</p></template><p v-else>Select a resource to filter its verified relationships.</p></aside>
       </div>
       <p v-else-if="crossLinks.length" class="catalog-disclaimer">No relationships match the current filter.</p>
+      <section class="panel" v-if="referenceTriples.length"><h2>Declared cross-domain references</h2><p class="catalog-disclaimer">These values are present in RDF as literal reference properties. They are not asserted resource-to-resource edges.</p><div v-for="(t,i) in referenceTriples" :key="i" class="graph-relationship"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap">{{ t.subject }}</strong><span class="catalog-wrap">→ {{ t.object }}</span></div></section>
     </template>
   </section>
 </template>
