@@ -8,6 +8,9 @@ const loading = ref(false)
 let timer: ReturnType<typeof setInterval> | undefined
 const names: Record<number, string> = { 1:'A feed flow',2:'D feed flow',3:'E feed flow',4:'A/C feed flow',5:'Recycle flow',6:'Reactor feed rate',7:'Reactor pressure',8:'Reactor level',9:'Reactor temperature',10:'Purge rate',11:'Separator temperature',12:'Separator level',13:'Separator pressure',14:'Separator underflow',15:'Stripper level',16:'Stripper pressure',17:'Stripper underflow',18:'Stripper temperature',19:'Stripper steam flow',20:'Compressor work',21:'Reactor cooling outlet temperature',22:'Separator cooling outlet temperature' }
 const units: Record<number,string> = { 1:'kscmh',2:'kg/hr',3:'kg/hr',4:'kscmh',5:'kscmh',6:'kscmh',7:'kPa gauge',8:'%',9:'°C',10:'kscmh',11:'°C',12:'%',13:'kPa gauge',14:'m³/hr',15:'%',16:'kPa gauge',17:'m³/hr',18:'°C',19:'kg/hr',20:'kW',21:'°C',22:'°C' }
+type FaultEvent = { sequence:number; action:string; fault_id:string; target:string; simulation_time_hours:number }
+const faultEvents = ref<FaultEvent[]>([])
+const eventError = ref('')
 const selected = ref('XMEAS9')
 const samples = ref<{time:number; measurements:number[]; manipulatedVariables:number[]}[]>([])
 const mvNames = ['D feed flow','E feed flow','A feed flow','A/C feed flow','Compressor recycle valve','Purge valve','Separator pot liquid flow','Stripper liquid product flow','Stripper steam valve','Reactor cooling water flow','Condenser cooling water flow','Agitator speed']
@@ -33,6 +36,21 @@ const chart = computed(()=>{
  }).join(' ')
  return {path,lo,hi,start,end}
 })
+const visibleEvents = computed(()=>{
+ const start=chart.value.start,end=chart.value.end
+ if(!trend.value.length||end<=start)return []
+ return faultEvents.value.filter(e=>e.simulation_time_hours>=start&&e.simulation_time_hours<=end)
+  .map(e=>({...e,x:55+650*(e.simulation_time_hours-start)/(end-start)}))
+})
+async function refreshEvents(){
+ try{
+  const response=await fetch('/api/simulation/fault-events')
+  const body=await response.json()
+  if(!response.ok)throw new Error(body.error||'Fault events unavailable')
+  faultEvents.value=body.events
+  eventError.value=''
+ }catch(e){eventError.value=e instanceof Error?e.message:String(e)}
+}
 function fmt(n:number){return Number.isFinite(n)?n.toFixed(3):'—'}
 async function refresh() {
  if (loading.value) return
@@ -44,7 +62,7 @@ async function refresh() {
   const snap=body as Snapshot
   const time=Number(snap.simulation.TimeHours)
   const last=samples.value[samples.value.length-1]
-  if(last && time<last.time) samples.value=[]
+  if(last && time<last.time) { samples.value=[]; faultEvents.value=[] }
   if(Number.isFinite(time) && (!last || time!==last.time)) samples.value=[...samples.value,{time,measurements:[...snap.measurements],manipulatedVariables:[...snap.manipulatedVariables]}].slice(-300)
   data.value=snap
   error.value=''
@@ -61,7 +79,7 @@ async function command(action:'Start'|'Stop'|'Reset') {
  } catch(e) {error.value=e instanceof Error?e.message:String(e)}
  finally {busy.value=false}
 }
-onMounted(()=>{void refresh();timer=setInterval(()=>void refresh(),2000)})
+onMounted(()=>{void refresh();void refreshEvents();timer=setInterval(()=>{void refresh();void refreshEvents()},2000)})
 onUnmounted(()=>{if(timer)clearInterval(timer)})
 </script>
 
@@ -104,10 +122,21 @@ onUnmounted(()=>{if(timer)clearInterval(timer)})
       <text x="705" y="258" text-anchor="end">{{fmt(chart.end)}}</text>
       <text x="380" y="283" text-anchor="middle">Simulation time (hours)</text>
      </g>
+     <g v-for="event in visibleEvents" :key="event.sequence">
+      <line :x1="event.x" y1="20" :x2="event.x" y2="240" :stroke="event.action==='inject'?'#dc2626':'#16a34a'" stroke-width="1.8" stroke-dasharray="5 4"/>
+      <circle :cx="event.x" cy="20" r="4" :fill="event.action==='inject'?'#dc2626':'#16a34a'"/>
+      <title>{{event.action==='inject'?'Injected':'Cleared'}} {{event.fault_id}} ({{event.target}}) at {{fmt(event.simulation_time_hours)}} h</title>
+     </g>
      <path :d="chart.path" stroke="#0e7490" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
     </svg>
    </div>
    <p v-else class="subdued">No samples yet. Connect to OPC UA and run the simulation.</p>
+   <div style="display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;font-size:13px">
+    <span><span style="color:#dc2626">━━</span> Fault injected</span>
+    <span><span style="color:#16a34a">━━</span> Fault cleared</span>
+    <span>Markers appear within the collected time window; hover for details.</span>
+   </div>
+   <p v-if="eventError" class="subdued">Fault event annotations unavailable: {{eventError}}</p>
    <p class="subdued">History is stored only in this browser session. Switching variables preserves collected samples.</p>
   </section>
  </div>
