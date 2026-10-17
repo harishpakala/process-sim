@@ -15,6 +15,7 @@ const search = ref('')
 const loading = ref(false)
 const error = ref('')
 const positions = ref<Record<string, { x: number; y: number }>>({})
+const pinned = new Set<string>()
 const pan = ref({ x: 0, y: 0 })
 const zoom = ref(1)
 const svgRef = ref<SVGSVGElement | null>(null)
@@ -114,6 +115,7 @@ async function toggle(id: string) {
   try {
     await neighbors(id, generation)
     expanded.value = [...expanded.value, id]
+    layoutGraph(id)
   } catch { /* Error is shown in the panel. */ }
 }
 async function focusOn(id: string) {
@@ -127,6 +129,48 @@ async function focusOn(id: string) {
   search.value = ''
   try { await neighbors(id, generation) } catch { /* Error shown in panel. */ }
 }
+function nodeColor(id: string) {
+  const type = kind(id)
+  const colors: Record<string, string> = { Equipment: '#0e7490', InstrumentationFunction: '#7c3aed', ActuatingFunction: '#b45309', Device: '#0369a1', EndPoint: '#0f766e', PLCEndPoint: '#15803d', ConnectionPoints: '#0d9488', Connections: '#a16207', ElectricalNet: '#be185d' }
+  return colors[type] || '#475569'
+}
+function layoutGraph(center: string) {
+  const ids = visible.value
+  if (ids.length < 2) return
+  const next: Record<string, { x: number; y: number }> = {}
+  ids.forEach((id, i) => {
+    const existing = positions.value[id]
+    const parent = positions.value[center] || coords(center)
+    const angle = i * 2.399963229728653
+    next[id] = existing || (id === center ? { ...parent } : { x: parent.x + Math.cos(angle) * (130 + 35 * Math.sqrt(i)), y: parent.y + Math.sin(angle) * (130 + 35 * Math.sqrt(i)) })
+  })
+  // Bounded deterministic force relaxation; dragged nodes stay fixed.
+  for (let step = 0; step < 100; step++) {
+    const force: Record<string, { x: number; y: number }> = {}
+    ids.forEach(id => { force[id] = { x: 0, y: 0 } })
+    for (let i = 0; i < ids.length; i++) for (let j = i + 1; j < ids.length; j++) {
+      const a = ids[i], b = ids[j], dx = next[a].x - next[b].x, dy = next[a].y - next[b].y
+      const dist2 = Math.max(dx * dx + dy * dy, 100)
+      const strength = Math.min(18, 100000 / dist2) / Math.sqrt(dist2)
+      force[a].x += dx * strength; force[a].y += dy * strength
+      force[b].x -= dx * strength; force[b].y -= dy * strength
+    }
+    for (const edge of edges.value) {
+      const a = next[edge.subject], b = next[edge.object]
+      if (!a || !b) continue
+      const dx = b.x - a.x, dy = b.y - a.y, dist = Math.max(Math.hypot(dx, dy), 1)
+      const strength = (dist - 165) * 0.008
+      force[edge.subject].x += dx * strength; force[edge.subject].y += dy * strength
+      force[edge.object].x -= dx * strength; force[edge.object].y -= dy * strength
+    }
+    for (const id of ids) {
+      if (pinned.has(id) || id === root.value) continue
+      next[id].x += Math.max(-15, Math.min(15, force[id].x))
+      next[id].y += Math.max(-15, Math.min(15, force[id].y))
+    }
+  }
+  positions.value = { ...positions.value, ...next }
+}
 function coords(id: string) {
   if (positions.value[id]) return positions.value[id]
   const i = visible.value.indexOf(id)
@@ -137,6 +181,7 @@ function coords(id: string) {
 }
 function resetView() {
   positions.value = {}
+  pinned.clear()
   pan.value = { x: 0, y: 0 }
   zoom.value = 1
 }
@@ -168,6 +213,7 @@ function pointerMove(event: PointerEvent) {
 }
 function pointerUp(event: PointerEvent) {
   if (gesture?.moved) {
+    if (gesture.id) pinned.add(gesture.id)
     suppressClick = true
     // A drag must not accidentally select or expand a node.
   }
@@ -211,17 +257,19 @@ function wheel(event: WheelEvent) {
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }}</p>
     <template v-if="!loading && root">
-      <p class="catalog-disclaimer">{{ visible.length }} visible resources · {{ edges.length }} RDF relationships. Drag nodes to reposition, drag the background to pan, scroll to zoom, and double-click to expand. Literal properties appear on the right.</p>
+      <p class="catalog-disclaimer">{{ visible.length }} visible resources · {{ edges.length }} RDF relationships. Drag nodes to reposition, drag the background to pan, scroll to zoom, and double-click to expand. Node colors indicate RDF types; arrows show predicate direction. Dragged nodes retain their positions. Literal properties appear on the right.</p>
       <div class="graph-workspace">
         <div class="graph-canvas graph-rdf-scroll" role="group" :aria-label="domain + ' RDF graph'">
           <svg ref="svgRef" viewBox="0 0 940 720" width="100%" height="100%" role="img" style="touch-action:none;cursor:grab;user-select:none" @pointerdown="pointerDown($event)" @pointermove="pointerMove" @pointerup="pointerUp" @pointercancel="pointerUp" @wheel="wheel">
+            <defs><marker id="rdf-arrow" markerWidth="7" markerHeight="7" refX="18" refY="3" orient="auto" markerUnits="userSpaceOnUse"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#598fa8" stroke-width="1.2"/></marker></defs>
             <g :transform="`translate(${pan.x} ${pan.y}) scale(${zoom})`">
             <g v-for="(edge, i) in edges" :key="i">
-              <line :x1="coords(edge.subject).x" :y1="coords(edge.subject).y" :x2="coords(edge.object).x" :y2="coords(edge.object).y" stroke="#598fa8" stroke-width="1.5"/>
+              <line :x1="coords(edge.subject).x" :y1="coords(edge.subject).y" :x2="coords(edge.object).x" :y2="coords(edge.object).y" stroke="#598fa8" stroke-width="1.5" marker-end="url(#rdf-arrow)"/>
+              <text :x="(coords(edge.subject).x+coords(edge.object).x)/2" :y="(coords(edge.subject).y+coords(edge.object).y)/2-6" text-anchor="middle" font-size="10" fill="#93c5d9" stroke="#142a3a" stroke-width="2" paint-order="stroke">{{ localName(edge.predicate).slice(0,22) }}</text>
               <title>{{ localName(edge.predicate) }}</title>
             </g>
             <g v-for="id in visible" :key="id" role="button" tabindex="0" style="cursor:move" @pointerdown.stop="pointerDown($event, id)" @click.stop="selectNode(id)" @dblclick.stop.prevent="doubleClickNode(id)" @keydown.enter.prevent="toggle(id)" @keydown.space.prevent="toggle(id)">
-              <circle :cx="coords(id).x" :cy="coords(id).y" :r="selected===id?31:23" :fill="selected===id?'#2563eb':'#365d75'" stroke="#9bc9e2"/>
+              <circle :cx="coords(id).x" :cy="coords(id).y" :r="selected===id?31:23" :fill="selected===id?'#2563eb':nodeColor(id)" stroke="#9bc9e2"/>
               <text :x="coords(id).x" :y="coords(id).y-32" text-anchor="middle" fill="#c7e5f5" font-size="15">{{ pending.includes(id)?'…':expanded.includes(id)?'−':'+' }}</text>
               <text :x="coords(id).x" :y="coords(id).y+43" text-anchor="middle" fill="#c7e5f5" font-size="11">{{ label(id).slice(0,22) }}</text>
               <title>{{ kind(id) }}: {{ id }} — double-click to {{ expanded.includes(id)?'collapse':'expand' }}</title>
