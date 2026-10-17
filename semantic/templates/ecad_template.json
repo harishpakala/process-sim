@@ -40,18 +40,9 @@
               "value": "3",
               "qualifiers": [
                 {
-                  "semanticId": {
-                    "type": "ExternalReference",
-                    "keys": [
-                      {
-                        "type": "GlobalReference",
-                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                      }
-                    ]
-                  },
                   "type": "Cardinality",
                   "valueType": "xs:string",
-                  "value": "One"
+                  "value": "ZeroToOne"
                 }
               ]
             },
@@ -74,22 +65,26 @@
                       "idShort": "Address",
                       "valueType": "xs:string",
                       "value": "3"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Role",
+                      "valueType": "xs:string",
+                      "value": "",
+                      "qualifiers": [
+                        {
+                          "type": "Cardinality",
+                          "valueType": "xs:string",
+                          "value": "ZeroToOne"
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
                     {
-                      "semanticId": {
-                        "type": "ExternalReference",
-                        "keys": [
-                          {
-                            "type": "GlobalReference",
-                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                          }
-                        ]
-                      },
                       "type": "Cardinality",
                       "valueType": "xs:string",
-                      "value": "ZeroToOne"
+                      "value": "ZeroToMany"
                     }
                   ]
                 },
@@ -108,22 +103,26 @@
                       "idShort": "Address",
                       "valueType": "xs:string",
                       "value": "3"
+                    },
+                    {
+                      "modelType": "Property",
+                      "idShort": "Role",
+                      "valueType": "xs:string",
+                      "value": "",
+                      "qualifiers": [
+                        {
+                          "type": "Cardinality",
+                          "valueType": "xs:string",
+                          "value": "ZeroToOne"
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
                     {
-                      "semanticId": {
-                        "type": "ExternalReference",
-                        "keys": [
-                          {
-                            "type": "GlobalReference",
-                            "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                          }
-                        ]
-                      },
                       "type": "Cardinality",
                       "valueType": "xs:string",
-                      "value": "ZeroToOne"
+                      "value": "ZeroToMany"
                     }
                   ]
                 }
@@ -365,77 +364,81 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "Connections",
+          "idShort": "SchematicsConnection",
           "value": [
-			{
-			              "idShort": "isConnectedTo",
-			              "first": {
-			                "type": "ModelReference",
-			                "keys": [
-			                  {
-			                    "type": "Submodel",
-			                    "value": "https://example.org/smi/ecad25"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "Devices"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "LI"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "ConnectionPoints"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "TA1_2_Out2"
-			                  }
-			                ]
-			              },
-			              "second": {
-			                "type": "ModelReference",
-			                "keys": [
-			                  {
-			                    "type": "Submodel",
-			                    "value": "https://example.org/smi/ecad25"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "Devices"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "PLCBox"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "ConnectionPoints"
-			                  },
-			                  {
-			                    "type": "SubmodelElementCollection",
-			                    "value": "D0_0"
-			                  }
-			                ]
-			              },
-			              "modelType": "RelationshipElement"
-			            }            
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "Connection",
+              "value": [
+                {
+                  "idShort": "isConnectedTo",
+                  "first": {
+                    "type": "ModelReference",
+                    "keys": [
+                      {
+                        "type": "Submodel",
+                        "value": "https://example.org/smi/ecad25"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Devices"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "LI"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "ConnectionPoints"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "TA1_2_Out2"
+                      }
+                    ]
+                  },
+                  "second": {
+                    "type": "ModelReference",
+                    "keys": [
+                      {
+                        "type": "Submodel",
+                        "value": "https://example.org/smi/ecad25"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "Devices"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "PLCBox"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "ConnectionPoints"
+                      },
+                      {
+                        "type": "SubmodelElementCollection",
+                        "value": "D0_0"
+                      }
+                    ]
+                  },
+                  "modelType": "RelationshipElement"
+                }
+              ],
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "ZeroToMany"
+                }
+              ]
+            }
           ],
           "qualifiers": [
             {
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
-                  }
-                ]
-              },
               "type": "Cardinality",
               "valueType": "xs:string",
-              "value": "ZeroToMany"
+              "value": "ZeroToOne"
             }
           ]
         }
@@ -451,6 +454,45 @@
               }
             ]
           },
+          "type": "Cardinality",
+          "valueType": "xs:string",
+          "value": "ZeroToOne"
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "ElectricalNets",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ElectricalNet",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "",
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "ZeroToOne"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
