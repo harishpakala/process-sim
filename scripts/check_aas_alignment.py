@@ -44,8 +44,10 @@ def check(template, instance, path="", issues=None):
     for name, element in actual_by_id.items():
         if name in template_by_id:
             continue
-        if len(repeatable) == 1 and element.get("modelType") == repeatable[0].get("modelType"):
-            check(repeatable[0], element, path + "/" + name, issues)
+        concepts = {q.get("value") for q in element.get("qualifiers", []) if q.get("type", "").lower() in ("ontoconcept", "ontologyconcept")}
+        matches = [candidate for candidate in repeatable if candidate.get("modelType") == element.get("modelType") and (candidate.get("idShort") in concepts or len(repeatable) == 1)]
+        if len(matches) == 1:
+            check(matches[0], element, path + "/" + name, issues)
         else:
             issues.append(f"{path}/{name}: not declared by template")
     return issues
