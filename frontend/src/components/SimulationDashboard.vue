@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 type Snapshot = { connected: boolean; simulation: { TimeHours: number; Running: boolean; ControlMode: string; RealTimeFactor: number }; measurements: number[]; manipulatedVariables: number[] }
 const data = ref<Snapshot | null>(null)
 const error = ref('')
@@ -8,6 +8,32 @@ const loading = ref(false)
 let timer: ReturnType<typeof setInterval> | undefined
 const names: Record<number, string> = { 1:'A feed flow',2:'D feed flow',3:'E feed flow',4:'A/C feed flow',5:'Recycle flow',6:'Reactor feed rate',7:'Reactor pressure',8:'Reactor level',9:'Reactor temperature',10:'Purge rate',11:'Separator temperature',12:'Separator level',13:'Separator pressure',14:'Separator underflow',15:'Stripper level',16:'Stripper pressure',17:'Stripper underflow',18:'Stripper temperature',19:'Stripper steam flow',20:'Compressor work',21:'Reactor cooling outlet temperature',22:'Separator cooling outlet temperature' }
 const units: Record<number,string> = { 1:'kscmh',2:'kg/hr',3:'kg/hr',4:'kscmh',5:'kscmh',6:'kscmh',7:'kPa gauge',8:'%',9:'°C',10:'kscmh',11:'°C',12:'%',13:'kPa gauge',14:'m³/hr',15:'%',16:'kPa gauge',17:'m³/hr',18:'°C',19:'kg/hr',20:'kW',21:'°C',22:'°C' }
+const selected = ref('XMEAS9')
+const samples = ref<{time:number; measurements:number[]; manipulatedVariables:number[]}[]>([])
+const mvNames = ['D feed flow','E feed flow','A feed flow','A/C feed flow','Compressor recycle valve','Purge valve','Separator pot liquid flow','Stripper liquid product flow','Stripper steam valve','Reactor cooling water flow','Condenser cooling water flow','Agitator speed']
+const options = [...Array.from({length:41},(_,i)=>({id:'XMEAS'+(i+1),label:'XMEAS'+(i+1)+' — '+(names[i+1]||'Composition analyzer')})),...Array.from({length:12},(_,i)=>({id:'XMV'+(i+1),label:'XMV'+(i+1)+' — '+mvNames[i]}))]
+const trend = computed(()=>{
+ const mv=selected.value.startsWith('XMV')
+ const index=Number(selected.value.slice(mv?3:5))-1
+ return samples.value.map(s=>({x:s.time,y:(mv?s.manipulatedVariables:s.measurements)[index]})).filter(p=>Number.isFinite(p.x)&&Number.isFinite(p.y))
+})
+const unit = computed(()=>selected.value.startsWith('XMV')?'':(units[Number(selected.value.slice(5))]||'mol%'))
+const chart = computed(()=>{
+ const p=trend.value
+ if(!p.length)return {path:'',lo:0,hi:1,start:0,end:1}
+ const values=p.map(v=>v.y)
+ let lo=Math.min(...values),hi=Math.max(...values)
+ const pad=(hi-lo||Math.max(Math.abs(hi),1))*.08
+ lo-=pad;hi+=pad
+ const start=p[0].x,end=p[p.length-1].x
+ const path=p.map((v,i)=>{
+  const x=55+650*(end===start?(p.length===1?0:i/(p.length-1)):(v.x-start)/(end-start))
+  const y=20+220*(hi-v.y)/(hi-lo)
+  return (i?'L':'M')+x.toFixed(2)+' '+y.toFixed(2)
+ }).join(' ')
+ return {path,lo,hi,start,end}
+})
+function fmt(n:number){return Number.isFinite(n)?n.toFixed(3):'—'}
 async function refresh() {
  if (loading.value) return
  loading.value=true
@@ -15,7 +41,12 @@ async function refresh() {
   const response=await fetch('/api/simulation/status')
   const body=await response.json()
   if (!response.ok) throw new Error(body.error || 'Simulation API unavailable')
-  data.value=body
+  const snap=body as Snapshot
+  const time=Number(snap.simulation.TimeHours)
+  const last=samples.value[samples.value.length-1]
+  if(last && time<last.time) samples.value=[]
+  if(Number.isFinite(time) && (!last || time!==last.time)) samples.value=[...samples.value,{time,measurements:[...snap.measurements],manipulatedVariables:[...snap.manipulatedVariables]}].slice(-300)
+  data.value=snap
   error.value=''
  } catch(e) { data.value=null;error.value=e instanceof Error?e.message:String(e) }
  finally {loading.value=false}
@@ -52,20 +83,32 @@ onUnmounted(()=>{if(timer)clearInterval(timer)})
    </div>
   </section>
   <section class="panel">
-   <div class="panel-title"><h2>Process measurements (XMEAS)</h2><span class="pill">Read-only · 2 s polling</span></div>
-   <div v-if="data" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
-    <div v-for="(value,index) in data.measurements" :key="index" style="border:1px solid var(--border,#d6dde3);border-radius:8px;padding:12px">
-     <small>XMEAS{{index+1}} · {{names[index+1]||'Analyzer measurement'}}</small>
-     <div style="font-weight:700;font-size:20px;margin-top:6px">{{Number(value).toFixed(3)}} <small>{{units[index+1]||(index>=22?'mol%':'')}}</small></div>
-    </div>
+   <div class="panel-title"><div><h2>Live process trend</h2><p>Select any of the 41 XMEAS or 12 XMV variables</p></div><span class="pill">2 s polling · 300 samples</span></div>
+   <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:end;margin-bottom:16px">
+    <label style="display:grid;gap:6px;flex:1;min-width:250px"><small>PROCESS VARIABLE</small>
+     <select v-model="selected" style="padding:10px;border:1px solid #b8c6d0;border-radius:8px;background:transparent;color:inherit">
+      <option v-for="option in options" :key="option.id" :value="option.id">{{option.label}}</option>
+     </select>
+    </label>
+    <div><small>CURRENT VALUE</small><strong style="display:block;font-size:22px">{{trend.length?fmt(trend[trend.length-1].y):'—'}} {{unit}}</strong></div>
+    <button class="secondary" @click="samples=[]">Clear history</button>
    </div>
-   <p v-else class="subdued">Start the OPC UA server and Python API to see live measurements.</p>
-  </section>
-  <section class="panel">
-   <div class="panel-title"><h2>Manipulated variables (XMV)</h2><span class="pill">Read-only</span></div>
-   <div v-if="data" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px">
-    <div v-for="(value,index) in data.manipulatedVariables" :key="index"><small>XMV{{index+1}}</small><strong style="display:block">{{Number(value).toFixed(3)}}</strong></div>
+   <div v-if="trend.length" style="overflow-x:auto">
+    <svg viewBox="0 0 760 290" role="img" :aria-label="'Trend for '+selected" style="width:100%;min-width:440px;height:auto">
+     <g stroke="currentColor" opacity=".2"><line x1="55" y1="20" x2="705" y2="20"/><line x1="55" y1="130" x2="705" y2="130"/><line x1="55" y1="240" x2="705" y2="240"/><line x1="55" y1="20" x2="55" y2="240"/></g>
+     <g fill="currentColor" opacity=".8" font-size="12">
+      <text x="48" y="24" text-anchor="end">{{fmt(chart.hi)}}</text>
+      <text x="48" y="134" text-anchor="end">{{fmt((chart.hi+chart.lo)/2)}}</text>
+      <text x="48" y="244" text-anchor="end">{{fmt(chart.lo)}}</text>
+      <text x="55" y="258">{{fmt(chart.start)}}</text>
+      <text x="705" y="258" text-anchor="end">{{fmt(chart.end)}}</text>
+      <text x="380" y="283" text-anchor="middle">Simulation time (hours)</text>
+     </g>
+     <path :d="chart.path" stroke="#0e7490" stroke-width="2.5" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+    </svg>
    </div>
+   <p v-else class="subdued">No samples yet. Connect to OPC UA and run the simulation.</p>
+   <p class="subdued">History is stored only in this browser session. Switching variables preserves collected samples.</p>
   </section>
  </div>
 </template>
