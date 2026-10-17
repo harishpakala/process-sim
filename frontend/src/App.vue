@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { KG_ENDPOINT } from './lib/sparql'
+import { selectTriples } from './lib/sparql'
+import SimulationDashboard from './components/SimulationDashboard.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
@@ -23,11 +24,7 @@ async function checkGraphDB() {
  graphdbStatus.value='checking'
  graphdbError.value=''
  try {
-  const url=KG_ENDPOINT+(KG_ENDPOINT.includes('?')?'&':'?')+new URLSearchParams({query:'ASK { ?s ?p ?o }'})
-  const response=await fetch(url,{headers:{Accept:'application/sparql-results+json'}})
-  if(!response.ok) throw new Error('HTTP '+response.status)
-  const result=await response.json()
-  if(typeof result.boolean!=='boolean') throw new Error('Unexpected SPARQL response')
+  await selectTriples('SELECT ?s ?p ?o WHERE { GRAPH ?g { ?s ?p ?o } } LIMIT 1')
   graphdbStatus.value='connected'
  } catch(e) {
   graphdbStatus.value='disconnected'
@@ -92,9 +89,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
     <template v-else-if="active==='AI Query'">
      <section class="panel ai"><BrainCircuit :size="38"/><h2>Ask your Digital Twin</h2><p>Future answers will be grounded in GraphDB queries and controlled process-sim tools, with visible evidence and provenance.</p><textarea placeholder="e.g. Which reactor instruments appear in the engineering BOM?" disabled></textarea><span class="pill amber-pill">LLM integration pending</span></section>
     </template>
-    <template v-else-if="active==='Simulation Control'">
-     <section class="panel"><h2>TEP simulation session</h2><p class="subdued">Future FastAPI service will manage process-sim TEPAdapter sessions.</p><div class="control-row"><button class="primary" @click="demoRunning=!demoRunning"><Play :size="16"/> {{demoRunning?'Pause preview':'Run preview'}}</button><button class="secondary" @click="demoRunning=false"><RotateCcw :size="16"/> Reset</button><span class="pill amber-pill">Demo state only</span></div></section>
-    </template>
+    <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
     <section v-if="!['Product Catalog','Asset Inventory'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
