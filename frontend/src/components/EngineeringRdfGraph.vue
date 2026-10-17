@@ -147,8 +147,10 @@ function pointerDown(event: PointerEvent, id = '') {
   gesture = { id, x: event.clientX, y: event.clientY, originX: id ? point.x : pan.value.x, originY: id ? point.y : pan.value.y, moved: false }
   // Capture on the actual node, not the SVG root: root capture retargets
   // click/dblclick to the canvas and prevents expansion.
-  captureTarget = event.currentTarget as Element
-  if ('setPointerCapture' in captureTarget) (captureTarget as Element & { setPointerCapture(id: number): void }).setPointerCapture(event.pointerId)
+  // Pointer capture on a node can suppress the browser's native dblclick.
+  // Only capture background pans; node drags track movement via SVG bubbling.
+  captureTarget = id ? null : event.currentTarget as Element
+  if (captureTarget && 'setPointerCapture' in captureTarget) (captureTarget as Element & { setPointerCapture(id: number): void }).setPointerCapture(event.pointerId)
 }
 function pointerMove(event: PointerEvent) {
   if (!gesture || !svgRef.value) return
