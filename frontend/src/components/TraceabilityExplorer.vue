@@ -31,25 +31,23 @@ async function load() {
     // Only asserted RDF IRI links are considered; matching names never create edges.
     // Fetch class declarations for both ends so a link is shown only when
     // it actually connects resources typed in different engineering domains.
-    const result = await selectTriples(`SELECT ?s ?p ?o WHERE {
-      GRAPH ?g {
-        ?s ?p ?o .
-        FILTER(isIRI(?o) && ?s != ?o)
-        GRAPH ?gs { ?s a ?st } .
-        GRAPH ?go { ?o a ?ot } .
-        FILTER(
-          (STRSTARTS(STR(?st), "https://example.org/dexpi/") ||
-           STRSTARTS(STR(?st), "https://example.org/ecad/") ||
-           STRSTARTS(STR(?st), "https://example.org/productcatalog/") ||
-           STRSTARTS(STR(?st), "https://example.org/assetinventory/")) &&
-          (STRSTARTS(STR(?ot), "https://example.org/dexpi/") ||
-           STRSTARTS(STR(?ot), "https://example.org/ecad/") ||
-           STRSTARTS(STR(?ot), "https://example.org/productcatalog/") ||
-           STRSTARTS(STR(?ot), "https://example.org/assetinventory/"))
-        )
-        FILTER(STRBEFORE(STRAFTER(STR(?st), "https://example.org/"), "/") !=
-               STRBEFORE(STRAFTER(STR(?ot), "https://example.org/"), "/"))
-      }
+    const result = await selectTriples(`SELECT DISTINCT ?s ?p ?o WHERE {
+      GRAPH ?g { ?s ?p ?o . FILTER(?s != ?o) }
+      GRAPH ?gs { ?s a ?st }
+      GRAPH ?go { ?o a ?ot }
+      FILTER(isIRI(?o))
+      FILTER(
+        (STRSTARTS(STR(?st), "https://example.org/dexpi/") ||
+         STRSTARTS(STR(?st), "https://example.org/ecad/") ||
+         STRSTARTS(STR(?st), "https://example.org/productcatalog/") ||
+         STRSTARTS(STR(?st), "https://example.org/assetinventory/")) &&
+        (STRSTARTS(STR(?ot), "https://example.org/dexpi/") ||
+         STRSTARTS(STR(?ot), "https://example.org/ecad/") ||
+         STRSTARTS(STR(?ot), "https://example.org/productcatalog/") ||
+         STRSTARTS(STR(?ot), "https://example.org/assetinventory/"))
+      )
+      FILTER(STRBEFORE(STRAFTER(STR(?st), "https://example.org/"), "/") !=
+             STRBEFORE(STRAFTER(STR(?ot), "https://example.org/"), "/"))
     } LIMIT 3000`)
     triples.value = result
     const ids = [...new Set(result.flatMap(t => [t.subject, t.object]))]
