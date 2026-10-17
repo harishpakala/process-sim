@@ -2,6 +2,7 @@
 import { computed, onMounted, ref } from 'vue'
 import { selectTriples } from './lib/sparql'
 import SimulationDashboard from './components/SimulationDashboard.vue'
+import FaultManagement from './components/FaultManagement.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
@@ -90,6 +91,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
      <section class="panel ai"><BrainCircuit :size="38"/><h2>Ask your Digital Twin</h2><p>Future answers will be grounded in GraphDB queries and controlled process-sim tools, with visible evidence and provenance.</p><textarea placeholder="e.g. Which reactor instruments appear in the engineering BOM?" disabled></textarea><span class="pill amber-pill">LLM integration pending</span></section>
     </template>
     <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
+    <template v-else-if="active==='Faults & Disturbances'"><FaultManagement /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
     <section v-if="!['Product Catalog','Asset Inventory'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
