@@ -61,7 +61,7 @@ async function load() {
     // Resolve literal reference values only through exact RDF identifier values.
     // Do not guess from labels or substrings; preserve the original evidence.
     if (referenceTriples.value.length) {
-      const values = [...new Set(referenceTriples.value.map(t => t.object).filter(v => /^https?:\\/\\//.test(v)))]
+      const values = [...new Set(referenceTriples.value.map(t => t.object).filter(v => v.startsWith('http://') || v.startsWith('https://')))]
       const found: {source:string;predicate:string;value:string;target:string;domain:string}[] = []
       for (let i = 0; i < values.length; i += 80) {
         const batch = values.slice(i, i + 80)
