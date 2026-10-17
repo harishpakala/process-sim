@@ -23,7 +23,8 @@ const crossLinks = computed(() => triples.value.filter(t => t.resource && t.subj
 const filtered = computed(() => crossLinks.value.filter(t => !search.value || [t.subject, t.object, labels.value[t.subject], labels.value[t.object], localName(t.predicate)].join(' ').toLowerCase().includes(search.value.toLowerCase())))
 const connected = computed(() => filtered.value.filter(t => !selected.value || t.subject === selected.value || t.object === selected.value))
 const nodes = computed(() => [...new Set(connected.value.flatMap(t => [t.subject, t.object]))])
-const label = (id: string) => labels.value[id] || localName(id)
+const label = (id: string) => labels.value[id] || (id.startsWith('http') ? decodeURIComponent(localName(id)) : id)
+const shortValue = (value: string) => value.startsWith('http://') || value.startsWith('https://') ? (labels.value[value] || decodeURIComponent(localName(value))) : value
 const color = (id: string) => ({dexpi:'#0e7490',ecad:'#0369a1',productcatalog:'#7c3aed',assetinventory:'#0f766e'}[domainOf(id)] || '#475569')
 async function load() {
   loading.value = true
@@ -88,7 +89,7 @@ async function load() {
       resolvedReferences.value = [...new Map(found.map(r => [r.source+'|'+r.predicate+'|'+r.target,r])).values()]
     }
     triples.value = result
-    const ids = [...new Set(result.flatMap(t => [t.subject, t.object]))]
+    const ids = [...new Set([...result.flatMap(t => [t.subject, t.object]), ...referenceTriples.value.map(t => t.subject), ...resolvedReferences.value.flatMap(r => [r.source, r.target])])]
     if (ids.length) {
       const values = ids.map(id => '<' + id + '>').join(' ')
       const meta = await selectTriples(`SELECT ?s ?p ?o WHERE {
@@ -141,8 +142,8 @@ onMounted(() => { void load() })
         <aside class="graph-sidepane"><h2>Resource details</h2><template v-if="selected"><strong>{{ label(selected) }}</strong><p class="catalog-wrap">{{ selected }}</p><p>Domain: {{ domainOf(selected) }}</p><p>Class: {{ localName(typeMap[selected] || '') }}</p><p>{{ connected.length }} visible verified relationships</p></template><p v-else>Select a resource to filter its verified relationships.</p></aside>
       </div>
       <p v-else-if="crossLinks.length" class="catalog-disclaimer">No relationships match the current filter.</p>
-      <section class="panel" v-if="resolvedReferences.length"><h2>Resolved reference paths</h2><p class="catalog-disclaimer">Each path matches an exact identifier literal on a typed RDF resource. This is a validated reference mapping, not an asserted object-property edge.</p><div v-for="(r,i) in resolvedReferences" :key="i" class="graph-relationship" style="margin-bottom:12px"><strong class="catalog-wrap">{{ r.source }}</strong><span>→ {{ localName(r.predicate) }} ({{ r.value }}) →</span><strong class="catalog-wrap">{{ r.target }}</strong></div></section>
-      <section class="panel" v-if="referenceTriples.length"><h2>Declared cross-domain references</h2><p class="catalog-disclaimer">These values are present in RDF as literal reference properties. They are not asserted resource-to-resource edges.</p><div v-for="(t,i) in referenceTriples" :key="i" class="graph-relationship"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap">{{ t.subject }}</strong><span class="catalog-wrap">→ {{ t.object }}</span></div></section>
+      <section class="panel" v-if="resolvedReferences.length"><h2>Resolved reference paths</h2><p class="catalog-disclaimer">Each path matches an exact identifier literal on a typed RDF resource. This is a validated reference mapping, not an asserted object-property edge.</p><div v-for="(r,i) in resolvedReferences" :key="i" class="graph-relationship" style="margin-bottom:12px"><strong class="catalog-wrap" :title="r.source">{{ label(r.source) }}</strong><span>→ {{ localName(r.predicate) }} ({{ shortValue(r.value) }}) →</span><strong class="catalog-wrap" :title="r.target">{{ label(r.target) }}</strong></div></section>
+      <section class="panel" v-if="referenceTriples.length"><h2>Declared cross-domain references</h2><p class="catalog-disclaimer">These values are present in RDF as literal reference properties. They are not asserted resource-to-resource edges.</p><div v-for="(t,i) in referenceTriples" :key="i" class="graph-relationship"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap" :title="t.subject">{{ label(t.subject) }}</strong><span class="catalog-wrap" :title="t.object">→ {{ shortValue(t.object) }}</span></div></section>
     </template>
   </section>
 </template>
