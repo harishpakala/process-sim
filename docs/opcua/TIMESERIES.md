@@ -91,3 +91,40 @@ causes a warning and no persistent record; there is no retry queue. The
 historian's run ID is sampled asynchronously, so a reset concurrent with a
 fault command can result in incorrect run attribution. Cross-process run
 recovery and fully transactional event acquisition are future work.
+
+## Phase 4: import semantic provenance into GraphDB
+
+The endpoint `GET /api/semantic/run?runId=<uuid>` generates RDF/Turtle for
+a stored run, its recorded signal identifiers, and its fault command events.
+This is an **export**, not an automatic GraphDB import.
+
+To load the verified run into the existing `AAS` repository, use GraphDB
+Workbench at `http://localhost:7200`: open **Import → RDF → Upload RDF
+files**, select the downloaded Turtle file, and choose the named graph
+`https://w3id.org/tep-nexus/graph/temporal-provenance`. Import into a
+named graph rather than the default graph to avoid mixing the new run
+provenance with the existing asset triples.
+
+To save the RDF export from PowerShell:
+
+```powershell
+Invoke-WebRequest -Uri "http://127.0.0.1:8000/api/semantic/run?runId=892c05d7-6ab3-4a33-8ee8-67a835fc6c72" -OutFile "tep-run.ttl"
+```
+
+Then verify in GraphDB Workbench SPARQL:
+
+```sparql
+PREFIX tep: <https://w3id.org/tep-nexus/ontology/>
+SELECT ?run (COUNT(DISTINCT ?event) AS ?eventCount)
+WHERE {
+ GRAPH <https://w3id.org/tep-nexus/graph/temporal-provenance> {
+   ?run a tep:SimulationRun .
+   OPTIONAL { ?run tep:hasFaultEvent ?event }
+ }
+}
+GROUP BY ?run
+```
+
+This RDF currently asserts **signal identifiers** but does not claim
+that a particular GraphDB engineering asset maps to those signals.
+Inspect existing asset-to-signal mapping triples before adding links.
