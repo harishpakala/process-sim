@@ -1,0 +1,2 @@
+# Optional persistent historian (PostgreSQL + TimescaleDB)
+psycopg[binary]>=3.1,<4
