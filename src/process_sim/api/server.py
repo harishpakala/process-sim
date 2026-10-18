@@ -12,7 +12,7 @@ import json
 import os
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
+from urllib.parse import urlencode, urlsplit, parse_qs
 from urllib.request import Request, urlopen
 
 GRAPHDB_ENDPOINT = os.environ.get("GRAPHDB_SPARQL_ENDPOINT", "http://localhost:7200/repositories/AAS")
@@ -22,6 +22,28 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/simulation/series":
+            try:
+                from uuid import UUID
+                import re
+                from process_sim.api.timeseries import query_samples
+                params = parse_qs(urlsplit(self.path).query)
+                run_id = str(UUID(params.get("runId", [""])[0]))
+                signal = params.get("signal", [""])[0].upper()
+                if not re.fullmatch(r"XMEAS(?:[1-9]|[1-3][0-9]|4[01])|XMV(?:[1-9]|1[0-2])", signal):
+                    raise ValueError("Invalid signal ID")
+                limit = int(params.get("limit", ["1000"])[0])
+                if not 1 <= limit <= 5000:
+                    raise ValueError("Limit must be 1..5000")
+                rows = query_samples(run_id, signal, limit)
+                self.send_json(200, {"runId": run_id, "signal": signal,
+                                     "points": [{"time": t, "value": v, "observedAt": stamp.isoformat()}
+                                                for t, v, stamp in rows]})
+            except (ValueError, KeyError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"Time-series database unavailable: {exc}"})
+            return
         if self.path == "/api/simulation/history":
             from process_sim.api.historian import history
             self.send_json(200, history())
