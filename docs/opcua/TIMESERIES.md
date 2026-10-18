@@ -128,3 +128,30 @@ GROUP BY ?run
 This RDF currently asserts **signal identifiers** but does not claim
 that a particular GraphDB engineering asset maps to those signals.
 Inspect existing asset-to-signal mapping triples before adding links.
+
+## Automatic GraphDB synchronization
+
+When `TEP_TIMESCALE_DSN` is configured, the Python API starts a background
+GraphDB synchronization worker by default. It checks the TimescaleDB run list
+every 15 seconds (`TEP_GRAPH_SYNC_SECONDS` overrides this). Each run's
+metadata and fault events are exported to a dedicated named graph:
+`https://w3id.org/tep-nexus/graph/temporal-provenance/run/<run-id>`.
+
+The worker uses RDF4J's statements endpoint with HTTP PUT, replacing the
+specific run graph instead of appending duplicate triples. This also
+backfills existing runs after startup. A GraphDB failure does not interrupt
+OPC UA acquisition; it is retried at the next polling interval. The status
+endpoint is `GET /api/semantic/sync/status` and reports `enabled`,
+`lastRunId`, `lastSuccess`, and `error`.
+
+Use `$env:TEP_GRAPH_SYNC="0"` to disable automatic writes to GraphDB.
+For a custom GraphDB repository set `GRAPHDB_SPARQL_ENDPOINT` (default:
+`http://localhost:7200/repositories/AAS`). GraphDB must be running and
+the repository must permit updates.
+
+**Scope:** The sync publishes run provenance, signal identifiers and fault
+command events, not high-frequency sensor readings or inferred asset
+relationships. It currently re-exports all runs every interval, which is
+simple and robust for small development datasets but not optimized for large
+histories. Runs with over 5000 events are truncated by the current exporter.
+Per-run graphs are separate from the earlier manual-import example graph.
