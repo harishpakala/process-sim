@@ -22,6 +22,25 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/semantic/run":
+            try:
+                from uuid import UUID
+                from process_sim.api.temporal_rdf import export_run
+                params = parse_qs(urlsplit(self.path).query)
+                run_id = str(UUID(params.get("runId", [""])[0]))
+                rdf = export_run(run_id).encode("utf-8")
+                self.send_response(200)
+                self.send_header("Content-Type", "text/turtle; charset=utf-8")
+                self.send_header("Content-Length", str(len(rdf)))
+                self.end_headers()
+                self.wfile.write(rdf)
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except LookupError as exc:
+                self.send_json(404, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"Semantic run export unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/simulation/series":
             try:
                 from uuid import UUID
