@@ -17,6 +17,20 @@ CREATE TABLE IF NOT EXISTS simulation_runs (
  ended_at TIMESTAMPTZ,
  end_reason TEXT
 );
+CREATE TABLE IF NOT EXISTS fault_events (
+ event_id UUID PRIMARY KEY,
+ run_id UUID NOT NULL REFERENCES simulation_runs(run_id),
+ observed_at TIMESTAMPTZ NOT NULL,
+ simulation_time_hours DOUBLE PRECISION NOT NULL,
+ action TEXT NOT NULL,
+ fault_id TEXT NOT NULL,
+ fault_type TEXT,
+ target TEXT,
+ magnitude DOUBLE PRECISION,
+ event_source TEXT NOT NULL DEFAULT 'operator_command',
+ metadata JSONB NOT NULL DEFAULT '{}'::jsonb
+);
+CREATE INDEX IF NOT EXISTS fault_events_run_time ON fault_events (run_id, observed_at);
 CREATE TABLE IF NOT EXISTS signal_samples (
  observed_at TIMESTAMPTZ NOT NULL,
  run_id UUID NOT NULL REFERENCES simulation_runs(run_id),
@@ -69,3 +83,32 @@ def query_samples(run_id, signal_id, limit=1000):
                ) recent ORDER BY observed_at""",
             (run_id, signal_id, limit),
         ).fetchall()
+
+def append_fault_event(event):
+    """Insert a successful operator command; event_id prevents duplicates."""
+    import json
+    with connect() as conn:
+        conn.execute(
+            """INSERT INTO fault_events
+            (event_id,run_id,observed_at,simulation_time_hours,action,fault_id,
+             fault_type,target,magnitude,event_source,metadata)
+            VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s::jsonb)
+            ON CONFLICT (event_id) DO NOTHING""",
+            (event["event_id"], event["run_id"], event["observed_at"],
+             event["simulation_time_hours"], event["action"], event["fault_id"],
+             event.get("fault_type"), event.get("target"), event.get("magnitude"),
+             event.get("event_source", "operator_command"),
+             json.dumps(event.get("metadata", {}))),
+        )
+
+def query_fault_events(run_id, limit=500):
+    with connect() as conn:
+        rows = conn.execute(
+            """SELECT event_id,run_id,observed_at,simulation_time_hours,action,
+                      fault_id,fault_type,target,magnitude,event_source,metadata
+               FROM fault_events WHERE run_id=%s ORDER BY observed_at DESC LIMIT %s""",
+            (run_id, limit),
+        ).fetchall()
+    fields = ("event_id","run_id","observed_at","simulation_time_hours","action",
+              "fault_id","fault_type","target","magnitude","event_source","metadata")
+    return [dict(zip(fields, row)) for row in reversed(rows)]
