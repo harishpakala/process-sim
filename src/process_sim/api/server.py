@@ -44,6 +44,26 @@ class Handler(BaseHTTPRequestHandler):
             except Exception as exc:
                 self.send_json(503, {"error": f"Time-series database unavailable: {exc}"})
             return
+        if urlsplit(self.path).path == "/api/simulation/fault-events/history":
+            try:
+                from uuid import UUID
+                from process_sim.api.timeseries import query_fault_events
+                params = parse_qs(urlsplit(self.path).query)
+                run_id = str(UUID(params.get("runId", [""])[0]))
+                limit = int(params.get("limit", ["500"])[0])
+                if not 1 <= limit <= 5000:
+                    raise ValueError("Limit must be 1..5000")
+                events = query_fault_events(run_id, limit)
+                for event in events:
+                    event["event_id"] = str(event["event_id"])
+                    event["run_id"] = str(event["run_id"])
+                    event["observed_at"] = event["observed_at"].isoformat()
+                self.send_json(200, {"runId": run_id, "events": events})
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"Fault history unavailable: {exc}"})
+            return
         if self.path == "/api/simulation/history":
             from process_sim.api.historian import history
             self.send_json(200, history())
@@ -97,12 +117,26 @@ class Handler(BaseHTTPRequestHandler):
                     if now is None:
                         self.send_json(200, {**result, "warning": "Fault operation succeeded but event timestamp could not be recorded"})
                         return
+                    from process_sim.api.historian import history
+                    run_id = history()["runId"]
+                    warnings = []
                     if action == "clear_all":
                         for fault in before["faults"]:
-                            record("clear", fault["fault_id"], now, fault.get("target", ""))
+                            warning = record("clear", fault["fault_id"], now, fault.get("target", ""),
+                                             run_id=run_id, fault_type=fault.get("fault_type"),
+                                             magnitude=fault.get("magnitude"), metadata={"command": "clear_all"})
+                            if warning:
+                                warnings.append(warning)
                     else:
                         known = next((f for f in before["faults"] if f["fault_id"] == payload.get("faultId")), None)
-                        record(action, payload.get("faultId", ""), now, payload.get("target", "") or (known or {}).get("target", ""))
+                        warning = record(action, payload.get("faultId", ""), now,
+                                         payload.get("target", "") or (known or {}).get("target", ""),
+                                         run_id=run_id, fault_type=payload.get("faultType") or (known or {}).get("fault_type"),
+                                         magnitude=payload.get("magnitude") if action == "inject" else (known or {}).get("magnitude"))
+                        if warning:
+                            warnings.append(warning)
+                    if warnings:
+                        result = {**result, "warning": "; ".join(dict.fromkeys(warnings))}
                 self.send_json(200 if result["success"] else 502, result)
             except (ValueError, TypeError) as exc:
                 self.send_json(400, {"error": str(exc)})
