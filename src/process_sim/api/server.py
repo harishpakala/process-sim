@@ -22,6 +22,10 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/semantic/sync/status":
+            from process_sim.api.graph_sync import status
+            self.send_json(200, status())
+            return
         if urlsplit(self.path).path == "/api/semantic/run":
             try:
                 from uuid import UUID
@@ -237,6 +241,8 @@ def main():
     port = int(os.environ.get("PROCESS_SIM_API_PORT", "8000"))
     from process_sim.api.historian import start
     start()
+    from process_sim.api.graph_sync import start as start_graph_sync
+    start_graph_sync()
     server = ThreadingHTTPServer((host, port), Handler)
     print(f"TEP NEXUS API listening at http://{host}:{port}", flush=True)
     try:
