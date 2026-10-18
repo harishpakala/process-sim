@@ -1,0 +1,17 @@
+services:
+  timescaledb:
+    image: timescale/timescaledb:latest-pg16
+    environment:
+      POSTGRES_USER: tep
+      POSTGRES_PASSWORD: ${TEP_DB_PASSWORD:-tep-local-dev}
+      POSTGRES_DB: tep_nexus
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - tep_timeseries:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U tep -d tep_nexus"]
+      interval: 5s
+      retries: 10
+volumes:
+  tep_timeseries:
