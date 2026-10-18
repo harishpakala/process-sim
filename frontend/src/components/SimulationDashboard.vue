@@ -42,11 +42,19 @@ const visibleEvents = computed(()=>{
  return faultEvents.value.filter(e=>e.simulation_time_hours>=start&&e.simulation_time_hours<=end)
   .map(e=>({...e,x:55+650*(e.simulation_time_hours-start)/(end-start)}))
 })
+async function apiJson(response: Response) {
+ const raw = await response.text()
+ if (!raw.trim()) throw new Error(`API returned an empty response (HTTP ${response.status}) for ${new URL(response.url).pathname}. Check that the Python API is running on port 8000 and inspect its terminal output.`)
+ let body: any
+ try { body = JSON.parse(raw) }
+ catch { throw new Error(`API returned invalid JSON (HTTP ${response.status}). Check the Python API terminal.`) }
+ if (!response.ok) throw new Error(body.error || `API request failed (HTTP ${response.status})`)
+ return body
+}
 async function refreshEvents(){
  try{
   const response=await fetch('/api/simulation/fault-events')
-  const body=await response.json()
-  if(!response.ok)throw new Error(body.error||'Fault events unavailable')
+  const body=await apiJson(response)
   faultEvents.value=body.events
   eventError.value=''
  }catch(e){eventError.value=e instanceof Error?e.message:String(e)}
@@ -57,21 +65,20 @@ async function refresh() {
  loading.value=true
  try {
   const response=await fetch('/api/simulation/history')
-  const body=await response.json()
-  if (!response.ok) throw new Error(body.error || 'Simulation API unavailable')
+  const body=await apiJson(response)
   if(!body.snapshot)throw new Error(body.error||'Waiting for OPC UA historian')
   samples.value=body.samples
   data.value=body.snapshot as Snapshot
   error.value=''
- } catch(e) { data.value=null;error.value=e instanceof Error?e.message:String(e) }
+ } catch(e) { error.value=e instanceof Error?e.message:String(e) }
  finally {loading.value=false}
 }
 async function command(action:'Start'|'Stop'|'Reset') {
  busy.value=true
  try {
   const response=await fetch('/api/simulation/control',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action})})
-  const body=await response.json()
-  if(!response.ok || !body.success) throw new Error(body.error || 'OPC UA command failed')
+  const body=await apiJson(response)
+  if(!body.success) throw new Error(body.error || 'OPC UA command failed')
   await refresh()
  } catch(e) {error.value=e instanceof Error?e.message:String(e)}
  finally {busy.value=false}
