@@ -52,3 +52,42 @@ or cross-process run recovery yet. Those belong to subsequent phases.
 
 The API is loopback-bound by default and has no authentication. Do not expose
 it or the sample database credentials to untrusted networks.
+
+## Phase 3: persistent fault command history
+
+Pull the latest main branch and **restart the Python API** with the same
+`TEP_TIMESCALE_DSN` used for Phase 1. The historian runs the idempotent
+schema initialization, adding `fault_events` to the existing database.
+Alternatively, initialize explicitly:
+
+```powershell
+$env:PYTHONPATH="src"
+python -c "from process_sim.api.timeseries import initialize; initialize()"
+```
+
+Successful operator `inject`, `clear`, and `clear_all` commands are recorded
+with their historian `run_id`, simulation time, UTC observation time, fault
+identifier and target. For `clear_all`, one clear event is recorded per
+previously listed fault. A database failure does not undo an already executed
+OPC UA command; the API includes a `warning` in its successful response.
+
+Query the database:
+
+```sql
+SELECT run_id, fault_id, action, target, simulation_time_hours, observed_at
+FROM fault_events ORDER BY observed_at DESC LIMIT 30;
+```
+
+Or call
+`GET /api/simulation/fault-events/history?runId=<uuid>&limit=500`.
+The existing `/api/simulation/fault-events` endpoint remains a process-local
+buffer for the current Vue dashboard.
+
+**Limitations:** These events represent confirmed operator commands, not
+automatically observed fault expiry or inferred physical effects. A command
+that succeeds while OPC UA snapshot timestamp retrieval fails cannot be
+persisted by this version. A missing historian run ID or database outage
+causes a warning and no persistent record; there is no retry queue. The
+historian's run ID is sampled asynchronously, so a reset concurrent with a
+fault command can result in incorrect run attribution. Cross-process run
+recovery and fully transactional event acquisition are future work.
