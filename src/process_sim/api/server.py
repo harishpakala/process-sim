@@ -22,6 +22,19 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/semantic/asset-specifications":
+            try:
+                from process_sim.api.asset_specifications import asset_specifications
+                params = parse_qs(urlsplit(self.path).query)
+                asset_id = params.get("assetId", [""])[0]
+                self.send_json(200, asset_specifications(asset_id, GRAPHDB_ENDPOINT))
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except LookupError as exc:
+                self.send_json(404, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"GraphDB asset specifications unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/simulation/runs":
             try:
                 from process_sim.api.timeseries import query_runs
