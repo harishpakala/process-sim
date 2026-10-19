@@ -50,6 +50,15 @@ const historicalRuns=ref<HistoricalRun[]>([])
 const historicalRunId=ref('')
 const historicalData=ref<AssetHistory|null>(null)
 const historicalLoading=ref(false)
+const runFaultEvents=ref<{event_id:string;fault_id:string;action:string;target:string;simulation_time_hours:number;observed_at:string}[]>([])
+const replayIndex=ref(0)
+const replayPlaying=ref(false)
+let replayTimer:ReturnType<typeof setInterval>|undefined
+onUnmounted(()=>{if(replayTimer)clearInterval(replayTimer)})
+watch(replayPlaying,playing=>{if(replayTimer)clearInterval(replayTimer);if(playing)replayTimer=setInterval(()=>{const count=historicalData.value?.points.length||0;if(replayIndex.value>=count-1){replayPlaying.value=false;return}replayIndex.value++},250)})
+const replayPoint=computed(()=>historicalData.value?.points[replayIndex.value]||null)
+const chart=computed(()=>{const pts=historicalData.value?.points||[];if(!pts.length)return null;const times=pts.map(p=>p.time),values=pts.map(p=>p.value);const minT=Math.min(...times),maxT=Math.max(...times),minV=Math.min(...values),maxV=Math.max(...values);const x=(t:number)=>50+(t-minT)/(maxT-minT||1)*700;const y=(v:number)=>215-(v-minV)/(maxV-minV||1)*185;return {line:pts.map((p,i)=>`${i?'L':'M'}${x(p.time).toFixed(2)},${y(p.value).toFixed(2)}`).join(' '),minT,maxT,minV,maxV,x,y}})
+const chartFaults=computed(()=>runFaultEvents.value.filter(e=>Number.isFinite(e.simulation_time_hours)&&chart.value&&e.simulation_time_hours>=chart.value.minT&&e.simulation_time_hours<=chart.value.maxT))
 const historicalError=ref('')
 async function loadHistoricalRuns(){
  try {
@@ -64,6 +73,9 @@ let historicalRequest=0
 async function loadAssetHistory(){
  const request=++historicalRequest
  historicalData.value=null
+ runFaultEvents.value=[]
+ replayPlaying.value=false
+ replayIndex.value=0
  historicalError.value=''
  if(!selected.value||!historicalRunId.value)return
  historicalLoading.value=true
@@ -72,7 +84,7 @@ async function loadAssetHistory(){
   const response=await fetch('/api/semantic/asset-history?'+params)
   const data=await response.json()
   if(!response.ok)throw new Error(data.error||'Historical query failed')
-  if(request===historicalRequest)historicalData.value=data
+  if(request===historicalRequest){historicalData.value=data;const faultResponse=await fetch('/api/simulation/fault-events/history?'+new URLSearchParams({runId:historicalRunId.value,limit:'5000'}));const faultPayload=await faultResponse.json();if(!faultResponse.ok)throw new Error(faultPayload.error||'Fault timeline unavailable');if(request===historicalRequest)runFaultEvents.value=faultPayload.events}
  }catch(e){if(request===historicalRequest)historicalError.value=e instanceof Error?e.message:String(e)}
  finally{if(request===historicalRequest)historicalLoading.value=false}
 }
@@ -219,6 +231,30 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
       <p v-if="historicalData.status!=='mapped'" class="catalog-disclaimer">No unique historical signal mapping exists for this asset.</p>
       <template v-else>
        <p v-if="!historicalData.points.length" class="catalog-disclaimer">No measurements found for this asset in the selected run.</p>
+       <template v-if="chart">
+        <h2 class="catalog-section-title">Historical trend and run fault timeline</h2>
+        <svg viewBox="0 0 780 265" role="img" :aria-label="'Historical trend for '+historicalData.signal" style="width:100%;height:auto;border:1px solid var(--border,#d6dce3);border-radius:8px">
+         <line x1="50" y1="215" x2="750" y2="215" stroke="currentColor" opacity=".45"/>
+         <line x1="50" y1="30" x2="50" y2="215" stroke="currentColor" opacity=".45"/>
+         <path :d="chart.line" fill="none" stroke="#0c8797" stroke-width="2"/>
+         <g v-for="event in chartFaults" :key="event.event_id">
+          <line :x1="chart.x(event.simulation_time_hours)" y1="30" :x2="chart.x(event.simulation_time_hours)" y2="215" :stroke="event.action==='inject'?'#d97706':'#7c3aed'" stroke-dasharray="5 4" stroke-width="2"/>
+          <title>{{event.action}} · {{event.fault_id}} · {{event.target}} · {{event.simulation_time_hours.toFixed(4)}} h</title>
+         </g>
+         <circle v-if="replayPoint" :cx="chart.x(replayPoint.time)" :cy="chart.y(replayPoint.value)" r="5" fill="#0c8797" stroke="white" stroke-width="2"/>
+         <text x="50" y="245" font-size="13" fill="currentColor">{{chart.minT.toFixed(3)}} h</text>
+         <text x="750" y="245" text-anchor="end" font-size="13" fill="currentColor">{{chart.maxT.toFixed(3)}} h</text>
+         <text x="55" y="25" font-size="13" fill="currentColor">{{chart.maxV.toFixed(2)}}</text>
+         <text x="55" y="208" font-size="13" fill="currentColor">{{chart.minV.toFixed(2)}}</text>
+        </svg>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:10px 0">
+         <button type="button" class="secondary" @click="replayPlaying=!replayPlaying">{{replayPlaying?'Pause':'Play'}} replay</button>
+         <input type="range" min="0" :max="Math.max(0,historicalData.points.length-1)" v-model.number="replayIndex" aria-label="Replay sample index" style="flex:1;min-width:120px"/>
+         <span v-if="replayPoint">{{replayPoint.time.toFixed(4)}} h · {{replayPoint.value.toFixed(4)}}</span>
+        </div>
+        <p class="catalog-disclaimer">Orange dashed lines: fault injections. Purple: clearing events. These are run-level events, not verified causes of changes in this signal. Events outside the displayed measurement window are listed below.</p>
+        <div v-for="event in runFaultEvents" :key="event.event_id" class="catalog-property"><span>{{event.action}} · {{event.fault_id}} · {{event.target}}</span><span>{{event.simulation_time_hours.toFixed(4)}} h</span></div>
+       </template>
        <div v-else style="max-height:240px;overflow:auto">
         <table style="width:100%;text-align:left"><thead><tr><th>Simulation time (h)</th><th>Value</th><th>Observed at</th></tr></thead>
          <tbody><tr v-for="(point,index) in historicalData.points" :key="index"><td>{{point.time.toFixed(4)}}</td><td>{{point.value.toFixed(4)}}</td><td>{{new Date(point.observedAt).toLocaleString()}}</td></tr></tbody>
