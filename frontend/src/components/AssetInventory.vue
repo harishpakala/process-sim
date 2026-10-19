@@ -76,9 +76,6 @@ async function loadAssetHistory(){
  }catch(e){if(request===historicalRequest)historicalError.value=e instanceof Error?e.message:String(e)}
  finally{if(request===historicalRequest)historicalLoading.value=false}
 }
-watch([selectedId,historicalRunId],()=>{void loadAssetHistory()})
-onMounted(()=>{void loadHistoricalRuns()})
-watch(historicalRuns,()=>{void loadAssetHistory()})
 
 const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const triples = ref<Triple[]>([])
@@ -150,6 +147,10 @@ const filtered = computed(() => {
   return assets.value.filter(a => [a.id, ...Object.values(a.fields)].join(' ').toLowerCase().includes(term))
 })
 const selected = computed(() => filtered.value.find(a => a.id === selectedId.value) ?? filtered.value[0] ?? null)
+watch([selectedId,historicalRunId],()=>{void loadAssetHistory()})
+onMounted(()=>{void loadHistoricalRuns()})
+watch(historicalRuns,()=>{void loadAssetHistory()})
+
 const productTypeCount = computed(() => new Set(assets.value.map(a => a.fields.ProductReference).filter(ref => ref && products.value[ref])).size)
 const signalCount = computed(() => assets.value.filter(a => a.fields.OperationalReference).length)
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
