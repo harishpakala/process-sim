@@ -103,7 +103,9 @@ onUnmounted(()=>{if(timer)clearInterval(timer);requestId++})
   </div>
   <div v-for="(s,i) in available" :key="s" style="margin:20px 0;border-top:1px solid #d1d5db;padding-top:12px">
    <strong :style="{color:palette[i%palette.length]}">{{s}}</strong> · {{series[s].length}} points · Current: {{currentValue(s)?.value.toFixed(4)??'—'}}
-   <svg v-if="plot(s)" viewBox="0 0 780 245" :aria-label="s+' historical trend'" role="img" style="display:block;width:100%;max-height:280px">
+   <svg v-if="plot(s)" viewBox="0 0 780 285" :aria-label="s+' historical trend'" role="img" style="display:block;width:100%;max-height:280px">
+    <text x="400" y="278" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Simulation time (hours)</text>
+    <text x="16" y="125" text-anchor="middle" transform="rotate(-90 16 125)" font-size="14" font-weight="600" fill="currentColor">Signal value ({{s}})</text>
     <line x1="55" y1="210" x2="745" y2="210" stroke="currentColor" opacity=".35"/>
     <line x1="55" y1="40" x2="55" y2="210" stroke="currentColor" opacity=".35"/>
     <path :d="plot(s)!.path" fill="none" :stroke="palette[i%palette.length]" stroke-width="2"/>
