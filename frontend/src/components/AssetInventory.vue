@@ -42,6 +42,44 @@ const runtimeStatus=computed(()=>{
  if(relatedFaults.value.some(f=>f.status==='active'))return 'Signal fault active'
  return live.value.simulation.Running?'Running (signal not verified)':'Stopped'
 })
+
+type HistoricalRun = {runId:string;startedAt:string;endedAt:string|null;sampleCount:number;faultEventCount:number}
+type HistoricalPoint = {time:number;value:number;observedAt:string}
+type AssetHistory = {status:string;signal?:string;signals:string[];points:HistoricalPoint[];faultEvents:{eventId:string;faultId:string;action:string;target:string;observedAt:string}[]}
+const historicalRuns=ref<HistoricalRun[]>([])
+const historicalRunId=ref('')
+const historicalData=ref<AssetHistory|null>(null)
+const historicalLoading=ref(false)
+const historicalError=ref('')
+async function loadHistoricalRuns(){
+ try {
+  const response=await fetch('/api/simulation/runs?limit=100')
+  const data=await response.json()
+  if(!response.ok)throw new Error(data.error||'Run discovery failed')
+  historicalRuns.value=data.runs
+  if(!historicalRuns.value.some(r=>r.runId===historicalRunId.value))historicalRunId.value=historicalRuns.value[0]?.runId||''
+ }catch(e){historicalError.value=e instanceof Error?e.message:String(e)}
+}
+let historicalRequest=0
+async function loadAssetHistory(){
+ const request=++historicalRequest
+ historicalData.value=null
+ historicalError.value=''
+ if(!selected.value||!historicalRunId.value)return
+ historicalLoading.value=true
+ try {
+  const params=new URLSearchParams({assetIri:selected.value.id,runId:historicalRunId.value,limit:'500'})
+  const response=await fetch('/api/semantic/asset-history?'+params)
+  const data=await response.json()
+  if(!response.ok)throw new Error(data.error||'Historical query failed')
+  if(request===historicalRequest)historicalData.value=data
+ }catch(e){if(request===historicalRequest)historicalError.value=e instanceof Error?e.message:String(e)}
+ finally{if(request===historicalRequest)historicalLoading.value=false}
+}
+watch([selectedId,historicalRunId],()=>{void loadAssetHistory()})
+onMounted(()=>{void loadHistoricalRuns()})
+watch(historicalRuns,()=>{void loadAssetHistory()})
+
 const statusKeys = ['ModelingStatus', 'SimulationStatus', 'MonitoringStatus', 'FaultInjectionStatus', 'FaultDetectionStatus']
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
@@ -156,6 +194,39 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
      </div>
      <p v-if="liveError" class="catalog-disclaimer">{{liveError}}</p>
      <p class="catalog-disclaimer">Runtime status describes simulator state and directly matched signal faults only. No asset-level process alarm limits or process-disturbance impact mapping have been validated.</p>
+
+     <h2 class="catalog-section-title">Historical operational state</h2>
+     <div class="catalog-properties">
+      <div class="catalog-property"><label for="asset-history-run">Simulation run</label>
+       <select id="asset-history-run" v-model="historicalRunId">
+        <option value="">Select a run</option>
+        <option v-for="run in historicalRuns" :key="run.runId" :value="run.runId">{{new Date(run.startedAt).toLocaleString()}} · {{run.sampleCount}} samples · {{run.faultEventCount}} faults</option>
+       </select>
+      </div>
+      <div class="catalog-property"><span>Run ID</span><span class="catalog-wrap">{{historicalRunId||'None'}}</span></div>
+     </div>
+     <button class="secondary" type="button" @click="loadHistoricalRuns">Refresh runs</button>
+     <p v-if="historicalLoading" role="status">Loading historical measurements…</p>
+     <p v-if="historicalError" role="alert" class="catalog-disclaimer">{{historicalError}}</p>
+     <template v-if="historicalData">
+      <div class="catalog-properties">
+       <div class="catalog-property"><span>Mapping status</span><strong>{{historicalData.status}}</strong></div>
+       <div class="catalog-property"><span>Resolved signal</span><span>{{historicalData.signal||historicalData.signals.join(', ')||'Unmapped'}}</span></div>
+       <div class="catalog-property"><span>Retrieved measurements</span><strong>{{historicalData.points.length}}</strong></div>
+       <div class="catalog-property"><span>Direct signal fault events</span><strong>{{historicalData.faultEvents.length}}</strong></div>
+      </div>
+      <p v-if="historicalData.status!=='mapped'" class="catalog-disclaimer">No unique historical signal mapping exists for this asset.</p>
+      <template v-else>
+       <p v-if="!historicalData.points.length" class="catalog-disclaimer">No measurements found for this asset in the selected run.</p>
+       <div v-else style="max-height:240px;overflow:auto">
+        <table style="width:100%;text-align:left"><thead><tr><th>Simulation time (h)</th><th>Value</th><th>Observed at</th></tr></thead>
+         <tbody><tr v-for="(point,index) in historicalData.points" :key="index"><td>{{point.time.toFixed(4)}}</td><td>{{point.value.toFixed(4)}}</td><td>{{new Date(point.observedAt).toLocaleString()}}</td></tr></tbody>
+        </table>
+       </div>
+       <p v-if="!historicalData.faultEvents.length" class="catalog-disclaimer">No directly targeted signal fault events recorded. Process-disturbance impacts are not inferred.</p>
+       <div v-for="event in historicalData.faultEvents" :key="event.eventId" class="catalog-property"><span>{{event.action}} · {{event.faultId}}</span><span>{{new Date(event.observedAt).toLocaleString()}}</span></div>
+      </template>
+     </template>
      <h2 class="catalog-section-title">Engineering lifecycle status (GraphDB)</h2>
      <div class="catalog-properties">
       <div v-for="key in statusKeys" :key="key" class="catalog-property"><span>{{ readable(key) }}</span><span>{{ statusLabel(selected.fields[key]) }}</span></div>
