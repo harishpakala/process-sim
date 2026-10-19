@@ -25,7 +25,8 @@ const connected = computed(() => filtered.value.filter(t => !selected.value || t
 const nodes = computed(() => [...new Set(connected.value.flatMap(t => [t.subject, t.object]))])
 const label = (id: string) => labels.value[id] || (id.startsWith('http') ? decodeURIComponent(localName(id)) : id)
 const shortValue = (value: string) => value.startsWith('http://') || value.startsWith('https://') ? (labels.value[value] || decodeURIComponent(localName(value))) : value
-const color = (id: string) => ({dexpi:'#0e7490',ecad:'#0369a1',productcatalog:'#7c3aed',assetinventory:'#0f766e'}[domainOf(id)] || '#475569')
+const domainColors: Record<string, string> = {dexpi:'#0e7490',ecad:'#0369a1',productcatalog:'#7c3aed',assetinventory:'#0f766e'}
+const color = (id: string) => domainColors[domainOf(id)] || '#475569'
 async function load() {
   loading.value = true
   error.value = ''
