@@ -22,6 +22,20 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/semantic/asset-history":
+            try:
+                from uuid import UUID
+                from process_sim.api.asset_history import asset_history
+                params = parse_qs(urlsplit(self.path).query)
+                asset = params.get("assetIri", [""])[0]
+                run_id = str(UUID(params.get("runId", [""])[0]))
+                limit = int(params.get("limit", ["1000"])[0])
+                self.send_json(200, asset_history(asset, run_id, limit))
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"Asset history unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/semantic/sync/status":
             from process_sim.api.graph_sync import status
             self.send_json(200, status())
