@@ -112,3 +112,30 @@ def query_fault_events(run_id, limit=500):
     fields = ("event_id","run_id","observed_at","simulation_time_hours","action",
               "fault_id","fault_type","target","magnitude","event_source","metadata")
     return [dict(zip(fields, row)) for row in reversed(rows)]
+
+def query_runs(limit=100):
+    """List runs with measurement and fault counts; newest first."""
+    if not 1 <= limit <= 500:
+        raise ValueError("Limit must be 1..500")
+    with connect() as conn:
+        rows = conn.execute(
+            """SELECT r.run_id, r.started_at, r.ended_at, r.end_reason,
+                      COALESCE(s.sample_count, 0), COALESCE(f.fault_count, 0)
+               FROM (SELECT * FROM simulation_runs ORDER BY started_at DESC LIMIT %s) r
+               LEFT JOIN LATERAL (
+                   SELECT count(*) AS sample_count FROM signal_samples
+                   WHERE run_id=r.run_id
+               ) s ON true
+               LEFT JOIN LATERAL (
+                   SELECT count(*) AS fault_count FROM fault_events
+                   WHERE run_id=r.run_id
+               ) f ON true
+               ORDER BY r.started_at DESC, r.run_id DESC""",
+            (limit,),
+        ).fetchall()
+    return [
+        {"runId": str(run_id), "startedAt": started.isoformat(),
+         "endedAt": ended.isoformat() if ended else None,
+         "endReason": reason, "sampleCount": samples, "faultEventCount": faults}
+        for run_id, started, ended, reason, samples, faults in rows
+    ]
