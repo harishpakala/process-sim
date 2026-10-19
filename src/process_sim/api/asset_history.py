@@ -8,7 +8,7 @@ from urllib.request import Request, urlopen
 from uuid import UUID
 
 ASSET_NS = "https://example.org/assetinventory/"
-SIGNAL_RE = re.compile(r"(?<![A-Za-z])X(MEAS|MV)[-_]?(\\d+)(?!\\d)", re.I)
+SIGNAL_RE = re.compile(r"(?<![A-Za-z])X(MEAS|MV)[-_]?(\d+)(?!\d)", re.I)
 
 def _signal(reference):
     match = SIGNAL_RE.search(reference)
@@ -22,7 +22,9 @@ def _signal(reference):
 def asset_history(asset_iri, run_id, limit=1000):
     from process_sim.api.timeseries import query_samples, query_fault_events
     uid = str(UUID(str(run_id)))
-    if not isinstance(asset_iri, str) or not asset_iri.startswith(ASSET_NS) or not re.fullmatch(r"https://example\\.org/assetinventory/[A-Za-z0-9_./#%-]+", asset_iri):
+    if not isinstance(asset_iri, str) or not re.fullmatch(r"https?://[A-Za-z0-9._~:/?#@!    if not isinstance(asset_iri, str) or not asset_iri.startswith(ASSET_NS) or not re.fullmatch(r"https://example\\.org/assetinventory/[A-Za-z0-9_./#%-]+", asset_iri):
+'()*+,;=%-]+", asset_iri) or len(asset_iri) > 2048:
+        raise ValueError("Invalid asset IRI")
         raise ValueError("Invalid AssetInventory asset IRI")
     if not 1 <= limit <= 5000:
         raise ValueError("Limit must be 1..5000")
