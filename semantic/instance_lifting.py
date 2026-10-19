@@ -235,13 +235,8 @@ def lift_property(
     )
 
     # Direct semantic property.
-    graph.add(
-        (
-            parent_uri,
-            predicate,
-            value,
-        )
-    )
+    if value is not None:
+        graph.add((parent_uri, predicate, value))
 
     # Represent the AAS Property itself as an RDF resource.
     property_uri = compute_uri(
@@ -272,6 +267,13 @@ def lift_property(
             OWL.NamedIndividual,
         )
     )
+
+    # Keep the existing direct literal for backwards-compatible SPARQL queries,
+    # and expose the individual AAS property with value, datatype and source path.
+    graph.add((parent_uri, semanticDict["AAS"]["hasSubmodelElement"], property_uri))
+    graph.add((property_uri, semanticDict["AAS"]["elementPath"], Literal(path)))
+    if value is not None:
+        graph.add((property_uri, semanticDict["AAS"]["value"], value))
 
     lift_semantic_id(
         graph,
@@ -322,6 +324,13 @@ def lift_range(
             range_uri,
         )
     )
+
+    graph.add((range_uri, semanticDict["AAS"]["elementPath"], Literal(path)))
+    for field, predicate in (("min", "min"), ("max", "max")):
+        raw = getattr(element, field, None)
+        typed = make_literal(raw, getattr(element, "value_type", None))
+        if typed is not None:
+            graph.add((range_uri, semanticDict["AAS"][predicate], typed))
 
     lift_semantic_id(
         graph,
