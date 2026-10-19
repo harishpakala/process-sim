@@ -470,7 +470,8 @@ def make_literal(value, value_type=None):
     """
     Create an RDF Literal using the AAS valueType when available.
     """
-    return Literal(str(value))
+    if value is None:
+        return None
     datatype = map_xsd_datatype(value_type)
 
     if datatype is not None:
@@ -709,90 +710,45 @@ def resolve_semantic_id(
 # SemanticId lifting
 # ============================================================
 
-def lift_semantic_id(
-    graph: Graph,
-    submodel_id: str,
-    element,
-    path: str,
-):
+def lift_semantic_id(graph: Graph, submodel_id: str, element, path: str):
+    """Preserve AAS semantic references exactly, without asserting unverified equivalence.
+
+    semanticId is the primary concept reference. Supplemental identifiers are
+    separate references. QUDT unit/quantity-kind references are recognized only
+    when explicitly supplied by the AAS source.
     """
-    Lift an AAS SemanticId.
+    element_uri = compute_uri(submodel_id, path)
+    aas = semanticDict["AAS"]
+    qudt = semanticDict["QUDT"]
 
-    Depending on the SemanticId:
+    def add_reference(reference, predicate):
+        if reference is None:
+            return
+        keys = getattr(reference, "keys", None) or []
+        for key in keys:
+            value = str(key.value).strip()
+            if not value:
+                continue
+            # ExternalReference keys may contain non-URI identifiers (e.g. ECLASS IRDI).
+            # Preserve the original identifier as a literal even if it is not a URI.
+            graph.add((element_uri, predicate, Literal(value)))
+            if not (value.startswith("https://") or value.startswith("http://") or value.startswith("urn:")):
+                continue
+            uri = URIRef(value)
+            graph.add((element_uri, RDFS.seeAlso, uri))
+            if predicate != aas["semanticId"]:
+                continue
+            mode = resolve_semantic_id(uri)
+            if mode == "unit":
+                graph.add((element_uri, qudt["unit"], uri))
+            elif mode == "quantitykind":
+                graph.add((element_uri, qudt["hasQuantityKind"], uri))
+            elif mode == "classification":
+                graph.add((element_uri, aas["classificationReference"], uri))
 
-        Unit
-            -> qudt:hasUnit
-
-        QuantityKind
-            -> qudt:hasQuantityKind
-
-        Classification
-            -> rdf:type
-
-        Other
-            -> rdfs:seeAlso
-    """
-
-    if element.semantic_id is None:
-        return
-
-    if len(
-        element.semantic_id.keys
-    ) == 0:
-        return
-
-    semantic_uri = URIRef(
-        element.semantic_id.keys[-1].value
-    )
-
-    element_uri = compute_uri(
-        submodel_id,
-        path,
-    )
-
-    mode = resolve_semantic_id(
-        semantic_uri
-    )
-
-    if mode == "unit":
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["QUDT"]["hasUnit"],
-                semantic_uri,
-            )
-        )
-
-    elif mode == "quantitykind":
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["QUDT"]["hasQuantityKind"],
-                semantic_uri,
-            )
-        )
-
-    elif mode == "classification":
-
-        graph.add(
-            (
-                element_uri,
-                RDF.type,
-                semantic_uri,
-            )
-        )
-
-    else:
-
-        graph.add(
-            (
-                element_uri,
-                RDFS.seeAlso,
-                semantic_uri,
-            )
-        )
+    add_reference(getattr(element, "semantic_id", None), aas["semanticId"])
+    for reference in (getattr(element, "supplemental_semantic_ids", None) or []):
+        add_reference(reference, aas["supplementalSemanticId"])
 
 
 # ============================================================
