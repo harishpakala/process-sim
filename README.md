@@ -362,7 +362,7 @@ Issue #2 tracks the formal characterization of this response relationship, inclu
 
 ## Research foundation
 
-The semantic-modeling strategy is grounded in the author's **accepted but not yet published** ONTO:NEXUS workshop paper, part of MODELS 2026:
+The semantic-modeling strategy is grounded in the author's ONTO:NEXUS workshop paper, part of MODELS 2026:
 
 > **From Asset Administration Shells to Knowledge Graphs: Rule-Based Semantic Lifting for Cross-Domain Reasoning in Cyber-Physical Systems**  
 > Harish Kumar Pakala, Bianca Wiesmayr, Christian Diedrich  
