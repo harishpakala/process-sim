@@ -340,12 +340,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ManufacturerPartNumber",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "ManufacturerProductDesignation",
               "valueType": "xs:string",
               "value": "Type 3241-7"
@@ -373,6 +367,18 @@
               "idShort": "ECLASSIRDI",
               "valueType": "xs:string",
               "value": "0173-1#01-AAD651#023"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplierName",
+              "valueType": "xs:string",
+              "value": "Tetra Pak"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplierPartNumber",
+              "valueType": "xs:string",
+              "value": "90533-1149"
             },
             {
               "modelType": "SubmodelElementCollection",
@@ -443,18 +449,6 @@
                   "idShort": "InstrumentAir",
                   "valueType": "xs:string",
                   "value": "Required; air reducing station included in supplier listing"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "SupplierName",
-                  "valueType": "xs:string",
-                  "value": "Tetra Pak"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "SupplierPartNumber",
-                  "valueType": "xs:string",
-                  "value": "90533-1149"
                 },
                 {
                   "modelType": "Property",
