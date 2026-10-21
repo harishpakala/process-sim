@@ -856,6 +856,832 @@
               }
             ]
           }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DeDietrich_HighPressureReactor_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "De Dietrich"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Customized high-pressure reactor inquiry (standard BE excluded)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-02-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Reactor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD319#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "REQUIRES_ALTERNATIVE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.dedietrich.com/en/equipment/process/reaction-agitation/glass-lined-reactors"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Reactor pressure and temperature, 24-hour fault-free TEP recording; not design limits"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Standard BE rated only +6 bar; observed reactor 26.78–27.31 bar(g); no certified custom configuration"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD319#012"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AlfaLaval_Olmi_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Alfa Laval"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Olmi engineered shell-and-tube heat exchanger"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Heat exchanger"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD338#010"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.alfalaval.com/en-GB/products/heat-transfer/tubular-heat-exchangers/process-shell-and-tube-heat-exchangers/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "24-hour fault-free TEP recording; condenser valve command is not thermal duty"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Condenser heat duty, process composition, approach temperatures and design pressure unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD338#010"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Didion_DSL_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Didion Vessel"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Type DSL gas-liquid separator family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-20-17-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Vessel separator (for gases)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKL760#020"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://didionvessel.com/gas-separators/gas-liquid-separators/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Separator pressure 26.05–26.61 bar(g) observed over 24 hours; not a design rating"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Selected-unit pressure rating, gas/liquid loads, droplet removal and materials unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKL760#020"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AtlasCopco_GT_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Atlas Copco"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "GT-Series engineered centrifugal compressor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-43"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Compressor, ventilator, vacuum pump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD585#011"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.atlascopco.com/gas-and-process/en/products/centrifugal-compressors/gt-series"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Compressor work 333.79–346.48 kW observed; not nameplate motor rating"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Gas composition, suction/discharge pressures, compressor map, efficiency, motor and ECLASS leaf unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD585#011"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Sulzer_StrippingColumn_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Sulzer"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Engineered stripping column or turnkey unit"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-01-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Column"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD304#013"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.sulzer.com/en/shared/products/stripping"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "24-hour observed stripper pressure; not certified design pressure"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "No configuration-specific rating verified for stripper 30.82–31.24 bar(g); separation design missing"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD304#013"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EKATO_HWLN_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/EKATO_HWLN_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "EKATO"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "HWL-N reactor agitator family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-09-08-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Agitator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKP267#021"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.ekato.com/products/agitators/reactor-agitators-ekato-hwl-n/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "XMV(12) is a control signal, not RPM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Shaft speed, torque, sealing, mixing duty and selected configuration unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKP267#021"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ABB_AMZ_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/ABB_AMZ_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "ABB"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "AMZ synchronous motor family (comparison only)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-02-24"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Synchronous motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKE158#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://new.abb.com/motors-generators/synchronous-motors/synchronous-motors/synchronous-dol-8-40-poles-motors/technical-data"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Compressor work is not electric motor nameplate power"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Synchronous technology and individual motor sizes unverified; family may be oversized"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKE158#012"
+              }
+            ]
+          }
         }
       ]
     }
