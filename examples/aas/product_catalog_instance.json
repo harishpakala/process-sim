@@ -30,6 +30,24 @@
               "value": "PFMV505-1"
             },
             {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-27-48"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Flow sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AHB183#005"
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "TechnicalProperties",
               "value": [
@@ -94,79 +112,6 @@
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "SMC_PSH_L2_01_W",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ManufacturerName",
-              "valueType": "xs:string",
-              "value": "SMC"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ManufacturerPartNumber",
-              "valueType": "xs:string",
-              "value": "PSH-L2-01-W"
-            },
-            {
-              "modelType": "SubmodelElementCollection",
-              "idShort": "TechnicalProperties",
-              "value": [
-                {
-                  "modelType": "Property",
-                  "idShort": "ProductCategory",
-                  "valueType": "xs:string",
-                  "value": "Condensation checker / digital temperature and humidity switch"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "OutputConfiguration",
-                  "valueType": "xs:string",
-                  "value": "IO-Link / switching output 1 + switching output 2"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "ProcessConnection",
-                  "valueType": "xs:string",
-                  "value": "R 1/8"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "Cable",
-                  "valueType": "xs:string",
-                  "value": "2 m waterproof lead wire with connector"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "OutputVariantNote",
-                  "valueType": "xs:string",
-                  "value": "L2 variant; do not infer analog output from RT variant"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "SpecificationSourceURL",
-                  "valueType": "xs:string",
-                  "value": "https://static.smc.eu/pdf/PSH_EU.pdf"
-                }
-              ]
-            }
-          ],
-          "qualifiers": [
-            {
-              "type": "OntoConcept",
-              "valueType": "xs:string",
-              "value": "Product"
-            }
-          ]
-        },
-        {
-          "modelType": "SubmodelElementCollection",
           "idShort": "IFM_LW2720",
           "value": [
             {
@@ -186,6 +131,24 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "LW2720"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-05-05"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Free-space radar level transmitter/switch"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC024#022"
             },
             {
               "modelType": "SubmodelElementCollection",
@@ -297,6 +260,24 @@
               "value": "A9MEM3555"
             },
             {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-14-23-16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Electronic electricity meter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AFZ828#022"
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "TechnicalProperties",
               "value": [
@@ -343,25 +324,55 @@
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "Siemens_S55264_V193",
+          "idShort": "SAMSON_3241_7",
           "value": [
             {
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
+              "value": "https://example.org/product-types/SAMSON_3241_7"
             },
             {
               "modelType": "Property",
               "idShort": "ManufacturerName",
               "valueType": "xs:string",
-              "value": "Siemens"
+              "value": "SAMSON"
             },
             {
               "modelType": "Property",
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
-              "value": "S55264-V193"
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Type 3241-7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Pneumatic globe control valve assembly, DN25, Kvs 10 m3/h, DIN PN40, normally closed, Type 3277 actuator and Type 3730-1 4-20 mA positioner"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "37-01-02-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Control globe valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD651#023"
             },
             {
               "modelType": "SubmodelElementCollection",
@@ -371,13 +382,25 @@
                   "modelType": "Property",
                   "idShort": "ProductCategory",
                   "valueType": "xs:string",
-                  "value": "Pressure-independent control valve body"
+                  "value": "Pneumatic globe control valve"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "ManufacturerModel",
+                  "idShort": "ValveBodyType",
                   "valueType": "xs:string",
-                  "value": "VPP46.25F3.6Q"
+                  "value": "Type 3241"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActuatorType",
+                  "valueType": "xs:string",
+                  "value": "3277"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerType",
+                  "valueType": "xs:string",
+                  "value": "3730-1"
                 },
                 {
                   "modelType": "Property",
@@ -387,112 +410,69 @@
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "MaximumOperatingPressure",
+                  "idShort": "FlowCoefficientKvs",
                   "valueType": "xs:string",
-                  "value": "2500 kPa"
+                  "value": "10 m3/h"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "IntendedApplication",
+                  "idShort": "FlangePressureRating",
                   "valueType": "xs:string",
-                  "value": "HVAC / room and zone control"
+                  "value": "DIN PN40"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "ActuatorNote",
+                  "idShort": "HousingMaterial",
                   "valueType": "xs:string",
-                  "value": "Actuator must be specified separately"
+                  "value": "Cast steel GS-C25"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "SpecificationSourceURL",
+                  "idShort": "NormalPosition",
                   "valueType": "xs:string",
-                  "value": "https://de.rs-online.com/web/p/druckunabhangige-steuerventile-picv/0636071"
-                }
-              ]
-            }
-          ],
-          "qualifiers": [
-            {
-              "type": "OntoConcept",
-              "valueType": "xs:string",
-              "value": "Product"
-            }
-          ]
-        },
-        {
-          "modelType": "SubmodelElementCollection",
-          "idShort": "Rittal_3244100",
-          "value": [
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ManufacturerName",
-              "valueType": "xs:string",
-              "value": "Rittal"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ManufacturerPartNumber",
-              "valueType": "xs:string",
-              "value": "3244100"
-            },
-            {
-              "modelType": "SubmodelElementCollection",
-              "idShort": "TechnicalProperties",
-              "value": [
-                {
-                  "modelType": "Property",
-                  "idShort": "ProductCategory",
-                  "valueType": "xs:string",
-                  "value": "Enclosure filter-fan assembly"
+                  "value": "Normally closed"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "RatedVoltage",
+                  "idShort": "PositionerInput",
                   "valueType": "xs:string",
-                  "value": "230 V AC single-phase"
+                  "value": "4 to 20 mA"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "Frequency",
+                  "idShort": "InstrumentAir",
                   "valueType": "xs:string",
-                  "value": "50 / 60 Hz"
+                  "value": "Required; air reducing station included in supplier listing"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "AirFlowStandardFilter",
+                  "idShort": "SupplierName",
                   "valueType": "xs:string",
-                  "value": "700 / 770 m³/h at 50 / 60 Hz"
+                  "value": "Tetra Pak"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "PowerConsumption",
+                  "idShort": "SupplierPartNumber",
                   "valueType": "xs:string",
-                  "value": "95 / 135 W at 50 / 60 Hz"
+                  "value": "90533-1149"
                 },
                 {
                   "modelType": "Property",
-                  "idShort": "IngressProtection",
+                  "idShort": "ManufacturerPartNumberStatus",
                   "valueType": "xs:string",
-                  "value": "IP54 with standard filter"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "OperatingTemperature",
-                  "valueType": "xs:string",
-                  "value": "−30 to 55 °C"
+                  "value": "Not verified; Type 3241-7 is a model designation, and 90533-1149 is a supplier catalog number"
                 },
                 {
                   "modelType": "Property",
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
-                  "value": "https://www.rittal.com/com-en/products/PG20231215KLI101/PG20231215KLI102/PG20240718KLI001/PRO0299?variantId=3244100"
+                  "value": "https://plantcomponents.tetrapak.com/default.aspx?NavID=001.002.020"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaterialNote",
+                  "valueType": "xs:string",
+                  "value": "Supplier heading states SS/SS, while detailed housing material states cast steel GS-C25; verify exact material specification"
                 }
               ]
             }
@@ -526,6 +506,24 @@
               "idShort": "ManufacturerPartNumber",
               "valueType": "xs:string",
               "value": "PSE550"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-06-23"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Pressure differential sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKA491#001"
             },
             {
               "modelType": "SubmodelElementCollection",
@@ -625,6 +623,24 @@
               "value": "2938581"
             },
             {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-04-07-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "AC-DC supply"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AFX043#011"
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "TechnicalProperties",
               "value": [
@@ -687,6 +703,91 @@
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
                   "value": "https://www.phoenixcontact.com/ro-ro/produse/power-supply-quint-ps-100-240ac24dc-5-2938581"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "IFM_TA1101",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-27-51"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Temperature sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AHB186#005"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Integrated temperature sensor / transmitter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementVariable",
+                  "valueType": "xs:string",
+                  "value": "Temperature"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SignalInterfaceNote",
+                  "valueType": "xs:string",
+                  "value": "Confirm exact output and IO-Link capabilities against TA1101 product-specific datasheet"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.ifm.com/de/de/product/TA1101"
                 }
               ]
             }
