@@ -5,7 +5,7 @@ import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-ne
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
-type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; eclassClass: string; eclassName: string; eclassIrdi: string; category: string; properties: { name: string; value: string }[] }
+type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; semanticId: string; eclassClass: string; eclassName: string; eclassIrdi: string; category: string; properties: { name: string; value: string }[] }
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
 const loading = ref(false)
@@ -16,6 +16,8 @@ const selectedId = ref('')
 const tab = ref<'Details' | 'Knowledge Graph'>('Details')
 const productType = 'https://example.org/productcatalog/Product'
 const productNS = 'https://example.org/productcatalog/'
+const aasNS = 'https://example.org/aas/'
+const catalogGraph = 'http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/'
 const products = computed<Product[]>(() => {
   const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'hasAssetIdentifier').map(t => t.subject))]
   return uris.map(uri => {
@@ -27,7 +29,7 @@ const products = computed<Product[]>(() => {
     return {
       id: localName(uri), uri,
       manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'), designation: get('ManufacturerProductDesignation'), supplierPartNumber: get('SupplierPartNumber'),
-      assetId: get('AssetIdentifier'), eclassClass: get('ECLASSClass'), eclassName: get('ECLASSPreferredName'), eclassIrdi: get('ECLASSIRDI'), category: technicalGet('ProductCategory') || 'Uncategorized',
+      assetId: get('AssetIdentifier'), semanticId: own.find(t => t.predicate === aasNS + 'semanticId')?.object || '', eclassClass: get('ECLASSClass'), eclassName: get('ECLASSPreferredName'), eclassIrdi: get('ECLASSIRDI'), category: technicalGet('ProductCategory') || 'Uncategorized',
       properties: technical.filter(t => t.predicate !== productNS + 'hasProductCategory').map(t => ({name:localName(t.predicate).replace(/^has/, ''),value:t.object})),
     }
   })
@@ -36,7 +38,7 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { { ?s <${productNS}hasAssetIdentifier> ?asset ; ?p ?o . } UNION { ?product <${productNS}hasAssetIdentifier> ?asset ; <${productNS}hasTechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
+    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH <${catalogGraph}> { { ?s <${productNS}hasAssetIdentifier> ?asset ; ?p ?o . } UNION { ?product <${productNS}hasAssetIdentifier> ?asset ; <${productNS}hasTechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
     if (!products.value.length) error.value = 'No lifted product resources found in the ProductCatalog named graph.'
   } catch (e) { triples.value = []; error.value = e instanceof Error ? e.message : 'Unable to query Knowledge Graph.' }
   finally { loading.value = false }
@@ -93,7 +95,9 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
               <div><small>Product asset identifier</small><strong class="catalog-wrap">{{ selected.assetId }}</strong></div>
               <div><small>ECLASS class</small><strong>{{ selected.eclassClass || '—' }}</strong></div>
               <div><small>ECLASS preferred name</small><strong>{{ selected.eclassName || '—' }}</strong></div>
-              <div><small>Semantic ID (ECLASS IRDI)</small><strong class="catalog-wrap">{{ selected.eclassIrdi || '—' }}</strong></div>
+              <div><small>AAS Semantic ID</small><strong class="catalog-wrap">{{ selected.semanticId || 'Not present in lifted RDF' }}</strong></div>
+              <div><small>ECLASS IRDI</small><strong class="catalog-wrap">{{ selected.eclassIrdi || '—' }}</strong></div>
+              <div v-if="selected.semanticId && selected.eclassIrdi"><small>Semantic ID / ECLASS consistency</small><strong>{{ selected.semanticId === selected.eclassIrdi ? 'Match' : 'Mismatch — verify source and lifting' }}</strong></div>
             </div>
             <h2 class="catalog-section-title">Technical properties <span class="pill muted">{{ selected.properties.length }}</span></h2>
             <div class="catalog-properties">
