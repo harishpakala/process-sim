@@ -5,7 +5,7 @@ import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-ne
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
-type Product = { id: string; uri: string; manufacturer: string; partNumber: string; assetId: string; category: string; properties: { name: string; value: string }[] }
+type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; category: string; properties: { name: string; value: string }[] }
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
 const loading = ref(false)
@@ -17,7 +17,7 @@ const tab = ref<'Details' | 'Knowledge Graph'>('Details')
 const productType = 'https://example.org/productcatalog/Product'
 const productNS = 'https://example.org/productcatalog/'
 const products = computed<Product[]>(() => {
-  const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'hasManufacturerPartNumber').map(t => t.subject))]
+  const uris = [...new Set(triples.value.filter(t => t.predicate === productNS + 'hasAssetIdentifier').map(t => t.subject))]
   return uris.map(uri => {
     const own = triples.value.filter(t => t.subject === uri)
     const get = (key: string) => own.find(t => t.predicate === productNS + 'has' + key)?.object || ''
@@ -26,7 +26,7 @@ const products = computed<Product[]>(() => {
     const technicalGet = (key: string) => technical.find(t => t.predicate === productNS + 'has' + key)?.object || ''
     return {
       id: localName(uri), uri,
-      manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'),
+      manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'), designation: get('ManufacturerProductDesignation'), supplierPartNumber: get('SupplierPartNumber'),
       assetId: get('AssetIdentifier'), category: technicalGet('ProductCategory') || 'Uncategorized',
       properties: technical.filter(t => t.predicate !== productNS + 'hasProductCategory').map(t => ({name:localName(t.predicate).replace(/^has/, ''),value:t.object})),
     }
@@ -36,7 +36,7 @@ async function load() {
   loading.value = true
   error.value = ''
   try {
-    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { { ?s <${productNS}hasManufacturerPartNumber> ?part ; ?p ?o . } UNION { ?product <${productNS}hasManufacturerPartNumber> ?part ; <${productNS}hasTechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
+    triples.value = await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { { ?s <${productNS}hasAssetIdentifier> ?asset ; ?p ?o . } UNION { ?product <${productNS}hasAssetIdentifier> ?asset ; <${productNS}hasTechnicalProperties> ?s . ?s ?p ?o . } } } LIMIT 5000`)
     if (!products.value.length) error.value = 'No lifted product resources found in the ProductCatalog named graph.'
   } catch (e) { triples.value = []; error.value = e instanceof Error ? e.message : 'Unable to query Knowledge Graph.' }
   finally { loading.value = false }
@@ -45,7 +45,7 @@ watch(products, items => { if (!items.some(p => p.id === selectedId.value)) sele
 void load()
 const manufacturers = computed(() => [...new Set(products.value.map(p => p.manufacturer).filter(Boolean))].sort())
 const filtered = computed(() => products.value.filter(product => {
-  const haystack = [product.id, product.manufacturer, product.partNumber, product.category, ...product.properties.map(item => item.value)].join(' ').toLowerCase()
+  const haystack = [product.id, product.manufacturer, product.partNumber, product.designation, product.supplierPartNumber, product.category, ...product.properties.map(item => item.value)].join(' ').toLowerCase()
   return haystack.includes(query.value.trim().toLowerCase()) && (manufacturer.value === 'All' || product.manufacturer === manufacturer.value)
 }))
 const selected = computed(() => products.value.find(product => product.id === selectedId.value) ?? null)
@@ -75,19 +75,20 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
         </label>
         <div class="catalog-results">
           <button v-for="product in filtered" :key="product.id" class="asset-row catalog-item" :class="{ highlight: selectedId === product.id }" @click="selectedId=product.id;tab='Details'">
-            <span class="asset-icon"><Package :size="17"/></span><span><strong>{{ product.partNumber }}</strong><small>{{ product.manufacturer }} · {{ product.category }}</small><small class="catalog-id">{{ product.id }}</small></span>
+            <span class="asset-icon"><Package :size="17"/></span><span><strong>{{ product.partNumber || product.designation || product.supplierPartNumber || product.id }}</strong><small>{{ product.manufacturer }} · {{ product.category }}</small><small class="catalog-id">{{ product.id }}</small></span>
           </button>
           <p v-if="!filtered.length" class="empty">No matching products. Try another search or manufacturer.</p>
         </div>
       </section>
       <section class="panel catalog-detail">
         <template v-if="selected">
-          <div class="panel-title"><div><h2>{{ selected.partNumber }}</h2><p>{{ selected.manufacturer }} · {{ selected.category }}</p></div><span class="pill">AAS PRODUCT</span></div>
+          <div class="panel-title"><div><h2>{{ selected.partNumber || selected.designation || selected.supplierPartNumber || selected.id }}</h2><p>{{ selected.manufacturer }} · {{ selected.category }}</p></div><span class="pill">AAS PRODUCT</span></div>
           <div class="tabs"><button :class="{selected:tab==='Details'}" @click="tab='Details'">Technical details</button><button :class="{selected:tab==='Knowledge Graph'}" @click="tab='Knowledge Graph'">Knowledge graph</button></div>
           <template v-if="tab==='Details'">
             <div class="catalog-identifiers">
               <div><small>Manufacturer</small><strong>{{ selected.manufacturer }}</strong></div>
-              <div><small>Part number</small><strong>{{ selected.partNumber }}</strong></div>
+              <div><small>Manufacturer part number</small><strong>{{ selected.partNumber || 'Not verified' }}</strong></div>
+              <div v-if="selected.supplierPartNumber"><small>Supplier part number</small><strong>{{ selected.supplierPartNumber }}</strong></div>
               <div><small>AAS collection ID</small><strong>{{ selected.id }}</strong></div>
               <div><small>Product RDF IRI</small><strong class="catalog-wrap">{{ selected.assetId }}</strong></div>
             </div>
