@@ -5,7 +5,7 @@ import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-ne
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
-type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; category: string; properties: { name: string; value: string }[] }
+type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; eclassClass: string; eclassName: string; eclassIrdi: string; category: string; properties: { name: string; value: string }[] }
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
 const loading = ref(false)
@@ -27,7 +27,7 @@ const products = computed<Product[]>(() => {
     return {
       id: localName(uri), uri,
       manufacturer: get('ManufacturerName'), partNumber: get('ManufacturerPartNumber'), designation: get('ManufacturerProductDesignation'), supplierPartNumber: get('SupplierPartNumber'),
-      assetId: get('AssetIdentifier'), category: technicalGet('ProductCategory') || 'Uncategorized',
+      assetId: get('AssetIdentifier'), eclassClass: get('ECLASSClass'), eclassName: get('ECLASSPreferredName'), eclassIrdi: get('ECLASSIRDI'), category: technicalGet('ProductCategory') || 'Uncategorized',
       properties: technical.filter(t => t.predicate !== productNS + 'hasProductCategory').map(t => ({name:localName(t.predicate).replace(/^has/, ''),value:t.object})),
     }
   })
@@ -45,7 +45,7 @@ watch(products, items => { if (!items.some(p => p.id === selectedId.value)) sele
 void load()
 const manufacturers = computed(() => [...new Set(products.value.map(p => p.manufacturer).filter(Boolean))].sort())
 const filtered = computed(() => products.value.filter(product => {
-  const haystack = [product.id, product.manufacturer, product.partNumber, product.designation, product.supplierPartNumber, product.category, ...product.properties.map(item => item.value)].join(' ').toLowerCase()
+  const haystack = [product.id, product.manufacturer, product.partNumber, product.designation, product.supplierPartNumber, product.eclassClass, product.eclassName, product.eclassIrdi, product.category, ...product.properties.map(item => item.value)].join(' ').toLowerCase()
   return haystack.includes(query.value.trim().toLowerCase()) && (manufacturer.value === 'All' || product.manufacturer === manufacturer.value)
 }))
 const selected = computed(() => products.value.find(product => product.id === selectedId.value) ?? null)
@@ -75,7 +75,7 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
         </label>
         <div class="catalog-results">
           <button v-for="product in filtered" :key="product.id" class="asset-row catalog-item" :class="{ highlight: selectedId === product.id }" @click="selectedId=product.id;tab='Details'">
-            <span class="asset-icon"><Package :size="17"/></span><span><strong>{{ product.partNumber || product.designation || product.supplierPartNumber || product.id }}</strong><small>{{ product.manufacturer }} · {{ product.category }}</small><small class="catalog-id">{{ product.id }}</small></span>
+            <span class="asset-icon"><Package :size="17"/></span><span><strong>{{ product.partNumber || product.designation || product.supplierPartNumber || product.id }}</strong><small>{{ product.manufacturer }} · {{ product.category }}</small><small v-if="product.eclassClass">ECLASS {{ product.eclassClass }} · {{ product.eclassName }}</small><small class="catalog-id">{{ product.id }}</small></span>
           </button>
           <p v-if="!filtered.length" class="empty">No matching products. Try another search or manufacturer.</p>
         </div>
@@ -90,7 +90,10 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
               <div><small>Manufacturer part number</small><strong>{{ selected.partNumber || 'Not verified' }}</strong></div>
               <div v-if="selected.supplierPartNumber"><small>Supplier part number</small><strong>{{ selected.supplierPartNumber }}</strong></div>
               <div><small>AAS collection ID</small><strong>{{ selected.id }}</strong></div>
-              <div><small>Product RDF IRI</small><strong class="catalog-wrap">{{ selected.assetId }}</strong></div>
+              <div><small>Product asset identifier</small><strong class="catalog-wrap">{{ selected.assetId }}</strong></div>
+              <div><small>ECLASS class</small><strong>{{ selected.eclassClass || '—' }}</strong></div>
+              <div><small>ECLASS preferred name</small><strong>{{ selected.eclassName || '—' }}</strong></div>
+              <div><small>Semantic ID (ECLASS IRDI)</small><strong class="catalog-wrap">{{ selected.eclassIrdi || '—' }}</strong></div>
             </div>
             <h2 class="catalog-section-title">Technical properties <span class="pill muted">{{ selected.properties.length }}</span></h2>
             <div class="catalog-properties">
