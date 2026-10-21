@@ -22,7 +22,7 @@ from process_sim.recording import (
 )
 
 
-EQUIPMENT_SIGNAL = re.compile(r"^(XMEAS|XMV)[_ (]*(\\d+)\\)?$", re.IGNORECASE)
+EQUIPMENT_SIGNAL = re.compile(r"^(XMEAS|XMV)[_ (]*(\d+)\)?$", re.IGNORECASE)
 
 
 def export_equipment_csv(observations, output: Path) -> None:
