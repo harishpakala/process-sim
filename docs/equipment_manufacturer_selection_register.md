@@ -1,6 +1,6 @@
 # TEP NEXUS — manufacturer-backed equipment candidate register
 
-Status: **research shortlist, not an approved equipment selection**. Updated 2026-10-21 with measured fault-free TEP operating-envelope screening.
+Status: **PROVISIONAL DIGITAL-TWIN CANDIDATES ONLY — SUBJECT TO CHANGE**. Updated 2026-10-21. Control-dynamics investigation paused by project decision; measured operating-envelope screening retained as provisional evidence.
 
 The Tennessee Eastman Process (TEP) is a simulation benchmark, not a procurement design package. These seven entries are **manufacturer-backed product families or engineered offerings**, not confirmed installed products. ECLASS class/IRDI values are inherited from the project's README working classification register; **they have not been independently checked against the official ECLASS release**. No manufacturer part number, equipment rating, asset tag, or purchase claim is inferred.
 
@@ -13,6 +13,26 @@ The Tennessee Eastman Process (TEP) is a simulation benchmark, not a procurement
 | Stripper | 36-01-01 | `0173-1#01-AAD304#013` | **Sulzer — engineered stripping column / turnkey stripping unit** | Manufacturer explicitly offers column internals **and column shells**, engineering packages, and complete stripping units. This resolves the prior Koch-Glitsch internals-only gap. [Manufacturer source](https://www.sulzer.com/en/shared/products/stripping) | **Verified complete-equipment offering; process design pending** | Separation target, feed/stripping agent composition and flow, pressure, temperature, stages/packing, reboiler/condenser interfaces |
 | Reactor agitator assembly | 36-09-08-01 | `0173-1#01-AKP267#021` | EKATO — HWL-N reactor agitator | Manufacturer lists family motor power 5–4,000 kW, shaft diameter 40–560 mm and vacuum–200 bar operating pressure. Family range is **not a TEP design point**. [Manufacturer source](https://www.ekato.com/products/agitators/reactor-agitators-ekato-hwl-n/) | **Verified offering; mechanical sizing pending** | Reactor geometry, viscosity, mixing and mass-transfer duty, shaft speed/torque, sealing, motor/gearbox scope |
 | Separately modeled drive motors | 27-02-24 | `0173-1#01-AKE158#012` | ABB — AMZ synchronous motor family | ABB confirms AMZ synchronous motors, 1–65 MW and 1–15 kV for published families; the **minimum family rating may be inappropriate** for some TEP pumps/agitators. [Manufacturer source](https://new.abb.com/motors-generators/synchronous-motors/synchronous-motors/synchronous-dol-8-40-poles-motors/technical-data) | **Verified motor family; individual drives and synchronous assumption unverified** | Separate pump/compressor/agitator shaft power, speed, supply voltage, hazardous-area requirements, starting method; confirm each drive is actually synchronous |
+
+## Project decision: pause dynamics experiments and proceed with provisional candidates
+
+The 24-hour fault-free run showed slow pressure and stripper-loop oscillations. The project is **pausing further steady-state/control experiments**, not declaring that steady state is impossible. PID retuning, cascade control, nonlinear or model-predictive control may improve convergence or change the operating envelope; none has yet been validated for this model. Any future controller modification requires re-running operating-envelope and equipment-fit checks.
+
+**Candidate status definitions:** `PROVISIONAL_CANDIDATE` means a real manufacturer family or engineered offering is identified but project suitability remains unverified; `REQUIRES_ALTERNATIVE` means the published standard configuration fails an observed requirement; `APPROVED` requires documented engineering review and configuration-specific design evidence. **No candidate is approved, purchased or installed.** These records are concept selections only and may be replaced, resized, or removed as model fidelity, control strategy, process conditions, design margins and manufacturer documentation evolve.
+
+| Equipment | Current conceptual candidate | Project status | Why subject to change |
+|---|---|---|---|
+| Reactor | De Dietrich customized high-pressure reactor inquiry (standard BE excluded) | `REQUIRES_ALTERNATIVE` for standard BE; custom design `PROVISIONAL_CANDIDATE` only | Standard BE +6 bar design pressure is below observed ~27 bar(g); no certified custom rating or materials confirmation |
+| Condenser | Alfa Laval Olmi engineered shell-and-tube | `PROVISIONAL_CANDIDATE` | Unknown heat duty, thermal approach, design pressure and process composition |
+| Gas–liquid separator | Didion DSL or engineered equivalent | `PROVISIONAL_CANDIDATE` | Unknown selected-unit pressure rating, gas/liquid loading and separation performance |
+| Recycle compressor | Atlas Copco GT-Series or engineered equivalent | `PROVISIONAL_CANDIDATE` | Unknown pressure ratio, gas composition, compressor map and driver sizing |
+| Stripper | Sulzer engineered stripping column/unit | `PROVISIONAL_CANDIDATE` | No verified configuration rated for observed ~31 bar(g); separation duty unverified |
+| Reactor agitator | EKATO HWL-N | `PROVISIONAL_CANDIDATE` | Family pressure capability is not a selected agitator rating; speed, torque, seal and vessel interface unknown |
+| Separately modeled motors | ABB AMZ synchronous family, as comparison only | `PROVISIONAL_CANDIDATE` | Synchronous technology assumption and 1 MW family minimum may not fit individual drives |
+
+**Semantic modeling rule:** AAS ProductCatalog entries may be added as *explicitly provisional research candidates* if they carry `SelectionStatus`, `EvidenceSource`, `OperatingEnvelopeBasis`, `FitGaps`, and `RevalidationTriggers` fields and are not linked as selected/installed AssetInventory products. Do not invent part numbers, selected design ratings or asset serial numbers. Keep existing approved/physical inventory distinct.
+
+**Revalidation triggers:** control algorithm or tuning changes; revised TEP physical model; new operating/fault envelopes; design-pressure/temperature basis; manufacturer configuration/datasheet; ECLASS classification verification; engineering sign-off.
 
 ## Decision rules
 
