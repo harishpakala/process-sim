@@ -108,7 +108,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AHB183#005"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -235,7 +244,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAC024#022"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -320,7 +338,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AFZ828#022"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -477,7 +504,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD651#023"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -592,7 +628,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKA491#001"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -707,7 +752,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AFX043#011"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -792,7 +846,16 @@
               "valueType": "xs:string",
               "value": "Product"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AHB186#005"
+              }
+            ]
+          }
         }
       ]
     }
