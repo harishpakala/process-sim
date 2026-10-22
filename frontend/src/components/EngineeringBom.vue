@@ -7,9 +7,15 @@ const assemblies = engineeringBomAssemblies.map(item => ({...item}))
 type BomItem = (typeof items)[number]
 type Assembly = (typeof assemblies)[number]
 type Node = { id:string; parent:string; title:string; type:'assembly'|'item'; assembly?:Assembly; item?:BomItem }
+const displayParent = (item:BomItem):string => {
+ if(!item.FunctionalAssemblyReference)return item.ParentItemId
+ const tag=item.EngineeringLocalId
+ const control=item.SourceGroup==='ActuatingFunctions'||/^(CV-|VC_|SC_|M[-_]?|M1$)/.test(tag)
+ return item.FunctionalAssemblyReference+(control?'-CTRL':'-INST')
+}
 const nodes:Node[] = [
  ...assemblies.map(a => ({id:a.BOMItemId,parent:a.ParentItemId,title:a.ItemDescription,type:'assembly' as const,assembly:a})),
- ...items.map(i => ({id:i.BOMItemId,parent:i.ParentItemId,title:i.ItemDescription,type:'item' as const,item:i}))
+ ...items.map(i => ({id:i.BOMItemId,parent:displayParent(i),title:i.ItemDescription,type:'item' as const,item:i}))
 ]
 const byId = new Map(nodes.map(n=>[n.id,n]))
 const search = ref('')
@@ -48,7 +54,7 @@ function select(node:Node){
  }
 }
 const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
-const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id).length
+const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id&&!i.FunctionalAssemblyReference).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
 
@@ -60,7 +66,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
    <div><small>Exact asset references</small><strong>{{matched}}</strong></div>
    <div><small>Unassigned objects</small><strong>{{childCount('ASM-UNASSIGNED')}}</strong></div>
   </div>
-  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Source-described functional associations appear in each equipment inspector; they are not physical BOM assignments. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Unassigned items are intentionally kept separate. Quantities are modeled-object counts, not purchase quantities.</p>
+  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Source-described functional associations appear in each equipment inspector; they are not physical BOM assignments. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Only items without an equipment association appear in Unassigned. Functionally associated records are displayed under equipment discipline branches, without asserting physical membership. Quantities are modeled-object counts, not purchase quantities.</p>
   <div class="ebom-workspace">
    <section class="ebom-panel ebom-tree">
     <div class="ebom-panel-header"><h2>Assembly structure</h2><span>{{filteredIds.size}} objects</span></div>
@@ -71,7 +77,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
     <div class="ebom-scroll" role="tree" aria-label="Engineering BOM assembly tree">
      <button v-for="entry in visible" :key="entry.node.id" class="ebom-node" :class="{active:selectedId===entry.node.id,assembly:entry.node.type==='assembly'}" :style="{paddingLeft:(12+entry.depth*18)+'px'}" role="treeitem" :aria-level="entry.depth+1" :aria-selected="selectedId===entry.node.id" :aria-expanded="entry.node.type==='assembly'?(expanded.has(entry.node.id)||!!search.trim()||domain!=='All'):undefined" @click="select(entry.node)">
       <span class="ebom-glyph">{{entry.node.type==='assembly'?(expanded.has(entry.node.id)||!!search.trim()||domain!=='All'?'▾':'▸'):'•'}}</span>
-      <span class="ebom-node-text"><strong>{{entry.node.title}}</strong><small>{{entry.node.item?.EngineeringLocalId || entry.node.id }}</small></span>
+      <span class="ebom-node-text"><strong>{{entry.node.title}}</strong><small>{{entry.node.item?.EngineeringLocalId || entry.node.id }}{{entry.node.item?.FunctionalAssemblyReference ? ' · Functionally associated' : ''}}</small></span>
       <span v-if="entry.node.id==='ASM-UNASSIGNED'" class="ebom-count">{{childCount(entry.node.id)}}</span>
      </button>
      <p v-if="!visible.length" class="ebom-empty">No matching engineering items.</p>
@@ -103,7 +109,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
       <p class="ebom-summary">{{selected.item.BOMItemId}} · {{selected.item.SourceDomain}} / {{selected.item.SourceGroup}}</p>
       <div class="ebom-fields">
        <div><span>Engineering tag</span><strong>{{selected.item.EngineeringLocalId}}</strong></div>
-       <div><span>Parent assembly</span><strong>{{selected.item.ParentItemId}}</strong></div>
+       <div><span>Physical EBOM parent</span><strong>{{selected.item.ParentItemId}}</strong></div>
        <div><span>BOM position</span><strong>{{selected.item.BOMPosition}}</strong></div>
        <div><span>Quantity basis</span><strong>{{selected.item.Quantity}} {{selected.item.Unit}} · modeled object</strong></div>
        <div><span>Assignment status</span><strong>{{selected.item.StructureStatus}}</strong></div>
