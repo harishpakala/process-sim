@@ -186,6 +186,16 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FunctionalAssemblyReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociationBasis",
+              "valueType": "xs:string"
             }
           ]
         }
