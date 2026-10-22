@@ -23,7 +23,7 @@ const filteredIds = computed(()=>{
  return new Set(items.filter(i=>(domain.value==='All'||i.SourceDomain===domain.value)&&(!term||Object.values(i).some(v=>String(v).toLowerCase().includes(term)))).map(i=>i.BOMItemId))
 })
 const visible = computed(()=>{
- const allowed = new Set(filteredIds.value)
+ const allowed = new Set<string>(filteredIds.value)
  for(const id of filteredIds.value){
   let parent=byId.get(id)?.parent
   while(parent && !allowed.has(parent)){allowed.add(parent);parent=byId.get(parent)?.parent}
