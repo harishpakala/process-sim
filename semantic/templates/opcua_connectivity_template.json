@@ -58,8 +58,9 @@
           ],
           "value": [
             {
-              "modelType": "ReferenceElement",
-              "idShort": "EngineeringFunctionReference"
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
