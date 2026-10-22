@@ -67,7 +67,7 @@ def main():
             failures.append(domain)
     if failures:
         raise SystemExit("Semantic lifting failed for: " + ", ".join(failures))
-    print("All four AAS domains lifted successfully.")
+    print("All configured AAS domains lifted successfully.")
 
 
 if __name__ == "__main__":
