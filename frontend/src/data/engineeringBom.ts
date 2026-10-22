@@ -286,7 +286,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0001",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
+    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0002",
@@ -308,7 +310,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0002",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
+    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0003",
@@ -330,7 +334,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0003",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
+    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0004",
@@ -352,7 +358,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0004",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
+    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0005",
@@ -374,7 +382,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0005",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
+    "StructureStatus": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0006",
@@ -396,7 +406,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0006",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0007",
@@ -418,7 +430,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0007",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0008",
@@ -440,7 +454,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0008",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0009",
@@ -462,7 +478,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0009",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0010",
@@ -484,7 +502,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0010",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0011",
@@ -506,7 +526,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0011",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0012",
@@ -528,7 +550,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0012",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0013",
@@ -550,7 +574,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0013",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0014",
@@ -572,7 +598,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0014",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0015",
@@ -594,7 +622,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0015",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0016",
@@ -616,7 +646,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0016",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0017",
@@ -638,7 +670,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0017",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0018",
@@ -660,7 +694,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0018",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0019",
@@ -682,7 +718,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0019",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0020",
@@ -704,7 +742,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0020",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0021",
@@ -726,7 +766,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0021",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0022",
@@ -748,7 +790,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0022",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0023",
@@ -770,7 +814,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0023",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0024",
@@ -792,7 +838,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0024",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0025",
@@ -814,7 +862,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0025",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0026",
@@ -836,7 +886,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0026",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0027",
@@ -858,7 +910,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0027",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-COMPRESSOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0028",
@@ -880,7 +934,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0028",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0029",
@@ -902,7 +958,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0029",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0030",
@@ -924,7 +982,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0030",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0031",
@@ -946,7 +1006,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0031",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0032",
@@ -968,7 +1030,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0032",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-COMPRESSOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0033",
@@ -990,7 +1054,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0033",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0034",
@@ -1012,7 +1078,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0034",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-SEPARATOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0035",
@@ -1034,7 +1102,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0035",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0036",
@@ -1056,7 +1126,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0036",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-STRIPPER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0037",
@@ -1078,7 +1150,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0037",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0038",
@@ -1100,7 +1174,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0038",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-CONDENSER",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0039",
@@ -1122,7 +1198,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0039",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0040",
@@ -1144,7 +1222,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0040",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0041",
@@ -1166,7 +1246,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0041",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0042",
@@ -1188,7 +1270,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0042",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0043",
@@ -1210,7 +1294,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0043",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0044",
@@ -1232,7 +1318,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0044",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0045",
@@ -1254,7 +1342,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0045",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0046",
@@ -1276,7 +1366,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0046",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0047",
@@ -1298,7 +1390,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0047",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0048",
@@ -1320,7 +1414,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0048",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0049",
@@ -1342,7 +1438,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0049",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0050",
@@ -1364,7 +1462,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0050",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0051",
@@ -1386,7 +1486,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0051",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0052",
@@ -1408,7 +1510,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0052",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0053",
@@ -1430,7 +1534,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0053",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0054",
@@ -1452,7 +1558,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0054",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0055",
@@ -1474,7 +1582,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0055",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0056",
@@ -1496,7 +1606,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0056",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0057",
@@ -1518,7 +1630,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0057",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0058",
@@ -1540,7 +1654,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0058",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0059",
@@ -1562,7 +1678,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0059",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0060",
@@ -1584,7 +1702,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0060",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0061",
@@ -1606,7 +1726,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0061",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0062",
@@ -1628,7 +1750,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0062",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0063",
@@ -1650,7 +1774,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0063",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0064",
@@ -1672,7 +1798,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0064",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0065",
@@ -1694,7 +1822,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0065",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0066",
@@ -1716,7 +1846,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0066",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0067",
@@ -1738,7 +1870,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0067",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0068",
@@ -1760,7 +1894,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0068",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0069",
@@ -1782,7 +1918,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0069",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0070",
@@ -1804,7 +1942,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0070",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0071",
@@ -1826,7 +1966,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0071",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0072",
@@ -1848,7 +1990,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0072",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0073",
@@ -1870,7 +2014,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0073",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0074",
@@ -1892,7 +2038,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0074",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0075",
@@ -1914,7 +2062,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0075",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0076",
@@ -1936,7 +2086,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0076",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "ASM-REACTOR",
+    "AssociationBasis": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
   },
   {
     "BOMItemId": "EBOM-0077",
@@ -1958,7 +2110,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0077",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0078",
@@ -1980,7 +2134,9 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0078",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   },
   {
     "BOMItemId": "EBOM-0079",
@@ -2002,6 +2158,8 @@ export const engineeringBomItems = [
     "ItemType": "ENGINEERING_OBJECT",
     "BOMPosition": "EBOM-0079",
     "QuantityPerAssembly": "1",
-    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    "StructureStatus": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+    "FunctionalAssemblyReference": "",
+    "AssociationBasis": "UNRESOLVED"
   }
 ] as const
