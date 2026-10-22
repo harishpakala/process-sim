@@ -262,8 +262,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(502, {"error": f"GraphDB unavailable: {exc}"})
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             self.send_json(400, {"error": f"Invalid request: {exc}"})
-        except Exception:
-            self.send_json(500, {"error": "Unexpected backend error"})
+        except Exception as exc:
+            import logging
+            logging.exception("Unexpected /api/kg/select backend error")
+            self.send_json(500, {"error": f"Knowledge API internal error ({type(exc).__name__}); see backend logs"})
 
     def send_json(self, status, data):
         payload = json.dumps(data).encode("utf-8")
