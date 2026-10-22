@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lift four AAS template/instance pairs and optionally publish their RDF graphs.
+"""Lift configured AAS template/instance pairs and optionally publish their RDF graphs.
 
 Run from the repository root:
     python3 scripts/import_knowledge_graph.py
