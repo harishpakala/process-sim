@@ -596,7 +596,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -687,7 +696,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -778,7 +796,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -869,7 +896,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -960,7 +996,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1051,7 +1096,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1142,7 +1196,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1233,7 +1296,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1324,7 +1396,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1415,7 +1496,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1506,7 +1596,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1597,7 +1696,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1688,7 +1796,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1779,7 +1896,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1870,7 +1996,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -1961,7 +2096,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2052,7 +2196,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2143,7 +2296,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2234,7 +2396,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2325,7 +2496,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2416,7 +2596,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2507,7 +2696,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2586,7 +2784,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2665,7 +2872,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2744,7 +2960,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2823,7 +3048,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2902,7 +3136,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -2981,7 +3224,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3060,7 +3312,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3139,7 +3400,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3218,7 +3488,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3297,7 +3576,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3376,7 +3664,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3455,7 +3752,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3534,7 +3840,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3613,7 +3928,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3692,7 +4016,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3771,7 +4104,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3850,7 +4192,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -3929,7 +4280,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4008,7 +4368,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMeasurement"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4099,7 +4468,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4190,7 +4568,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4281,7 +4668,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4372,7 +4768,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4463,7 +4868,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4554,7 +4968,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4645,7 +5068,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4736,7 +5168,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4827,7 +5268,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -4918,7 +5368,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5009,7 +5468,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalManipulatedVariable"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5100,7 +5568,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#LogicalMotorControl"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5185,7 +5662,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#IllustrativeMotor"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5270,7 +5756,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#IllustrativeMotor"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5355,7 +5850,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#IllustrativeMotor"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -5440,7 +5944,16 @@
               "valueType": "xs:string",
               "value": "NotEvaluated"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/tep/ontology/asset-inventory#IllustrativeControlValve"
+              }
+            ]
+          }
         }
       ]
     }
