@@ -5,6 +5,8 @@ import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-ne
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
 
+const props = withDefaults(defineProps<{ focusId?: string }>(), { focusId: '' })
+const emit = defineEmits<{ (e:'open-record', destination:string, identifier:string):void }>()
 type Product = { id: string; uri: string; manufacturer: string; partNumber: string; designation: string; supplierPartNumber: string; assetId: string; semanticId: string; eclassClass: string; eclassName: string; eclassIrdi: string; category: string; properties: { name: string; value: string }[] }
 const triples = ref<Triple[]>([])
 const domainGraphOpen = ref(false)
@@ -14,6 +16,7 @@ const query = ref('')
 const manufacturer = ref('All')
 const selectedId = ref('')
 const tab = ref<'Details' | 'Knowledge Graph'>('Details')
+const relatedAssets = ref<{id:string;tag:string;status:string}[]>([])
 const productType = 'https://example.org/productcatalog/Product'
 const productNS = 'https://example.org/productcatalog/'
 const aasNS = 'https://example.org/aas/'
@@ -43,7 +46,9 @@ async function load() {
   } catch (e) { triples.value = []; error.value = e instanceof Error ? e.message : 'Unable to query Knowledge Graph.' }
   finally { loading.value = false }
 }
-watch(products, items => { if (!items.some(p => p.id === selectedId.value)) selectedId.value = items[0]?.id || '' }, { immediate: true })
+watch(products, items => { const focused=items.find(p=>p.assetId===props.focusId || p.uri===props.focusId || p.id===props.focusId)
+  if(focused){selectedId.value=focused.id;query.value='';manufacturer.value='All';return}
+  if (!items.some(p => p.id === selectedId.value)) selectedId.value = items[0]?.id || '' }, { immediate: true })
 void load()
 const manufacturers = computed(() => [...new Set(products.value.map(p => p.manufacturer).filter(Boolean))].sort())
 const filtered = computed(() => products.value.filter(product => {
@@ -51,6 +56,14 @@ const filtered = computed(() => products.value.filter(product => {
   return haystack.includes(query.value.trim().toLowerCase()) && (manufacturer.value === 'All' || product.manufacturer === manufacturer.value)
 }))
 const selected = computed(() => products.value.find(product => product.id === selectedId.value) ?? null)
+watch(selected,async product=>{
+ relatedAssets.value=[]
+ if(!product)return
+ try{
+  const rows=await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { ?s <https://example.org/assetinventory/hasCandidateProductReference> <${product.assetId}> ; ?p ?o . } } LIMIT 200`)
+  relatedAssets.value=[...new Set(rows.map(t=>t.subject))].map(id=>({id,tag:rows.find(t=>t.subject===id && t.predicate==='https://example.org/assetinventory/hasEquipmentTag')?.object||id,status:rows.find(t=>t.subject===id && t.predicate==='https://example.org/assetinventory/hasCandidateSelectionStatus')?.object||'PROVISIONAL'}))
+ }catch { relatedAssets.value=[] }
+},{immediate:true})
 const sourceLinks = computed(() => selected.value?.properties.filter(item => /source|url|datasheet|documentation/i.test(item.name) && /^https?:\/\//i.test(item.value)) ?? [])
 function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/_/g, ' ') }
 </script>
@@ -93,6 +106,7 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
               <div v-if="selected.supplierPartNumber"><small>Supplier part number</small><strong>{{ selected.supplierPartNumber }}</strong></div>
               <div><small>AAS collection ID</small><strong>{{ selected.id }}</strong></div>
               <div><small>Product asset identifier</small><strong class="catalog-wrap">{{ selected.assetId }}</strong></div>
+              <div><small>Referenced by AssetInventory</small><div v-if="relatedAssets.length"><button v-for="asset in relatedAssets" :key="asset.id" class="secondary" type="button" @click="emit('open-record','Asset Inventory',asset.id)">{{ asset.tag }} ↗ ({{ asset.status }})</button></div><strong v-else>No linked assets found</strong></div>
               <div><small>ECLASS class</small><strong>{{ selected.eclassClass || '—' }}</strong></div>
               <div><small>ECLASS preferred name</small><strong>{{ selected.eclassName || '—' }}</strong></div>
               <div><small>AAS Semantic ID</small><strong class="catalog-wrap">{{ selected.semanticId || 'Not present in lifted RDF' }}</strong></div>
