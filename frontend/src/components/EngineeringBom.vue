@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import bom from '../../../examples/aas/tep_engineering_bom_instance.json'
+import { engineeringBomItems } from '../data/engineeringBom'
 const emit=defineEmits<{(e:'open-record',destination:string,identifier:string):void}>()
 type Item={BOMItemId:string;SourceDomain:string;SourceGroup:string;EngineeringReference:string;EngineeringLocalId:string;ItemDescription:string;Quantity:string;Unit:string;QuantityBasis:string;AssetReference:string;CandidateProductReference:string;SelectionStatus:string;Revision:string;ValidationStatus:string;EquivalenceStatus:string}
-const items:Item[]=bom.submodelElements[0].value.map(entry=>Object.fromEntries(entry.value.map(p=>[p.idShort,p.value])) as Item)
+const items:Item[]=engineeringBomItems.map(entry=>({...entry}))
 const search=ref('')
 const domain=ref('All')
 const selectedId=ref(items[0]?.BOMItemId||'')
