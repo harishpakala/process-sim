@@ -47,6 +47,7 @@ function select(node:Node){
   expanded.value=next
  }
 }
+const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
@@ -59,7 +60,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
    <div><small>Exact asset references</small><strong>{{matched}}</strong></div>
    <div><small>Unassigned objects</small><strong>{{childCount('ASM-UNASSIGNED')}}</strong></div>
   </div>
-  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Unassigned items are intentionally kept separate. Quantities are modeled-object counts, not purchase quantities.</p>
+  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Source-described functional associations appear in each equipment inspector; they are not physical BOM assignments. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Unassigned items are intentionally kept separate. Quantities are modeled-object counts, not purchase quantities.</p>
   <div class="ebom-workspace">
    <section class="ebom-panel ebom-tree">
     <div class="ebom-panel-header"><h2>Assembly structure</h2><span>{{filteredIds.size}} objects</span></div>
@@ -98,6 +99,8 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>BOM position</span><strong>{{selected.item.BOMPosition}}</strong></div>
        <div><span>Quantity basis</span><strong>{{selected.item.Quantity}} {{selected.item.Unit}} · modeled object</strong></div>
        <div><span>Assignment status</span><strong>{{selected.item.StructureStatus}}</strong></div>
+       <div><span>Functional association</span><strong>{{selected.item.FunctionalAssemblyReference || "Unresolved"}}</strong></div>
+       <div><span>Association evidence</span><strong>{{selected.item.AssociationBasis}}</strong></div>
        <div><span>Asset reference</span><strong>{{selected.item.AssetReference || 'Unresolved'}}</strong></div>
        <div><span>Product selection</span><strong>{{selected.item.SelectionStatus}}</strong></div>
        <div><span>Revision</span><strong>{{selected.item.Revision}}</strong></div>
@@ -151,6 +154,13 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
 .ebom-actions{display:flex;flex-wrap:wrap;gap:8px;padding:5px 17px}
 .ebom-actions button{background:#173b48;border:1px solid #3d8089;color:#8af0e8;border-radius:8px;padding:9px 12px;font-size:12px}
 .ebom-reference{font-size:11px;margin:12px 17px 18px;overflow-wrap:anywhere}
+.ebom-related{margin:18px 17px;padding:13px;background:#0e1c2f;border:1px solid #294159;border-radius:9px}
+.ebom-related h3{font-size:13px;margin:0 0 8px}
+.ebom-related p{font-size:11px;margin:0 0 10px}
+.ebom-related button{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;padding:9px 6px;background:transparent;border:0;border-top:1px solid #294159;color:#d5e7f5;text-align:left}
+.ebom-related button:hover{background:#1a3248}
+.ebom-related button strong{font-size:12px}
+.ebom-related button span{font-size:10px;color:#91abc4}
 .ebom-empty{padding:16px;font-size:12px}
 @media(max-width:1100px){.ebom-workspace{grid-template-columns:1fr}.ebom-scroll{max-height:380px}}
 @media(max-width:700px){.ebom-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ebom-filters{flex-wrap:wrap}.ebom-filters input{flex-basis:100%;width:100%}.ebom-fields>div{grid-template-columns:1fr;gap:5px}}
