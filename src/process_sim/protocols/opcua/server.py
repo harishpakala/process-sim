@@ -86,13 +86,13 @@ class OPCUAServer:
         measurements = await tep.add_object(self._namespace_index, "Measurements")
         self._measurement_nodes = []
         for index, value in enumerate(self.simulator.get_measurements(), start=1):
-            node = await measurements.add_variable(self._namespace_index, f"XMEAS{index}", float(value))
+            node = await measurements.add_variable(ua.NodeId(f"TEP.Measurements.XMEAS{index}", self._namespace_index), f"XMEAS{index}", float(value))
             await node.set_read_only()
             self._measurement_nodes.append(node)
         mvs = await tep.add_object(self._namespace_index, "ManipulatedVariables")
         self._mv_nodes = []
         for index, value in enumerate(self.simulator.get_manipulated_variables(), start=1):
-            node = await mvs.add_variable(self._namespace_index, f"XMV{index}", float(value))
+            node = await mvs.add_variable(ua.NodeId(f"TEP.ManipulatedVariables.XMV{index}", self._namespace_index), f"XMV{index}", float(value))
             await node.set_writable()
             self._mv_nodes.append(node)
         self._last_synced_mvs = [float(value) for value in self.simulator.get_manipulated_variables()]
