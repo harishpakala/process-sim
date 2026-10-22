@@ -6,6 +6,7 @@ import FaultManagement from './components/FaultManagement.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
+import DexpiOpcuaMappings from './components/DexpiOpcuaMappings.vue'
 import AssetInventory from './components/AssetInventory.vue'
 import MultiSignalReplay from './components/MultiSignalReplay.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
@@ -88,7 +89,7 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
     <template v-else-if="active==='Product Catalog'"><ProductCatalog /></template>
     <template v-else-if="active==='Asset Inventory'"><AssetInventory /></template>
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
-    <template v-else-if="graphView"><EngineeringRdfGraph :domain="active==='ECAD Explorer'?'ecad':'dexpi'" /></template>
+    <template v-else-if="graphView"><DexpiOpcuaMappings v-if="active==='DEXPI Explorer'" /><EngineeringRdfGraph :domain="active==='ECAD Explorer'?'ecad':'dexpi'" /></template>
     <template v-else-if="active==='AI Query'">
      <section class="panel ai"><BrainCircuit :size="38"/><h2>Ask your Digital Twin</h2><p>Future answers will be grounded in GraphDB queries and controlled process-sim tools, with visible evidence and provenance.</p><textarea placeholder="e.g. Which reactor instruments appear in the engineering BOM?" disabled></textarea><span class="pill amber-pill">LLM integration pending</span></section>
     </template>
