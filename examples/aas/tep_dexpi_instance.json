@@ -174,7 +174,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS1",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -184,36 +184,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -244,7 +214,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS2",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -254,36 +224,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -314,7 +254,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS3",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -324,36 +264,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -384,7 +294,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS4",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -394,36 +304,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -454,7 +334,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS5",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -464,36 +344,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -524,7 +374,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS6",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -534,36 +384,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -594,7 +414,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS10",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -604,36 +424,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -664,7 +454,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS14",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -674,36 +464,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS14"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS14"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -734,7 +494,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS17",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -744,36 +504,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS17"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS17"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -804,7 +534,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS19",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -814,36 +544,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS19"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS19"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -874,7 +574,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS9",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -888,36 +588,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -948,7 +618,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS11",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -962,36 +632,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1022,7 +662,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS18",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1036,36 +676,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS18"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS18"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1096,7 +706,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS21",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1110,36 +720,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS21"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS21"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1170,7 +750,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS22",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1184,36 +764,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS22"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS22"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1244,7 +794,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS8",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1258,36 +808,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1318,7 +838,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS12",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1332,36 +852,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1392,7 +882,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS15",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1406,36 +896,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS15"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS15"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1466,7 +926,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS7",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1476,36 +936,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1536,7 +966,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS13",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1546,36 +976,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS13"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS13"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1606,7 +1006,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS16",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1616,36 +1016,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS16"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS16"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         },
@@ -1676,7 +1046,7 @@
               "modelType": "Property",
               "idShort": "MeasuredVariable",
               "valueType": "xs:float",
-              "value": "XMEAS20",
+              "value": "",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -1686,36 +1056,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS20"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/Measurements/XMEAS20"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ"
             }
           ]
         }
@@ -1752,37 +1092,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV1"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -1813,37 +1123,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV2"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -1874,37 +1154,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV3"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -1935,37 +1185,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV4"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -1996,37 +1216,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV5"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2057,37 +1247,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV6"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2118,37 +1278,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV7"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2179,37 +1309,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV8"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2240,37 +1340,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV9"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2301,37 +1371,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV10"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2362,37 +1402,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV11"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         },
@@ -2423,37 +1433,7 @@
               "modelType": "Property",
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
-              "value": "XMV12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANamespaceURI",
-              "valueType": "xs:string",
-              "value": "urn:process-sim:opcua"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUANodeId",
-              "valueType": "xs:string",
-              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string",
-              "value": "Objects/TEP/ManipulatedVariables/XMV12"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUAMappingStatus",
-              "valueType": "xs:string",
-              "value": "PROVISIONAL_ENGINEERING_MATCH"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OPCUASignalDirection",
-              "valueType": "xs:string",
-              "value": "READ_WRITE"
+              "value": ""
             }
           ]
         }
