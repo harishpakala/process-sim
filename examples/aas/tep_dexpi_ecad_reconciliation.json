@@ -1,6 +1,6 @@
 {
   "schemaVersion": "1.0",
-  "description": "Candidate DEXPI–ECAD function/device correspondences. Separate from physical EBOM membership and procurement quantity.",
+  "description": "Candidate DEXPI–ECAD function/device correspondences. Separate from physical EBOM membership and procurement quantity. Excludes mismatched cooling-water equipment, motor-versus-control-function, and ambiguous valve pairings.",
   "candidates": [
     {
       "dexpiIdShort": "ReactorFeedFlow",
@@ -75,19 +75,6 @@
       "ecadLocalId": "CV-1101",
       "ecadReference": "https://aas.example.com/CV-1101",
       "ecadDescription": "Reactor Cooling Water Return (CWR) Control Valve",
-      "equipmentAssembly": "ASM-REACTOR",
-      "status": "CANDIDATE_NOT_VERIFIED",
-      "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
-      "identityConfirmed": false
-    },
-    {
-      "dexpiIdShort": "AgitatorSpeedControl",
-      "dexpiLocalId": "SC_101",
-      "dexpiReference": "https://aas.example.com/SC_101",
-      "ecadIdShort": "M1",
-      "ecadLocalId": "M1",
-      "ecadReference": "https://aas.example.com/M1",
-      "ecadDescription": "Reactor Stirrer Motor",
       "equipmentAssembly": "ASM-REACTOR",
       "status": "CANDIDATE_NOT_VERIFIED",
       "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
@@ -237,32 +224,6 @@
       "identityConfirmed": false
     },
     {
-      "dexpiIdShort": "CondenserCoolingWaterValve",
-      "dexpiLocalId": "VC_111",
-      "dexpiReference": "https://aas.example.com/VC_111",
-      "ecadIdShort": "CV_1201",
-      "ecadLocalId": "CV-1201",
-      "ecadReference": "https://aas.example.com/CV-1201",
-      "ecadDescription": "Condenser Outlet Control Valve",
-      "equipmentAssembly": "ASM-CONDENSER",
-      "status": "CANDIDATE_NOT_VERIFIED",
-      "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
-      "identityConfirmed": false
-    },
-    {
-      "dexpiIdShort": "SeparatorCoolingWaterOutletTemperature",
-      "dexpiLocalId": "TI_105",
-      "dexpiReference": "https://aas.example.com/TI_105",
-      "ecadIdShort": "TI_1202",
-      "ecadLocalId": "TI-1202",
-      "ecadReference": "https://aas.example.com/TI-1202",
-      "ecadDescription": "Condenser cooling water outlet temperature",
-      "equipmentAssembly": "ASM-CONDENSER",
-      "status": "CANDIDATE_NOT_VERIFIED",
-      "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
-      "identityConfirmed": false
-    },
-    {
       "dexpiIdShort": "CompressorPower",
       "dexpiLocalId": "JI_101",
       "dexpiReference": "https://aas.example.com/JI_101",
@@ -270,19 +231,6 @@
       "ecadLocalId": "JI-1401",
       "ecadReference": "https://aas.example.com/JI-1401",
       "ecadDescription": "Compressor work",
-      "equipmentAssembly": "ASM-COMPRESSOR",
-      "status": "CANDIDATE_NOT_VERIFIED",
-      "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
-      "identityConfirmed": false
-    },
-    {
-      "dexpiIdShort": "CompressorRecycleValve",
-      "dexpiLocalId": "VC_105",
-      "dexpiReference": "https://aas.example.com/VC_105",
-      "ecadIdShort": "CV_1401",
-      "ecadLocalId": "CV-1401",
-      "ecadReference": "https://aas.example.com/CV-1401",
-      "ecadDescription": "Compressor Control Valve",
       "equipmentAssembly": "ASM-COMPRESSOR",
       "status": "CANDIDATE_NOT_VERIFIED",
       "basis": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
