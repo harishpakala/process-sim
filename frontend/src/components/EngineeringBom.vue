@@ -24,6 +24,7 @@ const filteredIds = computed(()=>{
 })
 const visible = computed(()=>{
  const allowed = new Set<string>(filteredIds.value)
+ if(!search.value.trim() && domain.value==='All')for(const a of assemblies)allowed.add(a.BOMItemId)
  for(const id of filteredIds.value){
   let parent=byId.get(id)?.parent
   while(parent && !allowed.has(parent)){allowed.add(parent);parent=byId.get(parent)?.parent}
@@ -47,6 +48,7 @@ function select(node:Node){
  }
 }
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id).length
+const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
 
 <template>
@@ -57,7 +59,7 @@ const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id).length
    <div><small>Exact asset references</small><strong>{{matched}}</strong></div>
    <div><small>Unassigned objects</small><strong>{{childCount('ASM-UNASSIGNED')}}</strong></div>
   </div>
-  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Unassigned items are intentionally kept separate. Quantities are modeled-object counts, not purchase quantities.</p>
+  <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Unassigned items are intentionally kept separate. Quantities are modeled-object counts, not purchase quantities.</p>
   <div class="ebom-workspace">
    <section class="ebom-panel ebom-tree">
     <div class="ebom-panel-header"><h2>Assembly structure</h2><span>{{filteredIds.size}} objects</span></div>
@@ -83,9 +85,10 @@ const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id).length
        <div><span>Parent</span><strong>{{selected.parent || 'Top level'}}</strong></div>
        <div><span>Assembly type</span><strong>{{selected.assembly.AssemblyKind}}</strong></div>
        <div><span>Direct engineering objects</span><strong>{{childCount(selected.id)}}</strong></div>
-       <div><span>Structure status</span><strong>Provisional — physical component breakdown not verified</strong></div>
+       <div><span>Subassemblies</span><strong>{{subassemblyCount(selected.id)}}</strong></div>
+       <div><span>Structure status</span><strong>{{selected.assembly.StructureStatus}}</strong></div>
       </div>
-      <p class="ebom-hint">Select an engineering object in the tree to inspect its source references. Mechanical, instrumentation and electrical subassemblies will be populated only when engineering evidence supports them.</p>
+      <p class="ebom-hint">Select an engineering object in the tree to inspect its source references. These discipline branches are placeholders. Physical components, sensor assignments and quantities will be populated only when engineering evidence supports them.</p>
      </template>
      <template v-else-if="selected.item">
       <p class="ebom-summary">{{selected.item.BOMItemId}} · {{selected.item.SourceDomain}} / {{selected.item.SourceGroup}}</p>
