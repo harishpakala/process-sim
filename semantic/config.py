@@ -8,5 +8,6 @@ TARGETS = (
     ("productcatalog", ROOT / "semantic/templates/product_catalog_template.json", ROOT / "examples/aas/product_catalog_instance.json"),
     ("assetinventory", ROOT / "semantic/templates/asset_inventory_template.json", ROOT / "examples/aas/asset_inventory_instance.json"),
     ("opcuaconnectivity", ROOT / "semantic/templates/opcua_connectivity_template.json", ROOT / "examples/aas/tep_opcua_connectivity_instance.json"),
+    ("engineeringbom", ROOT / "semantic/templates/engineering_bom_template.json", ROOT / "examples/aas/tep_engineering_bom_instance.json"),
 )
 OUTPUT = ROOT / "out" / "semantic"
