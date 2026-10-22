@@ -8,6 +8,8 @@ import AssetStatusKnowledgeGraph from './AssetStatusKnowledgeGraph.vue'
 type AssetRecord = { id: string; fields: Record<string, string> }
 const assetType = 'https://example.org/assetinventory/Asset'
 const assetNS = 'https://example.org/assetinventory/'
+const aasNS = 'https://example.org/aas/'
+const localSemanticPrefix = 'https://example.org/tep/ontology/asset-inventory#'
 const productNS = 'https://example.org/productcatalog/'
 const productType = 'https://example.org/productcatalog/Product'
 type LiveSnapshot = {simulation:{Running:boolean;TimeHours:number};measurements:number[];manipulatedVariables:number[]}
@@ -104,6 +106,7 @@ const assets = computed<AssetRecord[]>(() => {
     const fields: Record<string, string> = { AssetId: id }
     const own = triples.value.filter(t => t.subject === id)
     for (const t of own) {
+      if (t.predicate === aasNS + 'semanticId') fields.SemanticId = t.object
       if (t.predicate.startsWith(assetNS)) {
         if (t.predicate === assetNS + 'hasProductReference') fields.ProductReference = t.object
         else if (t.predicate === assetNS + 'hasOperationalReference') fields.OperationalSignalIRI = t.object
@@ -165,6 +168,8 @@ watch(historicalRuns,()=>{void loadAssetHistory()})
 
 const productTypeCount = computed(() => new Set(assets.value.map(a => a.fields.ProductReference).filter(ref => ref && products.value[ref])).size)
 const signalCount = computed(() => assets.value.filter(a => a.fields.OperationalReference).length)
+const semanticCount = computed(() => assets.value.filter(a => a.fields.SemanticId).length)
+const semanticKind = (value: string) => !value ? 'Not available in GraphDB' : /^0173-1#/.test(value) ? 'ECLASS class (working mapping)' : value.startsWith(localSemanticPrefix) ? 'Project-defined concept (provisional)' : 'Other semantic reference'
 const readable = (s: string) => s.replace(/([a-z])([A-Z])/g, '$1 $2')
 const statusLabel = (value: string) => readable(value || 'Unknown')
 </script>
@@ -179,6 +184,7 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
    <div class="metric"><Factory :size="18"/><small>ASSET INSTANCES</small><strong>{{ assets.length }}</strong></div>
    <div class="metric"><Network :size="18"/><small>OPERATIONAL SIGNALS</small><strong>{{ signalCount }}</strong></div>
    <div class="metric"><Package :size="18"/><small>PRODUCT TYPES</small><strong>{{ productTypeCount }}</strong></div>
+   <div class="metric"><Network :size="18"/><small>SEMANTIC IDs IN KG</small><strong>{{ semanticCount }} / {{ assets.length }}</strong></div>
   </div>
   <div class="catalog-layout">
    <section class="panel catalog-list">
@@ -187,7 +193,7 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
     <button v-if="query" class="secondary" type="button" @click="query=''">Clear search</button>
     <div class="catalog-results">
      <button v-for="asset in filtered" :key="asset.id" class="asset-row catalog-item" :class="{highlight:selected?.id===asset.id}" @click="selectedId=asset.id;detailTab='Status'">
-      <span class="asset-icon"><Factory :size="17"/></span><span><strong>{{ asset.fields.EquipmentTag || localName(asset.id) }}</strong><small>{{ asset.fields.AssetName || 'Unnamed simulated asset' }}</small><small>{{ asset.fields.AssetType || 'SimulatedAsset' }}</small></span>
+      <span class="asset-icon"><Factory :size="17"/></span><span><strong>{{ asset.fields.EquipmentTag || localName(asset.id) }}</strong><small>{{ asset.fields.AssetName || 'Unnamed simulated asset' }}</small><small>{{ asset.fields.AssetType || 'SimulatedAsset' }}</small><small v-if="asset.fields.SemanticId">{{ semanticKind(asset.fields.SemanticId) }}</small></span>
      </button>
      <p v-if="!filtered.length && !loading" class="empty">No matching assets in the KG.</p>
     </div>
@@ -268,6 +274,19 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
      <div class="catalog-properties">
       <div v-for="key in statusKeys" :key="key" class="catalog-property"><span>{{ readable(key) }}</span><span>{{ statusLabel(selected.fields[key]) }}</span></div>
      </div>
+     <h2 class="catalog-section-title">Semantic classification (GraphDB)</h2>
+     <div class="catalog-properties">
+      <div class="catalog-property"><span>Classification source</span><strong>{{ semanticKind(selected.fields.SemanticId || '') }}</strong></div>
+      <div class="catalog-property"><span>AAS semanticId</span><code class="catalog-wrap">{{ selected.fields.SemanticId || 'Not lifted / not available in GraphDB' }}</code></div>
+     </div>
+     <p class="catalog-disclaimer">ECLASS IRDIs are working mappings pending official verification. Project-defined concept URIs are provisional and do not establish physical device installation. If a semantic ID is missing, re-import the updated AAS instance into GraphDB.</p>
+     <h2 class="catalog-section-title">Candidate product selection</h2>
+     <div class="catalog-properties" v-if="selected.fields.CandidateProductReference">
+      <div class="catalog-property"><span>Candidate product reference</span><code class="catalog-wrap">{{ selected.fields.CandidateProductReference }}</code></div>
+      <div class="catalog-property"><span>Selection status</span><strong>{{ selected.fields.CandidateSelectionStatus || 'Not specified' }}</strong></div>
+     </div>
+     <p v-else class="catalog-disclaimer">No candidate manufacturer product linked to this asset.</p>
+     <p class="catalog-disclaimer">Candidate references are proposals, not approved or installed products.</p>
      <h2 class="catalog-section-title">Product catalog</h2>
      <div class="catalog-properties" v-if="selected.fields.ProductReference && products[selected.fields.ProductReference]">
       <div class="catalog-property"><span>Manufacturer</span><span>{{ products[selected.fields.ProductReference].ManufacturerName || 'Not assigned' }}</span></div>
@@ -277,13 +296,13 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
      <p v-else class="catalog-disclaimer">No matching product type is defined in the KG for this simulated asset.</p>
      <h2 class="catalog-section-title">Engineering & identification</h2>
      <div class="catalog-properties">
-      <div v-for="(value,key) in Object.fromEntries(Object.entries(selected.fields).filter(([key]) => !statusKeys.includes(key)))" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
+      <div v-for="(value,key) in Object.fromEntries(Object.entries(selected.fields).filter(([key]) => !statusKeys.includes(key) && !['SemanticId', 'CandidateProductReference', 'CandidateSelectionStatus'].includes(key)))" :key="key" class="catalog-property"><span>{{ readable(String(key)) }}</span><span class="catalog-wrap">{{ value || 'Not assigned' }}</span></div>
      </div>
      <p class="catalog-disclaimer">Engineering associations are RDF references, not evidence of verified physical installation. GraphDB lifecycle status is engineering metadata; live operational state is calculated separately and is not written to GraphDB.</p>
     </template>
    </section>
   </div>
-  <p class="catalog-disclaimer">AssetInventory list, counters, statuses, product references and KG visualization are queried from GraphDB repository AAS. Live OPC UA status is shown separately where an existing operational signal reference can be resolved.</p>
+  <p class="catalog-disclaimer">AssetInventory list, counters, semantic IDs, statuses, product references and KG visualization are queried from GraphDB repository AAS. Live OPC UA status is shown separately where an existing operational signal reference can be resolved.</p>
  </section>
   </template>
 </template>
