@@ -19,6 +19,15 @@ const sections = [
 const opened=ref<Record<string,boolean>>({'ENGINEERING':true,'SIMULATION':true,'ERP':false,'SYSTEM & SEMANTICS':false})
 const active=ref('Overview')
 const selected=ref('R-001')
+const destinationId=ref('')
+const navigationKey=ref(0)
+function openRecord(destination: string, identifier: string) {
+ destinationId.value=identifier
+ navigationKey.value++
+ navigate(destination)
+ const group=sections.find(section=>section.items.includes(destination))
+ if(group)opened.value[group.name]=true
+}
 const view=ref<'Engineering'|'Knowledge Graph'>('Engineering')
 const demoRunning=ref(false)
 const graphdbStatus=ref<'checking'|'connected'|'disconnected'>('checking')
@@ -87,10 +96,10 @@ function navigate(page:string){active.value=page;view.value='Engineering'}
     </template>
     <template v-else-if="active==='Traceability'"><TraceabilityExplorer /></template>
     <template v-else-if="active==='OPC UA Connectivity'"><OpcuaConnectivity /></template>
-    <template v-else-if="active==='Product Catalog'"><ProductCatalog /></template>
-    <template v-else-if="active==='Asset Inventory'"><AssetInventory /></template>
+    <template v-else-if="active==='Product Catalog'"><ProductCatalog :key="navigationKey" :focus-id="active==='Product Catalog'?destinationId:''" @open-record="openRecord" /></template>
+    <template v-else-if="active==='Asset Inventory'"><AssetInventory :key="navigationKey" :focus-id="active==='Asset Inventory'?destinationId:''" @open-record="openRecord" /></template>
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
-    <template v-else-if="graphView"><EngineeringRdfGraph :domain="active==='ECAD Explorer'?'ecad':'dexpi'" /></template>
+    <template v-else-if="graphView"><EngineeringRdfGraph :key="navigationKey" :domain="active==='ECAD Explorer'?'ecad':'dexpi'" :focus-identifier="destinationId" @open-record="openRecord" /></template>
     <template v-else-if="active==='AI Query'">
      <section class="panel ai"><BrainCircuit :size="38"/><h2>Ask your Digital Twin</h2><p>Future answers will be grounded in GraphDB queries and controlled process-sim tools, with visible evidence and provenance.</p><textarea placeholder="e.g. Which reactor instruments appear in the engineering BOM?" disabled></textarea><span class="pill amber-pill">LLM integration pending</span></section>
     </template>
