@@ -2,7 +2,8 @@
 import { computed, ref, watch } from 'vue'
 import { selectTriples, localName, iri, type Triple } from '../lib/sparql'
 
-const props = defineProps<{ domain: 'dexpi' | 'ecad' | 'productcatalog' | 'assetinventory' }>()
+const props = withDefaults(defineProps<{ domain: 'dexpi' | 'ecad' | 'productcatalog' | 'assetinventory'; focusIdentifier?: string }>(),{focusIdentifier:''})
+const emit=defineEmits<{(e:'open-record',destination:string,identifier:string):void}>()
 const namespace = computed(() => 'https://example.org/' + props.domain + '/')
 const rdfType = 'http://www.w3.org/1999/02/22-rdf-syntax-ns#type'
 const labelPredicate = 'http://www.w3.org/2000/01/rdf-schema#label'
@@ -105,6 +106,13 @@ async function load() {
     if (!rows.length) { error.value = 'No AAS Submodel root named ' + rootLabel + ' found in GraphDB.'; return }
     root.value = rows[0].subject
     selected.value = root.value
+    if(props.focusIdentifier){
+      const escaped=JSON.stringify(props.focusIdentifier)
+      const found=await selectTriples(`SELECT ?s ?p ?o WHERE { GRAPH ?g { ?s <${namespace.value}hasAssetIdentifier> ?id . FILTER(STR(?id) = ${escaped}) BIND(<${rdfType}> AS ?p) BIND(<https://example.org/aas/SubmodelElementCollection> AS ?o) } } LIMIT 1`)
+      if(token!==generation)return
+      if(found.length){root.value=found[0].subject;selected.value=root.value}
+      else error.value='Engineering reference not found in the Knowledge Graph: '+props.focusIdentifier
+    }
     await neighbors(root.value, token)
   } catch (e) {
     if (token === generation) error.value = e instanceof Error ? e.message : String(e)
@@ -288,7 +296,7 @@ function wheel(event: WheelEvent) {
         <aside v-if="selected" class="graph-sidepane">
           <div class="panel-title"><h2>Node properties</h2><span class="pill">{{ kind(selected) }}</span></div>
           <div class="graph-sidepane-heading"><strong class="catalog-wrap">{{ label(selected) }}</strong><small class="catalog-wrap">{{ selected }}</small></div>
-          <div v-for="(t, i) in attributes" :key="i" class="graph-attribute"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap">{{ t.object }}</strong></div>
+          <div v-for="(t, i) in attributes" :key="i" class="graph-attribute"><small>{{ localName(t.predicate) }}</small><strong class="catalog-wrap">{{ t.object }}</strong><button v-if="localName(t.predicate)==='hasAssetIdentifier' && ['dexpi','ecad'].includes(domain)" type="button" class="secondary" @click="emit('open-record','Asset Inventory',t.object)">Find in Asset Inventory ↗</button></div>
           <h2 class="catalog-section-title">Outgoing RDF relationships</h2>
           <div v-for="(t, i) in outgoing" :key="i" class="graph-relationship"><small>{{ localName(t.predicate) }}</small><button type="button" @click="selected=t.object">{{ label(t.object) }}</button></div>
           <h2 class="catalog-section-title">Incoming RDF relationships</h2>
