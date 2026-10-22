@@ -48,17 +48,10 @@
           "idShort": "AFeedFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -115,17 +108,10 @@
           "idShort": "DFeedFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_102"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_102",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -182,17 +168,10 @@
           "idShort": "EFeedFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_103"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_103",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -249,17 +228,10 @@
           "idShort": "ACFeedFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_104"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_104",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -316,17 +288,10 @@
           "idShort": "RecycleFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_105"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_105",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -383,17 +348,10 @@
           "idShort": "ReactorFeedFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_106"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_106",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -450,17 +408,10 @@
           "idShort": "PurgeFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_107"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_107",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -517,17 +468,10 @@
           "idShort": "SeparatorUnderflow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_108"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_108",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -584,17 +528,10 @@
           "idShort": "StripperUnderflow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_109"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_109",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -651,17 +588,10 @@
           "idShort": "StripperSteamFlow",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/FI_110"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/FI_110",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -718,17 +648,10 @@
           "idShort": "ReactorTemperature",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/TI_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/TI_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -785,17 +708,10 @@
           "idShort": "SeparatorTemperature",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/TI_102"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/TI_102",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -852,17 +768,10 @@
           "idShort": "StripperTemperature",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/TI_103"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/TI_103",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -919,17 +828,10 @@
           "idShort": "ReactorCoolingWaterOutletTemperature",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/TI_104"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/TI_104",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -986,17 +888,10 @@
           "idShort": "SeparatorCoolingWaterOutletTemperature",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/TI_105"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/TI_105",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1053,17 +948,10 @@
           "idShort": "ReactorLevel",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/LI_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/LI_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1120,17 +1008,10 @@
           "idShort": "SeparatorLevel",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/LI_102"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/LI_102",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1187,17 +1068,10 @@
           "idShort": "StripperLevel",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/LI_103"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/LI_103",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1254,17 +1128,10 @@
           "idShort": "ReactorPressure",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/PI_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/PI_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1321,17 +1188,10 @@
           "idShort": "SeparatorPressure",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/PI_102"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/PI_102",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1388,17 +1248,10 @@
           "idShort": "StripperPressure",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/PI_103"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/PI_103",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1455,17 +1308,10 @@
           "idShort": "CompressorPower",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/JI_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/JI_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1522,17 +1368,10 @@
           "idShort": "DFeedFlowControl",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1589,17 +1428,10 @@
           "idShort": "EFeedFlowControl",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_102"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_102",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1656,17 +1488,10 @@
           "idShort": "AFeedFlowControl",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_103"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_103",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1723,17 +1548,10 @@
           "idShort": "ACFeedFlowControl",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_104"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_104",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1790,17 +1608,10 @@
           "idShort": "CompressorRecycleValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_105"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_105",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1857,17 +1668,10 @@
           "idShort": "PurgeValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_106"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_106",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1924,17 +1728,10 @@
           "idShort": "SeparatorLiquidValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_107"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_107",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -1991,17 +1788,10 @@
           "idShort": "StripperLiquidProductValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_108"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_108",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -2058,17 +1848,10 @@
           "idShort": "StripperSteamValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_109"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_109",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -2125,17 +1908,10 @@
           "idShort": "ReactorCoolingWaterValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_110"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_110",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -2192,17 +1968,10 @@
           "idShort": "CondenserCoolingWaterValve",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/VC_111"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/VC_111",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
@@ -2259,17 +2028,10 @@
           "idShort": "AgitatorSpeedControl",
           "value": [
             {
-              "modelType": "ReferenceElement",
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "value": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://aas.example.com/SC_101"
-                  }
-                ]
-              }
+              "value": "https://aas.example.com/SC_101",
+              "valueType": "xs:string"
             },
             {
               "modelType": "Property",
