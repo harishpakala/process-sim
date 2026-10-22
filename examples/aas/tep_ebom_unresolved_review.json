@@ -1,0 +1,256 @@
+{
+  "schemaVersion": "1.0",
+  "description": "Review of engineering objects with no named-equipment functional association. Classification does not establish physical EBOM parentage.",
+  "records": [
+    {
+      "bomItemId": "EBOM-0006",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_101",
+      "sourceName": "AFeedFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0007",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_102",
+      "sourceName": "DFeedFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0008",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_103",
+      "sourceName": "EFeedFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0009",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_104",
+      "sourceName": "ACFeedFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0010",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_105",
+      "sourceName": "RecycleFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0012",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "FI_107",
+      "sourceName": "PurgeFlow",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0028",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "VC_101",
+      "sourceName": "DFeedFlowControl",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0029",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "VC_102",
+      "sourceName": "EFeedFlowControl",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0030",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "VC_103",
+      "sourceName": "AFeedFlowControl",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0031",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "VC_104",
+      "sourceName": "ACFeedFlowControl",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0033",
+      "sourceDomain": "DEXPI",
+      "sourceTag": "VC_106",
+      "sourceName": "PurgeValve",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0040",
+      "sourceDomain": "ECAD",
+      "sourceTag": "DC-PSU-1",
+      "sourceName": "DCPowerSupply",
+      "classification": "PLANT_ELECTRICAL_INFRASTRUCTURE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0041",
+      "sourceDomain": "ECAD",
+      "sourceTag": "K1",
+      "sourceName": "PLCBox",
+      "classification": "PLANT_ELECTRICAL_INFRASTRUCTURE",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0042",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1001",
+      "sourceName": "FI_1001",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0043",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1002",
+      "sourceName": "FI_1002",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0044",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1003",
+      "sourceName": "FI_1003",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0045",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1004",
+      "sourceName": "FI_1004",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0046",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1006",
+      "sourceName": "FI_1006",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0051",
+      "sourceDomain": "ECAD",
+      "sourceTag": "FI-1005",
+      "sourceName": "FI_1005",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0064",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1001",
+      "sourceName": "CV_1001",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0065",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1002",
+      "sourceName": "CV_1002",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0066",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1003",
+      "sourceName": "CV_1003",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0067",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1004",
+      "sourceName": "CV_1004",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0068",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1005",
+      "sourceName": "CV_1005",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    },
+    {
+      "bomItemId": "EBOM-0069",
+      "sourceDomain": "ECAD",
+      "sourceTag": "CV-1006",
+      "sourceName": "CV_1006",
+      "classification": "UNRESOLVED",
+      "physicalMembership": "NOT_VERIFIED",
+      "equipmentAssociation": "NOT_ESTABLISHED",
+      "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
+    }
+  ]
+}
