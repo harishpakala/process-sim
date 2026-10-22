@@ -24,12 +24,19 @@ assets={p["EngineeringReference"]:p for p in map(props,inventory["submodelElemen
 assemblies=bom["submodelElements"][0]["value"]
 items=bom["submodelElements"][1]["value"]
 assembly_map={props(a)["BOMItemId"]:props(a) for a in assemblies}
-assert len(assembly_map)==len(assemblies)==7
+assert len(assembly_map)==len(assemblies)==22
+for parent in ("ASM-REACTOR","ASM-CONDENSER","ASM-SEPARATOR","ASM-COMPRESSOR","ASM-STRIPPER"):
+    assert {a for a,p in assembly_map.items() if p["ParentItemId"]==parent and p["AssemblyKind"]=="DISCIPLINE_PLACEHOLDER"}=={parent+"-"+suffix for suffix in ("MECH","INST","CTRL")}
 assert assembly_map["ASM-ROOT"]["ParentItemId"]==""
 for aid, assembly in assembly_map.items():
     if aid!="ASM-ROOT":assert assembly["ParentItemId"] in assembly_map
     assert assembly["ItemType"]=="ASSEMBLY"
-    assert assembly["StructureStatus"]=="PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
+    if assembly["AssemblyKind"]=="DISCIPLINE_PLACEHOLDER":
+        assert assembly["StructureStatus"]=="PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY"
+        assert assembly["QuantityPerAssembly"]==""
+        assert assembly["ParentItemId"] in {"ASM-REACTOR","ASM-CONDENSER","ASM-SEPARATOR","ASM-COMPRESSOR","ASM-STRIPPER"}
+    else:
+        assert assembly["StructureStatus"]=="PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
 equipment_parents={"R-001":"ASM-REACTOR","C-001":"ASM-CONDENSER","V-001":"ASM-SEPARATOR","K-001":"ASM-COMPRESSOR","S-001":"ASM-STRIPPER"}
 assert len(items)==len(sources)==79
 seen=set()
