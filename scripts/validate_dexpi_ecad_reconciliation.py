@@ -28,7 +28,7 @@ for row in crosswalk["candidates"]:
     assert row["ecadReference"] == ecad_sources[e]["AssetIdentifier"]
     assert row["ecadDescription"] == ecad_sources[e].get("Description", "")
     assert row["status"] == "CANDIDATE_NOT_VERIFIED" and row["identityConfirmed"] is False
-    assert row["equipmentAssembly"] in ("ASM-REACTOR","ASM-SEPARATOR","ASM-STRIPPER","ASM-CONDENSER","ASM-COMPRESSOR")
+    assert row["equipmentAssembly"] in ("ASM-REACTOR","ASM-SEPARATOR","ASM-STRIPPER","ASM-CONDENSER","ASM-COMPRESSOR","ASM-ROOT")
     for domain, ref in (("DEXPI",row["dexpiReference"]),("ECAD",row["ecadReference"])):
         assert (domain, ref) in bom_items
         assert bom_items[(domain, ref)]["EquivalenceStatus"] == "NOT_ASSESSED_ACROSS_DOMAINS"
