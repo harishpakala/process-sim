@@ -29,8 +29,8 @@ assert assembly_map["ASM-ROOT"]["ParentItemId"]==""
 for aid, assembly in assembly_map.items():
     if aid!="ASM-ROOT":assert assembly["ParentItemId"] in assembly_map
     assert assembly["ItemType"]=="ASSEMBLY"
-    assert assembly["StructureStatus"]=="SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
-parent_groups={"DEXPI:Equipments":"ASM-DEXPI-EQUIP","DEXPI:InstrumentationFunctions":"ASM-DEXPI-INSTR","DEXPI:ActuatingFunctions":"ASM-DEXPI-ACT","ECAD:Devices":"ASM-ECAD-DEV"}
+    assert assembly["StructureStatus"]=="PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
+equipment_parents={"R-001":"ASM-REACTOR","C-001":"ASM-CONDENSER","V-001":"ASM-SEPARATOR","K-001":"ASM-COMPRESSOR","S-001":"ASM-STRIPPER"}
 assert len(items)==len(sources)==79
 seen=set()
 for item in items:
@@ -40,10 +40,11 @@ for item in items:
     seen.add(key)
     assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
     assert p["Quantity"]=="1" and p["Unit"]=="EA"
-    assert p["ParentItemId"]==parent_groups[p["SourceDomain"]+":"+p["SourceGroup"]]
+    parent=equipment_parents.get(p["EngineeringLocalId"]) if p["SourceDomain"]=="DEXPI" and p["SourceGroup"]=="Equipments" else None
+    assert p["ParentItemId"]==(parent or "ASM-UNASSIGNED")
     assert p["ItemType"]=="ENGINEERING_OBJECT" and p["QuantityPerAssembly"]=="1"
     assert p["BOMPosition"]==p["BOMItemId"]
-    assert p["StructureStatus"]=="SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+    assert p["StructureStatus"]==("EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" if parent else "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP")
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
     asset=assets.get(p["EngineeringReference"])
     assert p["AssetReference"]==(asset.get("AssetId","") if asset else "")
