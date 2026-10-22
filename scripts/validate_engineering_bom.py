@@ -21,7 +21,16 @@ for domain,model,groups in [("DEXPI",dex,("Equipments","InstrumentationFunctions
             assert key not in sources,key
             sources[key]=(group["idShort"],item["idShort"],fields["LocalId"])
 assets={p["EngineeringReference"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("EngineeringReference")}
-items=bom["submodelElements"][0]["value"]
+assemblies=bom["submodelElements"][0]["value"]
+items=bom["submodelElements"][1]["value"]
+assembly_map={props(a)["BOMItemId"]:props(a) for a in assemblies}
+assert len(assembly_map)==len(assemblies)==7
+assert assembly_map["ASM-ROOT"]["ParentItemId"]==""
+for aid, assembly in assembly_map.items():
+    if aid!="ASM-ROOT":assert assembly["ParentItemId"] in assembly_map
+    assert assembly["ItemType"]=="ASSEMBLY"
+    assert assembly["StructureStatus"]=="SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+parent_groups={"DEXPI:Equipments":"ASM-DEXPI-EQUIP","DEXPI:InstrumentationFunctions":"ASM-DEXPI-INSTR","DEXPI:ActuatingFunctions":"ASM-DEXPI-ACT","ECAD:Devices":"ASM-ECAD-DEV"}
 assert len(items)==len(sources)==79
 seen=set()
 for item in items:
@@ -31,6 +40,10 @@ for item in items:
     seen.add(key)
     assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
     assert p["Quantity"]=="1" and p["Unit"]=="EA"
+    assert p["ParentItemId"]==parent_groups[p["SourceDomain"]+":"+p["SourceGroup"]]
+    assert p["ItemType"]=="ENGINEERING_OBJECT" and p["QuantityPerAssembly"]=="1"
+    assert p["BOMPosition"]==p["BOMItemId"]
+    assert p["StructureStatus"]=="SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
     asset=assets.get(p["EngineeringReference"])
     assert p["AssetReference"]==(asset.get("AssetId","") if asset else "")
