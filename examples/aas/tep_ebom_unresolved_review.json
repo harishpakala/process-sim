@@ -137,7 +137,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1001",
       "sourceName": "FI_1001",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -147,7 +147,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1002",
       "sourceName": "FI_1002",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -157,7 +157,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1003",
       "sourceName": "FI_1003",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -167,7 +167,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1004",
       "sourceName": "FI_1004",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -177,7 +177,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1006",
       "sourceName": "FI_1006",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -187,7 +187,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "FI-1005",
       "sourceName": "FI_1005",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -197,7 +197,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1001",
       "sourceName": "CV_1001",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -207,7 +207,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1002",
       "sourceName": "CV_1002",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -217,7 +217,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1003",
       "sourceName": "CV_1003",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -227,7 +227,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1004",
       "sourceName": "CV_1004",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -237,7 +237,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1005",
       "sourceName": "CV_1005",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
@@ -247,7 +247,7 @@
       "sourceDomain": "ECAD",
       "sourceTag": "CV-1006",
       "sourceName": "CV_1006",
-      "classification": "UNRESOLVED",
+      "classification": "PLANT_STREAM_FUNCTION_OR_DEVICE",
       "physicalMembership": "NOT_VERIFIED",
       "equipmentAssociation": "NOT_ESTABLISHED",
       "reviewStatus": "REQUIRES_ENGINEERING_REVIEW"
