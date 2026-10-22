@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { engineeringBomItems, engineeringBomAssemblies } from '../data/engineeringBom'
+import { engineeringReconciliation } from '../data/engineeringReconciliation'
 const emit = defineEmits<{(e:'open-record', destination:string, identifier:string):void}>()
 const items = engineeringBomItems.map(item => ({...item}))
 const assemblies = engineeringBomAssemblies.map(item => ({...item}))
@@ -54,6 +55,8 @@ function select(node:Node){
  }
 }
 const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
+const candidatePairs=(id:string)=>engineeringReconciliation.filter(p=>p.equipmentAssembly===id)
+const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>item.EngineeringReference===p.dexpiReference||item.EngineeringReference===p.ecadReference)
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id&&!i.FunctionalAssemblyReference).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
@@ -95,6 +98,15 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>Subassemblies</span><strong>{{subassemblyCount(selected.id)}}</strong></div>
        <div><span>Structure status</span><strong>{{selected.assembly.StructureStatus}}</strong></div>
       </div>
+      <div v-if="candidatePairs(selected.id).length" class="ebom-related">
+       <h3>DEXPI ↔ ECAD candidate correspondences ({{candidatePairs(selected.id).length}})</h3>
+       <p>Engineering function ↔ electrical device candidates. None are verified as identical physical components.</p>
+       <div v-for="pair in candidatePairs(selected.id)" :key="pair.dexpiReference" class="ebom-pair">
+        <strong>{{pair.dexpiLocalId}} ↔ {{pair.ecadLocalId}}</strong>
+        <span>{{pair.dexpiIdShort}} ↔ {{pair.ecadDescription}}</span>
+        <small>Candidate · Verification required</small>
+       </div>
+      </div>
       <div v-if="related(selected.id).length" class="ebom-related">
        <h3>Functionally associated instruments and devices ({{related(selected.id).length}})</h3>
        <p>Identified from DEXPI/ECAD descriptions; physical assembly membership is not verified.</p>
@@ -118,6 +130,14 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>Asset reference</span><strong>{{selected.item.AssetReference || 'Unresolved'}}</strong></div>
        <div><span>Product selection</span><strong>{{selected.item.SelectionStatus}}</strong></div>
        <div><span>Revision</span><strong>{{selected.item.Revision}}</strong></div>
+      </div>
+      <div v-if="linkedPairs(selected.item).length" class="ebom-related">
+       <h3>Cross-domain candidate correspondence</h3>
+       <div v-for="pair in linkedPairs(selected.item)" :key="pair.dexpiReference" class="ebom-pair">
+        <strong>{{pair.dexpiLocalId}} ↔ {{pair.ecadLocalId}}</strong>
+        <span>{{pair.dexpiIdShort}} ↔ {{pair.ecadDescription}}</span>
+        <small>Unverified candidate — not a merged BOM component</small>
+       </div>
       </div>
       <div class="ebom-actions">
        <button @click="emit('open-record',selected.item!.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.item!.EngineeringReference)">Open {{selected.item.SourceDomain}} source ↗</button>
@@ -175,6 +195,9 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
 .ebom-related button:hover{background:#1a3248}
 .ebom-related button strong{font-size:12px}
 .ebom-related button span{font-size:10px;color:#91abc4}
+.ebom-pair{display:flex;flex-direction:column;gap:4px;padding:9px 6px;border-top:1px solid #294159;overflow-wrap:anywhere}
+.ebom-pair strong{font-size:12px}
+.ebom-pair span,.ebom-pair small{font-size:10px;color:#91abc4}
 .ebom-empty{padding:16px;font-size:12px}
 @media(max-width:1100px){.ebom-workspace{grid-template-columns:1fr}.ebom-scroll{max-height:380px}}
 @media(max-width:700px){.ebom-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.ebom-filters{flex-wrap:wrap}.ebom-filters input{flex-basis:100%;width:100%}.ebom-fields>div{grid-template-columns:1fr;gap:5px}}
