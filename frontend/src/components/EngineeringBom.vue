@@ -5,7 +5,7 @@ const emit=defineEmits<{(e:'open-record',destination:string,identifier:string):v
 type Item={ParentItemId:string;ItemType:string;BOMPosition:string;QuantityPerAssembly:string;StructureStatus:string;BOMItemId:string;SourceDomain:string;SourceGroup:string;EngineeringReference:string;EngineeringLocalId:string;ItemDescription:string;Quantity:string;Unit:string;QuantityBasis:string;AssetReference:string;CandidateProductReference:string;SelectionStatus:string;Revision:string;ValidationStatus:string;EquivalenceStatus:string}
 const items:Item[]=engineeringBomItems.map(entry=>({...entry}))
 const assemblies=engineeringBomAssemblies.map(a=>({...a}))
-const expanded=ref<string[]>(['ASM-ROOT','ASM-DEXPI','ASM-ECAD','ASM-DEXPI-EQUIP','ASM-DEXPI-INSTR','ASM-DEXPI-ACT','ASM-ECAD-DEV'])
+const expanded=ref<string[]>(['ASM-ROOT','ASM-REACTOR','ASM-CONDENSER','ASM-SEPARATOR','ASM-COMPRESSOR','ASM-STRIPPER','ASM-UNASSIGNED'])
 const tree= computed(()=>{const nodes=[...assemblies,...items];const matching=new Set(filtered.value.map(i=>i.BOMItemId));const ancestors=new Set(matching);for(const id of matching){let node=nodes.find(n=>n.BOMItemId===id);while(node?.ParentItemId){ancestors.add(node.ParentItemId);node=nodes.find(n=>n.BOMItemId===node?.ParentItemId)}}const result:{node:typeof nodes[number];depth:number}[]=[];const walk=(parent:string,depth:number)=>{for(const node of nodes.filter(n=>n.ParentItemId===parent && ancestors.has(n.BOMItemId))){result.push({node,depth});if(expanded.value.includes(node.BOMItemId))walk(node.BOMItemId,depth+1)}};walk('',0);return result})
 function toggle(id:string){expanded.value=expanded.value.includes(id)?expanded.value.filter(x=>x!==id):[...expanded.value,id]}
 const search=ref('')
@@ -23,7 +23,7 @@ const matched=computed(()=>items.filter(item=>item.AssetReference).length)
   <div class="metric"><small>EXACT ASSET MATCHES</small><strong>{{matched}}</strong></div>
   <div class="metric"><small>UNRESOLVED REFERENCES</small><strong>{{items.length-matched}}</strong></div>
  </div>
- <p class="catalog-disclaimer">Assembly tree is an organizational hierarchy by source domain and source group, NOT a verified physical assembly breakdown. Engineering model inventory, not an approved procurement or manufacturing BOM. Quantity 1 means one source engineering object. Cross-domain device equivalence has not been assessed; DEXPI and ECAD items may represent the same intended component.</p>
+ <p class="catalog-disclaimer">Assembly tree now uses named equipment assemblies. Only the matching DEXPI equipment objects are assigned to them; 74 other engineering objects remain unassigned until component membership is verified. Mechanical, instrumentation and electrical subassemblies are not yet evidenced. Engineering model inventory, not an approved procurement or manufacturing BOM. Quantity 1 means one source engineering object. Cross-domain device equivalence has not been assessed; DEXPI and ECAD items may represent the same intended component.</p>
  <div class="catalog-layout">
   <section class="panel catalog-list">
    <div class="panel-title"><h2>Engineering BOM</h2><span class="pill">{{filtered.length}} / {{items.length}}</span></div>
@@ -40,7 +40,7 @@ const matched=computed(()=>items.filter(item=>item.AssetReference).length)
   <section v-if="selected" class="panel catalog-detail">
    <div class="panel-title"><div><h2>{{selected.ItemDescription}}</h2><p>{{selected.BOMItemId}} · {{selected.SourceDomain}} / {{selected.SourceGroup}}</p></div><span class="pill">{{selected.ValidationStatus}}</span></div>
    <div class="catalog-properties">
-    <div class="catalog-property"><span>Parent assembly</span><strong>{{selected.ParentItemId}} · organizational grouping only</strong></div>
+    <div class="catalog-property"><span>Parent assembly</span><strong>{{selected.ParentItemId}} · {{selected.StructureStatus}}</strong></div>
     <div class="catalog-property"><span>BOM position</span><strong>{{selected.BOMPosition}}</strong></div>
     <div class="catalog-property"><span>Engineering ID</span><strong>{{selected.EngineeringLocalId}}</strong></div>
     <div class="catalog-property"><span>Source reference</span><button class="secondary" type="button" @click="emit('open-record',selected.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.EngineeringReference)">{{selected.EngineeringReference}} ↗</button></div>
