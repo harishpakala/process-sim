@@ -145,7 +145,7 @@ async function load() {
       }
     } LIMIT 20000`)
     triples.value = data
-    if (!assets.value.length) error.value = 'No lifted Asset resources found. Check the AssetInventory named graph and SPARQL query.'
+    if (!assets.value.length) error.value = 'GraphDB returned no AssetInventory assets. The JSON validator does not publish RDF: run python scripts/import_knowledge_graph.py --push from the repository root, confirm the configured GraphDB repository, then select Retry. If the problem persists, inspect the AssetInventory named graph and rdf:type triples.'
   } catch (e) {
     triples.value = []
     error.value = e instanceof Error ? e.message : 'Unable to query GraphDB AAS.'
@@ -195,7 +195,7 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
      <button v-for="asset in filtered" :key="asset.id" class="asset-row catalog-item" :class="{highlight:selected?.id===asset.id}" @click="selectedId=asset.id;detailTab='Status'">
       <span class="asset-icon"><Factory :size="17"/></span><span><strong>{{ asset.fields.EquipmentTag || localName(asset.id) }}</strong><small>{{ asset.fields.AssetName || 'Unnamed simulated asset' }}</small><small>{{ asset.fields.AssetType || 'SimulatedAsset' }}</small><small v-if="asset.fields.SemanticId">{{ semanticKind(asset.fields.SemanticId) }}</small></span>
      </button>
-     <p v-if="!filtered.length && !loading" class="empty">No matching assets in the KG.</p>
+     <p v-if="!filtered.length && !loading" class="empty">{{ assets.length ? 'No assets match your search.' : 'No AssetInventory assets returned by GraphDB. Import the RDF graph and retry.' }}</p>
     </div>
    </section>
    <section class="panel catalog-detail" v-if="selected">
