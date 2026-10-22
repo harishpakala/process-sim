@@ -96,7 +96,16 @@
               "valueType": "xs:string",
               "value": "REQUIRES_ALTERNATIVE"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD319#012"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -187,7 +196,16 @@
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD338#010"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -278,7 +296,16 @@
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKL760#020"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -369,7 +396,16 @@
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD585#011"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
@@ -460,7 +496,16 @@
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
             }
-          ]
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD304#013"
+              }
+            ]
+          }
         },
         {
           "modelType": "SubmodelElementCollection",
