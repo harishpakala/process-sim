@@ -1,8 +1,94 @@
 // Generated snapshot of examples/aas/tep_engineering_bom_instance.json
+export const engineeringBomAssemblies = [
+  {
+    "BOMItemId": "ASM-ROOT",
+    "ParentItemId": "",
+    "ItemDescription": "TEP engineering model",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "ROOT",
+    "BOMPosition": "ASM-ROOT",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-DEXPI",
+    "ParentItemId": "ASM-ROOT",
+    "ItemDescription": "DEXPI source inventory",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-DEXPI",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-ECAD",
+    "ParentItemId": "ASM-ROOT",
+    "ItemDescription": "ECAD source inventory",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-ECAD",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-DEXPI-EQUIP",
+    "ParentItemId": "ASM-DEXPI",
+    "ItemDescription": "DEXPI equipment",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-DEXPI-EQUIP",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-DEXPI-INSTR",
+    "ParentItemId": "ASM-DEXPI",
+    "ItemDescription": "DEXPI instrumentation functions",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-DEXPI-INSTR",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-DEXPI-ACT",
+    "ParentItemId": "ASM-DEXPI",
+    "ItemDescription": "DEXPI actuating functions",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-DEXPI-ACT",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  },
+  {
+    "BOMItemId": "ASM-ECAD-DEV",
+    "ParentItemId": "ASM-ECAD",
+    "ItemDescription": "ECAD devices",
+    "ItemType": "ASSEMBLY",
+    "AssemblyKind": "SOURCE_GROUP",
+    "BOMPosition": "ASM-ECAD-DEV",
+    "QuantityPerAssembly": "1",
+    "Unit": "EA",
+    "Revision": "UNSPECIFIED",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+  }
+] as const
 export const engineeringBomItems = [
   {
     "BOMItemId": "EBOM-0001",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-EQUIP",
     "SourceDomain": "DEXPI",
     "SourceGroup": "Equipments",
     "EngineeringReference": "https://aas.example.com/TEP-R-001",
@@ -16,11 +102,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "REQUIRES_ALTERNATIVE",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "ASSET_REFERENCE_EXACT_MATCH",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0001",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0002",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-EQUIP",
     "SourceDomain": "DEXPI",
     "SourceGroup": "Equipments",
     "EngineeringReference": "https://aas.example.com/TEP-C-001",
@@ -34,11 +124,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "PROVISIONAL_CANDIDATE",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "ASSET_REFERENCE_EXACT_MATCH",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0002",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0003",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-EQUIP",
     "SourceDomain": "DEXPI",
     "SourceGroup": "Equipments",
     "EngineeringReference": "https://aas.example.com/TEP-V-001",
@@ -52,11 +146,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "PROVISIONAL_CANDIDATE",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "ASSET_REFERENCE_EXACT_MATCH",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0003",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0004",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-EQUIP",
     "SourceDomain": "DEXPI",
     "SourceGroup": "Equipments",
     "EngineeringReference": "https://aas.example.com/TEP-K-001",
@@ -70,11 +168,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "PROVISIONAL_CANDIDATE",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "ASSET_REFERENCE_EXACT_MATCH",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0004",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0005",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-EQUIP",
     "SourceDomain": "DEXPI",
     "SourceGroup": "Equipments",
     "EngineeringReference": "https://aas.example.com/TEP-S-001",
@@ -88,11 +190,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "PROVISIONAL_CANDIDATE",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "ASSET_REFERENCE_EXACT_MATCH",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0005",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0006",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_101",
@@ -106,11 +212,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0006",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0007",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_102",
@@ -124,11 +234,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0007",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0008",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_103",
@@ -142,11 +256,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0008",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0009",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_104",
@@ -160,11 +278,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0009",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0010",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_105",
@@ -178,11 +300,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0010",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0011",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_106",
@@ -196,11 +322,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0011",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0012",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_107",
@@ -214,11 +344,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0012",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0013",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_108",
@@ -232,11 +366,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0013",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0014",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_109",
@@ -250,11 +388,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0014",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0015",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/FI_110",
@@ -268,11 +410,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0015",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0016",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/TI_101",
@@ -286,11 +432,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0016",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0017",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/TI_102",
@@ -304,11 +454,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0017",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0018",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/TI_103",
@@ -322,11 +476,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0018",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0019",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/TI_104",
@@ -340,11 +498,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0019",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0020",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/TI_105",
@@ -358,11 +520,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0020",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0021",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/LI_101",
@@ -376,11 +542,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0021",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0022",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/LI_102",
@@ -394,11 +564,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0022",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0023",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/LI_103",
@@ -412,11 +586,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0023",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0024",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/PI_101",
@@ -430,11 +608,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0024",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0025",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/PI_102",
@@ -448,11 +630,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0025",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0026",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/PI_103",
@@ -466,11 +652,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0026",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0027",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-INSTR",
     "SourceDomain": "DEXPI",
     "SourceGroup": "InstrumentationFunctions",
     "EngineeringReference": "https://aas.example.com/JI_101",
@@ -484,11 +674,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0027",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0028",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_101",
@@ -502,11 +696,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0028",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0029",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_102",
@@ -520,11 +718,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0029",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0030",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_103",
@@ -538,11 +740,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0030",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0031",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_104",
@@ -556,11 +762,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0031",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0032",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_105",
@@ -574,11 +784,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0032",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0033",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_106",
@@ -592,11 +806,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0033",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0034",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_107",
@@ -610,11 +828,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0034",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0035",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_108",
@@ -628,11 +850,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0035",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0036",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_109",
@@ -646,11 +872,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0036",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0037",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_110",
@@ -664,11 +894,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0037",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0038",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/VC_111",
@@ -682,11 +916,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0038",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0039",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-DEXPI-ACT",
     "SourceDomain": "DEXPI",
     "SourceGroup": "ActuatingFunctions",
     "EngineeringReference": "https://aas.example.com/SC_101",
@@ -700,11 +938,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0039",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0040",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/DC-PSU-1",
@@ -718,11 +960,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0040",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0041",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/K1",
@@ -736,11 +982,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0041",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0042",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1001",
@@ -754,11 +1004,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0042",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0043",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1002",
@@ -772,11 +1026,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0043",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0044",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1003",
@@ -790,11 +1048,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0044",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0045",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1004",
@@ -808,11 +1070,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0045",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0046",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1006",
@@ -826,11 +1092,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0046",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0047",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1101",
@@ -844,11 +1114,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0047",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0048",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/PI-1101",
@@ -862,11 +1136,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0048",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0049",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/LI-1101",
@@ -880,11 +1158,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0049",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0050",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/TI-1101",
@@ -898,11 +1180,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0050",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0051",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1005",
@@ -916,11 +1202,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0051",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0052",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/TI-1301",
@@ -934,11 +1224,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0052",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0053",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/LI-1301",
@@ -952,11 +1246,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0053",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0054",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/PI-1301",
@@ -970,11 +1268,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0054",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0055",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1301",
@@ -988,11 +1290,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0055",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0056",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/LI-1501",
@@ -1006,11 +1312,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0056",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0057",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/PI-1501",
@@ -1024,11 +1334,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0057",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0058",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1501",
@@ -1042,11 +1356,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0058",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0059",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/TI-1501",
@@ -1060,11 +1378,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0059",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0060",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/FI-1502",
@@ -1078,11 +1400,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0060",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0061",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/JI-1401",
@@ -1096,11 +1422,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0061",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0062",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/TI-1103",
@@ -1114,11 +1444,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0062",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0063",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/TI-1202",
@@ -1132,11 +1466,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0063",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0064",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1001",
@@ -1150,11 +1488,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0064",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0065",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1002",
@@ -1168,11 +1510,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0065",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0066",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1003",
@@ -1186,11 +1532,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0066",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0067",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1004",
@@ -1204,11 +1554,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0067",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0068",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1005",
@@ -1222,11 +1576,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0068",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0069",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1006",
@@ -1240,11 +1598,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0069",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0070",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1101",
@@ -1258,11 +1620,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0070",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0071",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1201",
@@ -1276,11 +1642,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0071",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0072",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1301",
@@ -1294,11 +1664,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0072",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0073",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1401",
@@ -1312,11 +1686,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0073",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0074",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1501",
@@ -1330,11 +1708,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0074",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0075",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/CV-1502",
@@ -1348,11 +1730,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0075",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0076",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/M1",
@@ -1366,11 +1752,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0076",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0077",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/M-1301",
@@ -1384,11 +1774,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0077",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0078",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/M-1401",
@@ -1402,11 +1796,15 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0078",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   },
   {
     "BOMItemId": "EBOM-0079",
-    "ParentItemId": "",
+    "ParentItemId": "ASM-ECAD-DEV",
     "SourceDomain": "ECAD",
     "SourceGroup": "Devices",
     "EngineeringReference": "https://aas.example.com/M-1501",
@@ -1420,6 +1818,10 @@ export const engineeringBomItems = [
     "SelectionStatus": "UNSPECIFIED",
     "Revision": "UNSPECIFIED",
     "ValidationStatus": "UNRESOLVED_ASSET_REFERENCE",
-    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS"
+    "EquivalenceStatus": "NOT_ASSESSED_ACROSS_DOMAINS",
+    "ItemType": "ENGINEERING_OBJECT",
+    "BOMPosition": "EBOM-0079",
+    "QuantityPerAssembly": "1",
+    "StructureStatus": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
   }
 ] as const
