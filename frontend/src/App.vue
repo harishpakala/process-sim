@@ -4,6 +4,7 @@ import { selectTriples } from './lib/sparql'
 import SimulationDashboard from './components/SimulationDashboard.vue'
 import FaultManagement from './components/FaultManagement.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
+import EngineeringBom from './components/EngineeringBom.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
 import AssetInventory from './components/AssetInventory.vue'
@@ -96,6 +97,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     </template>
     <template v-else-if="active==='Traceability'"><TraceabilityExplorer /></template>
     <template v-else-if="active==='OPC UA Connectivity'"><OpcuaConnectivity /></template>
+    <template v-else-if="active==='Engineering BOM'"><EngineeringBom @open-record="openRecord" /></template>
     <template v-else-if="active==='Product Catalog'"><ProductCatalog :key="navigationKey" :focus-id="active==='Product Catalog'?destinationId:''" @open-record="openRecord" /></template>
     <template v-else-if="active==='Asset Inventory'"><AssetInventory :key="navigationKey" :focus-id="active==='Asset Inventory'?destinationId:''" @open-record="openRecord" /></template>
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
