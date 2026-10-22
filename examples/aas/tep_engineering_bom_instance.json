@@ -5,6 +5,474 @@
   "submodelElements": [
     {
       "modelType": "SubmodelElementCollection",
+      "idShort": "Assemblies",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_ROOT",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ROOT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "TEP engineering model"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "ROOT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-ROOT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_DEXPI",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ROOT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "DEXPI source inventory"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_ECAD",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ECAD"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ROOT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "ECAD source inventory"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-ECAD"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_DEXPI_EQUIP",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-EQUIP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "DEXPI equipment"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-EQUIP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_DEXPI_INSTR",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-INSTR"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "DEXPI instrumentation functions"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-INSTR"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_DEXPI_ACT",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-ACT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "DEXPI actuating functions"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-DEXPI-ACT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ASM_ECAD_DEV",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ECAD-DEV"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string",
+              "value": "ASM-ECAD"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string",
+              "value": "ECAD devices"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ASSEMBLY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string",
+              "value": "SOURCE_GROUP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "ASM-ECAD-DEV"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string",
+              "value": "EA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string",
+              "value": "UNSPECIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
       "idShort": "BOMItems",
       "value": [
         {
@@ -21,7 +489,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-EQUIP"
             },
             {
               "modelType": "Property",
@@ -106,6 +574,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -123,7 +615,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-EQUIP"
             },
             {
               "modelType": "Property",
@@ -208,6 +700,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0002"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -225,7 +741,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-EQUIP"
             },
             {
               "modelType": "Property",
@@ -310,6 +826,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0003"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -327,7 +867,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-EQUIP"
             },
             {
               "modelType": "Property",
@@ -412,6 +952,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0004"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -429,7 +993,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-EQUIP"
             },
             {
               "modelType": "Property",
@@ -514,6 +1078,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0005"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -531,7 +1119,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -616,6 +1204,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0006"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -633,7 +1245,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -718,6 +1330,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0007"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -735,7 +1371,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -820,6 +1456,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0008"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -837,7 +1497,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -922,6 +1582,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0009"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -939,7 +1623,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1024,6 +1708,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0010"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1041,7 +1749,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1126,6 +1834,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0011"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1143,7 +1875,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1228,6 +1960,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1245,7 +2001,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1330,6 +2086,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0013"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1347,7 +2127,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1432,6 +2212,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0014"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1449,7 +2253,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1534,6 +2338,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0015"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1551,7 +2379,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1636,6 +2464,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0016"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1653,7 +2505,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1738,6 +2590,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0017"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1755,7 +2631,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1840,6 +2716,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0018"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1857,7 +2757,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -1942,6 +2842,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0019"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -1959,7 +2883,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2044,6 +2968,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0020"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2061,7 +3009,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2146,6 +3094,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0021"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2163,7 +3135,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2248,6 +3220,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2265,7 +3261,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2350,6 +3346,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0023"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2367,7 +3387,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2452,6 +3472,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0024"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2469,7 +3513,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2554,6 +3598,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0025"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2571,7 +3639,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2656,6 +3724,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0026"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2673,7 +3765,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-INSTR"
             },
             {
               "modelType": "Property",
@@ -2758,6 +3850,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0027"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2775,7 +3891,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -2860,6 +3976,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0028"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2877,7 +4017,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -2962,6 +4102,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0029"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -2979,7 +4143,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3064,6 +4228,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0030"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3081,7 +4269,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3166,6 +4354,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0031"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3183,7 +4395,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3268,6 +4480,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0032"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3285,7 +4521,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3370,6 +4606,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0033"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3387,7 +4647,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3472,6 +4732,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0034"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3489,7 +4773,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3574,6 +4858,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0035"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3591,7 +4899,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3676,6 +4984,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0036"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3693,7 +5025,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3778,6 +5110,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0037"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3795,7 +5151,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3880,6 +5236,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0038"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3897,7 +5277,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-DEXPI-ACT"
             },
             {
               "modelType": "Property",
@@ -3982,6 +5362,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0039"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -3999,7 +5403,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4084,6 +5488,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0040"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4101,7 +5529,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4186,6 +5614,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0041"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4203,7 +5655,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4288,6 +5740,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0042"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4305,7 +5781,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4390,6 +5866,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0043"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4407,7 +5907,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4492,6 +5992,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0044"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4509,7 +6033,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4594,6 +6118,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0045"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4611,7 +6159,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4696,6 +6244,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0046"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4713,7 +6285,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4798,6 +6370,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0047"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4815,7 +6411,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -4900,6 +6496,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0048"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -4917,7 +6537,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5002,6 +6622,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0049"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5019,7 +6663,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5104,6 +6748,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0050"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5121,7 +6789,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5206,6 +6874,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0051"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5223,7 +6915,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5308,6 +7000,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0052"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5325,7 +7041,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5410,6 +7126,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0053"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5427,7 +7167,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5512,6 +7252,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0054"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5529,7 +7293,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5614,6 +7378,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0055"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5631,7 +7419,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5716,6 +7504,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0056"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5733,7 +7545,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5818,6 +7630,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0057"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5835,7 +7671,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -5920,6 +7756,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0058"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -5937,7 +7797,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6022,6 +7882,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0059"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6039,7 +7923,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6124,6 +8008,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0060"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6141,7 +8049,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6226,6 +8134,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0061"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6243,7 +8175,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6328,6 +8260,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0062"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6345,7 +8301,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6430,6 +8386,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0063"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6447,7 +8427,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6532,6 +8512,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0064"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6549,7 +8553,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6634,6 +8638,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0065"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6651,7 +8679,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6736,6 +8764,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0066"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6753,7 +8805,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6838,6 +8890,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0067"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6855,7 +8931,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -6940,6 +9016,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0068"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -6957,7 +9057,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7042,6 +9142,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0069"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7059,7 +9183,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7144,6 +9268,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0070"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7161,7 +9309,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7246,6 +9394,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0071"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7263,7 +9435,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7348,6 +9520,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0072"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7365,7 +9561,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7450,6 +9646,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0073"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7467,7 +9687,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7552,6 +9772,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0074"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7569,7 +9813,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7654,6 +9898,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0075"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7671,7 +9939,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7756,6 +10024,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0076"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7773,7 +10065,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7858,6 +10150,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0077"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7875,7 +10191,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -7960,6 +10276,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0078"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         },
@@ -7977,7 +10317,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-ECAD-DEV"
             },
             {
               "modelType": "Property",
@@ -8062,6 +10402,30 @@
               "idShort": "EquivalenceStatus",
               "valueType": "xs:string",
               "value": "NOT_ASSESSED_ACROSS_DOMAINS"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string",
+              "value": "ENGINEERING_OBJECT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string",
+              "value": "EBOM-0079"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string",
+              "value": "1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string",
+              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
             }
           ]
         }
