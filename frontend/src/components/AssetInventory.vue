@@ -5,6 +5,8 @@ import { Factory, Search, Network, Package } from 'lucide-vue-next'
 import { selectTriples, KG_TYPE, KG_VOCAB, localName, type Triple } from '../lib/sparql'
 import AssetStatusKnowledgeGraph from './AssetStatusKnowledgeGraph.vue'
 
+const props = withDefaults(defineProps<{ focusId?: string }>(), { focusId: '' })
+const emit = defineEmits<{ (e:'open-record', destination:string, identifier:string):void }>()
 type AssetRecord = { id: string; fields: Record<string, string> }
 const assetType = 'https://example.org/assetinventory/Asset'
 const assetNS = 'https://example.org/assetinventory/'
@@ -154,6 +156,8 @@ async function load() {
   }
 }
 watch(assets, list => {
+  const focused = list.find(a => [a.id,a.fields.AssetId,a.fields.EquipmentTag,a.fields.EngineeringReference].includes(props.focusId))
+  if (focused) { selectedId.value=focused.id;query.value='';return }
   if (!list.some(a => a.id === selectedId.value)) selectedId.value = list[0]?.id || ''
 }, { immediate: true })
 void load()
@@ -200,6 +204,11 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
    </section>
    <section class="panel catalog-detail" v-if="selected">
     <div class="panel-title"><div><h2>{{ selected.fields.AssetName || localName(selected.id) }}</h2><p>{{ selected.fields.EquipmentTag || localName(selected.id) }} · {{ selected.fields.AssetType || 'SimulatedAsset' }}</p></div><span class="pill">KG ASSET</span></div>
+    <div class="catalog-properties">
+      <div class="catalog-property"><span>Asset ID</span><strong class="catalog-wrap">{{ selected.fields.AssetId || selected.id }}</strong></div>
+      <div class="catalog-property"><span>Engineering reference</span><button v-if="selected.fields.EngineeringReference" class="secondary" type="button" @click="emit('open-record',selected.fields.EngineeringReference.includes('/TEP-')?'DEXPI Explorer':'ECAD Explorer',selected.fields.EngineeringReference)">{{ selected.fields.EngineeringReference }} ↗</button><span v-else>Not mapped</span></div>
+      <div class="catalog-property"><span>Candidate product</span><button v-if="selected.fields.CandidateProductReference" class="secondary" type="button" @click="emit('open-record','Product Catalog',selected.fields.CandidateProductReference)">{{ selected.fields.CandidateProductReference }} ↗</button><span v-else>Not mapped</span><small v-if="selected.fields.CandidateSelectionStatus">{{ selected.fields.CandidateSelectionStatus }} · not an installed product</small></div>
+    </div>
     <div class="tabs"><button :class="{selected:detailTab==='Status'}" @click="detailTab='Status'">Asset status</button><button :class="{selected:detailTab==='Knowledge Graph'}" @click="detailTab='Knowledge Graph'">Knowledge graph</button></div>
     <AssetStatusKnowledgeGraph v-if="detailTab==='Knowledge Graph'" :key="selected.id" :asset="selected" />
     <template v-else>
