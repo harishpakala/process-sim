@@ -48,7 +48,7 @@ const search=ref('')
 const assets=[{tag:'R-001',name:'Reactor',kind:'Equipment'},{tag:'C-001',name:'Condenser',kind:'Equipment'},{tag:'V-001',name:'Separator',kind:'Equipment'},{tag:'K-001',name:'Compressor',kind:'Equipment'},{tag:'S-001',name:'Stripper',kind:'Equipment'}]
 const filtered=computed(()=>assets.filter(a=>(a.tag+' '+a.name).toLowerCase().includes(search.value.toLowerCase())))
 const graphView=computed(()=>['DEXPI Explorer','ECAD Explorer'].includes(active.value))
-function navigate(page:string){active.value=page;view.value='Engineering'}
+function navigate(page:string){active.value=page;view.value='Engineering';destinationId.value=''}
 </script>
 
 <template>
