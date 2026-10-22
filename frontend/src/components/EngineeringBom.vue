@@ -89,6 +89,14 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>Subassemblies</span><strong>{{subassemblyCount(selected.id)}}</strong></div>
        <div><span>Structure status</span><strong>{{selected.assembly.StructureStatus}}</strong></div>
       </div>
+      <div v-if="related(selected.id).length" class="ebom-related">
+       <h3>Functionally associated instruments and devices ({{related(selected.id).length}})</h3>
+       <p>Identified from DEXPI/ECAD descriptions; physical assembly membership is not verified.</p>
+       <button v-for="item in related(selected.id)" :key="item.BOMItemId" @click="selectedId=item.BOMItemId">
+        <strong>{{item.ItemDescription.replaceAll('_','-')}}</strong>
+        <span>{{item.EngineeringLocalId}} · {{item.SourceDomain}}</span>
+       </button>
+      </div>
       <p class="ebom-hint">Select an engineering object in the tree to inspect its source references. These discipline branches are placeholders. Physical components, sensor assignments and quantities will be populated only when engineering evidence supports them.</p>
      </template>
      <template v-else-if="selected.item">
