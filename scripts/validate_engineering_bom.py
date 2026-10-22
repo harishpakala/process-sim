@@ -50,6 +50,10 @@ for item in items:
     parent=equipment_parents.get(p["EngineeringLocalId"]) if p["SourceDomain"]=="DEXPI" and p["SourceGroup"]=="Equipments" else None
     assert p["ParentItemId"]==(parent or "ASM-UNASSIGNED")
     assert p["ItemType"]=="ENGINEERING_OBJECT" and p["QuantityPerAssembly"]=="1"
+    assert p["FunctionalAssemblyReference"] in ("","ASM-REACTOR","ASM-SEPARATOR","ASM-STRIPPER","ASM-CONDENSER","ASM-COMPRESSOR")
+    assert p["AssociationBasis"]==("SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" if p["FunctionalAssemblyReference"] else "UNRESOLVED")
+    if p["FunctionalAssemblyReference"]:
+        assert p["ParentItemId"]=="ASM-UNASSIGNED", "Functional association must not assert physical membership"
     assert p["BOMPosition"]==p["BOMItemId"]
     assert p["StructureStatus"]==("EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" if parent else "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP")
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
