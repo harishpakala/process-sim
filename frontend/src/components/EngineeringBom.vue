@@ -100,7 +100,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
       </div>
       <div v-if="candidatePairs(selected.id).length" class="ebom-related">
        <h3>DEXPI ↔ ECAD candidate correspondences ({{candidatePairs(selected.id).length}})</h3>
-       <p>Engineering function ↔ electrical device candidates. None are verified as identical physical components.</p>
+       <p>Engineering function ↔ electrical device candidates. Plant-level pairs describe feed, purge and recycle functions without assigning equipment. None are verified as identical physical components.</p>
        <div v-for="pair in candidatePairs(selected.id)" :key="pair.dexpiReference" class="ebom-pair">
         <strong>{{pair.dexpiLocalId}} ↔ {{pair.ecadLocalId}}</strong>
         <span>{{pair.dexpiIdShort}} ↔ {{pair.ecadDescription}}</span>
