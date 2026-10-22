@@ -22,9 +22,9 @@ const selected=ref('R-001')
 const destinationId=ref('')
 const navigationKey=ref(0)
 function openRecord(destination: string, identifier: string) {
+ navigate(destination)
  destinationId.value=identifier
  navigationKey.value++
- navigate(destination)
  const group=sections.find(section=>section.items.includes(destination))
  if(group)opened.value[group.name]=true
 }
