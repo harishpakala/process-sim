@@ -7941,13 +7941,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8079,13 +8079,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8217,13 +8217,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8355,13 +8355,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8631,13 +8631,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8769,13 +8769,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -8907,13 +8907,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9045,13 +9045,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9183,13 +9183,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9321,13 +9321,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9459,13 +9459,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9597,13 +9597,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9735,13 +9735,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -9873,13 +9873,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -10011,13 +10011,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -10149,13 +10149,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-CONDENSER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11115,13 +11115,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11253,13 +11253,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-CONDENSER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11391,13 +11391,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11529,13 +11529,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11667,13 +11667,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -11805,13 +11805,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -12081,13 +12081,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -12219,13 +12219,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         },
@@ -12357,13 +12357,13 @@
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
               "valueType": "xs:string",
-              "value": ""
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
-              "value": "UNRESOLVED"
+              "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
             }
           ]
         }
