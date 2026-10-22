@@ -27,7 +27,7 @@
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "TEP engineering model"
+              "value": "TEP Plant"
             },
             {
               "modelType": "Property",
@@ -39,7 +39,7 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "ROOT"
+              "value": "PLANT"
             },
             {
               "modelType": "Property",
@@ -69,19 +69,19 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_DEXPI",
+          "idShort": "ASM_REACTOR",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI"
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
@@ -93,7 +93,7 @@
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "DEXPI source inventory"
+              "value": "Reactor Assembly — R-001"
             },
             {
               "modelType": "Property",
@@ -105,13 +105,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "EQUIPMENT_ASSEMBLY"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI"
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
@@ -135,19 +135,19 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_ECAD",
+          "idShort": "ASM_CONDENSER",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD"
+              "value": "ASM-CONDENSER"
             },
             {
               "modelType": "Property",
@@ -159,7 +159,7 @@
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "ECAD source inventory"
+              "value": "Condenser Assembly — C-001"
             },
             {
               "modelType": "Property",
@@ -171,13 +171,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "EQUIPMENT_ASSEMBLY"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-ECAD"
+              "value": "ASM-CONDENSER"
             },
             {
               "modelType": "Property",
@@ -201,31 +201,31 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_DEXPI_EQUIP",
+          "idShort": "ASM_SEPARATOR",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI"
+              "value": "ASM-ROOT"
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "DEXPI equipment"
+              "value": "Separator Assembly — V-001"
             },
             {
               "modelType": "Property",
@@ -237,13 +237,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "EQUIPMENT_ASSEMBLY"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
@@ -267,31 +267,31 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_DEXPI_INSTR",
+          "idShort": "ASM_COMPRESSOR",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI"
+              "value": "ASM-ROOT"
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "DEXPI instrumentation functions"
+              "value": "Compressor Assembly — K-001"
             },
             {
               "modelType": "Property",
@@ -303,13 +303,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "EQUIPMENT_ASSEMBLY"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
@@ -333,31 +333,31 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_DEXPI_ACT",
+          "idShort": "ASM_STRIPPER",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI"
+              "value": "ASM-ROOT"
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "DEXPI actuating functions"
+              "value": "Stripper Assembly — S-001"
             },
             {
               "modelType": "Property",
@@ -369,13 +369,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "EQUIPMENT_ASSEMBLY"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
@@ -399,31 +399,31 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         },
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ASM_ECAD_DEV",
+          "idShort": "ASM_UNASSIGNED",
           "value": [
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD"
+              "value": "ASM-ROOT"
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
               "valueType": "xs:string",
-              "value": "ECAD devices"
+              "value": "Unassigned Engineering Items"
             },
             {
               "modelType": "Property",
@@ -435,13 +435,13 @@
               "modelType": "Property",
               "idShort": "AssemblyKind",
               "valueType": "xs:string",
-              "value": "SOURCE_GROUP"
+              "value": "UNASSIGNED"
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -465,7 +465,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN"
             }
           ]
         }
@@ -489,7 +489,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-REACTOR"
             },
             {
               "modelType": "Property",
@@ -597,7 +597,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
             }
           ]
         },
@@ -615,7 +615,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-CONDENSER"
             },
             {
               "modelType": "Property",
@@ -723,7 +723,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
             }
           ]
         },
@@ -741,7 +741,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-SEPARATOR"
             },
             {
               "modelType": "Property",
@@ -849,7 +849,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
             }
           ]
         },
@@ -867,7 +867,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-COMPRESSOR"
             },
             {
               "modelType": "Property",
@@ -975,7 +975,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
             }
           ]
         },
@@ -993,7 +993,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-EQUIP"
+              "value": "ASM-STRIPPER"
             },
             {
               "modelType": "Property",
@@ -1101,7 +1101,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED"
             }
           ]
         },
@@ -1119,7 +1119,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1227,7 +1227,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1245,7 +1245,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1353,7 +1353,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1371,7 +1371,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1479,7 +1479,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1497,7 +1497,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1605,7 +1605,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1623,7 +1623,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1731,7 +1731,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1749,7 +1749,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1857,7 +1857,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -1875,7 +1875,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -1983,7 +1983,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2001,7 +2001,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2109,7 +2109,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2127,7 +2127,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2235,7 +2235,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2253,7 +2253,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2361,7 +2361,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2379,7 +2379,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2487,7 +2487,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2505,7 +2505,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2613,7 +2613,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2631,7 +2631,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2739,7 +2739,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2757,7 +2757,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2865,7 +2865,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -2883,7 +2883,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -2991,7 +2991,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3009,7 +3009,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3117,7 +3117,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3135,7 +3135,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3243,7 +3243,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3261,7 +3261,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3369,7 +3369,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3387,7 +3387,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3495,7 +3495,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3513,7 +3513,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3621,7 +3621,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3639,7 +3639,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3747,7 +3747,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3765,7 +3765,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-INSTR"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3873,7 +3873,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -3891,7 +3891,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -3999,7 +3999,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4017,7 +4017,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4125,7 +4125,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4143,7 +4143,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4251,7 +4251,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4269,7 +4269,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4377,7 +4377,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4395,7 +4395,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4503,7 +4503,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4521,7 +4521,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4629,7 +4629,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4647,7 +4647,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4755,7 +4755,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4773,7 +4773,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -4881,7 +4881,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -4899,7 +4899,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5007,7 +5007,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5025,7 +5025,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5133,7 +5133,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5151,7 +5151,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5259,7 +5259,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5277,7 +5277,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-DEXPI-ACT"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5385,7 +5385,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5403,7 +5403,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5511,7 +5511,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5529,7 +5529,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5637,7 +5637,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5655,7 +5655,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5763,7 +5763,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5781,7 +5781,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -5889,7 +5889,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -5907,7 +5907,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6015,7 +6015,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6033,7 +6033,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6141,7 +6141,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6159,7 +6159,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6267,7 +6267,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6285,7 +6285,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6393,7 +6393,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6411,7 +6411,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6519,7 +6519,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6537,7 +6537,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6645,7 +6645,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6663,7 +6663,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6771,7 +6771,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6789,7 +6789,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -6897,7 +6897,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -6915,7 +6915,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7023,7 +7023,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7041,7 +7041,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7149,7 +7149,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7167,7 +7167,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7275,7 +7275,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7293,7 +7293,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7401,7 +7401,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7419,7 +7419,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7527,7 +7527,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7545,7 +7545,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7653,7 +7653,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7671,7 +7671,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7779,7 +7779,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7797,7 +7797,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -7905,7 +7905,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -7923,7 +7923,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8031,7 +8031,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8049,7 +8049,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8157,7 +8157,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8175,7 +8175,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8283,7 +8283,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8301,7 +8301,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8409,7 +8409,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8427,7 +8427,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8535,7 +8535,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8553,7 +8553,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8661,7 +8661,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8679,7 +8679,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8787,7 +8787,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8805,7 +8805,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -8913,7 +8913,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -8931,7 +8931,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9039,7 +9039,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9057,7 +9057,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9165,7 +9165,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9183,7 +9183,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9291,7 +9291,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9309,7 +9309,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9417,7 +9417,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9435,7 +9435,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9543,7 +9543,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9561,7 +9561,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9669,7 +9669,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9687,7 +9687,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9795,7 +9795,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9813,7 +9813,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -9921,7 +9921,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -9939,7 +9939,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -10047,7 +10047,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -10065,7 +10065,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -10173,7 +10173,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -10191,7 +10191,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -10299,7 +10299,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         },
@@ -10317,7 +10317,7 @@
               "modelType": "Property",
               "idShort": "ParentItemId",
               "valueType": "xs:string",
-              "value": "ASM-ECAD-DEV"
+              "value": "ASM-UNASSIGNED"
             },
             {
               "modelType": "Property",
@@ -10425,7 +10425,7 @@
               "modelType": "Property",
               "idShort": "StructureStatus",
               "valueType": "xs:string",
-              "value": "SOURCE_ORGANIZATION_ONLY_NOT_PHYSICAL_ASSEMBLY"
+              "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
             }
           ]
         }
