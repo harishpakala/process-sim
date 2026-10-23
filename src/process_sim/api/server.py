@@ -22,6 +22,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == '/api/engineering/physical-bom/revisions':
+            try:
+                from process_sim.api.physical_bom import list_revisions
+                self.send_json(200, list_revisions())
+            except Exception as exc:
+                self.send_json(503, {'error': f'Physical BOM unavailable: {exc}'})
+            return
         if urlsplit(self.path).path == '/api/engineering/reviews':
             try:
                 from process_sim.api.engineering_reviews import list_events
@@ -160,6 +167,19 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == '/api/engineering/physical-bom/revisions':
+            try:
+                length = int(self.headers.get('Content-Length', '0'))
+                if not 0 < length <= 25000:
+                    self.send_json(413, {'error': 'Invalid or oversized BOM revision'})
+                    return
+                from process_sim.api.physical_bom import create_revision
+                self.send_json(201, create_revision(json.loads(self.rfile.read(length))))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {'error': str(exc)})
+            except Exception as exc:
+                self.send_json(503, {'error': f'Physical BOM unavailable: {exc}'})
+            return
         if urlsplit(self.path).path == '/api/engineering/reviews':
             try:
                 length = int(self.headers.get('Content-Length', '0'))
