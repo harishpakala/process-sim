@@ -1682,6 +1682,115 @@
               }
             ]
           }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_FMR62B_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "FMR62B (family; ordering code pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Micropilot FMR62B"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Continuous non-contact radar level transmitter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasuringPrinciple",
+                  "valueType": "xs:string",
+                  "value": "80 GHz radar"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistance",
+                  "valueType": "xs:string",
+                  "value": "80 m (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "160 bar (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "value": "±1 mm (manufacturer family specification)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "4 to 20 mA HART available; configuration pending"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/level-measurement/Radar-Micropilot-FMR62B"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "LevelScalingStatus",
+                  "valueType": "xs:string",
+                  "value": "UNVERIFIED: TEP percent level to radar distance conversion requires vessel calibration"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
         }
       ]
     }
