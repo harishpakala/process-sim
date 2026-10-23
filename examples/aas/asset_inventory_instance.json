@@ -1295,6 +1295,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
             }
           ],
           "semanticId": {
@@ -1695,6 +1713,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
             }
           ],
           "semanticId": {
@@ -1995,6 +2031,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
             }
           ],
           "semanticId": {
