@@ -1,6 +1,6 @@
 # Resolution of five remaining AssetInventory catalog references
 
-Checked **62** AssetInventory entries against **19** ProductCatalog AssetIdentifiers after migration: **24 unresolved active ProductReference URIs**.
+Checked **62** AssetInventory entries against **19** ProductCatalog AssetIdentifiers after migration: **0 unresolved active ProductReference URIs**.
 
 | Asset | Active reference | Selection meaning |
 |---|---|---|
