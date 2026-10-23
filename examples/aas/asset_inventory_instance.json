@@ -595,6 +595,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_STANDARD_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -695,6 +719,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_MASS_OR_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -795,6 +843,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_MASS_OR_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -895,6 +967,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_STANDARD_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -995,6 +1091,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_STANDARD_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -1095,6 +1215,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_STANDARD_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -1513,6 +1657,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_STANDARD_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -1931,6 +2099,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_MASS_OR_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -2249,6 +2441,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_MASS_OR_VOLUME_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
@@ -2449,6 +2665,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "value": "STEAM_MASS_FLOW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
             }
           ],
           "semanticId": {
