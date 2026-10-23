@@ -6352,7 +6352,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Unspecified_AgitatorDrive_Reference"
+              "value": "https://example.org/product-candidates/EKATO_HWLN_AgitatorDrivePackage_Candidate"
             },
             {
               "modelType": "Property",
@@ -6388,13 +6388,13 @@
               "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
-              "value": "UNASSIGNED_LOGICAL_DRIVE"
+              "value": "PROVISIONAL_AGITATOR_PACKAGE_UNSIZED"
             },
             {
               "modelType": "Property",
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
-              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+              "value": "EKATO agitator package concept, not a verified standalone drive motor or RPM mapping."
             },
             {
               "modelType": "Property",
@@ -6470,7 +6470,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -6506,13 +6506,13 @@
               "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
-              "value": "UNASSIGNED_ILLUSTRATIVE_MOTOR"
+              "value": "OPTIONAL_EXTENSION_MOTOR_FAMILY_UNSIZED"
             },
             {
               "modelType": "Property",
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
-              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+              "value": "ABB induction motor family only; physical motor existence, rated power, torque, speed, efficiency and configuration not verified."
             }
           ],
           "semanticId": {
@@ -6582,7 +6582,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -6618,13 +6618,13 @@
               "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
-              "value": "UNASSIGNED_COMPRESSOR_DRIVE"
+              "value": "PROVISIONAL_COMPRESSOR_DRIVE_UNSIZED"
             },
             {
               "modelType": "Property",
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
-              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+              "value": "ABB induction motor family only; physical motor existence, rated power, torque, speed, efficiency and configuration not verified."
             },
             {
               "modelType": "Property",
@@ -6700,7 +6700,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -6736,13 +6736,13 @@
               "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
-              "value": "UNASSIGNED_ILLUSTRATIVE_MOTOR"
+              "value": "OPTIONAL_EXTENSION_MOTOR_FAMILY_UNSIZED"
             },
             {
               "modelType": "Property",
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
-              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+              "value": "ABB induction motor family only; physical motor existence, rated power, torque, speed, efficiency and configuration not verified."
             }
           ],
           "semanticId": {
@@ -6812,7 +6812,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
+              "value": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
             },
             {
               "modelType": "Property",
@@ -6854,7 +6854,7 @@
               "modelType": "Property",
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
-              "value": "Provisional Type 3241 family proxy only; DN25 Kvs10 PN40 assembly NOT sized or approved for compressor control valve."
+              "value": "Type 3241 family candidate only; compressor valve Cv/Kvs, DN, actuator and fail position unverified."
             }
           ],
           "semanticId": {
