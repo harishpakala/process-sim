@@ -1791,6 +1791,279 @@
               "value": "Product"
             }
           ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_TMass_F300_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "6F3B (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "t-mass F 300"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Thermal mass gas flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN40 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/thermal-mass-flowmeter-t-mass-f300-6f3b"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_Promass_F300_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "8F3B (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Promass F 300"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Coriolis liquid mass and volume flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "0 to 2200000 kg/h (family-wide range; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN100 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/coriolis-flowmeter-promass-f300-8f3b"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_Prowirl_F200_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "7F2C (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Prowirl F 200"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Vortex steam mass flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "Steam/gas 1.5 to 28000 m3/h (reference conditions; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN100 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/vortex-flowmeter-prowirl-f200-7f2c"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
         }
       ]
     }
