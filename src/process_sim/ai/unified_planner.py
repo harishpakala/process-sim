@@ -55,8 +55,13 @@ def query_unified(question, graphdb_endpoint, *, ollama_transport=None,
     if route == "insufficient" and proposal["plan"] is None:
         return {"status": "insufficient_schema", "route": route}
     if route == "temporal":
-        executor = temporal_executor or execute_temporal_plan
-        result = executor(validate_temporal_plan(proposal["plan"]))
+        validated = validate_temporal_plan(proposal["plan"])
+        if validated["operation"] == "asset_history" and temporal_executor is None:
+            from .semantic_temporal_workflow import execute_asset_signal_workflow
+            result = execute_asset_signal_workflow(validated)
+        else:
+            executor = temporal_executor or execute_temporal_plan
+            result = executor(validated)
         return {"status": "executed_unverified", "route": route, "data": result}
     if route == "engineering" and proposal["plan"] is None:
         executor = engineering_executor or query_structured
