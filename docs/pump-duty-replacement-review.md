@@ -28,3 +28,19 @@ For each potential liquid pump collect: verified P&ID and pump existence, suctio
 - M-1401: **COMPRESSOR_DRIVE_NOT_LIQUID_PUMP**.
 - No new pump product or ECLASS IRDI is added to ProductCatalog in this review. No AssetInventory ProductReferences are changed.
 - Next: verify physical pump existence and pressure boundaries, then select a pressure-rated industrial process pump and run vendor curve/NPSH checks. Preserve provenance and avoid implying installed status.
+
+
+## Benchmark topology verification (2026-10-23)
+
+**Verified against a source-derived flowsheet:** The original TEP model's internal streams are explicitly enumerated in the `teprob.f` reconstruction at https://kitchingroup.cheme.cmu.edu/tep-rust/process/plant.html . It identifies FTM(11) as separator liquid underflow to stripper and FTM(13) as product; the five major units are reactor, condenser, separator, stripper and gas recycle compressor. The model's fifty state variables comprise vessel inventories/energies, cooling-water temperatures and 12 valve positions, **not pump-speed or pump-head states**. The benchmark therefore does **not establish a separately modeled separator-transfer pump or product pump**.
+
+**Pressure boundary review:** XMEAS13 is separator vessel pressure, while XMEAS16 is labeled stripper pressure in the benchmark but the source-derived audit identifies it as **mixing-zone pressure** rather than an independent stripper vapour-space pressure. Consequently subtracting XMEAS16 from XMEAS13 to infer a transfer-pump differential pressure would be invalid. Neither stream FTM(11) nor FTM(13) has verified pump suction/discharge pressure taps. Do not use nominal vessel pressures to assert a pump head, pressure class or NPSH.
+
+**Disposition:**
+- `TEP_M_1301`: illustrative motor, **NO_BENCHMARK_PUMP_EVIDENCE**; keep as optional extended-plant concept only, not a validated physical pump.
+- `TEP_M_1501`: illustrative motor, **NO_BENCHMARK_PUMP_EVIDENCE**; same restriction.
+- `TEP_M_1401`: compressor drive concept, **NOT_A_LIQUID_PUMP**.
+- No defensible high-pressure pump manufacturer/model can be selected for the benchmark on these data. An optional *augmented physical plant* requires a new P&ID, stream pressure boundary conditions, pump hydraulic model and design pressure basis before product-family screening.
+- **No catalog or inventory mutations** are appropriate until the user elects to model additional physical pumps beyond the original TEP benchmark.
+
+Sources: https://kitchingroup.cheme.cmu.edu/tep-rust/process/plant.html ; https://kitchingroup.cheme.cmu.edu/tep-rust/process/instrumentation.html ; Downs and Vogel (1993), original benchmark.
