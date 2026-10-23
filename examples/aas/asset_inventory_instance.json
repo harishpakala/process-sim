@@ -4761,6 +4761,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "FEED_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -4861,6 +4885,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "FEED_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -4961,6 +5009,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "FEED_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5061,6 +5133,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "FEED_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5161,6 +5257,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_RECYCLE_PURGE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5261,6 +5381,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "GAS_RECYCLE_PURGE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5361,6 +5505,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_PRODUCT_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5461,6 +5629,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "LIQUID_PRODUCT_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5561,6 +5753,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "STRIPPER_STEAM_FEED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5661,6 +5877,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "COOLING_WATER_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
@@ -5761,6 +6001,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "value": "COOLING_WATER_CONTROL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "SAMSON Type 3241 family candidate only; existing catalog DN25 Kvs10 PN40 assembly not validated for this duty; Siemens original ProductReference retained"
             }
           ],
           "semanticId": {
