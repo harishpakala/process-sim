@@ -1,21 +1,28 @@
-# ECLASS classification audit (2026-10-23)
+# ECLASS classification audit (updated 2026-10-23)
 
-The ProductCatalog template requires `ECLASSClass`, `ECLASSPreferredName`, and `ECLASSIRDI` for each entry. The template was **not changed**.
+## Current ProductCatalog
 
-After the partial remediation, **13/22** catalog entries contain all three fields, while **9/22** remain incomplete. The eleven pre-existing complete entries have not been independently authenticated against an official ECLASS release. Two additional family records reuse same-category classification triples from existing catalog entries and remain pending official verification.
+- **20 active product records; 20/20 have nonempty** `ECLASSClass`, `ECLASSPreferredName`, and `ECLASSIRDI`.
+- Two non-product placeholders, `Unspecified_MotorDrive_Reference` and `Unspecified_AgitatorDrive_Reference`, were removed from the active catalog and archived at `docs/migrations/retired-product-catalog-placeholders.json`.
+- The ProductCatalog SHACL template was **not relaxed** to make classification optional.
+- The user reported successful GraphDB graph updates and successful SHACL validation after these changes. This is a reported validation result; the GraphDB validation report has not been archived here.
+- Source-level cross-reference check: all 38 populated `ProductReference` fields in the 62-asset AssetInventory resolve to current ProductCatalog `AssetIdentifier` values. See `docs/migrations/asset-product-graphdb-verification.md` for query procedures.
 
-## Entries still missing ECLASS classifications
+## Verification limitations
 
-- `EandH_FMR62B_Candidate`
-- `EandH_TMass_F300_Candidate`
-- `EandH_Promass_F300_Candidate`
-- `EandH_Prowirl_F200_Candidate`
-- `EandH_PMP51B_Candidate`
-- `KSB_Multitec_HighPressure_Candidate`
-- `Unspecified_MotorDrive_Reference`
-- `Unspecified_AgitatorDrive_Reference`
-- `ABB_ProcessPerformance_InductionMotor_Candidate`
+**Populated ECLASS fields and SHACL conformance do not establish official ECLASS correctness.** User-supplied classification details were matched technically to candidate equipment; some older classifications and two family-level classifications were inherited from related catalog entries. The official ECLASS release, language, preferred names, codes and IRDIs have **not all been independently authenticated**. See each catalog entry's `ECLASSClassificationBasis` and `ECLASSVerificationStatus` when present.
 
-**Do not invent ECLASS IRDIs or reuse an unrelated class** merely to satisfy SHACL. In particular, the existing synchronous-motor classification is not evidence for an induction motor. The two `Unspecified_*` records are placeholders, not actual manufacturer products; they should be replaced by genuine classified products or removed from ProductCatalog after updating their references.
+In particular, the ABB Process Performance family is classified as a **low-voltage three-phase asynchronous motor**, conditional on the actual selected motor being a low-voltage three-phase variant. Do not replace this with a synchronous or DC motor class without product evidence.
 
-Use the official ECLASS class lookup to confirm the 8-digit class code, official preferred name, IRDI, release and language: https://eclass.eu/en/eclass-standard/search-content . SHACL is expected to continue failing while required fields are missing. No SHACL or GraphDB validation was executed here.
+The KSB Multitec family uses the broader **centrifugal pump** class; actual pump duty, NPSH, stage count, motor sizing and selection remain engineering decisions.
+
+Official ECLASS lookup: https://eclass.eu/en/eclass-standard/search-content
+
+## Reproducibility
+
+```bash
+python3 -m unittest discover -s tests -p 'test_aas_catalog_inventory_contract.py'
+python3 scripts/import_knowledge_graph.py --validate
+```
+
+The first command checks the source JSON contract; the second lifts configured AAS domains and validates their RDF against generated SHACL shapes. Neither certifies the official AAS metamodel or engineering product suitability. GraphDB SPARQL queries and expected counts are documented in `docs/migrations/asset-product-graphdb-verification.md`.
