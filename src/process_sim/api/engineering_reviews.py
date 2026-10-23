@@ -98,7 +98,10 @@ def append_event(body):
         raise ValueError("Functional review cannot set physical parent")
     with _LOCK, _connection() as db:
         db.execute("BEGIN IMMEDIATE")
-        last=db.execute("SELECT event_hash FROM engineering_review_events ORDER BY sequence DESC LIMIT 1").fetchone()
+        existing=[dict(row) for row in db.execute("SELECT * FROM engineering_review_events ORDER BY sequence")]
+        if not verify_chain(existing)["valid"]:
+            raise ValueError("Audit integrity check failed; refusing to append")
+        last=existing[-1] if existing else None
         previous=last["event_hash"] if last else "GENESIS"
         payload=dict(event_id=str(uuid4()),relationship_id=relationship_id,review_kind=kind,decision=decision,
                      reviewer=reviewer.strip(),evidence_reference=evidence.strip(),rationale=rationale.strip(),
