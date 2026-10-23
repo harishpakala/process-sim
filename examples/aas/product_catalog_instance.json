@@ -2015,6 +2015,30 @@
               "idShort": "InstallationVerificationStatus",
               "valueType": "xs:string",
               "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-41-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Centrifugal pump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD564#011"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
             }
           ]
         },
