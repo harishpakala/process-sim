@@ -2123,6 +2123,30 @@
               "idShort": "ECLASSVerificationStatus",
               "valueType": "xs:string",
               "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-09-08-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Agitator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKP267#021"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
             }
           ]
         },
@@ -2183,6 +2207,30 @@
               "idShort": "ECLASSVerificationStatus",
               "valueType": "xs:string",
               "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "37-01-02-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Control globe valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD651#023"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
             }
           ]
         }
