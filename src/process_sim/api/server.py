@@ -22,6 +22,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == '/api/engineering/reviews':
+            try:
+                from process_sim.api.engineering_reviews import list_events
+                self.send_json(200, list_events())
+            except Exception as exc:
+                self.send_json(503, {'error': f'Engineering review store unavailable: {exc}'})
+            return
         if urlsplit(self.path).path == "/api/semantic/asset-specifications":
             try:
                 from process_sim.api.asset_specifications import asset_specifications
@@ -153,6 +160,20 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == '/api/engineering/reviews':
+            try:
+                length = int(self.headers.get('Content-Length', '0'))
+                if not 0 < length <= 10000:
+                    self.send_json(413, {'error': 'Invalid or oversized review'})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                from process_sim.api.engineering_reviews import append_event
+                self.send_json(201, append_event(payload))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {'error': str(exc)})
+            except Exception as exc:
+                self.send_json(503, {'error': f'Engineering review store unavailable: {exc}'})
+            return
         if self.path == "/api/simulation/faults":
             try:
                 length = int(self.headers.get("Content-Length", "0"))
