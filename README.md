@@ -6,6 +6,22 @@
 
 The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
 
+## Deferred milestone — Physical BOM revision governance
+
+**Status: Deferred by project decision (23 October 2026).** Do not treat this as completed or production-ready.
+
+The initial Engineering Relationship Registry, server-side append-only review history, evidence-gated physical membership review, and immutable physical BOM revision overlays have been implemented as a prototype. The next governance milestone is intentionally postponed:
+
+- **Complete physical BOM revision supersession:** explicitly designate a new current baseline and supersede previous revisions without rewriting historical snapshots.
+- **Revision comparison:** display additions, removals, and changed equipment-parent assignments between any two physical BOM revisions.
+- **Withdrawal and correction:** record withdrawal/rejection of previously approved physical assignments through new audit events, preserving prior decisions and preventing stale evidence from authorizing new releases.
+- **Formal release workflow:** validate a proposed complete physical BOM baseline, require review and evidence for every change, and record release metadata and approval history.
+- **Production readiness:** verify end-to-end tests and frontend build; assess durable backups, document evidence/version integrity, access controls if deployed beyond a trusted local environment, and stronger independent audit integrity.
+
+**Engineering constraints:** Functional correspondence is not physical installation; neither establishes DEXPI–ECAD identity. Source EBOM `ParentItemId` must remain unchanged until explicitly justified by verified physical evidence and an approved revision process. Existing immutable revision overlays are not automatically superseded when later evidence is withdrawn.
+
+Implementation details: [Engineering review workflow](docs/engineering-review-workflow.md).
+
 ## Current development milestone — Semantic Digital Thread prototype (October 2026)
 
 The active integration milestone is **Phase 6 — Engineering & Semantic Digital Thread**, with early user-interface work from Phases 8 and 9. This is a prototype milestone, **not** completion of the full semantic digital thread or the GraphRAG phase.
