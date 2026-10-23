@@ -1,0 +1,557 @@
+{
+  "schemaVersion": "1.0",
+  "description": "Typed candidate relationships; approvals are maintained separately from immutable source assertions.",
+  "relationships": [
+    {
+      "relationshipId": "REL-0001",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_106",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1101",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorFeedFlow",
+        "ecadDevice": "FI_1101",
+        "ecadDescription": "Reactor Feed Flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0002",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/TI_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/TI-1101",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorTemperature",
+        "ecadDevice": "TI_1101",
+        "ecadDescription": "Reactor temperature"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0003",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/LI_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/LI-1101",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorLevel",
+        "ecadDevice": "LI_1101",
+        "ecadDescription": "Reactor level"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0004",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/PI_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/PI-1101",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorPressure",
+        "ecadDevice": "PI_1101",
+        "ecadDescription": "Reactor Pressure"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0005",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/TI_104",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/TI-1103",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorCoolingWaterOutletTemperature",
+        "ecadDevice": "TI_1103",
+        "ecadDescription": "Reactor cooling water outlet temperature"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0006",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_110",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1101",
+      "scopeAssembly": "ASM-REACTOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "ReactorCoolingWaterValve",
+        "ecadDevice": "CV_1101",
+        "ecadDescription": "Reactor Cooling Water Return (CWR) Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0007",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/TI_102",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/TI-1301",
+      "scopeAssembly": "ASM-SEPARATOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "SeparatorTemperature",
+        "ecadDevice": "TI_1301",
+        "ecadDescription": "Seperator temperature"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0008",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/LI_102",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/LI-1301",
+      "scopeAssembly": "ASM-SEPARATOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "SeparatorLevel",
+        "ecadDevice": "LI_1301",
+        "ecadDescription": "Separator liquid level"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0009",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/PI_102",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/PI-1301",
+      "scopeAssembly": "ASM-SEPARATOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "SeparatorPressure",
+        "ecadDevice": "PI_1301",
+        "ecadDescription": "Seperator Pressure"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0010",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_108",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1301",
+      "scopeAssembly": "ASM-SEPARATOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "SeparatorUnderflow",
+        "ecadDevice": "FI_1301",
+        "ecadDescription": "Seperator underflow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0011",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/TI_103",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/TI-1501",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperTemperature",
+        "ecadDevice": "TI_1501",
+        "ecadDescription": "Stripper temperature"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0012",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/LI_103",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/LI-1501",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperLevel",
+        "ecadDevice": "LI_1501",
+        "ecadDescription": "Stripper level"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0013",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/PI_103",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/PI-1501",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperPressure",
+        "ecadDevice": "PI_1501",
+        "ecadDescription": "Stripper Pressure"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0014",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_109",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1501",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperUnderflow",
+        "ecadDevice": "FI_1501",
+        "ecadDescription": "Stripper underflow"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0015",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_110",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1502",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperSteamFlow",
+        "ecadDevice": "FI_1502",
+        "ecadDescription": "Stripper stream flow"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0016",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_109",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1502",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperSteamValve",
+        "ecadDevice": "CV_1502",
+        "ecadDescription": "Stripper Stream Feed Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0017",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_108",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1501",
+      "scopeAssembly": "ASM-STRIPPER",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "StripperLiquidProductValve",
+        "ecadDevice": "CV_1501",
+        "ecadDescription": "Product Outlet Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0018",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/JI_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/JI-1401",
+      "scopeAssembly": "ASM-COMPRESSOR",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching process variable / equipment context from DEXPI function name and ECAD device description; not proof of identical installed device",
+        "dexpiFunction": "CompressorPower",
+        "ecadDevice": "JI_1401",
+        "ecadDescription": "Compressor work"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0019",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1001",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "AFeedFlow",
+        "ecadDevice": "FI_1001",
+        "ecadDescription": "Feed A flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0020",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_102",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1002",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "DFeedFlow",
+        "ecadDevice": "FI_1002",
+        "ecadDescription": "Feed D flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0021",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_103",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1003",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "EFeedFlow",
+        "ecadDevice": "FI_1003",
+        "ecadDescription": "Feed E flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0022",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_104",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1004",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "ACFeedFlow",
+        "ecadDevice": "FI_1004",
+        "ecadDescription": "Feed A and C flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0023",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_105",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1006",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "RecycleFlow",
+        "ecadDevice": "FI_1006",
+        "ecadDescription": "Recycle Flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0024",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/FI_107",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/FI-1005",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "PurgeFlow",
+        "ecadDevice": "FI_1005",
+        "ecadDescription": "Purge Flow rate"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0025",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_101",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1002",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "DFeedFlowControl",
+        "ecadDevice": "CV_1002",
+        "ecadDescription": "Feed D Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0026",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_102",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1003",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "EFeedFlowControl",
+        "ecadDevice": "CV_1003",
+        "ecadDescription": "Feed E Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0027",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_103",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1001",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "AFeedFlowControl",
+        "ecadDevice": "CV_1001",
+        "ecadDescription": "Feed A Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0028",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_104",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1004",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "ACFeedFlowControl",
+        "ecadDevice": "CV_1004",
+        "ecadDescription": "Feed A and C Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    },
+    {
+      "relationshipId": "REL-0029",
+      "relationshipType": "CANDIDATE_FUNCTION_DEVICE_CORRESPONDENCE",
+      "sourceDomain": "DEXPI",
+      "sourceReference": "https://aas.example.com/VC_106",
+      "targetDomain": "ECAD",
+      "targetReference": "https://aas.example.com/CV-1005",
+      "scopeAssembly": "ASM-ROOT",
+      "evidence": {
+        "kind": "SOURCE_NAME_DESCRIPTION_SIMILARITY",
+        "description": "Matching plant-wide flow or valve function by process stream in DEXPI and ECAD descriptions; no specific equipment or physical membership established",
+        "dexpiFunction": "PurgeValve",
+        "ecadDevice": "CV_1005",
+        "ecadDescription": "Purge Flow Control Valve"
+      },
+      "verificationStatus": "PENDING_REVIEW",
+      "physicalMembershipVerified": false,
+      "identityVerified": false
+    }
+  ]
+}
