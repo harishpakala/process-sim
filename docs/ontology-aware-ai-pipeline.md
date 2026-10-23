@@ -46,3 +46,33 @@ This prototype is intentionally conservative and may reject valid queries (for e
 3. Implement a typed plan schema, structured validator feedback, and bounded query repair.
 4. Add an authenticated, read-only Python API route and a Vue evidence/trace panel.
 5. Evaluate against direct LLM-to-SPARQL and ontology-context baselines, including temporal questions.
+
+
+## SHACL-aware registry milestone
+
+`process_sim.ai.shacl_registry.build_shacl_registry()` invokes the **existing**
+`semantic.template_lifting.build_template_graph` on each template registered in
+`semantic.config.TARGETS`, then joins the instance-derived classes and
+predicates from `semantic_registry`. The result includes SHACL property
+paths, cardinalities, value classes, nested node shapes, and source paths.
+
+```bash
+export PYTHONPATH=src:.
+python -m unittest discover -s tests -p 'test_ai_shacl_registry.py'
+```
+
+```python
+from process_sim.ai.shacl_registry import build_shacl_registry, planner_shacl_context
+registry = build_shacl_registry()
+context = planner_shacl_context(registry, domains=["dexpi"])
+print(context["domains"][0]["shaclPaths"][:3])
+```
+
+The schema registry is generated from source artifacts **without connecting to
+GraphDB**. It is not yet used by the Ollama planner: the planner still uses the
+earlier source-derived vocabulary catalog. The next milestone is a typed query
+plan and semantic path validator that consumes this SHACL-aware registry.
+
+Caveats: the extractor currently handles simple URI-valued `sh:path` and
+`sh:node` links; complex SHACL paths are skipped. No runtime tests or
+local GraphDB checks have been performed by the assistant.
