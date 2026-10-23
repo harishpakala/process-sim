@@ -1446,6 +1446,30 @@
                   "value": "UNVERIFIED: TEP percent level to radar distance conversion requires vessel calibration"
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-05-05"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Free-space radar level transmitter/switch"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC024#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS"
             }
           ],
           "qualifiers": [
