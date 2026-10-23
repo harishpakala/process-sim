@@ -6352,7 +6352,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
+              "value": "https://example.org/product-types/Unspecified_AgitatorDrive_Reference"
             },
             {
               "modelType": "Property",
@@ -6377,6 +6377,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PreviousProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Rittal_3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_LOGICAL_DRIVE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentSemanticNote",
+              "valueType": "xs:string",
+              "value": "Logical agitator command, not a valve."
             }
           ],
           "semanticId": {
@@ -6446,7 +6470,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
+              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
             },
             {
               "modelType": "Property",
@@ -6471,6 +6495,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PreviousProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Rittal_3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_ILLUSTRATIVE_MOTOR"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
             }
           ],
           "semanticId": {
@@ -6540,7 +6582,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
+              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
             },
             {
               "modelType": "Property",
@@ -6565,6 +6607,30 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PreviousProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Rittal_3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_COMPRESSOR_DRIVE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentSemanticNote",
+              "valueType": "xs:string",
+              "value": "Compressor drive concept, not liquid pump."
             }
           ],
           "semanticId": {
@@ -6634,7 +6700,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
+              "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
             },
             {
               "modelType": "Property",
@@ -6659,6 +6725,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PreviousProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Rittal_3244100"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_ILLUSTRATIVE_MOTOR"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Unassigned catalog placeholder, NOT a selected physical product; no manufacturer, motor rating, or installation verification."
             }
           ],
           "semanticId": {
@@ -6728,7 +6812,7 @@
               "modelType": "Property",
               "idShort": "ProductReference",
               "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
+              "value": "https://example.org/product-types/SAMSON_3241_7"
             },
             {
               "modelType": "Property",
@@ -6753,6 +6837,24 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PreviousProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Siemens_S55264_V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "value": "Provisional Type 3241 family proxy only; DN25 Kvs10 PN40 assembly NOT sized or approved for compressor control valve."
             }
           ],
           "semanticId": {
