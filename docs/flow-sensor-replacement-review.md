@@ -24,3 +24,24 @@ Manufacturer source: https://static.smc.eu/pdf/PFMV5-PFGV301_EU.pdf
 6. Keep OPC UA mappings provisional until verified.
 
 No ProductCatalog or AssetInventory flow assignments are changed by this review.
+
+## Benchmark-based signal review (Downs & Vogel, 1993, Table 4)
+
+Source: https://users.abo.fi/khaggblo/RS/Downs.pdf (page 249). Values are **nominal process measurements, not sensor ranges**.
+
+| Signal | Measured quantity | Base case | Unit | Evaluation |
+|---|---|---:|---|---|
+| XMEAS1 | A feed | 0.25052 | kscmh | Gas standard-volume flow; conversion/reference state required |
+| XMEAS2 | D feed | 3664.0 | kg/h | Mass-flow candidate |
+| XMEAS3 | E feed | 4509.3 | kg/h | Mass-flow candidate |
+| XMEAS4 | A and C feed | 9.3477 | kscmh | Gas standard-volume flow; conversion/reference state required |
+| XMEAS5 | Recycle | 26.902 | kscmh | High gas throughput; meter sizing required |
+| XMEAS6 | Reactor feed | 42.339 | kscmh | High gas throughput; meter sizing required |
+| XMEAS10 | Purge | 0.33712 | kscmh | Gas standard-volume flow; conversion/reference state required |
+| XMEAS14 | Separator underflow | 25.160 | m³/h | Liquid volume flow; density needed for mass conversion |
+| XMEAS17 | Stripper underflow | 22.949 | m³/h | Liquid volume flow; density needed for mass conversion |
+| XMEAS19 | **Stripper steam flow** | 230.31 | kg/h | Steam service requires dedicated instrument verification |
+
+**Correction:** XMEAS19 is steam flow, not an unspecified stripper process stream. A Promass F 300 family page lists steam among application categories but does not establish suitability of an unspecified configured meter for this duty.
+
+**Decision:** Do not approve or map a common F 300 to all ten signals. Evaluate separately (1) standard-volume gas streams, (2) liquid mass/volume streams, and (3) steam. Verify medium, measurement unit, normal and fault range, line sizing, pressure, and selected order code. Keep ECLASS IRDIs pending.
