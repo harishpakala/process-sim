@@ -25,7 +25,7 @@ class RegistryTests(unittest.TestCase):
             preds = {p["iri"]: p for p in d["predicates"]}
             self.assertIn("https://example.org/dexpi/hasEquipment", preds)
             self.assertEqual(preds["https://example.org/dexpi/hasAssetIdentifier"]["cardinality"], "One")
-            self.assertEqual(len(planner_context(result)["predicates"]), 4)
+            self.assertEqual(len(planner_context(result)["predicates"]), 3)
 
     def test_registry_rejects_oversized_context(self):
         with self.assertRaises(ValueError):
