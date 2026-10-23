@@ -43,6 +43,8 @@ def _connection():
       previous_hash TEXT NOT NULL,
       event_hash TEXT NOT NULL UNIQUE
     )""")
+    db.execute("""CREATE TRIGGER IF NOT EXISTS prevent_review_update BEFORE UPDATE ON engineering_review_events BEGIN SELECT RAISE(ABORT, 'review events are append-only'); END""")
+    db.execute("""CREATE TRIGGER IF NOT EXISTS prevent_review_delete BEFORE DELETE ON engineering_review_events BEGIN SELECT RAISE(ABORT, 'review events are append-only'); END""")
     return db
 
 def _hash(payload):
