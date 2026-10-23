@@ -5,6 +5,7 @@ import SimulationDashboard from './components/SimulationDashboard.vue'
 import FaultManagement from './components/FaultManagement.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringBom from './components/EngineeringBom.vue'
+import EngineeringVerificationWorkbench from './components/EngineeringVerificationWorkbench.vue'
 import EngineeringRdfGraph from './components/EngineeringRdfGraph.vue'
 import TraceabilityExplorer from './components/TraceabilityExplorer.vue'
 import AssetInventory from './components/AssetInventory.vue'
@@ -12,7 +13,7 @@ import OpcuaConnectivity from './components/OpcuaConnectivity.vue'
 import MultiSignalReplay from './components/MultiSignalReplay.vue'
 import { Activity, Atom, BrainCircuit, ChevronDown, ChevronRight, CircuitBoard, Database, Factory, FlaskConical, GitBranch, LayoutDashboard, Network, Package, Play, RotateCcw, Search, Settings2, ShieldCheck, Workflow } from 'lucide-vue-next'
 const sections = [
- {name:'ENGINEERING',items:['DEXPI Explorer','ECAD Explorer','Engineering BOM','Product Catalog']},
+ {name:'ENGINEERING',items:['DEXPI Explorer','ECAD Explorer','Engineering BOM','Relationship Verification','Product Catalog']},
  {name:'SIMULATION',items:['Simulation Control','Plant Monitor','Signal Explorer','Multi-Signal Replay','Faults & Disturbances','Experiments']},
  {name:'ERP',items:['Asset Inventory','Material Master','Supplier Master','Procurement','Stock Inventory','Maintenance','Cost Management']},
  {name:'SYSTEM & SEMANTICS',items:['Traceability','Data Quality','Semantic Models','OPC UA Connectivity','Reports','Settings']}
@@ -98,6 +99,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <template v-else-if="active==='Traceability'"><TraceabilityExplorer /></template>
     <template v-else-if="active==='OPC UA Connectivity'"><OpcuaConnectivity /></template>
     <template v-else-if="active==='Engineering BOM'"><EngineeringBom @open-record="openRecord" /></template>
+    <template v-else-if="active==='Relationship Verification'"><EngineeringVerificationWorkbench /></template>
     <template v-else-if="active==='Product Catalog'"><ProductCatalog :key="navigationKey" :focus-id="active==='Product Catalog'?destinationId:''" @open-record="openRecord" /></template>
     <template v-else-if="active==='Asset Inventory'"><AssetInventory :key="navigationKey" :focus-id="active==='Asset Inventory'?destinationId:''" @open-record="openRecord" /></template>
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
