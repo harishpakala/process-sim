@@ -1,0 +1,253 @@
+{
+  "modelType": "Submodel",
+  "idShort": "TEP_Optional_Pump_Extension",
+  "id": "https://example.org/tep/extensions/optional-pump-submodel",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "ProposedPumpAssets",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_P_1301_Proposed",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/extensions/assets/TEP_P_1301_Proposed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Separator-to-stripper transfer pump concept"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "ProposedLiquidTransferPump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelScope",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_PHYSICAL_PLANT_EXTENSION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringStatus",
+              "valueType": "xs:string",
+              "value": "CONCEPT_ONLY_NOT_SIZED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BenchmarkRepresentation",
+              "valueType": "xs:string",
+              "value": "NOT_AN_INDEPENDENT_DYNAMIC_PUMP_MODEL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociatedExistingAsset",
+              "valueType": "xs:string",
+              "value": "TEP_M_1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociatedTEPMeasurement",
+              "valueType": "xs:string",
+              "value": "XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NominalStreamFlow_m3h",
+              "valueType": "xs:string",
+              "value": "25.160"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NominalFlowBasis",
+              "valueType": "xs:string",
+              "value": "TEP nominal stream flow; not validated pump throughput"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PumpHead_m",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SuctionPressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DischargePressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DesignPressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NPSHa_m",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RequiredMotorPower_kW",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PumpFamily",
+              "valueType": "xs:string",
+              "value": "Industrial process centrifugal pump — unselected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductReferenceStatus",
+              "valueType": "xs:string",
+              "value": "NO_PRODUCT_SELECTED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SimulationIntegration",
+              "valueType": "xs:string",
+              "value": "DISABLED_BY_DEFAULT"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEP_P_1501_Proposed",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetId",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/extensions/assets/TEP_P_1501_Proposed"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string",
+              "value": "Stripper-product transfer pump concept"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string",
+              "value": "ProposedLiquidTransferPump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelScope",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_PHYSICAL_PLANT_EXTENSION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringStatus",
+              "valueType": "xs:string",
+              "value": "CONCEPT_ONLY_NOT_SIZED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BenchmarkRepresentation",
+              "valueType": "xs:string",
+              "value": "NOT_AN_INDEPENDENT_DYNAMIC_PUMP_MODEL"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociatedExistingAsset",
+              "valueType": "xs:string",
+              "value": "TEP_M_1501"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociatedTEPMeasurement",
+              "valueType": "xs:string",
+              "value": "XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NominalStreamFlow_m3h",
+              "valueType": "xs:string",
+              "value": "22.949"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NominalFlowBasis",
+              "valueType": "xs:string",
+              "value": "TEP nominal stream flow; not validated pump throughput"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PumpHead_m",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SuctionPressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DischargePressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DesignPressure_bar",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NPSHa_m",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RequiredMotorPower_kW",
+              "valueType": "xs:string",
+              "value": "UNDETERMINED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PumpFamily",
+              "valueType": "xs:string",
+              "value": "Industrial process centrifugal pump — unselected"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductReferenceStatus",
+              "valueType": "xs:string",
+              "value": "NO_PRODUCT_SELECTED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SimulationIntegration",
+              "valueType": "xs:string",
+              "value": "DISABLED_BY_DEFAULT"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
