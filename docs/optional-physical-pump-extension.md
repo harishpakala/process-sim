@@ -21,3 +21,9 @@ The extension explicitly does not assert that M-1301 or M-1501 is an actual phys
 6. Validate AAS JSON/schema and repository tests before integration.
 
 No pump model, vendor order code, ECLASS IRDI, ProductReference or fabricated numerical head/power has been assigned.
+
+## Selected family (2026-10-23)
+
+**KSB Multitec engineered high-pressure multistage centrifugal pump** is selected as the common *optional-extension reference family* for both proposed liquid pump assets. ProductCatalog entry: `KSB_Multitec_HighPressure_Candidate`; both optional AAS pump concepts carry a proposed replacement product reference. KSB's 2024 high-pressure Multitec brochure reports family limits up to 1500 m³/h, 1000 m head, 100 bar discharge pressure and -10 to +200 °C, but these are across variants and must not be assumed simultaneously available. OEM brochure: https://live-commerce-proxy-e2e-sales.ksb.com/rest/v2/ksb/users/anonymous/odata/disfile?application=PDF&checksum=8a6a794c81f0a755dc5d172834d124bbb0a194c270843aaed6c96be2f5235a6a&documentNumber=1777.021&documentPart=EN&documentType=YTO&documentVersion=14&extension=PDF&mimetype=application%2Fpdf&salesOrg=9953 .
+
+**No numerical head, NPSH, shaft power, stage count, DN, material, seal, or exact order code is selected.** The 25.160 and 22.949 m³/h values are nominal process stream measurements, not independently verified pump throughput. The pump topology remains an optional extension; active TEP benchmark AssetInventory is untouched. This is not an engineering approval or a procurement recommendation. OEM pump curve selection requires the verified pressure and thermophysical boundaries listed above.
