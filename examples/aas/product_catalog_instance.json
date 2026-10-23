@@ -2207,6 +2207,30 @@
               "idShort": "ECLASSVerificationStatus",
               "valueType": "xs:string",
               "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-02-21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Low-voltage three-phase current asynchronous motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKE138#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_CONDITIONAL_ON_LOW_VOLTAGE_THREE_PHASE_VARIANT"
             }
           ]
         },
