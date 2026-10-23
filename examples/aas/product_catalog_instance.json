@@ -1561,6 +1561,30 @@
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-04-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Thermal mass flow transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC009#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
             }
           ],
           "qualifiers": [
