@@ -6,13 +6,14 @@ import re
 from urllib.parse import urlsplit
 from urllib.request import Request, urlopen
 
-from .graphdb import discover_schema, select
+from .graphdb import select
+from .semantic_registry import build_registry, planner_context
 from .sparql_policy import validate_select
 
 SYSTEM = (
     "You plan read-only RDF graph queries. Return ONLY JSON with one key 'sparql' "
     "containing a SELECT query with LIMIT 1..200. Use ONLY predicates and named "
-    "graphs explicitly listed in the observed schema. Do not use SERVICE, FROM, "
+    "graphs supported by the source AAS lifting conventions. Use explicit full IRIs, not PREFIX abbreviations. Do not use SERVICE, FROM, "
     "updates, or invented relationships. If the schema is insufficient, return "
     '{"sparql": null}. Do not infer verified installation from semantic links.'
 )
@@ -38,7 +39,7 @@ def plan(question: str, schema: dict, *, endpoint: str = "http://127.0.0.1:11434
                "options": {"temperature": 0},
                "messages": [{"role": "system", "content": SYSTEM},
                             {"role": "user", "content": json.dumps({
-                                "question": question, "observed_schema": schema
+                                "question": question, "semantic_registry": schema
                             })[:16000]}]}
     result = transport(url, payload)
     raw = result.get("message", {}).get("content", "")
@@ -53,23 +54,30 @@ def plan(question: str, schema: dict, *, endpoint: str = "http://127.0.0.1:11434
 def query(question: str, graphdb_endpoint: str, *, ollama_transport=None,
           graphdb_transport=None, ollama_endpoint: str = "http://127.0.0.1:11434",
           model: str = "llama3.1:8b") -> dict:
-    schema = discover_schema(graphdb_endpoint, transport=graphdb_transport)
-    if not schema["observedPredicates"]:
-        return {"status": "insufficient_schema", "schema": schema, "sparql": None, "bindings": []}
+    registry = build_registry()
+    schema = planner_context(registry)
     proposal = plan(question, schema, endpoint=ollama_endpoint, model=model,
                     transport=ollama_transport)
     sparql = proposal["sparql"]
     if sparql is None:
         return {"status": "insufficient_schema", "schema": schema, "sparql": None, "bindings": []}
     validate_select(sparql)
-    # Fail closed: require every explicitly named predicate IRI to be observed.
-    allowed = {item["predicate"] for item in schema["observedPredicates"]}
-    predicates = set(re.findall(r"<([^>]+)>", sparql))
-    # Graph IRIs are allowed separately, but any non-schema IRI needs manual review.
-    graphs = {item["graph"] for item in schema["observedPredicates"]}
-    unknown = predicates - allowed - graphs
+    # Conservative IRI check: allow declared predicates/classes and standard RDF/AAS
+    # vocabulary. This intentionally rejects instance IRIs until AST role analysis exists.
+    allowed = {p["iri"] for d in registry["domains"] for p in d["predicates"]}
+    allowed.update(c for d in registry["domains"] for c in d["classes"])
+    allowed.update({
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+        "http://www.w3.org/2000/01/rdf-schema#label",
+        registry["aasNamespace"] + "hasSubmodelElement",
+        registry["aasNamespace"] + "value",
+        registry["aasNamespace"] + "first",
+        registry["aasNamespace"] + "second",
+    })
+    unknown = set(re.findall(r"<([^>]+)>", sparql)) - allowed
     if unknown:
-        raise ValueError("Query contains unrecognized IRIs: " + ", ".join(sorted(unknown)[:5]))
+        raise ValueError("Query references unregistered IRIs (conservative prototype): " +
+                         ", ".join(sorted(unknown)[:5]))
     result = select(graphdb_endpoint, sparql, transport=graphdb_transport)
     return {"status": "executed_unverified", "sparql": sparql,
             "schema": schema, "bindings": result["results"]["bindings"],
