@@ -1791,6 +1791,30 @@
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-04-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Vortex flow transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC010#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
             }
           ],
           "qualifiers": [
