@@ -111,19 +111,31 @@
               "modelType": "Property",
               "idShort": "PumpFamily",
               "valueType": "xs:string",
-              "value": "Industrial process centrifugal pump — unselected"
+              "value": "KSB Multitec high-pressure multistage centrifugal pump family"
             },
             {
               "modelType": "Property",
               "idShort": "ProductReferenceStatus",
               "valueType": "xs:string",
-              "value": "NO_PRODUCT_SELECTED"
+              "value": "PROPOSED_FAMILY_ONLY_NOT_CONFIGURED"
             },
             {
               "modelType": "Property",
               "idShort": "SimulationIntegration",
               "valueType": "xs:string",
               "value": "DISABLED_BY_DEFAULT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/KSB_Multitec_HighPressure_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_EXTENSION_PREFERRED_FAMILY_UNVERIFIED"
             }
           ]
         },
@@ -231,19 +243,31 @@
               "modelType": "Property",
               "idShort": "PumpFamily",
               "valueType": "xs:string",
-              "value": "Industrial process centrifugal pump — unselected"
+              "value": "KSB Multitec high-pressure multistage centrifugal pump family"
             },
             {
               "modelType": "Property",
               "idShort": "ProductReferenceStatus",
               "valueType": "xs:string",
-              "value": "NO_PRODUCT_SELECTED"
+              "value": "PROPOSED_FAMILY_ONLY_NOT_CONFIGURED"
             },
             {
               "modelType": "Property",
               "idShort": "SimulationIntegration",
               "valueType": "xs:string",
               "value": "DISABLED_BY_DEFAULT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProposedReplacementProductReference",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/KSB_Multitec_HighPressure_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_EXTENSION_PREFERRED_FAMILY_UNVERIFIED"
             }
           ]
         }
