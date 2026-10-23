@@ -1825,6 +1825,78 @@
               "value": "Product"
             }
           ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "KSB_Multitec_HighPressure_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/KSB_Multitec_HighPressure_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "KSB"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Multitec engineered high-pressure multistage centrifugal pump family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Optional physical-plant extension only; provisional common family for two conceptual liquid transfer pumps; NOT a configured, installed or engineering-approved pump."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_EXTENSION_PREFERRED_FAMILY_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://live-commerce-proxy-e2e-sales.ksb.com/rest/v2/ksb/users/anonymous/odata/disfile?application=PDF&checksum=8a6a794c81f0a755dc5d172834d124bbb0a194c270843aaed6c96be2f5235a6a&documentNumber=1777.021&documentPart=EN&documentType=YTO&documentVersion=14&extension=PDF&mimetype=application%2Fpdf&salesOrg=9953"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FamilyPublishedEnvelope",
+              "valueType": "xs:string",
+              "value": "Brochure family: up to 1500 m3/h, 1000 m head, 100 bar discharge pressure, -10 to +200 C; limits variant-dependent, not simultaneously guaranteed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DutyFlowBasis",
+              "valueType": "xs:string",
+              "value": "XMEAS14 25.160 m3/h; XMEAS17 22.949 m3/h; stream flows not validated pump operating points."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Pump existence, local casing pressure, fluid composition/temperature, min/normal/max Q, head, NPSH, vendor curves, motor sizing, seal materials, order code"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            }
+          ]
         }
       ]
     }
