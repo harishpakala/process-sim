@@ -7,7 +7,7 @@ from __future__ import annotations
 import json
 from urllib.request import Request, urlopen
 from .planner import _local_url, query_structured
-from .temporal_plan import execute_temporal_plan
+from .temporal_plan import execute_temporal_plan, validate_temporal_plan
 from .temporal_registry import temporal_registry
 
 OPERATIONS = ("runs", "signal_history", "asset_history")
@@ -56,7 +56,7 @@ def query_unified(question, graphdb_endpoint, *, ollama_transport=None,
         return {"status": "insufficient_schema", "route": route}
     if route == "temporal":
         executor = temporal_executor or execute_temporal_plan
-        result = executor(proposal["plan"])
+        result = executor(validate_temporal_plan(proposal["plan"]))
         return {"status": "executed_unverified", "route": route, "data": result}
     if route == "engineering" and proposal["plan"] is None:
         executor = engineering_executor or query_structured
