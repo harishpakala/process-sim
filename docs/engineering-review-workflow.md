@@ -26,3 +26,15 @@ cd frontend && npm run build
 ```
 
 No migration from prior browser-local decisions is automatic; export legacy reviews before upgrading if they need preservation.
+
+## Versioned physical BOM overlays
+
+- `GET /api/engineering/physical-bom/revisions` lists immutable physical BOM revision snapshots and verifies each snapshot's SHA-256 digest.
+- `POST /api/engineering/physical-bom/revisions` accepts `{"author":"Engineer","rationale":"Checked installation drawing","assignments":[{"bomItemId":"EBOM-XXXX","evidenceEventId":"<review event UUID>"}]}`.
+- Each assignment must identify an **ECAD source item** whose exact EngineeringReference matches the candidate relationship's ECAD target. The evidence event must be the latest physical-membership decision for that relationship, explicitly approved and scoped to a valid named equipment assembly.
+- An approval for functional correspondence **does not** authorize physical promotion. A physical installation approval **does not** assert that DEXPI and ECAD are the same installed device.
+- The snapshot preserves the original canonical BOM unchanged and records each evidence event UUID and hash. A revision is an immutable overlay rather than an automatic source-data rewrite.
+- The UI supports creating a one-assignment revision and inspecting historical revisions. API supports multiple assignments in one revision. Historical snapshots are not silently recomputed if a later approval is withdrawn; the reviewer must create a new revision and explicitly resolve prior membership.
+- **Limitations:** Evidence documents are referenced but not stored or cryptographically checked. The model does not yet handle per-component serial numbers, installation points, quantity verification, supersession of whole BOM revisions, or a signed release workflow. SQLite admin-level tampering and removal of the entire DB are outside the current protections.
+
+Run tests: `PYTHONPATH=src python -m unittest discover -s tests -p 'test_engineering_reviews.py'` and `PYTHONPATH=src python -m unittest discover -s tests -p 'test_physical_bom.py'`.
