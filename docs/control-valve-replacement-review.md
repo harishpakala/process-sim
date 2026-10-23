@@ -56,3 +56,34 @@ SAMSON Type 3241-1/-7 manufacturer data sheet T 8016 EN confirms PN16–PN40 var
 **Result:** Family is defensible as a common simulation *candidate*. No per-signal valve sizing, Cv/Kvs, actuator sizing, fail-safe configuration, or configured assembly approval can be established from TEP nominal process values alone. The present ProductCatalog SAMSON_3241_7 entry remains a specific assembly; proposed references must not be interpreted as its approval for all eleven signals. ECLASS IRDI still requires authoritative validation.
 
 The reference TEP manipulated-variable definitions are documented at https://github.com/PSE-Research/Tennessee-Eastman-profBraatz/blob/master/README.md .
+
+
+## Valve-by-valve sizing evidence audit (2026-10-23)
+
+**Method:** Cross-reference AssetInventory XMV1–XMV11 with the original TEP nominal measurement definitions and the SAMSON IEC 60534 sizing requirements. A nominal measurement from a nearby stream is *not* assumed to equal valve-throughput under all conditions. No pressure taps immediately upstream and downstream of each valve, valve-specific fluid state, piping DN, or fluid property package were verified in the available AAS records. Consequently **zero of eleven valves can be assigned a defensible numerical Kv/Cv**. This is a completed evidence audit, not a completed engineering sizing calculation.
+
+| XMV | Duty | Potential TEP measurement to examine (nominal) | Required additional inputs | Numerical Kv/Cv |
+|---|---|---|---|---|
+| 1 | D feed | XMEAS2: 3664.0 kg/h | Valve inlet/outlet pressure, density, phase, piping size, min/max flow | BLOCKED |
+| 2 | E feed | XMEAS3: 4509.3 kg/h | Valve inlet/outlet pressure, density, phase, piping size, min/max flow | BLOCKED |
+| 3 | A feed | XMEAS1: 0.25052 kscmh | Valve inlet/outlet absolute pressures, gas mixture MW, T, Z, reference state, min/max flow | BLOCKED |
+| 4 | A/C feed | XMEAS4: 9.3477 kscmh | Valve inlet/outlet absolute pressures, gas mixture MW, T, Z, reference state, min/max flow | BLOCKED |
+| 5 | Compressor recycle | XMEAS5 recycle flow: 26.902 kscmh **not established as the flow through XMV5** | Actual recycle-bypass flow, compressor operating map, pressures, gas state, dynamic anti-surge constraints | BLOCKED — HIGH PRIORITY |
+| 6 | Purge | XMEAS10: 0.33712 kscmh | Valve inlet/outlet absolute pressures, gas MW, T, Z, reference state, min/max flow | BLOCKED |
+| 7 | Separator liquid to stripper | XMEAS14: 25.160 m³/h | Valve inlet/outlet pressure, liquid density, vapor pressure, min/max flow | BLOCKED |
+| 8 | Stripper product | XMEAS17: 22.949 m³/h | Valve inlet/outlet pressure, liquid density, vapor pressure, min/max flow | BLOCKED |
+| 9 | Stripper steam | XMEAS19: 230.31 kg/h | Steam supply pressure, downstream pressure, temperature, dryness/enthalpy, steam tables, min/max flow | BLOCKED — HIGH PRIORITY |
+| 10 | Reactor cooling-water valve | No directly validated cooling-water flow measurement | Actual water flow, valve Δp, density, vapor pressure, min/max flow | BLOCKED |
+| 11 | Condenser cooling-water valve | No directly validated cooling-water flow measurement | Actual water flow, valve Δp, density, vapor pressure, min/max flow | BLOCKED |
+
+**Crucial caution:** XMEAS5 is process recycle flow, whereas XMV5 manipulates compressor recycle/bypass; direct equivalence is unverified. Reactor/separator pressure measurements are vessel pressures, not valve upstream/downstream pressure pairs. TEP XMV commands are not flow coefficients.
+
+### Sizing method once evidence exists
+
+- **Single-phase liquid, simplified non-choked case:** `Kv = Q_m3h × sqrt((rho_kgm3/1000)/deltaP_bar)`. Example **illustration only**, not a TEP calculation: at 25.160 m³/h, rho=1000 kg/m³ and assumed Δp=1 bar, Kv=25.160. Different actual Δp or density changes the result.
+- **Gas/steam:** use IEC 60534-2-1 compressible-fluid equations with absolute pressures, inlet temperature, gas properties or steam specific volume, expansion factor and choking checks. Do not substitute standard-volume flows without a verified standard reference state.
+- Select Kvs, DN, trim, actuator thrust, fail position and permissible differential pressure only *after* Kv calculations and operating-envelope checks. The existing catalog Kvs10 assembly must not be approved by inference.
+
+References: Downs & Vogel (1993), https://users.abo.fi/khaggblo/RS/Downs.pdf ; SAMSON control valve specification sheet, https://www.samson.de/document/k00200en.pdf ; SAMSON valve selection/sizing, https://www.samsongroup.com/document/t80430en.pdf ; IEC 60534-2-1 compressible-fluid sizing overview, https://www.iteh.eu/catalog/standards/sist/a3615b03-2b10-4d43-a04a-8af5c430bb33/sist-en-60534-2-1-2011 .
+
+**Decision:** Maintain eleven distinct valve assets and SAMSON Type 3241 as an unverified family candidate; no ProductReference or configured sizing approval changes warranted.
