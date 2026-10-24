@@ -48,7 +48,7 @@ def domain(uri):
     # Native AAS instance nodes have base64-encoded submodel IDs in their URI.
     if u.startswith("http://org.example.com/"):
         import base64
-        segment = u.split("/", 4)[3]
+        segment = uri.split("/", 4)[3]
         try:
             decoded = base64.urlsafe_b64decode(segment + "=" * (-len(segment) % 4)).decode("utf-8").casefold()
             u += " " + decoded
