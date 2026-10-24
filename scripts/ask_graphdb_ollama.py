@@ -125,6 +125,29 @@ def direct_product_answer(question, evidence):
     return f"{label} has no ProductReference or CandidateProductReference in the queried AssetInventory."
 
 
+
+def guarded_engineering_answer(question, evidence):
+    """Return factual guardrails for single-asset candidate and unmapped questions."""
+    if len(evidence) != 1:
+        return None
+    asset = evidence[0]["asset"]
+    label = asset.get("label", "This asset")
+    q = question.casefold()
+    if not asset.get("productRef") and not asset.get("candidateRef"):
+        if re.search(r"\\b(product|candidate|infer|installed|physical|selected|reference)\\b", q):
+            return (f"{label} has no ProductReference or CandidateProductReference in the queried "
+                    "AssetInventory. No selected physical product or provisional candidate can "
+                    "be inferred from this evidence.")
+    if asset.get("candidateStatus") == "REQUIRES_ALTERNATIVE" and re.search(
+            r"\\b(why|suitable|suitability|pressure|alternative|engineering)\\b", q):
+        return (f"{label} has candidate selection status REQUIRES_ALTERNATIVE and provisional "
+                f"CandidateProductReference {asset.get('candidateRef', 'not specified')}. "
+                "The retrieved GraphDB facts do not include operating and design pressures, "
+                "so the technical pressure mismatch cannot be independently established "
+                "from this evidence. This is not an approved installed product.")
+    return None
+
+
 def answer(question, endpoint, ollama_url, model, evidence_only=False):
     assets = graphdb_select(endpoint, ASSETS)
     products = graphdb_select(endpoint, PRODUCTS)
@@ -133,6 +156,9 @@ def answer(question, endpoint, ollama_url, model, evidence_only=False):
         return {"answer": "No matching evidence found in the loaded AAS graphs.", "evidence": [], "status": "NO_EVIDENCE"}
     if evidence_only:
         return {"answer": None, "evidence": evidence, "status": "EVIDENCE_ONLY"}
+    guarded = guarded_engineering_answer(question, evidence)
+    if guarded is not None:
+        return {"answer": guarded, "evidence": evidence, "status": "FACT_GUARDED_RESPONSE"}
     direct = direct_product_answer(question, evidence)
     if direct is not None:
         return {"answer": direct, "evidence": evidence, "status": "DETERMINISTIC_GROUNDED_RESPONSE"}
