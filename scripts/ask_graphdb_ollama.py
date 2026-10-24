@@ -89,6 +89,40 @@ def evidence_for(question, assets, products, limit=20):
              "source": "GraphDB AAS AssetInventory/ProductCatalog"} for a in candidates[:limit]]
 
 
+def direct_product_answer(question, evidence):
+    """Answer exact single-asset product association queries from facts, not LLM guesses."""
+    if len(evidence) != 1:
+        return None
+    if not re.search(r"\\b(product|manufacturer|transmitter|associated|assigned|mapped)\\b", question, re.I):
+        return None
+    item = evidence[0]
+    asset = item["asset"]
+    label = asset.get("label", "This asset")
+    product = item.get("matched_product")
+    if asset.get("productRef"):
+        if not product:
+            return (f"{label} has ProductReference {asset['productRef']}, but the "
+                    "referenced product was not found in the queried ProductCatalog.")
+        designation = product.get("designation") or product.get("label", "unnamed product")
+        manufacturer = product.get("manufacturer", "manufacturer unspecified")
+        parts = [f"{label} is associated in AssetInventory with {manufacturer} {designation} "
+                 f"(catalog entry: {product.get('label', 'unknown')})."]
+        if product.get("eclass"):
+            parts.append(f"ECLASS: {product['eclass']} ({product.get('eclassName', 'name unspecified')}); "
+                         f"IRDI: {product.get('irdi', 'not supplied')}.")
+        if product.get("selectionStatus"):
+            parts.append(f"Selection status: {product['selectionStatus']}.")
+        if product.get("verificationStatus"):
+            parts.append(f"ECLASS verification: {product['verificationStatus']}.")
+        parts.append("This modeled association does not establish physical installation or engineering approval.")
+        return " ".join(parts)
+    if asset.get("candidateRef"):
+        return (f"{label} has no ProductReference; its provisional CandidateProductReference "
+                f"is {asset['candidateRef']} (status: {asset.get('candidateStatus', 'not specified')}). "
+                "This is not an approved installed product.")
+    return f"{label} has no ProductReference or CandidateProductReference in the queried AssetInventory."
+
+
 def answer(question, endpoint, ollama_url, model, evidence_only=False):
     assets = graphdb_select(endpoint, ASSETS)
     products = graphdb_select(endpoint, PRODUCTS)
@@ -97,6 +131,9 @@ def answer(question, endpoint, ollama_url, model, evidence_only=False):
         return {"answer": "No matching evidence found in the loaded AAS graphs.", "evidence": [], "status": "NO_EVIDENCE"}
     if evidence_only:
         return {"answer": None, "evidence": evidence, "status": "EVIDENCE_ONLY"}
+    direct = direct_product_answer(question, evidence)
+    if direct is not None:
+        return {"answer": direct, "evidence": evidence, "status": "DETERMINISTIC_GROUNDED_RESPONSE"}
     system = (
         "You answer questions about a simulated industrial digital twin using ONLY the JSON evidence. "
         "Never invent equipment, manufacturers, technical ratings, or physical installations. "
