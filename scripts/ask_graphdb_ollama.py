@@ -93,7 +93,7 @@ def direct_product_answer(question, evidence):
     """Answer exact single-asset product association queries from facts, not LLM guesses."""
     if len(evidence) != 1:
         return None
-    if not re.search(r"\\b(product|manufacturer|transmitter|associated|assigned|mapped)\\b", question, re.I):
+    if not re.search(r"\b(product|manufacturer|transmitter|associated|assigned|mapped)\b", question, re.I):
         return None
     item = evidence[0]
     asset = item["asset"]
