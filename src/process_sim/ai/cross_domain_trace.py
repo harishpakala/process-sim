@@ -30,7 +30,8 @@ def validate_trace_plan(plan):
             raise ValueError("Invalid limit")
     return result
 
-def execute_trace_plan(plan, graphdb_endpoint, *, specs_reader=None, history_reader=None,\n                       alignment_declarations=()):
+def execute_trace_plan(plan, graphdb_endpoint, *, specs_reader=None, history_reader=None,
+                       alignment_declarations=()):
     p = validate_trace_plan(plan)
     if specs_reader is None:
         from process_sim.api.asset_specifications import asset_specifications
@@ -81,5 +82,8 @@ def execute_trace_plan(plan, graphdb_endpoint, *, specs_reader=None, history_rea
         "points": history.get("points", []) if history["status"] == "mapped" else [],
         "faultEvents": history.get("faultEvents", []) if history["status"] == "mapped" else [],
     }
-    from .property_alignment import assess_alignments\n    result["propertyAlignments"] = assess_alignments(\n        catalog, result["operationalEvidence"]["signal"], alignment_declarations)\n    result["sources"].append("TimescaleDB")
+    from .property_alignment import assess_alignments
+    result["propertyAlignments"] = assess_alignments(
+        catalog, result["operationalEvidence"]["signal"], alignment_declarations)
+    result["sources"].append("TimescaleDB")
     return result

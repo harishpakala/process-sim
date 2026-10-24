@@ -26,7 +26,9 @@ def query_unified(question, graphdb_endpoint, *, ollama_transport=None,
         "an object using ONLY: {operation:runs,limit:int}; "
         "{operation:signal_history,runId:UUID,signal:XMEAS1..41 or XMV1..12,limit:int}; "
         "{operation:asset_history,runId:UUID,assetIri:absolute HTTP IRI,limit:int}. "
-        "For cross_domain, plan must be {operation:asset_trace,assetId:string} "\n        "or {operation:asset_trace,assetId:string,runId:UUID,limit:int}. "\n        "For engineering or insufficient, plan must be null. "
+        "For cross_domain, plan must be {operation:asset_trace,assetId:string} "
+        "or {operation:asset_trace,assetId:string,runId:UUID,limit:int}. "
+        "For engineering or insufficient, plan must be null. "
         "Never invent run IDs, asset IRIs, signals, mappings, or physical installations. "
         "If required identifiers are missing choose insufficient. "
         "Never generate SQL or SPARQL."
@@ -54,7 +56,12 @@ def query_unified(question, graphdb_endpoint, *, ollama_transport=None,
     route = proposal["route"]
     if route == "insufficient" and proposal["plan"] is None:
         return {"status": "insufficient_schema", "route": route}
-    if route == "cross_domain":\n        from .cross_domain_trace import execute_trace_plan, validate_trace_plan\n        validated = validate_trace_plan(proposal["plan"])\n        return {"status": "executed_unverified", "route": route,\n                "data": execute_trace_plan(validated, graphdb_endpoint)}\n    if route == "temporal":
+    if route == "cross_domain":
+        from .cross_domain_trace import execute_trace_plan, validate_trace_plan
+        validated = validate_trace_plan(proposal["plan"])
+        return {"status": "executed_unverified", "route": route,
+                "data": execute_trace_plan(validated, graphdb_endpoint)}
+    if route == "temporal":
         validated = validate_temporal_plan(proposal["plan"])
         if validated["operation"] == "asset_history" and temporal_executor is None:
             from .semantic_temporal_workflow import execute_asset_signal_workflow

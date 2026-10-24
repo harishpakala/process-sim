@@ -23,7 +23,7 @@ def _iri(value):
     if not isinstance(value, str) or not value or any(ch in value for ch in '<>"{} \t\r\n'):
         raise ValueError("Invalid IRI")
     uri = URIRef(value)
-    if not uri.startswith(("https://", "http://", "urn:")):
+    if not str(uri).startswith(("https://", "http://", "urn:")):
         raise ValueError("Unsupported IRI scheme")
     return f"<{uri}>"
 
