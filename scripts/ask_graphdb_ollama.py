@@ -134,12 +134,12 @@ def guarded_engineering_answer(question, evidence):
     label = asset.get("label", "This asset")
     q = question.casefold()
     if not asset.get("productRef") and not asset.get("candidateRef"):
-        if re.search(r"\\b(product|candidate|infer|installed|physical|selected|reference)\\b", q):
+        if re.search(r"\b(product|candidate|infer|installed|physical|selected|reference)\b", q):
             return (f"{label} has no ProductReference or CandidateProductReference in the queried "
                     "AssetInventory. No selected physical product or provisional candidate can "
                     "be inferred from this evidence.")
     if asset.get("candidateStatus") == "REQUIRES_ALTERNATIVE" and re.search(
-            r"\\b(why|suitable|suitability|pressure|alternative|engineering)\\b", q):
+            r"\b(why|suitable|suitability|pressure|alternative|engineering)\b", q):
         return (f"{label} has candidate selection status REQUIRES_ALTERNATIVE and provisional "
                 f"CandidateProductReference {asset.get('candidateRef', 'not specified')}. "
                 "The retrieved GraphDB facts do not include operating and design pressures, "
