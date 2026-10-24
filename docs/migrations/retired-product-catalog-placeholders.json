@@ -1,0 +1,115 @@
+{
+  "description": "Retired non-product placeholder records removed from active ProductCatalog after asset references were reassigned. Preserved for migration traceability.",
+  "sourcePath": "examples/aas/product_catalog_instance.json",
+  "retirementReason": "UNREFERENCED_PLACEHOLDERS_NOT_CLASSIFIABLE_PRODUCTS",
+  "records": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Unspecified_MotorDrive_Reference",
+      "value": [
+        {
+          "modelType": "Property",
+          "idShort": "AssetIdentifier",
+          "valueType": "xs:string",
+          "value": "https://example.org/product-types/Unspecified_MotorDrive_Reference"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerName",
+          "valueType": "xs:string",
+          "value": "UNASSIGNED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerProductDesignation",
+          "valueType": "xs:string",
+          "value": "Unspecified motor/drive — unresolved engineering selection"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ProductDescription",
+          "valueType": "xs:string",
+          "value": "Catalog placeholder for illustrative motor assets only; not a commercial product, no selected vendor or rating."
+        },
+        {
+          "modelType": "Property",
+          "idShort": "SelectionStatus",
+          "valueType": "xs:string",
+          "value": "UNASSIGNED_PLACEHOLDER_NOT_PRODUCT"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "InstallationVerificationStatus",
+          "valueType": "xs:string",
+          "value": "NOT_INSTALLED_VERIFIED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSVerificationStatus",
+          "valueType": "xs:string",
+          "value": "NOT_ASSIGNED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "CatalogRecordType",
+          "valueType": "xs:string",
+          "value": "UNRESOLVED_REFERENCE_PLACEHOLDER"
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Unspecified_AgitatorDrive_Reference",
+      "value": [
+        {
+          "modelType": "Property",
+          "idShort": "AssetIdentifier",
+          "valueType": "xs:string",
+          "value": "https://example.org/product-types/Unspecified_AgitatorDrive_Reference"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerName",
+          "valueType": "xs:string",
+          "value": "UNASSIGNED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerProductDesignation",
+          "valueType": "xs:string",
+          "value": "Unspecified reactor agitator drive — unresolved engineering selection"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ProductDescription",
+          "valueType": "xs:string",
+          "value": "Catalog placeholder for logical XMV12 agitator motor command; XMV12 is not a valve or independently verified physical drive."
+        },
+        {
+          "modelType": "Property",
+          "idShort": "SelectionStatus",
+          "valueType": "xs:string",
+          "value": "UNASSIGNED_PLACEHOLDER_NOT_PRODUCT"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "InstallationVerificationStatus",
+          "valueType": "xs:string",
+          "value": "NOT_INSTALLED_VERIFIED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSVerificationStatus",
+          "valueType": "xs:string",
+          "value": "NOT_ASSIGNED"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "CatalogRecordType",
+          "valueType": "xs:string",
+          "value": "UNRESOLVED_REFERENCE_PLACEHOLDER"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,379 @@
+{
+  "schemaVersion": "1.0",
+  "reason": "Superseded sensor records removed from active ProductCatalog; retained for audit and migration",
+  "branch": "feat/local-ollama-grounded-ai",
+  "removedProductRecords": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "SMC_PFMV505_1",
+      "value": [
+        {
+          "modelType": "Property",
+          "idShort": "AssetIdentifier",
+          "valueType": "xs:string",
+          "value": "https://example.org/product-types/SMC_PFMV505_1"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerName",
+          "valueType": "xs:string",
+          "value": "SMC"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerPartNumber",
+          "valueType": "xs:string",
+          "value": "PFMV505-1"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSClass",
+          "valueType": "xs:string",
+          "value": "27-27-48"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSPreferredName",
+          "valueType": "xs:string",
+          "value": "Flow sensor"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSIRDI",
+          "valueType": "xs:string",
+          "value": "0173-1#01-AHB183#005"
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TechnicalProperties",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductCategory",
+              "valueType": "xs:string",
+              "value": "Minute-flow sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ApplicableFluid",
+              "valueType": "xs:string",
+              "value": "Dry air or nitrogen"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RatedFlowRange",
+              "valueType": "xs:string",
+              "value": "0 to 0.5 L/min"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AnalogOutput",
+              "valueType": "xs:string",
+              "value": "1 to 5 V DC (nonlinear)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Accuracy",
+              "valueType": "xs:string",
+              "value": "±5% full scale"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ResponseTime",
+              "valueType": "xs:string",
+              "value": "≤5 ms"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProofPressure",
+              "valueType": "xs:string",
+              "value": "500 kPa"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SpecificationSourceURL",
+              "valueType": "xs:string",
+              "value": "https://static.smc.eu/pdf/PFMV5-PFGV301_EU.pdf"
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "OntoConcept",
+          "valueType": "xs:string",
+          "value": "Product"
+        }
+      ],
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#01-AHB183#005"
+          }
+        ]
+      }
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "IFM_LW2720",
+      "value": [
+        {
+          "modelType": "Property",
+          "idShort": "AssetIdentifier",
+          "valueType": "xs:string",
+          "value": "https://example.org/product-types/IFM_LW2720"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerName",
+          "valueType": "xs:string",
+          "value": "IFM"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerPartNumber",
+          "valueType": "xs:string",
+          "value": "LW2720"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSClass",
+          "valueType": "xs:string",
+          "value": "27-20-05-05"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSPreferredName",
+          "valueType": "xs:string",
+          "value": "Free-space radar level transmitter/switch"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSIRDI",
+          "valueType": "xs:string",
+          "value": "0173-1#01-AAC024#022"
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TechnicalProperties",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductCategory",
+              "valueType": "xs:string",
+              "value": "Non-contact radar level sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuringPrinciple",
+              "valueType": "xs:string",
+              "value": "FMCW radar, 80 GHz"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuringRange",
+              "valueType": "xs:string",
+              "value": "10 m"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Accuracy",
+              "valueType": "xs:string",
+              "value": "±2 mm"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplyVoltage",
+              "valueType": "xs:string",
+              "value": "18 to 30 V DC"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AnalogOutput",
+              "valueType": "xs:string",
+              "value": "4 to 20 mA"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Communication",
+              "valueType": "xs:string",
+              "value": "IO-Link"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PressureRating",
+              "valueType": "xs:string",
+              "value": "8 bar"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MediumTemperature",
+              "valueType": "xs:string",
+              "value": "−40 to 150 °C (see derating diagram)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RecommendedMedia",
+              "valueType": "xs:string",
+              "value": "Water and hydrous media"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Protection",
+              "valueType": "xs:string",
+              "value": "IP68 / IP69K"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SpecificationSourceURL",
+              "valueType": "xs:string",
+              "value": "https://www.ifm.com/gb/en/product/LW2720"
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "OntoConcept",
+          "valueType": "xs:string",
+          "value": "Product"
+        }
+      ],
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#01-AAC024#022"
+          }
+        ]
+      }
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "SMC_PSE550",
+      "value": [
+        {
+          "modelType": "Property",
+          "idShort": "AssetIdentifier",
+          "valueType": "xs:string",
+          "value": "https://example.org/product-types/SMC_PSE550"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerName",
+          "valueType": "xs:string",
+          "value": "SMC"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ManufacturerPartNumber",
+          "valueType": "xs:string",
+          "value": "PSE550"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSClass",
+          "valueType": "xs:string",
+          "value": "27-20-06-23"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSPreferredName",
+          "valueType": "xs:string",
+          "value": "Pressure differential sensor"
+        },
+        {
+          "modelType": "Property",
+          "idShort": "ECLASSIRDI",
+          "valueType": "xs:string",
+          "value": "0173-1#01-AKA491#001"
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TechnicalProperties",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductCategory",
+              "valueType": "xs:string",
+              "value": "Low differential-pressure sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RatedDifferentialPressure",
+              "valueType": "xs:string",
+              "value": "0 to 2 kPa"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingPressure",
+              "valueType": "xs:string",
+              "value": "−50 to 50 kPa"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProofPressure",
+              "valueType": "xs:string",
+              "value": "65 kPa"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplyVoltage",
+              "valueType": "xs:string",
+              "value": "12 to 24 V DC ±10%"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AnalogOutput",
+              "valueType": "xs:string",
+              "value": "1 to 5 V DC (PSE550); 4 to 20 mA for PSE550-28"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Accuracy",
+              "valueType": "xs:string",
+              "value": "±1% full scale"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Protection",
+              "valueType": "xs:string",
+              "value": "IP40"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ApplicableFluid",
+              "valueType": "xs:string",
+              "value": "Air, inert and nonflammable gases"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SpecificationSourceURL",
+              "valueType": "xs:string",
+              "value": "https://static.smc.eu/binaries/content/assets/smc_global/product-documentation/operation-manuals/en/om_pse550_omg0009en-d.pdf"
+            }
+          ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "OntoConcept",
+          "valueType": "xs:string",
+          "value": "Product"
+        }
+      ],
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "0173-1#01-AKA491#001"
+          }
+        ]
+      }
+    }
+  ]
+}
