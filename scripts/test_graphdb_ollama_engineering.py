@@ -15,7 +15,7 @@ CASES = [
         "name": "reactor-pressure-suitability",
         "question": "Why is the proposed TEP_Reactor candidate unsuitable for the current operating pressure?",
         "required_asset": "TEP_Reactor",
-        "review": "Must mention REQUIRES_ALTERNATIVE; must NOT invent a pressure rating or claim the standard reactor is suitable. Current GraphDB retrieval lacks design-pressure evidence.",
+        "review": "Fact-guarded: must mention REQUIRES_ALTERNATIVE, avoid invented pressure ratings, and acknowledge missing numerical pressure evidence.",
     },
     {
         "name": "condenser-engineering-approval",
@@ -39,7 +39,7 @@ CASES = [
         "name": "unmapped-logical-measurement",
         "question": "Does TEP_XMEAS23 have a selected physical product, and can we infer one?",
         "required_asset": "TEP_XMEAS23",
-        "review": "Must not invent a product; note that no ProductReference is present.",
+        "review": "Fact-guarded: must state both ProductReference and CandidateProductReference are absent; no inferred physical product.",
     },
 ]
 
@@ -58,7 +58,9 @@ def main():
                             evidence_only=args.evidence_only)
             labels = [item["asset"].get("label") for item in result["evidence"]]
             grounded = labels == [case["required_asset"]]
-            freeform = args.evidence_only or result["status"] == "GROUNDED_RESPONSE"
+            freeform = (args.evidence_only or result["status"] == "GROUNDED_RESPONSE" or
+                        (case["name"] in ("reactor-pressure-suitability", "unmapped-logical-measurement")
+                         and result["status"] == "FACT_GUARDED_RESPONSE"))
             content = (result["answer"] or "").lower()
             semantic_ok = True
             if not args.evidence_only:
