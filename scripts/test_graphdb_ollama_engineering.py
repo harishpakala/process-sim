@@ -59,9 +59,26 @@ def main():
             labels = [item["asset"].get("label") for item in result["evidence"]]
             grounded = labels == [case["required_asset"]]
             freeform = args.evidence_only or result["status"] == "GROUNDED_RESPONSE"
-            if not grounded or not freeform:
+            content = (result["answer"] or "").lower()
+            semantic_ok = True
+            if not args.evidence_only:
+                if case["name"] == "reactor-pressure-suitability":
+                    semantic_ok = "requires_alternative" in content
+                elif case["name"] == "unmapped-logical-measurement":
+                    semantic_ok = (
+                        "no selected product" in content or "no productreference" in content
+                    ) and not any(phrase in content for phrase in (
+                        "candidate is present", "candidate product is present",
+                        "candidateproductreference is present", "provisional candidate product",
+                        "a candidate exists", "candidate was found",
+                    ))
+                elif case["name"] == "pressure-transmitter-classification":
+                    semantic_ok = all(term in content for term in (
+                        "27-27-49-05", "pressure transmitter", "pending_eclass_verification"
+                    ))
+            if not grounded or not freeform or not semantic_ok:
                 errors += 1
-            print(f"\n{'EVIDENCE PASS' if grounded and freeform else 'FAIL'} {case['name']}")
+            print(f"\n{'EVIDENCE PASS' if grounded and freeform and semantic_ok else 'FAIL'} {case['name']}")
             print("Question:", case["question"])
             print("Retrieved assets:", labels)
             print("Response status:", result["status"])
@@ -70,7 +87,7 @@ def main():
         except Exception as exc:
             errors += 1
             print(f"\nFAIL {case['name']}: {exc}")
-    print(f"\nRetrieval/path failures: {errors}; cases: {len(CASES)}")
+    print(f"\nAutomated check failures: {errors}; cases: {len(CASES)}")
     if not args.evidence_only:
         print("IMPORTANT: Read each answer against MANUAL REVIEW criteria. "
               "No automatic correctness score is claimed for model-generated text.")
