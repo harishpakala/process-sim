@@ -93,7 +93,9 @@ def direct_product_answer(question, evidence):
     """Answer exact single-asset product association queries from facts, not LLM guesses."""
     if len(evidence) != 1:
         return None
-    if not re.search(r"\b(product|manufacturer|transmitter|associated|assigned|mapped)\b", question, re.I):
+    if not re.search(r"\b(which|what)\b.*\b(product|manufacturer|transmitter|associated|assigned|mapped)\b", question, re.I):
+        return None
+    if re.search(r"\b(why|how|explain|infer|suitable|suitability|approved|installed|physical|confirm|verification|status)\b", question, re.I):
         return None
     item = evidence[0]
     asset = item["asset"]
@@ -135,6 +137,7 @@ def answer(question, endpoint, ollama_url, model, evidence_only=False):
     if direct is not None:
         return {"answer": direct, "evidence": evidence, "status": "DETERMINISTIC_GROUNDED_RESPONSE"}
     system = (
+        "Explicitly report candidateStatus (including REQUIRES_ALTERNATIVE or PROVISIONAL_CANDIDATE) whenever present; do not omit this status. "
         "You answer questions about a simulated industrial digital twin using ONLY the JSON evidence. "
         "Never invent equipment, manufacturers, technical ratings, or physical installations. "
         "A ProductReference is a modeled association, not proof of installation or engineering approval. "
