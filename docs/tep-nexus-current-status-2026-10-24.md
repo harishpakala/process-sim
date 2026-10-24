@@ -1,7 +1,7 @@
 # TEP NEXUS — Current Project Status
 
 **Status date:** 24 October 2026  
-**Working branch:** `feat/local-ollama-grounded-ai`  
+**Current branch:** `main` (feature branch merged and deleted)  
 **Purpose:** Evidence-aware project snapshot for engineering handoff and CAiSE 2027 planning. This document distinguishes repository implementation, previously reported local runs, and unverified integration. It is not a certification of production readiness.
 
 ## 1. Executive summary
@@ -10,7 +10,7 @@ TEP NEXUS is a research prototype for an industrial semantic digital twin built 
 
 **Verified in the inspected branch:** repository documentation for TEP simulation, OPC UA, AAS lifting, and engineering-domain source checks; source code for a read-only GraphDB-to-Ollama Q&A prototype and RDF relationship audit scripts.  
 **Previously reported local execution:** GraphDB graph inventory, entity-link audits, and Ollama test runs described below. These are historical observations from the development session, not freshly rerun by this documentation change.  
-**Not yet verified as an end-to-end system:** TEP → OPC UA → TimescaleDB → semantic asset → GraphDB → AI, including MES/ERP data exchange. MES and ERP are reported as implemented by the project owner, but their concrete interfaces and runtime evidence still require a targeted repository/runtime audit.
+**Not yet verified as an end-to-end system:** TEP → OPC UA → TimescaleDB → semantic asset → GraphDB → AI, excluding MES/ERP data exchange, which is not implemented. The project owner clarified that ERP scope currently consists only of the AssetInventory AAS and that no MES is implemented. No standalone ERP system or ERP/MES integration is established.
 
 ## 2. Architecture inventory and evidence level
 
@@ -19,9 +19,9 @@ TEP NEXUS is a research prototype for an industrial semantic digital twin built 
 | TEP reference simulation | Existing README documents adapter, deterministic simulation boundary, lifecycle and engineering measurements. | Capture a reproducible scenario with run ID, variable IDs and timestamps. |
 | Faults and scenarios | README documents fault manager, native disturbances, controlled experiments and recording. | Confirm repeatable experiment outputs and provenance. |
 | OPC UA | README documents simulation controls, XMEAS/XMV and fault-management methods. | Demonstrate live subscription/read with timestamps and stable asset identity. |
-| TimescaleDB / historian | Project owner reports operational data infrastructure; older README still lists historian/TSDB as outstanding. | Inspect code, schema, deployment and live writes; resolve documentation discrepancy. |
-| MES | Project owner reports implementation. | Inspect module, API, transaction boundaries and linkage to TEP/asset identifiers. |
-| ERP | Project owner reports implementation. | Inspect module, API and linkage to MES, BOM and asset identifiers. |
+| TimescaleDB / historian | Source-inspected `src/process_sim/api/historian.py` and `timeseries.py`: OPC UA polling, optional TimescaleDB run/sample/fault persistence, and query APIs. | Verify live writes, run lifecycle, recovery and reproducible queries. |
+| MES | **Not implemented**, as clarified by project owner. | Future work only; do not claim MES integration. |
+| ERP | **No standalone ERP implemented.** Current enterprise-relevant representation is the AssetInventory AAS only. | Do not equate AssetInventory with a deployed ERP or claim ERP transactions/integration. |
 | AAS semantic lifting | Repository documents configured DEXPI, ECAD, ProductCatalog and AssetInventory template/instance lifting; SHACL validation. | Repeat RDF completeness checks on current sources and pin versions. |
 | AssetInventory | Historical source check: 62 assets. Previously reported GraphDB Q&A inventory: 62 assets, 38 ProductReferences, 5 candidate-only, 19 unmapped. | Verify exact mapping coverage and entity-level links to other domains. |
 | ProductCatalog | Previously reported GraphDB Q&A inventory: 20 products; candidate status is distinct from installed/approved status. | Reconcile versioned JSON source and GraphDB contents. |
@@ -110,7 +110,7 @@ The README explicitly defers full physical BOM revision supersession, comparison
 Prior published foundation: *From Asset Administration Shells to Knowledge Graphs: Rule-Based Semantic Lifting for Cross-Domain Reasoning in Cyber-Physical Systems* (MODELS Companion 2026). It already introduces AAS-to-OWL/RDF semantic lifting, SHACL structural validation, ECAD–DEXPI integration and knowledge-graph-derived PLC bindings. **Do not claim these as newly invented by TEP NEXUS.**
 
 Proposed **new** CAiSE contribution, contingent on evaluation:
-1. Cross-layer industrial information architecture linking engineering, operational and enterprise information.
+1. Asset-centered industrial information architecture linking engineering models, operational history and enterprise-relevant AssetInventory AAS data, without claiming MES or standalone ERP integration.
 2. Verified asset-centered semantic integration and measurable cross-domain traceability.
 3. Evidence-grounded engineering reasoning with explicit uncertainty handling.
 
@@ -124,12 +124,12 @@ Proposed experiments:
 ## 8. Immediate action list (priority order)
 
 1. **Freeze paper scope and prior-work boundary.** Document novelty relative to MODELS Companion and the separate systems-engineering paper.
-2. **Audit TimescaleDB, MES and ERP implementation.** Locate actual modules, schema, APIs, test fixtures and running interfaces; update this document with file paths and evidence.
-3. **Capture one reproducible end-to-end trace.** Start with one TEP asset and its measurement; record identifiers, timestamps, data stores and query outputs.
+2. **Validate the inspected operational path.** `src/process_sim/api/opcua_client.py`, `historian.py`, `timeseries.py`, `temporal_rdf.py`, `graph_sync.py` and `asset_history.py` provide the source-level path; capture live TimescaleDB writes, GraphDB sync status and an asset-history trace. MES and standalone ERP remain future work.
+3. **Capture one reproducible engineering-to-operations trace.** Start with one TEP asset and its measurement; record identifiers, timestamps, TimescaleDB queries, GraphDB references and any ambiguous mappings. Do not imply MES/ERP participation.
 4. **Verify AssetInventory-centered joins.** Inspect RDF predicates and nested AAS references; resolve candidate links only with defensible identity evidence.
 5. **Build evaluation harness.** Pin data snapshot, test cases, baselines, metrics and reproducibility instructions.
 6. **Draft CAiSE abstract and manuscript in parallel.** Separate prior work, implemented contribution, measured results and limitations.
-7. **Synchronize README roadmap.** Update Phase 5/7/9 descriptions only after historian/enterprise/runtime audit; the README currently reflects an earlier milestone.
+7. **Keep README and paper claims synchronized.** Phase 5 source implementation is documented, while live integration remains unverified; Phase 7 has AssetInventory AAS but no standalone ERP or MES.
 
 ## 9. Status conventions
 
