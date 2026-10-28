@@ -1,3 +1,27 @@
+## SELiRA implementation and evaluation status (experimental)
+
+This branch introduces a **standalone, offline-testable correspondence qualification foundation** in `src/process_sim/selira/`. It does not replace existing `/api/semantic/asset-history` behavior, change the TEP simulator, or claim that GraphDB operational references are independently validated.
+
+| Capability | Status | Evidence |
+| --- | --- | --- |
+| Legacy operational-reference recognition | Existing implementation | `src/process_sim/api/asset_history.py`; `mapped` means one recognized signal, **not** semantic validation |
+| Candidate-level qualification and response-level resolution | Implemented on this branch | `selira/contracts.py`, `selira/resolution.py` |
+| Explicit reviewed declaration and nonempty evidence reference requirement | Implemented as **structural checks only** | `selira/resolution.py`; evidence authenticity is **not** independently verified |
+| Fail-closed authoritative-use policy | Implemented as reusable function, **not wired into production endpoints** | `selira/consumer_policy.py` |
+| Applicability evaluation against engineering configuration | Planned | The branch accepts declared `applicable`/`inapplicable`/`unknown` status; it does not calculate it |
+| GraphDB integration, independent evidence verification, service endpoints | Planned | No new deployed endpoint on this branch |
+| Reproducible end-to-end and quantitative evaluation | Not yet performed | Offline unit tests added, execution/CI status must be checked separately |
+
+**Offline tests** (with project installed in editable mode or `PYTHONPATH=src`):
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.py' -v
+```
+
+**Semantics:** An extracted `XMEAS`/`XMV` identifier is a candidate, not a validated correspondence. A unique candidate without a reviewed declaration remains unresolved. A validated declaration requires an evidence reference and declared applicability, but these fields are **assertions**, not independent proof. Conflicting declarations fail closed; competing unresolved signals produce ambiguity. The consumer-policy function permits authoritative use only for an unambiguously selected, validated, applicable candidate with evidence references.
+
+**Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
+
 # process-sim
 
 **Author:** Harish Kumar Pakala
