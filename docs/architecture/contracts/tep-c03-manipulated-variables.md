@@ -8,7 +8,15 @@
 C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)
 \]
 
-**Elements:** I_i: XMV signal identity; V_(i,k): manipulated value; T_k: simulation time; Q: native/manual control mode; P: command or observation provenance.
+## Tuple elements
+
+| Symbol | Meaning | Source |
+| --- | --- | --- |
+| `I_i` | XMV identifier, i = 1,…,12 | TEP signal indexing |
+| `V_(i,k)` | Manipulated-variable value at step k | TEPAdapter.get_manipulated_variables() |
+| `T_k` | Simulation timestamp (hours) | TEPAdapter.get_time_hours() |
+| `Q` | Native or manual control mode | TEPAdapter.control_mode |
+| `P` | Command or observation provenance | OPC UA/event or recording layer |
 
 **Constraint:** i ∈ {1,…,12}. The adapter rejects out-of-range XMV indices; OPC UA external control uses manual mode.
 
