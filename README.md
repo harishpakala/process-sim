@@ -26,6 +26,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **GraphDB candidate adapter (experimental):** `src/process_sim/selira/graphdb.py` reads bounded `hasOperationalReference` candidates from the configured SPARQL endpoint and passes them to the fail-closed resolver. `tests/test_selira_graphdb.py` adds six mocked-network tests. These tests are **not yet reported as executed**, and no live GraphDB connection or independent engineering-evidence validation has been demonstrated. GraphDB reference retrieval alone never constitutes a validated correspondence. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` to test both SELiRA modules.
 
+**GraphDB adapter test verification (2026-10-29):** User-reported Windows PowerShell output confirms `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **17/17 tests** (11 resolver/policy, six mocked GraphDB adapter). Combined with the previously reported 10/10 semantic regression tests, **27/27 tests passed locally** across five suites. The GraphDB adapter tests are mocked; live GraphDB connectivity and evidence authenticity remain unverified.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
