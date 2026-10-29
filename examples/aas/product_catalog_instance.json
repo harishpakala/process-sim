@@ -318,6 +318,18 @@
                   "idShort": "MaterialNote",
                   "valueType": "xs:string",
                   "value": "Supplier heading states SS/SS, while detailed housing material states cast steel GS-C25; verify exact material specification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliA"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
                 }
               ]
             },
