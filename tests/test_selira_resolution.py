@@ -50,6 +50,18 @@ class ResolutionTests(unittest.TestCase):
         self.assertEqual(result.resolution_status, "unresolved")
         self.assertEqual(result.candidates[0].reason, "conflicting declarations")
 
+    def test_rejected_candidate_is_not_authorized_alone(self):
+        result = resolve_correspondence(
+            PROPERTY, [REF], [declaration(status="rejected")])
+        self.assertEqual(result.resolution_status, "unresolved")
+        self.assertFalse(authorize_use(result))
+
+    def test_unverified_competitor_still_blocks_authorization(self):
+        result = resolve_correspondence(
+            PROPERTY, [REF, "opcua/XMEAS13"], [declaration()])
+        self.assertEqual(result.resolution_status, "ambiguous")
+        self.assertFalse(authorize_use(result))
+
     def test_validated_requires_evidence(self):
         with self.assertRaises(ValueError):
             resolve_correspondence(PROPERTY, [REF], [declaration(evidence=())])
