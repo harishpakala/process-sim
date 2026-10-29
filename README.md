@@ -174,6 +174,8 @@ SELiRA provides an offline-testable correspondence qualification foundation in `
 | Synthetic policy comparison | 18 deterministic declaration-driven scenarios; **not** an empirical real-world accuracy benchmark |
 | End-to-end operational validation | Not demonstrated |
 
+**SC-01 — Semantic Information Contract: Asset-to-Product Reference Consistency.** Validates that each applicable `AssetInventory` asset's product reference resolves to exactly one authoritative `ProductCatalog` entry at the evaluated source revision (`|P_ν(a)| = 1`). Outcomes: **V** (one verified match), **F** (zero or multiple matches with complete evidence), **U** (incomplete, missing, or stale evidence), and **NA** (asset outside the contract scope). Relevant source changes require reassessment. This identifier-consistency check does **not** establish product suitability or consumer authorization.
+
 **Tests:** The latest reported local run passed **42/42 SELiRA tests**; another **10 semantic regression tests** passed in separate runs. These are user-reported local results, not independently verified CI or live integration results.
 
 **Limitations:** Independent evidence authenticity, configuration applicability, live GraphDB/TimescaleDB integration, and production API enforcement remain incomplete or unverified. Existing `/api/semantic/asset-history` behavior is unchanged.
