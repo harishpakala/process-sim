@@ -1,31 +1,17 @@
-# TEP-C03 — Manipulated variables (XMV)
+# TEP-C03 — Manipulated variables contract
 
-**Status:** Draft contract specification scaffold. Formal requirements below are **to be defined and verified against the implementation**; no conformance or formal verification is claimed.
+**Status:** Proposed compact architectural contract; implementation coverage varies. This tuple is a semantic model, not a claim that the adapter directly returns all fields.
 
-## Scope
+## Formal representation
 
-12 XMV identities, control commands, readback and constraints.
+\[
+C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)
+\]
 
-## Formal contract definition (pending implementation audit)
+**Elements:** I_i: XMV signal identity; V_(i,k): manipulated value; T_k: simulation time; Q: native/manual control mode; P: command or observation provenance.
 
-| Element | Required specification | Status |
-| --- | --- | --- |
-| Typed interface | Operations, input/output types and admissible values | To be specified |
-| Preconditions | Conditions for each operation to be accepted | To be specified |
-| Postconditions | Observable results of success and failure | To be specified |
-| Invariants | State and data properties that must always hold | To be specified |
-| Temporal semantics | Simulation-time rules and operation ordering | To be specified |
-| Failure semantics | Explicit behavior for invalid input and invalid state | To be specified |
-| Provenance | Run, backend, time and source attribution as applicable | To be specified |
-| Verification | Implementation mapping, tests and conformance status | To be established |
+**Constraint:** i ∈ {1,…,12}. The adapter rejects out-of-range XMV indices; OPC UA external control uses manual mode.
 
-## Contract properties to formalize
+**Implementation boundary:** Control values are exposed by the adapter; provenance depends on the OPC UA/event or recording layer.
 
-1. Command preconditions.
-2. accepted/rejected writes.
-3. range semantics.
-4. command-to-state observability.
-
-## Verification status
-
-No implementation-level contract audit or machine-checkable conformance proof has been performed for this document. Each eventual requirement must be classified as **implemented and tested**, **implemented but unverified**, or **specified but not implemented**.
+**Verification:** Confirm the proposed representation against adapter, simulator, scenario and recording tests before treating it as a fully verified guarantee.
