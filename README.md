@@ -28,6 +28,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **GraphDB adapter test verification (2026-10-29):** User-reported Windows PowerShell output confirms `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **17/17 tests** (11 resolver/policy, six mocked GraphDB adapter). Combined with the previously reported 10/10 semantic regression tests, **27/27 tests passed locally** across five suites. The GraphDB adapter tests are mocked; live GraphDB connectivity and evidence authenticity remain unverified.
 
+**Experimental consumer enforcement:** `src/process_sim/selira/guarded_history.py` adds `guarded_asset_history`, which resolves GraphDB correspondence candidates and calls TimescaleDB sample retrieval **only after** `authorize_use` succeeds. Six new offline integration-style tests in `tests/test_selira_guarded_history.py` cover accepted, unverified, ambiguous, inapplicable, rejected-alternative, and invalid-limit paths. **New tests have not yet been run**; the 17 previously reported SELiRA tests remain the last confirmed SELiRA result. The legacy endpoint and web UI remain unchanged. Declared evidence and applicability are still not independently verified; no production authorization claim is made.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
