@@ -488,6 +488,30 @@
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
                   "value": "https://www.ifm.com/de/de/product/TA1101"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-50 to 200 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FactoryConfiguredRange",
+                  "valueType": "xs:string",
+                  "value": "-10 to 150 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/DEG_C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Temperature"
                 }
               ]
             },
