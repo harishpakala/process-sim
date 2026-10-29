@@ -24,6 +24,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **Semantic regression verification (2026-10-29):** User-reported local Windows PowerShell runs passed: `test_ai_property_alignment.py` (4/4), `test_ai_cross_domain_trace.py` (3/3), and `test_ai_semantic_temporal_workflow.py` (3/3). Together with the 11/11 SELiRA tests, **21/21 tests passed locally across four independently invoked suites**. This is not an independently observed CI result, full-repository regression run, or integration test.
 
+**GraphDB candidate adapter (experimental):** `src/process_sim/selira/graphdb.py` reads bounded `hasOperationalReference` candidates from the configured SPARQL endpoint and passes them to the fail-closed resolver. `tests/test_selira_graphdb.py` adds six mocked-network tests. These tests are **not yet reported as executed**, and no live GraphDB connection or independent engineering-evidence validation has been demonstrated. GraphDB reference retrieval alone never constitutes a validated correspondence. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` to test both SELiRA modules.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
