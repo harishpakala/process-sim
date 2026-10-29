@@ -30,6 +30,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **Experimental consumer enforcement:** `src/process_sim/selira/guarded_history.py` adds `guarded_asset_history`, which resolves GraphDB correspondence candidates and calls TimescaleDB sample retrieval **only after** `authorize_use` succeeds. Six new offline integration-style tests in `tests/test_selira_guarded_history.py` cover accepted, unverified, ambiguous, inapplicable, rejected-alternative, and invalid-limit paths. **New tests have not yet been run**; the 17 previously reported SELiRA tests remain the last confirmed SELiRA result. The legacy endpoint and web UI remain unchanged. Declared evidence and applicability are still not independently verified; no production authorization claim is made.
 
+**Guarded consumer test verification (2026-10-29):** User-reported Windows PowerShell run of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **23/23 tests** (11 resolution, six mocked GraphDB adapter, six mocked guarded consumer). Alongside the earlier 10/10 semantic regression tests, **33/33 local tests passed across six suites**. This is user-reported execution, not CI or live GraphDB/TimescaleDB end-to-end validation. The new guarded consumer is not yet wired into the existing web UI or production API.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
