@@ -100,7 +100,8 @@ def resolve_correspondence(requested_property: str, references, declarations=())
     all_signals = {c.signal for c in candidates if c.validation_status != "rejected"}
     if len(eligible) == 1 and all_signals == eligible and all(
             c.validation_status == "validated" and
-            c.applicability_status == "applicable" for c in candidates):
+            c.applicability_status == "applicable"
+            for c in candidates if c.validation_status != "rejected"):
         return ResolutionResult(requested_property, "validated",
                                 tuple(candidates), next(iter(eligible)))
     status = "ambiguous" if len(all_signals) > 1 else "unresolved"
