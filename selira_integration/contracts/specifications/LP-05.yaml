@@ -1,0 +1,6 @@
+id: LP-05
+name: Validity State Management
+type: lifecycle_policy
+status: prototype
+implementation: Python orchestration plus SPARQL and audit records
+notes: "SHACL alone does not perform change detection, scheduling or history management."
