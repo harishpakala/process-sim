@@ -1559,6 +1559,24 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
+                  "valueType": "xs:string",
+                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
@@ -1674,6 +1692,24 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
+                  "valueType": "xs:string",
+                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
@@ -1789,6 +1825,24 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M3-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/VolumeFlowRate"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
+                  "valueType": "xs:string",
+                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
