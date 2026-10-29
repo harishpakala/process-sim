@@ -8,7 +8,15 @@
 C_dist(i,k) = (I_i, A_(i,k), T_s, D, P)
 \]
 
-**Elements:** I_i: native IDV identity; A_(i,k): binary activation state; T_s: scheduled activation time; D: scheduled duration; P: source and fault provenance.
+## Tuple elements
+
+| Symbol | Meaning | Source |
+| --- | --- | --- |
+| `I_i` | IDV identifier, i = 1,…,20 | Native TEP IDV indexing |
+| `A_(i,k)` | Binary activation state at step k | TEPAdapter.get_disturbances() |
+| `T_s` | Scheduled activation time | Fault/scenario scheduler |
+| `D` | Scheduled duration | Fault/scenario scheduler |
+| `P` | Disturbance source and provenance | Fault/scenario metadata |
 
 **Constraint:** i ∈ {1,…,20}; A_(i,k) ∈ {0,1}. Scheduled faults are synchronized at native step boundaries.
 
