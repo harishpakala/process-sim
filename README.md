@@ -1,3 +1,78 @@
+# process-sim
+
+**Author:** Harish Kumar Pakala
+
+`process-sim` is an open industrial process simulation and digital-twin platform. It starts with the Tennessee Eastman Process (TEP) as the scientific reference model and is designed to evolve into an industrial knowledge, temporal-data, and AI platform.
+
+The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
+
+## Local startup (Windows PowerShell)
+
+Run these commands from the repository root. Start each long-running service in a separate terminal.
+
+### 1. Install dependencies
+
+```powershell
+python -m pip install -r requirements-opcua.txt -r requirements-timeseries.txt
+cd frontend
+npm install
+cd ..
+```
+
+### 2. Start TimescaleDB (optional)
+
+```powershell
+docker compose -f docker-compose.timeseries.yml up -d
+```
+
+Required for persistent historian data; omit if using an existing database. See [time-series setup](docs/opcua/TIMESERIES.md).
+
+### 3. Start the OPC UA simulation server
+
+```powershell
+$env:PYTHONPATH="$PWD\src"
+python examples/run_opcua_server.py --endpoint "opc.tcp://0.0.0.0:4841/process-sim/" --seed 42 --real-time-factor 1.0
+```
+
+The simulator starts in external-control mode; starting it does not automatically establish closed-loop control.
+
+### 4. Start GraphDB (optional for semantic features)
+
+Start your existing GraphDB service with repository `AAS` and the required RDF graphs. See [semantic setup](semantic/README.md).
+
+### 5. Start the HTTP API and historian
+
+```powershell
+$env:PYTHONPATH="$PWD\src"
+$env:TEP_TIMESCALE_DSN="postgresql://tep:tep-local-dev@127.0.0.1:5432/tep_nexus"
+$env:GRAPHDB_SPARQL_ENDPOINT="http://localhost:7200/repositories/AAS"
+python -m process_sim.api.server
+```
+
+Adjust the example DSN to your database; omit it when persistent history is unnecessary. The sample credentials are for local development only. Check `http://127.0.0.1:8000/api/health`. The historian requires an advancing simulation.
+
+### 6. Start the Vue web interface
+
+```powershell
+cd frontend
+npm run dev
+```
+
+Open the local URL printed by Vite (typically `http://localhost:5173`). Some engineering views use local AAS JSON rather than live GraphDB.
+
+### 7. Ollama (optional, standalone Q&A)
+
+```powershell
+ollama pull llama3.1:8b
+python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_XMEAS7?"
+```
+
+Ollama must be running separately. This script is a GraphDB-grounded CLI, **not** an integrated SELiRA verifier. See [Ollama grounding](docs/local-ollama-graphdb-grounding.md).
+
+### Shutdown and troubleshooting
+
+Stop foreground services with `Ctrl+C`. Stop the sample database with `docker compose -f docker-compose.timeseries.yml down` (without `-v` to retain data). For connection issues, check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama), plus the configured database DSN. See [time-series troubleshooting](docs/opcua/TIMESERIES.md).
+
 ## SELiRA implementation and evaluation status (experimental)
 
 This branch introduces a **standalone, offline-testable correspondence qualification foundation** in `src/process_sim/selira/`. It does not replace existing `/api/semantic/asset-history` behavior, change the TEP simulator, or claim that GraphDB operational references are independently validated.
@@ -45,134 +120,6 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 **GraphDB evidence test verification (2026-10-29):** User-reported Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **42/42 SELiRA tests**, including seven GraphDB named-graph evidence tests. Together with previously reported 10/10 semantic regression tests, **52 tests passed locally in separate runs**. GraphDB evidence tests use mocks; no live GraphDB evidence query or authenticated provenance verification has yet been demonstrated.
 
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
-
-# process-sim
-
-**Author:** Harish Kumar Pakala
-
-`process-sim` is an open industrial process simulation and digital-twin platform. It starts with the Tennessee Eastman Process (TEP) as the scientific reference model and is designed to evolve into an industrial knowledge, temporal-data, and AI platform.
-
-The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
-
-## Local startup — API, OPC UA, web UI, TimescaleDB, GraphDB and Ollama (Windows PowerShell)
-
-This is a **multi-terminal development setup**, not a single all-in-one server. Run the commands from the repository root unless a step changes directory. Use the same checkout for the API, OPC UA server, frontend and scripts. Python must be able to import `process_sim` from `src`; Node.js/npm, Docker (for the sample database), GraphDB and Ollama are separate prerequisites. The local HTTP API is unauthenticated and bound to loopback by default; do not expose it to untrusted networks.
-
-### 1. Install dependencies (once per Python environment)
-
-```powershell
-cd C:\Users\haris\Documents\GitHub\process-sim
-python -m pip install -r requirements-opcua.txt -r requirements-timeseries.txt
-cd frontend
-npm install
-cd ..
-```
-
-If your checkout is instead under `C:\Users\haris\Documents\GitHub\ps_olama\process-sim`, use that location consistently. Install any additional project requirements required by your selected TEP backend; the commands above specifically cover the OPC UA and historian integration.
-
-### 2. Start TimescaleDB (optional, required for persistent history)
-
-**Terminal A** — with Docker Desktop running:
-
-```powershell
-docker compose -f docker-compose.timeseries.yml up -d
-docker compose -f docker-compose.timeseries.yml ps
-```
-
-The supplied Compose configuration uses PostgreSQL/TimescaleDB on `127.0.0.1:5432`, database `tep_nexus`, user `tep`, and a **local-development-only** password `tep-local-dev`. Configure a different `TEP_DB_PASSWORD` before first startup for other environments. If you already use an existing TimescaleDB installation, **do not start a second database or overwrite its credentials**: use that installation's actual DSN instead. The API creates/updates its schema on startup when `TEP_TIMESCALE_DSN` is set.
-
-### 3. Start the OPC UA simulation server
-
-**Terminal B**:
-
-```powershell
-$env:PYTHONPATH="$PWD\src"
-python examples/run_opcua_server.py --endpoint "opc.tcp://0.0.0.0:4841/process-sim/" --seed 42 --real-time-factor 1.0
-```
-
-This is the **TEP simulator's OPC UA server**, not the Python HTTP API. The server exposes `TEP/Simulation` (including `Start`, `Stop`, `Reset`), `XMEAS1..41`, `XMV1..12` and fault-management methods. It starts in **manual/external OPC UA control mode**: XMV commands must come from an external controller; starting the server alone does not establish closed-loop control. For local clients, use `opc.tcp://127.0.0.1:4841/process-sim/` if the endpoint is reachable. Keep this terminal running.
-
-### 4. Start GraphDB (for semantic queries and asset resolution)
-
-Start your **existing GraphDB installation** and confirm that repository `AAS` exists and contains the imported AssetInventory and ProductCatalog RDF graphs. Workbench is normally at `http://localhost:7200`; the SPARQL endpoint is `http://localhost:7200/repositories/AAS`. GraphDB is not started by the TimescaleDB Docker Compose file. If the graphs have not yet been loaded, consult [semantic/README.md](semantic/README.md) for lifting/import and validation. The asset-history endpoint needs the `assetinventory:hasOperationalReference` triples.
-
-### 5. Start the Python HTTP API and historian
-
-**Terminal C** — start after the OPC UA server; configure environment variables in **this terminal** before launching:
-
-```powershell
-$env:PYTHONPATH="$PWD\src"
-$env:TEP_TIMESCALE_DSN="postgresql://tep:tep-local-dev@127.0.0.1:5432/tep_nexus"
-$env:GRAPHDB_SPARQL_ENDPOINT="http://localhost:7200/repositories/AAS"
-python -m process_sim.api.server
-```
-
-**Replace the example DSN with your existing database connection string if applicable.** Without `TEP_TIMESCALE_DSN`, the API can still provide a short in-memory history, but persistent run/signal/fault history and automatic GraphDB run synchronization are unavailable. With a configured DSN, the API starts an OPC UA polling historian and a GraphDB synchronization worker by default. The historian collects all 41 XMEAS and 12 XMV signals as simulation time advances. The worker publishes **run/signal/fault provenance metadata**, not all high-frequency samples, to separate GraphDB named graphs. Set `$env:TEP_GRAPH_SYNC="0"` before startup to disable automatic GraphDB writes. Consult [docs/opcua/TIMESERIES.md](docs/opcua/TIMESERIES.md) for details and limitations.
-
-Verify in another PowerShell window:
-
-```powershell
-Invoke-RestMethod "http://127.0.0.1:8000/api/health"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/status"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/history"
-Invoke-RestMethod "http://127.0.0.1:8000/api/semantic/sync/status"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/runs"
-```
-
-The HTTP API defaults to `http://127.0.0.1:8000` (`PROCESS_SIM_API_HOST` and `PROCESS_SIM_API_PORT` override the bind address and port). `/api/health` checks the API process only; use `/api/simulation/status` to test OPC UA connectivity, `/api/simulation/history` to inspect historian persistence/storage errors, and `/api/semantic/sync/status` to inspect GraphDB synchronization. A running API is **not** proof that the simulator is advancing; start it through its OPC UA `Start()` method or an integrated control UI/client.
-
-### 6. Start the Vue web interface
-
-**Terminal D**:
-
-```powershell
-cd frontend
-npm run dev
-```
-
-Open the **Local** URL printed by Vite (typically `http://localhost:5173`). Vite proxies `/api` requests to `http://127.0.0.1:8000` by default; override with `PROCESS_SIM_API_URL` when needed. Some engineering/product graph views are local AAS-JSON previews, **not** live GraphDB visualizations. Do not assume every frontend view is wired to the running OPC UA service.
-
-### 7. Ollama — separate local grounded Q&A
-
-Start Ollama separately and install the model expected by the GraphDB Q&A script:
-
-```powershell
-ollama pull llama3.1:8b
-ollama list
-Invoke-RestMethod "http://127.0.0.1:11434/api/tags"
-```
-
-If the Ollama service is not already running, start it using your local Ollama installation (for example, `ollama serve` in a separate terminal). **Ollama is not automatically started by the Python API or Vue frontend**, and the existing Q&A scripts are command-line tools, not HTTP API routes.
-
-The **repository-tracked** GraphDB/ProductCatalog question-answering prototype:
-
-```powershell
-python scripts/ask_graphdb_ollama.py "TEP_XMEAS7 pressure transmitter" --evidence-only
-python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_XMEAS7?"
-python scripts/ask_graphdb_ollama.py "Explain the engineering significance and verification limitations of the product association for TEP_XMEAS7."
-python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_NONEXISTENT_999?"
-```
-
-The outputs distinguish `EVIDENCE_ONLY`, `DETERMINISTIC_GROUNDED_RESPONSE`, `GROUNDED_RESPONSE`, and `NO_EVIDENCE`. A deterministic answer is **not** an Ollama generation; a no-evidence response is retrieval-layer abstention. Product associations and ECLASS mappings may be provisional and must not be represented as verified physical installation. See [docs/local-ollama-graphdb-grounding.md](docs/local-ollama-graphdb-grounding.md).
-
-**Locally tested historical Q&A script (not yet tracked on `main`):** if you have separately saved `scripts/ask_historical_ollama.py` in this checkout, you can run:
-
-```powershell
-python scripts/ask_historical_ollama.py TEP_XMEAS6 --run-id 5636ccad-cc2a-41ae-9032-3d2f52bd0185 --evidence-only
-python scripts/ask_historical_ollama.py TEP_XMEAS6 --run-id 5636ccad-cc2a-41ae-9032-3d2f52bd0185
-```
-
-This requires the API, GraphDB, TimescaleDB historical run, and Ollama. The run ID above is **an example from a validated local dataset**, not guaranteed to exist in a fresh database. It resolves an AssetInventory asset to an operational signal and retrieves historical values via `GET /api/semantic/asset-history` before prompting Ollama. It is **not** yet part of the server/frontend and does not implement general causal diagnosis.
-
-### Shutdown and troubleshooting
-
-Use `Ctrl+C` in the OPC UA, API, Vite and optional Ollama terminal windows. To stop only the sample TimescaleDB container while preserving its volume, run `docker compose -f docker-compose.timeseries.yml down` (do **not** add `-v` unless you intend to delete stored data).
-
-- **OPC UA unavailable:** confirm port 4841 is free, the OPC UA process is running, and `/api/simulation/status` reports connectivity.
-- **No persistent samples:** check `TEP_TIMESCALE_DSN`, `/api/simulation/history` → `storageError`, whether the simulator is advancing, and the correct database/run ID.
-- **GraphDB sync errors:** verify repository `AAS`, the SPARQL endpoint, GraphDB write permissions, and `/api/semantic/sync/status`.
-- **Ollama errors:** verify `/api/tags` and `ollama list`; the Q&A CLI needs a locally available model.
-- **Frontend API errors:** keep the API on port 8000 or configure `PROCESS_SIM_API_URL` for Vite.
 
 ## Deferred milestone — Physical BOM revision governance
 
