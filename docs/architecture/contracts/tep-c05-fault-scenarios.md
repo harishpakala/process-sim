@@ -8,7 +8,17 @@
 C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)
 \]
 
-**Elements:** I_f: fault identifier; F_f: fault type; X_f: XMEAS/XMV/IDV target; M_f: magnitude or value where applicable; T_s: start time; D: duration; P: scenario/operator provenance.
+## Tuple elements
+
+| Symbol | Meaning | Source |
+| --- | --- | --- |
+| `I_f` | Fault identifier | Fault definition |
+| `F_f` | Fault type | Fault definition |
+| `X_f` | Target XMEAS, XMV or IDV signal | Fault definition |
+| `M_f` | Magnitude or target value, when applicable | Fault definition |
+| `T_s` | Scheduled start time | Fault definition |
+| `D` | Scheduled duration | Fault definition |
+| `P` | Scenario or operator provenance | Fault metadata/event layer |
 
 **Constraint:** For a finite scheduled fault, intended active interval is T_s ≤ T < T_s + D, evaluated at native simulation-step boundaries.
 
