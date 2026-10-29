@@ -880,163 +880,23 @@ Capture the exact query, asset IRI, signal, run ID, source observations, expecte
 
 **Minimum publishable evaluation package:** E1–E4 with independently established ground truth, B2/B3/B4 comparisons, at least one complete traceable workflow, negative cases, reproducible artifacts, and an explicit limitations discussion. The evaluation plan does not predetermine positive results.
 
-## Roadmap
+## Roadmap — Remaining Work
 
-The ten phases are grouped into the four architectural pillars. They are not a rigid waterfall; implementation advances where a foundation supports the research program.
+This table tracks outstanding work rather than repeating capabilities already documented as implemented. **Prototype**, **foundation implemented**, and **integrated/validated** are distinct maturity levels.
 
-### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
+| Area | Current maturity | Remaining work |
+| --- | --- | --- |
+| Industrial Twin Core (Phase 2) | In progress | Complete richer equipment and functional relationships, lifecycle/run management, operating-state transitions, and source-generated events. |
+| Fault Injection & Scenarios (Phase 3) | Foundation implemented | Add schema validation, richer scheduling, noise/saturation/intermittent/combined faults, controller and communication faults, reusable scenario libraries, and experiment comparisons. |
+| OPC UA Integration (Phase 4) | Fault-management foundation implemented | Expose first-class lifecycle events, engineering names and units, EUInformation, quality/status/timestamps, richer alarms, external SCADA/HMI integration tests, and deployment security. |
+| Time-Series & Experiments (Phase 5) | Experiment foundation implemented | Characterize fault responses, automate benchmark aggregation and statistics, integrate historian/time-series backends, expand temporal event models, and support event-to-observation correlation and replay/query. |
+| Engineering & Semantic Digital Thread (Phase 6) | Prototype implemented; integration in progress | Complete cross-domain identity/provenance reconciliation, template governance, ECLASS/AAS verification, SHACL validation, and end-to-end semantic integration and evaluation. |
+| BOM & Enterprise Integration (Phase 7) | Planned | Model EBOM/MBOM/service BOM, master data, ERP references, manufacturer/supplier identifiers, revisions, lifecycle status, and enterprise-to-engineering identity resolution. |
+| Web SCADA / HMI (Phase 8) | Frontend prototype; live integration planned | Integrate live OPC UA data, trends/history, alarms, scenario controls, operator actions, and engineering/semantic metadata. Intended path: **SCADA/HMI → OPC UA → control/process layer**. |
+| Knowledge Graph & GraphRAG (Phase 9) | Visualization prototype; RDF/GraphRAG integration planned | Integrate and validate engineering/temporal graphs, SPARQL competency queries, graph-grounded retrieval, and provenance-aware answers; distinguish experimental adapters from production integrations. |
+| Industrial AI Platform (Phase 10) | Planned | Develop evidence-backed diagnosis, root-cause and temporal reasoning, engineering-aware recommendations, controlled agent actions, and benchmarked comparisons. |
 
-- ProfBraatz scientific reference
-- backend-independent simulator boundary
-- TEP adapter
-- deterministic stepping and seeded runs
-- measurements, manipulated variables, states, and disturbances
-- engineering mappings and XMEAS units
-- canonical observations/events
-
-### Phase 2 — Industrial Twin Core — IN PROGRESS
-
-- canonical plant and asset model
-- equipment, instruments, tags, and functional relationships
-- canonical and source-system identifiers
-- deterministic simulation clock/orchestration
-- lifecycle and run management
-- operating states and state transitions
-- source-generated events
-- richer asset relationships independent of TEP
-
-### Phase 3 — Fault Injection and Scenario Engineering — FOUNDATION IMPLEMENTED
-
-Completed:
-
-- `Fault`, `FaultType`, `FaultManager`
-- bias, drift, stuck, and process-disturbance definitions
-- scheduled activation windows
-- XMEAS/XMV signal fault application
-- native TEP IDV1..IDV20 integration
-- YAML/JSON scenario loading
-- `ScenarioRunner`
-- fault lifecycle events
-- scenario run provenance
-
-Next:
-
-- schema validation and richer scheduling semantics
-- noise, saturation, intermittent, and combined fault modes
-- controller and communication faults
-- scenario libraries and experiment comparison
-
-### Phase 4 — OPC UA Integration — FAULT-MANAGEMENT FOUNDATION COMPLETE
-
-Completed:
-
-- stable application namespace
-- TEP object
-- 41 XMEAS and 12 XMV nodes
-- simulation time and running state
-- Start/Stop/Reset methods
-- configurable real-time factor
-- XMV write bridge
-- asynchronous simulation loop
-- operator XMV event integration
-- OPC UA fault injection and clearing methods
-- operator fault provenance
-- fault listing and lifecycle status (`registered` / `active` / `expired`)
-- integration with the shared fault manager
-
-Next:
-
-- expose richer lifecycle notifications as first-class OPC UA Events
-- semantic engineering names and units
-- OPC UA EUInformation and quality/status/timestamps
-- richer alarms and events
-- external SCADA/HMI integration tests
-- security and deployment configuration
-
-### Phase 5 — Time-Series, Experiments, and Temporal Knowledge Infrastructure — EXPERIMENT FOUNDATION IMPLEMENTED
-
-Completed foundation:
-
-- canonical `Observation` and `Event` models
-- `SimulationRecorder`
-- run manifests and provenance
-- storage-neutral recording session
-- Parquet persistence
-- observation/event separation
-- operator and fault lifecycle event recording
-- declarative experiment definitions
-- experiment/ground-truth provenance
-- paired fault/baseline replication tooling
-- fault-magnitude sweep tooling
-- initial benchmark matrix
-- controlled closed-loop response experiments
-
-Next:
-
-- formal fault-response characterization
-- automated benchmark aggregation and statistical analysis
-- historian/time-series backend integration
-- temporal event model expansion
-- event-to-observation correlation
-- temporal knowledge graph schema and replay/query interfaces
-
-### Phase 6 — Engineering & Semantic Digital Thread — PROTOTYPE IMPLEMENTED; INTEGRATION IN PROGRESS
-
-- AAS submodel templates
-- domain template governance and validation
-- eCl@ss classification
-- QUDT quantity kinds and units
-- OWL/SHACL semantic foundation
-- deterministic semantic lifting
-- DEXPI/P&ID integration
-- ECAD integration
-- cross-domain asset identity
-- engineering provenance
-
-The guiding workflow is **model first → semantically annotate → validate → lift → integrate → reason**.
-
-### Phase 7 — BOM & Enterprise Integration — PLANNED
-
-- EBOM, MBOM, service/spare BOM
-- material and asset master data
-- ERP references
-- manufacturer and supplier part identities
-- quantities, positions, revisions, lifecycle/status
-- enterprise-to-engineering identity resolution
-- cross-domain digital-thread relationships
-
-### Phase 8 — Web SCADA / HMI — FRONTEND PROTOTYPE; LIVE INTEGRATION PLANNED
-
-- browser-based operational interface
-- live process visualization
-- trends and historical views
-- alarms and events
-- scenario controls
-- operator actions
-- engineering-name and semantic metadata integration
-
-The intended operational path is **SCADA/HMI → OPC UA → control/process layer**, not direct access to simulator internals.
-
-### Phase 9 — Knowledge Graph & GraphRAG — VISUALIZATION PROTOTYPE; RDF/GRAPHRAG PLANNED
-
-- industrial knowledge graph
-- temporal knowledge graph
-- SPARQL and engineering queries
-- competency-question-driven reasoning
-- graph-based retrieval
-- GraphRAG over engineering, operational, and enterprise context
-- evidence and provenance-aware answers
-
-### Phase 10 — Industrial AI Platform — PLANNED
-
-- industrial agents
-- fault diagnosis and root-cause reasoning
-- temporal reasoning over process behavior
-- engineering-aware recommendations
-- evidence-backed operational assistance
-- controlled agent actions
-- benchmarked evaluation against time-series-only and graph-enhanced baselines
-
+**Completed foundation:** Phase 1 (TEP reference and Python simulation integration) is omitted from the remaining-work table. Implementation status elsewhere in this README describes existing foundations; items above should not be interpreted as delivered or independently validated.
 ## Research progression
 
 The research sequence is intentionally evidence-driven:
