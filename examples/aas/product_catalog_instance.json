@@ -80,6 +80,66 @@
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
                   "value": "https://www.se.com/de/de/product/A9MEM3555/"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActiveEnergy"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActivePower"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/V"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Voltage"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/HZ"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Frequency"
                 }
               ]
             },
