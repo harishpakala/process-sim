@@ -8,7 +8,16 @@
 C_sim(k) = (B, S_k, T_k, Δt, R, Q)
 \]
 
-**Elements:** B: native backend; S_k: native simulation state at step k; T_k: simulation time in hours; Δt: native time increment; R: initialization seed; Q: native control mode.
+## Tuple elements
+
+| Symbol | Meaning | Source |
+| --- | --- | --- |
+| `B` | Native simulation backend | TEPAdapter configuration |
+| `S_k` | Native process state at step k | Native TEP simulator |
+| `T_k` | Simulation time (hours) at step k | Native TEP simulator |
+| `Δt` | Native simulation-time increment | Native simulator; test expectation |
+| `R` | Random seed | TEPAdapter constructor |
+| `Q` | Control mode | TEPAdapter constructor |
 
 **Constraint:** T_0 = 0 after successful reset in tested fixture; T_1 ≈ 1/3600 h after one step. Native backend behavior determines whether T_(k+1) = T_k + Δt holds generally.
 
