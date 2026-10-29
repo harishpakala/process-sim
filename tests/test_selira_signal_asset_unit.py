@@ -77,3 +77,33 @@ def test_missing_catalog_annotation_fails_closed(catalog):
     props = catalog["submodelElements"][0]["value"][0]["value"][0]["value"]
     props.pop()
     assert assess_xmeas7_pressure(catalog).status == CorrespondenceStatus.UNRESOLVED
+
+
+def test_real_inventory_catalog_xmeas7_correspondence_is_ambiguous_until_verified():
+    import json
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1] / "examples" / "aas"
+    inventory = json.loads((root / "asset_inventory_instance.json").read_text(encoding="utf-8"))
+    catalog = json.loads((root / "product_catalog_instance.json").read_text(encoding="utf-8"))
+    result = assess_xmeas7_pressure(catalog, inventory=inventory)
+    assert result.instrument == "PI-1101"
+    assert result.product == "EandH_PMP51B_Candidate"
+    assert result.status == CorrespondenceStatus.AMBIGUOUS
+    assert result.unit_assessment.multiplier == Decimal("0.01")
+    assert not result.permits_asset_binding
+
+
+def test_inventory_reference_mismatch_fails_closed(catalog):
+    inventory = {"submodelElements": [{"idShort": "Assets", "value": [{
+        "idShort": "TEP_XMEAS7",
+        "value": [
+            {"modelType": "Property", "idShort": "OperationalReference", "value": "XMEAS7"},
+            {"modelType": "Property", "idShort": "EquipmentTag", "value": "PI-1101"},
+            {"modelType": "Property", "idShort": "AssetType", "value": "LogicalMeasurement"},
+            {"modelType": "Property", "idShort": "ProductReference",
+             "value": "https://example.org/product-types/WRONG"},
+        ],
+    }]}]}
+    result = assess_xmeas7_pressure(catalog, inventory=inventory)
+    assert result.status == CorrespondenceStatus.UNRESOLVED
