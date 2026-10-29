@@ -501,7 +501,22 @@ Fault ──activatedAt──► simulation time
                      future TSDB / Temporal KG
 ```
 
-## TEP NEXUS contracts (proposed formal representations)
+## SELiRA contracts (proposed formal representations)
+
+The following table summarizes the proposed SELiRA contract types and their responsibilities. **SC-01** is a Semantic Information Contract; **SC-02 and SC-03** are proposed Engineering Validation Contracts; **CAC-01 and CAC-02** are proposed Consumer Acceptance Contracts. These definitions do not imply complete implementation or end-to-end enforcement.
+
+| ID | Type | Contract | Purpose |
+| --- | --- | --- | --- |
+| SC-01 | Semantic Information | Asset-to-Product Reference Consistency | Ensures a unique product reference. |
+| SC-02 | Engineering Validation | Engineering-to-Signal Meaning Consistency | Checks property meaning, equipment identity, units, and configuration. |
+| SC-03 | Engineering Validation | Configuration and Revision Applicability | Checks whether engineering evidence applies to the requested configuration and revision. |
+| CAC-01 | Consumer Acceptance | Operational Evidence Fitness | Checks whether measurements satisfy an operational analysis task. |
+| CAC-02 | Consumer Acceptance | Engineering Restriction Fitness | Checks whether an engineering restriction is suitable for a SAFSL-style specification task. |
+
+**Scope note:** SC-02 and SC-03 are proposed names in this overview and are not asserted to replace the existing SC-02–SC-06 specifications without reconciliation. CAC acceptance requires qualified engineering evidence and does not override failed or unresolved validation.
+
+## TEP NEXUS simulation information contracts (separate reference)
+
 
 The following **TEP-specific simulation information contracts** describe information exposed or recorded by the reference simulator. They are compact architectural representations, **not** Engineering Validation Contracts (SCs) or Consumer Acceptance Contracts (CACs). Their generic, TEP-independent counterparts remain to be derived. Tuple fields and constraints are not necessarily implemented or independently verified by `TEPAdapter`.
 
