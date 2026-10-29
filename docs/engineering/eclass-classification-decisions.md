@@ -54,17 +54,3 @@
 | Semantic assurance | A classification or reference in AAS is a declaration, not independent SELiRA validation, verified product fitness, or installed-hardware evidence. |
 | Implementation reconciliation | Compare this historical register with current `examples/aas/product_catalog_instance.json` and `examples/aas/asset_inventory_instance.json`; check supplier/manufacturer identifiers, DEXPI/ECAD references, signal/medium suitability, SHACL/RDF lifting, and classification coverage. |
 | Next review | Validate AAS templates, ECLASS class assignability, and asset-to-product references before publishing reconciled classifications as authoritative. |
-
-## Reviewed ECLASS alternatives not selected
-
-| Alternative | IRDI | Reason not selected |
-| --- | --- | --- |
-| Linear DC motor | `0173-1#01-ADJ119#015` | Linear rather than rotary motion |
-| Linear induction motor | `0173-1#01-ADJ117#015` | Linear rather than rotary motion |
-| Universal motor | `0173-1#01-AKE157#019` | Not selected industrial continuous-drive technology |
-| Electric motor (motor vehicle) | `0173-1#01-AFX525#006` | Incorrect application domain |
-| Motor (hydraulics, other) | `0173-1#01-AGU935#004` | Incorrect technology |
-| Submersible motor pump | `0173-1#01-AKL848#022` | Assumes submerged pump unit rather than standalone motor |
-| Compressor (positive type, rotating) | `0173-1#01-AAD586#013` | Compressor construction not substantiated |
-| Compressor (special execution) | `0173-1#01-AAD589#012` | Special execution not substantiated |
-| Compressor, ventilator, vacuum pump (other) | `0173-1#01-AKL925#012` | “Other” subtype not justified |
