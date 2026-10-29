@@ -73,6 +73,92 @@ Ollama must be running separately. This script is a GraphDB-grounded CLI, **not*
 
 Stop foreground services with `Ctrl+C`. Stop the sample database with `docker compose -f docker-compose.timeseries.yml down` (without `-v` to retain data). For connection issues, check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama), plus the configured database DSN. See [time-series troubleshooting](docs/opcua/TIMESERIES.md).
 
+## Recording a TEP run
+
+Install the recording dependencies:
+
+```bash
+pip install -r requirements-recording.txt
+```
+
+For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
+
+```powershell
+$env:PYTHONPATH="$PWD\src"
+```
+
+Record a one-hour Python-backend run:
+
+```bash
+python examples/record_tep_run.py --hours 1
+```
+
+Record every 10 native steps:
+
+```bash
+python examples/record_tep_run.py --hours 1 --interval 10
+```
+
+Inspect a run:
+
+```bash
+python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
+```
+
+Run the controlled experiment fixture:
+
+```bash
+python examples/run_experiment.py \
+  examples/experiments/reactor_cooling_bias_001.yaml \
+  examples/scenarios/reactor_sensor_bias.yaml \
+  --output data/runs
+```
+
+Run the five-seed replication benchmark:
+
+```powershell
+python examples/run_replication.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --seeds 42 43 44 45 46 `
+  --output data/runs `
+  --summary data/replications/reactor_cooling_bias.csv
+```
+
+Run the fault-magnitude sweep:
+
+```powershell
+python examples/run_fault_magnitude_sweep.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --magnitudes 1 5 10 `
+  --seeds 42 43 44 `
+  --output data/runs
+```
+
+Start the OPC UA server:
+
+```bash
+python examples/run_opcua_server.py
+```
+
+The default endpoint is `opc.tcp://0.0.0.0:4841/process-sim/`. The launcher supports configurable endpoint, seed, real-time factor, and update interval options.
+
+Each run is stored as:
+
+```text
+data/
+└── runs/
+    └── <run-id>/
+        ├── metadata.json
+        ├── observations.parquet
+        └── events.parquet
+```
+
+Parquet is the current portable intermediate format, not the final production historian architecture.
+
 ## SELiRA implementation and evaluation status (experimental)
 
 This branch introduces a **standalone, offline-testable correspondence qualification foundation** in `src/process_sim/selira/`. It does not replace existing `/api/semantic/asset-history` behavior, change the TEP simulator, or claim that GraphDB operational references are independently validated.
@@ -385,127 +471,6 @@ For an indefinite fault, the status remains `active` until the operator explicit
 
 The declarative scenario/experiment path remains the authoritative path for reproducible scientific benchmarks. OPC UA fault injection is the operator-facing operational path. Both paths feed the same fault-management and provenance model.
 
-## First controlled experiment
-
-Experiment `reactor_cooling_bias_001` was executed end-to-end and inspected successfully before the controller-path correction. It established the deterministic execution and temporal ground-truth layer:
-
-```text
-Run:              3972cf14-1e97-4259-a758-5d9f2ef6026c
-Scenario:         reactor_sensor_bias
-Seed:             42
-Simulated time:   0.0 → 2.0 h
-Native timestep:  1 s
-Variables:        53
-Observation rows: 381,653
-Event rows:       4
-```
-
-The recorded lifecycle was:
-
-```text
-0.0 h   SimulationStarted
-1.0 h   FaultActivated     XMEAS9
-1.5 h   FaultDeactivated   XMEAS9
-2.0 h   SimulationCompleted
-```
-
-This established reproducible experiment configuration, persisted ground truth, exact temporal fault boundaries, complete observation coverage, and run provenance. It did **not** establish closed-loop process propagation because the scheduled sensor fault was initially applied only to the recorded measurement path.
-
-## Closed-loop fault propagation benchmark
-
-The controller path was subsequently corrected so scheduled sensor faults are injected into the native TEP controller measurement input before controller calculations, while the same fault remains visible in recorded observations.
-
-The relevant control relationship is:
-
-```text
-XMEAS9 reactor-temperature measurement
-        │
-        ▼
-Controller 18
-        │
-        ▼
-reactor-temperature cascade setpoint
-        │
-        ▼
-Controller 10
-        │
-        ▼
-XMV10 reactor cooling-water flow
-        │
-        ▼
-TEP process dynamics
-        │
-        ▼
-XMEAS21 reactor cooling-water outlet temperature
-```
-
-A paired fault-versus-baseline experiment then showed substantial deviations in `XMV10` and `XMEAS21` during the fault window and persistent post-fault response. Across five independent seeds (42–46), the observed response was highly repeatable.
-
-Representative five-seed ranges:
-
-| Variable | Fault RMSE | Fault peak absolute deviation | Post RMSE |
-|---|---:|---:|---:|
-| XMEAS9 | 1.324–1.335 | 5.000 | 2.826–2.845 |
-| XMV10 | 21.617–22.101 | 58.987–60.381 | 21.673–22.637 |
-| XMEAS21 | 4.840–4.917 | 10.471–10.641 | 4.236–4.404 |
-
-These results support the reproducibility of the **observed closed-loop response** across seeds. They are empirical benchmark evidence, not a formal causal proof.
-
-## Fault-magnitude sweep
-
-A three-magnitude × three-seed paired benchmark was also executed for sensor-bias magnitudes of `1`, `5`, and `10`.
-
-Selected aggregate results:
-
-| Magnitude | Variable | Fault RMSE mean | Fault IAE mean | Fault ISE mean | Post RMSE mean |
-|---:|---|---:|---:|---:|---:|
-| 1 | XMEAS9 | 0.324 | 0.119 | 0.052 | 0.400 |
-| 1 | XMV10 | 9.320 | 3.420 | 43.435 | 11.478 |
-| 1 | XMEAS21 | 1.837 | 0.701 | 1.687 | 2.131 |
-| 5 | XMEAS9 | 1.328 | 0.491 | 0.878 | 2.837 |
-| 5 | XMV10 | 21.873 | 9.600 | 239.139 | 22.120 |
-| 5 | XMEAS21 | 4.881 | 2.037 | 11.910 | 4.315 |
-| 10 | XMEAS9 | 3.335 | 1.290 | 5.546 | 12.073 |
-| 10 | XMV10 | 28.946 | 12.854 | 418.897 | 41.059 |
-| 10 | XMEAS21 | 7.149 | 2.798 | 25.552 | 0.607 |
-
-The sweep demonstrates a reproducible magnitude-dependent response, but the response is not simply linear. In particular, `XMV10` error increases strongly while its maximum deviation appears bounded at the larger fault magnitudes. This behavior is now a specific research question rather than an assumption.
-
-Issue #2 tracks the formal characterization of this response relationship, including scaling, nonlinearity/saturation, and post-fault recovery.
-
-## Four architectural pillars
-
-1. **Digital Twin & Simulation** — Phases 1–4
-2. **Data & Temporal Infrastructure** — Phase 5
-3. **Semantic Digital Thread** — Phases 6–7
-4. **Industrial Intelligence** — Phases 8–10
-
-```text
-                INDUSTRIAL AI
-                     │
-             ┌───────┴────────┐
-             │ 4. Intelligence│
-             │ GraphRAG / AI  │
-             └───────┬────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 3. Semantic         │
-          │ Digital Thread      │
-          │ AAS / eCl@ss / QUDT │
-          │ DEXPI / ECAD / BOM  │
-          └──────────┬──────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 2. Temporal Data    │
-          │ TSDB + Events + TKG │
-          └──────────┬──────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 1. Digital Twin     │
-          │ TEP / Faults / OPCUA│
-          └─────────────────────┘
-```
-
 ## Research foundation
 
 The semantic-modeling strategy is grounded in the author's ONTO:NEXUS workshop paper, part of MODELS 2026:
@@ -726,159 +691,9 @@ Run
 
 Experiment metadata and declared ground truth are persisted under the run metadata for reproducibility.
 
-## Recording a TEP run
+## Research evaluation
 
-Install the recording dependencies:
-
-```bash
-pip install -r requirements-recording.txt
-```
-
-For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
-
-```powershell
-$env:PYTHONPATH="$PWD\src"
-```
-
-Record a one-hour Python-backend run:
-
-```bash
-python examples/record_tep_run.py --hours 1
-```
-
-Record every 10 native steps:
-
-```bash
-python examples/record_tep_run.py --hours 1 --interval 10
-```
-
-Inspect a run:
-
-```bash
-python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
-```
-
-Run the controlled experiment fixture:
-
-```bash
-python examples/run_experiment.py \
-  examples/experiments/reactor_cooling_bias_001.yaml \
-  examples/scenarios/reactor_sensor_bias.yaml \
-  --output data/runs
-```
-
-Run the five-seed replication benchmark:
-
-```powershell
-python examples/run_replication.py `
-  examples/experiments/reactor_cooling_bias_001.yaml `
-  examples/scenarios/reactor_sensor_bias.yaml `
-  examples/scenarios/reactor_no_fault.yaml `
-  --seeds 42 43 44 45 46 `
-  --output data/runs `
-  --summary data/replications/reactor_cooling_bias.csv
-```
-
-Run the fault-magnitude sweep:
-
-```powershell
-python examples/run_fault_magnitude_sweep.py `
-  examples/experiments/reactor_cooling_bias_001.yaml `
-  examples/scenarios/reactor_sensor_bias.yaml `
-  examples/scenarios/reactor_no_fault.yaml `
-  --magnitudes 1 5 10 `
-  --seeds 42 43 44 `
-  --output data/runs
-```
-
-Start the OPC UA server:
-
-```bash
-python examples/run_opcua_server.py
-```
-
-The default endpoint is `opc.tcp://0.0.0.0:4841/process-sim/`. The launcher supports configurable endpoint, seed, real-time factor, and update interval options.
-
-Each run is stored as:
-
-```text
-data/
-└── runs/
-    └── <run-id>/
-        ├── metadata.json
-        ├── observations.parquet
-        └── events.parquet
-```
-
-Parquet is the current portable intermediate format, not the final production historian architecture.
-
-## Research evaluation strategy — evidence-grounded industrial AI
-
-**Status (25 October 2026): evaluation protocol proposed; systematic benchmark results are not yet available.** This plan supports the research direction *Towards Evidence-Grounded AI in Industrial Automation: A Semantic Reference Architecture*. The architecture is intended to be reusable across industrial automation systems; **TEP NEXUS is the initial reference implementation**, not evidence of general portability. The evaluation follows a two-level principle inspired by the component-level and end-to-end evaluation design of *Req2Road* (CAiSE 2026, [arXiv:2602.15591](https://arxiv.org/abs/2602.15591)); its experiments and outcomes are not claimed to be equivalent.
-
-### Evaluation questions
-
-- **RQ1 — Semantic identity:** Can AssetInventory assets be resolved to the correct, unambiguous operational signals and historical observations?
-- **RQ2 — Evidence traceability:** Can each supported engineering statement be traced to the right asset, simulation run, observations, timestamps, and data source?
-- **RQ3 — Claim reliability:** Do independent numerical/temporal checks and evidence-bounded responses reduce unsupported statements and improve appropriate abstention compared with less-constrained baselines?
-- **RQ4 — Portability (future):** Which architectural contracts can be reused in a second automation environment without TEP-specific assumptions?
-
-### Component-level experiments
-
-| ID | Experiment | Procedure and ground truth | Primary measures |
-|---|---|---|---|
-| **E1** | Semantic asset-to-signal resolution | Audit the 41 XMEAS and 12 XMV signal identities against explicit AssetInventory operational references; manually adjudicate ambiguous or missing links. Do not assume full mapping coverage. | Mapping coverage, precision/recall on adjudicated cases, false-link and ambiguity-detection rates |
-| **E2** | Run-specific evidence retrieval and provenance | Query multiple recorded runs; compare returned observations, run IDs, ordering, values, and timestamps against independent historian queries and recorded manifests. Include nonexistent runs and missing data. | Evidence retrieval accuracy, run/time consistency, attribution accuracy, missing-evidence handling |
-| **E3** | Numerical and temporal claim verification | Construct correct and deliberately corrupted statements about latest values, deltas, direction, timestamps, and run identity; test independent checks. | Detection precision/recall, false rejection rate, unsupported numerical/temporal claim rate |
-| **E4** | Evidence-grounded AI reliability | Evaluate the same question set across controlled baseline configurations, including answerable and unanswerable questions. Independently adjudicate semantic and causal assertions. | Answer correctness, claim faithfulness, appropriate abstention, false causal attribution, latency |
-
-**Fault-aware cases** may use seeded TEP disturbances and fault events to test retrieval of recorded fault context. An injected fault label does **not** by itself prove that a specific measurement change has a unique cause. Full root-cause analysis remains planned and must not be reported as an evaluated capability.
-
-### Baselines and ablations
-
-Use the same model version, question set, generation settings, and comparable evidence windows where applicable. Record exactly what each configuration receives:
-
-| Configuration | Input and mechanisms | Purpose |
-|---|---|---|
-| **B1 — Ungrounded LLM** | Question and general scenario description; no retrieved operational measurements | Measure unsupported answering without access to evidence; **not** a fair numerical-information baseline |
-| **B2 — Historical-evidence LLM** | Question plus historian observations with signal, run, and time context | Test whether supplying operational evidence is sufficient |
-| **B3 — Semantic-grounded LLM** | B2 plus explicit AAS/GraphDB asset resolution and provenance | Isolate the benefit of semantic binding and source attribution |
-| **B4 — Semantic grounding + verification** | B3 plus independent claim checks, rejection/repair policy, and evidence-bounded abstention | Test verification benefits and costs |
-
-For a controlled **verification ablation**, compare B3 and B4 on *identical retrieved evidence*. For a **semantic-resolution ablation**, evaluate cases where identity is genuinely ambiguous or mismatched; do not attribute gains to semantics when the baselines already receive the correct identity. Record deterministic responses separately from model-generated responses: a rule-based answer is **not** an LLM answer that passed verification.
-
-### End-to-end feasibility
-
-Demonstrate a reproducible engineering question through:
-
-```text
-Engineering question
-    -> AssetInventory identity / GraphDB operational reference
-    -> Run-specific TimescaleDB observations
-    -> Evidence package (source, identity, run, time, values)
-    -> Numerical / temporal verification
-    -> Evidence-bounded answer or explicit abstention
-```
-
-Capture the exact query, asset IRI, signal, run ID, source observations, expected result, produced answer, verification status, and latency. Report any stages not exercised live; an existing historical query path does not automatically establish continuous OPC UA-to-historian-to-graph synchronization. No MES or standalone ERP integration is currently demonstrated.
-
-### Benchmark design and reproducibility
-
-- **Initial target, not a result:** audit up to 53 operational signals; collect 5–10 reproducible runs and approximately 30–50 manually reviewed engineering scenarios as a feasibility benchmark. Expand to 150–250 questions and repeated LLM trials if resources permit.
-- Include factual retrieval, trend/delta, run-specific, missing-evidence, ambiguous-mapping, unsupported-causality, and (if implemented) fault-context questions.
-- Create ground-truth records independently of model output using historian queries, graph assertions, controlled simulation manifests, and human review for ambiguous or causal cases.
-- Pin code commit, graph snapshot, database snapshot/run IDs, model identifier/version, prompts, seeds where supported, temperature, hardware, and timeouts. Preserve per-question inputs, outputs, decisions, and timings.
-- Report per-category denominators, failure examples, uncertainty intervals where justified, and threats to validity. Do not generalize from a single process, model, or corrected answer to all industrial systems.
-
-### Current evidence and limits
-
-- A previously recorded TEP run contains **145,856 signal samples**, covering **53 signals** and **2,752 timestamps**; selected asset-history values were compared with the historian.
-- In one XMEAS6 historical question, an Ollama response incorrectly characterized a decrease as unchanged. A subsequent **deterministic** response correctly computed the delta and declined unsupported causal attribution. This demonstrates a specific failure and mitigation, **not** a measured overall reliability improvement.
-- A valid asset with a nonexistent run produced a `NO_EVIDENCE` result. More negative cases and an automated regression suite are required.
-- The current historical Q&A CLI uses TEP-specific signal validation; reuse outside TEP is a design objective, not yet an evaluated property.
-- Numerical token screening is not full semantic verification. The present causal-question path bypasses the LLM and should be analyzed as a distinct deterministic response policy.
-
-**Minimum publishable evaluation package:** E1–E4 with independently established ground truth, B2/B3/B4 comparisons, at least one complete traceable workflow, negative cases, reproducible artifacts, and an explicit limitations discussion. The evaluation plan does not predetermine positive results.
+The proposed evidence-grounded AI evaluation protocol, baselines, and evidence limitations are documented in [Research evaluation strategy](docs/research/evaluation-strategy.md). Systematic benchmark results are not yet available.
 
 ## Roadmap — Remaining Work
 
