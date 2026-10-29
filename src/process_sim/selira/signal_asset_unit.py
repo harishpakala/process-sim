@@ -46,7 +46,7 @@ def assess_xmeas7_pressure(
     catalog: Mapping[str, Any],
     *,
     signal: str = "XMEAS7",
-    instrument: str = "PI_101",
+    instrument: str = "PI-1101",
     product: str = "EandH_PMP51B_Candidate",
     instrument_correspondence_verified: bool = False,
     product_configuration_verified: bool = False,
@@ -59,11 +59,11 @@ def assess_xmeas7_pressure(
     """
     unknown = validate_units(None, None)
     if (signal, instrument, product) != (
-        "XMEAS7", "PI_101", "EandH_PMP51B_Candidate"
+        "XMEAS7", "PI-1101", "EandH_PMP51B_Candidate"
     ):
         return SignalAssetUnitAssessment(
             CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,
-            "Only the reviewed XMEAS7 / PI_101 / PMP51B candidate is supported",
+            "Only the reviewed XMEAS7 / PI-1101 / PMP51B candidate is supported",
         )
     if MEASUREMENT_NAMES.get(7) != "reactor_pressure" or MEASUREMENT_UNITS.get(7) != "kPa gauge":
         return SignalAssetUnitAssessment(
