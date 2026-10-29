@@ -1970,6 +1970,30 @@
                   "idShort": "SelectionLimitation",
                   "valueType": "xs:string",
                   "value": "Simulation nominal vessel pressures only; configuration, process compatibility, ECLASS and installation unverified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-1 to 40 bar gauge"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/BAR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Pressure"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PressureReference",
+                  "valueType": "xs:string",
+                  "value": "Gauge"
                 }
               ]
             },
