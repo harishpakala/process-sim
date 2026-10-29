@@ -176,6 +176,19 @@ SELiRA provides an offline-testable correspondence qualification foundation in `
 
 **SC-01 — Semantic Information Contract: Asset-to-Product Reference Consistency.** Validates that each applicable `AssetInventory` asset's product reference resolves to exactly one authoritative `ProductCatalog` entry at the evaluated source revision (`|P_ν(a)| = 1`). Outcomes: **V** (one verified match), **F** (zero or multiple matches with complete evidence), **U** (incomplete, missing, or stale evidence), and **NA** (asset outside the contract scope). Relevant source changes require reassessment. This identifier-consistency check does **not** establish product suitability or consumer authorization.
 
+### Proposed additional SELiRA contracts (not yet verified end-to-end)
+
+The following compact definitions are **proposed** evaluation obligations. They do not imply that authoritative evidence, live integration, or production enforcement is implemented. All use **V** (validated), **F** (invalid), **U** (insufficient, incomplete, or stale evidence), and **NA** (demonstrably outside scope). Relevant source, configuration, or policy changes require reassessment.
+
+| ID | Type | Contract | Compact definition |
+| --- | --- | --- | --- |
+| **SC-02** | Engineering Validation Contract | Engineering-to-Signal Meaning Consistency | Validates that a mapped operational signal measures the intended engineering property on the correct equipment, with compatible physical meaning and units under the applicable configuration. **V:** all checks evidenced; **F:** authoritative contradiction; **U:** evidence insufficient; **NA:** mapping outside scope. |
+| **SC-03** | Engineering Validation Contract | Configuration and Revision Applicability | Validates that a correspondence and its supporting engineering evidence apply to the requested configuration and source revisions. **V:** applicability and currency evidenced; **F:** proven mismatch; **U:** applicability or revision unknown; **NA:** outside scope. |
+| **CAC-01** | Consumer Acceptance Contract | Operational Evidence Fitness | Accepts an otherwise validated engineering-to-signal correspondence for operational analysis only when the requested run/time interval, units, provenance, and measurement coverage satisfy the consumer's task requirements. **V:** requirements met; **F:** known requirement violated; **U:** evidence incomplete; **NA:** task outside scope. |
+| **CAC-02** | Consumer Acceptance Contract | Engineering Restriction Fitness | Accepts an otherwise validated engineering restriction for a SAFSL-style specification task only when its approval, target property, units, and configuration satisfy the consumer's requirements. **V:** requirements met; **F:** known mismatch; **U:** approval or context unknown; **NA:** task outside scope. |
+
+**Boundary:** SC-02 and SC-03 concern source-side engineering validity. CAC-01 and CAC-02 concern task-specific fitness for use and cannot override failed, pending, or ambiguous source qualification. These identifiers and definitions are documentation proposals, not claims about the existing SC-02–SC-06 implementation specifications.
+
 **Tests:** The latest reported local run passed **42/42 SELiRA tests**; another **10 semantic regression tests** passed in separate runs. These are user-reported local results, not independently verified CI or live integration results.
 
 **Limitations:** Independent evidence authenticity, configuration applicability, live GraphDB/TimescaleDB integration, and production API enforcement remain incomplete or unverified. Existing `/api/semantic/asset-history` behavior is unchanged.
