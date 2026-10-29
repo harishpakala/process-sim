@@ -28,8 +28,4 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run dependency-free formal tests
         run: |
-          python -m unittest -v \
-            tests.test_selira_contract_composition \
-            tests.test_selira_contract_dependency \
-            tests.test_selira_state_machine \
-            tests.test_selira_sc01_f6_integration
+          python -m unittest discover -s tests -p 'test_selira_*.py' -v
