@@ -56,3 +56,23 @@ def test_nonfinite_values_rejected():
     result = validate_units(QUDT_UNIT + "PA", QUDT_UNIT + "PA")
     with pytest.raises(ValueError):
         convert_value("NaN", result)
+
+
+def test_flow_mass_unit_identity():
+    result = validate_units(QUDT_UNIT + "KiloGM-PER-HR", QUDT_UNIT + "KiloGM-PER-HR",
+                            expected_quantity_kind=QUDT_QUANTITY_KIND + "MassFlowRate")
+    assert result.status == UnitStatus.COMPATIBLE
+    assert convert_value("3750", result) == Decimal("3750")
+
+
+def test_flow_volume_unit_identity():
+    result = validate_units(QUDT_UNIT + "M3-PER-HR", QUDT_UNIT + "M3-PER-HR",
+                            expected_quantity_kind=QUDT_QUANTITY_KIND + "VolumeFlowRate")
+    assert result.status == UnitStatus.COMPATIBLE
+
+
+def test_mass_to_volume_flow_fails_closed_without_density():
+    result = validate_units(QUDT_UNIT + "KiloGM-PER-HR", QUDT_UNIT + "M3-PER-HR")
+    assert result.status == UnitStatus.INCOMPATIBLE
+    with pytest.raises(ValueError):
+        convert_value("100", result)
