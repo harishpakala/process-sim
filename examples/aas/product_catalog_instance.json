@@ -1468,6 +1468,30 @@
                   "idShort": "LevelScalingStatus",
                   "valueType": "xs:string",
                   "value": "UNVERIFIED: TEP percent level to radar distance conversion requires vessel calibration"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliM"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
                 }
               ]
             },
