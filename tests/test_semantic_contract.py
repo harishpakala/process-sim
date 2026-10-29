@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 import unittest
 
-from rdflib import RDF, URIRef, Literal
+from rdflib import RDF, URIRef, Literal, XSD
 import aas_core3_1.jsonization as aas_jsonization
 
 from semantic.instance_lifting import build_instance_graph
@@ -25,9 +25,9 @@ class SemanticContractTests(unittest.TestCase):
         technical = compute_uri(model.id, "Products.Schneider_A9MEM3555.TechnicalProperties")
         self.assertIn((product, ns["hasTechnicalProperties"], technical), graph)
         self.assertIn((technical, RDF.type, semanticDict["AAS"]["SMC"]), graph)
-        self.assertIn((product, ns["hasManufacturerPartNumber"], Literal("A9MEM3555")), graph)
-        self.assertIn((technical, ns["hasCurrentSensorType"], Literal("Rogowski coil")), graph)
-        self.assertNotIn((product, ns["hasCurrentSensorType"], Literal("Rogowski coil")), graph)
+        self.assertIn((product, ns["hasManufacturerPartNumber"], Literal("A9MEM3555", datatype=XSD.string)), graph)
+        self.assertIn((technical, ns["hasCurrentSensorType"], Literal("Rogowski coil", datatype=XSD.string)), graph)
+        self.assertNotIn((product, ns["hasCurrentSensorType"], Literal("Rogowski coil", datatype=XSD.string)), graph)
 
     def test_ecad_instance_is_liftable(self):
         source = json.loads((ROOT / "examples/aas/tep_ecad_instance.json").read_text(encoding="utf-8"))
