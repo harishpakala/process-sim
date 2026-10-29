@@ -4,14 +4,14 @@ on:
   pull_request:
     paths:
       - 'src/process_sim/selira/**'
-      - 'tests/test_selira_resolution.py'
+      - 'tests/test_selira_*.py'
       - '.github/workflows/selira-tests.yml'
   push:
     branches:
       - feature/selira-correspondence-resolution
     paths:
       - 'src/process_sim/selira/**'
-      - 'tests/test_selira_resolution.py'
+      - 'tests/test_selira_*.py'
       - '.github/workflows/selira-tests.yml'
 
 jobs:
@@ -26,4 +26,4 @@ jobs:
       - name: Run isolated SELiRA tests
         env:
           PYTHONPATH: src
-        run: python -m unittest discover -s tests -p 'test_selira_resolution.py' -v
+        run: python -m unittest discover -s tests -p 'test_selira_*.py' -v
