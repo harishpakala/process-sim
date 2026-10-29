@@ -42,6 +42,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **GraphDB named-graph evidence inspection (new, tests pending):** `src/process_sim/selira/graph_evidence.py` queries existing `hasOperationalReference` assertions with named-graph IDs and compares their signals against Evidence Validator v1. Seven offline tests in `tests/test_selira_graph_evidence.py` cover matching, absent, competing, malformed and contradictory evidence plus the mocked GraphDB response. **42 SELiRA tests expected, not yet confirmed.** A matching assertion is `supported_graph_and_project_scope`, not an independently authenticated `validated` correspondence. No change to production web UI or historical-data endpoint. Live GraphDB query has not been executed.
 
+**GraphDB evidence test verification (2026-10-29):** User-reported Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **42/42 SELiRA tests**, including seven GraphDB named-graph evidence tests. Together with previously reported 10/10 semantic regression tests, **52 tests passed locally in separate runs**. GraphDB evidence tests use mocks; no live GraphDB evidence query or authenticated provenance verification has yet been demonstrated.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
