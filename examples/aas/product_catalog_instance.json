@@ -80,6 +80,66 @@
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
                   "value": "https://www.se.com/de/de/product/A9MEM3555/"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActiveEnergy"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActivePower"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/V"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Voltage"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/HZ"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Frequency"
                 }
               ]
             },
@@ -258,6 +318,18 @@
                   "idShort": "MaterialNote",
                   "valueType": "xs:string",
                   "value": "Supplier heading states SS/SS, while detailed housing material states cast steel GS-C25; verify exact material specification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliA"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
                 }
               ]
             },
@@ -488,6 +560,30 @@
                   "idShort": "SpecificationSourceURL",
                   "valueType": "xs:string",
                   "value": "https://www.ifm.com/de/de/product/TA1101"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-50 to 200 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FactoryConfiguredRange",
+                  "valueType": "xs:string",
+                  "value": "-10 to 150 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/DEG_C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Temperature"
                 }
               ]
             },
@@ -1444,6 +1540,30 @@
                   "idShort": "LevelScalingStatus",
                   "valueType": "xs:string",
                   "value": "UNVERIFIED: TEP percent level to radar distance conversion requires vessel calibration"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliM"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
                 }
               ]
             },
@@ -1559,6 +1679,18 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
                 }
               ]
             },
@@ -1674,6 +1806,18 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
                 }
               ]
             },
@@ -1789,6 +1933,18 @@
                   "idShort": "ApplicationQualification",
                   "valueType": "xs:string",
                   "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M3-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/VolumeFlowRate"
                 }
               ]
             },
@@ -1910,6 +2066,30 @@
                   "idShort": "SelectionLimitation",
                   "valueType": "xs:string",
                   "value": "Simulation nominal vessel pressures only; configuration, process compatibility, ECLASS and installation unverified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-1 to 40 bar gauge"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/BAR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Pressure"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PressureReference",
+                  "valueType": "xs:string",
+                  "value": "Gauge"
                 }
               ]
             },

@@ -1,0 +1,9 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix selira: <https://example.org/selira/> .
+# Proposed SELiRA evidence vocabulary; not yet mapped to source RDF.
+# This shape is only a readiness-gated prototype; not an engineering certification.
+selira:SC02 a sh:NodeShape ; sh:targetSubjectsOf selira:quantityKind ;
+ sh:sparql [ sh:message "Missing verified physical quantity compatibility evidence." ; sh:select """
+ PREFIX selira: <https://example.org/selira/>
+ SELECT $this WHERE { $this selira:quantityKind ?value . FILTER NOT EXISTS { $this selira:verifiedCompatibleQuantityKind true . } }
+ """ ] .

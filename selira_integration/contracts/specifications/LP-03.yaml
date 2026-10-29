@@ -1,0 +1,6 @@
+id: LP-03
+name: Change Impact Assessment
+type: lifecycle_policy
+status: prototype
+implementation: Python orchestration plus SPARQL and audit records
+notes: "SHACL alone does not perform change detection, scheduling or history management."

@@ -1,3 +1,51 @@
+## SELiRA implementation and evaluation status (experimental)
+
+This branch introduces a **standalone, offline-testable correspondence qualification foundation** in `src/process_sim/selira/`. It does not replace existing `/api/semantic/asset-history` behavior, change the TEP simulator, or claim that GraphDB operational references are independently validated.
+
+| Capability | Status | Evidence |
+| --- | --- | --- |
+| Legacy operational-reference recognition | Existing implementation | `src/process_sim/api/asset_history.py`; `mapped` means one recognized signal, **not** semantic validation |
+| Candidate-level qualification and response-level resolution | Implemented on this branch | `selira/contracts.py`, `selira/resolution.py` |
+| Explicit reviewed declaration and nonempty evidence reference requirement | Implemented as **structural checks only** | `selira/resolution.py`; evidence authenticity is **not** independently verified |
+| Fail-closed authoritative-use policy | Implemented as reusable function, **not wired into production endpoints** | `selira/consumer_policy.py` |
+| Applicability evaluation against engineering configuration | Planned | The branch accepts declared `applicable`/`inapplicable`/`unknown` status; it does not calculate it |
+| GraphDB integration, independent evidence verification, service endpoints | Planned | No new deployed endpoint on this branch |
+| Reproducible end-to-end and quantitative evaluation | Not yet performed | Offline unit tests added, execution/CI status must be checked separately |
+
+**Offline tests** (with project installed in editable mode or `PYTHONPATH=src`):
+
+```bash
+PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.py' -v
+```
+
+**Semantics:** An extracted `XMEAS`/`XMV` identifier is a candidate, not a validated correspondence. A unique candidate without a reviewed declaration remains unresolved. A validated declaration requires an evidence reference and declared applicability, but these fields are **assertions**, not independent proof. Conflicting declarations fail closed; competing unresolved signals produce ambiguity. The consumer-policy function permits authoritative use only for an unambiguously selected, validated, applicable candidate with evidence references.
+
+**Regression note (2026-10-29):** Local user execution reported 8/9 passing, with `test_rejected_candidate_does_not_block_validated_candidate` failing. The resolver and consumer policy were corrected to exclude explicitly rejected alternatives from selection and authorization. Two regression tests were added (11 tests total). The user subsequently reported **11/11 tests passing locally** (0.004 s, Python unittest on Windows). This is user-reported local execution, not independently verified CI or end-to-end integration.
+
+**Semantic regression verification (2026-10-29):** User-reported local Windows PowerShell runs passed: `test_ai_property_alignment.py` (4/4), `test_ai_cross_domain_trace.py` (3/3), and `test_ai_semantic_temporal_workflow.py` (3/3). Together with the 11/11 SELiRA tests, **21/21 tests passed locally across four independently invoked suites**. This is not an independently observed CI result, full-repository regression run, or integration test.
+
+**GraphDB candidate adapter (experimental):** `src/process_sim/selira/graphdb.py` reads bounded `hasOperationalReference` candidates from the configured SPARQL endpoint and passes them to the fail-closed resolver. `tests/test_selira_graphdb.py` adds six mocked-network tests. These tests are **not yet reported as executed**, and no live GraphDB connection or independent engineering-evidence validation has been demonstrated. GraphDB reference retrieval alone never constitutes a validated correspondence. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` to test both SELiRA modules.
+
+**GraphDB adapter test verification (2026-10-29):** User-reported Windows PowerShell output confirms `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **17/17 tests** (11 resolver/policy, six mocked GraphDB adapter). Combined with the previously reported 10/10 semantic regression tests, **27/27 tests passed locally** across five suites. The GraphDB adapter tests are mocked; live GraphDB connectivity and evidence authenticity remain unverified.
+
+**Experimental consumer enforcement:** `src/process_sim/selira/guarded_history.py` adds `guarded_asset_history`, which resolves GraphDB correspondence candidates and calls TimescaleDB sample retrieval **only after** `authorize_use` succeeds. Six new offline integration-style tests in `tests/test_selira_guarded_history.py` cover accepted, unverified, ambiguous, inapplicable, rejected-alternative, and invalid-limit paths. **New tests have not yet been run**; the 17 previously reported SELiRA tests remain the last confirmed SELiRA result. The legacy endpoint and web UI remain unchanged. Declared evidence and applicability are still not independently verified; no production authorization claim is made.
+
+**Guarded consumer test verification (2026-10-29):** User-reported Windows PowerShell run of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **23/23 tests** (11 resolution, six mocked GraphDB adapter, six mocked guarded consumer). Alongside the earlier 10/10 semantic regression tests, **33/33 local tests passed across six suites**. This is user-reported execution, not CI or live GraphDB/TimescaleDB end-to-end validation. The new guarded consumer is not yet wired into the existing web UI or production API.
+
+**Controlled baseline evaluation (experimental, not yet executed):** `src/process_sim/selira/evaluation.py` defines 18 deterministic synthetic scenarios across reactor, separator, and stripper pressure, comparing unique-identifier selection (legacy proxy) with SELiRA authorization. `tests/test_selira_evaluation.py` adds five tests. The oracle describes **authorization expected under synthetic review conditions**, not independently established physical truth; TEP metadata provides scenario names/units, while synthetic review assertions drive SELiRA. Therefore, this is a **policy sanity check**, not an empirical estimate of real-world accuracy or evidence authenticity. No comparative numbers should be reported as observed until tests execute. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` (28 SELiRA tests expected).
+
+**Synthetic comparison test verification (2026-10-29):** User-reported local Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **28/28 SELiRA tests** (11 resolution, six mocked GraphDB adapter, six guarded consumer, five comparison tests). Together with previously reported 10/10 semantic regression tests, **38/38 local tests passed across seven suites**. The 18 comparison scenarios are synthetic and declaration-driven; passing tests do **not** establish independently verified engineering ground truth, real-world improvement, or live end-to-end behavior.
+
+**Evidence Validator v1 (pending local execution):** `src/process_sim/selira/evidence_validator.py` checks three project-assigned pressure tags (`PI_101`, `PI_102`, `PI_103`) against the documented DEXPI/ECAD scope and TEP measurement metadata. Decisions are `supported_project_scope`, `rejected`, or `unresolved`; support is **not** promoted to the existing resolver's authoritative `validated` status. Identity, quantity-name and exact-unit checks are computed; applicability, immutable source version, live GraphDB and physical-device provenance remain unknown. Seven new tests in `tests/test_selira_evidence_validator.py` cover correct mappings, mismatches, unknown tag/version and invalid inputs. **35 SELiRA tests expected; seven new tests not yet confirmed.** This curated fixture is not an independent ground-truth corpus or source authenticity check.
+
+**Evidence Validator v1 local verification (2026-10-29):** User-reported `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **35/35 SELiRA tests**, including seven evidence-validator tests. Along with the previously reported ten semantic regression tests, **45 tests passed locally** (not a single fresh combined test invocation). These results do not establish live GraphDB integration, authenticated evidence provenance, configuration applicability, or independent physical ground truth.
+
+**GraphDB named-graph evidence inspection (new, tests pending):** `src/process_sim/selira/graph_evidence.py` queries existing `hasOperationalReference` assertions with named-graph IDs and compares their signals against Evidence Validator v1. Seven offline tests in `tests/test_selira_graph_evidence.py` cover matching, absent, competing, malformed and contradictory evidence plus the mocked GraphDB response. **42 SELiRA tests expected, not yet confirmed.** A matching assertion is `supported_graph_and_project_scope`, not an independently authenticated `validated` correspondence. No change to production web UI or historical-data endpoint. Live GraphDB query has not been executed.
+
+**GraphDB evidence test verification (2026-10-29):** User-reported Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **42/42 SELiRA tests**, including seven GraphDB named-graph evidence tests. Together with previously reported 10/10 semantic regression tests, **52 tests passed locally in separate runs**. GraphDB evidence tests use mocks; no live GraphDB evidence query or authenticated provenance verification has yet been demonstrated.
+
+**Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
+
 # process-sim
 
 **Author:** Harish Kumar Pakala

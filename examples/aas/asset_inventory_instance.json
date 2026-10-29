@@ -3263,6 +3263,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3351,6 +3357,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3439,6 +3451,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3527,6 +3545,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3615,6 +3639,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3703,6 +3733,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3791,6 +3827,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3879,6 +3921,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -3967,6 +4015,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4055,6 +4109,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4143,6 +4203,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4231,6 +4297,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4319,6 +4391,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4407,6 +4485,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4495,6 +4579,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4583,6 +4673,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4671,6 +4767,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4759,6 +4861,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {
@@ -4847,6 +4955,12 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductAssignmentStatus",
+              "valueType": "xs:string",
+              "value": "UNASSIGNED_SIMULATION_ONLY_REVIEW_REQUIRED"
             }
           ],
           "semanticId": {

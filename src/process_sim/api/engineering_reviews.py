@@ -9,6 +9,7 @@ import json
 import os
 import sqlite3
 import threading
+from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from uuid import uuid4
@@ -24,6 +25,7 @@ MEMBERSHIP_DECISIONS = {"VERIFIED_PHYSICAL_MEMBERSHIP", "REJECTED", "NEEDS_EVIDE
 def _registry():
     return {r["relationshipId"]: r for r in json.loads(REGISTRY.read_text(encoding="utf-8"))["relationships"]}
 
+@contextmanager
 def _connection():
     DATABASE.parent.mkdir(parents=True, exist_ok=True)
     db = sqlite3.connect(DATABASE, timeout=15)
@@ -45,7 +47,11 @@ def _connection():
     )""")
     db.execute("""CREATE TRIGGER IF NOT EXISTS prevent_review_update BEFORE UPDATE ON engineering_review_events BEGIN SELECT RAISE(ABORT, 'review events are append-only'); END""")
     db.execute("""CREATE TRIGGER IF NOT EXISTS prevent_review_delete BEFORE DELETE ON engineering_review_events BEGIN SELECT RAISE(ABORT, 'review events are append-only'); END""")
-    return db
+    try:
+        with db:
+            yield db
+    finally:
+        db.close()
 
 def _hash(payload):
     return hashlib.sha256(json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")).hexdigest()

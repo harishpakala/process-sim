@@ -1,0 +1,10 @@
+id: SC-03
+name: Unit Consistency
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "units have verified compatible dimensions and conversion conventions"
+dependencies: [asset_inventory, tep, qudt_registry]
+required_authority: "verified unit mappings including gauge versus absolute conventions"
+implementation: contracts/shapes/SC-03.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."

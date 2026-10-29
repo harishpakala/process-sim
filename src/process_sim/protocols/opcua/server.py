@@ -321,6 +321,14 @@ class OPCUAServer:
                 self.simulator.step()
             await self.update(True)
 
+    async def stop(self):
+        """Stop simulation and release the OPC UA server listener."""
+        await self.stop_simulation()
+        if self._server is not None:
+            server = self._server
+            self._server = None
+            await server.stop()
+
     async def run(self):
         await self.start()
         await self.start_simulation()
@@ -330,5 +338,4 @@ class OPCUAServer:
         except asyncio.CancelledError:
             pass
         finally:
-            await self.stop_simulation()
-            await self._server.stop()
+            await self.stop()
