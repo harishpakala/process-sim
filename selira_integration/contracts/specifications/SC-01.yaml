@@ -1,0 +1,10 @@
+id: SC-01
+name: Identity and Reference Integrity
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "assigned ProductReference resolves to exactly one catalog AssetIdentifier"
+dependencies: [asset_inventory, product_catalog]
+required_authority: "approved cross-template uniqueness requirement and complete catalog"
+implementation: contracts/shapes/SC-01.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."
