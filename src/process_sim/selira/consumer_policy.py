@@ -10,8 +10,12 @@ def authorize_use(result: ResolutionResult) -> bool:
         return False
     if not result.candidates:
         return False
-    return all(candidate.signal == result.selected_signal
-               and candidate.validation_status == "validated"
-               and candidate.applicability_status == "applicable"
-               and bool(candidate.evidence_references)
-               for candidate in result.candidates)
+    active = [candidate for candidate in result.candidates
+              if candidate.validation_status != "rejected"]
+    return bool(active) and all(
+        candidate.signal == result.selected_signal
+        and candidate.validation_status == "validated"
+        and candidate.applicability_status == "applicable"
+        and bool(candidate.evidence_references)
+        for candidate in active
+    )
