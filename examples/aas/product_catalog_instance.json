@@ -1571,12 +1571,6 @@
                   "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
                   "valueType": "xs:string",
                   "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
-                  "valueType": "xs:string",
-                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
@@ -1704,12 +1698,6 @@
                   "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
                   "valueType": "xs:string",
                   "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
-                  "valueType": "xs:string",
-                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
@@ -1837,12 +1825,6 @@
                   "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
                   "valueType": "xs:string",
                   "value": "http://qudt.org/vocab/quantitykind/VolumeFlowRate"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "FamilyMeasuringRangeUnitMappingStatus",
-                  "valueType": "xs:string",
-                  "value": "UNIT_FROM_CATALOG_RANGE_ONLY; configuration and TEP signal correspondence not verified"
                 }
               ]
             },
