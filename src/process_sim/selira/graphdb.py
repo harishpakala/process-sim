@@ -15,7 +15,7 @@ from .resolution import resolve_correspondence
 
 ASSET_NS = "https://example.org/assetinventory/"
 DEFAULT_ENDPOINT = "http://localhost:7200/repositories/AAS"
-_IRI = re.compile(r"https?://[A-Za-z0-9._~:/?#@!$&()*+,;=%-]{1,2048}\\Z")
+_IRI = re.compile(r"https?://[A-Za-z0-9._~:/?#@!$&()*+,;=%-]{1,2048}\Z")
 
 
 def fetch_operational_references(asset_iri: str, *, endpoint: str | None = None) -> list[str]:
