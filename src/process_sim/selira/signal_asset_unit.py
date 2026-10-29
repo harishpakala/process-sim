@@ -45,6 +45,7 @@ def _property(elements: list[dict[str, Any]], name: str) -> str | None:
 def assess_xmeas7_pressure(
     catalog: Mapping[str, Any],
     *,
+    inventory: Mapping[str, Any] | None = None,
     signal: str = "XMEAS7",
     instrument: str = "PI-1101",
     product: str = "EandH_PMP51B_Candidate",
@@ -54,7 +55,7 @@ def assess_xmeas7_pressure(
 ) -> SignalAssetUnitAssessment:
     """Assess the reviewed reactor-pressure candidate, failing closed.
 
-    Boolean evidence flags must be supplied by an independent engineering
+    When inventory is provided, verify the existing OperationalReference,\n    EquipmentTag and ProductReference join rather than inventing a mapping.\n    Boolean evidence flags must be supplied by an independent engineering
     verification process, never inferred from catalog metadata.
     """
     unknown = validate_units(None, None)
@@ -65,6 +66,29 @@ def assess_xmeas7_pressure(
             CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,
             "Only the reviewed XMEAS7 / PI-1101 / PMP51B candidate is supported",
         )
+    if inventory is not None:
+        assets = next(
+            (x.get("value", []) for x in inventory.get("submodelElements", [])
+             if x.get("idShort") == "Assets"), []
+        )
+        matches = [
+            a for a in assets
+            if _property(a.get("value", []), "OperationalReference") == signal
+        ]
+        if len(matches) != 1:
+            return SignalAssetUnitAssessment(
+                CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,
+                "Inventory must contain exactly one matching operational signal",
+            )
+        fields = matches[0].get("value", [])
+        catalog_reference = "https://example.org/product-types/" + product
+        if (_property(fields, "EquipmentTag") != instrument
+                or _property(fields, "ProductReference") != catalog_reference
+                or _property(fields, "AssetType") != "LogicalMeasurement"):
+            return SignalAssetUnitAssessment(
+                CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,
+                "Inventory instrument, product reference, or asset type disagrees",
+            )
     if MEASUREMENT_NAMES.get(7) != "reactor_pressure" or MEASUREMENT_UNITS.get(7) != "kPa gauge":
         return SignalAssetUnitAssessment(
             CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,
