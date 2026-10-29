@@ -1,10 +1,8 @@
-# TEP NEXUS — ECLASS classification decisions (historical working register)
+# TEP NEXUS — ECLASS classification decision register
 
-> **Status:** Archived from the project README during documentation cleanup. This is a historical engineering decision register, **not** a live ProductCatalog export or evidence that the listed classifications are currently implemented, verified, or physically installed. Reconcile entries with `examples/aas/product_catalog_instance.json` and `examples/aas/asset_inventory_instance.json` before relying on them.
+**Status:** Historical engineering selections (October 2026), **not** proof of current ProductCatalog implementation, ECLASS release verification, or physical installation. The Tennessee Eastman simulation does not specify commercial equipment.
 
-## TEP NEXUS — ECLASS equipment classification reference (October 2026)
-
-This is the **working classification register** for physical equipment in the Tennessee Eastman Process (TEP) semantic digital twin. The ECLASS names and IRDIs below were supplied from ECLASS lookup during engineering review. They describe **physical product/asset types**, not XMEAS measurements or XMV manipulated-variable identifiers. These selections are design decisions for TEP NEXUS, **not claims that the original TEP simulation specifies particular commercial hardware**.
+## Equipment classification decisions
 
 | Physical equipment / asset | ECLASS class | Preferred name | ECLASS class IRDI | Decision / qualification |
 |---|---|---|---|---|
@@ -21,9 +19,7 @@ This is the **working classification register** for physical equipment in the Te
 | Separately modeled pump, compressor, and agitator drive motors | 27-02-24 | Synchronous motor | `0173-1#01-AKE158#012` | Selected as an explicit motor-technology assumption |
 | Recycle gas compressor | 36-43 | Compressor, ventilator, vacuum pump | `0173-1#01-AAD585#011` | Selected broad parent class; verify product-class assignability in the ECLASS version in use |
 
-### ProductCatalog — selected commercial products (engineering decision, October 2026)
-
-The following **seven existing commercial product entries** are present in the TEP NEXUS ProductCatalog. ECLASS class names and IRDIs were supplied during engineering review; the classifications are documented here **before** changes to the AAS JSON, ECAD references, or AssetInventory. These are representative commercial products, not hardware specified by the original Tennessee Eastman benchmark.
+## Representative product selections
 
 | Manufacturer | Selected product / function | ECLASS class | Preferred name | ECLASS class IRDI | Qualification |
 |---|---|---|---|---|---|
@@ -35,35 +31,40 @@ The following **seven existing commercial product entries** are present in the T
 | Phoenix Contact | **2938581** / QUINT-PS-100-240AC/24DC/5 — industrial power supply | 27-04-07-04 | AC-DC supply | `0173-1#01-AFX043#011` | Selected; 24 V DC, 5 A nominal output; check total connected load |
 | IFM | **TA1101** — integrated temperature sensor/transmitter | 27-27-51 | Temperature sensor | `0173-1#01-AHB186#005` | Selected instead of the previously considered passive Pt100 TM4101; verify exact signal-interface details against its datasheet |
 
-**SAMSON part-number provenance:** Tetra Pak's Plant Components catalog lists **`90533-1149`** for the **3241-7 / 3730-1, DN25, Kvs 10.00 m³/h** assembly. This is a **Tetra Pak supplier/catalog part number**, **not a verified SAMSON manufacturer order number**. Keep supplier and manufacturer identifiers separate in the future ProductCatalog AAS. The supplied listing also specifies DIN PN40 flanges, cast-steel GS-C25 housing, Type 3277 pneumatic actuator, Type 3730-1 positioner (4–20 mA), normally closed operation, and an included air-reducing station. Its heading says “SS/SS,” while the detailed housing field says GS-C25; do not silently infer a stainless-steel housing.
+## Product identity and selection history
 
-**Explicit exclusions and replacements:**
+| Item | Decision / provenance | Verification boundary |
+| --- | --- | --- |
+| SAMSON Type 3241-7 / 3730-1 | Tetra Pak catalog number `90533-1149` (supplier reference, **not** verified SAMSON order number); DN25, Kvs 10 m³/h, PN40, Type 3277 actuator, 4–20 mA positioner, normally closed, air-reducing station | Housing described as GS-C25 in detailed data despite “SS/SS” heading; do not infer stainless steel; verify manufacturer identity and instrument-air requirements |
+| SMC PSH-L2-01-W | Excluded humidity/condensation checker | Removed from intended ProductCatalog scope |
+| Rittal 3244100 | Excluded enclosure filter fan | Do not reuse prior ECAD fan reference as a motor; reconcile ECAD |
+| Siemens S55264-V193 | Superseded HVAC valve | Replaced by representative SAMSON 3241-7 selection |
+| IFM TM4101 | Superseded passive Pt100 sensor | Replaced by IFM TA1101; verify signal interface |
+| IFM LW2720 | Earlier generic class `27-20-05-18` / `0173-1#01-AAC030#023` superseded | Prefer radar-specific `27-20-05-05`; float-switch `27-27-31-05` inapplicable |
 
-- **SMC PSH-L2-01-W** humidity/condensation checker — removed from the intended ProductCatalog scope.
-- **Rittal 3244100** enclosure filter fan — removed from the intended ProductCatalog scope; existing ECAD motor-device references to this fan part number require correction, not reuse as a motor.
-- **Siemens S55264-V193** HVAC pressure-independent valve — superseded by the selected **SAMSON Type 3241-7** representative process-control valve.
-- **IFM TM4101** passive Pt100 temperature sensor — considered but superseded by **IFM TA1101**.
-- The earlier generic **LW2720** candidate `27-20-05-18` / `0173-1#01-AAC030#023` is superseded by the radar-specific `27-20-05-05` class. Float-switch classification `27-27-31-05` is inapplicable.
+## Classification and evidence constraints
 
-**Implementation status:** This section records **agreed selections only**. The source `examples/aas/product_catalog_instance.json` still reflects the prior eight-product snapshot until a separate implementation commit; the seven-product selection has **not** yet been written into that AAS instance. The earlier counts and cross-domain part-number match statistics in this README refer to the existing snapshot and must be recalculated after changes. Validate manufacturer/supplier identity, electrical/pneumatic connections, DEXPI/ECAD/AssetInventory references, ECLASS release compatibility, and SHACL/RDF lifting after implementation.
+| Topic | Boundary / action |
+| --- | --- |
+| Source of truth | ProductCatalog AAS holds product-type ECLASS information; AssetInventory references products for modeled assets. Inventory coverage is not assumed complete. |
+| ECLASS identifiers | IRDIs identify classes, not arbitrary AAS properties. Verify classification against the applicable ECLASS release and whether broad parent classes are assignable. |
+| Physical-equipment assumptions | Globe valves, synchronous motors, vessel separator, and broad compressor class are TEP NEXUS modeling choices, not specified TEP benchmark hardware. |
+| Mechanical and electrical scope | Model drives separately only when separate assets; 24 V DC instrumentation power does not establish motor drive suitability. |
+| Signal distinction | XMEAS/XMV are process signal identifiers, not ECLASS equipment types; XMV(12) controls agitator speed, not a twelfth physical valve. |
+| Semantic assurance | A classification or reference in AAS is a declaration, not independent SELiRA validation, verified product fitness, or installed-hardware evidence. |
+| Implementation reconciliation | Compare this historical register with current `examples/aas/product_catalog_instance.json` and `examples/aas/asset_inventory_instance.json`; check supplier/manufacturer identifiers, DEXPI/ECAD references, signal/medium suitability, SHACL/RDF lifting, and classification coverage. |
+| Next review | Validate AAS templates, ECLASS class assignability, and asset-to-product references before publishing reconciled classifications as authoritative. |
 
-### Classification rules and evidence boundaries
+## Reviewed ECLASS alternatives not selected
 
-- **ProductCatalog AAS** should hold the authoritative ECLASS classification for a product type; **AssetInventory AAS** should reference that product for each installed asset. Validate actual inventory coverage before claiming every physical asset is classified.
-- Each `0173-1#01-...#...` identifier above is an **ECLASS class IRDI**. Do not reuse it as the semantic ID of an unrelated AAS property such as `DeviceType`.
-- Classify the **driven machine** and its **electric motor** separately only where the motor is represented as a distinct asset. The agitator's *complete* assembly classification must not be confused with the standalone motor classification.
-- The recycle compressor's broad 36-43 class avoids an unsupported assumption about rotary positive displacement, reciprocating compression, or turbo compression. **Confirm whether the parent class is directly assignable** in the selected ECLASS release before implementing the ProductCatalog mapping.
-- The gas–liquid separator selection assumes a **vessel separator**. The TEP process model does not specify separator internals.
-- The eleven globe-valve selections and the synchronous-motor selection are **TEP NEXUS modeling assumptions** rather than verified original TEP equipment specifications. XMV(12) denotes agitator speed control, **not a twelfth physical control valve**.
-- Synchronous motors require appropriate electrical drive arrangements. A 24 V DC instrumentation supply does **not** by itself establish suitable motor power or drive compatibility. ECAD power distribution and motor-drive details remain a separate consistency review.
-- ProductCatalog AAS entries include ECLASS class and IRDI values; the working equipment classifications still require ECLASS release/assignability verification. AssetInventory classification coverage must be checked separately.
-
-### Reviewed alternatives not selected
-
-- **Linear DC motor** (`0173-1#01-ADJ119#015`) and **Linear induction motor** (`0173-1#01-ADJ117#015`): linear rather than rotary motion.
-- **Universal motor** (`0173-1#01-AKE157#019`): rotary, but not the selected continuous industrial-drive technology.
-- **Electric motor (motor vehicle)** (`0173-1#01-AFX525#006`) and **Motor (hydraulics, other)** (`0173-1#01-AGU935#004`): incorrect application domain or energy-conversion technology.
-- **Submersible motor pump** (`0173-1#01-AKL848#022`): assumes submerged pump construction and describes a pump unit rather than a standalone drive motor.
-- **Compressor (positive type, rotating)** (`0173-1#01-AAD586#013`), **Compressor (special execution)** (`0173-1#01-AAD589#012`), and **Compressor, ventilator, vacuum pump (other)** (`0173-1#01-AKL925#012`): not selected without evidence of the specified design or an actual *other* subtype.
-
-**Next implementation step:** validate the updated ProductCatalog JSON against the AAS template and SHACL shapes, verify ECLASS class assignability, then reconcile product/asset references before any RDF publication or AssetInventory linking. Keep ECAD electrical topology changes separate from this documentation step.
+| Alternative | IRDI | Reason not selected |
+| --- | --- | --- |
+| Linear DC motor | `0173-1#01-ADJ119#015` | Linear rather than rotary motion |
+| Linear induction motor | `0173-1#01-ADJ117#015` | Linear rather than rotary motion |
+| Universal motor | `0173-1#01-AKE157#019` | Not selected industrial continuous-drive technology |
+| Electric motor (motor vehicle) | `0173-1#01-AFX525#006` | Incorrect application domain |
+| Motor (hydraulics, other) | `0173-1#01-AGU935#004` | Incorrect technology |
+| Submersible motor pump | `0173-1#01-AKL848#022` | Assumes submerged pump unit rather than standalone motor |
+| Compressor (positive type, rotating) | `0173-1#01-AAD586#013` | Compressor construction not substantiated |
+| Compressor (special execution) | `0173-1#01-AAD589#012` | Special execution not substantiated |
+| Compressor, ventilator, vacuum pump (other) | `0173-1#01-AKL925#012` | “Other” subtype not justified |
