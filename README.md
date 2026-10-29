@@ -490,13 +490,13 @@ Fault ──activatedAt──► simulation time
 
 The **TEP-specific contracts** below express the reference simulator's key information as compact tuples. Their generic, TEP-independent counterparts will be derived separately. These are **architectural representations**, not claims that every tuple field is returned directly by `TEPAdapter` or that all constraints are verified.
 
-| Contract | Formal representation |
-| --- | --- |
-| **[TEP-C01 — Simulation](docs/architecture/contracts/tep-c01-simulation.md)** | `C_sim(k) = (B, S_k, T_k, Δt, R, Q)` |
-| **[TEP-C02 — Measurements](docs/architecture/contracts/tep-c02-measurements.md)** | `C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)` |
-| **[TEP-C03 — Manipulated variables](docs/architecture/contracts/tep-c03-manipulated-variables.md)** | `C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)` |
-| **[TEP-C04 — Native disturbances](docs/architecture/contracts/tep-c04-disturbances.md)** | `C_dist(i,k) = (I_i, A_(i,k), T_s, D, P)` |
-| **[TEP-C05 — Faults and scenarios](docs/architecture/contracts/tep-c05-fault-scenarios.md)** | `C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)` |
+| ID | Contract | Mathematical representation | Purpose |
+| --- | --- | --- | --- |
+| TEP-C01 | [Simulation](docs/architecture/contracts/tep-c01-simulation.md) | `C_sim(k) = (B, S_k, T_k, Δt, R, Q)` | Simulation state, time, backend, seed and control mode |
+| TEP-C02 | [Measurements](docs/architecture/contracts/tep-c02-measurements.md) | `C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)` | 41 XMEAS signals and observation context |
+| TEP-C03 | [Manipulated variables](docs/architecture/contracts/tep-c03-manipulated-variables.md) | `C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)` | 12 XMV signals and control context |
+| TEP-C04 | [Native disturbances](docs/architecture/contracts/tep-c04-disturbances.md) | `C_dist(i,k) = (I_i, A_(i,k), T_s, D, P)` | 20 native IDV slots and scheduling |
+| TEP-C05 | [Faults and scenarios](docs/architecture/contracts/tep-c05-fault-scenarios.md) | `C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)` | Fault identity, target, scheduling and provenance |
 
 Each linked specification defines the tuple elements, a core constraint, and where the information originates. **Run identity and provenance come from recording/event infrastructure**, not necessarily the native simulator. A TEP signal such as `XMEAS7` is not proof of engineering asset identity; that requires separate semantic correspondence and evidence qualification.
 
