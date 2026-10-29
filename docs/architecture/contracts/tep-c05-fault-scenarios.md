@@ -1,31 +1,17 @@
-# TEP-C05 — Fault and scenario execution
+# TEP-C05 — Fault and scenarios contract
 
-**Status:** Draft contract specification scaffold. Formal requirements below are **to be defined and verified against the implementation**; no conformance or formal verification is claimed.
+**Status:** Proposed compact architectural contract; implementation coverage varies. This tuple is a semantic model, not a claim that the adapter directly returns all fields.
 
-## Scope
+## Formal representation
 
-fault definitions, scenario scheduling, fault lifecycle and event provenance.
+\[
+C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)
+\]
 
-## Formal contract definition (pending implementation audit)
+**Elements:** I_f: fault identifier; F_f: fault type; X_f: XMEAS/XMV/IDV target; M_f: magnitude or value where applicable; T_s: start time; D: duration; P: scenario/operator provenance.
 
-| Element | Required specification | Status |
-| --- | --- | --- |
-| Typed interface | Operations, input/output types and admissible values | To be specified |
-| Preconditions | Conditions for each operation to be accepted | To be specified |
-| Postconditions | Observable results of success and failure | To be specified |
-| Invariants | State and data properties that must always hold | To be specified |
-| Temporal semantics | Simulation-time rules and operation ordering | To be specified |
-| Failure semantics | Explicit behavior for invalid input and invalid state | To be specified |
-| Provenance | Run, backend, time and source attribution as applicable | To be specified |
-| Verification | Implementation mapping, tests and conformance status | To be established |
+**Constraint:** For a finite scheduled fault, intended active interval is T_s ≤ T < T_s + D, evaluated at native simulation-step boundaries.
 
-## Contract properties to formalize
+**Implementation boundary:** Magnitude is not meaningful for every fault type; stuck faults use a target value and process disturbances use native binary IDV activation.
 
-1. Fault state transitions.
-2. activation intervals.
-3. overlap and clearing semantics.
-4. event/run attribution.
-
-## Verification status
-
-No implementation-level contract audit or machine-checkable conformance proof has been performed for this document. Each eventual requirement must be classified as **implemented and tested**, **implemented but unverified**, or **specified but not implemented**.
+**Verification:** Confirm the proposed representation against adapter, simulator, scenario and recording tests before treating it as a fully verified guarantee.
