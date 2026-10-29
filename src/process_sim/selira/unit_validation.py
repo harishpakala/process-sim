@@ -47,6 +47,8 @@ UNITS = {
     QUDT_UNIT + "PA": UnitDefinition(QUDT_UNIT + "PA", QUDT_QUANTITY_KIND + "Pressure", Decimal("1")),
     QUDT_UNIT + "KiloPA": UnitDefinition(QUDT_UNIT + "KiloPA", QUDT_QUANTITY_KIND + "Pressure", Decimal("1000")),
     QUDT_UNIT + "BAR": UnitDefinition(QUDT_UNIT + "BAR", QUDT_QUANTITY_KIND + "Pressure", Decimal("100000")),
+    QUDT_UNIT + "KiloGM-PER-HR": UnitDefinition(QUDT_UNIT + "KiloGM-PER-HR", QUDT_QUANTITY_KIND + "MassFlowRate", Decimal("1") / Decimal("3600")),
+    QUDT_UNIT + "M3-PER-HR": UnitDefinition(QUDT_UNIT + "M3-PER-HR", QUDT_QUANTITY_KIND + "VolumeFlowRate", Decimal("1") / Decimal("3600")),
     QUDT_UNIT + "K": UnitDefinition(QUDT_UNIT + "K", QUDT_QUANTITY_KIND + "ThermodynamicTemperature", Decimal("1")),
 }
 
