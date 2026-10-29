@@ -8,7 +8,16 @@
 C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)
 \]
 
-**Elements:** I_i: XMEAS signal identity; V_(i,k): measured value at step k; U_i: engineering unit; T_k: simulation time; R_run: recording run ID; P: observation provenance.
+## Tuple elements
+
+| Symbol | Meaning | Source |
+| --- | --- | --- |
+| `I_i` | XMEAS signal identifier, i = 1,…,41 | TEP signal indexing |
+| `V_(i,k)` | Measurement value for signal i at step k | TEPAdapter.get_measurements() |
+| `U_i` | Engineering unit for signal i | Platform signal metadata |
+| `T_k` | Simulation timestamp (hours) | TEPAdapter.get_time_hours() |
+| `R_run` | Recording run identifier | Recording layer |
+| `P` | Observation provenance | Recording/event layer |
 
 **Constraint:** i ∈ {1,…,41}. Measurement identity alone does not establish engineering asset identity.
 
