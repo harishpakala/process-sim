@@ -246,11 +246,32 @@ These candidate AAS collections use `SelectionStatus`, `EvidenceSource`, `Operat
 
 **Revalidate candidates** after controller changes, revised simulation/fault envelopes, process design-basis updates, manufacturer datasheets, ECLASS checks or engineering sign-off. Do not promote provisional candidates to approved products without configuration-specific evidence.
 
-## ProductCatalog and ECLASS classification
+## ProductCatalog and AssetInventory AAS
 
-TEP NEXUS uses the [ProductCatalog AAS](examples/aas/product_catalog_instance.json) to describe product types, specifications, and ECLASS classifications. The [AssetInventory AAS](examples/aas/asset_inventory_instance.json) references product definitions to relate engineering assets to their associated product types.
+The two AAS submodels separate **product-type definitions** from **engineering asset instances**. The following tables summarize fields found in the current JSON instances; they are not catalogs of verified physical installations.
 
-Product classifications and asset-to-product references belong in these AAS artifacts rather than duplicated tables in this README. Some engineering selections remain provisional or are not yet reconciled with the current AAS instances. The historical selection register and its evidence limitations are retained in [ECLASS classification decisions](docs/engineering/eclass-classification-decisions.md) pending reconciliation.
+### ProductCatalog AAS
+
+| Information | Implemented AAS field(s) | Purpose |
+| --- | --- | --- |
+| Product identity | `AssetIdentifier` | Identifies the product-type definition. |
+| Manufacturer and designation | `ManufacturerName`, `ManufacturerPartNumber`; `ManufacturerProductDesignation` where present | Identifies the supplier's product/model. |
+| ECLASS classification | `ECLASSClass`, `ECLASSPreferredName`, `ECLASSIRDI` | Describes the assigned product class and identifier. |
+| Technical specifications | `TechnicalProperties` | Records product-specific technical characteristics. |
+| Engineering and verification status | `SelectionStatus`, `ECLASSVerificationStatus` and other status fields where present | Distinguishes proposed selections from independently verified claims. |
+
+### AssetInventory AAS
+
+| Information | Implemented AAS field(s) | Purpose |
+| --- | --- | --- |
+| Asset identity | `AssetId`, `AssetName`, `EquipmentTag` | Identifies the engineering asset or equipment tag. |
+| Asset type and location | `AssetType`, `Location` | Describes the asset's engineering context. |
+| Product association | `ProductReference`; `CandidateProductReference` where present | Connects an asset to a product definition or a provisional candidate. |
+| Operational signal | `OperationalReference` where present | Records a signal reference; its presence alone does **not** establish validated semantic correspondence. |
+| Engineering reference | `EngineeringReference` where present | Points to related engineering information. |
+| Modeling and integration status | `ModelingStatus`, `SimulationStatus`, `MonitoringStatus` | Records declared status; not an independent SELiRA certification. |
+
+**Source artifacts:** [ProductCatalog JSON](examples/aas/product_catalog_instance.json) and [AssetInventory JSON](examples/aas/asset_inventory_instance.json). Not every asset has a product reference or engineering reference, and provisional assignments must not be treated as verified installations. Historical equipment/ECLASS selection decisions remain in [the engineering decision register](docs/engineering/eclass-classification-decisions.md) for reconciliation.
 
 ## Current status
 
