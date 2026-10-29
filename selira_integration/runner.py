@@ -42,6 +42,6 @@ def main():
     for contract in IDS:
         result=execute(graph,contract,contract in args.ready)
         record={"timestamp":datetime.now(timezone.utc).isoformat(),"contract":contract,"source_revisions":revisions,"status":result["status"],"shape_sha256":hashlib.sha256((ROOT/"contracts"/"shapes"/f"{contract}.ttl").read_bytes()).hexdigest(),"report":result.get("report"),"reason":result.get("reason")}
-        with audit.open("a") as f:f.write(json.dumps(record)+"\\n")
+        with audit.open("a") as f:f.write(json.dumps(record)+"\n")
         print(contract,result["status"])
 if __name__=="__main__":main()
