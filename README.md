@@ -22,6 +22,8 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 **Regression note (2026-10-29):** Local user execution reported 8/9 passing, with `test_rejected_candidate_does_not_block_validated_candidate` failing. The resolver and consumer policy were corrected to exclude explicitly rejected alternatives from selection and authorization. Two regression tests were added (11 tests total). The user subsequently reported **11/11 tests passing locally** (0.004 s, Python unittest on Windows). This is user-reported local execution, not independently verified CI or end-to-end integration.
 
+**Semantic regression verification (2026-10-29):** User-reported local Windows PowerShell runs passed: `test_ai_property_alignment.py` (4/4), `test_ai_cross_domain_trace.py` (3/3), and `test_ai_semantic_temporal_workflow.py` (3/3). Together with the 11/11 SELiRA tests, **21/21 tests passed locally across four independently invoked suites**. This is not an independently observed CI result, full-repository regression run, or integration test.
+
 **Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
 
 # process-sim
