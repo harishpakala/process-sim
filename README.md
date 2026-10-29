@@ -486,21 +486,19 @@ Fault ──activatedAt──► simulation time
                      future TSDB / Temporal KG
 ```
 
-## TEP NEXUS contracts (proposed specification)
+## TEP NEXUS contracts (proposed formal representations)
 
-TEP NEXUS distinguishes **TEP-specific contracts** (the observable behavior of the Tennessee Eastman reference implementation) from **generic platform contracts** (reusable interfaces that must not assume TEP signal names or simulator internals). The TEP-specific contracts will be specified and checked against the existing implementation **before** their generic counterparts are derived. The linked documents are **draft specification scaffolds**, not completed formal contracts; their precise semantics and conformance checks still require implementation review.
+The **TEP-specific contracts** below express the reference simulator's key information as compact tuples. Their generic, TEP-independent counterparts will be derived separately. These are **architectural representations**, not claims that every tuple field is returned directly by `TEPAdapter` or that all constraints are verified.
 
-| ID | TEP-specific contract | Scope to specify |
-| --- | --- | --- |
-| **[TEP-C01](docs/architecture/contracts/tep-c01-simulation.md)** | Simulation lifecycle and time | Initialization, reset, stepping, states, simulation clock, seed and determinism boundaries |
-| **[TEP-C02](docs/architecture/contracts/tep-c02-measurements.md)** | Measurements (XMEAS) | 41 measurement identities, values, units, sampling, time and run context |
-| **[TEP-C03](docs/architecture/contracts/tep-c03-manipulated-variables.md)** | Manipulated variables (XMV) | 12 control-variable identities, read/write semantics, constraints and failure behavior |
-| **[TEP-C04](docs/architecture/contracts/tep-c04-disturbances.md)** | Native disturbances (IDV) | 20 disturbance slots, activation, duration and synchronization with native simulation steps |
-| **[TEP-C05](docs/architecture/contracts/tep-c05-fault-scenarios.md)** | Fault and scenario execution | Signal faults, scheduled lifecycle, declarative scenarios, events and provenance |
+| Contract | Formal representation |
+| --- | --- |
+| **[TEP-C01 — Simulation](docs/architecture/contracts/tep-c01-simulation.md)** | `C_sim(k) = (B, S_k, T_k, Δt, R, Q)` |
+| **[TEP-C02 — Measurements](docs/architecture/contracts/tep-c02-measurements.md)** | `C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)` |
+| **[TEP-C03 — Manipulated variables](docs/architecture/contracts/tep-c03-manipulated-variables.md)** | `C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)` |
+| **[TEP-C04 — Native disturbances](docs/architecture/contracts/tep-c04-disturbances.md)** | `C_dist(i,k) = (I_i, A_(i,k), T_s, D, P)` |
+| **[TEP-C05 — Faults and scenarios](docs/architecture/contracts/tep-c05-fault-scenarios.md)** | `C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)` |
 
-**Formal contract template:** Each contract will define typed operations and data; preconditions; postconditions; invariants; temporal/state-transition rules; explicit failure semantics; provenance; and verification evidence. Every requirement must be marked **implemented and tested**, **implemented but unverified**, or **specified but not implemented**. Timing and determinism guarantees must be established from actual simulator and adapter behavior, not assumed.
-
-**Architectural boundary:** A TEP signal such as `XMEAS7` is an operational signal identifier, **not proof of engineering asset identity**. Mapping it to an AAS asset requires separate semantic correspondence and evidence qualification. Generic contracts and SELiRA evidence/authorization contracts will be defined after the TEP-specific behavior is established.
+Each linked specification defines the tuple elements, a core constraint, and where the information originates. **Run identity and provenance come from recording/event infrastructure**, not necessarily the native simulator. A TEP signal such as `XMEAS7` is not proof of engineering asset identity; that requires separate semantic correspondence and evidence qualification.
 
 ## Fault and scenario engineering
 
