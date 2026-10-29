@@ -1,31 +1,17 @@
-# TEP-C02 — Measurements (XMEAS)
+# TEP-C02 — Measurements contract
 
-**Status:** Draft contract specification scaffold. Formal requirements below are **to be defined and verified against the implementation**; no conformance or formal verification is claimed.
+**Status:** Proposed compact architectural contract; implementation coverage varies. This tuple is a semantic model, not a claim that the adapter directly returns all fields.
 
-## Scope
+## Formal representation
 
-41 XMEAS signal identities, measured values, engineering units, sample context.
+\[
+C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)
+\]
 
-## Formal contract definition (pending implementation audit)
+**Elements:** I_i: XMEAS signal identity; V_(i,k): measured value at step k; U_i: engineering unit; T_k: simulation time; R_run: recording run ID; P: observation provenance.
 
-| Element | Required specification | Status |
-| --- | --- | --- |
-| Typed interface | Operations, input/output types and admissible values | To be specified |
-| Preconditions | Conditions for each operation to be accepted | To be specified |
-| Postconditions | Observable results of success and failure | To be specified |
-| Invariants | State and data properties that must always hold | To be specified |
-| Temporal semantics | Simulation-time rules and operation ordering | To be specified |
-| Failure semantics | Explicit behavior for invalid input and invalid state | To be specified |
-| Provenance | Run, backend, time and source attribution as applicable | To be specified |
-| Verification | Implementation mapping, tests and conformance status | To be established |
+**Constraint:** i ∈ {1,…,41}. Measurement identity alone does not establish engineering asset identity.
 
-## Contract properties to formalize
+**Implementation boundary:** TEPAdapter supplies signal-array values and native time; units are mapped by platform metadata, while run ID/provenance are added by recording infrastructure.
 
-1. Identifier domain.
-2. value/unit consistency.
-3. sampling-time association.
-4. missing or invalid measurement behavior.
-
-## Verification status
-
-No implementation-level contract audit or machine-checkable conformance proof has been performed for this document. Each eventual requirement must be classified as **implemented and tested**, **implemented but unverified**, or **specified but not implemented**.
+**Verification:** Confirm the proposed representation against adapter, simulator, scenario and recording tests before treating it as a fully verified guarantee.
