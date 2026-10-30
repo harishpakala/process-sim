@@ -37,7 +37,9 @@ def validation(graph, shapes):
         data_graph=graph, shacl_graph=shapes,
         inference="none", advanced=False,
         abort_on_first=False, meta_shacl=False)
-    result_type = Graph().namespace_manager.compute_qname(SH + "ValidationResult")
+    # ValidationFailure is not an RDF graph; expose the underlying failure.
+    if not isinstance(report_graph, Graph):
+        raise RuntimeError("pySHACL validation failed: " + str(report_graph))
     # Use explicit URIRef; count report result nodes, not duplicated triples.
     from rdflib import URIRef
     count = len(set(report_graph.subjects(
