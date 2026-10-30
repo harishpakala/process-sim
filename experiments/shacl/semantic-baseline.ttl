@@ -26,10 +26,10 @@ ex:SemanticEvidenceShape a sh:NodeShape ;
       PREFIX ex: <urn:selira:shacl:>
       SELECT $this WHERE {
         $this ex:engineeringUnit ?eng ; ex:operationalUnit ?op .
-        VALUES ?pressure { "Pa" "kPa" "bar" "psi" }
-        VALUES ?temperature { "K" "degC" "degF" }
-        FILTER((?eng = ?pressure && ?op = ?temperature) ||
-               (?eng = ?temperature && ?op = ?pressure))
+        FILTER((?eng IN ("Pa", "kPa", "bar", "psi") &&
+                ?op IN ("K", "degC", "degF")) ||
+               (?eng IN ("K", "degC", "degF") &&
+                ?op IN ("Pa", "kPa", "bar", "psi")))
       }
     """
   ] ;
