@@ -1,0 +1,25 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <urn:selira:shacl:> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# A deliberately explicit SHACL Core *structural* baseline.
+# The schema checks the presence of required evidence records and consumer
+# checks, not the truth, authority, or compatibility of their assertions.
+# No conclusion about the limitations of SHACL as a language is implied.
+
+ex:EvidenceShape a sh:NodeShape ;
+  sh:targetClass ex:EvidenceBundle ;
+  sh:property [ sh:path ex:identityLink ; sh:minCount 4 ; sh:maxCount 4 ;
+                sh:node ex:IdentityLinkShape ] ;
+  sh:property [ sh:path ex:engineeringQuantity ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:operationalQuantity ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:engineeringUnit ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:operationalUnit ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:applicability ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:binding ; sh:minCount 1 ] ;
+  sh:property [ sh:path ex:cac01Check ; sh:minCount 5 ] ;
+  sh:property [ sh:path ex:cac02Check ; sh:minCount 4 ] .
+
+ex:IdentityLinkShape a sh:NodeShape ;
+  sh:property [ sh:path ex:fromRole ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path ex:toRole ; sh:minCount 1 ; sh:maxCount 1 ] .
