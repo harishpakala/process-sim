@@ -12,7 +12,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from run_selira_integrated_experiment import run_scenario, cac_fixture
 from process_sim.selira.cac_contracts import evaluate_cac
-from process_sim.selira.integrated_contracts import SC_IDS, CAC_IDS, aggregate
+from process_sim.selira.integrated_contracts import SC_IDS, CAC_IDS, aggregate, conjunction
 
 
 def mixed_case(name, overrides, cac_overrides=None):
@@ -25,6 +25,12 @@ def mixed_case(name, overrides, cac_overrides=None):
     for r in results:
         if r["contract"] in CAC_IDS:
             r["status"] = (cac_overrides or {}).get(r["contract"], r["status"])
+    source = conjunction(r["status"] for r in results if r["contract"] in SC_IDS)
+    for r in results:
+        if r["contract"] in CAC_IDS:
+            r["sourceQualification"] = source
+            if source != "V" and "Source engineering qualification not verified" not in r["reasons"]:
+                r["reasons"].append("Source engineering qualification not verified")
     decision = aggregate(results)
     return {"scenario": name, "fixture": True,
             "contracts": results, "decision": decision,
