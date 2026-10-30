@@ -1,0 +1,58 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <urn:selira:shacl:> .
+
+# Task-aware SHACL-SPARQL profiles, separately scoped to CAC-01/CAC-02.
+# This profile is independent of SELiRA's computed decision outputs.
+# A violation is a validation finding, not a three-valued decision.
+
+ex:CAC01Shape a sh:NodeShape ;
+  sh:targetClass ex:CAC01Task ;
+  sh:sparql [
+    sh:message "CAC-01: missing required operational check" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        VALUES ?required { "runId" "timeInterval" "units" "provenance" "measurementCoverage" }
+        FILTER NOT EXISTS {
+          $this ex:cac01Check ?check .
+          ?check ex:requirement ?required .
+        }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "CAC-01: operational check explicitly violated" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:cac01Check ?check .
+        ?check ex:assertedVerdict "VIOLATED" .
+      }
+    """
+  ] .
+
+ex:CAC02Shape a sh:NodeShape ;
+  sh:targetClass ex:CAC02Task ;
+  sh:sparql [
+    sh:message "CAC-02: missing required restriction check" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        VALUES ?required { "approval" "targetProperty" "units" "configuration" }
+        FILTER NOT EXISTS {
+          $this ex:cac02Check ?check .
+          ?check ex:requirement ?required .
+        }
+      }
+    """
+  ] ;
+  sh:sparql [
+    sh:message "CAC-02: restriction check explicitly violated" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:cac02Check ?check .
+        ?check ex:assertedVerdict "VIOLATED" .
+      }
+    """
+  ] .
