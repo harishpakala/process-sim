@@ -5,6 +5,7 @@ import json
 from pathlib import Path
 
 from process_sim.selira.sc01_contract import evaluate_sc01, ROLES, LINKS
+from process_sim.selira.sc01_graphdb_evidence import assess_graphdb_sc01
 
 
 def synthetic_case(verdict="VERIFIED"):
@@ -54,17 +55,15 @@ def main():
     args = parser.parse_args()
     with Path(args.focused).open(encoding="utf-8") as handle:
         report = json.load(handle)
-    cases = [synthetic_case(), synthetic_case("CONTRADICTED"),
-             graphdb_case(report)]
+    cases = [synthetic_case(), synthetic_case("CONTRADICTED")]
     results = []
     for case in cases:
         outcome = evaluate_sc01(case)
         outcome["fixture"] = bool(case.get("fixture"))
-        if case["caseId"] == "SC01-T3":
-            outcome["observedFacts"] = case["observedFacts"]
-            outcome["sourceStatus"] = case["sourceStatus"]
-            outcome["sourceTruncated"] = case["truncated"]
         results.append(outcome)
+    observed = assess_graphdb_sc01(report)
+    observed["fixture"] = False
+    results.append(observed)
     output = {"experiment": "SC-01", "results": results,
               "warning": "Synthetic controls do not certify GraphDB engineering evidence."}
     with Path(args.output).open("w", encoding="utf-8") as handle:
