@@ -188,7 +188,10 @@ def compile_contract(source: str, bindings: Mapping):
         shape = SELIRA[f"{spec.name}_{contract.identifier}"]
         sparql = BNode()
         graph.add((shape, RDF.type, SH.NodeShape))
-        if focus.get("target_by_predicate"):\n            graph.add((shape, SH.targetSubjectsOf, focus_pred))\n        else:\n            graph.add((shape, SH.targetClass, focus_class))
+        if focus.get("target_by_predicate"):
+            graph.add((shape, SH.targetSubjectsOf, focus_pred))
+        else:
+            graph.add((shape, SH.targetClass, focus_class))
         graph.add((shape, SH.sparql, sparql))
         graph.add((sparql, RDF.type, SH.SPARQLConstraint))
         graph.add((sparql, SH.message, Literal(f"{contract.identifier}: exactly one canonical product required")))
