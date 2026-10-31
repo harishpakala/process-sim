@@ -2,10 +2,10 @@
 
 Read-only validation; completeness and canonical identity are caller attestations.
 """
-from rdflib import Graph, Namespace
+from rdflib import Graph, Namespace, RDF
 from pyshacl import validate
 
-from .compiler import compile_contract
+from .compiler import compile_contract, SELIRA
 from .tep_nexus import real_contract_source
 from .lifted_evidence import lift_sc01_instances
 
@@ -17,8 +17,7 @@ def compile_lifted_sc01(provenance):
     assets = provenance["assetinventory"]["template_id"]
     products = provenance["productcatalog"]["template_id"]
     return compile_contract(real_contract_source(), {"templates": {
-        assets: {"class": str(AI.Asset), "fields": {"ProductReference": str(AI.hasProductReference)},
-                 "target_by_predicate": True},
+        assets: {"class": str(SELIRA.SC01Asset), "fields": {"ProductReference": str(AI.hasProductReference)}},
         products: {"class": str(PC.Product), "fields": {"AssetIdentifier": str(PC.hasAssetIdentifier)},
                    "match_by_predicate": True, "lexical_match": True},
     }})
@@ -30,7 +29,7 @@ def evaluate_lifted_sc01(*, graph=None, provenance=None,
     if graph is None or provenance is None:
         graph, provenance = lift_sc01_instances()
     ttl, manifest = compile_lifted_sc01(provenance)
-    if not any(graph.subjects(AI.hasProductReference, None)):
+    if not any(graph.subjects(RDF.type, SELIRA.SC01Asset)):
         return {"verdict": "NA", "reason": "No assigned product references", "manifest": manifest}
     if not evidence_complete or not identity_normalized:
         return {"verdict": "U", "reason": "Completeness or canonical identity not attested",
