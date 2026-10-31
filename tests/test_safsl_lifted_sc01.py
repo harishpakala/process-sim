@@ -1,5 +1,6 @@
 import unittest
-from rdflib import Graph, Literal, URIRef
+from rdflib import Graph, Literal, URIRef, RDF
+from process_sim.safsl.shacl.compiler import SELIRA
 from process_sim.safsl.shacl.lifted_sc01 import AI, PC, evaluate_lifted_sc01
 
 PROVENANCE = {
@@ -13,6 +14,7 @@ class LiftedSC01Tests(unittest.TestCase):
         self.graph = Graph()
         self.asset = URIRef("urn:asset:1")
         self.product = URIRef("urn:product:1")
+        self.graph.add((self.asset, RDF.type, SELIRA.SC01Asset))
         self.graph.add((self.asset, AI.hasProductReference, Literal("P-1")))
         self.graph.add((self.product, PC.hasAssetIdentifier, Literal("P-1")))
 
@@ -32,11 +34,15 @@ class LiftedSC01Tests(unittest.TestCase):
         self.graph.add((URIRef("urn:product:2"), PC.hasAssetIdentifier, Literal("P-1")))
         self.assertEqual(self.evaluate(), "F")
 
+    def test_missing_reference_is_invalid(self):
+        self.graph.remove((self.asset, AI.hasProductReference, None))
+        self.assertEqual(self.evaluate(), "F")
+
     def test_unknown_without_attestation(self):
         self.assertEqual(evaluate_lifted_sc01(graph=self.graph, provenance=PROVENANCE)["verdict"], "U")
 
     def test_not_applicable_without_focus(self):
-        self.graph.remove((self.asset, AI.hasProductReference, None))
+        self.graph.remove((self.asset, RDF.type, SELIRA.SC01Asset))
         self.assertEqual(self.evaluate(), "NA")
 
 
