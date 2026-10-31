@@ -1,0 +1,13 @@
+Specification AssetProductIntegrity {
+    // Base64("urn:example:aas:template:AssetInventory")
+    Ref SubmodelTemplate assets = "dXJuOmV4YW1wbGU6YWFzOnRlbXBsYXRlOkFzc2V0SW52ZW50b3J5";
+    // Base64("urn:example:aas:template:ProductCatalog")
+    Ref SubmodelTemplate products = "dXJuOmV4YW1wbGU6YWFzOnRlbXBsYXRlOlByb2R1Y3RDYXRhbG9n";
+
+    Contract SC_01 {
+        forall asset in assets {
+            existsExactlyOne product in products
+                where matches(asset.productRef, product.canonicalId);
+        }
+    }
+}
