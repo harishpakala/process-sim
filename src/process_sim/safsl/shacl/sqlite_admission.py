@@ -5,6 +5,7 @@ It does NOT write to GraphDB or AAS repositories, nor certify their revisions.
 """
 import json
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 
 from rdflib import Graph
@@ -15,7 +16,7 @@ from .admission import Verdict, admit, VersionedGraphStore
 class SQLiteAdmissionStore:
     def __init__(self, filename):
         self.filename = str(filename)
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             db.execute("CREATE TABLE IF NOT EXISTS state (id INTEGER PRIMARY KEY CHECK(id=1), version INTEGER NOT NULL, rdf TEXT NOT NULL, revisions TEXT NOT NULL)")
             db.execute("CREATE TABLE IF NOT EXISTS audit (id INTEGER PRIMARY KEY AUTOINCREMENT, version INTEGER NOT NULL, verdict TEXT NOT NULL, committed INTEGER NOT NULL, reason TEXT NOT NULL, revisions TEXT NOT NULL)")
             db.execute("INSERT OR IGNORE INTO state VALUES (1,0,'','{}')")
@@ -26,7 +27,7 @@ class SQLiteAdmissionStore:
         return db
 
     def snapshot(self):
-        with self._connect() as db:
+        with closing(self._connect()) as db:
             version, rdf, revisions = db.execute("SELECT version,rdf,revisions FROM state WHERE id=1").fetchone()
         graph = Graph()
         if rdf:
