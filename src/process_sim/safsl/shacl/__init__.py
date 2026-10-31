@@ -1,1 +1,4 @@
-"""SAFSL contract-to-SHACL compilation package.\n\nImport compiler submodule explicitly to avoid runpy module warnings.\n"""\n
+"""SAFSL contract-to-SHACL compilation package.
+
+Import compiler submodule explicitly to avoid runpy module warnings.
+"""
