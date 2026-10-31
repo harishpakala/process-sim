@@ -1,0 +1,14 @@
+{
+  "templates": {
+    "urn:example:aas:template:AssetInventory": {
+      "class": "https://example.org/selira/Asset",
+      "fields": {"productRef": "https://example.org/selira/productRef"},
+      "complete": true
+    },
+    "urn:example:aas:template:ProductCatalog": {
+      "class": "https://example.org/selira/CanonicalProduct",
+      "fields": {"canonicalId": "https://example.org/selira/canonicalId"},
+      "complete": true
+    }
+  }
+}
