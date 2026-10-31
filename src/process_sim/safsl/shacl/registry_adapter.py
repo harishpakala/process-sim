@@ -19,10 +19,9 @@ def bindings_from_registry(registry, selections):
         if template_id not in domains:
             raise CompilationError(f"Template absent from ONTO NEXUS registry: {template_id}")
         domain = domains[template_id]
-        classes = set(domain.get("instanceClasses", [])) | set(domain.get("templateClasses", []))
-        # Registry instanceClasses may be structured records; normalize explicitly.
-        classes = {c if isinstance(c, str) else c.get("iri") for c in classes} if all(isinstance(c, str) for c in classes) else {
-            (c if isinstance(c, str) else c.get("iri")) for c in domain.get("instanceClasses", []) + domain.get("templateClasses", [])
+        classes = {
+            c if isinstance(c, str) else c.get("iri")
+            for c in (domain.get("instanceClasses", []) + domain.get("templateClasses", []))
         }
         selected_class = str(_iri(selected["class"], "selected class"))
         if selected_class not in classes:
