@@ -163,27 +163,32 @@ def compile_contract(source: str, bindings: Mapping):
         # No variable IRI interpolation except validated RDF URIRef N3 serialization.
         # Distinct RDF resources are counted as distinct canonical entities;
         # the graph must normalize owl:sameAs before evaluation.
+        match1 = "STR(?ref) = STR(?id)" if product.get("lexical_match") else "?ref = ?id"
+        match2 = "STR(?ref1) = STR(?id1) && STR(?ref2) = STR(?id2)" if product.get("lexical_match") else "?ref1 = ?id1 && ?ref2 = ?id2"
+        catalog_pattern = (f"?product <{product_pred}> ?id ." if product.get("match_by_predicate") else f"?product a <{product_class}> ; <{product_pred}> ?id .")
+        p1_pattern = (f"?p1 <{product_pred}> ?id1 ." if product.get("match_by_predicate") else f"?p1 a <{product_class}> ; <{product_pred}> ?id1 .")
+        p2_pattern = (f"?p2 <{product_pred}> ?id2 ." if product.get("match_by_predicate") else f"?p2 a <{product_class}> ; <{product_pred}> ?id2 .")
         query = f"""SELECT $this WHERE {{
   FILTER (
     NOT EXISTS {{
       $this <{focus_pred}> ?ref .
-      ?product a <{product_class}> ;
-               <{product_pred}> ?ref .
+      {catalog_pattern}
+      FILTER ({match1})
     }}
     ||
     EXISTS {{
       $this <{focus_pred}> ?ref1 .
-      ?p1 a <{product_class}> ; <{product_pred}> ?ref1 .
+      {p1_pattern}
       $this <{focus_pred}> ?ref2 .
-      ?p2 a <{product_class}> ; <{product_pred}> ?ref2 .
-      FILTER (?p1 != ?p2)
+      {p2_pattern}
+      FILTER (?p1 != ?p2 && {match2})
     }}
   )
 }}"""
         shape = SELIRA[f"{spec.name}_{contract.identifier}"]
         sparql = BNode()
         graph.add((shape, RDF.type, SH.NodeShape))
-        graph.add((shape, SH.targetClass, focus_class))
+        if focus.get("target_by_predicate"):\n            graph.add((shape, SH.targetSubjectsOf, focus_pred))\n        else:\n            graph.add((shape, SH.targetClass, focus_class))
         graph.add((shape, SH.sparql, sparql))
         graph.add((sparql, RDF.type, SH.SPARQLConstraint))
         graph.add((sparql, SH.message, Literal(f"{contract.identifier}: exactly one canonical product required")))
