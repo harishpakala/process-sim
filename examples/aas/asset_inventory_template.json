@@ -1,0 +1,91 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/asset-inventory-template",
+  "idShort": "AssetInventory",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Assets",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Asset",
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetName",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentTag",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetType",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Location",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperationalReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ModelingStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SimulationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MonitoringStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FaultInjectionStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FaultDetectionStatus",
+              "valueType": "xs:string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
