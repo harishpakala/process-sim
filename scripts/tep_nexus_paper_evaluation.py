@@ -71,7 +71,13 @@ def engineering_evidence(asset_path, product_path):
             raise ValueError(f"Unresolved ProductIdentifier for {asset_key}: {product_ref}")
         product_key, product_fields = product
         tech = product_fields.get("TechnicalProperties", {})
+        # Preserve catalog specifications alongside their QUDT semantics.
         qudt = {k: v for k, v in tech.items() if "QUDT" in k}
+        specification_keys = (
+            "MeasurementRange", "FactoryConfiguredRange", "FamilyMeasuringRange",
+            "MaximumMeasuringDistance", "Accuracy", "PressureReference",
+        )
+        specifications = {k: tech[k] for k in specification_keys if k in tech}
         evidence[kind] = {
             "asset_id": asset.get("AssetIdentifier"),
             "asset_key": asset_key,
@@ -83,9 +89,11 @@ def engineering_evidence(asset_path, product_path):
             "product_key": product_key,
             "manufacturer": product_fields.get("ManufacturerName"),
             "eclass_class": product_fields.get("ECLASSClass"),
+            "eclass_preferred_name": product_fields.get("ECLASSPreferredName"),
             "eclass_irdi": product_fields.get("ECLASSIRDI"),
             "eclass_verification": product_fields.get("ECLASSVerificationStatus"),
             "qudt_product_specification": qudt,
+            "catalog_technical_specifications": specifications,
             "product_selection_status": product_fields.get("SelectionStatus"),
             "installation_verification": product_fields.get("InstallationVerificationStatus"),
             "asset_simulation_status": asset.get("SimulationStatus"),
