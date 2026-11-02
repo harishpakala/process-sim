@@ -16,6 +16,7 @@ from pathlib import Path
 
 import requests
 
+from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_semantic_temporal_live import (
     resolve_engineering_context,
     retrieve_temporal_context,
@@ -214,6 +215,10 @@ def build_evidence(plan, mapping, temporal):
             "first": history["first"],
             "last": history["last"],
         }
+        evidence["quantitative_temporal_analytics"] = summarize_history(
+            history["samples"],
+            truncated=history["truncated_by_limit"],
+        )
 
     return evidence
 
@@ -228,6 +233,10 @@ retrieved JSON evidence.
 Rules:
 - Do not invent values, units, relationships or timestamps.
 - Distinguish simulation time from recorded time.
+- If quantitative_temporal_analytics is available, report the numerical
+  regression slope and endpoint change, with their simulation-time basis.
+- Do not confuse provisional engineering mapping with the measured trend.
+- If history is truncated, explicitly state that limitation.
 - Never claim a physically verified sensor.
 - State that engineering mapping is provisional.
 - State that shared run provenance is unverified.
