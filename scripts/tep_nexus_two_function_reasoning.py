@@ -95,9 +95,12 @@ def main():
     parser.add_argument("--graphdb-url", default="http://localhost:7200/repositories/AAS")
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--history-limit", type=int, default=1000)
+    parser.add_argument("--self-correct", action="store_true", help="One evidence-grounded revision attempt for failed structured answers")
     parser.add_argument("--answer-format", choices=("freeform", "structured"), default="freeform")
     parser.add_argument("--output", default="reports/tep_nexus_two_function_comparison.json")
     args = parser.parse_args()
+    if args.self_correct and args.answer_format != "structured":
+        parser.error("--self-correct requires --answer-format structured")
     if args.history_limit < 2:
         parser.error("--history-limit must be at least 2")
     if not os.getenv("TEP_TIMESCALE_DSN"):
@@ -105,7 +108,8 @@ def main():
     report = {"schema_version": 1, "generated_at_utc": utc_now(), "question": args.question,
               "status": "STARTED", "validated_plan": None, "evidence": None,
               "llm_answer": None, "llm_answer_validation": "NOT_RUN",
-              "llm_answer_validation_details": None}
+              "llm_answer_validation_details": None,
+              "self_correction": {"enabled": args.self_correct, "attempted": False}}
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -148,6 +152,46 @@ def main():
                       validate_comparison_answer(report["llm_answer"], evidence))
         report["llm_answer_validation_details"] = validation
         report["llm_answer_validation"] = validation["status"]
+        if args.self_correct and validation["status"] != "CHECKS_PASSED_LIMITED_SCOPE":
+            correction = report["self_correction"]
+            correction["attempted"] = True
+            correction["original_failed_checks"] = validation["failed_checks"]
+            try:
+                # Do not rewrite the original answer or mutate deterministic evidence.
+                # The feedback is independently derived from the evidence, not from
+                # any claimed winner in the LLM's answer.
+                comp = evidence["comparison"]
+                series = comp["series"]
+                winner_index = comp["larger_absolute_relative_change_index"]
+                expected_winner = (series[winner_index]["engineering_function"]
+                                   if type(winner_index) is int else winner_index)
+                correction["deterministic_expected_winner"] = expected_winner
+                feedback = {
+                    "original_answer": report["llm_answer"],
+                    "failed_checks": validation["failed_checks"],
+                    "expected_winner_from_evidence": expected_winner,
+                    "comparison_evidence": comp,
+                    "provenance": {
+                        "engineering_mapping": evidence["engineering_mapping"],
+                        "physical_sensor_binding": evidence["physical_sensor_binding"],
+                        "shared_run_provenance": evidence["shared_run_provenance"],
+                        "causal_inference": evidence["causal_inference"],
+                    },
+                }
+                revised = ollama_chat(
+                    args.ollama_url, args.model,
+                    structured_prompt() + " This is one revision attempt. "
+                    "The original answer failed deterministic evidence checks. "
+                    "Correct only claims contradicted by the supplied evidence; "
+                    "do not invent or infer causality. Return the full JSON object.",
+                    json.dumps(feedback))
+                correction["revised_llm_answer"] = revised
+                revised_validation = validate_structured_answer(revised, evidence)
+                correction["revised_validation"] = revised_validation
+                correction["revised_status"] = revised_validation["status"]
+            except Exception as correction_exc:
+                correction["revised_status"] = "REVISION_ERROR"
+                correction["error"] = f"{type(correction_exc).__name__}: {correction_exc}"
         report["status"] = ("COMPLETED" if validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE"
                             else "COMPLETED_WITH_ANSWER_CHECK_FAILURES")
     except Exception as exc:
