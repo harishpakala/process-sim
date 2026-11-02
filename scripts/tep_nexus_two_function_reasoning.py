@@ -1,7 +1,7 @@
 """Read-only two-function semantic/temporal comparison research prototype.
 
-LLM plans the comparison; deterministic code validates identifiers, resolves
-GraphDB mappings, and computes a comparison. Narrative is NOT auto-verified.
+LLM plans and explains; deterministic code validates identifiers, resolves
+mappings, computes comparisons and checks explicit narrative evidence coverage.
 """
 import argparse
 import json
@@ -15,6 +15,7 @@ from tep_nexus_function_registry import load_supported_functions, resolve_suppor
 from tep_nexus_ollama_query_planner import ollama_chat, utc_now
 from tep_nexus_semantic_temporal_live import retrieve_temporal_context
 from tep_nexus_temporal_analytics import summarize_history
+from tep_nexus_comparison_answer_validation import validate_comparison_answer
 
 
 def validate_comparison_plan(plan, question, registry):
@@ -101,7 +102,8 @@ def main():
         parser.error("TEP_TIMESCALE_DSN is not set")
     report = {"schema_version": 1, "generated_at_utc": utc_now(), "question": args.question,
               "status": "STARTED", "validated_plan": None, "evidence": None,
-              "llm_answer": None, "llm_answer_validation": "NOT_IMPLEMENTED"}
+              "llm_answer": None, "llm_answer_validation": "NOT_RUN",
+              "llm_answer_validation_details": None}
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     try:
@@ -136,7 +138,11 @@ def main():
             'Do not infer causation or physical sensor verification. '
             'Distinguish provisional mapping from verified evidence.',
             json.dumps({"question": args.question, "evidence": evidence}))
-        report["status"] = "COMPLETED_UNVERIFIED_NARRATIVE"
+        validation = validate_comparison_answer(report["llm_answer"], evidence)
+        report["llm_answer_validation_details"] = validation
+        report["llm_answer_validation"] = validation["status"]
+        report["status"] = ("COMPLETED" if validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE"
+                            else "COMPLETED_WITH_ANSWER_CHECK_FAILURES")
     except Exception as exc:
         report["status"] = "ERROR"
         report["error"] = f"{type(exc).__name__}: {exc}"
