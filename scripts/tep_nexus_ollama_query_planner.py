@@ -126,7 +126,7 @@ def validate_plan(plan, question, supported_functions=None):
     mentioned = set(
         item.upper()
         for item in re.findall(
-            r"\bTI_\d+\b", question, flags=re.IGNORECASE
+            r"\b[A-Za-z]{2}_\d+\b", question, flags=re.IGNORECASE
         )
     )
 
