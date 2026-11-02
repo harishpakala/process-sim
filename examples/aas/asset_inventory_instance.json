@@ -1172,7 +1172,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS6"
+              "value": "https://aas.example.com/FI106"
             },
             {
               "modelType": "Property",
@@ -1302,7 +1302,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS7"
+              "value": "https://aas.example.com/PI101"
             },
             {
               "modelType": "Property",
@@ -1414,7 +1414,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS8"
+              "value": "https://aas.example.com/LI101"
             },
             {
               "modelType": "Property",
@@ -1538,7 +1538,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS9"
+              "value": "https://aas.example.com/TI101"
             },
             {
               "modelType": "Property",
