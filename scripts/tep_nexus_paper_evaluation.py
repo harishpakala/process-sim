@@ -27,8 +27,8 @@ QUESTIONS = [
     ("Which asset identifiers link the engineering representations?", ["DEXPI", "ECAD", "AssetInventory"]),
     ("What engineering information is available for PI-1101?", ["DEXPI", "ECAD", "AssetInventory", "ProductCatalog"]),
     ("Which fault was activated, and when?", ["fault_events"]),
-    ("What were the four sensor values before and after activation?", ["AssetInventory", "signal_samples", "fault_events"]),
-    ("What engineering and operational evidence is available for FI-1101?", ["DEXPI", "ECAD", "AssetInventory", "ProductCatalog", "signal_samples", "fault_events"]),
+    ("For the selected reactor-related TEP signals XMEAS6, XMEAS7, XMEAS8, and XMEAS9, what were their recorded values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run?", ["AssetInventory", "signal_samples", "fault_events"]),
+    ("For the reactor feed-flow instrument FI-1101, provide its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, associated product candidate, ECLASS class, and operational signal. Also report the recorded XMEAS6 values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run.", ["DEXPI", "ECAD", "AssetInventory", "ProductCatalog", "signal_samples", "fault_events"]),
 ]
 
 
