@@ -43,8 +43,11 @@ Interpret the evidence fields precisely:
 Answer ALL requested parts and preserve the exact evidence values.
 For multi-instrument questions, include every instrument represented in evidence.
 For product questions, pair each asset/tag with its manufacturer and product.
-For ECLASS and QUDT questions, include every asset's ECLASS identifier and its
-QUDT product specification attributes; do not treat these as simulation units.
+For ECLASS and QUDT questions, include every asset's ECLASS class, IRDI,
+preferred name, catalog technical specifications and their QUDT unit/quantity-kind
+attributes. Preserve exact numeric ranges, units and qualification notes as written
+in the supplied catalog evidence. Never invent a range or accuracy from QUDT units.
+Do not treat catalog specifications as simulation measurement units.
 For fault events, give the fault ID, operator action, simulation_seconds and,
 when relevant, observed_at as a separate wall-clock timestamp.
 For before/after measurements, give each signal's values and simulation times.
@@ -136,9 +139,16 @@ def answer_for(item, engineering, temporal, graph):
                          f"({v.get('product_key') or 'unknown'})"
                          for v in engineering.values())
     elif i == 5:
-        text = "; ".join(f"{v['equipment_tag']}: ECLASS {v.get('eclass_irdi')}; "
-                         f"QUDT product attributes {json.dumps(v.get('qudt_product_specification', {}), sort_keys=True)}"
-                         for v in engineering.values())
+        text = "; ".join(
+            f"{v['equipment_tag']}: ECLASS class {v.get('eclass_class')}, "
+            f"preferred name {v.get('eclass_preferred_name')}, "
+            f"IRDI {v.get('eclass_irdi')}; "
+            f"catalog technical specifications "
+            f"{json.dumps(v.get('catalog_technical_specifications', {}), sort_keys=True)}; "
+            f"QUDT attributes "
+            f"{json.dumps(v.get('qudt_product_specification', {}), sort_keys=True)}"
+            for v in engineering.values()
+        )
     elif i == 8:
         event = item["evidence"].get("activation")
         text = (f"Recorded operator command {event['action']} for fault {event['fault_id']} "
