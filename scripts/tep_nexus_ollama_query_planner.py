@@ -16,6 +16,7 @@ from pathlib import Path
 
 import requests
 
+from tep_nexus_answer_validation import validate_answer
 from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_semantic_temporal_live import (
     resolve_engineering_context,
@@ -233,8 +234,11 @@ retrieved JSON evidence.
 Rules:
 - Do not invent values, units, relationships or timestamps.
 - Distinguish simulation time from recorded time.
-- If quantitative_temporal_analytics is available, report the numerical
-  regression slope and endpoint change, with their simulation-time basis.
+- If record_age_seconds exceeds 300, say the latest persisted record is stale.
+- Never describe stale persisted data as a live sensor reading.
+- If quantitative_temporal_analytics is available, explicitly report the
+  mean, standard deviation, regression slope and endpoint change,
+  with the slope in signal value per simulation minute.
 - Do not confuse provisional engineering mapping with the measured trend.
 - If history is truncated, explicitly state that limitation.
 - Never claim a physically verified sensor.
@@ -355,6 +359,9 @@ def main():
         )
 
         report["answer"] = answer
+        validation = validate_answer(answer, evidence)
+        report["answer_validation"] = validation["status"]
+        report["answer_validation_details"] = validation
         report["status"] = "COMPLETED"
 
         print("\n=== TEP NEXUS OLLAMA QUERY PLANNER ===")
@@ -365,6 +372,9 @@ def main():
         print(json.dumps(evidence, indent=2))
         print("\nOLLAMA ANSWER")
         print(answer["answer"])
+        print("\nANSWER VALIDATION:", report["answer_validation"])
+        if validation["failed_checks"]:
+            print("Failed checks:", ", ".join(validation["failed_checks"]))
         print("\nLimitations:")
         for limitation in answer["limitations"]:
             print("-", limitation)
