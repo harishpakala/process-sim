@@ -62,7 +62,7 @@ def limited_checks(level, answer, evidence):
     valid_types = (isinstance(answer["answer"], str) and
                    isinstance(answer["evidence_used"], list) and
                    isinstance(answer["limitations"], list))
-    checks = {"schema": valid_types, "nonempty_answer": bool(answer["answer"].strip())}
+    checks = {"schema": valid_types, "nonempty_answer": (isinstance(answer["answer"], str) and bool(answer["answer"].strip()))}
     if not valid_types:
         checks["nonempty_answer"] = False
     return {"status": "BASIC_FORMAT_PASSED" if all(checks.values()) else "BASIC_FORMAT_FAILED",
