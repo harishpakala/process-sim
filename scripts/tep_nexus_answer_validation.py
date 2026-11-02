@@ -9,7 +9,7 @@ import re
 
 
 def _number_after(text, label):
-    pattern = r"\b" + label + r"\s*(?:of|is|:|=)?\s*([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)
+    pattern = r"\b" + label + r"\s*(?:of|is|:|=)?\s*([-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?)"
     match = re.search(pattern, text, re.IGNORECASE)
     return float(match.group(1)) if match else None
 
