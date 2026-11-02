@@ -87,11 +87,6 @@ def compare_series(temporals):
             "comparison_available": comparable}
 
 
-def save_split_report(output, report):
-    output.write_text(json.dumps(report, indent=2), encoding="utf-8")
-    print("Saved:", output)
-
-
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--question", required=True)
@@ -166,7 +161,7 @@ def main():
                                       and interpretation_validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE")}
             report["status"] = ("COMPLETED" if report["split_judgment"]["both_stages_passed"]
                                 else "COMPLETED_WITH_ANSWER_CHECK_FAILURES")
-            return save_split_report(output, report)
+            return
         answer_system = (structured_prompt() if args.answer_format == "structured" else
             'Return JSON with answer (string) and limitations (array of strings). '
             'Use ONLY provided evidence. State the compared simulation-time interval, '
