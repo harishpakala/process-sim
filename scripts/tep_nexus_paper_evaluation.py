@@ -146,16 +146,90 @@ def temporal_evidence(dsn, run_id, signals):
     return result
 
 
-def evaluate(engineering, temporal):
+def verified_graphdb_mappings(endpoint):
+    """Require exact four-domain joins, including the expected operational signals."""
+    import requests
+    query = """
+    PREFIX dx: <https://example.org/dexpi/>
+    PREFIX ec: <https://example.org/ecad/>
+    PREFIX ai: <https://example.org/assetinventory/>
+    PREFIX pc: <https://example.org/productcatalog/>
+    SELECT DISTINCT ?assetId ?dexpiLocal ?ecadLocal ?signal ?productId ?eclassCode
+    WHERE {
+      ?d dx:hasAssetIdentifier ?assetId ; dx:hasLocalId ?dexpiLocal .
+      ?e ec:hasAssetIdentifier ?ecadId ; ec:hasLocalId ?ecadLocal .
+      ?a ai:hasAssetIdentifier ?invId ;
+         ai:hasOperationalReference ?signal ;
+         ai:hasProductIdentifier ?productId .
+      ?p pc:hasProductIdentifier ?catalogId .
+      OPTIONAL { ?p pc:hasECLASSClass ?eclassCode }
+      FILTER(STR(?assetId) = STR(?ecadId) &&
+             STR(?assetId) = STR(?invId) &&
+             STR(?productId) = STR(?catalogId))
+    }
+    """
+    response = requests.post(
+        endpoint, data={"query": query},
+        headers={"Accept": "application/sparql-results+json"}, timeout=30,
+    )
+    response.raise_for_status()
+    rows = [{k: v["value"] for k, v in b.items()}
+            for b in response.json()["results"]["bindings"]]
+    expected = {
+        "https://aas.example.com/PI101": ("PI_101", "PI-1101", "XMEAS7"),
+        "https://aas.example.com/FI106": ("FI_106", "FI-1101", "XMEAS6"),
+        "https://aas.example.com/TI101": ("TI_101", "TI-1101", "XMEAS9"),
+        "https://aas.example.com/LI101": ("LI_101", "LI-1101", "XMEAS8"),
+    }
+    selected = {}
+    for asset_id, (dexpi_id, ecad_id, signal) in expected.items():
+        matches = [row for row in rows if row.get("assetId") == asset_id
+                   and row.get("dexpiLocal") == dexpi_id
+                   and row.get("ecadLocal") == ecad_id
+                   and row.get("signal") == signal]
+        if len(matches) != 1:
+            raise ValueError(
+                f"Expected one exact four-domain join for {asset_id}; found {len(matches)}"
+            )
+        selected[asset_id] = matches[0]
+    return selected
+
+
+def evaluate(engineering, temporal, graph_mappings=None):
     """Supported means evidence available, not LLM answer correctness."""
     results = []
     for index, (question, sources) in enumerate(QUESTIONS, 1):
         item = {"id": f"Q{index}", "question": question, "required_sources": sources,
                 "answer_correctness": "NOT_ASSESSED"}
         if index in {1, 2, 3, 6, 7, 10}:
-            item["status"] = "UNVERIFIED_CROSS_DOMAIN_MAPPING"
-            item["reason"] = ("DEXPI/ECAD entity joins require explicit "
-                              "GraphDB mapping verification; AAS tags are insufficient.")
+            if graph_mappings is None:
+                item["status"] = "CROSS_DOMAIN_QUERY_NOT_RUN"
+                item["reason"] = "Pass --graphdb-url to verify four-domain joins."
+            else:
+                selected = list(graph_mappings.values())
+                if index == 7:
+                    selected = [graph_mappings["https://aas.example.com/PI101"]]
+                if index == 10:
+                    selected = [graph_mappings["https://aas.example.com/FI106"]]
+                item["status"] = "EVIDENCE_AVAILABLE"
+                item["evidence"] = {
+                    "graphdb_verified_mappings": selected,
+                    "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+                    "physical_installation_verified": False,
+                }
+                if index == 10:
+                    if temporal is None:
+                        item["status"] = "INCOMPLETE_TEMPORAL_EVIDENCE"
+                        item["reason"] = "No TimescaleDB run supplied."
+                    else:
+                        item["evidence"]["temporal"] = {
+                            "run_id": temporal["run_id"],
+                            "signal": "XMEAS6",
+                            "activation": temporal["selected_activation"],
+                            "measurements": temporal["measurements"].get("XMEAS6"),
+                        }
+                        if not temporal["measurements"].get("XMEAS6"):
+                            item["status"] = "INCOMPLETE_TEMPORAL_EVIDENCE"
         elif index in {4, 5}:
             item["status"] = "EVIDENCE_AVAILABLE"
             item["evidence"] = engineering
@@ -184,6 +258,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--asset-inventory", default="examples/aas/asset_inventory_instance.json")
     parser.add_argument("--product-catalog", default="examples/aas/product_catalog_instance.json")
+    parser.add_argument("--graphdb-url", default=None,
+                        help="GraphDB SPARQL endpoint for verified four-domain joins")
     parser.add_argument("--run-id", help="Operator-verified UUID of a recorded simulation run")
     parser.add_argument("--output", default="reports/tep_nexus_paper_evaluation.json")
     args = parser.parse_args()
@@ -194,15 +270,17 @@ def main():
         if not dsn:
             parser.error("TEP_TIMESCALE_DSN is required when --run-id is supplied")
         temporal = temporal_evidence(dsn, args.run_id, [x[2] for x in ASSETS.values()])
+    graph_mappings = verified_graphdb_mappings(args.graphdb_url) if args.graphdb_url else None
     report = {
         "generated_at_utc": datetime.now(timezone.utc).isoformat(),
         "scope": "read_only_reference_evidence_not_automated_natural_language_scoring",
         "engineering": engineering, "temporal": temporal,
-        "results": evaluate(engineering, temporal),
+        "graphdb_verified_mappings": graph_mappings,
+        "results": evaluate(engineering, temporal, graph_mappings),
         "limitations": [
             "No fault is injected by this script.",
             "Fault events record operator commands, not verified causal effects.",
-            "DEXPI/ECAD joins require separate explicit GraphDB validation.",
+            "DEXPI/ECAD joins are only validated when --graphdb-url is supplied and exact joins succeed.",
             "Product QUDT values are specifications, not verified simulation units.",
             "Product associations are not verified physical installations.",
             "Successful retrieval is not an LLM correctness score.",
