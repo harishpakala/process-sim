@@ -1,0 +1,1118 @@
+{
+  "evaluation": "E2 engineering-to-operational evidence retrieval",
+  "generated_at_utc": "2026-11-02T12:41:53.133692+00:00",
+  "query": {
+    "asset_identifier": "https://aas.example.com/PI101",
+    "requested_history_minutes": 10.0
+  },
+  "engineering_context": {
+    "asset_identifier": "https://aas.example.com/PI101",
+    "dexpi_local_id": "PI_101",
+    "ecad_local_id": "PI-1101",
+    "operational_signal": "XMEAS7",
+    "product_identifier": "https://example.org/product-types/EandH_PMP51B_Candidate",
+    "eclass_code": "27-27-49-05",
+    "mapping_status": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+    "physical_installation_verified": false,
+    "mapping_source": "GraphDB AAS repository",
+    "resolution_method": "four-domain AssetIdentifier/ProductIdentifier SPARQL join"
+  },
+  "temporal_context": {
+    "status": "AVAILABLE",
+    "run_id": "53b37c4d-b8ba-4e37-8f49-6765a156dc17",
+    "run_identity_source": "operator_supplied",
+    "signal": "XMEAS7",
+    "latest": {
+      "simulation_seconds": 667.0,
+      "value": 2704.7073473822734,
+      "observed_at": "2026-11-02T13:41:51.252778+01:00",
+      "record_age_seconds": 1.881
+    },
+    "history": {
+      "window_basis": "simulation_time",
+      "requested_window_minutes": 10.0,
+      "returned_samples": 207,
+      "history_limit": 1000,
+      "truncated_by_limit": false,
+      "minimum": 2704.0823387524047,
+      "maximum": 2705.751292648934,
+      "first": {
+        "simulation_seconds": 68.0,
+        "value": 2704.973542146252,
+        "observed_at": "2026-11-02T13:31:47.442184+01:00"
+      },
+      "last": {
+        "simulation_seconds": 667.0,
+        "value": 2704.7073473822734,
+        "observed_at": "2026-11-02T13:41:51.252778+01:00"
+      },
+      "samples": [
+        {
+          "simulation_seconds": 68.0,
+          "value": 2704.973542146252,
+          "observed_at": "2026-11-02T13:31:47.442184+01:00"
+        },
+        {
+          "simulation_seconds": 71.0,
+          "value": 2704.683417425423,
+          "observed_at": "2026-11-02T13:31:50.383462+01:00"
+        },
+        {
+          "simulation_seconds": 74.0,
+          "value": 2704.4726448596584,
+          "observed_at": "2026-11-02T13:31:53.427123+01:00"
+        },
+        {
+          "simulation_seconds": 77.0,
+          "value": 2704.391138997883,
+          "observed_at": "2026-11-02T13:31:56.363603+01:00"
+        },
+        {
+          "simulation_seconds": 79.0,
+          "value": 2704.9517050141912,
+          "observed_at": "2026-11-02T13:31:59.294323+01:00"
+        },
+        {
+          "simulation_seconds": 82.0,
+          "value": 2705.2529230711507,
+          "observed_at": "2026-11-02T13:32:02.204322+01:00"
+        },
+        {
+          "simulation_seconds": 85.0,
+          "value": 2704.892446771556,
+          "observed_at": "2026-11-02T13:32:05.055802+01:00"
+        },
+        {
+          "simulation_seconds": 88.0,
+          "value": 2704.771210315023,
+          "observed_at": "2026-11-02T13:32:07.945098+01:00"
+        },
+        {
+          "simulation_seconds": 91.0,
+          "value": 2704.5617845011643,
+          "observed_at": "2026-11-02T13:32:10.836621+01:00"
+        },
+        {
+          "simulation_seconds": 94.0,
+          "value": 2704.6246307546953,
+          "observed_at": "2026-11-02T13:32:13.933278+01:00"
+        },
+        {
+          "simulation_seconds": 97.0,
+          "value": 2705.2206011254443,
+          "observed_at": "2026-11-02T13:32:16.947336+01:00"
+        },
+        {
+          "simulation_seconds": 100.0,
+          "value": 2704.8234382883265,
+          "observed_at": "2026-11-02T13:32:19.939151+01:00"
+        },
+        {
+          "simulation_seconds": 103.0,
+          "value": 2705.0322755433376,
+          "observed_at": "2026-11-02T13:32:22.893688+01:00"
+        },
+        {
+          "simulation_seconds": 106.0,
+          "value": 2705.284136815553,
+          "observed_at": "2026-11-02T13:32:25.836533+01:00"
+        },
+        {
+          "simulation_seconds": 109.0,
+          "value": 2705.066436655114,
+          "observed_at": "2026-11-02T13:32:28.679005+01:00"
+        },
+        {
+          "simulation_seconds": 112.0,
+          "value": 2704.929480237223,
+          "observed_at": "2026-11-02T13:32:31.577926+01:00"
+        },
+        {
+          "simulation_seconds": 114.0,
+          "value": 2704.798963362137,
+          "observed_at": "2026-11-02T13:32:34.388472+01:00"
+        },
+        {
+          "simulation_seconds": 117.0,
+          "value": 2704.4436220835396,
+          "observed_at": "2026-11-02T13:32:37.220156+01:00"
+        },
+        {
+          "simulation_seconds": 120.0,
+          "value": 2704.7779881693878,
+          "observed_at": "2026-11-02T13:32:40.111063+01:00"
+        },
+        {
+          "simulation_seconds": 123.0,
+          "value": 2705.400336765621,
+          "observed_at": "2026-11-02T13:32:43.100427+01:00"
+        },
+        {
+          "simulation_seconds": 126.0,
+          "value": 2704.6086292976565,
+          "observed_at": "2026-11-02T13:32:46.083061+01:00"
+        },
+        {
+          "simulation_seconds": 129.0,
+          "value": 2705.1012178159463,
+          "observed_at": "2026-11-02T13:32:49.167082+01:00"
+        },
+        {
+          "simulation_seconds": 132.0,
+          "value": 2704.7893449959665,
+          "observed_at": "2026-11-02T13:32:52.178811+01:00"
+        },
+        {
+          "simulation_seconds": 135.0,
+          "value": 2705.309644138229,
+          "observed_at": "2026-11-02T13:32:55.073277+01:00"
+        },
+        {
+          "simulation_seconds": 138.0,
+          "value": 2705.236639168263,
+          "observed_at": "2026-11-02T13:32:58.093052+01:00"
+        },
+        {
+          "simulation_seconds": 141.0,
+          "value": 2704.99524463663,
+          "observed_at": "2026-11-02T13:33:00.962061+01:00"
+        },
+        {
+          "simulation_seconds": 144.0,
+          "value": 2705.1732657189013,
+          "observed_at": "2026-11-02T13:33:03.767756+01:00"
+        },
+        {
+          "simulation_seconds": 146.0,
+          "value": 2705.0624225626307,
+          "observed_at": "2026-11-02T13:33:06.576908+01:00"
+        },
+        {
+          "simulation_seconds": 149.0,
+          "value": 2705.048307558296,
+          "observed_at": "2026-11-02T13:33:09.495523+01:00"
+        },
+        {
+          "simulation_seconds": 152.0,
+          "value": 2705.0507761361528,
+          "observed_at": "2026-11-02T13:33:12.431799+01:00"
+        },
+        {
+          "simulation_seconds": 155.0,
+          "value": 2705.4173990968393,
+          "observed_at": "2026-11-02T13:33:15.416316+01:00"
+        },
+        {
+          "simulation_seconds": 158.0,
+          "value": 2704.783637865997,
+          "observed_at": "2026-11-02T13:33:18.377969+01:00"
+        },
+        {
+          "simulation_seconds": 161.0,
+          "value": 2704.685344494292,
+          "observed_at": "2026-11-02T13:33:21.397549+01:00"
+        },
+        {
+          "simulation_seconds": 164.0,
+          "value": 2705.4712616573925,
+          "observed_at": "2026-11-02T13:33:24.342602+01:00"
+        },
+        {
+          "simulation_seconds": 167.0,
+          "value": 2704.9155226559715,
+          "observed_at": "2026-11-02T13:33:27.268094+01:00"
+        },
+        {
+          "simulation_seconds": 170.0,
+          "value": 2704.93015141572,
+          "observed_at": "2026-11-02T13:33:30.062942+01:00"
+        },
+        {
+          "simulation_seconds": 172.0,
+          "value": 2705.0775624873327,
+          "observed_at": "2026-11-02T13:33:32.874493+01:00"
+        },
+        {
+          "simulation_seconds": 175.0,
+          "value": 2704.796446933989,
+          "observed_at": "2026-11-02T13:33:35.685399+01:00"
+        },
+        {
+          "simulation_seconds": 178.0,
+          "value": 2705.178687249157,
+          "observed_at": "2026-11-02T13:33:38.574157+01:00"
+        },
+        {
+          "simulation_seconds": 181.0,
+          "value": 2704.9065028447394,
+          "observed_at": "2026-11-02T13:33:41.710869+01:00"
+        },
+        {
+          "simulation_seconds": 184.0,
+          "value": 2705.2895738964544,
+          "observed_at": "2026-11-02T13:33:44.737351+01:00"
+        },
+        {
+          "simulation_seconds": 187.0,
+          "value": 2704.9129712050185,
+          "observed_at": "2026-11-02T13:33:47.756355+01:00"
+        },
+        {
+          "simulation_seconds": 190.0,
+          "value": 2704.849656196162,
+          "observed_at": "2026-11-02T13:33:50.741225+01:00"
+        },
+        {
+          "simulation_seconds": 193.0,
+          "value": 2704.8729809206093,
+          "observed_at": "2026-11-02T13:33:53.653571+01:00"
+        },
+        {
+          "simulation_seconds": 196.0,
+          "value": 2704.7691880540924,
+          "observed_at": "2026-11-02T13:33:56.586570+01:00"
+        },
+        {
+          "simulation_seconds": 199.0,
+          "value": 2705.0499108973518,
+          "observed_at": "2026-11-02T13:33:59.551821+01:00"
+        },
+        {
+          "simulation_seconds": 202.0,
+          "value": 2704.9646733761224,
+          "observed_at": "2026-11-02T13:34:02.425293+01:00"
+        },
+        {
+          "simulation_seconds": 205.0,
+          "value": 2705.01339004114,
+          "observed_at": "2026-11-02T13:34:05.257493+01:00"
+        },
+        {
+          "simulation_seconds": 208.0,
+          "value": 2704.6588660681546,
+          "observed_at": "2026-11-02T13:34:08.317429+01:00"
+        },
+        {
+          "simulation_seconds": 210.0,
+          "value": 2705.4392972579067,
+          "observed_at": "2026-11-02T13:34:11.198399+01:00"
+        },
+        {
+          "simulation_seconds": 213.0,
+          "value": 2704.9182078116028,
+          "observed_at": "2026-11-02T13:34:14.168013+01:00"
+        },
+        {
+          "simulation_seconds": 216.0,
+          "value": 2705.194381329797,
+          "observed_at": "2026-11-02T13:34:17.105834+01:00"
+        },
+        {
+          "simulation_seconds": 219.0,
+          "value": 2705.087052979386,
+          "observed_at": "2026-11-02T13:34:19.951770+01:00"
+        },
+        {
+          "simulation_seconds": 222.0,
+          "value": 2704.8066841861214,
+          "observed_at": "2026-11-02T13:34:22.779796+01:00"
+        },
+        {
+          "simulation_seconds": 225.0,
+          "value": 2705.3641270007506,
+          "observed_at": "2026-11-02T13:34:25.779151+01:00"
+        },
+        {
+          "simulation_seconds": 228.0,
+          "value": 2704.783124099023,
+          "observed_at": "2026-11-02T13:34:28.740861+01:00"
+        },
+        {
+          "simulation_seconds": 231.0,
+          "value": 2704.8128087816954,
+          "observed_at": "2026-11-02T13:34:31.687279+01:00"
+        },
+        {
+          "simulation_seconds": 234.0,
+          "value": 2705.3402049745137,
+          "observed_at": "2026-11-02T13:34:34.607913+01:00"
+        },
+        {
+          "simulation_seconds": 236.0,
+          "value": 2704.802727228235,
+          "observed_at": "2026-11-02T13:34:37.574623+01:00"
+        },
+        {
+          "simulation_seconds": 240.0,
+          "value": 2705.100680718607,
+          "observed_at": "2026-11-02T13:34:40.658563+01:00"
+        },
+        {
+          "simulation_seconds": 243.0,
+          "value": 2705.409761246386,
+          "observed_at": "2026-11-02T13:34:43.740559+01:00"
+        },
+        {
+          "simulation_seconds": 246.0,
+          "value": 2704.393555237327,
+          "observed_at": "2026-11-02T13:34:46.747539+01:00"
+        },
+        {
+          "simulation_seconds": 249.0,
+          "value": 2705.1160397421754,
+          "observed_at": "2026-11-02T13:34:49.790426+01:00"
+        },
+        {
+          "simulation_seconds": 252.0,
+          "value": 2705.2540824366906,
+          "observed_at": "2026-11-02T13:34:52.675628+01:00"
+        },
+        {
+          "simulation_seconds": 254.0,
+          "value": 2704.9547217863055,
+          "observed_at": "2026-11-02T13:34:55.554934+01:00"
+        },
+        {
+          "simulation_seconds": 257.0,
+          "value": 2704.958782687491,
+          "observed_at": "2026-11-02T13:34:58.525449+01:00"
+        },
+        {
+          "simulation_seconds": 260.0,
+          "value": 2704.613069747014,
+          "observed_at": "2026-11-02T13:35:01.400934+01:00"
+        },
+        {
+          "simulation_seconds": 263.0,
+          "value": 2704.804216265631,
+          "observed_at": "2026-11-02T13:35:04.353291+01:00"
+        },
+        {
+          "simulation_seconds": 266.0,
+          "value": 2704.556746169087,
+          "observed_at": "2026-11-02T13:35:07.384757+01:00"
+        },
+        {
+          "simulation_seconds": 269.0,
+          "value": 2705.045574008143,
+          "observed_at": "2026-11-02T13:35:10.435802+01:00"
+        },
+        {
+          "simulation_seconds": 272.0,
+          "value": 2705.208504958544,
+          "observed_at": "2026-11-02T13:35:13.496056+01:00"
+        },
+        {
+          "simulation_seconds": 275.0,
+          "value": 2705.4587348210453,
+          "observed_at": "2026-11-02T13:35:16.560735+01:00"
+        },
+        {
+          "simulation_seconds": 278.0,
+          "value": 2704.4973500213955,
+          "observed_at": "2026-11-02T13:35:19.507155+01:00"
+        },
+        {
+          "simulation_seconds": 281.0,
+          "value": 2704.8258276103447,
+          "observed_at": "2026-11-02T13:35:22.465385+01:00"
+        },
+        {
+          "simulation_seconds": 284.0,
+          "value": 2704.758535263644,
+          "observed_at": "2026-11-02T13:35:25.413506+01:00"
+        },
+        {
+          "simulation_seconds": 287.0,
+          "value": 2705.435231282043,
+          "observed_at": "2026-11-02T13:35:28.235359+01:00"
+        },
+        {
+          "simulation_seconds": 290.0,
+          "value": 2704.633564591288,
+          "observed_at": "2026-11-02T13:35:31.166720+01:00"
+        },
+        {
+          "simulation_seconds": 293.0,
+          "value": 2704.981574742133,
+          "observed_at": "2026-11-02T13:35:34.210231+01:00"
+        },
+        {
+          "simulation_seconds": 296.0,
+          "value": 2705.0701919103226,
+          "observed_at": "2026-11-02T13:35:37.269239+01:00"
+        },
+        {
+          "simulation_seconds": 299.0,
+          "value": 2704.9657368966073,
+          "observed_at": "2026-11-02T13:35:40.169660+01:00"
+        },
+        {
+          "simulation_seconds": 301.0,
+          "value": 2705.441930345416,
+          "observed_at": "2026-11-02T13:35:43.082307+01:00"
+        },
+        {
+          "simulation_seconds": 304.0,
+          "value": 2704.0823387524047,
+          "observed_at": "2026-11-02T13:35:46.113664+01:00"
+        },
+        {
+          "simulation_seconds": 307.0,
+          "value": 2704.986217946148,
+          "observed_at": "2026-11-02T13:35:48.941601+01:00"
+        },
+        {
+          "simulation_seconds": 310.0,
+          "value": 2704.792154352388,
+          "observed_at": "2026-11-02T13:35:51.789752+01:00"
+        },
+        {
+          "simulation_seconds": 313.0,
+          "value": 2704.8391250218715,
+          "observed_at": "2026-11-02T13:35:54.642685+01:00"
+        },
+        {
+          "simulation_seconds": 316.0,
+          "value": 2705.578997630346,
+          "observed_at": "2026-11-02T13:35:57.502613+01:00"
+        },
+        {
+          "simulation_seconds": 319.0,
+          "value": 2705.4890304785554,
+          "observed_at": "2026-11-02T13:36:00.314161+01:00"
+        },
+        {
+          "simulation_seconds": 321.0,
+          "value": 2705.0586227362232,
+          "observed_at": "2026-11-02T13:36:03.179938+01:00"
+        },
+        {
+          "simulation_seconds": 324.0,
+          "value": 2705.2209897078665,
+          "observed_at": "2026-11-02T13:36:06.121720+01:00"
+        },
+        {
+          "simulation_seconds": 327.0,
+          "value": 2704.872559887893,
+          "observed_at": "2026-11-02T13:36:09.105691+01:00"
+        },
+        {
+          "simulation_seconds": 330.0,
+          "value": 2704.91285720205,
+          "observed_at": "2026-11-02T13:36:12.034314+01:00"
+        },
+        {
+          "simulation_seconds": 333.0,
+          "value": 2705.091796201077,
+          "observed_at": "2026-11-02T13:36:14.937380+01:00"
+        },
+        {
+          "simulation_seconds": 336.0,
+          "value": 2705.322182060719,
+          "observed_at": "2026-11-02T13:36:17.784421+01:00"
+        },
+        {
+          "simulation_seconds": 339.0,
+          "value": 2705.4922105817163,
+          "observed_at": "2026-11-02T13:36:20.605361+01:00"
+        },
+        {
+          "simulation_seconds": 342.0,
+          "value": 2704.9779681898135,
+          "observed_at": "2026-11-02T13:36:23.473440+01:00"
+        },
+        {
+          "simulation_seconds": 344.0,
+          "value": 2704.7737068692727,
+          "observed_at": "2026-11-02T13:36:26.267500+01:00"
+        },
+        {
+          "simulation_seconds": 347.0,
+          "value": 2704.7684758464006,
+          "observed_at": "2026-11-02T13:36:29.072043+01:00"
+        },
+        {
+          "simulation_seconds": 350.0,
+          "value": 2705.3448918792687,
+          "observed_at": "2026-11-02T13:36:31.919791+01:00"
+        },
+        {
+          "simulation_seconds": 353.0,
+          "value": 2704.663807018624,
+          "observed_at": "2026-11-02T13:36:34.872354+01:00"
+        },
+        {
+          "simulation_seconds": 356.0,
+          "value": 2705.0989639401973,
+          "observed_at": "2026-11-02T13:36:37.841447+01:00"
+        },
+        {
+          "simulation_seconds": 359.0,
+          "value": 2704.6494959447364,
+          "observed_at": "2026-11-02T13:36:40.863122+01:00"
+        },
+        {
+          "simulation_seconds": 362.0,
+          "value": 2704.817860069762,
+          "observed_at": "2026-11-02T13:36:43.960624+01:00"
+        },
+        {
+          "simulation_seconds": 365.0,
+          "value": 2705.0619173751415,
+          "observed_at": "2026-11-02T13:36:46.956295+01:00"
+        },
+        {
+          "simulation_seconds": 368.0,
+          "value": 2705.4088284010522,
+          "observed_at": "2026-11-02T13:36:49.867974+01:00"
+        },
+        {
+          "simulation_seconds": 371.0,
+          "value": 2704.736339729489,
+          "observed_at": "2026-11-02T13:36:52.742193+01:00"
+        },
+        {
+          "simulation_seconds": 373.0,
+          "value": 2705.3922211477434,
+          "observed_at": "2026-11-02T13:36:55.530253+01:00"
+        },
+        {
+          "simulation_seconds": 376.0,
+          "value": 2704.8502739959154,
+          "observed_at": "2026-11-02T13:36:58.327465+01:00"
+        },
+        {
+          "simulation_seconds": 379.0,
+          "value": 2704.763438865247,
+          "observed_at": "2026-11-02T13:37:01.236338+01:00"
+        },
+        {
+          "simulation_seconds": 382.0,
+          "value": 2705.1473529627297,
+          "observed_at": "2026-11-02T13:37:04.234743+01:00"
+        },
+        {
+          "simulation_seconds": 385.0,
+          "value": 2705.008669120351,
+          "observed_at": "2026-11-02T13:37:07.171200+01:00"
+        },
+        {
+          "simulation_seconds": 388.0,
+          "value": 2704.8575557950976,
+          "observed_at": "2026-11-02T13:37:10.147293+01:00"
+        },
+        {
+          "simulation_seconds": 391.0,
+          "value": 2705.320197068963,
+          "observed_at": "2026-11-02T13:37:13.250930+01:00"
+        },
+        {
+          "simulation_seconds": 394.0,
+          "value": 2705.751292648934,
+          "observed_at": "2026-11-02T13:37:16.170064+01:00"
+        },
+        {
+          "simulation_seconds": 397.0,
+          "value": 2704.946557866998,
+          "observed_at": "2026-11-02T13:37:19.110967+01:00"
+        },
+        {
+          "simulation_seconds": 400.0,
+          "value": 2705.155223680145,
+          "observed_at": "2026-11-02T13:37:21.932726+01:00"
+        },
+        {
+          "simulation_seconds": 402.0,
+          "value": 2705.01224991741,
+          "observed_at": "2026-11-02T13:37:24.724718+01:00"
+        },
+        {
+          "simulation_seconds": 405.0,
+          "value": 2705.1816452378916,
+          "observed_at": "2026-11-02T13:37:27.510386+01:00"
+        },
+        {
+          "simulation_seconds": 408.0,
+          "value": 2704.679577872099,
+          "observed_at": "2026-11-02T13:37:30.414575+01:00"
+        },
+        {
+          "simulation_seconds": 411.0,
+          "value": 2704.9806694020112,
+          "observed_at": "2026-11-02T13:37:33.392176+01:00"
+        },
+        {
+          "simulation_seconds": 414.0,
+          "value": 2705.2380570346263,
+          "observed_at": "2026-11-02T13:37:36.340558+01:00"
+        },
+        {
+          "simulation_seconds": 417.0,
+          "value": 2705.095893601933,
+          "observed_at": "2026-11-02T13:37:39.436778+01:00"
+        },
+        {
+          "simulation_seconds": 420.0,
+          "value": 2704.8018475609133,
+          "observed_at": "2026-11-02T13:37:42.421186+01:00"
+        },
+        {
+          "simulation_seconds": 423.0,
+          "value": 2704.719602993567,
+          "observed_at": "2026-11-02T13:37:45.315951+01:00"
+        },
+        {
+          "simulation_seconds": 426.0,
+          "value": 2705.741359606882,
+          "observed_at": "2026-11-02T13:37:48.104697+01:00"
+        },
+        {
+          "simulation_seconds": 428.0,
+          "value": 2704.7928633695747,
+          "observed_at": "2026-11-02T13:37:50.993627+01:00"
+        },
+        {
+          "simulation_seconds": 431.0,
+          "value": 2705.5107254661893,
+          "observed_at": "2026-11-02T13:37:53.849311+01:00"
+        },
+        {
+          "simulation_seconds": 434.0,
+          "value": 2705.0289754621067,
+          "observed_at": "2026-11-02T13:37:56.647343+01:00"
+        },
+        {
+          "simulation_seconds": 437.0,
+          "value": 2705.340203689318,
+          "observed_at": "2026-11-02T13:37:59.561433+01:00"
+        },
+        {
+          "simulation_seconds": 440.0,
+          "value": 2705.2905161048166,
+          "observed_at": "2026-11-02T13:38:02.536005+01:00"
+        },
+        {
+          "simulation_seconds": 443.0,
+          "value": 2705.492034290593,
+          "observed_at": "2026-11-02T13:38:05.579412+01:00"
+        },
+        {
+          "simulation_seconds": 446.0,
+          "value": 2704.535395453641,
+          "observed_at": "2026-11-02T13:38:08.624208+01:00"
+        },
+        {
+          "simulation_seconds": 449.0,
+          "value": 2705.102252425952,
+          "observed_at": "2026-11-02T13:38:11.677179+01:00"
+        },
+        {
+          "simulation_seconds": 452.0,
+          "value": 2704.777773664521,
+          "observed_at": "2026-11-02T13:38:14.685507+01:00"
+        },
+        {
+          "simulation_seconds": 455.0,
+          "value": 2704.863143251344,
+          "observed_at": "2026-11-02T13:38:17.602949+01:00"
+        },
+        {
+          "simulation_seconds": 458.0,
+          "value": 2704.7880608934092,
+          "observed_at": "2026-11-02T13:38:20.441808+01:00"
+        },
+        {
+          "simulation_seconds": 461.0,
+          "value": 2704.9232419227237,
+          "observed_at": "2026-11-02T13:38:23.396991+01:00"
+        },
+        {
+          "simulation_seconds": 463.0,
+          "value": 2705.192917296272,
+          "observed_at": "2026-11-02T13:38:26.374374+01:00"
+        },
+        {
+          "simulation_seconds": 467.0,
+          "value": 2705.487333596054,
+          "observed_at": "2026-11-02T13:38:29.441857+01:00"
+        },
+        {
+          "simulation_seconds": 469.0,
+          "value": 2704.5752530290674,
+          "observed_at": "2026-11-02T13:38:32.412922+01:00"
+        },
+        {
+          "simulation_seconds": 472.0,
+          "value": 2705.616453427312,
+          "observed_at": "2026-11-02T13:38:35.403020+01:00"
+        },
+        {
+          "simulation_seconds": 475.0,
+          "value": 2705.4742282477823,
+          "observed_at": "2026-11-02T13:38:38.372170+01:00"
+        },
+        {
+          "simulation_seconds": 478.0,
+          "value": 2705.139368171678,
+          "observed_at": "2026-11-02T13:38:41.275464+01:00"
+        },
+        {
+          "simulation_seconds": 481.0,
+          "value": 2705.3277455447474,
+          "observed_at": "2026-11-02T13:38:44.193446+01:00"
+        },
+        {
+          "simulation_seconds": 484.0,
+          "value": 2704.785334058705,
+          "observed_at": "2026-11-02T13:38:47.035377+01:00"
+        },
+        {
+          "simulation_seconds": 487.0,
+          "value": 2704.8508177955596,
+          "observed_at": "2026-11-02T13:38:49.884531+01:00"
+        },
+        {
+          "simulation_seconds": 490.0,
+          "value": 2704.6913964623086,
+          "observed_at": "2026-11-02T13:38:52.741767+01:00"
+        },
+        {
+          "simulation_seconds": 493.0,
+          "value": 2704.715285390954,
+          "observed_at": "2026-11-02T13:38:55.559125+01:00"
+        },
+        {
+          "simulation_seconds": 495.0,
+          "value": 2704.7390074090076,
+          "observed_at": "2026-11-02T13:38:58.492639+01:00"
+        },
+        {
+          "simulation_seconds": 498.0,
+          "value": 2704.9323294563765,
+          "observed_at": "2026-11-02T13:39:01.576687+01:00"
+        },
+        {
+          "simulation_seconds": 501.0,
+          "value": 2705.264723484322,
+          "observed_at": "2026-11-02T13:39:04.553852+01:00"
+        },
+        {
+          "simulation_seconds": 504.0,
+          "value": 2705.143797239579,
+          "observed_at": "2026-11-02T13:39:07.619655+01:00"
+        },
+        {
+          "simulation_seconds": 507.0,
+          "value": 2704.99716693495,
+          "observed_at": "2026-11-02T13:39:10.551916+01:00"
+        },
+        {
+          "simulation_seconds": 510.0,
+          "value": 2705.2499751466476,
+          "observed_at": "2026-11-02T13:39:13.380410+01:00"
+        },
+        {
+          "simulation_seconds": 513.0,
+          "value": 2704.8723729169515,
+          "observed_at": "2026-11-02T13:39:16.224035+01:00"
+        },
+        {
+          "simulation_seconds": 516.0,
+          "value": 2705.1245287028573,
+          "observed_at": "2026-11-02T13:39:19.052078+01:00"
+        },
+        {
+          "simulation_seconds": 519.0,
+          "value": 2705.2826265863873,
+          "observed_at": "2026-11-02T13:39:21.890163+01:00"
+        },
+        {
+          "simulation_seconds": 522.0,
+          "value": 2705.1513662745438,
+          "observed_at": "2026-11-02T13:39:24.717664+01:00"
+        },
+        {
+          "simulation_seconds": 524.0,
+          "value": 2705.3267702115713,
+          "observed_at": "2026-11-02T13:39:27.661764+01:00"
+        },
+        {
+          "simulation_seconds": 527.0,
+          "value": 2704.719349756363,
+          "observed_at": "2026-11-02T13:39:30.630573+01:00"
+        },
+        {
+          "simulation_seconds": 530.0,
+          "value": 2705.4189578244836,
+          "observed_at": "2026-11-02T13:39:33.573232+01:00"
+        },
+        {
+          "simulation_seconds": 533.0,
+          "value": 2705.030684747947,
+          "observed_at": "2026-11-02T13:39:36.690460+01:00"
+        },
+        {
+          "simulation_seconds": 536.0,
+          "value": 2704.613136483774,
+          "observed_at": "2026-11-02T13:39:39.798499+01:00"
+        },
+        {
+          "simulation_seconds": 539.0,
+          "value": 2704.8909346139767,
+          "observed_at": "2026-11-02T13:39:42.769731+01:00"
+        },
+        {
+          "simulation_seconds": 542.0,
+          "value": 2705.4672163455766,
+          "observed_at": "2026-11-02T13:39:45.630187+01:00"
+        },
+        {
+          "simulation_seconds": 545.0,
+          "value": 2705.236134510587,
+          "observed_at": "2026-11-02T13:39:48.533628+01:00"
+        },
+        {
+          "simulation_seconds": 548.0,
+          "value": 2704.595357566035,
+          "observed_at": "2026-11-02T13:39:51.363601+01:00"
+        },
+        {
+          "simulation_seconds": 551.0,
+          "value": 2704.958569593936,
+          "observed_at": "2026-11-02T13:39:54.176036+01:00"
+        },
+        {
+          "simulation_seconds": 554.0,
+          "value": 2704.6679703013133,
+          "observed_at": "2026-11-02T13:39:57.084011+01:00"
+        },
+        {
+          "simulation_seconds": 557.0,
+          "value": 2705.406775020198,
+          "observed_at": "2026-11-02T13:40:00.132631+01:00"
+        },
+        {
+          "simulation_seconds": 560.0,
+          "value": 2705.4117147076026,
+          "observed_at": "2026-11-02T13:40:03.165895+01:00"
+        },
+        {
+          "simulation_seconds": 563.0,
+          "value": 2704.685535945563,
+          "observed_at": "2026-11-02T13:40:06.247637+01:00"
+        },
+        {
+          "simulation_seconds": 566.0,
+          "value": 2705.1095009410997,
+          "observed_at": "2026-11-02T13:40:09.253798+01:00"
+        },
+        {
+          "simulation_seconds": 569.0,
+          "value": 2704.8558875262456,
+          "observed_at": "2026-11-02T13:40:12.108559+01:00"
+        },
+        {
+          "simulation_seconds": 571.0,
+          "value": 2704.4788364973765,
+          "observed_at": "2026-11-02T13:40:14.881947+01:00"
+        },
+        {
+          "simulation_seconds": 574.0,
+          "value": 2705.191091747492,
+          "observed_at": "2026-11-02T13:40:17.673995+01:00"
+        },
+        {
+          "simulation_seconds": 577.0,
+          "value": 2705.5190303059644,
+          "observed_at": "2026-11-02T13:40:20.519395+01:00"
+        },
+        {
+          "simulation_seconds": 580.0,
+          "value": 2704.697820629828,
+          "observed_at": "2026-11-02T13:40:23.442770+01:00"
+        },
+        {
+          "simulation_seconds": 583.0,
+          "value": 2704.7786468011145,
+          "observed_at": "2026-11-02T13:40:26.361012+01:00"
+        },
+        {
+          "simulation_seconds": 586.0,
+          "value": 2704.7412085268634,
+          "observed_at": "2026-11-02T13:40:29.350577+01:00"
+        },
+        {
+          "simulation_seconds": 589.0,
+          "value": 2704.806221139108,
+          "observed_at": "2026-11-02T13:40:32.374943+01:00"
+        },
+        {
+          "simulation_seconds": 592.0,
+          "value": 2705.04791559489,
+          "observed_at": "2026-11-02T13:40:35.387367+01:00"
+        },
+        {
+          "simulation_seconds": 595.0,
+          "value": 2704.906538476252,
+          "observed_at": "2026-11-02T13:40:38.361249+01:00"
+        },
+        {
+          "simulation_seconds": 597.0,
+          "value": 2705.100851990229,
+          "observed_at": "2026-11-02T13:40:41.290518+01:00"
+        },
+        {
+          "simulation_seconds": 600.0,
+          "value": 2705.0697211600354,
+          "observed_at": "2026-11-02T13:40:44.151978+01:00"
+        },
+        {
+          "simulation_seconds": 603.0,
+          "value": 2704.3608725773606,
+          "observed_at": "2026-11-02T13:40:47.056353+01:00"
+        },
+        {
+          "simulation_seconds": 606.0,
+          "value": 2705.3216013460938,
+          "observed_at": "2026-11-02T13:40:49.907284+01:00"
+        },
+        {
+          "simulation_seconds": 609.0,
+          "value": 2704.8210602982726,
+          "observed_at": "2026-11-02T13:40:52.789400+01:00"
+        },
+        {
+          "simulation_seconds": 612.0,
+          "value": 2704.83191789095,
+          "observed_at": "2026-11-02T13:40:55.828019+01:00"
+        },
+        {
+          "simulation_seconds": 615.0,
+          "value": 2704.7428582061775,
+          "observed_at": "2026-11-02T13:40:58.991023+01:00"
+        },
+        {
+          "simulation_seconds": 618.0,
+          "value": 2704.771080951004,
+          "observed_at": "2026-11-02T13:41:01.977568+01:00"
+        },
+        {
+          "simulation_seconds": 621.0,
+          "value": 2704.8748014574803,
+          "observed_at": "2026-11-02T13:41:05.005866+01:00"
+        },
+        {
+          "simulation_seconds": 624.0,
+          "value": 2705.4657506826634,
+          "observed_at": "2026-11-02T13:41:08.012856+01:00"
+        },
+        {
+          "simulation_seconds": 627.0,
+          "value": 2705.1216752086093,
+          "observed_at": "2026-11-02T13:41:10.875522+01:00"
+        },
+        {
+          "simulation_seconds": 630.0,
+          "value": 2705.198837242374,
+          "observed_at": "2026-11-02T13:41:13.717412+01:00"
+        },
+        {
+          "simulation_seconds": 633.0,
+          "value": 2705.1445146160227,
+          "observed_at": "2026-11-02T13:41:16.540039+01:00"
+        },
+        {
+          "simulation_seconds": 635.0,
+          "value": 2704.8370428629823,
+          "observed_at": "2026-11-02T13:41:19.366804+01:00"
+        },
+        {
+          "simulation_seconds": 638.0,
+          "value": 2704.9587451521193,
+          "observed_at": "2026-11-02T13:41:22.247799+01:00"
+        },
+        {
+          "simulation_seconds": 641.0,
+          "value": 2704.642224499964,
+          "observed_at": "2026-11-02T13:41:25.254841+01:00"
+        },
+        {
+          "simulation_seconds": 644.0,
+          "value": 2705.2976493635856,
+          "observed_at": "2026-11-02T13:41:28.241655+01:00"
+        },
+        {
+          "simulation_seconds": 647.0,
+          "value": 2704.8512038250537,
+          "observed_at": "2026-11-02T13:41:31.185861+01:00"
+        },
+        {
+          "simulation_seconds": 650.0,
+          "value": 2704.757587591431,
+          "observed_at": "2026-11-02T13:41:34.269688+01:00"
+        },
+        {
+          "simulation_seconds": 653.0,
+          "value": 2704.7125159947905,
+          "observed_at": "2026-11-02T13:41:37.181680+01:00"
+        },
+        {
+          "simulation_seconds": 656.0,
+          "value": 2705.165219992202,
+          "observed_at": "2026-11-02T13:41:39.996173+01:00"
+        },
+        {
+          "simulation_seconds": 659.0,
+          "value": 2705.0309461657403,
+          "observed_at": "2026-11-02T13:41:42.797058+01:00"
+        },
+        {
+          "simulation_seconds": 661.0,
+          "value": 2704.80345672248,
+          "observed_at": "2026-11-02T13:41:45.595509+01:00"
+        },
+        {
+          "simulation_seconds": 664.0,
+          "value": 2704.7528426711365,
+          "observed_at": "2026-11-02T13:41:48.451507+01:00"
+        },
+        {
+          "simulation_seconds": 667.0,
+          "value": 2704.7073473822734,
+          "observed_at": "2026-11-02T13:41:51.252778+01:00"
+        }
+      ]
+    }
+  },
+  "evidence_path": [
+    {
+      "source": "GraphDB",
+      "relationship": "DEXPI/ECAD/AssetInventory shared logical AssetIdentifier",
+      "identifier": "https://aas.example.com/PI101"
+    },
+    {
+      "source": "GraphDB",
+      "relationship": "AssetInventory to ProductCatalog ProductIdentifier",
+      "identifier": "https://example.org/product-types/EandH_PMP51B_Candidate"
+    },
+    {
+      "source": "GraphDB",
+      "relationship": "AssetInventory OperationalReference",
+      "identifier": "XMEAS7"
+    },
+    {
+      "source": "TimescaleDB",
+      "relationship": "run ID + signal to timestamped measurements",
+      "identifier": "53b37c4d-b8ba-4e37-8f49-6765a156dc17"
+    }
+  ],
+  "limitations": [
+    "Logical simulation identity is accepted for the selected asset; physical installation is not verified.",
+    "Product associations are candidates, not verified physical installations.",
+    "ECLASS values are graph metadata, not independently certified classifications.",
+    "Run ID is operator supplied; shared OPC UA/TimescaleDB provenance is not independently verified.",
+    "Measurements are stored in TimescaleDB, not materialized as RDF.",
+    "Retrieval is evidence access, not fault diagnosis or causal inference."
+  ]
+}

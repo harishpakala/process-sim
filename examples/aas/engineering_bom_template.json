@@ -1,0 +1,205 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/engineering-bom-template",
+  "idShort": "TEP_EngineeringBOM",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Assemblies",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Assembly",
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssemblyKind",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "BOMItems",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "BOMItem",
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ParentItemId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceDomain",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceGroup",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringLocalId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Quantity",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Unit",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityBasis",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CandidateProductReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValidationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquivalenceStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemType",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "BOMPosition",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityPerAssembly",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FunctionalAssemblyReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociationBasis",
+              "valueType": "xs:string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

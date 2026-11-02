@@ -1,0 +1,13 @@
+{
+  "interface": "TEP NEXUS constrained LLM query planner",
+  "generated_at_utc": "2026-11-02T11:03:45.638524+00:00",
+  "question": "What were the four sensor values before and after activation? Selected reactor measurements: pressure PI-1101 (TEP_XMEAS7, XMEAS7), flow FI-1101 (TEP_XMEAS6, XMEAS6), temperature TI-1101 (TEP_XMEAS9, XMEAS9), level LI-1101 (TEP_XMEAS8, XMEAS8). Use only verified source relationships; report missing mappings and evidence. Simulation run: YOUR_VERIFIED_RUN_ID.",
+  "model": "llama3.1:8b",
+  "raw_plan": null,
+  "validated_plan": null,
+  "evidence": null,
+  "answer": null,
+  "status": "ERROR",
+  "answer_validation": "NOT_AUTOMATICALLY_VERIFIED",
+  "error": "ValueError: Temporal coverage is not scoped to the requested run"
+}

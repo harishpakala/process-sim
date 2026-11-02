@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-02T09:57:03.589040+00:00",
+  "question": "Compare FI_101 and PI_101 over the last 10 simulation minutes. Which changed more relative to its initial value?",
+  "status": "COMPLETED_WITH_ANSWER_CHECK_FAILURES",
+  "validated_plan": {
+    "engineering_functions": [
+      "FI_101",
+      "PI_101"
+    ],
+    "history_window_minutes": 10.0
+  },
+  "evidence": {
+    "mappings": [
+      {
+        "engineering_function": "FI_101",
+        "function_reference": "https://aas.example.com/FI_101",
+        "operational_signal": "XMEAS1",
+        "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+        "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+        "mapping_source": "GraphDB AAS repository",
+        "resolution_method": "path-constrained SPARQL; snapshot equality check"
+      },
+      {
+        "engineering_function": "PI_101",
+        "function_reference": "https://aas.example.com/PI_101",
+        "operational_signal": "XMEAS7",
+        "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+        "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+        "mapping_source": "GraphDB AAS repository",
+        "resolution_method": "path-constrained SPARQL; snapshot equality check"
+      }
+    ],
+    "comparison": {
+      "alignment": "exact_common_simulation_timestamps_no_interpolation",
+      "common_start_simulation_seconds": 2916.0,
+      "common_end_simulation_seconds": 3514.0,
+      "common_sample_count": 201,
+      "series": [
+        {
+          "signal": "XMEAS1",
+          "sample_count_aligned": 201,
+          "first_value": 0.2506686071040025,
+          "last_value": 0.25016506253200677,
+          "endpoint_change": -0.000503544571995751,
+          "relative_endpoint_change_percent": -0.20088058804540695,
+          "slope_per_simulation_minute": 1.528065315020885e-05,
+          "engineering_function": "FI_101"
+        },
+        {
+          "signal": "XMEAS7",
+          "sample_count_aligned": 201,
+          "first_value": 2704.4463049428855,
+          "last_value": 2704.724602141082,
+          "endpoint_change": 0.27829719819646925,
+          "relative_endpoint_change_percent": 0.010290357685705524,
+          "slope_per_simulation_minute": -0.008855622643608452,
+          "engineering_function": "PI_101"
+        }
+      ],
+      "larger_absolute_relative_change_index": 0,
+      "comparison_available": true
+    },
+    "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+    "run_identity_source": "operator_supplied",
+    "engineering_mapping": "PROVISIONAL",
+    "physical_sensor_binding": "NOT_VERIFIED",
+    "shared_run_provenance": "NOT_VERIFIED",
+    "causal_inference": "NOT_SUPPORTED"
+  },
+  "llm_answer": null,
+  "llm_answer_validation": "NOT_RUN",
+  "llm_answer_validation_details": null,
+  "self_correction": {
+    "enabled": false,
+    "attempted": false
+  },
+  "raw_plan": {
+    "engineering_functions": [
+      "FI_101",
+      "PI_101"
+    ],
+    "history_window_minutes": 10
+  },
+  "answer_format": "split",
+  "split_judgment": {
+    "numerical_llm_answer": {
+      "engineering_functions": [
+        "FI_101",
+        "PI_101"
+      ],
+      "relative_change_magnitudes_percent": [
+        0.20088058804540695,
+        0.010290357685705524
+      ],
+      "larger_absolute_relative_change_function": "PI_101",
+      "numerical_conclusion": "PI_101 changed more relative to its initial value"
+    },
+    "numerical_validation": {
+      "status": "FAILED",
+      "checks": {
+        "schema": true,
+        "functions": true,
+        "magnitudes": true,
+        "winner": false,
+        "conclusion_consistent_with_evidence": false
+      },
+      "failed_checks": [
+        "winner",
+        "conclusion_consistent_with_evidence"
+      ]
+    },
+    "interpretation_llm_answer": {
+      "numerical_conclusion": "PI_101 changed more relative to its initial value",
+      "engineering_interpretation": "PI_101 changed more relative to its initial value",
+      "limitations": [
+        "PROVISIONAL engineering mapping",
+        "UNVERIFIED physical sensor binding",
+        "UNVERIFIED shared run provenance",
+        "UNSUPPORTED causal inference"
+      ],
+      "causal_inference_supported": false,
+      "physical_binding_verified": false,
+      "shared_run_provenance_verified": false
+    },
+    "interpretation_validation": {
+      "status": "FAILED",
+      "checks": {
+        "schema": true,
+        "numerical_conclusion_retained": false,
+        "engineering_interpretation_present": true,
+        "provenance_flags": true,
+        "limitations": true
+      },
+      "failed_checks": [
+        "numerical_conclusion_retained"
+      ],
+      "scope": "field_and_keyword_checks_not_semantic_entailment"
+    },
+    "both_stages_passed": false
+  }
+}

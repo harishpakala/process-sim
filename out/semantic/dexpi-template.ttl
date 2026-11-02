@@ -1,0 +1,172 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix dexpi: <https://example.org/dexpi/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "DEXPI SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> a owl:Class ;
+    rdfs:label "DEXPI" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "ActuatingFunctions SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ActuatingFunctions constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    sh:path dexpi:hasActuatingFunctions .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "ActuatingFunction SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ActuatingFunction constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> ;
+    sh:path dexpi:hasActuatingFunction .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ActuatedVariable constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasActuatedVariable .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "Equipment SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Equipment constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> ;
+    sh:path dexpi:hasEquipment .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Equipments SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Equipments constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> ;
+    sh:path dexpi:hasEquipments .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "InstrumentationFunctions SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "InstrumentationFunctions constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    sh:path dexpi:hasInstrumentationFunctions .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "InstrumentationFunction SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "InstrumentationFunction constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> ;
+    sh:path dexpi:hasInstrumentationFunction .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MeasuredVariable constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasMeasuredVariable .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path dexpi:hasLocalId .
+
+dexpi:hasActuatedVariable a owl:DatatypeProperty ;
+    rdfs:label "hasActuatedVariable" .
+
+dexpi:hasActuatingFunction a owl:ObjectProperty ;
+    rdfs:label "hasActuatingFunction" .
+
+dexpi:hasActuatingFunctions a owl:ObjectProperty ;
+    rdfs:label "hasActuatingFunctions" .
+
+dexpi:hasEquipment a owl:ObjectProperty ;
+    rdfs:label "hasEquipment" .
+
+dexpi:hasEquipments a owl:ObjectProperty ;
+    rdfs:label "hasEquipments" .
+
+dexpi:hasInstrumentationFunction a owl:ObjectProperty ;
+    rdfs:label "hasInstrumentationFunction" .
+
+dexpi:hasInstrumentationFunctions a owl:ObjectProperty ;
+    rdfs:label "hasInstrumentationFunctions" .
+
+dexpi:hasMeasuredVariable a owl:DatatypeProperty ;
+    rdfs:label "hasMeasuredVariable" .
+
+dexpi:hasAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasAssetIdentifier" .
+
+dexpi:hasLocalId a owl:DatatypeProperty ;
+    rdfs:label "hasLocalId" .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
+

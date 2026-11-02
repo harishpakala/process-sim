@@ -13,7 +13,7 @@
           "value": [
             {
               "modelType": "Property",
-              "idShort": "AssetIdentifier",
+              "idShort": "ProductIdentifier",
               "valueType": "xs:string",
               "qualifiers": [
                 {

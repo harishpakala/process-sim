@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-02T06:59:56.020660+00:00",
+  "scope": "operator_local_execution_not_independent_provenance_verification",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "cases": [
+    {
+      "id": "fi_latest_history",
+      "function": "FI_101",
+      "expected": "complete",
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 71.391,
+      "pipeline_status": "COMPLETED",
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "original_failed_check_count": 3,
+      "repair_succeeded": true
+    },
+    {
+      "id": "vc_latest_history",
+      "function": "VC_101",
+      "expected": "complete",
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 62.344,
+      "pipeline_status": "COMPLETED",
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "original_failed_check_count": 6,
+      "repair_succeeded": true
+    },
+    {
+      "id": "ti_latest_history",
+      "function": "TI_101",
+      "expected": "complete",
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 66.109,
+      "pipeline_status": "COMPLETED",
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "original_failed_check_count": 4,
+      "repair_succeeded": true
+    },
+    {
+      "id": "unsupported_function",
+      "function": "FI_999",
+      "expected": "reject",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 9.156,
+      "pipeline_status": "ERROR",
+      "answer_validation": "NOT_AUTOMATICALLY_VERIFIED",
+      "original_failed_check_count": 0,
+      "repair_succeeded": false
+    },
+    {
+      "id": "conflicting_identifiers",
+      "function": "FI_101",
+      "expected": "reject",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 9.125,
+      "pipeline_status": "ERROR",
+      "answer_validation": "NOT_AUTOMATICALLY_VERIFIED",
+      "original_failed_check_count": 0,
+      "repair_succeeded": false
+    }
+  ]
+}

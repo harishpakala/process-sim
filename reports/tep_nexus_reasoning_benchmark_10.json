@@ -1,0 +1,889 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-02T10:14:28.111323+00:00",
+  "benchmark": "TEP_NEXUS_10_LEVEL_V1",
+  "model": "llama3.1:8b",
+  "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+  "status": "COMPLETED",
+  "results": [
+    {
+      "level": 1,
+      "capability": "semantic_lookup",
+      "question": "According to GraphDB AAS, which operational signals map to FI_101 and PI_101? State each mapping's status and source.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ]
+      },
+      "raw_llm_answer": {
+        "answer": "According to GraphDB AAS, FI_101 maps to XMEAS1 (PROVISIONAL_ENGINEERING_MATCH, GraphDB AAS repository) and PI_101 maps to XMEAS7 (PROVISIONAL_ENGINEERING_MATCH, GraphDB AAS repository).",
+        "evidence_used": [
+          "XMEAS1",
+          "XMEAS7",
+          "FI_101",
+          "PI_101",
+          "https://aas.example.com/FI_101",
+          "https://aas.example.com/PI_101",
+          "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+          "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
+        ],
+        "limitations": [
+          "Mappings are provisional and based on engineering matches.",
+          "Source is GraphDB AAS repository."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 2,
+      "capability": "temporal_retrieval",
+      "question": "For the specified run, report the first and last values of XMEAS1 and XMEAS7 in the last 10 simulation minutes and the actual interval.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        }
+      },
+      "raw_llm_answer": {
+        "answer": "The first value of XMEAS1 is 0.2506686071040025 and the last value is 0.25016506253200677. The first value of XMEAS7 is 2704.4463049428855 and the last value is 2704.724602141082. The actual interval is from 2916.0 to 3514.0 seconds.",
+        "evidence_used": [
+          "XMEAS1",
+          "XMEAS7",
+          "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds",
+          "common_end_simulation_seconds",
+          "common_sample_count",
+          "series",
+          "signal",
+          "sample_count_aligned",
+          "first_value",
+          "last_value",
+          "endpoint_change",
+          "relative_endpoint_change_percent",
+          "slope_per_simulation_minute",
+          "engineering_function"
+        ],
+        "limitations": [
+          "The analysis is limited to the specified run and simulation minutes.",
+          "The comparison is based on exact common simulation timestamps without interpolation."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 3,
+      "capability": "semantic_temporal_join",
+      "question": "Using the GraphDB mappings and TimescaleDB observations, report signed relative endpoint percentage changes for FI_101 and PI_101. Explain the joins and their status.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        }
+      },
+      "raw_llm_answer": {
+        "answer": "The signed relative endpoint percentage change for FI_101 is -0.2009% and for PI_101 is 0.0103%. The joins in the GraphDB mappings are based on path-constrained SPARQL and snapshot equality checks, with a PROVISIONAL_ENGINEERING_MATCH status.",
+        "evidence_used": [
+          "GraphDB AAS repository",
+          "TimescaleDB observations",
+          "path-constrained SPARQL",
+          "snapshot equality check",
+          "PROVISIONAL_ENGINEERING_MATCH"
+        ],
+        "limitations": [
+          "The mappings are PROVISIONAL_ENGINEERING_MATCH, indicating a need for further validation.",
+          "The comparison is based on exact common simulation timestamps with no interpolation."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 4,
+      "capability": "comparison_semantics",
+      "question": "Give BOTH (a) the greater signed relative endpoint change and (b) the greater absolute relative endpoint change for FI_101 versus PI_101, with numerical justification. Distinguish signed ordering from magnitude.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        }
+      },
+      "raw_llm_answer": {
+        "answer": "The greater signed relative endpoint change is -0.20088058804540695% for FI_101, and the greater absolute relative endpoint change is 0.010290357685705524% for PI_101.",
+        "evidence_used": [
+          "https://aas.example.com/FI_101",
+          "https://aas.example.com/PI_101",
+          "XMEAS1",
+          "XMEAS7",
+          "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+          "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
+        ],
+        "limitations": [
+          "Signed relative endpoint change is negative for FI_101, indicating a decrease.",
+          "Absolute relative endpoint change is small for both functions, indicating minimal change.",
+          "Comparison is based on exact common simulation timestamps with no interpolation."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 5,
+      "capability": "time_alignment",
+      "question": "Were FI_101 and PI_101 compared at exactly matching simulation timestamps? State alignment, shared sample count, interval, and interpolation status.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        }
+      },
+      "raw_llm_answer": {
+        "answer": "No, the signals were not compared at exactly matching simulation timestamps.",
+        "evidence_used": [
+          "The signals were compared at exact common simulation timestamps with no interpolation.",
+          "The common start simulation seconds were 2916.0 and the common end simulation seconds were 3514.0.",
+          "The common sample count was 201.",
+          "The signals XMEAS1 and XMEAS7 had a sample count aligned of 201.",
+          "The first value of XMEAS1 was 0.2506686071040025 and the last value was 0.25016506253200677.",
+          "The first value of XMEAS7 was 2704.4463049428855 and the last value was 2704.724602141082.",
+          "The endpoint change of XMEAS1 was -0.000503544571995751 and the endpoint change of XMEAS7 was 0.27829719819646925.",
+          "The relative endpoint change percent of XMEAS1 was -0.20088058804540695 and the relative endpoint change percent of XMEAS7 was 0.010290357685705524.",
+          "The slope per simulation minute of XMEAS1 was 1.528065315020885e-05 and the slope per simulation minute of XMEAS7 was -0.008855622643608452."
+        ],
+        "limitations": [
+          "The comparison was based on provisional engineering matches.",
+          "The signals were compared at exact common simulation timestamps with no interpolation, but the timestamps may not have been exactly matching."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 6,
+      "capability": "semantic_relationship",
+      "question": "Which relationships between FI_101 and PI_101 are actually established by the available AAS mapping evidence? Can one function be said to influence the other? Separate facts from hypotheses.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        },
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "run_identity_source": "operator_supplied",
+        "engineering_mapping": "PROVISIONAL",
+        "physical_sensor_binding": "NOT_VERIFIED",
+        "shared_run_provenance": "NOT_VERIFIED",
+        "causal_inference": "NOT_SUPPORTED"
+      },
+      "raw_llm_answer": {
+        "answer": "No direct influence between FI_101 and PI_101 can be established based on the provided AAS mapping evidence.",
+        "evidence_used": [
+          "PROVISIONAL_ENGINEERING_MATCH mapping status for FI_101",
+          "PROVISIONAL_ENGINEERING_MATCH mapping status for PI_101",
+          "exact_common_simulation_timestamps_no_interpolation alignment",
+          "XMEAS1 signal with 201 samples and slope per simulation minute of 1.528065315020885e-05 for FI_101",
+          "XMEAS7 signal with 201 samples and slope per simulation minute of -0.008855622643608452 for PI_101"
+        ],
+        "limitations": [
+          "Mapping status is PROVISIONAL_ENGINEERING_MATCH, indicating a need for further verification.",
+          "No direct causal link between FI_101 and PI_101 can be established based on the provided evidence.",
+          "Physical sensor binding is NOT_VERIFIED, which may impact the accuracy of the comparison."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 7,
+      "capability": "provenance_claim",
+      "question": "Evaluate the claim that FI_101 and PI_101 are verified physical sensors belonging to the same physical run. Distinguish operator-supplied run ID from independently verified provenance.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        },
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "run_identity_source": "operator_supplied",
+        "engineering_mapping": "PROVISIONAL",
+        "physical_sensor_binding": "NOT_VERIFIED",
+        "shared_run_provenance": "NOT_VERIFIED",
+        "causal_inference": "NOT_SUPPORTED"
+      },
+      "raw_llm_answer": {
+        "answer": "The claim that FI_101 and PI_101 are verified physical sensors belonging to the same physical run is UNVERIFIED.",
+        "evidence_used": [
+          "PROVISIONAL_ENGINEERING_MATCH mapping status for FI_101 and PI_101",
+          "exact_common_simulation_timestamps_no_interpolation alignment",
+          "common_sample_count of 201 for both signals",
+          "endpoint_change of -0.000503544571995751 for XMEAS1 and 0.27829719819646925 for XMEAS7",
+          "operator_supplied run ID 10cfb1d1-2984-4932-8207-dc430ed60c2b"
+        ],
+        "limitations": [
+          "PROVISIONAL ENGINEERING MATCH mapping status does not guarantee physical sensor binding",
+          "exact_common_simulation_timestamps_no_interpolation alignment does not imply shared run provenance",
+          "endpoint_change and relative_endpoint_change_percent do not distinguish between verified physical sensors and operator-supplied run ID"
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 8,
+      "capability": "cross_source_corroboration",
+      "question": "Do GraphDB mappings plus TimescaleDB values establish verified physical changes in FI_101 and PI_101? Separate observed signal trends, provisional attribution, and independent corroboration.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        },
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "run_identity_source": "operator_supplied",
+        "engineering_mapping": "PROVISIONAL",
+        "physical_sensor_binding": "NOT_VERIFIED",
+        "shared_run_provenance": "NOT_VERIFIED",
+        "causal_inference": "NOT_SUPPORTED"
+      },
+      "raw_llm_answer": {
+        "answer": "No verified physical changes established.",
+        "evidence_used": [
+          "GraphDB AAS repository",
+          "TimescaleDB values",
+          "PROVISIONAL_ENGINEERING_MATCH mappings for FI_101 and PI_101",
+          "exact_common_simulation_timestamps_no_interpolation alignment"
+        ],
+        "limitations": [
+          "Mappings are PROVISIONAL_ENGINEERING_MATCH",
+          "Physical sensor binding is NOT_VERIFIED",
+          "Causal inference is NOT_SUPPORTED"
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 9,
+      "capability": "hypothesis_evaluation",
+      "question": "Assess independent signal variation, causal influence, and incorrect or provisional signal attribution as competing hypotheses. Identify what is supported, unresolved, and what evidence would discriminate them.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        },
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "run_identity_source": "operator_supplied",
+        "engineering_mapping": "PROVISIONAL",
+        "physical_sensor_binding": "NOT_VERIFIED",
+        "shared_run_provenance": "NOT_VERIFIED",
+        "causal_inference": "NOT_SUPPORTED"
+      },
+      "raw_llm_answer": {
+        "answer": "Competing hypotheses include independent signal variation, causal influence, and incorrect or provisional signal attribution. The evidence supports independent signal variation, as the signals XMEAS1 and XMEAS7 show similar trends and endpoint changes. However, the evidence does not support causal influence, as the signals do not show a clear cause-and-effect relationship. The evidence also does not support incorrect or provisional signal attribution, as the mapping status is PROVISIONAL_ENGINEERING_MATCH.",
+        "evidence_used": [
+          "The signals XMEAS1 and XMEAS7 show similar trends and endpoint changes.",
+          "The mapping status is PROVISIONAL_ENGINEERING_MATCH.",
+          "The signals do not show a clear cause-and-effect relationship."
+        ],
+        "limitations": [
+          "The evidence does not support causal influence.",
+          "The mapping status is PROVISIONAL_ENGINEERING_MATCH, which may indicate incorrect or provisional signal attribution.",
+          "The comparison is based on exact common simulation timestamps, which may not capture all variations in the signals."
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    },
+    {
+      "level": 10,
+      "capability": "integrated_assessment",
+      "question": "Provide an evidence-grounded assessment of FI_101 and PI_101 over the last 10 simulation minutes. Integrate mapping, alignment, signed and absolute changes, provenance and causality. List supported conclusions and missing verification evidence.",
+      "status": "BASIC_FORMAT_PASSED",
+      "evidence_provided": {
+        "mappings": [
+          {
+            "engineering_function": "FI_101",
+            "function_reference": "https://aas.example.com/FI_101",
+            "operational_signal": "XMEAS1",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          },
+          {
+            "engineering_function": "PI_101",
+            "function_reference": "https://aas.example.com/PI_101",
+            "operational_signal": "XMEAS7",
+            "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+            "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+            "mapping_source": "GraphDB AAS repository",
+            "resolution_method": "path-constrained SPARQL; snapshot equality check"
+          }
+        ],
+        "comparison": {
+          "alignment": "exact_common_simulation_timestamps_no_interpolation",
+          "common_start_simulation_seconds": 2916.0,
+          "common_end_simulation_seconds": 3514.0,
+          "common_sample_count": 201,
+          "series": [
+            {
+              "signal": "XMEAS1",
+              "sample_count_aligned": 201,
+              "first_value": 0.2506686071040025,
+              "last_value": 0.25016506253200677,
+              "endpoint_change": -0.000503544571995751,
+              "relative_endpoint_change_percent": -0.20088058804540695,
+              "slope_per_simulation_minute": 1.528065315020885e-05,
+              "engineering_function": "FI_101"
+            },
+            {
+              "signal": "XMEAS7",
+              "sample_count_aligned": 201,
+              "first_value": 2704.4463049428855,
+              "last_value": 2704.724602141082,
+              "endpoint_change": 0.27829719819646925,
+              "relative_endpoint_change_percent": 0.010290357685705524,
+              "slope_per_simulation_minute": -0.008855622643608452,
+              "engineering_function": "PI_101"
+            }
+          ],
+          "larger_absolute_relative_change_index": 0,
+          "comparison_available": true
+        },
+        "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+        "run_identity_source": "operator_supplied",
+        "engineering_mapping": "PROVISIONAL",
+        "physical_sensor_binding": "NOT_VERIFIED",
+        "shared_run_provenance": "NOT_VERIFIED",
+        "causal_inference": "NOT_SUPPORTED"
+      },
+      "raw_llm_answer": {
+        "answer": "FI_101 and PI_101 exhibit different behavior over the last 10 simulation minutes.",
+        "evidence_used": [
+          "PROVISIONAL_ENGINEERING_MATCH mapping between FI_101 and XMEAS1",
+          "PROVISIONAL_ENGINEERING_MATCH mapping between PI_101 and XMEAS7",
+          "exact_common_simulation_timestamps_no_interpolation alignment between XMEAS1 and XMEAS7",
+          "endpoint_change of -0.000503544571995751 for XMEAS1",
+          "endpoint_change of 0.27829719819646925 for XMEAS7"
+        ],
+        "limitations": [
+          "PROVISIONAL ENGINEERING MATCH status of the mappings",
+          "NOT VERIFIED status of the physical sensor binding and shared run provenance",
+          "NOT SUPPORTED status of the causal inference"
+        ]
+      },
+      "validation": {
+        "status": "BASIC_FORMAT_PASSED",
+        "checks": {
+          "schema": true,
+          "nonempty_answer": true
+        },
+        "scope": "format_only_no_factual_or_semantic_grading",
+        "manual_review_required": true
+      }
+    }
+  ],
+  "evaluation_scope": "format checks only; factual and semantic grading pending",
+  "evidence": {
+    "mappings": [
+      {
+        "engineering_function": "FI_101",
+        "function_reference": "https://aas.example.com/FI_101",
+        "operational_signal": "XMEAS1",
+        "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+        "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+        "mapping_source": "GraphDB AAS repository",
+        "resolution_method": "path-constrained SPARQL; snapshot equality check"
+      },
+      {
+        "engineering_function": "PI_101",
+        "function_reference": "https://aas.example.com/PI_101",
+        "operational_signal": "XMEAS7",
+        "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+        "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+        "mapping_source": "GraphDB AAS repository",
+        "resolution_method": "path-constrained SPARQL; snapshot equality check"
+      }
+    ],
+    "comparison": {
+      "alignment": "exact_common_simulation_timestamps_no_interpolation",
+      "common_start_simulation_seconds": 2916.0,
+      "common_end_simulation_seconds": 3514.0,
+      "common_sample_count": 201,
+      "series": [
+        {
+          "signal": "XMEAS1",
+          "sample_count_aligned": 201,
+          "first_value": 0.2506686071040025,
+          "last_value": 0.25016506253200677,
+          "endpoint_change": -0.000503544571995751,
+          "relative_endpoint_change_percent": -0.20088058804540695,
+          "slope_per_simulation_minute": 1.528065315020885e-05,
+          "engineering_function": "FI_101"
+        },
+        {
+          "signal": "XMEAS7",
+          "sample_count_aligned": 201,
+          "first_value": 2704.4463049428855,
+          "last_value": 2704.724602141082,
+          "endpoint_change": 0.27829719819646925,
+          "relative_endpoint_change_percent": 0.010290357685705524,
+          "slope_per_simulation_minute": -0.008855622643608452,
+          "engineering_function": "PI_101"
+        }
+      ],
+      "larger_absolute_relative_change_index": 0,
+      "comparison_available": true
+    },
+    "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+    "run_identity_source": "operator_supplied",
+    "engineering_mapping": "PROVISIONAL",
+    "physical_sensor_binding": "NOT_VERIFIED",
+    "shared_run_provenance": "NOT_VERIFIED",
+    "causal_inference": "NOT_SUPPORTED"
+  },
+  "summary": {
+    "questions": 10,
+    "attempted": 10,
+    "basic_format_passed": 10,
+    "errors": 0,
+    "factual_accuracy": "NOT_GRADED",
+    "semantic_grounding": "NOT_GRADED"
+  }
+}
