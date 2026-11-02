@@ -1,4 +1,5 @@
 """Offline unit tests for the Step 5 benchmark classifier."""
+import json
 import sys
 import unittest
 from pathlib import Path
@@ -37,6 +38,22 @@ class TestBenchmark(unittest.TestCase):
         self.assertFalse(evaluate_case(case, {
             "status": "ERROR", "evidence": {"latest": 1},
             "error": "ValueError: Unsupported engineering function"}, 1)[0])
+
+    def test_fixture_covers_all_seven_families(self):
+        fixtures = json.loads((Path(__file__).resolve().parent /
+                               "fixtures" / "tep_nexus_benchmark_cases.json").read_text())
+        families = {case["function"].split("_")[0] for case in fixtures
+                    if case["expected"] == "complete"}
+        self.assertEqual(families, {"FI", "LI", "PI", "TI", "JI", "SC", "VC"})
+        self.assertEqual(len([case for case in fixtures
+                              if case["expected"] == "complete"]), 7)
+
+    def test_fixture_negative_cases_have_expected_errors(self):
+        fixtures = json.loads((Path(__file__).resolve().parent /
+                               "fixtures" / "tep_nexus_benchmark_cases.json").read_text())
+        negative = [case for case in fixtures if case["expected"] == "reject"]
+        self.assertEqual(len(negative), 2)
+        self.assertTrue(all(case.get("expected_error") for case in negative))
 
 if __name__ == "__main__":
     unittest.main()
