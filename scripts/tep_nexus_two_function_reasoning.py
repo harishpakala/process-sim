@@ -16,6 +16,7 @@ from tep_nexus_ollama_query_planner import ollama_chat, utc_now
 from tep_nexus_semantic_temporal_live import retrieve_temporal_context
 from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_comparison_answer_validation import validate_comparison_answer
+from tep_nexus_structured_answer import structured_prompt, validate_structured_answer
 
 
 def validate_comparison_plan(plan, question, registry):
@@ -94,6 +95,7 @@ def main():
     parser.add_argument("--graphdb-url", default="http://localhost:7200/repositories/AAS")
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--history-limit", type=int, default=1000)
+    parser.add_argument("--answer-format", choices=("freeform", "structured"), default="freeform")
     parser.add_argument("--output", default="reports/tep_nexus_two_function_comparison.json")
     args = parser.parse_args()
     if args.history_limit < 2:
@@ -131,14 +133,19 @@ def main():
                     "shared_run_provenance": "NOT_VERIFIED",
                     "causal_inference": "NOT_SUPPORTED"}
         report["evidence"] = evidence
-        report["llm_answer"] = ollama_chat(args.ollama_url, args.model,
+        report["answer_format"] = args.answer_format
+        answer_system = (structured_prompt() if args.answer_format == "structured" else
             'Return JSON with answer (string) and limitations (array of strings). '
             'Use ONLY provided evidence. State the compared simulation-time interval, '
             'endpoint changes, and relative changes where available. '
             'Do not infer causation or physical sensor verification. '
-            'Distinguish provisional mapping from verified evidence.',
+            'Distinguish provisional mapping from verified evidence.')
+        report["llm_answer"] = ollama_chat(args.ollama_url, args.model,
+            answer_system,
             json.dumps({"question": args.question, "evidence": evidence}))
-        validation = validate_comparison_answer(report["llm_answer"], evidence)
+        validation = (validate_structured_answer(report["llm_answer"], evidence)
+                      if args.answer_format == "structured" else
+                      validate_comparison_answer(report["llm_answer"], evidence))
         report["llm_answer_validation_details"] = validation
         report["llm_answer_validation"] = validation["status"]
         report["status"] = ("COMPLETED" if validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE"
