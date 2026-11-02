@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-02T11:03:41.494733+00:00",
+  "run_id": "YOUR_VERIFIED_RUN_ID",
+  "model": "llama3.1:8b",
+  "sensors": {
+    "pressure": {
+      "tag": "PI-1101",
+      "asset": "TEP_XMEAS7",
+      "signal": "XMEAS7"
+    },
+    "flow": {
+      "tag": "FI-1101",
+      "asset": "TEP_XMEAS6",
+      "signal": "XMEAS6"
+    },
+    "temperature": {
+      "tag": "TI-1101",
+      "asset": "TEP_XMEAS9",
+      "signal": "XMEAS9"
+    },
+    "level": {
+      "tag": "LI-1101",
+      "asset": "TEP_XMEAS8",
+      "signal": "XMEAS8"
+    }
+  },
+  "scope": "read_only; no fault injection performed by this script",
+  "evaluation_note": "Pipeline completion is not factual correctness. Independently review every response.",
+  "cases": [
+    {
+      "id": "Q1",
+      "question": "Which instruments are associated with the reactor?",
+      "sources_required": [
+        "DEXPI"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.45,
+      "planner_report": "reports\\tep_nexus_paper\\q1_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q2",
+      "question": "What are their electrical references?",
+      "sources_required": [
+        "DEXPI",
+        "ECAD"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.47,
+      "planner_report": "reports\\tep_nexus_paper\\q2_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q3",
+      "question": "What are their asset IDs and signal references?",
+      "sources_required": [
+        "DEXPI",
+        "AssetInventory"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.47,
+      "planner_report": "reports\\tep_nexus_paper\\q3_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q4",
+      "question": "Which products and manufacturers are associated with these assets?",
+      "sources_required": [
+        "AssetInventory",
+        "ProductCatalog"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.48,
+      "planner_report": "reports\\tep_nexus_paper\\q4_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q5",
+      "question": "What are their ECLASS and QUDT attributes?",
+      "sources_required": [
+        "ProductCatalog"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.47,
+      "planner_report": "reports\\tep_nexus_paper\\q5_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q6",
+      "question": "Which BOM entries correspond to these instruments?",
+      "sources_required": [
+        "BOM",
+        "AssetInventory"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.44,
+      "planner_report": "reports\\tep_nexus_paper\\q6_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q7",
+      "question": "What engineering information is available for PI-1101?",
+      "sources_required": [
+        "DEXPI",
+        "ECAD",
+        "BOM",
+        "AssetInventory",
+        "ProductCatalog"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.44,
+      "planner_report": "reports\\tep_nexus_paper\\q7_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q8",
+      "question": "Which fault was activated, and when?",
+      "sources_required": [
+        "fault_records"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.44,
+      "planner_report": "reports\\tep_nexus_paper\\q8_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q9",
+      "question": "What were the four sensor values before and after activation?",
+      "sources_required": [
+        "AssetInventory",
+        "TimescaleDB",
+        "fault_records"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.45,
+      "planner_report": "reports\\tep_nexus_paper\\q9_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    },
+    {
+      "id": "Q10",
+      "question": "What engineering and operational evidence is available for FI-1101?",
+      "sources_required": [
+        "DEXPI",
+        "ECAD",
+        "BOM",
+        "AssetInventory",
+        "ProductCatalog",
+        "TimescaleDB",
+        "fault_records"
+      ],
+      "planner_status": "ERROR",
+      "elapsed_seconds": 0.47,
+      "planner_report": "reports\\tep_nexus_paper\\q10_planner.json",
+      "reference_answer": null,
+      "factual_correctness": "NOT_ASSESSED",
+      "cross_domain_links_verified": "NOT_ASSESSED",
+      "error": "ValueError: Temporal coverage is not scoped to the requested run"
+    }
+  ]
+}

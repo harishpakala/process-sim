@@ -1,0 +1,821 @@
+{
+  "generated_at_utc": "2026-11-02T16:51:06.597402+00:00",
+  "scope": "read_only_reference_evidence_not_automated_natural_language_scoring",
+  "engineering": {
+    "pressure": {
+      "asset_id": "https://aas.example.com/PI101",
+      "asset_key": "TEP_XMEAS7",
+      "equipment_tag": "PI-1101",
+      "asset_name": "Reactor pressure",
+      "signal": "XMEAS7",
+      "plc_mapping_in_asset_inventory": "I10.19",
+      "product_uri": "https://example.org/product-types/EandH_PMP51B_Candidate",
+      "product_key": "EandH_PMP51B_Candidate",
+      "manufacturer": "Endress+Hauser",
+      "eclass_class": "27-27-49-05",
+      "eclass_preferred_name": "Pressure transmitter",
+      "eclass_irdi": "0173-1#01-AKA493#001",
+      "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+      "qudt_product_specification": {
+        "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/BAR",
+        "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Pressure"
+      },
+      "catalog_technical_specifications": {
+        "MeasurementRange": "-1 to 40 bar gauge",
+        "PressureReference": "Gauge"
+      },
+      "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+      "installation_verification": "NOT_INSTALLED_VERIFIED",
+      "asset_simulation_status": "NotConnected"
+    },
+    "flow": {
+      "asset_id": "https://aas.example.com/FI106",
+      "asset_key": "TEP_XMEAS6",
+      "equipment_tag": "FI-1101",
+      "asset_name": "Reactor feed flow rate",
+      "signal": "XMEAS6",
+      "plc_mapping_in_asset_inventory": "I10.9",
+      "product_uri": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+      "product_key": "EandH_TMass_F300_Candidate",
+      "manufacturer": "Endress+Hauser",
+      "eclass_class": "27-20-04-03",
+      "eclass_preferred_name": "Thermal mass flow transmitter",
+      "eclass_irdi": "0173-1#01-AAC009#022",
+      "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+      "qudt_product_specification": {
+        "FamilyMeasuringRangeQUDTUnit": "http://qudt.org/vocab/unit/KiloGM-PER-HR",
+        "FamilyMeasuringRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+      },
+      "catalog_technical_specifications": {
+        "FamilyMeasuringRange": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+      },
+      "product_selection_status": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED",
+      "installation_verification": "NOT_INSTALLED_VERIFIED",
+      "asset_simulation_status": "NotConnected"
+    },
+    "temperature": {
+      "asset_id": "https://aas.example.com/TI101",
+      "asset_key": "TEP_XMEAS9",
+      "equipment_tag": "TI-1101",
+      "asset_name": "Reactor temperature",
+      "signal": "XMEAS9",
+      "plc_mapping_in_asset_inventory": "I10.13",
+      "product_uri": "https://example.org/product-types/IFM_TA1101",
+      "product_key": "IFM_TA1101",
+      "manufacturer": "IFM",
+      "eclass_class": "27-27-51",
+      "eclass_preferred_name": "Temperature sensor",
+      "eclass_irdi": "0173-1#01-AHB186#005",
+      "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+      "qudt_product_specification": {
+        "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/DEG_C",
+        "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Temperature"
+      },
+      "catalog_technical_specifications": {
+        "MeasurementRange": "-50 to 200 \u00b0C",
+        "FactoryConfiguredRange": "-10 to 150 \u00b0C"
+      },
+      "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+      "installation_verification": null,
+      "asset_simulation_status": "NotConnected"
+    },
+    "level": {
+      "asset_id": "https://aas.example.com/LI101",
+      "asset_key": "TEP_XMEAS8",
+      "equipment_tag": "LI-1101",
+      "asset_name": "Reactor level",
+      "signal": "XMEAS8",
+      "plc_mapping_in_asset_inventory": "I10.0",
+      "product_uri": "https://example.org/product-types/EandH_FMR62B_Candidate",
+      "product_key": "EandH_FMR62B_Candidate",
+      "manufacturer": "Endress+Hauser",
+      "eclass_class": "27-20-05-05",
+      "eclass_preferred_name": "Free-space radar level transmitter/switch",
+      "eclass_irdi": "0173-1#01-AAC024#022",
+      "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+      "qudt_product_specification": {
+        "MaximumMeasuringDistanceQUDTUnit": "http://qudt.org/vocab/unit/M",
+        "MaximumMeasuringDistanceQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length",
+        "AccuracyQUDTUnit": "http://qudt.org/vocab/unit/MilliM",
+        "AccuracyQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length"
+      },
+      "catalog_technical_specifications": {
+        "MaximumMeasuringDistance": "80 m (family maximum; configuration dependent)",
+        "Accuracy": "\u00b11 mm (manufacturer family specification)"
+      },
+      "product_selection_status": "SIMULATION_SCOPE_PREFERRED_FAMILY",
+      "installation_verification": "NOT_INSTALLED_VERIFIED",
+      "asset_simulation_status": "NotConnected"
+    }
+  },
+  "temporal": {
+    "run_id": "53b37c4d-b8ba-4e37-8f49-6765a156dc17",
+    "fault_events": [
+      {
+        "event_id": "5ec12118-02d2-4857-8fef-f70b4d7b5206",
+        "fault_id": "paper-fault-01",
+        "action": "inject",
+        "simulation_seconds": 30.0,
+        "event_source": "operator_command",
+        "observed_at": "2026-11-02T13:31:09.131932+01:00"
+      }
+    ],
+    "measurements": {
+      "XMEAS7": {
+        "before": {
+          "simulation_seconds": 27.000000000000004,
+          "value": 2704.620214463725,
+          "observed_at": "2026-11-02T13:31:06.007769+01:00"
+        },
+        "after": {
+          "simulation_seconds": 30.0,
+          "value": 2705.2296678024463,
+          "observed_at": "2026-11-02T13:31:09.173564+01:00"
+        }
+      },
+      "XMEAS6": {
+        "before": {
+          "simulation_seconds": 27.000000000000004,
+          "value": 42.59676165856366,
+          "observed_at": "2026-11-02T13:31:06.007769+01:00"
+        },
+        "after": {
+          "simulation_seconds": 30.0,
+          "value": 42.12749043629619,
+          "observed_at": "2026-11-02T13:31:09.173564+01:00"
+        }
+      },
+      "XMEAS9": {
+        "before": {
+          "simulation_seconds": 27.000000000000004,
+          "value": 120.37951958596531,
+          "observed_at": "2026-11-02T13:31:06.007769+01:00"
+        },
+        "after": {
+          "simulation_seconds": 30.0,
+          "value": 120.39829605894376,
+          "observed_at": "2026-11-02T13:31:09.173564+01:00"
+        }
+      },
+      "XMEAS8": {
+        "before": {
+          "simulation_seconds": 27.000000000000004,
+          "value": 75.85021270847888,
+          "observed_at": "2026-11-02T13:31:06.007769+01:00"
+        },
+        "after": {
+          "simulation_seconds": 30.0,
+          "value": 74.97687917695812,
+          "observed_at": "2026-11-02T13:31:09.173564+01:00"
+        }
+      }
+    },
+    "selected_activation": {
+      "event_id": "5ec12118-02d2-4857-8fef-f70b4d7b5206",
+      "fault_id": "paper-fault-01",
+      "action": "inject",
+      "simulation_seconds": 30.0,
+      "event_source": "operator_command",
+      "observed_at": "2026-11-02T13:31:09.131932+01:00"
+    }
+  },
+  "graphdb_verified_mappings": {
+    "https://aas.example.com/PI101": {
+      "assetId": "https://aas.example.com/PI101",
+      "dexpiLocal": "PI_101",
+      "ecadLocal": "PI-1101",
+      "signal": "XMEAS7",
+      "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+      "eclassCode": "27-27-49-05"
+    },
+    "https://aas.example.com/FI106": {
+      "assetId": "https://aas.example.com/FI106",
+      "dexpiLocal": "FI_106",
+      "ecadLocal": "FI-1101",
+      "signal": "XMEAS6",
+      "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+      "eclassCode": "27-20-04-03"
+    },
+    "https://aas.example.com/TI101": {
+      "assetId": "https://aas.example.com/TI101",
+      "dexpiLocal": "TI_101",
+      "ecadLocal": "TI-1101",
+      "signal": "XMEAS9",
+      "productId": "https://example.org/product-types/IFM_TA1101",
+      "eclassCode": "27-27-51"
+    },
+    "https://aas.example.com/LI101": {
+      "assetId": "https://aas.example.com/LI101",
+      "dexpiLocal": "LI_101",
+      "ecadLocal": "LI-1101",
+      "signal": "XMEAS8",
+      "productId": "https://example.org/product-types/EandH_FMR62B_Candidate",
+      "eclassCode": "27-20-05-05"
+    }
+  },
+  "results": [
+    {
+      "id": "Q1",
+      "question": "Which instruments are associated with the reactor?",
+      "required_sources": [
+        "DEXPI"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/PI101",
+            "dexpiLocal": "PI_101",
+            "ecadLocal": "PI-1101",
+            "signal": "XMEAS7",
+            "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+            "eclassCode": "27-27-49-05"
+          },
+          {
+            "assetId": "https://aas.example.com/FI106",
+            "dexpiLocal": "FI_106",
+            "ecadLocal": "FI-1101",
+            "signal": "XMEAS6",
+            "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+            "eclassCode": "27-20-04-03"
+          },
+          {
+            "assetId": "https://aas.example.com/TI101",
+            "dexpiLocal": "TI_101",
+            "ecadLocal": "TI-1101",
+            "signal": "XMEAS9",
+            "productId": "https://example.org/product-types/IFM_TA1101",
+            "eclassCode": "27-27-51"
+          },
+          {
+            "assetId": "https://aas.example.com/LI101",
+            "dexpiLocal": "LI_101",
+            "ecadLocal": "LI-1101",
+            "signal": "XMEAS8",
+            "productId": "https://example.org/product-types/EandH_FMR62B_Candidate",
+            "eclassCode": "27-20-05-05"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false
+      }
+    },
+    {
+      "id": "Q2",
+      "question": "What are their electrical references?",
+      "required_sources": [
+        "DEXPI",
+        "ECAD"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/PI101",
+            "dexpiLocal": "PI_101",
+            "ecadLocal": "PI-1101",
+            "signal": "XMEAS7",
+            "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+            "eclassCode": "27-27-49-05"
+          },
+          {
+            "assetId": "https://aas.example.com/FI106",
+            "dexpiLocal": "FI_106",
+            "ecadLocal": "FI-1101",
+            "signal": "XMEAS6",
+            "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+            "eclassCode": "27-20-04-03"
+          },
+          {
+            "assetId": "https://aas.example.com/TI101",
+            "dexpiLocal": "TI_101",
+            "ecadLocal": "TI-1101",
+            "signal": "XMEAS9",
+            "productId": "https://example.org/product-types/IFM_TA1101",
+            "eclassCode": "27-27-51"
+          },
+          {
+            "assetId": "https://aas.example.com/LI101",
+            "dexpiLocal": "LI_101",
+            "ecadLocal": "LI-1101",
+            "signal": "XMEAS8",
+            "productId": "https://example.org/product-types/EandH_FMR62B_Candidate",
+            "eclassCode": "27-20-05-05"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false
+      }
+    },
+    {
+      "id": "Q3",
+      "question": "What are their asset IDs and signal references?",
+      "required_sources": [
+        "DEXPI",
+        "AssetInventory"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/PI101",
+            "dexpiLocal": "PI_101",
+            "ecadLocal": "PI-1101",
+            "signal": "XMEAS7",
+            "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+            "eclassCode": "27-27-49-05"
+          },
+          {
+            "assetId": "https://aas.example.com/FI106",
+            "dexpiLocal": "FI_106",
+            "ecadLocal": "FI-1101",
+            "signal": "XMEAS6",
+            "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+            "eclassCode": "27-20-04-03"
+          },
+          {
+            "assetId": "https://aas.example.com/TI101",
+            "dexpiLocal": "TI_101",
+            "ecadLocal": "TI-1101",
+            "signal": "XMEAS9",
+            "productId": "https://example.org/product-types/IFM_TA1101",
+            "eclassCode": "27-27-51"
+          },
+          {
+            "assetId": "https://aas.example.com/LI101",
+            "dexpiLocal": "LI_101",
+            "ecadLocal": "LI-1101",
+            "signal": "XMEAS8",
+            "productId": "https://example.org/product-types/EandH_FMR62B_Candidate",
+            "eclassCode": "27-20-05-05"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false
+      }
+    },
+    {
+      "id": "Q4",
+      "question": "Which products and manufacturers are associated with these assets?",
+      "required_sources": [
+        "AssetInventory",
+        "ProductCatalog"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "pressure": {
+          "asset_id": "https://aas.example.com/PI101",
+          "asset_key": "TEP_XMEAS7",
+          "equipment_tag": "PI-1101",
+          "asset_name": "Reactor pressure",
+          "signal": "XMEAS7",
+          "plc_mapping_in_asset_inventory": "I10.19",
+          "product_uri": "https://example.org/product-types/EandH_PMP51B_Candidate",
+          "product_key": "EandH_PMP51B_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-27-49-05",
+          "eclass_preferred_name": "Pressure transmitter",
+          "eclass_irdi": "0173-1#01-AKA493#001",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/BAR",
+            "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Pressure"
+          },
+          "catalog_technical_specifications": {
+            "MeasurementRange": "-1 to 40 bar gauge",
+            "PressureReference": "Gauge"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        },
+        "flow": {
+          "asset_id": "https://aas.example.com/FI106",
+          "asset_key": "TEP_XMEAS6",
+          "equipment_tag": "FI-1101",
+          "asset_name": "Reactor feed flow rate",
+          "signal": "XMEAS6",
+          "plc_mapping_in_asset_inventory": "I10.9",
+          "product_uri": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+          "product_key": "EandH_TMass_F300_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-20-04-03",
+          "eclass_preferred_name": "Thermal mass flow transmitter",
+          "eclass_irdi": "0173-1#01-AAC009#022",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "FamilyMeasuringRangeQUDTUnit": "http://qudt.org/vocab/unit/KiloGM-PER-HR",
+            "FamilyMeasuringRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+          },
+          "catalog_technical_specifications": {
+            "FamilyMeasuringRange": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        },
+        "temperature": {
+          "asset_id": "https://aas.example.com/TI101",
+          "asset_key": "TEP_XMEAS9",
+          "equipment_tag": "TI-1101",
+          "asset_name": "Reactor temperature",
+          "signal": "XMEAS9",
+          "plc_mapping_in_asset_inventory": "I10.13",
+          "product_uri": "https://example.org/product-types/IFM_TA1101",
+          "product_key": "IFM_TA1101",
+          "manufacturer": "IFM",
+          "eclass_class": "27-27-51",
+          "eclass_preferred_name": "Temperature sensor",
+          "eclass_irdi": "0173-1#01-AHB186#005",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/DEG_C",
+            "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Temperature"
+          },
+          "catalog_technical_specifications": {
+            "MeasurementRange": "-50 to 200 \u00b0C",
+            "FactoryConfiguredRange": "-10 to 150 \u00b0C"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+          "installation_verification": null,
+          "asset_simulation_status": "NotConnected"
+        },
+        "level": {
+          "asset_id": "https://aas.example.com/LI101",
+          "asset_key": "TEP_XMEAS8",
+          "equipment_tag": "LI-1101",
+          "asset_name": "Reactor level",
+          "signal": "XMEAS8",
+          "plc_mapping_in_asset_inventory": "I10.0",
+          "product_uri": "https://example.org/product-types/EandH_FMR62B_Candidate",
+          "product_key": "EandH_FMR62B_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-20-05-05",
+          "eclass_preferred_name": "Free-space radar level transmitter/switch",
+          "eclass_irdi": "0173-1#01-AAC024#022",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MaximumMeasuringDistanceQUDTUnit": "http://qudt.org/vocab/unit/M",
+            "MaximumMeasuringDistanceQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length",
+            "AccuracyQUDTUnit": "http://qudt.org/vocab/unit/MilliM",
+            "AccuracyQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length"
+          },
+          "catalog_technical_specifications": {
+            "MaximumMeasuringDistance": "80 m (family maximum; configuration dependent)",
+            "Accuracy": "\u00b11 mm (manufacturer family specification)"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_PREFERRED_FAMILY",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        }
+      }
+    },
+    {
+      "id": "Q5",
+      "question": "What are their ECLASS and QUDT attributes?",
+      "required_sources": [
+        "ProductCatalog"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "pressure": {
+          "asset_id": "https://aas.example.com/PI101",
+          "asset_key": "TEP_XMEAS7",
+          "equipment_tag": "PI-1101",
+          "asset_name": "Reactor pressure",
+          "signal": "XMEAS7",
+          "plc_mapping_in_asset_inventory": "I10.19",
+          "product_uri": "https://example.org/product-types/EandH_PMP51B_Candidate",
+          "product_key": "EandH_PMP51B_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-27-49-05",
+          "eclass_preferred_name": "Pressure transmitter",
+          "eclass_irdi": "0173-1#01-AKA493#001",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/BAR",
+            "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Pressure"
+          },
+          "catalog_technical_specifications": {
+            "MeasurementRange": "-1 to 40 bar gauge",
+            "PressureReference": "Gauge"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        },
+        "flow": {
+          "asset_id": "https://aas.example.com/FI106",
+          "asset_key": "TEP_XMEAS6",
+          "equipment_tag": "FI-1101",
+          "asset_name": "Reactor feed flow rate",
+          "signal": "XMEAS6",
+          "plc_mapping_in_asset_inventory": "I10.9",
+          "product_uri": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+          "product_key": "EandH_TMass_F300_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-20-04-03",
+          "eclass_preferred_name": "Thermal mass flow transmitter",
+          "eclass_irdi": "0173-1#01-AAC009#022",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "FamilyMeasuringRangeQUDTUnit": "http://qudt.org/vocab/unit/KiloGM-PER-HR",
+            "FamilyMeasuringRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+          },
+          "catalog_technical_specifications": {
+            "FamilyMeasuringRange": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        },
+        "temperature": {
+          "asset_id": "https://aas.example.com/TI101",
+          "asset_key": "TEP_XMEAS9",
+          "equipment_tag": "TI-1101",
+          "asset_name": "Reactor temperature",
+          "signal": "XMEAS9",
+          "plc_mapping_in_asset_inventory": "I10.13",
+          "product_uri": "https://example.org/product-types/IFM_TA1101",
+          "product_key": "IFM_TA1101",
+          "manufacturer": "IFM",
+          "eclass_class": "27-27-51",
+          "eclass_preferred_name": "Temperature sensor",
+          "eclass_irdi": "0173-1#01-AHB186#005",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MeasurementRangeQUDTUnit": "http://qudt.org/vocab/unit/DEG_C",
+            "MeasurementRangeQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Temperature"
+          },
+          "catalog_technical_specifications": {
+            "MeasurementRange": "-50 to 200 \u00b0C",
+            "FactoryConfiguredRange": "-10 to 150 \u00b0C"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_APPROVED_FAMILY",
+          "installation_verification": null,
+          "asset_simulation_status": "NotConnected"
+        },
+        "level": {
+          "asset_id": "https://aas.example.com/LI101",
+          "asset_key": "TEP_XMEAS8",
+          "equipment_tag": "LI-1101",
+          "asset_name": "Reactor level",
+          "signal": "XMEAS8",
+          "plc_mapping_in_asset_inventory": "I10.0",
+          "product_uri": "https://example.org/product-types/EandH_FMR62B_Candidate",
+          "product_key": "EandH_FMR62B_Candidate",
+          "manufacturer": "Endress+Hauser",
+          "eclass_class": "27-20-05-05",
+          "eclass_preferred_name": "Free-space radar level transmitter/switch",
+          "eclass_irdi": "0173-1#01-AAC024#022",
+          "eclass_verification": "PENDING_ECLASS_VERIFICATION",
+          "qudt_product_specification": {
+            "MaximumMeasuringDistanceQUDTUnit": "http://qudt.org/vocab/unit/M",
+            "MaximumMeasuringDistanceQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length",
+            "AccuracyQUDTUnit": "http://qudt.org/vocab/unit/MilliM",
+            "AccuracyQUDTQuantityKind": "http://qudt.org/vocab/quantitykind/Length"
+          },
+          "catalog_technical_specifications": {
+            "MaximumMeasuringDistance": "80 m (family maximum; configuration dependent)",
+            "Accuracy": "\u00b11 mm (manufacturer family specification)"
+          },
+          "product_selection_status": "SIMULATION_SCOPE_PREFERRED_FAMILY",
+          "installation_verification": "NOT_INSTALLED_VERIFIED",
+          "asset_simulation_status": "NotConnected"
+        }
+      }
+    },
+    {
+      "id": "Q6",
+      "question": "Which asset identifiers link the engineering representations?",
+      "required_sources": [
+        "DEXPI",
+        "ECAD",
+        "AssetInventory"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/PI101",
+            "dexpiLocal": "PI_101",
+            "ecadLocal": "PI-1101",
+            "signal": "XMEAS7",
+            "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+            "eclassCode": "27-27-49-05"
+          },
+          {
+            "assetId": "https://aas.example.com/FI106",
+            "dexpiLocal": "FI_106",
+            "ecadLocal": "FI-1101",
+            "signal": "XMEAS6",
+            "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+            "eclassCode": "27-20-04-03"
+          },
+          {
+            "assetId": "https://aas.example.com/TI101",
+            "dexpiLocal": "TI_101",
+            "ecadLocal": "TI-1101",
+            "signal": "XMEAS9",
+            "productId": "https://example.org/product-types/IFM_TA1101",
+            "eclassCode": "27-27-51"
+          },
+          {
+            "assetId": "https://aas.example.com/LI101",
+            "dexpiLocal": "LI_101",
+            "ecadLocal": "LI-1101",
+            "signal": "XMEAS8",
+            "productId": "https://example.org/product-types/EandH_FMR62B_Candidate",
+            "eclassCode": "27-20-05-05"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false
+      }
+    },
+    {
+      "id": "Q7",
+      "question": "What engineering information is available for PI-1101?",
+      "required_sources": [
+        "DEXPI",
+        "ECAD",
+        "AssetInventory",
+        "ProductCatalog"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/PI101",
+            "dexpiLocal": "PI_101",
+            "ecadLocal": "PI-1101",
+            "signal": "XMEAS7",
+            "productId": "https://example.org/product-types/EandH_PMP51B_Candidate",
+            "eclassCode": "27-27-49-05"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false
+      }
+    },
+    {
+      "id": "Q8",
+      "question": "Which fault was activated, and when?",
+      "required_sources": [
+        "fault_events"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "run_id": "53b37c4d-b8ba-4e37-8f49-6765a156dc17",
+        "activation": {
+          "event_id": "5ec12118-02d2-4857-8fef-f70b4d7b5206",
+          "fault_id": "paper-fault-01",
+          "action": "inject",
+          "simulation_seconds": 30.0,
+          "event_source": "operator_command",
+          "observed_at": "2026-11-02T13:31:09.131932+01:00"
+        }
+      }
+    },
+    {
+      "id": "Q9",
+      "question": "For the selected reactor-related TEP signals XMEAS6, XMEAS7, XMEAS8, and XMEAS9, what were their recorded values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run?",
+      "required_sources": [
+        "AssetInventory",
+        "signal_samples",
+        "fault_events"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "run_id": "53b37c4d-b8ba-4e37-8f49-6765a156dc17",
+        "activation": {
+          "event_id": "5ec12118-02d2-4857-8fef-f70b4d7b5206",
+          "fault_id": "paper-fault-01",
+          "action": "inject",
+          "simulation_seconds": 30.0,
+          "event_source": "operator_command",
+          "observed_at": "2026-11-02T13:31:09.131932+01:00"
+        },
+        "measurements": {
+          "XMEAS7": {
+            "before": {
+              "simulation_seconds": 27.000000000000004,
+              "value": 2704.620214463725,
+              "observed_at": "2026-11-02T13:31:06.007769+01:00"
+            },
+            "after": {
+              "simulation_seconds": 30.0,
+              "value": 2705.2296678024463,
+              "observed_at": "2026-11-02T13:31:09.173564+01:00"
+            }
+          },
+          "XMEAS6": {
+            "before": {
+              "simulation_seconds": 27.000000000000004,
+              "value": 42.59676165856366,
+              "observed_at": "2026-11-02T13:31:06.007769+01:00"
+            },
+            "after": {
+              "simulation_seconds": 30.0,
+              "value": 42.12749043629619,
+              "observed_at": "2026-11-02T13:31:09.173564+01:00"
+            }
+          },
+          "XMEAS9": {
+            "before": {
+              "simulation_seconds": 27.000000000000004,
+              "value": 120.37951958596531,
+              "observed_at": "2026-11-02T13:31:06.007769+01:00"
+            },
+            "after": {
+              "simulation_seconds": 30.0,
+              "value": 120.39829605894376,
+              "observed_at": "2026-11-02T13:31:09.173564+01:00"
+            }
+          },
+          "XMEAS8": {
+            "before": {
+              "simulation_seconds": 27.000000000000004,
+              "value": 75.85021270847888,
+              "observed_at": "2026-11-02T13:31:06.007769+01:00"
+            },
+            "after": {
+              "simulation_seconds": 30.0,
+              "value": 74.97687917695812,
+              "observed_at": "2026-11-02T13:31:09.173564+01:00"
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "Q10",
+      "question": "For the reactor feed-flow instrument FI-1101, provide its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, associated product candidate, ECLASS class, and operational signal. Also report the recorded XMEAS6 values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run.",
+      "required_sources": [
+        "DEXPI",
+        "ECAD",
+        "AssetInventory",
+        "ProductCatalog",
+        "signal_samples",
+        "fault_events"
+      ],
+      "answer_correctness": "NOT_ASSESSED",
+      "status": "EVIDENCE_AVAILABLE",
+      "evidence": {
+        "graphdb_verified_mappings": [
+          {
+            "assetId": "https://aas.example.com/FI106",
+            "dexpiLocal": "FI_106",
+            "ecadLocal": "FI-1101",
+            "signal": "XMEAS6",
+            "productId": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+            "eclassCode": "27-20-04-03"
+          }
+        ],
+        "logical_identity_scope": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": false,
+        "temporal": {
+          "run_id": "53b37c4d-b8ba-4e37-8f49-6765a156dc17",
+          "signal": "XMEAS6",
+          "activation": {
+            "event_id": "5ec12118-02d2-4857-8fef-f70b4d7b5206",
+            "fault_id": "paper-fault-01",
+            "action": "inject",
+            "simulation_seconds": 30.0,
+            "event_source": "operator_command",
+            "observed_at": "2026-11-02T13:31:09.131932+01:00"
+          },
+          "measurements": {
+            "before": {
+              "simulation_seconds": 27.000000000000004,
+              "value": 42.59676165856366,
+              "observed_at": "2026-11-02T13:31:06.007769+01:00"
+            },
+            "after": {
+              "simulation_seconds": 30.0,
+              "value": 42.12749043629619,
+              "observed_at": "2026-11-02T13:31:09.173564+01:00"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "No fault is injected by this script.",
+    "Fault events record operator commands, not verified causal effects.",
+    "DEXPI/ECAD joins are only validated when --graphdb-url is supplied and exact joins succeed.",
+    "Product QUDT values are specifications, not verified simulation units.",
+    "Product associations are not verified physical installations.",
+    "Successful retrieval is not an LLM correctness score."
+  ]
+}

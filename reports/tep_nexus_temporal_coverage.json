@@ -1,0 +1,456 @@
+{
+  "interface": "TEP NEXUS TimescaleDB temporal coverage",
+  "generated_at_utc": "2026-11-02T06:34:09.124241+00:00",
+  "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+  "run_identity_source": "operator_supplied",
+  "shared_run_provenance": "NOT_VERIFIED",
+  "physical_sensor_binding": "NOT_VERIFIED",
+  "planner_allowlist_modified": false,
+  "functions": [
+    {
+      "engineering_function": "FI_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS1",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_102",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS2",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_103",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS3",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_104",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS4",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_105",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS5",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_106",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS6",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_107",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS10",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_108",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS14",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_109",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS17",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "FI_110",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS19",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "JI_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS20",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "LI_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS8",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "LI_102",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS12",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "LI_103",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS15",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "PI_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS7",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "PI_102",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS13",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "PI_103",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS16",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "SC_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV12",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "TI_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS9",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "TI_102",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS11",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "TI_103",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS18",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "TI_104",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS21",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "TI_105",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMEAS22",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_101",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV1",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_102",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV2",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_103",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV3",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_104",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV4",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_105",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV5",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_106",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV6",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_107",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV7",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_108",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV8",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_109",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV9",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_110",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV10",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    },
+    {
+      "engineering_function": "VC_111",
+      "mapping_status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mapping_count": 1,
+      "signals": [
+        {
+          "signal": "XMV11",
+          "sample_count": 1201,
+          "latest_simulation_seconds": 3514.000000000211
+        }
+      ],
+      "temporal_coverage_status": "HAS_SAMPLES"
+    }
+  ],
+  "functions_with_samples": 34,
+  "functions_without_samples": 0,
+  "ambiguous_functions": 0
+}

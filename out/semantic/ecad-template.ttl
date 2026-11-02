@@ -1,0 +1,282 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix ecad: <https://example.org/ecad/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "ECAD SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> a owl:Class ;
+    rdfs:label "ECAD" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Address constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasAddress .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "EndPoint SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EndPoint constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    sh:path ecad:hasEndPoint .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Address constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasAddress .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "PLCEndPoint constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    sh:path ecad:hasPLCEndPoint .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ConnectionPoints constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasConnectionPoints .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path ecad:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "Device SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Device constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> ;
+    sh:path ecad:hasDevice .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Devices SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Devices constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasDevices .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRv> a aas:RelationshipElement ;
+    rdfs:label "isConnectedTo" ;
+    aas:first <https://example.org/smi/ecad25#Devices.LI.ConnectionPoints.TA1_2_Out2> ;
+    aas:second <https://example.org/smi/ecad25#Devices.PLCBox.ConnectionPoints.D0_0> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Connections SHACL shape" ;
+    ecad:hasisConnectedTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRv> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Connections constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasConnections .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Schematics SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Schematics constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasSchematics .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Address constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasAddress .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "EndPoint SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EndPoint constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    sh:path ecad:hasEndPoint .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Address constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasAddress .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "PLCEndPoint constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    sh:path ecad:hasPLCEndPoint .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ConnectionPoints constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasConnectionPoints .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path ecad:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "LocalId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:path ecad:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "Symbol SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Symbol constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> ;
+    sh:path ecad:hasSymbol .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Symbols SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Symbols constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> ;
+    sh:path ecad:hasSymbols .
+
+ecad:hasConnections a owl:ObjectProperty ;
+    rdfs:label "hasConnections" .
+
+ecad:hasDevice a owl:ObjectProperty ;
+    rdfs:label "hasDevice" .
+
+ecad:hasDevices a owl:ObjectProperty ;
+    rdfs:label "hasDevices" .
+
+ecad:hasSchematics a owl:ObjectProperty ;
+    rdfs:label "hasSchematics" .
+
+ecad:hasSymbol a owl:ObjectProperty ;
+    rdfs:label "hasSymbol" .
+
+ecad:hasSymbols a owl:ObjectProperty ;
+    rdfs:label "hasSymbols" .
+
+ecad:hasAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasAssetIdentifier" .
+
+ecad:hasConnectionPoints a owl:ObjectProperty ;
+    rdfs:label "hasConnectionPoints" .
+
+ecad:hasEndPoint a owl:ObjectProperty ;
+    rdfs:label "hasEndPoint" .
+
+ecad:hasPLCEndPoint a owl:ObjectProperty ;
+    rdfs:label "hasPLCEndPoint" .
+
+ecad:hasAddress a owl:DatatypeProperty ;
+    rdfs:label "hasAddress" .
+
+ecad:hasLocalId a owl:DatatypeProperty ;
+    rdfs:label "hasLocalId" .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
+

@@ -1,0 +1,420 @@
+{
+  "interface": "TEP NEXUS GraphDB mapping discovery",
+  "generated_at_utc": "2026-11-02T06:31:12.837028+00:00",
+  "source": "GraphDB SPARQL",
+  "mapping_confidence": "PROVISIONAL_NOT_PHYSICALLY_VERIFIED",
+  "planner_allowlist_modified": false,
+  "candidates": [
+    {
+      "engineering_function": "FI_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_101",
+          "operational_signal": "XMEAS1",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_102",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_102",
+          "operational_signal": "XMEAS2",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_103",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_103",
+          "operational_signal": "XMEAS3",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_104",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_104",
+          "operational_signal": "XMEAS4",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzQ"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_105",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_105",
+          "operational_signal": "XMEAS5",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzU"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_106",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_106",
+          "operational_signal": "XMEAS6",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_107",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_107",
+          "operational_signal": "XMEAS10",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEw"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_108",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_108",
+          "operational_signal": "XMEAS14",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_109",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_109",
+          "operational_signal": "XMEAS17",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3"
+        }
+      ]
+    },
+    {
+      "engineering_function": "FI_110",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/FI_110",
+          "operational_signal": "XMEAS19",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE5"
+        }
+      ]
+    },
+    {
+      "engineering_function": "JI_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/JI_101",
+          "operational_signal": "XMEAS20",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIw"
+        }
+      ]
+    },
+    {
+      "engineering_function": "LI_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/LI_101",
+          "operational_signal": "XMEAS8",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzg"
+        }
+      ]
+    },
+    {
+      "engineering_function": "LI_102",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/LI_102",
+          "operational_signal": "XMEAS12",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEy"
+        }
+      ]
+    },
+    {
+      "engineering_function": "LI_103",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/LI_103",
+          "operational_signal": "XMEAS15",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1"
+        }
+      ]
+    },
+    {
+      "engineering_function": "PI_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/PI_101",
+          "operational_signal": "XMEAS7",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
+        }
+      ]
+    },
+    {
+      "engineering_function": "PI_102",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/PI_102",
+          "operational_signal": "XMEAS13",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEz"
+        }
+      ]
+    },
+    {
+      "engineering_function": "PI_103",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/PI_103",
+          "operational_signal": "XMEAS16",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE2"
+        }
+      ]
+    },
+    {
+      "engineering_function": "SC_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/SC_101",
+          "operational_signal": "XMV12",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMg"
+        }
+      ]
+    },
+    {
+      "engineering_function": "TI_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/TI_101",
+          "operational_signal": "XMEAS9",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk"
+        }
+      ]
+    },
+    {
+      "engineering_function": "TI_102",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/TI_102",
+          "operational_signal": "XMEAS11",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx"
+        }
+      ]
+    },
+    {
+      "engineering_function": "TI_103",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/TI_103",
+          "operational_signal": "XMEAS18",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4"
+        }
+      ]
+    },
+    {
+      "engineering_function": "TI_104",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/TI_104",
+          "operational_signal": "XMEAS21",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx"
+        }
+      ]
+    },
+    {
+      "engineering_function": "TI_105",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/TI_105",
+          "operational_signal": "XMEAS22",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIy"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_101",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_101",
+          "operational_signal": "XMV1",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_102",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_102",
+          "operational_signal": "XMV2",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_103",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_103",
+          "operational_signal": "XMV3",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_104",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_104",
+          "operational_signal": "XMV4",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_105",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_105",
+          "operational_signal": "XMV5",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_106",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_106",
+          "operational_signal": "XMV6",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_107",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_107",
+          "operational_signal": "XMV7",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_108",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_108",
+          "operational_signal": "XMV8",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_109",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_109",
+          "operational_signal": "XMV9",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_110",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_110",
+          "operational_signal": "XMV10",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA"
+        }
+      ]
+    },
+    {
+      "engineering_function": "VC_111",
+      "mapping_count": 1,
+      "status": "UNIQUE_PROVISIONAL_CANDIDATE",
+      "mappings": [
+        {
+          "function_reference": "https://aas.example.com/VC_111",
+          "operational_signal": "XMV11",
+          "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ"
+        }
+      ]
+    }
+  ],
+  "invalid_rows": [],
+  "unique_candidate_count": 34,
+  "ambiguous_function_count": 0
+}

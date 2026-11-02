@@ -1,0 +1,176 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix assetinventory: <https://example.org/assetinventory/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "AssetInventory SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> a owl:Class ;
+    rdfs:label "AssetInventory" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "Assets SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Assets constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> ;
+    sh:path assetinventory:hasAssets .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "Asset SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk9wZXJhdGlvbmFsUmVmZXJlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nUmVmZXJlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Asset constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> ;
+    sh:path assetinventory:hasAsset .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ModelingStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasModelingStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MonitoringStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasMonitoringStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk9wZXJhdGlvbmFsUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "OperationalReference constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasOperationalReference .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssetName constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasAssetName .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssetType constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasAssetType .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "EngineeringReference constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasEngineeringReference .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EquipmentTag constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasEquipmentTag .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FaultDetectionStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasFaultDetectionStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FaultInjectionStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasFaultInjectionStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Location constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasLocation .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ProductIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasProductIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SimulationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasSimulationStatus .
+
+assetinventory:hasAsset a owl:ObjectProperty ;
+    rdfs:label "hasAsset" .
+
+assetinventory:hasAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasAssetIdentifier" .
+
+assetinventory:hasAssetName a owl:DatatypeProperty ;
+    rdfs:label "hasAssetName" .
+
+assetinventory:hasAssetType a owl:DatatypeProperty ;
+    rdfs:label "hasAssetType" .
+
+assetinventory:hasAssets a owl:ObjectProperty ;
+    rdfs:label "hasAssets" .
+
+assetinventory:hasEngineeringReference a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringReference" .
+
+assetinventory:hasEquipmentTag a owl:DatatypeProperty ;
+    rdfs:label "hasEquipmentTag" .
+
+assetinventory:hasFaultDetectionStatus a owl:DatatypeProperty ;
+    rdfs:label "hasFaultDetectionStatus" .
+
+assetinventory:hasFaultInjectionStatus a owl:DatatypeProperty ;
+    rdfs:label "hasFaultInjectionStatus" .
+
+assetinventory:hasLocation a owl:DatatypeProperty ;
+    rdfs:label "hasLocation" .
+
+assetinventory:hasModelingStatus a owl:DatatypeProperty ;
+    rdfs:label "hasModelingStatus" .
+
+assetinventory:hasMonitoringStatus a owl:DatatypeProperty ;
+    rdfs:label "hasMonitoringStatus" .
+
+assetinventory:hasOperationalReference a owl:DatatypeProperty ;
+    rdfs:label "hasOperationalReference" .
+
+assetinventory:hasProductIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasProductIdentifier" .
+
+assetinventory:hasSimulationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasSimulationStatus" .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
+
