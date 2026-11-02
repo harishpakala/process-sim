@@ -21,12 +21,14 @@
     "id": "unsupported_function",
     "function": "FI_999",
     "question": "Show the latest measurement for engineering function FI_999.",
-    "expected": "reject"
+    "expected": "reject",
+    "expected_error": "Unsupported engineering function"
   },
   {
     "id": "conflicting_identifiers",
     "function": "FI_101",
     "question": "Show the latest measurement for FI_101 and VC_101.",
-    "expected": "reject"
+    "expected": "reject",
+    "expected_error": "Planned engineering function does not match"
   }
 ]
