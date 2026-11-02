@@ -83,7 +83,7 @@ def assess_xmeas7_pressure(
         fields = matches[0].get("value", [])
         catalog_reference = "https://example.org/product-types/" + product
         if (_property(fields, "EquipmentTag") != instrument
-                or _property(fields, "ProductReference") != catalog_reference
+                or _property(fields, "ProductIdentifier") != catalog_reference
                 or _property(fields, "AssetType") != "LogicalMeasurement"):
             return SignalAssetUnitAssessment(
                 CorrespondenceStatus.UNRESOLVED, signal, instrument, product, unknown,

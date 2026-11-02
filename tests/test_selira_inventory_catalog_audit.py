@@ -35,4 +35,4 @@ def test_pressure_inventory_tag_and_catalog_reference():
     props = {x["idShort"]: x["value"] for x in pressure["value"]
              if x["modelType"] == "Property"}
     assert props["EquipmentTag"] == "PI-1101"
-    assert props["ProductReference"].endswith("/EandH_PMP51B_Candidate")
+    assert props["ProductIdentifier"].endswith("/EandH_PMP51B_Candidate")

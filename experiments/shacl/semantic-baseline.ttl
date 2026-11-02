@@ -1,0 +1,95 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ex: <urn:selira:shacl:> .
+
+# Engineering-aware SHACL-SPARQL *comparison profile*.
+# It supplements the structural shape; run both shapes together.
+# Input verdict literals are evidence assertions, NOT SELiRA output verdicts.
+# Scope: quantity kind, unit dimensions, revision applicability,
+# operational binding, identity contradiction and CAC violations.
+ex:SemanticEvidenceShape a sh:NodeShape ;
+  sh:targetClass ex:EvidenceBundle ;
+
+  sh:sparql [
+    sh:message "SC-02: engineering and operational quantity kinds differ" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:engineeringQuantity ?eng ; ex:operationalQuantity ?op .
+        FILTER(?eng != ?op)
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "SC-03: unit dimensions differ (pressure vs temperature)" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:engineeringUnit ?eng ; ex:operationalUnit ?op .
+        FILTER((?eng IN ("Pa", "kPa", "bar", "psi") &&
+                ?op IN ("K", "degC", "degF")) ||
+               (?eng IN ("K", "degC", "degF") &&
+                ?op IN ("Pa", "kPa", "bar", "psi")))
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "SC-04: explicit applicability contradiction for target revision/configuration" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:targetRevision ?rev ; ex:targetConfiguration ?config ;
+              ex:applicability ?a .
+        ?a ex:revision ?rev ; ex:configuration ?config ;
+           ex:assertedVerdict "INAPPLICABLE" .
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "SC-04: no applicable assertion for requested revision/configuration" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:targetRevision ?rev ; ex:targetConfiguration ?config .
+        FILTER NOT EXISTS {
+          $this ex:applicability ?a .
+          ?a ex:revision ?rev ; ex:configuration ?config .
+        }
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "SC-05: explicit binding contradiction" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:binding ?binding .
+        ?binding ex:assertedVerdict "CONTRADICTED" .
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "SC-01: identity correspondence explicitly contradicted" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        $this ex:identityLink ?link .
+        ?link ex:assertedVerdict "CONTRADICTED" .
+      }
+    """
+  ] ;
+
+  sh:sparql [
+    sh:message "CAC: consumer evidence check explicitly violated" ;
+    sh:select """
+      PREFIX ex: <urn:selira:shacl:>
+      SELECT $this WHERE {
+        { $this ex:cac01Check ?check } UNION { $this ex:cac02Check ?check }
+        ?check ex:assertedVerdict "VIOLATED" .
+      }
+    """
+  ] .

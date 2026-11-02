@@ -37,14 +37,14 @@ def audit_inventory_catalog(
     Historical and proposed replacement links are not substituted silently.
     """
     products = _collection(catalog, "Products")
-    product_ids = [_field(p, "AssetIdentifier") for p in products]
+    product_ids = [_field(p, "ProductIdentifier") for p in products]
     counts = Counter(x for x in product_ids if x)
-    index = {_field(p, "AssetIdentifier"): p.get("idShort") for p in products
-             if _field(p, "AssetIdentifier")}
+    index = {_field(p, "ProductIdentifier"): p.get("idShort") for p in products
+             if _field(p, "ProductIdentifier")}
     results = []
     for asset in _collection(inventory, "Assets"):
         name = asset.get("idShort", "")
-        direct = _field(asset, "ProductReference")
+        direct = _field(asset, "ProductIdentifier")
         candidate = _field(asset, "CandidateProductReference")
         ref = direct or candidate
         if direct and candidate and direct != candidate:

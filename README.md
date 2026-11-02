@@ -1,51 +1,3 @@
-## SELiRA implementation and evaluation status (experimental)
-
-This branch introduces a **standalone, offline-testable correspondence qualification foundation** in `src/process_sim/selira/`. It does not replace existing `/api/semantic/asset-history` behavior, change the TEP simulator, or claim that GraphDB operational references are independently validated.
-
-| Capability | Status | Evidence |
-| --- | --- | --- |
-| Legacy operational-reference recognition | Existing implementation | `src/process_sim/api/asset_history.py`; `mapped` means one recognized signal, **not** semantic validation |
-| Candidate-level qualification and response-level resolution | Implemented on this branch | `selira/contracts.py`, `selira/resolution.py` |
-| Explicit reviewed declaration and nonempty evidence reference requirement | Implemented as **structural checks only** | `selira/resolution.py`; evidence authenticity is **not** independently verified |
-| Fail-closed authoritative-use policy | Implemented as reusable function, **not wired into production endpoints** | `selira/consumer_policy.py` |
-| Applicability evaluation against engineering configuration | Planned | The branch accepts declared `applicable`/`inapplicable`/`unknown` status; it does not calculate it |
-| GraphDB integration, independent evidence verification, service endpoints | Planned | No new deployed endpoint on this branch |
-| Reproducible end-to-end and quantitative evaluation | Not yet performed | Offline unit tests added, execution/CI status must be checked separately |
-
-**Offline tests** (with project installed in editable mode or `PYTHONPATH=src`):
-
-```bash
-PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.py' -v
-```
-
-**Semantics:** An extracted `XMEAS`/`XMV` identifier is a candidate, not a validated correspondence. A unique candidate without a reviewed declaration remains unresolved. A validated declaration requires an evidence reference and declared applicability, but these fields are **assertions**, not independent proof. Conflicting declarations fail closed; competing unresolved signals produce ambiguity. The consumer-policy function permits authoritative use only for an unambiguously selected, validated, applicable candidate with evidence references.
-
-**Regression note (2026-10-29):** Local user execution reported 8/9 passing, with `test_rejected_candidate_does_not_block_validated_candidate` failing. The resolver and consumer policy were corrected to exclude explicitly rejected alternatives from selection and authorization. Two regression tests were added (11 tests total). The user subsequently reported **11/11 tests passing locally** (0.004 s, Python unittest on Windows). This is user-reported local execution, not independently verified CI or end-to-end integration.
-
-**Semantic regression verification (2026-10-29):** User-reported local Windows PowerShell runs passed: `test_ai_property_alignment.py` (4/4), `test_ai_cross_domain_trace.py` (3/3), and `test_ai_semantic_temporal_workflow.py` (3/3). Together with the 11/11 SELiRA tests, **21/21 tests passed locally across four independently invoked suites**. This is not an independently observed CI result, full-repository regression run, or integration test.
-
-**GraphDB candidate adapter (experimental):** `src/process_sim/selira/graphdb.py` reads bounded `hasOperationalReference` candidates from the configured SPARQL endpoint and passes them to the fail-closed resolver. `tests/test_selira_graphdb.py` adds six mocked-network tests. These tests are **not yet reported as executed**, and no live GraphDB connection or independent engineering-evidence validation has been demonstrated. GraphDB reference retrieval alone never constitutes a validated correspondence. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` to test both SELiRA modules.
-
-**GraphDB adapter test verification (2026-10-29):** User-reported Windows PowerShell output confirms `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **17/17 tests** (11 resolver/policy, six mocked GraphDB adapter). Combined with the previously reported 10/10 semantic regression tests, **27/27 tests passed locally** across five suites. The GraphDB adapter tests are mocked; live GraphDB connectivity and evidence authenticity remain unverified.
-
-**Experimental consumer enforcement:** `src/process_sim/selira/guarded_history.py` adds `guarded_asset_history`, which resolves GraphDB correspondence candidates and calls TimescaleDB sample retrieval **only after** `authorize_use` succeeds. Six new offline integration-style tests in `tests/test_selira_guarded_history.py` cover accepted, unverified, ambiguous, inapplicable, rejected-alternative, and invalid-limit paths. **New tests have not yet been run**; the 17 previously reported SELiRA tests remain the last confirmed SELiRA result. The legacy endpoint and web UI remain unchanged. Declared evidence and applicability are still not independently verified; no production authorization claim is made.
-
-**Guarded consumer test verification (2026-10-29):** User-reported Windows PowerShell run of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **23/23 tests** (11 resolution, six mocked GraphDB adapter, six mocked guarded consumer). Alongside the earlier 10/10 semantic regression tests, **33/33 local tests passed across six suites**. This is user-reported execution, not CI or live GraphDB/TimescaleDB end-to-end validation. The new guarded consumer is not yet wired into the existing web UI or production API.
-
-**Controlled baseline evaluation (experimental, not yet executed):** `src/process_sim/selira/evaluation.py` defines 18 deterministic synthetic scenarios across reactor, separator, and stripper pressure, comparing unique-identifier selection (legacy proxy) with SELiRA authorization. `tests/test_selira_evaluation.py` adds five tests. The oracle describes **authorization expected under synthetic review conditions**, not independently established physical truth; TEP metadata provides scenario names/units, while synthetic review assertions drive SELiRA. Therefore, this is a **policy sanity check**, not an empirical estimate of real-world accuracy or evidence authenticity. No comparative numbers should be reported as observed until tests execute. Run `python -m unittest discover -s tests -p 'test_selira_*.py' -v` with `PYTHONPATH=src` (28 SELiRA tests expected).
-
-**Synthetic comparison test verification (2026-10-29):** User-reported local Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **28/28 SELiRA tests** (11 resolution, six mocked GraphDB adapter, six guarded consumer, five comparison tests). Together with previously reported 10/10 semantic regression tests, **38/38 local tests passed across seven suites**. The 18 comparison scenarios are synthetic and declaration-driven; passing tests do **not** establish independently verified engineering ground truth, real-world improvement, or live end-to-end behavior.
-
-**Evidence Validator v1 (pending local execution):** `src/process_sim/selira/evidence_validator.py` checks three project-assigned pressure tags (`PI_101`, `PI_102`, `PI_103`) against the documented DEXPI/ECAD scope and TEP measurement metadata. Decisions are `supported_project_scope`, `rejected`, or `unresolved`; support is **not** promoted to the existing resolver's authoritative `validated` status. Identity, quantity-name and exact-unit checks are computed; applicability, immutable source version, live GraphDB and physical-device provenance remain unknown. Seven new tests in `tests/test_selira_evidence_validator.py` cover correct mappings, mismatches, unknown tag/version and invalid inputs. **35 SELiRA tests expected; seven new tests not yet confirmed.** This curated fixture is not an independent ground-truth corpus or source authenticity check.
-
-**Evidence Validator v1 local verification (2026-10-29):** User-reported `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **35/35 SELiRA tests**, including seven evidence-validator tests. Along with the previously reported ten semantic regression tests, **45 tests passed locally** (not a single fresh combined test invocation). These results do not establish live GraphDB integration, authenticated evidence provenance, configuration applicability, or independent physical ground truth.
-
-**GraphDB named-graph evidence inspection (new, tests pending):** `src/process_sim/selira/graph_evidence.py` queries existing `hasOperationalReference` assertions with named-graph IDs and compares their signals against Evidence Validator v1. Seven offline tests in `tests/test_selira_graph_evidence.py` cover matching, absent, competing, malformed and contradictory evidence plus the mocked GraphDB response. **42 SELiRA tests expected, not yet confirmed.** A matching assertion is `supported_graph_and_project_scope`, not an independently authenticated `validated` correspondence. No change to production web UI or historical-data endpoint. Live GraphDB query has not been executed.
-
-**GraphDB evidence test verification (2026-10-29):** User-reported Windows PowerShell execution of `python -m unittest discover -s tests -p "test_selira_*.py" -v` passed **42/42 SELiRA tests**, including seven GraphDB named-graph evidence tests. Together with previously reported 10/10 semantic regression tests, **52 tests passed locally in separate runs**. GraphDB evidence tests use mocks; no live GraphDB evidence query or authenticated provenance verification has yet been demonstrated.
-
-**Next implementation increments:** connect the resolver to authoritative AAS/GraphDB evidence and validation profiles; evaluate applicability against configurations; expose contract-bearing service responses; integrate consumer checks; add injected-error and false-withholding evaluations. Preserve the legacy asset-history response contract during migration.
-
 # process-sim
 
 **Author:** Harish Kumar Pakala
@@ -54,51 +6,41 @@ PYTHONPATH=src python -m unittest discover -s tests -p 'test_selira_resolution.p
 
 The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
 
-## Local startup — API, OPC UA, web UI, TimescaleDB, GraphDB and Ollama (Windows PowerShell)
+## Local startup (Windows PowerShell)
 
-This is a **multi-terminal development setup**, not a single all-in-one server. Run the commands from the repository root unless a step changes directory. Use the same checkout for the API, OPC UA server, frontend and scripts. Python must be able to import `process_sim` from `src`; Node.js/npm, Docker (for the sample database), GraphDB and Ollama are separate prerequisites. The local HTTP API is unauthenticated and bound to loopback by default; do not expose it to untrusted networks.
+Run these commands from the repository root. Start each long-running service in a separate terminal.
 
-### 1. Install dependencies (once per Python environment)
+### 1. Install dependencies
 
 ```powershell
-cd C:\Users\haris\Documents\GitHub\process-sim
 python -m pip install -r requirements-opcua.txt -r requirements-timeseries.txt
 cd frontend
 npm install
 cd ..
 ```
 
-If your checkout is instead under `C:\Users\haris\Documents\GitHub\ps_olama\process-sim`, use that location consistently. Install any additional project requirements required by your selected TEP backend; the commands above specifically cover the OPC UA and historian integration.
-
-### 2. Start TimescaleDB (optional, required for persistent history)
-
-**Terminal A** — with Docker Desktop running:
+### 2. Start TimescaleDB (optional)
 
 ```powershell
 docker compose -f docker-compose.timeseries.yml up -d
-docker compose -f docker-compose.timeseries.yml ps
 ```
 
-The supplied Compose configuration uses PostgreSQL/TimescaleDB on `127.0.0.1:5432`, database `tep_nexus`, user `tep`, and a **local-development-only** password `tep-local-dev`. Configure a different `TEP_DB_PASSWORD` before first startup for other environments. If you already use an existing TimescaleDB installation, **do not start a second database or overwrite its credentials**: use that installation's actual DSN instead. The API creates/updates its schema on startup when `TEP_TIMESCALE_DSN` is set.
+Required for persistent historian data; omit if using an existing database. See [time-series setup](docs/opcua/TIMESERIES.md).
 
 ### 3. Start the OPC UA simulation server
-
-**Terminal B**:
 
 ```powershell
 $env:PYTHONPATH="$PWD\src"
 python examples/run_opcua_server.py --endpoint "opc.tcp://0.0.0.0:4841/process-sim/" --seed 42 --real-time-factor 1.0
 ```
 
-This is the **TEP simulator's OPC UA server**, not the Python HTTP API. The server exposes `TEP/Simulation` (including `Start`, `Stop`, `Reset`), `XMEAS1..41`, `XMV1..12` and fault-management methods. It starts in **manual/external OPC UA control mode**: XMV commands must come from an external controller; starting the server alone does not establish closed-loop control. For local clients, use `opc.tcp://127.0.0.1:4841/process-sim/` if the endpoint is reachable. Keep this terminal running.
+The simulator starts in external-control mode; starting it does not automatically establish closed-loop control.
 
-### 4. Start GraphDB (for semantic queries and asset resolution)
+### 4. Start GraphDB (optional for semantic features)
 
-Start your **existing GraphDB installation** and confirm that repository `AAS` exists and contains the imported AssetInventory and ProductCatalog RDF graphs. Workbench is normally at `http://localhost:7200`; the SPARQL endpoint is `http://localhost:7200/repositories/AAS`. GraphDB is not started by the TimescaleDB Docker Compose file. If the graphs have not yet been loaded, consult [semantic/README.md](semantic/README.md) for lifting/import and validation. The asset-history endpoint needs the `assetinventory:hasOperationalReference` triples.
+Start your existing GraphDB service with repository `AAS` and the required RDF graphs. See [semantic setup](semantic/README.md).
 
-### 5. Start the Python HTTP API and historian
-
-**Terminal C** — start after the OPC UA server; configure environment variables in **this terminal** before launching:
+### 5. Start the HTTP API and historian
 
 ```powershell
 $env:PYTHONPATH="$PWD\src"
@@ -107,88 +49,149 @@ $env:GRAPHDB_SPARQL_ENDPOINT="http://localhost:7200/repositories/AAS"
 python -m process_sim.api.server
 ```
 
-**Replace the example DSN with your existing database connection string if applicable.** Without `TEP_TIMESCALE_DSN`, the API can still provide a short in-memory history, but persistent run/signal/fault history and automatic GraphDB run synchronization are unavailable. With a configured DSN, the API starts an OPC UA polling historian and a GraphDB synchronization worker by default. The historian collects all 41 XMEAS and 12 XMV signals as simulation time advances. The worker publishes **run/signal/fault provenance metadata**, not all high-frequency samples, to separate GraphDB named graphs. Set `$env:TEP_GRAPH_SYNC="0"` before startup to disable automatic GraphDB writes. Consult [docs/opcua/TIMESERIES.md](docs/opcua/TIMESERIES.md) for details and limitations.
-
-Verify in another PowerShell window:
-
-```powershell
-Invoke-RestMethod "http://127.0.0.1:8000/api/health"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/status"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/history"
-Invoke-RestMethod "http://127.0.0.1:8000/api/semantic/sync/status"
-Invoke-RestMethod "http://127.0.0.1:8000/api/simulation/runs"
-```
-
-The HTTP API defaults to `http://127.0.0.1:8000` (`PROCESS_SIM_API_HOST` and `PROCESS_SIM_API_PORT` override the bind address and port). `/api/health` checks the API process only; use `/api/simulation/status` to test OPC UA connectivity, `/api/simulation/history` to inspect historian persistence/storage errors, and `/api/semantic/sync/status` to inspect GraphDB synchronization. A running API is **not** proof that the simulator is advancing; start it through its OPC UA `Start()` method or an integrated control UI/client.
+Adjust the example DSN to your database; omit it when persistent history is unnecessary. The sample credentials are for local development only. Check `http://127.0.0.1:8000/api/health`. The historian requires an advancing simulation.
 
 ### 6. Start the Vue web interface
-
-**Terminal D**:
 
 ```powershell
 cd frontend
 npm run dev
 ```
 
-Open the **Local** URL printed by Vite (typically `http://localhost:5173`). Vite proxies `/api` requests to `http://127.0.0.1:8000` by default; override with `PROCESS_SIM_API_URL` when needed. Some engineering/product graph views are local AAS-JSON previews, **not** live GraphDB visualizations. Do not assume every frontend view is wired to the running OPC UA service.
+Open the local URL printed by Vite (typically `http://localhost:5173`). Some engineering views use local AAS JSON rather than live GraphDB.
 
-### 7. Ollama — separate local grounded Q&A
-
-Start Ollama separately and install the model expected by the GraphDB Q&A script:
+### 7. Ollama (optional, standalone Q&A)
 
 ```powershell
 ollama pull llama3.1:8b
-ollama list
-Invoke-RestMethod "http://127.0.0.1:11434/api/tags"
-```
-
-If the Ollama service is not already running, start it using your local Ollama installation (for example, `ollama serve` in a separate terminal). **Ollama is not automatically started by the Python API or Vue frontend**, and the existing Q&A scripts are command-line tools, not HTTP API routes.
-
-The **repository-tracked** GraphDB/ProductCatalog question-answering prototype:
-
-```powershell
-python scripts/ask_graphdb_ollama.py "TEP_XMEAS7 pressure transmitter" --evidence-only
 python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_XMEAS7?"
-python scripts/ask_graphdb_ollama.py "Explain the engineering significance and verification limitations of the product association for TEP_XMEAS7."
-python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_NONEXISTENT_999?"
 ```
 
-The outputs distinguish `EVIDENCE_ONLY`, `DETERMINISTIC_GROUNDED_RESPONSE`, `GROUNDED_RESPONSE`, and `NO_EVIDENCE`. A deterministic answer is **not** an Ollama generation; a no-evidence response is retrieval-layer abstention. Product associations and ECLASS mappings may be provisional and must not be represented as verified physical installation. See [docs/local-ollama-graphdb-grounding.md](docs/local-ollama-graphdb-grounding.md).
-
-**Locally tested historical Q&A script (not yet tracked on `main`):** if you have separately saved `scripts/ask_historical_ollama.py` in this checkout, you can run:
-
-```powershell
-python scripts/ask_historical_ollama.py TEP_XMEAS6 --run-id 5636ccad-cc2a-41ae-9032-3d2f52bd0185 --evidence-only
-python scripts/ask_historical_ollama.py TEP_XMEAS6 --run-id 5636ccad-cc2a-41ae-9032-3d2f52bd0185
-```
-
-This requires the API, GraphDB, TimescaleDB historical run, and Ollama. The run ID above is **an example from a validated local dataset**, not guaranteed to exist in a fresh database. It resolves an AssetInventory asset to an operational signal and retrieves historical values via `GET /api/semantic/asset-history` before prompting Ollama. It is **not** yet part of the server/frontend and does not implement general causal diagnosis.
+Ollama must be running separately. This script is a GraphDB-grounded CLI, **not** an integrated SELiRA verifier. See [Ollama grounding](docs/local-ollama-graphdb-grounding.md).
 
 ### Shutdown and troubleshooting
 
-Use `Ctrl+C` in the OPC UA, API, Vite and optional Ollama terminal windows. To stop only the sample TimescaleDB container while preserving its volume, run `docker compose -f docker-compose.timeseries.yml down` (do **not** add `-v` unless you intend to delete stored data).
+Stop foreground services with `Ctrl+C`. Stop the sample database with `docker compose -f docker-compose.timeseries.yml down` (without `-v` to retain data). For connection issues, check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama), plus the configured database DSN. See [time-series troubleshooting](docs/opcua/TIMESERIES.md).
 
-- **OPC UA unavailable:** confirm port 4841 is free, the OPC UA process is running, and `/api/simulation/status` reports connectivity.
-- **No persistent samples:** check `TEP_TIMESCALE_DSN`, `/api/simulation/history` → `storageError`, whether the simulator is advancing, and the correct database/run ID.
-- **GraphDB sync errors:** verify repository `AAS`, the SPARQL endpoint, GraphDB write permissions, and `/api/semantic/sync/status`.
-- **Ollama errors:** verify `/api/tags` and `ollama list`; the Q&A CLI needs a locally available model.
-- **Frontend API errors:** keep the API on port 8000 or configure `PROCESS_SIM_API_URL` for Vite.
+## Recording a TEP run
 
-## Deferred milestone — Physical BOM revision governance
+Install the recording dependencies:
 
-**Status: Deferred by project decision (23 October 2026).** Do not treat this as completed or production-ready.
+```bash
+pip install -r requirements-recording.txt
+```
 
-The initial Engineering Relationship Registry, server-side append-only review history, evidence-gated physical membership review, and immutable physical BOM revision overlays have been implemented as a prototype. The next governance milestone is intentionally postponed:
+For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
 
-- **Complete physical BOM revision supersession:** explicitly designate a new current baseline and supersede previous revisions without rewriting historical snapshots.
-- **Revision comparison:** display additions, removals, and changed equipment-parent assignments between any two physical BOM revisions.
-- **Withdrawal and correction:** record withdrawal/rejection of previously approved physical assignments through new audit events, preserving prior decisions and preventing stale evidence from authorizing new releases.
-- **Formal release workflow:** validate a proposed complete physical BOM baseline, require review and evidence for every change, and record release metadata and approval history.
-- **Production readiness:** verify end-to-end tests and frontend build; assess durable backups, document evidence/version integrity, access controls if deployed beyond a trusted local environment, and stronger independent audit integrity.
+```powershell
+$env:PYTHONPATH="$PWD\src"
+```
 
-**Engineering constraints:** Functional correspondence is not physical installation; neither establishes DEXPI–ECAD identity. Source EBOM `ParentItemId` must remain unchanged until explicitly justified by verified physical evidence and an approved revision process. Existing immutable revision overlays are not automatically superseded when later evidence is withdrawn.
+Record a one-hour Python-backend run:
 
-Implementation details: [Engineering review workflow](docs/engineering-review-workflow.md).
+```bash
+python examples/record_tep_run.py --hours 1
+```
+
+Record every 10 native steps:
+
+```bash
+python examples/record_tep_run.py --hours 1 --interval 10
+```
+
+Inspect a run:
+
+```bash
+python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
+```
+
+Run the controlled experiment fixture:
+
+```bash
+python examples/run_experiment.py \
+  examples/experiments/reactor_cooling_bias_001.yaml \
+  examples/scenarios/reactor_sensor_bias.yaml \
+  --output data/runs
+```
+
+Run the five-seed replication benchmark:
+
+```powershell
+python examples/run_replication.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --seeds 42 43 44 45 46 `
+  --output data/runs `
+  --summary data/replications/reactor_cooling_bias.csv
+```
+
+Run the fault-magnitude sweep:
+
+```powershell
+python examples/run_fault_magnitude_sweep.py `
+  examples/experiments/reactor_cooling_bias_001.yaml `
+  examples/scenarios/reactor_sensor_bias.yaml `
+  examples/scenarios/reactor_no_fault.yaml `
+  --magnitudes 1 5 10 `
+  --seeds 42 43 44 `
+  --output data/runs
+```
+
+Start the OPC UA server:
+
+```bash
+python examples/run_opcua_server.py
+```
+
+The default endpoint is `opc.tcp://0.0.0.0:4841/process-sim/`. The launcher supports configurable endpoint, seed, real-time factor, and update interval options.
+
+Each run is stored as:
+
+```text
+data/
+└── runs/
+    └── <run-id>/
+        ├── metadata.json
+        ├── observations.parquet
+        └── events.parquet
+```
+
+Parquet is the current portable intermediate format, not the final production historian architecture.
+
+## SELiRA — Experimental implementation status
+
+SELiRA provides an offline-testable correspondence qualification foundation in `src/process_sim/selira/`. An extracted XMEAS/XMV identifier is a **candidate**, not independently validated engineering correspondence.
+
+| Component | Current status |
+| --- | --- |
+| Candidate qualification and correspondence resolution | Implemented; handles rejected, conflicting, and ambiguous candidates |
+| Fail-closed consumer authorization | Reusable policy implemented; **not wired into production endpoints** |
+| GraphDB candidate retrieval | Experimental adapter; offline mocked tests reported passing |
+| Guarded historian access | Experimental function; **not integrated into the existing production API or web UI** |
+| Engineering evidence validation | Prototype for selected TEP pressure tags; project-scope checks are not authenticated physical evidence |
+| GraphDB named-graph evidence inspection | Experimental; mocked tests reported passing, live query unverified |
+| Synthetic policy comparison | 18 deterministic declaration-driven scenarios; **not** an empirical real-world accuracy benchmark |
+| End-to-end operational validation | Not demonstrated |
+
+**SC-01 — Semantic Information Contract: Asset-to-Product Reference Consistency.** Validates that each applicable `AssetInventory` asset's product reference resolves to exactly one authoritative `ProductCatalog` entry at the evaluated source revision (`|P_ν(a)| = 1`). Outcomes: **V** (one verified match), **F** (zero or multiple matches with complete evidence), **U** (incomplete, missing, or stale evidence), and **NA** (asset outside the contract scope). Relevant source changes require reassessment. This identifier-consistency check does **not** establish product suitability or consumer authorization.
+
+### Proposed additional SELiRA contracts (not yet verified end-to-end)
+
+The following compact definitions are **proposed** evaluation obligations. They do not imply that authoritative evidence, live integration, or production enforcement is implemented. All use **V** (validated), **F** (invalid), **U** (insufficient, incomplete, or stale evidence), and **NA** (demonstrably outside scope). Relevant source, configuration, or policy changes require reassessment.
+
+| ID | Type | Contract | Compact definition |
+| --- | --- | --- | --- |
+| **SC-02** | Engineering Validation Contract | Engineering-to-Signal Meaning Consistency | Validates that a mapped operational signal measures the intended engineering property on the correct equipment, with compatible physical meaning and units under the applicable configuration. **V:** all checks evidenced; **F:** authoritative contradiction; **U:** evidence insufficient; **NA:** mapping outside scope. |
+| **SC-03** | Engineering Validation Contract | Configuration and Revision Applicability | Validates that a correspondence and its supporting engineering evidence apply to the requested configuration and source revisions. **V:** applicability and currency evidenced; **F:** proven mismatch; **U:** applicability or revision unknown; **NA:** outside scope. |
+| **CAC-01** | Consumer Acceptance Contract | Operational Evidence Fitness | Accepts an otherwise validated engineering-to-signal correspondence for operational analysis only when the requested run/time interval, units, provenance, and measurement coverage satisfy the consumer's task requirements. **V:** requirements met; **F:** known requirement violated; **U:** evidence incomplete; **NA:** task outside scope. |
+| **CAC-02** | Consumer Acceptance Contract | Engineering Restriction Fitness | Accepts an otherwise validated engineering restriction for a SAFSL-style specification task only when its approval, target property, units, and configuration satisfy the consumer's requirements. **V:** requirements met; **F:** known mismatch; **U:** approval or context unknown; **NA:** task outside scope. |
+
+**Boundary:** SC-02 and SC-03 concern source-side engineering validity. CAC-01 and CAC-02 concern task-specific fitness for use and cannot override failed, pending, or ambiguous source qualification. These identifiers and definitions are documentation proposals, not claims about the existing SC-02–SC-06 implementation specifications.
+
+**Tests:** The latest reported local run passed **42/42 SELiRA tests**; another **10 semantic regression tests** passed in separate runs. These are user-reported local results, not independently verified CI or live integration results.
+
+**Limitations:** Independent evidence authenticity, configuration applicability, live GraphDB/TimescaleDB integration, and production API enforcement remain incomplete or unverified. Existing `/api/semantic/asset-history` behavior is unchanged.
 
 ## Operational and enterprise integration clarification (24 October 2026)
 
@@ -299,105 +302,32 @@ These candidate AAS collections use `SelectionStatus`, `EvidenceSource`, `Operat
 
 **Revalidate candidates** after controller changes, revised simulation/fault envelopes, process design-basis updates, manufacturer datasheets, ECLASS checks or engineering sign-off. Do not promote provisional candidates to approved products without configuration-specific evidence.
 
-## TEP NEXUS — ECLASS equipment classification reference (October 2026)
+## ProductCatalog and AssetInventory AAS
 
-This is the **working classification register** for physical equipment in the Tennessee Eastman Process (TEP) semantic digital twin. The ECLASS names and IRDIs below were supplied from ECLASS lookup during engineering review. They describe **physical product/asset types**, not XMEAS measurements or XMV manipulated-variable identifiers. These selections are design decisions for TEP NEXUS, **not claims that the original TEP simulation specifies particular commercial hardware**.
+The two AAS submodels separate **product-type definitions** from **engineering asset instances**. The following tables summarize fields found in the current JSON instances; they are not catalogs of verified physical installations.
 
-| Physical equipment / asset | ECLASS class | Preferred name | ECLASS class IRDI | Decision / qualification |
-|---|---|---|---|---|
-| Process control valves (11 physical valves) | 37-01-02-03 | Control globe valve | `0173-1#01-AAD651#023` | Selected; explicitly assumes globe-valve construction |
-| Temperature sensors | 27-27-51 | Temperature sensor | `0173-1#01-AHB186#005` | Selected; electrical temperature sensor assumed |
-| Pressure sensors | 27-27-49 | Pressure sensor | `0173-1#01-AHB184#005` | Selected |
-| Level transmitters | 27-20-05 | Level gauge or transmitter | `0173-1#01-AAC020#014` | Selected; transmitter implementation assumed |
-| Reactor | 36-02-01 | Reactor | `0173-1#01-AAD319#012` | Selected |
-| Process pumps | 36-41 | Pump | `0173-1#01-AAD563#010` | Selected; not applicable to compressor |
-| Condenser | 36-04 | Heat exchanger | `0173-1#01-AAD338#010` | Selected broad class |
-| Gas–liquid separator | 36-20-17-04 | Vessel separator (for gases) | `0173-1#01-AKL760#020` | Selected; assumes a vessel-type gas–liquid separator, without specifying internals |
-| Stripper | 36-01-01 | Column | `0173-1#01-AAD304#013` | Selected broad industrial column class |
-| Reactor agitator assembly | 36-09-08-01 | Agitator (complete) | `0173-1#01-AKP267#021` | Selected; assembly may include motor unless motor is modeled separately |
-| Separately modeled pump, compressor, and agitator drive motors | 27-02-24 | Synchronous motor | `0173-1#01-AKE158#012` | Selected as an explicit motor-technology assumption |
-| Recycle gas compressor | 36-43 | Compressor, ventilator, vacuum pump | `0173-1#01-AAD585#011` | Selected broad parent class; verify product-class assignability in the ECLASS version in use |
+### ProductCatalog AAS
 
-### ProductCatalog — selected commercial products (engineering decision, October 2026)
+| Information | Implemented AAS field(s) | Purpose |
+| --- | --- | --- |
+| Product identity | `AssetIdentifier` | Identifies the product-type definition. |
+| Manufacturer and designation | `ManufacturerName`, `ManufacturerPartNumber`; `ManufacturerProductDesignation` where present | Identifies the supplier's product/model. |
+| ECLASS classification | `ECLASSClass`, `ECLASSPreferredName`, `ECLASSIRDI` | Describes the assigned product class and identifier. |
+| Technical specifications | `TechnicalProperties` | Records product-specific technical characteristics. |
+| Engineering and verification status | `SelectionStatus`, `ECLASSVerificationStatus` and other status fields where present | Distinguishes proposed selections from independently verified claims. |
 
-The following **seven existing commercial product entries** are present in the TEP NEXUS ProductCatalog. ECLASS class names and IRDIs were supplied during engineering review; the classifications are documented here **before** changes to the AAS JSON, ECAD references, or AssetInventory. These are representative commercial products, not hardware specified by the original Tennessee Eastman benchmark.
+### AssetInventory AAS
 
-| Manufacturer | Selected product / function | ECLASS class | Preferred name | ECLASS class IRDI | Qualification |
-|---|---|---|---|---|---|
-| SMC | **PFMV505-1** — minute-flow sensor | 27-27-48 | Flow sensor | `0173-1#01-AHB183#005` | Selected; verify process medium and measurement range for any installed location |
-| IFM | **LW2720** — non-contact 80 GHz radar level sensor | 27-20-05-05 | Free-space radar level transmitter/switch | `0173-1#01-AAC024#022` | Selected; radar-specific class supersedes the provisional generic level-transmitter class |
-| Schneider Electric | **A9MEM3555** — three-phase electricity meter | 27-14-23-16 | Electronic electricity meter | `0173-1#01-AFZ828#022` | Selected; measures an AC electrical circuit, not the modeled 24 V DC instrument bus |
-| SAMSON | **Type 3241-7** — pneumatic globe control valve, DN25, Kvs 10 m³/h, PN40 | 37-01-02-03 | Control globe valve | `0173-1#01-AAD651#023` | Selected representative assembly: Type 3277 actuator, Type 3730-1 4–20 mA positioner, normally closed; requires instrument air |
-| SMC | **PSE550** — low differential-pressure sensor | 27-20-06-23 | Pressure differential sensor | `0173-1#01-AKA491#001` | Selected; low differential-pressure gas measurement, not automatically suitable for high-pressure TEP streams |
-| Phoenix Contact | **2938581** / QUINT-PS-100-240AC/24DC/5 — industrial power supply | 27-04-07-04 | AC-DC supply | `0173-1#01-AFX043#011` | Selected; 24 V DC, 5 A nominal output; check total connected load |
-| IFM | **TA1101** — integrated temperature sensor/transmitter | 27-27-51 | Temperature sensor | `0173-1#01-AHB186#005` | Selected instead of the previously considered passive Pt100 TM4101; verify exact signal-interface details against its datasheet |
+| Information | Implemented AAS field(s) | Purpose |
+| --- | --- | --- |
+| Asset identity | `AssetId`, `AssetName`, `EquipmentTag` | Identifies the engineering asset or equipment tag. |
+| Asset type and location | `AssetType`, `Location` | Describes the asset's engineering context. |
+| Product association | `ProductReference`; `CandidateProductReference` where present | Connects an asset to a product definition or a provisional candidate. |
+| Operational signal | `OperationalReference` where present | Records a signal reference; its presence alone does **not** establish validated semantic correspondence. |
+| Engineering reference | `EngineeringReference` where present | Points to related engineering information. |
+| Modeling and integration status | `ModelingStatus`, `SimulationStatus`, `MonitoringStatus` | Records declared status; not an independent SELiRA certification. |
 
-**SAMSON part-number provenance:** Tetra Pak's Plant Components catalog lists **`90533-1149`** for the **3241-7 / 3730-1, DN25, Kvs 10.00 m³/h** assembly. This is a **Tetra Pak supplier/catalog part number**, **not a verified SAMSON manufacturer order number**. Keep supplier and manufacturer identifiers separate in the future ProductCatalog AAS. The supplied listing also specifies DIN PN40 flanges, cast-steel GS-C25 housing, Type 3277 pneumatic actuator, Type 3730-1 positioner (4–20 mA), normally closed operation, and an included air-reducing station. Its heading says “SS/SS,” while the detailed housing field says GS-C25; do not silently infer a stainless-steel housing.
-
-**Explicit exclusions and replacements:**
-
-- **SMC PSH-L2-01-W** humidity/condensation checker — removed from the intended ProductCatalog scope.
-- **Rittal 3244100** enclosure filter fan — removed from the intended ProductCatalog scope; existing ECAD motor-device references to this fan part number require correction, not reuse as a motor.
-- **Siemens S55264-V193** HVAC pressure-independent valve — superseded by the selected **SAMSON Type 3241-7** representative process-control valve.
-- **IFM TM4101** passive Pt100 temperature sensor — considered but superseded by **IFM TA1101**.
-- The earlier generic **LW2720** candidate `27-20-05-18` / `0173-1#01-AAC030#023` is superseded by the radar-specific `27-20-05-05` class. Float-switch classification `27-27-31-05` is inapplicable.
-
-**Implementation status:** This section records **agreed selections only**. The source `examples/aas/product_catalog_instance.json` still reflects the prior eight-product snapshot until a separate implementation commit; the seven-product selection has **not** yet been written into that AAS instance. The earlier counts and cross-domain part-number match statistics in this README refer to the existing snapshot and must be recalculated after changes. Validate manufacturer/supplier identity, electrical/pneumatic connections, DEXPI/ECAD/AssetInventory references, ECLASS release compatibility, and SHACL/RDF lifting after implementation.
-
-### Classification rules and evidence boundaries
-
-- **ProductCatalog AAS** should hold the authoritative ECLASS classification for a product type; **AssetInventory AAS** should reference that product for each installed asset. Validate actual inventory coverage before claiming every physical asset is classified.
-- Each `0173-1#01-...#...` identifier above is an **ECLASS class IRDI**. Do not reuse it as the semantic ID of an unrelated AAS property such as `DeviceType`.
-- Classify the **driven machine** and its **electric motor** separately only where the motor is represented as a distinct asset. The agitator's *complete* assembly classification must not be confused with the standalone motor classification.
-- The recycle compressor's broad 36-43 class avoids an unsupported assumption about rotary positive displacement, reciprocating compression, or turbo compression. **Confirm whether the parent class is directly assignable** in the selected ECLASS release before implementing the ProductCatalog mapping.
-- The gas–liquid separator selection assumes a **vessel separator**. The TEP process model does not specify separator internals.
-- The eleven globe-valve selections and the synchronous-motor selection are **TEP NEXUS modeling assumptions** rather than verified original TEP equipment specifications. XMV(12) denotes agitator speed control, **not a twelfth physical control valve**.
-- Synchronous motors require appropriate electrical drive arrangements. A 24 V DC instrumentation supply does **not** by itself establish suitable motor power or drive compatibility. ECAD power distribution and motor-drive details remain a separate consistency review.
-- ProductCatalog AAS entries include ECLASS class and IRDI values; the working equipment classifications still require ECLASS release/assignability verification. AssetInventory classification coverage must be checked separately.
-
-### Reviewed alternatives not selected
-
-- **Linear DC motor** (`0173-1#01-ADJ119#015`) and **Linear induction motor** (`0173-1#01-ADJ117#015`): linear rather than rotary motion.
-- **Universal motor** (`0173-1#01-AKE157#019`): rotary, but not the selected continuous industrial-drive technology.
-- **Electric motor (motor vehicle)** (`0173-1#01-AFX525#006`) and **Motor (hydraulics, other)** (`0173-1#01-AGU935#004`): incorrect application domain or energy-conversion technology.
-- **Submersible motor pump** (`0173-1#01-AKL848#022`): assumes submerged pump construction and describes a pump unit rather than a standalone drive motor.
-- **Compressor (positive type, rotating)** (`0173-1#01-AAD586#013`), **Compressor (special execution)** (`0173-1#01-AAD589#012`), and **Compressor, ventilator, vacuum pump (other)** (`0173-1#01-AKL925#012`): not selected without evidence of the specified design or an actual *other* subtype.
-
-**Next implementation step:** validate the updated ProductCatalog JSON against the AAS template and SHACL shapes, verify ECLASS class assignability, then reconcile product/asset references before any RDF publication or AssetInventory linking. Keep ECAD electrical topology changes separate from this documentation step.
-
-## Current status
-
-The implementation currently spans the simulation, fault/scenario, OPC UA, recording, and controlled-experiment foundations. The complete roadmap contains 10 phases organized under four architectural pillars.
-
-Implemented and verified at the platform level:
-
-- ProfBraatz TEP exposed through `TEPAdapter`
-- backend-independent `ProcessSimulator` boundary
-- deterministic seeded TEP simulation control
-- 41 XMEAS measurements, 12 XMV manipulated variables, and 20 IDV disturbance slots
-- authoritative XMEAS engineering units
-- asynchronous OPC UA integration
-- simulation lifecycle controls and configurable real-time factor
-- OPC UA XMEAS/XMV exposure and XMV write bridge
-- OPC UA fault-management contract: `InjectFault`, `ClearFault`, `ClearAllFaults`, and `ListFaults`
-- operator fault provenance through OPC UA metadata
-- fault lifecycle status reporting: `registered`, `active`, and `expired`
-- fault lifecycle events including `FaultInjected`, `FaultActivated`, `FaultDeactivated`, and `FaultCleared` in the platform event path
-- canonical `Observation` and `Event` models
-- `SimulationRecorder` and `RunManifest`
-- Parquet persistence with one directory per run
-- recording and inspection examples
-- `Fault`, `FaultType`, and `FaultManager`
-- bias, drift, stuck, and process-disturbance fault definitions
-- scheduled fault activation/deactivation lifecycle events
-- native TEP IDV integration for scenario-managed process disturbances
-- YAML/JSON scenario definitions
-- executable `ScenarioRunner`
-- declarative `Experiment` / `GroundTruth` models and `ExperimentRunner`
-- experiment provenance persisted in run metadata
-- paired fault/baseline replication runner
-- fault-magnitude sweep tooling with RMSE, MAE, peak error, IAE, and ISE metrics
-- initial controlled benchmark fixtures and reproducibility evidence
+**Source artifacts:** [ProductCatalog JSON](examples/aas/product_catalog_instance.json) and [AssetInventory JSON](examples/aas/asset_inventory_instance.json). Not every asset has a product reference or engineering reference, and provisional assignments must not be treated as verified installations. Historical equipment/ECLASS selection decisions remain in [the engineering decision register](docs/engineering/eclass-classification-decisions.md) for reconciliation.
 
 ## OPC UA and industrial automation architecture
 
@@ -476,127 +406,6 @@ expired
 For an indefinite fault, the status remains `active` until the operator explicitly clears it.
 
 The declarative scenario/experiment path remains the authoritative path for reproducible scientific benchmarks. OPC UA fault injection is the operator-facing operational path. Both paths feed the same fault-management and provenance model.
-
-## First controlled experiment
-
-Experiment `reactor_cooling_bias_001` was executed end-to-end and inspected successfully before the controller-path correction. It established the deterministic execution and temporal ground-truth layer:
-
-```text
-Run:              3972cf14-1e97-4259-a758-5d9f2ef6026c
-Scenario:         reactor_sensor_bias
-Seed:             42
-Simulated time:   0.0 → 2.0 h
-Native timestep:  1 s
-Variables:        53
-Observation rows: 381,653
-Event rows:       4
-```
-
-The recorded lifecycle was:
-
-```text
-0.0 h   SimulationStarted
-1.0 h   FaultActivated     XMEAS9
-1.5 h   FaultDeactivated   XMEAS9
-2.0 h   SimulationCompleted
-```
-
-This established reproducible experiment configuration, persisted ground truth, exact temporal fault boundaries, complete observation coverage, and run provenance. It did **not** establish closed-loop process propagation because the scheduled sensor fault was initially applied only to the recorded measurement path.
-
-## Closed-loop fault propagation benchmark
-
-The controller path was subsequently corrected so scheduled sensor faults are injected into the native TEP controller measurement input before controller calculations, while the same fault remains visible in recorded observations.
-
-The relevant control relationship is:
-
-```text
-XMEAS9 reactor-temperature measurement
-        │
-        ▼
-Controller 18
-        │
-        ▼
-reactor-temperature cascade setpoint
-        │
-        ▼
-Controller 10
-        │
-        ▼
-XMV10 reactor cooling-water flow
-        │
-        ▼
-TEP process dynamics
-        │
-        ▼
-XMEAS21 reactor cooling-water outlet temperature
-```
-
-A paired fault-versus-baseline experiment then showed substantial deviations in `XMV10` and `XMEAS21` during the fault window and persistent post-fault response. Across five independent seeds (42–46), the observed response was highly repeatable.
-
-Representative five-seed ranges:
-
-| Variable | Fault RMSE | Fault peak absolute deviation | Post RMSE |
-|---|---:|---:|---:|
-| XMEAS9 | 1.324–1.335 | 5.000 | 2.826–2.845 |
-| XMV10 | 21.617–22.101 | 58.987–60.381 | 21.673–22.637 |
-| XMEAS21 | 4.840–4.917 | 10.471–10.641 | 4.236–4.404 |
-
-These results support the reproducibility of the **observed closed-loop response** across seeds. They are empirical benchmark evidence, not a formal causal proof.
-
-## Fault-magnitude sweep
-
-A three-magnitude × three-seed paired benchmark was also executed for sensor-bias magnitudes of `1`, `5`, and `10`.
-
-Selected aggregate results:
-
-| Magnitude | Variable | Fault RMSE mean | Fault IAE mean | Fault ISE mean | Post RMSE mean |
-|---:|---|---:|---:|---:|---:|
-| 1 | XMEAS9 | 0.324 | 0.119 | 0.052 | 0.400 |
-| 1 | XMV10 | 9.320 | 3.420 | 43.435 | 11.478 |
-| 1 | XMEAS21 | 1.837 | 0.701 | 1.687 | 2.131 |
-| 5 | XMEAS9 | 1.328 | 0.491 | 0.878 | 2.837 |
-| 5 | XMV10 | 21.873 | 9.600 | 239.139 | 22.120 |
-| 5 | XMEAS21 | 4.881 | 2.037 | 11.910 | 4.315 |
-| 10 | XMEAS9 | 3.335 | 1.290 | 5.546 | 12.073 |
-| 10 | XMV10 | 28.946 | 12.854 | 418.897 | 41.059 |
-| 10 | XMEAS21 | 7.149 | 2.798 | 25.552 | 0.607 |
-
-The sweep demonstrates a reproducible magnitude-dependent response, but the response is not simply linear. In particular, `XMV10` error increases strongly while its maximum deviation appears bounded at the larger fault magnitudes. This behavior is now a specific research question rather than an assumption.
-
-Issue #2 tracks the formal characterization of this response relationship, including scaling, nonlinearity/saturation, and post-fault recovery.
-
-## Four architectural pillars
-
-1. **Digital Twin & Simulation** — Phases 1–4
-2. **Data & Temporal Infrastructure** — Phase 5
-3. **Semantic Digital Thread** — Phases 6–7
-4. **Industrial Intelligence** — Phases 8–10
-
-```text
-                INDUSTRIAL AI
-                     │
-             ┌───────┴────────┐
-             │ 4. Intelligence│
-             │ GraphRAG / AI  │
-             └───────┬────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 3. Semantic         │
-          │ Digital Thread      │
-          │ AAS / eCl@ss / QUDT │
-          │ DEXPI / ECAD / BOM  │
-          └──────────┬──────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 2. Temporal Data    │
-          │ TSDB + Events + TKG │
-          └──────────┬──────────┘
-                     │
-          ┌──────────┴──────────┐
-          │ 1. Digital Twin     │
-          │ TEP / Faults / OPCUA│
-          └─────────────────────┘
-```
 
 ## Research foundation
 
@@ -692,442 +501,65 @@ Fault ──activatedAt──► simulation time
                      future TSDB / Temporal KG
 ```
 
+## SELiRA contracts (proposed formal representations)
+
+The following table summarizes the proposed SELiRA contract types and their responsibilities. **SC-01** is a Semantic Information Contract; **SC-02 and SC-03** are proposed Engineering Validation Contracts; **CAC-01 and CAC-02** are proposed Consumer Acceptance Contracts. These definitions do not imply complete implementation or end-to-end enforcement.
+
+| ID | Type | Contract | Purpose |
+| --- | --- | --- | --- |
+| SC-01 | Semantic Information | Asset-to-Product Reference Consistency | Ensures a unique product reference. |
+| SC-02 | Engineering Validation | Engineering-to-Signal Meaning Consistency | Checks property meaning, equipment identity, units, and configuration. |
+| SC-03 | Engineering Validation | Configuration and Revision Applicability | Checks whether engineering evidence applies to the requested configuration and revision. |
+| CAC-01 | Consumer Acceptance | Operational Evidence Fitness | Checks whether measurements satisfy an operational analysis task. |
+| CAC-02 | Consumer Acceptance | Engineering Restriction Fitness | Checks whether an engineering restriction is suitable for a SAFSL-style specification task. |
+
+**Scope note:** SC-02 and SC-03 are proposed names in this overview and are not asserted to replace the existing SC-02–SC-06 specifications without reconciliation. CAC acceptance requires qualified engineering evidence and does not override failed or unresolved validation.
+
+## TEP NEXUS simulation information contracts (separate reference)
+
+
+The following **TEP-specific simulation information contracts** describe information exposed or recorded by the reference simulator. They are compact architectural representations, **not** Engineering Validation Contracts (SCs) or Consumer Acceptance Contracts (CACs). Their generic, TEP-independent counterparts remain to be derived. Tuple fields and constraints are not necessarily implemented or independently verified by `TEPAdapter`.
+
+| ID | Type | Contract | Mathematical representation | Purpose |
+| --- | --- | --- | --- | --- |
+| TEP-C01 | Simulation information | [Simulation](docs/architecture/contracts/tep-c01-simulation.md) | `C_sim(k) = (B, S_k, T_k, Δt, R, Q)` | Describes simulation state, time, backend, seed, and control mode. |
+| TEP-C02 | Simulation information | [Measurements](docs/architecture/contracts/tep-c02-measurements.md) | `C_meas(i,k) = (I_i, V_(i,k), U_i, T_k, R_run, P)` | Describes 41 XMEAS signals and their observation context. |
+| TEP-C03 | Simulation information | [Manipulated variables](docs/architecture/contracts/tep-c03-manipulated-variables.md) | `C_ctrl(i,k) = (I_i, V_(i,k), T_k, Q, P)` | Describes 12 XMV signals and their control context. |
+| TEP-C04 | Simulation information | [Native disturbances](docs/architecture/contracts/tep-c04-disturbances.md) | `C_dist(i,k) = (I_i, A_(i,k), T_s, D, P)` | Describes 20 native IDV slots and disturbance scheduling. |
+| TEP-C05 | Simulation information | [Faults and scenarios](docs/architecture/contracts/tep-c05-fault-scenarios.md) | `C_fault(f) = (I_f, F_f, X_f, M_f, T_s, D, P)` | Describes fault identity, target, scheduling, and provenance. |
+
+Each linked specification defines its tuple elements, a core constraint, and information origins. **Run identity and provenance come from recording/event infrastructure**, not necessarily the native simulator.
+
+**Relation to SELiRA:** These contracts describe available simulation information. **SC-01 (Semantic Information Contract)** checks a separate asset-to-product reference relationship. **Engineering Validation Contracts (SCs)** evaluate whether claimed engineering correspondences are supported by applicable authoritative evidence. **Consumer Acceptance Contracts (CACs)** determine whether qualified information meets a specific consumer task's requirements. For example, `XMEAS7` identifies a TEP measurement channel but does not, by itself, establish the physical engineering asset it measures or authorize its use in a consumer workflow.
+
 ## Fault and scenario engineering
 
-```text
-Scenario YAML / JSON             SCADA / HMI
-        │                            │
-        ▼                            │ OPC UA
-   ScenarioRunner                    ▼
-        │                      OPC UA FaultManagement
-        └──────────────┐             │
-                       ▼             ▼
-                    FaultManager / lifecycle
-                             │
-              ┌──────────────┼───────────────┐
-              ▼              ▼               ▼
-           XMEAS/XMV     native IDV      provenance
-           signal faults  process faults  + events
-              │              │               │
-              └──────────────┴───────────────┘
-                             ▼
-                        TEP process model
-```
+TEP NEXUS supports declarative fault scenarios, including sensor bias, drift, actuator faults, and native TEP process disturbances. Fault execution is integrated with simulation orchestration and recording, preserving fault identity and temporal provenance. Signal-level faults operate at the TEP adapter boundary, while process disturbances use the model's native IDV interface.
 
-Signal-level faults operate at the TEP adapter boundary. Process disturbances are synchronized to the TEP model's native IDV interface. Both declarative and OPC UA paths preserve fault identity and temporal provenance.
+## Research evaluation
 
-Example:
+The proposed evidence-grounded AI evaluation protocol, baselines, and evidence limitations are documented in [Research evaluation strategy](docs/research/evaluation-strategy.md). Systematic benchmark results are not yet available.
 
-```yaml
-scenario: reactor_sensor_and_process_fault
-metadata:
-  random_seed: 42
-faults:
-  - id: reactor-temperature-bias
-    type: bias
-    target: XMEAS9
-    magnitude: 5.0
-    start: 1.0
-    duration: 0.5
-  - id: process-disturbance
-    type: process_disturbance
-    target: IDV6
-    start: 1.5
-    duration: 0.25
-```
+## Roadmap — Remaining Work
 
-## Controlled experiments
+This table tracks outstanding work rather than repeating capabilities already documented as implemented. **Prototype**, **foundation implemented**, and **integrated/validated** are distinct maturity levels.
 
-Experiments add scientific context around scenario execution:
+| Area | Current maturity | Remaining work |
+| --- | --- | --- |
+| Industrial Twin Core (Phase 2) | In progress | Complete richer equipment and functional relationships, lifecycle/run management, operating-state transitions, and source-generated events. |
+| Fault Injection & Scenarios (Phase 3) | Foundation implemented | Add schema validation, richer scheduling, noise/saturation/intermittent/combined faults, controller and communication faults, reusable scenario libraries, and experiment comparisons. |
+| OPC UA Integration (Phase 4) | Fault-management foundation implemented | Expose first-class lifecycle events, engineering names and units, EUInformation, quality/status/timestamps, richer alarms, external SCADA/HMI integration tests, and deployment security. |
+| Time-Series & Experiments (Phase 5) | Experiment foundation implemented | Characterize fault responses, automate benchmark aggregation and statistics, integrate historian/time-series backends, expand temporal event models, and support event-to-observation correlation and replay/query. |
+| Engineering & Semantic Digital Thread (Phase 6) | Prototype implemented; integration in progress | Complete cross-domain identity/provenance reconciliation, template governance, ECLASS/AAS verification, SHACL validation, and end-to-end semantic integration and evaluation. |
+| BOM & Enterprise Integration (Phase 7) | Planned | Model EBOM/MBOM/service BOM, master data, ERP references, manufacturer/supplier identifiers, revisions, lifecycle status, and enterprise-to-engineering identity resolution. |
+| Web SCADA / HMI (Phase 8) | Frontend prototype; live integration planned | Integrate live OPC UA data, trends/history, alarms, scenario controls, operator actions, and engineering/semantic metadata. Intended path: **SCADA/HMI → OPC UA → control/process layer**. |
+| Knowledge Graph & GraphRAG (Phase 9) | Visualization prototype; RDF/GraphRAG integration planned | Integrate and validate engineering/temporal graphs, SPARQL competency queries, graph-grounded retrieval, and provenance-aware answers; distinguish experimental adapters from production integrations. |
+| Industrial AI Platform (Phase 10) | Planned | Develop evidence-backed diagnosis, root-cause and temporal reasoning, engineering-aware recommendations, controlled agent actions, and benchmarked comparisons. |
 
-```text
-Experiment YAML / JSON
-        │
-        ├── Scenario ───────► ScenarioRunner
-        │                         │
-        └── Ground Truth         TEPAdapter
-                                  │
-                                  ▼
-                         Recording Session
-                                  │
-                         observations + events
-                                  │
-                                  ▼
-                             Run Manifest
-```
+**Completed foundation:** Phase 1 (TEP reference and Python simulation integration) is omitted from the remaining-work table. Implementation status elsewhere in this README describes existing foundations; items above should not be interpreted as delivered or independently validated.
+### Deferred: Physical BOM revision governance
 
-The experiment layer is intentionally thin. `ScenarioRunner` remains the owner of simulation orchestration, fault synchronization, recording cadence, storage, and simulator provenance. `ExperimentRunner` adds experiment identity, declared ground truth, and benchmark metadata.
-
-Current fixture:
-
-`examples/experiments/reactor_cooling_bias_001.yaml`
-
-Current benchmark families:
-
-1. normal baseline
-2. sensor bias
-3. sensor drift
-4. actuator stuck
-5. process disturbance
-6. combined faults
-
-The benchmark tooling now includes paired fault/baseline replication and fault-magnitude sweeps. Formal response characterization is tracked separately so that empirical results are not overstated.
-
-### Evidence status
-
-The current evidence establishes:
-
-- reproducible experiment configuration
-- persisted experiment and ground-truth metadata
-- complete observation coverage for configured durations
-- fault activation/deactivation at exact declared simulation boundaries
-- OPC UA fault registration, listing, provenance, and lifecycle status transitions
-- observed closed-loop response in expected controller/process variables
-- repeatability across five random seeds for the controlled sensor-bias benchmark
-- magnitude-dependent response across three fault magnitudes and three seeds
-
-Still to be established:
-
-- formal scaling/nonlinearity characterization
-- response latency and settling-time characterization
-- explanation of the apparent `XMV10` peak-deviation bound
-- broader fault-family comparisons
-- fault-attribution and detection metrics
-- temporal-KG reasoning benchmarks
-- comparisons against time-series-only and graph-enhanced AI baselines
-
-These distinctions are intentional: **implemented**, **executed**, and **scientifically validated** are treated as different evidence levels.
-
-## Run provenance
-
-Each recording run has a `RunManifest` containing:
-
-```text
-Run
-├── run_id
-├── simulator
-├── backend
-├── backend_version
-├── random_seed
-├── real_time_factor
-├── scenario
-├── started_at
-├── completed_at
-└── metadata
-```
-
-Experiment metadata and declared ground truth are persisted under the run metadata for reproducibility.
-
-## Recording a TEP run
-
-Install the recording dependencies:
-
-```bash
-pip install -r requirements-recording.txt
-```
-
-For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
-
-```powershell
-$env:PYTHONPATH="$PWD\src"
-```
-
-Record a one-hour Python-backend run:
-
-```bash
-python examples/record_tep_run.py --hours 1
-```
-
-Record every 10 native steps:
-
-```bash
-python examples/record_tep_run.py --hours 1 --interval 10
-```
-
-Inspect a run:
-
-```bash
-python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
-```
-
-Run the controlled experiment fixture:
-
-```bash
-python examples/run_experiment.py \
-  examples/experiments/reactor_cooling_bias_001.yaml \
-  examples/scenarios/reactor_sensor_bias.yaml \
-  --output data/runs
-```
-
-Run the five-seed replication benchmark:
-
-```powershell
-python examples/run_replication.py `
-  examples/experiments/reactor_cooling_bias_001.yaml `
-  examples/scenarios/reactor_sensor_bias.yaml `
-  examples/scenarios/reactor_no_fault.yaml `
-  --seeds 42 43 44 45 46 `
-  --output data/runs `
-  --summary data/replications/reactor_cooling_bias.csv
-```
-
-Run the fault-magnitude sweep:
-
-```powershell
-python examples/run_fault_magnitude_sweep.py `
-  examples/experiments/reactor_cooling_bias_001.yaml `
-  examples/scenarios/reactor_sensor_bias.yaml `
-  examples/scenarios/reactor_no_fault.yaml `
-  --magnitudes 1 5 10 `
-  --seeds 42 43 44 `
-  --output data/runs
-```
-
-Start the OPC UA server:
-
-```bash
-python examples/run_opcua_server.py
-```
-
-The default endpoint is `opc.tcp://0.0.0.0:4841/process-sim/`. The launcher supports configurable endpoint, seed, real-time factor, and update interval options.
-
-Each run is stored as:
-
-```text
-data/
-└── runs/
-    └── <run-id>/
-        ├── metadata.json
-        ├── observations.parquet
-        └── events.parquet
-```
-
-Parquet is the current portable intermediate format, not the final production historian architecture.
-
-## Research evaluation strategy — evidence-grounded industrial AI
-
-**Status (25 October 2026): evaluation protocol proposed; systematic benchmark results are not yet available.** This plan supports the research direction *Towards Evidence-Grounded AI in Industrial Automation: A Semantic Reference Architecture*. The architecture is intended to be reusable across industrial automation systems; **TEP NEXUS is the initial reference implementation**, not evidence of general portability. The evaluation follows a two-level principle inspired by the component-level and end-to-end evaluation design of *Req2Road* (CAiSE 2026, [arXiv:2602.15591](https://arxiv.org/abs/2602.15591)); its experiments and outcomes are not claimed to be equivalent.
-
-### Evaluation questions
-
-- **RQ1 — Semantic identity:** Can AssetInventory assets be resolved to the correct, unambiguous operational signals and historical observations?
-- **RQ2 — Evidence traceability:** Can each supported engineering statement be traced to the right asset, simulation run, observations, timestamps, and data source?
-- **RQ3 — Claim reliability:** Do independent numerical/temporal checks and evidence-bounded responses reduce unsupported statements and improve appropriate abstention compared with less-constrained baselines?
-- **RQ4 — Portability (future):** Which architectural contracts can be reused in a second automation environment without TEP-specific assumptions?
-
-### Component-level experiments
-
-| ID | Experiment | Procedure and ground truth | Primary measures |
-|---|---|---|---|
-| **E1** | Semantic asset-to-signal resolution | Audit the 41 XMEAS and 12 XMV signal identities against explicit AssetInventory operational references; manually adjudicate ambiguous or missing links. Do not assume full mapping coverage. | Mapping coverage, precision/recall on adjudicated cases, false-link and ambiguity-detection rates |
-| **E2** | Run-specific evidence retrieval and provenance | Query multiple recorded runs; compare returned observations, run IDs, ordering, values, and timestamps against independent historian queries and recorded manifests. Include nonexistent runs and missing data. | Evidence retrieval accuracy, run/time consistency, attribution accuracy, missing-evidence handling |
-| **E3** | Numerical and temporal claim verification | Construct correct and deliberately corrupted statements about latest values, deltas, direction, timestamps, and run identity; test independent checks. | Detection precision/recall, false rejection rate, unsupported numerical/temporal claim rate |
-| **E4** | Evidence-grounded AI reliability | Evaluate the same question set across controlled baseline configurations, including answerable and unanswerable questions. Independently adjudicate semantic and causal assertions. | Answer correctness, claim faithfulness, appropriate abstention, false causal attribution, latency |
-
-**Fault-aware cases** may use seeded TEP disturbances and fault events to test retrieval of recorded fault context. An injected fault label does **not** by itself prove that a specific measurement change has a unique cause. Full root-cause analysis remains planned and must not be reported as an evaluated capability.
-
-### Baselines and ablations
-
-Use the same model version, question set, generation settings, and comparable evidence windows where applicable. Record exactly what each configuration receives:
-
-| Configuration | Input and mechanisms | Purpose |
-|---|---|---|
-| **B1 — Ungrounded LLM** | Question and general scenario description; no retrieved operational measurements | Measure unsupported answering without access to evidence; **not** a fair numerical-information baseline |
-| **B2 — Historical-evidence LLM** | Question plus historian observations with signal, run, and time context | Test whether supplying operational evidence is sufficient |
-| **B3 — Semantic-grounded LLM** | B2 plus explicit AAS/GraphDB asset resolution and provenance | Isolate the benefit of semantic binding and source attribution |
-| **B4 — Semantic grounding + verification** | B3 plus independent claim checks, rejection/repair policy, and evidence-bounded abstention | Test verification benefits and costs |
-
-For a controlled **verification ablation**, compare B3 and B4 on *identical retrieved evidence*. For a **semantic-resolution ablation**, evaluate cases where identity is genuinely ambiguous or mismatched; do not attribute gains to semantics when the baselines already receive the correct identity. Record deterministic responses separately from model-generated responses: a rule-based answer is **not** an LLM answer that passed verification.
-
-### End-to-end feasibility
-
-Demonstrate a reproducible engineering question through:
-
-```text
-Engineering question
-    -> AssetInventory identity / GraphDB operational reference
-    -> Run-specific TimescaleDB observations
-    -> Evidence package (source, identity, run, time, values)
-    -> Numerical / temporal verification
-    -> Evidence-bounded answer or explicit abstention
-```
-
-Capture the exact query, asset IRI, signal, run ID, source observations, expected result, produced answer, verification status, and latency. Report any stages not exercised live; an existing historical query path does not automatically establish continuous OPC UA-to-historian-to-graph synchronization. No MES or standalone ERP integration is currently demonstrated.
-
-### Benchmark design and reproducibility
-
-- **Initial target, not a result:** audit up to 53 operational signals; collect 5–10 reproducible runs and approximately 30–50 manually reviewed engineering scenarios as a feasibility benchmark. Expand to 150–250 questions and repeated LLM trials if resources permit.
-- Include factual retrieval, trend/delta, run-specific, missing-evidence, ambiguous-mapping, unsupported-causality, and (if implemented) fault-context questions.
-- Create ground-truth records independently of model output using historian queries, graph assertions, controlled simulation manifests, and human review for ambiguous or causal cases.
-- Pin code commit, graph snapshot, database snapshot/run IDs, model identifier/version, prompts, seeds where supported, temperature, hardware, and timeouts. Preserve per-question inputs, outputs, decisions, and timings.
-- Report per-category denominators, failure examples, uncertainty intervals where justified, and threats to validity. Do not generalize from a single process, model, or corrected answer to all industrial systems.
-
-### Current evidence and limits
-
-- A previously recorded TEP run contains **145,856 signal samples**, covering **53 signals** and **2,752 timestamps**; selected asset-history values were compared with the historian.
-- In one XMEAS6 historical question, an Ollama response incorrectly characterized a decrease as unchanged. A subsequent **deterministic** response correctly computed the delta and declined unsupported causal attribution. This demonstrates a specific failure and mitigation, **not** a measured overall reliability improvement.
-- A valid asset with a nonexistent run produced a `NO_EVIDENCE` result. More negative cases and an automated regression suite are required.
-- The current historical Q&A CLI uses TEP-specific signal validation; reuse outside TEP is a design objective, not yet an evaluated property.
-- Numerical token screening is not full semantic verification. The present causal-question path bypasses the LLM and should be analyzed as a distinct deterministic response policy.
-
-**Minimum publishable evaluation package:** E1–E4 with independently established ground truth, B2/B3/B4 comparisons, at least one complete traceable workflow, negative cases, reproducible artifacts, and an explicit limitations discussion. The evaluation plan does not predetermine positive results.
-
-## Roadmap
-
-The ten phases are grouped into the four architectural pillars. They are not a rigid waterfall; implementation advances where a foundation supports the research program.
-
-### Phase 1 — TEP Reference and Python Simulation Integration — FOUNDATION COMPLETE
-
-- ProfBraatz scientific reference
-- backend-independent simulator boundary
-- TEP adapter
-- deterministic stepping and seeded runs
-- measurements, manipulated variables, states, and disturbances
-- engineering mappings and XMEAS units
-- canonical observations/events
-
-### Phase 2 — Industrial Twin Core — IN PROGRESS
-
-- canonical plant and asset model
-- equipment, instruments, tags, and functional relationships
-- canonical and source-system identifiers
-- deterministic simulation clock/orchestration
-- lifecycle and run management
-- operating states and state transitions
-- source-generated events
-- richer asset relationships independent of TEP
-
-### Phase 3 — Fault Injection and Scenario Engineering — FOUNDATION IMPLEMENTED
-
-Completed:
-
-- `Fault`, `FaultType`, `FaultManager`
-- bias, drift, stuck, and process-disturbance definitions
-- scheduled activation windows
-- XMEAS/XMV signal fault application
-- native TEP IDV1..IDV20 integration
-- YAML/JSON scenario loading
-- `ScenarioRunner`
-- fault lifecycle events
-- scenario run provenance
-
-Next:
-
-- schema validation and richer scheduling semantics
-- noise, saturation, intermittent, and combined fault modes
-- controller and communication faults
-- scenario libraries and experiment comparison
-
-### Phase 4 — OPC UA Integration — FAULT-MANAGEMENT FOUNDATION COMPLETE
-
-Completed:
-
-- stable application namespace
-- TEP object
-- 41 XMEAS and 12 XMV nodes
-- simulation time and running state
-- Start/Stop/Reset methods
-- configurable real-time factor
-- XMV write bridge
-- asynchronous simulation loop
-- operator XMV event integration
-- OPC UA fault injection and clearing methods
-- operator fault provenance
-- fault listing and lifecycle status (`registered` / `active` / `expired`)
-- integration with the shared fault manager
-
-Next:
-
-- expose richer lifecycle notifications as first-class OPC UA Events
-- semantic engineering names and units
-- OPC UA EUInformation and quality/status/timestamps
-- richer alarms and events
-- external SCADA/HMI integration tests
-- security and deployment configuration
-
-### Phase 5 — Time-Series, Experiments, and Temporal Knowledge Infrastructure — EXPERIMENT FOUNDATION IMPLEMENTED
-
-Completed foundation:
-
-- canonical `Observation` and `Event` models
-- `SimulationRecorder`
-- run manifests and provenance
-- storage-neutral recording session
-- Parquet persistence
-- observation/event separation
-- operator and fault lifecycle event recording
-- declarative experiment definitions
-- experiment/ground-truth provenance
-- paired fault/baseline replication tooling
-- fault-magnitude sweep tooling
-- initial benchmark matrix
-- controlled closed-loop response experiments
-
-Next:
-
-- formal fault-response characterization
-- automated benchmark aggregation and statistical analysis
-- historian/time-series backend integration
-- temporal event model expansion
-- event-to-observation correlation
-- temporal knowledge graph schema and replay/query interfaces
-
-### Phase 6 — Engineering & Semantic Digital Thread — PROTOTYPE IMPLEMENTED; INTEGRATION IN PROGRESS
-
-- AAS submodel templates
-- domain template governance and validation
-- eCl@ss classification
-- QUDT quantity kinds and units
-- OWL/SHACL semantic foundation
-- deterministic semantic lifting
-- DEXPI/P&ID integration
-- ECAD integration
-- cross-domain asset identity
-- engineering provenance
-
-The guiding workflow is **model first → semantically annotate → validate → lift → integrate → reason**.
-
-### Phase 7 — BOM & Enterprise Integration — PLANNED
-
-- EBOM, MBOM, service/spare BOM
-- material and asset master data
-- ERP references
-- manufacturer and supplier part identities
-- quantities, positions, revisions, lifecycle/status
-- enterprise-to-engineering identity resolution
-- cross-domain digital-thread relationships
-
-### Phase 8 — Web SCADA / HMI — FRONTEND PROTOTYPE; LIVE INTEGRATION PLANNED
-
-- browser-based operational interface
-- live process visualization
-- trends and historical views
-- alarms and events
-- scenario controls
-- operator actions
-- engineering-name and semantic metadata integration
-
-The intended operational path is **SCADA/HMI → OPC UA → control/process layer**, not direct access to simulator internals.
-
-### Phase 9 — Knowledge Graph & GraphRAG — VISUALIZATION PROTOTYPE; RDF/GRAPHRAG PLANNED
-
-- industrial knowledge graph
-- temporal knowledge graph
-- SPARQL and engineering queries
-- competency-question-driven reasoning
-- graph-based retrieval
-- GraphRAG over engineering, operational, and enterprise context
-- evidence and provenance-aware answers
-
-### Phase 10 — Industrial AI Platform — PLANNED
-
-- industrial agents
-- fault diagnosis and root-cause reasoning
-- temporal reasoning over process behavior
-- engineering-aware recommendations
-- evidence-backed operational assistance
-- controlled agent actions
-- benchmarked evaluation against time-series-only and graph-enhanced baselines
+The Engineering Relationship Registry and immutable physical BOM revision overlays exist as prototypes. **Full supersession, revision comparison, correction/withdrawal audit, formal release approval, and production hardening remain deferred**, not completed. Physical installation must not be inferred from functional correspondence. See [Engineering review workflow](docs/engineering-review-workflow.md).
 
 ## Research progression
 
