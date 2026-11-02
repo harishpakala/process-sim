@@ -159,12 +159,14 @@ def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
                 entry["validated_plan"] = validate_selection(raw, qid)
                 if item["status"] == "EVIDENCE_AVAILABLE":
                     answer = ollama_json(ollama_url, model,
-                        "Answer only using supplied evidence and reference answer. Return JSON with exactly "
-                        "answer (string) and limitations (array of strings). Do not invent mappings, "
-                        "units, effects, or claims of verified physical installation. "
-                        "Do not assert the injected fault caused any measurement change.",
-                        {"question": question, "evidence": evidence,
-                         "reference_answer": fallback})
+                        "You are the TEP NEXUS engineering evidence assistant. "
+                        "Answer using ONLY the supplied evidence. Return JSON with exactly "
+                        "answer (string) and limitations (array of strings). "
+                        "Include requested identifiers, relationships, and measurements. "
+                        "Do not invent mappings, units, effects, or claims of verified "
+                        "physical installation. A fault activation is an operator command, "
+                        "not proof of causality. Abstain if evidence is insufficient.",
+                        {"question": question, "evidence": evidence})
                     if set(answer) != {"answer", "limitations"} or not isinstance(answer["answer"], str) or not isinstance(answer["limitations"], list) or not all(isinstance(x, str) for x in answer["limitations"]):
                         raise ValueError("Invalid Ollama answer format")
                     entry["ollama_answer"] = answer
@@ -198,6 +200,7 @@ def main():
         p.error("Evidence report must contain Q1-Q10")
     graph = graphdb_probe(a.graphdb_url) if a.graphdb_url else None
     result = run(report, graph, a.ollama_url, a.model)
+    result["answer_generation_mode"] = "BLIND_EVIDENCE_ONLY" if a.ollama_url else "NO_LLM"
     path = Path(a.output)
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(result, indent=2), encoding="utf-8")
