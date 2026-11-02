@@ -24,11 +24,11 @@ QUESTIONS = [
     ("What are their asset IDs and signal references?", ["DEXPI", "AssetInventory"]),
     ("Which products and manufacturers are associated with these assets?", ["AssetInventory", "ProductCatalog"]),
     ("What are their ECLASS and QUDT attributes?", ["ProductCatalog"]),
-    ("Which BOM entries correspond to these instruments?", ["BOM", "AssetInventory"]),
+    ("Which asset identifiers link the engineering representations?", ["DEXPI", "ECAD", "AssetInventory"]),
     ("What engineering information is available for PI-1101?", ["DEXPI", "ECAD", "AssetInventory", "ProductCatalog"]),
     ("Which fault was activated, and when?", ["fault_events"]),
     ("What were the four sensor values before and after activation?", ["AssetInventory", "signal_samples", "fault_events"]),
-    ("What engineering and operational evidence is available for FI-1101?", ["DEXPI", "ECAD", "BOM", "AssetInventory", "ProductCatalog", "signal_samples", "fault_events"]),
+    ("What engineering and operational evidence is available for FI-1101?", ["DEXPI", "ECAD", "AssetInventory", "ProductCatalog", "signal_samples", "fault_events"]),
 ]
 
 
@@ -57,7 +57,7 @@ def records(path):
 def engineering_evidence(asset_path, product_path):
     assets = records(asset_path)
     products = records(product_path)
-    by_uri = {v.get("AssetIdentifier"): (k, v) for k, v in products.items()}
+    by_uri = {v.get("ProductIdentifier"): (k, v) for k, v in products.items()}
     evidence = {}
     for kind, (asset_key, tag, signal) in ASSETS.items():
         if asset_key not in assets:
@@ -65,15 +65,15 @@ def engineering_evidence(asset_path, product_path):
         asset = assets[asset_key]
         if asset.get("EquipmentTag") != tag or asset.get("OperationalReference") != signal:
             raise ValueError(f"Unexpected tag/signal for {asset_key}")
-        product_ref = asset.get("ProductReference")
+        product_ref = asset.get("ProductIdentifier")
         product = by_uri.get(product_ref)
         if not product:
-            raise ValueError(f"Unresolved ProductReference for {asset_key}: {product_ref}")
+            raise ValueError(f"Unresolved ProductIdentifier for {asset_key}: {product_ref}")
         product_key, product_fields = product
         tech = product_fields.get("TechnicalProperties", {})
         qudt = {k: v for k, v in tech.items() if "QUDT" in k}
         evidence[kind] = {
-            "asset_id": asset.get("AssetId"),
+            "asset_id": asset.get("AssetIdentifier"),
             "asset_key": asset_key,
             "equipment_tag": tag,
             "asset_name": asset.get("AssetName"),
@@ -154,7 +154,7 @@ def evaluate(engineering, temporal):
                 "answer_correctness": "NOT_ASSESSED"}
         if index in {1, 2, 3, 6, 7, 10}:
             item["status"] = "UNVERIFIED_CROSS_DOMAIN_MAPPING"
-            item["reason"] = ("DEXPI/ECAD/BOM entity joins require explicit "
+            item["reason"] = ("DEXPI/ECAD entity joins require explicit "
                               "GraphDB mapping verification; AAS tags are insufficient.")
         elif index in {4, 5}:
             item["status"] = "EVIDENCE_AVAILABLE"
@@ -202,7 +202,7 @@ def main():
         "limitations": [
             "No fault is injected by this script.",
             "Fault events record operator commands, not verified causal effects.",
-            "DEXPI/ECAD/BOM joins require separate explicit GraphDB validation.",
+            "DEXPI/ECAD joins require separate explicit GraphDB validation.",
             "Product QUDT values are specifications, not verified simulation units.",
             "Product associations are not verified physical installations.",
             "Successful retrieval is not an LLM correctness score.",
