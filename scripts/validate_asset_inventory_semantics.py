@@ -29,15 +29,15 @@ def main():
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     assets = next(e["value"] for e in inventory["submodelElements"] if e["idShort"] == "Assets")
     products = next(e["value"] for e in catalog["submodelElements"] if e["idShort"] == "Products")
-    by_identifier = {prop(p, "AssetIdentifier"): p for p in products}
+    by_identifier = {prop(p, "ProductIdentifier"): p for p in products}
     assert len(by_identifier) == len(products)
     assert len({a["idShort"] for a in assets}) == len(assets)
-    assert len({prop(a, "AssetId") for a in assets}) == len(assets)
+    assert len({prop(a, "AssetIdentifier") for a in assets}) == len(assets)
     candidate_count = 0
     for asset in assets:
         asset_type = prop(asset, "AssetType")
         classification = semantic(asset)
-        assert prop(asset, "AssetId") and prop(asset, "EquipmentTag")
+        assert prop(asset, "AssetIdentifier") and prop(asset, "EquipmentTag")
         assert not prop(asset, "InstalledProductReference"), asset["idShort"]
         candidate = prop(asset, "CandidateProductReference")
         if asset_type in LOGICAL_TYPES:
