@@ -13,7 +13,7 @@
           "value": [
             {
               "modelType": "Property",
-              "idShort": "AssetId",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/extensions/assets/TEP_P_1301_Proposed"
             },
@@ -145,7 +145,7 @@
           "value": [
             {
               "modelType": "Property",
-              "idShort": "AssetId",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/extensions/assets/TEP_P_1501_Proposed"
             },
