@@ -7,6 +7,7 @@ Ollama selects a fixed question ID and explains only supplied evidence.
 """
 from __future__ import annotations
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -27,6 +28,35 @@ QUESTIONS = [
 ]
 TAGS = ("PI-1101", "FI-1101", "TI-1101", "LI-1101")
 MAX_GRAPH_ROWS = 200
+PROMPT_VERSION = "E4C_V1_EXPLICIT_FIELD_GROUNDING"
+ANSWER_SYSTEM_PROMPT = """You are TEP NEXUS, a read-only engineering evidence retrieval assistant.
+Answer the supplied question using ONLY the supplied evidence. Do not use external
+knowledge, reference answers, or inferred engineering relationships.
+
+Interpret the evidence fields precisely:
+- dexpiLocal is a DEXPI instrument reference.
+- ecadLocal is an electrical engineering reference; it is NOT a signal.
+- assetId is a canonical logical simulation asset identifier.
+- signal is an operational measurement reference (for example, XMEAS6).
+- productId or product_uri is an associated product candidate, not installed hardware.
+
+Answer ALL requested parts and preserve the exact evidence values.
+For multi-instrument questions, include every instrument represented in evidence.
+For product questions, pair each asset/tag with its manufacturer and product.
+For ECLASS and QUDT questions, include every asset's ECLASS identifier and its
+QUDT product specification attributes; do not treat these as simulation units.
+For fault events, give the fault ID, operator action, simulation_seconds and,
+when relevant, observed_at as a separate wall-clock timestamp.
+For before/after measurements, give each signal's values and simulation times.
+For combined engineering and operational questions, include identifiers,
+the operational signal, and the actual numerical samples where available.
+Do not infer equipment types from product names. Never assert a physical
+installation, verified ECLASS release, causal fault effect, or measurement units
+that the evidence does not establish. If something is missing, say so.
+Return JSON with EXACTLY two keys: answer (string) and limitations (array of strings).
+Put requested factual content in answer, NOT in limitations.
+"""
+ANSWER_PROMPT_SHA256 = hashlib.sha256(ANSWER_SYSTEM_PROMPT.encode("utf-8")).hexdigest()
 
 
 def graphdb_probe(endpoint, timeout=15):
@@ -158,15 +188,10 @@ def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
                 entry["raw_plan"] = raw
                 entry["validated_plan"] = validate_selection(raw, qid)
                 if item["status"] == "EVIDENCE_AVAILABLE":
-                    answer = ollama_json(ollama_url, model,
-                        "You are the TEP NEXUS engineering evidence assistant. "
-                        "Answer using ONLY the supplied evidence. Return JSON with exactly "
-                        "answer (string) and limitations (array of strings). "
-                        "Include requested identifiers, relationships, and measurements. "
-                        "Do not invent mappings, units, effects, or claims of verified "
-                        "physical installation. A fault activation is an operator command, "
-                        "not proof of causality. Abstain if evidence is insufficient.",
-                        {"question": question, "evidence": evidence})
+                    answer = ollama_json(
+                        ollama_url, model, ANSWER_SYSTEM_PROMPT,
+                        {"question": question, "evidence": evidence},
+                    )
                     if set(answer) != {"answer", "limitations"} or not isinstance(answer["answer"], str) or not isinstance(answer["limitations"], list) or not all(isinstance(x, str) for x in answer["limitations"]):
                         raise ValueError("Invalid Ollama answer format")
                     entry["ollama_answer"] = answer
@@ -181,6 +206,9 @@ def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
             "graphdb_probe_edge_count": len(graph_edges) if graph_edges is not None else None,
             "graphdb_probe_note": "Generic bounded RDF IRI-edge inventory; not a validated DEXPI/ECAD/BOM join.",
             "ollama_model": model if ollama_url else None,
+            "prompt_version": PROMPT_VERSION if ollama_url else None,
+            "prompt_sha256": ANSWER_PROMPT_SHA256 if ollama_url else None,
+            "prompt_hash_algorithm": "sha256" if ollama_url else None,
             "scope": "Q1-Q10 fixed-registry planner with evidence-grounded responses; correctness unassessed",
             "results": results}
 
