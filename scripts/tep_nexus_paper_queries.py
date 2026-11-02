@@ -23,8 +23,8 @@ QUESTIONS = [
     "Which asset identifiers link the engineering representations?",
     "What engineering information is available for PI-1101?",
     "Which fault was activated, and when?",
-    "What were the four sensor values before and after activation?",
-    "What engineering and operational evidence is available for FI-1101?",
+    "For the selected reactor-related TEP signals XMEAS6, XMEAS7, XMEAS8, and XMEAS9, what were their recorded values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run?",
+    "For the reactor feed-flow instrument FI-1101, provide its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, associated product candidate, ECLASS class, and operational signal. Also report the recorded XMEAS6 values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run.",
 ]
 TAGS = ("PI-1101", "FI-1101", "TI-1101", "LI-1101")
 MAX_GRAPH_ROWS = 200
