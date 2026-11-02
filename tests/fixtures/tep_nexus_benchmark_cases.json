@@ -18,6 +18,30 @@
     "expected": "complete"
   },
   {
+    "id": "li_101_latest_history",
+    "function": "LI_101",
+    "question": "For engineering function LI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "pi_101_latest_history",
+    "function": "PI_101",
+    "question": "For engineering function PI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "ji_101_latest_history",
+    "function": "JI_101",
+    "question": "For engineering function JI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "sc_101_latest_history",
+    "function": "SC_101",
+    "question": "For engineering function SC_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
     "id": "unsupported_function",
     "function": "FI_999",
     "question": "Show the latest measurement for engineering function FI_999.",
