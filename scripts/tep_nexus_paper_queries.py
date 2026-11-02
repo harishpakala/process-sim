@@ -19,7 +19,7 @@ QUESTIONS = [
     "What are their asset IDs and signal references?",
     "Which products and manufacturers are associated with these assets?",
     "What are their ECLASS and QUDT attributes?",
-    "Which BOM entries correspond to these instruments?",
+    "Which asset identifiers link the engineering representations?",
     "What engineering information is available for PI-1101?",
     "Which fault was activated, and when?",
     "What were the four sensor values before and after activation?",
@@ -75,7 +75,33 @@ def answer_for(item, engineering, temporal, graph):
         return {"answer": "Insufficient verified evidence to answer this question.",
                 "limitations": [item.get("reason", status)]}
     i = int(item["id"][1:])
-    if i == 4:
+    if i in {1, 2, 3, 6, 7, 10}:
+        mappings = item["evidence"]["graphdb_verified_mappings"]
+        if i == 1:
+            text = "; ".join(f"{m['dexpiLocal']} ({m['assetId']})" for m in mappings)
+        elif i == 2:
+            text = "; ".join(f"{m['dexpiLocal']} -> ECAD {m['ecadLocal']}" for m in mappings)
+        elif i == 3:
+            text = "; ".join(f"{m['assetId']} -> {m['signal']}" for m in mappings)
+        elif i == 6:
+            text = "; ".join(
+                f"{m['dexpiLocal']} / {m['ecadLocal']} / AssetInventory: {m['assetId']}"
+                for m in mappings
+            )
+        elif i == 7:
+            m = mappings[0]
+            text = (f"{m['assetId']}: DEXPI {m['dexpiLocal']}, ECAD {m['ecadLocal']}, "
+                    f"operational signal {m['signal']}, product {m['productId']}, "
+                    f"ECLASS {m.get('eclassCode', 'not available')}")
+        else:
+            m = mappings[0]
+            temporal = item["evidence"].get("temporal", {})
+            samples = temporal.get("measurements") or {}
+            text = (f"{m['assetId']}: DEXPI {m['dexpiLocal']}, ECAD {m['ecadLocal']}, "
+                    f"signal {m['signal']}, product {m['productId']}, "
+                    f"run {temporal.get('run_id', 'not available')}; "
+                    f"activation-adjacent samples: {json.dumps(samples, sort_keys=True)}")
+    elif i == 4:
         text = "; ".join(f"{v['equipment_tag']}: {v.get('manufacturer') or 'unknown'} "
                          f"({v.get('product_key') or 'unknown'})"
                          for v in engineering.values())
@@ -99,16 +125,22 @@ def answer_for(item, engineering, temporal, graph):
         text = "Insufficient verified evidence to answer this question."
     return {"answer": text, "limitations": [
         "Retrieval is not proof of physical installation, causality or LLM answer correctness.",
-        "GraphDB links are not verified cross-domain joins unless independently validated."
+        "Four-domain joins are accepted logical simulation mappings, not physical installation verification."
     ]}
 
 
 def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
     results = []
     source = {x["id"]: x for x in report["results"]}
+    if len(source) != 10 or any(f"Q{i}" not in source for i in range(1, 11)):
+        raise ValueError("Evidence must contain Q1-Q10")
     for index, question in enumerate(QUESTIONS, 1):
         qid = f"Q{index}"
         item = source[qid]
+        if item["question"] != question:
+            raise ValueError(
+                f"Question registry mismatch for {qid}; regenerate evidence with the updated evaluator"
+            )
         entry = {"id": qid, "question": question, "source_status": item["status"],
                  "validated_plan": {"question_id": qid, "strategy": "fixed_question_registry"},
                  "graphdb_probe_status": "IRI_EDGES_INSPECTED_NOT_JOIN_VALIDATED" if graph_edges is not None else "NOT_RUN",
