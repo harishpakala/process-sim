@@ -247,7 +247,8 @@ def print_summary(report):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--run-id", required=True)\n    parser.add_argument("--asset-identifier", default="https://aas.example.com/PI101")
+    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--asset-identifier", default="https://aas.example.com/PI101")
     parser.add_argument("--window-minutes", type=float, default=10)
     parser.add_argument("--history-limit", type=int, default=1000)
     parser.add_argument("--watch", action="store_true")
