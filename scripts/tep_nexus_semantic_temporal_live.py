@@ -244,10 +244,63 @@ def print_summary(report):
     print("Shared run provenance: NOT VERIFIED")
 
 
+
+E3_ASSETS = {
+    "https://aas.example.com/PI101": "XMEAS7",
+    "https://aas.example.com/FI106": "XMEAS6",
+    "https://aas.example.com/TI101": "XMEAS9",
+    "https://aas.example.com/LI101": "XMEAS8",
+}
+
+
+def run_e3_batch(args, dsn):
+    results = []
+    for asset_id, expected_signal in E3_ASSETS.items():
+        item = {"asset_identifier": asset_id, "expected_signal": expected_signal}
+        try:
+            mapping = resolve_engineering_context(args.graphdb_url, asset_id)
+            item["engineering_context"] = mapping
+            if mapping["operational_signal"] != expected_signal:
+                raise ValueError("Operational signal mismatch")
+            temporal = retrieve_temporal_context(
+                dsn, args.run_id, expected_signal,
+                args.window_minutes, args.history_limit,
+            )
+            item["temporal_context"] = temporal
+            item["status"] = "PASS" if temporal["status"] == "AVAILABLE" else "NO_SAMPLES"
+        except (requests.RequestException, psycopg.Error, RuntimeError, ValueError) as exc:
+            item["status"] = "ERROR"
+            item["error"] = str(exc)
+        results.append(item)
+        print(asset_id, expected_signal, item["status"])
+    passed = sum(item["status"] == "PASS" for item in results)
+    return {
+        "evaluation": "E3 four-instrument engineering-to-operational repeatability",
+        "generated_at_utc": now_utc().isoformat(),
+        "run_id": args.run_id,
+        "window_minutes": args.window_minutes,
+        "summary": {
+            "assets_tested": len(results),
+            "passed": passed,
+            "no_samples": sum(item["status"] == "NO_SAMPLES" for item in results),
+            "errors": sum(item["status"] == "ERROR" for item in results),
+            "all_passed": passed == len(results),
+        },
+        "results": results,
+        "limitations": [
+            "Logical simulation identity does not verify physical installation.",
+            "Run ID is operator supplied; shared OPC UA provenance is not verified.",
+            "Product associations and ECLASS values are not independently verified.",
+            "Retrieval is not fault diagnosis or causal inference.",
+        ],
+    }
+
+
 def main():
     parser = argparse.ArgumentParser()
 
     parser.add_argument("--run-id", required=True)
+    parser.add_argument("--all-four", action="store_true")
     parser.add_argument("--asset-identifier", default="https://aas.example.com/PI101")
     parser.add_argument("--window-minutes", type=float, default=10)
     parser.add_argument("--history-limit", type=int, default=1000)
@@ -280,6 +333,22 @@ def main():
     dsn = os.getenv("TEP_TIMESCALE_DSN")
     if not dsn:
         parser.error("TEP_TIMESCALE_DSN is not set")
+
+    if args.all_four:
+        if args.watch:
+            parser.error("--all-four cannot be combined with --watch")
+        report = run_e3_batch(args, dsn)
+        name = ("reports/tep_nexus_e3_evidence.json"
+                if args.output == "reports/tep_nexus_e2_evidence.json"
+                else args.output)
+        output = Path(name)
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+        print("E3 summary:", report["summary"])
+        print("Saved:", output)
+        if not report["summary"]["all_passed"]:
+            raise SystemExit(1)
+        return
 
     # Resolve engineering semantics once, then refresh temporal data.
     mapping = resolve_engineering_context(args.graphdb_url, args.asset_identifier)
