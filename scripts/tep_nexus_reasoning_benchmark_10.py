@@ -15,16 +15,16 @@ from tep_nexus_semantic_temporal_live import retrieve_temporal_context
 from tep_nexus_two_function_reasoning import compare_series
 
 QUESTIONS = [
-    ("semantic_lookup", "According to GraphDB AAS, which operational signals map to FI_101 and PI_101? State each mapping's status and source."),
-    ("temporal_retrieval", "For the specified run, report the first and last values of XMEAS1 and XMEAS7 in the last 10 simulation minutes and the actual interval."),
-    ("semantic_temporal_join", "Using the GraphDB mappings and TimescaleDB observations, report signed relative endpoint percentage changes for FI_101 and PI_101. Explain the joins and their status."),
-    ("comparison_semantics", "Give BOTH (a) the greater signed relative endpoint change and (b) the greater absolute relative endpoint change for FI_101 versus PI_101, with numerical justification. Distinguish signed ordering from magnitude."),
-    ("time_alignment", "Were FI_101 and PI_101 compared at exactly matching simulation timestamps? State alignment, shared sample count, interval, and interpolation status."),
-    ("semantic_relationship", "Which relationships between FI_101 and PI_101 are actually established by the available AAS mapping evidence? Can one function be said to influence the other? Separate facts from hypotheses."),
-    ("provenance_claim", "Evaluate the claim that FI_101 and PI_101 are verified physical sensors belonging to the same physical run. Distinguish operator-supplied run ID from independently verified provenance."),
-    ("cross_source_corroboration", "Do GraphDB mappings plus TimescaleDB values establish verified physical changes in FI_101 and PI_101? Separate observed signal trends, provisional attribution, and independent corroboration."),
-    ("hypothesis_evaluation", "Assess independent signal variation, causal influence, and incorrect or provisional signal attribution as competing hypotheses. Identify what is supported, unresolved, and what evidence would discriminate them."),
-    ("integrated_assessment", "Provide an evidence-grounded assessment of FI_101 and PI_101 over the last 10 simulation minutes. Integrate mapping, alignment, signed and absolute changes, provenance and causality. List supported conclusions and missing verification evidence."),
+    ("semantic_lookup", "From the supplied mappings array ONLY, return for FI_101 and PI_101: engineering_function, operational_signal, mapping_status, and mapping_source. Do not interpret PROVISIONAL_ENGINEERING_MATCH as verified physical binding."),
+    ("temporal_retrieval", "From comparison.series ONLY, report for XMEAS1 and XMEAS7 their first_value and last_value, and report comparison.common_start_simulation_seconds and common_end_simulation_seconds. These are aligned comparison endpoints, not necessarily raw-series endpoints."),
+    ("semantic_temporal_join", "Join each supplied mapping to comparison.series using mapping.operational_signal == series.signal. Report engineering function, signal, relative_endpoint_change_percent including its sign, and mapping_status. State whether the mapping is verified or provisional."),
+    ("comparison_semantics", "Use the two supplied relative_endpoint_change_percent numbers. Task A: compare the SIGNED numbers using >; report the function with the numerically greater value. Task B: compute abs(number) for each and compare those NONNEGATIVE magnitudes using >; report the function with the larger magnitude. State both percentages and both winners. Do not interchange Tasks A and B."),
+    ("time_alignment", "Evaluate ONLY the alignment actually used in comparison, not the original raw-series timestamp sets. Read comparison.alignment, common_sample_count, common_start_simulation_seconds and common_end_simulation_seconds. Did the comparison use the SAME common timestamps for both series? Was interpolation used? State whether the evidence establishes that the original raw series had identical timestamp sets."),
+    ("semantic_relationship", "List the function-to-signal links explicitly present in mappings. Separately answer: (1) Is a direct process-topology edge between FI_101 and PI_101 supplied? (2) Is causal influence established? If not supplied, say NOT ESTABLISHED FROM PROVIDED EVIDENCE rather than claiming it does not exist."),
+    ("provenance_claim", "Classify each claim separately as VERIFIED, NOT_VERIFIED, or CONTRADICTED by the supplied evidence: (1) function-to-signal mapping is provisional; (2) physical sensor binding is verified; (3) the run identifier was supplied by the operator; (4) the two signals have independently verified shared physical-run provenance. Explain that NOT_VERIFIED is not equivalent to CONTRADICTED."),
+    ("cross_source_corroboration", "Give three separate conclusions: (1) observed direction of each signal's endpoint change from comparison.series.endpoint_change; (2) confidence status of attribution from mappings.mapping_status; (3) whether independent physical sensor verification is supplied. Do not infer verified physical-process behavior from provisional mappings."),
+    ("hypothesis_evaluation", "Evaluate H1: signal variation is independent, H2: one signal causally influences the other, H3: one provisional function-to-signal attribution is incorrect. Use only the supplied summary and mapping/provenance flags. Classify EACH as ESTABLISHED, CONTRADICTED, or UNDETERMINED. A possible hypothesis is not ESTABLISHED; absence of causal evidence does not CONTRADICT causality. Identify one additional evidence type needed for each hypothesis. Do not infer similarity of full time-series trajectories from endpoints or slopes alone."),
+    ("integrated_assessment", "Return a complete evidence-based assessment with ALL six labeled parts: (1) both function-to-signal mappings and their provisional status; (2) shared comparison interval, sample count, and interpolation status; (3) signed endpoint percentage changes for both functions; (4) greater signed winner AND greater absolute-magnitude winner, with definitions; (5) physical binding, shared-run provenance, and causality verification status; (6) at least two specific additional evidence items needed to verify physical-process attribution or causal interpretation. Do not claim that a numerical simulation observation verifies a physical sensor."),
 ]
 
 def build_evidence(args):
@@ -76,10 +76,11 @@ def run(args):
         raise ValueError("TEP_TIMESCALE_DSN is not set")
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
-    report = {"schema_version": 1, "generated_at_utc": utc_now(),
-              "benchmark": "TEP_NEXUS_10_LEVEL_V1", "model": args.model,
+    report = {"schema_version": 2, "generated_at_utc": utc_now(),
+              "benchmark": "TEP_NEXUS_10_LEVEL_V2", "model": args.model,
               "run_id": args.run_id, "status": "STARTED", "results": [],
-              "evaluation_scope": "format checks only; factual and semantic grading pending"}
+              "evaluation_scope": "format checks only; factual and semantic grading pending",
+              "question_specification": "explicit evidence scope, operators, epistemic categories and completeness requirements"}
     try:
         evidence = build_evidence(args)
         report["evidence"] = evidence
@@ -131,7 +132,7 @@ def main():
     parser.add_argument("--graphdb-url", default="http://localhost:7200/repositories/AAS")
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--history-limit", type=int, default=1000)
-    parser.add_argument("--output", default="reports/tep_nexus_reasoning_benchmark_10.json")
+    parser.add_argument("--output", default="reports/tep_nexus_reasoning_benchmark_10_v2.json")
     args = parser.parse_args()
     report = run(args)
     print("Saved:", args.output, "status:", report["status"])
