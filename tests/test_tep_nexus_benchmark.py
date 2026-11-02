@@ -23,5 +23,20 @@ class TestBenchmark(unittest.TestCase):
         self.assertFalse(evaluate_case(case, {"status": "ERROR", "evidence": {"x": 1}}, 1)[0])
     def test_rejection_cannot_be_success(self):
         self.assertFalse(evaluate_case(dict(CASE, expected="reject"), {"status": "COMPLETED"}, 0)[0])
+    def test_wrong_rejection_reason(self):
+        case = dict(CASE, expected="reject",
+                    expected_error="Planned engineering function does not match")
+        self.assertFalse(evaluate_case(case, {
+            "status": "ERROR", "evidence": None,
+            "error": "ConnectionError: service unavailable"}, 1)[0])
+        self.assertTrue(evaluate_case(case, {
+            "status": "ERROR", "evidence": None,
+            "error": "ValueError: Planned engineering function does not match the explicit identifier"}, 1)[0])
+    def test_rejection_with_evidence_fails_even_with_matching_reason(self):
+        case = dict(CASE, expected="reject", expected_error="Unsupported engineering function")
+        self.assertFalse(evaluate_case(case, {
+            "status": "ERROR", "evidence": {"latest": 1},
+            "error": "ValueError: Unsupported engineering function"}, 1)[0])
+
 if __name__ == "__main__":
     unittest.main()
