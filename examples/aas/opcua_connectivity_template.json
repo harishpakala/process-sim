@@ -1,0 +1,110 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-opcua-connectivity-template",
+  "idShort": "TEP_OPCUAConnectivity",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Servers",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Server",
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EndpointUrl",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NamespaceURI",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EndpointStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECADConnectionPointReferenceStatus",
+              "valueType": "xs:string"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "SignalMappings",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SignalMapping",
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
