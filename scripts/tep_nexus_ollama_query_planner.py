@@ -17,6 +17,7 @@ from pathlib import Path
 import requests
 
 from tep_nexus_answer_validation import validate_answer
+from tep_nexus_answer_repair import repair_answer
 from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_semantic_temporal_live import (
     resolve_engineering_context,
@@ -358,8 +359,23 @@ def main():
             evidence,
         )
 
+        report["original_answer"] = answer
+        original_validation = validate_answer(answer, evidence)
+        report["original_answer_validation_details"] = original_validation
+        report["answer_repair"] = None
+
+        if original_validation["status"] == "FAILED":
+            repair = repair_answer(answer, evidence)
+            report["answer_repair"] = {
+                "method": repair["method"],
+                "repair_success": repair["repair_success"],
+            }
+            answer = repair["repaired_answer"]
+            validation = repair["repaired_validation"]
+        else:
+            validation = original_validation
+
         report["answer"] = answer
-        validation = validate_answer(answer, evidence)
         report["answer_validation"] = validation["status"]
         report["answer_validation_details"] = validation
         report["status"] = "COMPLETED"
@@ -372,7 +388,10 @@ def main():
         print(json.dumps(evidence, indent=2))
         print("\nOLLAMA ANSWER")
         print(answer["answer"])
-        print("\nANSWER VALIDATION:", report["answer_validation"])
+        print("\nORIGINAL ANSWER VALIDATION:", original_validation["status"])
+        print("FINAL ANSWER VALIDATION:", report["answer_validation"])
+        if report["answer_repair"]:
+            print("Deterministic repair:", report["answer_repair"]["repair_success"])
         if validation["failed_checks"]:
             print("Failed checks:", ", ".join(validation["failed_checks"]))
         print("\nLimitations:")
