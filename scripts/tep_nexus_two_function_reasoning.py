@@ -17,6 +17,8 @@ from tep_nexus_semantic_temporal_live import retrieve_temporal_context
 from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_comparison_answer_validation import validate_comparison_answer
 from tep_nexus_structured_answer import structured_prompt, validate_structured_answer
+from tep_nexus_split_judgment import (numerical_prompt, interpretation_prompt,
+                                      validate_numerical, validate_interpretation)
 
 
 def validate_comparison_plan(plan, question, registry):
@@ -85,6 +87,11 @@ def compare_series(temporals):
             "comparison_available": comparable}
 
 
+def save_split_report(output, report):
+    output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    print("Saved:", output)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--question", required=True)
@@ -96,7 +103,7 @@ def main():
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--history-limit", type=int, default=1000)
     parser.add_argument("--self-correct", action="store_true", help="One evidence-grounded revision attempt for failed structured answers")
-    parser.add_argument("--answer-format", choices=("freeform", "structured"), default="freeform")
+    parser.add_argument("--answer-format", choices=("freeform", "structured", "split"), default="freeform")
     parser.add_argument("--output", default="reports/tep_nexus_two_function_comparison.json")
     args = parser.parse_args()
     if args.self_correct and args.answer_format != "structured":
@@ -138,6 +145,28 @@ def main():
                     "causal_inference": "NOT_SUPPORTED"}
         report["evidence"] = evidence
         report["answer_format"] = args.answer_format
+        if args.answer_format == "split":
+            quantitative = {"comparison": result}
+            numerical = ollama_chat(args.ollama_url, args.model, numerical_prompt(),
+                                    json.dumps({"question": args.question, "quantitative_evidence": quantitative}))
+            numerical_validation = validate_numerical(numerical, evidence)
+            interpretation = ollama_chat(args.ollama_url, args.model, interpretation_prompt(),
+                json.dumps({"numerical_judgment": numerical,
+                            "quantitative_evidence": quantitative,
+                            "provenance": {key: evidence[key] for key in
+                                ("engineering_mapping", "physical_sensor_binding",
+                                 "shared_run_provenance", "causal_inference")}}))
+            interpretation_validation = validate_interpretation(interpretation, numerical, evidence)
+            report["split_judgment"] = {
+                "numerical_llm_answer": numerical,
+                "numerical_validation": numerical_validation,
+                "interpretation_llm_answer": interpretation,
+                "interpretation_validation": interpretation_validation,
+                "both_stages_passed": (numerical_validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE"
+                                      and interpretation_validation["status"] == "CHECKS_PASSED_LIMITED_SCOPE")}
+            report["status"] = ("COMPLETED" if report["split_judgment"]["both_stages_passed"]
+                                else "COMPLETED_WITH_ANSWER_CHECK_FAILURES")
+            return save_split_report(output, report)
         answer_system = (structured_prompt() if args.answer_format == "structured" else
             'Return JSON with answer (string) and limitations (array of strings). '
             'Use ONLY provided evidence. State the compared simulation-time interval, '
