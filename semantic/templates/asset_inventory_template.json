@@ -20,7 +20,7 @@
           "value": [
             {
               "modelType": "Property",
-              "idShort": "AssetId",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string"
             },
             {
@@ -45,7 +45,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProductReference",
+              "idShort": "ProductIdentifier",
               "valueType": "xs:string"
             },
             {
