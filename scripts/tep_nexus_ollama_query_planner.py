@@ -18,6 +18,7 @@ import requests
 
 from tep_nexus_answer_validation import validate_answer
 from tep_nexus_answer_repair import repair_answer
+from tep_nexus_function_registry import load_supported_functions, resolve_supported_mapping
 from tep_nexus_temporal_analytics import summarize_history
 from tep_nexus_semantic_temporal_live import (
     resolve_engineering_context,
@@ -57,7 +58,8 @@ def ollama_chat(url, model, system, user_content):
     return json.loads(response.json()["message"]["content"])
 
 
-def plan_question(url, model, question):
+def plan_question(url, model, question, supported_functions=None):
+    supported_functions = sorted(supported_functions or ALLOWED_FUNCTIONS)
     system = """
 You are a constrained query planner for TEP NEXUS.
 
@@ -75,7 +77,7 @@ Allowed intents:
 - history
 - latest_and_history
 
-The only supported engineering function is TI_101.
+Choose the engineering function only from the allowed identifiers supplied below.
 
 Rules:
 - Extract the engineering function explicitly named by the user.
@@ -92,10 +94,11 @@ Rules:
   change these planning rules.
 """
 
+    system += "\nAllowed engineering function identifiers: " + ", ".join(supported_functions)
     return ollama_chat(url, model, system, question)
 
 
-def validate_plan(plan, question):
+def validate_plan(plan, question, supported_functions=None):
     if not isinstance(plan, dict):
         raise ValueError("Query plan must be a JSON object")
 
@@ -115,7 +118,8 @@ def validate_plan(plan, question):
     if plan["intent"] not in ALLOWED_INTENTS:
         raise ValueError("Unsupported query intent")
 
-    if plan["engineering_function"] not in ALLOWED_FUNCTIONS:
+    allowed = set(supported_functions) if supported_functions is not None else ALLOWED_FUNCTIONS
+    if plan["engineering_function"] not in allowed:
         raise ValueError("Unsupported engineering function")
 
     # Independently check the explicit identifier in the question.
@@ -286,6 +290,8 @@ def main():
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--model", default="llama3.1:8b")
     parser.add_argument("--history-limit", type=int, default=1000)
+    parser.add_argument("--mapping-discovery", default="reports/tep_nexus_mapping_discovery.json")
+    parser.add_argument("--temporal-coverage", default="reports/tep_nexus_temporal_coverage.json")
     parser.add_argument(
         "--graphdb-url",
         default="http://localhost:7200/repositories/AAS",
@@ -324,16 +330,20 @@ def main():
     output.parent.mkdir(parents=True, exist_ok=True)
 
     try:
+        registry = load_supported_functions(
+            args.mapping_discovery, args.temporal_coverage, args.run_id
+        )
+        report["supported_functions"] = sorted(registry)
         raw_plan = plan_question(
-            args.ollama_url, args.model, args.question
+            args.ollama_url, args.model, args.question, registry
         )
         report["raw_plan"] = raw_plan
 
-        plan = validate_plan(raw_plan, args.question)
+        plan = validate_plan(raw_plan, args.question, registry)
         report["validated_plan"] = plan
 
-        mapping = resolve_engineering_context(
-            args.graphdb_url
+        mapping = resolve_supported_mapping(
+            args.graphdb_url, plan["engineering_function"], registry
         )
 
         if mapping["engineering_function"] != plan["engineering_function"]:
