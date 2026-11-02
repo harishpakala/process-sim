@@ -37,7 +37,7 @@ class CatalogInventoryContract(unittest.TestCase):
         self.assertEqual(len(ids), len(set(ids)))
 
     def test_catalog_identifiers_unique(self):
-        ids = [properties(x).get("AssetIdentifier") for x in self.products]
+        ids = [properties(x).get("ProductIdentifier") for x in self.products]
         self.assertTrue(all(ids))
         self.assertEqual(len(ids), len(set(ids)))
 
@@ -52,15 +52,15 @@ class CatalogInventoryContract(unittest.TestCase):
         self.assertFalse(RETIRED.intersection(x["idShort"] for x in self.products))
 
     def test_inventory_references_resolve(self):
-        known = {properties(x)["AssetIdentifier"] for x in self.products}
+        known = {properties(x)["ProductIdentifier"] for x in self.products}
         for asset in self.assets:
-            ref = properties(asset).get("ProductReference")
+            ref = properties(asset).get("ProductIdentifier")
             if ref:
                 with self.subTest(asset=asset["idShort"]):
                     self.assertIn(ref, known)
 
     def test_inventory_asset_ids_unique(self):
-        ids = [properties(x).get("AssetId") for x in self.assets]
+        ids = [properties(x).get("AssetIdentifier") for x in self.assets]
         self.assertTrue(all(ids))
         self.assertEqual(len(ids), len(set(ids)))
 
