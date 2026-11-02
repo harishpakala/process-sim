@@ -49,6 +49,8 @@ def validate_structured_answer(answer, evidence):
     checks["conclusion"] = (isinstance(conclusion, str) and bool(conclusion.strip())
                             and (winner in conclusion if isinstance(winner, str)
                                  else "unavailable" in conclusion.lower()))
+    # A declared wrong winner must not make its own prose conclusion pass.
+    checks["conclusion_consistent_with_evidence"] = (checks["conclusion"] and checks["winner"])
     limitations = answer["limitations"]
     lower = (" ".join(limitations).lower() if isinstance(limitations, list)
              and all(isinstance(x, str) for x in limitations) else "")
