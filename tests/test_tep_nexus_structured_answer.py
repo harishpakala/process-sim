@@ -39,7 +39,16 @@ class TestStructuredAnswer(unittest.TestCase):
 
     def test_wrong_winner(self):
         a = dict(ANSWER, larger_absolute_relative_change_function="PI_101")
-        self.assertIn("winner", validate_structured_answer(a, EVIDENCE)["failed_checks"])
+        failures = validate_structured_answer(a, EVIDENCE)["failed_checks"]
+        self.assertIn("winner", failures)
+        self.assertIn("conclusion_consistent_with_evidence", failures)
+
+    def test_wrong_winner_and_matching_wrong_conclusion(self):
+        a = dict(ANSWER, larger_absolute_relative_change_function="PI_101",
+                 conclusion="PI_101 changed more than FI_101.")
+        failures = validate_structured_answer(a, EVIDENCE)["failed_checks"]
+        self.assertIn("winner", failures)
+        self.assertIn("conclusion_consistent_with_evidence", failures)
 
     def test_wrong_number(self):
         a = dict(ANSWER, measurements=[dict(ANSWER["measurements"][0], endpoint_change=42),
