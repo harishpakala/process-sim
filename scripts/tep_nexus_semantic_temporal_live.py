@@ -17,75 +17,63 @@ import requests
 
 
 SPARQL = """
-PREFIX dexpi: <https://example.org/dexpi/>
-PREFIX inv: <https://example.org/assetinventory/>
-PREFIX aas: <https://example.org/aas/>
-
-SELECT DISTINCT ?functionRef ?signal ?asset WHERE {
-  ?function dexpi:hasLocalId "TI_101" ;
-            dexpi:hasAssetIdentifier ?functionRef .
-  ?mappingRef aas:value ?functionRef ;
-              aas:elementPath ?refPath .
-  ?signalNode aas:value ?signal ;
-              aas:elementPath ?signalPath .
-
-  BIND(
-    STRBEFORE(
-      STR(?refPath), ".EngineeringFunctionReference"
-    ) AS ?mappingPath
-  )
-
-  FILTER(
-    STR(?signalPath) =
-    CONCAT(?mappingPath, ".SignalName")
-  )
-
-  ?asset inv:hasOperationalReference ?signal .
+PREFIX dx: <https://example.org/dexpi/>
+PREFIX ec: <https://example.org/ecad/>
+PREFIX ai: <https://example.org/assetinventory/>
+PREFIX pc: <https://example.org/productcatalog/>
+SELECT DISTINCT ?assetId ?dexpiLocal ?ecadLocal ?signal ?productId ?eclassCode WHERE {
+  ?d dx:hasAssetIdentifier ?assetId ;
+     dx:hasLocalId ?dexpiLocal .
+  FILTER(STR(?assetId) = STR(?requestedAsset))
+  ?e ec:hasAssetIdentifier ?ecadId ;
+     ec:hasLocalId ?ecadLocal .
+  ?a ai:hasAssetIdentifier ?inventoryId ;
+     ai:hasOperationalReference ?signal ;
+     ai:hasProductIdentifier ?productId .
+  ?p pc:hasProductIdentifier ?catalogId .
+  OPTIONAL { ?p pc:hasECLASSClass ?eclassCode }
+  FILTER(STR(?assetId) = STR(?ecadId) &&
+         STR(?assetId) = STR(?inventoryId) &&
+         STR(?productId) = STR(?catalogId))
 }
 """
-
 
 def now_utc():
     return datetime.now(timezone.utc)
 
 
-def resolve_engineering_context(graphdb_url):
+def resolve_engineering_context(graphdb_url, asset_identifier):
+    # Bind as a SPARQL literal; identifiers in the lifted graph are literals.
+    literal = json.dumps(asset_identifier)
+    query = SPARQL.replace("?requestedAsset", literal)
     response = requests.post(
         graphdb_url,
-        data={"query": SPARQL},
+        data={"query": query},
         headers={"Accept": "application/sparql-results+json"},
         timeout=20,
     )
     response.raise_for_status()
-
-    bindings = response.json()["results"]["bindings"]
-
     rows = [
         {key: value["value"] for key, value in row.items()}
-        for row in bindings
+        for row in response.json()["results"]["bindings"]
     ]
-
     if len(rows) != 1:
         raise RuntimeError(
-            f"Expected one engineering mapping; found {len(rows)}"
+            f"Expected exactly one four-domain mapping for {asset_identifier}; "
+            f"found {len(rows)}"
         )
-
-    mapping = rows[0]
-
-    if mapping["signal"] != "XMEAS9":
-        raise RuntimeError(
-            "Unexpected signal for verified TI_101 mapping: "
-            + mapping["signal"]
-        )
-
+    row = rows[0]
     return {
-        "engineering_function": "TI_101",
-        "function_reference": mapping["functionRef"],
-        "operational_signal": mapping["signal"],
-        "asset_uri": mapping["asset"],
-        "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+        "asset_identifier": row["assetId"],
+        "dexpi_local_id": row["dexpiLocal"],
+        "ecad_local_id": row["ecadLocal"],
+        "operational_signal": row["signal"],
+        "product_identifier": row["productId"],
+        "eclass_code": row.get("eclassCode"),
+        "mapping_status": "ACCEPTED_LOGICAL_SIMULATION_IDENTITY",
+        "physical_installation_verified": False,
         "mapping_source": "GraphDB AAS repository",
-        "resolution_method": "path-constrained SPARQL",
+        "resolution_method": "four-domain AssetIdentifier/ProductIdentifier SPARQL join",
     }
 
 
@@ -192,47 +180,31 @@ def retrieve_temporal_context(
 
 def make_report(args, mapping, temporal):
     return {
-        "demonstrator": "TEP NEXUS semantic-temporal query",
+        "evaluation": "E2 engineering-to-operational evidence retrieval",
         "generated_at_utc": now_utc().isoformat(),
         "query": {
-            "engineering_function": "TI_101",
+            "asset_identifier": args.asset_identifier,
             "requested_history_minutes": args.window_minutes,
         },
         "engineering_context": mapping,
         "temporal_context": temporal,
         "evidence_path": [
-            {
-                "source": "GraphDB",
-                "relationship": "DEXPI engineering function -> AAS function reference",
-                "identifier": mapping["function_reference"],
-            },
-            {
-                "source": "GraphDB",
-                "relationship": "AAS mapping -> operational signal",
-                "identifier": mapping["operational_signal"],
-            },
-            {
-                "source": "GraphDB",
-                "relationship": "operational reference -> AssetInventory asset",
-                "identifier": mapping["asset_uri"],
-            },
-            {
-                "source": "TimescaleDB",
-                "relationship": "signal + run ID -> time-indexed observations",
-                "identifier": args.run_id,
-            },
+            {"source": "GraphDB", "relationship": "DEXPI/ECAD/AssetInventory shared logical AssetIdentifier",
+             "identifier": mapping["asset_identifier"]},
+            {"source": "GraphDB", "relationship": "AssetInventory to ProductCatalog ProductIdentifier",
+             "identifier": mapping["product_identifier"]},
+            {"source": "GraphDB", "relationship": "AssetInventory OperationalReference",
+             "identifier": mapping["operational_signal"]},
+            {"source": "TimescaleDB", "relationship": "run ID + signal to timestamped measurements",
+             "identifier": args.run_id},
         ],
         "limitations": [
-            "Engineering-to-operational mapping is provisional.",
-            "Run ID is supplied by the operator.",
-            "Shared OPC UA/TimescaleDB run provenance is not verified.",
-            "Temporal observations remain in TimescaleDB; "
-            "this is a federated semantic-temporal query, "
-            "not proof that observations are materialized as RDF.",
-            "Data freshness describes the latest persisted record, "
-            "not an independently verified physical sensor reading.",
-            "TEP simulation is an experimental data source, "
-            "not a validated physical plant model.",
+            "Logical simulation identity is accepted for the selected asset; physical installation is not verified.",
+            "Product associations are candidates, not verified physical installations.",
+            "ECLASS values are graph metadata, not independently certified classifications.",
+            "Run ID is operator supplied; shared OPC UA/TimescaleDB provenance is not independently verified.",
+            "Measurements are stored in TimescaleDB, not materialized as RDF.",
+            "Retrieval is evidence access, not fault diagnosis or causal inference.",
         ],
     }
 
@@ -242,10 +214,10 @@ def print_summary(report):
     temporal = report["temporal_context"]
 
     print("\n=== TEP NEXUS SEMANTIC-TEMPORAL QUERY ===")
-    print("Engineering function:", mapping["engineering_function"])
-    print("AAS function reference:", mapping["function_reference"])
+    print("Engineering function:", mapping["dexpi_local_id"])
+    print("AAS function reference:", mapping["asset_identifier"])
     print("Operational signal:", mapping["operational_signal"])
-    print("Asset URI:", mapping["asset_uri"])
+    print("Asset URI:", mapping["asset_identifier"])
     print("Mapping status:", mapping["mapping_status"])
 
     if temporal["status"] != "AVAILABLE":
@@ -275,7 +247,7 @@ def print_summary(report):
 def main():
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-id", required=True)\n    parser.add_argument("--asset-identifier", default="https://aas.example.com/PI101")
     parser.add_argument("--window-minutes", type=float, default=10)
     parser.add_argument("--history-limit", type=int, default=1000)
     parser.add_argument("--watch", action="store_true")
@@ -291,7 +263,7 @@ def main():
     )
     parser.add_argument(
         "--output",
-        default="reports/tep_nexus_semantic_temporal_live.json",
+        default="reports/tep_nexus_e2_evidence.json",
     )
 
     args = parser.parse_args()
@@ -309,7 +281,7 @@ def main():
         parser.error("TEP_TIMESCALE_DSN is not set")
 
     # Resolve engineering semantics once, then refresh temporal data.
-    mapping = resolve_engineering_context(args.graphdb_url)
+    mapping = resolve_engineering_context(args.graphdb_url, args.asset_identifier)
 
     repetitions = args.iterations if args.watch else 1
     output = Path(args.output)
