@@ -130,7 +130,7 @@ def build(report):
     cases.append(evaluate("E10", report))
     return {
         "experiment": "SELiRA E1-E10 evidence-level comparison",
-        "contractCatalog": "Experimental SC numbering; see docs/selira-contract-alignment.md",
+        "contractCatalog": "Experimental SC numbering; see docs/research/selira/selira-contract-alignment.md",
         "cases": cases, "metrics": summarize(cases),
         "limitations": [
             "E1-E9 are synthetic assertion perturbations, not authenticated engineering observations",

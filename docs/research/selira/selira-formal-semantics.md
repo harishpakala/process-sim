@@ -113,7 +113,7 @@ These names do not correspond one-to-one to experimental SC-02/SC-03.
 A future canonical `selira.contracts.v1` must explicitly decide whether
 meaning consistency composes quantity kind and unit compatibility, and must
 publish a migration mapping. **Do not reinterpret historical SC-02/SC-03
-results as the README contracts.** See `docs/selira-contract-alignment.md`.
+results as the README contracts.** See `docs/research/selira/selira-contract-alignment.md`.
 
 ## 5. Properties testable against the implementation
 

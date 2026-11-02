@@ -44,7 +44,7 @@ E10 includes the focused GraphDB discovery report verbatim and must
 not be treated as a complete authenticated engineering graph.
 The original GraphDB query scope should accompany reviewer instructions.
 
-Follow `docs/selira-independent-adjudication.md` for the review
+Follow `docs/research/selira/selira-independent-adjudication.md` for the review
 and adjudication protocol. Obtain at least two independent reviews
 per dossier/task, freeze their CSV submissions, then calculate
 agreement and adjudicate discrepancies before comparing against
