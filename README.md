@@ -6,6 +6,12 @@
 
 The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
 
+## TEP NEXUS paper — artifact evaluation and reproducibility
+
+Reviewers can start with the **[Artifact Evaluation and Reproducibility Guide](docs/artifact_evaluation/README.md)**. It documents evidence replay, the read-only evidence-generation procedure, the manual grading rubric, and the reported results and limitations.
+
+**Artifact availability:** The guide identifies run-specific inputs and outputs that still need to be deposited in an immutable release. Until that bundle is published, the exact reported experiment cannot be replayed from a fresh clone alone. Recorded operator injection commands do not independently verify fault activation.
+
 ## Local startup (Windows PowerShell)
 
 Run these commands from the repository root. Start each long-running service in a separate terminal.
