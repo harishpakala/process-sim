@@ -6,6 +6,8 @@ import os
 from pathlib import Path
 from uuid import UUID
 
+from process_sim.api.catalog_grounding import POLICY, flags as grounding_flags
+
 ROOT = Path(__file__).resolve().parents[3]
 
 
@@ -78,13 +80,16 @@ def answer(question_id, run_id=None, event_id=None):
     if item["status"] == "EVIDENCE_AVAILABLE":
         response = query.ollama_json(
             os.environ.get("OLLAMA_URL", "http://localhost:11434"),
-            model, query.ANSWER_SYSTEM_PROMPT,
+            model, query.ANSWER_SYSTEM_PROMPT + POLICY,
             {"question": text, "evidence": item.get("evidence")})
         if (not isinstance(response, dict) or set(response) != {"answer", "limitations"}
                 or not isinstance(response["answer"], str)
                 or not isinstance(response["limitations"], list)
                 or any(not isinstance(x, str) for x in response["limitations"])):
             raise ValueError("Invalid Ollama answer format")
+    checks = grounding_flags(response["answer"], response["limitations"], item.get("evidence") or {}, question_id)
+    if checks:
+        response = fallback
     return {
         "id": question_id, "question": text, "status": item["status"],
         "questionAdaptation": "UI_CONTEXTUAL_TEMPORAL_WORDING" if number >= 8 else "PAPER_SCRIPT_DEFAULT",
@@ -93,7 +98,8 @@ def answer(question_id, run_id=None, event_id=None):
         "runId": run_id, "eventId": event_id,
         "model": model if item["status"] == "EVIDENCE_AVAILABLE" else None,
         "promptVersion": query.PROMPT_VERSION,
-        "answerValidation": "NOT_AUTOMATICALLY_VERIFIED",
+        "answerValidation": "REJECTED_MODEL_ANSWER_USED_EVIDENCE_FALLBACK" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
+        "validationFlags": checks,
         "warning": "Fault events record operator commands; actual activation and causality are not verified."
     }
 
@@ -162,7 +168,7 @@ def custom_answer(question, run_id=None, event_id=None):
     model = os.environ.get("TEP_QUERY_MODEL", "llama3.1:8b")
     response = query.ollama_json(
         os.environ.get("OLLAMA_URL", "http://localhost:11434"), model,
-        query.ANSWER_SYSTEM_PROMPT + """
+        query.ANSWER_SYSTEM_PROMPT + POLICY + """
 Exploratory query mode: do not claim evidence for facts not present in the supplied fields.
 If the question is outside the retrieved evidence scope, explain that limitation.
 Do not interpret an operator command as verified fault activation.
@@ -172,13 +178,18 @@ Do not interpret an operator command as verified fault activation.
             or not isinstance(response["limitations"], list)
             or any(not isinstance(v, str) for v in response["limitations"])):
         raise ValueError("Invalid Ollama response format")
+    checks = grounding_flags(response["answer"], response["limitations"], evidence)
+    if checks:
+        response = {"answer": "The generated response failed ProductCatalog evidence checks. Please review the retrieved evidence.",
+                    "limitations": ["Grounding validation flags: " + ", ".join(checks)]}
     return {
         "id": "CUSTOM", "question": question, "answer": response["answer"],
         "limitations": response["limitations"], "status": "EVIDENCE_AVAILABLE",
         "evidence": evidence, "runId": run_id if needs_temporal else None,
         "eventId": event_id if needs_temporal else None,
         "model": model, "promptVersion": "EXPLORATORY_V1_NOT_PAPER_BASELINE",
-        "answerValidation": "NOT_AUTOMATICALLY_VERIFIED",
+        "answerValidation": "REJECTED_MODEL_ANSWER" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
+        "validationFlags": checks,
         "warning": "Fault events record operator commands; activation and causality are not verified.",
         "questionAdaptation": "EXPLORATORY_NOT_PAPER_EVALUATION"
     }
