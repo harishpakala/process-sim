@@ -4,7 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 type Question = { id: string; question: string; requiresRun: boolean }
 type Run = { run_id?: string; runId?: string; [key:string]: unknown }
 type FaultEvent = { event_id: string; fault_id: string; action: string; simulation_time_hours?: number; simulation_seconds?: number; event_source?: string; target?: string }
-type Answer = { id: string; question: string; answer: string; limitations: string[]; status: string; evidence?: unknown; reason?: string; model?: string; promptVersion: string; answerValidation: string; warning: string; runId?: string; eventId?: string; questionAdaptation?: string }
+type Answer = { id: string; question: string; answer: string; limitations: string[]; status: string; evidence?: unknown; reason?: string; model?: string; promptVersion: string; answerValidation: string; validationFlags?: string[]; answerSource?: string; warning: string; runId?: string; eventId?: string; questionAdaptation?: string }
 type Mapping = { assetId?: string; dexpiLocal?: string; ecadLocal?: string; signal?: string; productId?: string; eclassCode?: string }
 type Sample = { simulation_seconds?: number; value?: number }
 type SamplePair = { before?: Sample | null; after?: Sample | null }
@@ -12,7 +12,7 @@ type EngineeringRecord = { equipment_tag?: string; asset_id?: string; signal?: s
 function object(value: unknown): Record<string, unknown> { return value && typeof value==='object' && !Array.isArray(value) ? value as Record<string,unknown> : {} }
 const evidence = computed(()=>object(answer.value?.evidence))
 const mappings = computed<Mapping[]>(()=>Array.isArray(evidence.value.graphdb_verified_mappings) ? evidence.value.graphdb_verified_mappings as Mapping[] : [])
-const engineering = computed<EngineeringRecord[]>(()=> Object.values(evidence.value).filter(v=>object(v).equipment_tag).map(v=>v as EngineeringRecord))
+const engineering = computed<EngineeringRecord[]>(()=> Object.values({...evidence.value, ...object(evidence.value.engineering_catalog)}).filter(v=>object(v).equipment_tag).map(v=>v as EngineeringRecord))
 const temporal = computed(()=>object(evidence.value.temporal))
 const event = computed(()=>object(evidence.value.activation || temporal.value.activation))
 const measurements = computed<Record<string,SamplePair>>(()=>{
@@ -24,10 +24,17 @@ const sampleRows = computed(()=>Object.entries(measurements.value).map(([signal,
 function seconds(value:unknown):string { return typeof value==='number' && Number.isFinite(value) ? value.toFixed(3)+' s' : 'Not recorded' }
 function sampleValue(sample?:Sample|null):string { return sample && typeof sample.value==='number' ? String(sample.value) : 'Not recorded' }
 function assetShort(uri?:string):string { return uri ? uri.split('/').pop() || uri : '—' }
+const responseLabel = computed(()=>{
+ const source = answer.value?.answerSource || ''
+ if(source==='DETERMINISTIC_EVIDENCE_FALLBACK') return 'Evidence fallback — model answer rejected'
+ if(source==='REJECTED_MODEL_ANSWER') return 'Model answer rejected'
+ if(source==='OLLAMA_HEURISTIC_CHECKS_PASSED') return 'Model answer — heuristic checks passed'
+ return 'Verification not established'
+})
 const evidenceSources = computed(()=>{
  const sources:string[]=[]
- if(mappings.value.length) sources.push('GraphDB: exact four-domain mapping')
- if(engineering.value.length) sources.push('AssetInventory / ProductCatalog instance evidence')
+ if(mappings.value.length) sources.push('GraphDB: accepted logical identifier mapping (not physical verification)')
+ if(engineering.value.length) sources.push('AAS Asset Inventory / ProductCatalog candidate evidence (pending verification)')
  if(event.value.fault_id || sampleRows.value.length) sources.push('TimescaleDB: persisted fault events and signal samples')
  return sources
 })
@@ -152,9 +159,11 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
    <div class="panel-title"><div><h2>{{answer.id==='CUSTOM'?'Exploratory query':answer.id+' — Query result'}}</h2><p>{{answer.question}}</p></div><span class="pill">{{answer.status}}</span></div>
    <div v-if="answer.status!=='EVIDENCE_AVAILABLE'" class="result-notice" role="status">{{answer.reason || 'Required evidence is incomplete. This is not a verified answer.'}}</div>
    <div class="result-section">
-    <h3>AI-generated explanation</h3>
+    <h3>Answer</h3>
+    <p class="source-row"><strong>{{responseLabel}}</strong></p>
+    <p v-if="answer.validationFlags?.length" class="result-notice" role="alert">Validation flags: {{answer.validationFlags.join('; ')}}</p>
     <p class="answer-text">{{answer.answer}}</p>
-    <p class="subdued">Model-generated text is not verified against the evidence. Use the structured records below to check individual claims.</p>
+    <p class="subdued">Heuristic checks are not proof of correctness. Verify claims against the structured evidence below.</p>
    </div>
    <div class="result-section">
     <div class="section-heading"><h3>Supporting evidence</h3><span class="pill">{{mappings.length || engineering.length || sampleRows.length || (event.fault_id ? 1 : 0)}} record(s)</span></div>
@@ -164,8 +173,8 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
      </table>
     </div>
     <div v-if="engineering.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th v-if="answer.id==='Q5'">ECLASS</th></tr></thead>
-      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td v-if="answer.id==='Q5'">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small></td></tr></tbody>
+     <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th v-if="engineering.some(r=>r.eclass_class)">ProductCatalog ECLASS</th></tr></thead>
+      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td v-if="answer.id==='Q5'">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
      </table>
      <details v-if="answer.id==='Q5'" class="detail-toggle"><summary>Catalog specifications and QUDT attributes</summary><div v-for="(m,i) in engineering" :key="i" class="spec-block"><strong>{{m.equipment_tag}} — {{m.eclass_verification || 'Verification status not provided'}}</strong><pre>{{JSON.stringify({specifications:m.catalog_technical_specifications,qudt:m.qudt_product_specification},null,2)}}</pre></div></details>
     </div>
@@ -193,7 +202,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
     <p v-for="source in evidenceSources" :key="source" class="source-row">{{source}}</p>
     <p v-if="answer.runId" class="source-row">Run: <span class="mono">{{answer.runId}}</span></p>
     <p v-if="answer.eventId" class="source-row">Event: <span class="mono">{{answer.eventId}}</span></p>
-    <p class="subdued">Model: {{answer.model || 'No LLM answer'}} · Prompt: {{answer.promptVersion}} · {{answer.answerValidation}} · Manual rubric grading required</p>
+    <p class="subdued">Answer source: {{answer.answerSource || 'Not specified'}} · Model: {{answer.model || 'No LLM answer'}} · Prompt: {{answer.promptVersion}} · {{answer.answerValidation}} · Manual rubric grading required</p>
     <p v-if="answer.questionAdaptation==='EXPLORATORY_NOT_PAPER_EVALUATION'" class="subdued">Exploratory question: not part of the fixed Q1–Q10 evaluation or reported scores.</p>
     <p v-if="answer.questionAdaptation==='UI_CONTEXTUAL_TEMPORAL_WORDING'" class="subdued">Temporal question wording was adapted for the selected run; this is not an exact frozen-question replay.</p>
    </div>
