@@ -41,8 +41,9 @@ def answer(question_id, run_id=None, event_id=None):
     engineering = evaluation.engineering_evidence(
         str(ROOT / "examples/aas/asset_inventory_instance.json"),
         str(ROOT / "examples/aas/product_catalog_instance.json"))
-    graph = evaluation.verified_graphdb_mappings(
+    graph = (evaluation.verified_graphdb_mappings(
         os.environ.get("GRAPHDB_SPARQL_ENDPOINT", "http://localhost:7200/repositories/AAS"))
+        if number in {1, 2, 3, 6, 7, 10} else None)
     temporal = None
     if run_id:
         dsn = os.environ.get("TEP_TIMESCALE_DSN")
@@ -57,6 +58,16 @@ def answer(question_id, run_id=None, event_id=None):
     item = next(x for x in evaluation.evaluate(engineering, temporal, graph)
                 if x["id"] == question_id)
     text = query.QUESTIONS[number - 1]
+    if number == 8:
+        text = "Which fault injection operator command was recorded, and at what simulation time? Is actual activation verified?"
+    elif number == 9:
+        text = ("For XMEAS6, XMEAS7, XMEAS8 and XMEAS9, report the recorded values and "
+                "simulation timestamps immediately before and after the selected injection command.")
+    elif number == 10:
+        text = ("For FI-1101, report the AAS AssetIdentifier, DEXPI and ECAD references, "
+                "product candidate, ECLASS class and signal, together with recorded XMEAS6 "
+                "measurements immediately before and after the selected injection command.")
+
     fallback = query.answer_for(item, engineering, temporal, None)
     response = fallback
     model = os.environ.get("TEP_QUERY_MODEL", "llama3.1:8b")
@@ -72,6 +83,7 @@ def answer(question_id, run_id=None, event_id=None):
             raise ValueError("Invalid Ollama answer format")
     return {
         "id": question_id, "question": text, "status": item["status"],
+        "questionAdaptation": "UI_CONTEXTUAL_TEMPORAL_WORDING" if number >= 8 else "PAPER_SCRIPT_DEFAULT",
         "answer": response["answer"], "limitations": response["limitations"],
         "evidence": item.get("evidence"), "reason": item.get("reason"),
         "runId": run_id, "eventId": event_id,
