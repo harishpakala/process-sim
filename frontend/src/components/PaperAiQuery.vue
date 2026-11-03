@@ -57,6 +57,7 @@ const examples = [
 ]
 const temporalCustom = computed(()=>/fault|inject|before|after|historian|recorded value|measurement|timeseries|time series|simulation time|operational history|trend/i.test(customQuestion.value))
 const questions = ref<Question[]>([])
+const questionsLoading = ref(false)
 const runs = ref<Run[]>([])
 const events = ref<FaultEvent[]>([])
 const runId = ref('')
@@ -79,10 +80,13 @@ async function getJson(url:string, options?:RequestInit) {
  return data
 }
 async function loadQuestions(){
+ questionsLoading.value=true
  try {
-  const data = await getJson('/api/ai/paper/questions')
+  const data = await getJson('/api/ai/paper/questions?refresh='+Date.now(), {cache:'no-store'})
+  if(!Array.isArray(data.questions) || data.questions.length!==10) throw new Error('Expected Q1–Q10')
   questions.value = data.questions
  } catch(e){error.value = e instanceof Error ? e.message : String(e)}
+ finally {questionsLoading.value=false}
 }
 async function loadRuns(){
  historyError.value=''
@@ -147,9 +151,10 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
     </label>
     <p v-if="runId && !events.length" class="subdued">No persisted fault events found for this run.</p>
     <p v-if="selectedEvent && firstInjection && selectedEvent.event_id!==firstInjection.event_id" role="alert" style="color:#b45309">The current evidence generator uses the first injection command. Select that event to avoid incorrect temporal attribution.</p>
-    <label v-if="mode==='paper'" style="display:grid;gap:6px">Evaluation question
+    <label v-if="mode==='paper'" style="display:grid;gap:6px">TEP Nexus Paper question
      <select v-model="questionId"><option v-for="q in available" :key="q.id" :value="q.id">{{q.id}} — {{q.question}}</option></select>
     </label>
+    <div v-if="mode==='paper'" class="control-row"><button type="button" class="secondary" :disabled="questionsLoading" @click="loadQuestions">{{questionsLoading ? 'Refreshing…' : 'Refresh paper questions'}}</button><span class="subdued">{{questions.length}} loaded</span></div>
     <p v-if="mode==='paper' && selectedQuestion" class="subdued">{{selectedQuestion.requiresRun ? 'Requires a recorded run, fault command and samples; the simulator may be stopped.' : 'Engineering evidence only; simulation is not required.'}}</p>
     <button class="primary" type="button" :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && (!runId || !eventId))) : (customQuestion.trim().length<5 || (temporalCustom && !runId)))" @click="ask">{{busy?'Retrieving evidence and querying Ollama…':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
     <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
