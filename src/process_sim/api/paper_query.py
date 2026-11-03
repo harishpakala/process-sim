@@ -96,3 +96,89 @@ def answer(question_id, run_id=None, event_id=None):
         "answerValidation": "NOT_AUTOMATICALLY_VERIFIED",
         "warning": "Fault events record operator commands; actual activation and causality are not verified."
     }
+
+
+def custom_answer(question, run_id=None, event_id=None):
+    """Exploratory queries: route to a supported read-only evidence scope, never execute LLM code."""
+    import re
+    if not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
+        raise ValueError("Question must contain 5–1000 characters")
+    question = question.strip()
+    if run_id:
+        run_id = str(UUID(run_id))
+    if event_id:
+        event_id = str(UUID(event_id))
+    if event_id and not run_id:
+        raise ValueError("Select a run for the recorded event")
+
+    q = question.lower()
+    temporal_words = ("fault", "inject", "before", "after", "historian",
+                      "recorded value", "measurement", "timeseries", "time series",
+                      "simulation time", "operational history", "trend")
+    product_words = ("product", "manufacturer", "catalog", "vendor", "model", "qudt",
+                     "eclass", "irdi", "specification", "accuracy", "range")
+    engineering_words = ("instrument", "reactor", "signal", "asset", "tag", "ecad",
+                         "dexpi", "mapping", "identifier", "reference", "pi-1101",
+                         "fi-1101", "ti-1101", "li-1101", "electrical", "engineering")
+    needs_temporal = any(word in q for word in temporal_words)
+    needs_products = any(word in q for word in product_words)
+    needs_engineering = any(word in q for word in engineering_words) or needs_products
+    if not (needs_temporal or needs_engineering):
+        raise ValueError("This exploratory interface currently supports engineering assets, product specifications, and recorded fault/signal evidence only.")
+    if needs_temporal and not run_id:
+        raise ValueError("This question requires recorded operational evidence. Select a simulation run first.")
+
+    evaluation = _load("tep_nexus_custom_evaluation", "scripts/tep_nexus_paper_evaluation.py")
+    query = _load("tep_nexus_custom_queries", "scripts/tep_nexus_paper_queries.py")
+    engineering = evaluation.engineering_evidence(
+        str(ROOT / "examples/aas/asset_inventory_instance.json"),
+        str(ROOT / "examples/aas/product_catalog_instance.json"))
+    graph = None
+    if needs_engineering:
+        graph = evaluation.verified_graphdb_mappings(
+            os.environ.get("GRAPHDB_SPARQL_ENDPOINT", "http://localhost:7200/repositories/AAS"))
+    temporal = None
+    if needs_temporal:
+        dsn = os.environ.get("TEP_TIMESCALE_DSN")
+        if not dsn:
+            raise RuntimeError("TEP_TIMESCALE_DSN is not configured")
+        temporal = evaluation.temporal_evidence(
+            dsn, run_id, [x[2] for x in evaluation.ASSETS.values()])
+        selected = temporal.get("selected_activation")
+        if event_id and (not selected or selected["event_id"] != event_id):
+            raise ValueError("The selected event is not the first recorded injection command; event-specific sampling is not yet supported.")
+        if not selected:
+            raise ValueError("No recorded injection command is available in the selected run.")
+
+    evidence = {}
+    if graph is not None:
+        evidence["graphdb_verified_mappings"] = list(graph.values())
+    if needs_products:
+        evidence["engineering_catalog"] = engineering
+    if temporal is not None:
+        evidence["activation"] = temporal.get("selected_activation")
+        evidence["measurements"] = temporal.get("measurements", {})
+        evidence["run_id"] = run_id
+    model = os.environ.get("TEP_QUERY_MODEL", "llama3.1:8b")
+    response = query.ollama_json(
+        os.environ.get("OLLAMA_URL", "http://localhost:11434"), model,
+        query.ANSWER_SYSTEM_PROMPT + """
+Exploratory query mode: do not claim evidence for facts not present in the supplied fields.
+If the question is outside the retrieved evidence scope, explain that limitation.
+Do not interpret an operator command as verified fault activation.
+""", {"question": question, "evidence": evidence})
+    if (not isinstance(response, dict) or set(response) != {"answer", "limitations"}
+            or not isinstance(response["answer"], str)
+            or not isinstance(response["limitations"], list)
+            or any(not isinstance(v, str) for v in response["limitations"])):
+        raise ValueError("Invalid Ollama response format")
+    return {
+        "id": "CUSTOM", "question": question, "answer": response["answer"],
+        "limitations": response["limitations"], "status": "EVIDENCE_AVAILABLE",
+        "evidence": evidence, "runId": run_id if needs_temporal else None,
+        "eventId": event_id if needs_temporal else None,
+        "model": model, "promptVersion": "EXPLORATORY_V1_NOT_PAPER_BASELINE",
+        "answerValidation": "NOT_AUTOMATICALLY_VERIFIED",
+        "warning": "Fault events record operator commands; activation and causality are not verified.",
+        "questionAdaptation": "EXPLORATORY_NOT_PAPER_EVALUATION"
+    }
