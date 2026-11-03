@@ -12,7 +12,7 @@ const revisionRationale=ref('')
 const selectedEvidenceEvent=ref('')
 const revisionFeedback=ref('')
 const physicalCandidates=computed(()=>events.value.filter(e=>e.review_kind==='PHYSICAL_MEMBERSHIP'&&e.decision==='VERIFIED_PHYSICAL_MEMBERSHIP'&&events.value.filter(v=>v.relationship_id===e.relationship_id&&v.review_kind==='PHYSICAL_MEMBERSHIP').at(-1)?.event_id===e.event_id).map(e=>({event:e,item:engineeringBomItems.find(i=>i.SourceDomain==='ECAD'&&i.EngineeringReference===engineeringRelationships.find(r=>r.relationshipId===e.relationship_id)?.targetReference)})).filter(x=>x.item))
-const selectedId=ref(engineeringRelationships[0]?.relationshipId||'')
+const selectedId=ref<string>(engineeringRelationships[0]?.relationshipId||'')
 const filter=ref('ALL')
 const reviewer=ref('')
 const evidenceReference=ref('')
@@ -111,7 +111,7 @@ function exportReviews(){
      <div><span>Relationship type</span><strong>{{selected.relationshipType}}</strong></div>
      <div><span>DEXPI function</span><strong>{{pair?.dexpiLocalId}} · {{selected.sourceReference}}</strong></div>
      <div><span>ECAD device</span><strong>{{pair?.ecadLocalId}} · {{selected.targetReference}}</strong></div>
-     <div><span>Equipment scope</span><strong>{{selected.scopeAssembly==='ASM-ROOT'?'Plant-wide / not assigned to equipment':selected.scopeAssembly}}</strong></div>
+     <div><span>Equipment scope</span><strong>{{String(selected.scopeAssembly)==='ASM-ROOT'?'Plant-wide / not assigned to equipment':selected.scopeAssembly}}</strong></div>
      <div><span>Evidence basis</span><strong>{{selected.evidence.description}}</strong></div>
      <div><span>Physical membership</span><strong>Not verified</strong></div>
      <div><span>Same installed device</span><strong>Not verified</strong></div>
