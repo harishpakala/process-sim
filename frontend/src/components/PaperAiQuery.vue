@@ -23,6 +23,22 @@ const measurements = computed<Record<string,SamplePair>>(()=>{
 const sampleRows = computed(()=>Object.entries(measurements.value).map(([signal,pair])=>({signal,before:pair?.before,after:pair?.after})))
 const evidenceCount = computed(()=>mappings.value.length + engineering.value.length + sampleRows.value.length + (event.value.fault_id ? 1 : 0))
 const hasCatalog = computed(()=>engineering.value.some(record=>Boolean(record.product_key)))
+const selectedAssetTag = ref('')
+const assetTags = computed(()=>Array.from(new Set([
+ ...engineering.value.map(r=>r.equipment_tag).filter((v):v is string=>Boolean(v)),
+ ...mappings.value.map(m=>m.ecadLocal).filter((v):v is string=>Boolean(v))
+])).sort())
+const selectedAsset = computed(()=>{
+ const tag=selectedAssetTag.value
+ const record=engineering.value.find(r=>r.equipment_tag===tag)
+ const mapping=mappings.value.find(m=>m.ecadLocal===tag || (record?.asset_id && m.assetId===record.asset_id))
+ const catalog=record?.product_uri ? engineering.value.find(r=>r.product_uri===record.product_uri && r.product_key) : record
+ const signal=record?.signal || mapping?.signal
+ const samples=signal ? measurements.value[signal] : undefined
+ return {record,catalog,mapping,signal,samples}
+})
+watch(assetTags, tags=>{if(!tags.includes(selectedAssetTag.value)) selectedAssetTag.value=tags[0] || ''})
+
 function seconds(value:unknown):string { return typeof value==='number' && Number.isFinite(value) ? value.toFixed(3)+' s' : 'Not recorded' }
 function sampleValue(sample?:Sample|null):string { return sample && typeof sample.value==='number' ? String(sample.value) : 'Not recorded' }
 function assetShort(uri?:string):string { return uri ? uri.split('/').pop() || uri : '—' }
@@ -199,6 +215,37 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
      </table>
     </div>
     <p v-if="!mappings.length && !engineering.length && !sampleRows.length && !event.fault_id" class="subdued">No structured evidence records were returned for this question.</p>
+   </div>
+   <div v-if="assetTags.length" class="result-section">
+    <h3>Engineering asset detail</h3>
+    <p class="subdued">Shows only identifiers and catalog records returned for this question. Missing fields are not evidence of absence.</p>
+    <label style="display:grid;gap:6px">Select instrument
+     <select v-model="selectedAssetTag"><option v-for="tag in assetTags" :key="tag" :value="tag">{{tag}}</option></select>
+    </label>
+    <div class="table-scroll"><table class="evidence-table"><tbody>
+     <tr><th>Equipment tag (AAS inventory / ECAD)</th><td>{{selectedAssetTag}}</td></tr>
+     <tr><th>DEXPI reference (GraphDB)</th><td>{{selectedAsset.mapping?.dexpiLocal || 'Not returned'}}</td></tr>
+     <tr><th>ECAD reference (GraphDB)</th><td>{{selectedAsset.mapping?.ecadLocal || 'Not returned'}}</td></tr>
+     <tr><th>Canonical AAS AssetIdentifier</th><td class="mono">{{selectedAsset.mapping?.assetId || selectedAsset.record?.asset_id || 'Not returned'}}</td></tr>
+     <tr><th>Operational signal</th><td>{{selectedAsset.signal || 'Not returned'}}</td></tr>
+     <tr><th>Product candidate (ProductCatalog)</th><td>{{selectedAsset.catalog?.product_key || 'Not returned'}}</td></tr>
+     <tr><th>Manufacturer (ProductCatalog)</th><td>{{selectedAsset.catalog?.manufacturer || 'Not returned'}}</td></tr>
+     <tr><th>ECLASS class (ProductCatalog only)</th><td>{{selectedAsset.catalog?.eclass_class || 'Not returned'}}</td></tr>
+     <tr><th>ECLASS IRDI (ProductCatalog only)</th><td class="mono">{{selectedAsset.catalog?.eclass_irdi || 'Not returned'}}</td></tr>
+     <tr><th>ECLASS verification</th><td>{{selectedAsset.catalog?.eclass_verification || 'Not recorded'}}</td></tr>
+     <tr><th>Physical installation verification</th><td>{{selectedAsset.catalog?.installation_verification ?? 'Unknown / not recorded'}}</td></tr>
+    </tbody></table></div>
+    <details v-if="selectedAsset.catalog?.catalog_technical_specifications || selectedAsset.catalog?.qudt_product_specification" class="detail-toggle">
+     <summary>ProductCatalog specifications and QUDT attributes</summary>
+     <pre>{{JSON.stringify({specifications:selectedAsset.catalog?.catalog_technical_specifications,qudt:selectedAsset.catalog?.qudt_product_specification},null,2)}}</pre>
+    </details>
+    <div v-if="selectedAsset.samples" class="event-summary">
+     <strong>Recorded signal samples — {{selectedAsset.signal}}</strong>
+     <span>Before: {{seconds(selectedAsset.samples.before?.simulation_seconds)}} / {{sampleValue(selectedAsset.samples.before)}}</span>
+     <span>After: {{seconds(selectedAsset.samples.after?.simulation_seconds)}} / {{sampleValue(selectedAsset.samples.after)}}</span>
+     <small>Observed samples are not proof that a fault caused the change.</small>
+    </div>
+    <p class="subdued">Logical identifier mappings and product candidates do not verify installed hardware. GraphDB ECLASS fields are not classification authority.</p>
    </div>
    <div class="result-section">
     <h3>Limitations and qualifications</h3>
