@@ -141,8 +141,13 @@ def answer(question_id, run_id=None, event_id=None):
             raise ValueError("Invalid Ollama answer format")
     checks = grounding_flags(response["answer"], response["limitations"], item.get("evidence") or {}, question_id)
     checks = sorted(set(checks + _ui_completeness_flags(question_id, response["answer"], item.get("evidence") or {})))
+    displayed_checks = checks
     if checks:
         response = fallback
+        displayed_checks = sorted(set(
+            grounding_flags(response["answer"], response["limitations"], item.get("evidence") or {}, question_id)
+            + _ui_completeness_flags(question_id, response["answer"], item.get("evidence") or {})
+        ))
     return {
         "id": question_id, "question": text, "status": item["status"],
         "questionAdaptation": "INDEPENDENT_V4_1_UI_QUESTION_REGISTRY",
@@ -153,6 +158,8 @@ def answer(question_id, run_id=None, event_id=None):
         "promptVersion": "INDEPENDENT_V4_1_WEB_UI",
         "answerValidation": "REJECTED_MODEL_ANSWER_USED_EVIDENCE_FALLBACK" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
         "validationFlags": checks,
+        "validationFlagsScope": "REJECTED_MODEL_ANSWER" if checks else "DISPLAYED_MODEL_ANSWER",
+        "displayedAnswerValidationFlags": displayed_checks,
         "answerSource": "DETERMINISTIC_EVIDENCE_FALLBACK" if checks or item["status"] != "EVIDENCE_AVAILABLE" else "OLLAMA_HEURISTIC_CHECKS_PASSED",
         "warning": "Fault events record operator commands; actual activation and causality are not verified."
     }
