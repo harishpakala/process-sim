@@ -1,0 +1,64 @@
+[
+  {
+    "id": "fi_latest_history",
+    "function": "FI_101",
+    "question": "For engineering function FI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "vc_latest_history",
+    "function": "VC_101",
+    "question": "For engineering function VC_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "ti_latest_history",
+    "function": "TI_101",
+    "question": "For engineering function TI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "li_101_latest_history",
+    "function": "LI_101",
+    "question": "For engineering function LI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "pi_101_latest_history",
+    "function": "PI_101",
+    "question": "For engineering function PI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "ji_101_latest_history",
+    "function": "JI_101",
+    "question": "For engineering function JI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "sc_101_latest_history",
+    "function": "SC_101",
+    "question": "For engineering function SC_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "coverage_fi_106",
+    "function": "FI_106",
+    "question": "For engineering function FI_106, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+    "expected": "complete"
+  },
+  {
+    "id": "unsupported_function",
+    "function": "FI_999",
+    "question": "Show the latest measurement for engineering function FI_999.",
+    "expected": "reject",
+    "expected_error": "Unsupported engineering function"
+  },
+  {
+    "id": "conflicting_identifiers",
+    "function": "FI_101",
+    "question": "Show the latest measurement for FI_101 and VC_101.",
+    "expected": "reject",
+    "expected_error": "Planned engineering function does not match"
+  }
+]
