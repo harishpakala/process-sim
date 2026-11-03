@@ -1,0 +1,45 @@
+{
+  "status": "questions_only_not_automatically_scored",
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Which instruments are associated with the reactor?"
+    },
+    {
+      "id": "Q2",
+      "question": "What are their electrical references?"
+    },
+    {
+      "id": "Q3",
+      "question": "What are their asset IDs and signal references?"
+    },
+    {
+      "id": "Q4",
+      "question": "Which products and manufacturers are associated with these assets?"
+    },
+    {
+      "id": "Q5",
+      "question": "What ECLASS classifications and QUDT attributes are available for these assets, and which attributes are only associated with product candidates rather than independently verified physical instruments?"
+    },
+    {
+      "id": "Q6",
+      "question": "Which asset identifiers link the engineering representations?"
+    },
+    {
+      "id": "Q7",
+      "question": "What engineering information is available for PI-1101?"
+    },
+    {
+      "id": "Q8",
+      "question": "What `paper-fault-01` operator injection command was recorded, at what simulation time, and what evidence, if any, verifies that the requested fault actually became active?"
+    },
+    {
+      "id": "Q9",
+      "question": "For the selected reactor-related TEP signals XMEAS6, XMEAS7, XMEAS8, and XMEAS9, what were their recorded values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run?"
+    },
+    {
+      "id": "Q10",
+      "question": "For the reactor feed-flow instrument FI-1101, provide its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, associated product candidate, ECLASS class, and operational signal. Also report the recorded XMEAS6 values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run."
+    }
+  ]
+}
