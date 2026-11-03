@@ -38,6 +38,10 @@ def flags(answer, limitations, evidence, question_id=None):
     records = catalog_records(evidence)
     warnings = []
     combined = answer + "\n" + "\n".join(limitations)
+    if records and re.search(
+        r"ProductCatalog(?:\\s+classification)?\\s+evidence\\s+(?:was\\s+)?not\\s+retrieved",
+        combined, re.I):
+        warnings.append("CONTRADICTORY_PRODUCTCATALOG_NOT_RETRIEVED")
     # IRDIs are globally recognizable identifiers; permit only catalog-listed values.
     allowed_irdis = {r["eclass_irdi"] for r in records if r.get("eclass_irdi")}
     for irdi in set(re.findall(r"0173-1#\S+", combined)):
