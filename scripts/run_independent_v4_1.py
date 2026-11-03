@@ -47,7 +47,7 @@ def scope_report(report):
 def paired(text, left, right):
     """Check that two identifiers appear in the same answer line or clause."""
     for line in text.splitlines():
-        for clause in re.split(r"[;\\n]", line):
+        for clause in re.split(r"[;\n]", line):
             if left in clause and right in clause:
                 return True
     return False
