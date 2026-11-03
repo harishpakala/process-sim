@@ -7,6 +7,10 @@ import argparse
 import json
 import re
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'src'))
+from process_sim.api.catalog_grounding import flags as catalog_flags
 
 
 def validate(row):
@@ -76,6 +80,7 @@ def validate(row):
         for field in ("fault_id", "action"):
             if event.get(field) and str(event[field]) not in answer:
                 warnings.append("MISSING_EVENT_FIELD:" + field)
+    warnings.extend(catalog_flags(answer, limitations, evidence, row.get('id')))
     return sorted(set(warnings))
 
 
