@@ -8,7 +8,7 @@ type Answer = { id: string; question: string; answer: string; limitations: strin
 type Mapping = { assetId?: string; dexpiLocal?: string; ecadLocal?: string; signal?: string; productId?: string; eclassCode?: string }
 type Sample = { simulation_seconds?: number; value?: number }
 type SamplePair = { before?: Sample | null; after?: Sample | null }
-type EngineeringRecord = { equipment_tag?: string; asset_id?: string; signal?: string; manufacturer?: string; product_key?: string; product_uri?: string; eclass_class?: string; eclass_irdi?: string; eclass_verification?: string; catalog_technical_specifications?: unknown; qudt_product_specification?: unknown }
+type EngineeringRecord = { equipment_tag?: string; asset_id?: string; signal?: string; manufacturer?: string; product_key?: string; product_uri?: string; eclass_class?: string; eclass_irdi?: string; eclass_verification?: string; installation_verification?: string | null; catalog_technical_specifications?: unknown; qudt_product_specification?: unknown }
 function object(value: unknown): Record<string, unknown> { return value && typeof value==='object' && !Array.isArray(value) ? value as Record<string,unknown> : {} }
 const evidence = computed(()=>object(answer.value?.evidence))
 const mappings = computed<Mapping[]>(()=>Array.isArray(evidence.value.graphdb_verified_mappings) ? evidence.value.graphdb_verified_mappings as Mapping[] : [])
@@ -170,7 +170,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
     <p class="source-row"><strong>{{responseLabel}}</strong></p>
     <p v-if="answer.validationFlags?.length" class="result-notice" role="alert">Validation flags: {{answer.validationFlags.join('; ')}}</p>
     <p class="answer-text">{{answer.answer}}</p>
-    <p class="subdued">Heuristic checks are not proof of correctness. Verify claims against the structured evidence below.</p>
+    <p class="subdued">Heuristic checks and deterministic fallbacks are not independent proof of correctness. Verify claims against the structured evidence below.</p>
    </div>
    <div class="result-section">
     <div class="section-heading"><h3>Supporting evidence</h3><span class="pill">{{evidenceCount}} record(s)</span></div>
@@ -180,8 +180,8 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
      </table>
     </div>
     <div v-if="engineering.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th v-if="engineering.some(r=>r.eclass_class)">ProductCatalog ECLASS</th></tr></thead>
-      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td v-if="engineering.some(r=>r.eclass_class)">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
+     <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th>Installation</th><th v-if="engineering.some(r=>r.eclass_class)">ProductCatalog ECLASS</th></tr></thead>
+      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td>{{m.installation_verification ?? 'Unknown / not recorded'}}</td><td v-if="engineering.some(r=>r.eclass_class)">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
      </table>
      <details v-if="engineering.some(r=>r.catalog_technical_specifications || r.qudt_product_specification)" class="detail-toggle"><summary>Catalog specifications and QUDT attributes</summary><div v-for="(m,i) in engineering" :key="i" class="spec-block"><strong>{{m.equipment_tag}} — {{m.eclass_verification || 'Verification status not provided'}}</strong><pre>{{JSON.stringify({specifications:m.catalog_technical_specifications,qudt:m.qudt_product_specification},null,2)}}</pre></div></details>
     </div>
