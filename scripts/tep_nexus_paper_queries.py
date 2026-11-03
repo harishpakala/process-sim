@@ -169,19 +169,33 @@ def answer_for(item, engineering, temporal, graph):
     ]}
 
 
-def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
+def load_questions(path):
+    """Read Q1-Q10 without modifying the frozen question registry."""
+    data = json.loads(Path(path).read_text(encoding="utf-8-sig"))
+    rows = data.get("questions")
+    if not isinstance(rows, list) or len(rows) != 10:
+        raise ValueError("Question file must contain exactly ten questions")
+    for index, row in enumerate(rows, 1):
+        if (not isinstance(row, dict) or row.get("id") != f"Q{index}"
+                or not isinstance(row.get("question"), str)
+                or not row["question"].strip()):
+            raise ValueError(f"Invalid question entry Q{index}")
+    return [row["question"] for row in rows]
+
+
+def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b",
+        questions=None):
     results = []
+    questions = QUESTIONS if questions is None else questions
     source = {x["id"]: x for x in report["results"]}
     if len(source) != 10 or any(f"Q{i}" not in source for i in range(1, 11)):
         raise ValueError("Evidence must contain Q1-Q10")
-    for index, question in enumerate(QUESTIONS, 1):
+    for index, question in enumerate(questions, 1):
         qid = f"Q{index}"
         item = source[qid]
-        if item["question"] != question:
-            raise ValueError(
-                f"Question registry mismatch for {qid}; regenerate evidence with the updated evaluator"
-            )
-        entry = {"id": qid, "question": question, "source_status": item["status"],
+        # Evidence is keyed by stable question ID; alternate wording is allowed.
+        # The frozen evidence question remains recorded for provenance.
+        entry = {"id": qid, "question": question, "evidence_question": item["question"], "source_status": item["status"],
                  "validated_plan": {"question_id": qid, "strategy": "fixed_question_registry"},
                  "graphdb_probe_status": "IRI_EDGES_INSPECTED_NOT_JOIN_VALIDATED" if graph_edges is not None else "NOT_RUN",
                  "answer_validation": "NOT_AUTOMATICALLY_VERIFIED"}
@@ -226,6 +240,8 @@ def run(report, graph_edges=None, ollama_url=None, model="llama3.1:8b"):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--evidence", default="reports/tep_nexus_paper_evaluation.json")
+    p.add_argument("--questions", default=None,
+                   help="Optional Q1-Q10 JSON question registry; default is original frozen wording")
     p.add_argument("--graphdb-url", default=None,
                    help="Optional read-only GraphDB IRI-edge probe")
     p.add_argument("--ollama-url", default=None,
@@ -237,7 +253,11 @@ def main():
     if len(report.get("results", [])) != 10:
         p.error("Evidence report must contain Q1-Q10")
     graph = graphdb_probe(a.graphdb_url) if a.graphdb_url else None
-    result = run(report, graph, a.ollama_url, a.model)
+    questions = load_questions(a.questions) if a.questions else None
+    result = run(report, graph, a.ollama_url, a.model, questions=questions)
+    result["questions_file"] = a.questions
+    result["question_set_sha256"] = hashlib.sha256(json.dumps(
+        QUESTIONS if questions is None else questions, ensure_ascii=False).encode("utf-8")).hexdigest()
     result["answer_generation_mode"] = "BLIND_EVIDENCE_ONLY" if a.ollama_url else "NO_LLM"
     path = Path(a.output)
     path.parent.mkdir(parents=True, exist_ok=True)
