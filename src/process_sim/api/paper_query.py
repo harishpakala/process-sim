@@ -20,8 +20,12 @@ def _load(name, relative):
 
 def questions():
     q = _load("tep_nexus_paper_queries_web", "scripts/tep_nexus_paper_queries.py")
+    display = list(q.QUESTIONS)
+    display[7] = "Which fault injection command was recorded, and when? Was activation verified?"
+    display[8] = "What were XMEAS6–XMEAS9 measurements immediately before and after the selected fault command?"
+    display[9] = "What are FI-1101's engineering references and XMEAS6 measurements around the selected command?"
     return [{"id": f"Q{i}", "question": value, "requiresRun": i >= 8}
-            for i, value in enumerate(q.QUESTIONS, 1)]
+            for i, value in enumerate(display, 1)]
 
 
 def answer(question_id, run_id=None, event_id=None):
