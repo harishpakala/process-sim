@@ -4,7 +4,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 type Question = { id: string; question: string; requiresRun: boolean }
 type Run = { run_id?: string; runId?: string; [key:string]: unknown }
 type FaultEvent = { event_id: string; fault_id: string; action: string; simulation_time_hours?: number; simulation_seconds?: number; event_source?: string; target?: string }
-type Answer = { id: string; question: string; answer: string; limitations: string[]; status: string; evidence?: unknown; reason?: string; model?: string; promptVersion: string; answerValidation: string; validationFlags?: string[]; answerSource?: string; warning: string; runId?: string; eventId?: string; questionAdaptation?: string }
+type Answer = { id: string; question: string; answer: string; limitations: string[]; status: string; evidence?: unknown; reason?: string; model?: string; promptVersion: string; answerValidation: string; validationFlags?: string[]; validationFlagsScope?: string; displayedAnswerValidationFlags?: string[]; answerSource?: string; warning: string; runId?: string; eventId?: string; questionAdaptation?: string }
 type Mapping = { assetId?: string; dexpiLocal?: string; ecadLocal?: string; signal?: string; productId?: string; eclassCode?: string }
 type Sample = { simulation_seconds?: number; value?: number }
 type SamplePair = { before?: Sample | null; after?: Sample | null }
@@ -168,7 +168,10 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
    <div class="result-section">
     <h3>Answer</h3>
     <p class="source-row"><strong>{{responseLabel}}</strong></p>
-    <p v-if="answer.validationFlags?.length" class="result-notice" role="alert">Validation flags: {{answer.validationFlags.join('; ')}}</p>
+    <p v-if="answer.validationFlags?.length && answer.validationFlagsScope==='REJECTED_MODEL_ANSWER'" class="result-notice" role="status">Original Ollama answer rejected: {{answer.validationFlags.join('; ')}}. These flags refer to the rejected model output, not the displayed fallback.</p>
+    <p v-else-if="answer.validationFlags?.length" class="result-notice" role="alert">Answer validation flags: {{answer.validationFlags.join('; ')}}</p>
+    <p v-if="answer.displayedAnswerValidationFlags?.length" class="result-notice" role="alert">Displayed answer also requires review: {{answer.displayedAnswerValidationFlags.join('; ')}}</p>
+    <p v-else-if="answer.answerSource==='DETERMINISTIC_EVIDENCE_FALLBACK' && answer.displayedAnswerValidationFlags" class="subdued">Displayed fallback passed the configured structural checks; this is not independent verification.</p>
     <p class="answer-text">{{answer.answer}}</p>
     <p class="subdued">Heuristic checks and deterministic fallbacks are not independent proof of correctness. Verify claims against the structured evidence below.</p>
    </div>
