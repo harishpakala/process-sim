@@ -174,6 +174,24 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/ai/custom/answer":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict):
+                    raise ValueError("Expected a JSON object")
+                from process_sim.api.paper_query import custom_answer
+                result = custom_answer(payload.get("question"), payload.get("runId") or None,
+                                       payload.get("eventId") or None)
+                self.send_json(200, result)
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception as exc:
+                self.send_json(503, {"error": f"Exploratory query unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/paper/answer":
             try:
                 length = int(self.headers.get("Content-Length", "0"))
