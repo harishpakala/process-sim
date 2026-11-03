@@ -11,7 +11,7 @@ ECLASS_FIELDS = ("eclass_class", "eclass_irdi", "eclass_preferred_name",
 POLICY = """
 ECLASS authority policy: ECLASS class codes, IRDIs, preferred names, verification
 status, QUDT attributes and catalog specifications must come EXCLUSIVELY from
-the supplied ProductCatalog-backed engineering_catalog records. Do not use
+the supplied ProductCatalog-backed catalog records (direct evidence or engineering_catalog). Do not use
 external knowledge or lookups, or infer ECLASS details from GraphDB, DEXPI,
 ECAD, AAS identifiers or product names. A graph mapping's eclassCode is NOT
 authorization to assert a ProductCatalog classification. When ProductCatalog evidence is absent, say 'ProductCatalog classification\nevidence was not retrieved' for requested ECLASS attributes. Do NOT claim\nProductCatalog itself lacks these fields merely because they were not retrieved. Never invent IRDI or preferred name. Do not add unrelated
@@ -39,7 +39,7 @@ def flags(answer, limitations, evidence, question_id=None):
     warnings = []
     combined = answer + "\n" + "\n".join(limitations)
     if records and re.search(
-        r"ProductCatalog(?:\\s+classification)?\\s+evidence\\s+(?:was\\s+)?not\\s+retrieved",
+        r"ProductCatalog(?:\s+classification)?\s+evidence\s+(?:was\s+)?not\s+retrieved",
         combined, re.I):
         warnings.append("CONTRADICTORY_PRODUCTCATALOG_NOT_RETRIEVED")
     # IRDIs are globally recognizable identifiers; permit only catalog-listed values.
@@ -54,10 +54,10 @@ def flags(answer, limitations, evidence, question_id=None):
         if value not in allowed_irdis:
             warnings.append("IRDI_NOT_IN_PRODUCTCATALOG:" + value)
     if not records:
-        if question_id == "Q6" and re.search(r"\\b(?:ECLASS|IRDI|preferred name|eclassCode)\\b", answer, re.I):
+        if question_id == "Q6" and re.search(r"\b(?:ECLASS|IRDI|preferred name|eclassCode)\b", answer, re.I):
             warnings.append("UNREQUESTED_ECLASS_DETAILS_Q6")
         if question_id in ("Q7", "Q10") and re.search(
-                r"\\bECLASS\\s+(?:class|code)\\s*(?:is|:|=)?\\s*\\d", answer, re.I):
+                r"\bECLASS\s+(?:class|code)\s*(?:is|:|=)?\s*\d", answer, re.I):
             warnings.append("ECLASS_CLASS_WITHOUT_PRODUCTCATALOG")
         if re.search(r"\bpreferred name\s*:\s*(?!not available|unknown|none)\S+", answer, re.I):
             warnings.append("PREFERRED_NAME_WITHOUT_PRODUCTCATALOG")
