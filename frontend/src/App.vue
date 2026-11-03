@@ -109,7 +109,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
     <template v-else-if="active==='Faults & Disturbances'"><FaultManagement /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
-    <section v-if="!['Product Catalog','Asset Inventory'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
+    <section v-if="!['Product Catalog','Asset Inventory','AI Query'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
   </main>
  </div>
