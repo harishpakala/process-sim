@@ -1,0 +1,46 @@
+{
+  "version": "INDEPENDENT_QUESTIONS_V2",
+  "description": "Proposed standalone wording for batch testing; not the frozen paper baseline.",
+  "questions": [
+    {
+      "id": "Q1",
+      "question": "Which instruments are associated with the reactor in the available DEXPI engineering data?"
+    },
+    {
+      "id": "Q2",
+      "question": "What ECAD electrical references are associated with the reactor instruments identified in the engineering data?"
+    },
+    {
+      "id": "Q3",
+      "question": "What canonical AAS AssetIdentifiers and operational signal references are associated with the reactor instruments?"
+    },
+    {
+      "id": "Q4",
+      "question": "Which product candidates and manufacturers are associated with the reactor instruments in the AAS Asset Inventory and Product Catalog?"
+    },
+    {
+      "id": "Q5",
+      "question": "What ECLASS classifications, IRDIs, QUDT attributes, and catalog technical specifications are recorded for the product candidates associated with the reactor instruments?"
+    },
+    {
+      "id": "Q6",
+      "question": "Which verified identifier relationships connect the DEXPI, ECAD, AAS Asset Inventory, and Product Catalog representations of the reactor instruments?"
+    },
+    {
+      "id": "Q7",
+      "question": "What DEXPI, ECAD, AAS Asset Inventory, product-candidate, ECLASS, and operational signal information is available for reactor instrument PI-1101?"
+    },
+    {
+      "id": "Q8",
+      "question": "What is the first recorded fault-injection operator command in the selected simulation run, including its fault ID, action, and simulation timestamp?"
+    },
+    {
+      "id": "Q9",
+      "question": "What are the recorded XMEAS6, XMEAS7, XMEAS8, and XMEAS9 values and simulation timestamps immediately before and after the first recorded fault-injection operator command in the selected simulation run?"
+    },
+    {
+      "id": "Q10",
+      "question": "For reactor feed-flow instrument FI-1101, what are its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, product candidate, ECLASS class, and operational signal, together with the recorded XMEAS6 samples surrounding the first fault-injection operator command in the selected simulation run?"
+    }
+  ]
+}
