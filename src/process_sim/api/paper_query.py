@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import importlib.util
+import json
 import os
 from pathlib import Path
 from uuid import UUID
@@ -20,14 +21,60 @@ def _load(name, relative):
     return module
 
 
+def _independent_questions():
+    path = ROOT / "reports/independent_questions_v2.json"
+    entries = json.loads(path.read_text(encoding="utf-8-sig"))["questions"]
+    if [entry["id"] for entry in entries] != [f"Q{i}" for i in range(1, 11)]:
+        raise ValueError("Invalid independent question registry")
+    return {entry["id"]: entry["question"] for entry in entries}
+
+
 def questions():
-    q = _load("tep_nexus_paper_queries_web", "scripts/tep_nexus_paper_queries.py")
-    display = list(q.QUESTIONS)
-    display[7] = "Which fault injection command was recorded, and when? Was activation verified?"
-    display[8] = "What were XMEAS6–XMEAS9 measurements immediately before and after the selected fault command?"
-    display[9] = "What are FI-1101's engineering references and XMEAS6 measurements around the selected command?"
-    return [{"id": f"Q{i}", "question": value, "requiresRun": i >= 8}
-            for i, value in enumerate(display, 1)]
+    return [{"id": key, "question": value, "requiresRun": int(key[1:]) >= 8}
+            for key, value in _independent_questions().items()]
+
+
+UI_V4_1_RULES = """
+For Q3, pair each canonical AAS AssetIdentifier with its operational signal.
+For Q4, pair each equipment tag with its ProductCatalog product candidate and manufacturer.
+For Q6, give DEXPI, ECAD, AAS AssetIdentifier and product-candidate relationships,
+without ECLASS classification claims.
+When catalog evidence is present, never claim it was not retrieved.
+"""
+
+
+def _ui_completeness_flags(question_id, answer_text, evidence):
+    import re
+    def paired(left, right):
+        return any(left in clause and right in clause
+                   for clause in re.split(r"[;\n]", answer_text))
+    issues = []
+    mappings = evidence.get("graphdb_verified_mappings", [])
+    if question_id == "Q3":
+        for mapping in mappings:
+            if mapping.get("assetId") and mapping.get("signal") and not paired(mapping["assetId"], mapping["signal"]):
+                issues.append("MISSING_ASSET_SIGNAL_PAIR:" + mapping["assetId"])
+    if question_id == "Q4":
+        for record in catalog_records(evidence):
+            tag, product = record.get("equipment_tag"), record.get("product_key")
+            if tag and product and not paired(tag, product):
+                issues.append("MISSING_TAG_PRODUCT_PAIR:" + tag)
+    if question_id == "Q6":
+        for mapping in mappings:
+            for field in ("assetId", "dexpiLocal", "ecadLocal", "productId"):
+                value = mapping.get(field)
+                if value and value not in answer_text and (
+                        field != "productId" or value.rsplit("/", 1)[-1] not in answer_text):
+                    issues.append("MISSING_MAPPING_FIELD:" + field + ":" + value)
+    if question_id in ("Q7", "Q10"):
+        records = catalog_records(evidence)
+        for mapping in mappings:
+            record = next((r for r in records if r.get("product_uri") == mapping.get("productId")), None)
+            if record is None:
+                issues.append("MISSING_PRODUCTCATALOG_JOIN")
+            elif record.get("eclass_class") and record["eclass_class"] not in answer_text:
+                issues.append("MISSING_PRODUCTCATALOG_CLASS")
+    return issues
 
 
 def answer(question_id, run_id=None, event_id=None):
@@ -77,16 +124,7 @@ def answer(question_id, run_id=None, event_id=None):
     if number == 6 and item.get("evidence"):
         for mapping in item["evidence"].get("graphdb_verified_mappings", []):
             mapping.pop("eclassCode", None)
-    text = query.QUESTIONS[number - 1]
-    if number == 8:
-        text = "Which fault injection operator command was recorded, and at what simulation time? Is actual activation verified?"
-    elif number == 9:
-        text = ("For XMEAS6, XMEAS7, XMEAS8 and XMEAS9, report the recorded values and "
-                "simulation timestamps immediately before and after the selected injection command.")
-    elif number == 10:
-        text = ("For FI-1101, report the AAS AssetIdentifier, DEXPI and ECAD references, "
-                "product candidate, ECLASS class and signal, together with recorded XMEAS6 "
-                "measurements immediately before and after the selected injection command.")
+    text = _independent_questions()[question_id]
 
     fallback = query.answer_for(item, engineering, temporal, None)
     response = fallback
@@ -94,7 +132,7 @@ def answer(question_id, run_id=None, event_id=None):
     if item["status"] == "EVIDENCE_AVAILABLE":
         response = query.ollama_json(
             os.environ.get("OLLAMA_URL", "http://localhost:11434"),
-            model, query.ANSWER_SYSTEM_PROMPT + POLICY,
+            model, query.ANSWER_SYSTEM_PROMPT + POLICY + UI_V4_1_RULES,
             {"question": text, "evidence": item.get("evidence")})
         if (not isinstance(response, dict) or set(response) != {"answer", "limitations"}
                 or not isinstance(response["answer"], str)
@@ -102,16 +140,17 @@ def answer(question_id, run_id=None, event_id=None):
                 or any(not isinstance(x, str) for x in response["limitations"])):
             raise ValueError("Invalid Ollama answer format")
     checks = grounding_flags(response["answer"], response["limitations"], item.get("evidence") or {}, question_id)
+    checks = sorted(set(checks + _ui_completeness_flags(question_id, response["answer"], item.get("evidence") or {})))
     if checks:
         response = fallback
     return {
         "id": question_id, "question": text, "status": item["status"],
-        "questionAdaptation": "UI_CONTEXTUAL_TEMPORAL_WORDING" if number >= 8 else "PAPER_SCRIPT_DEFAULT",
+        "questionAdaptation": "INDEPENDENT_V4_1_UI_QUESTION_REGISTRY",
         "answer": response["answer"], "limitations": response["limitations"],
         "evidence": item.get("evidence"), "reason": item.get("reason"),
         "runId": run_id, "eventId": event_id,
         "model": model if item["status"] == "EVIDENCE_AVAILABLE" else None,
-        "promptVersion": query.PROMPT_VERSION,
+        "promptVersion": "INDEPENDENT_V4_1_WEB_UI",
         "answerValidation": "REJECTED_MODEL_ANSWER_USED_EVIDENCE_FALLBACK" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
         "validationFlags": checks,
         "answerSource": "DETERMINISTIC_EVIDENCE_FALLBACK" if checks or item["status"] != "EVIDENCE_AVAILABLE" else "OLLAMA_HEURISTIC_CHECKS_PASSED",
