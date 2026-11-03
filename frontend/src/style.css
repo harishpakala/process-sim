@@ -93,3 +93,27 @@
 .asset-inventory .catalog-results{flex:1;min-height:0;max-height:none;overflow-y:auto;overscroll-behavior:contain;scrollbar-gutter:stable}
 .asset-inventory .catalog-detail{max-height:560px;overflow-y:auto}
 @media(max-width:1050px){.asset-inventory .catalog-list{height:420px}.asset-inventory .catalog-detail{max-height:520px}}
+
+
+/* Consistent dark native dropdowns throughout TEP NEXUS, including Simulation Control. */
+select, .catalog-filter select {
+  font: inherit;
+  background-color: #101820;
+  color: #ffffff;
+  border: 1px solid #657b92;
+  border-radius: 7px;
+  padding: 10px;
+  color-scheme: dark;
+}
+select option, select optgroup {
+  background-color: #101820;
+  color: #ffffff;
+}
+select:focus-visible {
+  outline: 2px solid #79b8ff;
+  outline-offset: 2px;
+}
+select:disabled {
+  opacity: .6;
+  cursor: not-allowed;
+}
