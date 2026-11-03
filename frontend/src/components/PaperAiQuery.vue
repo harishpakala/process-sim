@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import SimulationEvidenceTimeline from './SimulationEvidenceTimeline.vue'
 
 type Question = { id: string; question: string; requiresRun: boolean }
 type Run = { run_id?: string; runId?: string; [key:string]: unknown }
@@ -198,6 +199,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
       <tbody><tr v-for="row in sampleRows" :key="row.signal"><td><strong>{{row.signal}}</strong></td><td>{{seconds(row.before?.simulation_seconds)}}</td><td>{{sampleValue(row.before)}}</td><td>{{seconds(row.after?.simulation_seconds)}}</td><td>{{sampleValue(row.after)}}</td></tr></tbody>
      </table>
     </div>
+    <SimulationEvidenceTimeline v-if="sampleRows.length" :command="event" :measurements="measurements" />
     <p v-if="!mappings.length && !engineering.length && !sampleRows.length && !event.fault_id" class="subdued">No structured evidence records were returned for this question.</p>
    </div>
    <div class="result-section">
