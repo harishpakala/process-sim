@@ -125,10 +125,10 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask exploratory engineering questions or run the controlled Q1–Q10 evaluation.</p></div><span class="pill">{{mode==='paper'?'Q1–Q10':'Exploratory'}}</span></div>
+   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask exploratory engineering questions or use the independent V4.1 Q1–Q10 questions.</p></div><span class="pill">{{mode==='paper'?'V4.1 Q1–Q10':'Exploratory'}}</span></div>
    <div class="mode-switch" role="group" aria-label="Query mode">
     <button type="button" :class="mode==='custom'?'primary':'secondary'" :aria-pressed="mode==='custom'" @click="mode='custom'">Ask a question</button>
-    <button type="button" :class="mode==='paper'?'primary':'secondary'" :aria-pressed="mode==='paper'" @click="mode='paper'">Paper evaluation</button>
+    <button type="button" :class="mode==='paper'?'primary':'secondary'" :aria-pressed="mode==='paper'" @click="mode='paper'">V4.1 questions</button>
    </div>
    <div v-if="mode==='custom'" class="custom-query">
     <label for="custom-question">Your question</label>
