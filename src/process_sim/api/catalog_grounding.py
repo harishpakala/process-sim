@@ -14,9 +14,7 @@ status, QUDT attributes and catalog specifications must come EXCLUSIVELY from
 the supplied ProductCatalog-backed engineering_catalog records. Do not use
 external knowledge or lookups, or infer ECLASS details from GraphDB, DEXPI,
 ECAD, AAS identifiers or product names. A graph mapping's eclassCode is NOT
-authorization to assert a ProductCatalog classification. When ProductCatalog
-evidence is absent, state 'Not available in ProductCatalog' for requested
-ECLASS attributes. Never invent IRDI or preferred name. Do not add unrelated
+authorization to assert a ProductCatalog classification. When ProductCatalog evidence is absent, say 'ProductCatalog classification\nevidence was not retrieved' for requested ECLASS attributes. Do NOT claim\nProductCatalog itself lacks these fields merely because they were not retrieved. Never invent IRDI or preferred name. Do not add unrelated
 ECLASS details to identifier-relationship questions. Preserve null versus
 NOT_INSTALLED_VERIFIED and PENDING_ECLASS_VERIFICATION precisely.
 """
@@ -52,6 +50,11 @@ def flags(answer, limitations, evidence, question_id=None):
         if value not in allowed_irdis:
             warnings.append("IRDI_NOT_IN_PRODUCTCATALOG:" + value)
     if not records:
+        if question_id == "Q6" and re.search(r"\\b(?:ECLASS|IRDI|preferred name|eclassCode)\\b", answer, re.I):
+            warnings.append("UNREQUESTED_ECLASS_DETAILS_Q6")
+        if question_id in ("Q7", "Q10") and re.search(
+                r"\\bECLASS\\s+(?:class|code)\\s*(?:is|:|=)?\\s*\\d", answer, re.I):
+            warnings.append("ECLASS_CLASS_WITHOUT_PRODUCTCATALOG")
         if re.search(r"\bpreferred name\s*:\s*(?!not available|unknown|none)\S+", answer, re.I):
             warnings.append("PREFERRED_NAME_WITHOUT_PRODUCTCATALOG")
         if re.search(r"\bECLASS\s+(?:class|code)\s*[:=]\s*\d", answer, re.I):
