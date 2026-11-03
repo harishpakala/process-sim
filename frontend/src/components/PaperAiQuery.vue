@@ -21,6 +21,8 @@ const measurements = computed<Record<string,SamplePair>>(()=>{
  return raw as Record<string,SamplePair>
 })
 const sampleRows = computed(()=>Object.entries(measurements.value).map(([signal,pair])=>({signal,before:pair?.before,after:pair?.after})))
+const evidenceCount = computed(()=>mappings.value.length + engineering.value.length + sampleRows.value.length + (event.value.fault_id ? 1 : 0))
+const hasCatalog = computed(()=>engineering.value.some(record=>Boolean(record.product_key)))
 function seconds(value:unknown):string { return typeof value==='number' && Number.isFinite(value) ? value.toFixed(3)+' s' : 'Not recorded' }
 function sampleValue(sample?:Sample|null):string { return sample && typeof sample.value==='number' ? String(sample.value) : 'Not recorded' }
 function assetShort(uri?:string):string { return uri ? uri.split('/').pop() || uri : '—' }
@@ -33,8 +35,8 @@ const responseLabel = computed(()=>{
 })
 const evidenceSources = computed(()=>{
  const sources:string[]=[]
- if(mappings.value.length) sources.push('GraphDB: accepted logical identifier mapping (not physical verification)')
- if(engineering.value.length) sources.push('AAS Asset Inventory / ProductCatalog candidate evidence (pending verification)')
+ if(mappings.value.length) sources.push('GraphDB: logical DEXPI / ECAD / AAS / product mappings (not physical installation proof)')
+ if(hasCatalog.value) sources.push('AAS Asset Inventory and ProductCatalog: candidate products; ECLASS verification status shown per record')
  if(event.value.fault_id || sampleRows.value.length) sources.push('TimescaleDB: persisted fault events and signal samples')
  return sources
 })
@@ -171,17 +173,17 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
     <p class="subdued">Heuristic checks are not proof of correctness. Verify claims against the structured evidence below.</p>
    </div>
    <div class="result-section">
-    <div class="section-heading"><h3>Supporting evidence</h3><span class="pill">{{mappings.length || engineering.length || sampleRows.length || (event.fault_id ? 1 : 0)}} record(s)</span></div>
+    <div class="section-heading"><h3>Supporting evidence</h3><span class="pill">{{evidenceCount}} record(s)</span></div>
     <div v-if="mappings.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>ECAD instrument</th><th>AAS asset identifier</th><th>DEXPI reference</th><th>Signal</th><th v-if="Number(answer.id.slice(1))>=7">Product candidate</th></tr></thead>
-      <tbody><tr v-for="(m,i) in mappings" :key="i"><td>{{m.ecadLocal || '—'}}</td><td><span class="mono">{{assetShort(m.assetId)}}</span><small class="full-id">{{m.assetId}}</small></td><td>{{m.dexpiLocal || '—'}}</td><td><strong>{{m.signal || '—'}}</strong></td><td v-if="Number(answer.id.slice(1))>=7">{{m.productId || '—'}}</td></tr></tbody>
+     <table class="evidence-table"><thead><tr><th>ECAD instrument</th><th>AAS asset identifier</th><th>DEXPI reference</th><th>Signal</th><th v-if="mappings.some(m=>m.productId)">Product candidate</th></tr></thead>
+      <tbody><tr v-for="(m,i) in mappings" :key="i"><td>{{m.ecadLocal || '—'}}</td><td><span class="mono">{{assetShort(m.assetId)}}</span><small class="full-id">{{m.assetId}}</small></td><td>{{m.dexpiLocal || '—'}}</td><td><strong>{{m.signal || '—'}}</strong></td><td v-if="mappings.some(m=>m.productId)">{{m.productId || '—'}}</td></tr></tbody>
      </table>
     </div>
     <div v-if="engineering.length" class="table-scroll">
      <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th v-if="engineering.some(r=>r.eclass_class)">ProductCatalog ECLASS</th></tr></thead>
-      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td v-if="answer.id==='Q5'">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
+      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td v-if="engineering.some(r=>r.eclass_class)">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
      </table>
-     <details v-if="answer.id==='Q5'" class="detail-toggle"><summary>Catalog specifications and QUDT attributes</summary><div v-for="(m,i) in engineering" :key="i" class="spec-block"><strong>{{m.equipment_tag}} — {{m.eclass_verification || 'Verification status not provided'}}</strong><pre>{{JSON.stringify({specifications:m.catalog_technical_specifications,qudt:m.qudt_product_specification},null,2)}}</pre></div></details>
+     <details v-if="engineering.some(r=>r.catalog_technical_specifications || r.qudt_product_specification)" class="detail-toggle"><summary>Catalog specifications and QUDT attributes</summary><div v-for="(m,i) in engineering" :key="i" class="spec-block"><strong>{{m.equipment_tag}} — {{m.eclass_verification || 'Verification status not provided'}}</strong><pre>{{JSON.stringify({specifications:m.catalog_technical_specifications,qudt:m.qudt_product_specification},null,2)}}</pre></div></details>
     </div>
     <div v-if="event.fault_id" class="event-summary">
      <strong>Recorded operator command</strong>
@@ -205,6 +207,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
    <div class="result-section">
     <h3>Evidence provenance and evaluation</h3>
     <p v-for="source in evidenceSources" :key="source" class="source-row">{{source}}</p>
+    <p v-if="!evidenceSources.length" class="subdued">No structured source provenance was returned.</p>
     <p v-if="answer.runId" class="source-row">Run: <span class="mono">{{answer.runId}}</span></p>
     <p v-if="answer.eventId" class="source-row">Event: <span class="mono">{{answer.eventId}}</span></p>
     <p class="subdued">Answer source: {{answer.answerSource || 'Not specified'}} · Model: {{answer.model || 'No LLM answer'}} · Prompt: {{answer.promptVersion}} · {{answer.answerValidation}} · Manual rubric grading required</p>
