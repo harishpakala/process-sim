@@ -6,7 +6,7 @@ import os
 from pathlib import Path
 from uuid import UUID
 
-from process_sim.api.catalog_grounding import POLICY, flags as grounding_flags
+from process_sim.api.catalog_grounding import POLICY, flags as grounding_flags, catalog_records
 
 ROOT = Path(__file__).resolve().parents[3]
 
@@ -63,6 +63,20 @@ def answer(question_id, run_id=None, event_id=None):
                 raise ValueError("Selected event is not the run's first recorded injection command; this evaluation backend cannot yet rebase samples to another event")
     item = next(x for x in evaluation.evaluate(engineering, temporal, graph)
                 if x["id"] == question_id)
+    # ProductCatalog is the sole classification authority. Join by exact
+    # product URI and never forward GraphDB eclassCode as catalog evidence.
+    if number in {7, 10} and item.get("evidence"):
+        scoped = item["evidence"]
+        mappings = scoped.get("graphdb_verified_mappings", [])
+        products = {m.get("productId") for m in mappings}
+        matches = {key: record for key, record in engineering.items()
+                   if isinstance(record, dict) and record.get("product_uri") in products}
+        if products and not matches:
+            raise ValueError("ProductCatalog record unavailable for requested product")
+        scoped["engineering_catalog"] = matches
+    if number == 6 and item.get("evidence"):
+        for mapping in item["evidence"].get("graphdb_verified_mappings", []):
+            mapping.pop("eclassCode", None)
     text = query.QUESTIONS[number - 1]
     if number == 8:
         text = "Which fault injection operator command was recorded, and at what simulation time? Is actual activation verified?"
@@ -100,6 +114,7 @@ def answer(question_id, run_id=None, event_id=None):
         "promptVersion": query.PROMPT_VERSION,
         "answerValidation": "REJECTED_MODEL_ANSWER_USED_EVIDENCE_FALLBACK" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
         "validationFlags": checks,
+        "answerSource": "DETERMINISTIC_EVIDENCE_FALLBACK" if checks or item["status"] != "EVIDENCE_AVAILABLE" else "OLLAMA_HEURISTIC_CHECKS_PASSED",
         "warning": "Fault events record operator commands; actual activation and causality are not verified."
     }
 
@@ -158,7 +173,7 @@ def custom_answer(question, run_id=None, event_id=None):
 
     evidence = {}
     if graph is not None:
-        evidence["graphdb_verified_mappings"] = list(graph.values())
+        evidence["graphdb_verified_mappings"] = [{k: v for k, v in record.items() if k != "eclassCode"} for record in graph.values()]
     if needs_products:
         evidence["engineering_catalog"] = engineering
     if temporal is not None:
@@ -190,6 +205,7 @@ Do not interpret an operator command as verified fault activation.
         "model": model, "promptVersion": "EXPLORATORY_V1_NOT_PAPER_BASELINE",
         "answerValidation": "REJECTED_MODEL_ANSWER" if checks else "HEURISTIC_CHECKS_PASSED_NOT_VERIFIED",
         "validationFlags": checks,
+        "answerSource": "REJECTED_MODEL_ANSWER" if checks else "OLLAMA_HEURISTIC_CHECKS_PASSED",
         "warning": "Fault events record operator commands; activation and causality are not verified.",
         "questionAdaptation": "EXPLORATORY_NOT_PAPER_EVALUATION"
     }
