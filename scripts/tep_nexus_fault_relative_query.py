@@ -231,8 +231,15 @@ def main():
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
     target.write_text(json.dumps(result, indent=2), encoding="utf-8")
+    from tep_nexus_fault_relative_analysis import analyze, render_html
+    analysis_path = target.with_name("tep_nexus_fault_relative_analysis.json")
+    timeline_path = target.with_name("tep_nexus_fault_relative_timeline.html")
+    analysis_path.write_text(json.dumps(analyze(result["temporalEvidence"]), indent=2), encoding="utf-8")
+    timeline_path.write_text(render_html(result), encoding="utf-8")
     print(json.dumps({
         "output": str(target),
+        "analysis": str(analysis_path),
+        "timeline": str(timeline_path),
         "function": result["validatedPlan"]["engineering_function"],
         "signal": result["temporalEvidence"]["signal"],
         "faultCommands": len(result["temporalEvidence"]["faultCommands"]),
