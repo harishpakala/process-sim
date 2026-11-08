@@ -2816,7 +2816,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI106"
+              "value": "https://aas.example.com/FI-1101"
             },
             {
               "modelType": "Property",
@@ -3016,7 +3016,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/PI101"
+              "value": "https://aas.example.com/PI-1101"
             },
             {
               "modelType": "Property",
@@ -3216,7 +3216,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/LI101"
+              "value": "https://aas.example.com/LI-1101"
             },
             {
               "modelType": "Property",
@@ -3416,7 +3416,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI101"
+              "value": "https://aas.example.com/TI-1101"
             },
             {
               "modelType": "Property",
