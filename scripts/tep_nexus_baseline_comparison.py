@@ -57,7 +57,7 @@ def compare(run_id, windows, *, dsn, graphdb_url, functions=None, limit=1000,
                         "fingerprints": sorted(n["id"].rsplit("/", 1)[-1] for n in observations),
                         "count": graph["result"]["observationCount"],
                         "truncated": graph["result"]["truncated"],
-                        "signal": next((n["localId"] for n in graph["nodes"]
+                        "signal": next((n["signalId"] for n in graph["nodes"]
                                         if n["type"] == "OperationalSignal"), None),
                     }
                 else:
