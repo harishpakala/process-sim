@@ -3,6 +3,9 @@
 Units must be supplied from trusted source metadata. This module never infers
 an engineering signal's unit from its name or its physical quantity.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

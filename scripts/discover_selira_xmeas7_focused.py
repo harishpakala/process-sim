@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Read-only focused XMEAS7 engineering relationship discovery."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import sys

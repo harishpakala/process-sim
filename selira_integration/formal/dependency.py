@@ -4,6 +4,9 @@ This is a pure impact planner, not a GraphDB change listener. Dependency tokens
 must be provided by validated source/contract query tracking; incomplete token
 coverage cannot justify selective revalidation correctness.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from dataclasses import dataclass
 from typing import Mapping
 

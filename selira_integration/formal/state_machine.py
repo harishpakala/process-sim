@@ -1,4 +1,7 @@
 """F6: pure, immutable revision-aware correspondence lifecycle transitions."""
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass, replace

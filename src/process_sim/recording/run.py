@@ -1,5 +1,8 @@
 """Run identity and provenance metadata for recorded simulations."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

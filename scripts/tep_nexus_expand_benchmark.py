@@ -3,6 +3,9 @@
 This command never connects to GraphDB, TimescaleDB or Ollama. It reads local
 mapping and coverage snapshots and refuses to silently drop baseline cases.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

@@ -1,4 +1,7 @@
 """Offline checks using the actual DEXPI and ECAD template lifting pipeline."""
+
+# Created: 2026-10-23
+# Author: Harish
 import unittest
 
 from process_sim.ai.shacl_registry import build_shacl_registry, planner_shacl_context

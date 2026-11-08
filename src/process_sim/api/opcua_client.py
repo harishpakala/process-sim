@@ -1,4 +1,7 @@
 """OPC UA client boundary for the TEP NEXUS HTTP API."""
+
+# Created: 2026-10-17
+# Author: Harish
 from __future__ import annotations
 
 import os

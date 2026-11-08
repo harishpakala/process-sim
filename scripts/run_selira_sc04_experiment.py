@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Run SC-04 synthetic applicability controls and real GraphDB discovery."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

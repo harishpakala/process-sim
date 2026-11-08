@@ -1,5 +1,8 @@
 """Recording primitives for process-sim."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from .models import Observation, Event
 from .parquet import ParquetStorage
 from .recorder import SimulationRecorder

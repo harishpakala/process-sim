@@ -4,6 +4,9 @@ Discovery is NOT certification: these triples are candidate facts, not a
 reviewed revision-scoped engineering identity chain. Never generate a
 validated declaration from this module.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 import json

@@ -2,6 +2,9 @@
 
 SQLite is the only transaction boundary. No GraphDB/AAS writes or distributed CAS.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from rdflib import Graph
 
 from .lifted_sc01 import compile_lifted_sc01

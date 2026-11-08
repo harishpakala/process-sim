@@ -3,6 +3,9 @@
 The existing asset_history service is authoritative for GraphDB operational
 references and TimescaleDB signal retrieval. No new identity joins are inferred.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 from .temporal_plan import validate_temporal_plan, execute_temporal_plan

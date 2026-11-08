@@ -1,3 +1,6 @@
+"""Created: 2026-08-19
+Author: Harish"""
+
 from pathlib import Path
 
 from process_sim.recording import ParquetStorage, SimulationRecorder, SimulationRecordingSession

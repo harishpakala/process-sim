@@ -4,6 +4,9 @@ Fingerprints detect observed changes, not authoritative version tokens.
 Two independent SPARQL reads are NOT an atomic GraphDB snapshot. This module
 must not be used as proof of distributed compare-and-swap.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from __future__ import annotations
 
 import hashlib

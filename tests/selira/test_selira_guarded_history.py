@@ -1,4 +1,7 @@
 """Consumer-policy integration tests; all dependencies mocked."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 from datetime import datetime, timezone
 from unittest.mock import Mock

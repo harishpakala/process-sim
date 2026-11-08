@@ -3,6 +3,9 @@
 GraphDB is a source of candidate links, not independent validation evidence.
 No temporal samples are fetched until a separate consumer authorizes use.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 import json

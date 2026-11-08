@@ -1,4 +1,7 @@
 """Resolve existing AAS asset operational references to historical signals."""
+
+# Created: 2026-10-19
+# Author: Harish
 from __future__ import annotations
 import json
 import os

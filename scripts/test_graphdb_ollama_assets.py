@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Regression smoke test for GraphDB-backed asset/product answers (no pytest required)."""
+
+# Created: 2026-10-24
+# Author: Harish
 import argparse
 import os
 import sys

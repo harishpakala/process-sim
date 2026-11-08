@@ -3,6 +3,9 @@
 Discovery is not approval: all returned mappings remain provisional until
 independently reviewed. No changes to the planner allowlist are made.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import json
 from collections import defaultdict

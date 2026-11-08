@@ -1,4 +1,7 @@
 """Regression checks for structural correspondence without trust promotion."""
+
+# Created: 2026-10-29
+# Author: Harish
 from process_sim.selira.functional_paths import assess_functional_paths, resolve_functional_paths
 
 

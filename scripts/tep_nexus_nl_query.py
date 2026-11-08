@@ -4,6 +4,9 @@ GraphDB -> TimescaleDB -> local Ollama.
 Read-only. Does not execute LLM-generated SPARQL or SQL.
 """
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import json
 import os

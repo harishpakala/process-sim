@@ -1,4 +1,7 @@
 """Experimental, read-only GraphDB SHACL runner. Approval/readiness is external."""
+
+# Created: 2026-10-29
+# Author: Harish
 import argparse, hashlib, json
 from pathlib import Path
 from datetime import datetime, timezone

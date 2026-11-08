@@ -4,6 +4,9 @@ Checks two separately maintained repository records: the DEXPI/ECAD scope
 mapping and canonical TEP measurement metadata. This is not proof of physical
 installation, live GraphDB consistency, or authenticity of source documents.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass, asdict

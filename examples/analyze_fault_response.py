@@ -21,6 +21,9 @@ The analysis is deliberately descriptive. A baseline comparison reports
 observed trajectory differences and does not by itself establish causality.
 """
 
+# Created: 2026-08-20
+# Author: Harish
+
 from __future__ import annotations
 
 import argparse

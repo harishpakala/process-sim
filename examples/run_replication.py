@@ -16,6 +16,9 @@ python examples/run_replication.py \
     --summary data/replications/reactor_cooling_bias.csv
 """
 
+# Created: 2026-08-20
+# Author: Harish
+
 from __future__ import annotations
 
 import argparse

@@ -1,5 +1,8 @@
 """Run paired fault/baseline experiments across fault magnitudes and seeds."""
 
+# Created: 2026-08-20
+# Author: Harish
+
 from __future__ import annotations
 
 import argparse

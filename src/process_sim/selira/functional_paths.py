@@ -3,6 +3,9 @@
 A matching graph path establishes structural consistency, not physical asset
 identity, authenticated provenance, or a verified live OPC UA binding.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 import json

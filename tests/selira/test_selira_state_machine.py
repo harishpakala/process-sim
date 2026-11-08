@@ -1,4 +1,7 @@
 """F6 lifecycle transition safety regression tests."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 
 from selira_integration.formal.composition import (

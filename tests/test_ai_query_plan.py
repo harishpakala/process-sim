@@ -1,4 +1,7 @@
 """Tests for SHACL-grounded structured query plans, with no live services."""
+
+# Created: 2026-10-23
+# Author: Harish
 import unittest
 
 from process_sim.ai.query_plan import validate_plan

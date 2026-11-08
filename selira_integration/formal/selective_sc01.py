@@ -3,6 +3,9 @@
 Reference algorithm over complete immutable snapshots. Not a proof of
 general SHACL/SPARQL selective revalidation correctness.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from dataclasses import dataclass
 
 from selira_integration.lifecycle import Snapshot, check

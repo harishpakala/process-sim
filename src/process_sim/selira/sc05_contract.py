@@ -1,4 +1,7 @@
 """SC-05 prototype: operational endpoint binding; no live OPC UA verification."""
+
+# Created: 2026-10-30
+# Author: Harish
 from collections.abc import Mapping
 
 

@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Validate candidate DEXPI–ECAD correspondences without asserting equivalence."""
+
+# Created: 2026-10-22
+# Author: Harish
 import json
 from pathlib import Path
 

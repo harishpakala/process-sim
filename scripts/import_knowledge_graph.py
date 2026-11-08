@@ -9,6 +9,9 @@ Run from the repository root:
 Source of truth: semantic/config.py TARGETS.
 Does not use scripts/export_asset_kg.py or fabricated RDF classes.
 """
+
+# Created: 2026-10-16
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

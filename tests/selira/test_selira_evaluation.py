@@ -1,4 +1,7 @@
 """Deterministic comparison tests; no live infrastructure required."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 
 from process_sim.selira.evaluation import evaluate, scenarios

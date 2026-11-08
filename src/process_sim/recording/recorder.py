@@ -1,5 +1,8 @@
 """Backend-independent simulation recorder."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from datetime import datetime, timezone

@@ -1,4 +1,7 @@
 """Read-only Q1-Q10 paper evaluation bridge for the web UI."""
+
+# Created: 2026-11-03
+# Author: Harish
 from __future__ import annotations
 
 import importlib.util

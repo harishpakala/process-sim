@@ -1,4 +1,7 @@
 """Finite-state properties of implemented SC/CAC decision composition."""
+
+# Created: 2026-10-30
+# Author: Harish
 import itertools
 import unittest
 

@@ -4,6 +4,9 @@
 Install: python -m pip install "rdflib>=7,<9" "pyshacl>=0.30,<1"
 SHACL conformance is not an engineering acceptance decision.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

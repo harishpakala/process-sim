@@ -1,5 +1,8 @@
 """Parquet persistence for recorded simulation data."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 import json

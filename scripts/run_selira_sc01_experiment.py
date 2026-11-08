@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Run SC-01 synthetic V/F controls and a real-evidence U case."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

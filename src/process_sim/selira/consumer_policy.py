@@ -1,4 +1,7 @@
 """Fail-closed consumer policy for authoritative semantic use."""
+
+# Created: 2026-10-28
+# Author: Harish
 from .contracts import ResolutionResult
 
 

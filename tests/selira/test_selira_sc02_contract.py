@@ -1,3 +1,6 @@
+"""Created: 2026-10-30
+Author: Harish"""
+
 import unittest
 from process_sim.selira.sc02_contract import evaluate_sc02, assess_graphdb_sc02
 from scripts.run_selira_sc02_experiment import synthetic_case

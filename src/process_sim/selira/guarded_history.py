@@ -3,6 +3,9 @@
 This is an experimental SELiRA path, not a replacement for asset_history.
 Reviewed declarations are assertions, not independently authenticated evidence.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from uuid import UUID

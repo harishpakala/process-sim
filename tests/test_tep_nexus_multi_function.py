@@ -1,4 +1,7 @@
 """Offline tests for run-scoped registry and generalized planner."""
+
+# Created: 2026-11-02
+# Author: Harish
 import json
 import sys
 import tempfile

@@ -1,4 +1,7 @@
 """Offline SELiRA correspondence tests; no GraphDB or TimescaleDB required."""
+
+# Created: 2026-10-28
+# Author: Harish
 import unittest
 
 from process_sim.selira import authorize_use, resolve_correspondence

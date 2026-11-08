@@ -2,6 +2,9 @@
 
 No unit is inferred from a signal name, BOM quantity, or descriptive text.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from collections.abc import Mapping
 
 # Explicitly supported unit symbols; scale is relative to canonical SI.

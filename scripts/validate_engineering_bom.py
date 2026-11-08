@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Validate EBOM source identities and conservative asset/product associations."""
+
+# Created: 2026-10-22
+# Author: Harish
 import json
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]

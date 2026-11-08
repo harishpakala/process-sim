@@ -4,6 +4,9 @@ Snapshot-specific reference implementation. The complete catalog must be
 available to detect additions, removals and duplicate identifiers. This is
 not yet a general SPARQL dependency extractor.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

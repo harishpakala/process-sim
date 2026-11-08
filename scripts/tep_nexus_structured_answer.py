@@ -1,4 +1,7 @@
 """Check structured LLM comparison reports against deterministic evidence."""
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 
 def structured_prompt():

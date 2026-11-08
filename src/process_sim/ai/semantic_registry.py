@@ -2,6 +2,9 @@
 
 No GraphDB dependency; this is a declaration catalog, not a claim that RDF is loaded.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import json

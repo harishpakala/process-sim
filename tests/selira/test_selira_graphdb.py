@@ -1,4 +1,7 @@
 """Offline GraphDB adapter tests: mocked SPARQL responses, no live server."""
+
+# Created: 2026-10-29
+# Author: Harish
 import io
 import json
 import unittest

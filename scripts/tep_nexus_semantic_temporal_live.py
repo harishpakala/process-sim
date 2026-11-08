@@ -5,6 +5,9 @@ DEXPI engineering function -> AAS mapping -> AssetInventory asset
 -> TimescaleDB latest measurement and simulation-time history.
 """
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import json
 import os

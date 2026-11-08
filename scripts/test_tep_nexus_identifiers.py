@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Regression checks for the TEP NEXUS asset/product identifier convention."""
+
+# Created: 2026-11-02
+# Author: Harish
 import json
 from pathlib import Path
 

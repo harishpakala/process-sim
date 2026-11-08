@@ -1,4 +1,7 @@
 """Regression tests for the SC-01 lifecycle reference engine."""
+
+# Created: 2026-10-29
+# Author: Harish
 import tempfile
 import unittest
 from pathlib import Path

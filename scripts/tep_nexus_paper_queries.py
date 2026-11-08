@@ -5,6 +5,9 @@ Uses an existing paper-evaluation JSON report. Optional GraphDB probing
 discovers explicit RDF edges; it never equates tags by string similarity.
 Ollama selects a fixed question ID and explains only supplied evidence.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 from __future__ import annotations
 import argparse
 import hashlib

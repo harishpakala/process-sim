@@ -6,6 +6,9 @@ Natural language -> Ollama JSON plan -> deterministic validation
 Read-only. No LLM-generated SPARQL or SQL is executed.
 """
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import json
 import os

@@ -3,6 +3,9 @@
 This is a reference coordinator for a single-process store, NOT an atomic
 transaction implementation for remote GraphDB/AAS repositories.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from dataclasses import dataclass
 from enum import Enum
 from threading import RLock

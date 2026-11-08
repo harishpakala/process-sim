@@ -1,4 +1,7 @@
 """F6 ↔ existing SC-01 snapshot integration tests."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 
 from selira_integration.lifecycle import Snapshot

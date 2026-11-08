@@ -4,6 +4,9 @@
 Existing SC-02/03/04 prototype IDs are retained; see contractCatalog for
 README numbering differences. Synthetic V does not certify engineering data.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

@@ -1,4 +1,7 @@
 """Evidence validator tests: metadata consistency is not physical validation."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 
 from process_sim.selira.evidence_validator import validate_pressure_correspondence

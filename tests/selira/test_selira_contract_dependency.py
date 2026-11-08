@@ -1,4 +1,7 @@
 """Dependency impact tests; coverage must be externally attested."""
+
+# Created: 2026-10-29
+# Author: Harish
 import unittest
 from selira_integration.formal.dependency import ContractKey, plan_impact
 

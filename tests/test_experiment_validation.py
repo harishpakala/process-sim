@@ -1,3 +1,6 @@
+"""Created: 2026-08-19
+Author: Harish"""
+
 from process_sim.experiments import ExpectedFault, ExperimentValidator, GroundTruth
 from process_sim.recording import Event
 

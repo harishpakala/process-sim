@@ -3,6 +3,9 @@
 Requires psycopg and a PostgreSQL/TimescaleDB instance. A missing database does
 not silently turn persistence into success: the historian exposes its error.
 """
+
+# Created: 2026-10-18
+# Author: Harish
 from __future__ import annotations
 import os
 from datetime import datetime, timezone

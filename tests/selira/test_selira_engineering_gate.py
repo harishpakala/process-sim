@@ -1,4 +1,7 @@
 """Deterministic SELiRA engineering-gate cases (no GraphDB or Ollama required)."""
+
+# Created: 2026-10-30
+# Author: Harish
 import copy
 import unittest
 

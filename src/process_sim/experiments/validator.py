@@ -1,5 +1,8 @@
 """Validation of recorded experiment events against declared ground truth."""
 
+# Created: 2026-08-21
+# Author: Harish
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

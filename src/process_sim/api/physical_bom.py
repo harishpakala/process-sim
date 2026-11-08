@@ -2,6 +2,9 @@
 
 Each promoted component is the ECAD source object, not a merged DEXPI/ECAD identity.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 import hashlib
 import json

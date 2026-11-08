@@ -3,6 +3,9 @@
 This module does not import the compiler, SPARQL, or pySHACL. It specifies
 the contract's mathematical meaning for finite canonical entity sets.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from dataclasses import dataclass
 from typing import Mapping, FrozenSet
 

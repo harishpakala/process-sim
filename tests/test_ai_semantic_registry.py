@@ -1,4 +1,7 @@
 """Offline tests for source-driven registry; no GraphDB/Ollama required."""
+
+# Created: 2026-10-23
+# Author: Harish
 import json
 import tempfile
 import unittest

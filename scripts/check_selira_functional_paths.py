@@ -7,6 +7,9 @@ Override the default endpoint with GRAPHDB_SPARQL_ENDPOINT if needed.
 This checks structural evidence only; it does not verify live OPC UA bindings,
 physical installation, or consumer authorization.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 import os

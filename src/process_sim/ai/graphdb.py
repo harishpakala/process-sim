@@ -1,4 +1,7 @@
 """Bounded, read-only GraphDB schema discovery and SPARQL execution."""
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import json

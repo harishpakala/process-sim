@@ -9,6 +9,9 @@ Usage:
 Input: header row with XMEAS(7), XMEAS_7, xmeas7 (likewise XMV), and a numeric
 time column. --steady-start is expressed in the input time column's units.
 """
+
+# Created: 2026-10-21
+# Author: Harish
 import argparse
 import csv
 import math

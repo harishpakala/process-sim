@@ -3,6 +3,9 @@
 Input is a reviewed, revision-scoped evidence snapshot, NOT authenticated GraphDB
 proof. This module never upgrades missing or contradictory evidence to VALID.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

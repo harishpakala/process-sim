@@ -1,5 +1,8 @@
 """Aggregate SC and task-specific CAC verdicts, without granting authorization."""
 
+# Created: 2026-10-30
+# Author: Harish
+
 SC_IDS = ("SC-01", "SC-02", "SC-03", "SC-04", "SC-05")
 CAC_IDS = ("CAC-01", "CAC-02")
 

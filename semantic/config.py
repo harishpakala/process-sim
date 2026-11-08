@@ -1,4 +1,7 @@
 """Built-in semantic lifting targets; run scripts without command-line arguments."""
+
+# Created: 2026-10-15
+# Author: Harish
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent

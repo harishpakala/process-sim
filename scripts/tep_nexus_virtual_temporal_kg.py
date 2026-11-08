@@ -1,5 +1,8 @@
 ﻿"""TEP NEXUS: read-only virtual temporal knowledge graph interface."""
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import json
 import os

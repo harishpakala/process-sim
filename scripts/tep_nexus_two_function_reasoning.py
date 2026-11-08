@@ -3,6 +3,9 @@
 LLM plans and explains; deterministic code validates identifiers, resolves
 mappings, computes comparisons and checks explicit narrative evidence coverage.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import json
 import math

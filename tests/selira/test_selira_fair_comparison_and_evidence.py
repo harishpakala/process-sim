@@ -1,4 +1,7 @@
 """Regression tests for fail-closed evidence audit and decision policy."""
+
+# Created: 2026-10-30
+# Author: Harish
 import hashlib
 import sys
 import tempfile

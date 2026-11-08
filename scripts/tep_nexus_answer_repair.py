@@ -3,6 +3,9 @@
 Never patch arbitrary free-form LLM text: reconstruct a canonical answer
 from known evidence and preserve the original separately for audit.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 from tep_nexus_answer_validation import validate_answer
 
 

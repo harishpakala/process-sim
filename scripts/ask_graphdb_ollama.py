@@ -4,6 +4,9 @@
 No model-generated SPARQL. All database queries are fixed and SELECT-only.
 No graph writes, plant controls, or model-generated actions.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 import argparse
 import json
 import os

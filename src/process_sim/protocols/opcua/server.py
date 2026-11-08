@@ -1,5 +1,8 @@
 """OPC UA server adapter for a process-sim simulator."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 import asyncio

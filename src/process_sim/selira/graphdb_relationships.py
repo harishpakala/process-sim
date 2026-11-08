@@ -2,6 +2,9 @@
 
 The result is diagnostic RDF evidence, not a certified identity path.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from urllib.parse import urlsplit

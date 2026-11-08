@@ -1,4 +1,7 @@
 """Read-only referential-integrity audit for SELiRA asset and product AAS submodels."""
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from collections import Counter

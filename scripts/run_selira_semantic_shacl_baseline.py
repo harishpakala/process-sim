@@ -4,6 +4,9 @@
 The semantic profile is a deliberately limited research comparator, not
 a full translation of SELiRA's three-valued logic or evidence authority.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

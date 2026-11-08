@@ -1,4 +1,7 @@
 """Regression checks for exploratory E11-E20 challenge protocol."""
+
+# Created: 2026-10-30
+# Author: Harish
 import sys
 import unittest
 from pathlib import Path

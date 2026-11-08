@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Discover candidate XMEAS7 engineering triples from a live GraphDB repository."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import os

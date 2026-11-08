@@ -1,4 +1,7 @@
 """Bounded temporal query protocol backed by existing TimescaleDB APIs."""
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 from uuid import UUID
 from process_sim.api.timeseries import query_samples, query_runs

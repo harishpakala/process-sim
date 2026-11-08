@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Inspect engineering relationships from a cross-domain discovery report."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import sys

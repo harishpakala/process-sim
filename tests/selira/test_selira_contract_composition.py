@@ -1,4 +1,7 @@
 """Exhaustive algebra and policy tests for SELiRA contract composition."""
+
+# Created: 2026-10-29
+# Author: Harish
 import itertools
 import unittest
 from selira_integration.formal.composition import (

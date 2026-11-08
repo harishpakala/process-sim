@@ -1,4 +1,7 @@
 """F7 controlled SC-01 equivalence checks against full revalidation."""
+
+# Created: 2026-10-29
+# Author: Harish
 import itertools
 import unittest
 

@@ -1,4 +1,7 @@
 """Unit contract checks: no invented signal units or implicit authorization."""
+
+# Created: 2026-10-29
+# Author: Harish
 from decimal import Decimal
 
 import pytest

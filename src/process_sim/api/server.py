@@ -5,6 +5,9 @@ The browser sends SPARQL SELECT queries to /api/kg/select; only this service
 knows the GraphDB URL. Bind to loopback by default and put authentication in
 front of this API before any public deployment.
 """
+
+# Created: 2026-10-17
+# Author: Harish
 from __future__ import annotations
 
 import asyncio

@@ -1,5 +1,8 @@
 """Execute reproducible fault scenarios against a process simulator."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from pathlib import Path

@@ -4,6 +4,9 @@ The first LLM call sees only quantitative evidence. The second sees its
 original numerical judgment plus provenance constraints. Both are checked
 separately; no deterministic repair is applied.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 
 def numerical_prompt():

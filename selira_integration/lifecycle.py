@@ -5,6 +5,9 @@ not certify product suitability. Caller must attest catalog completeness and rul
 authority. Historical records are append-only; production needs transactional RDF
 persistence and GraphDB snapshot capture.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from dataclasses import dataclass, asdict
 from datetime import datetime, timezone
 from pathlib import Path

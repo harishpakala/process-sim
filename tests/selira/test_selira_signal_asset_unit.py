@@ -1,4 +1,7 @@
 """Evidence-gated TEP reactor pressure to catalog asset integration."""
+
+# Created: 2026-10-29
+# Author: Harish
 from decimal import Decimal
 
 import pytest

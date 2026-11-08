@@ -4,6 +4,9 @@ This is a deliberately narrow first slice: template SHACL paths with a single
 parent/child chain, plus instance-derived class/predicate alignment. The model
 does not author executable SPARQL in this path.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

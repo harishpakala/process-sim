@@ -2,6 +2,9 @@
 
 Expansion supplies candidates for human review, never authorization.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from urllib.parse import urlsplit

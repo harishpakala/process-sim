@@ -4,6 +4,9 @@
 This is evidence-conditioned LLM QA, NOT execution of the TEP NEXUS retrieval pipeline.
 No automated correctness scoring, no simulation writes, no frozen-baseline modifications.
 """
+
+# Created: 2026-11-03
+# Author: Harish
 import argparse
 import hashlib
 import json

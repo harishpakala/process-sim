@@ -3,6 +3,9 @@
 This module reuses semantic.template_lifting.build_template_graph, rather than
 implementing a second AAS->RDF translator. No GraphDB connection is required.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import json

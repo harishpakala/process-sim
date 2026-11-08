@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Validate registry links and candidate-only semantics."""
+
+# Created: 2026-10-23
+# Author: Harish
 import json
 from pathlib import Path
 root=Path(__file__).resolve().parents[1]/"examples"/"aas"

@@ -2,6 +2,9 @@
 
 Requires rdflib grammar parsing; deploy GraphDB with read-only credentials.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import re

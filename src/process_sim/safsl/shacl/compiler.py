@@ -5,6 +5,9 @@ completeness metadata; it does not infer mappings from AAS idShort strings.
 The emitted shapes validate a complete snapshot. The runtime admission
 decision (V/F/U/NA) is the responsibility of the caller.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 import base64
 import binascii
 import json

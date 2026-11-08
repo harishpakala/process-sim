@@ -1,4 +1,7 @@
 """Inventory/catalog integrity and simulation-only analyzer policy tests."""
+
+# Created: 2026-10-29
+# Author: Harish
 import json
 from pathlib import Path
 

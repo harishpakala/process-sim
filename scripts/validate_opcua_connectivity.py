@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Validate standalone OPC UA Connectivity AAS references and signal IDs."""
+
+# Created: 2026-10-22
+# Author: Harish
 import json
 from pathlib import Path
 

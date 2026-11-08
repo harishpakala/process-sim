@@ -3,6 +3,9 @@
 No authentication: reviewer is a self-declared identifier, not an authenticated identity.
 Default database is a persistent local file; set PROCESS_SIM_REVIEW_DB for deployment.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 import hashlib
 import json

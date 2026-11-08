@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Expand discovered XMEAS7 subjects using live read-only GraphDB SPARQL."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import sys

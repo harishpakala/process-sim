@@ -1,4 +1,7 @@
 """Inspect named-graph assertions; never treat storage as authentication."""
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 import json

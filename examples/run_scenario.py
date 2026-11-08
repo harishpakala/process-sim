@@ -1,5 +1,8 @@
 """Run a process-sim scenario from YAML or JSON."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 import argparse
 
 from process_sim.backends.tep import TEPAdapter
