@@ -19,7 +19,7 @@ Run these commands from the repository root. Start each long-running service in 
 ### 1. Install dependencies
 
 ```powershell
-python -m pip install -r requirements-opcua.txt -r requirements-timeseries.txt
+python -m pip install -r requirements.txt
 cd frontend
 npm install
 cd ..
@@ -84,7 +84,7 @@ Stop foreground services with `Ctrl+C`. Stop the sample database with `docker co
 Install the recording dependencies:
 
 ```bash
-pip install -r requirements-recording.txt
+python -m pip install -r requirements.txt
 ```
 
 For the current `src/` layout, set `PYTHONPATH` when needed. PowerShell:
