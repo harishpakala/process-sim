@@ -3,7 +3,7 @@ import sys
 import unittest
 from datetime import datetime, timezone
 from pathlib import Path
-from unittest.mock import Mock
+from unittest.mock import MagicMock
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 from tep_nexus_live_virtual_graph import execute, retrieve_observations, validate_request
@@ -56,18 +56,18 @@ class LiveVirtualGraphTests(unittest.TestCase):
                     observation_retriever=lambda *args: self.fail("SQL must not be queried"))
 
     def test_sql_is_parameterized_read_only_and_truncation_probed(self):
-        cur = Mock()
-        cur.__enter__ = Mock(return_value=cur)
-        cur.__exit__ = Mock(return_value=False)
+        cur = MagicMock()
+        cur.__enter__ = MagicMock(return_value=cur)
+        cur.__exit__ = MagicMock(return_value=False)
         stamp = datetime(2026, 11, 8, tzinfo=timezone.utc)
         cur.fetchall.return_value = [(0.01, 1.0, stamp), (0.012, 2.0, stamp),
                                      (0.013, 3.0, stamp)]
-        conn = Mock()
-        conn.__enter__ = Mock(return_value=conn)
-        conn.__exit__ = Mock(return_value=False)
-        tx = Mock()
-        tx.__enter__ = Mock(return_value=tx)
-        tx.__exit__ = Mock(return_value=False)
+        conn = MagicMock()
+        conn.__enter__ = MagicMock(return_value=conn)
+        conn.__exit__ = MagicMock(return_value=False)
+        tx = MagicMock()
+        tx.__enter__ = MagicMock(return_value=tx)
+        tx.__exit__ = MagicMock(return_value=False)
         conn.transaction.return_value = tx
         conn.cursor.return_value = cur
         result = retrieve_observations("dsn", request(), "XMEAS9",
