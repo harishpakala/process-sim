@@ -11,7 +11,7 @@ RUN = "077a3c31-44f4-4f3a-b06d-ad52b148fe10"
 
 def make_graph(request, *, change_id=False, truncated=False):
     start, end = request["start_simulation_seconds"], request["end_simulation_seconds"]
-    f = "function", s = "signal", a = "asset"
+    f, s, a = "function", "signal", "asset"
     observations = []
     for second in (20, 30, 40):
         if start <= second <= end:
