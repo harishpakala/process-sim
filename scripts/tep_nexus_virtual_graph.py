@@ -80,9 +80,9 @@ def project(query):
         for ordinal, sample in enumerate(window["samples"]):
             # A sample can appear in overlapping windows. This identity is
             # intentionally scoped to the query window and ordinal.
-            o = _uri("run", run, "window", window_index, "observation", ordinal)
+            o = (_uri("run", run, "signal", signal, "observation", sample["observationFingerprint"])\n                 if sample.get("observationFingerprint") else\n                 _uri("run", run, "window", window_index, "observation", ordinal))
             node(o, "VirtualObservation", source="TimescaleDB signal_samples",
-                 identityScope="QUERY_WINDOW_ORDINAL_NOT_DATABASE_PRIMARY_KEY",
+                 identityScope=("CONTENT_FINGERPRINT_NOT_DATABASE_PRIMARY_KEY"\n                                if sample.get("observationFingerprint") else\n                                "QUERY_WINDOW_ORDINAL_NOT_DATABASE_PRIMARY_KEY"),
                  simulationTimeHours=sample["simulationTimeHours"],
                  observedAt=sample["observedAt"], value=sample["value"],
                  signalUnits="NOT_VERIFIED", windowIndex=window_index,
