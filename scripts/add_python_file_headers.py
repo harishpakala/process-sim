@@ -54,15 +54,25 @@ def header_position(source: str) -> int:
 def insert_header(source: str, created: str) -> str | None:
     if ATTRIBUTION.search(source[:1600]):
         return None
-    prefix_end = header_position(source)
-    prefix, body = source[:prefix_end], source[prefix_end:]
-    header = f'"""Created: {created}\nAuthor: Harish\n"""\n\n'
-    # Insert before the module docstring, preserving its content and the
-    # legality of subsequent from __future__ imports.
-    candidate = prefix + header + body
+    try:
+        module = ast.parse(source)
+    except (SyntaxError, ValueError):
+        return None
+
+    header_text = f"Created: {created}\\nAuthor: Harish"
+    first = module.body[0] if module.body else None
+    if (isinstance(first, ast.Expr) and isinstance(first.value, ast.Constant)
+            and isinstance(first.value.value, str)):
+        # Retain the existing module docstring as the first statement.
+        # Add metadata as comments after it, before any future imports.
+        lines = source.splitlines(keepends=True)
+        pos = sum(len(line) for line in lines[:first.end_lineno])
+        candidate = source[:pos] + f"\\n# Created: {created}\\n# Author: Harish\\n" + source[pos:]
+    else:
+        pos = header_position(source)
+        candidate = source[:pos] + '"""' + header_text + '"""\\n\\n' + source[pos:]
     try:
         ast.parse(candidate)
-        ast.parse(source)
     except (SyntaxError, ValueError):
         return None
     return candidate
