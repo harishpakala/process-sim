@@ -115,7 +115,13 @@ def execute(request, *, dsn, graphdb_url,
         },
     }
     graph = project(query)
-    graph["interface"] = "TEP NEXUS live read-only virtual temporal graph query v2"\n    graph["observationIdentity"] = {\n        "method": "SHA256_CANONICAL_CONTENT_FINGERPRINT",\n        "scope": "run + signal + simulation time + value + observed_at",\n        "databasePrimaryKeyVerified": False,\n        "duplicatePolicy": "REJECT_INDISTINGUISHABLE_ROWS",\n    }
+    graph["interface"] = "TEP NEXUS live read-only virtual temporal graph query v2"
+    graph["observationIdentity"] = {
+        "method": "SHA256_CANONICAL_CONTENT_FINGERPRINT",
+        "scope": "run + signal + simulation time + value + observed_at",
+        "databasePrimaryKeyVerified": False,
+        "duplicatePolicy": "REJECT_INDISTINGUISHABLE_ROWS",
+    }
     graph["snapshotScope"] = "single bounded historian retrieval with live GraphDB mapping recheck"
     graph["request"] = req
     graph["result"] = {
