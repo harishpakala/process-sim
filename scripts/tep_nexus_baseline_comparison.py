@@ -54,7 +54,7 @@ def compare(run_id, windows, *, dsn, graphdb_url, functions=None, limit=1000,
                     observations = [n for n in graph["nodes"] if n["type"] == "VirtualObservation"]
                     results[method] = {
                         "latencyMs": (clock() - t0) * 1000,
-                        "fingerprints": sorted(n["id"].rsplit("/", 1)[-1] for n in observations),
+                        "fingerprints": sorted(n.get("contentFingerprint") or n["id"].rsplit("/", 1)[-1] for n in observations),
                         "count": graph["result"]["observationCount"],
                         "truncated": graph["result"]["truncated"],
                         "signal": next((n["signalId"] for n in graph["nodes"]
@@ -70,7 +70,7 @@ def compare(run_id, windows, *, dsn, graphdb_url, functions=None, limit=1000,
                         "signal": signal,
                     }
             v, d = results["virtual"], results["direct"]
-            # VTKG observation IDs must contain the original content fingerprint.
+            # Compare preserved content fingerprints, not source-key-derived graph IDs.
             equal = (v["fingerprints"] == d["fingerprints"] and v["count"] == d["count"]
                      and v["truncated"] == d["truncated"] and v["signal"] == d["signal"])
             if not equal:
@@ -118,7 +118,7 @@ def compare(run_id, windows, *, dsn, graphdb_url, functions=None, limit=1000,
         "limitations": [
             "The direct baseline uses pre-resolved provisional mappings, not independent engineering semantics.",
             "Separate sequential queries are not a common database snapshot; concurrent writes can cause mismatches.",
-            "Fingerprints are content identities, not verified historian primary keys.",
+            "Compared fingerprints represent measurement content; virtual observation IDs separately derive from the source primary key.",
             "No Ollama planning, RDF-materialization baseline, or per-stage instrumentation.",
             "Cache state is uncontrolled; timings include client connection overhead.",
         ],
