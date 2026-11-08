@@ -20,7 +20,7 @@ def correct_planner(url, model, question, supported):
 class PlanningBenchmarkTests(unittest.TestCase):
     def test_deterministic_case_generation(self):
         cases = make_cases(FUNCTIONS, RUN)
-        self.assertEqual(len(cases), 10)
+        self.assertEqual(len(cases), 15)
         self.assertEqual(len({c["id"] for c in cases}), len(cases))
         self.assertEqual(sum(c["expected"] == "REJECT" for c in cases), 3)
 
@@ -31,6 +31,21 @@ class PlanningBenchmarkTests(unittest.TestCase):
                           clock=lambda: 1.0)
         self.assertEqual(report["summary"]["status"], "PASS")
         self.assertEqual(report["summary"]["rejectedInvalidCases"], 3)
+
+    def test_repetitions_expand_trials_without_changing_question_set(self):
+        cases = make_cases({"TI_101": {}}, RUN)
+        report = evaluate(cases, run_id=RUN, supported_functions={"TI_101": {}},
+                          url="unused", model="fake", planner=correct_planner,
+                          clock=lambda: 1.0, repetitions=3)
+        self.assertEqual(report["summary"]["caseCount"], len(cases) * 3)
+        self.assertEqual(report["summary"]["uniqueQuestionCount"], len(cases))
+        self.assertEqual(report["summary"]["adversarialAttemptCount"], 18)
+        self.assertEqual(report["summary"]["status"], "PASS")
+
+    def test_invalid_repetitions_rejected(self):
+        with self.assertRaisesRegex(ValueError, "repetitions"):
+            evaluate([], run_id=RUN, supported_functions=FUNCTIONS,
+                     url="unused", model="fake", repetitions=0)
 
     def test_wrong_function_is_detected(self):
         cases = make_cases({"TI_101": {}}, RUN)
