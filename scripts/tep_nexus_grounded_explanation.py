@@ -202,6 +202,16 @@ def generate(query, analysis, *, ollama_url=None, model="llama3.1:8b"):
     return result
 
 
+def render_markdown(result):
+    """Render the exact same explanation object as the JSON artifact."""
+    content = "# TEP NEXUS — fault-relative grounded explanation\n\n" + result["answer"] + "\n"
+    if result["ollama"]["status"] == "ACCEPTED":
+        content += ("\n## Ollama paraphrase (heuristically screened, not formally verified)\n\n"
+                    + result["ollama"]["supplementalAnswer"] + "\n")
+    content += "\n## Model screening\n\n" + result["ollama"]["status"] + "\n"
+    return content
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", default="reports/tep_nexus_fault_relative_query.json")
@@ -221,11 +231,7 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
     md.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
-    content = "# TEP NEXUS — fault-relative grounded explanation\n\n" + result["answer"] + "\n"
-    if result["ollama"]["status"] == "ACCEPTED":
-        content += ("\n## Ollama paraphrase (heuristically screened, not formally verified)\n\n"
-                    + result["ollama"]["supplementalAnswer"] + "\n")
-    content += "\n## Model screening\n\n" + result["ollama"]["status"] + "\n"
+    content = render_markdown(result)
     md.write_text(content, encoding="utf-8")
     print(json.dumps({"status": result["status"], "ollama": result["ollama"]["status"],
                       "output": str(out), "markdown": str(md)}, indent=2))
