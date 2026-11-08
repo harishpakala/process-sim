@@ -1,7 +1,7 @@
 """Offline contract tests for live GraphDB/TimescaleDB virtual graph orchestration."""
 import sys
 import unittest
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from unittest.mock import MagicMock
 
@@ -60,8 +60,9 @@ class LiveVirtualGraphTests(unittest.TestCase):
         cur.__enter__ = MagicMock(return_value=cur)
         cur.__exit__ = MagicMock(return_value=False)
         stamp = datetime(2026, 11, 8, tzinfo=timezone.utc)
-        cur.fetchall.return_value = [(0.01, 1.0, stamp), (0.012, 2.0, stamp),
-                                     (0.013, 3.0, stamp)]
+        cur.fetchall.return_value = [(0.01, 1.0, stamp),
+                                     (0.012, 2.0, stamp + timedelta(microseconds=1)),
+                                     (0.013, 3.0, stamp + timedelta(microseconds=2))]
         conn = MagicMock()
         conn.__enter__ = MagicMock(return_value=conn)
         conn.__exit__ = MagicMock(return_value=False)
