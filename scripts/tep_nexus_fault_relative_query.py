@@ -205,6 +205,50 @@ def execute_question(
     }
 
 
+
+def write_snapshot_artifacts(target, report, analysis, timeline, explanation):
+    """Write related artifacts from a single evidence snapshot.
+
+    Each file is atomically replaced to avoid partially written JSON/Markdown;
+    the collection is not a multi-file atomic transaction.
+    """
+    from pathlib import Path
+    from tempfile import NamedTemporaryFile
+    import os
+
+    from tep_nexus_grounded_explanation import render_markdown
+
+    target = Path(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    artifacts = {
+        target: json.dumps(report, indent=2, allow_nan=False),
+        target.with_name("tep_nexus_fault_relative_analysis.json"):
+            json.dumps(analysis, indent=2, allow_nan=False),
+        target.with_name("tep_nexus_fault_relative_timeline.html"): timeline,
+    }
+    if explanation is not None:
+        artifacts[target.with_name("tep_nexus_grounded_explanation.json")] = (
+            json.dumps(explanation, indent=2, allow_nan=False)
+        )
+        artifacts[target.with_name("tep_nexus_grounded_explanation.md")] = (
+            render_markdown(explanation)
+        )
+    # Stage every file before publishing any of them.
+    staged = {}
+    try:
+        for path, contents in artifacts.items():
+            with NamedTemporaryFile(mode="w", encoding="utf-8",
+                                    dir=path.parent, prefix=".tep_nexus_",
+                                    suffix=".tmp", delete=False) as handle:
+                handle.write(contents)
+                staged[path] = Path(handle.name)
+        for path, temp in staged.items():
+            os.replace(temp, path)
+    finally:
+        for temp in staged.values():
+            temp.unlink(missing_ok=True)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--question", required=True)
@@ -219,6 +263,9 @@ def main():
     parser.add_argument("--interval", type=float, default=5.0, help="Seconds between refreshes")
     parser.add_argument("--iterations", type=int, default=5, help="Number of refreshes in watch mode")
     parser.add_argument("--output", default="reports/tep_nexus_fault_relative_query.json")
+    parser.add_argument("--no-explanation", action="store_true", help="Skip grounded explanation files")
+    parser.add_argument("--explanation-ollama", choices=("final", "each", "none"), default="final",
+                        help="Ollama on final iteration (default), every iteration, or never")
     args = parser.parse_args()
     dsn = os.environ.get("TEP_TIMESCALE_DSN")
     if not dsn:
@@ -234,11 +281,14 @@ def main():
     )
     from pathlib import Path
     from tep_nexus_fault_relative_analysis import analyze, render_html
+    from tep_nexus_grounded_explanation import generate
     import time
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
     analysis_path = target.with_name("tep_nexus_fault_relative_analysis.json")
     timeline_path = target.with_name("tep_nexus_fault_relative_timeline.html")
+    explanation_path = target.with_name("tep_nexus_grounded_explanation.json")
+    markdown_path = target.with_name("tep_nexus_grounded_explanation.md")
     repetitions = args.iterations if args.watch else 1
     for index in range(repetitions):
         if index:
@@ -249,11 +299,21 @@ def main():
                 window_minutes=result["validatedPlan"]["history_window_minutes"],
                 sample_limit=args.sample_limit,
             )
-        target.write_text(json.dumps(result, indent=2), encoding="utf-8")
-        analysis_path.write_text(
-            json.dumps(analyze(result["temporalEvidence"]), indent=2), encoding="utf-8"
+        # Generate all artifacts from this same in-memory historian snapshot.
+        # In watch mode, deterministic explanations update each iteration;
+        # Ollama runs only at the final iteration unless explicitly requested.
+        analysis = analyze(result["temporalEvidence"])
+        timeline = render_html(result)
+        explanation = None
+        if not args.no_explanation:
+            use_ollama = (args.explanation_ollama == "each" or
+                          (args.explanation_ollama == "final" and index == repetitions - 1))
+            explanation = generate(result, analysis,
+                                   ollama_url=args.ollama_url if use_ollama else None,
+                                   model=args.model)
+        write_snapshot_artifacts(
+            target, result, analysis, timeline, explanation,
         )
-        timeline_path.write_text(render_html(result), encoding="utf-8")
         latest = result["temporalEvidence"]["latestPersisted"]
         print(json.dumps({
             "iteration": index + 1,
@@ -267,6 +327,9 @@ def main():
             "windows": len(result["temporalEvidence"]["windows"]),
             "latestObservedAt": latest["observedAt"] if latest else None,
             "recordAgeSeconds": latest["recordAgeSeconds"] if latest else None,
+            "explanation": str(explanation_path) if explanation is not None else None,
+            "explanationStatus": explanation["status"] if explanation is not None else None,
+            "ollamaStatus": explanation["ollama"]["status"] if explanation is not None else None,
         }, indent=2))
         if index < repetitions - 1:
             time.sleep(args.interval)
