@@ -17,7 +17,7 @@ def make_graph(request, *, change_id=False, truncated=False):
         if start <= second <= end:
             observations.append({
                 "id": "changed" if change_id and second == 30 else f"obs{second}",
-                "type": "VirtualObservation", "identityScope": "CONTENT_FINGERPRINT_NOT_DATABASE_PRIMARY_KEY",
+                "type": "VirtualObservation", "identityScope": "SOURCE_COMPOSITE_PRIMARY_KEY_SHA256",
                 "simulationTimeHours": second / 3600, "value": second})
     return {
         "nodes": [{"id": "function", "type": "EngineeringFunction", "localId": "TI_101"},
