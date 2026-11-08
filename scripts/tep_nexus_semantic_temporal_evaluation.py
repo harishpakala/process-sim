@@ -53,8 +53,8 @@ def evaluate(run_id, windows, *, dsn, graphdb_url,
                     "asset_edge_present": any(e["predicate"] == "associatedWithAsset" for e in edges),
                     "observation_count_consistent": len(observations) == graph["result"]["observationCount"],
                     "observation_ids_unique": len(set(observed_ids)) == len(observed_ids),
-                    "identity_is_content_based": all(
-                        n["identityScope"] == "CONTENT_FINGERPRINT_NOT_DATABASE_PRIMARY_KEY"
+                    "identity_is_source_primary_key": all(
+                        n["identityScope"] == "SOURCE_COMPOSITE_PRIMARY_KEY_SHA256"
                         for n in observations),
                     "no_rdf_materialization": graph["materializedInGraphDB"] is False,
                     "provenance_caveats_preserved": (
@@ -113,7 +113,7 @@ def evaluate(run_id, windows, *, dsn, graphdb_url,
         "limitations": [
             "Correctness checks are structural; no independent historian ground-truth oracle.",
             "Only run-scoped eligible functions and requested intervals are tested.",
-            "Cross-window identity uses content fingerprints, not verified database primary keys.",
+            "Cross-window live identity uses hashes of the verified TimescaleDB composite primary key.",
             "Overlap comparisons are skipped when either window is truncated.",
             "Latencies include GraphDB mapping rechecks and TimescaleDB retrieval; no warmup or statistical benchmark design.",
             "No storage-overhead or near-real-time freshness benchmark is performed.",
