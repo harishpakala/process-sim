@@ -44,6 +44,13 @@ def observation_fingerprint(run_id, signal, hours, value, observed_at):
     return hashlib.sha256(json.dumps(fields, separators=(",", ":")).encode("utf-8")).hexdigest()
 
 
+def observation_primary_key(run_id, signal, observed_at):
+    """Stable source identity derived from signal_samples_pkey."""
+    stamp = observed_at.astimezone(timezone.utc).isoformat(timespec="microseconds")
+    fields = [str(UUID(str(run_id))), signal, stamp]
+    return hashlib.sha256(json.dumps(fields, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
 def retrieve_observations(dsn, request, signal, *, connection_factory=None):
     """Parameter-bound read-only SQL; ordered and capped with a truncation probe."""
     connect = connection_factory or psycopg.connect
@@ -72,11 +79,13 @@ def retrieve_observations(dsn, request, signal, *, connection_factory=None):
         if not math.isfinite(float(hours)) or not math.isfinite(float(value)):
             raise ValueError("Non-finite historian measurement")
         fingerprint = observation_fingerprint(request["run_id"], signal, hours, value, observed)
-        if fingerprint in seen:
+        key_hash = observation_primary_key(request["run_id"], signal, observed)
+        if key_hash in seen:
             raise ValueError("Indistinguishable duplicate historian rows: stable row identity unavailable")
-        seen.add(fingerprint)
+        seen.add(key_hash)
         samples.append({
             "observationFingerprint": fingerprint,
+            "observationPrimaryKeyHash": key_hash,
             "simulationTimeHours": float(hours),
             "value": float(value),
             "observedAt": observed.isoformat(),
@@ -117,10 +126,13 @@ def execute(request, *, dsn, graphdb_url,
     graph = project(query)
     graph["interface"] = "TEP NEXUS live read-only virtual temporal graph query v2"
     graph["observationIdentity"] = {
-        "method": "SHA256_CANONICAL_CONTENT_FINGERPRINT",
-        "scope": "run + signal + simulation time + value + observed_at",
-        "databasePrimaryKeyVerified": False,
-        "duplicatePolicy": "REJECT_INDISTINGUISHABLE_ROWS",
+        "method": "SHA256_SOURCE_COMPOSITE_PRIMARY_KEY",
+        "scope": "observed_at + run_id + signal_id",
+        "databasePrimaryKeyVerified": True,
+        "sourceConstraint": "signal_samples_pkey",
+        "sourceTable": "public.signal_samples",
+        "contentFingerprintRetained": True,
+        "duplicatePolicy": "REJECT_DUPLICATE_SOURCE_PRIMARY_KEYS",
     }
     graph["snapshotScope"] = "single bounded historian retrieval with live GraphDB mapping recheck"
     graph["request"] = req
