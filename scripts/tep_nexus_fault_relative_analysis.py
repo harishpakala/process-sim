@@ -28,6 +28,37 @@ def _stats(samples):
     }
 
 
+def assess_baseline(before_stats, *, min_samples=20, max_relative_std=0.05):
+    """Conservative heuristic, not a formal steady-state detector.
+
+    Relative variability is std / abs(mean); near-zero means cannot support
+    this normalization. A passing result is not proof of process stationarity.
+    """
+    warnings = []
+    count = before_stats["count"]
+    mean = before_stats["mean"]
+    std = before_stats["standardDeviation"]
+    relative_std = None
+    if count < min_samples:
+        warnings.append("INSUFFICIENT_PRE_EVENT_SAMPLES")
+    if mean is None or std is None or abs(mean) < 1e-12:
+        warnings.append("BASELINE_VARIABILITY_NOT_ASSESSABLE")
+    else:
+        relative_std = std / abs(mean)
+        if relative_std > max_relative_std:
+            warnings.append("HIGH_PRE_EVENT_VARIABILITY")
+    if count and before_stats["minimum"] == 0 and before_stats["maximum"] != 0:
+        warnings.append("POSSIBLE_INITIALIZATION_TRANSIENT")
+    return {
+        "status": "REVIEW_REQUIRED" if warnings else "HEURISTICALLY_ACCEPTABLE",
+        "warnings": warnings,
+        "relativeStandardDeviation": relative_std,
+        "minimumSampleCount": min_samples,
+        "maximumRelativeStandardDeviation": max_relative_std,
+        "note": "Heuristic screening only; does not establish steady state or causation.",
+    }
+
+
 def analyze(evidence):
     """Classify each window relative to its own command center.
 
@@ -47,6 +78,7 @@ def analyze(evidence):
             "sampleCount": len(samples),
             "truncated": bool(window["truncated"]),
             "before": a, "atOrAfter": b,
+            "baselineQuality": assess_baseline(a),
             "meanDifferenceAfterMinusBefore": (
                 b["mean"] - a["mean"] if a["count"] and b["count"] else None
             ),
@@ -129,6 +161,9 @@ def render_html(report):
           <table><thead><tr><th>Metric</th><th>Before</th><th>At/after command</th></tr></thead>
           <tbody>{rows}</tbody></table>
           <p>Mean difference (after − before): {_fmt(summary["meanDifferenceAfterMinusBefore"])}</p>
+          <p><strong>Pre-event baseline quality: {summary["baselineQuality"]["status"]}</strong>. Warnings:
+          {html.escape(", ".join(summary["baselineQuality"]["warnings"]) or "none")}.
+          This is a heuristic, not proof of steady state.</p>
           <p>Samples truncated: {str(summary["truncated"]).lower()}. Temporal relations:
           {html.escape(json.dumps(summary["relationCounts"]))}</p></section>""")
     freshness = ("No persisted sample" if latest is None else
