@@ -22,7 +22,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 EXCLUDE = {".git", ".venv", "venv", "node_modules", "__pycache__", "out", "data"}
 ATTRIBUTION = re.compile(
-    r"(?im)^\\s*(?:@author\\s*:|author\\s*:|created(?:\\s+on)?\\s*:|copyright\\b|spdx-license-identifier\\s*:)"
+    r"(?im)^\s*(?:@author\s*:|author\s*:|created(?:\s+on)?\s*:|copyright\b|spdx-license-identifier\s*:)"
 )
 
 
@@ -46,7 +46,7 @@ def header_position(source: str) -> int:
     i = 0
     if lines and lines[0].startswith("#!"):
         i = 1
-    if i < min(2, len(lines)) and re.search(r"coding[:=]\\s*[-\\w.]+", lines[i]):
+    if i < min(2, len(lines)) and re.search(r"coding[:=]\s*[-\w.]+", lines[i]):
         i += 1
     return sum(len(line) for line in lines[:i])
 
@@ -56,7 +56,7 @@ def insert_header(source: str, created: str) -> str | None:
         return None
     prefix_end = header_position(source)
     prefix, body = source[:prefix_end], source[prefix_end:]
-    header = f'"""Created: {created}\\nAuthor: Harish\\n"""\\n\\n'
+    header = f'"""Created: {created}\nAuthor: Harish\n"""\n\n'
     # Insert before the module docstring, preserving its content and the
     # legality of subsequent from __future__ imports.
     candidate = prefix + header + body
