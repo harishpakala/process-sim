@@ -6,7 +6,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "scripts"))
 
-from tep_nexus_fault_relative_analysis import analyze, render_html
+from tep_nexus_fault_relative_analysis import analyze, render_html, assess_baseline
 
 
 class FaultAnalysisTests(unittest.TestCase):
@@ -49,6 +49,30 @@ class FaultAnalysisTests(unittest.TestCase):
         evidence["windows"][0]["samples"] = evidence["windows"][0]["samples"][1:]
         result = analyze(evidence)[0]
         self.assertIsNone(result["meanDifferenceAfterMinusBefore"])
+
+    def test_startup_baseline_is_flagged(self):
+        baseline = {"count": 12, "mean": 110.3686,
+                    "standardDeviation": 33.2774,
+                    "minimum": 0.0, "maximum": 120.412}
+        quality = assess_baseline(baseline)
+        self.assertEqual(quality["status"], "REVIEW_REQUIRED")
+        self.assertIn("INSUFFICIENT_PRE_EVENT_SAMPLES", quality["warnings"])
+        self.assertIn("HIGH_PRE_EVENT_VARIABILITY", quality["warnings"])
+        self.assertIn("POSSIBLE_INITIALIZATION_TRANSIENT", quality["warnings"])
+
+    def test_constant_nonzero_baseline_passes_heuristic(self):
+        baseline = {"count": 30, "mean": 125.0,
+                    "standardDeviation": 0.01,
+                    "minimum": 124.98, "maximum": 125.02}
+        self.assertEqual(assess_baseline(baseline)["status"],
+                         "HEURISTICALLY_ACCEPTABLE")
+
+    def test_zero_mean_is_not_assumed_stable(self):
+        baseline = {"count": 30, "mean": 0.0,
+                    "standardDeviation": 0.0,
+                    "minimum": 0.0, "maximum": 0.0}
+        self.assertIn("BASELINE_VARIABILITY_NOT_ASSESSABLE",
+                      assess_baseline(baseline)["warnings"])
 
     def test_timeline_escapes_untrusted_strings(self):
         evidence = self.evidence()
