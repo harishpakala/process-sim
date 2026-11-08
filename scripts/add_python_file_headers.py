@@ -59,7 +59,7 @@ def insert_header(source: str, created: str) -> str | None:
     except (SyntaxError, ValueError):
         return None
 
-    header_text = f"Created: {created}\\nAuthor: Harish"
+    header_text = f"Created: {created}\nAuthor: Harish"
     first = module.body[0] if module.body else None
     if (isinstance(first, ast.Expr) and isinstance(first.value, ast.Constant)
             and isinstance(first.value.value, str)):
@@ -67,10 +67,10 @@ def insert_header(source: str, created: str) -> str | None:
         # Add metadata as comments after it, before any future imports.
         lines = source.splitlines(keepends=True)
         pos = sum(len(line) for line in lines[:first.end_lineno])
-        candidate = source[:pos] + f"\\n# Created: {created}\\n# Author: Harish\\n" + source[pos:]
+        candidate = source[:pos] + f"\n# Created: {created}\n# Author: Harish\n" + source[pos:]
     else:
         pos = header_position(source)
-        candidate = source[:pos] + '"""' + header_text + '"""\\n\\n' + source[pos:]
+        candidate = source[:pos] + '"""' + header_text + '"""\n\n' + source[pos:]
     try:
         ast.parse(candidate)
     except (SyntaxError, ValueError):
