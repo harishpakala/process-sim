@@ -6,6 +6,7 @@ observations on demand. No RDF materialization or LLM-generated SQL.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import math
 import os
@@ -35,6 +36,14 @@ def validate_request(function, run_id, start_seconds, end_seconds, limit):
             "end_simulation_seconds": float(end_seconds), "limit": limit}
 
 
+def observation_fingerprint(run_id, signal, hours, value, observed_at):
+    """Cross-window content identity, not a guaranteed historian row identity."""
+    stamp = observed_at.astimezone(timezone.utc).isoformat(timespec="microseconds")
+    fields = [str(UUID(str(run_id))), signal, float(hours).hex(),
+              float(value).hex(), stamp]
+    return hashlib.sha256(json.dumps(fields, separators=(",", ":")).encode("utf-8")).hexdigest()
+
+
 def retrieve_observations(dsn, request, signal, *, connection_factory=None):
     """Parameter-bound read-only SQL; ordered and capped with a truncation probe."""
     connect = connection_factory or psycopg.connect
@@ -58,10 +67,16 @@ def retrieve_observations(dsn, request, signal, *, connection_factory=None):
                 rows = cur.fetchall()
     truncated = len(rows) > request["limit"]
     samples = []
+    seen = set()
     for hours, value, observed in rows[:request["limit"]]:
         if not math.isfinite(float(hours)) or not math.isfinite(float(value)):
             raise ValueError("Non-finite historian measurement")
+        fingerprint = observation_fingerprint(request["run_id"], signal, hours, value, observed)
+        if fingerprint in seen:
+            raise ValueError("Indistinguishable duplicate historian rows: stable row identity unavailable")
+        seen.add(fingerprint)
         samples.append({
+            "observationFingerprint": fingerprint,
             "simulationTimeHours": float(hours),
             "value": float(value),
             "observedAt": observed.isoformat(),
@@ -100,7 +115,7 @@ def execute(request, *, dsn, graphdb_url,
         },
     }
     graph = project(query)
-    graph["interface"] = "TEP NEXUS live read-only virtual temporal graph query v1"
+    graph["interface"] = "TEP NEXUS live read-only virtual temporal graph query v2"\n    graph["observationIdentity"] = {\n        "method": "SHA256_CANONICAL_CONTENT_FINGERPRINT",\n        "scope": "run + signal + simulation time + value + observed_at",\n        "databasePrimaryKeyVerified": False,\n        "duplicatePolicy": "REJECT_INDISTINGUISHABLE_ROWS",\n    }
     graph["snapshotScope"] = "single bounded historian retrieval with live GraphDB mapping recheck"
     graph["request"] = req
     graph["result"] = {
