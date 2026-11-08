@@ -1,7 +1,7 @@
 """Deterministic offline virtual-graph projection of TEP NEXUS query evidence.
 
 This module does not issue SQL/SPARQL or materialize historian observations.
-Observation IDs are snapshot-local ordinal identities, NOT database row IDs.
+Live IDs use source-key hashes; offline fallback uses ordinals.
 """
 from __future__ import annotations
 
@@ -80,13 +80,18 @@ def project(query):
         for ordinal, sample in enumerate(window["samples"]):
             # A sample can appear in overlapping windows. This identity is
             # intentionally scoped to the query window and ordinal.
-            o = (_uri("run", run, "signal", signal, "observation", sample["observationFingerprint"])
+            o = (_uri("run", run, "signal", signal, "observation", sample["observationPrimaryKeyHash"])
+                 if sample.get("observationPrimaryKeyHash") else
+                 _uri("run", run, "signal", signal, "observation", sample["observationFingerprint"])
                  if sample.get("observationFingerprint") else
                  _uri("run", run, "window", window_index, "observation", ordinal))
             node(o, "VirtualObservation", source="TimescaleDB signal_samples",
-                 identityScope=("CONTENT_FINGERPRINT_NOT_DATABASE_PRIMARY_KEY"
+                 identityScope=("SOURCE_COMPOSITE_PRIMARY_KEY_SHA256"
+                                if sample.get("observationPrimaryKeyHash") else
+                                "CONTENT_FINGERPRINT_NOT_DATABASE_PRIMARY_KEY"
                                 if sample.get("observationFingerprint") else
                                 "QUERY_WINDOW_ORDINAL_NOT_DATABASE_PRIMARY_KEY"),
+                 contentFingerprint=sample.get("observationFingerprint"),
                  simulationTimeHours=sample["simulationTimeHours"],
                  observedAt=sample["observedAt"], value=sample["value"],
                  signalUnits="NOT_VERIFIED", windowIndex=window_index,
@@ -109,7 +114,7 @@ def project(query):
         "nodes": list(nodes.values()),
         "edges": edges,
         "limitations": [
-            "Virtual observation identifiers are query-window ordinals, not stable historian primary keys.",
+            "Live observation IDs use source-key hashes; offline fallback IDs may be query-window ordinals.",
             "GraphDB does not directly expose these observations via SPARQL.",
             "Engineering mapping is provisional; physical binding and shared run provenance are not verified.",
             "Recorded fault commands do not establish physical fault causation.",
