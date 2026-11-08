@@ -9,7 +9,7 @@ from tep_nexus_correctness_audit import audit
 RUN = "077a3c31-44f4-4f3a-b06d-ad52b148fe10"
 MAPPING = {"function_reference": "REF", "operational_signal": "XMEAS9",
            "asset_uri": "https://example.org/asset/9"}
-STAMP = "2026-11-08T15:00:00+00:00"
+STAMP = "2026-11-08T15:00:00.000000+00:00"
 
 
 def registry(*args):
