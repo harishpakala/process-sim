@@ -215,11 +215,16 @@ def main():
     parser.add_argument("--mapping-discovery", default="reports/tep_nexus_mapping_discovery.json")
     parser.add_argument("--temporal-coverage", default="reports/tep_nexus_temporal_coverage.json")
     parser.add_argument("--sample-limit", type=int, default=1000)
+    parser.add_argument("--watch", action="store_true", help="Refresh historian evidence without replanning")
+    parser.add_argument("--interval", type=float, default=5.0, help="Seconds between refreshes")
+    parser.add_argument("--iterations", type=int, default=5, help="Number of refreshes in watch mode")
     parser.add_argument("--output", default="reports/tep_nexus_fault_relative_query.json")
     args = parser.parse_args()
     dsn = os.environ.get("TEP_TIMESCALE_DSN")
     if not dsn:
         parser.error("TEP_TIMESCALE_DSN must be configured")
+    if args.interval <= 0 or args.iterations < 1:
+        parser.error("--interval and --iterations must be positive")
     result = execute_question(
         args.question, args.run_id, dsn=dsn, graphdb_url=args.graphdb_url,
         ollama_url=args.ollama_url, model=args.model,
@@ -228,24 +233,43 @@ def main():
         sample_limit=args.sample_limit,
     )
     from pathlib import Path
+    from tep_nexus_fault_relative_analysis import analyze, render_html
+    import time
     target = Path(args.output)
     target.parent.mkdir(parents=True, exist_ok=True)
-    target.write_text(json.dumps(result, indent=2), encoding="utf-8")
-    from tep_nexus_fault_relative_analysis import analyze, render_html
     analysis_path = target.with_name("tep_nexus_fault_relative_analysis.json")
     timeline_path = target.with_name("tep_nexus_fault_relative_timeline.html")
-    analysis_path.write_text(json.dumps(analyze(result["temporalEvidence"]), indent=2), encoding="utf-8")
-    timeline_path.write_text(render_html(result), encoding="utf-8")
-    print(json.dumps({
-        "output": str(target),
-        "analysis": str(analysis_path),
-        "timeline": str(timeline_path),
-        "function": result["validatedPlan"]["engineering_function"],
-        "signal": result["temporalEvidence"]["signal"],
-        "faultCommands": len(result["temporalEvidence"]["faultCommands"]),
-        "intervals": len(result["temporalEvidence"]["faultCommandIntervals"]),
-        "windows": len(result["temporalEvidence"]["windows"]),
-    }, indent=2))
+    repetitions = args.iterations if args.watch else 1
+    for index in range(repetitions):
+        if index:
+            # Preserve the validated plan and GraphDB mapping; re-query only
+            # the changing historian data. This does not contact OPC UA.
+            result["temporalEvidence"] = retrieve_fault_relative_evidence(
+                dsn, args.run_id, result["engineeringMapping"]["operational_signal"],
+                window_minutes=result["validatedPlan"]["history_window_minutes"],
+                sample_limit=args.sample_limit,
+            )
+        target.write_text(json.dumps(result, indent=2), encoding="utf-8")
+        analysis_path.write_text(
+            json.dumps(analyze(result["temporalEvidence"]), indent=2), encoding="utf-8"
+        )
+        timeline_path.write_text(render_html(result), encoding="utf-8")
+        latest = result["temporalEvidence"]["latestPersisted"]
+        print(json.dumps({
+            "iteration": index + 1,
+            "output": str(target),
+            "analysis": str(analysis_path),
+            "timeline": str(timeline_path),
+            "function": result["validatedPlan"]["engineering_function"],
+            "signal": result["temporalEvidence"]["signal"],
+            "faultCommands": len(result["temporalEvidence"]["faultCommands"]),
+            "intervals": len(result["temporalEvidence"]["faultCommandIntervals"]),
+            "windows": len(result["temporalEvidence"]["windows"]),
+            "latestObservedAt": latest["observedAt"] if latest else None,
+            "recordAgeSeconds": latest["recordAgeSeconds"] if latest else None,
+        }, indent=2))
+        if index < repetitions - 1:
+            time.sleep(args.interval)
 
 
 if __name__ == "__main__":
