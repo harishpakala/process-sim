@@ -67,7 +67,14 @@ This command starts the **OPC UA service**, not the simulation run. Once the ser
 
 **4. Prepare GraphDB** (required for GraphDB-backed semantic queries)
 
-Start GraphDB with repository `AAS` and load the required engineering RDF. Follow [semantic setup](semantic/README.md); starting an empty repository is insufficient.
+Start GraphDB with repository `AAS`, then generate and publish the engineering RDF from the repository root:
+
+```powershell
+python -m semantic.template_lifting --push
+python -m semantic.instance_lifting --validate --push
+```
+
+These commands use the configured default domains (DEXPI, ECAD and ProductCatalog). `--validate` runs local SHACL validation for instance lifting, while `--push` uploads generated RDF to GraphDB. Check the validation output and GraphDB configuration before relying on the published data. See [semantic setup](semantic/README.md) for details.
 
 **5. Start the HTTP API and historian** (terminal B)
 
