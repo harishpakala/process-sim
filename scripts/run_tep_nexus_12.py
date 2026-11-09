@@ -11,8 +11,6 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-import subprocess
-import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -44,22 +42,51 @@ def main():
 
     output = ROOT / args.output_dir
     output.mkdir(parents=True, exist_ok=True)
-    subprocess.run([
-        sys.executable, str(ROOT / "scripts/tep_nexus_e4e_compare.py"),
-        "--run-id", args.run_id,
-        "--graphdb-url", args.graphdb_url,
-        "--output-root", str(output / "evidence"),
-        "--asset-inventory", str(ROOT / "examples/aas/asset_inventory_instance.json"),
-        "--product-catalog", str(ROOT / "examples/aas/product_catalog_instance.json"),
-    ], check=True, cwd=ROOT)
-
-    evidence_file = output / "evidence/revised/evidence_and_assessment_template.json"
-    report = json.loads(evidence_file.read_text(encoding="utf-8"))
-    rows = report["results"]
-    if [r["id"] for r in rows] != [f"Q{i}" for i in range(1, 11)]:
-        raise RuntimeError("Expected exactly the existing revised Q1-Q10 question set.")
-
     evaluator = load_module("scripts/tep_nexus_paper_evaluation.py", "paper_eval_12")
+    engineering = evaluator.engineering_evidence(
+        str(ROOT / "examples/aas/asset_inventory_instance.json"),
+        str(ROOT / "examples/aas/product_catalog_instance.json"))
+    temporal = evaluator.temporal_evidence(
+        dsn, args.run_id, [item[2] for item in evaluator.ASSETS.values()])
+    graph_error = None
+    try:
+        graph = evaluator.verified_graphdb_mappings(args.graphdb_url)
+    except ValueError as exc:
+        graph = None
+        graph_error = str(exc)
+        print("WARNING: GraphDB four-domain verification failed: " + graph_error,
+              flush=True)
+        print("Affected questions will be marked GRAPHDB_VERIFICATION_FAILED, "
+              "not PASS.", flush=True)
+    evidence_rows = evaluator.evaluate(engineering, temporal, graph)
+    questions_path = ROOT / "docs/e4e_tests/revised_questions.json"
+    questions = json.loads(questions_path.read_text(encoding="utf-8"))["questions"]
+    if [q["id"] for q in questions] != [f"Q{i}" for i in range(1, 11)]:
+        raise RuntimeError("Expected exactly the existing revised Q1-Q10 question set.")
+    rows = []
+    for question, record in zip(questions, evidence_rows):
+        status = record["status"]
+        reason = record.get("reason")
+        if graph_error and status == "CROSS_DOMAIN_QUERY_NOT_RUN":
+            status = "GRAPHDB_VERIFICATION_FAILED"
+            reason = graph_error
+        rows.append({
+            **question,
+            "required_sources": record["required_sources"],
+            "evidence_status": status,
+            "evidence_reason": reason,
+            "evidence": record.get("evidence"),
+        })
+    evidence_file = output / "evidence/revised/evidence_and_assessment_template.json"
+    evidence_file.parent.mkdir(parents=True, exist_ok=True)
+    evidence_file.write_text(json.dumps({
+        "run_id": args.run_id,
+        "version": "revised",
+        "assessment_status": "NOT_ASSESSED",
+        "graphdb_verification_error": graph_error,
+        "results": rows,
+    }, indent=2, default=str) + "\n", encoding="utf-8")
+
     qa = load_module("scripts/tep_nexus_e4e_ollama_qa.py", "ollama_qa_12")
     engineering = evaluator.engineering_evidence(
         str(ROOT / "examples/aas/asset_inventory_instance.json"),
@@ -154,6 +181,7 @@ def main():
             "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
             "assessment_status": "NOT_MANUALLY_ASSESSED",
             "q11_evidence": q11, "q12_evidence": q12,
+            "graphdb_verification_error": graph_error,
             "results": results,
         }, indent=2, ensure_ascii=False, default=str) + "\n", encoding="utf-8")
     print(f"Saved {destination}; {len(results)} questions; no automatic grades.")
