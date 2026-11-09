@@ -1,6 +1,6 @@
 # TEP NEXUS — 36-case benchmark and artifact evaluation
 
-This is the entry point for reviewing and reproducing the **Step 5E evidence-derived, full-function benchmark**. The benchmark tests run-scoped engineering-function query planning and limited-scope answer validation. It is **not a fault-injection tutorial**. For simulation Start/Stop/Reset and the **Fault-01 bias on XMEAS9** Web UI example, see the [root README](../../README.md#operate-the-simulation-and-faults-from-the-web-ui).
+This document provides instructions for reproducing the **TEP NEXUS 36-query benchmark**. The benchmark evaluates engineering-function query planning, limited-scope answer validation, and execution latency. It includes 34 supported engineering-function queries and two negative test cases.
 
 ## 1. Benchmark scope
 
