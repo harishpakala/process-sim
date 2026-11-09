@@ -98,6 +98,24 @@ After starting the OPC UA server, HTTP API, and Vue frontend, use this interacti
 3. **Inspect and clear:** The Fault Management view lists registered faults and offers **Clear** and **Clear all**. Fault statuses returned by the service should be read as recorded simulator state, not as independent evidence of physical effects.
 4. **Monitor and analyze:** Use the Web UI's measurements, historian, and TEP NEXUS query views as applicable. Persistent run-specific history requires the configured TimescaleDB historian and an advancing simulation.
 
+#### Example: Inject Fault-01 — XMEAS9 bias
+
+Start the simulation in the Web UI and confirm that simulation time is advancing. Open **Fault Management** and enter these exact settings:
+
+| Web UI field | Value |
+| --- | --- |
+| **Fault ID** | `Fault-01` |
+| **Fault type** | **Bias** (`bias`) |
+| **Target** | **XMEAS9** (reactor temperature; sometimes written `XMEAS09`) |
+| **Magnitude** | **5** |
+| **Duration (simulation hours)** | **0** |
+| **Stuck value** | Not applicable for a bias fault |
+
+Select **Inject fault**. The Web UI submits the injection request to the simulation API and OPC UA fault-management interface. Refresh or inspect **Registered faults** to find `Fault-01` and its reported status. The displayed status and a successful API response are simulator records; they do not independently establish that the expected measurement change occurred.
+
+**Duration `0` means indefinite**, not zero-length: the fault remains registered for ongoing application until explicitly cleared (or the simulation state is reset). To remove it, select **Clear** next to `Fault-01` and confirm. The magnitude is entered in the simulator's bias parameter; do not infer independently calibrated physical units or a verified +5 °C effect solely from the request.
+
+
 **Important distinction:** Starting the platform's OPC UA/API services is an infrastructure step; **Start/Stop/Reset and fault injection are interactive Web UI operations**. Simulation lifecycle and fault injection are operated through the Web UI. A successful injection request records an operator command; it does not, by itself, independently verify fault activation.
 
 **7. Optional: run local Ollama**
