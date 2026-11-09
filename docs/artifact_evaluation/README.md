@@ -1,108 +1,135 @@
-# TEP NEXUS — Artifact Evaluation and Reproducibility Guide
+# TEP NEXUS — 36-case benchmark and artifact evaluation
 
-This guide accompanies the TEP NEXUS paper's **selected fault02 experiment**. It distinguishes (A) replay of the *same evidence* from (B) generating *new evidence*. **Testing is closed**; these instructions are for independent reviewer assessment, not additional author experiments.
+This document provides instructions for reproducing the **TEP NEXUS 36-query benchmark**. The benchmark evaluates engineering-function query planning, limited-scope answer validation, and execution latency. It includes 34 supported engineering-function queries and two negative test cases.
 
-> **Availability warning (checked on `main`, 2026-11-03):** The run-specific `docs/e4e_tests/original_questions_fault02.json` is **not committed**. The final evaluation record references other local files under `reports/` whose availability has **not** been established. Consequently, the archived-evidence replay is **not yet independently executable from a fresh clone**. Authors must deposit the exact question sets, evidence report, and LLM outputs in a permanent artifact bundle and provide hashes/links before claiming turnkey reproduction. Do not substitute historical `paper-fault-01` questions.
+## 1. Benchmark scope
 
-## 1. What is being reproduced?
+The expanded suite is generated from the **user-selected run's** provisional engineering-function registry. A previously observed registry contained **34 supported functions**; other user-selected runs may not meet that prerequisite. The suite retains seven positive and two negative baseline cases and adds 27 positive cases, yielding **34 positive + 2 negative = 36 cases** when the expected registry is available.
 
-Selected run ID: `a436c579-4f6a-4a60-b1b8-5a0de6ffdbf5`. The selected event is an **operator injection command**, `paper-fault-02`, recorded at 35.0 simulation seconds; it is **not** independently verified fault activation. Four reactor-related signals have adjacent samples at 34.0 and 38.0 seconds. Two sets of ten questions were answered twice each with Ollama `llama3.1:8b` and prompt version `E4C_V1_EXPLICIT_FIELD_GROUNDING` (SHA-256 `d556b0fcc819698af316af8134ec96131f0212fd13b9d5b7eaf67bf371f6a40d`).
+| Case group | Count | Expected behavior |
+| --- | ---: | --- |
+| Supported engineering functions | 34 | Complete the query with the requested measurement, ten-simulation-minute trend, associated asset and provenance; pass the implemented limited-scope answer checks |
+| Unsupported or conflicting function requests | 2 | Reject for the intended validation reason, rather than a service outage or model-formatting error |
+| **Total** | **36** | **36 harness passes in the recorded local run** |
 
-The manual task-focused grades are **8 PASS, 1 PARTIAL, 1 FAIL per question set per execution**; the repeated answers matched the earlier answers within each set. See [final evaluation record](../e4e_tests/fault02_final_evaluation_and_paper_findings.md) and [detailed Q3/Q5/Q8 review](../e4e_tests/fault02_manual_review_q3_q5_q8.md).
+The seven baseline positive function families are FI, LI, PI, TI, JI, SC and VC. The two negative baseline cases cover an unsupported function (`FI_999`) and a conflicting function selection (`FI_101` versus `VC_101`). The registry and fixture set are specific to the selected run; the generator must not invent or silently drop function identities.
 
-## 2. Obtain source and record provenance
+The historical Fault-02 Q1–Q10 LLM evaluation is **a different experiment**, not part of these 36 cases. Its [original reviewer guide](../e4e_tests/fault02_artifact_evaluation_guide_archived.md) and [evaluation findings](../e4e_tests/fault02_final_evaluation_and_paper_findings.md) remain archived for provenance.
 
-Use Windows PowerShell from the repository root (other shells require syntax adjustments):
+## 2. The 36 benchmark questions
+
+The table below reproduces the **exact question text and case order** from the [committed benchmark test cases](../../reports/tep_nexus_benchmark_full_coverage_cases.json) (also available as a [test fixture copy](../../tests/fixtures/tep_nexus_full_36_cases.json)). These are the questions from the recorded local benchmark; generating cases for another run depends on its supported-function registry.
+
+| # | Engineering function | Question | Expected outcome |
+| ---: | --- | --- | --- |
+| 1 | `FI_101` | For engineering function FI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 2 | `VC_101` | For engineering function VC_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 3 | `TI_101` | For engineering function TI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 4 | `LI_101` | For engineering function LI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 5 | `PI_101` | For engineering function PI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 6 | `JI_101` | For engineering function JI_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 7 | `SC_101` | For engineering function SC_101, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 8 | `FI_999` | Show the latest measurement for engineering function FI_999. | Reject |
+| 9 | `FI_101` | Show the latest measurement for FI_101 and VC_101. | Reject |
+| 10 | `FI_102` | For engineering function FI_102, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 11 | `FI_103` | For engineering function FI_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 12 | `FI_104` | For engineering function FI_104, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 13 | `FI_105` | For engineering function FI_105, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 14 | `FI_106` | For engineering function FI_106, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 15 | `FI_107` | For engineering function FI_107, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 16 | `FI_108` | For engineering function FI_108, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 17 | `FI_109` | For engineering function FI_109, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 18 | `FI_110` | For engineering function FI_110, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 19 | `LI_102` | For engineering function LI_102, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 20 | `LI_103` | For engineering function LI_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 21 | `PI_102` | For engineering function PI_102, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 22 | `PI_103` | For engineering function PI_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 23 | `TI_102` | For engineering function TI_102, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 24 | `TI_103` | For engineering function TI_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 25 | `TI_104` | For engineering function TI_104, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 26 | `TI_105` | For engineering function TI_105, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 27 | `VC_102` | For engineering function VC_102, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 28 | `VC_103` | For engineering function VC_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 29 | `VC_104` | For engineering function VC_104, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 30 | `VC_105` | For engineering function VC_105, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 31 | `VC_106` | For engineering function VC_106, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 32 | `VC_107` | For engineering function VC_107, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 33 | `VC_108` | For engineering function VC_108, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 34 | `VC_109` | For engineering function VC_109, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 35 | `VC_110` | For engineering function VC_110, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+| 36 | `VC_111` | For engineering function VC_111, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance. | Complete |
+
+The two rejection cases intentionally test unsupported and conflicting function identifiers; a correct rejection counts as a harness pass.
+
+## 3. Recorded benchmark results and latency (2026-11-02)
+
+The repository contains an actual [sanitized full-coverage summary](../../reports/tep_nexus_benchmark_full_coverage_summary.json) generated at **2026-11-02 09:28:09 UTC**, with `scope: operator_local_execution_not_independent_provenance_verification`. The values below are calculated from the 36 recorded `elapsed_seconds` fields, using the linear-interpolated 95th percentile definition implemented in [the audit script](../../scripts/audit_tep_nexus_benchmark.py). These are **observed results from one historical local run**, not a guaranteed outcome for another user-selected run.
+
+| Metric | Recorded result |
+| --- | ---: |
+| Total distinct cases / executions | 36 / 36 (one repeat) |
+| Positive cases passing limited-scope checks | 34 / 34 |
+| Negative cases rejected as expected | 2 / 2 |
+| Total harness passes / failures | **36 / 0** |
+| Mean end-to-end latency per case | **57.791 s** |
+| Median end-to-end latency | **58.180 s** |
+| 95th-percentile end-to-end latency (linear interpolation) | **69.665 s** |
+| Minimum / maximum end-to-end latency | **9.375 / 71.406 s** |
+| Total sequential measured case time | **2,080.471 s (34.67 min)** |
+| Median positive-case latency | **58.852 s** |
+| Median negative-case latency | **9.430 s** |
+| Positive cases reporting successful answer repair | **34 / 34** |
+| Initial failed answer checks recorded before repair | **107** |
+
+The per-case durations include the planner subprocess and, where applicable, answer repair; the two expected-rejection cases finish much faster and **must not be conflated with successful answer-generation latency**. The archived summary does **not** provide per-stage latency breakdowns, hardware specifications, independent SQL-oracle comparisons, or multiple-trial uncertainty intervals. A 36/36 harness pass rate is **not** a 100% independently verified factual-accuracy claim.
+
+For audit or paper reproduction, run:
 
 ```powershell
-git clone https://github.com/harishpakala/process-sim.git
-cd process-sim
-git rev-parse HEAD
-python --version
+python scripts\audit_tep_nexus_benchmark.py `
+  --summary reports\tep_nexus_benchmark_full_coverage_summary.json `
+  --output reports\tep_nexus_benchmark_audit.json
 ```
 
-For exact source reproducibility, use the **specific artifact release commit** once published; `main` changes over time. The historical frozen baseline is `3d40b6af97299826fdd1fc30e17c8bca5f8fd0a6` and must remain untouched; the fault02 documentation was added later, so the historical baseline alone is **not** the complete artifact.
+This audit recomputes counts and latency statistics from the committed summary; without independently prepared expected and actual historian CSVs, it does **not** verify raw observations against an independent oracle.
 
-## 3. Mode A — replay the original evidence (preferred, after artifact deposit)
+## 4. Generate and run the 36-case benchmark
 
-Prerequisites: Python, `requests` for the Ollama HTTP calls, a running Ollama service with `llama3.1:8b`, and the archived artifact bundle containing the exact paths below. Install Python requirements appropriate to the repository environment; at minimum, the query script imports `requests` when Ollama is enabled.
+From the repository root in Windows PowerShell, with Python dependencies, a working query-planner/model service, and access to the required GraphDB/TimescaleDB evidence. The existing `reports/tep_nexus_mapping_discovery.json` and `reports/tep_nexus_temporal_coverage.json` snapshots must both correspond to **your selected, verified historian run**; the commands below do not generate these snapshots or restore historical data. The generator requires 34 eligible functions by default. See the [root README](../../README.md#local-startup-windows-powershell) for local service startup.
+
+Replace the placeholder with your actual run ID, not an ID copied from another experiment:
 
 ```powershell
-ollama pull llama3.1:8b
-python -m pip install requests
+$runId = "<YOUR_VERIFIED_RUN_ID>"
+
+python scripts\tep_nexus_expand_benchmark.py `
+  --run-id $runId `
+  --output reports\tep_nexus_benchmark_full_coverage_cases.json
 ```
 
-Verify that the artifact bundle provides:
+Inspect the generated JSON before running it. **Expected, conditional on a valid 34-function registry:** 36 fixtures comprising 34 positive and two negative cases. The generator's output is a constructed test set, **not a benchmark execution result**.
 
-```text
-reports/tep_nexus_e4e_evidence_fault02.json
-docs/e4e_tests/original_questions_fault02.json
-docs/e4e_tests/revised_questions_fault02.json
-reports/e4e_comparison/fault02/original/llm_answers.json
-reports/e4e_comparison/fault02/revised/llm_answers.json
-reports/e4e_comparison/fault02/repeat02/original/llm_answers.json
-reports/e4e_comparison/fault02/repeat02/revised/llm_answers.json
-```
-
-**Do not run the following commands until those inputs are available.** Each command writes a new reviewer-local file rather than overwriting the published results:
+A controlled pilot with a few new supported functions is advisable before the full suite. Run the generated fixtures with the same `$runId`:
 
 ```powershell
-python scripts/tep_nexus_paper_queries.py `
-  --evidence reports/tep_nexus_e4e_evidence_fault02.json `
-  --questions docs/e4e_tests/original_questions_fault02.json `
-  --ollama-url http://localhost:11434 --model llama3.1:8b `
-  --output reports/reviewer_replay/original/llm_answers.json
-
-python scripts/tep_nexus_paper_queries.py `
-  --evidence reports/tep_nexus_e4e_evidence_fault02.json `
-  --questions docs/e4e_tests/revised_questions_fault02.json `
-  --ollama-url http://localhost:11434 --model llama3.1:8b `
-  --output reports/reviewer_replay/revised/llm_answers.json
+python scripts\tep_nexus_benchmark.py `
+  --fixtures reports\tep_nexus_benchmark_full_coverage_cases.json `
+  --run-id $runId `
+  --repeats 1 `
+  --timeout 300 `
+  --summary reports\tep_nexus_benchmark_full_coverage_summary.json
 ```
 
-Inspect `source_run_id`, `prompt_sha256`, `question_set_sha256`, `answer_generation_mode`, each `ollama_answer`, and each `ollama_error`. The script reports `NOT_AUTOMATICALLY_VERIFIED`; it **does not grade correctness**. Apply the recorded manual task-focused rubric, noting Q3's contradictory ancillary limitations, Q5's product-family provenance problem, and Q8's unsupported activation assertion. Ollama outputs may vary across environments even at temperature zero; compare substantive facts and qualifications, not just exact text.
+The runner writes a sanitized summary to the supplied `--summary` path and per-case planner reports under `reports/tep_nexus_benchmark_runs/` by default. It reports total, passed, failed, per-case classifications, elapsed time, available stage timings, answer-validation status and repair metadata. A nonzero exit code indicates at least one failed case.
 
-## 4. Mode B — regenerate evidence from a persisted run (requires services/data)
+The Step 5E checkpoint's **25–35-minute estimate** was a pre-execution forecast. The committed 36-case summary records **34.67 minutes of summed per-case execution time**; actual wall-clock time may differ due to overhead. For repeated trials, specify `--repeats N` and report the resulting total as **36 × N executions**, not N new distinct questions.
 
-See [main README local startup](../../README.md#local-startup-windows-powershell) and [semantic setup](../../semantic/README.md). The evidence script is **read-only** and **does not inject faults or start a simulation**. It requires a populated GraphDB SPARQL repository with exact four-domain joins, AAS JSON sources, and a TimescaleDB historian containing the selected run's operator command and signal samples. Merely starting the services is insufficient.
+## 5. How to interpret the results
 
-```powershell
-$env:TEP_TIMESCALE_DSN = "postgresql://tep:tep-local-dev@127.0.0.1:5432/tep_nexus"
-python scripts/tep_nexus_paper_evaluation.py `
-  --graphdb-url http://localhost:7200/repositories/AAS `
-  --run-id a436c579-4f6a-4a60-b1b8-5a0de6ffdbf5 `
-  --output reports/reviewer_replay/evidence_from_historian.json
-```
+A positive case passes the runner's checks only when the planner completes, selects the expected engineering function, reports `CHECKS_PASSED_LIMITED_SCOPE` and has no failed implemented answer checks. A negative case passes only when it fails at the intended validation stage with the required rejection reason; an unrelated timeout or Ollama planning failure is not a correct rejection.
 
-This command needs the **original run records** in the configured database. A fresh database will not contain the selected run. The DSN shown is a local-development example, not a production credential. For a newly created run, supply its *actual* run ID and archive its own evidence separately; do not claim that its measurements must match the published run.
+**Passing the harness does not establish** independently verified physical sensor installation, full cross-system provenance, arbitrary factual correctness, or causal attribution of measurement changes. A reported `COMPLETED` status without the required validation fields is not sufficient for a positive-case pass.
 
-To check the available CLI arguments:
+Review the sanitized summary, investigate failures using local reports, and distinguish pipeline completion from independent engineering ground truth. Do not commit unsanitized operational reports or mapping snapshots.
 
-```powershell
-python scripts/tep_nexus_paper_evaluation.py --help
-python scripts/tep_nexus_paper_queries.py --help
-```
-
-GraphDB exact-join verification must succeed for relevant cross-domain questions. `evidence-available 10/10` is an evidence-presence result, not proof of LLM answer correctness or physical installation. This guide does not assert that a complete clean-machine GraphDB/TimescaleDB bootstrap or operator fault command sequence has been independently verified.
-
-## 5. Expected selected-run observations
-
-| Signal | 34.0 s | 38.0 s |
-| --- | ---: | ---: |
-| XMEAS6 | 42.484025175435605 | 42.07586204745709 |
-| XMEAS7 | 2704.903453038064 | 2704.99975408382 |
-| XMEAS8 | 74.41177807996309 | 74.97420993656078 |
-| XMEAS9 | 120.41150921909319 | 125.39120858001397 |
-
-There is no recorded sample exactly at 35.0 s in the selected evidence. Neither these differences nor the operator command verify fault activation or causal effect.
-
-## 6. Reviewer checklist and remaining packaging obligations
-
-- Confirm source commit, Python/Ollama versions, model identity, prompt hash, and exact question/evidence file hashes.
-- Confirm Q1–Q10 evidence statuses independently of natural-language grading.
-- Inspect the `ollama_answer` field, **not** the deterministic `reference_answer`, when grading the LLM.
-- Use the manual rubric in the final evaluation record; retain all partial/failed cases.
-- Archive the missing run-specific inputs and four original outputs in a versioned release with SHA-256 manifest.
-- Document the tested GraphDB loading procedure and the historian/run export or fixture needed for Mode B before claiming fully automated end-to-end reproducibility.
-
-**Evidence boundaries:** logical simulation mappings are not verified physical installation; ECLASS release verification remains pending; operator commands are not confirmed fault activations; two executions on one evidence snapshot do not demonstrate independent-run robustness.
+**Current publication boundary:** The committed summary establishes a recorded **36/36 limited-scope local harness result** with observed end-to-end latencies. It does **not** establish an independently reproducible data bundle, independently verified historian/provenance correctness, or physical-world validation.
