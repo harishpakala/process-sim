@@ -89,17 +89,7 @@ A positive case passes the runner's checks only when the planner completes, sele
 
 Review the sanitized summary, investigate failures using local reports, and distinguish pipeline completion from independent engineering ground truth. Do not commit unsanitized operational reports or mapping snapshots.
 
-## 5. Reproducibility checklist
-
-- [ ] Pin source commit, Python/runtime versions, model version and service configuration.
-- [ ] Record the selected run ID and verify the mapping and temporal-coverage snapshot provenance.
-- [ ] Record the supported-function count and SHA-256 hashes of the snapshots and generated fixture JSON.
-- [ ] Confirm 34 positive and two negative fixtures, or document why the prerequisites are not met.
-- [ ] Execute offline tests and the benchmark; preserve command lines, exit codes and sanitized summary.
-- [ ] Report actual passed/failed counts, case classifications, timings and limitations **only after execution**.
-- [ ] Deposit a versioned, privacy-reviewed artifact bundle with hashes and clear instructions for restoring any run-specific data needed by independent reviewers.
-
-## 6. Related research documentation
+## 5. Related research documentation
 
 - [Step 5E — full-function benchmark design and commands](../research/tep-nexus/tep-nexus-step5e-full-function-coverage.md)
 - [Step 5C — seven-family baseline](../research/tep-nexus/tep-nexus-step5c-seven-family-benchmark.md)
