@@ -12,7 +12,6 @@
 | --- | --- |
 | Run the local platform and Web UI | [Local startup](#local-startup-windows-powershell) |
 | Understand the TEP NEXUS architecture | [Architecture at a glance](#architecture-at-a-glance) |
-| Record or inspect a simulation run | [Recording a TEP run](#recording-a-tep-run) |
 | Work with AAS, RDF, SHACL, or GraphDB | [Semantic setup](semantic/README.md) |
 | Configure historian persistence | [TimescaleDB / OPC UA guide](docs/opcua/TIMESERIES.md) |
 | Review the research experiment | [Artifact evaluation guide](docs/artifact_evaluation/README.md) |
@@ -99,7 +98,7 @@ After starting the OPC UA server, HTTP API, and Vue frontend, use this interacti
 3. **Inspect and clear:** The Fault Management view lists registered faults and offers **Clear** and **Clear all**. Fault statuses returned by the service should be read as recorded simulator state, not as independent evidence of physical effects.
 4. **Monitor and analyze:** Use the Web UI's measurements, historian, and TEP NEXUS query views as applicable. Persistent run-specific history requires the configured TimescaleDB historian and an advancing simulation.
 
-**Important distinction:** Starting the platform's OPC UA/API services is a one-time infrastructure step; **Start/Stop/Reset and fault injection are interactive Web UI operations**. Command-line recording and experiment scripts remain optional tools for repeatable research runs, not prerequisites for operating the simulation in the browser. A successful injection request records an operator command; it does not, by itself, independently verify fault activation.
+**Important distinction:** Starting the platform's OPC UA/API services is an infrastructure step; **Start/Stop/Reset and fault injection are interactive Web UI operations**. Simulation lifecycle and fault injection are operated through the Web UI. A successful injection request records an operator command; it does not, by itself, independently verify fault activation.
 
 **7. Optional: run local Ollama**
 
@@ -111,31 +110,6 @@ python scripts/ask_graphdb_ollama.py "Which product is associated with TEP_XMEAS
 Ollama must be running. This is a standalone GraphDB-grounded CLI, not the complete live TEP NEXUS validation pipeline. See [Ollama grounding](docs/local-ollama-graphdb-grounding.md).
 
 **Shutdown:** Stop foreground processes with `Ctrl+C`. To stop the sample database without deleting its data: `docker compose -f docker-compose.timeseries.yml down`. Check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama) when troubleshooting.
-
-## Recording a TEP run
-
-**Optional CLI research workflow:** Normal interactive simulation and fault control happen in the Web UI. Use these scripts only when you need portable Parquet recordings or reproducible scripted experiments.
-
-With Python dependencies installed and `PYTHONPATH` configured, record a run:
-
-```powershell
-$env:PYTHONPATH="$PWD\src"
-python examples/record_tep_run.py --hours 1
-```
-
-Record every tenth native step:
-
-```powershell
-python examples/record_tep_run.py --hours 1 --interval 10
-```
-
-Inspect a recorded run:
-
-```powershell
-python examples/inspect_tep_run.py --run-id <run-id> --root data/runs
-```
-
-Portable run artifacts are stored under `data/runs/<run-id>/` as `metadata.json`, `observations.parquet`, and `events.parquet`. Parquet recording is distinct from the optional TimescaleDB historian. For scenarios, replication, and fault sweeps, see the [archived detailed README](docs/project-history-and-research-notes.md).
 
 ## Research evaluation and reproducibility
 
