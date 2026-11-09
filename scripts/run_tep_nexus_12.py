@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--end-seconds", type=float, default=60.0)
     parser.add_argument("--limit", type=int, default=5000)
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--output-dir", default="reports/evaluation_12_2026")
+    parser.add_argument("--output-dir", default="reports/evaluation_12_independent")
     args = parser.parse_args()
     if not 0 <= args.start_seconds <= args.end_seconds or not 1 <= args.limit <= 5000:
         parser.error("Require 0 <= start <= end and 1 <= limit <= 5000.")
@@ -62,7 +62,7 @@ def main():
     questions_path = ROOT / "docs/e4e_tests/revised_questions.json"
     questions = json.loads(questions_path.read_text(encoding="utf-8"))["questions"]
     if [q["id"] for q in questions] != [f"Q{i}" for i in range(1, 11)]:
-        raise RuntimeError("Expected exactly the existing revised Q1-Q10 question set.")
+        raise RuntimeError("Expected exactly the revised independent Q1-Q10 question set.")
     rows = []
     for question, record in zip(questions, evidence_rows):
         status = record["status"]
@@ -141,11 +141,11 @@ def main():
     }
     rows += [
         {"id": "Q11", "question":
-         "Which ECLASS IRDI is associated with the product candidate linked to the reactor temperature instrument TI-1101?",
+         "What ECLASS IRDI is associated with the product candidate linked to reactor temperature instrument TI-1101?",
          "evidence_status": "EVIDENCE_AVAILABLE" if q11["eclass_irdi"] else "NO_EVIDENCE",
          "evidence": q11},
         {"id": "Q12", "question":
-         f"What recorded temperature observations are associated with TI-1101 during simulation time {args.start_seconds:g} to {args.end_seconds:g} seconds in the selected run?",
+         f"What temperature-signal observations were recorded for reactor temperature instrument TI-1101 (XMEAS9) between simulation time {args.start_seconds:g} and {args.end_seconds:g} seconds in the selected simulation run?",
          "evidence_status": "EVIDENCE_AVAILABLE" if q12["observations"] else "NO_EVIDENCE",
          "evidence": q12},
     ]
