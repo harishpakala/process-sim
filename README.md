@@ -2,15 +2,166 @@
 
 **Author:** Harish Kumar Pakala
 
-`process-sim` is an open industrial process simulation and digital-twin platform. It starts with the Tennessee Eastman Process (TEP) as the scientific reference model and is designed to evolve into an industrial knowledge, temporal-data, and AI platform.
+`process-sim` is an open industrial process simulation and digital-twin research platform. It uses the Tennessee Eastman Process (TEP) as its scientific reference model and provides a foundation for investigating industrial process simulation, engineering information integration, operational data retrieval, and AI-assisted engineering applications.
 
-The project deliberately separates the **reference process model** from the surrounding platform. The ProfBraatz TEP implementation remains the scientific baseline; `process-sim` provides the Python boundary, orchestration, industrial integration, recording, fault/scenario infrastructure, semantic modeling, and future AI foundations around it.
+The project deliberately separates the **reference process model** from the surrounding platform. The TEP implementation provides the process model, while `process-sim` provides simulation orchestration, industrial interfaces, measurement recording, event management, semantic integration, and research evaluation capabilities.
 
-## TEP NEXUS paper — artifact evaluation and reproducibility
+## TEP NEXUS — Semantic–Temporal Digital Twin Architecture
 
-Reviewers can start with the **[Artifact Evaluation and Reproducibility Guide](docs/artifact_evaluation/README.md)**. It documents evidence replay, the read-only evidence-generation procedure, the manual grading rubric, and the reported results and limitations.
+TEP NEXUS is a research implementation within `process-sim` that investigates engineering-context-preserving retrieval across heterogeneous engineering information and simulation-specific operational data.
 
-**Artifact availability:** The guide identifies run-specific inputs and outputs that still need to be deposited in an immutable release. Until that bundle is published, the exact reported experiment cannot be replayed from a fresh clone alone. Recorded operator injection commands do not independently verify fault activation.
+Its architecture combines:
+
+- **GraphDB:** AAS-derived engineering information and semantic relationships.
+- **TimescaleDB:** Simulation-specific measurements and recorded events.
+- **Engineering-to-signal mappings:** Explicit associations between engineering functions and operational signals.
+- **Virtual Temporal Knowledge Graph (VTKG):** On-demand integration of engineering context and run-scoped observations.
+- **Application layer:** Constrained retrieval, evidence validation, and deterministic response reconstruction.
+
+The implementation is evaluated using a simulation-based Tennessee Eastman Process configuration.
+
+
+
+## Research Paper — DTwiSE 2027
+
+**Target venue:** International Workshop on Digital Twin Software Engineering (DTwiSE 2027), co-located with ICSE 2027.
+
+The associated research investigates how digital-twin software can preserve engineering context when retrieving execution-specific operational measurements and recorded events.
+
+The paper evaluates:
+
+- Cross-domain engineering reference resolution.
+- Engineering-to-operational-signal mapping.
+- Simulation-run-aware temporal retrieval.
+- On-demand Virtual Temporal Knowledge Graph construction.
+- Constrained LLM-mediated retrieval and evidence validation.
+- Deterministic response reconstruction and rejection behavior.
+
+**Research artifact:** [Artifact Evaluation and Reproducibility Guide](docs/artifact_evaluation/README.md).
+
+The exact experiment files and outputs corresponding to the manuscript are being consolidated into a versioned research artifact. The reported results should be interpreted within the stated simulation configuration and evaluation limitations.
+
+Recorded operator injection commands are distinguished from independently verified fault activation.
+
+---
+
+## 1. Project Objectives
+
+The project investigates software engineering approaches for connecting process simulation, engineering information, and operational data within an industrial digital-twin environment.
+
+The main objectives are:
+
+1. Provide a controlled process simulation environment for digital-twin experimentation.
+2. Integrate engineering information from heterogeneous engineering representations.
+3. Connect engineering functions with operational signals through explicit references and mappings.
+4. Retrieve measurements and events under simulation-run and temporal constraints.
+5. Investigate semantic integration and evidence-grounded AI interaction.
+6. Support reproducible evaluation of digital-twin software architectures.
+
+## 2. Architecture Overview
+
+The platform separates process simulation, operational data management, semantic engineering information, and application services.
+
+### 2.1 Process Simulation Layer
+
+The Tennessee Eastman Process provides a controlled chemical-process simulation environment.
+
+The simulation environment supplies process measurements, manipulated variables, operating conditions, and recorded simulation events.
+
+The selected TEP implementation and its signal conventions are documented separately from the conventional benchmark specification.
+
+### 2.2 Operational Data Layer
+
+TimescaleDB stores simulation-specific operational measurements and recorded events.
+
+Measurements retain their simulation-run context and temporal information. Simulation time is distinguished from recording timestamps to support execution-aware retrieval.
+
+### 2.3 Semantic Engineering Layer
+
+GraphDB stores RDF representations of engineering information derived from Asset Administration Shell (AAS) Submodel Templates and Instances.
+
+The engineering representations include:
+
+- DEXPI process-engineering information.
+- ECAD electrical-engineering information.
+- AssetInventory.
+- ProductCatalog.
+- Engineering Bill of Materials (EBOM).
+- OPC UA Connectivity.
+
+Explicit references associate corresponding engineering entities across these representations.
+
+Engineering-to-signal mappings connect selected engineering functions with operational signal identifiers.
+
+The completeness and physical validity of these relationships depend on the underlying engineering data and mapping evidence.
+
+### 2.4 Semantic–Temporal Integration
+
+TEP NEXUS introduces an on-demand Virtual Temporal Knowledge Graph (VTKG).
+
+The VTKG combines engineering relationships retrieved from GraphDB with selected observations retrieved from TimescaleDB.
+
+It provides a request-scoped representation connecting:
+
+- Engineering functions.
+- Assets and engineering entities.
+- Operational signals.
+- Simulation runs.
+- Retrieved observations.
+- Source references and provenance information.
+
+The VTKG avoids permanently materializing the complete historian as RDF.
+
+### 2.5 Application and Retrieval Layer
+
+The application layer coordinates engineering resolution, operational retrieval, and evidence processing.
+
+An optional locally deployed language model proposes structured retrieval plans and evidence-grounded responses.
+
+Application logic validates permitted operations and retrieval constraints before executing predefined, read-only database operations.
+
+Generated answers undergo deterministic evidence checks. When answer validation fails, the application can reconstruct responses directly from retrieved evidence.
+
+Retrieval failures are reported rather than repaired through language generation.
+
+---
+
+## 3. Implemented Research Capabilities
+
+The following capabilities are investigated within the current TEP NEXUS implementation.
+
+| Capability | Description |
+|---|---|
+| AAS semantic representation | Ontology-oriented engineering information and RDF representations |
+| Engineering traceability | Explicit cross-domain engineering references |
+| Signal resolution | Engineering-function-to-operational-signal mappings |
+| Temporal retrieval | Run-specific and simulation-time-constrained observations |
+| Virtual graph construction | On-demand integration of engineering and operational evidence |
+| Query constraints | Structured requests and predefined read-only operations |
+| Evidence validation | Deterministic checks on retrieved identifiers and observations |
+| Response reconstruction | Evidence-only fallback when generated answers fail validation |
+| Evaluation | Pipeline benchmarks, SQL comparisons, negative tests, and engineering questions |
+
+The implementation is a research prototype, not a continuously synchronized physical digital twin.
+
+---
+
+## 4. Repository Structure
+
+The repository contains simulation software, semantic integration components, application services, and research evaluation artifacts.
+
+| Directory | Purpose |
+|---|---|
+| `simulation/` | Process simulation and orchestration components |
+| `semantic/` | Semantic representations and engineering information integration |
+| `docs/` | Architecture, implementation, and research documentation |
+| `tests/` | Software and integration tests |
+| `scripts/` | Execution, validation, and evaluation utilities |
+| `experiments/` | Experimental configurations and evaluation artifacts |
+
+The exact directory structure may evolve as the implementation develops.
+
+For component-specific instructions, consult the documentation within the corresponding directory.
 
 ## Local startup (Windows PowerShell)
 
