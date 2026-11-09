@@ -134,12 +134,4 @@ A positive case passes the runner's checks only when the planner completes, sele
 
 Review the sanitized summary, investigate failures using local reports, and distinguish pipeline completion from independent engineering ground truth. Do not commit unsanitized operational reports or mapping snapshots.
 
-## 6. Related research documentation
-
-- [Step 5E — full-function benchmark design and commands](../research/tep-nexus/tep-nexus-step5e-full-function-coverage.md)
-- [Step 5C — seven-family baseline](../research/tep-nexus/tep-nexus-step5c-seven-family-benchmark.md)
-- [Repeated benchmark and rejection classification](../research/tep-nexus/tep-nexus-step5-repeated-benchmark-checkpoint.md)
-- [Research evaluation strategy](../research/evaluation-strategy.md)
-- [Archived Fault-02 reviewer guide](../e4e_tests/fault02_artifact_evaluation_guide_archived.md) — historical experiment only; not required to operate or run the 36-case suite
-
 **Current publication boundary:** The committed summary establishes a recorded **36/36 limited-scope local harness result** with observed end-to-end latencies. It does **not** establish an independently reproducible data bundle, independently verified historian/provenance correctness, or physical-world validation.
