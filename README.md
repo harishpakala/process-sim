@@ -17,6 +17,18 @@
 | Explore SELiRA semantic correspondence and validation research | [SELiRA research documentation](docs/research/selira/selira-contract-alignment.md) · [Integration prototype](selira_integration/README.md) |
 | Consult detailed project history, contracts, and roadmap | [Archived detailed README](docs/project-history-and-research-notes.md) |
 
+## Engineering diagrams and AAS JSON models
+
+The repository includes illustrative reactor engineering diagrams and the AAS source files used for semantic integration. Instrument and product associations are provisional, not independently verified physical installations.
+
+- **Engineering diagrams:** [Reactor P&ID](docs/engineering-models/tep-reactor-pid.png) · [Reactor ECAD](docs/engineering-models/tep-reactor-ecad.png)
+- **DEXPI:** [Template](examples/aas/dexpi_template.json) · [Instance](examples/aas/tep_dexpi_instance.json)
+- **ECAD:** [Template](examples/aas/ecad_template.json) · [Instance](examples/aas/tep_ecad_instance.json)
+- **AssetInventory:** [Template](examples/aas/asset_inventory_template.json) · [Instance](examples/aas/asset_inventory_instance.json)
+- **ProductCatalog:** [Template](examples/aas/product_catalog_template.json) · [Instance](examples/aas/product_catalog_instance.json)
+- **Engineering BOM:** [Template](examples/aas/engineering_bom_template.json) · [Instance](examples/aas/tep_engineering_bom_instance.json)
+- **OPC UA Connectivity:** [Template](examples/aas/opcua_connectivity_template.json) · [Instance](examples/aas/tep_opcua_connectivity_instance.json)
+
 ## Architecture at a glance
 
 | Component | Responsibility |
