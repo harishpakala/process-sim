@@ -145,20 +145,8 @@ Ollama must be running. This is a standalone GraphDB-grounded CLI, not the compl
 
 **Shutdown:** Stop foreground processes with `Ctrl+C`. To stop the sample database without deleting its data: `docker compose -f docker-compose.timeseries.yml down`. Check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama) when troubleshooting.
 
-## Research evaluation and reproducibility
+## Research evaluation
 
-The TEP NEXUS research investigates engineering reference resolution, signal mapping, run-scoped temporal retrieval, virtual graph construction, constrained AI interaction, and deterministic evidence checks.
-
-The [artifact evaluation and reproducibility guide](docs/artifact_evaluation/README.md) describes the selected evidence, evaluation procedures, limitations, and required inputs. **The exact reported experiment is not yet reproducible from a fresh clone alone**: run-specific inputs and outputs still need an immutable, versioned artifact bundle. Do not substitute historical question sets or runs.
-
-The Web UI paper-question workflow and the separately executed evidence-conditioned Ollama assessment are **not equivalent experiments**. The 12-question qualitative assessment does not establish live VTKG accuracy or independent verification of engineering mappings.
-
-## Implementation scope and documentation
-
-- **Implemented research foundations:** simulation orchestration, OPC UA interfaces, recording, AAS-derived engineering representations, and selected semantic–temporal retrieval paths. Deployment and verification depend on configured services and populated data.
-- **Experimental or incomplete:** SELiRA correspondence qualification and consumer authorization, live integration of some engineering views, production hardening, model-evolution handling, and broader performance comparisons.
-- **Not claimed:** standalone ERP or MES implementation, independently verified installed instruments, fully autonomous industrial AI, or a physically synchronized plant digital twin.
-
-The original long-form README, including dated milestone tables, equipment candidates, proposed contracts, and historical research decisions, is preserved **without modification** in [Project history and research notes](docs/project-history-and-research-notes.md). Its dated status reports are historical snapshots, not a substitute for checking current code and tests.
+The **TEP NEXUS 36-query benchmark** evaluates engineering-function queries, limited-scope answer validation, and execution latency. See the [artifact-evaluation guide](docs/artifact_evaluation/README.md) for all 36 questions, recorded results, and reproduction instructions. Reproducing the historical run requires its run-specific evidence and configuration; a fresh clone alone is insufficient.
 
 For the semantic-lifting research foundation, see ONTO:NEXUS: [*From Asset Administration Shells to Knowledge Graphs: Rule-Based Semantic Lifting for Cross-Domain Reasoning in Cyber-Physical Systems*](https://doi.org/10.1145/3837062.3839557).
