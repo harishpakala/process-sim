@@ -2,8 +2,6 @@
 
 This is the entry point for reviewing and reproducing the **Step 5E evidence-derived, full-function benchmark**. The benchmark tests run-scoped engineering-function query planning and limited-scope answer validation. It is **not a fault-injection tutorial**. For simulation Start/Stop/Reset and the **Fault-01 bias on XMEAS9** Web UI example, see the [root README](../../README.md#operate-the-simulation-and-faults-from-the-web-ui).
 
-> **Evidence status:** A committed [36-case local benchmark summary](../../reports/tep_nexus_benchmark_full_coverage_summary.json) records **36/36 harness passes** on 2026-11-02. These are *limited-scope pipeline validation outcomes*, not independent historian/provenance ground truth. The earlier [Step 5E checkpoint](../research/tep-nexus/tep-nexus-step5e-full-function-coverage.md) predates this execution and still describes it as pending.
-
 ## 1. Benchmark scope
 
 The expanded suite is generated from the **user-selected run's** provisional engineering-function registry. A previously observed registry contained **34 supported functions**; other user-selected runs may not meet that prerequisite. The suite retains seven positive and two negative baseline cases and adds 27 positive cases, yielding **34 positive + 2 negative = 36 cases** when the expected registry is available.
