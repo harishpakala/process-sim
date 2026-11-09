@@ -91,6 +91,10 @@ Open the URL printed by Vite (typically `http://localhost:5173`). **Operate the 
 
 ### Operate the simulation and faults from the Web UI
 
+![TEP simulation controls in the Web UI](docs/images/simulation-control.png)
+
+*Simulation Control: use the browser controls to start, stop, or reset the TEP simulation.*
+
 After starting the OPC UA server, HTTP API, and Vue frontend, use this interactive workflow:
 
 1. **Simulation control:** Start the TEP simulation from the Web UI. Check the reported running state and advancing simulation time. Use **Stop** to stop execution and **Reset** when a fresh simulation state is needed.
@@ -110,6 +114,10 @@ Start the simulation in the Web UI and confirm that simulation time is advancing
 | **Magnitude** | **5** |
 | **Duration (simulation hours)** | **0** |
 | **Stuck value** | Not applicable for a bias fault |
+
+![Fault Management form configured for Fault-01, Bias, XMEAS9, magnitude 5, duration 0](docs/images/fault-01-configuration.png)
+
+*Fault-01 configuration in the Web UI. Verify the form values before selecting Inject fault.*
 
 Select **Inject fault**. The Web UI submits the injection request to the simulation API and OPC UA fault-management interface. Refresh or inspect **Registered faults** to find `Fault-01` and its reported status. The displayed status and a successful API response are simulator records; they do not independently establish that the expected measurement change occurred.
 
