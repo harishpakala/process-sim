@@ -3,6 +3,9 @@
 All slopes are per simulation minute. No claim of a physical trend or
 verified engineering mapping is implied by these descriptive statistics.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 import statistics
 

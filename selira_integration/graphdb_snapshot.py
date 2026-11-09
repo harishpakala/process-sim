@@ -3,6 +3,9 @@
 The source properties are URI-shaped RDF *literals*. Preserve lexical values;
 do not infer candidate assignments or invent a catalog-completeness assertion.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 import json
 from pathlib import Path

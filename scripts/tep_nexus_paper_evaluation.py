@@ -4,6 +4,9 @@
 Run from repository root. No fault is injected by this program.
 Unknown cross-domain joins are never inferred from similar-looking tags.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 from __future__ import annotations
 
 import argparse

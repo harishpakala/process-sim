@@ -1,5 +1,8 @@
 ﻿"""TEP NEXUS v2: read-only cross-store validation."""
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import asyncio
 import json

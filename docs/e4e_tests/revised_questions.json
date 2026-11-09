@@ -3,43 +3,43 @@
   "questions": [
     {
       "id": "Q1",
-      "question": "Which instruments are associated with the reactor?"
+      "question": "Which process instruments are associated with the Tennessee Eastman Process (TEP) reactor, according to the integrated engineering representations?"
     },
     {
       "id": "Q2",
-      "question": "What are their electrical references?"
+      "question": "What are the corresponding ECAD device identifiers for the reactor pressure, feed-flow, temperature, and level instruments?"
     },
     {
       "id": "Q3",
-      "question": "What are their asset IDs and signal references?"
+      "question": "What are the canonical AAS AssetIdentifiers and operational TEP signal references for the reactor pressure, feed-flow, temperature, and level instruments?"
     },
     {
       "id": "Q4",
-      "question": "Which products and manufacturers are associated with these assets?"
+      "question": "Which product candidates and manufacturers are associated with the reactor pressure, feed-flow, temperature, and level instruments?"
     },
     {
       "id": "Q5",
-      "question": "What ECLASS classifications and QUDT attributes are available for these assets, and which attributes are only associated with product candidates rather than independently verified physical instruments?"
+      "question": "What ECLASS classifications and QUDT attributes are available for the product candidates associated with the reactor pressure, feed-flow, temperature, and level instruments? Which attributes lack independent verification for the physically installed instruments?"
     },
     {
       "id": "Q6",
-      "question": "Which asset identifiers link the engineering representations?"
+      "question": "Which canonical AAS AssetIdentifiers connect the DEXPI, ECAD, and AssetInventory representations of the reactor pressure, feed-flow, temperature, and level instruments?"
     },
     {
       "id": "Q7",
-      "question": "What engineering information is available for PI-1101?"
+      "question": "What DEXPI, ECAD, AssetInventory, ProductCatalog, and operational signal information is available for reactor pressure instrument PI-1101?"
     },
     {
       "id": "Q8",
-      "question": "What `paper-fault-01` operator injection command was recorded, at what simulation time, and what evidence, if any, verifies that the requested fault actually became active?"
+      "question": "What operator injection command was recorded for `paper-fault-01` in the selected simulation run, at what simulation time was it recorded, and is there independent evidence that the requested fault became active?"
     },
     {
       "id": "Q9",
-      "question": "For the selected reactor-related TEP signals XMEAS6, XMEAS7, XMEAS8, and XMEAS9, what were their recorded values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run?"
+      "question": "What were the recorded values and simulation timestamps of XMEAS6, XMEAS7, XMEAS8, and XMEAS9 immediately before and at the `paper-fault-01` injection command at simulation time 30 seconds in the selected simulation run?"
     },
     {
       "id": "Q10",
-      "question": "For the reactor feed-flow instrument FI-1101, provide its canonical AAS AssetIdentifier, DEXPI reference, ECAD reference, associated product candidate, ECLASS class, and operational signal. Also report the recorded XMEAS6 values and simulation timestamps immediately before and at the paper-fault-01 operator injection command at simulation time 30 seconds in the selected simulation run."
+      "question": "For reactor feed-flow instrument FI-1101, what are its canonical AAS AssetIdentifier, DEXPI identifier, ECAD identifier, associated product candidate, ECLASS classification, and operational signal? What XMEAS6 observations were recorded immediately before and at simulation time 30 seconds in the selected simulation run?"
     }
   ]
 }

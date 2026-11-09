@@ -3,6 +3,9 @@
 ECLASS IRDIs identify terms only. No mappings are populated automatically from
 names, catalog strings, ECLASS classes, or coincident signal identifiers.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 from collections.abc import Mapping

@@ -1,4 +1,7 @@
 """Offline deterministic temporal analytics regression tests."""
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 import sys
 import unittest

@@ -1,4 +1,7 @@
 """SC-01 compiler tests: run with python -m unittest tests/test_safsl_shacl_sc01.py."""
+
+# Created: 2026-10-31
+# Author: Harish
 import base64
 import unittest
 

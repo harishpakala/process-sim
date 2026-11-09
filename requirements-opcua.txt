@@ -1,2 +1,0 @@
-# OPC UA server integration
-asyncua>=1.1,<2

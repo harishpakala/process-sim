@@ -1,4 +1,7 @@
 """Offline checks for split numerical and engineering judgment."""
+
+# Created: 2026-11-02
+# Author: Harish
 import sys
 import unittest
 from pathlib import Path

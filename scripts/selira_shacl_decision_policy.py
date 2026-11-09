@@ -4,6 +4,9 @@
 This is a Python interpretation of an RDF/SHACL validation report, not
 an execution of SHACL-SPARQL itself. See comparison limitations.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from itertools import product
 
 SC = ("SC-01", "SC-02", "SC-03", "SC-04", "SC-05")

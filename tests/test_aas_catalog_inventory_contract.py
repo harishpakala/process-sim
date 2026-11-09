@@ -3,6 +3,9 @@
 Run: python3 -m unittest discover -s tests -p 'test_aas_catalog_inventory_contract.py'
 These checks do not replace AAS metamodel, RDF or SHACL validation.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 import json
 from pathlib import Path
 import unittest

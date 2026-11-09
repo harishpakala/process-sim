@@ -4,6 +4,9 @@ This is NOT open-ended factual verification. It checks selected explicit
 claims and required caveats against retrieved evidence; unparsed claims
 are outside scope. Failed checks do not prevent evidence preservation.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 import re
 

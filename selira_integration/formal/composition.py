@@ -3,6 +3,9 @@
 Pure reference semantics for the proposed formal specification. This module
 does not establish engineering authority or execute SHACL.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 from dataclasses import dataclass
 from enum import Enum

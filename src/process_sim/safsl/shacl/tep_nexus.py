@@ -5,6 +5,9 @@ real AAS template JSON IDs and the existing GraphDB snapshot reader. Source
 identifiers are RDF literals, compared lexically, as in the existing SC-01
 reference engine. No remote writes are performed.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from __future__ import annotations
 
 import base64

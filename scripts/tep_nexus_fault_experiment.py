@@ -4,6 +4,9 @@
 Does not start an OPC UA server, modify simulator internals, or fabricate a
 historian run ID. A persisted run ID must be established independently.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import asyncio
 import json

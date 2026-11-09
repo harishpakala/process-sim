@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """E1-E10 evidence-perturbation benchmark; synthetic comparators, no certification."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 from copy import deepcopy
 import json

@@ -4,6 +4,9 @@ The caller supplies reviewed validation declarations. This module checks their
 structure and association but does NOT independently authenticate evidence URIs.
 Unreviewed mappings and unknown applicability remain non-authoritative.
 """
+
+# Created: 2026-10-28
+# Author: Harish
 from __future__ import annotations
 
 import re

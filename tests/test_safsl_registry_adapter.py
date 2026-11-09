@@ -1,3 +1,6 @@
+"""Created: 2026-10-31
+Author: Harish"""
+
 import unittest
 from process_sim.safsl.shacl.compiler import CompilationError
 from process_sim.safsl.shacl.registry_adapter import bindings_from_registry

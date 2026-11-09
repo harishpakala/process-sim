@@ -4,6 +4,9 @@ All questions use one independently retrieved evidence snapshot. No synthetic
 relationships, causal links, or physical provenance are introduced. Raw LLM
 answers are preserved; automatic checks have explicitly limited scope.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import json
 import os

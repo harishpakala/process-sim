@@ -1,5 +1,8 @@
 """Execute a declarative experiment specification."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 import argparse

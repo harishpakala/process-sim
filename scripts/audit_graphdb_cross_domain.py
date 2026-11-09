@@ -4,6 +4,9 @@
 Reports observed namespaces, classes, predicates, and explicit URI-to-URI edges.
 Does not infer joins from similar names and does not write to the repository.
 """
+
+# Created: 2026-10-24
+# Author: Harish
 import argparse
 import collections
 import json

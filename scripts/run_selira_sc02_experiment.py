@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Execute SC-02 V/F synthetic controls and GraphDB unknown case."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 from pathlib import Path

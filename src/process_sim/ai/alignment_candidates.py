@@ -3,6 +3,9 @@
 This is a review queue, not a verified ECLASS property dictionary. Product
 classification IRDIs must never be substituted for characteristic IRDIs.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 CANDIDATES = (

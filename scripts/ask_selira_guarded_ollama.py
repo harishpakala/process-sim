@@ -5,6 +5,9 @@ Does NOT retrieve/authenticate DEXPI, ECAD, PLC, or OPC UA mappings from GraphDB
 Only an explicitly supplied evidence snapshot can be evaluated. The answer is
 limited to the supplied measurement and must not be described as plant-verified.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import os

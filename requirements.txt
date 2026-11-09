@@ -1,0 +1,25 @@
+# TEP NEXUS / process-sim Python dependencies
+# Install: python -m pip install -r requirements.txt
+# The Vue frontend uses frontend/package.json and npm separately.
+
+# TEP numerical simulation
+numpy>=1.24,<3
+
+# OPC UA integration
+asyncua>=1.1,<2
+
+# Simulation recording / Parquet
+pandas>=2.0,<4
+pyarrow>=14,<24
+
+# PostgreSQL / TimescaleDB historian
+psycopg[binary]>=3.1,<4
+
+# AAS semantic lifting, RDF, SHACL and SPARQL
+aas-core3.1
+rdflib
+pyshacl
+requests
+
+# SAFSL grammar/parser
+lark

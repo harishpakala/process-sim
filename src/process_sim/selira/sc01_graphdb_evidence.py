@@ -1,4 +1,7 @@
 """Classify SC-01 GraphDB observations without upgrading discovery to certification."""
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from collections import defaultdict

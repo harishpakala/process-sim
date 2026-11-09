@@ -3,6 +3,9 @@
 This module assesses a *proposed* mapping; it never infers installation or
 authorizes a correspondence merely because units are convertible.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

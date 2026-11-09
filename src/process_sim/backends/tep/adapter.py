@@ -5,6 +5,9 @@ TEPSimulator API into the process-sim boundary and keeps TEP-specific details
 out of the rest of the platform.
 """
 
+# Created: 2026-08-19
+# Author: Harish
+
 from typing import Callable, Dict, Optional, Tuple
 
 import numpy as np

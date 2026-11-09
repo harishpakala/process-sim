@@ -3,6 +3,9 @@
 No alternate RDF mapping, GraphDB reads, or writes. This is a local
 candidate-graph builder; authoritative source revision attestation is external.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from __future__ import annotations
 
 import json

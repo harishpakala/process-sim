@@ -4,6 +4,9 @@ AAS template IDs and RDF paths are checked against lifted registry records.
 Class/field selections remain explicit: the registry cannot infer business
 roles (asset vs canonical product) or canonical identity automatically.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from .compiler import CompilationError, _iri
 
 

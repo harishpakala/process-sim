@@ -3,6 +3,9 @@
 Independent evaluation and web queries may import this module. Frozen paper
 scripts remain unchanged. These checks do not prove semantic correctness.
 """
+
+# Created: 2026-11-03
+# Author: Harish
 import re
 
 ECLASS_FIELDS = ("eclass_class", "eclass_irdi", "eclass_preferred_name",

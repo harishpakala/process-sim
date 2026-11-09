@@ -1,5 +1,8 @@
 """Smoke and contract tests for the ProfBraatz TEP integration."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 import pytest
 
 tep = pytest.importorskip("tep")

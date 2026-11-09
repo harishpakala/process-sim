@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Search GraphDB for candidate cross-domain engineering identifiers."""
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import sys

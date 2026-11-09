@@ -3,6 +3,9 @@
 The worker periodically rebuilds each run's RDF from authoritative TimescaleDB
 records and replaces only that run's dedicated named graph.
 """
+
+# Created: 2026-10-18
+# Author: Harish
 from __future__ import annotations
 import os
 from threading import Thread, Lock

@@ -4,6 +4,9 @@
 Requires running TEP API (with TimescaleDB and GraphDB configured) and Ollama.
 Python standard library only. No database writes, SPARQL updates, or plant controls.
 """
+
+# Created: 2026-10-24
+# Author: Harish
 import argparse
 import math
 import json

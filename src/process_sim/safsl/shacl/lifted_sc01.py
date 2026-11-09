@@ -2,6 +2,9 @@
 
 Read-only validation; completeness and canonical identity are caller attestations.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 from rdflib import Graph, Namespace, RDF
 from pyshacl import validate
 

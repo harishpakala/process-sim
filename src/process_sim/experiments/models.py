@@ -1,5 +1,8 @@
 """Declarative experiment specifications and expected ground truth."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

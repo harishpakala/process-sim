@@ -1,5 +1,8 @@
 """Execute declarative experiments and persist their ground truth."""
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from pathlib import Path

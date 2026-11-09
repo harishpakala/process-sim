@@ -1,4 +1,7 @@
 """Regression checks for server-backed append-only review history."""
+
+# Created: 2026-10-23
+# Author: Harish
 import os
 import sqlite3
 import tempfile

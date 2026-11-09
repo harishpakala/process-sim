@@ -1,4 +1,7 @@
 """In-memory, process-local log of successful operator fault commands."""
+
+# Created: 2026-10-17
+# Author: Harish
 from __future__ import annotations
 from collections import deque
 from threading import Lock

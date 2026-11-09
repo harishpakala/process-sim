@@ -1,4 +1,7 @@
 """Offline checks for the paper evaluation's provenance and time-selection rules."""
+
+# Created: 2026-11-02
+# Author: Harish
 import importlib.util
 from pathlib import Path
 import unittest

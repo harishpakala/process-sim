@@ -1,0 +1,47 @@
+{
+  "scope": "negative_integration_checks_live_graphdb_only_for_stale_mapping",
+  "generated_at_utc": "2026-11-09T14:08:01.614834+00:00",
+  "run_id": "077a3c31-44f4-4f3a-b06d-ad52b148fe10",
+  "function": "PI_101",
+  "limitations": [
+    "The stale-mapping scenario queries the real GraphDB.",
+    "Unknown-run and no-coverage scenarios are rejected by local registry validation before GraphDB.",
+    "Historian retrieval is replaced with a tripwire; zero attempts demonstrate control-flow prevention, not network-level SQL tracing.",
+    "No-coverage is simulated using a temporary modified snapshot; source databases are not modified.",
+    "An old mapping snapshot must reflect a real previously observed mapping change."
+  ],
+  "cases": [
+    {
+      "id": "stale_mapping_live_graphdb",
+      "status": "PASS",
+      "expected_exception": "RuntimeError",
+      "expected_message_contains": "GraphDB mapping changed since discovery",
+      "observed_exception": "RuntimeError",
+      "observed_message": "GraphDB mapping changed since discovery; regenerate reports",
+      "historian_retrieval_attempts": 0
+    },
+    {
+      "id": "unknown_run_id",
+      "status": "PASS",
+      "expected_exception": "ValueError",
+      "expected_message_contains": "Temporal coverage is not scoped to the requested run",
+      "observed_exception": "ValueError",
+      "observed_message": "Temporal coverage is not scoped to the requested run",
+      "historian_retrieval_attempts": 0
+    },
+    {
+      "id": "no_temporal_coverage",
+      "status": "PASS",
+      "expected_exception": "ValueError",
+      "expected_message_contains": "Engineering function not in run-scoped registry",
+      "observed_exception": "ValueError",
+      "observed_message": "Engineering function not in run-scoped registry",
+      "historian_retrieval_attempts": 0
+    }
+  ],
+  "summary": {
+    "total": 3,
+    "passed": 3,
+    "failed": 0
+  }
+}

@@ -5,6 +5,9 @@ The browser sends SPARQL SELECT queries to /api/kg/select; only this service
 knows the GraphDB URL. Bind to loopback by default and put authentication in
 front of this API before any public deployment.
 """
+
+# Created: 2026-10-17
+# Author: Harish
 from __future__ import annotations
 
 import asyncio
@@ -363,7 +366,7 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     host = os.environ.get("PROCESS_SIM_API_HOST", "127.0.0.1")
     port = int(os.environ.get("PROCESS_SIM_API_PORT", "8000"))
-    from process_sim.api.historian import start
+    from process_sim.api.historian import start, stop
     start()
     from process_sim.api.graph_sync import start as start_graph_sync
     start_graph_sync()
@@ -374,7 +377,10 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        server.server_close()
+        try:
+            stop()
+        finally:
+            server.server_close()
 
 
 if __name__ == "__main__":

@@ -1,4 +1,7 @@
 """Ontology-aware local Ollama SPARQL planner with a validated execution path."""
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import json

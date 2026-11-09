@@ -1,4 +1,7 @@
 """Focused read-only GraphDB inspection of XMEAS7 engineering relationships."""
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from .graphdb_discovery import query_graphdb

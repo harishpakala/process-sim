@@ -3,6 +3,9 @@
 Checks explicit evidence coverage, not semantic entailment or hallucination-free
 reasoning. Fail closed when the answer is malformed or a claim is ambiguous.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import math
 import re
 

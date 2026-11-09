@@ -1,4 +1,7 @@
 """Offline tests; no Ollama service or engineering-data writes required."""
+
+# Created: 2026-10-23
+# Author: Harish
 import tempfile
 import unittest
 from pathlib import Path

@@ -3,6 +3,9 @@
 Temporal RDF is not generated from AAS templates. Keep this separate from the
 AAS SHACL registry; changes to the exporter must be reflected in tests here.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from process_sim.api.temporal_rdf import BASE
 from process_sim.api.graph_sync import BASE_GRAPH
 

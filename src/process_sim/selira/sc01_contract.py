@@ -3,6 +3,9 @@
 Evidence is supplied by the caller. A declared 'verified' status is NOT
 independent authentication; synthetic fixtures must never be used as live proof.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from __future__ import annotations
 
 from collections.abc import Mapping

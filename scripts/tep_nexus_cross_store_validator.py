@@ -1,5 +1,8 @@
 ﻿"""Read-only TEP NEXUS cross-store measurement validator."""
 
+# Created: 2026-11-01
+# Author: Harish
+
 import argparse
 import asyncio
 import json

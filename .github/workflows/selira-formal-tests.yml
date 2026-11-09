@@ -6,12 +6,12 @@ on:
       - feature/selira-12-contracts-graphdb-prototype
     paths:
       - 'selira_integration/**'
-      - 'tests/test_selira_*.py'
+      - 'tests/selira/**'
       - '.github/workflows/selira-formal-tests.yml'
   pull_request:
     paths:
       - 'selira_integration/**'
-      - 'tests/test_selira_*.py'
+      - 'tests/selira/**'
       - '.github/workflows/selira-formal-tests.yml'
   workflow_dispatch:
 
@@ -28,4 +28,4 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Run dependency-free formal tests
         run: |
-          python -m unittest discover -s tests -p 'test_selira_*.py' -v
+          python -m unittest discover -s tests/selira -p 'test_*.py' -v

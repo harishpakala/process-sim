@@ -1,4 +1,7 @@
 """Portable SAFSL parser using the upstream Lark grammar and transformer."""
+
+# Created: 2026-10-31
+# Author: Harish
 from importlib.resources import files
 from lark import Lark
 from process_sim.safsl.parser.transformer import SAFSLTransformer

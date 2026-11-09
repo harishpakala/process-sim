@@ -3,6 +3,9 @@
 
 Run: python scripts/validate_asset_inventory_semantics.py
 """
+
+# Created: 2026-10-22
+# Author: Harish
 import json
 from pathlib import Path
 

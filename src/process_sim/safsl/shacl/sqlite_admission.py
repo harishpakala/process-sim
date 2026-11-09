@@ -3,6 +3,9 @@
 This adapter atomically updates its OWN SQLite RDF snapshot, version and audit.
 It does NOT write to GraphDB or AAS repositories, nor certify their revisions.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 import json
 import sqlite3
 from contextlib import closing

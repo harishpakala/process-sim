@@ -4,6 +4,9 @@
 This supplements, not renumbers, the integrated SC/CAC prototype. All
 assertions here are synthetic; no engineering approval is issued.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import json
 import sys

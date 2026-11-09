@@ -4,6 +4,9 @@
 Usage: python3 scripts/export_asset_kg.py
 Output: examples/kg/tep_asset_product_graph.ttl
 """
+
+# Created: 2026-10-16
+# Author: Harish
 import argparse
 import json
 import os

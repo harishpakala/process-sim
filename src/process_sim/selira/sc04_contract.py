@@ -3,6 +3,9 @@
 This evaluator trusts only explicitly marked assertions within the supplied
 snapshot; it does not independently authenticate sources or grant authorization.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 from collections.abc import Mapping
 
 

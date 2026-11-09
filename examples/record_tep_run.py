@@ -6,6 +6,9 @@ python examples/record_tep_run.py --hours 1
 python examples/record_tep_run.py --hours 2 --interval 10
 """
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 import argparse

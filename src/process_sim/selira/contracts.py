@@ -3,6 +3,9 @@
 Resolution is response-level; validation and applicability are candidate-level.
 No implicit promotion from a recognized operational reference to validation.
 """
+
+# Created: 2026-10-28
+# Author: Harish
 from dataclasses import asdict, dataclass
 from typing import Literal
 

@@ -3,11 +3,14 @@
 Runs the existing query planner as a subprocess for each fixture.
 Produces a sanitized summary, not raw evidence or credentials.
 """
+
+# Created: 2026-11-02
+# Author: Harish
 import argparse
 import json
 import subprocess
 import sys
-import time
+import time  # STAGE_TIMING_V1
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -68,6 +71,7 @@ def run_suite(cases, run_id, output_dir, model, planner, extra_args=None, repeat
             "function": case["function"], "expected": case["expected"],
             "passed": passed, "classification": classification,
             "elapsed_seconds": duration,
+            "stage_latency_seconds": report.get("stage_latency_seconds", {}),
             "pipeline_status": report.get("status"),
             "answer_validation": report.get("answer_validation"),
             "original_failed_check_count": len(

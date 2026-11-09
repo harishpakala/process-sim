@@ -5,6 +5,9 @@ a time-series storage, or a temporal knowledge graph without changing the
 simulation core.
 """
 
+# Created: 2026-08-19
+# Author: Harish
+
 from __future__ import annotations
 
 from dataclasses import dataclass, field

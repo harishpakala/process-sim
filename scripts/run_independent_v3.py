@@ -1,5 +1,8 @@
 #!/usr/bin/env python3
 """Independent Q1-Q10 runner with ProductCatalog grounding; frozen scripts unchanged."""
+
+# Created: 2026-11-03
+# Author: Harish
 import argparse
 import hashlib
 import importlib.util

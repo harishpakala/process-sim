@@ -3,6 +3,9 @@
 No oracle code calls the compiler or SPARQL engine. The SHACL side uses
 the public compiler API and the production pySHACL execution path.
 """
+
+# Created: 2026-10-31
+# Author: Harish
 import base64
 import itertools
 import unittest

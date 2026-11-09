@@ -7,6 +7,9 @@ Manifest format:
 "verificationRecord":"..."}]}
 Paths resolve below --evidence-root; no network calls are made.
 """
+
+# Created: 2026-10-30
+# Author: Harish
 import argparse
 import hashlib
 import json

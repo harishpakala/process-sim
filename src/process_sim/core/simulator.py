@@ -4,6 +4,9 @@ The core interface intentionally contains no TEP-specific names. Backend
 adapters translate their native APIs into this contract.
 """
 
+# Created: 2026-08-19
+# Author: Harish
+
 from typing import Protocol
 
 

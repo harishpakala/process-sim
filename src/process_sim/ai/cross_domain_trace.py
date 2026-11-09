@@ -3,6 +3,9 @@
 ECLASS identifiers label terms. Catalog values are manufacturer claims; no
 numeric limits, units, or measurement equivalence are inferred.
 """
+
+# Created: 2026-10-23
+# Author: Harish
 from __future__ import annotations
 
 import re

@@ -3,6 +3,9 @@
 This is a local, read-only reference integration. Revision authority and
 catalog completeness must be independently attested by the caller.
 """
+
+# Created: 2026-10-29
+# Author: Harish
 from __future__ import annotations
 
 from dataclasses import dataclass

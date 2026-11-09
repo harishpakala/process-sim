@@ -4,6 +4,9 @@
 Uses only the Python standard library; no GraphDB connection required.
 A mismatch is reported, never silently repaired or converted into invented RDF.
 """
+
+# Created: 2026-10-17
+# Author: Harish
 import json
 from pathlib import Path
 import sys
