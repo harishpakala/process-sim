@@ -1,4 +1,4 @@
-"""Read-only Q1-Q10 paper evaluation bridge for the web UI."""
+"""Read-only Q1-Q12 paper question bridge for the web UI."""
 
 # Created: 2026-11-03
 # Author: Harish
@@ -29,7 +29,10 @@ def _independent_questions():
     entries = json.loads(path.read_text(encoding="utf-8-sig"))["questions"]
     if [entry["id"] for entry in entries] != [f"Q{i}" for i in range(1, 11)]:
         raise ValueError("Invalid independent question registry")
-    return {entry["id"]: entry["question"] for entry in entries}
+    result = {entry["id"]: entry["question"] for entry in entries}
+    result["Q11"] = "What ECLASS IRDI is associated with the product candidate linked to reactor temperature instrument TI-1101?"
+    result["Q12"] = "What temperature-signal observations were recorded for reactor temperature instrument TI-1101 (XMEAS9) between simulation time 0 and 60 seconds in the selected simulation run?"
+    return result
 
 
 def questions():
@@ -80,9 +83,66 @@ def _ui_completeness_flags(question_id, answer_text, evidence):
     return issues
 
 
+def _answer_q11_q12(question_id, run_id):
+    """UI-only live evidence path; distinct from the frozen 12-question assessment."""
+    evaluation = _load("tep_nexus_paper_evaluation_web_extended", "scripts/tep_nexus_paper_evaluation.py")
+    engineering = evaluation.engineering_evidence(
+        str(ROOT / "examples/aas/asset_inventory_instance.json"),
+        str(ROOT / "examples/aas/product_catalog_instance.json"))
+    temperature = engineering["temperature"]
+    if temperature.get("equipment_tag") != "TI-1101" or temperature.get("signal") != "XMEAS9":
+        raise ValueError("Temperature instrument mapping does not match the supported fixture")
+    evidence = {}
+    if question_id == "Q11":
+        evidence = {"engineering_catalog": {"temperature": temperature}}
+        irdi = temperature.get("eclass_irdi")
+        status = "EVIDENCE_AVAILABLE" if irdi else "NO_EVIDENCE"
+        response = (f"TI-1101 is associated with product candidate {temperature.get('product_key')}; "
+                    f"its recorded ECLASS IRDI is {irdi}. This is not physical installation verification.") if irdi else "No ECLASS IRDI is recorded for the TI-1101 product candidate."
+    else:
+        dsn = os.environ.get("TEP_TIMESCALE_DSN")
+        if not dsn:
+            raise RuntimeError("TEP_TIMESCALE_DSN is not configured")
+        import psycopg
+        with psycopg.connect(dsn, connect_timeout=5) as conn:
+            with conn.transaction():
+                conn.execute("SET TRANSACTION READ ONLY")
+                samples = conn.execute("""
+                    SELECT simulation_time_hours, value, observed_at
+                    FROM public.signal_samples
+                    WHERE run_id = %s::uuid AND signal_id = %s
+                      AND simulation_time_hours >= %s AND simulation_time_hours <= %s
+                    ORDER BY simulation_time_hours, observed_at
+                    LIMIT %s
+                """, (run_id, "XMEAS9", 0.0, 60.0 / 3600.0, 5001)).fetchall()
+        observations = [{"simulation_seconds": float(t) * 3600, "value": float(v),
+                         "observed_at": ts.isoformat()}
+                        for t, v, ts in samples[:5000]]
+        evidence = {"signal": "XMEAS9", "equipment_tag": "TI-1101", "run_id": run_id,
+                    "interval_seconds_inclusive": [0, 60],
+                    "truncated": len(samples) > 5000, "observations": observations}
+        status = "EVIDENCE_AVAILABLE" if observations else "NO_EVIDENCE"
+        response = (f"Retrieved {len(observations)} recorded XMEAS9 observations for TI-1101 "
+                    f"between 0 and 60 simulation seconds; see the evidence table for every "
+                    f"timestamp and raw value.{' The result is truncated.' if evidence['truncated'] else ''}"
+                    if observations else "No XMEAS9 observations were recorded in the selected interval.")
+    return {"id": question_id, "question": _independent_questions()[question_id],
+            "status": status, "answer": response,
+            "limitations": ["Product association does not verify physical installation."] if question_id == "Q11" else
+                           ["Raw historian values do not independently establish measurement units or instrument state."],
+            "evidence": evidence, "reason": None if status == "EVIDENCE_AVAILABLE" else "No matching evidence",
+            "runId": run_id, "eventId": None, "model": None,
+            "promptVersion": "Q11_Q12_UI_EVIDENCE_ONLY",
+            "questionAdaptation": "LIVE_UI_NOT_FROZEN_12_QUESTION_REPLAY",
+            "answerValidation": "DETERMINISTIC_EVIDENCE_SUMMARY_NOT_LLM",
+            "validationFlags": [], "displayedAnswerValidationFlags": [],
+            "answerSource": "DETERMINISTIC_EVIDENCE_FALLBACK",
+            "warning": "No fault activation or physical sensor state is inferred."}
+
+
 def answer(question_id, run_id=None, event_id=None):
-    if question_id not in {f"Q{i}" for i in range(1, 11)}:
-        raise ValueError("Select one of Q1-Q10")
+    if question_id not in {f"Q{i}" for i in range(1, 13)}:
+        raise ValueError("Select one of Q1-Q12")
     if event_id and not run_id:
         raise ValueError("A run is required when an event is selected")
     if run_id:
@@ -90,8 +150,12 @@ def answer(question_id, run_id=None, event_id=None):
     if event_id:
         event_id = str(UUID(event_id))
     number = int(question_id[1:])
-    if number >= 8 and not run_id:
-        raise ValueError("Q8-Q10 require a recorded simulation run")
+    if number >= 8 and number != 11 and not run_id:
+        raise ValueError("Q8-Q10 and Q12 require a recorded simulation run")
+    if number in {11, 12}:
+        if event_id:
+            raise ValueError("Q11 and Q12 do not use a fault event")
+        return _answer_q11_q12(question_id, run_id)
     evaluation = _load("tep_nexus_paper_evaluation_web", "scripts/tep_nexus_paper_evaluation.py")
     query = _load("tep_nexus_paper_queries_web_answer", "scripts/tep_nexus_paper_queries.py")
     engineering = evaluation.engineering_evidence(
