@@ -12,7 +12,6 @@
 | --- | --- |
 | Run the local platform and Web UI | [Local startup](#local-startup-windows-powershell) |
 | Understand the TEP NEXUS architecture | [Architecture at a glance](#architecture-at-a-glance) |
-| Work with AAS, RDF, SHACL, or GraphDB | [Semantic setup](semantic/README.md) |
 | Configure historian persistence | [TimescaleDB / OPC UA guide](docs/opcua/TIMESERIES.md) |
 | Review the research experiment | [Artifact evaluation guide](docs/artifact_evaluation/README.md) |
 | Explore SELiRA semantic correspondence and validation research | [SELiRA research documentation](docs/research/selira/selira-contract-alignment.md) · [Integration prototype](selira_integration/README.md) |
