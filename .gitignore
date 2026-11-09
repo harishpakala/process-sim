@@ -38,3 +38,17 @@ Thumbs.db
 
 # Generated simulation data
 data/
+
+# Node.js / npm
+**/node_modules/
+**/dist/
+**/.npm/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Local GraphDB backups
+out/graphdb-backups/
+
+# Temporary instrumentation backups
+*.pre_stage_timing.bak
