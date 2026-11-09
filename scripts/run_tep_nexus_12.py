@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--end-seconds", type=float, default=60.0)
     parser.add_argument("--limit", type=int, default=5000)
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--output-dir", default="reports/evaluation_12_independent")
+    parser.add_argument("--output-dir", default="reports/evaluation_12_grounded")
     args = parser.parse_args()
     if not 0 <= args.start_seconds <= args.end_seconds or not 1 <= args.limit <= 5000:
         parser.error("Require 0 <= start <= end and 1 <= limit <= 5000.")
@@ -150,6 +150,22 @@ def main():
          "evidence": q12},
     ]
 
+    grounding_rules = (
+        "Answer the question using only the supplied JSON evidence. "
+        "Report explicit identifiers, mappings, values, and timestamps directly; "
+        "do not downgrade an explicit canonical assetId or GraphDB mapping to a guess. "
+        "A verified logical mapping does NOT verify physical installation or product "
+        "selection: preserve those separate qualifications. "
+        "An operator injection command is a recorded request, not proof that a fault "
+        "became active; do not describe samples at the command time as post-fault. "
+        "For temporal queries, distinguish simulation_seconds from observed_at "
+        "(wall-clock record time); 30 and 30.0 seconds denote the same instant. "
+        "Floating-point roundoff (for example 27.000000000000004) is not itself "
+        "a timing discrepancy. Do not claim timing discrepancies, physical "
+        "installation, measurement units, causal effects, or missing mappings "
+        "without supporting evidence. If evidence is genuinely missing, identify "
+        "the specific missing field. Answer concisely and completely."
+    )
     destination = output / "answers_12.json"
     results = []
     for row in rows:
@@ -157,7 +173,7 @@ def main():
         prompt = ("Question:\n" + row["question"] +
                   "\n\nEvidence from a read-only snapshot (JSON):\n" +
                   json.dumps(evidence, indent=2, ensure_ascii=False, default=str) +
-                  "\n\nGive a grounded answer. Note missing evidence and timing discrepancies.")
+                  "\n\nGrounding instructions:\n" + grounding_rules)
         entry = {
             "id": row["id"], "question": row["question"],
             "evidence_status": row.get("evidence_status"),
@@ -178,6 +194,7 @@ def main():
             "generated_at_utc": datetime.now(timezone.utc).isoformat(),
             "run_id": args.run_id,
             "model_requested": args.model,
+            "grounding_instructions": grounding_rules,
             "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
             "assessment_status": "NOT_MANUALLY_ASSESSED",
             "q11_evidence": q11, "q12_evidence": q12,
