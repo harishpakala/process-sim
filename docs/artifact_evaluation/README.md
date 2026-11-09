@@ -61,7 +61,7 @@ The local paths `reports/tep_nexus_mapping_discovery.json` and `reports/tep_nexu
 
 For local infrastructure startup, use the [root README](../../README.md#local-startup-windows-powershell). Starting services does not restore historical data.
 
-## 4. Generate the 36-case fixture
+## 4. Generate and run the 36-case benchmark
 
 From the repository root in Windows PowerShell, using a source checkout and local snapshots verified for **your selected run**. Replace the placeholder with an actual historian run ID; do not copy an ID from an unrelated experiment:
 
@@ -75,9 +75,7 @@ python scripts\tep_nexus_expand_benchmark.py `
 
 Inspect the generated JSON before running it. **Expected, conditional on a valid 34-function registry:** 36 fixtures comprising 34 positive and two negative cases. The generator's output is a constructed test set, **not a benchmark execution result**.
 
-## 5. Run the benchmark
-
-A controlled pilot with a few new supported functions is advisable before the full suite. The full one-repeat smoke run documented in Step 5E is:
+A controlled pilot with a few new supported functions is advisable before the full suite. Run the generated fixtures with the same `$runId`:
 
 ```powershell
 python scripts\tep_nexus_benchmark.py `
@@ -92,7 +90,7 @@ The runner writes a sanitized summary to the supplied `--summary` path and per-c
 
 The Step 5E checkpoint's **25–35-minute estimate** was a pre-execution forecast. The committed 36-case summary records **34.67 minutes of summed per-case execution time**; actual wall-clock time may differ due to overhead. For repeated trials, specify `--repeats N` and report the resulting total as **36 × N executions**, not N new distinct questions.
 
-## 6. How to interpret the results
+## 5. How to interpret the results
 
 A positive case passes the runner's checks only when the planner completes, selects the expected engineering function, reports `CHECKS_PASSED_LIMITED_SCOPE` and has no failed implemented answer checks. A negative case passes only when it fails at the intended validation stage with the required rejection reason; an unrelated timeout or Ollama planning failure is not a correct rejection.
 
@@ -100,7 +98,7 @@ A positive case passes the runner's checks only when the planner completes, sele
 
 Review the sanitized summary, investigate failures using local reports, and distinguish pipeline completion from independent engineering ground truth. Do not commit unsanitized operational reports or mapping snapshots.
 
-## 7. Reproducibility checklist
+## 6. Reproducibility checklist
 
 - [ ] Pin source commit, Python/runtime versions, model version and service configuration.
 - [ ] Record the selected run ID and verify the mapping and temporal-coverage snapshot provenance.
@@ -110,7 +108,7 @@ Review the sanitized summary, investigate failures using local reports, and dist
 - [ ] Report actual passed/failed counts, case classifications, timings and limitations **only after execution**.
 - [ ] Deposit a versioned, privacy-reviewed artifact bundle with hashes and clear instructions for restoring any run-specific data needed by independent reviewers.
 
-## 8. Related research documentation
+## 7. Related research documentation
 
 - [Step 5E — full-function benchmark design and commands](../research/tep-nexus/tep-nexus-step5e-full-function-coverage.md)
 - [Step 5C — seven-family baseline](../research/tep-nexus/tep-nexus-step5c-seven-family-benchmark.md)
