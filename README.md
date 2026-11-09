@@ -15,6 +15,7 @@
 | Work with AAS, RDF, SHACL, or GraphDB | [Semantic setup](semantic/README.md) |
 | Configure historian persistence | [TimescaleDB / OPC UA guide](docs/opcua/TIMESERIES.md) |
 | Review the research experiment | [Artifact evaluation guide](docs/artifact_evaluation/README.md) |
+| Explore SELiRA semantic correspondence and validation research | [SELiRA research documentation](docs/research/selira/selira-contract-alignment.md) · [Integration prototype](selira_integration/README.md) |
 | Browse frontend-specific instructions | [Frontend README](frontend/README.md) |
 | Consult detailed project history, contracts, and roadmap | [Archived detailed README](docs/project-history-and-research-notes.md) |
 
