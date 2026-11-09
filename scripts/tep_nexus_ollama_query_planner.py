@@ -1,4 +1,4 @@
-﻿"""TEP NEXUS: constrained Ollama semantic-temporal query planner.
+"""TEP NEXUS: constrained Ollama semantic-temporal query planner.
 
 Natural language -> Ollama JSON plan -> deterministic validation
 -> GraphDB -> TimescaleDB -> evidence-grounded Ollama answer.
@@ -14,6 +14,7 @@ import json
 import os
 import re
 import sys
+import time  # STAGE_TIMING_V1
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -326,28 +327,40 @@ def main():
         "evidence": None,
         "answer": None,
         "status": "STARTED",
+        "stage_latency_seconds": {},
         "answer_validation": "NOT_AUTOMATICALLY_VERIFIED",
     }
 
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
 
+    stage_started = time.perf_counter()
+    def mark_stage(name):
+        nonlocal stage_started
+        report["stage_latency_seconds"][name] = round(time.perf_counter() - stage_started, 6)
+        stage_started = time.perf_counter()
+
     try:
         registry = load_supported_functions(
             args.mapping_discovery, args.temporal_coverage, args.run_id
         )
         report["supported_functions"] = sorted(registry)
+        mark_stage("registry_load")
         raw_plan = plan_question(
             args.ollama_url, args.model, args.question, registry
         )
         report["raw_plan"] = raw_plan
+        mark_stage("llm_planning")
 
         plan = validate_plan(raw_plan, args.question, registry)
         report["validated_plan"] = plan
+        mark_stage("plan_validation")
 
         mapping = resolve_supported_mapping(
             args.graphdb_url, plan["engineering_function"], registry
         )
+
+        mark_stage("graphdb_mapping_resolution")
 
         if mapping["engineering_function"] != plan["engineering_function"]:
             raise RuntimeError(
@@ -362,7 +375,10 @@ def main():
             args.history_limit,
         )
 
+        mark_stage("timescaledb_retrieval")
+
         evidence = build_evidence(plan, mapping, temporal)
+        mark_stage("evidence_construction")
         report["evidence"] = evidence
 
         answer = explain(
@@ -372,10 +388,13 @@ def main():
             evidence,
         )
 
+        mark_stage("llm_answer_generation")
+
         report["original_answer"] = answer
         original_validation = validate_answer(answer, evidence)
         report["original_answer_validation_details"] = original_validation
         report["answer_repair"] = None
+        mark_stage("initial_answer_validation")
 
         if original_validation["status"] == "FAILED":
             repair = repair_answer(answer, evidence)
@@ -387,6 +406,8 @@ def main():
             validation = repair["repaired_validation"]
         else:
             validation = original_validation
+
+        mark_stage("deterministic_repair_and_final_validation")
 
         report["answer"] = answer
         report["answer_validation"] = validation["status"]
@@ -413,6 +434,7 @@ def main():
 
     except Exception as exc:
         report["status"] = "ERROR"
+        report["stage_latency_seconds"]["failed_stage_partial"] = round(time.perf_counter() - stage_started, 6)
         report["error"] = f"{type(exc).__name__}: {exc}"
         print("ERROR:", report["error"], file=sys.stderr)
 

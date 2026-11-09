@@ -1,0 +1,201 @@
+{
+  "scope": "independent_sql_observation_comparison_four_fixed_mapping_fixtures",
+  "oracle": "separate read-only TimescaleDB SQL, same source table",
+  "limitations": [
+    "Independent of live retrieval SQL implementation and function registry for expected values, but shares the same underlying TimescaleDB historian.",
+    "Four expected engineering-to-signal mappings are fixed fixtures requiring external review.",
+    "Not independent physical installation, provenance, or fault-activation verification.",
+    "Live and oracle queries execute separately; use an immutable simulation run or snapshot to prevent concurrent-write differences."
+  ],
+  "cases": [
+    {
+      "function": "PI_101",
+      "signal": "XMEAS7",
+      "windowSeconds": [
+        0.0,
+        120.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 42,
+      "oracle_full_count": 42,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 42,
+      "oracle_row_count": 42
+    },
+    {
+      "function": "PI_101",
+      "signal": "XMEAS7",
+      "windowSeconds": [
+        600.0,
+        900.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 100,
+      "oracle_full_count": 100,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 100,
+      "oracle_row_count": 100
+    },
+    {
+      "function": "FI_106",
+      "signal": "XMEAS6",
+      "windowSeconds": [
+        0.0,
+        120.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 42,
+      "oracle_full_count": 42,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 42,
+      "oracle_row_count": 42
+    },
+    {
+      "function": "FI_106",
+      "signal": "XMEAS6",
+      "windowSeconds": [
+        600.0,
+        900.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 100,
+      "oracle_full_count": 100,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 100,
+      "oracle_row_count": 100
+    },
+    {
+      "function": "TI_101",
+      "signal": "XMEAS9",
+      "windowSeconds": [
+        0.0,
+        120.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 42,
+      "oracle_full_count": 42,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 42,
+      "oracle_row_count": 42
+    },
+    {
+      "function": "TI_101",
+      "signal": "XMEAS9",
+      "windowSeconds": [
+        600.0,
+        900.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 100,
+      "oracle_full_count": 100,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 100,
+      "oracle_row_count": 100
+    },
+    {
+      "function": "LI_101",
+      "signal": "XMEAS8",
+      "windowSeconds": [
+        0.0,
+        120.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 42,
+      "oracle_full_count": 42,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 42,
+      "oracle_row_count": 42
+    },
+    {
+      "function": "LI_101",
+      "signal": "XMEAS8",
+      "windowSeconds": [
+        600.0,
+        900.0
+      ],
+      "limit": 1000,
+      "status": "PASS",
+      "checks": {
+        "signal_matches_independent_fixture": true,
+        "ordered_rows_exact": true,
+        "count_matches": true,
+        "truncation_matches": true,
+        "run_matches": true
+      },
+      "live_count": 100,
+      "oracle_full_count": 100,
+      "oracle_truncated": false,
+      "first_mismatch_index": null,
+      "live_row_count": 100,
+      "oracle_row_count": 100
+    }
+  ],
+  "summary": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  }
+}
