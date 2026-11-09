@@ -21,8 +21,10 @@ const measurements = computed<Record<string,SamplePair>>(()=>{
  if(temporal.value.signal && raw.before !== undefined) return { [String(temporal.value.signal)]: raw as SamplePair }
  return raw as Record<string,SamplePair>
 })
+const observationRows = computed(() => Array.isArray(evidence.value.observations) ? evidence.value.observations as Array<{simulation_seconds:number;value:number;observed_at?:string}> : [])
+const isFaultQuestion = computed(() => ['Q8','Q9','Q10'].includes(questionId.value))
 const sampleRows = computed(()=>Object.entries(measurements.value).map(([signal,pair])=>({signal,before:pair?.before,after:pair?.after})))
-const evidenceCount = computed(()=>mappings.value.length + engineering.value.length + sampleRows.value.length + (event.value.fault_id ? 1 : 0))
+const evidenceCount = computed(()=>mappings.value.length + engineering.value.length + sampleRows.value.length + observationRows.value.length + (event.value.fault_id ? 1 : 0))
 const hasCatalog = computed(()=>engineering.value.some(record=>Boolean(record.product_key)))
 function seconds(value:unknown):string { return typeof value==='number' && Number.isFinite(value) ? value.toFixed(3)+' s' : 'Not recorded' }
 function sampleValue(sample?:Sample|null):string { return sample && typeof sample.value==='number' ? String(sample.value) : 'Not recorded' }
@@ -36,6 +38,7 @@ const responseLabel = computed(()=>{
 })
 const evidenceSources = computed(()=>{
  const sources:string[]=[]
+ if(observationRows.value.length) sources.push('TimescaleDB: run-scoped XMEAS9 observations, simulation timestamps and recording timestamps (direct historian retrieval)')
  if(mappings.value.length) sources.push('GraphDB: logical DEXPI / ECAD / AAS / product mappings (not physical installation proof)')
  if(hasCatalog.value) sources.push('AAS Asset Inventory and ProductCatalog: candidate products; ECLASS verification status shown per record')
  if(event.value.fault_id || sampleRows.value.length) sources.push('TimescaleDB: persisted fault events and signal samples')
@@ -86,7 +89,7 @@ async function loadQuestions(){
  questionsLoading.value=true
  try {
   const data = await getJson('/api/ai/paper/questions?refresh='+Date.now(), {cache:'no-store'})
-  if(!Array.isArray(data.questions) || data.questions.length!==10) throw new Error('Expected Q1–Q10')
+  if(!Array.isArray(data.questions) || data.questions.length!==12) throw new Error('Expected Q1–Q12')
   questions.value = data.questions
  } catch(e){error.value = e instanceof Error ? e.message : String(e)}
  finally {questionsLoading.value=false}
@@ -108,7 +111,7 @@ async function loadEvents(){
   eventId.value=events.value.find(e=>['inject','activate','enable','start'].includes(e.action.toLowerCase()))?.event_id || ''
  } catch(e){historyError.value = 'Fault history unavailable: '+(e instanceof Error ? e.message : String(e))}
 }
-watch(runId,()=>{clearAnswer();void loadEvents();if(!runId.value && Number(questionId.value.slice(1))>=8)questionId.value='Q1'})
+watch(runId,()=>{clearAnswer();void loadEvents();if(!runId.value && ['Q8','Q9','Q10','Q12'].includes(questionId.value))questionId.value='Q1'})
 watch(questionId,clearAnswer)
 watch(mode,clearAnswer)
 watch(customQuestion,clearAnswer)
@@ -118,11 +121,11 @@ async function ask(){
  if(mode.value==='paper' && !selectedQuestion.value)return
  if(mode.value==='custom' && (customQuestion.value.trim().length<5 || customQuestion.value.length>1000)){error.value='Enter a question between 5 and 1000 characters';return}
  if(mode.value==='paper' && selectedQuestion.value?.requiresRun && !runId.value){error.value='Select a recorded run';return}
- if(mode.value==='paper' && selectedQuestion.value?.requiresRun && !eventId.value){error.value='Select a recorded injection event';return}
+ if(mode.value==='paper' && isFaultQuestion.value && !eventId.value){error.value='Select a recorded injection event';return}
  if(mode.value==='custom' && temporalCustom.value && !runId.value){error.value='Select a recorded run for this temporal question';return}
  busy.value=true
  try{
-  answer.value=await getJson(mode.value==='custom' ? '/api/ai/custom/answer' : '/api/ai/paper/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(mode.value==='custom' ? {question:customQuestion.value.trim(),runId:temporalCustom.value ? runId.value||null : null,eventId:temporalCustom.value ? eventId.value||null : null} : {questionId:questionId.value,runId:runId.value||null,eventId:selectedQuestion.value?.requiresRun ? eventId.value : null})})
+  answer.value=await getJson(mode.value==='custom' ? '/api/ai/custom/answer' : '/api/ai/paper/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(mode.value==='custom' ? {question:customQuestion.value.trim(),runId:temporalCustom.value ? runId.value||null : null,eventId:temporalCustom.value ? eventId.value||null : null} : {questionId:questionId.value,runId:runId.value||null,eventId:isFaultQuestion.value ? eventId.value : null})})
  }catch(e){error.value=e instanceof Error?e.message:String(e)}
  finally{busy.value=false}
 }
@@ -132,7 +135,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask engineering questions or explore the TEP Nexus Paper Q1–Q10 question set.</p></div><span class="pill">{{mode==='paper'?'TEP Nexus Paper':'Exploratory'}}</span></div>
+   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask engineering questions or explore the TEP Nexus Paper Q1–Q12 question set.</p></div><span class="pill">{{mode==='paper'?'TEP Nexus Paper':'Exploratory'}}</span></div>
    <div class="mode-switch" role="group" aria-label="Query mode">
     <button type="button" :class="mode==='custom'?'primary':'secondary'" :aria-pressed="mode==='custom'" @click="mode='custom'">Ask a question</button>
     <button type="button" :class="mode==='paper'?'primary':'secondary'" :aria-pressed="mode==='paper'" @click="mode='paper'">TEP Nexus Paper</button>
@@ -158,8 +161,8 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
      <select v-model="questionId"><option v-for="q in available" :key="q.id" :value="q.id">{{q.id}} — {{q.question}}</option></select>
     </label>
     <div v-if="mode==='paper'" class="control-row"><button type="button" class="secondary" :disabled="questionsLoading" @click="loadQuestions">{{questionsLoading ? 'Refreshing…' : 'Refresh paper questions'}}</button><span class="subdued">{{questions.length}} loaded</span></div>
-    <p v-if="mode==='paper' && selectedQuestion" class="subdued">{{selectedQuestion.requiresRun ? 'Requires a recorded run, fault command and samples; the simulator may be stopped.' : 'Engineering evidence only; simulation is not required.'}}</p>
-    <button class="primary" type="button" :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && (!runId || !eventId))) : (customQuestion.trim().length<5 || (temporalCustom && !runId)))" @click="ask">{{busy?'Retrieving evidence and querying Ollama…':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
+    <p v-if="mode==='paper' && selectedQuestion" class="subdued">{{selectedQuestion.requiresRun ? isFaultQuestion ? 'Requires a recorded run and fault command; the simulator may be stopped.' : 'Requires a recorded run with XMEAS9 samples; no fault command is required.' : 'Engineering evidence only; simulation is not required.'}}</p>
+    <button class="primary" type="button" :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && !runId) || (isFaultQuestion && !eventId)) : (customQuestion.trim().length<5 || (temporalCustom && !runId)))" @click="ask">{{busy?'Retrieving evidence and querying Ollama…':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
     <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
    </div>
   </section>
@@ -199,15 +202,16 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
       <tbody><tr v-for="row in sampleRows" :key="row.signal"><td><strong>{{row.signal}}</strong></td><td>{{seconds(row.before?.simulation_seconds)}}</td><td>{{sampleValue(row.before)}}</td><td>{{seconds(row.after?.simulation_seconds)}}</td><td>{{sampleValue(row.after)}}</td></tr></tbody>
      </table>
     </div>
+    <div v-if="answer.id==='Q12'" class="table-scroll"><p class="subdued">Run-scoped XMEAS9 observations in the inclusive 0–60 s interval. {{evidence.truncated ? 'Result truncated.' : 'No truncation reported.'}} Recording timestamps are distinct from simulation time.</p><table class="evidence-table"><thead><tr><th>Simulation time (s)</th><th>Value (raw; units not verified)</th><th>Recorded at (UTC)</th></tr></thead><tbody><tr v-for="(o,i) in observationRows" :key="i"><td>{{o.simulation_seconds}}</td><td>{{o.value}}</td><td>{{o.observed_at || '—'}}</td></tr></tbody></table></div>
     <SimulationEvidenceTimeline v-if="sampleRows.length" :command="event" :measurements="measurements" />
-    <p v-if="!mappings.length && !engineering.length && !sampleRows.length && !event.fault_id" class="subdued">No structured evidence records were returned for this question.</p>
+    <p v-if="!mappings.length && !engineering.length && !sampleRows.length && !observationRows.length && !event.fault_id" class="subdued">No structured evidence records were returned for this question.</p>
    </div>
    <div class="result-section">
     <h3>Limitations and qualifications</h3>
     <ul v-if="relevantLimitations.length"><li v-for="(item,i) in relevantLimitations" :key="i">{{item}}</li></ul>
     <p v-else class="subdued">No question-specific limitations were supplied by the model. This does not imply the answer has been verified.</p>
-    <p v-if="Number(answer.id.slice(1))>=8" class="subdued">{{answer.warning}}</p>
-    <p v-if="answer.id==='Q4' || answer.id==='Q5' || answer.id==='Q7' || answer.id==='Q10'" class="subdued">Catalog product associations are candidates, not proof of installed hardware. ECLASS verification must be assessed separately.</p>
+    <p v-if="isFaultQuestion" class="subdued">{{answer.warning}}</p>
+    <p v-if="answer.id==='Q4' || answer.id==='Q5' || answer.id==='Q7' || answer.id==='Q10' || answer.id==='Q11'" class="subdued">Catalog product associations are candidates, not proof of installed hardware. ECLASS verification must be assessed separately.</p>
    </div>
    <div class="result-section">
     <h3>Evidence provenance and evaluation</h3>
@@ -216,7 +220,8 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
     <p v-if="answer.runId" class="source-row">Run: <span class="mono">{{answer.runId}}</span></p>
     <p v-if="answer.eventId" class="source-row">Event: <span class="mono">{{answer.eventId}}</span></p>
     <p class="subdued">Answer source: {{answer.answerSource || 'Not specified'}} · Model: {{answer.model || 'No LLM answer'}} · Prompt: {{answer.promptVersion}} · {{answer.answerValidation}} · Manual rubric grading required</p>
-    <p v-if="answer.questionAdaptation==='EXPLORATORY_NOT_PAPER_EVALUATION'" class="subdued">Exploratory question: not part of the fixed Q1–Q10 evaluation or reported scores.</p>
+    <p v-if="answer.questionAdaptation==='EXPLORATORY_NOT_PAPER_EVALUATION'" class="subdued">Exploratory question: not part of the fixed Q1–Q12 evaluation or reported scores.</p>
+    <p v-if="answer.id==='Q11' || answer.id==='Q12'" class="subdued">Web UI live evidence retrieval; not a replay of the separate evidence-conditioned 12-question paper assessment.</p>
     <p v-if="answer.questionAdaptation==='UI_CONTEXTUAL_TEMPORAL_WORDING'" class="subdued">Temporal question wording was adapted for the selected run; this is not an exact frozen-question replay.</p>
    </div>
    <details class="detail-toggle"><summary>Technical details — raw evidence JSON</summary><pre>{{JSON.stringify(answer.evidence,null,2)}}</pre></details>
