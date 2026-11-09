@@ -64,7 +64,7 @@ $env:PYTHONPATH="$PWD\src"
 python examples/run_opcua_server.py --endpoint "opc.tcp://0.0.0.0:4841/process-sim/" --seed 42 --real-time-factor 1.0
 ```
 
-Starting the simulator does not itself establish closed-loop control or create the historical run used in the paper.
+This command starts the **OPC UA service**, not the simulation run. Once the service and API are available, use the **Web UI** to start, stop, or reset the TEP simulation. Starting the service does not establish closed-loop control or create the historical run used in the paper.
 
 **4. Prepare GraphDB** (required for GraphDB-backed semantic queries)
 
@@ -88,7 +88,18 @@ cd frontend
 npm run dev
 ```
 
-Open the URL printed by Vite (typically `http://localhost:5173`). Some engineering views use local AAS JSON rather than live GraphDB.
+Open the URL printed by Vite (typically `http://localhost:5173`). **Operate the simulation from the browser** using the simulation controls, then use the **Fault Management** view to inject, inspect, or clear faults. Some engineering views use local AAS JSON rather than live GraphDB.
+
+### Operate the simulation and faults from the Web UI
+
+After starting the OPC UA server, HTTP API, and Vue frontend, use this interactive workflow:
+
+1. **Simulation control:** Start the TEP simulation from the Web UI. Check the reported running state and advancing simulation time. Use **Stop** to stop execution and **Reset** when a fresh simulation state is needed.
+2. **Fault Management:** Choose a fault type (`process_disturbance`, `bias`, `drift`, or `stuck`), select a target, configure the magnitude or value and duration, then select **Inject fault**. The frontend sends the request through `/api/simulation/faults` to the OPC UA fault-management methods.
+3. **Inspect and clear:** The Fault Management view lists registered faults and offers **Clear** and **Clear all**. Fault statuses returned by the service should be read as recorded simulator state, not as independent evidence of physical effects.
+4. **Monitor and analyze:** Use the Web UI's measurements, historian, and TEP NEXUS query views as applicable. Persistent run-specific history requires the configured TimescaleDB historian and an advancing simulation.
+
+**Important distinction:** Starting the platform's OPC UA/API services is a one-time infrastructure step; **Start/Stop/Reset and fault injection are interactive Web UI operations**. Command-line recording and experiment scripts remain optional tools for repeatable research runs, not prerequisites for operating the simulation in the browser. A successful injection request records an operator command; it does not, by itself, independently verify fault activation.
 
 **7. Optional: run local Ollama**
 
@@ -102,6 +113,8 @@ Ollama must be running. This is a standalone GraphDB-grounded CLI, not the compl
 **Shutdown:** Stop foreground processes with `Ctrl+C`. To stop the sample database without deleting its data: `docker compose -f docker-compose.timeseries.yml down`. Check ports 4841 (OPC UA), 8000 (API), 7200 (GraphDB), and 11434 (Ollama) when troubleshooting.
 
 ## Recording a TEP run
+
+**Optional CLI research workflow:** Normal interactive simulation and fault control happen in the Web UI. Use these scripts only when you need portable Parquet recordings or reproducible scripted experiments.
 
 With Python dependencies installed and `PYTHONPATH` configured, record a run:
 
