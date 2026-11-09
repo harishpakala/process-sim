@@ -66,12 +66,7 @@ For local infrastructure startup, use the [root README](../../README.md#local-st
 From the repository root in Windows PowerShell, using a source checkout and local snapshots verified for **your selected run**. Replace the placeholder with an actual historian run ID; do not copy an ID from an unrelated experiment:
 
 ```powershell
-git rev-parse HEAD
-python --version
-
 $runId = "<YOUR_VERIFIED_RUN_ID>"
-
-python -m unittest discover -s tests -p "test_tep_nexus_*.py" -v
 
 python scripts\tep_nexus_expand_benchmark.py `
   --run-id $runId `
