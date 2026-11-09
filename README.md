@@ -16,7 +16,6 @@
 | Configure historian persistence | [TimescaleDB / OPC UA guide](docs/opcua/TIMESERIES.md) |
 | Review the research experiment | [Artifact evaluation guide](docs/artifact_evaluation/README.md) |
 | Explore SELiRA semantic correspondence and validation research | [SELiRA research documentation](docs/research/selira/selira-contract-alignment.md) · [Integration prototype](selira_integration/README.md) |
-| Browse frontend-specific instructions | [Frontend README](frontend/README.md) |
 | Consult detailed project history, contracts, and roadmap | [Archived detailed README](docs/project-history-and-research-notes.md) |
 
 ## Architecture at a glance
@@ -89,6 +88,8 @@ npm run dev
 ```
 
 Open the URL printed by Vite (typically `http://localhost:5173`). **Operate the simulation from the browser** using the simulation controls, then use the **Fault Management** view to inject, inspect, or clear faults. Some engineering views use local AAS JSON rather than live GraphDB.
+
+The frontend is built with **Vue 3, TypeScript, and Vite**. Its development commands are included above, so no separate frontend setup guide is needed. Some schematic connections are illustrative rather than verified DEXPI piping; the process simulation runs in the backend, not in the browser.
 
 ### Operate the simulation and faults from the Web UI
 
