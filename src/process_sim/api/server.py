@@ -251,6 +251,10 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json(409, {"error": str(exc)})
             except (ValueError, OSError) as exc:
                 self.send_json(503, {"error": str(exc)})
+            except Exception as exc:
+                import logging
+                logging.exception("Unexpected Q13 live start failure")
+                self.send_json(500, {"error": f"Q13 live start failed ({type(exc).__name__}); check backend logs"})
             return
         if urlsplit(self.path).path == "/api/ai/custom/answer":
             try:
