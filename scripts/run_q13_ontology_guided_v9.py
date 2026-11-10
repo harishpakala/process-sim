@@ -427,6 +427,32 @@ def synthesis_payload(audit, findings):
             "historian": audit.get("historian")}
 
 
+def mandatory_evidence(findings):
+    """Only require exact IDs/status values actually present in verified RDF."""
+    required = {"bom_ids": [], "mapping_statuses": []}
+    for f in findings:
+        for r in f.get("evidence_index", []):
+            p, v = r["predicate"].lower(), r["value"]
+            if f["domain"] == "engineeringbom" and p == "hasbomitemid" and v:
+                required["bom_ids"].append(v)
+            if f["domain"] == "opcuaconnectivity" and p == "hasmappingstatus" and v:
+                required["mapping_statuses"].append(v)
+    return {k: list(dict.fromkeys(v)) for k, v in required.items()}
+
+
+def evidence_completeness(audit, answer, findings):
+    required = mandatory_evidence(findings)
+    acceptance = audit["acceptance"]
+    acceptance["bom_item_ids_present"] = all(v in answer for v in required["bom_ids"])
+    acceptance["opcua_mapping_status_present"] = all(v in answer for v in required["mapping_statuses"])
+    acceptance["opcua_live_binding_qualified"] = (
+        not required["mapping_statuses"] or
+        bool(re.search(r"(?:live|operational).{0,80}(?:unverified|not verified|not confirmed|not established|provisional)|(?:unverified|not verified|not confirmed|not established|provisional).{0,80}(?:live|operational)", answer, re.I | re.S)))
+    return all(acceptance[k] for k in (
+        "bom_item_ids_present", "opcua_mapping_status_present",
+        "opcua_live_binding_qualified"))
+
+
 def deterministic_answer(audit, findings):
     """Grounded fallback: only normalized RDF assertions and explicit gaps."""
     lines = ["Engineering trace (deterministic RDF fallback; LLM synthesis unavailable)."]
@@ -450,6 +476,15 @@ def deterministic_answer(audit, findings):
         missing = list(dict.fromkeys(f.get("unverified_or_missing", [])))[:2]
         lines.append(f["domain"].upper() + ": " + ("; ".join(facts) if facts else "No nonempty RDF assertions.") +
                      (". Missing: " + "; ".join(missing) if missing else "") + ".")
+    required = mandatory_evidence(findings)
+    if required["bom_ids"]:
+        lines.append("Engineering BOM item records verified in RDF: " +
+                     ", ".join(required["bom_ids"]) +
+                     ". Functional engineering association does not verify physical membership.")
+    if required["mapping_statuses"]:
+        lines.append("OPC UA verified RDF mapping-status assertion: " +
+                     ", ".join(required["mapping_statuses"]) +
+                     ". The live operational binding is NOT verified.")
     lines.append("Engineering limitations: physical installation of a ProductCatalog candidate is NOT verified by these RDF assertions; an OPC UA provisional mapping status is not proof of a live binding.")
     h = audit.get("historian")
     if h:
@@ -498,7 +533,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_3.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_4.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -508,7 +543,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_6_3_readable_aas_identifiers",
+    audit = {"method": "q13_v9_6_4_evidence_completeness",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -605,6 +640,8 @@ def main():
                 "OPC UA mapping status is a verified RDF assertion but the live binding is unverified. "
                 "Never repeat a model-generated provisional claim as verified RDF evidence. "
                 "Show decoded AAS element paths instead of Base64 URI segments; preserve RDF identity in the audit. "
+                "Explicitly include each verified Engineering BOM item ID and the exact OPC UA mapping status literal. "
+                "State that a verified mapping-status assertion does NOT verify a live OPC UA binding. "
                 "Be concise: at most two sentences per domain, then one "
                 "uncertainty statement and a short historian summary."
             )
@@ -624,6 +661,7 @@ def main():
             passed = evaluate_answer(audit, audit["final_answer"])
             audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
             passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
+            passed = evidence_completeness(audit, audit["final_answer"], findings) and passed
             if not passed and audit["synthesis_mode"] == "OLLAMA":
                 audit["rejected_ollama_answer"] = audit["final_answer"]
                 audit["rejected_ollama_acceptance"] = dict(audit["acceptance"])
@@ -633,6 +671,7 @@ def main():
                 passed = evaluate_answer(audit, audit["final_answer"])
                 audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
                 passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
+                passed = evidence_completeness(audit, audit["final_answer"], findings) and passed
             audit["status"] = ("REVIEW_REQUIRED" if passed and
                                not audit["acceptance"]["rdf_fallback_domains"]
                                else "INCOMPLETE")
