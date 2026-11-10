@@ -49,6 +49,24 @@ def parse_json_reply(reply):
     return obj
 
 
+def evidence_fallback(domain, triples):
+    """Explicit RDF-only fallback; never represented as LLM reasoning."""
+    verified, provisional, missing = [], [], []
+    for t in triples:
+        pred = t["p"].rsplit("/", 1)[-1]
+        val = t["o"]
+        if not val.strip():
+            missing.append(pred + " has an empty RDF value")
+        elif any(x in val.lower() for x in ("provisional", "unverified", "unresolved", "notconnected")) or "candidate" in pred.lower():
+            provisional.append(pred + "=" + val)
+        else:
+            verified.append(pred + "=" + val)
+    return {"domain": domain, "verified_facts": verified,
+            "provisional_facts": provisional, "unverified_or_missing": missing,
+            "supporting_triples": list(range(len(triples))),
+            "summary_source": "RDF_ONLY_FALLBACK_NOT_LLM"}
+
+
 def ask_json(url, model, system, payload, timeout):
     raw = core.ollama(url, model, [
         {"role": "system", "content": system},
@@ -120,9 +138,28 @@ def domain_reasoning(args, domain, schema, identifiers, earlier):
                 steps.append(record)
                 break
             if node not in candidates or direction not in ("incoming", "outgoing"):
-                record["error"] = "Model requested noncandidate node or invalid direction"
-                steps.append(record)
-                break
+                record["invalid_choice"] = choice
+                try:
+                    choice, correction = ask_json(
+                        args.ollama_url, args.model,
+                        system + " Previous choice was invalid. Choose from candidate_nodes only, or null.",
+                        {"candidate_nodes": candidates, "invalid_choice": choice},
+                        args.ollama_timeout)
+                    record["correction_reply"] = correction
+                    node = choice.get("next_node")
+                    direction = choice.get("direction", "outgoing")
+                except (ValueError, KeyError, OSError) as exc:
+                    record["correction_error"] = str(exc)
+                    steps.append(record)
+                    break
+                if node is None:
+                    record["action"] = "stop_after_correction"
+                    steps.append(record)
+                    break
+                if node not in candidates or direction not in ("incoming", "outgoing"):
+                    record["error"] = "Invalid choice after bounded correction"
+                    steps.append(record)
+                    break
             new_rows, query = expand_node(args.graphdb_url, domain, schema, node,
                                           direction, args.graphdb_timeout)
             record.update({"action": "expand", "node": node, "direction": direction,
@@ -149,8 +186,21 @@ def summarize_domain(args, domain, schema, triples):
     payload = {"question": core.QUESTION, "domain": domain,
                "ontology": schema[:args.schema_chars],
                "triples": triples[:args.max_evidence_triples]}
-    result, raw = ask_json(args.ollama_url, args.model, system,
-                           payload, args.ollama_timeout)
+    raw = core.ollama(args.ollama_url, args.model, [
+        {"role": "system", "content": system},
+        {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}
+    ], args.ollama_timeout)
+    try:
+        result = parse_json_reply(raw)
+        source = "OLLAMA"
+    except ValueError:
+        repaired = core.ollama(args.ollama_url, args.model, [
+            {"role": "system", "content": "Repair malformed JSON only. Do not invent or add facts. Return a single JSON object."},
+            {"role": "user", "content": raw[:12000]}
+        ], args.ollama_timeout)
+        result = parse_json_reply(repaired)
+        raw += "\n--- REPAIRED JSON ---\n" + repaired
+        source = "OLLAMA_JSON_REPAIR"
     for key in ("verified_facts", "provisional_facts", "unverified_or_missing"):
         if not isinstance(result.get(key), list):
             raise ValueError("Domain summary missing list " + key)
@@ -159,6 +209,22 @@ def summarize_domain(args, domain, schema, triples):
     if not isinstance(indices, list) or any(type(i) is not int or i < 0 or
                                             i >= len(payload["triples"]) for i in indices):
         raise ValueError("Invalid supporting_triples indices")
+    for t in payload["triples"]:
+        pred = t["p"].rsplit("/", 1)[-1]
+        val = t["o"]
+        if not val.strip():
+            note = pred + " has an empty RDF value"
+            if note not in result["unverified_or_missing"]:
+                result["unverified_or_missing"].append(note)
+            result["provisional_facts"] = [
+                f for f in result["provisional_facts"]
+                if pred.lower() not in str(f).lower()]
+        elif any(x in val.lower() for x in
+                 ("provisional", "unverified", "unresolved", "notconnected")):
+            note = pred + "=" + val
+            if note not in result["provisional_facts"]:
+                result["provisional_facts"].append(note)
+    result["summary_source"] = source
     return result, raw
 
 
@@ -175,7 +241,7 @@ def main():
     p.add_argument("--max-prompt-triples", type=int, default=35)
     p.add_argument("--max-evidence-triples", type=int, default=80)
     p.add_argument("--skip-lifting", action="store_true")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_1.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -185,7 +251,7 @@ def main():
     if not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context()
-    audit = {"method": "q13_v9_llm_directed_ontology_traversal",
+    audit = {"method": "q13_v9_1_llm_directed_ontology_traversal",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -213,6 +279,9 @@ def main():
                         record["status"] = "SUMMARIZED"
                     except (ValueError, KeyError, OSError) as exc:
                         record["summary_error"] = str(exc)
+                        record["finding"] = evidence_fallback(
+                            domain, triples[:args.max_evidence_triples])
+                        record["status"] = "RDF_FALLBACK"
             except (ValueError, KeyError, OSError) as exc:
                 record["error"] = str(exc)
                 record["status"] = "ERROR"
@@ -227,6 +296,9 @@ def main():
         audit["acceptance"]["domains_summarized"] = [
             r["domain"] for r in audit["domains"] if r.get("finding")]
         audit["acceptance"]["six_domain_coverage"] = len(findings) == 6
+        audit["acceptance"]["rdf_fallback_domains"] = [
+            r["domain"] for r in audit["domains"]
+            if r.get("finding", {}).get("summary_source") == "RDF_ONLY_FALLBACK_NOT_LLM"]
         if len(findings) == 6:
             system = (
                 "You answer a six-domain engineering trace using ONLY verified "
@@ -253,7 +325,7 @@ def main():
                     "install" in lower and any(w in lower for w in
                                                ("unverified", "unknown", "not verified",
                                                 "not confirmed", "no evidence")))
-                audit["status"] = ("REVIEW_REQUIRED" if all(
+                audit["status"] = ("REVIEW_REQUIRED" if not audit["acceptance"]["rdf_fallback_domains"] and all(
                     audit["acceptance"].get(k) for k in (
                         "six_domain_coverage", "six_domain_names_mentioned",
                         "provisional_status_mentioned",
