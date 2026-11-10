@@ -150,7 +150,7 @@ The deterministic and language-model arms **do not receive equivalent input repr
 
 ### 6.1 Recorded comparative results (local execution)
 
-The following are reported local results of the three-arm experiment, **not currently a committed three-arm result artifact in this branch**. They should be independently recalculated from a subsequently archived raw JSON file before being treated as a fully reproducible repository result.
+The following are reported local results of the three-arm experiment, **now archived as case-level JSON and paired CSV in this feature branch**. The archived JSON contains 324 case records and matched triples; the audit script below independently recomputes the reported statistics from those records.
 
 | Metric | Deterministic | Hybrid | Full LLM |
 | --- | ---: | ---: | ---: |
@@ -205,7 +205,17 @@ A standalone deterministic baseline and a paired deterministic-versus-LLM experi
 
 For research reporting, preserve the **raw case-level JSON** in addition to CSV summaries and record the exact Git commit, run ID, fixture checksum, local model configuration, hardware, software versions, and GraphDB/TimescaleDB state. Avoid publishing raw operational data or internal addresses without reviewing them.
 
-For the 102 positive matched triples, pair cases by **fixture ID and repeat number** before computing latency differences and ratios. Because the three repetitions arise from only **34 distinct positive fixtures**, uncertainty intervals should resample fixtures as clusters (retaining their repetitions), rather than assuming 102 independent scenarios. A fixture-clustered confidence interval and breakdown of failed validation checks by actual check identifier remain **unreported in this repository guide**; do not infer their values from the 355-check total.
+For the 102 positive matched triples, pair cases by **fixture ID and repeat number** before computing latency differences and ratios. Because the three repetitions arise from only **34 distinct positive fixtures**, uncertainty intervals should resample fixtures as clusters (retaining their repetitions), rather than assuming 102 independent scenarios. Using 10,000 fixture-clustered bootstrap resamples (seed 20261110), the descriptive 95% interval for the median paired latency difference is **[32.317, 35.420] s**, and for the median paired latency ratio is **[5.076, 5.473]×**. The detailed breakdown of failed validation checks by actual check identifier remains **unavailable in the archived aggregate case records**; do not infer categories from the 355-check total.
+
+Recalculate all arm statistics, paired effects, failed-check totals, and the fixture-clustered intervals with the [three-arm audit script](../../scripts/audit_tep_nexus_three_arm.py):
+
+```powershell
+python scripts/audit_tep_nexus_three_arm.py `
+  --input reports/tep_nexus_three_arm_experiment.json `
+  --output reports/tep_nexus_three_arm_audit.json `
+  --iterations 10000 `
+  --seed 20261110
+```
 
 The original [36-case audit script](../../scripts/audit_tep_nexus_benchmark.py) is for the archived historical benchmark summary; it is **not** a three-arm statistical audit script.
 
@@ -218,11 +228,13 @@ The original [36-case audit script](../../scripts/audit_tep_nexus_benchmark.py) 
 | Historical summary audit | Committed: [audit script](../../scripts/audit_tep_nexus_benchmark.py) |
 | Three-arm runner and the baseline scripts | Committed: [three-arm runner](../../scripts/tep_nexus_three_arm_experiment.py), [hybrid](../../scripts/tep_nexus_hybrid_baseline.py), [deterministic](../../scripts/tep_nexus_deterministic_baseline.py) |
 | Run-specific mapping and coverage snapshots | Example/local snapshots exist, but must be checked against the selected historian run |
-| Raw three-arm JSON/CSV and all case reports | **Not yet committed in this branch** |
+| Raw three-arm JSON/CSV | Committed: [324 case records and triples](../../reports/tep_nexus_three_arm_experiment.json) and [paired latency CSV](../../reports/tep_nexus_three_arm_experiment.csv) |
+| Per-case detailed model-answer validation reports | **Not archived**; aggregate case records provide counts but not individual failed-check identifiers |
+| Three-arm statistical audit | Committed: [audit script](../../scripts/audit_tep_nexus_three_arm.py) |
 | Restorable historical TimescaleDB/GraphDB experiment state | **Not established as a complete archived dataset** |
 | Exact hardware/environment and fixture-clustered uncertainty analysis | **Not yet documented as a complete reproduction package** |
 
-A fresh clone can inspect the benchmark code, questions, and committed historical summary. It **cannot independently recreate the recorded three-arm latencies** without the corresponding live historian data, semantic state, model/environment configuration, and a raw result archive. A fresh local experiment is possible only after those prerequisites are prepared.
+A fresh clone can inspect the benchmark code, questions, and committed historical summary. It **can independently recalculate the recorded three-arm summary statistics and fixture-clustered intervals** from the archived JSON, but **cannot independently rerun the recorded experiment** without the corresponding live historian data, semantic state, and model/environment configuration. A fresh local experiment is possible only after those prerequisites are prepared.
 
 The 12 qualitative engineering questions, eight SQL consistency comparisons, and selected negative/virtual-graph tests in the paper are **separate evaluation components**; they should not be counted as additional fixtures or repetitions in the 324-execution comparison.
 
