@@ -232,7 +232,8 @@ The original [36-case audit script](../../scripts/audit_tep_nexus_benchmark.py) 
 | Per-case detailed model-answer validation reports | **Not archived**; aggregate case records provide counts but not individual failed-check identifiers |
 | Three-arm statistical audit | Committed: [audit script](../../scripts/audit_tep_nexus_three_arm.py) |
 | Restorable historical TimescaleDB/GraphDB experiment state | **Not established as a complete archived dataset** |
-| Exact hardware/environment and fixture-clustered uncertainty analysis | **Not yet documented as a complete reproduction package** |
+| Fixture-clustered uncertainty analysis | Documented and recomputable using the archived JSON and audit script |
+| Exact hardware/environment and restorable database state | **Not yet documented as a complete reproduction package** |
 
 A fresh clone can inspect the benchmark code, questions, and committed historical summary. It **can independently recalculate the recorded three-arm summary statistics and fixture-clustered intervals** from the archived JSON, but **cannot independently rerun the recorded experiment** without the corresponding live historian data, semantic state, and model/environment configuration. A fresh local experiment is possible only after those prerequisites are prepared.
 
