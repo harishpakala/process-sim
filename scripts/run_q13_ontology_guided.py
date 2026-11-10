@@ -163,7 +163,8 @@ def discover_domain(url, domain, schema, timeout, identifiers):
         result["samples"].extend(graphdb_select(url, query, timeout))
     # Match exact literal/IRI identifier values, never arbitrary substrings.
     # Only a bounded number of evidence-derived identifiers are propagated.
-    for identifier in sorted(identifiers)[:24]:
+    prioritized = [ASSET_ID] + sorted(set(identifiers) - {ASSET_ID})[:23]
+    for identifier in prioritized:
         value = json.dumps(identifier)
         query = ("SELECT ?s ?p ?o WHERE { " + base
                  + " FILTER(STR(?o) = " + value + ") } LIMIT 25")
@@ -186,6 +187,11 @@ def observed_identifiers(discovery, existing):
     """Propagate only actual literal/IRI values on anchored subjects."""
     found = set(existing)
     for row in discovery.get("neighborhood", []):
+        predicate = row.get("p", {}).get("value", "").lower()
+        if not any(token in predicate for token in
+                   ("identifier", "reference", "localid", "signalname",
+                    "engineeringfunctionid", "equipmenttag", "bomitemid")):
+            continue
         obj = row.get("o", {})
         value = obj.get("value", "")
         if (obj.get("type") in ("literal", "uri")
@@ -402,7 +408,7 @@ def main():
                       str(args.retries) + " attempts", flush=True)
         valid_results = [r for r in audit["queries"] if r["bindings"] is not None]
         audit["graphdb_status"] = (
-            "EVIDENCE_AVAILABLE" if any(r["bindings"] for r in valid_results)
+            "PARTIAL_ANCHORED_EVIDENCE" if any(r["bindings"] for r in valid_results)
             else "GRAPHDB_EVIDENCE_UNAVAILABLE"
         )
         audit["historian"] = historian_summary(dsn)
@@ -426,7 +432,11 @@ def main():
                  "summary. Explicitly identify domains with no evidence. "
                  "No graph results does NOT prove that XMEAS9 is unrelated to "
                  "reactor temperature. Do not infer verified physical "
-                 "installation or OPC UA binding from candidate references."},
+                 "installation or OPC UA binding from candidate references. "
+                 "An anchored row alone does not verify every requested "
+                 "relationship; distinguish observed properties from missing "
+                 "properties. Never label a field as a signal reference unless "
+                 "its predicate is the signal-reference predicate."},
                 {"role": "user", "content":
                  "QUESTION:\n" + QUESTION + "\n\nGRAPHDB RESULTS:\n"
                  + json.dumps(evidence, ensure_ascii=False)[:50000]
