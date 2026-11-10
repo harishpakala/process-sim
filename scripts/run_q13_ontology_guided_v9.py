@@ -45,18 +45,44 @@ def timed_select(endpoint, query, timeout):
 
 
 def readable_node(uri, labels=None):
+    """Display an AAS URI as its element path; never alter the RDF identity."""
     if labels and uri in labels:
         return labels[uri]
     tail = uri.rsplit("/", 1)[-1].rsplit("#", 1)[-1]
-    if len(tail) > 45:
+    # AAS lifting uses URL-safe Base64 path components. Decode even short
+    # components, but only for the known lifted-node URI namespace.
+    if uri.startswith("http://org.example.com/") and tail:
         try:
-            decoded = base64.urlsafe_b64decode(tail + "=" * (-len(tail) % 4)).decode("utf-8")
-            if decoded.isprintable() and len(decoded) < 140:
+            decoded = base64.urlsafe_b64decode(
+                tail + "=" * (-len(tail) % 4)).decode("utf-8")
+            if (decoded.isprintable() and len(decoded) < 180 and
+                    decoded.encode("utf-8") and
+                    base64.urlsafe_b64encode(decoded.encode("utf-8")).decode("ascii").rstrip("=") == tail.rstrip("=")):
                 return decoded
         except (ValueError, UnicodeDecodeError):
             pass
         return "rdf-node-" + __import__("hashlib").sha256(uri.encode()).hexdigest()[:10]
     return tail or uri
+
+
+def display_evidence_value(value):
+    """Render lifted URIs readably without changing verified_triples."""
+    if value.startswith("http://org.example.com/"):
+        return readable_node(value)
+    return value
+
+
+def opaque_aas_tokens(answer, findings):
+    """Detect raw encoded path components present in the underlying evidence."""
+    tokens = set()
+    for f in findings:
+        for r in f.get("evidence_index", []):
+            v = r.get("value", "")
+            if v.startswith("http://org.example.com/"):
+                tail = v.rsplit("/", 1)[-1]
+                if tail and readable_node(v) != tail:
+                    tokens.add(tail)
+    return sorted(t for t in tokens if len(t) >= 16 and t in answer)
 
 
 def compact_triples(triples):
@@ -391,7 +417,7 @@ def synthesis_payload(audit, findings):
                     1 if any(x in p for x in ("name", "product", "equipment", "measurement", "reference", "status")) else 2)
         chosen = sorted((r for r in idx if not r["missing"]), key=lambda r: (priority(r), r["triple_index"]))[:8]
         facts = [{"ref": r["triple_index"], "fact": r["predicate"] + "=" +
-                  (readable_node(r["value"]) if r["value"].startswith(("http://org.example.com/",)) else r["value"])}
+                  display_evidence_value(r["value"])}
                  for r in chosen]
         domains.append({"domain": f["domain"], "verified": facts,
                         "missing": f.get("unverified_or_missing", [])[:3],
@@ -415,8 +441,7 @@ def deterministic_answer(audit, findings):
         facts = []
         for r in ranked:
             value = r["value"]
-            if value.startswith("http://org.example.com/"):
-                value = readable_node(value)
+            value = display_evidence_value(value)
             if re.search(r"\bnode_\d+\b", value):
                 continue
             facts.append(r["predicate"] + "=" + value + " [triple " + str(r["triple_index"]) + "]")
@@ -473,7 +498,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_2.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_3.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -483,7 +508,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_6_2_evidence_quality_gate",
+    audit = {"method": "q13_v9_6_3_readable_aas_identifiers",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -496,7 +521,7 @@ def main():
         available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
-        audit["method"] = "q13_v9_6_1_reliable_evidence_synthesis"
+        audit["method"] = "q13_v9_6_3_readable_aas_identifiers"
         for record in audit["domains"]:
             if record.get("finding") and record.get("verified_triples"):
                 normalize_finding(record["finding"], record["verified_triples"][:args.max_evidence_triples])
@@ -579,6 +604,7 @@ def main():
                 "Engineering BOM item IDs and functional association do not prove physical membership. "
                 "OPC UA mapping status is a verified RDF assertion but the live binding is unverified. "
                 "Never repeat a model-generated provisional claim as verified RDF evidence. "
+                "Show decoded AAS element paths instead of Base64 URI segments; preserve RDF identity in the audit. "
                 "Be concise: at most two sentences per domain, then one "
                 "uncertainty statement and a short historian summary."
             )
@@ -596,6 +622,8 @@ def main():
                 audit["final_answer"] = deterministic_answer(audit, findings)
                 audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
             passed = evaluate_answer(audit, audit["final_answer"])
+            audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
+            passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
             if not passed and audit["synthesis_mode"] == "OLLAMA":
                 audit["rejected_ollama_answer"] = audit["final_answer"]
                 audit["rejected_ollama_acceptance"] = dict(audit["acceptance"])
@@ -603,6 +631,8 @@ def main():
                 audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
                 audit["fallback_reason"] = "OLLAMA_QUALITY_GATE_FAILED"
                 passed = evaluate_answer(audit, audit["final_answer"])
+                audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
+                passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
             audit["status"] = ("REVIEW_REQUIRED" if passed and
                                not audit["acceptance"]["rdf_fallback_domains"]
                                else "INCOMPLETE")
