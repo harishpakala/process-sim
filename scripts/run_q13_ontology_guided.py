@@ -392,10 +392,10 @@ def main():
                  "or XMEAS9 engineering identity from historian observations. "
                  "Explicitly report missing links. Do not invent triples."},
                 {"role": "user", "content":
-                 "QUESTION:\\n" + QUESTION + "\\n\\n"
-                 "GRAPHDB VERIFIED SUBJECT-PREDICATE-OBJECT TRIPLES:\\n"
+                 "QUESTION:\n" + QUESTION + "\n\n"
+                 "GRAPHDB VERIFIED SUBJECT-PREDICATE-OBJECT TRIPLES:\n"
                  + json.dumps(evidence, ensure_ascii=False)
-                 + "\\n\\nHISTORIAN:\\n"
+                 + "\n\nHISTORIAN:\n"
                  + json.dumps(audit["historian"])}
             ]
             audit["final_answer"] = ollama(
