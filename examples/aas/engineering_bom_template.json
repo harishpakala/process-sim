@@ -109,7 +109,12 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string"
             },
             {
