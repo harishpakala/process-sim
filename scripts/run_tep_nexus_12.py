@@ -25,6 +25,7 @@ def load_module(path, name):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", required=True, help="Recorded simulation run UUID")
+    parser.add_argument("--only-q13", action="store_true", help="Run Q13-v2 only; skip Q1-Q12 evidence and model calls")
     parser.add_argument("--graphdb-url", default="http://localhost:7200/repositories/AAS")
     parser.add_argument("--ollama-url", default="http://localhost:11434")
     parser.add_argument("--model", default="llama3.1:8b")
@@ -42,113 +43,116 @@ def main():
 
     output = ROOT / args.output_dir
     output.mkdir(parents=True, exist_ok=True)
-    evaluator = load_module("scripts/tep_nexus_paper_evaluation.py", "paper_eval_12")
-    engineering = evaluator.engineering_evidence(
-        str(ROOT / "examples/aas/asset_inventory_instance.json"),
-        str(ROOT / "examples/aas/product_catalog_instance.json"))
-    temporal = evaluator.temporal_evidence(
-        dsn, args.run_id, [item[2] for item in evaluator.ASSETS.values()])
-    graph_error = None
-    try:
-        graph = evaluator.verified_graphdb_mappings(args.graphdb_url)
-    except ValueError as exc:
-        graph = None
-        graph_error = str(exc)
-        print("WARNING: GraphDB four-domain verification failed: " + graph_error,
-              flush=True)
-        print("Affected questions will be marked GRAPHDB_VERIFICATION_FAILED, "
-              "not PASS.", flush=True)
-    evidence_rows = evaluator.evaluate(engineering, temporal, graph)
-    questions_path = ROOT / "docs/e4e_tests/revised_questions.json"
-    questions = json.loads(questions_path.read_text(encoding="utf-8"))["questions"]
-    if [q["id"] for q in questions] != [f"Q{i}" for i in range(1, 11)]:
-        raise RuntimeError("Expected exactly the revised independent Q1-Q10 question set.")
-    rows = []
-    for question, record in zip(questions, evidence_rows):
-        status = record["status"]
-        reason = record.get("reason")
-        if graph_error and status == "CROSS_DOMAIN_QUERY_NOT_RUN":
-            status = "GRAPHDB_VERIFICATION_FAILED"
-            reason = graph_error
-        rows.append({
-            **question,
-            "required_sources": record["required_sources"],
-            "evidence_status": status,
-            "evidence_reason": reason,
-            "evidence": record.get("evidence"),
-        })
-    evidence_file = output / "evidence/revised/evidence_and_assessment_template.json"
-    evidence_file.parent.mkdir(parents=True, exist_ok=True)
-    evidence_file.write_text(json.dumps({
-        "run_id": args.run_id,
-        "version": "revised",
-        "assessment_status": "NOT_ASSESSED",
-        "graphdb_verification_error": graph_error,
-        "results": rows,
-    }, indent=2, default=str) + "\n", encoding="utf-8")
-
-    qa = load_module("scripts/tep_nexus_e4e_ollama_qa.py", "ollama_qa_12")
-    engineering = evaluator.engineering_evidence(
-        str(ROOT / "examples/aas/asset_inventory_instance.json"),
-        str(ROOT / "examples/aas/product_catalog_instance.json"))
-    temperature = engineering["temperature"]
-    if temperature["equipment_tag"] != "TI-1101" or temperature["signal"] != "XMEAS9":
-        raise RuntimeError("TI-1101 to XMEAS9 mapping differs from the test fixture.")
-
-    q11 = {
-        "source": "AAS AssetInventory and ProductCatalog instances",
-        "asset_id": temperature.get("asset_id"),
-        "equipment_tag": temperature.get("equipment_tag"),
-        "product_uri": temperature.get("product_uri"),
-        "product_key": temperature.get("product_key"),
-        "eclass_class": temperature.get("eclass_class"),
-        "eclass_irdi": temperature.get("eclass_irdi"),
-        "eclass_verification": temperature.get("eclass_verification"),
-        "product_selection_status": temperature.get("product_selection_status"),
-        "installation_verification": temperature.get("installation_verification"),
-    }
-
     import psycopg
-    with psycopg.connect(dsn, connect_timeout=5) as conn:
-        with conn.transaction():
-            conn.execute("SET TRANSACTION READ ONLY")
-            samples = conn.execute("""
-                SELECT simulation_time_hours, value, observed_at
-                FROM public.signal_samples
-                WHERE run_id = %s::uuid AND signal_id = %s
-                  AND simulation_time_hours >= %s
-                  AND simulation_time_hours <= %s
-                ORDER BY simulation_time_hours, observed_at
-                LIMIT %s
-            """, (args.run_id, "XMEAS9", args.start_seconds / 3600,
-                  args.end_seconds / 3600, args.limit + 1)).fetchall()
-    truncated = len(samples) > args.limit
-    q12 = {
-        "source": "TimescaleDB public.signal_samples (read-only)",
-        "mapping_source": "AAS AssetInventory instance",
-        "asset_id": temperature.get("asset_id"),
-        "equipment_tag": "TI-1101",
-        "signal": "XMEAS9",
-        "run_id": args.run_id,
-        "interval_seconds_inclusive": [args.start_seconds, args.end_seconds],
-        "truncated": truncated,
-        "observations": [
-            {"simulation_seconds": float(t) * 3600, "value": float(v),
-             "observed_at": ts.isoformat()}
-            for t, v, ts in samples[:args.limit]
-        ],
-        "qualification": "Direct historian evidence, not VTKG-to-SQL equivalence.",
-    }
-    rows += [
-        {"id": "Q11", "question":
-         "What ECLASS IRDI is associated with the product candidate linked to reactor temperature instrument TI-1101?",
-         "evidence_status": "EVIDENCE_AVAILABLE" if q11["eclass_irdi"] else "NO_EVIDENCE",
-         "evidence": q11},
-        {"id": "Q12", "question":
-         f"What temperature-signal observations were recorded for reactor temperature instrument TI-1101 (XMEAS9) between simulation time {args.start_seconds:g} and {args.end_seconds:g} seconds in the selected simulation run?",
-         "evidence_status": "EVIDENCE_AVAILABLE" if q12["observations"] else "NO_EVIDENCE",
-         "evidence": q12},
-    ]
+    qa = load_module("scripts/tep_nexus_e4e_ollama_qa.py", "ollama_qa_12")
+    q11 = q12 = None
+    rows = []
+    if not args.only_q13:
+        evaluator = load_module("scripts/tep_nexus_paper_evaluation.py", "paper_eval_12")
+        engineering = evaluator.engineering_evidence(
+            str(ROOT / "examples/aas/asset_inventory_instance.json"),
+            str(ROOT / "examples/aas/product_catalog_instance.json"))
+        temporal = evaluator.temporal_evidence(
+            dsn, args.run_id, [item[2] for item in evaluator.ASSETS.values()])
+        graph_error = None
+        try:
+            graph = evaluator.verified_graphdb_mappings(args.graphdb_url)
+        except ValueError as exc:
+            graph = None
+            graph_error = str(exc)
+            print("WARNING: GraphDB four-domain verification failed: " + graph_error,
+                  flush=True)
+            print("Affected questions will be marked GRAPHDB_VERIFICATION_FAILED, "
+                  "not PASS.", flush=True)
+        evidence_rows = evaluator.evaluate(engineering, temporal, graph)
+        questions_path = ROOT / "docs/e4e_tests/revised_questions.json"
+        questions = json.loads(questions_path.read_text(encoding="utf-8"))["questions"]
+        if [q["id"] for q in questions] != [f"Q{i}" for i in range(1, 11)]:
+            raise RuntimeError("Expected exactly the revised independent Q1-Q10 question set.")
+        rows = []
+        for question, record in zip(questions, evidence_rows):
+            status = record["status"]
+            reason = record.get("reason")
+            if graph_error and status == "CROSS_DOMAIN_QUERY_NOT_RUN":
+                status = "GRAPHDB_VERIFICATION_FAILED"
+                reason = graph_error
+            rows.append({
+                **question,
+                "required_sources": record["required_sources"],
+                "evidence_status": status,
+                "evidence_reason": reason,
+                "evidence": record.get("evidence"),
+            })
+        evidence_file = output / "evidence/revised/evidence_and_assessment_template.json"
+        evidence_file.parent.mkdir(parents=True, exist_ok=True)
+        evidence_file.write_text(json.dumps({
+            "run_id": args.run_id,
+            "version": "revised",
+            "assessment_status": "NOT_ASSESSED",
+            "graphdb_verification_error": graph_error,
+            "results": rows,
+        }, indent=2, default=str) + "\n", encoding="utf-8")
+
+        engineering = evaluator.engineering_evidence(
+            str(ROOT / "examples/aas/asset_inventory_instance.json"),
+            str(ROOT / "examples/aas/product_catalog_instance.json"))
+        temperature = engineering["temperature"]
+        if temperature["equipment_tag"] != "TI-1101" or temperature["signal"] != "XMEAS9":
+            raise RuntimeError("TI-1101 to XMEAS9 mapping differs from the test fixture.")
+
+        q11 = {
+            "source": "AAS AssetInventory and ProductCatalog instances",
+            "asset_id": temperature.get("asset_id"),
+            "equipment_tag": temperature.get("equipment_tag"),
+            "product_uri": temperature.get("product_uri"),
+            "product_key": temperature.get("product_key"),
+            "eclass_class": temperature.get("eclass_class"),
+            "eclass_irdi": temperature.get("eclass_irdi"),
+            "eclass_verification": temperature.get("eclass_verification"),
+            "product_selection_status": temperature.get("product_selection_status"),
+            "installation_verification": temperature.get("installation_verification"),
+        }
+
+        with psycopg.connect(dsn, connect_timeout=5) as conn:
+            with conn.transaction():
+                conn.execute("SET TRANSACTION READ ONLY")
+                samples = conn.execute("""
+                    SELECT simulation_time_hours, value, observed_at
+                    FROM public.signal_samples
+                    WHERE run_id = %s::uuid AND signal_id = %s
+                      AND simulation_time_hours >= %s
+                      AND simulation_time_hours <= %s
+                    ORDER BY simulation_time_hours, observed_at
+                    LIMIT %s
+                """, (args.run_id, "XMEAS9", args.start_seconds / 3600,
+                      args.end_seconds / 3600, args.limit + 1)).fetchall()
+        truncated = len(samples) > args.limit
+        q12 = {
+            "source": "TimescaleDB public.signal_samples (read-only)",
+            "mapping_source": "AAS AssetInventory instance",
+            "asset_id": temperature.get("asset_id"),
+            "equipment_tag": "TI-1101",
+            "signal": "XMEAS9",
+            "run_id": args.run_id,
+            "interval_seconds_inclusive": [args.start_seconds, args.end_seconds],
+            "truncated": truncated,
+            "observations": [
+                {"simulation_seconds": float(t) * 3600, "value": float(v),
+                 "observed_at": ts.isoformat()}
+                for t, v, ts in samples[:args.limit]
+            ],
+            "qualification": "Direct historian evidence, not VTKG-to-SQL equivalence.",
+        }
+        rows += [
+            {"id": "Q11", "question":
+             "What ECLASS IRDI is associated with the product candidate linked to reactor temperature instrument TI-1101?",
+             "evidence_status": "EVIDENCE_AVAILABLE" if q11["eclass_irdi"] else "NO_EVIDENCE",
+             "evidence": q11},
+            {"id": "Q12", "question":
+             f"What temperature-signal observations were recorded for reactor temperature instrument TI-1101 (XMEAS9) between simulation time {args.start_seconds:g} and {args.end_seconds:g} seconds in the selected simulation run?",
+             "evidence_status": "EVIDENCE_AVAILABLE" if q12["observations"] else "NO_EVIDENCE",
+             "evidence": q12},
+        ]
 
     # Q13 is appended without altering the existing Q1-Q12 wording or evidence.
     # Its historian run/window are fixed by the published Q13 question.
@@ -290,7 +294,7 @@ def main():
         "without supporting evidence. If evidence is genuinely missing, identify "
         "the specific missing field. Answer concisely and completely."
     )
-    destination = output / "answers_13_v2.json"
+    destination = output / ("answers_q13_v2_only.json" if args.only_q13 else "answers_13_v2.json")
     results = []
     for row in rows:
         evidence = row.get("evidence")
@@ -361,6 +365,7 @@ def main():
             "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
             "assessment_status": "NOT_MANUALLY_ASSESSED",
             "q11_evidence": q11, "q12_evidence": q12, "q13_evidence": q13,
+            "only_q13": args.only_q13,
             "q13_prompt_evidence": prompt_evidence if row["id"] == "Q13" else None,
             "graphdb_verification_error": graph_error,
             "results": results,
