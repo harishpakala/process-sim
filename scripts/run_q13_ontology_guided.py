@@ -129,9 +129,13 @@ def graphdb_select(url, query, timeout):
 
 
 def domain_predicates(domain, schema):
-    return sorted(set(re.findall(
-        r"https://example\\.org/" + re.escape(domain) + r"/[A-Za-z0-9_]+",
-        schema)))
+    """Extract exact predicate IRIs from the lifted TTL context."""
+    prefix = "https://example.org/" + domain + "/"
+    return sorted({line.strip().split()[0] for line in schema.splitlines()
+                   if line.strip().startswith(prefix)
+                   and line.strip().split()[0].startswith(prefix)})
+
+
 
 
 def sparql_iri(value):
@@ -151,7 +155,7 @@ def discover_domain(url, domain, schema, timeout, identifiers):
     result = {"predicate_count": len(uris), "anchors": [], "neighborhood": [],
               "samples": [], "identifier_inputs": sorted(identifiers)}
     if not uris:
-        return result
+        raise ValueError("No predicates extracted from TTL-derived schema for " + domain)
     values = " ".join(sparql_iri(uri) for uri in uris)
     base = "VALUES ?p { " + values + " }\\n?s ?p ?o .\\n"
     # Sample a small number per predicate rather than letting the first
@@ -180,6 +184,7 @@ def discover_domain(url, domain, schema, timeout, identifiers):
                  + " AS ?s) ?s ?p ?o } LIMIT 60")
         result["neighborhood"].extend(graphdb_select(url, query, timeout))
     result["anchor_subjects"] = subjects
+    result["sample_count"] = len(result["samples"])
     return result
 
 
