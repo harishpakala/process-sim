@@ -105,7 +105,7 @@ def normalize_finding(finding, triples):
     # Model claims not backed by an exact triple are retained only as qualified
     # provisional interpretations, never promoted to verified assertions.
     inferred = [f for f in finding.get("provisional_facts", []) if not direct(f)
-                and not re.search(r"\\bnode_\\d+\\b|rdf-node-[0-9a-f]{10}", f, re.I)
+                and not re.search(r"\bnode_\d+\b|rdf-node-[0-9a-f]{10}", f, re.I)
                 and not any(f.strip().lower().startswith(a.lower()) for a in status)
                 and not any(m.split(" has an empty", 1)[0].lower() in f.lower()
                             and not f.split(":", 1)[-1].strip() for m in missing)]
@@ -396,7 +396,7 @@ def synthesis_payload(audit, findings):
         domains.append({"domain": f["domain"], "verified": facts,
                         "missing": f.get("unverified_or_missing", [])[:3],
                         "provisional": [v for v in f.get("provisional_facts", [])[:3]
-                                        if not re.search(r"\\bnode_\\d+\\b|rdf-node-[0-9a-f]{10}", v, re.I)]})
+                                        if not re.search(r"\bnode_\d+\b|rdf-node-[0-9a-f]{10}", v, re.I)]})
     return {"question": audit["question"], "domains": domains,
             "historian": audit.get("historian")}
 
@@ -417,7 +417,7 @@ def deterministic_answer(audit, findings):
             value = r["value"]
             if value.startswith("http://org.example.com/"):
                 value = readable_node(value)
-            if re.search(r"\\bnode_\\d+\\b", value):
+            if re.search(r"\bnode_\d+\b", value):
                 continue
             facts.append(r["predicate"] + "=" + value + " [triple " + str(r["triple_index"]) + "]")
             if len(facts) == 6:
@@ -429,7 +429,7 @@ def deterministic_answer(audit, findings):
     h = audit.get("historian")
     if h:
         lines.append("Historian observations: " + json.dumps(h, ensure_ascii=False, separators=(",", ":"))[:650])
-    return "\\n".join(lines)
+    return "\n".join(lines)
 
 
 def evaluate_answer(audit, answer):
@@ -445,11 +445,18 @@ def evaluate_answer(audit, answer):
             "no evidence", "cannot confirm", "not established")))
     acceptance["status_not_misclassified"] = not bool(
         re.search(r"(?:notconnected|not connected).{0,55}(?:provisional rdf|provisional evidence)", lower))
-    acceptance["no_raw_node_aliases"] = not bool(re.search(r"\\bnode_\\d+\\b", answer))
+    acceptance["no_raw_node_aliases"] = not bool(re.search(r"\bnode_\d+\b|rdf-node-[0-9a-f]{10}", answer, re.I))
+    acceptance["no_unqualified_bom_membership"] = not bool(re.search(
+        r"(?:verified|confirmed|proven) (?:physical )?(?:installation|membership|installed)",
+        answer, re.I))
+    acceptance["no_claimed_live_binding"] = not bool(re.search(
+        r"(?:verified|confirmed|established) live (?:opc ua )?(?:binding|connection)",
+        answer, re.I))
     return all(acceptance[k] for k in (
         "six_domain_coverage", "six_domain_names_mentioned",
         "provisional_status_mentioned", "installation_uncertainty_mentioned",
-        "status_not_misclassified", "no_raw_node_aliases"))
+        "status_not_misclassified", "no_raw_node_aliases",
+        "no_unqualified_bom_membership", "no_claimed_live_binding"))
 
 
 def main():
@@ -466,7 +473,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_1.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_2.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -476,7 +483,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_6_1_reliable_evidence_synthesis",
+    audit = {"method": "q13_v9_6_2_evidence_quality_gate",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -569,6 +576,9 @@ def main():
                 "Write a natural engineering narrative, not a property dump. "
                 "Do not output node aliases, base64 paths or opaque RDF identifiers. "
                 "Cite evidence as domain triple indices when relevant. "
+                "Engineering BOM item IDs and functional association do not prove physical membership. "
+                "OPC UA mapping status is a verified RDF assertion but the live binding is unverified. "
+                "Never repeat a model-generated provisional claim as verified RDF evidence. "
                 "Be concise: at most two sentences per domain, then one "
                 "uncertainty statement and a short historian summary."
             )
@@ -586,6 +596,13 @@ def main():
                 audit["final_answer"] = deterministic_answer(audit, findings)
                 audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
             passed = evaluate_answer(audit, audit["final_answer"])
+            if not passed and audit["synthesis_mode"] == "OLLAMA":
+                audit["rejected_ollama_answer"] = audit["final_answer"]
+                audit["rejected_ollama_acceptance"] = dict(audit["acceptance"])
+                audit["final_answer"] = deterministic_answer(audit, findings)
+                audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
+                audit["fallback_reason"] = "OLLAMA_QUALITY_GATE_FAILED"
+                passed = evaluate_answer(audit, audit["final_answer"])
             audit["status"] = ("REVIEW_REQUIRED" if passed and
                                not audit["acceptance"]["rdf_fallback_domains"]
                                else "INCOMPLETE")
