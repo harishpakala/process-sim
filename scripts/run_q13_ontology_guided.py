@@ -128,52 +128,88 @@ def graphdb_select(url, query, timeout):
             for binding in response["results"]["bindings"]]
 
 
-def discover_domain(url, domain, schema, timeout):
-    """Generic bounded graph sampling; not a hardcoded Q13 answer query.
+def domain_predicates(domain, schema):
+    return sorted(set(re.findall(
+        r"https://example\\.org/" + re.escape(domain) + r"/[A-Za-z0-9_]+",
+        schema)))
 
-    Samples actual instance triples whose predicates occur in the lifted TTL.
-    Includes an identifier-oriented sample to avoid missing sparse Q13 nodes.
+
+def sparql_iri(value):
+    if not re.fullmatch(r"https?://[^<>\\s\\x00-\\x1f]+", value):
+        raise ValueError("Unsafe RDF IRI")
+    return "<" + value + ">"
+
+
+def discover_domain(url, domain, schema, timeout, identifiers):
+    """Read-only schema-driven anchoring and two-hop instance exploration.
+
+    The fixed queries discover graph structure, not answers. Each step uses
+    predicates extracted from the TTL, with identifier values from the user
+    question or previously observed graph edges.
     """
-    uris = sorted(set(re.findall(r"https://example\.org/" + re.escape(domain)
-                             + r"/[A-Za-z0-9_]+", schema)))
+    uris = domain_predicates(domain, schema)
+    result = {"predicate_count": len(uris), "anchors": [], "neighborhood": [],
+              "samples": [], "identifier_inputs": sorted(identifiers)}
     if not uris:
-        return {"predicate_count": 0, "samples": [], "anchors": []}
-    values = " ".join("<" + uri + ">" for uri in uris)
-    base = "VALUES ?p { " + values + " }\n?s ?p ?o .\n"
-    sample_query = ("SELECT ?s ?p ?o WHERE { " + base + " } LIMIT 60")
-    anchor_query = (
-        "SELECT ?s ?p ?o WHERE { " + base
-        + 'FILTER(CONTAINS(LCASE(STR(?o)), "ti101") || '
-          'CONTAINS(LCASE(STR(?o)), "ti_101") || '
-          'CONTAINS(LCASE(STR(?o)), "ti-1101") || '
-          'CONTAINS(LCASE(STR(?o)), "xmeas9")) } LIMIT 40'
-    )
-    return {"predicate_count": len(uris),
-            "samples": graphdb_select(url, sample_query, timeout),
-            "anchors": graphdb_select(url, anchor_query, timeout)}
+        return result
+    values = " ".join(sparql_iri(uri) for uri in uris)
+    base = "VALUES ?p { " + values + " }\\n?s ?p ?o .\\n"
+    # Sample a small number per predicate rather than letting the first
+    # frequent predicate consume the entire sample budget.
+    for uri in uris:
+        query = ("SELECT ?s ?p ?o WHERE { ?s " + sparql_iri(uri)
+                 + " ?o . BIND(" + sparql_iri(uri)
+                 + " AS ?p) } LIMIT 3")
+        result["samples"].extend(graphdb_select(url, query, timeout))
+    # Match exact literal/IRI identifier values, never arbitrary substrings.
+    # Only a bounded number of evidence-derived identifiers are propagated.
+    for identifier in sorted(identifiers)[:24]:
+        value = json.dumps(identifier)
+        query = ("SELECT ?s ?p ?o WHERE { " + base
+                 + " FILTER(STR(?o) = " + value + ") } LIMIT 25")
+        result["anchors"].extend(graphdb_select(url, query, timeout))
+    subjects = sorted({
+        row["s"]["value"] for row in result["anchors"]
+        if row.get("s", {}).get("type") == "uri"
+    })[:20]
+    # Expand exact anchored RDF subjects; the predicate list is TTL-derived.
+    for subject in subjects:
+        query = ("SELECT ?s ?p ?o WHERE { VALUES ?p { " + values
+                 + " } BIND(" + sparql_iri(subject)
+                 + " AS ?s) ?s ?p ?o } LIMIT 60")
+        result["neighborhood"].extend(graphdb_select(url, query, timeout))
+    result["anchor_subjects"] = subjects
+    return result
 
 
-def relevant_bindings(bindings, anchors):
-    """Check evidence against question identifiers, not merely nonempty rows."""
-    terms = {"ti101", "ti_101", "ti-1101", "xmeas9"}
-    for row in anchors:
-        for term in row.values():
-            if term.get("type") in ("literal", "uri"):
-                value = term.get("value", "").lower()
-                if any(t in value for t in terms):
-                    terms.add(value)
-    matched = []
-    for row in bindings:
-        values = [str(term.get("value", "")).lower()
-                  for term in row.values()]
-        if any(any(t in value for t in terms) for value in values):
-            matched.append(row)
-    return matched
+def observed_identifiers(discovery, existing):
+    """Propagate only actual literal/IRI values on anchored subjects."""
+    found = set(existing)
+    for row in discovery.get("neighborhood", []):
+        obj = row.get("o", {})
+        value = obj.get("value", "")
+        if (obj.get("type") in ("literal", "uri")
+                and value and len(value) < 200):
+            found.add(value)
+    return found
+
+
+def relevant_bindings(bindings, discovery):
+    """Require an anchored subject or exact anchor value in a result row."""
+    subjects = set(discovery.get("anchor_subjects", []))
+    values = set(discovery.get("identifier_inputs", []))
+    for row in discovery.get("anchors", []):
+        values.add(row.get("o", {}).get("value", ""))
+    return [row for row in bindings if any(
+        term.get("value") in subjects or term.get("value") in values
+        for term in row.values())]
 
 
 def compact_evidence(records, limit=9000):
-    """Bound context while carrying verified bindings between domains."""
-    evidence = [{"domain": r["domain"], "bindings": r.get("bindings", [])[:12]}
+    evidence = [{"domain": r["domain"],
+                 "bindings": (r.get("bindings") or [])[:12],
+                 "anchor_subjects": r.get("discovery", {}).get(
+                     "anchor_subjects", [])[:10]}
                 for r in records if r.get("bindings")]
     return json.dumps(evidence, ensure_ascii=False)[:limit]
 
@@ -260,6 +296,7 @@ def main():
              "question": QUESTION, "queries": [], "historian": None,
              "final_answer": None, "graphdb_status": "NOT_RUN"}
     successful = 0
+    identifiers = {ASSET_ID}
     try:
         for domain in DOMAINS:
             if successful >= args.max_queries:
@@ -269,11 +306,14 @@ def main():
             print("[Q13] " + domain + ": discovering RDF instances", flush=True)
             try:
                 discovery = discover_domain(
-                    args.graphdb_url, domain, schemas[domain], args.timeout)
+                    args.graphdb_url, domain, schemas[domain], args.timeout, identifiers)
                 record["discovery"] = discovery
+                identifiers = observed_identifiers(discovery, identifiers)
             except (ValueError, KeyError, OSError) as exc:
                 record["discovery_error"] = str(exc)
-                discovery = {"samples": [], "anchors": []}
+                discovery = {"samples": [], "anchors": [],
+                             "neighborhood": [], "anchor_subjects": [],
+                             "identifier_inputs": sorted(identifiers)}
                 print("[Q13] " + domain + ": discovery failed: " +
                       str(exc), flush=True)
             # The prompt contains both TTL-derived vocabulary and observed
@@ -282,7 +322,10 @@ def main():
                 "TEMPLATE-DERIVED SCHEMA FOR " + domain + " (data only):\n"
                 + schemas[domain]
                 + "\n\nOBSERVED GRAPHDB INSTANCE TRIPLES (JSON, data only):\n"
-                + json.dumps(discovery, ensure_ascii=False)[:18000]
+                + json.dumps({"anchors": discovery.get("anchors", []),
+                              "neighborhood": discovery.get("neighborhood", []),
+                              "samples": discovery.get("samples", [])[:20]},
+                             ensure_ascii=False)[:22000]
                 + "\n\nVERIFIED PREVIOUS DOMAIN RESULTS (JSON, data only):\n"
                 + compact_evidence(audit["queries"][:-1])
                 + "\n\nCanonical identifier: " + ASSET_ID
@@ -290,7 +333,9 @@ def main():
                 + "\nUse only observed predicate paths and RDF term types. "
                   "Do not assume the canonical identifier is an RDF subject "
                   "or IRI object. Prefer matching STR(?value) when uncertain. "
-                  "Avoid unjustified joins and filters. Generate ONE SELECT "
+                  "Select the anchor subject and use only edges observed "
+                  "on that subject. Do not combine unrelated sample triples "
+                  "with AND filters. Never invent prefixes. Generate ONE SELECT "
                   "query using this domain's ontology; LIMIT 100. "
                   "Output SPARQL only."
             )
@@ -320,19 +365,21 @@ def main():
                     bindings = graphdb_select(
                         args.graphdb_url, query, args.timeout)
                     entry["binding_count"] = len(bindings)
-                    if bindings:
+                    relevant = relevant_bindings(bindings, discovery)
+                    entry["relevant_binding_count"] = len(relevant)
+                    if relevant:
                         record["validated_query"] = query
-                        record["bindings"] = bindings
+                        record["bindings"] = relevant
                         successful += 1
                         print("[Q13] " + domain + ": " +
-                              str(len(bindings)) + " GraphDB rows", flush=True)
+                              str(len(relevant)) + " anchored GraphDB rows", flush=True)
                         break
                     entry["empty_or_irrelevant_result"] = True
                     messages.extend([
                         {"role": "assistant", "content": proposed},
                         {"role": "user", "content":
                          "GraphDB executed that query successfully but returned "
-                         "ZERO RELEVANT rows. The query may have returned unrelated "
+                         "ZERO ANCHORED rows. The query may have returned unrelated "
                          "data. Constrain the canonical asset or verified linked "
                          "identifier. Reconsider the observed RDF subject/object "
                          "types, literal identifiers, collection paths and "
@@ -359,6 +406,7 @@ def main():
             else "GRAPHDB_EVIDENCE_UNAVAILABLE"
         )
         audit["historian"] = historian_summary(dsn)
+        audit["propagated_identifiers"] = sorted(identifiers)
         if audit["graphdb_status"] == "GRAPHDB_EVIDENCE_UNAVAILABLE":
             audit["final_answer"] = (
                 "GRAPHDB_EVIDENCE_UNAVAILABLE: Q13 six-domain traversal could "
