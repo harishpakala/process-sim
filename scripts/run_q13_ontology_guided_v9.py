@@ -556,7 +556,7 @@ def main():
         available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
-        audit["method"] = "q13_v9_6_3_readable_aas_identifiers"
+        audit["method"] = "q13_v9_6_4_evidence_completeness"
         for record in audit["domains"]:
             if record.get("finding") and record.get("verified_triples"):
                 normalize_finding(record["finding"], record["verified_triples"][:args.max_evidence_triples])
