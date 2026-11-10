@@ -8,15 +8,23 @@ type Audit = { question?: string; answer: string; status?: string; method?: stri
 const result = ref<Audit | null>(null)
 const loading = ref(false)
 const error = ref('')
+async function apiJson(url: string, options?: RequestInit): Promise<Record<string, any>> {
+ const response = await fetch(url, options)
+ const raw = await response.text()
+ let data: Record<string, any>
+ try { data = raw.trim() ? JSON.parse(raw) : {} }
+ catch { throw new Error(`API returned non-JSON (HTTP ${response.status}): ${raw.slice(0, 240) || 'empty response'}`) }
+ if (!response.ok) throw new Error(data.error || `API request failed (HTTP ${response.status}${raw ? '' : ', empty response'})`)
+ if (!raw.trim()) throw new Error(`API returned an empty response (HTTP ${response.status})`)
+ return data
+}
 const liveState = ref('')
 const liveBusy = ref(false)
 const liveError = ref('')
 async function liveStart() {
  liveBusy.value = true; liveError.value = ''
  try {
-  const response = await fetch('/api/ai/q13/ontology/live/start', { method:'POST' })
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'Live Q13 start failed')
+  const data = await apiJson('/api/ai/q13/ontology/live/start', { method:'POST' })
   liveState.value = data.state || 'QUEUED'
  } catch (e) { liveError.value = e instanceof Error ? e.message : String(e) }
  finally { liveBusy.value = false }
@@ -24,14 +32,10 @@ async function liveStart() {
 async function liveCheck() {
  liveBusy.value = true; liveError.value = ''
  try {
-  const response = await fetch('/api/ai/q13/ontology/live/status', {cache:'no-store'})
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'Live Q13 status unavailable')
+  const data = await apiJson('/api/ai/q13/ontology/live/status', {cache:'no-store'})
   liveState.value = data.state || 'UNKNOWN'
   if (data.state === 'COMPLETED') {
-   const resultResponse = await fetch('/api/ai/q13/ontology/live/result', {cache:'no-store'})
-   const audit = await resultResponse.json()
-   if (!resultResponse.ok) throw new Error(audit.error || 'Live result unavailable')
+   const audit = await apiJson('/api/ai/q13/ontology/live/result', {cache:'no-store'})
    result.value = audit as Audit
   }
   if (data.state === 'FAILED') liveError.value = data.error || 'Live Q13 failed'
@@ -45,9 +49,7 @@ async function refresh() {
  loading.value = true
  error.value = ''
  try {
-  const response = await fetch('/api/ai/q13/ontology/result', { cache:'no-store' })
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'Q13 audit unavailable')
+  const data = await apiJson('/api/ai/q13/ontology/result', { cache:'no-store' })
   result.value = data as Audit
  } catch (e) {
   result.value = null
