@@ -128,6 +128,38 @@ def graphdb_select(url, query, timeout):
             for binding in response["results"]["bindings"]]
 
 
+def discover_domain(url, domain, schema, timeout):
+    """Generic bounded graph sampling; not a hardcoded Q13 answer query.
+
+    Samples actual instance triples whose predicates occur in the lifted TTL.
+    Includes an identifier-oriented sample to avoid missing sparse Q13 nodes.
+    """
+    uris = sorted(set(re.findall(r"https://example\\.org/" + re.escape(domain)
+                             + r"/[A-Za-z0-9_]+", schema)))
+    if not uris:
+        return {"predicate_count": 0, "samples": [], "anchors": []}
+    values = " ".join("<" + uri + ">" for uri in uris)
+    base = "VALUES ?p { " + values + " }\\n?s ?p ?o .\\n"
+    sample_query = ("SELECT ?s ?p ?o WHERE { " + base + " } LIMIT 60")
+    anchor_query = (
+        "SELECT ?s ?p ?o WHERE { " + base
+        + 'FILTER(CONTAINS(LCASE(STR(?o)), "ti101") || '
+          'CONTAINS(LCASE(STR(?o)), "ti_101") || '
+          'CONTAINS(LCASE(STR(?o)), "ti-1101") || '
+          'CONTAINS(LCASE(STR(?o)), "xmeas9")) } LIMIT 40'
+    )
+    return {"predicate_count": len(uris),
+            "samples": graphdb_select(url, sample_query, timeout),
+            "anchors": graphdb_select(url, anchor_query, timeout)}
+
+
+def compact_evidence(records, limit=9000):
+    """Bound context while carrying verified bindings between domains."""
+    evidence = [{"domain": r["domain"], "bindings": r.get("bindings", [])[:12]}
+                for r in records if r.get("bindings")]
+    return json.dumps(evidence, ensure_ascii=False)[:limit]
+
+
 def historian_summary(dsn):
     import psycopg
     with psycopg.connect(dsn, connect_timeout=5) as conn:
@@ -214,52 +246,91 @@ def main():
         for domain in DOMAINS:
             if successful >= args.max_queries:
                 break
-            # Focused schema context reduces Ollama context pressure. Each
-            # query is model-generated, not a predefined domain SPARQL query.
+            record = {"domain": domain, "attempts": [], "bindings": None}
+            audit["queries"].append(record)
+            print("[Q13] " + domain + ": discovering RDF instances", flush=True)
+            try:
+                discovery = discover_domain(
+                    args.graphdb_url, domain, schemas[domain], args.timeout)
+                record["discovery"] = discovery
+            except (ValueError, KeyError, OSError) as exc:
+                record["discovery_error"] = str(exc)
+                discovery = {"samples": [], "anchors": []}
+                print("[Q13] " + domain + ": discovery failed: " +
+                      str(exc), flush=True)
+            # The prompt contains both TTL-derived vocabulary and observed
+            # instance triples, including the RDF term types (uri/literal).
             user_prompt = (
-                "TEMPLATE-DERIVED SCHEMA FOR " + domain + " (data only):\\n"
-                + schemas[domain] + "\\n\\nCanonical identifier: " + ASSET_ID
-                + "\\nTask: " + domain_tasks[domain]
-                + "\\nReturn exactly one SELECT query. Include LIMIT 100. "
-                "Do not explain the query."
+                "TEMPLATE-DERIVED SCHEMA FOR " + domain + " (data only):\n"
+                + schemas[domain]
+                + "\n\nOBSERVED GRAPHDB INSTANCE TRIPLES (JSON, data only):\n"
+                + json.dumps(discovery, ensure_ascii=False)[:18000]
+                + "\n\nVERIFIED PREVIOUS DOMAIN RESULTS (JSON, data only):\n"
+                + compact_evidence(audit["queries"][:-1])
+                + "\n\nCanonical identifier: " + ASSET_ID
+                + "\nTask: " + domain_tasks[domain]
+                + "\nUse only observed predicate paths and RDF term types. "
+                  "Do not assume the canonical identifier is an RDF subject "
+                  "or IRI object. Prefer matching STR(?value) when uncertain. "
+                  "Avoid unjustified joins and filters. Generate ONE SELECT "
+                  "query using this domain's ontology; LIMIT 100. "
+                  "Output SPARQL only."
             )
             messages = [{"role": "system", "content": system},
                         {"role": "user", "content": user_prompt}]
-            record = {"domain": domain, "attempts": [], "bindings": None}
             for attempt in range(1, args.retries + 1):
-                proposed = ollama(args.ollama_url, args.model, messages, args.timeout)
-                entry = {"attempt": attempt, "proposal": proposed}
+                print("[Q13] " + domain + ": Ollama attempt " +
+                      str(attempt), flush=True)
+                entry = {"attempt": attempt}
                 record["attempts"].append(entry)
                 try:
+                    proposed = ollama(
+                        args.ollama_url, args.model, messages, args.timeout)
+                    entry["proposal"] = proposed
                     query = validate_select(proposed)
-                    record["validated_query"] = query
-                    break
-                except ValueError as exc:
+                    entry["validated_query"] = query
+                except (ValueError, KeyError, OSError) as exc:
                     entry["validation_error"] = str(exc)
+                    messages.extend([
+                        {"role": "assistant", "content": entry.get("proposal", "")},
+                        {"role": "user", "content":
+                         "Your response was not valid SPARQL: " + str(exc)
+                         + "\nRetry the SAME task. Output only SELECT SPARQL."}
+                    ])
+                    continue
+                try:
+                    bindings = graphdb_select(
+                        args.graphdb_url, query, args.timeout)
+                    entry["binding_count"] = len(bindings)
+                    if bindings:
+                        record["validated_query"] = query
+                        record["bindings"] = bindings
+                        successful += 1
+                        print("[Q13] " + domain + ": " +
+                              str(len(bindings)) + " GraphDB rows", flush=True)
+                        break
+                    entry["empty_result"] = True
                     messages.extend([
                         {"role": "assistant", "content": proposed},
                         {"role": "user", "content":
-                         "INVALID OUTPUT: " + str(exc) +
-                         "\\nYour previous response was NOT valid SPARQL. "
-                         "Retry the SAME task. Start immediately with PREFIX "
-                         "or SELECT. Output ONLY the query, no prose."}
+                         "GraphDB executed that query successfully but returned "
+                         "ZERO rows. Reconsider the observed RDF subject/object "
+                         "types, literal identifiers, collection paths and "
+                         "unjustified joins. Try a DIFFERENT, simpler SELECT "
+                         "for the SAME domain. Output SPARQL only."}
                     ])
-            if "validated_query" in record:
-                try:
-                    record["bindings"] = graphdb_select(
-                        args.graphdb_url, record["validated_query"], args.timeout)
-                    successful += 1
-                    print("[Q13] " + domain + ": " +
-                          str(len(record["bindings"])) + " GraphDB rows", flush=True)
                 except (ValueError, KeyError, OSError) as exc:
-                    record["execution_error"] = str(exc)
-                    print("[Q13] " + domain + ": GraphDB execution failed: " +
-                          str(exc), flush=True)
-            else:
-                record["error"] = "SPARQL_GENERATION_FAILED"
-                print("[Q13] " + domain + ": no valid SELECT after " +
+                    entry["execution_error"] = str(exc)
+                    messages.extend([
+                        {"role": "assistant", "content": proposed},
+                        {"role": "user", "content":
+                         "GraphDB rejected your query: " + str(exc)
+                         + "\nFix it for the SAME domain. SPARQL only."}
+                    ])
+            if record["bindings"] is None:
+                record["error"] = "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
+                print("[Q13] " + domain + ": no evidence after " +
                       str(args.retries) + " attempts", flush=True)
-            audit["queries"].append(record)
         valid_results = [r for r in audit["queries"] if r["bindings"] is not None]
         audit["graphdb_status"] = (
             "EVIDENCE_AVAILABLE" if any(r["bindings"] for r in valid_results)
@@ -287,9 +358,9 @@ def main():
                  "reactor temperature. Do not infer verified physical "
                  "installation or OPC UA binding from candidate references."},
                 {"role": "user", "content":
-                 "QUESTION:\\n" + QUESTION + "\\n\\nGRAPHDB RESULTS:\\n"
+                 "QUESTION:\n" + QUESTION + "\n\nGRAPHDB RESULTS:\n"
                  + json.dumps(evidence, ensure_ascii=False)[:50000]
-                 + "\\n\\nHISTORIAN:\\n" + json.dumps(audit["historian"])}
+                 + "\n\nHISTORIAN:\n" + json.dumps(audit["historian"])}
             ]
             audit["final_answer"] = ollama(
                 args.ollama_url, args.model, answer_messages, args.timeout)
