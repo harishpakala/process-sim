@@ -258,3 +258,45 @@ This **adds a proposed thirteenth question to the separate 12-question qualitati
 **Expected source-level anchors (not a predetermined system answer):** DEXPI `TI_101`; ECAD `TI-1101`; EBOM `EBOM-0016` and `EBOM-0050`; canonical `AssetIdentifier=https://aas.example.com/TI101`; AssetInventory `TEP_XMEAS9`; ProductCatalog candidate `IFM_TA1101`; provisional OPC UA mapping `TI_101 → XMEAS9`. Preserve the distinct ECAD SMC part reference and IFM candidate rather than asserting product equivalence. The specified run is drawn from the archived temporal coverage snapshot; its presence and observations in the live historian must be checked.
 
 **Evaluation:** PASS only if all six model contributions are evidenced by actual returned records/graph statements and the temporal rows are confirmed to belong to the requested run and interval. PARTIAL if links or observations are missing and the system accurately reports those gaps. FAIL if it invents links, conflates candidate products, or returns observations from a different run. Record the actual response, query timestamp, GraphDB evidence, TimescaleDB rows, and verdict before including Q13 in quantitative claims. The updated EBOM JSON must be re-lifted before a live graph test.
+
+
+### Running Q1–Q13 with the existing evidence-conditioned Ollama runner
+
+The original Q1–Q12 question texts are unchanged: Q1–Q10 load from
+`docs/e4e_tests/revised_questions.json`; Q11 and Q12 remain defined in
+`scripts/run_tep_nexus_12.py`. Q13 is appended after Q12, with its own
+read-only GraphDB SPARQL and TimescaleDB historian evidence. The script name
+is retained to avoid breaking existing references.
+
+From the repository root, with GraphDB, TimescaleDB and Ollama available,
+and `TEP_TIMESCALE_DSN` configured **locally** (do not commit credentials):
+
+```powershell
+$env:TEP_TIMESCALE_DSN = "postgresql://USER:PASSWORD@localhost:5432/DBNAME"
+python scripts/run_tep_nexus_12.py --run-id 10cfb1d1-2984-4932-8207-dc430ed60c2b --graphdb-url http://localhost:7200/repositories/AAS --model llama3.1:8b --output-dir reports/evaluation_13_grounded
+```
+
+Replace the DSN placeholder with the actual local connection information.
+The command runs Q1–Q12 with their pre-existing evidence logic (Q12 uses the
+default 0–60-second interval) and adds Q13 with its specified run ID and
+0–600-second interval, regardless of the Q12 window arguments. The selected
+`--run-id` applies to the existing run-dependent questions.
+
+The runner writes `reports/evaluation_13_grounded/answers_13.json` with
+question texts, Ollama responses, evidence hashes and Q13 evidence, plus
+`reports/evaluation_13_grounded/evidence/revised/evidence_and_assessment_template.json`
+for the existing Q1–Q10 evidence assessment. Q13 SPARQL results include
+canonical asset identifiers, product/signal references and OPC UA mapping
+provenance. Q13 historian evidence includes XMEAS9 observation values,
+simulation times and recorded timestamps. Failed GraphDB queries or missing
+historian observations are reported as incomplete evidence rather than
+silently asserted.
+
+**Interpretation:** This is evidence-conditioned Ollama QA, **not** a live
+VTKG planner execution or automatic PASS/PARTIAL/FAIL grading. Q13's
+`EVIDENCE_AVAILABLE` flag is a preliminary data-presence check, not proof
+that every relationship is correct. Inspect the actual response and evidence,
+preserve provisional mapping and product-selection caveats, and assign
+manual grades. Historical Q1–Q12 grades and 36-case benchmark results are
+not overwritten. The runner cannot execute against the user's local services
+from GitHub alone.
