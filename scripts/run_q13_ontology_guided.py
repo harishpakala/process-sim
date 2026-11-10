@@ -139,9 +139,14 @@ def domain_predicates(domain, schema):
 
 
 def sparql_iri(value):
-    if not re.fullmatch(r"https?://[^<>\\s\\x00-\\x1f]+", value):
-        raise ValueError("Unsafe RDF IRI")
+    """Validate an observed HTTP(S) RDF IRI before inserting into SPARQL."""
+    parsed = urllib.parse.urlsplit(value)
+    if (parsed.scheme not in ("http", "https") or not parsed.netloc
+            or any(ord(ch) <= 32 or ch in '<>"{}|^\\`' for ch in value)):
+        raise ValueError("Unsafe RDF IRI: " + repr(value))
     return "<" + value + ">"
+
+
 
 
 def discover_domain(url, domain, schema, timeout, identifiers):
@@ -157,7 +162,7 @@ def discover_domain(url, domain, schema, timeout, identifiers):
     if not uris:
         raise ValueError("No predicates extracted from TTL-derived schema for " + domain)
     values = " ".join(sparql_iri(uri) for uri in uris)
-    base = "VALUES ?p { " + values + " }\\n?s ?p ?o .\\n"
+    base = "VALUES ?p { " + values + " }\n?s ?p ?o .\n"
     # Sample a small number per predicate rather than letting the first
     # frequent predicate consume the entire sample budget.
     for uri in uris:
