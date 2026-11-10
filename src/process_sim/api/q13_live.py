@@ -96,6 +96,5 @@ def result() -> dict:
             "summarySource": (d.get("finding") or {}).get("summary_source"),
             "verifiedTriples": d.get("verified_triples", []),
             "finding": d.get("finding"),
-        } for d in audit.get("domains", []),
-        ],
+        } for d in audit.get("domains", [])],
     }
