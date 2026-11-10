@@ -157,7 +157,7 @@ The following are reported local results of the three-arm experiment, **now arch
 | Positive executions passing final checks | 102/102 | 102/102 | 102/102 |
 | Expected negative rejections | 6/6 | 6/6 | 6/6 |
 | Positive median latency (s) | 0.390 | 8.067 | 42.136 |
-| Positive p95 latency (s) | 0.640 | 11.410 | 69.983 |
+| Positive p95 latency (s) | 0.638 | 11.373 | 69.846 |
 | Negative median latency (s) | 0.00005 | 7.112 | 7.093 |
 
 Among **102 matched positive executions** (34 distinct positive fixtures, each repeated three times), the median paired full-LLM-minus-hybrid latency difference was **33.953 s**. The **median of individual paired full-LLM/hybrid latency ratios** was **5.31×**; this is not the ratio of the two overall medians.
@@ -219,7 +219,13 @@ python scripts/audit_tep_nexus_three_arm.py `
 
 The original [36-case audit script](../../scripts/audit_tep_nexus_benchmark.py) is for the archived historical benchmark summary; it is **not** a three-arm statistical audit script.
 
-## 7. Artifact inventory and reproducibility boundary
+## 7. Engineering traceability worked example
+
+A source-level audit of the reactor-temperature chain is available in the [engineering traceability report](engineering-traceability-reactor-temperature.md). It reconciles DEXPI `TI_101`, ECAD `TI-1101`, AssetInventory `TEP_XMEAS9`, two unresolved EBOM engineering-object entries, the product-catalog candidate, and the provisional `XMEAS9` OPC UA mapping. **This is a documented model-level correspondence, not a completed live RDF traversal or verified installed-device chain.**
+
+The committed temporal coverage snapshot uses a different historian run ID from the archived three-arm experiment; its 1,201 reported samples must not be presented as independent evidence for that three-arm run. See the traceability report for required verification steps.
+
+## 8. Artifact inventory and reproducibility boundary
 
 | Artifact | Status in this feature branch |
 | --- | --- |
