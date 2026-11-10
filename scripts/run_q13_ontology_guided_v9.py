@@ -42,8 +42,19 @@ def parse_json_reply(reply):
     cleaned = re.sub(r"^\s*```(?:json)?\s*|\s*```\s*$", "", reply, flags=re.I).strip()
     try:
         obj = json.loads(cleaned)
-    except json.JSONDecodeError as exc:
-        raise ValueError("Model did not return valid JSON") from exc
+    except json.JSONDecodeError:
+        decoder = json.JSONDecoder()
+        obj = None
+        for match in re.finditer(r"\\{", cleaned):
+            try:
+                candidate, _ = decoder.raw_decode(cleaned[match.start():])
+                if isinstance(candidate, dict):
+                    obj = candidate
+                    break
+            except json.JSONDecodeError:
+                continue
+        if obj is None:
+            raise ValueError("Model did not return a complete JSON object")
     if not isinstance(obj, dict):
         raise ValueError("Model reply must be a JSON object")
     return obj
@@ -204,11 +215,17 @@ def summarize_domain(args, domain, schema, triples):
     for key in ("verified_facts", "provisional_facts", "unverified_or_missing"):
         if not isinstance(result.get(key), list):
             raise ValueError("Domain summary missing list " + key)
+        result[key] = [v for v in result[key] if isinstance(v, str)]
     result["domain"] = domain
     indices = result.get("supporting_triples", [])
-    if not isinstance(indices, list) or any(type(i) is not int or i < 0 or
-                                            i >= len(payload["triples"]) for i in indices):
-        raise ValueError("Invalid supporting_triples indices")
+    valid = sorted(set(i for i in indices if type(i) is int
+                       and 0 <= i < len(payload["triples"]))) if isinstance(indices, list) else []
+    result["invalid_supporting_indices"] = (len(indices) - len(valid)
+        if isinstance(indices, list) else "not_a_list")
+    result["supporting_triples"] = valid
+    # A status assertion is verified as RDF, even when its value describes
+    # unverified engineering mapping, lack of connection, or unresolved reference.
+    result["verified_status_assertions"] = []
     for t in payload["triples"]:
         pred = t["p"].rsplit("/", 1)[-1]
         val = t["o"]
@@ -220,10 +237,14 @@ def summarize_domain(args, domain, schema, triples):
                 f for f in result["provisional_facts"]
                 if pred.lower() not in str(f).lower()]
         elif any(x in val.lower() for x in
-                 ("provisional", "unverified", "unresolved", "notconnected")):
+                 ("provisional", "unverified", "unresolved", "notconnected",
+                  "notconfigured", "notassessed")):
             note = pred + "=" + val
-            if note not in result["provisional_facts"]:
-                result["provisional_facts"].append(note)
+            result["verified_status_assertions"].append(note)
+            if note not in result["verified_facts"]:
+                result["verified_facts"].append(note)
+            result["provisional_facts"] = [
+                f for f in result["provisional_facts"] if str(f) != note]
     result["summary_source"] = source
     return result, raw
 
@@ -241,7 +262,7 @@ def main():
     p.add_argument("--max-prompt-triples", type=int, default=35)
     p.add_argument("--max-evidence-triples", type=int, default=80)
     p.add_argument("--skip-lifting", action="store_true")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_1.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_2.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -251,7 +272,7 @@ def main():
     if not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context()
-    audit = {"method": "q13_v9_1_llm_directed_ontology_traversal",
+    audit = {"method": "q13_v9_2_llm_directed_ontology_traversal",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -307,7 +328,11 @@ def main():
                 "provisional engineering mappings, and unverified installation "
                 "or live binding. Never turn product candidacy into installation. "
                 "Do not invent details. Answer clearly with a domain-by-domain "
-                "trace and a final uncertainty statement."
+                "trace and a final uncertainty statement. Explicitly state "
+                "whether physical installation of the catalog candidate is "
+                "verified by the graph; if not, say it is NOT verified. "
+                "An RDF status such as NotConnected is a VERIFIED statement "
+                "about connectivity status, not provisional RDF evidence."
             )
             try:
                 audit["final_answer"] = core.ollama(args.ollama_url, args.model, [
@@ -317,19 +342,25 @@ def main():
                         "historian": audit["historian"]}, ensure_ascii=False)}
                 ], args.ollama_timeout)
                 lower = audit["final_answer"].lower()
+                normalized = re.sub(r"[^a-z0-9]", "", lower)
                 audit["acceptance"]["six_domain_names_mentioned"] = all(
-                    d in lower for d in core.DOMAINS)
+                    re.sub(r"[^a-z0-9]", "", d.lower()) in normalized
+                    for d in core.DOMAINS)
                 audit["acceptance"]["provisional_status_mentioned"] = (
                     "provisional" in lower)
                 audit["acceptance"]["installation_uncertainty_mentioned"] = (
                     "install" in lower and any(w in lower for w in
                                                ("unverified", "unknown", "not verified",
-                                                "not confirmed", "no evidence")))
+                                                "not confirmed", "no evidence",
+                                                "cannot confirm", "not established")))
+                audit["acceptance"]["status_not_misclassified"] = not bool(
+                    re.search(r"(?:notconnected|not connected).{0,55}(?:provisional rdf|provisional evidence)", lower))
                 audit["status"] = ("REVIEW_REQUIRED" if not audit["acceptance"]["rdf_fallback_domains"] and all(
                     audit["acceptance"].get(k) for k in (
                         "six_domain_coverage", "six_domain_names_mentioned",
                         "provisional_status_mentioned",
-                        "installation_uncertainty_mentioned"))
+                        "installation_uncertainty_mentioned",
+                        "status_not_misclassified"))
                     else "INCOMPLETE")
             except (ValueError, KeyError, OSError) as exc:
                 audit["answer_error"] = str(exc)
