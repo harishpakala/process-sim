@@ -139,6 +139,7 @@ def main():
     p.add_argument("--run-id", required=True)
     p.add_argument("--fixtures", default="reports/tep_nexus_benchmark_full_coverage_cases.json")
     p.add_argument("--repeats", type=int, default=3)
+    p.add_argument("--resume", action="store_true", help="Continue from the existing --output JSON without rerunning completed arms")
     p.add_argument("--model", default="llama3.1:8b")
     p.add_argument("--timeout", type=int, default=300)
     p.add_argument("--history-limit", type=int, default=1000)
@@ -170,12 +171,43 @@ def main():
         ids.add(case["id"])
     registry = load_supported_functions(a.mapping_discovery, a.temporal_coverage, a.run_id)
     rows = []
+    if a.resume:
+        checkpoint = Path(a.output)
+        if not checkpoint.is_file():
+            p.error(f"--resume requires existing checkpoint: {checkpoint}")
+        prior = json.loads(checkpoint.read_text(encoding="utf-8-sig"))
+        config = prior.get("configuration", {})
+        if (prior.get("run_id") != a.run_id
+                or config.get("fixtures") != a.fixtures
+                or config.get("model") != a.model
+                or config.get("timeout") != a.timeout):
+            p.error("Checkpoint run-id, fixtures, model, or timeout differs from current arguments")
+        if config.get("repeats", 0) > a.repeats:
+            p.error("Requested repeats is smaller than checkpoint repeats")
+        rows = prior.get("cases", [])
+        if not isinstance(rows, list):
+            p.error("Checkpoint cases must be a list")
+        expected_cases = {case["id"]: case for case in cases}
+        seen = set()
+        for row in rows:
+            key = (row.get("repeat"), row.get("id"), row.get("arm"))
+            if (key in seen or row.get("repeat") not in range(1, a.repeats + 1)
+                    or row.get("arm") not in ARMS or row.get("id") not in expected_cases
+                    or row.get("function") != expected_cases[row["id"]]["function"]
+                    or row.get("expected") != expected_cases[row["id"]]["expected"]):
+                p.error("Checkpoint contains duplicate, invalid, or incompatible case rows")
+            seen.add(key)
+        print(f"Resuming from {checkpoint}: {len(rows)} completed arm executions", flush=True)
+    completed = {(r["repeat"], r["id"], r["arm"]) for r in rows}
     try:
         for repeat in range(1, a.repeats + 1):
             for index, case in enumerate(cases):
                 offset = (repeat + index) % len(ARMS)
                 order = ARMS[offset:] + ARMS[:offset]
                 for arm in order:
+                    key = (repeat, case["id"], arm)
+                    if key in completed:
+                        continue
                     if arm == "deterministic":
                         row = run_deterministic(
                             case, a.run_id, registry, a.graphdb_url, dsn, a.history_limit)
@@ -186,6 +218,8 @@ def main():
                             Path(a.case_reports) / f"{arm}_{repeat:02d}_{index:03d}.json")
                     row["repeat"] = repeat
                     rows.append(row)
+                    completed.add(key)
+                    save(a, rows, cases)
                     print(f"repeat={repeat} case={case['id']} arm={arm} "
                           f"passed={row['passed']} seconds={row['elapsed_seconds']:.3f}", flush=True)
                 save(a, rows, cases)
