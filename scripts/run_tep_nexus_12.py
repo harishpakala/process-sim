@@ -5,6 +5,7 @@ Run from the process-sim repository root. Existing ten-question records are
 left unchanged. This does NOT execute the live VTKG pipeline or auto-grade.
 """
 import argparse
+import base64
 import hashlib
 import importlib.util
 import json
@@ -22,6 +23,21 @@ def load_module(path, name):
     return module
 
 
+def readable_graph_subject(uri):
+    """Decode the AAS-lifted Base64 URI segments; retain original on failure."""
+    try:
+        segments = uri.rstrip("/").split("/")
+        if len(segments) < 2:
+            return uri
+        encoded = segments[-1]
+        decoded = base64.urlsafe_b64decode(encoded + "=" * (-len(encoded) % 4)).decode("utf-8")
+        if not decoded or any(ord(ch) < 32 for ch in decoded):
+            return uri
+        return decoded
+    except (ValueError, UnicodeDecodeError, base64.binascii.Error):
+        return uri
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--run-id", required=True, help="Recorded simulation run UUID")
@@ -33,7 +49,7 @@ def main():
     parser.add_argument("--end-seconds", type=float, default=60.0)
     parser.add_argument("--limit", type=int, default=5000)
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--output-dir", default="reports/evaluation_13_v2_grounded")
+    parser.add_argument("--output-dir", default="reports/evaluation_13_v3_grounded")
     args = parser.parse_args()
     if not 0 <= args.start_seconds <= args.end_seconds or not 1 <= args.limit <= 5000:
         parser.error("Require 0 <= start <= end and 1 <= limit <= 5000.")
@@ -257,7 +273,7 @@ def main():
         "question": (
             "Using the supplied GraphDB and TimescaleDB evidence, trace the "
             "reactor-temperature measurement across the six AAS information models. "
-            "Answer in order: (1) DEXPI: engineering function and source tag; "
+            "Answer in order: (1) DEXPI: reactor-temperature instrumentation function and its shared AssetIdentifier; "
             "(2) ECAD: electrical device and tag; (3) Engineering BOM: associated "
             "BOM items; (4) AssetInventory: logical asset and shared AssetIdentifier; "
             "(5) ProductCatalog: associated product candidate and whether physical "
@@ -295,18 +311,19 @@ def main():
         "without supporting evidence. If evidence is genuinely missing, identify "
         "the specific missing field. Answer concisely and completely."
     )
-    destination = output / ("answers_q13_v2_only.json" if args.only_q13 else "answers_13_v2.json")
+    destination = output / ("answers_q13_v3_only.json" if args.only_q13 else "answers_13_v3.json")
     results = []
     for row in rows:
         evidence = row.get("evidence")
-        # Q13-v2: give the LLM a compact evidence digest, not 207 raw rows.
+        # Q13-v3: human-readable lifted AAS subject IDs and compact historian.
         # The full unmodified Q13 evidence remains in q13_evidence in the output.
         prompt_evidence = evidence
         if row["id"] == "Q13":
             compact_graph = {}
             for group, triples in q13["graphdb"].items():
                 compact_graph[group] = [
-                    {"subject": t["subject"].rsplit("/", 1)[-1],
+                    {"subject": readable_graph_subject(t["subject"]),
+                     "source_subject_uri": t["subject"],
                      "predicate": t["predicate"].rsplit("/", 1)[-1].rsplit("#", 1)[-1],
                      "value": t["value"]}
                     for t in triples
@@ -331,10 +348,11 @@ def main():
                 },
                 "mapping_qualification": q13["mapping_qualification"],
                 "evidence_limitations": (
-                    "GraphDB subject identifiers are abbreviated suffixes; "
-                    "source model and item identity must be supported by returned "
-                    "predicates/subjects, not inferred from a candidate product. "
-                    "Missing engineering tag fields must be reported as missing."
+                    "GraphDB lifted subject identifiers are decoded to AAS element paths "
+                    "where possible; source_subject_uri retains the original. "
+                    "A device identifier is not proof of a separately retrieved "
+                    "engineering tag field. Report missing tag fields explicitly; "
+                    "do not infer physical product installation."
                 ),
             }
         prompt = ("Question:\n" + row["question"] +
@@ -343,7 +361,7 @@ def main():
                   "\n\nGrounding instructions:\n" + grounding_rules)
         entry = {
             "id": row["id"], "question": row["question"],
-            "question_version": "Q13-v2" if row["id"] == "Q13" else "unchanged",
+            "question_version": "Q13-v3" if row["id"] == "Q13" else "unchanged",
             "evidence_status": row.get("evidence_status"),
             "evidence_sha256": hashlib.sha256(
                 json.dumps(evidence, sort_keys=True, default=str).encode()).hexdigest(),
