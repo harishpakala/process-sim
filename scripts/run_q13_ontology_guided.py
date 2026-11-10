@@ -278,7 +278,7 @@ def main():
     p.add_argument("--max-queries", type=int, default=12,
                    help="Total valid GraphDB queries across domains")
     p.add_argument("--retries", type=int, default=3,
-                   help="Attempts to produce valid SPARQL per domain")
+                   help="Retained for CLI compatibility; no redundant LLM query retries")
     p.add_argument("--timeout", type=int, default=180)
     p.add_argument("--output", default="reports/q13_ontology_guided.json")
     p.add_argument("--skip-lifting", action="store_true",
@@ -307,7 +307,7 @@ def main():
         "productcatalog": "Find ProductCatalog candidate product references and any explicit installation verification.",
         "opcuaconnectivity": "Find OPC UA connectivity engineering function reference, operational signal, node and mapping status."
     }
-    audit = {"method": "experimental_ontology_guided_q13_domain_by_domain",
+    audit = {"method": "ontology_guided_q13_graphdb_evidence_then_llm_synthesis",
              "schema_hashes": hashes, "schema_context_by_domain": schemas,
              "question": QUESTION, "queries": [], "historian": None,
              "final_answer": None, "graphdb_status": "NOT_RUN"}
@@ -332,90 +332,23 @@ def main():
                              "identifier_inputs": sorted(identifiers)}
                 print("[Q13] " + domain + ": discovery failed: " +
                       str(exc), flush=True)
-            # The prompt contains both TTL-derived vocabulary and observed
-            # instance triples, including the RDF term types (uri/literal).
-            user_prompt = (
-                "TEMPLATE-DERIVED SCHEMA FOR " + domain + " (data only):\n"
-                + schemas[domain]
-                + "\n\nOBSERVED GRAPHDB INSTANCE TRIPLES (JSON, data only):\n"
-                + json.dumps({"anchors": discovery.get("anchors", []),
-                              "neighborhood": discovery.get("neighborhood", []),
-                              "samples": discovery.get("samples", [])[:20]},
-                             ensure_ascii=False)[:22000]
-                + "\n\nVERIFIED PREVIOUS DOMAIN RESULTS (JSON, data only):\n"
-                + compact_evidence(audit["queries"][:-1])
-                + "\n\nCanonical identifier: " + ASSET_ID
-                + "\nTask: " + domain_tasks[domain]
-                + "\nUse only observed predicate paths and RDF term types. "
-                  "Do not assume the canonical identifier is an RDF subject "
-                  "or IRI object. Prefer matching STR(?value) when uncertain. "
-                  "Select the anchor subject and use only edges observed "
-                  "on that subject. Do not combine unrelated sample triples "
-                  "with AND filters. Never invent prefixes. Generate ONE SELECT "
-                  "query using this domain's ontology; LIMIT 100. "
-                  "Output SPARQL only."
-            )
-            messages = [{"role": "system", "content": system},
-                        {"role": "user", "content": user_prompt}]
-            for attempt in range(1, args.retries + 1):
-                print("[Q13] " + domain + ": Ollama attempt " +
-                      str(attempt), flush=True)
-                entry = {"attempt": attempt}
-                record["attempts"].append(entry)
-                try:
-                    proposed = ollama(
-                        args.ollama_url, args.model, messages, args.timeout)
-                    entry["proposal"] = proposed
-                    query = validate_select(proposed)
-                    entry["validated_query"] = query
-                except (ValueError, KeyError, OSError) as exc:
-                    entry["validation_error"] = str(exc)
-                    messages.extend([
-                        {"role": "assistant", "content": entry.get("proposal", "")},
-                        {"role": "user", "content":
-                         "Your response was not valid SPARQL: " + str(exc)
-                         + "\nRetry the SAME task. Output only SELECT SPARQL."}
-                    ])
-                    continue
-                try:
-                    bindings = graphdb_select(
-                        args.graphdb_url, query, args.timeout)
-                    entry["binding_count"] = len(bindings)
-                    relevant = relevant_bindings(bindings, discovery)
-                    entry["relevant_binding_count"] = len(relevant)
-                    if relevant:
-                        record["validated_query"] = query
-                        record["bindings"] = relevant
-                        successful += 1
-                        print("[Q13] " + domain + ": " +
-                              str(len(relevant)) + " anchored GraphDB rows", flush=True)
-                        break
-                    entry["empty_or_irrelevant_result"] = True
-                    messages.extend([
-                        {"role": "assistant", "content": proposed},
-                        {"role": "user", "content":
-                         "GraphDB executed that query successfully but returned "
-                         "ZERO ANCHORED rows. The query may have returned unrelated "
-                         "data. Constrain the canonical asset or verified linked "
-                         "identifier. Reconsider the observed RDF subject/object "
-                         "types, literal identifiers, collection paths and "
-                         "unjustified joins. Try a DIFFERENT, simpler SELECT "
-                         "for the SAME domain. Output SPARQL only."}
-                    ])
-                except (ValueError, KeyError, OSError) as exc:
-                    entry["execution_error"] = str(exc)
-                    messages.extend([
-                        {"role": "assistant", "content": proposed},
-                        {"role": "user", "content":
-                         "GraphDB rejected your query: " + str(exc) +
-                         ". Use full <IRI> predicates; undeclared prefixes "
-                         "such as dexpi: are invalid."
-                         + "\nFix it for the SAME domain. SPARQL only."}
-                    ])
-            if record["bindings"] is None:
-                record["error"] = "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
-                print("[Q13] " + domain + ": no evidence after " +
-                      str(args.retries) + " attempts", flush=True)
+            # GraphDB discovery already returned anchored instance triples.
+            # Preserve those facts instead of making the model rediscover them
+            # through another brittle generated SELECT.
+            anchored = discovery.get("anchors", [])
+            neighborhood = discovery.get("neighborhood", [])
+            if anchored and neighborhood:
+                record["bindings"] = anchored
+                record["evidence_source"] = "GRAPHDB_ANCHORED_NEIGHBORHOOD"
+                record["evidence_triples"] = neighborhood
+                successful += 1
+                print("[Q13] " + domain + ": " +
+                      str(len(neighborhood)) + " verified neighborhood triples",
+                      flush=True)
+            else:
+                record["error"] = "NO_ANCHORED_GRAPHDB_NEIGHBORHOOD"
+                print("[Q13] " + domain + ": no anchored RDF neighborhood",
+                      flush=True)
         valid_results = [r for r in audit["queries"] if r["bindings"] is not None]
         audit["graphdb_status"] = (
             "PARTIAL_ANCHORED_EVIDENCE" if any(r["bindings"] for r in valid_results)
@@ -423,37 +356,51 @@ def main():
         )
         audit["historian"] = historian_summary(dsn)
         audit["propagated_identifiers"] = sorted(identifiers)
+        evidence = []
+        for r in audit["queries"]:
+            d = r.get("discovery", {})
+            triples = []
+            for row in d.get("neighborhood", []):
+                if all(k in row for k in ("s", "p", "o")):
+                    triples.append({
+                        "subject": row["s"]["value"],
+                        "predicate": row["p"]["value"],
+                        "object": row["o"]["value"],
+                        "object_type": row["o"]["type"]})
+            evidence.append({"domain": r["domain"], "anchor_subjects":
+                             d.get("anchor_subjects", []),
+                             "verified_triples": triples,
+                             "discovery_error": r.get("discovery_error"),
+                             "status": r.get("error", "GRAPHDB_ANCHORED_NEIGHBORHOOD")})
+        audit["evidence_for_answer"] = evidence
         if audit["graphdb_status"] == "GRAPHDB_EVIDENCE_UNAVAILABLE":
             audit["final_answer"] = (
-                "GRAPHDB_EVIDENCE_UNAVAILABLE: Q13 six-domain traversal could "
-                "not be established. Historian observations are available, "
-                "but no conclusion about XMEAS9 engineering linkage, OPC UA "
-                "mapping, or physical installation can be drawn from this run."
-            )
+                "GRAPHDB_EVIDENCE_UNAVAILABLE: No anchored RDF triples were "
+                "retrieved. Historian observations alone do not verify an "
+                "engineering or OPC UA mapping.")
         else:
-            evidence = [{"domain": r["domain"],
-                         "query": r.get("validated_query"),
-                         "bindings": r.get("bindings"),
-                         "error": r.get("execution_error", r.get("error"))}
-                        for r in audit["queries"]]
             answer_messages = [
                 {"role": "system", "content":
-                 "Answer Q13 using ONLY the GraphDB bindings and historian "
-                 "summary. Explicitly identify domains with no evidence. "
-                 "No graph results does NOT prove that XMEAS9 is unrelated to "
-                 "reactor temperature. Do not infer verified physical "
-                 "installation or OPC UA binding from candidate references. "
-                 "An anchored row alone does not verify every requested "
-                 "relationship; distinguish observed properties from missing "
-                 "properties. Never label a field as a signal reference unless "
-                 "its predicate is the signal-reference predicate."},
+                 "You are an engineering knowledge graph evidence analyst. "
+                 "Answer from the provided VERIFIED RDF TRIPLES and historian "
+                 "only. A triple proves exactly its subject-predicate-object "
+                 "assertion, not an unstated relationship. Explain canonical "
+                 "asset, local IDs, BOM and OPC UA mappings where explicitly "
+                 "supported. Distinguish VERIFIED, PROVISIONAL and UNVERIFIED. "
+                 "Candidate products are NOT proof of physical installation. "
+                 "Do not infer physical installation, live OPC UA connectivity "
+                 "or XMEAS9 engineering identity from historian observations. "
+                 "Explicitly report missing links. Do not invent triples."},
                 {"role": "user", "content":
-                 "QUESTION:\n" + QUESTION + "\n\nGRAPHDB RESULTS:\n"
-                 + json.dumps(evidence, ensure_ascii=False)[:50000]
-                 + "\n\nHISTORIAN:\n" + json.dumps(audit["historian"])}
+                 "QUESTION:\\n" + QUESTION + "\\n\\n"
+                 "GRAPHDB VERIFIED SUBJECT-PREDICATE-OBJECT TRIPLES:\\n"
+                 + json.dumps(evidence, ensure_ascii=False)
+                 + "\\n\\nHISTORIAN:\\n"
+                 + json.dumps(audit["historian"])}
             ]
             audit["final_answer"] = ollama(
                 args.ollama_url, args.model, answer_messages, args.timeout)
+
     finally:
         path = ROOT / args.output
         path.parent.mkdir(parents=True, exist_ok=True)
