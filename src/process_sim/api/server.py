@@ -25,6 +25,21 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path in ("/api/ai/q13/ontology/live/status", "/api/ai/q13/ontology/live/result"):
+            from process_sim.api import q13_live
+            if os.getenv("TEP_Q13_LIVE_ENABLED") != "1":
+                self.send_json(503, {"error": "Live Q13 is disabled"})
+                return
+            if urlsplit(self.path).path.endswith("/status"):
+                self.send_json(200, q13_live.status())
+            else:
+                try:
+                    self.send_json(200, q13_live.result())
+                except LookupError as exc:
+                    self.send_json(409, {"error": str(exc)})
+                except (OSError, ValueError) as exc:
+                    self.send_json(503, {"error": str(exc)})
+            return
         if urlsplit(self.path).path == "/api/ai/q13/ontology/result":
             # Read-only integration of an explicitly configured, completed audit.
             # This does not run Ollama or GraphDB on the request thread.
@@ -222,6 +237,21 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/ai/q13/ontology/live/start":
+            from process_sim.api import q13_live
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if length != 0:
+                    self.send_json(400, {"error": "Live Q13 start accepts no request body"})
+                    return
+                self.send_json(202, q13_live.start())
+            except PermissionError as exc:
+                self.send_json(403, {"error": str(exc)})
+            except RuntimeError as exc:
+                self.send_json(409, {"error": str(exc)})
+            except (ValueError, OSError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            return
         if urlsplit(self.path).path == "/api/ai/custom/answer":
             try:
                 length = int(self.headers.get("Content-Length", "0"))
