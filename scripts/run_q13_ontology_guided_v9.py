@@ -285,6 +285,24 @@ def summarize_domain(args, domain, schema, triples):
     return result, raw
 
 
+def save_audit(audit, output):
+    target = ROOT / output
+    target.parent.mkdir(parents=True, exist_ok=True)
+    audit["timings"] = TIMINGS
+    target.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    return target
+
+
+def synthesis_payload(audit, findings):
+    return {"question": audit["question"], "domain_findings": [
+        {"domain": f["domain"],
+         "verified_facts": f.get("verified_facts", [])[:12],
+         "provisional_facts": f.get("provisional_facts", [])[:8],
+         "unverified_or_missing": f.get("unverified_or_missing", [])[:8],
+         "verified_status_assertions": f.get("verified_status_assertions", [])[:8]}
+        for f in findings], "historian": audit.get("historian")}
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--graphdb-url", default=os.getenv(
@@ -298,62 +316,80 @@ def main():
     p.add_argument("--max-prompt-triples", type=int, default=24)
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_3.json")
+    p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_4.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
     dsn = os.getenv("TEP_TIMESCALE_DSN")
-    if not dsn:
+    if not args.resume_audit and not dsn:
         p.error("Set TEP_TIMESCALE_DSN locally")
-    if not args.skip_lifting:
+    if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
-    schemas, hashes = core.schema_context()
-    audit = {"method": "q13_v9_3_llm_directed_ontology_traversal",
+    schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
+    audit = {"method": "q13_v9_4_checkpointed_llm_directed_ontology_traversal",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
     identifiers = {core.ASSET_ID}
+    if args.resume_audit:
+        source = Path(args.resume_audit).expanduser()
+        if not source.is_absolute():
+            source = ROOT / source
+        audit = json.loads(source.read_text(encoding="utf-8"))
+        available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
+        if not set(core.DOMAINS).issubset(available):
+            p.error("--resume-audit requires six domain findings")
+        audit["method"] = "q13_v9_4_checkpointed_llm_directed_ontology_traversal"
+        audit["final_answer"] = None
+        audit.pop("answer_error", None)
+        audit["status"] = "INCOMPLETE"
+        audit["resume_source"] = str(source)
+        print("[Q13-v9.4] Resuming final synthesis only", flush=True)
     try:
-        for domain in core.DOMAINS:
-            record = {"domain": domain, "status": "NOT_STARTED"}
-            audit["domains"].append(record)
-            domain_start = time.perf_counter()
-            print("[Q13-v9.3] START " + domain, flush=True)
+        if not args.resume_audit:
+            for domain in core.DOMAINS:
+                record = {"domain": domain, "status": "NOT_STARTED"}
+                audit["domains"].append(record)
+                domain_start = time.perf_counter()
+                print("[Q13-v9.3] START " + domain, flush=True)
+                try:
+                    discovery, triples, steps = domain_reasoning(
+                        args, domain, schemas[domain], identifiers,
+                        [r.get("finding") for r in audit["domains"][:-1]
+                         if r.get("finding")])
+                    record["discovery"] = discovery
+                    print("[Q13-v9.3] " + domain + " discovery complete; " + str(len(triples)) + " triples", flush=True)
+                    record["verified_triples"] = triples
+                    record["traversal_steps"] = steps
+                    identifiers = core.observed_identifiers(discovery, identifiers)
+                    record["status"] = ("EVIDENCE_FOUND" if triples else "NO_EVIDENCE")
+                    if triples:
+                        try:
+                            finding, raw = summarize_domain(args, domain, schemas[domain], triples)
+                            record["finding"] = finding
+                            record["finding_raw"] = raw
+                            record["status"] = "SUMMARIZED"
+                            print("[Q13-v9.3] " + domain + " summary complete", flush=True)
+                        except (ValueError, KeyError, OSError) as exc:
+                            record["summary_error"] = str(exc)
+                            record["finding"] = evidence_fallback(
+                                domain, triples[:args.max_evidence_triples])
+                            record["status"] = "RDF_FALLBACK"
+                            print("[Q13-v9.3] " + domain + " RDF fallback: " + str(exc), flush=True)
+                except (ValueError, KeyError, OSError) as exc:
+                    record["error"] = str(exc)
+                    record["status"] = "ERROR"
+                finally:
+                    record["elapsed_seconds"] = round(time.perf_counter() - domain_start, 2)
+                    print("[Q13-v9.3] END " + domain + " " + str(record["elapsed_seconds"]) + "s", flush=True)
+            audit["propagated_identifiers"] = sorted(identifiers)
             try:
-                discovery, triples, steps = domain_reasoning(
-                    args, domain, schemas[domain], identifiers,
-                    [r.get("finding") for r in audit["domains"][:-1]
-                     if r.get("finding")])
-                record["discovery"] = discovery
-                print("[Q13-v9.3] " + domain + " discovery complete; " + str(len(triples)) + " triples", flush=True)
-                record["verified_triples"] = triples
-                record["traversal_steps"] = steps
-                identifiers = core.observed_identifiers(discovery, identifiers)
-                record["status"] = ("EVIDENCE_FOUND" if triples else "NO_EVIDENCE")
-                if triples:
-                    try:
-                        finding, raw = summarize_domain(args, domain, schemas[domain], triples)
-                        record["finding"] = finding
-                        record["finding_raw"] = raw
-                        record["status"] = "SUMMARIZED"
-                        print("[Q13-v9.3] " + domain + " summary complete", flush=True)
-                    except (ValueError, KeyError, OSError) as exc:
-                        record["summary_error"] = str(exc)
-                        record["finding"] = evidence_fallback(
-                            domain, triples[:args.max_evidence_triples])
-                        record["status"] = "RDF_FALLBACK"
-                        print("[Q13-v9.3] " + domain + " RDF fallback: " + str(exc), flush=True)
-            except (ValueError, KeyError, OSError) as exc:
-                record["error"] = str(exc)
-                record["status"] = "ERROR"
-            finally:
-                record["elapsed_seconds"] = round(time.perf_counter() - domain_start, 2)
-                print("[Q13-v9.3] END " + domain + " " + str(record["elapsed_seconds"]) + "s", flush=True)
-        audit["propagated_identifiers"] = sorted(identifiers)
-        try:
-            audit["historian"] = core.historian_summary(dsn)
-        except Exception as exc:
-            audit["historian_error"] = str(exc)
+                audit["historian"] = core.historian_summary(dsn)
+            except Exception as exc:
+                audit["historian_error"] = str(exc)
+            checkpoint = save_audit(audit, args.output)
+            print("[Q13-v9.4] Checkpoint saved:", checkpoint, flush=True)
         findings = [r["finding"] for r in audit["domains"] if r.get("finding")]
         audit["acceptance"]["domains_with_graph_evidence"] = [
             r["domain"] for r in audit["domains"] if r.get("verified_triples")]
@@ -380,9 +416,7 @@ def main():
             try:
                 audit["final_answer"] = timed_ollama(args.ollama_url, args.model, [
                     {"role": "system", "content": system},
-                    {"role": "user", "content": json.dumps({
-                        "question": core.QUESTION, "domain_findings": findings,
-                        "historian": audit["historian"]}, ensure_ascii=False)}
+                    {"role": "user", "content": json.dumps(synthesis_payload(audit, findings), ensure_ascii=False)}
                 ], args.ollama_timeout)
                 lower = audit["final_answer"].lower()
                 normalized = re.sub(r"[^a-z0-9]", "", lower)
@@ -408,11 +442,7 @@ def main():
             except (ValueError, KeyError, OSError) as exc:
                 audit["answer_error"] = str(exc)
     finally:
-        audit["timings"] = TIMINGS
-        target = ROOT / args.output
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n",
-                          encoding="utf-8")
+        target = save_audit(audit, args.output)
         print("Audit:", target, "Status:", audit["status"], flush=True)
     if audit["final_answer"]:
         print(audit["final_answer"])
