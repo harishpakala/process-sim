@@ -96,6 +96,44 @@ def parse_json_reply(reply):
     return obj
 
 
+def reconcile_rdf_assertions(result, triples):
+    """RDF presence is verified; uncertain values do not make the assertion provisional."""
+    verified = result["verified_facts"]
+    provisional = result["provisional_facts"]
+    status = result.setdefault("verified_status_assertions", [])
+    for t in triples:
+        pred = t["p"].rsplit("/", 1)[-1]
+        val = t["o"]
+        if not val.strip():
+            note = pred + " has an empty RDF value"
+            if note not in result["unverified_or_missing"]:
+                result["unverified_or_missing"].append(note)
+            provisional[:] = [f for f in provisional if not
+                              (pred.lower() in f.lower() and not f.split(":", 1)[-1].strip())]
+            continue
+        assertion = pred + "=" + val
+        # Promote only exact, source-grounded predicate/value statements.
+        # Never promote an inference about an installation or live connection.
+        matches = [f for f in provisional if
+                   f.strip().lower() in (assertion.lower(),
+                                         (pred + ": " + val).lower(),
+                                         (pred + ":" + val).lower())]
+        for fact in matches:
+            provisional.remove(fact)
+            if assertion not in verified:
+                verified.append(assertion)
+        if any(word in val.lower() for word in
+               ("provisional", "unverified", "unresolved", "unspecified",
+                "notconnected", "notconfigured", "notassessed")):
+            if assertion not in status:
+                status.append(assertion)
+            if assertion not in verified:
+                verified.append(assertion)
+            if assertion in provisional:
+                provisional.remove(assertion)
+    return result
+
+
 def evidence_fallback(domain, triples):
     """Explicit RDF-only fallback; never represented as LLM reasoning."""
     verified, provisional, missing = [], [], []
@@ -104,14 +142,13 @@ def evidence_fallback(domain, triples):
         val = t["o"]
         if not val.strip():
             missing.append(pred + " has an empty RDF value")
-        elif any(x in val.lower() for x in ("provisional", "unverified", "unresolved", "notconnected")) or "candidate" in pred.lower():
-            provisional.append(pred + "=" + val)
         else:
             verified.append(pred + "=" + val)
-    return {"domain": domain, "verified_facts": verified,
+    result = {"domain": domain, "verified_facts": verified,
             "provisional_facts": provisional, "unverified_or_missing": missing,
             "supporting_triples": list(range(len(triples))),
             "summary_source": "RDF_ONLY_FALLBACK_NOT_LLM"}
+    return reconcile_rdf_assertions(result, triples)
 
 
 def ask_json(url, model, system, payload, timeout):
@@ -228,7 +265,11 @@ def summarize_domain(args, domain, schema, triples):
         "supporting_triples (array of integer indices, zero-based). "
         "Use only provided triples. A candidate is not a physical installation. "
         "A mapping status is not live binding. Do not infer absent relationships. "
-        "No invented identifiers. Keep concise."
+        "No invented identifiers. Keep concise. An RDF triple is verified even "
+        "when its literal value says PROVISIONAL, UNSPECIFIED, UNRESOLVED, "
+        "or NotConnected. Put the asserted predicate/value in verified_facts; "
+        "reserve provisional_facts for explicitly qualified engineering "
+        "inferences, not literal RDF assertions."
     )
     payload = {"question": core.QUESTION, "domain": domain,
                "ontology": schema[:args.schema_chars],
@@ -259,28 +300,7 @@ def summarize_domain(args, domain, schema, triples):
     result["invalid_supporting_indices"] = (len(indices) - len(valid)
         if isinstance(indices, list) else "not_a_list")
     result["supporting_triples"] = valid
-    # A status assertion is verified as RDF, even when its value describes
-    # unverified engineering mapping, lack of connection, or unresolved reference.
-    result["verified_status_assertions"] = []
-    for t in payload["triples"]:
-        pred = t["p"].rsplit("/", 1)[-1]
-        val = t["o"]
-        if not val.strip():
-            note = pred + " has an empty RDF value"
-            if note not in result["unverified_or_missing"]:
-                result["unverified_or_missing"].append(note)
-            result["provisional_facts"] = [
-                f for f in result["provisional_facts"]
-                if pred.lower() not in str(f).lower()]
-        elif any(x in val.lower() for x in
-                 ("provisional", "unverified", "unresolved", "notconnected",
-                  "notconfigured", "notassessed")):
-            note = pred + "=" + val
-            result["verified_status_assertions"].append(note)
-            if note not in result["verified_facts"]:
-                result["verified_facts"].append(note)
-            result["provisional_facts"] = [
-                f for f in result["provisional_facts"] if str(f) != note]
+    reconcile_rdf_assertions(result, triples[:args.max_evidence_triples])
     result["summary_source"] = source
     return result, raw
 
@@ -296,10 +316,10 @@ def save_audit(audit, output):
 def synthesis_payload(audit, findings):
     return {"question": audit["question"], "domain_findings": [
         {"domain": f["domain"],
-         "verified_facts": f.get("verified_facts", [])[:12],
-         "provisional_facts": f.get("provisional_facts", [])[:8],
-         "unverified_or_missing": f.get("unverified_or_missing", [])[:8],
-         "verified_status_assertions": f.get("verified_status_assertions", [])[:8]}
+         "verified_facts": f.get("verified_facts", [])[:7],
+         "provisional_facts": f.get("provisional_facts", [])[:5],
+         "unverified_or_missing": f.get("unverified_or_missing", [])[:5],
+         "verified_status_assertions": f.get("verified_status_assertions", [])[:5]}
         for f in findings], "historian": audit.get("historian")}
 
 
@@ -317,7 +337,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_4.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_5.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -327,7 +347,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_4_checkpointed_llm_directed_ontology_traversal",
+    audit = {"method": "q13_v9_5_evidence_reconciled_checkpointed_traversal",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -341,6 +361,9 @@ def main():
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
         audit["method"] = "q13_v9_4_checkpointed_llm_directed_ontology_traversal"
+        for record in audit["domains"]:
+            if record.get("finding") and record.get("verified_triples"):
+                reconcile_rdf_assertions(record["finding"], record["verified_triples"])
         audit["final_answer"] = None
         audit.pop("answer_error", None)
         audit["status"] = "INCOMPLETE"
@@ -411,7 +434,9 @@ def main():
                 "whether physical installation of the catalog candidate is "
                 "verified by the graph; if not, say it is NOT verified. "
                 "An RDF status such as NotConnected is a VERIFIED statement "
-                "about connectivity status, not provisional RDF evidence."
+                "about connectivity status, not provisional RDF evidence. "
+                "Be concise: at most two sentences per domain, then one "
+                "uncertainty statement and a short historian summary."
             )
             try:
                 audit["final_answer"] = timed_ollama(args.ollama_url, args.model, [
