@@ -1,6 +1,8 @@
-# TEP NEXUS — 36-case benchmark and artifact evaluation
+# TEP NEXUS — benchmark and artifact evaluation
 
-This document provides instructions for reproducing the **TEP NEXUS 36-query benchmark**. The benchmark evaluates engineering-function query planning, limited-scope answer validation, and execution latency. It includes 34 supported engineering-function queries and two negative test cases.
+This guide documents the original **36-case engineering-function benchmark** and the subsequent **three-arm comparative experiment**. The two evaluations must not be conflated: the historical single-arm measurements in Section 3 are committed results from 2026-11-02, whereas Section 6 describes the later deterministic, hybrid, and full-LLM comparison. Both evaluate a bounded, simulation-based retrieval prototype, not independently verified physical instrumentation.
+
+The existing 36 question texts, recorded historical results, and reproduction instructions are retained below.
 
 ## 1. Benchmark scope
 
@@ -133,3 +135,95 @@ A positive case passes the runner's checks only when the planner completes, sele
 Review the sanitized summary, investigate failures using local reports, and distinguish pipeline completion from independent engineering ground truth. Do not commit unsanitized operational reports or mapping snapshots.
 
 **Current publication boundary:** The committed summary establishes a recorded **36/36 limited-scope local harness result** with observed end-to-end latencies. It does **not** establish an independently reproducible data bundle, independently verified historian/provenance correctness, or physical-world validation.
+
+## 6. Three-arm comparative experiment
+
+The later comparison uses the same **36-case fixture** (34 positive cases and two expected rejections) under three execution strategies. Each case is repeated three times for each strategy: **36 × 3 × 3 = 324 executions**. The harness rotates arm order and records individual case outcomes, stage timings when available, and paired comparisons.
+
+| Arm | Input and execution path | Interpretation |
+| --- | --- | --- |
+| Deterministic | Structured fixture parameters; validated GraphDB/TimescaleDB retrieval; deterministic evidence-only answer | Low-latency reference **without natural-language interpretation** |
+| Hybrid | Ollama-assisted natural-language planning; constrained retrieval; deterministic evidence-only answer | Tests the cost of natural-language planning while avoiding generative answering |
+| Full LLM | Ollama-assisted planning and answer generation; application validation and deterministic repair where necessary | Tests full generative-answer pipeline plus checking and repair |
+
+The deterministic and language-model arms **do not receive equivalent input representations**. Consequently, latency differences must not be described as a head-to-head comparison of equal natural-language capabilities. All three strategies use the same fixture expectations for final pipeline checks. An expected rejection counts as success only when the intended validation reason is observed.
+
+### 6.1 Recorded comparative results (local execution)
+
+The following are reported local results of the three-arm experiment, **not currently a committed three-arm result artifact in this branch**. They should be independently recalculated from a subsequently archived raw JSON file before being treated as a fully reproducible repository result.
+
+| Metric | Deterministic | Hybrid | Full LLM |
+| --- | ---: | ---: | ---: |
+| Positive executions passing final checks | 102/102 | 102/102 | 102/102 |
+| Expected negative rejections | 6/6 | 6/6 | 6/6 |
+| Positive median latency (s) | 0.390 | 8.067 | 42.136 |
+| Positive p95 latency (s) | 0.640 | 11.410 | 69.983 |
+| Negative median latency (s) | 0.00005 | 7.112 | 7.093 |
+
+Among **102 matched positive executions** (34 distinct positive fixtures, each repeated three times), the median paired full-LLM-minus-hybrid latency difference was **33.953 s**. The **median of individual paired full-LLM/hybrid latency ratios** was **5.31×**; this is not the ratio of the two overall medians.
+
+All **102 initial full-LLM positive answers** failed at least one configured validation check, with **355 failed checks in aggregate**. Each was subsequently reconstructed deterministically and passed the implemented limited-scope final checks. The 355 count refers to failed **checks**, not independent erroneous answers. The hybrid arm's deterministic response construction avoids free-form answer-generation checks by design; that is not evidence of unrestricted language-model answer accuracy.
+
+These measurements include application and local model execution overhead. They should not be generalized across hardware, different model configurations, changed historian contents, or different engineering-function registries.
+
+### 6.2 Run the comparative experiment (Windows PowerShell)
+
+Follow the [root startup guide](../../README.md#local-startup-windows-powershell) to configure GraphDB, TimescaleDB, and Ollama. Prepare a **verified, locally accessible historian run** and ensure the following two existing snapshots describe the **same** run and function registry:
+
+- `reports/tep_nexus_mapping_discovery.json`
+- `reports/tep_nexus_temporal_coverage.json`
+
+The repository does **not** restore the historical historian state automatically. Never reuse a run ID from the paper unless its underlying data actually exist in your local database. The default `llama3.1:8b` model must be available through Ollama.
+
+From the repository root:
+
+```powershell
+$runId = "<YOUR_VERIFIED_RUN_ID>"
+$env:TEP_TIMESCALE_DSN = "<YOUR_LOCAL_TIMESCALE_DSN>"
+
+ollama pull llama3.1:8b
+
+python scripts/tep_nexus_three_arm_experiment.py `
+  --run-id $runId `
+  --fixtures tests/fixtures/tep_nexus_full_36_cases.json `
+  --repeats 3 `
+  --model llama3.1:8b `
+  --timeout 300 `
+  --output reports/tep_nexus_three_arm_experiment.json `
+  --csv reports/tep_nexus_three_arm_experiment.csv
+```
+
+The runner also writes individual reports to `reports/tep_nexus_three_arm_runs/` by default, checkpoints progress after completed cases, and offers `--resume` to continue a compatible interrupted run. Check the results and exit status before citing a successful trial; merely completing a process does not establish expected negative rejection behavior or observational correctness.
+
+A standalone deterministic baseline and a paired deterministic-versus-LLM experiment are also available:
+
+- [Deterministic baseline instructions](deterministic-baseline.md) and [script](../../scripts/tep_nexus_deterministic_baseline.py).
+- [Paired experiment script](../../scripts/tep_nexus_paired_experiment.py). This is a **two-arm** experiment, distinct from the three-arm runner.
+- [VTKG-versus-direct comparison script](../../scripts/tep_nexus_baseline_comparison.py), which evaluates a different comparison. The three-arm run does not establish a performance advantage of VTKG over direct data composition.
+
+### 6.3 Audit and statistical reporting
+
+For research reporting, preserve the **raw case-level JSON** in addition to CSV summaries and record the exact Git commit, run ID, fixture checksum, local model configuration, hardware, software versions, and GraphDB/TimescaleDB state. Avoid publishing raw operational data or internal addresses without reviewing them.
+
+For the 102 positive matched triples, pair cases by **fixture ID and repeat number** before computing latency differences and ratios. Because the three repetitions arise from only **34 distinct positive fixtures**, uncertainty intervals should resample fixtures as clusters (retaining their repetitions), rather than assuming 102 independent scenarios. A fixture-clustered confidence interval and breakdown of failed validation checks by actual check identifier remain **unreported in this repository guide**; do not infer their values from the 355-check total.
+
+The original [36-case audit script](../../scripts/audit_tep_nexus_benchmark.py) is for the archived historical benchmark summary; it is **not** a three-arm statistical audit script.
+
+## 7. Artifact inventory and reproducibility boundary
+
+| Artifact | Status in this feature branch |
+| --- | --- |
+| Historical 36-case questions and fixture | Committed: [36-case fixture](../../tests/fixtures/tep_nexus_full_36_cases.json) |
+| Historical 36-case measurements | Committed: [summary](../../reports/tep_nexus_benchmark_full_coverage_summary.json) |
+| Historical summary audit | Committed: [audit script](../../scripts/audit_tep_nexus_benchmark.py) |
+| Three-arm runner and the baseline scripts | Committed: [three-arm runner](../../scripts/tep_nexus_three_arm_experiment.py), [hybrid](../../scripts/tep_nexus_hybrid_baseline.py), [deterministic](../../scripts/tep_nexus_deterministic_baseline.py) |
+| Run-specific mapping and coverage snapshots | Example/local snapshots exist, but must be checked against the selected historian run |
+| Raw three-arm JSON/CSV and all case reports | **Not yet committed in this branch** |
+| Restorable historical TimescaleDB/GraphDB experiment state | **Not established as a complete archived dataset** |
+| Exact hardware/environment and fixture-clustered uncertainty analysis | **Not yet documented as a complete reproduction package** |
+
+A fresh clone can inspect the benchmark code, questions, and committed historical summary. It **cannot independently recreate the recorded three-arm latencies** without the corresponding live historian data, semantic state, model/environment configuration, and a raw result archive. A fresh local experiment is possible only after those prerequisites are prepared.
+
+The 12 qualitative engineering questions, eight SQL consistency comparisons, and selected negative/virtual-graph tests in the paper are **separate evaluation components**; they should not be counted as additional fixtures or repetitions in the 324-execution comparison.
+
+**Scientific interpretation:** Final harness success indicates consistency with the **implemented limited-scope checks**, not verified sensor installation, fault causality, general LLM factual accuracy, or independent validation of the engineering-to-signal mappings.
