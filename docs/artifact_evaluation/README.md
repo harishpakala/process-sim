@@ -246,3 +246,15 @@ A fresh clone can inspect the benchmark code, questions, and committed historica
 The 12 qualitative engineering questions, eight SQL consistency comparisons, and selected negative/virtual-graph tests in the paper are **separate evaluation components**; they should not be counted as additional fixtures or repetitions in the 324-execution comparison.
 
 **Scientific interpretation:** Final harness success indicates consistency with the **implemented limited-scope checks**, not verified sensor installation, fault causality, general LLM factual accuracy, or independent validation of the engineering-to-signal mappings.
+
+## Proposed qualitative Q13 — cross-model traceability (not yet executed)
+
+This **adds a proposed thirteenth question to the separate 12-question qualitative engineering evaluation**. It does **not** modify the historical 36-case benchmark, its fixtures, or its reported results. The existing 12-question results (11 PASS, Q12 PARTIAL) remain historical evidence; Q13 has no recorded outcome yet.
+
+**Q13 — Reactor-temperature end-to-end traceability**
+
+> Trace the reactor-temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, ProductCatalog, and OPC UA Connectivity. Identify the shared AssetIdentifier, source engineering tags, BOM item IDs, logical asset, product candidate, and operational signal. Then retrieve XMEAS9 observations for simulation run `10cfb1d1-2984-4932-8207-dc430ed60c2b` over simulation seconds 0–600. Provide evidence for each relationship and explicitly report unresolved or provisional mappings.
+
+**Expected source-level anchors (not a predetermined system answer):** DEXPI `TI_101`; ECAD `TI-1101`; EBOM `EBOM-0016` and `EBOM-0050`; canonical `AssetIdentifier=https://aas.example.com/TI101`; AssetInventory `TEP_XMEAS9`; ProductCatalog candidate `IFM_TA1101`; provisional OPC UA mapping `TI_101 → XMEAS9`. Preserve the distinct ECAD SMC part reference and IFM candidate rather than asserting product equivalence. The specified run is drawn from the archived temporal coverage snapshot; its presence and observations in the live historian must be checked.
+
+**Evaluation:** PASS only if all six model contributions are evidenced by actual returned records/graph statements and the temporal rows are confirmed to belong to the requested run and interval. PARTIAL if links or observations are missing and the system accurately reports those gaps. FAIL if it invents links, conflates candidate products, or returns observations from a different run. Record the actual response, query timestamp, GraphDB evidence, TimescaleDB rows, and verdict before including Q13 in quantitative claims. The updated EBOM JSON must be re-lifted before a live graph test.
