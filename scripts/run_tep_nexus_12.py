@@ -46,6 +46,7 @@ def main():
     import psycopg
     qa = load_module("scripts/tep_nexus_e4e_ollama_qa.py", "ollama_qa_12")
     q11 = q12 = None
+    graph_error = None
     rows = []
     if not args.only_q13:
         evaluator = load_module("scripts/tep_nexus_paper_evaluation.py", "paper_eval_12")
