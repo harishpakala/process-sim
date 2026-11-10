@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Evaluate Q1-Q12 together with source-backed, evidence-conditioned Ollama QA.
+"""Evaluate Q1-Q13 together with source-backed, evidence-conditioned Ollama QA.
 
 Run from the process-sim repository root. Existing ten-question records are
 left unchanged. This does NOT execute the live VTKG pipeline or auto-grade.
@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--end-seconds", type=float, default=60.0)
     parser.add_argument("--limit", type=int, default=5000)
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--output-dir", default="reports/evaluation_12_grounded")
+    parser.add_argument("--output-dir", default="reports/evaluation_13_grounded")
     args = parser.parse_args()
     if not 0 <= args.start_seconds <= args.end_seconds or not 1 <= args.limit <= 5000:
         parser.error("Require 0 <= start <= end and 1 <= limit <= 5000.")
@@ -150,6 +150,121 @@ def main():
          "evidence": q12},
     ]
 
+    # Q13 is appended without altering the existing Q1-Q12 wording or evidence.
+    # Its historian run/window are fixed by the published Q13 question.
+    q13_run = "10cfb1d1-2984-4932-8207-dc430ed60c2b"
+    q13_asset = "https://aas.example.com/TI101"
+    q13_product = "https://example.org/product-types/IFM_TA1101"
+    q13_queries = {
+        "canonical_asset_identifiers": """
+            SELECT ?subject ?predicate ?value WHERE {
+              ?subject ?predicate ?value .
+              FILTER(CONTAINS(STR(?predicate), "AssetIdentifier"))
+              FILTER(STR(?value) = "https://aas.example.com/TI101")
+            } ORDER BY ?subject ?predicate LIMIT 100
+        """,
+        "product_and_signal_references": """
+            SELECT ?subject ?predicate ?value WHERE {
+              ?subject ?predicate ?value .
+              FILTER(
+                CONTAINS(STR(?predicate), "ProductIdentifier") ||
+                CONTAINS(STR(?predicate), "ProductReference") ||
+                CONTAINS(STR(?predicate), "EngineeringFunctionReference") ||
+                CONTAINS(STR(?predicate), "SignalName")
+              )
+              FILTER(
+                CONTAINS(STR(?value), "IFM_TA1101") ||
+                CONTAINS(STR(?value), "XMEAS9") ||
+                STR(?value) = "https://aas.example.com/TI101"
+              )
+            } ORDER BY ?subject ?predicate LIMIT 100
+        """,
+        "opcua_mapping_provenance": """
+            SELECT ?subject ?predicate ?value WHERE {
+              ?subject <https://example.org/opcuaconnectivity/hasEngineeringFunctionReference>
+                "https://aas.example.com/TI101" .
+              ?subject ?predicate ?value .
+            } ORDER BY ?predicate LIMIT 100
+        """,
+    }
+    q13 = {
+        "source": "Live GraphDB SPARQL and TimescaleDB read-only queries",
+        "asset_identifier": q13_asset,
+        "product_candidate_identifier": q13_product,
+        "run_id": q13_run,
+        "signal": "XMEAS9",
+        "interval_seconds_inclusive": [0, 600],
+        "graphdb": {},
+        "graphdb_errors": {},
+        "historian_error": None,
+        "observations": [],
+        "observations_truncated": False,
+        "mapping_qualification": (
+            "OPC UA engineering match is provisional; live OPC UA binding and "
+            "physical product installation are not verified."
+        ),
+    }
+    import requests
+    for name, sparql in q13_queries.items():
+        try:
+            response = requests.post(
+                args.graphdb_url, data={"query": sparql},
+                headers={"Accept": "application/sparql-results+json"},
+                timeout=30)
+            response.raise_for_status()
+            q13["graphdb"][name] = [
+                {key: val.get("value") for key, val in binding.items()}
+                for binding in response.json()["results"]["bindings"]
+            ]
+        except (requests.RequestException, ValueError, KeyError) as exc:
+            q13["graphdb_errors"][name] = f"{type(exc).__name__}: {exc}"
+
+    try:
+        with psycopg.connect(dsn, connect_timeout=5) as conn:
+            with conn.transaction():
+                conn.execute("SET TRANSACTION READ ONLY")
+                q13_samples = conn.execute("""
+                    SELECT simulation_time_hours, value, observed_at
+                    FROM public.signal_samples
+                    WHERE run_id = %s::uuid AND signal_id = %s
+                      AND simulation_time_hours >= 0
+                      AND simulation_time_hours <= %s
+                    ORDER BY simulation_time_hours, observed_at
+                    LIMIT %s
+                """, (q13_run, "XMEAS9", 600.0 / 3600.0, args.limit + 1)).fetchall()
+        q13["observations_truncated"] = len(q13_samples) > args.limit
+        q13["observations"] = [
+            {"simulation_seconds": float(t) * 3600, "value": float(v),
+             "observed_at": ts.isoformat() if ts is not None else None}
+            for t, v, ts in q13_samples[:args.limit]
+        ]
+    except (psycopg.Error, ValueError, TypeError) as exc:
+        q13["historian_error"] = f"{type(exc).__name__}: {exc}"
+
+    q13_complete = (
+        not q13["graphdb_errors"]
+        and all(q13["graphdb"].get(name) for name in q13_queries)
+        and bool(q13["observations"])
+        and not q13["observations_truncated"]
+    )
+    rows.append({
+        "id": "Q13",
+        "question": (
+            "Trace the reactor-temperature measurement across DEXPI, ECAD, "
+            "Engineering BOM, AssetInventory, ProductCatalog, and OPC UA Connectivity. "
+            "Identify the shared AssetIdentifier, source engineering tags, BOM item IDs, "
+            "logical asset, product candidate, and operational signal. Then retrieve "
+            "XMEAS9 observations for simulation run "
+            "10cfb1d1-2984-4932-8207-dc430ed60c2b over simulation seconds 0–600. "
+            "Provide evidence for each relationship and explicitly report unresolved "
+            "or provisional mappings."
+        ),
+        "evidence_status": (
+            "EVIDENCE_AVAILABLE" if q13_complete else "INCOMPLETE_EVIDENCE"
+        ),
+        "evidence": q13,
+    })
+
     grounding_rules = (
         "Answer the question using only the supplied JSON evidence. "
         "Report explicit identifiers, mappings, values, and timestamps directly; "
@@ -166,7 +281,7 @@ def main():
         "without supporting evidence. If evidence is genuinely missing, identify "
         "the specific missing field. Answer concisely and completely."
     )
-    destination = output / "answers_12.json"
+    destination = output / "answers_13.json"
     results = []
     for row in rows:
         evidence = row.get("evidence")
@@ -197,7 +312,7 @@ def main():
             "grounding_instructions": grounding_rules,
             "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
             "assessment_status": "NOT_MANUALLY_ASSESSED",
-            "q11_evidence": q11, "q12_evidence": q12,
+            "q11_evidence": q11, "q12_evidence": q12, "q13_evidence": q13,
             "graphdb_verification_error": graph_error,
             "results": results,
         }, indent=2, ensure_ascii=False, default=str) + "\n", encoding="utf-8")
