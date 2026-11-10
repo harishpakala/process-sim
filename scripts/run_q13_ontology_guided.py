@@ -153,6 +153,24 @@ def discover_domain(url, domain, schema, timeout):
             "anchors": graphdb_select(url, anchor_query, timeout)}
 
 
+def relevant_bindings(bindings, anchors):
+    """Check evidence against question identifiers, not merely nonempty rows."""
+    terms = {"ti101", "ti_101", "ti-1101", "xmeas9"}
+    for row in anchors:
+        for term in row.values():
+            if term.get("type") in ("literal", "uri"):
+                value = term.get("value", "").lower()
+                if any(t in value for t in terms):
+                    terms.add(value)
+    matched = []
+    for row in bindings:
+        values = [str(term.get("value", "")).lower()
+                  for term in row.values()]
+        if any(any(t in value for t in terms) for value in values):
+            matched.append(row)
+    return matched
+
+
 def compact_evidence(records, limit=9000):
     """Bound context while carrying verified bindings between domains."""
     evidence = [{"domain": r["domain"], "bindings": r.get("bindings", [])[:12]}
@@ -309,12 +327,14 @@ def main():
                         print("[Q13] " + domain + ": " +
                               str(len(bindings)) + " GraphDB rows", flush=True)
                         break
-                    entry["empty_result"] = True
+                    entry["empty_or_irrelevant_result"] = True
                     messages.extend([
                         {"role": "assistant", "content": proposed},
                         {"role": "user", "content":
                          "GraphDB executed that query successfully but returned "
-                         "ZERO rows. Reconsider the observed RDF subject/object "
+                         "ZERO RELEVANT rows. The query may have returned unrelated "
+                         "data. Constrain the canonical asset or verified linked "
+                         "identifier. Reconsider the observed RDF subject/object "
                          "types, literal identifiers, collection paths and "
                          "unjustified joins. Try a DIFFERENT, simpler SELECT "
                          "for the SAME domain. Output SPARQL only."}
@@ -324,7 +344,9 @@ def main():
                     messages.extend([
                         {"role": "assistant", "content": proposed},
                         {"role": "user", "content":
-                         "GraphDB rejected your query: " + str(exc)
+                         "GraphDB rejected your query: " + str(exc) +
+                         ". Use full <IRI> predicates; undeclared prefixes "
+                         "such as dexpi: are invalid."
                          + "\nFix it for the SAME domain. SPARQL only."}
                     ])
             if record["bindings"] is None:
