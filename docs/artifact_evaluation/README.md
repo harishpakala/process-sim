@@ -247,9 +247,9 @@ The 12 qualitative engineering questions, eight SQL consistency comparisons, and
 
 **Scientific interpretation:** Final harness success indicates consistency with the **implemented limited-scope checks**, not verified sensor installation, fault causality, general LLM factual accuracy, or independent validation of the engineering-to-signal mappings.
 
-## Proposed qualitative Q13 — cross-model traceability (not yet executed)
+## Qualitative Q13 — cross-model traceability (v1 evaluated; v2 pending)
 
-This **adds a proposed thirteenth question to the separate 12-question qualitative engineering evaluation**. It does **not** modify the historical 36-case benchmark, its fixtures, or its reported results. The existing 12-question results (11 PASS, Q12 PARTIAL) remain historical evidence; Q13 has no recorded outcome yet.
+This **adds a proposed thirteenth question to the separate 12-question qualitative engineering evaluation**. It does **not** modify the historical 36-case benchmark, its fixtures, or its reported results. The existing 12-question results (11 PASS, Q12 PARTIAL) remain historical evidence; Q13-v1 was executed locally and its answer was assessed as incomplete; the uploaded local result is not committed to this repository. Q13-v2 is a separate follow-up evaluation with no recorded outcome yet.
 
 **Q13 — Reactor-temperature end-to-end traceability**
 
@@ -260,11 +260,11 @@ This **adds a proposed thirteenth question to the separate 12-question qualitati
 **Evaluation:** PASS only if all six model contributions are evidenced by actual returned records/graph statements and the temporal rows are confirmed to belong to the requested run and interval. PARTIAL if links or observations are missing and the system accurately reports those gaps. FAIL if it invents links, conflates candidate products, or returns observations from a different run. Record the actual response, query timestamp, GraphDB evidence, TimescaleDB rows, and verdict before including Q13 in quantitative claims. The updated EBOM JSON must be re-lifted before a live graph test.
 
 
-### Running Q1–Q13 with the existing evidence-conditioned Ollama runner
+### Running Q1–Q12 unchanged with Q13-v2 in the evidence-conditioned Ollama runner
 
 The original Q1–Q12 question texts are unchanged: Q1–Q10 load from
 `docs/e4e_tests/revised_questions.json`; Q11 and Q12 remain defined in
-`scripts/run_tep_nexus_12.py`. Q13 is appended after Q12, with its own
+`scripts/run_tep_nexus_12.py`. Q13-v2 is appended after Q12, with its own
 read-only GraphDB SPARQL and TimescaleDB historian evidence. The script name
 is retained to avoid breaking existing references.
 
@@ -273,7 +273,7 @@ and `TEP_TIMESCALE_DSN` configured **locally** (do not commit credentials):
 
 ```powershell
 $env:TEP_TIMESCALE_DSN = "postgresql://USER:PASSWORD@localhost:5432/DBNAME"
-python scripts/run_tep_nexus_12.py --run-id 10cfb1d1-2984-4932-8207-dc430ed60c2b --graphdb-url http://localhost:7200/repositories/AAS --model llama3.1:8b --output-dir reports/evaluation_13_grounded
+python scripts/run_tep_nexus_12.py --run-id 10cfb1d1-2984-4932-8207-dc430ed60c2b --graphdb-url http://localhost:7200/repositories/AAS --model llama3.1:8b --output-dir reports/evaluation_13_v2_grounded
 ```
 
 Replace the DSN placeholder with the actual local connection information.
@@ -282,9 +282,9 @@ default 0–60-second interval) and adds Q13 with its specified run ID and
 0–600-second interval, regardless of the Q12 window arguments. The selected
 `--run-id` applies to the existing run-dependent questions.
 
-The runner writes `reports/evaluation_13_grounded/answers_13.json` with
+The runner writes `reports/evaluation_13_v2_grounded/answers_13_v2.json` with
 question texts, Ollama responses, evidence hashes and Q13 evidence, plus
-`reports/evaluation_13_grounded/evidence/revised/evidence_and_assessment_template.json`
+`reports/evaluation_13_v2_grounded/evidence/revised/evidence_and_assessment_template.json`
 for the existing Q1–Q10 evidence assessment. Q13 SPARQL results include
 canonical asset identifiers, product/signal references and OPC UA mapping
 provenance. Q13 historian evidence includes XMEAS9 observation values,
@@ -300,3 +300,25 @@ preserve provisional mapping and product-selection caveats, and assign
 manual grades. Historical Q1–Q12 grades and 36-case benchmark results are
 not overwritten. The runner cannot execute against the user's local services
 from GitHub alone.
+
+### Q13 question versioning and evidence presentation
+
+**Q13-v1** is the original paragraph quoted above. Its initial local
+`answers_13.json` result should be retained unchanged as a failed/incomplete
+answer-completeness trial. Do not relabel that run as a PASS.
+
+**Q13-v2** retains the same six-model and 0–600-second historian requirements
+but explicitly numbers the seven answer sections and asks for the historian
+count and first/last observations rather than all 207 samples. The runner
+feeds the model a compact SPARQL triple digest and historian summary for Q13
+only. The **full original SPARQL results and all returned historian samples**
+remain in the top-level `q13_evidence` output field for audit. Q1–Q12
+question text, prompts and evidence logic are not changed.
+
+This revision is an **intervention**, not a directly comparable rerun of the
+same question. Report Q13-v1 and Q13-v2 separately, with their question
+wording, evidence presentation, model configuration and manual assessments.
+A complete answer is not guaranteed: some source tags may not be present in
+the current SPARQL evidence, and the model must report such gaps rather than
+invent them. The runner still does not perform live VTKG execution or
+automatic grading.
