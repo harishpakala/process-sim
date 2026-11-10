@@ -25,6 +25,51 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/q13/ontology/result":
+            # Read-only integration of an explicitly configured, completed audit.
+            # This does not run Ollama or GraphDB on the request thread.
+            try:
+                from pathlib import Path
+                configured = os.environ.get("TEP_Q13_ONTOLOGY_AUDIT")
+                if not configured:
+                    self.send_json(503, {"error": "Set TEP_Q13_ONTOLOGY_AUDIT to a completed Q13 audit JSON"})
+                    return
+                source = Path(configured).expanduser().resolve()
+                if not source.is_file() or source.stat().st_size > 8_000_000:
+                    self.send_json(503, {"error": "Configured Q13 audit is missing or too large"})
+                    return
+                audit = json.loads(source.read_text(encoding="utf-8"))
+                if not isinstance(audit, dict) or not audit.get("method", "").startswith("q13_v9_6_"):
+                    raise ValueError("Configured file is not a Q13 ontology-guided audit")
+                domains = audit.get("domains", [])
+                acceptance = audit.get("acceptance", {})
+                if not isinstance(domains, list) or not isinstance(acceptance, dict):
+                    raise ValueError("Invalid Q13 audit structure")
+                if not audit.get("final_answer") or not acceptance.get("six_domain_coverage"):
+                    self.send_json(409, {"error": "Q13 audit is incomplete"})
+                    return
+                self.send_json(200, {
+                    "question": audit.get("question"),
+                    "answer": audit["final_answer"],
+                    "status": audit.get("status"),
+                    "method": audit.get("method"),
+                    "synthesisMode": audit.get("synthesis_mode"),
+                    "fallbackReason": audit.get("fallback_reason"),
+                    "acceptance": acceptance,
+                    "historian": audit.get("historian"),
+                    "domains": [{
+                        "domain": d.get("domain"),
+                        "status": d.get("status"),
+                        "summarySource": (d.get("finding") or {}).get("summary_source"),
+                        "verifiedTriples": d.get("verified_triples", []),
+                        "finding": d.get("finding"),
+                    } for d in domains],
+                })
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(422, {"error": f"Invalid Q13 audit: {exc}"})
+            except OSError as exc:
+                self.send_json(503, {"error": f"Q13 audit unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/paper/questions":
             try:
                 from process_sim.api.paper_query import questions
