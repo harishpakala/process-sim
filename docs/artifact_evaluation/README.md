@@ -337,3 +337,30 @@ TimescaleDB retrieval, and writes
 It does not create the Q1–Q10 assessment template or invoke the Q1–Q12
 retrieval/answer paths. `TEP_TIMESCALE_DSN` must still be set locally.
 The result remains ungraded until its answer and evidence are reviewed.
+
+### Q13-v3 — DEXPI wording and readable AAS identifiers
+
+Q13-v3 retains the Q13-v2 seven-part structure, six-model trace and fixed
+historian run/window. The DEXPI subquestion now requests the
+reactor-temperature **instrumentation function and shared AssetIdentifier**,
+not an independently sourced DEXPI tag. ECAD and the other five sections
+remain unchanged.
+
+The prompt evidence now Base64-decodes lifted GraphDB subject suffixes,
+exposing element paths such as `Devices.TI_1101`, `BOMItems.EBOM_0016`,
+`BOMItems.EBOM_0050`, and `Assets.TEP_XMEAS9`. It also retains the
+original `source_subject_uri` beside each decoded subject for audit.
+A decoded device identifier does not independently establish an engineering
+tag property; missing properties must be acknowledged.
+
+Run **only Q13-v3** (requires local `TEP_TIMESCALE_DSN`):
+
+```powershell
+python scripts/run_tep_nexus_12.py --only-q13 --run-id 10cfb1d1-2984-4932-8207-dc430ed60c2b --graphdb-url http://localhost:7200/repositories/AAS --model llama3.1:8b --output-dir reports/evaluation_13_v3_only
+```
+
+Output: `reports/evaluation_13_v3_only/answers_q13_v3_only.json`.
+Q13-v1 and Q13-v2 outputs must be retained separately. The versioned
+changes are an evaluation intervention, not a retroactive PASS; manual
+assessment is required. The same full raw GraphDB and historian evidence
+is preserved in `q13_evidence`.
