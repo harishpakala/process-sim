@@ -11,11 +11,47 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 
 import run_q13_ontology_guided as core
 
 ROOT = Path(__file__).resolve().parents[1]
+TIMINGS = []
+
+
+def timed_ollama(url, model, messages, timeout):
+    label = "ollama:" + (messages[0].get("content", "")[:35] if messages else "request")
+    start = time.perf_counter()
+    print("[Q13-v9.3] START " + label, flush=True)
+    try:
+        return core.ollama(url, model, messages, timeout)
+    finally:
+        seconds = round(time.perf_counter() - start, 2)
+        TIMINGS.append({"operation": label, "seconds": seconds})
+        print("[Q13-v9.3] END " + label + " " + str(seconds) + "s", flush=True)
+
+
+def timed_select(endpoint, query, timeout):
+    start = time.perf_counter()
+    try:
+        return core.graphdb_select(endpoint, query, timeout)
+    finally:
+        seconds = round(time.perf_counter() - start, 2)
+        TIMINGS.append({"operation": "graphdb:expand", "seconds": seconds})
+        print("[Q13-v9.3] GraphDB expand " + str(seconds) + "s", flush=True)
+
+
+def compact_triples(triples):
+    """Shorten RDF URIs only in model input; audit retains full provenance."""
+    def short_uri(uri):
+        return uri.rsplit("/", 1)[-1] if "/" in uri else uri
+    return [{"s": "node_" + str(i) if len(t["s"]) > 90 else short_uri(t["s"]),
+             "p": short_uri(t["p"]),
+             "o": short_uri(t["o"]) if t["o_type"] == "uri" else t["o"],
+             "o_type": t["o_type"]} for i, t in enumerate(triples)]
+
+
 
 
 def triples_from_rows(rows):
@@ -45,7 +81,7 @@ def parse_json_reply(reply):
     except json.JSONDecodeError:
         decoder = json.JSONDecoder()
         obj = None
-        for match in re.finditer(r"\\{", cleaned):
+        for match in re.finditer(r"\{", cleaned):
             try:
                 candidate, _ = decoder.raw_decode(cleaned[match.start():])
                 if isinstance(candidate, dict):
@@ -79,7 +115,7 @@ def evidence_fallback(domain, triples):
 
 
 def ask_json(url, model, system, payload, timeout):
-    raw = core.ollama(url, model, [
+    raw = timed_ollama(url, model, [
         {"role": "system", "content": system},
         {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}
     ], timeout)
@@ -98,7 +134,7 @@ def expand_node(endpoint, domain, schema, node, direction, timeout):
                  " } BIND(" + iri + " AS ?o) ?s ?p ?o } LIMIT 100")
     else:
         raise ValueError("Invalid traversal direction")
-    return triples_from_rows(core.graphdb_select(endpoint, query, timeout)), query
+    return triples_from_rows(timed_select(endpoint, query, timeout)), query
 
 
 def candidate_nodes(triples, expanded, limit=45):
@@ -135,7 +171,7 @@ def domain_reasoning(args, domain, schema, identifiers, earlier):
                   "ontology": schema[:args.schema_chars],
                   "prior_domain_findings": earlier[-2:],
                   "anchor_subjects": sorted(anchors),
-                  "verified_triples": triples[-args.max_prompt_triples:],
+                  "verified_triples": compact_triples(triples[-args.max_prompt_triples:]),
                   "candidate_nodes": candidates}
         try:
             choice, raw = ask_json(args.ollama_url, args.model, system,
@@ -196,8 +232,8 @@ def summarize_domain(args, domain, schema, triples):
     )
     payload = {"question": core.QUESTION, "domain": domain,
                "ontology": schema[:args.schema_chars],
-               "triples": triples[:args.max_evidence_triples]}
-    raw = core.ollama(args.ollama_url, args.model, [
+               "triples": compact_triples(triples[:args.max_evidence_triples])}
+    raw = timed_ollama(args.ollama_url, args.model, [
         {"role": "system", "content": system},
         {"role": "user", "content": json.dumps(payload, ensure_ascii=False)}
     ], args.ollama_timeout)
@@ -205,7 +241,7 @@ def summarize_domain(args, domain, schema, triples):
         result = parse_json_reply(raw)
         source = "OLLAMA"
     except ValueError:
-        repaired = core.ollama(args.ollama_url, args.model, [
+        repaired = timed_ollama(args.ollama_url, args.model, [
             {"role": "system", "content": "Repair malformed JSON only. Do not invent or add facts. Return a single JSON object."},
             {"role": "user", "content": raw[:12000]}
         ], args.ollama_timeout)
@@ -258,11 +294,11 @@ def main():
     p.add_argument("--graphdb-timeout", type=int, default=60)
     p.add_argument("--ollama-timeout", type=int, default=240)
     p.add_argument("--max-hops", type=int, default=2)
-    p.add_argument("--schema-chars", type=int, default=6500)
-    p.add_argument("--max-prompt-triples", type=int, default=35)
-    p.add_argument("--max-evidence-triples", type=int, default=80)
+    p.add_argument("--schema-chars", type=int, default=2500)
+    p.add_argument("--max-prompt-triples", type=int, default=24)
+    p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_2.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_3.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -272,7 +308,7 @@ def main():
     if not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context()
-    audit = {"method": "q13_v9_2_llm_directed_ontology_traversal",
+    audit = {"method": "q13_v9_3_llm_directed_ontology_traversal",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -281,13 +317,15 @@ def main():
         for domain in core.DOMAINS:
             record = {"domain": domain, "status": "NOT_STARTED"}
             audit["domains"].append(record)
-            print("[Q13-v9] " + domain, flush=True)
+            domain_start = time.perf_counter()
+            print("[Q13-v9.3] START " + domain, flush=True)
             try:
                 discovery, triples, steps = domain_reasoning(
                     args, domain, schemas[domain], identifiers,
                     [r.get("finding") for r in audit["domains"][:-1]
                      if r.get("finding")])
                 record["discovery"] = discovery
+                print("[Q13-v9.3] " + domain + " discovery complete; " + str(len(triples)) + " triples", flush=True)
                 record["verified_triples"] = triples
                 record["traversal_steps"] = steps
                 identifiers = core.observed_identifiers(discovery, identifiers)
@@ -298,14 +336,19 @@ def main():
                         record["finding"] = finding
                         record["finding_raw"] = raw
                         record["status"] = "SUMMARIZED"
+                        print("[Q13-v9.3] " + domain + " summary complete", flush=True)
                     except (ValueError, KeyError, OSError) as exc:
                         record["summary_error"] = str(exc)
                         record["finding"] = evidence_fallback(
                             domain, triples[:args.max_evidence_triples])
                         record["status"] = "RDF_FALLBACK"
+                        print("[Q13-v9.3] " + domain + " RDF fallback: " + str(exc), flush=True)
             except (ValueError, KeyError, OSError) as exc:
                 record["error"] = str(exc)
                 record["status"] = "ERROR"
+            finally:
+                record["elapsed_seconds"] = round(time.perf_counter() - domain_start, 2)
+                print("[Q13-v9.3] END " + domain + " " + str(record["elapsed_seconds"]) + "s", flush=True)
         audit["propagated_identifiers"] = sorted(identifiers)
         try:
             audit["historian"] = core.historian_summary(dsn)
@@ -335,7 +378,7 @@ def main():
                 "about connectivity status, not provisional RDF evidence."
             )
             try:
-                audit["final_answer"] = core.ollama(args.ollama_url, args.model, [
+                audit["final_answer"] = timed_ollama(args.ollama_url, args.model, [
                     {"role": "system", "content": system},
                     {"role": "user", "content": json.dumps({
                         "question": core.QUESTION, "domain_findings": findings,
@@ -365,6 +408,7 @@ def main():
             except (ValueError, KeyError, OSError) as exc:
                 audit["answer_error"] = str(exc)
     finally:
+        audit["timings"] = TIMINGS
         target = ROOT / args.output
         target.parent.mkdir(parents=True, exist_ok=True)
         target.write_text(json.dumps(audit, indent=2, ensure_ascii=False) + "\n",
