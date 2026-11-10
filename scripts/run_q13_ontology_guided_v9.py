@@ -9,6 +9,7 @@ No Q13 domain identifiers or answer values are hardcoded beyond the question.
 import argparse
 import base64
 import json
+import socket
 import os
 import re
 import sys
@@ -104,6 +105,8 @@ def normalize_finding(finding, triples):
     # Model claims not backed by an exact triple are retained only as qualified
     # provisional interpretations, never promoted to verified assertions.
     inferred = [f for f in finding.get("provisional_facts", []) if not direct(f)
+                and not re.search(r"\\bnode_\\d+\\b|rdf-node-[0-9a-f]{10}", f, re.I)
+                and not any(f.strip().lower().startswith(a.lower()) for a in status)
                 and not any(m.split(" has an empty", 1)[0].lower() in f.lower()
                             and not f.split(":", 1)[-1].strip() for m in missing)]
     finding["verified_facts"] = dedupe(assertions)
@@ -376,14 +379,77 @@ def save_audit(audit, output):
 
 
 def synthesis_payload(audit, findings):
-    return {"question": audit["question"], "domain_findings": [
-        {"domain": f["domain"],
-         "verified_facts": f.get("verified_facts", [])[:9],
-         "provisional_facts": f.get("provisional_facts", [])[:5],
-         "unverified_or_missing": f.get("unverified_or_missing", [])[:5],
-         "verified_status_assertions": f.get("verified_status_assertions", [])[:5],
-         "evidence_refs": [r["triple_index"] for r in f.get("evidence_index", [])[:9]]}
-        for f in findings], "historian": audit.get("historian")}
+    """Bounded, domain-balanced facts with original evidence indices."""
+    domains = []
+    for f in findings:
+        idx = f.get("evidence_index", [])
+        # Prefer identifiers, names, status and signal/node properties; avoid
+        # opaque URI edges when compacting the LLM prompt.
+        def priority(r):
+            p = r["predicate"].lower()
+            return (0 if any(x in p for x in ("assetidentifier", "localid", "signal", "nodeid", "browsepath", "mappingstatus", "validationstatus")) else
+                    1 if any(x in p for x in ("name", "product", "equipment", "measurement", "reference", "status")) else 2)
+        chosen = sorted((r for r in idx if not r["missing"]), key=lambda r: (priority(r), r["triple_index"]))[:8]
+        facts = [{"ref": r["triple_index"], "fact": r["predicate"] + "=" +
+                  (readable_node(r["value"]) if r["value"].startswith(("http://org.example.com/",)) else r["value"])}
+                 for r in chosen]
+        domains.append({"domain": f["domain"], "verified": facts,
+                        "missing": f.get("unverified_or_missing", [])[:3],
+                        "provisional": [v for v in f.get("provisional_facts", [])[:3]
+                                        if not re.search(r"\\bnode_\\d+\\b|rdf-node-[0-9a-f]{10}", v, re.I)]})
+    return {"question": audit["question"], "domains": domains,
+            "historian": audit.get("historian")}
+
+
+def deterministic_answer(audit, findings):
+    """Grounded fallback: only normalized RDF assertions and explicit gaps."""
+    lines = ["Engineering trace (deterministic RDF fallback; LLM synthesis unavailable)."]
+    for f in findings:
+        records = f.get("evidence_index", [])
+        concrete = [r for r in records if not r["missing"]]
+        ranked = sorted(concrete, key=lambda r: (
+            0 if any(x in r["predicate"].lower() for x in (
+                "assetidentifier", "localid", "signal", "nodeid", "browsepath",
+                "mappingstatus", "validationstatus", "productidentifier")) else 1,
+            r["triple_index"]))
+        facts = []
+        for r in ranked:
+            value = r["value"]
+            if value.startswith("http://org.example.com/"):
+                value = readable_node(value)
+            if re.search(r"\\bnode_\\d+\\b", value):
+                continue
+            facts.append(r["predicate"] + "=" + value + " [triple " + str(r["triple_index"]) + "]")
+            if len(facts) == 6:
+                break
+        missing = list(dict.fromkeys(f.get("unverified_or_missing", [])))[:2]
+        lines.append(f["domain"].upper() + ": " + ("; ".join(facts) if facts else "No nonempty RDF assertions.") +
+                     (". Missing: " + "; ".join(missing) if missing else "") + ".")
+    lines.append("Engineering limitations: physical installation of a ProductCatalog candidate is NOT verified by these RDF assertions; an OPC UA provisional mapping status is not proof of a live binding.")
+    h = audit.get("historian")
+    if h:
+        lines.append("Historian observations: " + json.dumps(h, ensure_ascii=False, separators=(",", ":"))[:650])
+    return "\\n".join(lines)
+
+
+def evaluate_answer(audit, answer):
+    lower = answer.lower()
+    normalized = re.sub(r"[^a-z0-9]", "", lower)
+    acceptance = audit["acceptance"]
+    acceptance["six_domain_names_mentioned"] = all(
+        re.sub(r"[^a-z0-9]", "", d.lower()) in normalized for d in core.DOMAINS)
+    acceptance["provisional_status_mentioned"] = "provisional" in lower
+    acceptance["installation_uncertainty_mentioned"] = (
+        "install" in lower and any(w in lower for w in (
+            "unverified", "unknown", "not verified", "not confirmed",
+            "no evidence", "cannot confirm", "not established")))
+    acceptance["status_not_misclassified"] = not bool(
+        re.search(r"(?:notconnected|not connected).{0,55}(?:provisional rdf|provisional evidence)", lower))
+    acceptance["no_raw_node_aliases"] = not bool(re.search(r"\\bnode_\\d+\\b", answer))
+    return all(acceptance[k] for k in (
+        "six_domain_coverage", "six_domain_names_mentioned",
+        "provisional_status_mentioned", "installation_uncertainty_mentioned",
+        "status_not_misclassified", "no_raw_node_aliases"))
 
 
 def main():
@@ -400,7 +466,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_1.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -410,7 +476,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_6_evidence_indexed_engineering_trace",
+    audit = {"method": "q13_v9_6_1_reliable_evidence_synthesis",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -423,11 +489,13 @@ def main():
         available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
-        audit["method"] = "q13_v9_6_evidence_indexed_engineering_trace"
+        audit["method"] = "q13_v9_6_1_reliable_evidence_synthesis"
         for record in audit["domains"]:
             if record.get("finding") and record.get("verified_triples"):
                 normalize_finding(record["finding"], record["verified_triples"][:args.max_evidence_triples])
         audit["final_answer"] = None
+        audit["acceptance"] = {}
+        audit["synthesis_mode"] = "NOT_STARTED"
         audit.pop("answer_error", None)
         audit["status"] = "INCOMPLETE"
         audit["resume_source"] = str(source)
@@ -505,33 +573,25 @@ def main():
                 "uncertainty statement and a short historian summary."
             )
             try:
-                audit["final_answer"] = timed_ollama(args.ollama_url, args.model, [
+                answer = timed_ollama(args.ollama_url, args.model, [
                     {"role": "system", "content": system},
                     {"role": "user", "content": json.dumps(synthesis_payload(audit, findings), ensure_ascii=False)}
                 ], args.ollama_timeout)
-                lower = audit["final_answer"].lower()
-                normalized = re.sub(r"[^a-z0-9]", "", lower)
-                audit["acceptance"]["six_domain_names_mentioned"] = all(
-                    re.sub(r"[^a-z0-9]", "", d.lower()) in normalized
-                    for d in core.DOMAINS)
-                audit["acceptance"]["provisional_status_mentioned"] = (
-                    "provisional" in lower)
-                audit["acceptance"]["installation_uncertainty_mentioned"] = (
-                    "install" in lower and any(w in lower for w in
-                                               ("unverified", "unknown", "not verified",
-                                                "not confirmed", "no evidence",
-                                                "cannot confirm", "not established")))
-                audit["acceptance"]["status_not_misclassified"] = not bool(
-                    re.search(r"(?:notconnected|not connected).{0,55}(?:provisional rdf|provisional evidence)", lower))
-                audit["status"] = ("REVIEW_REQUIRED" if not audit["acceptance"]["rdf_fallback_domains"] and all(
-                    audit["acceptance"].get(k) for k in (
-                        "six_domain_coverage", "six_domain_names_mentioned",
-                        "provisional_status_mentioned",
-                        "installation_uncertainty_mentioned",
-                        "status_not_misclassified"))
-                    else "INCOMPLETE")
-            except (ValueError, KeyError, OSError) as exc:
+                if not answer.strip():
+                    raise ValueError("Ollama returned an empty answer")
+                audit["final_answer"] = answer
+                audit["synthesis_mode"] = "OLLAMA"
+            except (ValueError, KeyError, OSError, TimeoutError, socket.timeout) as exc:
                 audit["answer_error"] = str(exc)
+                audit["final_answer"] = deterministic_answer(audit, findings)
+                audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
+            passed = evaluate_answer(audit, audit["final_answer"])
+            audit["status"] = ("REVIEW_REQUIRED" if passed and
+                               not audit["acceptance"]["rdf_fallback_domains"]
+                               else "INCOMPLETE")
+        else:
+            audit["synthesis_mode"] = "FAILED"
+
     finally:
         target = save_audit(audit, args.output)
         print("Audit:", target, "Status:", audit["status"], flush=True)
