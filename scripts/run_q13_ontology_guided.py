@@ -134,12 +134,12 @@ def discover_domain(url, domain, schema, timeout):
     Samples actual instance triples whose predicates occur in the lifted TTL.
     Includes an identifier-oriented sample to avoid missing sparse Q13 nodes.
     """
-    uris = sorted(set(re.findall(r"https://example\\.org/" + re.escape(domain)
+    uris = sorted(set(re.findall(r"https://example\.org/" + re.escape(domain)
                              + r"/[A-Za-z0-9_]+", schema)))
     if not uris:
         return {"predicate_count": 0, "samples": [], "anchors": []}
     values = " ".join("<" + uri + ">" for uri in uris)
-    base = "VALUES ?p { " + values + " }\\n?s ?p ?o .\\n"
+    base = "VALUES ?p { " + values + " }\n?s ?p ?o .\n"
     sample_query = ("SELECT ?s ?p ?o WHERE { " + base + " } LIMIT 60")
     anchor_query = (
         "SELECT ?s ?p ?o WHERE { " + base
