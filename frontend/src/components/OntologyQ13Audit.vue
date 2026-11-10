@@ -8,6 +8,36 @@ type Audit = { question?: string; answer: string; status?: string; method?: stri
 const result = ref<Audit | null>(null)
 const loading = ref(false)
 const error = ref('')
+const liveState = ref('')
+const liveBusy = ref(false)
+const liveError = ref('')
+async function liveStart() {
+ liveBusy.value = true; liveError.value = ''
+ try {
+  const response = await fetch('/api/ai/q13/ontology/live/start', { method:'POST' })
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'Live Q13 start failed')
+  liveState.value = data.state || 'QUEUED'
+ } catch (e) { liveError.value = e instanceof Error ? e.message : String(e) }
+ finally { liveBusy.value = false }
+}
+async function liveCheck() {
+ liveBusy.value = true; liveError.value = ''
+ try {
+  const response = await fetch('/api/ai/q13/ontology/live/status', {cache:'no-store'})
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'Live Q13 status unavailable')
+  liveState.value = data.state || 'UNKNOWN'
+  if (data.state === 'COMPLETED') {
+   const resultResponse = await fetch('/api/ai/q13/ontology/live/result', {cache:'no-store'})
+   const audit = await resultResponse.json()
+   if (!resultResponse.ok) throw new Error(audit.error || 'Live result unavailable')
+   result.value = audit as Audit
+  }
+  if (data.state === 'FAILED') liveError.value = data.error || 'Live Q13 failed'
+ } catch (e) { liveError.value = e instanceof Error ? e.message : String(e) }
+ finally { liveBusy.value = false }
+}
 const domainNames: Record<string,string> = { dexpi:'DEXPI', ecad:'ECAD', engineeringbom:'Engineering BOM', assetinventory:'AssetInventory', productcatalog:'ProductCatalog', opcuaconnectivity:'OPC UA Connectivity' }
 const name = (value: string) => domainNames[value] || value
 const shortPredicate = (value: string) => value.split(/[/#]/).pop() || value
@@ -34,6 +64,8 @@ onMounted(() => { void refresh() })
     <div><h2>Q13 — Ontology-guided engineering trace</h2><p>Read-only view of the configured, completed Q13 audit. This does not execute a new query.</p></div>
     <button type="button" class="secondary" :disabled="loading" @click="refresh">{{ loading ? 'Loading…' : 'Reload audit' }}</button>
    </div>
+   <div class="q13-status"><button type="button" class="secondary" :disabled="liveBusy || liveState==='RUNNING' || liveState==='QUEUED'" @click="liveStart">Run live Q13 (opt-in)</button><button type="button" class="secondary" :disabled="liveBusy" @click="liveCheck">Check live status / load result</button><span v-if="liveState">Live job: {{ liveState }}</span></div>
+   <p v-if="liveError" role="alert" class="q13-error">{{ liveError }}</p>
    <p v-if="error" role="alert" class="q13-error">{{ error }}</p>
    <template v-if="result">
     <div class="q13-status">
