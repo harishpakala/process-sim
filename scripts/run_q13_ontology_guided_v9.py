@@ -7,6 +7,7 @@ chooses which observed RDF node to expand; the runner constructs safe SPARQL.
 No Q13 domain identifiers or answer values are hardcoded beyond the question.
 """
 import argparse
+import base64
 import json
 import os
 import re
@@ -42,16 +43,77 @@ def timed_select(endpoint, query, timeout):
         print("[Q13-v9.3] GraphDB expand " + str(seconds) + "s", flush=True)
 
 
+def readable_node(uri, labels=None):
+    if labels and uri in labels:
+        return labels[uri]
+    tail = uri.rsplit("/", 1)[-1].rsplit("#", 1)[-1]
+    if len(tail) > 45:
+        try:
+            decoded = base64.urlsafe_b64decode(tail + "=" * (-len(tail) % 4)).decode("utf-8")
+            if decoded.isprintable() and len(decoded) < 140:
+                return decoded
+        except (ValueError, UnicodeDecodeError):
+            pass
+        return "rdf-node-" + __import__("hashlib").sha256(uri.encode()).hexdigest()[:10]
+    return tail or uri
+
+
 def compact_triples(triples):
-    """Shorten RDF URIs only in model input; audit retains full provenance."""
-    def short_uri(uri):
-        return uri.rsplit("/", 1)[-1] if "/" in uri else uri
-    return [{"s": "node_" + str(i) if len(t["s"]) > 90 else short_uri(t["s"]),
-             "p": short_uri(t["p"]),
-             "o": short_uri(t["o"]) if t["o_type"] == "uri" else t["o"],
-             "o_type": t["o_type"]} for i, t in enumerate(triples)]
+    """Stable subject labels across triples; keep original URIs in audit."""
+    labels = {}
+    for t in triples:
+        if t["o_type"] == "literal" and t["o"].strip() and t["p"].rsplit("/", 1)[-1].lower() in (
+                "haslocalid", "hasname", "hasidshort", "hasassetidentifier"):
+            labels.setdefault(t["s"], t["o"] if len(t["o"]) < 90 else t["o"][-50:])
+    return [{"s": readable_node(t["s"], labels),
+             "p": readable_node(t["p"]),
+             "o": readable_node(t["o"], labels) if t["o_type"] == "uri" else t["o"],
+             "o_type": t["o_type"]} for t in triples]
 
 
+def evidence_index(triples):
+    """Source-of-truth assertions with original triple indices and missing values."""
+    records, seen = [], set()
+    for i, t in enumerate(triples):
+        pred = readable_node(t["p"])
+        val = t["o"]
+        key = (t["s"], t["p"], val, t["o_type"])
+        if key in seen:
+            continue
+        seen.add(key)
+        records.append({"triple_index": i, "predicate": pred,
+                        "value": val, "missing": not bool(val.strip()),
+                        "status_literal": any(x in val.lower() for x in (
+                            "provisional", "unverified", "unresolved", "unspecified",
+                            "notconnected", "notconfigured", "notassessed"))})
+    return records
+
+
+def normalize_finding(finding, triples):
+    """Rebuild asserted facts from RDF; keep model inference separate."""
+    indexed = evidence_index(triples)
+    assertions = [r["predicate"] + "=" + r["value"] for r in indexed if not r["missing"]]
+    missing = [r["predicate"] + " has an empty RDF value" for r in indexed if r["missing"]]
+    status = [r["predicate"] + "=" + r["value"] for r in indexed if r["status_literal"] and not r["missing"]]
+    def dedupe(values):
+        return list(dict.fromkeys(values))
+    def direct(fact):
+        text = fact.strip().lower()
+        return any(text in (a.lower(), a.replace("=", ": ", 1).lower(),
+                            a.replace("=", ":", 1).lower()) for a in assertions)
+    # Model claims not backed by an exact triple are retained only as qualified
+    # provisional interpretations, never promoted to verified assertions.
+    inferred = [f for f in finding.get("provisional_facts", []) if not direct(f)
+                and not any(m.split(" has an empty", 1)[0].lower() in f.lower()
+                            and not f.split(":", 1)[-1].strip() for m in missing)]
+    finding["verified_facts"] = dedupe(assertions)
+    finding["provisional_facts"] = dedupe(inferred)
+    finding["unverified_or_missing"] = dedupe(missing + [
+        f for f in finding.get("unverified_or_missing", [])
+        if f not in missing and not direct(f)])
+    finding["verified_status_assertions"] = dedupe(status)
+    finding["evidence_index"] = indexed
+    return finding
 
 
 def triples_from_rows(rows):
@@ -148,7 +210,7 @@ def evidence_fallback(domain, triples):
             "provisional_facts": provisional, "unverified_or_missing": missing,
             "supporting_triples": list(range(len(triples))),
             "summary_source": "RDF_ONLY_FALLBACK_NOT_LLM"}
-    return reconcile_rdf_assertions(result, triples)
+    return normalize_finding(result, triples)
 
 
 def ask_json(url, model, system, payload, timeout):
@@ -300,7 +362,7 @@ def summarize_domain(args, domain, schema, triples):
     result["invalid_supporting_indices"] = (len(indices) - len(valid)
         if isinstance(indices, list) else "not_a_list")
     result["supporting_triples"] = valid
-    reconcile_rdf_assertions(result, triples[:args.max_evidence_triples])
+    normalize_finding(result, triples[:args.max_evidence_triples])
     result["summary_source"] = source
     return result, raw
 
@@ -316,10 +378,11 @@ def save_audit(audit, output):
 def synthesis_payload(audit, findings):
     return {"question": audit["question"], "domain_findings": [
         {"domain": f["domain"],
-         "verified_facts": f.get("verified_facts", [])[:7],
+         "verified_facts": f.get("verified_facts", [])[:9],
          "provisional_facts": f.get("provisional_facts", [])[:5],
          "unverified_or_missing": f.get("unverified_or_missing", [])[:5],
-         "verified_status_assertions": f.get("verified_status_assertions", [])[:5]}
+         "verified_status_assertions": f.get("verified_status_assertions", [])[:5],
+         "evidence_refs": [r["triple_index"] for r in f.get("evidence_index", [])[:9]]}
         for f in findings], "historian": audit.get("historian")}
 
 
@@ -337,7 +400,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_5.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -347,7 +410,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_5_evidence_reconciled_checkpointed_traversal",
+    audit = {"method": "q13_v9_6_evidence_indexed_engineering_trace",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -360,15 +423,15 @@ def main():
         available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
-        audit["method"] = "q13_v9_4_checkpointed_llm_directed_ontology_traversal"
+        audit["method"] = "q13_v9_6_evidence_indexed_engineering_trace"
         for record in audit["domains"]:
             if record.get("finding") and record.get("verified_triples"):
-                reconcile_rdf_assertions(record["finding"], record["verified_triples"])
+                normalize_finding(record["finding"], record["verified_triples"][:args.max_evidence_triples])
         audit["final_answer"] = None
         audit.pop("answer_error", None)
         audit["status"] = "INCOMPLETE"
         audit["resume_source"] = str(source)
-        print("[Q13-v9.4] Resuming final synthesis only", flush=True)
+        print("[Q13-v9.6] Resuming final synthesis only", flush=True)
     try:
         if not args.resume_audit:
             for domain in core.DOMAINS:
@@ -435,6 +498,9 @@ def main():
                 "verified by the graph; if not, say it is NOT verified. "
                 "An RDF status such as NotConnected is a VERIFIED statement "
                 "about connectivity status, not provisional RDF evidence. "
+                "Write a natural engineering narrative, not a property dump. "
+                "Do not output node aliases, base64 paths or opaque RDF identifiers. "
+                "Cite evidence as domain triple indices when relevant. "
                 "Be concise: at most two sentences per domain, then one "
                 "uncertainty statement and a short historian summary."
             )
