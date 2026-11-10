@@ -322,3 +322,18 @@ A complete answer is not guaranteed: some source tags may not be present in
 the current SPARQL evidence, and the model must report such gaps rather than
 invent them. The runner still does not perform live VTKG execution or
 automatic grading.
+
+### Fast Q13-v2-only rerun
+
+To avoid running Q1–Q12 or their evidence retrieval, add `--only-q13`:
+
+```powershell
+python scripts/run_tep_nexus_12.py --only-q13 --run-id 10cfb1d1-2984-4932-8207-dc430ed60c2b --graphdb-url http://localhost:7200/repositories/AAS --model llama3.1:8b --output-dir reports/evaluation_13_v2_only
+```
+
+This invokes Ollama **once** for Q13-v2, performs only the Q13 GraphDB and
+TimescaleDB retrieval, and writes
+`reports/evaluation_13_v2_only/answers_q13_v2_only.json`.
+It does not create the Q1–Q10 assessment template or invoke the Q1–Q12
+retrieval/answer paths. `TEP_TIMESCALE_DSN` must still be set locally.
+The result remains ungraded until its answer and evidence are reviewed.
