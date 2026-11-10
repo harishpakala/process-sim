@@ -32,7 +32,7 @@ def main():
     parser.add_argument("--end-seconds", type=float, default=60.0)
     parser.add_argument("--limit", type=int, default=5000)
     parser.add_argument("--timeout", type=int, default=180)
-    parser.add_argument("--output-dir", default="reports/evaluation_13_grounded")
+    parser.add_argument("--output-dir", default="reports/evaluation_13_v2_grounded")
     args = parser.parse_args()
     if not 0 <= args.start_seconds <= args.end_seconds or not 1 <= args.limit <= 5000:
         parser.error("Require 0 <= start <= end and 1 <= limit <= 5000.")
@@ -250,14 +250,23 @@ def main():
     rows.append({
         "id": "Q13",
         "question": (
-            "Trace the reactor-temperature measurement across DEXPI, ECAD, "
-            "Engineering BOM, AssetInventory, ProductCatalog, and OPC UA Connectivity. "
-            "Identify the shared AssetIdentifier, source engineering tags, BOM item IDs, "
-            "logical asset, product candidate, and operational signal. Then retrieve "
-            "XMEAS9 observations for simulation run "
-            "10cfb1d1-2984-4932-8207-dc430ed60c2b over simulation seconds 0–600. "
-            "Provide evidence for each relationship and explicitly report unresolved "
-            "or provisional mappings."
+            "Using the supplied GraphDB and TimescaleDB evidence, trace the "
+            "reactor-temperature measurement across the six AAS information models. "
+            "Answer in order: (1) DEXPI: engineering function and source tag; "
+            "(2) ECAD: electrical device and tag; (3) Engineering BOM: associated "
+            "BOM items; (4) AssetInventory: logical asset and shared AssetIdentifier; "
+            "(5) ProductCatalog: associated product candidate and whether physical "
+            "installation is verified; (6) OPC UA Connectivity: operational signal, "
+            "engineering reference, OPC UA node and mapping status; "
+            "(7) TimescaleDB: for simulation run "
+            "10cfb1d1-2984-4932-8207-dc430ed60c2b, report the number of XMEAS9 "
+            "observations between simulation seconds 0 and 600, first and last "
+            "observation times, and their recorded values. Finish with a brief "
+            "summary of how the models are linked through the shared "
+            "AssetIdentifier, and explicitly identify provisional or unverified "
+            "mappings. Use only supplied evidence; do not invent missing "
+            "relationships, product-installation confirmations, or live OPC UA "
+            "verification."
         ),
         "evidence_status": (
             "EVIDENCE_AVAILABLE" if q13_complete else "INCOMPLETE_EVIDENCE"
@@ -281,16 +290,55 @@ def main():
         "without supporting evidence. If evidence is genuinely missing, identify "
         "the specific missing field. Answer concisely and completely."
     )
-    destination = output / "answers_13.json"
+    destination = output / "answers_13_v2.json"
     results = []
     for row in rows:
         evidence = row.get("evidence")
+        # Q13-v2: give the LLM a compact evidence digest, not 207 raw rows.
+        # The full unmodified Q13 evidence remains in q13_evidence in the output.
+        prompt_evidence = evidence
+        if row["id"] == "Q13":
+            compact_graph = {}
+            for group, triples in q13["graphdb"].items():
+                compact_graph[group] = [
+                    {"subject": t["subject"].rsplit("/", 1)[-1],
+                     "predicate": t["predicate"].rsplit("/", 1)[-1].rsplit("#", 1)[-1],
+                     "value": t["value"]}
+                    for t in triples
+                    if group != "opcua_mapping_provenance"
+                    or t["predicate"].startswith("https://example.org/opcuaconnectivity/")
+                ]
+            observations = q13["observations"]
+            prompt_evidence = {
+                "source": q13["source"],
+                "asset_identifier": q13["asset_identifier"],
+                "product_candidate_identifier": q13["product_candidate_identifier"],
+                "graphdb": compact_graph,
+                "graphdb_errors": q13["graphdb_errors"],
+                "historian": {
+                    "run_id": q13["run_id"], "signal": q13["signal"],
+                    "interval_seconds_inclusive": q13["interval_seconds_inclusive"],
+                    "returned_observation_count": len(observations),
+                    "truncated": q13["observations_truncated"],
+                    "error": q13["historian_error"],
+                    "first_observation": observations[0] if observations else None,
+                    "last_observation": observations[-1] if observations else None,
+                },
+                "mapping_qualification": q13["mapping_qualification"],
+                "evidence_limitations": (
+                    "GraphDB subject identifiers are abbreviated suffixes; "
+                    "source model and item identity must be supported by returned "
+                    "predicates/subjects, not inferred from a candidate product. "
+                    "Missing engineering tag fields must be reported as missing."
+                ),
+            }
         prompt = ("Question:\n" + row["question"] +
                   "\n\nEvidence from a read-only snapshot (JSON):\n" +
-                  json.dumps(evidence, indent=2, ensure_ascii=False, default=str) +
+                  json.dumps(prompt_evidence, indent=2, ensure_ascii=False, default=str) +
                   "\n\nGrounding instructions:\n" + grounding_rules)
         entry = {
             "id": row["id"], "question": row["question"],
+            "question_version": "Q13-v2" if row["id"] == "Q13" else "unchanged",
             "evidence_status": row.get("evidence_status"),
             "evidence_sha256": hashlib.sha256(
                 json.dumps(evidence, sort_keys=True, default=str).encode()).hexdigest(),
@@ -313,6 +361,7 @@ def main():
             "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
             "assessment_status": "NOT_MANUALLY_ASSESSED",
             "q11_evidence": q11, "q12_evidence": q12, "q13_evidence": q13,
+            "q13_prompt_evidence": prompt_evidence if row["id"] == "Q13" else None,
             "graphdb_verification_error": graph_error,
             "results": results,
         }, indent=2, ensure_ascii=False, default=str) + "\n", encoding="utf-8")
