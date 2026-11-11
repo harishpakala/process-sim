@@ -47,10 +47,13 @@ assert len(items)==len(sources)==79
 seen=set()
 for item in items:
     p=props(item)
-    key=(p["SourceDomain"],p["SourceAssetIdentifier"])
+    key=(p["SourceDomain"],p["AssetIdentifier"])
     assert key in sources and key not in seen,key
     seen.add(key)
     assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
+    # SourceAssetIdentifier preserves the original source URI; it is not the
+    # current canonical AssetIdentifier after DEXPI/ECAD identity reconciliation.
+    assert p.get("SourceAssetIdentifier"), p["BOMItemId"]
     assert p["Quantity"]=="1" and p["Unit"]=="EA"
     parent=equipment_parents.get(p["EngineeringLocalId"]) if p["SourceDomain"]=="DEXPI" and p["SourceGroup"]=="Equipments" else None
     assert p["ParentItemId"]==(parent or "ASM-UNASSIGNED")
