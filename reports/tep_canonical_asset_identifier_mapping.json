@@ -10,7 +10,7 @@
     "dexpi": 39,
     "ecad": 40,
     "assetInventory": 62,
-    "proposedReplacements": 57
+    "proposedReplacements": 58
   },
   "collisions": [
     {
@@ -25,11 +25,11 @@
   "mappings": [
     {
       "oldAssetIdentifier": "https://aas.example.com/CV-1006",
-      "proposedAssetIdentifier": "https://aas.example.com/CV-1006",
+      "proposedAssetIdentifier": "https://aas.example.com/CV1006",
       "evidence": [
         "ECAD CV-1006"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/CV-1201",
