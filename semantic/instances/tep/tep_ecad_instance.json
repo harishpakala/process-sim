@@ -9463,6 +9463,30 @@
               "idShort": "ProductVerificationEvidence",
               "valueType": "xs:string",
               "value": "Recorded candidate Rittal / 3244100; suitability and datasheet not verified. No automatic substitution authorized."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/M1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
             }
           ],
           "qualifiers": [
