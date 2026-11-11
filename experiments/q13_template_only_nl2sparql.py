@@ -24,6 +24,9 @@ import requests
 from rdflib import Graph, URIRef
 from rdflib.namespace import RDF, RDFS, SH, OWL
 from rdflib.plugins.sparql.parser import parseQuery
+from rdflib.plugins.sparql.algebra import translateQuery
+from rdflib.plugins.sparql.parserutils import CompValue
+from rdflib.term import Variable
 
 ROOT = Path(__file__).resolve().parents[1]
 ONTOLOGY_DIR = ROOT / "semantic" / "ontology"
@@ -47,6 +50,13 @@ SYSTEM = """You are a SPARQL 1.1 query author for an engineering RDF graph.
 You receive a natural-language question and six AAS template-derived TTL schemas.
 Use ONLY the supplied schemas to identify valid predicates and join paths.
 Generate ONE complete read-only SPARQL SELECT query against instance data.
+Plan a connected graph pattern using shared identifier variables for related
+asset records, and a shared product identifier for catalog records.
+Every requested domain must contribute actual triple patterns, not just PREFIX.
+Include Engineering BOM records and project requested literal property values.
+Apply descriptive text filters only to appropriate descriptive properties;
+never require manufacturers, part numbers or tags to match a generic phrase.
+Do not copy any example query or assume any unstated identifier.
 Derive cross-domain joins independently; never assume an identifier value,
 product, signal, BOM item, or expected answer not stated in the question.
 The templates are schema constraints, NOT instance facts.
@@ -179,6 +189,74 @@ def validate_query(query, allowed_predicates):
     return issues
 
 
+def structural_validation(query):
+    """Inspect parsed basic graph patterns; never repair generated queries."""
+    required = {
+        "dexpi": "https://example.org/dexpi/",
+        "ecad": "https://example.org/ecad/",
+        "engineeringbom": "https://example.org/engineeringbom/",
+        "assetinventory": "https://example.org/assetinventory/",
+        "opcuaconnectivity": "https://example.org/opcuaconnectivity/",
+        "productcatalog": "https://example.org/productcatalog/",
+    }
+    result = {"domains_present": [], "domains_missing": [],
+              "triple_count": 0, "connected": False,
+              "shared_identifier_variables": [], "issues": []}
+    try:
+        algebra = translateQuery(parseQuery(query)).algebra
+    except Exception as exc:
+        result["issues"].append("Cannot inspect SPARQL algebra: " + str(exc))
+        return result
+    triples = []
+    def walk(node):
+        if isinstance(node, CompValue):
+            if node.name == "BGP":
+                triples.extend(node.get("triples", []))
+            for value in node.values():
+                walk(value)
+        elif isinstance(node, (tuple, list)):
+            for value in node:
+                walk(value)
+    walk(algebra)
+    result["triple_count"] = len(triples)
+    present, edges, identifier_usage = set(), {}, {}
+    for subject, predicate, obj in triples:
+        if isinstance(predicate, URIRef):
+            uri = str(predicate)
+            for name, ns in required.items():
+                if uri.startswith(ns):
+                    present.add(name)
+                    if isinstance(obj, Variable) and ("Identifier" in uri or "Reference" in uri):
+                        identifier_usage.setdefault(str(obj), set()).add(name)
+        for term in (subject, obj):
+            if isinstance(term, Variable):
+                edges.setdefault(str(term), set())
+        if isinstance(subject, Variable) and isinstance(obj, Variable):
+            edges[str(subject)].add(str(obj))
+            edges[str(obj)].add(str(subject))
+    result["domains_present"] = sorted(present)
+    result["domains_missing"] = sorted(set(required) - present)
+    result["shared_identifier_variables"] = sorted(
+        var for var, domains in identifier_usage.items() if len(domains) > 1)
+    if result["domains_missing"]:
+        result["issues"].append("Missing domain triple patterns: " +
+                                ", ".join(result["domains_missing"]))
+    if not result["shared_identifier_variables"]:
+        result["issues"].append("No identifier variable shared between domains.")
+    if edges:
+        visited = {next(iter(edges))}
+        pending = list(visited)
+        while pending:
+            for neighbor in edges[pending.pop()]:
+                if neighbor not in visited:
+                    visited.add(neighbor)
+                    pending.append(neighbor)
+        result["connected"] = visited == set(edges)
+    if not result["connected"]:
+        result["issues"].append("Disconnected graph-pattern variables.")
+    return result
+
+
 def evaluate(bindings):
     """Descriptive evaluation only: never alter query or fill missing results."""
     values = [{key: cell.get("value") for key, cell in row.items()}
@@ -246,6 +324,7 @@ def main():
         "model_rationale": None,
         "raw_model_response": None,
         "syntax_and_schema_issues": [],
+        "structural_validation": None,
         "graphdb_bindings": None,
         "evaluation": None,
         "error": None,
@@ -284,6 +363,10 @@ def main():
         audit["raw_model_response"] = raw
         issues = validate_query(query, allowed)
         audit["syntax_and_schema_issues"] = issues
+        structure = structural_validation(query) if not issues else None
+        audit["structural_validation"] = structure
+        if structure:
+            issues.extend(structure["issues"])
         print("Ollama prompt tokens:", audit["actual_prompt_tokens"], flush=True)
         print("Generated SPARQL:\n" + (query or "<none>"), flush=True)
         if issues:
