@@ -46,8 +46,8 @@ def main(argv=None):
     if args.catalog_product_identifier is not None:
         selected="catalog_product_properties_opt_in"
         # Do not silently answer the full cross-domain Q5 using a catalog-only query.
-        catalog_only=(re.search(r"\\b(product catalog|catalog product|catalog-only)\\b",args.question,re.I)
-                      and not re.search(r"\\b(reactor|instrument|associated|linked|installed|bom|dexpi|ecad|asset inventory)\\b",args.question,re.I))
+        catalog_only=(re.search(r"\b(product catalog|catalog product|catalog-only)\b",args.question,re.I)
+                      and not re.search(r"\b(reactor|instrument|associated|linked|installed|bom|dexpi|ecad|asset inventory)\b",args.question,re.I))
         if extra or not catalog_only:
             result={"route":selected,"status":"unsupported",
                     "reason":"CATALOG_ONLY_SCOPE_REQUIRED: explicit catalog-only question, no cross-domain association or installation claims"}
@@ -62,7 +62,7 @@ def main(argv=None):
                 result={"route":selected,"status":"error","reason":type(e).__name__+": "+str(e)}
         path=args.output if args.output.is_absolute() else ROOT/args.output
         path.parent.mkdir(parents=True,exist_ok=True)
-        path.write_text(json.dumps(result,indent=2,ensure_ascii=False)+"\\n",encoding="utf-8")
+        path.write_text(json.dumps(result,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
         print(json.dumps(result,indent=2,ensure_ascii=False))
         print("Audit saved:",path)
         return 0 if result["status"] in ("compiled","executed") else 2
