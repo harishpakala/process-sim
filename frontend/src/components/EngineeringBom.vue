@@ -129,6 +129,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>Association evidence</span><strong>{{selected.item.AssociationBasis}}</strong></div>
        <div><span>Asset identifier</span><strong>{{selected.item.AssetIdentifier || 'Unresolved'}}</strong></div>
        <div><span>Catalog product identifier</span><strong>{{selected.item.ProductIdentifier || 'Not resolved'}}</strong></div>
+       <div><span>Inventory match status</span><strong>{{selected.item.ValidationStatus}}</strong></div>
        <div><span>Product selection</span><strong>{{selected.item.SelectionStatus}}</strong></div>
        <div><span>Revision</span><strong>{{selected.item.Revision}}</strong></div>
       </div>
