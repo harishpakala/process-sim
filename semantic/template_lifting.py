@@ -49,6 +49,25 @@ from semantic.ontoutils import (
 )
 
 
+def add_semantic_annotations(graph, source, shape_uri, predicate_uri=None):
+    """Propagate authored AAS descriptions into SHACL and predicate metadata."""
+    from rdflib.namespace import SH
+    name = getattr(source, "id_short", None)
+    if name:
+        graph.add((shape_uri, SH.name, Literal(name)))
+        if predicate_uri is not None:
+            graph.add((predicate_uri, RDFS.label, Literal(name)))
+    for entry in getattr(source, "description", None) or []:
+        language = getattr(entry, "language", None)
+        value = getattr(entry, "text", None)
+        if not value:
+            continue
+        literal = Literal(value, lang=language or None)
+        graph.add((shape_uri, SH.description, literal))
+        if predicate_uri is not None:
+            graph.add((predicate_uri, RDFS.comment, literal))
+
+
 def make_semantic_predicate(
     domain: str,
     id_short: str,
@@ -161,6 +180,8 @@ def lift_template(
             template_class,
         )
     )
+
+    add_semantic_annotations(graph, submodel, template_shape)
 
     lift_elements(
         graph=graph,
@@ -310,6 +331,8 @@ def lift_property(
         )
     )
 
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
+
     min_count, max_count = get_cardinality(
         element
     )
@@ -419,6 +442,8 @@ def lift_range(
             range_class,
         )
     )
+
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
 
     min_count, max_count = get_cardinality(
         element
@@ -531,6 +556,8 @@ def lift_smc(
         )
     )
 
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
+
     min_count, max_count = get_cardinality(element)
 
     add_cardinality_constraints(
@@ -573,6 +600,8 @@ def lift_smc(
             ),
         )
     )
+
+    add_semantic_annotations(graph, element, child_shape)
 
     # IMPORTANT:
     # Do NOT use sh:targetClass aas:SMC here.
