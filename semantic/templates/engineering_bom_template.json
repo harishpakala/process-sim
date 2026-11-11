@@ -139,12 +139,12 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string"
             },
             {
               "modelType": "Property",
-              "idShort": "CandidateProductReference",
+              "idShort": "ProductIdentifier",
               "valueType": "xs:string"
             },
             {
