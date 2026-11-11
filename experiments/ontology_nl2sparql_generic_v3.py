@@ -70,14 +70,12 @@ def minimum_joins(plan,cat,edges,required):
  missing_domains=set(required)-{cat[x]['domain'] for x in terminals}
  # Every required domain needs one representative, chosen by shortest connectivity.
  target_domains=set(required)
- start=frozenset(terminals)
+ start=frozenset({sorted(terminals)[0]})
  queue=deque([(start,())]);seen={start}
  while queue:
   nodes,path=queue.popleft()
-  if target_domains<={cat[x]['domain'] for x in nodes}:
-   # Connectivity is established by chosen edges, not merely membership in nodes.
-   if not path and len(nodes)>1:pass
-   else:return list(path),nodes
+  if terminals<=nodes and target_domains<={cat[x]['domain'] for x in nodes}:
+   return list(path),nodes
   for eid,e in sorted(edges.items()):
    a,b=e['left'],e['right']
    if (a in nodes) == (b in nodes):continue
