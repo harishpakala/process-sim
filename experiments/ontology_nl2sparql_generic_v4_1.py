@@ -46,7 +46,7 @@ def catalog(schema,question,limit,required):
  result={}
  for _,d,shape in picked:
   k='s'+str(len(result))
-  result[k]={'domain':d,'shape':shape['uri'],'label':shape.get('label'),'description':shape.get('description'),'properties':[{'predicate':p['predicate'],'label':p.get('label'),'description':p.get('description'),'kind':p.get('kind')} for p in shape['properties']]}
+  result[k]={'domain':d,'shape':shape['uri'],'label':shape.get('label'),'description':shape.get('description'),'properties':[{'predicate':p['predicate'],'label':p.get('label'),'description':p.get('description'),'kind':p.get('kind'),'node_shape':p.get('node_shape')} for p in shape['properties']]}
  return result
 def joins(cat,allow_hypothesis_joins=False):
  """Identifier-name equality is not an asserted relationship; disable by default."""
@@ -203,8 +203,54 @@ def validate(plan,cat,required,requested,question):
    errors.append('Tag output mapped to non-tag predicate: '+local(p))
 
  return errors
-def compile_plan(plan,edges,selected_joins):
+def shape_context_paths(schema,cat,shape_ids):
+ """Trace selected SHACL node shapes through explicit sh:node property links.
+ A predicate alone cannot identify its owning entity type.
+ """
+ from collections import deque
+ result={}
+ for domain in schema['domains']:
+  shapes={x['uri']:x for x in domain['node_shapes']}
+  incoming={}
+  for parent in shapes.values():
+   for prop in parent['properties']:
+    child=prop.get('node_shape')
+    if child in shapes:
+     incoming.setdefault(child,[]).append((parent['uri'],prop['predicate']))
+  roots={x['uri'] for x in shapes.values() if x.get('target_classes')}
+  for sid in shape_ids:
+   selected=cat[sid]
+   if selected['domain']!=domain['domain']:continue
+   target=selected['shape']
+   if target in roots:
+    result[sid]=[]
+    continue
+   queue=deque([(target,[])])
+   seen={target}
+   found=None
+   while queue:
+    node,path=queue.popleft()
+    if node in roots:
+     found=path
+     break
+    for parent,predicate in sorted(incoming.get(node,[])):
+     if parent not in seen:
+      seen.add(parent)
+      queue.append((parent,[(parent,predicate,node)]+path))
+   if found is None:
+    raise ValueError('No SHACL sh:node path to a target shape for '+selected['label'])
+   result[sid]=found
+ if set(result)!=set(shape_ids):
+  raise ValueError('Missing SHACL entity context for selected shapes')
+ return result
+
+def compile_plan(plan,edges,selected_joins,context_paths):
  lines=[]
+ for sid,path in sorted(context_paths.items()):
+  for parent,predicate,child in path:
+   lines.append('?shape_'+re.sub('[^A-Za-z0-9_]','_',parent)+' <'+predicate+'> ?shape_'+re.sub('[^A-Za-z0-9_]','_',child)+' .')
+  if path:
+   lines.append('FILTER(?node_'+sid+' = ?shape_'+re.sub('[^A-Za-z0-9_]','_',path[-1][2])+')')
  for j in selected_joins:
   e=edges[j];v='?key_'+j
   for side in ('left','right'):lines.append('?node_'+e[side]+' <'+e[side+'_predicate']+'> '+v+' .')
@@ -261,7 +307,9 @@ def main():
   else:
    selected_joins,joined_shapes=minimum_joins(report['plan'],cat,edges,required)
    report['selected_joins']=selected_joins;report['joined_shapes']=sorted(joined_shapes)
-   query=compile_plan(report['plan'],edges,selected_joins);report['generated_sparql']=query
+   context_paths=shape_context_paths(schema,cat,joined_shapes)
+   report['entity_context_paths']=context_paths
+   query=compile_plan(report['plan'],edges,selected_joins,context_paths);report['generated_sparql']=query
    print('Compiled query:\n'+query,flush=True)
    if not args.skip_execution:
     r=requests.post(args.graphdb_url,data={'query':query},headers={'Accept':'application/sparql-results+json'},timeout=60);r.raise_for_status()
