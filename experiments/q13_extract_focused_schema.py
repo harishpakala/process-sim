@@ -32,6 +32,11 @@ def label(graph, node):
     return str(value) if value is not None else None
 
 
+def annotation(graph, node, predicate):
+    values = sorted(str(value) for value in graph.objects(node, predicate))
+    return values[0] if values else None
+
+
 def extract():
     domains = []
     by_identifier = defaultdict(list)
@@ -57,7 +62,8 @@ def extract():
                         else "datatype" if (path, RDF.type, OWL.DatatypeProperty) in graph
                         else "unspecified")
                 item = {"predicate": str(path),
-                        "label": label(graph, prop),
+                        "label": annotation(graph, prop, SH.name) or label(graph, prop),
+                        "description": annotation(graph, prop, SH.description) or annotation(graph, path, RDFS.comment),
                         "kind": kind}
                 datatype = graph.value(prop, SH.datatype)
                 node_kind = graph.value(prop, SH.nodeKind)
@@ -79,7 +85,8 @@ def extract():
             if properties:
                 shapes.append({
                     "uri": str(node),
-                    "label": label(graph, node),
+                    "label": annotation(graph, node, SH.name) or label(graph, node),
+                    "description": annotation(graph, node, SH.description),
                     "target_classes": sorted(str(v) for v in graph.objects(node, SH.targetClass)),
                     "properties": sorted(properties, key=lambda item: item["predicate"]),
                 })
