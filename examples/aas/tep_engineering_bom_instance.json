@@ -1501,6 +1501,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEP-R-001"
@@ -1537,18 +1543,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Reactor"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "REQUIRES_ALTERNATIVE"
@@ -1563,7 +1557,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_REFERENCE_EXACT_MATCH"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -1645,6 +1639,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEP-C-001"
@@ -1681,18 +1681,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Condenser"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
@@ -1707,7 +1695,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_REFERENCE_EXACT_MATCH"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -1789,6 +1777,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEP-V-001"
@@ -1825,18 +1819,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Separator"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
@@ -1851,7 +1833,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_REFERENCE_EXACT_MATCH"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -1933,6 +1915,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEP-K-001"
@@ -1969,18 +1957,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Compressor"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
@@ -1995,7 +1971,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_REFERENCE_EXACT_MATCH"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2077,6 +2053,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEP-S-001"
@@ -2113,18 +2095,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Stripper"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "PROVISIONAL_CANDIDATE"
@@ -2139,7 +2109,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_REFERENCE_EXACT_MATCH"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2221,6 +2191,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS1"
@@ -2257,18 +2233,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -2283,7 +2247,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2365,6 +2329,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS2"
@@ -2401,18 +2371,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -2427,7 +2385,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2509,6 +2467,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS3"
@@ -2545,18 +2509,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -2571,7 +2523,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2653,6 +2605,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS4"
@@ -2689,18 +2647,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -2715,7 +2661,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2797,6 +2743,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS5"
@@ -2833,18 +2785,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -2859,7 +2799,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -2941,6 +2881,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI106"
@@ -2977,18 +2923,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3003,7 +2937,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3085,6 +3019,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS10"
@@ -3121,18 +3061,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3147,7 +3075,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3229,6 +3157,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS14"
@@ -3265,18 +3199,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3291,7 +3213,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3373,6 +3295,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS17"
@@ -3409,18 +3337,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3435,7 +3351,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3517,6 +3433,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS19"
@@ -3553,18 +3475,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3579,7 +3489,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3661,6 +3571,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI101"
@@ -3697,18 +3613,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3723,7 +3627,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3805,6 +3709,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS11"
@@ -3841,18 +3751,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -3867,7 +3765,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -3949,6 +3847,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS18"
@@ -3985,18 +3889,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4011,7 +3903,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4093,6 +3985,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS21"
@@ -4129,18 +4027,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4155,7 +4041,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4237,6 +4123,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI_105"
@@ -4273,18 +4165,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4299,7 +4179,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -4381,6 +4261,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI101"
@@ -4417,18 +4303,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4443,7 +4317,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4525,6 +4399,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS12"
@@ -4561,18 +4441,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4587,7 +4455,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4669,6 +4537,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS15"
@@ -4705,18 +4579,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4731,7 +4593,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4813,6 +4675,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/PI101"
@@ -4849,18 +4717,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -4875,7 +4731,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -4957,6 +4813,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS13"
@@ -4993,18 +4855,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5019,7 +4869,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5101,6 +4951,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS16"
@@ -5137,18 +4993,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5163,7 +5007,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5245,6 +5089,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Schneider_A9MEM3555"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMEAS20"
@@ -5281,18 +5131,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5307,7 +5145,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5389,6 +5227,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV1"
@@ -5425,18 +5269,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5451,7 +5283,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5533,6 +5365,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV2"
@@ -5569,18 +5407,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5595,7 +5421,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5677,6 +5503,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV3"
@@ -5713,18 +5545,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5739,7 +5559,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5821,6 +5641,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV4"
@@ -5857,18 +5683,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -5883,7 +5697,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -5965,6 +5779,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC_105"
@@ -6001,18 +5821,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6027,7 +5835,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -6109,6 +5917,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV6"
@@ -6145,18 +5959,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6171,7 +5973,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -6253,6 +6055,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC_107"
@@ -6289,18 +6097,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6315,7 +6111,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -6397,6 +6193,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV8"
@@ -6433,18 +6235,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6459,7 +6249,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -6541,6 +6331,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV9"
@@ -6577,18 +6373,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6603,7 +6387,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -6685,6 +6469,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://example.org/tep/assets/TEP_XMV10"
@@ -6721,18 +6511,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6747,7 +6525,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -6829,6 +6607,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC_111"
@@ -6865,18 +6649,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -6891,7 +6663,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -6973,6 +6745,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/SC_101"
@@ -7009,18 +6787,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7035,7 +6801,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -7117,6 +6883,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/DC-PSU-1"
@@ -7153,18 +6925,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7179,7 +6939,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -7261,6 +7021,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/K1"
@@ -7297,18 +7063,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7323,7 +7077,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -7405,6 +7159,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1001"
@@ -7441,18 +7201,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7467,7 +7215,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -7549,6 +7297,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1002"
@@ -7585,18 +7339,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7611,7 +7353,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -7693,6 +7435,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1003"
@@ -7729,18 +7477,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7755,7 +7491,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -7837,6 +7573,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1004"
@@ -7873,18 +7615,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -7899,7 +7629,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -7981,6 +7711,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1006"
@@ -8017,18 +7753,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8043,7 +7767,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8125,6 +7849,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1101"
@@ -8161,18 +7891,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8187,7 +7905,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8269,6 +7987,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/PI-1101"
@@ -8305,18 +8029,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8331,7 +8043,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8413,6 +8125,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI-1101"
@@ -8449,18 +8167,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8475,7 +8181,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8557,6 +8263,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI-1101"
@@ -8593,18 +8305,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8619,7 +8319,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8701,6 +8401,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1005"
@@ -8737,18 +8443,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8763,7 +8457,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8845,6 +8539,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI-1301"
@@ -8881,18 +8581,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -8907,7 +8595,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -8989,6 +8677,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI-1301"
@@ -9025,18 +8719,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9051,7 +8733,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9133,6 +8815,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/PI-1301"
@@ -9169,18 +8857,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9195,7 +8871,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9277,6 +8953,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1301"
@@ -9313,18 +8995,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9339,7 +9009,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9421,6 +9091,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI-1501"
@@ -9457,18 +9133,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9483,7 +9147,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9565,6 +9229,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/PI-1501"
@@ -9601,18 +9271,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9627,7 +9285,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9709,6 +9367,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1501"
@@ -9745,18 +9409,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9771,7 +9423,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9853,6 +9505,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI-1501"
@@ -9889,18 +9547,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -9915,7 +9561,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -9997,6 +9643,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI-1502"
@@ -10033,18 +9685,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10059,7 +9699,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10141,6 +9781,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Schneider_A9MEM3555"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/JI-1401"
@@ -10177,18 +9823,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10203,7 +9837,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10285,6 +9919,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI-1103"
@@ -10321,18 +9961,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10347,7 +9975,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10429,6 +10057,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI-1202"
@@ -10465,18 +10099,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10491,7 +10113,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -10573,6 +10195,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1001"
@@ -10609,18 +10237,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10635,7 +10251,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10717,6 +10333,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1002"
@@ -10753,18 +10375,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10779,7 +10389,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10861,6 +10471,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1003"
@@ -10897,18 +10513,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -10923,7 +10527,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11005,6 +10609,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1004"
@@ -11041,18 +10651,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11067,7 +10665,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11149,6 +10747,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1005"
@@ -11185,18 +10789,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11211,7 +10803,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11293,6 +10885,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1006"
@@ -11329,18 +10927,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11355,7 +10941,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -11437,6 +11023,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1101"
@@ -11473,18 +11065,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11499,7 +11079,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11581,6 +11161,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1201"
@@ -11617,18 +11203,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11643,7 +11217,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -11725,6 +11299,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1301"
@@ -11761,18 +11341,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11787,7 +11355,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -11869,6 +11437,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1401"
@@ -11905,18 +11479,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -11931,7 +11493,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -12013,6 +11575,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1501"
@@ -12049,18 +11617,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12075,7 +11631,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -12157,6 +11713,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/CV-1502"
@@ -12193,18 +11755,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12219,7 +11769,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -12301,6 +11851,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/M1"
@@ -12337,18 +11893,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12363,7 +11907,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -12445,6 +11989,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/M-1301"
@@ -12481,18 +12031,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12507,7 +12045,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -12589,6 +12127,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/M-1401"
@@ -12625,18 +12169,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12651,7 +12183,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
@@ -12733,6 +12265,12 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/M-1501"
@@ -12769,18 +12307,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": ""
-            },
-            {
-              "modelType": "Property",
               "idShort": "SelectionStatus",
               "valueType": "xs:string",
               "value": "UNSPECIFIED"
@@ -12795,7 +12321,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_ASSET_REFERENCE"
+              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
             },
             {
               "modelType": "Property",
