@@ -59,7 +59,7 @@ def joins(cat):
     if pa and pb:
      result['j'+str(len(result))]={'left':a,'right':b,'left_predicate':pa[0],'right_predicate':pb[0],'identifier':name,'evidence':'same identifier local name; RDF-term equality is a hypothesis'}
  return result
-SYSTEM="""Return JSON plan for an unseen engineering question using ONLY supplied SHACL properties. Choose requested output fields and explicit filters. NEVER write joins or SPARQL: the compiler chooses minimal joins. Output exactly keys fields, filters, unsupported. fields are {name,shape,predicate}; filters are {shape,predicate,contains} for explicitly requested substring matching (including identifiers) or {shape,predicate,equals} for explicitly supplied exact values. Names are safe unique SPARQL variables. Match field semantics exactly: equipment tags use hasEquipmentTag, operational references use hasOperationalReference, identifiers use hasAssetIdentifier, not hasRelatedAssetIdentifier. Do not invent predicates. If an output is unavailable, mark it unsupported; do not invent a predicate or substitute an unrelated property. Nonempty unsupported means the entire request is rejected. Domain connectivity is handled by compiler. JSON only."""
+SYSTEM="""Return JSON plan for an unseen engineering question using ONLY supplied SHACL properties. Choose requested output fields and explicit filters. NEVER write joins or SPARQL: the compiler chooses minimal joins. Output exactly keys fields, filters, unsupported. fields are {name,shape,predicate}; filters are {shape,predicate,contains} for explicitly requested substring matching (including identifiers) or {shape,predicate,equals} for explicitly supplied exact values. Names are safe unique SPARQL variables. Match field semantics exactly: equipment tags use hasEquipmentTag, operational references use hasOperationalReference, identifiers use hasAssetIdentifier, not hasRelatedAssetIdentifier. Do not invent predicates. Account for EVERY requested_outputs phrase in fields or unsupported. If an output is unavailable, mark it unsupported; do not invent a predicate or substitute an unrelated property. Nonempty unsupported means the entire request is rejected. Domain connectivity is handled by compiler. JSON only."""
 def minimum_joins(plan,cat,edges,required):
  """Find shortest join tree covering selected shapes and at least one shape per required domain.
  For 10 or fewer shapes, enumerate connected subsets using BFS, favoring fewer joins."""
@@ -118,6 +118,41 @@ def normalize_output_names(plan):
   f['name']=name;seen.add(name)
  return plan
 
+
+def requested_outputs(question):
+ """Extract coordinated projection phrases independently of the model and SHACL."""
+ q=re.sub(r'([a-z])([A-Z])',r'\\1 \\2',question)
+ m=re.search(r'\\b(?:list|show|return|display|give|retrieve|select)\\b',q,re.I)
+ if not m:return []
+ q=q[m.end():]
+ q=re.split(r'\\b(?:where|whose|having|filtered by|such that)\\b',q,maxsplit=1,flags=re.I)[0]
+ q=re.split(r'[.;?]',q,maxsplit=1)[0]
+ chunks=re.split(r'\\s*,\\s*|\\s+and\\s+',q,flags=re.I)
+ result=[]
+ for chunk in chunks:
+  chunk=re.sub(r'^\\s*(?:and|the|all|their|each|its)\\s+','',chunk.strip(),flags=re.I)
+  chunk=re.sub(r'^\\s*(?:within|for|in)\\s+.*?\\b(?:show|list)\\b\\s*','',chunk,flags=re.I)
+  if chunk:result.append(chunk)
+ return result
+
+def projection_signature(phrase):
+ """Normalize only grammatical and domain qualifiers, never semantic field types."""
+ words=normalized_words(phrase)
+ qualifiers={'opc','ua','connectivity','dexpi','ecad','bom','inventory','catalog',
+             'engineeringbom','assetinventory','productcatalog','opcuaconnectivity',
+             'server','mapping','their','the','a','an','each','all','of','for','in'}
+ # 'engineering' is NOT a qualifier: engineering function ID differs from function reference.
+ return [w for w in words if w not in qualifiers]
+
+def projection_covered(phrase,selected):
+ """Require every meaningful requested term to occur in a selected predicate."""
+ target=set(projection_signature(phrase))
+ if not target:return False
+ for _,_,predicate in selected:
+  actual=set(normalized_words(local(predicate)))-{'has'}
+  if target<=actual:return True
+ return False
+
 def validate(plan,cat,required,requested,question):
  errors=[]
  if not isinstance(plan,dict) or set(plan)!={'fields','filters','unsupported'}:return ['Invalid plan keys']
@@ -145,6 +180,9 @@ def validate(plan,cat,required,requested,question):
  for c in requested:
   if not any(set(c['tokens'])<=tokens(local(p)) for _,_,p in selected):
    errors.append('Missing semantic output: '+c['phrase'])
+ for phrase in requested_outputs(question):
+  if not projection_covered(phrase,selected):
+   errors.append('Unresolved requested output: '+phrase)
  for n,s,p in selected:
   kind=next(x.get('kind') for x in cat[s]['properties'] if x['predicate']==p)
   if kind=='object' and tokens(n)&{'tag','tags','identifier','identifiers','reference','references','name','names'}:
@@ -184,9 +222,9 @@ def main():
  try:
   schema=extract();required=required_domains(schema,args.question);requested=concepts(args.question);cat=catalog(schema,args.question,args.max_shapes,required);edges=joins(cat)
   report['schema_sources']=[{'domain':d['domain'],'file':d['source_file'],'sha256':d['source_sha256']} for d in schema['domains']]
-  report['candidate_shapes']=cat;report['join_candidates']=edges;report['required_domains']=required;report['requested_concepts']=requested
+  report['candidate_shapes']=cat;report['join_candidates']=edges;report['required_domains']=required;report['requested_concepts']=requested;report['requested_outputs']=requested_outputs(args.question)
   if not cat:raise ValueError('No ontology shapes matched question')
-  payload=json.dumps({'question':args.question,'required_domains':required,'requested_concepts':requested,'shapes':cat,'plan_format':{'fields':[{'name':'outputName','shape':'shape ID','predicate':'full IRI'}],'filters':[],'unsupported':[]}},separators=(',',':'))
+  payload=json.dumps({'question':args.question,'required_domains':required,'requested_concepts':requested,'requested_outputs':requested_outputs(args.question),'shapes':cat,'plan_format':{'fields':[{'name':'outputName','shape':'shape ID','predicate':'full IRI'}],'filters':[],'unsupported':[]}},separators=(',',':'))
   estimate=(len(payload)+len(SYSTEM))//4;budget=min(args.max_prompt_estimate,args.num_ctx-args.num_predict-512)
   report['estimated_prompt_tokens']=estimate
   print('Shapes:',len(cat),'join candidates:',len(edges),'estimated tokens:',estimate,'budget:',budget,flush=True)
