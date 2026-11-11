@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Q13 ontology-only natural-language to SPARQL experiment.
 
-Ollama sees ONLY the natural-language question, six template-derived TTL files,
+Ollama sees ONLY the natural-language question and schema derived from six TTL files,
 and generic query-generation instructions. No instance evidence, reference
 SPARQL, expected identifiers, or expected bindings enter the model prompt.
 
@@ -22,6 +22,7 @@ from pathlib import Path
 
 import requests
 from rdflib import Graph, URIRef
+from rdflib.namespace import RDF, RDFS, SH, OWL
 from rdflib.plugins.sparql.parser import parseQuery
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -90,9 +91,48 @@ def load_ontologies():
             "sha256": hashlib.sha256(data.encode("utf-8")).hexdigest(),
             "ttl": data,
         })
-    from rdflib.namespace import SH
     allowed = {str(obj) for obj in graph.objects(None, SH.path) if isinstance(obj, URIRef)}
     return schemas, allowed
+
+
+
+def compact_schema(schemas):
+    """Extract schema-only SHACL paths and their parent shapes, never instance data."""
+    domains = []
+    for item in schemas:
+        graph = Graph()
+        graph.parse(data=item["ttl"], format="turtle")
+        paths = {}
+        for shape in graph.subjects(SH.path, None):
+            path = graph.value(shape, SH.path)
+            if not isinstance(path, URIRef):
+                continue
+            entry = paths.setdefault(str(path), {"uri": str(path), "labels": set(),
+                                                  "contexts": set(), "kind": set()})
+            label = graph.value(shape, RDFS.label)
+            if label:
+                entry["labels"].add(str(label))
+            for node in graph.subjects(SH.property, shape):
+                context = graph.value(node, RDFS.label)
+                if context:
+                    entry["contexts"].add(str(context))
+            for kind in (OWL.ObjectProperty, OWL.DatatypeProperty):
+                if (path, RDF.type, kind) in graph:
+                    entry["kind"].add("object" if kind == OWL.ObjectProperty else "datatype")
+        domains.append({
+            "filename": item["file"],
+            "properties": [
+                {"uri": entry["uri"], "labels": sorted(entry["labels"]),
+                 "parent_shapes": sorted(entry["contexts"]), "kind": sorted(entry["kind"])}
+                for _, entry in sorted(paths.items())
+            ],
+        })
+    return domains
+
+
+def estimate_tokens(text):
+    """Approximation; actual token usage comes from Ollama."""
+    return (len(text) + 3) // 4
 
 
 def extract_sparql(response):
@@ -170,21 +210,30 @@ def main():
     p.add_argument("--model", default="llama3.1:8b")
     p.add_argument("--question", default=DEFAULT_QUESTION)
     p.add_argument("--ollama-timeout", type=int, default=300)
+    p.add_argument("--num-ctx", type=int, default=16384)
+    p.add_argument("--input-mode", choices=("compact", "full"), default="compact")
     p.add_argument("--graphdb-timeout", type=int, default=60)
     p.add_argument("--output", default="reports/q13_template_only_nl2sparql.json")
     p.add_argument("--skip-execution", action="store_true",
                    help="Generate and validate SPARQL without contacting GraphDB.")
     args = p.parse_args()
     schemas, allowed = load_ontologies()
-    prompt = {
-        "question": args.question,
-        "ontologies": [{"filename": s["file"], "turtle": s["ttl"]} for s in schemas],
-    }
+    ontology_input = (compact_schema(schemas) if args.input_mode == "compact"
+                      else [{"filename": item["file"], "turtle": item["ttl"]}
+                            for item in schemas])
+    prompt = {"question": args.question, "ontologies": ontology_input}
     messages = [
         {"role": "system", "content": SYSTEM},
         {"role": "user", "content": json.dumps(prompt, ensure_ascii=False)},
     ]
+    prompt_text = json.dumps(prompt, ensure_ascii=False)
     audit = {
+        "input_mode": args.input_mode,
+        "requested_num_ctx": args.num_ctx,
+        "prompt_chars": len(SYSTEM) + len(prompt_text),
+        "estimated_prompt_tokens": estimate_tokens(SYSTEM + prompt_text),
+        "actual_prompt_tokens": None,
+        "actual_generated_tokens": None,
         "created_at_utc": datetime.now(timezone.utc).isoformat(),
         "method": "ontology_only_first_attempt_nl2sparql",
         "question": args.question,
@@ -203,23 +252,39 @@ def main():
         "first_attempt_only": True,
     }
     destination = ROOT / args.output
+    if not destination.is_absolute():
+        destination = ROOT / destination
+    if destination.exists():
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        destination = destination.with_name(destination.stem + "_" + stamp + destination.suffix)
     destination.parent.mkdir(parents=True, exist_ok=True)
     try:
-        print("Sending six template TTL ontologies and question to Ollama...", flush=True)
+        print("Sending six ontology-derived schemas to Ollama:", args.input_mode,
+              "estimated tokens:", audit["estimated_prompt_tokens"],
+              "num_ctx:", args.num_ctx, flush=True)
         response = requests.post(
             args.ollama_url.rstrip("/") + "/api/chat",
             json={"model": args.model, "messages": messages,
-                  "stream": False, "format": "json",
-                  "options": {"temperature": 0}},
+                  "stream": False,
+                  "format": {"type": "object", "properties": {
+                      "sparql": {"type": "string"},
+                      "rationale": {"type": "string"}},
+                      "required": ["sparql", "rationale"],
+                      "additionalProperties": False},
+                  "options": {"temperature": 0, "num_ctx": args.num_ctx}},
             timeout=args.ollama_timeout,
         )
         response.raise_for_status()
-        query, rationale, raw = extract_sparql(response.json())
+        model_response = response.json()
+        audit["actual_prompt_tokens"] = model_response.get("prompt_eval_count")
+        audit["actual_generated_tokens"] = model_response.get("eval_count")
+        query, rationale, raw = extract_sparql(model_response)
         audit["generated_sparql"] = query
         audit["model_rationale"] = rationale
         audit["raw_model_response"] = raw
         issues = validate_query(query, allowed)
         audit["syntax_and_schema_issues"] = issues
+        print("Ollama prompt tokens:", audit["actual_prompt_tokens"], flush=True)
         print("Generated SPARQL:\n" + (query or "<none>"), flush=True)
         if issues:
             print("Validation failed; query will NOT execute: " + "; ".join(issues),
