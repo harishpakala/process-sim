@@ -196,6 +196,21 @@
               "modelType": "Property",
               "idShort": "AssociationBasis",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string"
             }
           ]
         }
