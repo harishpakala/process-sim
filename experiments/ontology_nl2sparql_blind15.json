@@ -1,0 +1,221 @@
+{
+  "benchmark_id": "ontology_nl2sparql_v3_blind15_v1",
+  "description": "15 held-out questions. No reference SPARQL or expected instance bindings are supplied to the model. Structural expectations are used by the offline evaluator only. Exploratory cases are not guaranteed expressible by the extracted SHACL.",
+  "cases": [
+    {
+      "id": "B01",
+      "category": "single",
+      "question": "List equipment tags and operational references from AssetInventory.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasEquipmentTag",
+        "hasOperationalReference"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B02",
+      "category": "single",
+      "question": "Show asset names and equipment tags from AssetInventory.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetName",
+        "hasEquipmentTag"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B03",
+      "category": "single",
+      "question": "List asset identifiers and asset types from AssetInventory.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasAssetType"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B04",
+      "category": "single",
+      "question": "Show asset identifiers and local IDs from ECAD.",
+      "required_domains": [
+        "ecad"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasLocalId"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B05",
+      "category": "single",
+      "question": "List asset identifiers and engineering verification statuses from ECAD.",
+      "required_domains": [
+        "ecad"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasEngineeringVerificationStatus"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B06",
+      "category": "single",
+      "question": "List asset identifiers and monitoring statuses from AssetInventory.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasMonitoringStatus"
+      ],
+      "min_joins": 0,
+      "expectation": "supported"
+    },
+    {
+      "id": "B07",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, return their asset identifiers and equipment tags.",
+      "required_domains": [
+        "ecad",
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasEquipmentTag"
+      ],
+      "min_joins": 1,
+      "expectation": "supported"
+    },
+    {
+      "id": "B08",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, show ECAD local IDs and inventory asset names.",
+      "required_domains": [
+        "ecad",
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasLocalId",
+        "hasAssetName"
+      ],
+      "min_joins": 1,
+      "expectation": "supported"
+    },
+    {
+      "id": "B09",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, list ECAD local IDs and inventory operational references.",
+      "required_domains": [
+        "ecad",
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasLocalId",
+        "hasOperationalReference"
+      ],
+      "min_joins": 1,
+      "expectation": "supported"
+    },
+    {
+      "id": "B10",
+      "category": "three_domain",
+      "question": "For assets represented in ECAD, DEXPI and AssetInventory, list ECAD local IDs and inventory equipment tags.",
+      "required_domains": [
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasLocalId",
+        "hasEquipmentTag"
+      ],
+      "min_joins": 2,
+      "expectation": "exploratory"
+    },
+    {
+      "id": "B11",
+      "category": "three_domain",
+      "question": "For assets represented in ECAD, OPC UA Connectivity and AssetInventory, list ECAD local IDs and inventory equipment tags.",
+      "required_domains": [
+        "ecad",
+        "opcuaconnectivity",
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasLocalId",
+        "hasEquipmentTag"
+      ],
+      "min_joins": 2,
+      "expectation": "exploratory"
+    },
+    {
+      "id": "B12",
+      "category": "filter",
+      "question": "List equipment tags and asset names from AssetInventory whose asset name contains temperature.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasEquipmentTag",
+        "hasAssetName"
+      ],
+      "min_joins": 0,
+      "expectation": "exploratory"
+    },
+    {
+      "id": "B13",
+      "category": "filter",
+      "question": "List ECAD asset identifiers and local IDs where the local ID contains TI.",
+      "required_domains": [
+        "ecad"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier",
+        "hasLocalId"
+      ],
+      "min_joins": 0,
+      "expectation": "exploratory"
+    },
+    {
+      "id": "B14",
+      "category": "unsupported",
+      "question": "From AssetInventory, list each equipment tag and its maintenance cost in euros.",
+      "required_domains": [
+        "assetinventory"
+      ],
+      "required_output_predicate_local_names": [
+        "hasEquipmentTag"
+      ],
+      "min_joins": 0,
+      "expectation": "unsupported"
+    },
+    {
+      "id": "B15",
+      "category": "unsupported",
+      "question": "From ECAD, show each asset identifier and its real-time battery percentage.",
+      "required_domains": [
+        "ecad"
+      ],
+      "required_output_predicate_local_names": [
+        "hasAssetIdentifier"
+      ],
+      "min_joins": 0,
+      "expectation": "unsupported"
+    }
+  ]
+}
