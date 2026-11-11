@@ -114,6 +114,11 @@
             },
             {
               "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string"
             },
@@ -140,16 +145,6 @@
             {
               "modelType": "Property",
               "idShort": "QuantityBasis",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "AssetReference",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
               "valueType": "xs:string"
             },
             {
