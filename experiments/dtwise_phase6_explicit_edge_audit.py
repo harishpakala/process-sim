@@ -22,7 +22,7 @@ except ModuleNotFoundError as exc:
 def safe_iri(value):
     parsed = urlparse(value)
     if parsed.scheme not in ("http", "https") or not parsed.netloc or any(
-        char in value for char in '<>\\"{}|^\\r\\n'
+        char in value for char in ("<", ">", "\\", "\"", "{", "}", "|", "^", "\r", "\n")
     ):
         raise ValueError("Unsafe resource IRI")
     return "<" + value + ">"
