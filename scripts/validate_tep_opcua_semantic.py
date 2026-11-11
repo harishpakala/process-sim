@@ -16,8 +16,8 @@ CANONICAL = re.compile(r"^https://aas\.example\.com/[A-Za-z0-9]+$")
 EXPECTED = {
     "TI_105": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW",
     "VC_105": "UNRESOLVED_TAG_DISCREPANCY",
-    "VC_107": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW",
-    "VC_111": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW",
+    "VC_107": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION",
+    "VC_111": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION",
     "SC_101": "RELATED_CONTROL_NOT_SAME_ASSET",
 }
 
@@ -107,6 +107,50 @@ def main():
         errors.append("Not all mappings match DEXPI and Engineering BOM")
     if counts["INVENTORY_EXACT"] + counts["INVENTORY_DOCUMENTED"] != 34:
         errors.append("Not all inventory relationships accounted for")
+
+    # Verify cross-domain reciprocal links and cited P&ID interpretation.
+    dex_by_tag = {r.get("LocalId"): r for r in dex}
+    ecad_by_id = {r.get("AssetIdentifier"): r for r in ecad}
+    bom_by_key = {(r.get("SourceDomain"), r.get("AssetIdentifier")): r for r in bom}
+    for mapping in opc:
+        tag = mapping.get("EngineeringFunctionId")
+        if tag not in EXPECTED:
+            continue
+        function_id = mapping.get("AssetIdentifier")
+        related = mapping.get("RelatedInventoryAssetIdentifier")
+        status = EXPECTED[tag]
+        evidence = mapping.get("InventoryAssociationEvidence")
+        if not evidence or "tep-reactor-pid.png" not in evidence:
+            errors.append(f"{tag}: missing P&ID evidence reference")
+        candidates = [
+            ("DEXPI", dex_by_tag.get(tag), related),
+            ("AssetInventory", inv_by_id.get(related), function_id),
+            ("DEXPI BOM", bom_by_key.get(("DEXPI", function_id)), related),
+        ]
+        if tag != "SC_101":
+            candidates.extend([
+                ("ECAD", ecad_by_id.get(related), function_id),
+                ("ECAD BOM", bom_by_key.get(("ECAD", related)), function_id),
+            ])
+        for domain, item, reciprocal in candidates:
+            if not item:
+                errors.append(f"{tag}: missing {domain} record")
+            elif (item.get("RelatedAssetIdentifier") != reciprocal
+                  or item.get("CrossDomainAssociationStatus") != status
+                  or item.get("CrossDomainAssociationEvidence") != evidence
+                  or not item.get("EngineeringInterpretationNote")):
+                errors.append(f"{tag}: inconsistent {domain} association")
+        if not mapping.get("EngineeringInterpretationNote"):
+            errors.append(f"{tag}: missing OPC UA interpretation note")
+    for name in ("dexpi", "ecad", "asset_inventory",
+                 "engineering_bom", "opcua_connectivity"):
+        model = load(ROOT / "templates" / (name + "_template.json"))
+        fields = {p.get("idShort") for g in model.get("submodelElements", [])
+                  for item in g.get("value", [])
+                  for p in item.get("value", [])}
+        if "EngineeringInterpretationNote" not in fields:
+            errors.append(f"{name}: missing template interpretation note")
+
     print("OPC UA mappings:", len(opc))
     print("DEXPI exact matches:", counts["DEXPI"])
     print("Engineering BOM matches:", counts["BOM"])
