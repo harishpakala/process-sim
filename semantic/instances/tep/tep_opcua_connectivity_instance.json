@@ -68,18 +68,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS1"
@@ -138,18 +126,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS2",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -214,18 +190,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS3"
@@ -284,18 +248,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS4",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_104"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -360,18 +312,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_105"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS5"
@@ -430,18 +370,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/FI106",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_106"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -506,18 +434,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_107"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS10"
@@ -576,18 +492,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS14",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_108"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -652,18 +556,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_109"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS17"
@@ -722,18 +614,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS19",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "FI_110"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -798,18 +678,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "TI_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS9"
@@ -868,18 +736,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS11",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "TI_102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -944,18 +800,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "TI_103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS18"
@@ -1017,18 +861,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "TI_104"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS21"
@@ -1087,18 +919,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/TI_105",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "TI_105"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1187,18 +1007,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "LI_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS8"
@@ -1257,18 +1065,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS12",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "LI_102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1333,18 +1129,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "LI_103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS15"
@@ -1403,18 +1187,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/PI101",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "PI_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1479,18 +1251,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "PI_102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS13"
@@ -1549,18 +1309,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMEAS16",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "PI_103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1625,18 +1373,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "JI_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMEAS20"
@@ -1695,18 +1431,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMV1",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1771,18 +1495,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMV2"
@@ -1841,18 +1553,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMV3",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -1917,18 +1617,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_104"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMV4"
@@ -1987,18 +1675,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/VC_105",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_105"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -2087,18 +1763,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_106"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMV6"
@@ -2157,18 +1821,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/VC_107",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_107"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -2257,18 +1909,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_108"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMV8"
@@ -2327,18 +1967,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://example.org/tep/assets/TEP_XMV9",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_109"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -2403,18 +2031,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_110"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string",
               "value": "XMV10"
@@ -2473,18 +2089,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/VC_111",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "VC_111"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
@@ -2570,18 +2174,6 @@
               "idShort": "EngineeringFunctionReference",
               "value": "https://aas.example.com/SC_101",
               "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string",
-              "value": "SC_101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string",
-              "value": "DEXPI"
             },
             {
               "modelType": "Property",
