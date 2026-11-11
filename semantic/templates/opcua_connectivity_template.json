@@ -79,16 +79,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringFunctionId",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringDomain",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
               "idShort": "SignalName",
               "valueType": "xs:string"
             },
