@@ -121,17 +121,17 @@ def normalize_output_names(plan):
 
 def requested_outputs(question):
  """Extract coordinated projection phrases independently of the model and SHACL."""
- q=re.sub(r'([a-z])([A-Z])',r'\\1 \\2',question)
- m=re.search(r'\\b(?:list|show|return|display|give|retrieve|select)\\b',q,re.I)
+ q=re.sub(r'([a-z])([A-Z])',r'\1 \2',question)
+ m=re.search(r'\b(?:list|show|return|display|give|retrieve|select)\b',q,re.I)
  if not m:return []
  q=q[m.end():]
- q=re.split(r'\\b(?:where|whose|having|filtered by|such that)\\b',q,maxsplit=1,flags=re.I)[0]
+ q=re.split(r'\b(?:where|whose|having|filtered by|such that)\b',q,maxsplit=1,flags=re.I)[0]
  q=re.split(r'[.;?]',q,maxsplit=1)[0]
- chunks=re.split(r'\\s*,\\s*|\\s+and\\s+',q,flags=re.I)
+ chunks=re.split(r'\s*,\s*|\s+and\s+',q,flags=re.I)
  result=[]
  for chunk in chunks:
-  chunk=re.sub(r'^\\s*(?:and|the|all|their|each|its)\\s+','',chunk.strip(),flags=re.I)
-  chunk=re.sub(r'^\\s*(?:within|for|in)\\s+.*?\\b(?:show|list)\\b\\s*','',chunk,flags=re.I)
+  chunk=re.sub(r'^\s*(?:and|the|all|their|each|its)\s+','',chunk.strip(),flags=re.I)
+  chunk=re.sub(r'^\s*(?:within|for|in)\s+.*?\b(?:show|list)\b\s*','',chunk,flags=re.I)
   if chunk:result.append(chunk)
  return result
 
@@ -152,6 +152,16 @@ def projection_covered(phrase,selected):
   actual=set(normalized_words(local(predicate)))-{'has'}
   if target<=actual:return True
  return False
+
+def repair_field_shapes(plan,cat):
+ """Repair a model's shape ID only when the selected predicate has one unique owner."""
+ if not isinstance(plan,dict) or not isinstance(plan.get('fields'),list):return plan
+ for f in plan['fields']:
+  if not isinstance(f,dict) or not isinstance(f.get('predicate'),str):continue
+  p=f['predicate']
+  owners=[sid for sid,shape in cat.items() if any(x['predicate']==p for x in shape['properties'])]
+  if len(owners)==1 and f.get('shape')!=owners[0]:f['shape']=owners[0]
+ return plan
 
 def validate(plan,cat,required,requested,question):
  errors=[]
@@ -241,7 +251,7 @@ def main():
   report['raw_model_response']=''.join(parts)
   report['ollama_stats']={k:last.get(k) for k in ('prompt_eval_count','eval_count','total_duration')}
   if not report['completed']:raise ValueError('Ollama stream incomplete')
-  report['plan']=normalize_output_names(json.loads(report['raw_model_response']))
+  report['plan']=normalize_output_names(repair_field_shapes(json.loads(report['raw_model_response']),cat))
   report['plan_issues']=validate(report['plan'],cat,required,requested,args.question)
   if report['plan_issues']:print('Plan rejected:',report['plan_issues'],flush=True)
   else:
