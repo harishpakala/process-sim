@@ -59,6 +59,11 @@
           "value": [
             {
               "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
               "valueType": "xs:string"
             },
