@@ -1503,7 +1503,7 @@
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
             },
             {
               "modelType": "Property",
@@ -1641,7 +1641,7 @@
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
             },
             {
               "modelType": "Property",
@@ -1779,7 +1779,7 @@
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
             },
             {
               "modelType": "Property",
@@ -1917,7 +1917,7 @@
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
             },
             {
               "modelType": "Property",
@@ -2055,7 +2055,7 @@
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
             },
             {
               "modelType": "Property",
