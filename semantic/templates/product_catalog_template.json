@@ -30,6 +30,12 @@
                     ]
                   }
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the catalog product; distinct from an installed asset identifier."
+                }
               ]
             },
             {
@@ -50,6 +56,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Name of the product manufacturer."
                 }
               ]
             },
@@ -72,6 +84,12 @@
                     ]
                   }
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Part number assigned by the product manufacturer."
+                }
               ]
             },
             {
@@ -92,6 +110,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Product designation assigned by the manufacturer."
                 }
               ]
             },
@@ -114,6 +138,12 @@
                     ]
                   }
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Textual description of the catalog product."
+                }
               ]
             },
             {
@@ -134,6 +164,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Name of the product supplier."
                 }
               ]
             },
@@ -156,6 +192,12 @@
                     ]
                   }
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Part number assigned by the supplier."
+                }
               ]
             },
             {
@@ -176,6 +218,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ECLASS classification associated with the product."
                 }
               ]
             },
@@ -198,6 +246,12 @@
                     ]
                   }
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Preferred name of the assigned ECLASS classification."
+                }
               ]
             },
             {
@@ -218,6 +272,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "International Registration Data Identifier for the ECLASS classification."
                 }
               ]
             },
@@ -244,6 +304,12 @@
                         ]
                       }
                     }
+                  ],
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Technical characteristic recorded for the catalog product."
+                    }
                   ]
                 }
               ],
@@ -261,6 +327,12 @@
                       }
                     ]
                   }
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Collection of technical properties associated with the product."
                 }
               ]
             }
@@ -280,6 +352,12 @@
                 ]
               }
             }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Catalog record describing an identified product."
+            }
           ]
         }
       ],
@@ -298,7 +376,19 @@
             ]
           }
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of catalog product records."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."
     }
   ]
 }
