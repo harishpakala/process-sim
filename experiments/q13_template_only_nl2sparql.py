@@ -50,8 +50,13 @@ SYSTEM = """You are a SPARQL 1.1 query author for an engineering RDF graph.
 You receive a natural-language question and six AAS template-derived TTL schemas.
 Use ONLY the supplied schemas to identify valid predicates and join paths.
 Generate ONE complete read-only SPARQL SELECT query against instance data.
-Plan a connected graph pattern using shared identifier variables for related
-asset records, and a shared product identifier for catalog records.
+Plan a connected graph pattern: DEXPI, ECAD, Engineering BOM,
+AssetInventory, and OPC UA Connectivity must share the same AssetIdentifier
+value through their schema-defined asset-identifier predicates. ProductCatalog
+is the exception: join its ProductIdentifier through the ProductIdentifier
+on the corresponding AssetInventory or Engineering BOM record (or both).
+Use mandatory patterns for all six domains and the identifier bridges; do not
+place required joins only inside OPTIONAL or a UNION alternative.
 Every requested domain must contribute actual triple patterns, not just PREFIX.
 Include Engineering BOM records and project requested literal property values.
 Apply descriptive text filters only to appropriate descriptive properties;
@@ -190,7 +195,12 @@ def validate_query(query, allowed_predicates):
 
 
 def structural_validation(query):
-    """Inspect parsed basic graph patterns; never repair generated queries."""
+    """Validate mandatory six-domain identifier joins without repairing the query.
+
+    OPTIONAL right branches and UNION alternatives are not sufficient evidence
+    of required joins. This deliberately conservative check can reject valid
+    queries with equivalent but differently structured joins.
+    """
     required = {
         "dexpi": "https://example.org/dexpi/",
         "ecad": "https://example.org/ecad/",
@@ -199,50 +209,107 @@ def structural_validation(query):
         "opcuaconnectivity": "https://example.org/opcuaconnectivity/",
         "productcatalog": "https://example.org/productcatalog/",
     }
-    result = {"domains_present": [], "domains_missing": [],
-              "triple_count": 0, "connected": False,
-              "shared_identifier_variables": [], "issues": []}
+    asset_domains = set(required) - {"productcatalog"}
+    asset_predicates = {name: ns + "hasAssetIdentifier"
+                        for name, ns in required.items() if name in asset_domains}
+    product_predicates = {
+        name: required[name] + "hasProductIdentifier"
+        for name in ("engineeringbom", "assetinventory", "productcatalog")
+    }
+    result = {
+        "domains_present": [], "domains_missing": [],
+        "triple_count": 0, "connected": False,
+        "shared_identifier_variables": [],
+        "asset_identifier_variable": None, "product_identifier_variable": None,
+        "asset_join_domains": [], "product_bridge_domains": [], "issues": [],
+    }
     try:
         algebra = translateQuery(parseQuery(query)).algebra
     except Exception as exc:
         result["issues"].append("Cannot inspect SPARQL algebra: " + str(exc))
         return result
+
     triples = []
     def walk(node):
-        if isinstance(node, CompValue):
-            if node.name == "BGP":
-                triples.extend(node.get("triples", []))
-            for value in node.values():
+        if not isinstance(node, CompValue):
+            return
+        if node.name == "BGP":
+            triples.extend(node.get("triples", []))
+            return
+        if node.name == "LeftJoin":
+            walk(node.get("p1"))  # OPTIONAL right side is not mandatory
+            return
+        if node.name in ("Union", "Minus"):
+            if node.name == "Minus":
+                walk(node.get("p1"))
+            # UNION branches are alternatives, not guaranteed shared joins.
+            return
+        for value in node.values():
+            if isinstance(value, CompValue):
                 walk(value)
-        elif isinstance(node, (tuple, list)):
-            for value in node:
-                walk(value)
+            elif isinstance(value, (tuple, list)):
+                for child in value:
+                    walk(child)
+
     walk(algebra)
     result["triple_count"] = len(triples)
-    present, edges, identifier_usage = set(), {}, {}
+    present, edges = set(), {}
+    asset_usage, product_usage = {}, {}
     for subject, predicate, obj in triples:
         if isinstance(predicate, URIRef):
             uri = str(predicate)
             for name, ns in required.items():
                 if uri.startswith(ns):
                     present.add(name)
-                    if isinstance(obj, Variable) and ("Identifier" in uri or "Reference" in uri):
-                        identifier_usage.setdefault(str(obj), set()).add(name)
+            if isinstance(obj, Variable):
+                for name, expected in asset_predicates.items():
+                    if uri == expected:
+                        asset_usage.setdefault(str(obj), set()).add(name)
+                for name, expected in product_predicates.items():
+                    if uri == expected:
+                        product_usage.setdefault(str(obj), set()).add(name)
         for term in (subject, obj):
             if isinstance(term, Variable):
                 edges.setdefault(str(term), set())
         if isinstance(subject, Variable) and isinstance(obj, Variable):
             edges[str(subject)].add(str(obj))
             edges[str(obj)].add(str(subject))
+
     result["domains_present"] = sorted(present)
     result["domains_missing"] = sorted(set(required) - present)
     result["shared_identifier_variables"] = sorted(
-        var for var, domains in identifier_usage.items() if len(domains) > 1)
+        set(var for var, domains in asset_usage.items() if len(domains) > 1)
+        | set(var for var, domains in product_usage.items() if len(domains) > 1)
+    )
+    asset_matches = sorted(var for var, domains in asset_usage.items()
+                           if asset_domains <= domains)
+    if asset_matches:
+        result["asset_identifier_variable"] = asset_matches[0]
+        result["asset_join_domains"] = sorted(asset_domains)
+    else:
+        result["asset_join_domains"] = sorted(
+            max(asset_usage.values(), key=len, default=set())
+        )
+        result["issues"].append(
+            "No single mandatory AssetIdentifier variable joins DEXPI, ECAD, "
+            "Engineering BOM, AssetInventory, and OPC UA Connectivity."
+        )
+    bridge_matches = sorted(
+        (var, domains) for var, domains in product_usage.items()
+        if "productcatalog" in domains
+        and domains & {"assetinventory", "engineeringbom"}
+    )
+    if bridge_matches:
+        result["product_identifier_variable"] = bridge_matches[0][0]
+        result["product_bridge_domains"] = sorted(bridge_matches[0][1])
+    else:
+        result["issues"].append(
+            "No mandatory ProductIdentifier variable joins ProductCatalog "
+            "to AssetInventory or Engineering BOM."
+        )
     if result["domains_missing"]:
-        result["issues"].append("Missing domain triple patterns: " +
+        result["issues"].append("Missing mandatory domain triple patterns: " +
                                 ", ".join(result["domains_missing"]))
-    if not result["shared_identifier_variables"]:
-        result["issues"].append("No identifier variable shared between domains.")
     if edges:
         visited = {next(iter(edges))}
         pending = list(visited)
@@ -253,7 +320,7 @@ def structural_validation(query):
                     pending.append(neighbor)
         result["connected"] = visited == set(edges)
     if not result["connected"]:
-        result["issues"].append("Disconnected graph-pattern variables.")
+        result["issues"].append("Disconnected mandatory graph-pattern variables.")
     return result
 
 
