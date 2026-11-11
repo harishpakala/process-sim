@@ -12,7 +12,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1] / "semantic"
 INSTANCE = ROOT / "instances" / "tep"
-CANONICAL = re.compile(r"^https://aas\\.example\\.com/[A-Za-z0-9]+$")
+CANONICAL = re.compile(r"^https://aas\.example\.com/[A-Za-z0-9]+$")
 EXPECTED = {
     "TI_105": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW",
     "VC_105": "UNRESOLVED_TAG_DISCREPANCY",
