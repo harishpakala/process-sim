@@ -15,6 +15,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Server"
             }
           ],
           "value": [
@@ -54,6 +59,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ],
           "value": [
