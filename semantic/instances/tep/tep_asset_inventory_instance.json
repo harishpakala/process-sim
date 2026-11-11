@@ -3180,25 +3180,25 @@
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI105"
+              "value": "https://aas.example.com/TI1202"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified."
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified. Canonical URI alignment explicitly approved by user; P&ID limitations retained."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID interpretation: TI-1202 measures condenser cooling-water outlet temperature. Original DEXPI source name retained; separator-versus-condenser discrepancy requires engineering review."
+              "value": "User-approved canonical identifier alignment (TI_105 -> https://aas.example.com/TI1202); source tags and source URIs retained. Modeling decision, not independent P&ID proof. Original DEXPI separator/condenser naming discrepancy remains."
             }
           ],
           "semanticId": {
@@ -5640,25 +5640,25 @@
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC105"
+              "value": "https://aas.example.com/CV1006"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "UNRESOLVED_TAG_DISCREPANCY"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity."
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity. Canonical URI alignment explicitly approved by user; P&ID limitations retained."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID does not depict CV-1006; CV-1005 is purge valve, not a substitute for the recycle-valve tag. Requires source drawing/tag-list reconciliation."
+              "value": "User-approved canonical identifier alignment (VC_105 -> https://aas.example.com/CV1006); source tags and source URIs retained. Modeling decision, not independent P&ID proof. CV-1006 is absent from reviewed P&ID."
             }
           ],
           "semanticId": {
@@ -5924,25 +5924,25 @@
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC107"
+              "value": "https://aas.example.com/CV1301"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted."
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID limitations retained."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID-supported process connection: separator liquid outlet to stripper inlet via CV-1301. DEXPI function and ECAD physical valve retain distinct identifiers."
+              "value": "User-approved canonical identifier alignment (VC_107 -> https://aas.example.com/CV1301); source tags and source URIs retained. Modeling decision, not independent P&ID proof."
             }
           ],
           "semanticId": {
@@ -6468,25 +6468,25 @@
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC111"
+              "value": "https://aas.example.com/CV1201"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted."
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID limitations retained."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID-supported: CV-1201 is condenser cooling-water return control valve, not condenser process outlet valve. VC_111 remains a separate DEXPI function identity."
+              "value": "User-approved canonical identifier alignment (VC_111 -> https://aas.example.com/CV1201); source tags and source URIs retained. Modeling decision, not independent P&ID proof."
             }
           ],
           "semanticId": {
