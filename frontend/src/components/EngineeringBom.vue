@@ -56,7 +56,7 @@ function select(node:Node){
 }
 const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
 const candidatePairs=(id:string)=>engineeringReconciliation.filter(p=>p.equipmentAssembly===id)
-const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>item.EngineeringReference===p.dexpiReference||item.EngineeringReference===p.ecadReference)
+const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>item.SourceAssetIdentifier===p.dexpiReference||item.SourceAssetIdentifier===p.ecadReference)
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id&&!i.FunctionalAssemblyReference).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
@@ -142,11 +142,11 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        </div>
       </div>
       <div class="ebom-actions">
-       <button @click="emit('open-record',selected.item!.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.item!.EngineeringReference)">Open {{selected.item.SourceDomain}} source ↗</button>
+       <button @click="emit('open-record',selected.item!.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.item!.SourceAssetIdentifier)">Open {{selected.item.SourceDomain}} source ↗</button>
        <button v-if="selected.item.ValidationStatus === 'ASSET_IDENTIFIER_EXACT_MATCH'" @click="emit('open-record','Asset Inventory',selected.item!.AssetIdentifier)">Open asset ↗</button>
        <button v-if="selected.item.ProductIdentifier" @click="emit('open-record','Product Catalog',selected.item!.ProductIdentifier)">Open candidate product ↗</button>
       </div>
-      <p class="ebom-reference">{{selected.item.EngineeringReference}}</p>
+      <p class="ebom-reference">{{selected.item.SourceAssetIdentifier}}</p>
      </template>
     </template>
    </section>
