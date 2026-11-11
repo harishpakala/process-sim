@@ -151,6 +151,69 @@ def main():
         if "EngineeringInterpretationNote" not in fields:
             errors.append(f"{name}: missing template interpretation note")
 
+
+    # ECAD verification is a separate evidence assessment, not identity proof.
+    ecad_model = load(INSTANCE / "tep_ecad_instance.json")
+    device_group = next(g for g in ecad_model["submodelElements"]
+                        if g["idShort"] == "Devices")
+    net_group = next(g for g in ecad_model["submodelElements"]
+                     if g["idShort"] == "ElectricalNets")
+    schematic_group = next(g for g in ecad_model["submodelElements"]
+                           if g["idShort"] == "Schematics")
+    endpoint_paths = set()
+    used_endpoints = set()
+    for group in (device_group, net_group):
+        for device in group["value"]:
+            base = (group["idShort"], device["idShort"])
+            endpoint_paths.add(base)
+            for cp_group in device.get("value", []):
+                if cp_group.get("idShort") == "ConnectionPoints":
+                    for cp in cp_group.get("value", []):
+                        endpoint_paths.add(base + ("ConnectionPoints", cp["idShort"]))
+    for conn in schematic_group["value"]:
+        relationships = [p for p in conn.get("value", [])
+                         if p.get("modelType") == "RelationshipElement"]
+        if len(relationships) != 1:
+            errors.append(f"ECAD {conn['idShort']}: expected one relationship")
+            continue
+        rel = relationships[0]
+        for side in ("first", "second"):
+            keys = rel.get(side, {}).get("keys", [])
+            path = tuple(k.get("value") for k in keys[1:])
+            if path not in endpoint_paths:
+                errors.append(f"ECAD {conn['idShort']}: invalid {side} endpoint {path}")
+            else:
+                used_endpoints.add(path)
+    unused = [p for p in endpoint_paths if len(p) == 4 and p not in used_endpoints]
+    if unused:
+        errors.append(f"ECAD unconnected modeled connection points: {len(unused)}")
+    ecad_template = load(ROOT / "templates" / "ecad_template.json")
+    device_template = next(g for g in ecad_template["submodelElements"]
+                           if g["idShort"] == "Devices")["value"][0]
+    verification_fields = {"EngineeringVerificationStatus",
+                           "EngineeringVerificationEvidence",
+                           "ProductVerificationStatus",
+                           "ProductVerificationEvidence"}
+    if verification_fields - {p.get("idShort") for p in device_template["value"]}:
+        errors.append("ECAD template missing verification fields")
+    engineering_statuses = Counter()
+    product_statuses = Counter()
+    for d in ecad:
+        tag = d.get("LocalId")
+        if not all(d.get(k) for k in verification_fields):
+            errors.append(f"ECAD {tag}: missing verification status/evidence")
+        engineering_statuses[d.get("EngineeringVerificationStatus")] += 1
+        product_statuses[d.get("ProductVerificationStatus")] += 1
+    print("ECAD devices:", len(ecad))
+    print("ECAD schematic connections:", len(schematic_group["value"]))
+    print("ECAD modeled connection points:", sum(len(p) == 4 for p in endpoint_paths))
+    print("ECAD invalid references:", sum("invalid" in e and "ECAD" in e for e in errors))
+    for status, count in sorted(engineering_statuses.items()):
+        print("ECAD ENGINEERING:", status, count)
+    for status, count in sorted(product_statuses.items()):
+        print("ECAD PRODUCT:", status, count)
+    print("ECAD REVIEW REQUIRED: Engineering and product statuses are not physical or datasheet verification.")
+
     print("OPC UA mappings:", len(opc))
     print("DEXPI exact matches:", counts["DEXPI"])
     print("Engineering BOM matches:", counts["BOM"])
