@@ -69,13 +69,13 @@ REFERENCE = {
     "product_identifier": "https://example.org/product-types/IFM_TA1101",
 }
 FORBIDDEN = re.compile(
-    r"\\b(?:INSERT|DELETE|LOAD|CLEAR|DROP|CREATE|MOVE|COPY|ADD|"
-    r"WITH|USING|SERVICE|DESCRIBE|CONSTRUCT|ASK)\\b",
+    r"\b(?:INSERT|DELETE|LOAD|CLEAR|DROP|CREATE|MOVE|COPY|ADD|"
+    r"WITH|USING|SERVICE|DESCRIBE|CONSTRUCT|ASK)\b",
     re.IGNORECASE,
 )
 IRI_TOKEN = re.compile(r"<([^>]+)>")
-PREFIX = re.compile(r"\\bPREFIX\\s+([\\w-]*):\\s*<([^>]+)>", re.IGNORECASE)
-PREDICATE = re.compile(r"(?<![\\w:])([A-Za-z][\\w-]*):([A-Za-z_][\\w.-]*)")
+PREFIX = re.compile(r"\bPREFIX\s+([\w-]*):\s*<([^>]+)>", re.IGNORECASE)
+PREDICATE = re.compile(r"(?<![\w:])([A-Za-z][\w-]*):([A-Za-z_][\w.-]*)")
 
 
 def load_ontologies():
@@ -111,13 +111,13 @@ def validate_query(query, allowed_predicates):
     issues = []
     if not query:
         return ["No SPARQL query in Ollama JSON response."]
-    clean = re.sub(r"#[^\\n]*", "", query)
-    clean = re.sub(r'"(?:\\\\.|[^"\\\\])*"|\'(?:\\\\.|[^\'\\\\])*\'', '""', clean)
+    clean = re.sub(r"#[^\n]*", "", query)
+    clean = re.sub(r'"(?:\\.|[^"\\])*"|\'(?:\\.|[^\'\\])*\'', '""', clean)
     if FORBIDDEN.search(clean):
         issues.append("Forbidden non-SELECT keyword or remote SERVICE detected.")
-    if not re.search(r"\\bSELECT\\b", clean, re.IGNORECASE):
+    if not re.search(r"\bSELECT\b", clean, re.IGNORECASE):
         issues.append("Query must contain SELECT.")
-    if re.search(r"\\b(?:FROM|GRAPH)\\s*<", clean, re.IGNORECASE):
+    if re.search(r"\b(?:FROM|GRAPH)\s*<", clean, re.IGNORECASE):
         issues.append("Explicit graph/dataset targeting is disabled in this experiment.")
     try:
         parseQuery(query)
@@ -220,7 +220,7 @@ def main():
         audit["raw_model_response"] = raw
         issues = validate_query(query, allowed)
         audit["syntax_and_schema_issues"] = issues
-        print("Generated SPARQL:\\n" + (query or "<none>"), flush=True)
+        print("Generated SPARQL:\n" + (query or "<none>"), flush=True)
         if issues:
             print("Validation failed; query will NOT execute: " + "; ".join(issues),
                   flush=True)
@@ -242,7 +242,7 @@ def main():
         print("ERROR: " + audit["error"], file=sys.stderr, flush=True)
     finally:
         destination.write_text(json.dumps(audit, indent=2, ensure_ascii=False)
-                               + "\\n", encoding="utf-8")
+                               + "\n", encoding="utf-8")
         print("Audit saved: " + str(destination), flush=True)
     return 1 if audit["error"] or audit["syntax_and_schema_issues"] else 0
 
