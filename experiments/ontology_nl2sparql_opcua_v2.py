@@ -109,7 +109,7 @@ def compile_plan(plan,edges,selected_joins):
    lines.append('FILTER(CONTAINS(LCASE(STR('+variable+')),LCASE('+json.dumps(f['contains'])+')))')
   else:
    lines.append('FILTER(STR('+variable+') = '+json.dumps(f['equals'])+')')
- query='SELECT DISTINCT '+' '.join('?'+f['name'] for f in plan['fields'])+' WHERE {\\n  '+'\\n  '.join(lines)+'\\n}'
+ query='SELECT DISTINCT '+' '.join('?'+f['name'] for f in plan['fields'])+' WHERE {\n  '+'\n  '.join(lines)+'\n}'
  base.parseQuery(query)
  return query
 
