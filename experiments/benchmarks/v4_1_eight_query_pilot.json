@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "experiment": "v4_1_single_domain_pilot",
+  "status": "proposed_not_executed",
+  "method": "Eight single-domain, single-property questions. Predicate presence verified against repository SHACL templates; answers and instance counts NOT verified. These are pilot cases, not frozen independent gold.",
+  "cases": [
+    {
+      "id": "P01",
+      "question": "List the local IDs in DEXPI.",
+      "domain": "dexpi",
+      "expected_predicate_local": "hasLocalId",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P02",
+      "question": "List the local IDs in ECAD.",
+      "domain": "ecad",
+      "expected_predicate_local": "hasLocalId",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P03",
+      "question": "List the BOM item IDs in Engineering BOM.",
+      "domain": "engineeringbom",
+      "expected_predicate_local": "hasBOMItemId",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P04",
+      "question": "List the asset identifiers in Asset Inventory.",
+      "domain": "assetinventory",
+      "expected_predicate_local": "hasAssetIdentifier",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P05",
+      "question": "List the signal names in OPC UA Connectivity.",
+      "domain": "opcuaconnectivity",
+      "expected_predicate_local": "hasSignalName",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P06",
+      "question": "List the manufacturer names in Product Catalog.",
+      "domain": "productcatalog",
+      "expected_predicate_local": "hasManufacturerName",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P07",
+      "question": "List the product identifiers in Product Catalog.",
+      "domain": "productcatalog",
+      "expected_predicate_local": "hasProductIdentifier",
+      "gold_answer_status": "not_verified"
+    },
+    {
+      "id": "P08",
+      "question": "List the operational references in Asset Inventory.",
+      "domain": "assetinventory",
+      "expected_predicate_local": "hasOperationalReference",
+      "gold_answer_status": "not_verified"
+    }
+  ]
+}
