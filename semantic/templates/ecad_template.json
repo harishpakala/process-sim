@@ -164,6 +164,26 @@
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string"
             }
           ],
           "qualifiers": [
