@@ -26,24 +26,60 @@
             {
               "modelType": "Property",
               "idShort": "EndpointUrl",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Network endpoint URL used to connect to the OPC UA server."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "NamespaceURI",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Namespace URI identifying an OPC UA namespace."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EndpointStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Status of the OPC UA server endpoint."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ECADConnectionPointReferenceStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Status of the reference to an ECAD connection point."
+                }
+              ]
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "An OPC UA server connection and its endpoint metadata."
             }
           ]
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of configured OPC UA servers."
         }
       ]
     },
@@ -70,66 +106,156 @@
             {
               "modelType": "Property",
               "idShort": "AssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the asset associated with this signal mapping."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringFunctionReference",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SignalName",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering signal name represented by this mapping."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "OPCUANodeId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "OPC UA NodeId identifying the mapped node in a server address space."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "OPCUABrowsePath",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "OPC UA browse path used to locate the mapped node."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SignalDirection",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Direction of data exchange for the mapped signal."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "MappingStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Status of the engineering-to-OPC-UA signal mapping."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "MappingBasis",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Evidence or method used to establish the signal mapping."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier referencing an associated asset inventory record."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Status of the association with an inventory asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "InventoryAssociationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Evidence supporting the inventory asset association."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering note documenting interpretation or uncertainty about this mapping."
+                }
+              ]
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Association between an engineering signal and an OPC UA address-space node."
             }
           ]
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of mappings between engineering signals and OPC UA nodes."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "Template describing OPC UA server connectivity and engineering signal-to-node mappings."
     }
   ]
 }
