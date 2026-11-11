@@ -3175,6 +3175,24 @@
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_APPROVED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "OPC UA XMEAS22; ECAD TI-1202 and inventory TI-1202 denote condenser cooling-water outlet temperature; DEXPI function label refers to separator, so equipment context needs review"
             }
           ],
           "semanticId": {
@@ -5611,6 +5629,24 @@
               "idShort": "PreviousProductReference",
               "valueType": "xs:string",
               "value": "https://example.org/product-types/Siemens_S55264_V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "UNRESOLVED_TAG_DISCREPANCY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "OPC UA XMV5; inventory/ECAD CV-1006 is recycle valve, while P&ID labels CV-1005 on purge line; identity not confirmed"
             }
           ],
           "semanticId": {
@@ -5871,6 +5907,24 @@
               "idShort": "PreviousProductReference",
               "valueType": "xs:string",
               "value": "https://example.org/product-types/Siemens_S55264_V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "OPC UA XMV7; inventory/ECAD CV-1301 is stripper inlet valve; DEXPI names separator liquid valve, verify equipment boundary"
             }
           ],
           "semanticId": {
@@ -6391,6 +6445,24 @@
               "idShort": "PreviousProductReference",
               "valueType": "xs:string",
               "value": "https://example.org/product-types/Siemens_S55264_V193"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC111"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "OPC UA XMV11; ECAD/inventory CV-1201 is condenser cooling-water valve; verify precise valve role"
             }
           ],
           "semanticId": {
@@ -6515,6 +6587,24 @@
               "idShort": "EquipmentSemanticNote",
               "valueType": "xs:string",
               "value": "Logical agitator command, not a valve."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/SC101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "RELATED_CONTROL_NOT_SAME_ASSET"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "OPC UA XMV12 is agitator command; inventory XMV12 is logical motor control associated with P&ID M1; control function is not the motor asset"
             }
           ],
           "semanticId": {
