@@ -17,7 +17,7 @@
         "keys": [
           {
             "type": "GlobalReference",
-            "value": "https://example.org/dtwise/core/AssemblyRecord"
+            "value": "https://example.org/engineeringbom/AssemblyRecord"
           }
         ]
       },
@@ -30,14 +30,14 @@
             "keys": [
               {
                 "type": "GlobalReference",
-                "value": "https://example.org/dtwise/core/AssemblyRecord"
+                "value": "https://example.org/engineeringbom/AssemblyRecord"
               }
             ]
           },
           "value": [
             {
               "modelType": "Property",
-              "idShort": "hasBOMItemId_1",
+              "idShort": "BOMItemId",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -51,7 +51,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasItemDescription_2",
+              "idShort": "ItemDescription",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -65,7 +65,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasStructureStatus_3",
+              "idShort": "StructureStatus",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -79,7 +79,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasRevision_4",
+              "idShort": "Revision",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -93,27 +93,61 @@
             },
             {
               "modelType": "Property",
-              "idShort": "label_5",
+              "idShort": "Label",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "http://www.w3.org/2000/01/rdf-schema#label"
+                    "value": "https://example.org/engineeringbom/hasLabel"
                   }
                 ]
               },
               "valueType": "xs:string"
             },
             {
-              "modelType": "ReferenceElement",
-              "idShort": "hasRecordedParent_6",
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/hasRecordedParent"
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
                   }
                 ]
               }
@@ -130,7 +164,7 @@
         "keys": [
           {
             "type": "GlobalReference",
-            "value": "https://example.org/dtwise/core/BOMItemRecord"
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
           }
         ]
       },
@@ -143,14 +177,14 @@
             "keys": [
               {
                 "type": "GlobalReference",
-                "value": "https://example.org/dtwise/core/BOMItemRecord"
+                "value": "https://example.org/engineeringbom/BOMItemRecord"
               }
             ]
           },
           "value": [
             {
               "modelType": "Property",
-              "idShort": "hasBOMItemId_1",
+              "idShort": "BOMItemId",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -164,7 +198,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasEngineeringLocalId_2",
+              "idShort": "EngineeringLocalId",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -178,7 +212,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasItemDescription_3",
+              "idShort": "ItemDescription",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -192,7 +226,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasAssetIdentifier_4",
+              "idShort": "AssetIdentifier",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -206,7 +240,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasProductIdentifier_5",
+              "idShort": "ProductIdentifier",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -220,7 +254,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasSourceDomain_6",
+              "idShort": "SourceDomain",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -234,7 +268,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasSourceGroup_7",
+              "idShort": "SourceGroup",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -248,7 +282,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasStructureStatus_8",
+              "idShort": "StructureStatus",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -262,7 +296,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasRevision_9",
+              "idShort": "Revision",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -276,7 +310,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasQuantityBasis_10",
+              "idShort": "QuantityBasis",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -290,7 +324,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "hasAssociationBasis_11",
+              "idShort": "AssociationBasis",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
@@ -304,40 +338,61 @@
             },
             {
               "modelType": "Property",
-              "idShort": "label_12",
+              "idShort": "Label",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "http://www.w3.org/2000/01/rdf-schema#label"
+                    "value": "https://example.org/engineeringbom/hasLabel"
                   }
                 ]
               },
               "valueType": "xs:string"
             },
             {
-              "modelType": "ReferenceElement",
-              "idShort": "hasRecordedParent_13",
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/hasRecordedParent"
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
                   }
                 ]
-              }
-            },
-            {
-              "modelType": "ReferenceElement",
-              "idShort": "functionallyAssociatedWith_14",
-              "semanticId": {
-                "type": "ExternalReference",
+              },
+              "first": {
+                "type": "ModelReference",
                 "keys": [
                   {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/functionallyAssociatedWith"
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItems"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItemRecordTemplate"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
                   }
                 ]
               }
@@ -354,7 +409,7 @@
         "keys": [
           {
             "type": "GlobalReference",
-            "value": "https://example.org/dtwise/core/ParentReference"
+            "value": "https://example.org/engineeringbom/ParentReference"
           }
         ]
       },
@@ -367,78 +422,99 @@
             "keys": [
               {
                 "type": "GlobalReference",
-                "value": "https://example.org/dtwise/core/ParentReference"
+                "value": "https://example.org/engineeringbom/ParentReference"
               }
             ]
           },
           "value": [
             {
-              "modelType": "ReferenceElement",
-              "idShort": "referenceSource_1",
+              "modelType": "Property",
+              "idShort": "SourceField",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/referenceSource"
+                    "value": "https://example.org/engineeringbom/hasSourceField"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceRecordId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
                   }
                 ]
               }
-            },
-            {
-              "modelType": "ReferenceElement",
-              "idShort": "referenceTarget_2",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/referenceTarget"
-                  }
-                ]
-              }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "sourceField_3",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/sourceField"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "structureStatus_4",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/structureStatus"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "sourceRecordId_5",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/sourceRecordId"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
             }
           ]
         }
@@ -452,7 +528,7 @@
         "keys": [
           {
             "type": "GlobalReference",
-            "value": "https://example.org/dtwise/core/FunctionalAssociation"
+            "value": "https://example.org/engineeringbom/FunctionalAssociation"
           }
         ]
       },
@@ -465,92 +541,113 @@
             "keys": [
               {
                 "type": "GlobalReference",
-                "value": "https://example.org/dtwise/core/FunctionalAssociation"
+                "value": "https://example.org/engineeringbom/FunctionalAssociation"
               }
             ]
           },
           "value": [
             {
-              "modelType": "ReferenceElement",
-              "idShort": "functionalAssociationSource_1",
+              "modelType": "Property",
+              "idShort": "AssociationBasis",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/functionalAssociationSource"
+                    "value": "https://example.org/engineeringbom/hasAssociationBasis"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceRecordId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceField",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceField"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "functionallyAssociatedWith",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/functionallyAssociatedWith"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItems"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItemRecordTemplate"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecordTemplate"
                   }
                 ]
               }
-            },
-            {
-              "modelType": "ReferenceElement",
-              "idShort": "functionalAssociationTarget_2",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/functionalAssociationTarget"
-                  }
-                ]
-              }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "associationBasis_3",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/associationBasis"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "structureStatus_4",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/structureStatus"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "sourceRecordId_5",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/sourceRecordId"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "sourceField_6",
-              "semanticId": {
-                "type": "ExternalReference",
-                "keys": [
-                  {
-                    "type": "GlobalReference",
-                    "value": "https://example.org/dtwise/core/sourceField"
-                  }
-                ]
-              },
-              "valueType": "xs:string"
             }
           ]
         }
