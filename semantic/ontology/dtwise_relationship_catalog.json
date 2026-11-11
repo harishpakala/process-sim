@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.3.0",
   "graph": "https://example.org/dtwise/graph/ebom-v2",
   "prefixes": {
     "core": "https://example.org/dtwise/core/",
@@ -88,9 +88,149 @@
           "node": "instrument",
           "predicate": "ebom:hasItemDescription"
         },
-        "assetIdentifier": {
+        "sourceDomain": {
           "node": "instrument",
-          "predicate": "ebom:hasAssetIdentifier"
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "all_functional_associations": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "ecad_devices_functional_association": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "ECAD"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "Devices"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "dexpi_actuating_functional_association": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "DEXPI"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "ActuatingFunctions"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
         }
       }
     }
