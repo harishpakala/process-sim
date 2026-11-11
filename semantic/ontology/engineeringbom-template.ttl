@@ -130,6 +130,24 @@
     sh:minCount 0 ;
     sh:path engineeringbom:hasBOMPosition .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uRXZpZGVuY2Uvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path engineeringbom:hasCrossDomainAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path engineeringbom:hasCrossDomainAssociationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path engineeringbom:hasEngineeringInterpretationNote .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EngineeringLocalId constraint" ;
     sh:maxCount 1 ;
@@ -190,6 +208,12 @@
     sh:minCount 0 ;
     sh:path engineeringbom:hasQuantityPerAssembly .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZWxhdGVkQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path engineeringbom:hasRelatedAssetIdentifier .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Revision constraint" ;
     sh:maxCount 1 ;
@@ -244,6 +268,9 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01JdGVtSWQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01Qb3NpdGlvbi9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uRXZpZGVuY2Uvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FcXVpdmFsZW5jZVN0YXR1cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5GdW5jdGlvbmFsQXNzZW1ibHlSZWZlcmVuY2Uvc2hhcGU>,
@@ -254,6 +281,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eUJhc2lzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eVBlckFzc2VtYmx5L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZWxhdGVkQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZXZpc2lvbi9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5TZWxlY3Rpb25TdGF0dXMvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VBc3NldElkZW50aWZpZXIvc2hhcGU>,
@@ -303,6 +331,15 @@ engineeringbom:hasBOMItem a owl:ObjectProperty ;
 engineeringbom:hasBOMItems a owl:ObjectProperty ;
     rdfs:label "hasBOMItems" .
 
+engineeringbom:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationEvidence" .
+
+engineeringbom:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationStatus" .
+
+engineeringbom:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringInterpretationNote" .
+
 engineeringbom:hasEngineeringLocalId a owl:DatatypeProperty ;
     rdfs:label "hasEngineeringLocalId" .
 
@@ -320,6 +357,9 @@ engineeringbom:hasQuantity a owl:DatatypeProperty ;
 
 engineeringbom:hasQuantityBasis a owl:DatatypeProperty ;
     rdfs:label "hasQuantityBasis" .
+
+engineeringbom:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasRelatedAssetIdentifier" .
 
 engineeringbom:hasSelectionStatus a owl:DatatypeProperty ;
     rdfs:label "hasSelectionStatus" .

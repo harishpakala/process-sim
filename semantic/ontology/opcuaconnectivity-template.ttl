@@ -64,6 +64,12 @@
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> ;
     sh:path opcuaconnectivity:hasServers .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasAssetIdentifier .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0RvbWFpbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EngineeringDomain constraint" ;
     sh:maxCount 1 ;
@@ -81,6 +87,24 @@
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:path opcuaconnectivity:hasEngineeringFunctionReference .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEngineeringInterpretationNote .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "InventoryAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasInventoryAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "InventoryAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasInventoryAssociationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "MappingBasis constraint" ;
@@ -106,6 +130,12 @@
     sh:minCount 0 ;
     sh:path opcuaconnectivity:hasOPCUABrowsePath .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "RelatedInventoryAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasRelatedInventoryAssetIdentifier .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SignalDirection constraint" ;
     sh:maxCount 1 ;
@@ -120,13 +150,18 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "SignalMapping SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0RvbWFpbi9zaGFwZQ>,
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0RvbWFpbi9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uSWQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> .
 
@@ -149,6 +184,9 @@
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> ;
     sh:path opcuaconnectivity:hasSignalMappings .
 
+opcuaconnectivity:hasAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasAssetIdentifier" .
+
 opcuaconnectivity:hasECADConnectionPointReferenceStatus a owl:DatatypeProperty ;
     rdfs:label "hasECADConnectionPointReferenceStatus" .
 
@@ -167,6 +205,15 @@ opcuaconnectivity:hasEngineeringFunctionId a owl:DatatypeProperty ;
 opcuaconnectivity:hasEngineeringFunctionReference a owl:DatatypeProperty ;
     rdfs:label "hasEngineeringFunctionReference" .
 
+opcuaconnectivity:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringInterpretationNote" .
+
+opcuaconnectivity:hasInventoryAssociationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasInventoryAssociationEvidence" .
+
+opcuaconnectivity:hasInventoryAssociationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasInventoryAssociationStatus" .
+
 opcuaconnectivity:hasMappingBasis a owl:DatatypeProperty ;
     rdfs:label "hasMappingBasis" .
 
@@ -181,6 +228,9 @@ opcuaconnectivity:hasOPCUABrowsePath a owl:DatatypeProperty ;
 
 opcuaconnectivity:hasOPCUANodeId a owl:DatatypeProperty ;
     rdfs:label "hasOPCUANodeId" .
+
+opcuaconnectivity:hasRelatedInventoryAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasRelatedInventoryAssetIdentifier" .
 
 opcuaconnectivity:hasServer a owl:ObjectProperty ;
     rdfs:label "hasServer" .

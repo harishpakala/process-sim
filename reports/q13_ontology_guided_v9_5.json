@@ -1,5 +1,5 @@
 {
-  "method": "q13_v9_4_checkpointed_llm_directed_ontology_traversal",
+  "method": "q13_v9_6_5_evidence_repair",
   "question": "Trace reactor-temperature measurement for canonical AssetIdentifier https://aas.example.com/TI101 across six AAS domains: DEXPI function and identifier, ECAD device and local tag, Engineering BOM items, AssetInventory logical asset, ProductCatalog product candidate and physical-installation status, OPC UA operational signal/node and mapping provenance/status. Distinguish verified graph links from provisional or unverified assertions. Also summarize XMEAS9 observations for run 10cfb1d1-2984-4932-8207-dc430ed60c2b between simulation seconds 0 and 600.",
   "schema_hashes": {
     "dexpi": "fcb1726cee26d603ef0b2a98393c5be4791f3ef8864eb2b43eeff34b05d72eed",
@@ -529,8 +529,8 @@
       "finding": {
         "domain": "dexpi",
         "verified_facts": [
-          "hasAssetIdentifier: https://aas.example.com/TI101",
-          "hasLocalId: TI_101"
+          "hasAssetIdentifier=https://aas.example.com/TI101",
+          "hasLocalId=TI_101"
         ],
         "provisional_facts": [],
         "unverified_or_missing": [
@@ -542,7 +542,30 @@
         ],
         "invalid_supporting_indices": 0,
         "verified_status_assertions": [],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasAssetIdentifier",
+            "value": "https://aas.example.com/TI101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasLocalId",
+            "value": "TI_101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasMeasuredVariable",
+            "value": "",
+            "missing": true,
+            "status_literal": false
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"dexpi\",\n  \"verified_facts\": [\n    \"hasAssetIdentifier: https://aas.example.com/TI101\",\n    \"hasLocalId: TI_101\"\n  ],\n  \"provisional_facts\": [\n    \"hasMeasuredVariable: \"\n  ],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1\n  ]\n}",
       "elapsed_seconds": 14.08
@@ -1129,8 +1152,8 @@
       "finding": {
         "domain": "ecad",
         "verified_facts": [
-          "hasAssetIdentifier: https://aas.example.com/TI101",
-          "hasConnectionPoints: RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM",
+          "hasAssetIdentifier=https://aas.example.com/TI101",
+          "hasConnectionPoints=http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM",
           "hasLocalId=TI-1101"
         ],
         "provisional_facts": [],
@@ -1142,7 +1165,30 @@
         ],
         "invalid_supporting_indices": 0,
         "verified_status_assertions": [],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasAssetIdentifier",
+            "value": "https://aas.example.com/TI101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasConnectionPoints",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasLocalId",
+            "value": "TI-1101",
+            "missing": false,
+            "status_literal": false
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"ecad\",\n  \"verified_facts\": [\n    \"hasAssetIdentifier: https://aas.example.com/TI101\",\n    \"hasConnectionPoints: RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM\"\n  ],\n  \"provisional_facts\": [\n    \"hasLocalId: TI-1101\"\n  ],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1, 2\n  ]\n}",
       "elapsed_seconds": 46.34
@@ -3331,48 +3377,33 @@
       "finding": {
         "domain": "engineeringbom",
         "verified_facts": [
-          "node_0 hasAssetReference: ''",
-          "node_1 hasAssociationBasis: 'SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP'",
-          "node_2 hasBOMItemId: 'EBOM-0016'",
-          "node_3 hasBOMPosition: 'EBOM-0016'",
-          "node_5 hasEngineeringLocalId: 'TI_101'",
-          "node_6 hasEquivalenceStatus: 'NOT_ASSESSED_ACROSS_DOMAINS'",
-          "node_7 hasFunctionalAssemblyReference: 'ASM-REACTOR'",
-          "node_8 hasItemDescription: 'ReactorTemperature'",
-          "node_9 hasItemType: 'ENGINEERING_OBJECT'",
-          "node_11 hasQuantity: '1'",
-          "node_12 hasQuantityBasis: 'ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY'",
-          "node_13 hasQuantityPerAssembly: '1'",
-          "node_16 hasSourceDomain: 'DEXPI'",
-          "node_17 hasSourceGroup: 'InstrumentationFunctions'",
-          "node_18 hasStructureStatus: 'UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP'",
-          "node_19 hasUnit: 'EA'",
-          "node_20 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'",
-          "node_23 hasBOMItemId: 'EBOM-0050'",
-          "node_24 hasBOMPosition: 'EBOM-0050'",
-          "node_26 hasEngineeringLocalId: 'TI-1101'",
-          "node_27 hasEquivalenceStatus: 'NOT_ASSESSED_ACROSS_DOMAINS'",
-          "node_28 hasFunctionalAssemblyReference: 'ASM-REACTOR'",
-          "node_29 hasItemDescription: 'TI_1101'",
-          "node_30 hasItemType: 'ENGINEERING_OBJECT'",
-          "node_32 hasQuantity: '1'",
-          "node_33 hasQuantityBasis: 'ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY'",
-          "node_34 hasQuantityPerAssembly: '1'",
-          "node_37 hasSourceDomain: 'ECAD'",
-          "node_38 hasSourceGroup: 'Devices'",
-          "node_39 hasStructureStatus: 'UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP'",
-          "node_40 hasUnit: 'EA'",
-          "node_41 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'",
-          "hasValidationStatus=UNRESOLVED_ASSET_REFERENCE",
+          "hasAssociationBasis=SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP",
+          "hasBOMItemId=EBOM-0016",
+          "hasBOMPosition=EBOM-0016",
+          "hasEngineeringLocalId=TI_101",
+          "hasEquivalenceStatus=NOT_ASSESSED_ACROSS_DOMAINS",
+          "hasFunctionalAssemblyReference=ASM-REACTOR",
+          "hasItemDescription=ReactorTemperature",
+          "hasItemType=ENGINEERING_OBJECT",
+          "hasParentItemId=ASM-UNASSIGNED",
+          "hasQuantity=1",
+          "hasQuantityBasis=ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY",
+          "hasQuantityPerAssembly=1",
           "hasRevision=UNSPECIFIED",
-          "hasSelectionStatus=UNSPECIFIED"
+          "hasSelectionStatus=UNSPECIFIED",
+          "hasSourceDomain=DEXPI",
+          "hasSourceGroup=InstrumentationFunctions",
+          "hasStructureStatus=UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+          "hasUnit=EA",
+          "hasValidationStatus=UNRESOLVED_ASSET_REFERENCE",
+          "hasBOMItemId=EBOM-0050",
+          "hasBOMPosition=EBOM-0050",
+          "hasEngineeringLocalId=TI-1101",
+          "hasItemDescription=TI_1101",
+          "hasSourceDomain=ECAD",
+          "hasSourceGroup=Devices"
         ],
-        "provisional_facts": [
-          "node_22 hasAssociationBasis: 'SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP'",
-          "node_35 hasRevision: 'UNSPECIFIED'",
-          "node_36 hasSelectionStatus: 'UNSPECIFIED'",
-          "node_41 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'"
-        ],
+        "provisional_facts": [],
         "unverified_or_missing": [
           "hasAssetReference has an empty RDF value",
           "hasCandidateProductReference has an empty RDF value"
@@ -3423,12 +3454,307 @@
         ],
         "invalid_supporting_indices": 0,
         "verified_status_assertions": [
-          "hasValidationStatus=UNRESOLVED_ASSET_REFERENCE",
-          "hasValidationStatus=UNRESOLVED_ASSET_REFERENCE",
           "hasRevision=UNSPECIFIED",
-          "hasSelectionStatus=UNSPECIFIED"
+          "hasSelectionStatus=UNSPECIFIED",
+          "hasValidationStatus=UNRESOLVED_ASSET_REFERENCE"
         ],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasAssetReference",
+            "value": "",
+            "missing": true,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasAssociationBasis",
+            "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasBOMItemId",
+            "value": "EBOM-0016",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 3,
+            "predicate": "hasBOMPosition",
+            "value": "EBOM-0016",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 4,
+            "predicate": "hasCandidateProductReference",
+            "value": "",
+            "missing": true,
+            "status_literal": false
+          },
+          {
+            "triple_index": 5,
+            "predicate": "hasEngineeringLocalId",
+            "value": "TI_101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 6,
+            "predicate": "hasEquivalenceStatus",
+            "value": "NOT_ASSESSED_ACROSS_DOMAINS",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 7,
+            "predicate": "hasFunctionalAssemblyReference",
+            "value": "ASM-REACTOR",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 8,
+            "predicate": "hasItemDescription",
+            "value": "ReactorTemperature",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 9,
+            "predicate": "hasItemType",
+            "value": "ENGINEERING_OBJECT",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 10,
+            "predicate": "hasParentItemId",
+            "value": "ASM-UNASSIGNED",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 11,
+            "predicate": "hasQuantity",
+            "value": "1",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 12,
+            "predicate": "hasQuantityBasis",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 13,
+            "predicate": "hasQuantityPerAssembly",
+            "value": "1",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 14,
+            "predicate": "hasRevision",
+            "value": "UNSPECIFIED",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 15,
+            "predicate": "hasSelectionStatus",
+            "value": "UNSPECIFIED",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 16,
+            "predicate": "hasSourceDomain",
+            "value": "DEXPI",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 17,
+            "predicate": "hasSourceGroup",
+            "value": "InstrumentationFunctions",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 18,
+            "predicate": "hasStructureStatus",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 19,
+            "predicate": "hasUnit",
+            "value": "EA",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 20,
+            "predicate": "hasValidationStatus",
+            "value": "UNRESOLVED_ASSET_REFERENCE",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 21,
+            "predicate": "hasAssetReference",
+            "value": "",
+            "missing": true,
+            "status_literal": false
+          },
+          {
+            "triple_index": 22,
+            "predicate": "hasAssociationBasis",
+            "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 23,
+            "predicate": "hasBOMItemId",
+            "value": "EBOM-0050",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 24,
+            "predicate": "hasBOMPosition",
+            "value": "EBOM-0050",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 25,
+            "predicate": "hasCandidateProductReference",
+            "value": "",
+            "missing": true,
+            "status_literal": false
+          },
+          {
+            "triple_index": 26,
+            "predicate": "hasEngineeringLocalId",
+            "value": "TI-1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 27,
+            "predicate": "hasEquivalenceStatus",
+            "value": "NOT_ASSESSED_ACROSS_DOMAINS",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 28,
+            "predicate": "hasFunctionalAssemblyReference",
+            "value": "ASM-REACTOR",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 29,
+            "predicate": "hasItemDescription",
+            "value": "TI_1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 30,
+            "predicate": "hasItemType",
+            "value": "ENGINEERING_OBJECT",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 31,
+            "predicate": "hasParentItemId",
+            "value": "ASM-UNASSIGNED",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 32,
+            "predicate": "hasQuantity",
+            "value": "1",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 33,
+            "predicate": "hasQuantityBasis",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 34,
+            "predicate": "hasQuantityPerAssembly",
+            "value": "1",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 35,
+            "predicate": "hasRevision",
+            "value": "UNSPECIFIED",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 36,
+            "predicate": "hasSelectionStatus",
+            "value": "UNSPECIFIED",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 37,
+            "predicate": "hasSourceDomain",
+            "value": "ECAD",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 38,
+            "predicate": "hasSourceGroup",
+            "value": "Devices",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 39,
+            "predicate": "hasStructureStatus",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 40,
+            "predicate": "hasUnit",
+            "value": "EA",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 41,
+            "predicate": "hasValidationStatus",
+            "value": "UNRESOLVED_ASSET_REFERENCE",
+            "missing": false,
+            "status_literal": true
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"engineeringbom\",\n  \"verified_facts\": [\n    \"node_0 hasAssetReference: ''\",\n    \"node_1 hasAssociationBasis: 'SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP'\",\n    \"node_2 hasBOMItemId: 'EBOM-0016'\",\n    \"node_3 hasBOMPosition: 'EBOM-0016'\",\n    \"node_5 hasEngineeringLocalId: 'TI_101'\",\n    \"node_6 hasEquivalenceStatus: 'NOT_ASSESSED_ACROSS_DOMAINS'\",\n    \"node_7 hasFunctionalAssemblyReference: 'ASM-REACTOR'\",\n    \"node_8 hasItemDescription: 'ReactorTemperature'\",\n    \"node_9 hasItemType: 'ENGINEERING_OBJECT'\",\n    \"node_11 hasQuantity: '1'\",\n    \"node_12 hasQuantityBasis: 'ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY'\",\n    \"node_13 hasQuantityPerAssembly: '1'\",\n    \"node_16 hasSourceDomain: 'DEXPI'\",\n    \"node_17 hasSourceGroup: 'InstrumentationFunctions'\",\n    \"node_18 hasStructureStatus: 'UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP'\",\n    \"node_19 hasUnit: 'EA'\",\n    \"node_20 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'\",\n    \"node_23 hasBOMItemId: 'EBOM-0050'\",\n    \"node_24 hasBOMPosition: 'EBOM-0050'\",\n    \"node_26 hasEngineeringLocalId: 'TI-1101'\",\n    \"node_27 hasEquivalenceStatus: 'NOT_ASSESSED_ACROSS_DOMAINS'\",\n    \"node_28 hasFunctionalAssemblyReference: 'ASM-REACTOR'\",\n    \"node_29 hasItemDescription: 'TI_1101'\",\n    \"node_30 hasItemType: 'ENGINEERING_OBJECT'\",\n    \"node_32 hasQuantity: '1'\",\n    \"node_33 hasQuantityBasis: 'ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY'\",\n    \"node_34 hasQuantityPerAssembly: '1'\",\n    \"node_37 hasSourceDomain: 'ECAD'\",\n    \"node_38 hasSourceGroup: 'Devices'\",\n    \"node_39 hasStructureStatus: 'UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP'\",\n    \"node_40 hasUnit: 'EA'\",\n    \"node_41 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'\"\n  ],\n  \"provisional_facts\": [\n    \"node_4 hasCandidateProductReference: ''\",\n    \"node_21 hasAssetReference: ''\",\n    \"node_22 hasAssociationBasis: 'SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP'\",\n    \"node_25 hasCandidateProductReference: ''\",\n    \"node_35 hasRevision: 'UNSPECIFIED'\",\n    \"node_36 hasSelectionStatus: 'UNSPECIFIED'\",\n    \"node_41 hasValidationStatus: 'UNRESOLVED_ASSET_REFERENCE'\"\n  ],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41\n  ]\n}",
       "elapsed_seconds": 183.83
@@ -4504,19 +4830,17 @@
       "finding": {
         "domain": "assetinventory",
         "verified_facts": [
-          "https://aas.example.com/TI101 is an AssetIdentifier",
-          "Reactor temperature is an AssetName",
-          "LogicalMeasurement is an AssetType",
-          "TI-1101 is an EquipmentTag",
-          "NotEvaluated is a FaultDetectionStatus",
-          "NotEvaluated is a FaultInjectionStatus",
-          "TEP simulation is a Location",
-          "EngineeringDefined is a ModelingStatus",
-          "NotConfigured is a MonitoringStatus",
-          "XMEAS9 is an OperationalReference",
-          "https://example.org/product-types/IFM_TA1101 is a ProductIdentifier",
-          "NotConnected is a SimulationStatus",
+          "hasAssetIdentifier=https://aas.example.com/TI101",
+          "hasAssetName=Reactor temperature",
+          "hasAssetType=LogicalMeasurement",
+          "hasEquipmentTag=TI-1101",
+          "hasFaultDetectionStatus=NotEvaluated",
+          "hasFaultInjectionStatus=NotEvaluated",
+          "hasLocation=TEP simulation",
+          "hasModelingStatus=EngineeringDefined",
           "hasMonitoringStatus=NotConfigured",
+          "hasOperationalReference=XMEAS9",
+          "hasProductIdentifier=https://example.org/product-types/IFM_TA1101",
           "hasSimulationStatus=NotConnected"
         ],
         "provisional_facts": [],
@@ -4540,7 +4864,93 @@
           "hasMonitoringStatus=NotConfigured",
           "hasSimulationStatus=NotConnected"
         ],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasAssetIdentifier",
+            "value": "https://aas.example.com/TI101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasAssetName",
+            "value": "Reactor temperature",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasAssetType",
+            "value": "LogicalMeasurement",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 3,
+            "predicate": "hasEquipmentTag",
+            "value": "TI-1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 4,
+            "predicate": "hasFaultDetectionStatus",
+            "value": "NotEvaluated",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 5,
+            "predicate": "hasFaultInjectionStatus",
+            "value": "NotEvaluated",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 6,
+            "predicate": "hasLocation",
+            "value": "TEP simulation",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 7,
+            "predicate": "hasModelingStatus",
+            "value": "EngineeringDefined",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 8,
+            "predicate": "hasMonitoringStatus",
+            "value": "NotConfigured",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 9,
+            "predicate": "hasOperationalReference",
+            "value": "XMEAS9",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 10,
+            "predicate": "hasProductIdentifier",
+            "value": "https://example.org/product-types/IFM_TA1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 11,
+            "predicate": "hasSimulationStatus",
+            "value": "NotConnected",
+            "missing": false,
+            "status_literal": true
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"assetinventory\",\n  \"verified_facts\": [\n    \"https://aas.example.com/TI101 is an AssetIdentifier\",\n    \"Reactor temperature is an AssetName\",\n    \"LogicalMeasurement is an AssetType\",\n    \"TI-1101 is an EquipmentTag\",\n    \"NotEvaluated is a FaultDetectionStatus\",\n    \"NotEvaluated is a FaultInjectionStatus\",\n    \"TEP simulation is a Location\",\n    \"EngineeringDefined is a ModelingStatus\",\n    \"NotConfigured is a MonitoringStatus\",\n    \"XMEAS9 is an OperationalReference\",\n    \"https://example.org/product-types/IFM_TA1101 is a ProductIdentifier\",\n    \"NotConnected is a SimulationStatus\"\n  ],\n  \"provisional_facts\": [],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11\n  ]\n}",
       "elapsed_seconds": 40.06
@@ -5350,14 +5760,14 @@
       "finding": {
         "domain": "productcatalog",
         "verified_facts": [
-          "27-27-51",
-          "0173-1#01-AHB186#005",
-          "Temperature sensor",
-          "IFM",
-          "TA1101",
-          "TA1101",
-          "https://example.org/product-types/IFM_TA1101",
-          "UHJvZHVjdHMuSUZNX1RBMTEwMS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          "hasECLASSClass=27-27-51",
+          "hasECLASSIRDI=0173-1#01-AHB186#005",
+          "hasECLASSPreferredName=Temperature sensor",
+          "hasManufacturerName=IFM",
+          "hasManufacturerPartNumber=TA1101",
+          "hasManufacturerProductDesignation=TA1101",
+          "hasProductIdentifier=https://example.org/product-types/IFM_TA1101",
+          "hasTechnicalProperties=http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMS5UZWNobmljYWxQcm9wZXJ0aWVz"
         ],
         "provisional_facts": [],
         "unverified_or_missing": [],
@@ -5373,7 +5783,65 @@
         ],
         "invalid_supporting_indices": 0,
         "verified_status_assertions": [],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasECLASSClass",
+            "value": "27-27-51",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasECLASSIRDI",
+            "value": "0173-1#01-AHB186#005",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasECLASSPreferredName",
+            "value": "Temperature sensor",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 3,
+            "predicate": "hasManufacturerName",
+            "value": "IFM",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 4,
+            "predicate": "hasManufacturerPartNumber",
+            "value": "TA1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 5,
+            "predicate": "hasManufacturerProductDesignation",
+            "value": "TA1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 6,
+            "predicate": "hasProductIdentifier",
+            "value": "https://example.org/product-types/IFM_TA1101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 7,
+            "predicate": "hasTechnicalProperties",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMS5UZWNobmljYWxQcm9wZXJ0aWVz",
+            "missing": false,
+            "status_literal": false
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"productcatalog\",\n  \"verified_facts\": [\n    \"27-27-51\",\n    \"0173-1#01-AHB186#005\",\n    \"Temperature sensor\",\n    \"IFM\",\n    \"TA1101\",\n    \"TA1101\",\n    \"https://example.org/product-types/IFM_TA1101\",\n    \"UHJvZHVjdHMuSUZNX1RBMTEwMS5UZWNobmljYWxQcm9wZXJ0aWVz\"\n  ],\n  \"provisional_facts\": [],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1, 2, 3, 4, 5, 6, 7\n  ]\n}",
       "elapsed_seconds": 128.29
@@ -6229,20 +6697,17 @@
       "finding": {
         "domain": "opcuaconnectivity",
         "verified_facts": [
-          "node_0 hasEngineeringDomain DEXPI",
-          "node_1 hasEngineeringFunctionId TI_101",
-          "node_2 hasEngineeringFunctionReference https://aas.example.com/TI101",
-          "node_3 hasMappingBasis TEP benchmark signal meaning; live OPC UA binding not verified",
-          "node_4 hasMappingStatus PROVISIONAL_ENGINEERING_MATCH",
-          "node_5 hasOPCUABrowsePath Objects/TEP/Measurements/XMEAS9",
-          "node_6 hasOPCUANodeId nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9",
-          "node_7 hasSignalDirection READ",
-          "node_8 hasSignalName XMEAS9",
-          "hasMappingStatus=PROVISIONAL_ENGINEERING_MATCH"
+          "hasEngineeringDomain=DEXPI",
+          "hasEngineeringFunctionId=TI_101",
+          "hasEngineeringFunctionReference=https://aas.example.com/TI101",
+          "hasMappingBasis=TEP benchmark signal meaning; live OPC UA binding not verified",
+          "hasMappingStatus=PROVISIONAL_ENGINEERING_MATCH",
+          "hasOPCUABrowsePath=Objects/TEP/Measurements/XMEAS9",
+          "hasOPCUANodeId=nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9",
+          "hasSignalDirection=READ",
+          "hasSignalName=XMEAS9"
         ],
-        "provisional_facts": [
-          "node_3 hasMappingBasis TEP benchmark signal meaning; live OPC UA binding not verified"
-        ],
+        "provisional_facts": [],
         "unverified_or_missing": [],
         "supporting_triples": [
           0,
@@ -6259,7 +6724,72 @@
         "verified_status_assertions": [
           "hasMappingStatus=PROVISIONAL_ENGINEERING_MATCH"
         ],
-        "summary_source": "OLLAMA"
+        "summary_source": "OLLAMA",
+        "evidence_index": [
+          {
+            "triple_index": 0,
+            "predicate": "hasEngineeringDomain",
+            "value": "DEXPI",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 1,
+            "predicate": "hasEngineeringFunctionId",
+            "value": "TI_101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 2,
+            "predicate": "hasEngineeringFunctionReference",
+            "value": "https://aas.example.com/TI101",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 3,
+            "predicate": "hasMappingBasis",
+            "value": "TEP benchmark signal meaning; live OPC UA binding not verified",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 4,
+            "predicate": "hasMappingStatus",
+            "value": "PROVISIONAL_ENGINEERING_MATCH",
+            "missing": false,
+            "status_literal": true
+          },
+          {
+            "triple_index": 5,
+            "predicate": "hasOPCUABrowsePath",
+            "value": "Objects/TEP/Measurements/XMEAS9",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 6,
+            "predicate": "hasOPCUANodeId",
+            "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 7,
+            "predicate": "hasSignalDirection",
+            "value": "READ",
+            "missing": false,
+            "status_literal": false
+          },
+          {
+            "triple_index": 8,
+            "predicate": "hasSignalName",
+            "value": "XMEAS9",
+            "missing": false,
+            "status_literal": false
+          }
+        ]
       },
       "finding_raw": "{\n  \"domain\": \"opcuaconnectivity\",\n  \"verified_facts\": [\n    \"node_0 hasEngineeringDomain DEXPI\",\n    \"node_1 hasEngineeringFunctionId TI_101\",\n    \"node_2 hasEngineeringFunctionReference https://aas.example.com/TI101\",\n    \"node_3 hasMappingBasis TEP benchmark signal meaning; live OPC UA binding not verified\",\n    \"node_4 hasMappingStatus PROVISIONAL_ENGINEERING_MATCH\",\n    \"node_5 hasOPCUABrowsePath Objects/TEP/Measurements/XMEAS9\",\n    \"node_6 hasOPCUANodeId nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9\",\n    \"node_7 hasSignalDirection READ\",\n    \"node_8 hasSignalName XMEAS9\"\n  ],\n  \"provisional_facts\": [\n    \"node_3 hasMappingBasis TEP benchmark signal meaning; live OPC UA binding not verified\"\n  ],\n  \"unverified_or_missing\": [],\n  \"supporting_triples\": [\n    0, 1, 2, 3, 4, 5, 6, 7, 8\n  ]\n}",
       "elapsed_seconds": 42.9
@@ -6284,7 +6814,7 @@
       "observed_at": "2026-11-01T22:42:20.954789+01:00"
     }
   },
-  "final_answer": "Here is the trace of the reactor-temperature measurement for the canonical AssetIdentifier https://aas.example.com/TI101 across the six AAS domains:\n\n**DEXPI Domain**\n\n* Verified facts: The AssetIdentifier is https://aas.example.com/TI101, and the local ID is TI_101.\n* Provisional facts: None.\n* Unverified or missing facts: The measured variable has an empty RDF value.\n* Verified status assertions: None.\n\n**ECAD Domain**\n\n* Verified facts: The AssetIdentifier is https://aas.example.com/TI101, and the connection points are RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM. The local ID is TI-1101.\n* Provisional facts: None.\n* Unverified or missing facts: None.\n* Verified status assertions: None.\n\n**Engineering BOM Domain**\n\n* Verified facts: Node_0 has an AssetReference, node_1 has an AssociationBasis, node_2 has a BOMItemId, node_3 has a BOMPosition, node_5 has an EngineeringLocalId, node_6 has an EquivalenceStatus, and node_7 has a FunctionalAssemblyReference.\n* Provisional facts: Node_22 has an AssociationBasis, node_35 has a Revision, node_36 has a SelectionStatus, and node_41 has a ValidationStatus.\n* Unverified or missing facts: Node_0 has an empty RDF value for AssetReference, and node_1 has an empty RDF value for CandidateProductReference.\n* Verified status assertions: Node_41 has a ValidationStatus of UNRESOLVED_ASSET_REFERENCE, node_35 has a Revision of UNSPECIFIED, node_36 has a SelectionStatus of UNSPECIFIED.\n\n**AssetInventory Domain**\n\n* Verified facts: The AssetIdentifier https://aas.example.com/TI101 is an AssetIdentifier, Reactor temperature is an AssetName, LogicalMeasurement is an AssetType, TI-1101 is an EquipmentTag, NotEvaluated is a FaultDetectionStatus, NotEvaluated is a FaultInjectionStatus, and TEP simulation is a Location.\n* Provisional facts: None.\n* Unverified or missing facts: None.\n* Verified status assertions: The monitoring status is NotConfigured, and the simulation status is NotConnected.\n\n**ProductCatalog Domain**\n\n* Verified facts: The product candidate has a product ID of 27-27-51, a product name of Temperature sensor, a manufacturer of IFM, a product type of TA1101, and a product reference of https://example.org/product-types/IFM_TA1101.\n* Provisional facts: None.\n* Unverified or missing facts: None.\n* Verified status assertions: None.\n\n**OPCUA Connectivity Domain**\n\n* Verified facts: Node_0 has an EngineeringDomain of DEXPI, node_1 has an EngineeringFunctionId of TI_101, node_2 has an EngineeringFunctionReference of https://aas.example.com/TI101, node_3 has a MappingBasis of TEP benchmark signal meaning, node_4 has a MappingStatus of PROVISIONAL_ENGINEERING_MATCH, node_5 has an OPCUABrowsePath of Objects/TEP/Measurements/XMEAS9, and node_6 has an OPCUANodeId of nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9.\n* Provisional facts: Node_3 has a MappingBasis of TEP benchmark signal meaning, and the live OPC UA binding is not verified.\n* Unverified or missing facts: None.\n* Verified status assertions: The mapping status is PROVISIONAL_ENGINEERING_MATCH.\n\n**Uncertainty Statement**\n\nThe physical installation of the catalog candidate is NOT verified by the graph.\n\n**Historian Summary**\n\nThe historian observations for run 10cfb1d1-2984-4932-8207-dc430ed60c2b between simulation seconds 0 and 600 show that the XMEAS9 signal has a count of 207, with a first value of 0.0 at simulation second 0.0 and a last value of 120.4043641512432 at simulation second 597.9999999999953.",
+  "final_answer": "Here is the trace of the reactor-temperature measurement for the canonical AssetIdentifier https://aas.example.com/TI101 across the six AAS domains:\n\n**DEXPI Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a local ID TI_101 (ref 1).\n* Missing: The DEXPI function and identifier for the measured variable is not available (hasMeasuredVariable has an empty RDF value).\n* Provisional: None.\n\n**ECAD Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a local ID TI-1101 (ref 2) and a connection point Devices.TI_1101.ConnectionPoints (ref 1).\n* Missing: None.\n* Provisional: None.\n\n**Engineering BOM Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with EngineeringLocalIds TI_101 (ref 5) and TI-1101 (ref 26). The EngineeringLocalId TI_101 has a validation status of UNRESOLVED_ASSET_REFERENCE (ref 20).\n* Missing: The AssetReference and CandidateProductReference for the AssetIdentifier are not available (hasAssetReference and hasCandidateProductReference have empty RDF values).\n* Provisional: None.\n\n**AssetInventory Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with an AssetName of \"Reactor temperature\" (ref 1) and an EquipmentTag of TI-1101 (ref 3). The Asset has a FaultDetectionStatus of NotEvaluated (ref 4) and a ModelingStatus of EngineeringDefined (ref 7).\n* Missing: None.\n* Provisional: None.\n\n**ProductCatalog Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a product candidate with an ECLASSPreferredName of \"Temperature sensor\" (ref 2) and a ManufacturerName of IFM (ref 3). The product has a ProductIdentifier of https://example.org/product-types/IFM_TA1101 (ref 6) and a ManufacturerPartNumber of TA1101 (ref 4).\n* Missing: None.\n* Provisional: None.\n\n**OPCUA Connectivity Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with an OPCUA mapping status of PROVISIONAL_ENGINEERING_MATCH (ref 4). The OPCUA BrowsePath is Objects/TEP/Measurements/XMEAS9 (ref 5) and the OPCUANodeId is nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9 (ref 6).\n* Missing: None.\n* Provisional: None.\n\n**Uncertainty Statement**\n\nThe physical installation of the catalog candidate is NOT verified by the graph.\n\n**Historian Summary**\n\nThe historian observations for run 10cfb1d1-2984-4932-8207-dc430ed60c2b between simulation seconds 0 and 600 show a count of 207 observations. The first observation is at simulation second 0 with a value of 0.0, and the last observation is at simulation second 597.9999999999953 with a value of 120.4043641512432.\\n\\nEvidence-backed clarifications:\\nEngineering BOM clarification (verified RDF): item IDs EBOM-0016, EBOM-0050 are recorded in the engineering BOM. Their association does not establish verified physical equipment membership.\\nOPC UA live-binding clarification: the live operational OPC UA binding is NOT verified; the recorded mapping status is an engineering assertion, not evidence of a live connection.",
   "acceptance": {
     "domains_with_graph_evidence": [
       "dexpi",
@@ -6307,7 +6837,14 @@
     "six_domain_names_mentioned": true,
     "provisional_status_mentioned": true,
     "installation_uncertainty_mentioned": true,
-    "status_not_misclassified": true
+    "status_not_misclassified": true,
+    "no_raw_node_aliases": true,
+    "no_unqualified_bom_membership": true,
+    "no_claimed_live_binding": true,
+    "no_encoded_aas_identifiers": true,
+    "bom_item_ids_present": true,
+    "opcua_mapping_status_present": true,
+    "opcua_live_binding_qualified": true
   },
   "status": "REVIEW_REQUIRED",
   "propagated_identifiers": [
@@ -6323,8 +6860,45 @@
   "timings": [
     {
       "operation": "ollama:You answer a six-domain engineering",
-      "seconds": 146.09
+      "seconds": 152.99
     }
   ],
-  "resume_source": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\q13_ontology_guided_v9_4.json"
+  "resume_source": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\q13_ontology_guided_v9_4.json",
+  "synthesis_mode": "OLLAMA_EVIDENCE_REPAIRED",
+  "rejected_ollama_answer": "Here is the trace of the reactor-temperature measurement for the canonical AssetIdentifier https://aas.example.com/TI101 across the six AAS domains:\n\n**DEXPI Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a local ID TI_101 (ref 1).\n* Missing: The DEXPI function and identifier for the measured variable is not available (hasMeasuredVariable has an empty RDF value).\n* Provisional: None.\n\n**ECAD Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a local ID TI-1101 (ref 2) and a connection point Devices.TI_1101.ConnectionPoints (ref 1).\n* Missing: None.\n* Provisional: None.\n\n**Engineering BOM Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with EngineeringLocalIds TI_101 (ref 5) and TI-1101 (ref 26). The EngineeringLocalId TI_101 has a validation status of UNRESOLVED_ASSET_REFERENCE (ref 20).\n* Missing: The AssetReference and CandidateProductReference for the AssetIdentifier are not available (hasAssetReference and hasCandidateProductReference have empty RDF values).\n* Provisional: None.\n\n**AssetInventory Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with an AssetName of \"Reactor temperature\" (ref 1) and an EquipmentTag of TI-1101 (ref 3). The Asset has a FaultDetectionStatus of NotEvaluated (ref 4) and a ModelingStatus of EngineeringDefined (ref 7).\n* Missing: None.\n* Provisional: None.\n\n**ProductCatalog Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with a product candidate with an ECLASSPreferredName of \"Temperature sensor\" (ref 2) and a ManufacturerName of IFM (ref 3). The product has a ProductIdentifier of https://example.org/product-types/IFM_TA1101 (ref 6) and a ManufacturerPartNumber of TA1101 (ref 4).\n* Missing: None.\n* Provisional: None.\n\n**OPCUA Connectivity Domain**\n\n* Verified: The AssetIdentifier https://aas.example.com/TI101 is associated with an OPCUA mapping status of PROVISIONAL_ENGINEERING_MATCH (ref 4). The OPCUA BrowsePath is Objects/TEP/Measurements/XMEAS9 (ref 5) and the OPCUANodeId is nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9 (ref 6).\n* Missing: None.\n* Provisional: None.\n\n**Uncertainty Statement**\n\nThe physical installation of the catalog candidate is NOT verified by the graph.\n\n**Historian Summary**\n\nThe historian observations for run 10cfb1d1-2984-4932-8207-dc430ed60c2b between simulation seconds 0 and 600 show a count of 207 observations. The first observation is at simulation second 0 with a value of 0.0, and the last observation is at simulation second 597.9999999999953 with a value of 120.4043641512432.",
+  "rejected_ollama_acceptance": {
+    "domains_with_graph_evidence": [
+      "dexpi",
+      "ecad",
+      "engineeringbom",
+      "assetinventory",
+      "productcatalog",
+      "opcuaconnectivity"
+    ],
+    "domains_summarized": [
+      "dexpi",
+      "ecad",
+      "engineeringbom",
+      "assetinventory",
+      "productcatalog",
+      "opcuaconnectivity"
+    ],
+    "six_domain_coverage": true,
+    "rdf_fallback_domains": [],
+    "six_domain_names_mentioned": true,
+    "provisional_status_mentioned": true,
+    "installation_uncertainty_mentioned": true,
+    "status_not_misclassified": true,
+    "no_raw_node_aliases": true,
+    "no_unqualified_bom_membership": true,
+    "no_claimed_live_binding": true,
+    "no_encoded_aas_identifiers": true,
+    "bom_item_ids_present": false,
+    "opcua_mapping_status_present": true,
+    "opcua_live_binding_qualified": false
+  },
+  "repaired_acceptance_checks": [
+    "bom_item_ids_present",
+    "opcua_live_binding_qualified"
+  ]
 }

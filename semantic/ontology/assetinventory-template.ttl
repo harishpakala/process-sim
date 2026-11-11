@@ -33,12 +33,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nUmVmZXJlbmNlL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> a sh:PropertyShape ;
@@ -84,6 +88,24 @@
     sh:minCount 0 ;
     sh:path assetinventory:hasAssetType .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasCrossDomainAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasCrossDomainAssociationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasEngineeringInterpretationNote .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringReference constraint" ;
     sh:maxCount 1 ;
@@ -120,6 +142,12 @@
     sh:minCount 0 ;
     sh:path assetinventory:hasProductIdentifier .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path assetinventory:hasRelatedAssetIdentifier .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SimulationStatus constraint" ;
     sh:maxCount 1 ;
@@ -140,6 +168,15 @@ assetinventory:hasAssetType a owl:DatatypeProperty ;
 
 assetinventory:hasAssets a owl:ObjectProperty ;
     rdfs:label "hasAssets" .
+
+assetinventory:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationEvidence" .
+
+assetinventory:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationStatus" .
+
+assetinventory:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringInterpretationNote" .
 
 assetinventory:hasEngineeringReference a owl:DatatypeProperty ;
     rdfs:label "hasEngineeringReference" .
@@ -167,6 +204,9 @@ assetinventory:hasOperationalReference a owl:DatatypeProperty ;
 
 assetinventory:hasProductIdentifier a owl:DatatypeProperty ;
     rdfs:label "hasProductIdentifier" .
+
+assetinventory:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasRelatedAssetIdentifier" .
 
 assetinventory:hasSimulationStatus a owl:DatatypeProperty ;
     rdfs:label "hasSimulationStatus" .

@@ -76,11 +76,41 @@
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
     sh:path ecad:hasConnectionPoints .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasCrossDomainAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasCrossDomainAssociationStatus .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
     sh:path ecad:hasAssetIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasEngineeringInterpretationNote .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EngineeringVerificationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasEngineeringVerificationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "EngineeringVerificationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasEngineeringVerificationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
@@ -88,11 +118,37 @@
     sh:minCount 1 ;
     sh:path ecad:hasLocalId .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ProductVerificationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasProductVerificationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ProductVerificationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasProductVerificationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path ecad:hasRelatedAssetIdentifier .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "Device SHACL shape" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "Device constraint" ;
@@ -244,11 +300,35 @@
 ecad:hasConnections a owl:ObjectProperty ;
     rdfs:label "hasConnections" .
 
+ecad:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationEvidence" .
+
+ecad:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationStatus" .
+
 ecad:hasDevice a owl:ObjectProperty ;
     rdfs:label "hasDevice" .
 
 ecad:hasDevices a owl:ObjectProperty ;
     rdfs:label "hasDevices" .
+
+ecad:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringInterpretationNote" .
+
+ecad:hasEngineeringVerificationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringVerificationEvidence" .
+
+ecad:hasEngineeringVerificationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringVerificationStatus" .
+
+ecad:hasProductVerificationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasProductVerificationEvidence" .
+
+ecad:hasProductVerificationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasProductVerificationStatus" .
+
+ecad:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasRelatedAssetIdentifier" .
 
 ecad:hasSchematics a owl:ObjectProperty ;
     rdfs:label "hasSchematics" .

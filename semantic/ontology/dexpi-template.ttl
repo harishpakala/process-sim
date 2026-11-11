@@ -31,7 +31,11 @@
     rdfs:label "ActuatingFunction SHACL shape" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ActuatingFunction constraint" ;
@@ -52,11 +56,35 @@
     sh:minCount 1 ;
     sh:path dexpi:hasAssetIdentifier .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasCrossDomainAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasCrossDomainAssociationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasEngineeringInterpretationNote .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
     sh:path dexpi:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasRelatedAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
@@ -110,7 +138,11 @@
     rdfs:label "InstrumentationFunction SHACL shape" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "InstrumentationFunction constraint" ;
@@ -131,11 +163,35 @@
     sh:minCount 1 ;
     sh:path dexpi:hasAssetIdentifier .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasCrossDomainAssociationEvidence .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasCrossDomainAssociationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasEngineeringInterpretationNote .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
     sh:path dexpi:hasLocalId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path dexpi:hasRelatedAssetIdentifier .
 
 dexpi:hasActuatedVariable a owl:DatatypeProperty ;
     rdfs:label "hasActuatedVariable" .
@@ -160,6 +216,18 @@ dexpi:hasInstrumentationFunctions a owl:ObjectProperty ;
 
 dexpi:hasMeasuredVariable a owl:DatatypeProperty ;
     rdfs:label "hasMeasuredVariable" .
+
+dexpi:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationEvidence" .
+
+dexpi:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
+    rdfs:label "hasCrossDomainAssociationStatus" .
+
+dexpi:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringInterpretationNote" .
+
+dexpi:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "hasRelatedAssetIdentifier" .
 
 dexpi:hasAssetIdentifier a owl:DatatypeProperty ;
     rdfs:label "hasAssetIdentifier" .
