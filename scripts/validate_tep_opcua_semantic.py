@@ -14,11 +14,13 @@ ROOT = Path(__file__).resolve().parents[1] / "semantic"
 INSTANCE = ROOT / "instances" / "tep"
 CANONICAL = re.compile(r"^https://aas\.example\.com/[A-Za-z0-9]+$")
 EXPECTED = {
-    "TI_105": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW",
-    "VC_105": "UNRESOLVED_TAG_DISCREPANCY",
-    "VC_107": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION",
-    "VC_111": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION",
     "SC_101": "RELATED_CONTROL_NOT_SAME_ASSET",
+}
+ALIGNED = {
+    "TI_105": "https://aas.example.com/TI1202",
+    "VC_105": "https://aas.example.com/CV1006",
+    "VC_107": "https://aas.example.com/CV1301",
+    "VC_111": "https://aas.example.com/CV1201",
 }
 
 
@@ -107,6 +109,47 @@ def main():
         errors.append("Not all mappings match DEXPI and Engineering BOM")
     if counts["INVENTORY_EXACT"] + counts["INVENTORY_DOCUMENTED"] != 34:
         errors.append("Not all inventory relationships accounted for")
+
+
+    # Four explicitly approved canonical alignments remain traceable to original tags.
+    ecad_by_asset = {r.get("AssetIdentifier"): r for r in ecad}
+    bom_by_source = {(r.get("SourceDomain"), r.get("EngineeringLocalId")): r
+                     for r in bom}
+    opc_by_tag = {r.get("EngineeringFunctionId"): r for r in opc}
+    for tag, canonical in ALIGNED.items():
+        candidates = [
+            ("DEXPI", dex_by_tag.get(tag)),
+            ("OPC UA", opc_by_tag.get(tag)),
+            ("ECAD", ecad_by_asset.get(canonical)),
+            ("AssetInventory", inv_by_id.get(canonical)),
+            ("DEXPI BOM", bom_by_source.get(("DEXPI", tag))),
+        ]
+        ecad_tag = next((r.get("LocalId") for r in ecad
+                         if r.get("AssetIdentifier") == canonical), None)
+        candidates.append(("ECAD BOM", bom_by_source.get(("ECAD", ecad_tag))))
+        for domain, item in candidates:
+            if not item or item.get("AssetIdentifier") != canonical:
+                errors.append(f"{tag}: {domain} canonical alignment mismatch")
+                continue
+            if domain == "OPC UA":
+                status = item.get("InventoryAssociationStatus")
+                related = item.get("RelatedInventoryAssetIdentifier")
+                evidence = item.get("InventoryAssociationEvidence")
+            else:
+                status = item.get("CrossDomainAssociationStatus")
+                related = item.get("RelatedAssetIdentifier")
+                evidence = item.get("CrossDomainAssociationEvidence")
+            if (status != "USER_APPROVED_CANONICAL_ALIGNMENT"
+                    or related != canonical or not evidence):
+                errors.append(f"{tag}: {domain} alignment evidence/status mismatch")
+        if dex_by_tag.get(tag, {}).get("SourceAssetIdentifier") != (
+                "https://aas.example.com/" + tag):
+            errors.append(f"{tag}: DEXPI source URI was not preserved")
+        if bom_by_source.get(("DEXPI", tag), {}).get("ValidationStatus") != (
+                "ASSET_IDENTIFIER_EXACT_MATCH"):
+            errors.append(f"{tag}: DEXPI BOM exact match not recorded")
+    if counts["ECAD_EXACT"] != 33 or counts["INVENTORY_EXACT"] != 33:
+        errors.append("Expected 33 exact ECAD and AssetInventory mappings")
 
     # Verify cross-domain reciprocal links and cited P&ID interpretation.
     dex_by_tag = {r.get("LocalId"): r for r in dex}
