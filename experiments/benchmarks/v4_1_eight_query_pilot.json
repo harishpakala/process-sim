@@ -6,7 +6,7 @@
   "cases": [
     {
       "id": "P01",
-      "question": "List the local IDs in DEXPI.",
+      "question": "List the local ID of each equipment item in DEXPI.",
       "domain": "dexpi",
       "expected_predicate_local": "hasLocalId",
       "gold_answer_status": "not_verified"
