@@ -48,7 +48,9 @@ def catalog(schema,question,limit,required):
   k='s'+str(len(result))
   result[k]={'domain':d,'shape':shape['uri'],'label':shape.get('label'),'description':shape.get('description'),'properties':[{'predicate':p['predicate'],'label':p.get('label'),'description':p.get('description'),'kind':p.get('kind')} for p in shape['properties']]}
  return result
-def joins(cat):
+def joins(cat,allow_hypothesis_joins=False):
+ """Identifier-name equality is not an asserted relationship; disable by default."""
+ if not allow_hypothesis_joins:return {}
  result={}
  for a,sa in cat.items():
   for b,sb in cat.items():
@@ -222,6 +224,7 @@ def main():
  ap.add_argument('--num-ctx',type=int,default=8192);ap.add_argument('--num-predict',type=int,default=1000)
  ap.add_argument('--max-prompt-estimate',type=int,default=5000);ap.add_argument('--max-shapes',type=int,default=10)
  ap.add_argument('--ollama-timeout',type=int,default=300);ap.add_argument('--skip-execution',action='store_true')
+ ap.add_argument('--allow-hypothesis-joins',action='store_true',help='Unsafe research ablation only: permit unverified cross-domain identifier equality joins')
  ap.add_argument('--output',default='reports/ontology_nl2sparql_generic_v4_1.json')
  args=ap.parse_args();start=time.monotonic()
  path=Path(args.output)
@@ -230,8 +233,8 @@ def main():
  path.parent.mkdir(parents=True,exist_ok=True)
  report={'method':'generic_v4_1_ontology_structural_validation','question':args.question,'model':args.model,'completed':False,'plan':None,'raw_model_response':None,'generated_sparql':None,'plan_issues':[],'graphdb_bindings':None,'binding_count':None,'error':None}
  try:
-  schema=extract();required=required_domains(schema,args.question);requested=concepts(args.question);cat=catalog(schema,args.question,args.max_shapes,required);edges=joins(cat)
-  report['validation_policy']='ontology_structural_without_lexical_projection_coverage'
+  schema=extract();required=required_domains(schema,args.question);requested=concepts(args.question);cat=catalog(schema,args.question,args.max_shapes,required);edges=joins(cat,args.allow_hypothesis_joins)
+  report['validation_policy']='ontology_structural_without_lexical_projection_coverage';report['hypothesis_joins_enabled']=args.allow_hypothesis_joins
   report['schema_sources']=[{'domain':d['domain'],'file':d['source_file'],'sha256':d['source_sha256']} for d in schema['domains']]
   report['candidate_shapes']=cat;report['join_candidates']=edges;report['required_domains']=required;report['requested_concepts']=requested;report['requested_outputs']=requested_outputs(args.question)
   if not cat:raise ValueError('No ontology shapes matched question')
