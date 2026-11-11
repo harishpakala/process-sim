@@ -13,49 +13,49 @@
     },
     {
       "id": "P02",
-      "question": "List the local IDs in ECAD.",
+      "question": "List the local ID of each device item in ECAD.",
       "domain": "ecad",
       "expected_predicate_local": "hasLocalId",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P03",
-      "question": "List the BOM item IDs in Engineering BOM.",
+      "question": "List the BOM item ID of each BOM item in Engineering BOM.",
       "domain": "engineeringbom",
       "expected_predicate_local": "hasBOMItemId",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P04",
-      "question": "List the asset identifiers in Asset Inventory.",
+      "question": "List the asset identifier of each asset item in Asset Inventory.",
       "domain": "assetinventory",
       "expected_predicate_local": "hasAssetIdentifier",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P05",
-      "question": "List the signal names in OPC UA Connectivity.",
+      "question": "List the signal name of each signal mapping item in OPC UA Connectivity.",
       "domain": "opcuaconnectivity",
       "expected_predicate_local": "hasSignalName",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P06",
-      "question": "List the manufacturer names in Product Catalog.",
+      "question": "List the manufacturer name of each product item in Product Catalog.",
       "domain": "productcatalog",
       "expected_predicate_local": "hasManufacturerName",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P07",
-      "question": "List the product identifiers in Product Catalog.",
+      "question": "List the product identifier of each product item in Product Catalog.",
       "domain": "productcatalog",
       "expected_predicate_local": "hasProductIdentifier",
       "gold_answer_status": "not_verified"
     },
     {
       "id": "P08",
-      "question": "List the operational references in Asset Inventory.",
+      "question": "List the operational reference of each asset item in Asset Inventory.",
       "domain": "assetinventory",
       "expected_predicate_local": "hasOperationalReference",
       "gold_answer_status": "not_verified"
