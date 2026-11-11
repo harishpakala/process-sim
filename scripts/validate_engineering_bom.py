@@ -20,9 +20,10 @@ for domain,model,groups in [("DEXPI",dex,("Equipments","InstrumentationFunctions
         if group["idShort"] not in groups:continue
         for item in group["value"]:
             fields=props(item)
-            key=(domain,fields["AssetIdentifier"])
+            source_id=fields.get("SourceAssetIdentifier") or fields["AssetIdentifier"]
+            key=(domain,source_id)
             assert key not in sources,key
-            sources[key]=(group["idShort"],item["idShort"],fields["LocalId"])
+            sources[key]=(group["idShort"],item["idShort"],fields["LocalId"],fields["AssetIdentifier"])
 assets={p["AssetIdentifier"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("AssetIdentifier")}
 catalog=load("examples/aas/product_catalog_instance.json")
 product_ids={p["ProductIdentifier"] for p in map(props,catalog["submodelElements"][0]["value"]) if p.get("ProductIdentifier")}
@@ -51,7 +52,7 @@ for item in items:
     key=(p["SourceDomain"],p["SourceAssetIdentifier"])
     assert key in sources and key not in seen,key
     seen.add(key)
-    assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
+    assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"],p["AssetIdentifier"])==sources[key],key
     # SourceAssetIdentifier preserves the original source URI; it is not the
     # current canonical AssetIdentifier after DEXPI/ECAD identity reconciliation.
     assert p.get("SourceAssetIdentifier"), p["BOMItemId"]
