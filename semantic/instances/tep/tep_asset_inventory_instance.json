@@ -3096,7 +3096,7 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Separator cooling-water outlet temperature"
+              "value": "Condenser Cooling-Water Outlet Temperature"
             },
             {
               "modelType": "Property",
@@ -3192,7 +3192,13 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "OPC UA XMEAS22; ECAD TI-1202 and inventory TI-1202 denote condenser cooling-water outlet temperature; DEXPI function label refers to separator, so equipment context needs review"
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "P&ID interpretation: TI-1202 measures condenser cooling-water outlet temperature. Original DEXPI source name retained; separator-versus-condenser discrepancy requires engineering review."
             }
           ],
           "semanticId": {
@@ -5646,7 +5652,13 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "OPC UA XMV5; inventory/ECAD CV-1006 is recycle valve, while P&ID labels CV-1005 on purge line; identity not confirmed"
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "P&ID does not depict CV-1006; CV-1005 is purge valve, not a substitute for the recycle-valve tag. Requires source drawing/tag-list reconciliation."
             }
           ],
           "semanticId": {
@@ -5810,7 +5822,7 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Stripper Inlet Control Valve"
+              "value": "Separator Liquid Outlet / Stripper Inlet Control Valve"
             },
             {
               "modelType": "Property",
@@ -5918,13 +5930,19 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "OPC UA XMV7; inventory/ECAD CV-1301 is stripper inlet valve; DEXPI names separator liquid valve, verify equipment boundary"
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "P&ID-supported process connection: separator liquid outlet to stripper inlet via CV-1301. DEXPI function and ECAD physical valve retain distinct identifiers."
             }
           ],
           "semanticId": {
@@ -6348,7 +6366,7 @@
               "modelType": "Property",
               "idShort": "AssetName",
               "valueType": "xs:string",
-              "value": "Condenser Outlet Control Valve"
+              "value": "Condenser Cooling-Water Return Control Valve"
             },
             {
               "modelType": "Property",
@@ -6456,13 +6474,19 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "OPC UA XMV11; ECAD/inventory CV-1201 is condenser cooling-water valve; verify precise valve role"
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "P&ID-supported: CV-1201 is condenser cooling-water return control valve, not condenser process outlet valve. VC_111 remains a separate DEXPI function identity."
             }
           ],
           "semanticId": {
@@ -6604,7 +6628,13 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "OPC UA XMV12 is agitator command; inventory XMV12 is logical motor control associated with P&ID M1; control function is not the motor asset"
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows reactor agitator motor M1 but no SC_101 speed-control loop tag. XMV12 is logical manipulated command; SC_101 control function, XMV12 command and physical M1 motor are distinct."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "P&ID shows M1 agitator motor; XMV12 is logical command and SC_101 a control function. Do not merge identities."
             }
           ],
           "semanticId": {
