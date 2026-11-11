@@ -31,6 +31,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier associated with the represented asset."
+                }
               ]
             },
             {
@@ -53,6 +59,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the ECAD source model or containing element."
+                }
               ]
             },
             {
@@ -67,13 +79,25 @@
                       "modelType": "Property",
                       "idShort": "LocalId",
                       "valueType": "xs:string",
-                      "value": "Q10.0"
+                      "value": "Q10.0",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Identifier local to the ECAD source model or containing element."
+                        }
+                      ]
                     },
                     {
                       "modelType": "Property",
                       "idShort": "Address",
                       "valueType": "xs:string",
-                      "value": "3"
+                      "value": "3",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Address assigned to the connection endpoint in the electrical design."
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
@@ -90,6 +114,12 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    }
+                  ],
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Connection endpoint in the electrical design."
                     }
                   ]
                 },
@@ -101,13 +131,25 @@
                       "modelType": "Property",
                       "idShort": "LocalId",
                       "valueType": "xs:string",
-                      "value": "Q10.0"
+                      "value": "Q10.0",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Identifier local to the ECAD source model or containing element."
+                        }
+                      ]
                     },
                     {
                       "modelType": "Property",
                       "idShort": "Address",
                       "valueType": "xs:string",
-                      "value": "3"
+                      "value": "3",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Address assigned to the connection endpoint in the electrical design."
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
@@ -124,6 +166,12 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    }
+                  ],
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Connection endpoint associated with a programmable logic controller."
                     }
                   ]
                 }
@@ -143,47 +191,101 @@
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Collection of connection points belonging to an electrical device or symbol."
+                }
               ]
             },
             {
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of a related asset; distinct from the identifier of the current element."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of an association to another engineering domain."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Evidence recorded for the cross-domain association."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering interpretation or qualification associated with the element."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringVerificationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of engineering verification for the device."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringVerificationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded evidence supporting engineering verification."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ProductVerificationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of verification against product information."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ProductVerificationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded evidence supporting product verification."
+                }
+              ]
             }
           ],
           "qualifiers": [
@@ -200,6 +302,12 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Electrical device represented in the engineering design."
             }
           ]
         }
@@ -218,6 +326,12 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of electrical devices represented in the ECAD model."
         }
       ]
     },
@@ -249,6 +363,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier associated with the represented asset."
+                }
               ]
             },
             {
@@ -271,6 +391,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the ECAD source model or containing element."
+                }
               ]
             },
             {
@@ -285,13 +411,25 @@
                       "modelType": "Property",
                       "idShort": "LocalId",
                       "valueType": "xs:string",
-                      "value": "Q10.0"
+                      "value": "Q10.0",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Identifier local to the ECAD source model or containing element."
+                        }
+                      ]
                     },
                     {
                       "modelType": "Property",
                       "idShort": "Address",
                       "valueType": "xs:string",
-                      "value": "3"
+                      "value": "3",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Address assigned to the connection endpoint in the electrical design."
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
@@ -308,6 +446,12 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    }
+                  ],
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Connection endpoint in the electrical design."
                     }
                   ]
                 },
@@ -319,13 +463,25 @@
                       "modelType": "Property",
                       "idShort": "LocalId",
                       "valueType": "xs:string",
-                      "value": "Q10.0"
+                      "value": "Q10.0",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Identifier local to the ECAD source model or containing element."
+                        }
+                      ]
                     },
                     {
                       "modelType": "Property",
                       "idShort": "Address",
                       "valueType": "xs:string",
-                      "value": "3"
+                      "value": "3",
+                      "description": [
+                        {
+                          "language": "en",
+                          "text": "Address assigned to the connection endpoint in the electrical design."
+                        }
+                      ]
                     }
                   ],
                   "qualifiers": [
@@ -342,6 +498,12 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    }
+                  ],
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Connection endpoint associated with a programmable logic controller."
                     }
                   ]
                 }
@@ -361,6 +523,12 @@
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Collection of connection points belonging to an electrical device or symbol."
+                }
               ]
             }
           ],
@@ -379,6 +547,12 @@
               "valueType": "xs:string",
               "value": "ZeroToMany"
             }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Graphical or logical symbol representing an electrical design element."
+            }
           ]
         }
       ],
@@ -396,6 +570,12 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of schematic symbols."
         }
       ]
     },
@@ -459,7 +639,13 @@
                   }
                 ]
               },
-              "modelType": "RelationshipElement"
+              "modelType": "RelationshipElement",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Relationship expressing a connection between two schematic elements."
+                }
+              ]
             }
           ],
           "qualifiers": [
@@ -476,6 +662,12 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Collection of connections between schematic elements."
             }
           ]
         }
@@ -495,7 +687,19 @@
           "valueType": "xs:string",
           "value": "ZeroToOne"
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of electrical schematic information."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."
     }
   ]
 }
