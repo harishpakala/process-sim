@@ -1497,7 +1497,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Reactor"
+              "value": "https://aas.example.com/TEPR001"
             },
             {
               "modelType": "Property",
@@ -1635,7 +1635,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Condenser"
+              "value": "https://aas.example.com/TEPC001"
             },
             {
               "modelType": "Property",
@@ -1773,7 +1773,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Separator"
+              "value": "https://aas.example.com/TEPV001"
             },
             {
               "modelType": "Property",
@@ -1911,7 +1911,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Compressor"
+              "value": "https://aas.example.com/TEPK001"
             },
             {
               "modelType": "Property",
@@ -2049,7 +2049,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_Stripper"
+              "value": "https://aas.example.com/TEPS001"
             },
             {
               "modelType": "Property",
@@ -2187,7 +2187,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS1"
+              "value": "https://aas.example.com/FI101"
             },
             {
               "modelType": "Property",
@@ -2199,7 +2199,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS1"
+              "value": "https://aas.example.com/FI_101"
             },
             {
               "modelType": "Property",
@@ -2325,7 +2325,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS2"
+              "value": "https://aas.example.com/FI102"
             },
             {
               "modelType": "Property",
@@ -2337,7 +2337,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS2"
+              "value": "https://aas.example.com/FI_102"
             },
             {
               "modelType": "Property",
@@ -2463,7 +2463,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS3"
+              "value": "https://aas.example.com/FI103"
             },
             {
               "modelType": "Property",
@@ -2475,7 +2475,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS3"
+              "value": "https://aas.example.com/FI_103"
             },
             {
               "modelType": "Property",
@@ -2601,7 +2601,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS4"
+              "value": "https://aas.example.com/FI104"
             },
             {
               "modelType": "Property",
@@ -2613,7 +2613,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS4"
+              "value": "https://aas.example.com/FI_104"
             },
             {
               "modelType": "Property",
@@ -2739,7 +2739,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS5"
+              "value": "https://aas.example.com/FI105"
             },
             {
               "modelType": "Property",
@@ -2751,7 +2751,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS5"
+              "value": "https://aas.example.com/FI_105"
             },
             {
               "modelType": "Property",
@@ -2889,7 +2889,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/FI106"
+              "value": "https://aas.example.com/FI_106"
             },
             {
               "modelType": "Property",
@@ -3015,7 +3015,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS10"
+              "value": "https://aas.example.com/FI107"
             },
             {
               "modelType": "Property",
@@ -3027,7 +3027,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS10"
+              "value": "https://aas.example.com/FI_107"
             },
             {
               "modelType": "Property",
@@ -3153,7 +3153,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS14"
+              "value": "https://aas.example.com/FI108"
             },
             {
               "modelType": "Property",
@@ -3165,7 +3165,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS14"
+              "value": "https://aas.example.com/FI_108"
             },
             {
               "modelType": "Property",
@@ -3291,7 +3291,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS17"
+              "value": "https://aas.example.com/FI109"
             },
             {
               "modelType": "Property",
@@ -3303,7 +3303,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS17"
+              "value": "https://aas.example.com/FI_109"
             },
             {
               "modelType": "Property",
@@ -3429,7 +3429,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS19"
+              "value": "https://aas.example.com/FI110"
             },
             {
               "modelType": "Property",
@@ -3441,7 +3441,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS19"
+              "value": "https://aas.example.com/FI_110"
             },
             {
               "modelType": "Property",
@@ -3579,7 +3579,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI101"
+              "value": "https://aas.example.com/TI_101"
             },
             {
               "modelType": "Property",
@@ -3705,7 +3705,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS11"
+              "value": "https://aas.example.com/TI102"
             },
             {
               "modelType": "Property",
@@ -3717,7 +3717,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS11"
+              "value": "https://aas.example.com/TI_102"
             },
             {
               "modelType": "Property",
@@ -3843,7 +3843,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS18"
+              "value": "https://aas.example.com/TI103"
             },
             {
               "modelType": "Property",
@@ -3855,7 +3855,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS18"
+              "value": "https://aas.example.com/TI_103"
             },
             {
               "modelType": "Property",
@@ -3981,7 +3981,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS21"
+              "value": "https://aas.example.com/TI104"
             },
             {
               "modelType": "Property",
@@ -3993,7 +3993,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS21"
+              "value": "https://aas.example.com/TI_104"
             },
             {
               "modelType": "Property",
@@ -4119,7 +4119,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_105"
+              "value": "https://aas.example.com/TI105"
             },
             {
               "modelType": "Property",
@@ -4269,7 +4269,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/LI101"
+              "value": "https://aas.example.com/LI_101"
             },
             {
               "modelType": "Property",
@@ -4395,7 +4395,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS12"
+              "value": "https://aas.example.com/LI102"
             },
             {
               "modelType": "Property",
@@ -4407,7 +4407,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS12"
+              "value": "https://aas.example.com/LI_102"
             },
             {
               "modelType": "Property",
@@ -4533,7 +4533,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS15"
+              "value": "https://aas.example.com/LI103"
             },
             {
               "modelType": "Property",
@@ -4545,7 +4545,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS15"
+              "value": "https://aas.example.com/LI_103"
             },
             {
               "modelType": "Property",
@@ -4683,7 +4683,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/PI101"
+              "value": "https://aas.example.com/PI_101"
             },
             {
               "modelType": "Property",
@@ -4809,7 +4809,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS13"
+              "value": "https://aas.example.com/PI102"
             },
             {
               "modelType": "Property",
@@ -4821,7 +4821,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS13"
+              "value": "https://aas.example.com/PI_102"
             },
             {
               "modelType": "Property",
@@ -4947,7 +4947,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS16"
+              "value": "https://aas.example.com/PI103"
             },
             {
               "modelType": "Property",
@@ -4959,7 +4959,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS16"
+              "value": "https://aas.example.com/PI_103"
             },
             {
               "modelType": "Property",
@@ -5085,7 +5085,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS20"
+              "value": "https://aas.example.com/JI101"
             },
             {
               "modelType": "Property",
@@ -5097,7 +5097,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS20"
+              "value": "https://aas.example.com/JI_101"
             },
             {
               "modelType": "Property",
@@ -5223,7 +5223,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV1"
+              "value": "https://aas.example.com/VC101"
             },
             {
               "modelType": "Property",
@@ -5235,7 +5235,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV1"
+              "value": "https://aas.example.com/VC_101"
             },
             {
               "modelType": "Property",
@@ -5361,7 +5361,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV2"
+              "value": "https://aas.example.com/VC102"
             },
             {
               "modelType": "Property",
@@ -5373,7 +5373,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV2"
+              "value": "https://aas.example.com/VC_102"
             },
             {
               "modelType": "Property",
@@ -5499,7 +5499,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV3"
+              "value": "https://aas.example.com/VC103"
             },
             {
               "modelType": "Property",
@@ -5511,7 +5511,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV3"
+              "value": "https://aas.example.com/VC_103"
             },
             {
               "modelType": "Property",
@@ -5637,7 +5637,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV4"
+              "value": "https://aas.example.com/VC104"
             },
             {
               "modelType": "Property",
@@ -5649,7 +5649,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV4"
+              "value": "https://aas.example.com/VC_104"
             },
             {
               "modelType": "Property",
@@ -5775,7 +5775,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_105"
+              "value": "https://aas.example.com/VC105"
             },
             {
               "modelType": "Property",
@@ -5913,7 +5913,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV6"
+              "value": "https://aas.example.com/VC106"
             },
             {
               "modelType": "Property",
@@ -5925,7 +5925,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV6"
+              "value": "https://aas.example.com/VC_106"
             },
             {
               "modelType": "Property",
@@ -6051,7 +6051,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_107"
+              "value": "https://aas.example.com/VC107"
             },
             {
               "modelType": "Property",
@@ -6189,7 +6189,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV8"
+              "value": "https://aas.example.com/VC108"
             },
             {
               "modelType": "Property",
@@ -6201,7 +6201,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV8"
+              "value": "https://aas.example.com/VC_108"
             },
             {
               "modelType": "Property",
@@ -6327,7 +6327,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV9"
+              "value": "https://aas.example.com/VC109"
             },
             {
               "modelType": "Property",
@@ -6339,7 +6339,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV9"
+              "value": "https://aas.example.com/VC_109"
             },
             {
               "modelType": "Property",
@@ -6465,7 +6465,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV10"
+              "value": "https://aas.example.com/VC110"
             },
             {
               "modelType": "Property",
@@ -6477,7 +6477,7 @@
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV10"
+              "value": "https://aas.example.com/VC_110"
             },
             {
               "modelType": "Property",
@@ -6603,7 +6603,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_111"
+              "value": "https://aas.example.com/VC111"
             },
             {
               "modelType": "Property",
@@ -6741,7 +6741,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/SC_101"
+              "value": "https://aas.example.com/SC101"
             },
             {
               "modelType": "Property",
@@ -6879,7 +6879,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/DC-PSU-1"
+              "value": "https://aas.example.com/DCPSU1"
             },
             {
               "modelType": "Property",
@@ -7155,7 +7155,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS1"
+              "value": "https://aas.example.com/FI101"
             },
             {
               "modelType": "Property",
@@ -7293,7 +7293,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS2"
+              "value": "https://aas.example.com/FI102"
             },
             {
               "modelType": "Property",
@@ -7431,7 +7431,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS3"
+              "value": "https://aas.example.com/FI103"
             },
             {
               "modelType": "Property",
@@ -7569,7 +7569,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS4"
+              "value": "https://aas.example.com/FI104"
             },
             {
               "modelType": "Property",
@@ -7707,7 +7707,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS5"
+              "value": "https://aas.example.com/FI105"
             },
             {
               "modelType": "Property",
@@ -8397,7 +8397,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS10"
+              "value": "https://aas.example.com/FI107"
             },
             {
               "modelType": "Property",
@@ -8535,7 +8535,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS11"
+              "value": "https://aas.example.com/TI102"
             },
             {
               "modelType": "Property",
@@ -8673,7 +8673,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS12"
+              "value": "https://aas.example.com/LI102"
             },
             {
               "modelType": "Property",
@@ -8811,7 +8811,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS13"
+              "value": "https://aas.example.com/PI102"
             },
             {
               "modelType": "Property",
@@ -8949,7 +8949,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS14"
+              "value": "https://aas.example.com/FI108"
             },
             {
               "modelType": "Property",
@@ -9087,7 +9087,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS15"
+              "value": "https://aas.example.com/LI103"
             },
             {
               "modelType": "Property",
@@ -9225,7 +9225,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS16"
+              "value": "https://aas.example.com/PI103"
             },
             {
               "modelType": "Property",
@@ -9363,7 +9363,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS17"
+              "value": "https://aas.example.com/FI109"
             },
             {
               "modelType": "Property",
@@ -9501,7 +9501,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS18"
+              "value": "https://aas.example.com/TI103"
             },
             {
               "modelType": "Property",
@@ -9639,7 +9639,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS19"
+              "value": "https://aas.example.com/FI110"
             },
             {
               "modelType": "Property",
@@ -9777,7 +9777,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS20"
+              "value": "https://aas.example.com/JI101"
             },
             {
               "modelType": "Property",
@@ -9915,7 +9915,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMEAS21"
+              "value": "https://aas.example.com/TI104"
             },
             {
               "modelType": "Property",
@@ -10053,13 +10053,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/TI-1202"
+              "value": "https://aas.example.com/TI1202"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-types/IFM_TA1101"
             },
             {
               "modelType": "Property",
@@ -10113,7 +10113,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -10191,7 +10191,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV3"
+              "value": "https://aas.example.com/VC103"
             },
             {
               "modelType": "Property",
@@ -10329,7 +10329,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV1"
+              "value": "https://aas.example.com/VC101"
             },
             {
               "modelType": "Property",
@@ -10467,7 +10467,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV2"
+              "value": "https://aas.example.com/VC102"
             },
             {
               "modelType": "Property",
@@ -10605,7 +10605,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV4"
+              "value": "https://aas.example.com/VC104"
             },
             {
               "modelType": "Property",
@@ -10743,7 +10743,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV6"
+              "value": "https://aas.example.com/VC106"
             },
             {
               "modelType": "Property",
@@ -10881,13 +10881,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/CV-1006"
+              "value": "https://aas.example.com/CV1006"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-types/SAMSON_3241_7"
             },
             {
               "modelType": "Property",
@@ -10941,7 +10941,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11019,7 +11019,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV10"
+              "value": "https://aas.example.com/VC110"
             },
             {
               "modelType": "Property",
@@ -11157,13 +11157,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/CV-1201"
+              "value": "https://aas.example.com/CV1201"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-types/SAMSON_3241_7"
             },
             {
               "modelType": "Property",
@@ -11217,7 +11217,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11295,13 +11295,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/CV-1301"
+              "value": "https://aas.example.com/CV1301"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-types/SAMSON_3241_7"
             },
             {
               "modelType": "Property",
@@ -11355,7 +11355,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11433,13 +11433,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/CV-1401"
+              "value": "https://aas.example.com/CV1401"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
             },
             {
               "modelType": "Property",
@@ -11493,7 +11493,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -11571,7 +11571,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV8"
+              "value": "https://aas.example.com/VC108"
             },
             {
               "modelType": "Property",
@@ -11709,7 +11709,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV9"
+              "value": "https://aas.example.com/VC109"
             },
             {
               "modelType": "Property",
@@ -11985,13 +11985,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/M-1301"
+              "value": "https://aas.example.com/M1301"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -12045,7 +12045,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -12123,13 +12123,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/M-1401"
+              "value": "https://aas.example.com/M1401"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -12183,7 +12183,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -12261,13 +12261,13 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/M-1501"
+              "value": "https://aas.example.com/M1501"
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
               "valueType": "xs:string",
-              "value": ""
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
             },
             {
               "modelType": "Property",
@@ -12321,7 +12321,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
