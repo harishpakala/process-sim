@@ -121,6 +121,11 @@
               "modelType": "Property",
               "idShort": "InventoryAssociationEvidence",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string"
             }
           ]
         }
