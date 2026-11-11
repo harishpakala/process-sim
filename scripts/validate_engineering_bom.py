@@ -47,7 +47,7 @@ assert len(items)==len(sources)==79
 seen=set()
 for item in items:
     p=props(item)
-    key=(p["SourceDomain"],p["EngineeringReference"])
+    key=(p["SourceDomain"],p["SourceAssetIdentifier"])
     assert key in sources and key not in seen,key
     seen.add(key)
     assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
