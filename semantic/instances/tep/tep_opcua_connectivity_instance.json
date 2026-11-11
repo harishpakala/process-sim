@@ -1030,6 +1030,24 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI1202"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "XMEAS22 and ECAD TI-1202 refer to condenser cooling-water outlet temperature; DEXPI function name says separator, so equipment context must be verified"
             }
           ]
         },
@@ -1822,6 +1840,24 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1006"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string",
+              "value": "UNRESOLVED_TAG_DISCREPANCY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "XMV5 inventory is CV-1006 recycle valve; P&ID depicts CV-1005 purge valve, while DEXPI names compressor recycle; do not merge identifiers"
             }
           ]
         },
@@ -1954,6 +1990,24 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "XMV7 and CV-1301 correspond to stripper inlet in inventory/ECAD; DEXPI calls it separator liquid valve; confirm functional equivalence"
             }
           ]
         },
@@ -2218,6 +2272,24 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1201"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string",
+              "value": "PROPOSED_EQUIVALENCE_REQUIRES_REVIEW"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "XMV11 and CV-1201 correspond to condenser cooling-water control; verify exact valve role"
             }
           ]
         },
@@ -2284,6 +2356,24 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/tep/assets/TEP_XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string",
+              "value": "RELATED_CONTROL_NOT_SAME_ASSET"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "XMV12 is logical agitator speed command associated with motor M1; SC101 is a control function, not verified identical to the motor"
             }
           ]
         }
