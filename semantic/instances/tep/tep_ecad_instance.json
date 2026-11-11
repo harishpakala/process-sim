@@ -139,6 +139,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NO_PRODUCT_SELECTION_RECORDED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No manufacturer and part number recorded; not assessed for procurement suitability."
             }
           ],
           "qualifiers": [
@@ -1795,6 +1819,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NO_PRODUCT_SELECTION_RECORDED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No manufacturer and part number recorded; not assessed for procurement suitability."
             }
           ],
           "qualifiers": [
@@ -2001,6 +2049,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -2207,6 +2279,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -2413,6 +2509,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -2619,6 +2739,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -2825,6 +2969,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -3031,6 +3199,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -3237,6 +3429,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -3443,6 +3659,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate IFM / LW2720; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -3649,6 +3889,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -3855,6 +4119,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -4061,6 +4349,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -4267,6 +4579,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate IFM / LW2720; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -4473,6 +4809,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -4679,6 +5039,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -4885,6 +5269,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate IFM / LW2720; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -5091,6 +5499,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -5297,6 +5729,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -5503,6 +5959,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -5709,6 +6189,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PFMV505-1; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -5915,6 +6419,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Schneider / A9MEM3555; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -6121,6 +6649,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -6351,6 +6903,30 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "P&ID interpretation: TI-1202 measures condenser cooling-water outlet temperature. Original DEXPI source name retained; separator-versus-condenser discrepancy requires engineering review."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PID_CONTEXT_SUPPORTED_IDENTITY_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: TI-1202 on condenser cooling-water outlet; DEXPI TI_105 names separator."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate SMC / PSH-L2-01-W; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -6517,6 +7093,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -6683,6 +7283,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -6849,6 +7473,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7015,6 +7663,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7181,6 +7853,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7371,6 +8067,30 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "P&ID does not depict CV-1006; CV-1005 is purge valve, not a substitute for the recycle-valve tag. Requires source drawing/tag-list reconciliation."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "UNRESOLVED_TAG_DISCREPANCY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: CV-1006 not depicted; CV-1005 labels purge line, not recycle."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7537,6 +8257,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7727,6 +8471,30 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "P&ID-supported: CV-1201 is condenser cooling-water return control valve, not condenser process outlet valve. VC_111 remains a separate DEXPI function identity."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: CV-1201 on condenser cooling-water return line."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -7917,6 +8685,30 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "P&ID-supported process connection: separator liquid outlet to stripper inlet via CV-1301. DEXPI function and ECAD physical valve retain distinct identifiers."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PID_SUPPORTED_FUNCTIONAL_ASSOCIATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: CV-1301 between separator liquid outlet and stripper inlet."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8083,6 +8875,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "REQUIRES_PID_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: no unambiguous CV-1401 compressor valve label identified; role requires original drawing review."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8249,6 +9065,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8415,6 +9255,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Siemens / S55264-V193; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8575,6 +9439,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PID_DEVICE_SUPPORTED_CONTROL_DISTINCT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "docs/engineering-models/tep-reactor-pid.png: M1 shown as reactor agitator motor; SC_101/XMV12 are separate control/command concepts."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Rittal / 3244100; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8741,6 +9629,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Rittal / 3244100; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -8907,6 +9819,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Rittal / 3244100; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
@@ -9073,6 +10009,30 @@
                   }
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_YET_REVIEWED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "No device-specific P&ID verification recorded in this audit."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationStatus",
+              "valueType": "xs:string",
+              "value": "DATASHEET_REVIEW_REQUIRED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductVerificationEvidence",
+              "valueType": "xs:string",
+              "value": "Recorded candidate Rittal / 3244100; suitability and datasheet not verified. No automatic substitution authorized."
             }
           ],
           "qualifiers": [
