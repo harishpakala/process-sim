@@ -21,91 +21,211 @@
             {
               "modelType": "Property",
               "idShort": "AssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the asset represented by this inventory record."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "AssetName",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Human-readable name of the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EquipmentTag",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Equipment tag assigned to the asset in engineering or plant documentation."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "AssetType",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded type or category of the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Location",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded location of the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the product associated with the asset; distinct from the asset identifier."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringReference",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Reference linking the asset record to engineering information."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "OperationalReference",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Reference linking the asset record to operational information."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ModelingStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of modeling activities for the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SimulationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of simulation activities for the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "MonitoringStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of monitoring activities for the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "FaultInjectionStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of fault injection activities for the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "FaultDetectionStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of fault detection activities for the asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of an asset related to the inventory asset."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of an association to information in another domain."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Evidence recorded for a cross-domain association."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering interpretation or qualification recorded for the asset."
+                }
+              ]
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Inventory record for an identified asset."
             }
           ]
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of inventory asset records."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."
     }
   ]
 }
