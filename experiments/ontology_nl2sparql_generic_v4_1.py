@@ -88,7 +88,7 @@ def singular_token(token):
  return token[:-1] if len(token)>3 and token.endswith('s') and not token.endswith('ss') else token
 
 def normalized_words(text):
- text=re.sub(r'([a-z])([A-Z])',r'\\1 \\2',text or '')
+ text=re.sub(r'([a-z])([A-Z])',r'\1 \2',text or '')
  return [singular_token(x) for x in re.findall(r'[a-z0-9]+',text.lower())]
 
 def substring_requested(question,predicate,value):
