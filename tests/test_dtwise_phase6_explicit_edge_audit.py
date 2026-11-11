@@ -23,6 +23,10 @@ class ExplicitEdgeAuditTests(unittest.TestCase):
             ],
         }
 
+    def test_accepts_normal_resource_iri(self):
+        self.assertEqual(safe_iri("https://example.org/a"), "<https://example.org/a>")
+        self.assertEqual(safe_iri("https://example.org/resource"), "<https://example.org/resource>")
+
     def test_rejects_unsafe_iri(self):
         with self.assertRaises(ValueError):
             safe_iri("https://example.org/x> ?s ?p ?o")
