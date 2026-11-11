@@ -10,16 +10,120 @@
     "dexpi": 39,
     "ecad": 40,
     "assetInventory": 62,
-    "proposedReplacements": 58
+    "proposedReplacements": 77
   },
   "collisions": [
+    {
+      "target": "https://aas.example.com/CV1006",
+      "oldIdentifiers": [
+        "https://aas.example.com/CV-1006",
+        "https://example.org/tep/assets/TEP_XMV5"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/CV1201",
+      "oldIdentifiers": [
+        "https://aas.example.com/CV-1201",
+        "https://example.org/tep/assets/TEP_XMV11"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/CV1301",
+      "oldIdentifiers": [
+        "https://aas.example.com/CV-1301",
+        "https://example.org/tep/assets/TEP_XMV7"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/CV1401",
+      "oldIdentifiers": [
+        "https://aas.example.com/CV-1401",
+        "https://example.org/tep/assets/TEP_CV_1401"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/M1301",
+      "oldIdentifiers": [
+        "https://aas.example.com/M-1301",
+        "https://example.org/tep/assets/TEP_M_1301"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/M1401",
+      "oldIdentifiers": [
+        "https://aas.example.com/M-1401",
+        "https://example.org/tep/assets/TEP_M_1401"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/M1501",
+      "oldIdentifiers": [
+        "https://aas.example.com/M-1501",
+        "https://example.org/tep/assets/TEP_M_1501"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
     {
       "target": "https://aas.example.com/M1",
       "oldIdentifiers": [
         "https://aas.example.com/M1",
         "https://example.org/tep/assets/TEP_XMV12"
       ],
-      "reason": "M1 ECAD motor and XMV12 inventory actuator require identity review before merging"
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TEPC001",
+      "oldIdentifiers": [
+        "https://aas.example.com/TEP-C-001",
+        "https://example.org/tep/assets/TEP_Condenser"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TEPK001",
+      "oldIdentifiers": [
+        "https://aas.example.com/TEP-K-001",
+        "https://example.org/tep/assets/TEP_Compressor"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TEPR001",
+      "oldIdentifiers": [
+        "https://aas.example.com/TEP-R-001",
+        "https://example.org/tep/assets/TEP_Reactor"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TEPS001",
+      "oldIdentifiers": [
+        "https://aas.example.com/TEP-S-001",
+        "https://example.org/tep/assets/TEP_Stripper"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TEPV001",
+      "oldIdentifiers": [
+        "https://aas.example.com/TEP-V-001",
+        "https://example.org/tep/assets/TEP_Separator"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
+    },
+    {
+      "target": "https://aas.example.com/TI1202",
+      "oldIdentifiers": [
+        "https://aas.example.com/TI-1202",
+        "https://example.org/tep/assets/TEP_XMEAS22"
+      ],
+      "reason": "Multiple source identifiers map to one proposed asset; verify identity equivalence before migration"
     }
   ],
   "mappings": [
@@ -29,39 +133,39 @@
       "evidence": [
         "ECAD CV-1006"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/CV-1201",
-      "proposedAssetIdentifier": "https://aas.example.com/CV-1201",
+      "proposedAssetIdentifier": "https://aas.example.com/CV1201",
       "evidence": [
         "ECAD CV-1201"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/CV-1301",
-      "proposedAssetIdentifier": "https://aas.example.com/CV-1301",
+      "proposedAssetIdentifier": "https://aas.example.com/CV1301",
       "evidence": [
         "ECAD CV-1301"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/CV-1401",
-      "proposedAssetIdentifier": "https://aas.example.com/CV-1401",
+      "proposedAssetIdentifier": "https://aas.example.com/CV1401",
       "evidence": [
         "ECAD CV-1401"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/DC-PSU-1",
-      "proposedAssetIdentifier": "https://aas.example.com/DC-PSU-1",
+      "proposedAssetIdentifier": "https://aas.example.com/DCPSU1",
       "evidence": [
         "ECAD DC-PSU-1"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/FI106",
@@ -93,27 +197,27 @@
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/M-1301",
-      "proposedAssetIdentifier": "https://aas.example.com/M-1301",
+      "proposedAssetIdentifier": "https://aas.example.com/M1301",
       "evidence": [
         "ECAD M-1301"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/M-1401",
-      "proposedAssetIdentifier": "https://aas.example.com/M-1401",
+      "proposedAssetIdentifier": "https://aas.example.com/M1401",
       "evidence": [
         "ECAD M-1401"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/M-1501",
-      "proposedAssetIdentifier": "https://aas.example.com/M-1501",
+      "proposedAssetIdentifier": "https://aas.example.com/M1501",
       "evidence": [
         "ECAD M-1501"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/M1",
@@ -135,67 +239,67 @@
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/SC_101",
-      "proposedAssetIdentifier": "https://aas.example.com/SC_101",
+      "proposedAssetIdentifier": "https://aas.example.com/SC101",
       "evidence": [
         "DEXPI SC_101"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TEP-C-001",
-      "proposedAssetIdentifier": "https://aas.example.com/TEP-C-001",
+      "proposedAssetIdentifier": "https://aas.example.com/TEPC001",
       "evidence": [
         "DEXPI C-001"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TEP-K-001",
-      "proposedAssetIdentifier": "https://aas.example.com/TEP-K-001",
+      "proposedAssetIdentifier": "https://aas.example.com/TEPK001",
       "evidence": [
         "DEXPI K-001"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TEP-R-001",
-      "proposedAssetIdentifier": "https://aas.example.com/TEP-R-001",
+      "proposedAssetIdentifier": "https://aas.example.com/TEPR001",
       "evidence": [
         "DEXPI R-001"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TEP-S-001",
-      "proposedAssetIdentifier": "https://aas.example.com/TEP-S-001",
+      "proposedAssetIdentifier": "https://aas.example.com/TEPS001",
       "evidence": [
         "DEXPI S-001"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TEP-V-001",
-      "proposedAssetIdentifier": "https://aas.example.com/TEP-V-001",
+      "proposedAssetIdentifier": "https://aas.example.com/TEPV001",
       "evidence": [
         "DEXPI V-001"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TI_105",
-      "proposedAssetIdentifier": "https://aas.example.com/TI_105",
+      "proposedAssetIdentifier": "https://aas.example.com/TI105",
       "evidence": [
         "DEXPI TI_105"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TI-1202",
-      "proposedAssetIdentifier": "https://aas.example.com/TI-1202",
+      "proposedAssetIdentifier": "https://aas.example.com/TI1202",
       "evidence": [
         "ECAD TI-1202"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/TI101",
@@ -209,27 +313,27 @@
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/VC_105",
-      "proposedAssetIdentifier": "https://aas.example.com/VC_105",
+      "proposedAssetIdentifier": "https://aas.example.com/VC105",
       "evidence": [
         "DEXPI VC_105"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/VC_107",
-      "proposedAssetIdentifier": "https://aas.example.com/VC_107",
+      "proposedAssetIdentifier": "https://aas.example.com/VC107",
       "evidence": [
         "DEXPI VC_107"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://aas.example.com/VC_111",
-      "proposedAssetIdentifier": "https://aas.example.com/VC_111",
+      "proposedAssetIdentifier": "https://aas.example.com/VC111",
       "evidence": [
         "DEXPI VC_111"
       ],
-      "status": "ALREADY_CANONICAL"
+      "status": "PROPOSED_NOT_APPLIED"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_Compressor",
@@ -237,7 +341,7 @@
       "evidence": [
         "AssetInventory TEP_Compressor"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_Condenser",
@@ -245,7 +349,7 @@
       "evidence": [
         "AssetInventory TEP_Condenser"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_CV_1401",
@@ -253,7 +357,7 @@
       "evidence": [
         "AssetInventory TEP_CV_1401"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_M_1301",
@@ -261,7 +365,7 @@
       "evidence": [
         "AssetInventory TEP_M_1301"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_M_1401",
@@ -269,7 +373,7 @@
       "evidence": [
         "AssetInventory TEP_M_1401"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_M_1501",
@@ -277,7 +381,7 @@
       "evidence": [
         "AssetInventory TEP_M_1501"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_Reactor",
@@ -285,7 +389,7 @@
       "evidence": [
         "AssetInventory TEP_Reactor"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_Separator",
@@ -293,7 +397,7 @@
       "evidence": [
         "AssetInventory TEP_Separator"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_Stripper",
@@ -301,7 +405,7 @@
       "evidence": [
         "AssetInventory TEP_Stripper"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_XMEAS1",
@@ -449,7 +553,7 @@
       "evidence": [
         "AssetInventory TEP_XMEAS22"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_XMEAS23",
@@ -659,7 +763,7 @@
       "evidence": [
         "AssetInventory TEP_XMV11"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_XMV12",
@@ -705,7 +809,7 @@
       "evidence": [
         "AssetInventory TEP_XMV5"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_XMV6",
@@ -723,7 +827,7 @@
       "evidence": [
         "AssetInventory TEP_XMV7"
       ],
-      "status": "PROPOSED_NOT_APPLIED"
+      "status": "REVIEW_COLLISION"
     },
     {
       "oldAssetIdentifier": "https://example.org/tep/assets/TEP_XMV8",
