@@ -21,54 +21,126 @@
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of a bill-of-materials item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the parent item in the BOM structure."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Textual description of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ItemType",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded type of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "AssemblyKind",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded kind of assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Position of the item within the BOM structure."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "QuantityPerAssembly",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Quantity of the item required per containing assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Unit",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Unit associated with the recorded quantity."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Revision",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Revision designation of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "StructureStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of the BOM structure."
+                }
+              ]
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Assembly record describing a grouping or structure of BOM items."
             }
           ]
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of assembly records in the engineering bill of materials."
         }
       ]
     },
@@ -90,136 +162,310 @@
             {
               "modelType": "Property",
               "idShort": "BOMItemId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of a bill-of-materials item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ParentItemId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of the parent item in the BOM structure."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SourceDomain",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering domain from which the BOM item information originates."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SourceGroup",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Source grouping from which the BOM item information originates."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "AssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of an asset associated with the BOM item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ProductIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of a product associated with the BOM item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Asset identifier as recorded in the source information."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringLocalId",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the source engineering model."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ItemDescription",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Textual description of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Quantity",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded quantity of the BOM item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Unit",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Unit associated with the recorded quantity."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "QuantityBasis",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Basis used to interpret the recorded quantity."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "SelectionStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of item selection."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "Revision",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Revision designation of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ValidationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of BOM item validation."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EquivalenceStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of an equivalence assessment."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "ItemType",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded type of the BOM item or assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "BOMPosition",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Position of the item within the BOM structure."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "QuantityPerAssembly",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Quantity of the item required per containing assembly."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "StructureStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of the BOM structure."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "FunctionalAssemblyReference",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Reference to a functional assembly associated with the item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "AssociationBasis",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded basis for an association between the BOM item and other information."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of an asset related to the BOM item."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of a cross-domain association."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Evidence recorded in support of a cross-domain association."
+                }
+              ]
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
-              "valueType": "xs:string"
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering interpretation or qualification recorded for the BOM item."
+                }
+              ]
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Item record in the engineering bill of materials."
             }
           ]
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of engineering bill-of-materials item records."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "Engineering bill-of-materials submodel describing assembly structures, BOM items, quantities, and engineering associations."
     }
   ]
 }
