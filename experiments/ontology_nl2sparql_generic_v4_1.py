@@ -30,7 +30,7 @@ def catalog(schema,question,limit,required):
  for d in schema['domains']:
   for shape in d['node_shapes']:
    p=shape['properties']
-   terms=tokens(d['domain']+' '+str(shape.get('label') or '')+' '+' '.join(local(x['predicate'])+' '+str(x.get('label') or '') for x in p))
+   terms=tokens(d['domain']+' '+str(shape.get('label') or '')+' '+str(shape.get('description') or '')+' '+' '.join(local(x['predicate'])+' '+str(x.get('label') or '')+' '+str(x.get('description') or '') for x in p))
    score=3*len(q&terms)+5*bool(d['domain'] in required)+sum(8 for c in concepts(question) if any(set(c['tokens'])<=tokens(local(x['predicate'])) for x in p))
    if score and (not required or d['domain'] in required):scored.append((score,d['domain'],shape))
  scored.sort(key=lambda x:(-x[0],x[1],x[2]['uri']))
@@ -46,7 +46,7 @@ def catalog(schema,question,limit,required):
  result={}
  for _,d,shape in picked:
   k='s'+str(len(result))
-  result[k]={'domain':d,'shape':shape['uri'],'properties':[{'predicate':p['predicate'],'label':p.get('label'),'kind':p.get('kind')} for p in shape['properties']]}
+  result[k]={'domain':d,'shape':shape['uri'],'label':shape.get('label'),'description':shape.get('description'),'properties':[{'predicate':p['predicate'],'label':p.get('label'),'description':p.get('description'),'kind':p.get('kind')} for p in shape['properties']]}
  return result
 def joins(cat):
  result={}
@@ -59,7 +59,7 @@ def joins(cat):
     if pa and pb:
      result['j'+str(len(result))]={'left':a,'right':b,'left_predicate':pa[0],'right_predicate':pb[0],'identifier':name,'evidence':'same identifier local name; RDF-term equality is a hypothesis'}
  return result
-SYSTEM="""Return JSON plan for an unseen engineering question using ONLY supplied SHACL properties. Choose requested output fields and explicit filters. NEVER write joins or SPARQL: the compiler chooses minimal joins. Output exactly keys fields, filters, unsupported. fields are {name,shape,predicate}; filters are {shape,predicate,contains} for explicitly requested substring matching (including identifiers) or {shape,predicate,equals} for explicitly supplied exact values. Names are safe unique SPARQL variables. Match field semantics exactly: equipment tags use hasEquipmentTag, operational references use hasOperationalReference, identifiers use hasAssetIdentifier, not hasRelatedAssetIdentifier. Do not invent predicates. Account for EVERY requested_outputs phrase in fields or unsupported. If an output is unavailable, mark it unsupported; do not invent a predicate or substitute an unrelated property. Nonempty unsupported means the entire request is rejected. Domain connectivity is handled by compiler. JSON only."""
+SYSTEM="""Return JSON plan for an unseen engineering question using ONLY supplied SHACL properties and their authored semantic descriptions. Choose requested output fields and explicit filters. NEVER write joins or SPARQL: the compiler chooses minimal joins. Output exactly keys fields, filters, unsupported. fields are {name,shape,predicate}; filters are {shape,predicate,contains} for explicitly requested substring matching (including identifiers) or {shape,predicate,equals} for explicitly supplied exact values. Names are safe unique SPARQL variables. Match field semantics exactly: equipment tags use hasEquipmentTag, operational references use hasOperationalReference, identifiers use hasAssetIdentifier, not hasRelatedAssetIdentifier. Do not invent predicates. Account for EVERY requested_outputs phrase in fields or unsupported. If an output is unavailable, mark it unsupported; do not invent a predicate or substitute an unrelated property. Nonempty unsupported means the entire request is rejected. Domain connectivity is handled by compiler. JSON only."""
 def minimum_joins(plan,cat,edges,required):
  """Find shortest join tree covering selected shapes and at least one shape per required domain.
  For 10 or fewer shapes, enumerate connected subsets using BFS, favoring fewer joins."""
