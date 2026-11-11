@@ -12,7 +12,12 @@ from urllib.parse import urlparse
 
 import requests
 
-from q13_extract_focused_schema import ROOT, extract
+try:
+    from experiments.q13_extract_focused_schema import ROOT, extract
+except ModuleNotFoundError as exc:
+    if exc.name != "experiments":
+        raise
+    from q13_extract_focused_schema import ROOT, extract
 
 PREDICATES = (
     "https://example.org/ecad/hasPLCEndPoint",
