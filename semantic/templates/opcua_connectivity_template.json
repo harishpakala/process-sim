@@ -106,6 +106,21 @@
               "modelType": "Property",
               "idShort": "MappingBasis",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedInventoryAssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationStatus",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InventoryAssociationEvidence",
+              "valueType": "xs:string"
             }
           ]
         }
