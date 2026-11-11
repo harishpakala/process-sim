@@ -453,6 +453,42 @@ def evidence_completeness(audit, answer, findings):
         "opcua_live_binding_qualified"))
 
 
+
+def repair_ollama_answer(audit, answer, findings):
+    """Repair only missing, independently verified evidence; never repair unsafe claims."""
+    failed = {k for k, v in audit["acceptance"].items() if isinstance(v, bool) and not v}
+    repairable = {"bom_item_ids_present", "opcua_mapping_status_present",
+                  "opcua_live_binding_qualified"}
+    if not failed or not failed <= repairable:
+        return None, []
+    required = mandatory_evidence(findings)
+    additions = []
+    repaired_checks = []
+    if "bom_item_ids_present" in failed:
+        missing = [v for v in required["bom_ids"] if v not in answer]
+        if not missing:
+            return None, []
+        additions.append("Engineering BOM clarification (verified RDF): item IDs " +
+                         ", ".join(missing) +
+                         " are recorded in the engineering BOM. Their association does not establish verified physical equipment membership.")
+        repaired_checks.append("bom_item_ids_present")
+    if "opcua_mapping_status_present" in failed:
+        missing = [v for v in required["mapping_statuses"] if v not in answer]
+        if not missing:
+            return None, []
+        additions.append("OPC UA mapping-status clarification (verified RDF): " +
+                         ", ".join(missing) + ".")
+        repaired_checks.append("opcua_mapping_status_present")
+    if "opcua_live_binding_qualified" in failed:
+        if not required["mapping_statuses"]:
+            return None, []
+        additions.append("OPC UA live-binding clarification: the live operational OPC UA binding is NOT verified; the recorded mapping status is an engineering assertion, not evidence of a live connection.")
+        repaired_checks.append("opcua_live_binding_qualified")
+    if not additions:
+        return None, []
+    return answer.rstrip() + "\\n\\nEvidence-backed clarifications:\\n" + "\\n".join(additions), repaired_checks
+
+
 def deterministic_answer(audit, findings):
     """Grounded fallback: only normalized RDF assertions and explicit gaps."""
     lines = ["Engineering trace (deterministic RDF fallback; LLM synthesis unavailable)."]
@@ -533,7 +569,7 @@ def main():
     p.add_argument("--max-evidence-triples", type=int, default=60)
     p.add_argument("--skip-lifting", action="store_true")
     p.add_argument("--resume-audit", help="Prior six-domain audit JSON; retry final synthesis only")
-    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_4.json")
+    p.add_argument("--output", default="reports/q13_ontology_guided_v9_6_5.json")
     args = p.parse_args()
     if not 0 <= args.max_hops <= 8:
         p.error("--max-hops must be between 0 and 8")
@@ -543,7 +579,7 @@ def main():
     if not args.resume_audit and not args.skip_lifting:
         core.regenerate_templates()
     schemas, hashes = core.schema_context() if not args.resume_audit else ({}, {})
-    audit = {"method": "q13_v9_6_4_evidence_completeness",
+    audit = {"method": "q13_v9_6_5_evidence_repair",
              "question": core.QUESTION, "schema_hashes": hashes,
              "domains": [], "historian": None, "final_answer": None,
              "acceptance": {}, "status": "INCOMPLETE"}
@@ -556,7 +592,7 @@ def main():
         available = {r.get("domain") for r in audit.get("domains", []) if r.get("finding")}
         if not set(core.DOMAINS).issubset(available):
             p.error("--resume-audit requires six domain findings")
-        audit["method"] = "q13_v9_6_4_evidence_completeness"
+        audit["method"] = "q13_v9_6_5_evidence_repair"
         for record in audit["domains"]:
             if record.get("finding") and record.get("verified_triples"):
                 normalize_finding(record["finding"], record["verified_triples"][:args.max_evidence_triples])
@@ -665,13 +701,25 @@ def main():
             if not passed and audit["synthesis_mode"] == "OLLAMA":
                 audit["rejected_ollama_answer"] = audit["final_answer"]
                 audit["rejected_ollama_acceptance"] = dict(audit["acceptance"])
-                audit["final_answer"] = deterministic_answer(audit, findings)
-                audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
-                audit["fallback_reason"] = "OLLAMA_QUALITY_GATE_FAILED"
-                passed = evaluate_answer(audit, audit["final_answer"])
-                audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
-                passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
-                passed = evidence_completeness(audit, audit["final_answer"], findings) and passed
+                repaired, checks = repair_ollama_answer(audit, audit["final_answer"], findings)
+                if repaired is not None:
+                    audit["final_answer"] = repaired
+                    repaired_passed = evaluate_answer(audit, repaired)
+                    audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(repaired, findings))
+                    repaired_passed = repaired_passed and audit["acceptance"]["no_encoded_aas_identifiers"]
+                    repaired_passed = evidence_completeness(audit, repaired, findings) and repaired_passed
+                    if repaired_passed:
+                        audit["synthesis_mode"] = "OLLAMA_EVIDENCE_REPAIRED"
+                        audit["repaired_acceptance_checks"] = checks
+                        passed = True
+                if audit["synthesis_mode"] != "OLLAMA_EVIDENCE_REPAIRED":
+                    audit["final_answer"] = deterministic_answer(audit, findings)
+                    audit["synthesis_mode"] = "DETERMINISTIC_FALLBACK"
+                    audit["fallback_reason"] = "OLLAMA_QUALITY_GATE_FAILED"
+                    passed = evaluate_answer(audit, audit["final_answer"])
+                    audit["acceptance"]["no_encoded_aas_identifiers"] = not bool(opaque_aas_tokens(audit["final_answer"], findings))
+                    passed = passed and audit["acceptance"]["no_encoded_aas_identifiers"]
+                    passed = evidence_completeness(audit, audit["final_answer"], findings) and passed
             audit["status"] = ("REVIEW_REQUIRED" if passed and
                                not audit["acceptance"]["rdf_fallback_domains"]
                                else "INCOMPLETE")
