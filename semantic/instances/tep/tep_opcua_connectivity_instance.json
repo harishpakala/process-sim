@@ -35,6 +35,13 @@
               "valueType": "xs:string",
               "value": "UNMAPPED_NO_VERIFIED_INTERFACE"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Server"
+            }
           ]
         }
       ]
@@ -107,6 +114,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -172,6 +186,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -239,6 +260,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -304,6 +332,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -371,6 +406,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -436,6 +478,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -503,6 +552,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -568,6 +624,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -635,6 +698,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -700,6 +770,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -767,6 +844,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -832,6 +916,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -899,6 +990,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -964,6 +1062,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1055,6 +1160,13 @@
               "valueType": "xs:string",
               "value": "User-approved canonical identifier alignment (TI_105 -> https://aas.example.com/TI1202); source tags and source URIs retained. Modeling decision, not independent P&ID proof. Original DEXPI separator/condenser naming discrepancy remains."
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1120,6 +1232,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1187,6 +1306,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1252,6 +1378,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1319,6 +1452,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1384,6 +1524,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1451,6 +1598,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1516,6 +1670,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1583,6 +1744,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1648,6 +1816,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1715,6 +1890,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1780,6 +1962,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -1871,6 +2060,13 @@
               "valueType": "xs:string",
               "value": "User-approved canonical identifier alignment (VC_105 -> https://aas.example.com/CV1006); source tags and source URIs retained. Modeling decision, not independent P&ID proof. CV-1006 is absent from reviewed P&ID."
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -1936,6 +2132,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -2027,6 +2230,13 @@
               "valueType": "xs:string",
               "value": "User-approved canonical identifier alignment (VC_107 -> https://aas.example.com/CV1301); source tags and source URIs retained. Modeling decision, not independent P&ID proof."
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -2092,6 +2302,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -2159,6 +2376,13 @@
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -2224,6 +2448,13 @@
               "idShort": "MappingBasis",
               "valueType": "xs:string",
               "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         },
@@ -2315,6 +2546,13 @@
               "valueType": "xs:string",
               "value": "User-approved canonical identifier alignment (VC_111 -> https://aas.example.com/CV1201); source tags and source URIs retained. Modeling decision, not independent P&ID proof."
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
+            }
           ]
         },
         {
@@ -2404,6 +2642,13 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "SC_101 original function tag retained; M1 canonical motor asset; XMV12 signal remains logical control."
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "SignalMapping"
             }
           ]
         }
