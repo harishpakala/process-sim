@@ -1,0 +1,76 @@
+{
+  "arms": {
+    "deterministic": {
+      "complete": {
+        "median_seconds": 0.3896895,
+        "n": 102,
+        "p95_seconds": 0.6382550999999996,
+        "passed": 102
+      },
+      "reject": {
+        "median_seconds": 5.25e-05,
+        "n": 6,
+        "p95_seconds": 6.475e-05,
+        "passed": 6
+      }
+    },
+    "hybrid": {
+      "complete": {
+        "median_seconds": 8.066803,
+        "n": 102,
+        "p95_seconds": 11.373367549999992,
+        "passed": 102
+      },
+      "reject": {
+        "median_seconds": 7.112023,
+        "n": 6,
+        "p95_seconds": 9.81769325,
+        "passed": 6
+      }
+    },
+    "llm": {
+      "complete": {
+        "median_seconds": 42.1360575,
+        "n": 102,
+        "p95_seconds": 69.84584474999997,
+        "passed": 102
+      },
+      "reject": {
+        "median_seconds": 7.0932215,
+        "n": 6,
+        "p95_seconds": 10.0098035,
+        "passed": 6
+      }
+    }
+  },
+  "bootstrap": {
+    "cluster": "positive fixture ID",
+    "iterations": 10000,
+    "seed": 20261110
+  },
+  "case_records": 324,
+  "caveats": [
+    "Confidence intervals are fixture-clustered descriptive bootstrap intervals, not independent replication across plants or historian snapshots.",
+    "Per-check failure categories are not recoverable from aggregate original_failed_check_count; original detailed per-case reports are required.",
+    "Deterministic arm uses structured fixture input; other arms interpret natural language.",
+    "Recorded final passes represent limited-scope checks and may follow deterministic repair."
+  ],
+  "distinct_positive_fixtures": 34,
+  "full_llm_initial_failed_checks_total": 355,
+  "full_llm_initial_positive_answers_with_failed_checks": 102,
+  "paired_llm_minus_hybrid_95pct_fixture_cluster_bootstrap_ci_seconds": [
+    32.316767999999996,
+    35.420379
+  ],
+  "paired_llm_minus_hybrid_median_seconds": 33.953391499999995,
+  "paired_llm_over_hybrid_95pct_fixture_cluster_bootstrap_ci": [
+    5.075566129374842,
+    5.4729062504150505
+  ],
+  "paired_llm_over_hybrid_median_ratio": 5.305176702495322,
+  "positive_triples": 102,
+  "repeats_per_positive_fixture": {
+    "3": 34
+  },
+  "source_run_id": "077a3c31-44f4-4f3a-b06d-ad52b148fe10"
+}

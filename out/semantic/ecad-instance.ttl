@@ -63,14 +63,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1004"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV4"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed A and C Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1004"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1004"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0Lk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -82,7 +84,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1004.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1004"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV4"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -172,6 +174,12 @@
     aas:elementPath "Devices.CV_1004.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1004.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1004"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1> a aas:SMC,
         ecad:Device ;
     rdfs:label "CV_1005" ;
@@ -180,14 +188,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1005"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV6"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Purge Flow Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1005"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1005"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1Lk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -199,7 +209,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1005.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1005"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV6"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -288,6 +298,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.CV_1005.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1005.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1005"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA2> a aas:SMC,
         ecad:Device ;
@@ -414,14 +430,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1001"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV3"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed A Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1001"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1001"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -433,7 +451,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1001.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1001"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV3"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -523,6 +541,12 @@
     aas:elementPath "Devices.CV_1001.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1001.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1001"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAy> a aas:SMC,
         ecad:Device ;
     rdfs:label "CV_1002" ;
@@ -531,14 +555,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1002"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV1"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed D Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1002"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1002"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -550,7 +576,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1002.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1002"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV1"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -640,6 +666,12 @@
     aas:elementPath "Devices.CV_1002.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1002.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1002"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAz> a aas:SMC,
         ecad:Device ;
     rdfs:label "CV_1003" ;
@@ -648,14 +680,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1003"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV2"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed E Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1003"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1003"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -667,7 +701,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1003.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1003"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV2"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -757,6 +791,12 @@
     aas:elementPath "Devices.CV_1003.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1003.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1003"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "CV_1101" ;
@@ -765,14 +805,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1101"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV10"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor Cooling Water Return (CWR) Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1101"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -784,7 +826,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1101.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1101"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV10"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -873,6 +915,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.CV_1101.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1101.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMjAx> a aas:SMC,
         ecad:Device ;
@@ -1233,14 +1281,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1501"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV8"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Product Outlet Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1501"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -1252,7 +1302,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1501.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1501"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV8"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -1342,6 +1392,12 @@
     aas:elementPath "Devices.CV_1501.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1501.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1501"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAy> a aas:SMC,
         ecad:Device ;
     rdfs:label "CV_1502" ;
@@ -1350,14 +1406,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/CV-1502"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMV9"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper Stream Feed Control Valve"^^xsd:string ;
     ecad:hasDeviceType "Valve"^^xsd:string ;
     ecad:hasLocalId "CV-1502"^^xsd:string ;
     ecad:hasManufacturer "Siemens"^^xsd:string ;
-    ecad:hasPartNumber "S55264-V193"^^xsd:string .
+    ecad:hasPartNumber "S55264-V193"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/CV-1502"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -1369,7 +1427,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.CV_1502.AssetIdentifier" ;
-    aas:value "https://aas.example.com/CV-1502"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV9"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -1458,6 +1516,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.CV_1502.PartNumber" ;
     aas:value "S55264-V193"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.CV_1502.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV-1502"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5EQ1Bvd2VyU3VwcGx5> a aas:SMC,
         ecad:Device ;
@@ -1552,14 +1616,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1004"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS4"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed A and C flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1004"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1004"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0Lk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -1571,7 +1637,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1004.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1004"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS4"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -1691,6 +1757,12 @@
     aas:elementPath "Devices.FI_1004.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1004.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1004"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1005" ;
@@ -1699,14 +1771,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1005"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS10"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Purge Flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1005"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1005"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1Lk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -1718,7 +1792,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1005.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1005"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS10"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -1838,6 +1912,12 @@
     aas:elementPath "Devices.FI_1005.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1005.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1005"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1006" ;
@@ -1846,14 +1926,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1006"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS5"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Recycle Flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1006"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1006"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2Lk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -1865,7 +1947,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1006.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1006"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS5"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -1985,6 +2067,12 @@
     aas:elementPath "Devices.FI_1006.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1006.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1006"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1001" ;
@@ -1993,14 +2081,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1001"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS1"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed A flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1001"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1001"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2012,7 +2102,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1001.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1001"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS1"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -2132,6 +2222,12 @@
     aas:elementPath "Devices.FI_1001.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1001.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1001"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAy> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1002" ;
@@ -2140,14 +2236,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1002"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS2"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed D flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1002"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1002"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2159,7 +2257,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1002.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1002"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS2"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -2279,6 +2377,12 @@
     aas:elementPath "Devices.FI_1002.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1002.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1002"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAz> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1003" ;
@@ -2287,14 +2391,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1003"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS3"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Feed E flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1003"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1003"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2306,7 +2412,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1003.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1003"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS3"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -2426,6 +2532,12 @@
     aas:elementPath "Devices.FI_1003.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1003.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1003"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1101" ;
@@ -2434,14 +2546,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLlBhcnROdW1iZXI> ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
     ecad:hasAssetIdentifier "https://aas.example.com/FI106"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor Feed Flow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1101"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2573,6 +2687,12 @@
     aas:elementPath "Devices.FI_1101.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1101.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1101"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1301" ;
@@ -2581,14 +2701,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1301"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS14"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Seperator underflow rate"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1301"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1301"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2600,7 +2722,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1301.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1301"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS14"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -2720,6 +2842,12 @@
     aas:elementPath "Devices.FI_1301.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1301.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1301"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1501" ;
@@ -2728,14 +2856,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1501"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS17"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper underflow"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1501"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2747,7 +2877,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1501.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1501"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS17"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -2867,6 +2997,12 @@
     aas:elementPath "Devices.FI_1501.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1501.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1501"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAy> a aas:SMC,
         ecad:Device ;
     rdfs:label "FI_1502" ;
@@ -2875,14 +3011,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/FI-1502"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS19"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper stream flow"^^xsd:string ;
     ecad:hasDeviceType "Flow"^^xsd:string ;
     ecad:hasLocalId "FI-1502"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PFMV505-1"^^xsd:string .
+    ecad:hasPartNumber "PFMV505-1"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/FI-1502"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -2894,7 +3032,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.FI_1502.AssetIdentifier" ;
-    aas:value "https://aas.example.com/FI-1502"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS19"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -3014,6 +3152,12 @@
     aas:elementPath "Devices.FI_1502.PartNumber" ;
     aas:value "PFMV505-1"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.FI_1502.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI-1502"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "JI_1401" ;
@@ -3022,14 +3166,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/JI-1401"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS20"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Compressor work"^^xsd:string ;
     ecad:hasDeviceType "Power"^^xsd:string ;
     ecad:hasLocalId "JI-1401"^^xsd:string ;
     ecad:hasManufacturer "Schneider"^^xsd:string ;
-    ecad:hasPartNumber "A9MEM3555"^^xsd:string .
+    ecad:hasPartNumber "A9MEM3555"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/JI-1401"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -3041,7 +3187,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.JI_1401.AssetIdentifier" ;
-    aas:value "https://aas.example.com/JI-1401"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS20"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -3161,6 +3307,12 @@
     aas:elementPath "Devices.JI_1401.PartNumber" ;
     aas:value "A9MEM3555"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.JI_1401.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/JI-1401"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "LI_1101" ;
@@ -3169,14 +3321,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLlBhcnROdW1iZXI> ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
     ecad:hasAssetIdentifier "https://aas.example.com/LI101"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor level"^^xsd:string ;
     ecad:hasDeviceType "Level"^^xsd:string ;
     ecad:hasLocalId "LI-1101"^^xsd:string ;
     ecad:hasManufacturer "IFM"^^xsd:string ;
-    ecad:hasPartNumber "LW2720"^^xsd:string .
+    ecad:hasPartNumber "LW2720"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/LI-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -3308,6 +3462,12 @@
     aas:elementPath "Devices.LI_1101.PartNumber" ;
     aas:value "LW2720"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.LI_1101.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI-1101"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "LI_1301" ;
@@ -3316,14 +3476,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/LI-1301"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS12"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Separator liquid level"^^xsd:string ;
     ecad:hasDeviceType "Level"^^xsd:string ;
     ecad:hasLocalId "LI-1301"^^xsd:string ;
     ecad:hasManufacturer "IFM"^^xsd:string ;
-    ecad:hasPartNumber "LW2720"^^xsd:string .
+    ecad:hasPartNumber "LW2720"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/LI-1301"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -3335,7 +3497,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.LI_1301.AssetIdentifier" ;
-    aas:value "https://aas.example.com/LI-1301"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS12"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -3455,6 +3617,12 @@
     aas:elementPath "Devices.LI_1301.PartNumber" ;
     aas:value "LW2720"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.LI_1301.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI-1301"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "LI_1501" ;
@@ -3463,14 +3631,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/LI-1501"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS15"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper level"^^xsd:string ;
     ecad:hasDeviceType "Level"^^xsd:string ;
     ecad:hasLocalId "LI-1501"^^xsd:string ;
     ecad:hasManufacturer "IFM"^^xsd:string ;
-    ecad:hasPartNumber "LW2720"^^xsd:string .
+    ecad:hasPartNumber "LW2720"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/LI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -3482,7 +3652,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.LI_1501.AssetIdentifier" ;
-    aas:value "https://aas.example.com/LI-1501"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS15"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -3601,6 +3771,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.LI_1501.PartNumber" ;
     aas:value "LW2720"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.LI_1501.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NMQ> a aas:SMC,
         ecad:Device ;
@@ -4078,14 +4254,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLlBhcnROdW1iZXI> ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
     ecad:hasAssetIdentifier "https://aas.example.com/PI101"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor Pressure"^^xsd:string ;
     ecad:hasDeviceType "Pressure"^^xsd:string ;
     ecad:hasLocalId "PI-1101"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/PI-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -4217,6 +4395,12 @@
     aas:elementPath "Devices.PI_1101.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.PI_1101.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI-1101"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "PI_1301" ;
@@ -4225,14 +4409,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/PI-1301"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS13"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Seperator Pressure"^^xsd:string ;
     ecad:hasDeviceType "Pressure"^^xsd:string ;
     ecad:hasLocalId "PI-1301"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/PI-1301"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -4244,7 +4430,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.PI_1301.AssetIdentifier" ;
-    aas:value "https://aas.example.com/PI-1301"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS13"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -4364,6 +4550,12 @@
     aas:elementPath "Devices.PI_1301.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.PI_1301.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI-1301"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "PI_1501" ;
@@ -4372,14 +4564,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/PI-1501"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS16"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper Pressure"^^xsd:string ;
     ecad:hasDeviceType "Pressure"^^xsd:string ;
     ecad:hasLocalId "PI-1501"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/PI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -4391,7 +4585,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.PI_1501.AssetIdentifier" ;
-    aas:value "https://aas.example.com/PI-1501"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS16"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -4510,6 +4704,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.PI_1501.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.PI_1501.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3g> a aas:SMC,
         ecad:Device ;
@@ -5326,14 +5526,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLlBhcnROdW1iZXI> ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
     ecad:hasAssetIdentifier "https://aas.example.com/TI101"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor temperature"^^xsd:string ;
     ecad:hasDeviceType "Temperature"^^xsd:string ;
     ecad:hasLocalId "TI-1101"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/TI-1101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -5465,6 +5667,12 @@
     aas:elementPath "Devices.TI_1101.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.TI_1101.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI-1101"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAz> a aas:SMC,
         ecad:Device ;
     rdfs:label "TI_1103" ;
@@ -5473,14 +5681,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/TI-1103"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS21"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Reactor cooling water outlet temperature"^^xsd:string ;
     ecad:hasDeviceType "Temperature"^^xsd:string ;
     ecad:hasLocalId "TI-1103"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/TI-1103"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -5492,7 +5702,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.TI_1103.AssetIdentifier" ;
-    aas:value "https://aas.example.com/TI-1103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS21"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -5611,6 +5821,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.TI_1103.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAzLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.TI_1103.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI-1103"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMjAy> a aas:SMC,
         ecad:Device ;
@@ -5767,14 +5983,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/TI-1301"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS11"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Seperator temperature"^^xsd:string ;
     ecad:hasDeviceType "Temperature"^^xsd:string ;
     ecad:hasLocalId "TI-1301"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/TI-1301"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -5786,7 +6004,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.TI_1301.AssetIdentifier" ;
-    aas:value "https://aas.example.com/TI-1301"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS11"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -5906,6 +6124,12 @@
     aas:elementPath "Devices.TI_1301.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.TI_1301.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI-1301"^^xsd:string .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAx> a aas:SMC,
         ecad:Device ;
     rdfs:label "TI_1501" ;
@@ -5914,14 +6138,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLkRlc2NyaXB0aW9u>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLkRldmljZVR5cGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLkxvY2FsSWQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLlBhcnROdW1iZXI> ;
-    ecad:hasAssetIdentifier "https://aas.example.com/TI-1501"^^xsd:string ;
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLlBhcnROdW1iZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    ecad:hasAssetIdentifier "https://example.org/tep/assets/TEP_XMEAS18"^^xsd:string ;
     ecad:hasConnectionPoints <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> ;
     ecad:hasDescription "Stripper temperature"^^xsd:string ;
     ecad:hasDeviceType "Temperature"^^xsd:string ;
     ecad:hasLocalId "TI-1501"^^xsd:string ;
     ecad:hasManufacturer "SMC"^^xsd:string ;
-    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string .
+    ecad:hasPartNumber "PSH-L2-01-W"^^xsd:string ;
+    ecad:hasSourceAssetIdentifier "https://aas.example.com/TI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLk1hbnVmYWN0dXJlcg> a owl:NamedIndividual,
         aas:Property ;
@@ -5933,7 +6159,7 @@
         aas:Property ;
     rdfs:label "AssetIdentifier" ;
     aas:elementPath "Devices.TI_1501.AssetIdentifier" ;
-    aas:value "https://aas.example.com/TI-1501"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS18"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLkNvbm5lY3Rpb25Qb2ludHM> a aas:SMC,
         ecad:ConnectionPoints ;
@@ -6052,6 +6278,12 @@
     rdfs:label "PartNumber" ;
     aas:elementPath "Devices.TI_1501.PartNumber" ;
     aas:value "PSH-L2-01-W"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAxLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Devices.TI_1501.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI-1501"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RWxlY3RyaWNhbE5ldHM> a aas:SMC ;
     rdfs:label "ElectricalNets" ;

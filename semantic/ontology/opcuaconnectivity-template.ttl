@@ -1,0 +1,205 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix opcuaconnectivity: <https://example.org/opcuaconnectivity/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "TEP_OPCUAConnectivity SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> a owl:Class ;
+    rdfs:label "TEP_OPCUAConnectivity" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ECADConnectionPointReferenceStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasECADConnectionPointReferenceStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "EndpointStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEndpointStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "EndpointUrl constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEndpointUrl .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "NamespaceURI constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasNamespaceURI .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "Server SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Server constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> ;
+    sh:path opcuaconnectivity:hasServer .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Servers SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Servers constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> ;
+    sh:path opcuaconnectivity:hasServers .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0RvbWFpbi9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EngineeringDomain constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEngineeringDomain .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uSWQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "EngineeringFunctionId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEngineeringFunctionId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "EngineeringFunctionReference constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasEngineeringFunctionReference .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MappingBasis constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasMappingBasis .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "MappingStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasMappingStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "OPCUANodeId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasOPCUANodeId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "OPCUABrowsePath constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasOPCUABrowsePath .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SignalDirection constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasSignalDirection .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "SignalName constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:path opcuaconnectivity:hasSignalName .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "SignalMapping SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0RvbWFpbi9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "SignalMapping constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> ;
+    sh:path opcuaconnectivity:hasSignalMapping .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "SignalMappings SHACL shape" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SignalMappings constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> ;
+    sh:path opcuaconnectivity:hasSignalMappings .
+
+opcuaconnectivity:hasECADConnectionPointReferenceStatus a owl:DatatypeProperty ;
+    rdfs:label "hasECADConnectionPointReferenceStatus" .
+
+opcuaconnectivity:hasEndpointStatus a owl:DatatypeProperty ;
+    rdfs:label "hasEndpointStatus" .
+
+opcuaconnectivity:hasEndpointUrl a owl:DatatypeProperty ;
+    rdfs:label "hasEndpointUrl" .
+
+opcuaconnectivity:hasEngineeringDomain a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringDomain" .
+
+opcuaconnectivity:hasEngineeringFunctionId a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringFunctionId" .
+
+opcuaconnectivity:hasEngineeringFunctionReference a owl:DatatypeProperty ;
+    rdfs:label "hasEngineeringFunctionReference" .
+
+opcuaconnectivity:hasMappingBasis a owl:DatatypeProperty ;
+    rdfs:label "hasMappingBasis" .
+
+opcuaconnectivity:hasMappingStatus a owl:DatatypeProperty ;
+    rdfs:label "hasMappingStatus" .
+
+opcuaconnectivity:hasNamespaceURI a owl:DatatypeProperty ;
+    rdfs:label "hasNamespaceURI" .
+
+opcuaconnectivity:hasOPCUABrowsePath a owl:DatatypeProperty ;
+    rdfs:label "hasOPCUABrowsePath" .
+
+opcuaconnectivity:hasOPCUANodeId a owl:DatatypeProperty ;
+    rdfs:label "hasOPCUANodeId" .
+
+opcuaconnectivity:hasServer a owl:ObjectProperty ;
+    rdfs:label "hasServer" .
+
+opcuaconnectivity:hasServers a owl:ObjectProperty ;
+    rdfs:label "hasServers" .
+
+opcuaconnectivity:hasSignalDirection a owl:DatatypeProperty ;
+    rdfs:label "hasSignalDirection" .
+
+opcuaconnectivity:hasSignalMapping a owl:ObjectProperty ;
+    rdfs:label "hasSignalMapping" .
+
+opcuaconnectivity:hasSignalMappings a owl:ObjectProperty ;
+    rdfs:label "hasSignalMappings" .
+
+opcuaconnectivity:hasSignalName a owl:DatatypeProperty ;
+    rdfs:label "hasSignalName" .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
+

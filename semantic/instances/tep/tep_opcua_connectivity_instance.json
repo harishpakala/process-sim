@@ -1,0 +1,2089 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-opcua-connectivity-instance",
+  "idShort": "TEP_OPCUAConnectivity",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Servers",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "TEPSimulator",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EndpointUrl",
+              "valueType": "xs:string",
+              "value": "opc.tcp://localhost:4841/process-sim/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "NamespaceURI",
+              "valueType": "xs:string",
+              "value": "urn:process-sim:opcua"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EndpointStatus",
+              "valueType": "xs:string",
+              "value": "CONFIGURATION_EXAMPLE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECADConnectionPointReferenceStatus",
+              "valueType": "xs:string",
+              "value": "UNMAPPED_NO_VERIFIED_INTERFACE"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "SignalMappings",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AFeedFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS1",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DFeedFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS2",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EFeedFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS3",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ACFeedFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS4",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "RecycleFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS5",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorFeedFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/FI106",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PurgeFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS10",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorUnderflow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS14",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS14"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperUnderflow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS17",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS17"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperSteamFlow",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS19",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "FI_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS19"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorTemperature",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/TI101",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "TI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorTemperature",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS11",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "TI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperTemperature",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS18",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "TI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS18"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorCoolingWaterOutletTemperature",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS21",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "TI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorCoolingWaterOutletTemperature",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/TI_105",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "TI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS22"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorLevel",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/LI101",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "LI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorLevel",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS12",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "LI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperLevel",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS15",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "LI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS15"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorPressure",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/PI101",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "PI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorPressure",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS13",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "PI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS13"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperPressure",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS16",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "PI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CompressorPower",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMEAS20",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "JI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/Measurements/XMEAS20"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DFeedFlowControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV1",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EFeedFlowControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV2",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV2"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AFeedFlowControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV3",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV3"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ACFeedFlowControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV4",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV4"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CompressorRecycleValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/VC_105",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV5"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PurgeValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV6",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV6"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorLiquidValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/VC_107",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperLiquidProductValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV8",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV8"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperSteamValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV9",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV9"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorCoolingWaterValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://example.org/tep/assets/TEP_XMV10",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV10"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CondenserCoolingWaterValve",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/VC_111",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "VC_111"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV11"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AgitatorSpeedControl",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionReference",
+              "value": "https://aas.example.com/SC_101",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringFunctionId",
+              "valueType": "xs:string",
+              "value": "SC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringDomain",
+              "valueType": "xs:string",
+              "value": "DEXPI"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalName",
+              "valueType": "xs:string",
+              "value": "XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUANodeId",
+              "valueType": "xs:string",
+              "value": "nsu=urn:process-sim:opcua;s=TEP.ManipulatedVariables.XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OPCUABrowsePath",
+              "valueType": "xs:string",
+              "value": "Objects/TEP/ManipulatedVariables/XMV12"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SignalDirection",
+              "valueType": "xs:string",
+              "value": "READ_WRITE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_ENGINEERING_MATCH"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MappingBasis",
+              "valueType": "xs:string",
+              "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

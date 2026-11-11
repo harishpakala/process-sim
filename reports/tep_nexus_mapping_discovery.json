@@ -1,6 +1,6 @@
 {
   "interface": "TEP NEXUS GraphDB mapping discovery",
-  "generated_at_utc": "2026-11-02T06:31:12.837028+00:00",
+  "generated_at_utc": "2026-11-10T05:42:59.788700+00:00",
   "source": "GraphDB SPARQL",
   "mapping_confidence": "PROVISIONAL_NOT_PHYSICALLY_VERIFIED",
   "planner_allowlist_modified": false,
@@ -11,7 +11,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_101",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS1",
           "operational_signal": "XMEAS1",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE"
         }
@@ -23,7 +23,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_102",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS2",
           "operational_signal": "XMEAS2",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI"
         }
@@ -35,7 +35,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_103",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS3",
           "operational_signal": "XMEAS3",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM"
         }
@@ -47,7 +47,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_104",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS4",
           "operational_signal": "XMEAS4",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzQ"
         }
@@ -59,7 +59,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_105",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS5",
           "operational_signal": "XMEAS5",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzU"
         }
@@ -71,7 +71,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_106",
+          "function_reference": "https://aas.example.com/FI106",
           "operational_signal": "XMEAS6",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY"
         }
@@ -83,7 +83,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_107",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS10",
           "operational_signal": "XMEAS10",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEw"
         }
@@ -95,7 +95,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_108",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS14",
           "operational_signal": "XMEAS14",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0"
         }
@@ -107,7 +107,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_109",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS17",
           "operational_signal": "XMEAS17",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3"
         }
@@ -119,7 +119,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/FI_110",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS19",
           "operational_signal": "XMEAS19",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE5"
         }
@@ -131,7 +131,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/JI_101",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS20",
           "operational_signal": "XMEAS20",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIw"
         }
@@ -143,7 +143,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/LI_101",
+          "function_reference": "https://aas.example.com/LI101",
           "operational_signal": "XMEAS8",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzg"
         }
@@ -155,7 +155,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/LI_102",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS12",
           "operational_signal": "XMEAS12",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEy"
         }
@@ -167,7 +167,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/LI_103",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS15",
           "operational_signal": "XMEAS15",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1"
         }
@@ -179,7 +179,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/PI_101",
+          "function_reference": "https://aas.example.com/PI101",
           "operational_signal": "XMEAS7",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
         }
@@ -191,7 +191,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/PI_102",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS13",
           "operational_signal": "XMEAS13",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEz"
         }
@@ -203,7 +203,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/PI_103",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS16",
           "operational_signal": "XMEAS16",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE2"
         }
@@ -227,7 +227,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/TI_101",
+          "function_reference": "https://aas.example.com/TI101",
           "operational_signal": "XMEAS9",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk"
         }
@@ -239,7 +239,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/TI_102",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS11",
           "operational_signal": "XMEAS11",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx"
         }
@@ -251,7 +251,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/TI_103",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS18",
           "operational_signal": "XMEAS18",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4"
         }
@@ -263,7 +263,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/TI_104",
+          "function_reference": "https://example.org/tep/assets/TEP_XMEAS21",
           "operational_signal": "XMEAS21",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx"
         }
@@ -287,7 +287,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_101",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV1",
           "operational_signal": "XMV1",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx"
         }
@@ -299,7 +299,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_102",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV2",
           "operational_signal": "XMV2",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy"
         }
@@ -311,7 +311,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_103",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV3",
           "operational_signal": "XMV3",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
         }
@@ -323,7 +323,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_104",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV4",
           "operational_signal": "XMV4",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0"
         }
@@ -347,7 +347,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_106",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV6",
           "operational_signal": "XMV6",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2"
         }
@@ -371,7 +371,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_108",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV8",
           "operational_signal": "XMV8",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4"
         }
@@ -383,7 +383,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_109",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV9",
           "operational_signal": "XMV9",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5"
         }
@@ -395,7 +395,7 @@
       "status": "UNIQUE_PROVISIONAL_CANDIDATE",
       "mappings": [
         {
-          "function_reference": "https://aas.example.com/VC_110",
+          "function_reference": "https://example.org/tep/assets/TEP_XMV10",
           "operational_signal": "XMV10",
           "asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA"
         }

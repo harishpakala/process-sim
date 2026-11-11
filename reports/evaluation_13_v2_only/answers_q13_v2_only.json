@@ -1,0 +1,1415 @@
+{
+  "generated_at_utc": "2026-11-10T14:23:08.739103+00:00",
+  "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+  "model_requested": "llama3.1:8b",
+  "grounding_instructions": "Answer the question using only the supplied JSON evidence. Report explicit identifiers, mappings, values, and timestamps directly; do not downgrade an explicit canonical assetId or GraphDB mapping to a guess. A verified logical mapping does NOT verify physical installation or product selection: preserve those separate qualifications. An operator injection command is a recorded request, not proof that a fault became active; do not describe samples at the command time as post-fault. For temporal queries, distinguish simulation_seconds from observed_at (wall-clock record time); 30 and 30.0 seconds denote the same instant. Floating-point roundoff (for example 27.000000000000004) is not itself a timing discrepancy. Do not claim timing discrepancies, physical installation, measurement units, causal effects, or missing mappings without supporting evidence. If evidence is genuinely missing, identify the specific missing field. Answer concisely and completely.",
+  "method": "evidence_conditioned_ollama_qa_not_live_vtkg_execution",
+  "assessment_status": "NOT_MANUALLY_ASSESSED",
+  "q11_evidence": null,
+  "q12_evidence": null,
+  "q13_evidence": {
+    "source": "Live GraphDB SPARQL and TimescaleDB read-only queries",
+    "asset_identifier": "https://aas.example.com/TI101",
+    "product_candidate_identifier": "https://example.org/product-types/IFM_TA1101",
+    "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+    "signal": "XMEAS9",
+    "interval_seconds_inclusive": [
+      0,
+      600
+    ],
+    "graphdb": {
+      "canonical_asset_identifiers": [
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk",
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDE2",
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDE2",
+          "predicate": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDUw",
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAx",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        }
+      ],
+      "product_and_signal_references": [
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIy",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "value": "XMEAS9"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ",
+          "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        }
+      ],
+      "opcua_mapping_provenance": [
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+          "value": "https://example.org/aas/SMC"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "http://www.w3.org/2000/01/rdf-schema#label",
+          "value": "ReactorTemperature"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLk1hcHBpbmdTdGF0dXM"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLlNpZ25hbE5hbWU"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLk9QQ1VBQnJvd3NlUGF0aA"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLk1hcHBpbmdCYXNpcw"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLk9QQ1VBTm9kZUlk"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLkVuZ2luZWVyaW5nRnVuY3Rpb25JZA"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLkVuZ2luZWVyaW5nRG9tYWlu"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLkVuZ2luZWVyaW5nRnVuY3Rpb25SZWZlcmVuY2U"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/aas/hasSubmodelElement",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLlNpZ25hbERpcmVjdGlvbg"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "value": "DEXPI"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "value": "TI_101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "value": "PROVISIONAL_ENGINEERING_MATCH"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "value": "Objects/TEP/Measurements/XMEAS9"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "value": "READ"
+        },
+        {
+          "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "value": "XMEAS9"
+        }
+      ]
+    },
+    "graphdb_errors": {},
+    "historian_error": null,
+    "observations": [
+      {
+        "simulation_seconds": 0.0,
+        "value": 0.0,
+        "observed_at": "2026-11-01T22:32:12.417405+01:00"
+      },
+      {
+        "simulation_seconds": 2.0,
+        "value": 120.4033529571204,
+        "observed_at": "2026-11-01T22:32:21.076555+01:00"
+      },
+      {
+        "simulation_seconds": 5.0,
+        "value": 120.39824722734292,
+        "observed_at": "2026-11-01T22:32:24.059266+01:00"
+      },
+      {
+        "simulation_seconds": 8.0,
+        "value": 120.41998666431569,
+        "observed_at": "2026-11-01T22:32:27.105962+01:00"
+      },
+      {
+        "simulation_seconds": 11.0,
+        "value": 120.39871177618335,
+        "observed_at": "2026-11-01T22:32:29.924005+01:00"
+      },
+      {
+        "simulation_seconds": 14.000000000000002,
+        "value": 120.40124271645843,
+        "observed_at": "2026-11-01T22:32:32.761737+01:00"
+      },
+      {
+        "simulation_seconds": 16.0,
+        "value": 120.40482929296566,
+        "observed_at": "2026-11-01T22:32:35.587864+01:00"
+      },
+      {
+        "simulation_seconds": 19.0,
+        "value": 120.396416850701,
+        "observed_at": "2026-11-01T22:32:38.449049+01:00"
+      },
+      {
+        "simulation_seconds": 22.0,
+        "value": 120.40351581425281,
+        "observed_at": "2026-11-01T22:32:41.491257+01:00"
+      },
+      {
+        "simulation_seconds": 25.0,
+        "value": 120.41199273873507,
+        "observed_at": "2026-11-01T22:32:44.523078+01:00"
+      },
+      {
+        "simulation_seconds": 28.000000000000004,
+        "value": 120.40608957601472,
+        "observed_at": "2026-11-01T22:32:47.214120+01:00"
+      },
+      {
+        "simulation_seconds": 31.0,
+        "value": 120.38797796223969,
+        "observed_at": "2026-11-01T22:32:50.231726+01:00"
+      },
+      {
+        "simulation_seconds": 34.0,
+        "value": 120.41150921909319,
+        "observed_at": "2026-11-01T22:32:53.202116+01:00"
+      },
+      {
+        "simulation_seconds": 37.0,
+        "value": 120.38596435455293,
+        "observed_at": "2026-11-01T22:32:56.131868+01:00"
+      },
+      {
+        "simulation_seconds": 40.0,
+        "value": 120.39980406335265,
+        "observed_at": "2026-11-01T22:32:59.035793+01:00"
+      },
+      {
+        "simulation_seconds": 43.0,
+        "value": 120.39441872726353,
+        "observed_at": "2026-11-01T22:33:01.815737+01:00"
+      },
+      {
+        "simulation_seconds": 45.0,
+        "value": 120.40271628240102,
+        "observed_at": "2026-11-01T22:33:04.644797+01:00"
+      },
+      {
+        "simulation_seconds": 48.0,
+        "value": 120.41735463580707,
+        "observed_at": "2026-11-01T22:33:07.446217+01:00"
+      },
+      {
+        "simulation_seconds": 51.00000000000001,
+        "value": 120.39746521123415,
+        "observed_at": "2026-11-01T22:33:10.324313+01:00"
+      },
+      {
+        "simulation_seconds": 54.00000000000001,
+        "value": 120.39393057730757,
+        "observed_at": "2026-11-01T22:33:13.260398+01:00"
+      },
+      {
+        "simulation_seconds": 57.00000000000001,
+        "value": 120.38806299009373,
+        "observed_at": "2026-11-01T22:33:16.187774+01:00"
+      },
+      {
+        "simulation_seconds": 59.999999999999986,
+        "value": 120.39535439311875,
+        "observed_at": "2026-11-01T22:33:19.177539+01:00"
+      },
+      {
+        "simulation_seconds": 62.99999999999997,
+        "value": 120.39922641738043,
+        "observed_at": "2026-11-01T22:33:22.072478+01:00"
+      },
+      {
+        "simulation_seconds": 64.99999999999996,
+        "value": 120.39705980478684,
+        "observed_at": "2026-11-01T22:33:24.884793+01:00"
+      },
+      {
+        "simulation_seconds": 67.99999999999994,
+        "value": 120.40292329438395,
+        "observed_at": "2026-11-01T22:33:27.707542+01:00"
+      },
+      {
+        "simulation_seconds": 70.99999999999991,
+        "value": 120.4088146711229,
+        "observed_at": "2026-11-01T22:33:30.649425+01:00"
+      },
+      {
+        "simulation_seconds": 73.9999999999999,
+        "value": 120.40264775344532,
+        "observed_at": "2026-11-01T22:33:33.671294+01:00"
+      },
+      {
+        "simulation_seconds": 76.99999999999989,
+        "value": 120.38776604728369,
+        "observed_at": "2026-11-01T22:33:36.585170+01:00"
+      },
+      {
+        "simulation_seconds": 79.99999999999987,
+        "value": 120.40669274606276,
+        "observed_at": "2026-11-01T22:33:39.595423+01:00"
+      },
+      {
+        "simulation_seconds": 82.99999999999984,
+        "value": 120.39488073070021,
+        "observed_at": "2026-11-01T22:33:42.659802+01:00"
+      },
+      {
+        "simulation_seconds": 85.99999999999983,
+        "value": 120.39446256960798,
+        "observed_at": "2026-11-01T22:33:45.744246+01:00"
+      },
+      {
+        "simulation_seconds": 88.99999999999982,
+        "value": 120.37800051869243,
+        "observed_at": "2026-11-01T22:33:48.841102+01:00"
+      },
+      {
+        "simulation_seconds": 91.99999999999979,
+        "value": 120.392236521355,
+        "observed_at": "2026-11-01T22:33:51.659155+01:00"
+      },
+      {
+        "simulation_seconds": 94.99999999999977,
+        "value": 120.39184220849273,
+        "observed_at": "2026-11-01T22:33:54.518685+01:00"
+      },
+      {
+        "simulation_seconds": 97.99999999999976,
+        "value": 120.38316889849868,
+        "observed_at": "2026-11-01T22:33:57.431347+01:00"
+      },
+      {
+        "simulation_seconds": 100.99999999999974,
+        "value": 120.40799759726215,
+        "observed_at": "2026-11-01T22:34:00.375634+01:00"
+      },
+      {
+        "simulation_seconds": 102.99999999999973,
+        "value": 120.40728899816915,
+        "observed_at": "2026-11-01T22:34:03.228845+01:00"
+      },
+      {
+        "simulation_seconds": 105.9999999999997,
+        "value": 120.38106562601803,
+        "observed_at": "2026-11-01T22:34:06.128264+01:00"
+      },
+      {
+        "simulation_seconds": 108.99999999999969,
+        "value": 120.37168321023587,
+        "observed_at": "2026-11-01T22:34:09.174621+01:00"
+      },
+      {
+        "simulation_seconds": 111.99999999999967,
+        "value": 120.38864826227883,
+        "observed_at": "2026-11-01T22:34:12.129572+01:00"
+      },
+      {
+        "simulation_seconds": 114.99999999999969,
+        "value": 120.40866366302284,
+        "observed_at": "2026-11-01T22:34:15.071633+01:00"
+      },
+      {
+        "simulation_seconds": 117.99999999999972,
+        "value": 120.38511198084159,
+        "observed_at": "2026-11-01T22:34:17.952678+01:00"
+      },
+      {
+        "simulation_seconds": 120.99999999999973,
+        "value": 120.39180547160679,
+        "observed_at": "2026-11-01T22:34:20.739034+01:00"
+      },
+      {
+        "simulation_seconds": 123.99999999999974,
+        "value": 120.3967360786882,
+        "observed_at": "2026-11-01T22:34:23.716298+01:00"
+      },
+      {
+        "simulation_seconds": 126.99999999999977,
+        "value": 120.38582543295402,
+        "observed_at": "2026-11-01T22:34:26.525338+01:00"
+      },
+      {
+        "simulation_seconds": 129.9999999999998,
+        "value": 120.41667485277078,
+        "observed_at": "2026-11-01T22:34:29.457740+01:00"
+      },
+      {
+        "simulation_seconds": 131.9999999999998,
+        "value": 120.41061369511034,
+        "observed_at": "2026-11-01T22:34:32.372471+01:00"
+      },
+      {
+        "simulation_seconds": 134.99999999999983,
+        "value": 120.38859740387838,
+        "observed_at": "2026-11-01T22:34:35.356527+01:00"
+      },
+      {
+        "simulation_seconds": 137.99999999999983,
+        "value": 120.42460094383489,
+        "observed_at": "2026-11-01T22:34:38.527812+01:00"
+      },
+      {
+        "simulation_seconds": 140.99999999999986,
+        "value": 120.4084886173314,
+        "observed_at": "2026-11-01T22:34:41.578964+01:00"
+      },
+      {
+        "simulation_seconds": 143.9999999999999,
+        "value": 120.40344720285573,
+        "observed_at": "2026-11-01T22:34:44.617620+01:00"
+      },
+      {
+        "simulation_seconds": 146.9999999999999,
+        "value": 120.40104720160451,
+        "observed_at": "2026-11-01T22:34:47.540560+01:00"
+      },
+      {
+        "simulation_seconds": 149.99999999999991,
+        "value": 120.38587884526984,
+        "observed_at": "2026-11-01T22:34:50.508646+01:00"
+      },
+      {
+        "simulation_seconds": 152.99999999999994,
+        "value": 120.41947787907863,
+        "observed_at": "2026-11-01T22:34:53.529097+01:00"
+      },
+      {
+        "simulation_seconds": 155.99999999999994,
+        "value": 120.38885309173385,
+        "observed_at": "2026-11-01T22:34:56.375145+01:00"
+      },
+      {
+        "simulation_seconds": 158.99999999999997,
+        "value": 120.40117611409241,
+        "observed_at": "2026-11-01T22:34:59.161376+01:00"
+      },
+      {
+        "simulation_seconds": 162.0,
+        "value": 120.38529826451077,
+        "observed_at": "2026-11-01T22:35:02.031200+01:00"
+      },
+      {
+        "simulation_seconds": 165.0,
+        "value": 120.3855005488446,
+        "observed_at": "2026-11-01T22:35:05.109259+01:00"
+      },
+      {
+        "simulation_seconds": 168.00000000000003,
+        "value": 120.4052436604494,
+        "observed_at": "2026-11-01T22:35:08.210401+01:00"
+      },
+      {
+        "simulation_seconds": 171.00000000000006,
+        "value": 120.38091798017997,
+        "observed_at": "2026-11-01T22:35:11.138157+01:00"
+      },
+      {
+        "simulation_seconds": 174.00000000000009,
+        "value": 120.39559357639084,
+        "observed_at": "2026-11-01T22:35:14.025146+01:00"
+      },
+      {
+        "simulation_seconds": 177.00000000000009,
+        "value": 120.39277020493603,
+        "observed_at": "2026-11-01T22:35:16.924290+01:00"
+      },
+      {
+        "simulation_seconds": 179.0000000000001,
+        "value": 120.39012730916936,
+        "observed_at": "2026-11-01T22:35:19.805309+01:00"
+      },
+      {
+        "simulation_seconds": 182.0000000000001,
+        "value": 120.38676316896812,
+        "observed_at": "2026-11-01T22:35:22.609924+01:00"
+      },
+      {
+        "simulation_seconds": 185.00000000000014,
+        "value": 120.40101774568916,
+        "observed_at": "2026-11-01T22:35:25.419963+01:00"
+      },
+      {
+        "simulation_seconds": 188.00000000000017,
+        "value": 120.39858756370674,
+        "observed_at": "2026-11-01T22:35:28.329052+01:00"
+      },
+      {
+        "simulation_seconds": 191.00000000000017,
+        "value": 120.40789425387379,
+        "observed_at": "2026-11-01T22:35:31.323428+01:00"
+      },
+      {
+        "simulation_seconds": 194.0000000000002,
+        "value": 120.39903913454266,
+        "observed_at": "2026-11-01T22:35:34.275954+01:00"
+      },
+      {
+        "simulation_seconds": 197.00000000000023,
+        "value": 120.3975532115657,
+        "observed_at": "2026-11-01T22:35:37.225918+01:00"
+      },
+      {
+        "simulation_seconds": 200.00000000000023,
+        "value": 120.39814717829502,
+        "observed_at": "2026-11-01T22:35:40.164517+01:00"
+      },
+      {
+        "simulation_seconds": 203.00000000000026,
+        "value": 120.40846141558252,
+        "observed_at": "2026-11-01T22:35:42.951370+01:00"
+      },
+      {
+        "simulation_seconds": 205.00000000000028,
+        "value": 120.39663941678884,
+        "observed_at": "2026-11-01T22:35:45.733521+01:00"
+      },
+      {
+        "simulation_seconds": 208.00000000000028,
+        "value": 120.40021953467723,
+        "observed_at": "2026-11-01T22:35:48.508310+01:00"
+      },
+      {
+        "simulation_seconds": 211.0000000000003,
+        "value": 120.38821718872823,
+        "observed_at": "2026-11-01T22:35:51.354427+01:00"
+      },
+      {
+        "simulation_seconds": 214.00000000000034,
+        "value": 120.39776494729325,
+        "observed_at": "2026-11-01T22:35:54.171338+01:00"
+      },
+      {
+        "simulation_seconds": 216.00000000000034,
+        "value": 120.3764250662236,
+        "observed_at": "2026-11-01T22:35:57.055581+01:00"
+      },
+      {
+        "simulation_seconds": 219.00000000000037,
+        "value": 120.38837092730662,
+        "observed_at": "2026-11-01T22:36:00.022129+01:00"
+      },
+      {
+        "simulation_seconds": 222.00000000000037,
+        "value": 120.4002212431818,
+        "observed_at": "2026-11-01T22:36:03.025693+01:00"
+      },
+      {
+        "simulation_seconds": 225.0000000000004,
+        "value": 120.39900618502529,
+        "observed_at": "2026-11-01T22:36:05.943088+01:00"
+      },
+      {
+        "simulation_seconds": 228.00000000000043,
+        "value": 120.38928019618804,
+        "observed_at": "2026-11-01T22:36:08.777899+01:00"
+      },
+      {
+        "simulation_seconds": 231.00000000000043,
+        "value": 120.38352740752092,
+        "observed_at": "2026-11-01T22:36:11.640802+01:00"
+      },
+      {
+        "simulation_seconds": 234.00000000000045,
+        "value": 120.3959116373747,
+        "observed_at": "2026-11-01T22:36:14.412796+01:00"
+      },
+      {
+        "simulation_seconds": 237.00000000000048,
+        "value": 120.40602639160016,
+        "observed_at": "2026-11-01T22:36:17.224695+01:00"
+      },
+      {
+        "simulation_seconds": 239.00000000000048,
+        "value": 120.39053543399433,
+        "observed_at": "2026-11-01T22:36:20.022197+01:00"
+      },
+      {
+        "simulation_seconds": 242.0000000000005,
+        "value": 120.4004956585073,
+        "observed_at": "2026-11-01T22:36:22.831071+01:00"
+      },
+      {
+        "simulation_seconds": 245.00000000000054,
+        "value": 120.39475867299359,
+        "observed_at": "2026-11-01T22:36:25.756716+01:00"
+      },
+      {
+        "simulation_seconds": 248.00000000000054,
+        "value": 120.40491017080373,
+        "observed_at": "2026-11-01T22:36:28.675870+01:00"
+      },
+      {
+        "simulation_seconds": 251.00000000000057,
+        "value": 120.39546553278814,
+        "observed_at": "2026-11-01T22:36:31.739520+01:00"
+      },
+      {
+        "simulation_seconds": 254.0000000000006,
+        "value": 120.38761982729724,
+        "observed_at": "2026-11-01T22:36:34.725258+01:00"
+      },
+      {
+        "simulation_seconds": 257.0000000000006,
+        "value": 120.40299781018143,
+        "observed_at": "2026-11-01T22:36:37.580670+01:00"
+      },
+      {
+        "simulation_seconds": 260.0000000000006,
+        "value": 120.38740392479097,
+        "observed_at": "2026-11-01T22:36:40.422125+01:00"
+      },
+      {
+        "simulation_seconds": 262.0000000000006,
+        "value": 120.40198782263754,
+        "observed_at": "2026-11-01T22:36:43.265870+01:00"
+      },
+      {
+        "simulation_seconds": 265.0000000000007,
+        "value": 120.40053750312336,
+        "observed_at": "2026-11-01T22:36:46.262916+01:00"
+      },
+      {
+        "simulation_seconds": 268.0000000000007,
+        "value": 120.3962500809352,
+        "observed_at": "2026-11-01T22:36:49.053451+01:00"
+      },
+      {
+        "simulation_seconds": 271.0000000000007,
+        "value": 120.41567218692329,
+        "observed_at": "2026-11-01T22:36:51.939331+01:00"
+      },
+      {
+        "simulation_seconds": 274.00000000000074,
+        "value": 120.4070301394377,
+        "observed_at": "2026-11-01T22:36:54.933606+01:00"
+      },
+      {
+        "simulation_seconds": 277.00000000000074,
+        "value": 120.40397994432858,
+        "observed_at": "2026-11-01T22:36:57.976725+01:00"
+      },
+      {
+        "simulation_seconds": 280.00000000000074,
+        "value": 120.40935729494595,
+        "observed_at": "2026-11-01T22:37:00.940033+01:00"
+      },
+      {
+        "simulation_seconds": 283.0000000000008,
+        "value": 120.38892757213986,
+        "observed_at": "2026-11-01T22:37:03.812110+01:00"
+      },
+      {
+        "simulation_seconds": 286.0000000000008,
+        "value": 120.3951358442603,
+        "observed_at": "2026-11-01T22:37:06.608692+01:00"
+      },
+      {
+        "simulation_seconds": 288.0000000000008,
+        "value": 120.4124405488923,
+        "observed_at": "2026-11-01T22:37:09.490549+01:00"
+      },
+      {
+        "simulation_seconds": 291.00000000000085,
+        "value": 120.40578799222345,
+        "observed_at": "2026-11-01T22:37:12.296403+01:00"
+      },
+      {
+        "simulation_seconds": 294.00000000000085,
+        "value": 120.3982831960809,
+        "observed_at": "2026-11-01T22:37:15.120645+01:00"
+      },
+      {
+        "simulation_seconds": 297.00000000000085,
+        "value": 120.39561341631445,
+        "observed_at": "2026-11-01T22:37:18.203671+01:00"
+      },
+      {
+        "simulation_seconds": 300.0000000000009,
+        "value": 120.41764559627391,
+        "observed_at": "2026-11-01T22:37:21.350685+01:00"
+      },
+      {
+        "simulation_seconds": 303.0000000000009,
+        "value": 120.38217636680919,
+        "observed_at": "2026-11-01T22:37:24.388976+01:00"
+      },
+      {
+        "simulation_seconds": 306.0000000000009,
+        "value": 120.4086820462698,
+        "observed_at": "2026-11-01T22:37:27.516297+01:00"
+      },
+      {
+        "simulation_seconds": 309.00000000000097,
+        "value": 120.41206864050565,
+        "observed_at": "2026-11-01T22:37:30.541714+01:00"
+      },
+      {
+        "simulation_seconds": 312.00000000000097,
+        "value": 120.39642184286623,
+        "observed_at": "2026-11-01T22:37:33.563071+01:00"
+      },
+      {
+        "simulation_seconds": 315.00000000000097,
+        "value": 120.40875703420124,
+        "observed_at": "2026-11-01T22:37:36.495280+01:00"
+      },
+      {
+        "simulation_seconds": 318.000000000001,
+        "value": 120.41276928286018,
+        "observed_at": "2026-11-01T22:37:39.408970+01:00"
+      },
+      {
+        "simulation_seconds": 321.000000000001,
+        "value": 120.4125833446927,
+        "observed_at": "2026-11-01T22:37:42.238839+01:00"
+      },
+      {
+        "simulation_seconds": 324.000000000001,
+        "value": 120.39650366304815,
+        "observed_at": "2026-11-01T22:37:45.077845+01:00"
+      },
+      {
+        "simulation_seconds": 327.0000000000011,
+        "value": 120.39076436877608,
+        "observed_at": "2026-11-01T22:37:48.070616+01:00"
+      },
+      {
+        "simulation_seconds": 329.0000000000011,
+        "value": 120.40327928022587,
+        "observed_at": "2026-11-01T22:37:51.011515+01:00"
+      },
+      {
+        "simulation_seconds": 333.0000000000011,
+        "value": 120.38739190324682,
+        "observed_at": "2026-11-01T22:37:54.119028+01:00"
+      },
+      {
+        "simulation_seconds": 335.0000000000011,
+        "value": 120.39562543118828,
+        "observed_at": "2026-11-01T22:37:57.182426+01:00"
+      },
+      {
+        "simulation_seconds": 338.00000000000114,
+        "value": 120.41343274489954,
+        "observed_at": "2026-11-01T22:38:00.181070+01:00"
+      },
+      {
+        "simulation_seconds": 341.00000000000114,
+        "value": 120.40294641272982,
+        "observed_at": "2026-11-01T22:38:03.107477+01:00"
+      },
+      {
+        "simulation_seconds": 344.0000000000012,
+        "value": 120.40610380294156,
+        "observed_at": "2026-11-01T22:38:05.984481+01:00"
+      },
+      {
+        "simulation_seconds": 347.0000000000012,
+        "value": 120.40495390730158,
+        "observed_at": "2026-11-01T22:38:08.865359+01:00"
+      },
+      {
+        "simulation_seconds": 350.0000000000012,
+        "value": 120.40052013137824,
+        "observed_at": "2026-11-01T22:38:11.734189+01:00"
+      },
+      {
+        "simulation_seconds": 353.00000000000125,
+        "value": 120.39817723102061,
+        "observed_at": "2026-11-01T22:38:14.622556+01:00"
+      },
+      {
+        "simulation_seconds": 356.00000000000125,
+        "value": 120.40747964957761,
+        "observed_at": "2026-11-01T22:38:17.586106+01:00"
+      },
+      {
+        "simulation_seconds": 359.00000000000125,
+        "value": 120.38591151789824,
+        "observed_at": "2026-11-01T22:38:20.602528+01:00"
+      },
+      {
+        "simulation_seconds": 362.0000000000013,
+        "value": 120.40017513479192,
+        "observed_at": "2026-11-01T22:38:23.736757+01:00"
+      },
+      {
+        "simulation_seconds": 365.0000000000013,
+        "value": 120.40193173474621,
+        "observed_at": "2026-11-01T22:38:26.759100+01:00"
+      },
+      {
+        "simulation_seconds": 368.0000000000013,
+        "value": 120.38865366089732,
+        "observed_at": "2026-11-01T22:38:29.667661+01:00"
+      },
+      {
+        "simulation_seconds": 371.00000000000136,
+        "value": 120.39179965346882,
+        "observed_at": "2026-11-01T22:38:32.494627+01:00"
+      },
+      {
+        "simulation_seconds": 374.00000000000136,
+        "value": 120.39919564018444,
+        "observed_at": "2026-11-01T22:38:35.296012+01:00"
+      },
+      {
+        "simulation_seconds": 376.00000000000136,
+        "value": 120.39878473626781,
+        "observed_at": "2026-11-01T22:38:38.196828+01:00"
+      },
+      {
+        "simulation_seconds": 379.00000000000136,
+        "value": 120.38808748434171,
+        "observed_at": "2026-11-01T22:38:41.092251+01:00"
+      },
+      {
+        "simulation_seconds": 382.0000000000014,
+        "value": 120.40143104653455,
+        "observed_at": "2026-11-01T22:38:44.036519+01:00"
+      },
+      {
+        "simulation_seconds": 385.0000000000014,
+        "value": 120.37205560869103,
+        "observed_at": "2026-11-01T22:38:47.046597+01:00"
+      },
+      {
+        "simulation_seconds": 388.0000000000014,
+        "value": 120.38708397353444,
+        "observed_at": "2026-11-01T22:38:50.114711+01:00"
+      },
+      {
+        "simulation_seconds": 391.0000000000015,
+        "value": 120.4012561312882,
+        "observed_at": "2026-11-01T22:38:53.119355+01:00"
+      },
+      {
+        "simulation_seconds": 394.0000000000015,
+        "value": 120.41067925967545,
+        "observed_at": "2026-11-01T22:38:55.963838+01:00"
+      },
+      {
+        "simulation_seconds": 397.00000000000153,
+        "value": 120.40657772391933,
+        "observed_at": "2026-11-01T22:38:58.773613+01:00"
+      },
+      {
+        "simulation_seconds": 400.00000000000153,
+        "value": 120.40904307674299,
+        "observed_at": "2026-11-01T22:39:01.590301+01:00"
+      },
+      {
+        "simulation_seconds": 402.00000000000153,
+        "value": 120.40078405836944,
+        "observed_at": "2026-11-01T22:39:04.396077+01:00"
+      },
+      {
+        "simulation_seconds": 405.00000000000153,
+        "value": 120.4077477964913,
+        "observed_at": "2026-11-01T22:39:07.194864+01:00"
+      },
+      {
+        "simulation_seconds": 408.0000000000016,
+        "value": 120.3978599432845,
+        "observed_at": "2026-11-01T22:39:10.087036+01:00"
+      },
+      {
+        "simulation_seconds": 411.0000000000016,
+        "value": 120.41171060947485,
+        "observed_at": "2026-11-01T22:39:12.987878+01:00"
+      },
+      {
+        "simulation_seconds": 414.0000000000016,
+        "value": 120.39368822278513,
+        "observed_at": "2026-11-01T22:39:15.897333+01:00"
+      },
+      {
+        "simulation_seconds": 417.00000000000165,
+        "value": 120.40829839843813,
+        "observed_at": "2026-11-01T22:39:18.808572+01:00"
+      },
+      {
+        "simulation_seconds": 420.00000000000165,
+        "value": 120.39391393915628,
+        "observed_at": "2026-11-01T22:39:21.752296+01:00"
+      },
+      {
+        "simulation_seconds": 423.00000000000165,
+        "value": 120.39652483516227,
+        "observed_at": "2026-11-01T22:39:24.730367+01:00"
+      },
+      {
+        "simulation_seconds": 425.0000000000017,
+        "value": 120.3962739198064,
+        "observed_at": "2026-11-01T22:39:27.584376+01:00"
+      },
+      {
+        "simulation_seconds": 428.0000000000017,
+        "value": 120.41074719178641,
+        "observed_at": "2026-11-01T22:39:30.557354+01:00"
+      },
+      {
+        "simulation_seconds": 431.0000000000017,
+        "value": 120.40542870964734,
+        "observed_at": "2026-11-01T22:39:33.585556+01:00"
+      },
+      {
+        "simulation_seconds": 434.00000000000176,
+        "value": 120.41298815111136,
+        "observed_at": "2026-11-01T22:39:36.538120+01:00"
+      },
+      {
+        "simulation_seconds": 437.00000000000176,
+        "value": 120.3912123814007,
+        "observed_at": "2026-11-01T22:39:39.547673+01:00"
+      },
+      {
+        "simulation_seconds": 440.00000000000176,
+        "value": 120.38675545323747,
+        "observed_at": "2026-11-01T22:39:42.494517+01:00"
+      },
+      {
+        "simulation_seconds": 443.0000000000018,
+        "value": 120.38888860684364,
+        "observed_at": "2026-11-01T22:39:45.487544+01:00"
+      },
+      {
+        "simulation_seconds": 446.0000000000018,
+        "value": 120.41325026994126,
+        "observed_at": "2026-11-01T22:39:48.452239+01:00"
+      },
+      {
+        "simulation_seconds": 449.0000000000018,
+        "value": 120.4155960577521,
+        "observed_at": "2026-11-01T22:39:51.473485+01:00"
+      },
+      {
+        "simulation_seconds": 452.0000000000017,
+        "value": 120.4055487729979,
+        "observed_at": "2026-11-01T22:39:54.332412+01:00"
+      },
+      {
+        "simulation_seconds": 455.0000000000016,
+        "value": 120.41034840590038,
+        "observed_at": "2026-11-01T22:39:57.072462+01:00"
+      },
+      {
+        "simulation_seconds": 458.0000000000015,
+        "value": 120.4086021341811,
+        "observed_at": "2026-11-01T22:39:59.909679+01:00"
+      },
+      {
+        "simulation_seconds": 460.00000000000136,
+        "value": 120.41733324039151,
+        "observed_at": "2026-11-01T22:40:02.696380+01:00"
+      },
+      {
+        "simulation_seconds": 463.00000000000125,
+        "value": 120.41014099479493,
+        "observed_at": "2026-11-01T22:40:05.541660+01:00"
+      },
+      {
+        "simulation_seconds": 466.0000000000011,
+        "value": 120.39492823516711,
+        "observed_at": "2026-11-01T22:40:08.604177+01:00"
+      },
+      {
+        "simulation_seconds": 469.00000000000097,
+        "value": 120.41073182672935,
+        "observed_at": "2026-11-01T22:40:11.610554+01:00"
+      },
+      {
+        "simulation_seconds": 472.00000000000085,
+        "value": 120.41545582220274,
+        "observed_at": "2026-11-01T22:40:14.674378+01:00"
+      },
+      {
+        "simulation_seconds": 475.0000000000007,
+        "value": 120.39962146180854,
+        "observed_at": "2026-11-01T22:40:17.695655+01:00"
+      },
+      {
+        "simulation_seconds": 478.00000000000057,
+        "value": 120.4001171732676,
+        "observed_at": "2026-11-01T22:40:20.601090+01:00"
+      },
+      {
+        "simulation_seconds": 481.00000000000045,
+        "value": 120.40394857180091,
+        "observed_at": "2026-11-01T22:40:23.533691+01:00"
+      },
+      {
+        "simulation_seconds": 484.00000000000034,
+        "value": 120.40198846012922,
+        "observed_at": "2026-11-01T22:40:26.413131+01:00"
+      },
+      {
+        "simulation_seconds": 487.00000000000017,
+        "value": 120.41272682847331,
+        "observed_at": "2026-11-01T22:40:29.237267+01:00"
+      },
+      {
+        "simulation_seconds": 490.00000000000006,
+        "value": 120.37602085455376,
+        "observed_at": "2026-11-01T22:40:32.059213+01:00"
+      },
+      {
+        "simulation_seconds": 491.99999999999994,
+        "value": 120.39872413838472,
+        "observed_at": "2026-11-01T22:40:34.965780+01:00"
+      },
+      {
+        "simulation_seconds": 494.99999999999983,
+        "value": 120.38340812784917,
+        "observed_at": "2026-11-01T22:40:37.985541+01:00"
+      },
+      {
+        "simulation_seconds": 497.9999999999997,
+        "value": 120.39917316563786,
+        "observed_at": "2026-11-01T22:40:40.967495+01:00"
+      },
+      {
+        "simulation_seconds": 500.9999999999996,
+        "value": 120.37630611697108,
+        "observed_at": "2026-11-01T22:40:44.067831+01:00"
+      },
+      {
+        "simulation_seconds": 503.99999999999943,
+        "value": 120.39396103456895,
+        "observed_at": "2026-11-01T22:40:47.101299+01:00"
+      },
+      {
+        "simulation_seconds": 506.9999999999993,
+        "value": 120.39390915865162,
+        "observed_at": "2026-11-01T22:40:49.985576+01:00"
+      },
+      {
+        "simulation_seconds": 509.9999999999992,
+        "value": 120.38428891693894,
+        "observed_at": "2026-11-01T22:40:52.840209+01:00"
+      },
+      {
+        "simulation_seconds": 512.9999999999991,
+        "value": 120.40335592465092,
+        "observed_at": "2026-11-01T22:40:55.680032+01:00"
+      },
+      {
+        "simulation_seconds": 515.999999999999,
+        "value": 120.39323298450716,
+        "observed_at": "2026-11-01T22:40:58.539812+01:00"
+      },
+      {
+        "simulation_seconds": 518.9999999999987,
+        "value": 120.3836600867275,
+        "observed_at": "2026-11-01T22:41:01.434566+01:00"
+      },
+      {
+        "simulation_seconds": 521.9999999999986,
+        "value": 120.40574440903136,
+        "observed_at": "2026-11-01T22:41:04.439705+01:00"
+      },
+      {
+        "simulation_seconds": 524.9999999999985,
+        "value": 120.41571031663828,
+        "observed_at": "2026-11-01T22:41:07.637651+01:00"
+      },
+      {
+        "simulation_seconds": 527.9999999999984,
+        "value": 120.39864936226758,
+        "observed_at": "2026-11-01T22:41:10.667598+01:00"
+      },
+      {
+        "simulation_seconds": 530.9999999999983,
+        "value": 120.4022702861385,
+        "observed_at": "2026-11-01T22:41:13.760353+01:00"
+      },
+      {
+        "simulation_seconds": 533.9999999999982,
+        "value": 120.40064901597019,
+        "observed_at": "2026-11-01T22:41:16.819313+01:00"
+      },
+      {
+        "simulation_seconds": 536.9999999999981,
+        "value": 120.39797866698171,
+        "observed_at": "2026-11-01T22:41:19.728715+01:00"
+      },
+      {
+        "simulation_seconds": 539.9999999999978,
+        "value": 120.40231954189194,
+        "observed_at": "2026-11-01T22:41:22.603994+01:00"
+      },
+      {
+        "simulation_seconds": 541.9999999999978,
+        "value": 120.37934913091975,
+        "observed_at": "2026-11-01T22:41:25.464604+01:00"
+      },
+      {
+        "simulation_seconds": 544.9999999999976,
+        "value": 120.39381809914862,
+        "observed_at": "2026-11-01T22:41:28.441642+01:00"
+      },
+      {
+        "simulation_seconds": 547.9999999999975,
+        "value": 120.39928232885832,
+        "observed_at": "2026-11-01T22:41:30.963928+01:00"
+      },
+      {
+        "simulation_seconds": 550.9999999999974,
+        "value": 120.41314816326853,
+        "observed_at": "2026-11-01T22:41:33.885677+01:00"
+      },
+      {
+        "simulation_seconds": 553.9999999999973,
+        "value": 120.4077727800977,
+        "observed_at": "2026-11-01T22:41:36.912604+01:00"
+      },
+      {
+        "simulation_seconds": 556.9999999999972,
+        "value": 120.40063054456412,
+        "observed_at": "2026-11-01T22:41:39.879037+01:00"
+      },
+      {
+        "simulation_seconds": 559.999999999997,
+        "value": 120.41806300938599,
+        "observed_at": "2026-11-01T22:41:42.929180+01:00"
+      },
+      {
+        "simulation_seconds": 562.9999999999969,
+        "value": 120.39902891478143,
+        "observed_at": "2026-11-01T22:41:45.904534+01:00"
+      },
+      {
+        "simulation_seconds": 565.9999999999967,
+        "value": 120.42885418846836,
+        "observed_at": "2026-11-01T22:41:48.820127+01:00"
+      },
+      {
+        "simulation_seconds": 568.9999999999966,
+        "value": 120.39298194566462,
+        "observed_at": "2026-11-01T22:41:51.752357+01:00"
+      },
+      {
+        "simulation_seconds": 570.9999999999966,
+        "value": 120.38072248908804,
+        "observed_at": "2026-11-01T22:41:54.669757+01:00"
+      },
+      {
+        "simulation_seconds": 573.9999999999964,
+        "value": 120.40454685586317,
+        "observed_at": "2026-11-01T22:41:57.580363+01:00"
+      },
+      {
+        "simulation_seconds": 576.9999999999962,
+        "value": 120.39533507681529,
+        "observed_at": "2026-11-01T22:42:00.561151+01:00"
+      },
+      {
+        "simulation_seconds": 579.9999999999961,
+        "value": 120.4001364745746,
+        "observed_at": "2026-11-01T22:42:03.526341+01:00"
+      },
+      {
+        "simulation_seconds": 582.999999999996,
+        "value": 120.40119103935844,
+        "observed_at": "2026-11-01T22:42:06.501036+01:00"
+      },
+      {
+        "simulation_seconds": 585.9999999999959,
+        "value": 120.39210594888398,
+        "observed_at": "2026-11-01T22:42:09.391652+01:00"
+      },
+      {
+        "simulation_seconds": 588.9999999999958,
+        "value": 120.39160556836833,
+        "observed_at": "2026-11-01T22:42:12.414679+01:00"
+      },
+      {
+        "simulation_seconds": 591.9999999999956,
+        "value": 120.3872814505284,
+        "observed_at": "2026-11-01T22:42:15.214310+01:00"
+      },
+      {
+        "simulation_seconds": 594.9999999999955,
+        "value": 120.39934233558112,
+        "observed_at": "2026-11-01T22:42:18.138035+01:00"
+      },
+      {
+        "simulation_seconds": 597.9999999999953,
+        "value": 120.4043641512432,
+        "observed_at": "2026-11-01T22:42:20.954789+01:00"
+      }
+    ],
+    "observations_truncated": false,
+    "mapping_qualification": "OPC UA engineering match is provisional; live OPC UA binding and physical product installation are not verified."
+  },
+  "only_q13": true,
+  "q13_prompt_evidence": {
+    "source": "Live GraphDB SPARQL and TimescaleDB read-only queries",
+    "asset_identifier": "https://aas.example.com/TI101",
+    "product_candidate_identifier": "https://example.org/product-types/IFM_TA1101",
+    "graphdb": {
+      "canonical_asset_identifiers": [
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzk",
+          "predicate": "hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ",
+          "predicate": "hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "Qk9NSXRlbXMuRUJPTV8wMDE2",
+          "predicate": "hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "Qk9NSXRlbXMuRUJPTV8wMDE2",
+          "predicate": "hasSourceAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "Qk9NSXRlbXMuRUJPTV8wMDUw",
+          "predicate": "hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "RGV2aWNlcy5USV8xMTAx",
+          "predicate": "hasAssetIdentifier",
+          "value": "https://aas.example.com/TI101"
+        }
+      ],
+      "product_and_signal_references": [
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzE4",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzEx",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzIx",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzIy",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "QXNzZXRzLlRFUF9YTUVBUzk",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasEngineeringFunctionReference",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasSignalName",
+          "value": "XMEAS9"
+        },
+        {
+          "subject": "UHJvZHVjdHMuSUZNX1RBMTEwMQ",
+          "predicate": "hasProductIdentifier",
+          "value": "https://example.org/product-types/IFM_TA1101"
+        }
+      ],
+      "opcua_mapping_provenance": [
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasEngineeringDomain",
+          "value": "DEXPI"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasEngineeringFunctionId",
+          "value": "TI_101"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasEngineeringFunctionReference",
+          "value": "https://aas.example.com/TI101"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasMappingBasis",
+          "value": "TEP benchmark signal meaning; live OPC UA binding not verified"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasMappingStatus",
+          "value": "PROVISIONAL_ENGINEERING_MATCH"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasOPCUABrowsePath",
+          "value": "Objects/TEP/Measurements/XMEAS9"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasOPCUANodeId",
+          "value": "nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasSignalDirection",
+          "value": "READ"
+        },
+        {
+          "subject": "U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "predicate": "hasSignalName",
+          "value": "XMEAS9"
+        }
+      ]
+    },
+    "graphdb_errors": {},
+    "historian": {
+      "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+      "signal": "XMEAS9",
+      "interval_seconds_inclusive": [
+        0,
+        600
+      ],
+      "returned_observation_count": 207,
+      "truncated": false,
+      "error": null,
+      "first_observation": {
+        "simulation_seconds": 0.0,
+        "value": 0.0,
+        "observed_at": "2026-11-01T22:32:12.417405+01:00"
+      },
+      "last_observation": {
+        "simulation_seconds": 597.9999999999953,
+        "value": 120.4043641512432,
+        "observed_at": "2026-11-01T22:42:20.954789+01:00"
+      }
+    },
+    "mapping_qualification": "OPC UA engineering match is provisional; live OPC UA binding and physical product installation are not verified.",
+    "evidence_limitations": "GraphDB subject identifiers are abbreviated suffixes; source model and item identity must be supported by returned predicates/subjects, not inferred from a candidate product. Missing engineering tag fields must be reported as missing."
+  },
+  "graphdb_verification_error": null,
+  "results": [
+    {
+      "id": "Q13",
+      "question": "Using the supplied GraphDB and TimescaleDB evidence, trace the reactor-temperature measurement across the six AAS information models. Answer in order: (1) DEXPI: engineering function and source tag; (2) ECAD: electrical device and tag; (3) Engineering BOM: associated BOM items; (4) AssetInventory: logical asset and shared AssetIdentifier; (5) ProductCatalog: associated product candidate and whether physical installation is verified; (6) OPC UA Connectivity: operational signal, engineering reference, OPC UA node and mapping status; (7) TimescaleDB: for simulation run 10cfb1d1-2984-4932-8207-dc430ed60c2b, report the number of XMEAS9 observations between simulation seconds 0 and 600, first and last observation times, and their recorded values. Finish with a brief summary of how the models are linked through the shared AssetIdentifier, and explicitly identify provisional or unverified mappings. Use only supplied evidence; do not invent missing relationships, product-installation confirmations, or live OPC UA verification.",
+      "question_version": "Q13-v2",
+      "evidence_status": "EVIDENCE_AVAILABLE",
+      "evidence_sha256": "5315e116daf5862047eafea1bfef8d491ae4873f9d9caf4d882b7c505a982d81",
+      "answer_text": "Here are the answers to the question, tracing the reactor-temperature measurement across the six AAS information models:\n\n1. DEXPI: engineering function and source tag\n   - Engineering function: TI_101\n   - Source tag: https://aas.example.com/TI101\n\n2. ECAD: electrical device and tag\n   - No direct evidence for ECAD; however, the subject \"QXNzZXRzLlRFUF9YTUVBUzE4\" has a predicate \"hasProductIdentifier\" with value \"https://example.org/product-types/IFM_TA1101\", which is also linked to ECAD in the provided evidence.\n\n3. Engineering BOM: associated BOM items\n   - No direct evidence for Engineering BOM; however, the subject \"U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl\" has a predicate \"hasEngineeringFunctionReference\" with value \"https://aas.example.com/TI101\", which is also linked to Engineering BOM in the provided evidence.\n\n4. AssetInventory: logical asset and shared AssetIdentifier\n   - Logical asset: https://aas.example.com/TI101\n   - Shared AssetIdentifier: https://aas.example.com/TI101\n\n5. ProductCatalog: associated product candidate and whether physical installation is verified\n   - Associated product candidate: https://example.org/product-types/IFM_TA1101\n   - Physical installation is not verified.\n\n6. OPC UA Connectivity: operational signal, engineering reference, OPC UA node and mapping status\n   - Operational signal: XMEAS9\n   - Engineering reference: https://aas.example.com/TI101\n   - OPC UA node: nsu=urn:process-sim:opcua;s=TEP.Measurements.XMEAS9\n   - Mapping status: PROVISIONAL_ENGINEERING_MATCH\n\n7. TimescaleDB: for simulation run 10cfb1d1-2984-4932-8207-dc430ed60c2b, report the number of XMEAS9 observations between simulation seconds 0 and 600, first and last observation times, and their recorded values.\n   - Number of observations: 207\n   - First observation time: 0.0 seconds\n   - Last observation time: 597.9999999999953 seconds\n   - First recorded value: 0.0\n   - Last recorded value: 120.4043641512432\n\nSummary:\nThe reactor-temperature measurement is linked through the shared AssetIdentifier (https://aas.example.com/TI101) across the six AAS information models. The mapping between DEXPI and ECAD is not directly verified, and the physical installation of the product is not verified. The OPC UA connectivity mapping is provisional.",
+      "model_metadata": {
+        "model": "llama3.1:8b",
+        "created_at": "2026-11-10T14:23:08.7385498Z",
+        "done": true,
+        "total_duration": 119254064800,
+        "eval_count": 593,
+        "prompt_eval_count": 2296
+      },
+      "manual_assessment": null,
+      "assessment_justification": null,
+      "error": null
+    }
+  ]
+}

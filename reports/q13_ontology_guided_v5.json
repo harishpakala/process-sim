@@ -1,0 +1,276 @@
+{
+  "method": "experimental_ontology_guided_q13_domain_by_domain",
+  "schema_hashes": {
+    "dexpi": "fcb1726cee26d603ef0b2a98393c5be4791f3ef8864eb2b43eeff34b05d72eed",
+    "ecad": "67c61285a284ba89e7960e5ad5ea9e59f91d46c9fdf8216beda39e21550e1226",
+    "engineeringbom": "66de24ec3af03afe4bc50be9dca90dc6cf3949e8aa1b21d6bdcac3b53b53c719",
+    "assetinventory": "9b52f7c2eaacbf7142fcda6700bedd0af9eebff01df7c0c87af213b0e513087a",
+    "productcatalog": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7",
+    "opcuaconnectivity": "6820a8d5850ea4743a7b41e38149d47d14582f2c9113f383d752b5e3e85b4dfa"
+  },
+  "schema_context_by_domain": {
+    "dexpi": "DOMAIN dexpi\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/dexpi/hasActuatedVariable\nhttps://example.org/dexpi/hasActuatingFunction\nhttps://example.org/dexpi/hasActuatingFunctions\nhttps://example.org/dexpi/hasAssetIdentifier\nhttps://example.org/dexpi/hasEquipment\nhttps://example.org/dexpi/hasEquipments\nhttps://example.org/dexpi/hasInstrumentationFunction\nhttps://example.org/dexpi/hasInstrumentationFunctions\nhttps://example.org/dexpi/hasLocalId\nhttps://example.org/dexpi/hasMeasuredVariable\nSHACL property paths and constraints:\nhttps://example.org/dexpi/hasActuatedVariable | minCount=1 | maxCount=1\nhttps://example.org/dexpi/hasActuatingFunction | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/dexpi/hasActuatingFunctions | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/dexpi/hasAssetIdentifier | minCount=1 | maxCount=1\nhttps://example.org/dexpi/hasEquipment | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/dexpi/hasEquipments | class=https://example.org/aas/SMC | minCount=1 | maxCount=1\nhttps://example.org/dexpi/hasInstrumentationFunction | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/dexpi/hasInstrumentationFunctions | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/dexpi/hasLocalId | minCount=1 | maxCount=1\nhttps://example.org/dexpi/hasMeasuredVariable | minCount=1 | maxCount=1",
+    "ecad": "DOMAIN ecad\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/ecad/hasAddress\nhttps://example.org/ecad/hasAssetIdentifier\nhttps://example.org/ecad/hasConnectionPoints\nhttps://example.org/ecad/hasConnections\nhttps://example.org/ecad/hasDevice\nhttps://example.org/ecad/hasDevices\nhttps://example.org/ecad/hasEndPoint\nhttps://example.org/ecad/hasLocalId\nhttps://example.org/ecad/hasPLCEndPoint\nhttps://example.org/ecad/hasSchematics\nhttps://example.org/ecad/hasSymbol\nhttps://example.org/ecad/hasSymbols\nSHACL property paths and constraints:\nhttps://example.org/ecad/hasAddress | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasAssetIdentifier | minCount=1 | maxCount=1\nhttps://example.org/ecad/hasConnectionPoints | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasConnections | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/ecad/hasDevice | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/ecad/hasDevices | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasEndPoint | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/ecad/hasEndPoint | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasLocalId | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasLocalId | minCount=1 | maxCount=1\nhttps://example.org/ecad/hasPLCEndPoint | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/ecad/hasPLCEndPoint | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasSchematics | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/ecad/hasSymbol | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/ecad/hasSymbols | class=https://example.org/aas/SMC | minCount=0 | maxCount=1",
+    "engineeringbom": "DOMAIN engineeringbom\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/engineeringbom/hasAssemblies\nhttps://example.org/engineeringbom/hasAssembly\nhttps://example.org/engineeringbom/hasAssemblyKind\nhttps://example.org/engineeringbom/hasAssetReference\nhttps://example.org/engineeringbom/hasAssociationBasis\nhttps://example.org/engineeringbom/hasBOMItem\nhttps://example.org/engineeringbom/hasBOMItemId\nhttps://example.org/engineeringbom/hasBOMItems\nhttps://example.org/engineeringbom/hasBOMPosition\nhttps://example.org/engineeringbom/hasCandidateProductReference\nhttps://example.org/engineeringbom/hasEngineeringLocalId\nhttps://example.org/engineeringbom/hasEngineeringReference\nhttps://example.org/engineeringbom/hasEquivalenceStatus\nhttps://example.org/engineeringbom/hasFunctionalAssemblyReference\nhttps://example.org/engineeringbom/hasItemDescription\nhttps://example.org/engineeringbom/hasItemType\nhttps://example.org/engineeringbom/hasParentItemId\nhttps://example.org/engineeringbom/hasQuantity\nhttps://example.org/engineeringbom/hasQuantityBasis\nhttps://example.org/engineeringbom/hasQuantityPerAssembly\nhttps://example.org/engineeringbom/hasRevision\nhttps://example.org/engineeringbom/hasSelectionStatus\nhttps://example.org/engineeringbom/hasSourceDomain\nhttps://example.org/engineeringbom/hasSourceGroup\nhttps://example.org/engineeringbom/hasStructureStatus\nhttps://example.org/engineeringbom/hasUnit\nhttps://example.org/engineeringbom/hasValidationStatus\nSHACL property paths and constraints:\nhttps://example.org/engineeringbom/hasAssemblies | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasAssembly | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/engineeringbom/hasAssemblyKind | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasAssetReference | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasAssociationBasis | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasBOMItem | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/engineeringbom/hasBOMItemId | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasBOMItems | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasBOMPosition | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasCandidateProductReference | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasEngineeringLocalId | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasEngineeringReference | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasEquivalenceStatus | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasFunctionalAssemblyReference | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasItemDescription | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasItemType | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasParentItemId | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasQuantity | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasQuantityBasis | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasQuantityPerAssembly | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasRevision | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasSelectionStatus | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasSourceDomain | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasSourceGroup | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasStructureStatus | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasUnit | minCount=0 | maxCount=1\nhttps://example.org/engineeringbom/hasValidationStatus | minCount=0 | maxCount=1",
+    "assetinventory": "DOMAIN assetinventory\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/assetinventory/hasAsset\nhttps://example.org/assetinventory/hasAssetIdentifier\nhttps://example.org/assetinventory/hasAssetName\nhttps://example.org/assetinventory/hasAssetType\nhttps://example.org/assetinventory/hasAssets\nhttps://example.org/assetinventory/hasEngineeringReference\nhttps://example.org/assetinventory/hasEquipmentTag\nhttps://example.org/assetinventory/hasFaultDetectionStatus\nhttps://example.org/assetinventory/hasFaultInjectionStatus\nhttps://example.org/assetinventory/hasLocation\nhttps://example.org/assetinventory/hasModelingStatus\nhttps://example.org/assetinventory/hasMonitoringStatus\nhttps://example.org/assetinventory/hasOperationalReference\nhttps://example.org/assetinventory/hasProductIdentifier\nhttps://example.org/assetinventory/hasSimulationStatus\nSHACL property paths and constraints:\nhttps://example.org/assetinventory/hasAsset | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/assetinventory/hasAssetIdentifier | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasAssetName | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasAssetType | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasAssets | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasEngineeringReference | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasEquipmentTag | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasFaultDetectionStatus | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasFaultInjectionStatus | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasLocation | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasModelingStatus | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasMonitoringStatus | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasOperationalReference | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasProductIdentifier | minCount=0 | maxCount=1\nhttps://example.org/assetinventory/hasSimulationStatus | minCount=0 | maxCount=1",
+    "productcatalog": "DOMAIN productcatalog\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/productcatalog/hasECLASSClass\nhttps://example.org/productcatalog/hasECLASSIRDI\nhttps://example.org/productcatalog/hasECLASSPreferredName\nhttps://example.org/productcatalog/hasManufacturerName\nhttps://example.org/productcatalog/hasManufacturerPartNumber\nhttps://example.org/productcatalog/hasManufacturerProductDesignation\nhttps://example.org/productcatalog/hasProduct\nhttps://example.org/productcatalog/hasProductDescription\nhttps://example.org/productcatalog/hasProductIdentifier\nhttps://example.org/productcatalog/hasProducts\nhttps://example.org/productcatalog/hasSupplierName\nhttps://example.org/productcatalog/hasSupplierPartNumber\nhttps://example.org/productcatalog/hasTechnicalProperties\nhttps://example.org/productcatalog/hasTechnicalProperty\nSHACL property paths and constraints:\nhttps://example.org/productcatalog/hasECLASSClass | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasECLASSIRDI | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasECLASSPreferredName | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasManufacturerName | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasManufacturerPartNumber | minCount=0 | maxCount=1\nhttps://example.org/productcatalog/hasManufacturerProductDesignation | minCount=0 | maxCount=1\nhttps://example.org/productcatalog/hasProduct | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/productcatalog/hasProductDescription | minCount=0 | maxCount=1\nhttps://example.org/productcatalog/hasProductIdentifier | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasProducts | class=https://example.org/aas/SMC | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasSupplierName | minCount=0 | maxCount=1\nhttps://example.org/productcatalog/hasSupplierPartNumber | minCount=0 | maxCount=1\nhttps://example.org/productcatalog/hasTechnicalProperties | class=https://example.org/aas/SMC | minCount=1 | maxCount=1\nhttps://example.org/productcatalog/hasTechnicalProperty | class=https://example.org/aas/SMC | minCount=0",
+    "opcuaconnectivity": "DOMAIN opcuaconnectivity\nClasses:\nhttp://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/\nhttps://example.org/aas/SMC\nProperties:\nhttps://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus\nhttps://example.org/opcuaconnectivity/hasEndpointStatus\nhttps://example.org/opcuaconnectivity/hasEndpointUrl\nhttps://example.org/opcuaconnectivity/hasEngineeringDomain\nhttps://example.org/opcuaconnectivity/hasEngineeringFunctionId\nhttps://example.org/opcuaconnectivity/hasEngineeringFunctionReference\nhttps://example.org/opcuaconnectivity/hasMappingBasis\nhttps://example.org/opcuaconnectivity/hasMappingStatus\nhttps://example.org/opcuaconnectivity/hasNamespaceURI\nhttps://example.org/opcuaconnectivity/hasOPCUABrowsePath\nhttps://example.org/opcuaconnectivity/hasOPCUANodeId\nhttps://example.org/opcuaconnectivity/hasServer\nhttps://example.org/opcuaconnectivity/hasServers\nhttps://example.org/opcuaconnectivity/hasSignalDirection\nhttps://example.org/opcuaconnectivity/hasSignalMapping\nhttps://example.org/opcuaconnectivity/hasSignalMappings\nhttps://example.org/opcuaconnectivity/hasSignalName\nSHACL property paths and constraints:\nhttps://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasEndpointStatus | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasEndpointUrl | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasEngineeringDomain | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasEngineeringFunctionId | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasEngineeringFunctionReference | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasMappingBasis | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasMappingStatus | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasNamespaceURI | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasOPCUABrowsePath | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasOPCUANodeId | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasServer | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/opcuaconnectivity/hasServers | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasSignalDirection | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasSignalMapping | class=https://example.org/aas/SMC | minCount=0\nhttps://example.org/opcuaconnectivity/hasSignalMappings | class=https://example.org/aas/SMC | minCount=0 | maxCount=1\nhttps://example.org/opcuaconnectivity/hasSignalName | minCount=0 | maxCount=1"
+  },
+  "question": "Trace reactor-temperature measurement for canonical AssetIdentifier https://aas.example.com/TI101 across six AAS domains: DEXPI function and identifier, ECAD device and local tag, Engineering BOM items, AssetInventory logical asset, ProductCatalog product candidate and physical-installation status, OPC UA operational signal/node and mapping provenance/status. Distinguish verified graph links from provisional or unverified assertions. Also summarize XMEAS9 observations for run 10cfb1d1-2984-4932-8207-dc430ed60c2b between simulation seconds 0 and 600.",
+  "queries": [
+    {
+      "domain": "dexpi",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?value ?assetIdentifier\nWHERE {\n  ?anchor dexpi:hasInstrumentationFunction ?value .\n  ?anchor dexpi:hasAssetIdentifier ?assetIdentifier .\n  FILTER (isLiteral(?value) && datatype(?value) = xsd:string)\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n} LIMIT 100",
+          "validated_query": "SELECT ?value ?assetIdentifier\nWHERE {\n  ?anchor dexpi:hasInstrumentationFunction ?value .\n  ?anchor dexpi:hasAssetIdentifier ?assetIdentifier .\n  FILTER (isLiteral(?value) && datatype(?value) = xsd:string)\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n} LIMIT 100",
+          "execution_error": "HTTP Error 400: "
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?value ?assetIdentifier\nWHERE {\n  ?anchor <https://example.org/dexpi/hasInstrumentationFunction> ?value .\n  ?anchor <https://example.org/dexpi/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?value) && datatype(?value) = xsd:string)\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n} LIMIT 100",
+          "validated_query": "SELECT ?value ?assetIdentifier\nWHERE {\n  ?anchor <https://example.org/dexpi/hasInstrumentationFunction> ?value .\n  ?anchor <https://example.org/dexpi/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?value) && datatype(?value) = xsd:string)\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 3,
+          "proposal": "SELECT ?assetIdentifier\nWHERE {\n  ?anchor <https://example.org/dexpi/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n  FILTER (?anchor = <https://aas.example.com/TI101>)\n} LIMIT 100",
+          "validated_query": "SELECT ?assetIdentifier\nWHERE {\n  ?anchor <https://example.org/dexpi/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && datatype(?assetIdentifier) = xsd:string)\n  FILTER (?anchor = <https://aas.example.com/TI101>)\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        }
+      ],
+      "bindings": null,
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "error": "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
+    },
+    {
+      "domain": "ecad",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?device ?localId ?assetIdentifier\nWHERE {\n  ?device a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?device <https://example.org/ecad/hasLocalId> ?localId .\n  ?device <https://example.org/ecad/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?localId) && isLiteral(?assetIdentifier))\n  FILTER (regex(?assetIdentifier, \"TI101\", \"i\"))\n  FILTER (regex(?localId, \"ECAD\", \"i\"))\n} LIMIT 100",
+          "validated_query": "SELECT ?device ?localId ?assetIdentifier\nWHERE {\n  ?device a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?device <https://example.org/ecad/hasLocalId> ?localId .\n  ?device <https://example.org/ecad/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?localId) && isLiteral(?assetIdentifier))\n  FILTER (regex(?assetIdentifier, \"TI101\", \"i\"))\n  FILTER (regex(?localId, \"ECAD\", \"i\"))\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?assetIdentifier\nWHERE {\n  ?device <https://example.org/ecad/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && regex(?assetIdentifier, \"TI101\", \"i\"))\n} LIMIT 100",
+          "validated_query": "SELECT ?assetIdentifier\nWHERE {\n  ?device <https://example.org/ecad/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && regex(?assetIdentifier, \"TI101\", \"i\"))\n} LIMIT 100",
+          "binding_count": 1,
+          "relevant_binding_count": 1
+        }
+      ],
+      "bindings": [
+        {
+          "assetIdentifier": {
+            "type": "literal",
+            "value": "https://aas.example.com/TI101",
+            "datatype": null
+          }
+        }
+      ],
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "validated_query": "SELECT ?assetIdentifier\nWHERE {\n  ?device <https://example.org/ecad/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && regex(?assetIdentifier, \"TI101\", \"i\"))\n} LIMIT 100"
+    },
+    {
+      "domain": "engineeringbom",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?bomItem ?bomItemId\nWHERE {\n  ?bomItem a <https://example.org/aas/SMC> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItem> ?item .\n  ?item <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId))\n} LIMIT 100",
+          "validated_query": "SELECT ?bomItem ?bomItemId\nWHERE {\n  ?bomItem a <https://example.org/aas/SMC> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItem> ?item .\n  ?item <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId))\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?bomItemId\nWHERE {\n  ?bomItem <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId))\n} LIMIT 100",
+          "validated_query": "SELECT ?bomItemId\nWHERE {\n  ?bomItem <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId))\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 3,
+          "proposal": "SELECT ?bomItemId\nWHERE {\n  ?bomItem <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId) && regex(?bomItemId, \"https://aas.example.com/.*\"))\n} LIMIT 100",
+          "validated_query": "SELECT ?bomItemId\nWHERE {\n  ?bomItem <https://example.org/engineeringbom/hasAssetReference> <https://aas.example.com/TI101> .\n  ?bomItem <https://example.org/engineeringbom/hasBOMItemId> ?bomItemId .\n  FILTER (isLiteral(?bomItemId) && regex(?bomItemId, \"https://aas.example.com/.*\"))\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        }
+      ],
+      "bindings": null,
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "error": "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
+    },
+    {
+      "domain": "assetinventory",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?asset ?assetIdentifier ?signalReference\nWHERE {\n  ?asset a <https://example.org/aas/SMC> .\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && STR(?assetIdentifier) = \"https://aas.example.com/TI101\")\n  ?asset <https://example.org/assetinventory/hasOperationalReference> ?signalReference .\n  FILTER (isIRI(?signalReference))\n} LIMIT 100",
+          "validated_query": "SELECT ?asset ?assetIdentifier ?signalReference\nWHERE {\n  ?asset a <https://example.org/aas/SMC> .\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && STR(?assetIdentifier) = \"https://aas.example.com/TI101\")\n  ?asset <https://example.org/assetinventory/hasOperationalReference> ?signalReference .\n  FILTER (isIRI(?signalReference))\n} LIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?assetIdentifier\nWHERE {\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && STR(?assetIdentifier) = \"https://aas.example.com/TI101\")\n} LIMIT 100",
+          "validated_query": "SELECT ?assetIdentifier\nWHERE {\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && STR(?assetIdentifier) = \"https://aas.example.com/TI101\")\n} LIMIT 100",
+          "binding_count": 1,
+          "relevant_binding_count": 1
+        }
+      ],
+      "bindings": [
+        {
+          "assetIdentifier": {
+            "type": "literal",
+            "value": "https://aas.example.com/TI101",
+            "datatype": null
+          }
+        }
+      ],
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "validated_query": "SELECT ?assetIdentifier\nWHERE {\n  ?asset <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  FILTER (isLiteral(?assetIdentifier) && STR(?assetIdentifier) = \"https://aas.example.com/TI101\")\n} LIMIT 100"
+    },
+    {
+      "domain": "productcatalog",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?product ?product ?installationVerification\nWHERE {\n  ?product a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> .\n  ?product <https://example.org/productcatalog/hasProduct> ?product .\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\") .\n  OPTIONAL { ?product <https://example.org/productcatalog/hasTechnicalProperties> ?technicalProperties .\n             ?technicalProperties <https://example.org/productcatalog/hasTechnicalProperty> ?installationVerification .\n             FILTER (isLiteral(?installationVerification) && STR(?installationVerification) = \"true\") .\n           }\n}\nLIMIT 100",
+          "validated_query": "SELECT ?product ?product ?installationVerification\nWHERE {\n  ?product a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> .\n  ?product <https://example.org/productcatalog/hasProduct> ?product .\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\") .\n  OPTIONAL { ?product <https://example.org/productcatalog/hasTechnicalProperties> ?technicalProperties .\n             ?technicalProperties <https://example.org/productcatalog/hasTechnicalProperty> ?installationVerification .\n             FILTER (isLiteral(?installationVerification) && STR(?installationVerification) = \"true\") .\n           }\n}\nLIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?productIdentifier\nWHERE {\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\")\n}",
+          "validated_query": "SELECT ?productIdentifier\nWHERE {\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\")\n}\nLIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        },
+        {
+          "attempt": 3,
+          "proposal": "SELECT ?productIdentifier\nWHERE {\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\")\n  ?product <https://example.org/productcatalog/hasECLASSClass> ?eclass .\n  ?product <https://example.org/productcatalog/hasECLASSIRDI> ?iridi .\n  ?product <https://example.org/productcatalog/hasECLASSPreferredName> ?preferredName .\n}\nLIMIT 100",
+          "validated_query": "SELECT ?productIdentifier\nWHERE {\n  ?product <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n  FILTER (isLiteral(?productIdentifier) && STR(?productIdentifier) = \"https://aas.example.com/TI101\")\n  ?product <https://example.org/productcatalog/hasECLASSClass> ?eclass .\n  ?product <https://example.org/productcatalog/hasECLASSIRDI> ?iridi .\n  ?product <https://example.org/productcatalog/hasECLASSPreferredName> ?preferredName .\n}\nLIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        }
+      ],
+      "bindings": null,
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "error": "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "attempts": [
+        {
+          "attempt": 1,
+          "proposal": "SELECT ?opcuabrowsepath ?opcuabrowsenodeid ?signalname ?signalmapping ?mappingstatus\nWHERE {\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\") && \n           isLiteral(?o) && \n           isIRI(?s) && \n           isIRI(?p))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEngineeringFunctionReference\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalDirection\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingBasis\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointStatus\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointUrl\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasNamespaceURI\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\") && \n           isLiteral(?o))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\") && \n           isLiteral(?o))\n  FILTER (count(?opcuabrowsepath) <= 100)",
+          "validation_error": "Invalid SPARQL: Expected SelectQuery, found end of text  (at char 3172), (line:61, col:42)"
+        },
+        {
+          "attempt": 2,
+          "proposal": "SELECT ?opcuabrowsepath ?opcuabrowsenodeid ?signalname ?signalmapping ?mappingstatus\nWHERE {\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\") && \n           isLiteral(?o) && \n           isIRI(?s) && \n           isIRI(?p))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEngineeringFunctionReference\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalDirection\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingBasis\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointUrl\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasNamespaceURI\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\"))\n  FILTER (count(?opcuabrowsepath) <= 100)",
+          "validation_error": "Invalid SPARQL: Expected SelectQuery, found end of text  (at char 2824), (line:49, col:42)"
+        },
+        {
+          "attempt": 3,
+          "proposal": "SELECT ?opcuabrowsepath ?opcuabrowsenodeid ?signalname ?signalmapping ?mappingstatus\nWHERE {\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\") && \n           isLiteral(?o) && \n           isIRI(?s) && \n           isIRI(?p))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEngineeringFunctionReference\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalDirection\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingBasis\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointUrl\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasNamespaceURI\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\"))\n}",
+          "validated_query": "SELECT ?opcuabrowsepath ?opcuabrowsenodeid ?signalname ?signalmapping ?mappingstatus\nWHERE {\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\") && \n           isLiteral(?o) && \n           isIRI(?s) && \n           isIRI(?p))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEngineeringFunctionReference\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalDirection\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingBasis\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasEndpointUrl\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasNamespaceURI\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUANodeId\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasOPCUABrowsePath\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalName\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasSignalMapping\", \"i\"))\n  ?s ?p ?o .\n  FILTER (regex(str(?s), \"https://aas.example.com/TI101\", \"i\") && \n           regex(str(?p), \"https://example.org/opcuaconnectivity/hasMappingStatus\", \"i\"))\n}\nLIMIT 100",
+          "binding_count": 0,
+          "relevant_binding_count": 0,
+          "empty_or_irrelevant_result": true
+        }
+      ],
+      "bindings": null,
+      "discovery": {
+        "predicate_count": 0,
+        "anchors": [],
+        "neighborhood": [],
+        "samples": [],
+        "identifier_inputs": [
+          "https://aas.example.com/TI101"
+        ]
+      },
+      "error": "NO_GRAPHDB_EVIDENCE_AFTER_RETRIES"
+    }
+  ],
+  "historian": {
+    "run_id": "10cfb1d1-2984-4932-8207-dc430ed60c2b",
+    "signal": "XMEAS9",
+    "window_seconds": [
+      0,
+      600
+    ],
+    "count": 207,
+    "first": {
+      "simulation_seconds": 0.0,
+      "value": 0.0,
+      "observed_at": "2026-11-01T22:32:12.417405+01:00"
+    },
+    "last": {
+      "simulation_seconds": 597.9999999999953,
+      "value": 120.4043641512432,
+      "observed_at": "2026-11-01T22:42:20.954789+01:00"
+    }
+  },
+  "final_answer": "Based on the provided GraphDB results and Historian data, here is the answer to the question:\n\n**DEXPI Domain:**\nNo evidence found in the GraphDB results for the DEXPI domain.\n\n**ECAD Domain:**\nVerified graph link: The ECAD device with local tag has an AssetIdentifier of `https://aas.example.com/TI101`.\n\n**Engineering BOM Domain:**\nNo evidence found in the GraphDB results for the Engineering BOM domain.\n\n**AssetInventory Domain:**\nVerified graph link: The AssetInventory logical asset has an AssetIdentifier of `https://aas.example.com/TI101`.\n\n**ProductCatalog Domain:**\nNo evidence found in the GraphDB results for the ProductCatalog domain.\n\n**OPCUAConnectivity Domain:**\nNo evidence found in the GraphDB results for the OPCUAConnectivity domain.\n\n**XMEAS9 Observations:**\nFor run `10cfb1d1-2984-4932-8207-dc430ed60c2b` between simulation seconds 0 and 600, the Historian data shows that XMEAS9 has a count of 207 observations. The first observation is at simulation second 0 with a value of 0.0, and the last observation is at simulation second 597.9999999999953 with a value of 120.4043641512432.\n\nNote that the GraphDB results do not provide any information about the relationship between XMEAS9 and reactor temperature, so we cannot conclude that XMEAS9 is unrelated to reactor temperature based on the absence of graph results.",
+  "graphdb_status": "PARTIAL_ANCHORED_EVIDENCE",
+  "propagated_identifiers": [
+    "https://aas.example.com/TI101"
+  ]
+}
