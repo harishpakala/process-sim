@@ -109,7 +109,17 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
               "valueType": "xs:string"
             },
             {
@@ -135,16 +145,6 @@
             {
               "modelType": "Property",
               "idShort": "QuantityBasis",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ProductIdentifier",
               "valueType": "xs:string"
             },
             {
