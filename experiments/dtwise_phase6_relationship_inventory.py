@@ -9,7 +9,12 @@ import argparse
 import json
 from pathlib import Path
 
-from q13_extract_focused_schema import ROOT, extract
+try:
+    from experiments.q13_extract_focused_schema import ROOT, extract
+except ModuleNotFoundError as exc:
+    if exc.name != "experiments":
+        raise
+    from q13_extract_focused_schema import ROOT, extract
 
 
 def inventory(schema):
