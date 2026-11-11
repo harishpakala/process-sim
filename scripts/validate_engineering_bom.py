@@ -23,7 +23,9 @@ for domain,model,groups in [("DEXPI",dex,("Equipments","InstrumentationFunctions
             key=(domain,fields["AssetIdentifier"])
             assert key not in sources,key
             sources[key]=(group["idShort"],item["idShort"],fields["LocalId"])
-assets={p["EngineeringReference"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("EngineeringReference")}
+assets={p["AssetIdentifier"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("AssetIdentifier")}
+catalog=load("examples/aas/product_catalog_instance.json")
+product_ids={p["ProductIdentifier"] for p in map(props,catalog["submodelElements"][0]["value"]) if p.get("ProductIdentifier")}
 assemblies=bom["submodelElements"][0]["value"]
 items=bom["submodelElements"][1]["value"]
 assembly_map={props(a)["BOMItemId"]:props(a) for a in assemblies}
@@ -60,9 +62,11 @@ for item in items:
     assert p["BOMPosition"]==p["BOMItemId"]
     assert p["StructureStatus"]==("EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" if parent else "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP")
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
-    asset=assets.get(p["EngineeringReference"])
-    assert p["AssetReference"]==(asset.get("AssetId","") if asset else "")
-    assert p["CandidateProductReference"]==(asset.get("CandidateProductReference","") if asset else "")
-    assert p["ValidationStatus"]==("ASSET_REFERENCE_EXACT_MATCH" if asset else "UNRESOLVED_ASSET_REFERENCE")
+    asset=assets.get(p["AssetIdentifier"])
+    assert "AssetReference" not in p and "CandidateProductReference" not in p
+    product=asset.get("ProductIdentifier","") if asset else ""
+    assert p["ProductIdentifier"]==(product if product in product_ids else "")
+    assert not p["ProductIdentifier"] or p["ProductIdentifier"] in product_ids
+    assert p["ValidationStatus"]==("ASSET_IDENTIFIER_EXACT_MATCH" if asset else "ASSET_INVENTORY_MATCH_UNRESOLVED")
     assert p["EquivalenceStatus"]=="NOT_ASSESSED_ACROSS_DOMAINS"
-print(f"PASS: {len(items)} EBOM lines, {sum(bool(props(i)['AssetReference']) for i in items)} exact asset matches; no inferred cross-domain equivalence")
+print(f"PASS: {len(items)} EBOM lines, {sum(props(i)['ValidationStatus']=='ASSET_IDENTIFIER_EXACT_MATCH' for i in items)} exact asset identifiers, {sum(bool(props(i)['ProductIdentifier']) for i in items)} catalog product identifiers; no inferred physical installation")
