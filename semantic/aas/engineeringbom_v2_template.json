@@ -24,7 +24,7 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "AssemblyRecordTemplate",
+          "idShort": "AssemblyRecord",
           "semanticId": {
             "type": "ExternalReference",
             "keys": [
@@ -122,7 +122,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -130,7 +130,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               },
@@ -139,7 +139,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -147,7 +147,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               }
@@ -171,7 +171,7 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "BOMItemRecordTemplate",
+          "idShort": "BOMItemRecord",
           "semanticId": {
             "type": "ExternalReference",
             "keys": [
@@ -367,7 +367,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -375,7 +375,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "BOMItemRecordTemplate"
+                    "value": "BOMItemRecord"
                   }
                 ]
               },
@@ -384,7 +384,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -392,7 +392,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               }
@@ -416,7 +416,7 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ParentReferenceTemplate",
+          "idShort": "ParentReference",
           "semanticId": {
             "type": "ExternalReference",
             "keys": [
@@ -486,7 +486,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -494,7 +494,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               },
@@ -503,7 +503,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -511,7 +511,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               }
@@ -535,7 +535,7 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "FunctionalAssociationTemplate",
+          "idShort": "FunctionalAssociation",
           "semanticId": {
             "type": "ExternalReference",
             "keys": [
@@ -619,7 +619,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -627,7 +627,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "BOMItemRecordTemplate"
+                    "value": "BOMItemRecord"
                   }
                 ]
               },
@@ -636,7 +636,7 @@
                 "keys": [
                   {
                     "type": "Submodel",
-                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
                   },
                   {
                     "type": "SubmodelElementCollection",
@@ -644,7 +644,7 @@
                   },
                   {
                     "type": "SubmodelElementCollection",
-                    "value": "AssemblyRecordTemplate"
+                    "value": "AssemblyRecord"
                   }
                 ]
               }
