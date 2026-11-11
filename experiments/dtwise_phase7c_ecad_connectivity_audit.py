@@ -49,8 +49,8 @@ def compile_probes(asset_identifier, graph=None, limit=200):
         "plc_endpoint_outgoing": plc_path + " ?plc_endpoint ?predicate ?neighbor .",
         "plc_endpoint_incoming": plc_path + " ?neighbor ?predicate ?plc_endpoint .",
         "direct_device_to_plc": device_path + " " + plc_path +
-            " { ?device_endpoint ?connecting_predicate ?plc_endpoint . } UNION "
-            "{ ?plc_endpoint ?connecting_predicate ?device_endpoint . }",
+            " { { ?device_endpoint ?connecting_predicate ?plc_endpoint . } UNION "
+            "{ ?plc_endpoint ?connecting_predicate ?device_endpoint . } }",
         "shared_intermediate": device_path + " " + plc_path +
             " ?device_endpoint ?device_edge ?intermediate . "
             "?plc_endpoint ?plc_edge ?intermediate . FILTER(isIRI(?intermediate))",
