@@ -64,7 +64,7 @@ for item in items:
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
     asset=assets.get(p["AssetIdentifier"])
     assert "AssetReference" not in p and "CandidateProductReference" not in p
-    product=asset.get("ProductIdentifier","") if asset else ""
+    product=(asset.get("ProductIdentifier") or asset.get("CandidateProductReference") or "") if asset else ""
     assert p["ProductIdentifier"]==(product if product in product_ids else "")
     assert not p["ProductIdentifier"] or p["ProductIdentifier"] in product_ids
     assert p["ValidationStatus"]==("ASSET_IDENTIFIER_EXACT_MATCH" if asset else "ASSET_INVENTORY_MATCH_UNRESOLVED")
