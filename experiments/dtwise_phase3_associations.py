@@ -41,7 +41,7 @@ def parse_question(question):
     if sum((dexpi, ecad)) > 1 or sum((instrumentation, actuating, devices)) > 1:
         raise ValueError("AMBIGUOUS_FILTER")
     if dexpi and instrumentation:
-        intent = "dexpi_instrumentation_functional_association"
+        intent = "dexpi_instrumentation_phase3"
     elif dexpi and actuating:
         intent = "dexpi_actuating_functional_association"
     elif ecad and devices:
