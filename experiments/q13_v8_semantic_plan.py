@@ -117,7 +117,10 @@ def role_issues(field, uri):
     tokens = tokenize(local(uri))
     required, forbidden = ROLE_RULES[field]
     issues = []
-    matched = (all(t in tokens for t in required) if field in ("bomItemId", "sourceDomain", "partNumber")\n               else any(t in tokens for t in required))\n    if not matched:
+    matched = (all(t in tokens for t in required)
+               if field in ("bomItemId", "sourceDomain", "partNumber")
+               else any(t in tokens for t in required))
+    if not matched:
         issues.append("Semantic role mismatch for " + field + ": " + local(uri))
     if any(t in tokens for t in forbidden):
         issues.append("Semantic role conflict for " + field + ": " + local(uri))
