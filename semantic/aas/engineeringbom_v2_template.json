@@ -152,6 +152,13 @@
                 ]
               }
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
           ]
         }
       ]
@@ -397,6 +404,13 @@
                 ]
               }
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
           ]
         }
       ]
@@ -515,6 +529,13 @@
                   }
                 ]
               }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
             }
           ]
         }
@@ -648,6 +669,13 @@
                   }
                 ]
               }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
             }
           ]
         }
