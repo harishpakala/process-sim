@@ -189,12 +189,10 @@ def validate(plan,cat,required,requested,question):
  if not plan['fields']:errors.append('No output fields')
  if any(not isinstance(x,str) for x in plan['unsupported']):errors.append('Invalid unsupported')
  if plan['unsupported']:errors.append('Unsupported requirements: '+', '.join(str(x) for x in plan['unsupported']))
- for c in requested:
-  if not any(set(c['tokens'])<=tokens(local(p)) for _,_,p in selected):
-   errors.append('Missing semantic output: '+c['phrase'])
- for phrase in requested_outputs(question):
-  if not projection_covered(phrase,selected):
-   errors.append('Unresolved requested output: '+phrase)
+ # Do not validate semantic coverage by lexical overlap between question phrases
+ # and predicate local names. The LLM chooses grounded fields; ontology membership
+ # and structural constraints are checked here. Semantic correctness is evaluated
+ # independently against reference queries/answers.
  for n,s,p in selected:
   kind=next(x.get('kind') for x in cat[s]['properties'] if x['predicate']==p)
   if kind=='object' and tokens(n)&{'tag','tags','identifier','identifiers','reference','references','name','names'}:
@@ -230,9 +228,10 @@ def main():
  if not path.is_absolute():path=ROOT/path
  if path.exists():path=path.with_name(path.stem+'_'+datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%fZ')+path.suffix)
  path.parent.mkdir(parents=True,exist_ok=True)
- report={'method':'generic_v4_1_grounded_filters_normalized_names','question':args.question,'model':args.model,'completed':False,'plan':None,'raw_model_response':None,'generated_sparql':None,'plan_issues':[],'graphdb_bindings':None,'binding_count':None,'error':None}
+ report={'method':'generic_v4_1_ontology_structural_validation','question':args.question,'model':args.model,'completed':False,'plan':None,'raw_model_response':None,'generated_sparql':None,'plan_issues':[],'graphdb_bindings':None,'binding_count':None,'error':None}
  try:
   schema=extract();required=required_domains(schema,args.question);requested=concepts(args.question);cat=catalog(schema,args.question,args.max_shapes,required);edges=joins(cat)
+  report['validation_policy']='ontology_structural_without_lexical_projection_coverage'
   report['schema_sources']=[{'domain':d['domain'],'file':d['source_file'],'sha256':d['source_sha256']} for d in schema['domains']]
   report['candidate_shapes']=cat;report['join_candidates']=edges;report['required_domains']=required;report['requested_concepts']=requested;report['requested_outputs']=requested_outputs(args.question)
   if not cat:raise ValueError('No ontology shapes matched question')
