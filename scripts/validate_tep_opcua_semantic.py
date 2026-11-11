@@ -13,14 +13,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / "semantic"
 INSTANCE = ROOT / "instances" / "tep"
 CANONICAL = re.compile(r"^https://aas\.example\.com/[A-Za-z0-9]+$")
-EXPECTED = {
-    "SC_101": "RELATED_CONTROL_NOT_SAME_ASSET",
-}
+EXPECTED = {}
 ALIGNED = {
     "TI_105": "https://aas.example.com/TI1202",
     "VC_105": "https://aas.example.com/CV1006",
     "VC_107": "https://aas.example.com/CV1301",
     "VC_111": "https://aas.example.com/CV1201",
+    "SC_101": "https://aas.example.com/M1",
 }
 
 
@@ -148,8 +147,8 @@ def main():
         if bom_by_source.get(("DEXPI", tag), {}).get("ValidationStatus") != (
                 "ASSET_IDENTIFIER_EXACT_MATCH"):
             errors.append(f"{tag}: DEXPI BOM exact match not recorded")
-    if counts["ECAD_EXACT"] != 33 or counts["INVENTORY_EXACT"] != 33:
-        errors.append("Expected 33 exact ECAD and AssetInventory mappings")
+    if counts["ECAD_EXACT"] != 34 or counts["INVENTORY_EXACT"] != 34:
+        errors.append("Expected 34 exact ECAD and AssetInventory mappings")
 
     # Verify cross-domain reciprocal links and cited P&ID interpretation.
     dex_by_tag = {r.get("LocalId"): r for r in dex}
@@ -273,7 +272,7 @@ def main():
         print("FAIL: Structural validation errors")
         return 1
     print("PASS: Structural cross-domain validation")
-    print("REVIEW REQUIRED: Documented associations are not confirmed asset identities.")
+    print("REVIEW REQUIRED: User-approved canonical alignment is not independent physical engineering proof.")
     print("Live OPC UA connectivity was not tested.")
     return 0
 
