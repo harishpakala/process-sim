@@ -211,6 +211,11 @@
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string"
             }
           ]
         }
