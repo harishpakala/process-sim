@@ -2325,7 +2325,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/SC101"
+              "value": "https://aas.example.com/M1"
             },
             {
               "modelType": "Property",
@@ -2385,25 +2385,25 @@
               "modelType": "Property",
               "idShort": "RelatedInventoryAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV12"
+              "value": "https://aas.example.com/M1"
             },
             {
               "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
-              "value": "RELATED_CONTROL_NOT_SAME_ASSET"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "InventoryAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows reactor agitator motor M1 but no SC_101 speed-control loop tag. XMV12 is logical manipulated command; SC_101 control function, XMV12 command and physical M1 motor are distinct."
+              "value": "User-approved SC_101 -> M1 canonical alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows reactor agitator motor M1. XMV12 remains logical command."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID shows M1 agitator motor; XMV12 is logical command and SC_101 a control function. Do not merge identities."
+              "value": "SC_101 original function tag retained; M1 canonical motor asset; XMV12 signal remains logical control."
             }
           ]
         }
