@@ -74,6 +74,9 @@ def extract():
                     item["node_kind"] = str(node_kind)
                 if target_class is not None:
                     item["value_class"] = str(target_class)
+                nested_shape = graph.value(prop, SH.node)
+                if nested_shape is not None:
+                    item["node_shape"] = str(nested_shape)
                 properties.append(item)
                 local = str(path).rsplit("/", 1)[-1].rsplit("#", 1)[-1]
                 if local in IDENTIFIERS:
