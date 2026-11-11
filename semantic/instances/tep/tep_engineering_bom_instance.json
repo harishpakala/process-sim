@@ -7264,7 +7264,7 @@
               "modelType": "Property",
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://aas.example.com/SC101"
+              "value": "https://aas.example.com/M1"
             },
             {
               "modelType": "Property",
@@ -7324,7 +7324,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -7372,25 +7372,25 @@
               "modelType": "Property",
               "idShort": "RelatedAssetIdentifier",
               "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV12"
+              "value": "https://aas.example.com/M1"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
-              "value": "RELATED_CONTROL_NOT_SAME_ASSET"
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
             },
             {
               "modelType": "Property",
               "idShort": "CrossDomainAssociationEvidence",
               "valueType": "xs:string",
-              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows reactor agitator motor M1 but no SC_101 speed-control loop tag. XMV12 is logical manipulated command; SC_101 control function, XMV12 command and physical M1 motor are distinct."
+              "value": "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."
             },
             {
               "modelType": "Property",
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
-              "value": "P&ID shows M1 agitator motor; XMV12 is logical command and SC_101 a control function. Do not merge identities."
+              "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
             }
           ],
           "qualifiers": [
@@ -12809,7 +12809,7 @@
               "modelType": "Property",
               "idShort": "ValidationStatus",
               "valueType": "xs:string",
-              "value": "ASSET_INVENTORY_MATCH_UNRESOLVED"
+              "value": "ASSET_IDENTIFIER_EXACT_MATCH"
             },
             {
               "modelType": "Property",
@@ -12852,6 +12852,30 @@
               "idShort": "AssociationBasis",
               "valueType": "xs:string",
               "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/M1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
             }
           ],
           "qualifiers": [
