@@ -282,15 +282,26 @@ def main():
   schema=extract();required=required_domains(schema,args.question);requested=concepts(args.question);cat=catalog(schema,args.question,args.max_shapes,required);edges=joins(cat,args.allow_hypothesis_joins)
   report['validation_policy']='ontology_structural_without_lexical_projection_coverage';report['hypothesis_joins_enabled']=args.allow_hypothesis_joins
   report['schema_sources']=[{'domain':d['domain'],'file':d['source_file'],'sha256':d['source_sha256']} for d in schema['domains']]
-  report['candidate_shapes']=cat;report['join_candidates']=edges;report['required_domains']=required;report['requested_concepts']=requested;report['requested_outputs']=requested_outputs(args.question)
+  report['candidate_shapes']=cat;report['join_candidates']=edges;
+  report['required_domains']=required;
+  report['requested_concepts']=requested;report['requested_outputs']=requested_outputs(args.question)
   if not cat:raise ValueError('No ontology shapes matched question')
-  payload=json.dumps({'question':args.question,'required_domains':required,'requested_concepts':requested,'requested_outputs':requested_outputs(args.question),'shapes':cat,'plan_format':{'fields':[{'name':'outputName','shape':'shape ID','predicate':'full IRI'}],'filters':[],'unsupported':[]}},separators=(',',':'))
+  payload=json.dumps({'question':args.question,
+                      'required_domains':required,
+                      'requested_concepts':requested,
+                      'requested_outputs':requested_outputs(args.question),'shapes':cat,
+                      'plan_format':{'fields':[{'name':'outputName','shape':'shape ID','predicate':'full IRI'}],
+                                     'filters':[],'unsupported':[]}},separators=(',',':'))
   estimate=(len(payload)+len(SYSTEM))//4;budget=min(args.max_prompt_estimate,args.num_ctx-args.num_predict-512)
   report['estimated_prompt_tokens']=estimate
   print('Shapes:',len(cat),'join candidates:',len(edges),'estimated tokens:',estimate,'budget:',budget,flush=True)
   if estimate>budget:raise ValueError('Prompt over budget; reduce --max-shapes')
   parts=[];last={}
-  with requests.post(args.ollama_url.rstrip('/')+'/api/chat',json={'model':args.model,'stream':True,'format':'json','options':{'temperature':0,'num_ctx':args.num_ctx,'num_predict':args.num_predict},'messages':[{'role':'system','content':SYSTEM},{'role':'user','content':payload}]},timeout=(10,args.ollama_timeout),stream=True) as response:
+  with requests.post(args.ollama_url.rstrip('/')+'/api/chat',json=
+                     {'model':args.model,'stream':True,'format':'json',
+                      'options':{'temperature':0,'num_ctx':args.num_ctx,'num_predict':args.num_predict},
+                      'messages':[{'role':'system','content':SYSTEM},{'role':'user','content':payload}]},
+                     timeout=(10,args.ollama_timeout),stream=True) as response:
    response.raise_for_status()
    for line in response.iter_lines():
     if not line:continue
@@ -309,6 +320,7 @@ def main():
    report['selected_joins']=selected_joins;report['joined_shapes']=sorted(joined_shapes)
    context_paths=shape_context_paths(schema,cat,joined_shapes)
    report['entity_context_paths']=context_paths
+   
    query=compile_plan(report['plan'],edges,selected_joins,context_paths);report['generated_sparql']=query
    print('Compiled query:\n'+query,flush=True)
    if not args.skip_execution:

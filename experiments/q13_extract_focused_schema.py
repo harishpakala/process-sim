@@ -19,7 +19,7 @@ BASE = ROOT / "semantic" / "ontology"
 FILES = {
     "dexpi": "dexpi-template.ttl",
     "ecad": "ecad-template.ttl",
-    "engineeringbom": "ebom_v2_shapes.ttl",
+    "engineeringbom": "engineeringbom-template.ttl",
     "assetinventory": "assetinventory-template.ttl",
     "opcuaconnectivity": "opcuaconnectivity-template.ttl",
     "productcatalog": "productcatalog-template.ttl",

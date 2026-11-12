@@ -5,404 +5,507 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU> a sh:NodeShape ;
-    rdfs:label "TEP_EngineeringBOM SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> ;
-    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/> .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:hasBOMItemId ;
+    aas:semanticId "https://example.org/engineeringbom/hasBOMItemId" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/> a owl:Class ;
-    rdfs:label "TEP_EngineeringBOM" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:hasItemDescription ;
+    aas:semanticId "https://example.org/engineeringbom/hasItemDescription" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5Bc3NlbWJseUtpbmQvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "AssemblyKind constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasAssemblyKind .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:hasLabel ;
+    aas:semanticId "https://example.org/engineeringbom/hasLabel" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:hasRevision ;
+    aas:semanticId "https://example.org/engineeringbom/hasRevision" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:hasStructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXI> rdfs:seeAlso engineeringbom:hasAssetIdentifier ;
+    aas:semanticId "https://example.org/engineeringbom/hasAssetIdentifier" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lz> rdfs:seeAlso engineeringbom:hasAssociationBasis ;
+    aas:semanticId "https://example.org/engineeringbom/hasAssociationBasis" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:hasBOMItemId ;
+    aas:semanticId "https://example.org/engineeringbom/hasBOMItemId" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQ> rdfs:seeAlso engineeringbom:hasEngineeringLocalId ;
+    aas:semanticId "https://example.org/engineeringbom/hasEngineeringLocalId" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:hasItemDescription ;
+    aas:semanticId "https://example.org/engineeringbom/hasItemDescription" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:hasLabel ;
+    aas:semanticId "https://example.org/engineeringbom/hasLabel" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllcg> rdfs:seeAlso engineeringbom:hasProductIdentifier ;
+    aas:semanticId "https://example.org/engineeringbom/hasProductIdentifier" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lz> rdfs:seeAlso engineeringbom:hasQuantityBasis ;
+    aas:semanticId "https://example.org/engineeringbom/hasQuantityBasis" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:hasRevision ;
+    aas:semanticId "https://example.org/engineeringbom/hasRevision" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4> rdfs:seeAlso engineeringbom:hasSourceDomain ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceDomain" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cA> rdfs:seeAlso engineeringbom:hasSourceGroup ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceGroup" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:hasStructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcw> rdfs:seeAlso engineeringbom:hasAssociationBasis ;
+    aas:semanticId "https://example.org/engineeringbom/hasAssociationBasis" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:hasSourceField ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceField" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:hasSourceRecordId ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceRecordId" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:hasStructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:hasSourceField ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceField" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:hasSourceRecordId ;
+    aas:semanticId "https://example.org/engineeringbom/hasSourceRecordId" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:hasStructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "TEP_EngineeringBOM_V2_Template SHACL shape" ;
+    sh:description "AAS structure template; example fields are unpopulated."@en ;
+    sh:name "TEP_EngineeringBOM_V2_Template" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> a owl:Class ;
+    rdfs:label "TEP_EngineeringBOM_V2_Template" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItemId constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "BOMItemId" ;
     sh:path engineeringbom:hasBOMItemId .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5CT01Qb3NpdGlvbi9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "BOMPosition constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasBOMPosition .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ItemDescription constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ItemDescription" ;
     sh:path engineeringbom:hasItemDescription .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5JdGVtVHlwZS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "ItemType constraint" ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Label constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
-    sh:path engineeringbom:hasItemType .
+    sh:name "Label" ;
+    sh:path engineeringbom:hasLabel .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5QYXJlbnRJdGVtSWQvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "ParentItemId constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasParentItemId .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5RdWFudGl0eVBlckFzc2VtYmx5L3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "QuantityPerAssembly constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasQuantityPerAssembly .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Revision constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Revision" ;
     sh:path engineeringbom:hasRevision .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5Vbml0L3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "Unit constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasUnit .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> a aas:RelationshipElement ;
+    rdfs:label "hasRecordedParent" ;
+    rdfs:seeAlso engineeringbom:hasRecordedParent ;
+    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU> a sh:NodeShape ;
-    rdfs:label "Assembly SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5Bc3NlbWJseUtpbmQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5CT01JdGVtSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5CT01Qb3NpdGlvbi9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5JdGVtRGVzY3JpcHRpb24vc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5JdGVtVHlwZS9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5QYXJlbnRJdGVtSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5RdWFudGl0eVBlckFzc2VtYmx5L3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5SZXZpc2lvbi9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS5Vbml0L3NoYXBl> .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "AssemblyRecord SHACL shape" ;
+    sh:name "AssemblyRecord" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "Assembly constraint" ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssemblyRecord constraint" ;
     sh:class aas:SMC ;
-    sh:minCount 0 ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU> ;
-    sh:path engineeringbom:hasAssembly .
+    sh:minCount 1 ;
+    sh:name "AssemblyRecord" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> ;
+    sh:path engineeringbom:hasAssemblyRecord .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> a sh:NodeShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Assemblies SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9zaGFwZQ> .
+    sh:name "Assemblies" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Assemblies constraint" ;
     sh:class aas:SMC ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> ;
+    sh:name "Assemblies" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> ;
     sh:path engineeringbom:hasAssemblies .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "AssetIdentifier" ;
     sh:path engineeringbom:hasAssetIdentifier .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssociationBasis constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "AssociationBasis" ;
     sh:path engineeringbom:hasAssociationBasis .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItemId constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "BOMItemId" ;
     sh:path engineeringbom:hasBOMItemId .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01Qb3NpdGlvbi9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "BOMPosition constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasBOMPosition .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uRXZpZGVuY2Uvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "CrossDomainAssociationEvidence constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasCrossDomainAssociationEvidence .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "CrossDomainAssociationStatus constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasCrossDomainAssociationStatus .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "EngineeringInterpretationNote constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasEngineeringInterpretationNote .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EngineeringLocalId constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringLocalId" ;
     sh:path engineeringbom:hasEngineeringLocalId .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FcXVpdmFsZW5jZVN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "EquivalenceStatus constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasEquivalenceStatus .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5GdW5jdGlvbmFsQXNzZW1ibHlSZWZlcmVuY2Uvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "FunctionalAssemblyReference constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasFunctionalAssemblyReference .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ItemDescription constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ItemDescription" ;
     sh:path engineeringbom:hasItemDescription .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5JdGVtVHlwZS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "ItemType constraint" ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Label constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
-    sh:path engineeringbom:hasItemType .
+    sh:name "Label" ;
+    sh:path engineeringbom:hasLabel .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5QYXJlbnRJdGVtSWQvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "ParentItemId constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasParentItemId .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ProductIdentifier constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ProductIdentifier" ;
     sh:path engineeringbom:hasProductIdentifier .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "Quantity constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasQuantity .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eUJhc2lzL3NoYXBl> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "QuantityBasis constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "QuantityBasis" ;
     sh:path engineeringbom:hasQuantityBasis .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eVBlckFzc2VtYmx5L3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "QuantityPerAssembly constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasQuantityPerAssembly .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZWxhdGVkQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "RelatedAssetIdentifier constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasRelatedAssetIdentifier .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Revision constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Revision" ;
     sh:path engineeringbom:hasRevision .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5TZWxlY3Rpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "SelectionStatus constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasSelectionStatus .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "SourceAssetIdentifier constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasSourceAssetIdentifier .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VEb21haW4vc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceDomain constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "SourceDomain" ;
     sh:path engineeringbom:hasSourceDomain .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VHcm91cC9zaGFwZQ> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "SourceGroup constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "SourceGroup" ;
     sh:path engineeringbom:hasSourceGroup .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Vbml0L3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "Unit constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasUnit .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> a aas:RelationshipElement ;
+    rdfs:label "hasRecordedParent" ;
+    rdfs:seeAlso engineeringbom:hasRecordedParent ;
+    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#BOMItems.BOMItemRecord> ;
+    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5WYWxpZGF0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "ValidationStatus constraint" ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:path engineeringbom:hasValidationStatus .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "BOMItemRecord SHACL shape" ;
+    sh:name "BOMItemRecord" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU> a sh:NodeShape ;
-    rdfs:label "BOMItem SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Bc3NldElkZW50aWZpZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01JdGVtSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5CT01Qb3NpdGlvbi9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uRXZpZGVuY2Uvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Dcm9zc0RvbWFpbkFzc29jaWF0aW9uU3RhdHVzL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5FcXVpdmFsZW5jZVN0YXR1cy9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5GdW5jdGlvbmFsQXNzZW1ibHlSZWZlcmVuY2Uvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5JdGVtRGVzY3JpcHRpb24vc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5JdGVtVHlwZS9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5QYXJlbnRJdGVtSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eS9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eUJhc2lzL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5RdWFudGl0eVBlckFzc2VtYmx5L3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZWxhdGVkQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5SZXZpc2lvbi9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5TZWxlY3Rpb25TdGF0dXMvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VBc3NldElkZW50aWZpZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VEb21haW4vc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Tb3VyY2VHcm91cC9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5Vbml0L3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS5WYWxpZGF0aW9uU3RhdHVzL3NoYXBl> .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "BOMItem constraint" ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "BOMItemRecord constraint" ;
     sh:class aas:SMC ;
-    sh:minCount 0 ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU> ;
-    sh:path engineeringbom:hasBOMItem .
+    sh:minCount 1 ;
+    sh:name "BOMItemRecord" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> ;
+    sh:path engineeringbom:hasBOMItemRecord .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> a sh:NodeShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "BOMItems SHACL shape" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9zaGFwZQ> .
+    sh:name "BOMItems" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> a sh:PropertyShape ;
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItems constraint" ;
     sh:class aas:SMC ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> ;
+    sh:name "BOMItems" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> ;
     sh:path engineeringbom:hasBOMItems .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AssociationBasis constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "AssociationBasis" ;
+    sh:path engineeringbom:hasAssociationBasis .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SourceField constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SourceField" ;
+    sh:path engineeringbom:hasSourceField .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SourceRecordId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SourceRecordId" ;
+    sh:path engineeringbom:hasSourceRecordId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "StructureStatus" ;
+    sh:path engineeringbom:hasStructureStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGg> a aas:RelationshipElement ;
+    rdfs:label "functionallyAssociatedWith" ;
+    rdfs:seeAlso engineeringbom:functionallyAssociatedWith ;
+    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#BOMItems.BOMItemRecord> ;
+    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:semanticId "https://example.org/engineeringbom/functionallyAssociatedWith" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "FunctionalAssociation SHACL shape" ;
+    sh:name "FunctionalAssociation" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    engineeringbom:hasfunctionallyAssociatedWith <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGg> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "FunctionalAssociation constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 1 ;
+    sh:name "FunctionalAssociation" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> ;
+    sh:path engineeringbom:hasFunctionalAssociation .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "FunctionalAssociations SHACL shape" ;
+    sh:name "FunctionalAssociations" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "FunctionalAssociations constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FunctionalAssociations" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> ;
+    sh:path engineeringbom:hasFunctionalAssociations .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SourceField constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SourceField" ;
+    sh:path engineeringbom:hasSourceField .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SourceRecordId constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SourceRecordId" ;
+    sh:path engineeringbom:hasSourceRecordId .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "StructureStatus" ;
+    sh:path engineeringbom:hasStructureStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuaGFzUmVjb3JkZWRQYXJlbnQ> a aas:RelationshipElement ;
+    rdfs:label "hasRecordedParent" ;
+    rdfs:seeAlso engineeringbom:hasRecordedParent ;
+    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
+    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "ParentReference SHACL shape" ;
+    sh:name "ParentReference" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuaGFzUmVjb3JkZWRQYXJlbnQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ParentReference constraint" ;
+    sh:class aas:SMC ;
+    sh:minCount 1 ;
+    sh:name "ParentReference" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> ;
+    sh:path engineeringbom:hasParentReference .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "ParentReferences SHACL shape" ;
+    sh:name "ParentReferences" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ParentReferences constraint" ;
+    sh:class aas:SMC ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ParentReferences" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> ;
+    sh:path engineeringbom:hasParentReferences .
+
 engineeringbom:hasAssemblies a owl:ObjectProperty ;
-    rdfs:label "hasAssemblies" .
+    rdfs:label "Assemblies",
+        "hasAssemblies" .
 
-engineeringbom:hasAssembly a owl:ObjectProperty ;
-    rdfs:label "hasAssembly" .
+engineeringbom:hasAssemblyRecord a owl:ObjectProperty ;
+    rdfs:label "AssemblyRecord",
+        "hasAssemblyRecord" .
 
-engineeringbom:hasAssemblyKind a owl:DatatypeProperty ;
-    rdfs:label "hasAssemblyKind" .
-
-engineeringbom:hasAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasAssetIdentifier" .
-
-engineeringbom:hasAssociationBasis a owl:DatatypeProperty ;
-    rdfs:label "hasAssociationBasis" .
-
-engineeringbom:hasBOMItem a owl:ObjectProperty ;
-    rdfs:label "hasBOMItem" .
+engineeringbom:hasBOMItemRecord a owl:ObjectProperty ;
+    rdfs:label "BOMItemRecord",
+        "hasBOMItemRecord" .
 
 engineeringbom:hasBOMItems a owl:ObjectProperty ;
-    rdfs:label "hasBOMItems" .
+    rdfs:label "BOMItems",
+        "hasBOMItems" .
 
-engineeringbom:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationEvidence" .
+engineeringbom:hasFunctionalAssociation a owl:ObjectProperty ;
+    rdfs:label "FunctionalAssociation",
+        "hasFunctionalAssociation" .
 
-engineeringbom:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationStatus" .
+engineeringbom:hasFunctionalAssociations a owl:ObjectProperty ;
+    rdfs:label "FunctionalAssociations",
+        "hasFunctionalAssociations" .
 
-engineeringbom:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringInterpretationNote" .
+engineeringbom:hasParentReference a owl:ObjectProperty ;
+    rdfs:label "ParentReference",
+        "hasParentReference" .
+
+engineeringbom:hasParentReferences a owl:ObjectProperty ;
+    rdfs:label "ParentReferences",
+        "hasParentReferences" .
+
+engineeringbom:hasAssetIdentifier a owl:DatatypeProperty ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" .
 
 engineeringbom:hasEngineeringLocalId a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringLocalId" .
-
-engineeringbom:hasEquivalenceStatus a owl:DatatypeProperty ;
-    rdfs:label "hasEquivalenceStatus" .
-
-engineeringbom:hasFunctionalAssemblyReference a owl:DatatypeProperty ;
-    rdfs:label "hasFunctionalAssemblyReference" .
+    rdfs:label "EngineeringLocalId",
+        "hasEngineeringLocalId" .
 
 engineeringbom:hasProductIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasProductIdentifier" .
-
-engineeringbom:hasQuantity a owl:DatatypeProperty ;
-    rdfs:label "hasQuantity" .
+    rdfs:label "ProductIdentifier",
+        "hasProductIdentifier" .
 
 engineeringbom:hasQuantityBasis a owl:DatatypeProperty ;
-    rdfs:label "hasQuantityBasis" .
-
-engineeringbom:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasRelatedAssetIdentifier" .
-
-engineeringbom:hasSelectionStatus a owl:DatatypeProperty ;
-    rdfs:label "hasSelectionStatus" .
-
-engineeringbom:hasSourceAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasSourceAssetIdentifier" .
+    rdfs:label "QuantityBasis",
+        "hasQuantityBasis" .
 
 engineeringbom:hasSourceDomain a owl:DatatypeProperty ;
-    rdfs:label "hasSourceDomain" .
+    rdfs:label "SourceDomain",
+        "hasSourceDomain" .
 
 engineeringbom:hasSourceGroup a owl:DatatypeProperty ;
-    rdfs:label "hasSourceGroup" .
+    rdfs:label "SourceGroup",
+        "hasSourceGroup" .
 
-engineeringbom:hasValidationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasValidationStatus" .
+engineeringbom:hasAssociationBasis a owl:DatatypeProperty ;
+    rdfs:label "AssociationBasis",
+        "hasAssociationBasis" .
 
 engineeringbom:hasBOMItemId a owl:DatatypeProperty ;
-    rdfs:label "hasBOMItemId" .
-
-engineeringbom:hasBOMPosition a owl:DatatypeProperty ;
-    rdfs:label "hasBOMPosition" .
+    rdfs:label "BOMItemId",
+        "hasBOMItemId" .
 
 engineeringbom:hasItemDescription a owl:DatatypeProperty ;
-    rdfs:label "hasItemDescription" .
+    rdfs:label "ItemDescription",
+        "hasItemDescription" .
 
-engineeringbom:hasItemType a owl:DatatypeProperty ;
-    rdfs:label "hasItemType" .
-
-engineeringbom:hasParentItemId a owl:DatatypeProperty ;
-    rdfs:label "hasParentItemId" .
-
-engineeringbom:hasQuantityPerAssembly a owl:DatatypeProperty ;
-    rdfs:label "hasQuantityPerAssembly" .
+engineeringbom:hasLabel a owl:DatatypeProperty ;
+    rdfs:label "Label",
+        "hasLabel" .
 
 engineeringbom:hasRevision a owl:DatatypeProperty ;
-    rdfs:label "hasRevision" .
+    rdfs:label "Revision",
+        "hasRevision" .
 
-engineeringbom:hasStructureStatus a owl:DatatypeProperty ;
-    rdfs:label "hasStructureStatus" .
+engineeringbom:hasSourceField a owl:DatatypeProperty ;
+    rdfs:label "SourceField",
+        "hasSourceField" .
 
-engineeringbom:hasUnit a owl:DatatypeProperty ;
-    rdfs:label "hasUnit" .
+engineeringbom:hasSourceRecordId a owl:DatatypeProperty ;
+    rdfs:label "SourceRecordId",
+        "hasSourceRecordId" .
 
 aas:SMC a owl:Class ;
     rdfs:label "Submodel Element Collection" .
+
+engineeringbom:hasStructureStatus a owl:DatatypeProperty ;
+    rdfs:label "StructureStatus",
+        "hasStructureStatus" .
 

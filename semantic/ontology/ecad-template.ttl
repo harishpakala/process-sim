@@ -7,6 +7,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> a sh:NodeShape ;
     rdfs:label "ECAD SHACL shape" ;
+    sh:description "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."@en ;
+    sh:name "ECAD" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> ;
@@ -17,127 +19,169 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Address" ;
     sh:path ecad:hasAddress .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "EndPoint SHACL shape" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EndPoint constraint" ;
     sh:class aas:SMC ;
+    sh:description "Connection endpoint in the electrical design."@en ;
     sh:minCount 0 ;
+    sh:name "EndPoint" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
     sh:path ecad:hasEndPoint .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Address" ;
     sh:path ecad:hasAddress .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "PLCEndPoint constraint" ;
     sh:class aas:SMC ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
     sh:minCount 0 ;
+    sh:name "PLCEndPoint" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
     sh:path ecad:hasPLCEndPoint .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ConnectionPoints constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ConnectionPoints" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
     sh:path ecad:hasConnectionPoints .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Evidence recorded for the cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationEvidence" ;
     sh:path ecad:hasCrossDomainAssociationEvidence .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association to another engineering domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationStatus" ;
     sh:path ecad:hasCrossDomainAssociationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "AssetIdentifier" ;
     sh:path ecad:hasAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification associated with the element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringInterpretationNote" ;
     sh:path ecad:hasEngineeringInterpretationNote .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EngineeringVerificationEvidence constraint" ;
+    sh:description "Recorded evidence supporting engineering verification."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringVerificationEvidence" ;
     sh:path ecad:hasEngineeringVerificationEvidence .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EngineeringVerificationStatus constraint" ;
+    sh:description "Recorded status of engineering verification for the device."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringVerificationStatus" ;
     sh:path ecad:hasEngineeringVerificationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ProductVerificationEvidence constraint" ;
+    sh:description "Recorded evidence supporting product verification."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ProductVerificationEvidence" ;
     sh:path ecad:hasProductVerificationEvidence .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ProductVerificationStatus constraint" ;
+    sh:description "Recorded status of verification against product information."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ProductVerificationStatus" ;
     sh:path ecad:hasProductVerificationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of a related asset; distinct from the identifier of the current element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "RelatedAssetIdentifier" ;
     sh:path ecad:hasRelatedAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "Device SHACL shape" ;
+    sh:description "Electrical device represented in the engineering design."@en ;
+    sh:name "Device" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ>,
@@ -153,19 +197,25 @@
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "Device constraint" ;
     sh:class aas:SMC ;
+    sh:description "Electrical device represented in the engineering design."@en ;
     sh:minCount 0 ;
+    sh:name "Device" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> ;
     sh:path ecad:hasDevice .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Devices SHACL shape" ;
+    sh:description "Collection of electrical devices represented in the ECAD model."@en ;
+    sh:name "Devices" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Devices constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of electrical devices represented in the ECAD model."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Devices" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> ;
     sh:path ecad:hasDevices .
 
@@ -176,104 +226,138 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Connections SHACL shape" ;
+    sh:description "Collection of connections between schematic elements."@en ;
+    sh:name "Connections" ;
     ecad:hasisConnectedTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRv> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Connections constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of connections between schematic elements."@en ;
     sh:minCount 0 ;
+    sh:name "Connections" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> ;
     sh:path ecad:hasConnections .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Schematics SHACL shape" ;
+    sh:description "Collection of electrical schematic information."@en ;
+    sh:name "Schematics" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Schematics constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of electrical schematic information."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Schematics" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> ;
     sh:path ecad:hasSchematics .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Address" ;
     sh:path ecad:hasAddress .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "EndPoint SHACL shape" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EndPoint constraint" ;
     sh:class aas:SMC ;
+    sh:description "Connection endpoint in the electrical design."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EndPoint" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
     sh:path ecad:hasEndPoint .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Address" ;
     sh:path ecad:hasAddress .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "PLCEndPoint constraint" ;
     sh:class aas:SMC ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "PLCEndPoint" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
     sh:path ecad:hasPLCEndPoint .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ConnectionPoints constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ConnectionPoints" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
     sh:path ecad:hasConnectionPoints .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "AssetIdentifier" ;
     sh:path ecad:hasAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "LocalId" ;
     sh:path ecad:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "Symbol SHACL shape" ;
+    sh:description "Graphical or logical symbol representing an electrical design element."@en ;
+    sh:name "Symbol" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> .
@@ -281,81 +365,127 @@
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "Symbol constraint" ;
     sh:class aas:SMC ;
+    sh:description "Graphical or logical symbol representing an electrical design element."@en ;
     sh:minCount 0 ;
+    sh:name "Symbol" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> ;
     sh:path ecad:hasSymbol .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Symbols SHACL shape" ;
+    sh:description "Collection of schematic symbols."@en ;
+    sh:name "Symbols" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Symbols constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of schematic symbols."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "Symbols" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> ;
     sh:path ecad:hasSymbols .
 
 ecad:hasConnections a owl:ObjectProperty ;
-    rdfs:label "hasConnections" .
+    rdfs:label "Connections",
+        "hasConnections" ;
+    rdfs:comment "Collection of connections between schematic elements."@en .
 
 ecad:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationEvidence" .
+    rdfs:label "CrossDomainAssociationEvidence",
+        "hasCrossDomainAssociationEvidence" ;
+    rdfs:comment "Evidence recorded for the cross-domain association."@en .
 
 ecad:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationStatus" .
+    rdfs:label "CrossDomainAssociationStatus",
+        "hasCrossDomainAssociationStatus" ;
+    rdfs:comment "Recorded status of an association to another engineering domain."@en .
 
 ecad:hasDevice a owl:ObjectProperty ;
-    rdfs:label "hasDevice" .
+    rdfs:label "Device",
+        "hasDevice" ;
+    rdfs:comment "Electrical device represented in the engineering design."@en .
 
 ecad:hasDevices a owl:ObjectProperty ;
-    rdfs:label "hasDevices" .
+    rdfs:label "Devices",
+        "hasDevices" ;
+    rdfs:comment "Collection of electrical devices represented in the ECAD model."@en .
 
 ecad:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringInterpretationNote" .
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering interpretation or qualification associated with the element."@en .
 
 ecad:hasEngineeringVerificationEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringVerificationEvidence" .
+    rdfs:label "EngineeringVerificationEvidence",
+        "hasEngineeringVerificationEvidence" ;
+    rdfs:comment "Recorded evidence supporting engineering verification."@en .
 
 ecad:hasEngineeringVerificationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringVerificationStatus" .
+    rdfs:label "EngineeringVerificationStatus",
+        "hasEngineeringVerificationStatus" ;
+    rdfs:comment "Recorded status of engineering verification for the device."@en .
 
 ecad:hasProductVerificationEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasProductVerificationEvidence" .
+    rdfs:label "ProductVerificationEvidence",
+        "hasProductVerificationEvidence" ;
+    rdfs:comment "Recorded evidence supporting product verification."@en .
 
 ecad:hasProductVerificationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasProductVerificationStatus" .
+    rdfs:label "ProductVerificationStatus",
+        "hasProductVerificationStatus" ;
+    rdfs:comment "Recorded status of verification against product information."@en .
 
 ecad:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasRelatedAssetIdentifier" .
+    rdfs:label "RelatedAssetIdentifier",
+        "hasRelatedAssetIdentifier" ;
+    rdfs:comment "Identifier of a related asset; distinct from the identifier of the current element."@en .
 
 ecad:hasSchematics a owl:ObjectProperty ;
-    rdfs:label "hasSchematics" .
+    rdfs:label "Schematics",
+        "hasSchematics" ;
+    rdfs:comment "Collection of electrical schematic information."@en .
 
 ecad:hasSymbol a owl:ObjectProperty ;
-    rdfs:label "hasSymbol" .
+    rdfs:label "Symbol",
+        "hasSymbol" ;
+    rdfs:comment "Graphical or logical symbol representing an electrical design element."@en .
 
 ecad:hasSymbols a owl:ObjectProperty ;
-    rdfs:label "hasSymbols" .
+    rdfs:label "Symbols",
+        "hasSymbols" ;
+    rdfs:comment "Collection of schematic symbols."@en .
 
 ecad:hasAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasAssetIdentifier" .
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier associated with the represented asset."@en .
 
 ecad:hasConnectionPoints a owl:ObjectProperty ;
-    rdfs:label "hasConnectionPoints" .
+    rdfs:label "ConnectionPoints",
+        "hasConnectionPoints" ;
+    rdfs:comment "Collection of connection points belonging to an electrical device or symbol."@en .
 
 ecad:hasEndPoint a owl:ObjectProperty ;
-    rdfs:label "hasEndPoint" .
+    rdfs:label "EndPoint",
+        "hasEndPoint" ;
+    rdfs:comment "Connection endpoint in the electrical design."@en .
 
 ecad:hasPLCEndPoint a owl:ObjectProperty ;
-    rdfs:label "hasPLCEndPoint" .
+    rdfs:label "PLCEndPoint",
+        "hasPLCEndPoint" ;
+    rdfs:comment "Connection endpoint associated with a programmable logic controller."@en .
 
 ecad:hasAddress a owl:DatatypeProperty ;
-    rdfs:label "hasAddress" .
+    rdfs:label "Address",
+        "hasAddress" ;
+    rdfs:comment "Address assigned to the connection endpoint in the electrical design."@en .
 
 ecad:hasLocalId a owl:DatatypeProperty ;
-    rdfs:label "hasLocalId" .
+    rdfs:label "LocalId",
+        "hasLocalId" ;
+    rdfs:comment "Identifier local to the ECAD source model or containing element."@en .
 
 aas:SMC a owl:Class ;
     rdfs:label "Submodel Element Collection" .

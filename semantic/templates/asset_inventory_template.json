@@ -86,28 +86,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Reference linking the asset record to engineering information."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Reference linking the asset record to operational information."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "description": [

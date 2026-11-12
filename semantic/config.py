@@ -11,6 +11,6 @@ TARGETS = (
     ("productcatalog", ROOT / "semantic/templates/product_catalog_template.json", ROOT / "semantic/instances/tep/tep_product_catalog_instance.json"),
     ("assetinventory", ROOT / "semantic/templates/asset_inventory_template.json", ROOT / "semantic/instances/tep/tep_asset_inventory_instance.json"),
     ("opcuaconnectivity", ROOT / "semantic/templates/opcua_connectivity_template.json", ROOT / "semantic/instances/tep/tep_opcua_connectivity_instance.json"),
-    ("engineeringbom", ROOT / "semantic/templates/engineering_bom_template.json", ROOT / "semantic/instances/tep/tep_engineering_bom_instance.json"),
+    ("engineeringbom", ROOT / "semantic/templates/engineeringbom_v2_template.json", ROOT / "semantic/instances/tep/engineeringbom_v2_instance.json"),
 )
 OUTPUT = ROOT / "semantic" / "ontology"

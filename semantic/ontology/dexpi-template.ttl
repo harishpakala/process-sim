@@ -7,6 +7,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> a sh:NodeShape ;
     rdfs:label "DEXPI SHACL shape" ;
+    sh:description "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."@en ;
+    sh:name "DEXPI" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> ;
@@ -17,18 +19,24 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "ActuatingFunctions SHACL shape" ;
+    sh:description "Collection of process actuation functions."@en ;
+    sh:name "ActuatingFunctions" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ActuatingFunctions constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of process actuation functions."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "ActuatingFunctions" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
     sh:path dexpi:hasActuatingFunctions .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "ActuatingFunction SHACL shape" ;
+    sh:description "Function that actuates or manipulates a process variable."@en ;
+    sh:name "ActuatingFunction" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
@@ -40,102 +48,136 @@
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ActuatingFunction constraint" ;
     sh:class aas:SMC ;
+    sh:description "Function that actuates or manipulates a process variable."@en ;
     sh:minCount 0 ;
+    sh:name "ActuatingFunction" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> ;
     sh:path dexpi:hasActuatingFunction .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ActuatedVariable constraint" ;
+    sh:description "Process variable acted upon by the actuating function."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "ActuatedVariable" ;
     sh:path dexpi:hasActuatedVariable .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "AssetIdentifier" ;
     sh:path dexpi:hasAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Recorded evidence supporting a cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationEvidence" ;
     sh:path dexpi:hasCrossDomainAssociationEvidence .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association with information in another engineering domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationStatus" ;
     sh:path dexpi:hasCrossDomainAssociationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification of the represented association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringInterpretationNote" ;
     sh:path dexpi:hasEngineeringInterpretationNote .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "LocalId" ;
     sh:path dexpi:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "RelatedAssetIdentifier" ;
     sh:path dexpi:hasRelatedAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "AssetIdentifier" ;
     sh:path dexpi:hasAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "LocalId" ;
     sh:path dexpi:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "Equipment SHACL shape" ;
+    sh:description "Process equipment item identified in the DEXPI engineering model."@en ;
+    sh:name "Equipment" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "Equipment constraint" ;
     sh:class aas:SMC ;
+    sh:description "Process equipment item identified in the DEXPI engineering model."@en ;
     sh:minCount 0 ;
+    sh:name "Equipment" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> ;
     sh:path dexpi:hasEquipment .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Equipments SHACL shape" ;
+    sh:description "Collection of process equipment representations."@en ;
+    sh:name "Equipments" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Equipments constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of process equipment representations."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "Equipments" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> ;
     sh:path dexpi:hasEquipments .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "InstrumentationFunctions SHACL shape" ;
+    sh:description "Collection of instrumentation functions."@en ;
+    sh:name "InstrumentationFunctions" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "InstrumentationFunctions constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of instrumentation functions."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "InstrumentationFunctions" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
     sh:path dexpi:hasInstrumentationFunctions .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "InstrumentationFunction SHACL shape" ;
+    sh:description "Function that measures or observes a process variable."@en ;
+    sh:name "InstrumentationFunction" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
@@ -147,93 +189,137 @@
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "InstrumentationFunction constraint" ;
     sh:class aas:SMC ;
+    sh:description "Function that measures or observes a process variable."@en ;
     sh:minCount 0 ;
+    sh:name "InstrumentationFunction" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> ;
     sh:path dexpi:hasInstrumentationFunction .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "MeasuredVariable constraint" ;
+    sh:description "Process variable measured by the instrumentation function."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "MeasuredVariable" ;
     sh:path dexpi:hasMeasuredVariable .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "AssetIdentifier" ;
     sh:path dexpi:hasAssetIdentifier .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Recorded evidence supporting a cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationEvidence" ;
     sh:path dexpi:hasCrossDomainAssociationEvidence .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association with information in another engineering domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "CrossDomainAssociationStatus" ;
     sh:path dexpi:hasCrossDomainAssociationStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification of the represented association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "EngineeringInterpretationNote" ;
     sh:path dexpi:hasEngineeringInterpretationNote .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
+    sh:name "LocalId" ;
     sh:path dexpi:hasLocalId .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
+    sh:name "RelatedAssetIdentifier" ;
     sh:path dexpi:hasRelatedAssetIdentifier .
 
 dexpi:hasActuatedVariable a owl:DatatypeProperty ;
-    rdfs:label "hasActuatedVariable" .
+    rdfs:label "ActuatedVariable",
+        "hasActuatedVariable" ;
+    rdfs:comment "Process variable acted upon by the actuating function."@en .
 
 dexpi:hasActuatingFunction a owl:ObjectProperty ;
-    rdfs:label "hasActuatingFunction" .
+    rdfs:label "ActuatingFunction",
+        "hasActuatingFunction" ;
+    rdfs:comment "Function that actuates or manipulates a process variable."@en .
 
 dexpi:hasActuatingFunctions a owl:ObjectProperty ;
-    rdfs:label "hasActuatingFunctions" .
+    rdfs:label "ActuatingFunctions",
+        "hasActuatingFunctions" ;
+    rdfs:comment "Collection of process actuation functions."@en .
 
 dexpi:hasEquipment a owl:ObjectProperty ;
-    rdfs:label "hasEquipment" .
+    rdfs:label "Equipment",
+        "hasEquipment" ;
+    rdfs:comment "Process equipment item identified in the DEXPI engineering model."@en .
 
 dexpi:hasEquipments a owl:ObjectProperty ;
-    rdfs:label "hasEquipments" .
+    rdfs:label "Equipments",
+        "hasEquipments" ;
+    rdfs:comment "Collection of process equipment representations."@en .
 
 dexpi:hasInstrumentationFunction a owl:ObjectProperty ;
-    rdfs:label "hasInstrumentationFunction" .
+    rdfs:label "InstrumentationFunction",
+        "hasInstrumentationFunction" ;
+    rdfs:comment "Function that measures or observes a process variable."@en .
 
 dexpi:hasInstrumentationFunctions a owl:ObjectProperty ;
-    rdfs:label "hasInstrumentationFunctions" .
+    rdfs:label "InstrumentationFunctions",
+        "hasInstrumentationFunctions" ;
+    rdfs:comment "Collection of instrumentation functions."@en .
 
 dexpi:hasMeasuredVariable a owl:DatatypeProperty ;
-    rdfs:label "hasMeasuredVariable" .
+    rdfs:label "MeasuredVariable",
+        "hasMeasuredVariable" ;
+    rdfs:comment "Process variable measured by the instrumentation function."@en .
 
 dexpi:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationEvidence" .
+    rdfs:label "CrossDomainAssociationEvidence",
+        "hasCrossDomainAssociationEvidence" ;
+    rdfs:comment "Recorded evidence supporting a cross-domain association."@en .
 
 dexpi:hasCrossDomainAssociationStatus a owl:DatatypeProperty ;
-    rdfs:label "hasCrossDomainAssociationStatus" .
+    rdfs:label "CrossDomainAssociationStatus",
+        "hasCrossDomainAssociationStatus" ;
+    rdfs:comment "Recorded status of an association with information in another engineering domain."@en .
 
 dexpi:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
-    rdfs:label "hasEngineeringInterpretationNote" .
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering interpretation or qualification of the represented association."@en .
 
 dexpi:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasRelatedAssetIdentifier" .
+    rdfs:label "RelatedAssetIdentifier",
+        "hasRelatedAssetIdentifier" ;
+    rdfs:comment "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en .
 
 dexpi:hasAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "hasAssetIdentifier" .
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier associated with the represented engineering asset."@en .
 
 dexpi:hasLocalId a owl:DatatypeProperty ;
-    rdfs:label "hasLocalId" .
+    rdfs:label "LocalId",
+        "hasLocalId" ;
+    rdfs:comment "Identifier local to the source engineering model."@en .
 
 aas:SMC a owl:Class ;
     rdfs:label "Submodel Element Collection" .
