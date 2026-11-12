@@ -117,7 +117,14 @@ def resolve(index, question, limit=10):
         label_tokens = set().union(*(_tokens(x) for x in concept["labels"])) if concept["labels"] else set()
         primary = len(query_tokens & (local_tokens | label_tokens))
         domain_match = int(concept["domain"].lower() in mentioned_domains)
-        candidates.append((-(score + 2 * primary + 8 * domain_match),
+        # Prefer directly matched properties; template classes are structural context.
+        kind_bonus = 3 if concept["kind"] == "property" and primary else 0
+        template_penalty = (5 if concept["kind"] == "class"
+                            and "template" in _tokens(_local(concept["uri"]) + " " +
+                                " ".join(concept["labels"]))
+                            and "template" not in query_tokens else 0)
+        candidates.append((-(score + 2 * primary + 8 * domain_match +
+                             kind_bonus - template_penalty),
                            concept["domain"], concept["uri"], concept))
     candidates.sort(key=lambda x: x[:3])
 
