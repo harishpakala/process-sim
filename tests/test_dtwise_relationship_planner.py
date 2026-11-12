@@ -42,7 +42,8 @@ class RelationshipPlannerTests(unittest.TestCase):
                                   "property_chain": [P]}]):
             result = plan_relationship(QUESTION, index)
         self.assertIsNone(result["sparql"])
-        self.assertEqual(result["ontology_evidence"], [])\n        self.assertIn("subject", result["reason"])
+        self.assertEqual(result["ontology_evidence"], [])
+        self.assertIn("subject", result["reason"])
 
     def test_no_relationship_language_preserves_regular_lookup(self):
         self.assertFalse(is_relationship_question("ECAD device local identifier"))
@@ -115,6 +116,34 @@ class RelationshipPlannerTests(unittest.TestCase):
             self.assertEqual(_schema_connections(
                 index, [{"domain": "example", "property_chain": [a]}],
                 [{"domain": "example", "property_chain": [b]}]), [])
+
+    def test_generic_identity_candidates_are_not_grounded(self):
+        from semantic.dtwise_relationship_planner import _instance_resolution_candidates
+        prop = "https://example.org/example/hasName"
+        index = {"concepts": [{"kind": "property", "domain": "example",
+                                "uri": prop, "labels": ["Name"]}]}
+        with patch("semantic.dtwise_relationship_planner._traversals",
+                   return_value=[{"complete_to_root": True,
+                                  "start_shape": "shape", "property_chain": [prop]}]):
+            candidates = _instance_resolution_candidates(index, {"text": "Sample reactor"})
+        self.assertEqual(candidates[0]["status"], "unresolved_instance_candidate")
+        self.assertNotIn("value", candidates[0])
+
+    def test_explicit_reference_edges_only(self):
+        from semantic.dtwise_relationship_planner import _ontology_reference_edges
+        prop = "https://example.org/example/hasPart"
+        domain = "http://www.w3.org/2000/01/rdf-schema#domain"
+        range_uri = "http://www.w3.org/2000/01/rdf-schema#range"
+        index = {"concepts": [{"kind": "property", "domain": "example", "uri": prop}],
+                 "relationships": [
+                     {"domain": "example", "subject": prop, "predicate": domain,
+                      "object": "https://example.org/example/Assembly"},
+                     {"domain": "example", "subject": prop, "predicate": range_uri,
+                      "object": "https://example.org/example/Part"}]}
+        edges = _ontology_reference_edges(index)
+        self.assertEqual(len(edges), 1)
+        self.assertEqual(edges[0]["predicate"], prop)
+        self.assertEqual(edges[0]["status"], "ontology_schema_edge_only")
 
     def test_deterministic(self):
         index = {"concepts": []}
