@@ -68,8 +68,8 @@ def compile_sparql(selection, limit=100, index=None):
     entity_count = (
         intent == "count"
         and concept["domain"] == "ecad"
-        and bool(re.search(r"\\bdevices?\\b", selection["question"], re.I))
-        and not bool(re.search(r"\\b(identifier|identifiers|local\\s+ids?|values?)\\b",
+        and bool(re.search(r"\bdevices?\b", selection["question"], re.I))
+        and not bool(re.search(r"\b(identifier|identifiers|local\s+ids?|values?)\b",
                                selection["question"], re.I))
     )
     if entity_count:
