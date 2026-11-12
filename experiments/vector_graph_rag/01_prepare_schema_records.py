@@ -16,6 +16,26 @@ def main():
     ap.add_argument('--output', type=Path, default=Path('experiments/vector_graph_rag/data/schema_records.jsonl'))
     args = ap.parse_args()
     index = json.loads(args.index.read_text(encoding='utf-8'))
+    # The authored EngineeringBOM template contains a BOMItemRecord description
+    # that is absent from some previously generated schema indexes. Reuse only
+    # that exact authored description; do not synthesize schema semantics.
+    template_path = Path('semantic/templates/engineeringbom_v2_template.json')
+    template_descriptions = {}
+    if template_path.exists():
+        template = json.loads(template_path.read_text(encoding='utf-8'))
+        def visit(value):
+            if isinstance(value, dict):
+                if value.get('idShort') == 'BOMItemRecord':
+                    template_descriptions['BOMItemRecord'] = [
+                        entry['text'] for entry in value.get('description', [])
+                        if entry.get('language') == 'en' and entry.get('text')
+                    ]
+                for child in value.values():
+                    visit(child)
+            elif isinstance(value, list):
+                for child in value:
+                    visit(child)
+        visit(template)
     records = []
     for concept in index['concepts']:
         if concept['kind'] not in ('class', 'property'):
@@ -23,9 +43,9 @@ def main():
         domain, uri = concept['domain'], concept['uri']
         paths = sorted({p['node_shape'] for p in index.get('shape_paths', [])
                         if p['domain'] == domain and p['path'] == uri})
-        parts = [f"Ontology {concept['kind']}: {local(uri)}",
+        descriptions = concept.get('descriptions', [])\n        if (not descriptions and domain == 'engineeringbom'\n                and uri == 'https://example.org/engineeringbom/hasBOMItemRecord'):\n            descriptions = template_descriptions.get('BOMItemRecord', [])\n        parts = [f"Ontology {concept['kind']}: {local(uri)}",
                  'Labels: ' + '; '.join(concept.get('labels', [])),
-                 'Descriptions: ' + '; '.join(concept.get('descriptions', [])),
+                 'Descriptions: ' + '; '.join(descriptions),
                  'SHACL owning shapes: ' + '; '.join(local(p) for p in paths)]
         text = '\n'.join(p for p in parts if not p.endswith(': '))
         key = f'{domain}|{concept["kind"]}|{uri}'
