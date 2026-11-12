@@ -56,7 +56,7 @@ function select(node:Node){
 }
 const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
 const candidatePairs=(id:string)=>engineeringReconciliation.filter(p=>p.equipmentAssembly===id)
-const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>item.SourceAssetIdentifier===p.dexpiReference||item.SourceAssetIdentifier===p.ecadReference)
+const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>String(item.SourceAssetIdentifier)===String(p.dexpiReference)||String(item.SourceAssetIdentifier)===String(p.ecadReference))
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id&&!i.FunctionalAssemblyReference).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
