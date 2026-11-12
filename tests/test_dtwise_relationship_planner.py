@@ -42,7 +42,7 @@ class RelationshipPlannerTests(unittest.TestCase):
                                   "property_chain": [P]}]):
             result = plan_relationship(QUESTION, index)
         self.assertIsNone(result["sparql"])
-        self.assertEqual(result["ontology_evidence"][0]["uri"], P)
+        self.assertEqual(result["ontology_evidence"], [])\n        self.assertIn("subject", result["reason"])
 
     def test_no_relationship_language_preserves_regular_lookup(self):
         self.assertFalse(is_relationship_question("ECAD device local identifier"))
@@ -51,6 +51,35 @@ class RelationshipPlannerTests(unittest.TestCase):
         for term in ("connected", "linked", "related", "corresponding"):
             with self.subTest(term=term):
                 self.assertTrue(is_relationship_question("devices " + term + " to reactor"))
+
+    def test_roles_extracted_from_tep_question(self):
+        result = plan_relationship(QUESTION, {"concepts": []})
+        self.assertEqual(result["role_plan"]["subject"]["text"],
+                         "the Tennessee Eastman Process reactor")
+        self.assertEqual(result["role_plan"]["target"]["text"],
+                         "process instruments")
+
+    def test_instrument_matches_intermediate_shacl_edge(self):
+        instrument_edge = "https://example.org/dexpi/hasInstrumentationFunction"
+        leaf = "https://example.org/dexpi/hasAssetIdentifier"
+        index = {"concepts": [{"uri": leaf, "domain": "dexpi", "kind": "property"}]}
+        with patch("semantic.dtwise_relationship_planner._traversals",
+                   return_value=[{"complete_to_root": True,
+                                  "property_chain": [instrument_edge, leaf]}]):
+            result = plan_relationship(QUESTION, index)
+        self.assertEqual(result["role_evidence"]["target"][0]["uri"], leaf)
+        self.assertEqual(result["role_evidence"]["target"][0]["match_scope"],
+                         "shacl_path")
+        self.assertIsNone(result["sparql"])
+
+    def test_unverified_path_excluded(self):
+        leaf = "https://example.org/dexpi/hasInstrumentationFunction"
+        index = {"concepts": [{"uri": leaf, "domain": "dexpi", "kind": "property"}]}
+        with patch("semantic.dtwise_relationship_planner._traversals",
+                   return_value=[{"complete_to_root": False,
+                                  "property_chain": [leaf]}]):
+            result = plan_relationship(QUESTION, index)
+        self.assertEqual(result["role_evidence"]["target"], [])
 
     def test_deterministic(self):
         index = {"concepts": []}
