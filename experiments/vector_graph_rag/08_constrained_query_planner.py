@@ -9,7 +9,7 @@ from pathlib import Path
 DEFAULT_INDEX = Path('semantic/ontology/dtwise/dtwise-schema-index.json')
 DEFAULT_RETRIEVAL = Path('experiments/vector_graph_rag/data/hybrid_evaluation_33_v3.json')
 
-def plan(index, question, selected, retrieved_hits=None, require_retrieved=True):
+def plan(index, question, selected, retrieved_hits=None, require_retrieved=True, requested_domains=None):
     """selected: list of {'domain': ..., 'uri': ...}; never infer selection from wording."""
     result = {
         'version': 'dtwise-query-plan-v1',
@@ -32,7 +32,7 @@ def plan(index, question, selected, retrieved_hits=None, require_retrieved=True)
         return result
     if not question.strip():
         return abstain('Question must not be empty')
-    if len(selected) != 1:
+    if requested_domains and len(set(requested_domains)) > 1:\n        return abstain('Cross-domain question requires verified identity mappings; v1 does not join domains')\n    if len(selected) != 1:
         return abstain('V1 supports exactly one explicitly selected property; no joins or multi-property queries')
     item = selected[0]
     domain, uri = item.get('domain'), item.get('uri')
@@ -97,7 +97,7 @@ def main():
         result = {'status': 'abstained', 'reason': 'Question not uniquely found in retrieval results', 'question': args.question, 'sparql': None}
     else:
         result = plan(index, args.question, [{'domain': args.domain, 'uri': args.concept}],
-                      matches[0].get('hybrid', {}).get('hits', []))
+                      matches[0].get('hybrid', {}).get('hits', []),\n                      requested_domains=matches[0].get('expected_domains', []))
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print(json.dumps({'status': result['status'], 'reason': result.get('reason'), 'sparql': result.get('sparql')}, indent=2))
