@@ -133,6 +133,9 @@ def compile_sparql(selection, limit=100, index=None):
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
     selected = selection.get("selected_concepts", [])
+    if len(selected) > 1:
+        from semantic.dtwise_multi_property import compile_multi_property
+        return compile_multi_property(selection, limit=limit)
     if len(selected) != 1:
         raise ValueError("Single-property compilation requires exactly one selected concept")
     concept = selected[0]
