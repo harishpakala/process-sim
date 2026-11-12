@@ -3,8 +3,8 @@
 Usage:
   python -m semantic.dtwise_ebom_unresolved_evidence --endpoint http://localhost:7200/repositories/AAS --output unresolved-ebom-evidence.json
 
-Collects all direct RDF predicates/values on BOM records with unresolved
-association basis, preserving provenance without interpreting asset identity.
+Collects direct RDF predicates/values on BOM records with unresolved
+association basis in the four-domain shared-identifier cohort, preserving provenance without interpreting asset identity.
 """
 import argparse
 import json
@@ -14,13 +14,29 @@ from pathlib import Path
 
 from semantic.dtwise_graphdb_integration import execute
 
-QUERY = """PREFIX ebom: <https://example.org/engineeringbom/>
+QUERY = """PREFIX ebom: <https://example.org/engineeringbom/>\nPREFIX ecad: <https://example.org/ecad/>\nPREFIX dexpi: <https://example.org/dexpi/>\nPREFIX inventory: <https://example.org/assetinventory/>
 SELECT DISTINCT ?assetIdentifier ?bomRecord ?predicate ?value
 WHERE {
   ?root ebom:hasBOMItems/ebom:hasBOMItemRecord ?bomRecord .
   ?bomRecord ebom:hasAssetIdentifier ?assetIdentifier ;
              ebom:hasAssociationBasis "UNRESOLVED" ;
              ?predicate ?value .
+  FILTER EXISTS {
+    ?ecadRoot ecad:hasDevices/ecad:hasDevice/ecad:hasAssetIdentifier ?ecadId .
+    FILTER(STR(?ecadId) = STR(?assetIdentifier))
+  }
+  FILTER EXISTS {
+    { ?dexpiRoot dexpi:hasActuatingFunctions/dexpi:hasActuatingFunction/dexpi:hasAssetIdentifier ?dexpiId }
+    UNION
+    { ?dexpiRoot dexpi:hasEquipments/dexpi:hasEquipment/dexpi:hasAssetIdentifier ?dexpiId }
+    UNION
+    { ?dexpiRoot dexpi:hasInstrumentationFunctions/dexpi:hasInstrumentationFunction/dexpi:hasAssetIdentifier ?dexpiId }
+    FILTER(STR(?dexpiId) = STR(?assetIdentifier))
+  }
+  FILTER EXISTS {
+    ?inventoryRoot inventory:hasAssets/inventory:hasAsset/inventory:hasAssetIdentifier ?inventoryId .
+    FILTER(STR(?inventoryId) = STR(?assetIdentifier))
+  }
 }
 ORDER BY ?assetIdentifier ?bomRecord ?predicate ?value
 LIMIT 10000
