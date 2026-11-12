@@ -67,6 +67,7 @@ def evaluate(annotations, report, index=None):
                 "required_found_at_10": at(10),
                 "required_recall_at_5": at(5) / len(required),
                 "required_recall_at_10": at(10) / len(required),
+                "complete_required_coverage_at_10": int(at(10) == len(required)),
                 "required_precision_at_10": at(10) / 10,
                 "reciprocal_rank_first_required": 1 / first if first else 0.0,
                 "first_required_rank": first,
@@ -84,6 +85,7 @@ def evaluate(annotations, report, index=None):
             "missing": len(cases) - len(scored),
             "mean_required_recall_at_5": avg("required_recall_at_5"),
             "mean_required_recall_at_10": avg("required_recall_at_10"),
+            "complete_required_coverage_at_10": avg("complete_required_coverage_at_10"),
             "mean_required_precision_at_10": avg("required_precision_at_10"),
             "mean_reciprocal_rank": avg("reciprocal_rank_first_required"),
         }, "cases": rows}
