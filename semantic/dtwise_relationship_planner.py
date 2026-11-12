@@ -87,6 +87,75 @@ def _discover(index, terms):
     return evidence[:20]
 
 
+
+def _schema_graph(index):
+    """Directed SHACL traversal graph; edges are observed predicate transitions.
+
+    Root is a separate node for each domain/start shape. Two sibling properties
+    are not a subject-to-target association merely because they share a root.
+    """
+    graph = {}
+    for concept in index.get("concepts", []):
+        if concept.get("kind") != "property":
+            continue
+        uri, domain = concept.get("uri"), concept.get("domain")
+        if not isinstance(uri, str) or not isinstance(domain, str):
+            continue
+        for traversal in _traversals(index, uri, domain):
+            if not traversal.get("complete_to_root"):
+                continue
+            chain = traversal.get("property_chain", [])
+            if not chain or chain[-1] != uri:
+                continue
+            root = (domain, traversal.get("start_shape") or "unknown-root", ())
+            for depth, predicate in enumerate(chain):
+                parent = (root[0], root[1], tuple(chain[:depth]))
+                child = (root[0], root[1], tuple(chain[:depth + 1]))
+                graph.setdefault(parent, set()).add((predicate, child))
+    return graph
+
+
+def _schema_connections(index, subject_evidence, target_evidence):
+    """Discover only directed ancestor-to-descendant schema connections.
+
+    These are structural candidates, not proof of entity identity, assembly
+    membership, or association. No reverse edges or cross-domain equality.
+    """
+    graph = _schema_graph(index)
+    paths = []
+    for s in subject_evidence:
+        for t in target_evidence:
+            if s["domain"] != t["domain"]:
+                continue
+            left, right = tuple(s["property_chain"]), tuple(t["property_chain"])
+            if len(left) >= len(right) or right[:len(left)] != left:
+                continue
+            suffix = right[len(left):]
+            # The suffix must be a directed sequence in the indexed graph.
+            found = False
+            for node in graph:
+                if node[0] != s["domain"] or node[2] != left:
+                    continue
+                cursor = node
+                for edge in suffix:
+                    choices = [n for predicate, n in graph.get(cursor, ())
+                               if predicate == edge]
+                    if len(choices) != 1:
+                        break
+                    cursor = choices[0]
+                else:
+                    found = True
+                    break
+            if found:
+                paths.append({"domain": s["domain"],
+                              "subject_path": list(left),
+                              "target_path": list(right),
+                              "connecting_predicates": list(suffix),
+                              "status": "structural_candidate_only"})
+    return sorted(paths, key=lambda p: (len(p["connecting_predicates"]),
+                                        p["domain"], p["subject_path"],
+                                        p["target_path"]))[:20]
+
 def plan_relationship(question, index):
     if not is_relationship_question(question):
         raise ValueError("Not a relationship question")
@@ -95,7 +164,7 @@ def plan_relationship(question, index):
     roles = _roles(question)
     subject = _discover(index, roles["subject"]["terms"])
     target = _discover(index, roles["target"]["terms"])
-    missing = [role for role, matches in (("subject", subject), ("target", target))
+    connections = _schema_connections(index, subject, target)\n    missing = [role for role, matches in (("subject", subject), ("target", target))
                if not matches]
     return {
         "question": question,
@@ -109,7 +178,7 @@ def plan_relationship(question, index):
                   ("No verified subject-to-target association path has been "
                    "established. Shared root paths or identifier equality "
                    "alone do not prove the requested relationship."),
-        "role_plan": roles,
+        "schema_connections": connections,\n        "role_plan": roles,
         "role_evidence": {"subject": subject, "target": target},
         # Retain legacy key for consumers of the initial diagnostic response.
         "ontology_evidence": subject + target,
