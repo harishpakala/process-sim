@@ -137,7 +137,7 @@ def search(index, query, limit=15):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--directory", type=Path, default=Path("out/semantic/dtwise"))
+    parser.add_argument("--directory", type=Path, default=Path("semantic/ontology/dtwise"))
     parser.add_argument("--output", type=Path, help="Output JSON path")
     parser.add_argument("--query", help="Optional retrieval smoke test")
     args = parser.parse_args()
