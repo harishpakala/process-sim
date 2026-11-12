@@ -37,3 +37,41 @@ def list_reports():
     return {"kind": "local_experiment_reports", "execution": "none",
             "warning": "Reports are local artifacts, not live runs or independently verified accuracy scores.",
             "benchmarks": items}
+
+
+def list_questions():
+    """Source-backed question inventory; no generated scores or execution."""
+    from process_sim.api.paper_query import questions as paper_questions
+    groups = []
+    paper = paper_questions()
+    groups.append({"id": "PAPER", "title": "TEP NEXUS paper Q1–Q12",
+                   "provenance": "Existing paper question registry; not Experiment 36D.",
+                   "questions": [{"id": q["id"], "question": q["question"],
+                                  "mode": "With Run ID" if q["requiresRun"] else "Without Run ID",
+                                  "expected": "Evidence-grounded answer or justified abstention",
+                                  "note": "Requires live evaluation for a correctness decision"}
+                                 for q in paper]})
+    diagnostic = json.loads((ROOT / "experiments/vector_graph_rag/data/two_aggregation_diagnostics_39.json").read_text(encoding="utf-8-sig"))
+    groups.append({"id": "39", "title": "Experiment 39 targeted aggregation diagnostics",
+                   "provenance": diagnostic.get("annotation_provenance"),
+                   "questions": [{"id": c["id"], "question": c["question"],
+                                  "mode": "With Run ID" if c["id"] == "VTKG_DIAG_01" else "Without Run ID",
+                                  "expected": c["expected_path_id"],
+                                  "note": c["annotation_note"]} for c in diagnostic["cases"]]})
+    # Experiment 37 generates its cases from the current SHACL path catalog.
+    # Only list exact cases from a locally produced report; do not invent questions.
+    path = ROOT / "experiments/vector_graph_rag/data/ontology_path_benchmark_37_results.json"
+    if path.is_file() and path.stat().st_size <= 2_000_000:
+        report = json.loads(path.read_text(encoding="utf-8-sig"))
+        cases = report.get("cases", [])
+        groups.append({"id": "37", "title": "Experiment 37 catalog-derived path cases",
+                       "provenance": report.get("dataset_type", "Catalog-derived development cases"),
+                       "questions": [{"id": c["id"], "question": c["question"],
+                                      "mode": "Without Run ID", "expected": c.get("expected_path_id"),
+                                      "note": c.get("source", "")} for c in cases if isinstance(c, dict) and c.get("question")]})
+    else:
+        groups.append({"id": "37", "title": "Experiment 37 catalog-derived path cases",
+                       "provenance": "Generate from the local SHACL catalog using Experiment 37.",
+                       "questions": [], "note": "Run Experiment 37 to populate the exact generated questions."})
+    return {"kind": "source_backed_benchmark_questions", "groups": groups,
+            "warning": "Question coverage does not imply held-out evaluation or a passing score."}
