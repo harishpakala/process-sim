@@ -32,10 +32,10 @@ def plan(index, question, selected, retrieved_hits=None, require_retrieved=True,
         return result
     if not question.strip():
         return abstain('Question must not be empty')
-    if requested_domains and len(set(requested_domains)) > 1:\n        return abstain('Cross-domain question requires verified identity mappings; v1 does not join domains')\n    if len(selected) != 1:
+    if requested_domains and len(set(requested_domains)) > 1:\n        return abstain('Cross-domain question requires verified identity mappings; v1 does not join domains')\n    if requested_domains is None or not requested_domains:\n        return abstain('Explicit intended domain scope required; planner does not infer question intent')\n    if len(selected) != 1:
         return abstain('V1 supports exactly one explicitly selected property; no joins or multi-property queries')
     item = selected[0]
-    domain, uri = item.get('domain'), item.get('uri')
+    domain, uri = item.get('domain'), item.get('uri')\n    if domain not in set(requested_domains):\n        return abstain('Selected predicate is outside the declared question domain scope')
     if not isinstance(domain, str) or not isinstance(uri, str):
         return abstain('Domain and URI are required')
     if not (uri.startswith('https://') or uri.startswith('http://')) or any(c in uri for c in '<>"{}\\\n\r\t '):
@@ -86,7 +86,7 @@ def main():
     ap.add_argument('--index', type=Path, default=DEFAULT_INDEX)
     ap.add_argument('--retrieval', type=Path, default=DEFAULT_RETRIEVAL)
     ap.add_argument('--question', required=True, help='Exact question from retrieval results')
-    ap.add_argument('--domain', required=True)
+    ap.add_argument('--domain', required=True)\n    ap.add_argument('--requested-domain', action='append', required=True,\n                    help='Explicit intended domain(s); repeat for cross-domain questions (which abstain)')
     ap.add_argument('--concept', required=True, help='Full predicate IRI, explicitly selected')
     ap.add_argument('--output', type=Path, default=Path('experiments/vector_graph_rag/data/query_plan_v1.json'))
     args = ap.parse_args()
@@ -97,7 +97,7 @@ def main():
         result = {'status': 'abstained', 'reason': 'Question not uniquely found in retrieval results', 'question': args.question, 'sparql': None}
     else:
         result = plan(index, args.question, [{'domain': args.domain, 'uri': args.concept}],
-                      matches[0].get('hybrid', {}).get('hits', []),\n                      requested_domains=matches[0].get('expected_domains', []))
+                      matches[0].get('hybrid', {}).get('hits', []),\n                      requested_domains=args.requested_domain)
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(result, indent=2, ensure_ascii=False) + '\n', encoding='utf-8')
     print(json.dumps({'status': result['status'], 'reason': result.get('reason'), 'sparql': result.get('sparql')}, indent=2))
