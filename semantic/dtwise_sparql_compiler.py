@@ -130,6 +130,9 @@ def _grounded_value_filter(selection, concept):
 
 
 def compile_sparql(selection, limit=100, index=None):
+    from semantic.dtwise_relationship_planner import is_relationship_question, plan_relationship
+    if is_relationship_question(selection.get("question", "")):
+        return plan_relationship(selection["question"], index)
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
     selected = selection.get("selected_concepts", [])
@@ -202,7 +205,10 @@ def main():
     args = parser.parse_args()
     index = json.loads(args.index.read_text(encoding="utf-8"))
     mentioned = {domain.lower() for domain in _mentioned_domains(args.query)}
-    if len(mentioned) > 1:
+    from semantic.dtwise_relationship_planner import is_relationship_question, plan_relationship
+    if is_relationship_question(args.query):
+        result = plan_relationship(args.query, index)
+    elif len(mentioned) > 1:
         from semantic.dtwise_cross_domain import compile_cross_domain
         catalog = json.loads(args.catalog.read_text(encoding="utf-8"))
         result = compile_cross_domain(args.query, index, catalog,
