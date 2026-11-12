@@ -100,6 +100,35 @@ def _entity_count_path(index, question, domain, selected_chain):
     return list(next(iter(best)))
 
 
+def _grounded_value_filter(selection, concept):
+    """Compile only an exact value on the selected terminal ontology property.
+
+    No predicate is inferred from a model-supplied role. Other roles, multiple
+    constraints, and values absent from the question fail closed.
+    """
+    constraints = selection.get("value_constraints", [])
+    if not constraints:
+        return None
+    if not isinstance(constraints, list) or len(constraints) != 1:
+        raise ValueError("Value constraints require exactly one grounded equality")
+    constraint = constraints[0]
+    if not isinstance(constraint, dict):
+        raise ValueError("Value constraints must be objects")
+    value, role = constraint.get("text"), constraint.get("role")
+    if not isinstance(value, str) or not value.strip() or not isinstance(role, str):
+        raise ValueError("Value constraints require nonempty text and role")
+    question = selection.get("question", "")
+    if value.casefold() not in question.casefold():
+        raise ValueError("Value constraint not present in original question")
+    # A role may only refer to the property that is already selected.
+    # Require an exact match to the ontology local name or its tokenized form.
+    local = re.split(r"[/#]", concept["uri"])[-1]
+    if _tokens(role) != _tokens(local):
+        raise ValueError("Value constraint role does not match selected property")
+    # JSON string quoting is compatible with SPARQL quoted string escapes.
+    return "  FILTER(STR(?value) = " + json.dumps(value, ensure_ascii=True) + ")"
+
+
 def compile_sparql(selection, limit=100, index=None):
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
@@ -109,8 +138,6 @@ def compile_sparql(selection, limit=100, index=None):
     concept = selected[0]
     if concept.get("kind") != "property":
         raise ValueError("Only property concepts are supported")
-    if selection.get("value_constraints"):
-        raise ValueError("Value constraints require an explicit grounded predicate/value planner")
     if selection.get("join_status") != "unverified":
         raise ValueError("Unexpected join status; compiler does not support joins")
     intent = selection.get("intent")
@@ -144,6 +171,9 @@ def compile_sparql(selection, limit=100, index=None):
         query = "SELECT DISTINCT ?value WHERE {\n" + body + "\n} LIMIT " + str(limit)
     return {"question": selection["question"], "intent": intent,
             "selected_uri": concept["uri"], "chosen_path": chain,
+            "value_filter": {"property": concept["uri"], "operator": "exact_string",
+                             "text": selection["value_constraints"][0]["text"]}
+                            if value_filter else None,
             "count_target": ("entity" if entity_count else "value") if intent == "count" else None,
             "sparql": query, "execution_status": "not_executed",
             "cross_domain_join": "not_supported"}
