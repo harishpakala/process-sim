@@ -161,6 +161,11 @@ def compile_sparql(selection, limit=100, index=None):
         subject = "?root" if i == 0 else "?n" + str(i)
         obj = ("?entity" if entity_count else "?value") if i == len(chain) - 1 else "?n" + str(i + 1)
         triples.append("  " + subject + " " + _iri(predicate) + " " + obj + " .")
+    value_filter = _grounded_value_filter(selection, concept)
+    if value_filter and entity_count:
+        raise ValueError("Entity counts with value constraints require a grounded entity filter plan")
+    if value_filter:
+        triples.append(value_filter)
     body = "\n".join(triples)
     if intent == "count":
         target = "?entity" if entity_count else "?value"
