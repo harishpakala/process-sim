@@ -1,0 +1,73 @@
+{
+  "timestamp_utc": "2026-11-11T19:46:53.639321+00:00",
+  "summary": {
+    "total": 4,
+    "compiled": 4,
+    "executed": 4,
+    "semantic_pass": 4,
+    "semantic_fail": 0,
+    "semantic_not_evaluated": 0,
+    "route_pass": 4,
+    "route_fail": 0
+  },
+  "execution_skipped": false,
+  "cases": [
+    {
+      "id": "COND-ALL",
+      "question": "Which engineering items are functionally associated with condenser C-001?",
+      "route": "ebom_v2_catalog",
+      "route_verdict": "PASS",
+      "compiled": true,
+      "executed": true,
+      "binding_count": 3,
+      "semantic_verdict": "PASS",
+      "return_code": 0,
+      "error": null,
+      "elapsed_seconds": 0.625,
+      "audit_file": "reports\\phase5_benchmark_cases\\case_001.json"
+    },
+    {
+      "id": "COND-ECAD",
+      "question": "Which ECAD devices are functionally associated with condenser C-001?",
+      "route": "ebom_v2_catalog",
+      "route_verdict": "PASS",
+      "compiled": true,
+      "executed": true,
+      "binding_count": 2,
+      "semantic_verdict": "PASS",
+      "return_code": 0,
+      "error": null,
+      "elapsed_seconds": 0.609,
+      "audit_file": "reports\\phase5_benchmark_cases\\case_002.json"
+    },
+    {
+      "id": "COND-DEXPI-ACT",
+      "question": "Which DEXPI actuating functions are functionally associated with condenser C-001?",
+      "route": "ebom_v2_catalog",
+      "route_verdict": "PASS",
+      "compiled": true,
+      "executed": true,
+      "binding_count": 1,
+      "semantic_verdict": "PASS",
+      "return_code": 0,
+      "error": null,
+      "elapsed_seconds": 0.641,
+      "audit_file": "reports\\phase5_benchmark_cases\\case_003.json"
+    },
+    {
+      "id": "COND-DEXPI-INST",
+      "question": "Which DEXPI instrumentation functions are functionally associated with condenser C-001?",
+      "route": "ebom_v2_catalog",
+      "route_verdict": "PASS",
+      "compiled": true,
+      "executed": true,
+      "binding_count": 0,
+      "semantic_verdict": "PASS",
+      "return_code": 0,
+      "error": null,
+      "elapsed_seconds": 0.625,
+      "audit_file": "reports\\phase5_benchmark_cases\\case_004.json"
+    }
+  ],
+  "interpretation": "Semantic PASS requires supplied gold and executed bindings; compilation alone never counts."
+}

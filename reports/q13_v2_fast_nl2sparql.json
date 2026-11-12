@@ -1,0 +1,376 @@
+{
+  "input_mode": "compact",
+  "requested_num_ctx": 8192,
+  "prompt_chars": 6993,
+  "estimated_prompt_tokens": 1749,
+  "actual_prompt_tokens": 1711,
+  "actual_generated_tokens": 473,
+  "prompt_eval_duration_ns": 40042163000,
+  "eval_duration_ns": 72012514000,
+  "total_duration_ns": 118988208500,
+  "generation_tokens_per_second": 6.57,
+  "created_at_utc": "2026-11-11T13:31:42.453401+00:00",
+  "method": "q13_v2_fast_pruned_schema_first_attempt_nl2sparql",
+  "schema_representation": "pruned_shacl_predicates_shape_context_and_identifier_candidates",
+  "requested_num_predict": 1800,
+  "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+  "model": "llama3.1:8b",
+  "ontology_files": [
+    {
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "prompt_system": "Generate one read-only SPARQL 1.1 SELECT query from the user question\nand the six ontology-derived SHACL property inventories. Use only listed\npredicate URIs, never invent predicates. Predicates are prefixed names or\n<IRIs>, never ?prefix:property. Use shared variables to join equal identifiers.\nThe five engineering domains share AssetIdentifier; ProductCatalog joins via\nProductIdentifier on AssetInventory or Engineering BOM. Required domain and\nidentifier triples must be mandatory, not OPTIONAL or UNION alternatives.\nFilter descriptive labels/names rather than opaque identifiers. Select only\nrequested values; avoid extraneous properties. Do not assume any instance\nidentifier, result, or reference query. Schema is not instance data.\nReturn ONLY JSON with keys \"sparql\" and \"rationale\". No markdown.",
+  "prompt_user": {
+    "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+    "ontologies": {
+      "domains": [
+        {
+          "domain": "dexpi",
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+              "shapes": [
+                "ActuatingFunction SHACL shape",
+                "Equipment SHACL shape",
+                "InstrumentationFunction SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasInstrumentationFunction",
+              "shapes": [
+                "InstrumentationFunctions SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+              "shapes": [
+                "DEXPI SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+              "shapes": [
+                "ActuatingFunction SHACL shape",
+                "InstrumentationFunction SHACL shape"
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "ecad",
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAssetIdentifier",
+              "shapes": [
+                "Device SHACL shape",
+                "Symbol SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/ecad/hasDevice",
+              "shapes": [
+                "Devices SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/ecad/hasDevices",
+              "shapes": [
+                "ECAD SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+              "shapes": [
+                "Device SHACL shape"
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "engineeringbom",
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+              "shapes": [
+                "Assembly SHACL shape",
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemDescription",
+              "shapes": [
+                "Assembly SHACL shape",
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemType",
+              "shapes": [
+                "Assembly SHACL shape",
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+              "shapes": [
+                "Assembly SHACL shape",
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceDomain",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceGroup",
+              "shapes": [
+                "BOMItem SHACL shape"
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "assetinventory",
+          "properties": [
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetName",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetType",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasOperationalReference",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+              "shapes": [
+                "Asset SHACL shape"
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+              "shapes": [
+                "SignalMapping SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+              "shapes": [
+                "Server SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+              "shapes": [
+                "SignalMapping SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+              "shapes": [
+                "SignalMapping SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+              "shapes": [
+                "SignalMappings SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+              "shapes": [
+                "TEP_OPCUAConnectivity SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+              "shapes": [
+                "SignalMapping SHACL shape"
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "productcatalog",
+          "properties": [
+            {
+              "predicate": "https://example.org/productcatalog/hasECLASSPreferredName",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerName",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerProductDesignation",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasProductDescription",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasSupplierName",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasSupplierPartNumber",
+              "shapes": [
+                "Product SHACL shape"
+              ]
+            }
+          ]
+        }
+      ],
+      "identifier_join_candidates": [
+        {
+          "identifier": "AssetIdentifier",
+          "status": "candidate_value_equality_join_not_formally_asserted",
+          "domains": [
+            "assetinventory",
+            "dexpi",
+            "ecad",
+            "engineeringbom",
+            "opcuaconnectivity"
+          ],
+          "predicates": [
+            "https://example.org/assetinventory/hasAssetIdentifier",
+            "https://example.org/dexpi/hasAssetIdentifier",
+            "https://example.org/ecad/hasAssetIdentifier",
+            "https://example.org/engineeringbom/hasAssetIdentifier",
+            "https://example.org/opcuaconnectivity/hasAssetIdentifier"
+          ]
+        },
+        {
+          "identifier": "ProductIdentifier",
+          "status": "candidate_value_equality_join_not_formally_asserted",
+          "domains": [
+            "assetinventory",
+            "engineeringbom",
+            "productcatalog"
+          ],
+          "predicates": [
+            "https://example.org/assetinventory/hasProductIdentifier",
+            "https://example.org/engineeringbom/hasProductIdentifier",
+            "https://example.org/productcatalog/hasProductIdentifier"
+          ]
+        }
+      ],
+      "note": "Candidate equality joins inferred from names, not OWL axioms."
+    }
+  },
+  "generated_sparql": "PREFIX dexpi: <https://example.org/dexpi/> PREFIX ecad: <https://example.org/ecad/> PREFIX engineeringbom: <https://example.org/engineeringbom/> PREFIX assetinventory: <https://example.org/assetinventory/> PREFIX opcuaconnectivity: <https://example.org/opcuaconnectivity/> PREFIX productcatalog: <https://example.org/productcatalog/> SELECT ?dexpiAssetIdentifier ?ecadAssetIdentifier ?engineeringbomBOMItemId ?assetinventoryAssetIdentifier ?opcuaconnectivityAssetIdentifier ?productcatalogProductIdentifier ?engineeringbomSourceDomain ?engineeringbomSourceGroup ?assetinventoryInventoryTag ?assetinventoryOperationalSignal ?productcatalogManufacturer ?productcatalogPartNumber WHERE { ?dexpiAsset dexpi:hasAssetIdentifier ?dexpiAssetIdentifier . ?ecadAsset ecad:hasAssetIdentifier ?ecadAssetIdentifier . ?engineeringbomBOMItem engineeringbom:hasBOMItemId ?engineeringbomBOMItemId . ?assetinventoryAsset assetinventory:hasAssetIdentifier ?assetinventoryAssetIdentifier . ?opcuaconnectivityAsset opcuaconnectivity:hasAssetIdentifier ?opcuaconnectivityAssetIdentifier . ?productcatalogProduct productcatalog:hasProductIdentifier ?productcatalogProductIdentifier . ?engineeringbomBOMItem engineeringbom:hasSourceDomain ?engineeringbomSourceDomain . ?engineeringbomBOMItem engineeringbom:hasSourceGroup ?engineeringbomSourceGroup . ?assetinventoryAsset assetinventory:hasInventoryTag ?assetinventoryInventoryTag . ?assetinventoryAsset assetinventory:hasOperationalReference ?assetinventoryOperationalSignal . ?productcatalogProduct productcatalog:hasManufacturerName ?productcatalogManufacturer . ?productcatalogProduct productcatalog:hasManufacturerPartNumber ?productcatalogPartNumber . FILTER (regex(str(?dexpiAssetIdentifier), 'temperature')) }",
+  "model_rationale": "The query joins the six domains using the shared AssetIdentifier and ProductIdentifier identifiers. It selects the engineering identifiers, BOM item IDs, and source domains from the Engineering BOM domain. It also selects the inventory tag, operational signal, manufacturer, and part number from the AssetInventory and ProductCatalog domains. The FILTER clause is used to select only the measurements related to temperature.",
+  "raw_model_response": "{\n  \"sparql\": \"PREFIX dexpi: <https://example.org/dexpi/> PREFIX ecad: <https://example.org/ecad/> PREFIX engineeringbom: <https://example.org/engineeringbom/> PREFIX assetinventory: <https://example.org/assetinventory/> PREFIX opcuaconnectivity: <https://example.org/opcuaconnectivity/> PREFIX productcatalog: <https://example.org/productcatalog/> SELECT ?dexpiAssetIdentifier ?ecadAssetIdentifier ?engineeringbomBOMItemId ?assetinventoryAssetIdentifier ?opcuaconnectivityAssetIdentifier ?productcatalogProductIdentifier ?engineeringbomSourceDomain ?engineeringbomSourceGroup ?assetinventoryInventoryTag ?assetinventoryOperationalSignal ?productcatalogManufacturer ?productcatalogPartNumber WHERE { ?dexpiAsset dexpi:hasAssetIdentifier ?dexpiAssetIdentifier . ?ecadAsset ecad:hasAssetIdentifier ?ecadAssetIdentifier . ?engineeringbomBOMItem engineeringbom:hasBOMItemId ?engineeringbomBOMItemId . ?assetinventoryAsset assetinventory:hasAssetIdentifier ?assetinventoryAssetIdentifier . ?opcuaconnectivityAsset opcuaconnectivity:hasAssetIdentifier ?opcuaconnectivityAssetIdentifier . ?productcatalogProduct productcatalog:hasProductIdentifier ?productcatalogProductIdentifier . ?engineeringbomBOMItem engineeringbom:hasSourceDomain ?engineeringbomSourceDomain . ?engineeringbomBOMItem engineeringbom:hasSourceGroup ?engineeringbomSourceGroup . ?assetinventoryAsset assetinventory:hasInventoryTag ?assetinventoryInventoryTag . ?assetinventoryAsset assetinventory:hasOperationalReference ?assetinventoryOperationalSignal . ?productcatalogProduct productcatalog:hasManufacturerName ?productcatalogManufacturer . ?productcatalogProduct productcatalog:hasManufacturerPartNumber ?productcatalogPartNumber . FILTER (regex(str(?dexpiAssetIdentifier), 'temperature')) }\",\n  \"rationale\": \"The query joins the six domains using the shared AssetIdentifier and ProductIdentifier identifiers. It selects the engineering identifiers, BOM item IDs, and source domains from the Engineering BOM domain. It also selects the inventory tag, operational signal, manufacturer, and part number from the AssetInventory and ProductCatalog domains. The FILTER clause is used to select only the measurements related to temperature.\"\n}",
+  "syntax_and_schema_issues": [
+    "Predicates absent from supplied SHACL sh:path declarations: https://example.org/assetinventory/hasInventoryTag"
+  ],
+  "structural_validation": null,
+  "graphdb_bindings": null,
+  "evaluation": null,
+  "error": null,
+  "first_attempt_only": true
+}

@@ -1,0 +1,419 @@
+{
+  "benchmark_id": "ontology_nl2sparql_v3_blind15_v1",
+  "model": "qwen2.5-coder:3b",
+  "script": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\experiments\\ontology_nl2sparql_generic_v4.py",
+  "results": [
+    {
+      "id": "B01",
+      "category": "single",
+      "question": "List equipment tags and operational references from AssetInventory.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B01_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 53,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasEquipmentTag",
+        "hasOperationalReference"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [
+        "assetinventory"
+      ],
+      "elapsed_seconds": 16.69
+    },
+    {
+      "id": "B02",
+      "category": "single",
+      "question": "Show asset names and equipment tags from AssetInventory.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B02_audit.json",
+      "status": "structural_fail",
+      "issues": [
+        "process_exit_nonzero",
+        "plan_rejected: ['Invalid variable']",
+        "missing_joined_domains: assetinventory",
+        "no_compiled_query"
+      ],
+      "binding_count": null,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [
+        "Invalid variable"
+      ],
+      "output_predicates": [
+        "hasAssetName",
+        "hasEquipmentTag"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [],
+      "elapsed_seconds": 15.66
+    },
+    {
+      "id": "B03",
+      "category": "single",
+      "question": "List asset identifiers and asset types from AssetInventory.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B03_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 62,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasAssetType"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [
+        "assetinventory"
+      ],
+      "elapsed_seconds": 15.48
+    },
+    {
+      "id": "B04",
+      "category": "single",
+      "question": "Show asset identifiers and local IDs from ECAD.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B04_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 40,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasLocalId"
+      ],
+      "used_field_domains": [
+        "ecad"
+      ],
+      "joined_domains": [
+        "ecad"
+      ],
+      "elapsed_seconds": 24.62
+    },
+    {
+      "id": "B05",
+      "category": "single",
+      "question": "List asset identifiers and engineering verification statuses from ECAD.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B05_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 40,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasEngineeringVerificationStatus"
+      ],
+      "used_field_domains": [
+        "ecad"
+      ],
+      "joined_domains": [
+        "ecad"
+      ],
+      "elapsed_seconds": 23.95
+    },
+    {
+      "id": "B06",
+      "category": "single",
+      "question": "List asset identifiers and monitoring statuses from AssetInventory.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B06_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 62,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasMonitoringStatus"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [
+        "assetinventory"
+      ],
+      "elapsed_seconds": 16.47
+    },
+    {
+      "id": "B07",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, return their asset identifiers and equipment tags.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B07_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 38,
+      "selected_joins": [
+        "j0"
+      ],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasEquipmentTag"
+      ],
+      "used_field_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "joined_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "elapsed_seconds": 21.75
+    },
+    {
+      "id": "B08",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, show ECAD local IDs and inventory asset names.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B08_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 38,
+      "selected_joins": [
+        "j0"
+      ],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetName",
+        "hasLocalId"
+      ],
+      "used_field_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "joined_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "elapsed_seconds": 18.7
+    },
+    {
+      "id": "B09",
+      "category": "two_domain",
+      "question": "For assets represented in ECAD and AssetInventory, list ECAD local IDs and inventory operational references.",
+      "expectation": "supported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B09_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 34,
+      "selected_joins": [
+        "j1"
+      ],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasLocalId",
+        "hasOperationalReference"
+      ],
+      "used_field_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "joined_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "elapsed_seconds": 19.94
+    },
+    {
+      "id": "B10",
+      "category": "three_domain",
+      "question": "For assets represented in ECAD, DEXPI and AssetInventory, list ECAD local IDs and inventory equipment tags.",
+      "expectation": "exploratory",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B10_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 34,
+      "selected_joins": [
+        "j1",
+        "j2"
+      ],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasEquipmentTag",
+        "hasLocalId"
+      ],
+      "used_field_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "joined_domains": [
+        "assetinventory",
+        "dexpi",
+        "ecad"
+      ],
+      "elapsed_seconds": 22.89
+    },
+    {
+      "id": "B11",
+      "category": "three_domain",
+      "question": "For assets represented in ECAD, OPC UA Connectivity and AssetInventory, list ECAD local IDs and inventory equipment tags.",
+      "expectation": "exploratory",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B11_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 34,
+      "selected_joins": [
+        "j2",
+        "j3"
+      ],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasEquipmentTag",
+        "hasLocalId"
+      ],
+      "used_field_domains": [
+        "assetinventory",
+        "ecad"
+      ],
+      "joined_domains": [
+        "assetinventory",
+        "ecad",
+        "opcuaconnectivity"
+      ],
+      "elapsed_seconds": 23.2
+    },
+    {
+      "id": "B12",
+      "category": "filter",
+      "question": "List equipment tags and asset names from AssetInventory whose asset name contains temperature.",
+      "expectation": "exploratory",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B12_audit.json",
+      "status": "structural_fail",
+      "issues": [
+        "process_exit_nonzero",
+        "plan_rejected: ['Substring filter not explicitly grounded in question']",
+        "missing_joined_domains: assetinventory",
+        "no_compiled_query",
+        "substring_filter_not_compiled"
+      ],
+      "binding_count": null,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [
+        "Substring filter not explicitly grounded in question"
+      ],
+      "output_predicates": [
+        "hasAssetName",
+        "hasEquipmentTag"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [],
+      "elapsed_seconds": 12.33
+    },
+    {
+      "id": "B13",
+      "category": "filter",
+      "question": "List ECAD asset identifiers and local IDs where the local ID contains TI.",
+      "expectation": "exploratory",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B13_20261111T162415814285Z_audit.json",
+      "status": "structural_pass",
+      "issues": [],
+      "binding_count": 5,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasLocalId"
+      ],
+      "used_field_domains": [
+        "ecad"
+      ],
+      "joined_domains": [
+        "ecad"
+      ],
+      "elapsed_seconds": 8.08
+    },
+    {
+      "id": "B14",
+      "category": "unsupported",
+      "question": "From AssetInventory, list each equipment tag and its maintenance cost in euros.",
+      "expectation": "unsupported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B14_20261111T162424491402Z_audit.json",
+      "status": "validator_rejection",
+      "issues": [
+        "process_exit_nonzero",
+        "plan_rejected: ['Undeclared field property']",
+        "missing_joined_domains: assetinventory"
+      ],
+      "binding_count": null,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [
+        "Undeclared field property"
+      ],
+      "output_predicates": [
+        "hasEquipmentTag",
+        "hasMaintenanceCost"
+      ],
+      "used_field_domains": [
+        "assetinventory"
+      ],
+      "joined_domains": [],
+      "elapsed_seconds": 6.12
+    },
+    {
+      "id": "B15",
+      "category": "unsupported",
+      "question": "From ECAD, show each asset identifier and its real-time battery percentage.",
+      "expectation": "unsupported",
+      "audit_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\blind15_v4\\B15_20261111T162431151951Z_audit.json",
+      "status": "validator_rejection",
+      "issues": [
+        "process_exit_nonzero",
+        "plan_rejected: ['Undeclared field property']",
+        "missing_joined_domains: ecad"
+      ],
+      "binding_count": null,
+      "selected_joins": [],
+      "model_unsupported": [],
+      "validator_issues": [
+        "Undeclared field property"
+      ],
+      "output_predicates": [
+        "hasAssetIdentifier",
+        "hasRealTimeBatteryPercentage"
+      ],
+      "used_field_domains": [
+        "ecad"
+      ],
+      "joined_domains": [],
+      "elapsed_seconds": 6.48
+    }
+  ],
+  "counts": {
+    "structural_pass": 11,
+    "structural_fail": 2,
+    "model_abstention": 0,
+    "validator_rejection": 2,
+    "failed_abstention": 0,
+    "error": 0
+  },
+  "note": "Structural checks are necessary but not sufficient for semantic correctness. Manually inspect filters, shapes, joins, and bindings."
+}

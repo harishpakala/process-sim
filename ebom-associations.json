@@ -1,0 +1,1784 @@
+{
+  "head": {
+    "vars": [
+      "assetIdentifier",
+      "bomRecord",
+      "bomItemId",
+      "revision",
+      "engineeringLocalId",
+      "associationBasis"
+    ]
+  },
+  "results": {
+    "bindings": [
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1006"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0032"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_105"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1006"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0069"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1006"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1201"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0038"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_111"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1201"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0071"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1201"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1301"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0034"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_107"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/CV1301"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0072"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1301"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0006"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0042"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1001"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0007"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_102"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0043"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1002"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0008"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0044"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1003"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0009"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_104"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0045"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1004"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI105"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0010"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_105"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI105"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0046"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1006"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI106"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0011"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_106"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI106"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0047"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI107"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0012"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_107"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI107"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0051"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1005"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI108"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0013"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_108"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI108"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0055"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1301"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI109"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0014"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_109"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI109"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0058"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1501"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI110"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0015"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI_110"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/FI110"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0060"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "FI-1502"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/JI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0027"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "JI_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/JI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0061"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "JI-1401"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0021"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0049"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI-1101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0022"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI_102"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0053"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI-1301"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0023"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI_103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/LI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0056"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "LI-1501"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/M1"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0039"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "SC_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/M1"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0076"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "M1"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0024"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0048"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI-1101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0025"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI_102"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0054"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI-1301"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0026"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI_103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/PI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0057"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "PI-1501"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0016"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0050"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI-1101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0017"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI_102"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0052"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI-1301"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0018"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI_103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0059"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI-1501"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0019"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI_104"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYy"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0062"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI-1103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI1202"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0020"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI_105"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/TI1202"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0063"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "TI-1202"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0028"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC101"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0065"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1002"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0029"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_102"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC102"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0066"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1003"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0030"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_103"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC103"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0064"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1001"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0031"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_104"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC104"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0067"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1004"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC106"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0033"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_106"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC106"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0068"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1005"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "UNRESOLVED"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC108"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0035"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_108"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC108"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0074"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1501"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC109"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0036"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_109"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC109"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0075"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1502"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC110"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0037"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "VC_110"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      },
+      {
+        "assetIdentifier": {
+          "type": "literal",
+          "value": "https://aas.example.com/VC110"
+        },
+        "bomRecord": {
+          "type": "uri",
+          "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw"
+        },
+        "bomItemId": {
+          "type": "literal",
+          "value": "EBOM-0070"
+        },
+        "revision": {
+          "type": "literal",
+          "value": "UNSPECIFIED"
+        },
+        "engineeringLocalId": {
+          "type": "literal",
+          "value": "CV-1101"
+        },
+        "associationBasis": {
+          "type": "literal",
+          "value": "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,315 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "List the product identifiers in Product Catalog.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "productIdentifier",
+        "shape": "s1",
+        "predicate": "https://example.org/productcatalog/hasProductIdentifier"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"productIdentifier\",\n      \"shape\": \"s1\",\n      \"predicate\": \"https://example.org/productcatalog/hasProductIdentifier\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?productIdentifier WHERE {\n  ?node_s1 <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/KSB_Multitec_HighPressure_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/EKATO_HWLN_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/EKATO_HWLN_AgitatorDrivePackage_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/Schneider_A9MEM3555"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/SAMSON_3241_7"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/PXC_2938581"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-candidates/ABB_AMZ_Candidate"
+      }
+    },
+    {
+      "productIdentifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/IFM_TA1101"
+      }
+    }
+  ],
+  "binding_count": 20,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "hypothesis_joins_enabled": false,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "productcatalog",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ",
+      "label": "TechnicalProperties",
+      "description": "Collection of technical properties associated with the product.",
+      "properties": [
+        {
+          "predicate": "https://example.org/productcatalog/hasTechnicalProperty",
+          "label": "TechnicalProperty",
+          "description": "Technical characteristic recorded for the catalog product.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "productcatalog",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+      "label": "Product",
+      "description": "Catalog record describing an identified product.",
+      "properties": [
+        {
+          "predicate": "https://example.org/productcatalog/hasECLASSClass",
+          "label": "ECLASSClass",
+          "description": "ECLASS classification associated with the product.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasECLASSIRDI",
+          "label": "ECLASSIRDI",
+          "description": "International Registration Data Identifier for the ECLASS classification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasECLASSPreferredName",
+          "label": "ECLASSPreferredName",
+          "description": "Preferred name of the assigned ECLASS classification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasManufacturerName",
+          "label": "ManufacturerName",
+          "description": "Name of the product manufacturer.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber",
+          "label": "ManufacturerPartNumber",
+          "description": "Part number assigned by the product manufacturer.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasManufacturerProductDesignation",
+          "label": "ManufacturerProductDesignation",
+          "description": "Product designation assigned by the manufacturer.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasProductDescription",
+          "label": "ProductDescription",
+          "description": "Textual description of the catalog product.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of the catalog product; distinct from an installed asset identifier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasSupplierName",
+          "label": "SupplierName",
+          "description": "Name of the product supplier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasSupplierPartNumber",
+          "label": "SupplierPartNumber",
+          "description": "Part number assigned by the supplier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/productcatalog/hasTechnicalProperties",
+          "label": "TechnicalProperties",
+          "description": "Collection of technical properties associated with the product.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "productcatalog",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl",
+      "label": "Products",
+      "description": "Collection of catalog product records.",
+      "properties": [
+        {
+          "predicate": "https://example.org/productcatalog/hasProduct",
+          "label": "Product",
+          "description": "Catalog record describing an identified product.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "productcatalog",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU",
+      "label": "ProductCatalog",
+      "description": "Product catalog submodel containing manufacturer, supplier, classification, and technical product information.",
+      "properties": [
+        {
+          "predicate": "https://example.org/productcatalog/hasProducts",
+          "label": "Products",
+          "description": "Collection of catalog product records.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "productcatalog"
+  ],
+  "requested_concepts": [],
+  "requested_outputs": [
+    "product identifiers in Product Catalog"
+  ],
+  "estimated_prompt_tokens": 1265,
+  "ollama_stats": {
+    "prompt_eval_count": 1143,
+    "eval_count": 56,
+    "total_duration": 12955082200
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s1"
+  ],
+  "elapsed_seconds": 15.17
+}

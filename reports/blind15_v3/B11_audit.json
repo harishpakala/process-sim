@@ -1,0 +1,817 @@
+{
+  "method": "generic_v3_deterministic_minimum_joins",
+  "question": "For assets represented in ECAD, OPC UA Connectivity and AssetInventory, list ECAD local IDs and inventory equipment tags.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "ecadLocalId",
+        "shape": "s3",
+        "predicate": "https://example.org/ecad/hasLocalId"
+      },
+      {
+        "name": "equipmentTag",
+        "shape": "s1",
+        "predicate": "https://example.org/assetinventory/hasEquipmentTag"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"ecadLocalId\",\n      \"shape\": \"s3\",\n      \"predicate\": \"https://example.org/ecad/hasLocalId\"\n    },\n    {\n      \"name\": \"equipmentTag\",\n      \"shape\": \"s1\",\n      \"predicate\": \"https://example.org/assetinventory/hasEquipmentTag\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?ecadLocalId ?equipmentTag WHERE {\n  ?node_s1 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j2 .\n  ?node_s2 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j2 .\n  ?node_s1 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j3 .\n  ?node_s3 <https://example.org/ecad/hasAssetIdentifier> ?key_j3 .\n  ?node_s3 <https://example.org/ecad/hasLocalId> ?ecadLocalId .\n  ?node_s1 <https://example.org/assetinventory/hasEquipmentTag> ?equipmentTag .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1006"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1006"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1202"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1202"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1004"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1004"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1201"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1201"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1502"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1502"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1004"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1004"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1301"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1301"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "M1"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "M1"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1101"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1101"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1006"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1006"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1301"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1301"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1003"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1003"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1501"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1501"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1005"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1005"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "JI-1401"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "JI-1401"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1005"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1005"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1501"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1501"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1301"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1301"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1101"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1101"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1002"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1002"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1101"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1101"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1001"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1001"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1101"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1101"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1301"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1301"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1103"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1103"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1003"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1003"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1502"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1502"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1001"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1001"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1501"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1501"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1002"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1002"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1301"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1301"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1501"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1501"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1101"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1101"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1501"
+      },
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1501"
+      }
+    }
+  ],
+  "binding_count": 34,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+          "label": "EngineeringVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+          "label": "EngineeringVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+          "label": "ProductVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+          "label": "ProductVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "label": "EngineeringDomain constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "label": "EngineeringFunctionId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "label": "EngineeringFunctionReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+          "label": "InventoryAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+          "label": "InventoryAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "label": "MappingBasis constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "label": "MappingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "label": "OPCUABrowsePath constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "label": "OPCUANodeId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+          "label": "RelatedInventoryAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "label": "SignalDirection constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "label": "SignalName constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s1",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s0",
+      "right": "s2",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j2": {
+      "left": "s1",
+      "right": "s2",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j3": {
+      "left": "s1",
+      "right": "s3",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j4": {
+      "left": "s2",
+      "right": "s3",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "ecad",
+    "assetinventory",
+    "opcuaconnectivity"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "equipment tag",
+      "tokens": [
+        "equipment",
+        "tag"
+      ]
+    },
+    {
+      "phrase": "local id",
+      "tokens": [
+        "id",
+        "local"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 2475,
+  "ollama_stats": {
+    "prompt_eval_count": 2560,
+    "eval_count": 95,
+    "total_duration": 31300144000
+  },
+  "selected_joins": [
+    "j2",
+    "j3"
+  ],
+  "joined_shapes": [
+    "s1",
+    "s2",
+    "s3"
+  ],
+  "elapsed_seconds": 33.49
+}

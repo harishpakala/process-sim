@@ -1,0 +1,570 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "Which DEXPI instrumentation functions are functionally associated with reactor assembly R-001, according to the Engineering BOM (EBOM)? Return their engineering identifiers, descriptions, and asset identifiers.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "assetIdentifier",
+        "shape": "s5",
+        "predicate": "https://example.org/dexpi/hasAssetIdentifier"
+      },
+      {
+        "name": "engineeringInterpretationNote",
+        "shape": "s5",
+        "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote"
+      },
+      {
+        "name": "assetIdentifier_2",
+        "shape": "s5",
+        "predicate": "https://example.org/dexpi/hasAssetIdentifier"
+      }
+    ],
+    "filters": [
+      {
+        "shape": "s4",
+        "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+        "contains": "R-001"
+      }
+    ],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"engineeringIdentifiers\",\n      \"shape\": \"s5\",\n      \"predicate\": \"https://example.org/dexpi/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"descriptions\",\n      \"shape\": \"s5\",\n      \"predicate\": \"https://example.org/dexpi/hasEngineeringInterpretationNote\"\n    },\n    {\n      \"name\": \"assetIdentifiers\",\n      \"shape\": \"s5\",\n      \"predicate\": \"https://example.org/dexpi/hasAssetIdentifier\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"shape\": \"s4\",\n      \"predicate\": \"https://example.org/dexpi/hasInstrumentationFunctions\",\n      \"contains\": \"R-001\"\n    }\n  ],\n  \"unsupported\": []\n}",
+  "generated_sparql": null,
+  "plan_issues": [
+    "Undeclared field property",
+    "Undeclared field property",
+    "Undeclared field property",
+    "Substring filter not explicitly grounded in question"
+  ],
+  "graphdb_bindings": null,
+  "binding_count": null,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+      "label": "InstrumentationFunction",
+      "description": "Function that measures or observes a process variable.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Recorded evidence supporting a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association with information in another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification of the represented association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasMeasuredVariable",
+          "label": "MeasuredVariable",
+          "description": "Process variable measured by the instrumentation function.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+      "label": "BOMItem",
+      "description": "Item record in the engineering bill of materials.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier of an asset associated with the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssociationBasis",
+          "label": "AssociationBasis",
+          "description": "Recorded basis for an association between the BOM item and other information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+          "label": "BOMItemId",
+          "description": "Identifier of a bill-of-materials item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+          "label": "BOMPosition",
+          "description": "Position of the item within the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded in support of a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification recorded for the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEngineeringLocalId",
+          "label": "EngineeringLocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEquivalenceStatus",
+          "label": "EquivalenceStatus",
+          "description": "Recorded status of an equivalence assessment.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+          "label": "FunctionalAssemblyReference",
+          "description": "Reference to a functional assembly associated with the item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemDescription",
+          "label": "ItemDescription",
+          "description": "Textual description of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemType",
+          "label": "ItemType",
+          "description": "Recorded type of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasParentItemId",
+          "label": "ParentItemId",
+          "description": "Identifier of the parent item in the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of a product associated with the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantity",
+          "label": "Quantity",
+          "description": "Recorded quantity of the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityBasis",
+          "label": "QuantityBasis",
+          "description": "Basis used to interpret the recorded quantity.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+          "label": "QuantityPerAssembly",
+          "description": "Quantity of the item required per containing assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRevision",
+          "label": "Revision",
+          "description": "Revision designation of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSelectionStatus",
+          "label": "SelectionStatus",
+          "description": "Recorded status of item selection.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+          "label": "SourceAssetIdentifier",
+          "description": "Asset identifier as recorded in the source information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceDomain",
+          "label": "SourceDomain",
+          "description": "Engineering domain from which the BOM item information originates.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceGroup",
+          "label": "SourceGroup",
+          "description": "Source grouping from which the BOM item information originates.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+          "label": "StructureStatus",
+          "description": "Recorded status of the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasUnit",
+          "label": "Unit",
+          "description": "Unit associated with the recorded quantity.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasValidationStatus",
+          "label": "ValidationStatus",
+          "description": "Recorded status of BOM item validation.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "label": "ActuatingFunction",
+      "description": "Function that actuates or manipulates a process variable.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatedVariable",
+          "label": "ActuatedVariable",
+          "description": "Process variable acted upon by the actuating function.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Recorded evidence supporting a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association with information in another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification of the represented association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+      "label": "Equipment",
+      "description": "Process equipment item identified in the DEXPI engineering model.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "label": "DEXPI",
+      "description": "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatingFunctions",
+          "label": "ActuatingFunctions",
+          "description": "Collection of process actuation functions.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEquipments",
+          "label": "Equipments",
+          "description": "Collection of process equipment representations.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+          "label": "InstrumentationFunctions",
+          "description": "Collection of instrumentation functions.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "label": "InstrumentationFunctions",
+      "description": "Collection of instrumentation functions.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasInstrumentationFunction",
+          "label": "InstrumentationFunction",
+          "description": "Function that measures or observes a process variable.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU",
+      "label": "Assembly",
+      "description": "Assembly record describing a grouping or structure of BOM items.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssemblyKind",
+          "label": "AssemblyKind",
+          "description": "Recorded kind of assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+          "label": "BOMItemId",
+          "description": "Identifier of a bill-of-materials item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+          "label": "BOMPosition",
+          "description": "Position of the item within the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemDescription",
+          "label": "ItemDescription",
+          "description": "Textual description of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemType",
+          "label": "ItemType",
+          "description": "Recorded type of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasParentItemId",
+          "label": "ParentItemId",
+          "description": "Identifier of the parent item in the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+          "label": "QuantityPerAssembly",
+          "description": "Quantity of the item required per containing assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRevision",
+          "label": "Revision",
+          "description": "Revision designation of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+          "label": "StructureStatus",
+          "description": "Recorded status of the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasUnit",
+          "label": "Unit",
+          "description": "Unit associated with the recorded quantity.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+      "label": "Assemblies",
+      "description": "Collection of assembly records in the engineering bill of materials.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssembly",
+          "label": "Assembly",
+          "description": "Assembly record describing a grouping or structure of BOM items.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+      "label": "TEP_EngineeringBOM",
+      "description": "Engineering bill-of-materials submodel describing assembly structures, BOM items, quantities, and engineering associations.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssemblies",
+          "label": "Assemblies",
+          "description": "Collection of assembly records in the engineering bill of materials.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItems",
+          "label": "BOMItems",
+          "description": "Collection of engineering bill-of-materials item records.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "label": "ActuatingFunctions",
+      "description": "Collection of process actuation functions.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatingFunction",
+          "label": "ActuatingFunction",
+          "description": "Function that actuates or manipulates a process variable.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s1",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s1",
+      "right": "s2",
+      "left_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j2": {
+      "left": "s1",
+      "right": "s3",
+      "left_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "dexpi",
+    "engineeringbom"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "asset identifier",
+      "tokens": [
+        "asset",
+        "identifier"
+      ]
+    }
+  ],
+  "requested_outputs": [
+    "engineering identifiers",
+    "descriptions",
+    "asset identifiers"
+  ],
+  "estimated_prompt_tokens": 3844,
+  "ollama_stats": {
+    "prompt_eval_count": 3547,
+    "eval_count": 179,
+    "total_duration": 35833539900
+  },
+  "elapsed_seconds": 37.95
+}

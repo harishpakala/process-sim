@@ -1,0 +1,1645 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix dexpi: <https://example.org/dexpi/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/>,
+        aas:Submodel ;
+    rdfs:label "TEP_DEXPI" ;
+    dexpi:hasActuatingFunctions <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25z> ;
+    dexpi:hasEquipments <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cw> ;
+    dexpi:hasInstrumentationFunctions <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25z> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25z> a aas:SMC ;
+    rdfs:label "ActuatingFunctions" ;
+    dexpi:hasActuatingFunction <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9s>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2w>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9s>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2w>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2w>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9s> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "ACFeedFlowControl" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkFjdHVhdGVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC104"^^xsd:string ;
+    dexpi:hasLocalId "VC_104"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkFjdHVhdGVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.ACFeedFlowControl.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.ACFeedFlowControl.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.ACFeedFlowControl.LocalId" ;
+    aas:value "VC_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9sLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.ACFeedFlowControl.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2w> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "AFeedFlowControl" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC103"^^xsd:string ;
+    dexpi:hasLocalId "VC_103"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.AFeedFlowControl.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.AFeedFlowControl.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.AFeedFlowControl.LocalId" ;
+    aas:value "VC_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.AFeedFlowControl.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9s> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "AgitatorSpeedControl" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkFjdHVhdGVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLlJlbGF0ZWRBc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/M1"^^xsd:string ;
+    dexpi:hasCrossDomainAssociationEvidence "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."^^xsd:string ;
+    dexpi:hasCrossDomainAssociationStatus "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string ;
+    dexpi:hasEngineeringInterpretationNote "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."^^xsd:string ;
+    dexpi:hasLocalId "SC_101"^^xsd:string ;
+    dexpi:hasRelatedAssetIdentifier "https://aas.example.com/M1"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/SC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkFjdHVhdGVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.AssetIdentifier" ;
+    aas:value "https://aas.example.com/M1"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationEvidence" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.CrossDomainAssociationEvidence" ;
+    aas:value "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationStatus" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.CrossDomainAssociationStatus" ;
+    aas:value "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "EngineeringInterpretationNote" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.EngineeringInterpretationNote" ;
+    aas:value "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.LocalId" ;
+    aas:value "SC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLlJlbGF0ZWRBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "RelatedAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.RelatedAssetIdentifier" ;
+    aas:value "https://aas.example.com/M1"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9sLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.AgitatorSpeedControl.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/SC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmU> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "CompressorRecycleValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQWN0dWF0ZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuU291cmNlQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuUmVsYXRlZEFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/CV1006"^^xsd:string ;
+    dexpi:hasCrossDomainAssociationEvidence "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string ;
+    dexpi:hasCrossDomainAssociationStatus "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string ;
+    dexpi:hasEngineeringInterpretationNote "User-approved canonical identifier alignment (VC_105 -> https://aas.example.com/CV1006). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. CV-1006 remains absent from reviewed P&ID."^^xsd:string ;
+    dexpi:hasLocalId "VC_105"^^xsd:string ;
+    dexpi:hasRelatedAssetIdentifier "https://aas.example.com/CV1006"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationEvidence" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.CrossDomainAssociationEvidence" ;
+    aas:value "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cw> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationStatus" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.CrossDomainAssociationStatus" ;
+    aas:value "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQWN0dWF0ZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1006"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "EngineeringInterpretationNote" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.EngineeringInterpretationNote" ;
+    aas:value "User-approved canonical identifier alignment (VC_105 -> https://aas.example.com/CV1006). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. CV-1006 remains absent from reviewed P&ID."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.LocalId" ;
+    aas:value "VC_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmUuUmVsYXRlZEFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "RelatedAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CompressorRecycleValve.RelatedAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1006"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "CondenserCoolingWaterValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkFjdHVhdGVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/CV1201"^^xsd:string ;
+    dexpi:hasCrossDomainAssociationEvidence "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string ;
+    dexpi:hasCrossDomainAssociationStatus "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string ;
+    dexpi:hasEngineeringInterpretationNote "User-approved canonical identifier alignment (VC_111 -> https://aas.example.com/CV1201). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."^^xsd:string ;
+    dexpi:hasLocalId "VC_111"^^xsd:string ;
+    dexpi:hasRelatedAssetIdentifier "https://aas.example.com/CV1201"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_111"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkFjdHVhdGVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1201"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationEvidence" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.CrossDomainAssociationEvidence" ;
+    aas:value "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationStatus" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.CrossDomainAssociationStatus" ;
+    aas:value "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "EngineeringInterpretationNote" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.EngineeringInterpretationNote" ;
+    aas:value "User-approved canonical identifier alignment (VC_111 -> https://aas.example.com/CV1201). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.LocalId" ;
+    aas:value "VC_111"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "RelatedAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.RelatedAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1201"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.CondenserCoolingWaterValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_111"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2w> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "DFeedFlowControl" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC101"^^xsd:string ;
+    dexpi:hasLocalId "VC_101"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.DFeedFlowControl.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.DFeedFlowControl.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.DFeedFlowControl.LocalId" ;
+    aas:value "VC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.DFeedFlowControl.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2w> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "EFeedFlowControl" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC102"^^xsd:string ;
+    dexpi:hasLocalId "VC_102"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuQWN0dWF0ZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.EFeedFlowControl.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.EFeedFlowControl.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.EFeedFlowControl.LocalId" ;
+    aas:value "VC_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2wuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.EFeedFlowControl.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmU> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "PurgeValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuQWN0dWF0ZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC106"^^xsd:string ;
+    dexpi:hasLocalId "VC_106"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuQWN0dWF0ZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.PurgeValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.PurgeValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.PurgeValve.LocalId" ;
+    aas:value "VC_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmUuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.PurgeValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "ReactorCoolingWaterValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5BY3R1YXRlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC110"^^xsd:string ;
+    dexpi:hasLocalId "VC_110"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5BY3R1YXRlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.ReactorCoolingWaterValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.ReactorCoolingWaterValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.ReactorCoolingWaterValve.LocalId" ;
+    aas:value "VC_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.ReactorCoolingWaterValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZl> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "StripperLiquidProductValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkFjdHVhdGVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC108"^^xsd:string ;
+    dexpi:hasLocalId "VC_108"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkFjdHVhdGVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.StripperLiquidProductValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.StripperLiquidProductValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.StripperLiquidProductValve.LocalId" ;
+    aas:value "VC_108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.StripperLiquidProductValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZQ> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "StripperSteamValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5BY3R1YXRlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/VC109"^^xsd:string ;
+    dexpi:hasLocalId "VC_109"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5BY3R1YXRlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.StripperSteamValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.StripperSteamValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/VC109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.StripperSteamValve.LocalId" ;
+    aas:value "VC_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.StripperSteamValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZl> a aas:SMC,
+        dexpi:ActuatingFunction ;
+    rdfs:label "SeparatorLiquidValve" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkFjdHVhdGVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasActuatedVariable ""^^xsd:string ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/CV1301"^^xsd:string ;
+    dexpi:hasCrossDomainAssociationEvidence "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string ;
+    dexpi:hasCrossDomainAssociationStatus "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string ;
+    dexpi:hasEngineeringInterpretationNote "User-approved canonical identifier alignment (VC_107 -> https://aas.example.com/CV1301). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."^^xsd:string ;
+    dexpi:hasLocalId "VC_107"^^xsd:string ;
+    dexpi:hasRelatedAssetIdentifier "https://aas.example.com/CV1301"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/VC_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkFjdHVhdGVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "ActuatedVariable" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.ActuatedVariable" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.AssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1301"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationEvidence" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.CrossDomainAssociationEvidence" ;
+    aas:value "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationStatus" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.CrossDomainAssociationStatus" ;
+    aas:value "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "EngineeringInterpretationNote" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.EngineeringInterpretationNote" ;
+    aas:value "User-approved canonical identifier alignment (VC_107 -> https://aas.example.com/CV1301). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.LocalId" ;
+    aas:value "VC_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "RelatedAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.RelatedAssetIdentifier" ;
+    aas:value "https://aas.example.com/CV1301"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "ActuatingFunctions.SeparatorLiquidValve.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/VC_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cw> a aas:SMC ;
+    rdfs:label "Equipments" ;
+    dexpi:hasEquipment <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2Vy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9y>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvcg> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2Vy> a aas:SMC,
+        dexpi:Equipment ;
+    rdfs:label "ProductCondenser" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TEPC001"^^xsd:string ;
+    dexpi:hasLocalId "C-001"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TEP-C-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "Equipments.ProductCondenser.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TEPC001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "Equipments.ProductCondenser.LocalId" ;
+    aas:value "C-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2VyLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Equipments.ProductCondenser.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TEP-C-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXI> a aas:SMC,
+        dexpi:Equipment ;
+    rdfs:label "ProductStripper" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TEPS001"^^xsd:string ;
+    dexpi:hasLocalId "S-001"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TEP-S-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "Equipments.ProductStripper.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TEPS001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "Equipments.ProductStripper.LocalId" ;
+    aas:value "S-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXIuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Equipments.ProductStripper.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TEP-S-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9y> a aas:SMC,
+        dexpi:Equipment ;
+    rdfs:label "Reactor" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TEPR001"^^xsd:string ;
+    dexpi:hasLocalId "R-001"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TEP-R-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "Equipments.Reactor.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TEPR001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "Equipments.Reactor.LocalId" ;
+    aas:value "R-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9yLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Equipments.Reactor.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TEP-R-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvcg> a aas:SMC,
+        dexpi:Equipment ;
+    rdfs:label "RecycleCompressor" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TEPK001"^^xsd:string ;
+    dexpi:hasLocalId "K-001"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TEP-K-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "Equipments.RecycleCompressor.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TEPK001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "Equipments.RecycleCompressor.LocalId" ;
+    aas:value "K-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvci5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Equipments.RecycleCompressor.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TEP-K-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvcg> a aas:SMC,
+        dexpi:Equipment ;
+    rdfs:label "VaporLiquidSeparator" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TEPV001"^^xsd:string ;
+    dexpi:hasLocalId "V-001"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TEP-V-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "Equipments.VaporLiquidSeparator.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TEPV001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "Equipments.VaporLiquidSeparator.LocalId" ;
+    aas:value "V-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvci5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "Equipments.VaporLiquidSeparator.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TEP-V-001"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25z> a aas:SMC ;
+    rdfs:label "InstrumentationFunctions" ;
+    dexpi:hasInstrumentationFunction <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3c>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWw>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVs>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdw> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3c> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ACFeedFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuTWVhc3VyZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI104"^^xsd:string ;
+    dexpi:hasLocalId "FI_104"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ACFeedFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ACFeedFlow.LocalId" ;
+    aas:value "FI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuTWVhc3VyZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.ACFeedFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3cuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ACFeedFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "AFeedFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI101"^^xsd:string ;
+    dexpi:hasLocalId "FI_101"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.AFeedFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.AFeedFlow.LocalId" ;
+    aas:value "FI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.AFeedFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.AFeedFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlcg> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "CompressorPower" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/JI101"^^xsd:string ;
+    dexpi:hasLocalId "JI_101"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/JI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.CompressorPower.AssetIdentifier" ;
+    aas:value "https://aas.example.com/JI101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.CompressorPower.LocalId" ;
+    aas:value "JI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Power> ;
+    aas:elementPath "InstrumentationFunctions.CompressorPower.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Power" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlci5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.CompressorPower.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/JI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "DFeedFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI102"^^xsd:string ;
+    dexpi:hasLocalId "FI_102"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.DFeedFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.DFeedFlow.LocalId" ;
+    aas:value "FI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.DFeedFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.DFeedFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "EFeedFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI103"^^xsd:string ;
+    dexpi:hasLocalId "FI_103"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.EFeedFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.EFeedFlow.LocalId" ;
+    aas:value "FI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.EFeedFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.EFeedFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "PurgeFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI107"^^xsd:string ;
+    dexpi:hasLocalId "FI_107"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.PurgeFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.PurgeFlow.LocalId" ;
+    aas:value "FI_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.PurgeFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.PurgeFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_107"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "RecycleFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93Lk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI105"^^xsd:string ;
+    dexpi:hasLocalId "FI_105"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93Lk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.RecycleFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.RecycleFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.RecycleFlow.LocalId" ;
+    aas:value "FI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.RecycleFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZQ> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ReactorCoolingWaterOutletTemperature" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TI104"^^xsd:string ;
+    dexpi:hasLocalId "TI_104"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorCoolingWaterOutletTemperature.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TI104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ReactorCoolingWaterOutletTemperature.LocalId" ;
+    aas:value "TI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Temperature>,
+        <https://qudt.org/vocab/unit/DEG_C> ;
+    aas:elementPath "InstrumentationFunctions.ReactorCoolingWaterOutletTemperature.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Temperature",
+        "https://qudt.org/vocab/unit/DEG_C" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorCoolingWaterOutletTemperature.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI_104"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ReactorFeedFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI106"^^xsd:string ;
+    dexpi:hasLocalId "FI_106"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorFeedFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ReactorFeedFlow.LocalId" ;
+    aas:value "FI_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.ReactorFeedFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorFeedFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_106"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbA> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ReactorLevel" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/LI101"^^xsd:string ;
+    dexpi:hasLocalId "LI_101"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/LI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorLevel.AssetIdentifier" ;
+    aas:value "https://aas.example.com/LI101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ReactorLevel.LocalId" ;
+    aas:value "LI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Dimensionless>,
+        <https://qudt.org/vocab/unit/PERCENT> ;
+    aas:elementPath "InstrumentationFunctions.ReactorLevel.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Dimensionless",
+        "https://qudt.org/vocab/unit/PERCENT" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbC5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorLevel.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZQ> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ReactorPressure" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/PI101"^^xsd:string ;
+    dexpi:hasLocalId "PI_101"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/PI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorPressure.AssetIdentifier" ;
+    aas:value "https://aas.example.com/PI101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ReactorPressure.LocalId" ;
+    aas:value "PI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Pressure> ;
+    aas:elementPath "InstrumentationFunctions.ReactorPressure.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Pressure" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorPressure.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "ReactorTemperature" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TI101"^^xsd:string ;
+    dexpi:hasLocalId "TI_101"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorTemperature.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TI101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.ReactorTemperature.LocalId" ;
+    aas:value "TI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Temperature>,
+        <https://qudt.org/vocab/unit/DEG_C> ;
+    aas:elementPath "InstrumentationFunctions.ReactorTemperature.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Temperature",
+        "https://qudt.org/vocab/unit/DEG_C" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZS5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.ReactorTemperature.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI_101"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "StripperLevel" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuTWVhc3VyZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/LI103"^^xsd:string ;
+    dexpi:hasLocalId "LI_103"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/LI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperLevel.AssetIdentifier" ;
+    aas:value "https://aas.example.com/LI103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.StripperLevel.LocalId" ;
+    aas:value "LI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuTWVhc3VyZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Dimensionless>,
+        <https://qudt.org/vocab/unit/PERCENT> ;
+    aas:elementPath "InstrumentationFunctions.StripperLevel.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Dimensionless",
+        "https://qudt.org/vocab/unit/PERCENT" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWwuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperLevel.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "StripperSteamFlow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93Lk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI110"^^xsd:string ;
+    dexpi:hasLocalId "FI_110"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93Lk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.StripperSteamFlow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperSteamFlow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.StripperSteamFlow.LocalId" ;
+    aas:value "FI_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperSteamFlow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_110"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmU> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "StripperPressure" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuTWVhc3VyZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/PI103"^^xsd:string ;
+    dexpi:hasLocalId "PI_103"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/PI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperPressure.AssetIdentifier" ;
+    aas:value "https://aas.example.com/PI103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.StripperPressure.LocalId" ;
+    aas:value "PI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuTWVhc3VyZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Pressure> ;
+    aas:elementPath "InstrumentationFunctions.StripperPressure.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Pressure" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmUuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperPressure.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmU> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "StripperTemperature" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuQXNzZXRJZGVudGlmaWVy>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuTG9jYWxJZA>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuTWVhc3VyZWRWYXJpYWJsZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuU291cmNlQXNzZXRJZGVudGlmaWVy> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TI103"^^xsd:string ;
+    dexpi:hasLocalId "TI_103"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperTemperature.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TI103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuTG9jYWxJZA> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.StripperTemperature.LocalId" ;
+    aas:value "TI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuTWVhc3VyZWRWYXJpYWJsZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Temperature>,
+        <https://qudt.org/vocab/unit/DEG_C> ;
+    aas:elementPath "InstrumentationFunctions.StripperTemperature.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Temperature",
+        "https://qudt.org/vocab/unit/DEG_C" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmUuU291cmNlQXNzZXRJZGVudGlmaWVy> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperTemperature.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI_103"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "StripperUnderflow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93Lk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI109"^^xsd:string ;
+    dexpi:hasLocalId "FI_109"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93Lk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.StripperUnderflow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperUnderflow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.StripperUnderflow.LocalId" ;
+    aas:value "FI_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93LlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.StripperUnderflow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_109"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "SeparatorCoolingWaterOutletTemperature" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TI1202"^^xsd:string ;
+    dexpi:hasCrossDomainAssociationEvidence "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string ;
+    dexpi:hasCrossDomainAssociationStatus "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string ;
+    dexpi:hasEngineeringInterpretationNote "User-approved canonical identifier alignment (TI_105 -> https://aas.example.com/TI1202). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. DEXPI source name retains separator/condenser discrepancy."^^xsd:string ;
+    dexpi:hasLocalId "TI_105"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasRelatedAssetIdentifier "https://aas.example.com/TI1202"^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Temperature>,
+        <https://qudt.org/vocab/unit/DEG_C> ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Temperature",
+        "https://qudt.org/vocab/unit/DEG_C" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TI1202"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationEvidence" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.CrossDomainAssociationEvidence" ;
+    aas:value "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXM> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "CrossDomainAssociationStatus" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.CrossDomainAssociationStatus" ;
+    aas:value "USER_APPROVED_CANONICAL_ALIGNMENT"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3Rl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "EngineeringInterpretationNote" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.EngineeringInterpretationNote" ;
+    aas:value "User-approved canonical identifier alignment (TI_105 -> https://aas.example.com/TI1202). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. DEXPI source name retains separator/condenser discrepancy."^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.LocalId" ;
+    aas:value "TI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlJlbGF0ZWRBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "RelatedAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.RelatedAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI1202"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorCoolingWaterOutletTemperature.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI_105"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVs> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "SeparatorLevel" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/LI102"^^xsd:string ;
+    dexpi:hasLocalId "LI_102"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/LI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Dimensionless>,
+        <https://qudt.org/vocab/unit/PERCENT> ;
+    aas:elementPath "InstrumentationFunctions.SeparatorLevel.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Dimensionless",
+        "https://qudt.org/vocab/unit/PERCENT" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorLevel.AssetIdentifier" ;
+    aas:value "https://aas.example.com/LI102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorLevel.LocalId" ;
+    aas:value "LI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVsLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorLevel.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/LI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJl> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "SeparatorPressure" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/PI102"^^xsd:string ;
+    dexpi:hasLocalId "PI_102"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/PI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Pressure> ;
+    aas:elementPath "InstrumentationFunctions.SeparatorPressure.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Pressure" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorPressure.AssetIdentifier" ;
+    aas:value "https://aas.example.com/PI102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorPressure.LocalId" ;
+    aas:value "PI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorPressure.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/PI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJl> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "SeparatorTemperature" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLk1lYXN1cmVkVmFyaWFibGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLkFzc2V0SWRlbnRpZmllcg>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLkxvY2FsSWQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/TI102"^^xsd:string ;
+    dexpi:hasLocalId "TI_102"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/TI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLk1lYXN1cmVkVmFyaWFibGU> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/Temperature>,
+        <https://qudt.org/vocab/unit/DEG_C> ;
+    aas:elementPath "InstrumentationFunctions.SeparatorTemperature.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/Temperature",
+        "https://qudt.org/vocab/unit/DEG_C" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLkFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorTemperature.AssetIdentifier" ;
+    aas:value "https://aas.example.com/TI102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLkxvY2FsSWQ> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorTemperature.LocalId" ;
+    aas:value "TI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJlLlNvdXJjZUFzc2V0SWRlbnRpZmllcg> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorTemperature.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/TI_102"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdw> a aas:SMC,
+        dexpi:InstrumentationFunction ;
+    rdfs:label "SeparatorUnderflow" ;
+    aas:hasSubmodelElement <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Bc3NldElkZW50aWZpZXI>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Mb2NhbElk>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5NZWFzdXJlZFZhcmlhYmxl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> ;
+    dexpi:hasAssetIdentifier "https://aas.example.com/FI108"^^xsd:string ;
+    dexpi:hasLocalId "FI_108"^^xsd:string ;
+    dexpi:hasMeasuredVariable ""^^xsd:string ;
+    dexpi:hasSourceAssetIdentifier "https://aas.example.com/FI_108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Bc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "AssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorUnderflow.AssetIdentifier" ;
+    aas:value "https://aas.example.com/FI108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Mb2NhbElk> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "LocalId" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorUnderflow.LocalId" ;
+    aas:value "FI_108"^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5NZWFzdXJlZFZhcmlhYmxl> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "MeasuredVariable" ;
+    rdfs:seeAlso <https://qudt.org/vocab/quantitykind/MassFlowRate> ;
+    aas:elementPath "InstrumentationFunctions.SeparatorUnderflow.MeasuredVariable" ;
+    aas:semanticId "https://qudt.org/vocab/quantitykind/MassFlowRate" ;
+    aas:value ""^^xsd:string .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdy5Tb3VyY2VBc3NldElkZW50aWZpZXI> a owl:NamedIndividual,
+        aas:Property ;
+    rdfs:label "SourceAssetIdentifier" ;
+    aas:elementPath "InstrumentationFunctions.SeparatorUnderflow.SourceAssetIdentifier" ;
+    aas:value "https://aas.example.com/FI_108"^^xsd:string .
+

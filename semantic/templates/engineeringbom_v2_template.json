@@ -1,0 +1,685 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+  "idShort": "TEP_EngineeringBOM_V2_Template",
+  "description": [
+    {
+      "language": "en",
+      "text": "AAS structure template; example fields are unpopulated."
+    }
+  ],
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Assemblies",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "https://example.org/engineeringbom/AssemblyRecord"
+          }
+        ]
+      },
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AssemblyRecord",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/engineeringbom/AssemblyRecord"
+              }
+            ]
+          },
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasBOMItemId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasItemDescription"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRevision"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Label",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasLabel"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "BOMItems",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ]
+      },
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "BOMItemRecord",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/engineeringbom/BOMItemRecord"
+              }
+            ]
+          },
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "BOMItemId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasBOMItemId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringLocalId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasEngineeringLocalId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ItemDescription",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasItemDescription"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasAssetIdentifier"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasProductIdentifier"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceDomain",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceDomain"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceGroup",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceGroup"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Revision",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRevision"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "QuantityBasis",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasQuantityBasis"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssociationBasis",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasAssociationBasis"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Label",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasLabel"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItems"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItemRecord"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "ParentReferences",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "https://example.org/engineeringbom/ParentReference"
+          }
+        ]
+      },
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ParentReference",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/engineeringbom/ParentReference"
+              }
+            ]
+          },
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "SourceField",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceField"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceRecordId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "hasRecordedParent",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "FunctionalAssociations",
+      "semanticId": {
+        "type": "ExternalReference",
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "value": "https://example.org/engineeringbom/FunctionalAssociation"
+          }
+        ]
+      },
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "FunctionalAssociation",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://example.org/engineeringbom/FunctionalAssociation"
+              }
+            ]
+          },
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssociationBasis",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasAssociationBasis"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "StructureStatus",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceRecordId",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceField",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/hasSourceField"
+                  }
+                ]
+              },
+              "valueType": "xs:string"
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "functionallyAssociatedWith",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/functionallyAssociatedWith"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItems"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItemRecord"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              }
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "OneToMany"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

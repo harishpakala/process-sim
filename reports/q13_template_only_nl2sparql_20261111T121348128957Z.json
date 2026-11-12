@@ -1,0 +1,1566 @@
+{
+  "input_mode": "compact",
+  "requested_num_ctx": 16384,
+  "prompt_chars": 24012,
+  "estimated_prompt_tokens": 6003,
+  "actual_prompt_tokens": 5877,
+  "actual_generated_tokens": 345,
+  "created_at_utc": "2026-11-11T12:13:48.128957+00:00",
+  "method": "ontology_only_first_attempt_nl2sparql",
+  "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+  "model": "llama3.1:8b",
+  "ontology_files": [
+    {
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "prompt_system": "You are a SPARQL 1.1 query author for an engineering RDF graph.\nYou receive a natural-language question and six AAS template-derived TTL schemas.\nUse ONLY the supplied schemas to identify valid predicates and join paths.\nGenerate ONE complete read-only SPARQL SELECT query against instance data.\nPlan a connected graph pattern using shared identifier variables for related\nasset records, and a shared product identifier for catalog records.\nEvery requested domain must contribute actual triple patterns, not just PREFIX.\nInclude Engineering BOM records and project requested literal property values.\nApply descriptive text filters only to appropriate descriptive properties;\nnever require manufacturers, part numbers or tags to match a generic phrase.\nDo not copy any example query or assume any unstated identifier.\nDerive cross-domain joins independently; never assume an identifier value,\nproduct, signal, BOM item, or expected answer not stated in the question.\nThe templates are schema constraints, NOT instance facts.\nAll domain identifiers may be represented as RDF literals; join variables\non matching RDF terms rather than treating literal identifier strings as IRIs.\nFor identifying the requested measurement, use graph values (e.g. names,\ndescriptions or local IDs) and case-insensitive text matching where the\nschema permits. Do not invent predicates or relationships.\nDo not include INSERT, DELETE, UPDATE, LOAD, SERVICE, or other side effects.\nReturn ONLY a JSON object with keys \"sparql\" and \"rationale\".\nNo markdown fences. If insufficient schema information, still give your best\nquery and explain the limitation in rationale. Do not use a reference query.",
+  "prompt_user": {
+    "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+    "ontologies": [
+      {
+        "filename": "dexpi-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/dexpi/hasActuatedVariable",
+            "labels": [
+              "ActuatedVariable constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasActuatingFunction",
+            "labels": [
+              "ActuatingFunction constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunctions SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasActuatingFunctions",
+            "labels": [
+              "ActuatingFunctions constraint"
+            ],
+            "parent_shapes": [
+              "DEXPI SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasAssetIdentifier",
+            "labels": [
+              "AssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "Equipment SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+            "labels": [
+              "CrossDomainAssociationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+            "labels": [
+              "CrossDomainAssociationStatus constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+            "labels": [
+              "EngineeringInterpretationNote constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasEquipment",
+            "labels": [
+              "Equipment constraint"
+            ],
+            "parent_shapes": [
+              "Equipments SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasEquipments",
+            "labels": [
+              "Equipments constraint"
+            ],
+            "parent_shapes": [
+              "DEXPI SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasInstrumentationFunction",
+            "labels": [
+              "InstrumentationFunction constraint"
+            ],
+            "parent_shapes": [
+              "InstrumentationFunctions SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasInstrumentationFunctions",
+            "labels": [
+              "InstrumentationFunctions constraint"
+            ],
+            "parent_shapes": [
+              "DEXPI SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasLocalId",
+            "labels": [
+              "LocalId constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "Equipment SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasMeasuredVariable",
+            "labels": [
+              "MeasuredVariable constraint"
+            ],
+            "parent_shapes": [
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+            "labels": [
+              "RelatedAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "ActuatingFunction SHACL shape",
+              "InstrumentationFunction SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          }
+        ]
+      },
+      {
+        "filename": "ecad-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/ecad/hasAddress",
+            "labels": [
+              "Address constraint"
+            ],
+            "parent_shapes": [
+              "EndPoint SHACL shape",
+              "PLCEndPoint SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasAssetIdentifier",
+            "labels": [
+              "AssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape",
+              "Symbol SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasConnectionPoints",
+            "labels": [
+              "ConnectionPoints constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape",
+              "Symbol SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasConnections",
+            "labels": [
+              "Connections constraint"
+            ],
+            "parent_shapes": [
+              "Schematics SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+            "labels": [
+              "CrossDomainAssociationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+            "labels": [
+              "CrossDomainAssociationStatus constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasDevice",
+            "labels": [
+              "Device constraint"
+            ],
+            "parent_shapes": [
+              "Devices SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasDevices",
+            "labels": [
+              "Devices constraint"
+            ],
+            "parent_shapes": [
+              "ECAD SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasEndPoint",
+            "labels": [
+              "EndPoint constraint"
+            ],
+            "parent_shapes": [
+              "ConnectionPoints SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasEngineeringInterpretationNote",
+            "labels": [
+              "EngineeringInterpretationNote constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+            "labels": [
+              "EngineeringVerificationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasEngineeringVerificationStatus",
+            "labels": [
+              "EngineeringVerificationStatus constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasLocalId",
+            "labels": [
+              "LocalId constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape",
+              "EndPoint SHACL shape",
+              "PLCEndPoint SHACL shape",
+              "Symbol SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasPLCEndPoint",
+            "labels": [
+              "PLCEndPoint constraint"
+            ],
+            "parent_shapes": [
+              "ConnectionPoints SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasProductVerificationEvidence",
+            "labels": [
+              "ProductVerificationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasProductVerificationStatus",
+            "labels": [
+              "ProductVerificationStatus constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasRelatedAssetIdentifier",
+            "labels": [
+              "RelatedAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Device SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasSchematics",
+            "labels": [
+              "Schematics constraint"
+            ],
+            "parent_shapes": [
+              "ECAD SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasSymbol",
+            "labels": [
+              "Symbol constraint"
+            ],
+            "parent_shapes": [
+              "Symbols SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/ecad/hasSymbols",
+            "labels": [
+              "Symbols constraint"
+            ],
+            "parent_shapes": [
+              "ECAD SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          }
+        ]
+      },
+      {
+        "filename": "engineeringbom-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/engineeringbom/hasAssemblies",
+            "labels": [
+              "Assemblies constraint"
+            ],
+            "parent_shapes": [
+              "TEP_EngineeringBOM SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasAssembly",
+            "labels": [
+              "Assembly constraint"
+            ],
+            "parent_shapes": [
+              "Assemblies SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasAssemblyKind",
+            "labels": [
+              "AssemblyKind constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasAssetIdentifier",
+            "labels": [
+              "AssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasAssociationBasis",
+            "labels": [
+              "AssociationBasis constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasBOMItem",
+            "labels": [
+              "BOMItem constraint"
+            ],
+            "parent_shapes": [
+              "BOMItems SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasBOMItemId",
+            "labels": [
+              "BOMItemId constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasBOMItems",
+            "labels": [
+              "BOMItems constraint"
+            ],
+            "parent_shapes": [
+              "TEP_EngineeringBOM SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasBOMPosition",
+            "labels": [
+              "BOMPosition constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+            "labels": [
+              "CrossDomainAssociationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+            "labels": [
+              "CrossDomainAssociationStatus constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+            "labels": [
+              "EngineeringInterpretationNote constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasEngineeringLocalId",
+            "labels": [
+              "EngineeringLocalId constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasEquivalenceStatus",
+            "labels": [
+              "EquivalenceStatus constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+            "labels": [
+              "FunctionalAssemblyReference constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasItemDescription",
+            "labels": [
+              "ItemDescription constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasItemType",
+            "labels": [
+              "ItemType constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasParentItemId",
+            "labels": [
+              "ParentItemId constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasProductIdentifier",
+            "labels": [
+              "ProductIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasQuantity",
+            "labels": [
+              "Quantity constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasQuantityBasis",
+            "labels": [
+              "QuantityBasis constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+            "labels": [
+              "QuantityPerAssembly constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+            "labels": [
+              "RelatedAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasRevision",
+            "labels": [
+              "Revision constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasSelectionStatus",
+            "labels": [
+              "SelectionStatus constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+            "labels": [
+              "SourceAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasSourceDomain",
+            "labels": [
+              "SourceDomain constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasSourceGroup",
+            "labels": [
+              "SourceGroup constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasStructureStatus",
+            "labels": [
+              "StructureStatus constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasUnit",
+            "labels": [
+              "Unit constraint"
+            ],
+            "parent_shapes": [
+              "Assembly SHACL shape",
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/engineeringbom/hasValidationStatus",
+            "labels": [
+              "ValidationStatus constraint"
+            ],
+            "parent_shapes": [
+              "BOMItem SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          }
+        ]
+      },
+      {
+        "filename": "assetinventory-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/assetinventory/hasAsset",
+            "labels": [
+              "Asset constraint"
+            ],
+            "parent_shapes": [
+              "Assets SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasAssetIdentifier",
+            "labels": [
+              "AssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasAssetName",
+            "labels": [
+              "AssetName constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasAssetType",
+            "labels": [
+              "AssetType constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasAssets",
+            "labels": [
+              "Assets constraint"
+            ],
+            "parent_shapes": [
+              "AssetInventory SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+            "labels": [
+              "CrossDomainAssociationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+            "labels": [
+              "CrossDomainAssociationStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+            "labels": [
+              "EngineeringInterpretationNote constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasEngineeringReference",
+            "labels": [
+              "EngineeringReference constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasEquipmentTag",
+            "labels": [
+              "EquipmentTag constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasFaultDetectionStatus",
+            "labels": [
+              "FaultDetectionStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasFaultInjectionStatus",
+            "labels": [
+              "FaultInjectionStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasLocation",
+            "labels": [
+              "Location constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasModelingStatus",
+            "labels": [
+              "ModelingStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasMonitoringStatus",
+            "labels": [
+              "MonitoringStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasOperationalReference",
+            "labels": [
+              "OperationalReference constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasProductIdentifier",
+            "labels": [
+              "ProductIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+            "labels": [
+              "RelatedAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/assetinventory/hasSimulationStatus",
+            "labels": [
+              "SimulationStatus constraint"
+            ],
+            "parent_shapes": [
+              "Asset SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          }
+        ]
+      },
+      {
+        "filename": "opcuaconnectivity-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+            "labels": [
+              "AssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+            "labels": [
+              "ECADConnectionPointReferenceStatus constraint"
+            ],
+            "parent_shapes": [
+              "Server SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEndpointStatus",
+            "labels": [
+              "EndpointStatus constraint"
+            ],
+            "parent_shapes": [
+              "Server SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEndpointUrl",
+            "labels": [
+              "EndpointUrl constraint"
+            ],
+            "parent_shapes": [
+              "Server SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+            "labels": [
+              "EngineeringDomain constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+            "labels": [
+              "EngineeringFunctionId constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+            "labels": [
+              "EngineeringFunctionReference constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+            "labels": [
+              "EngineeringInterpretationNote constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+            "labels": [
+              "InventoryAssociationEvidence constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+            "labels": [
+              "InventoryAssociationStatus constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasMappingBasis",
+            "labels": [
+              "MappingBasis constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasMappingStatus",
+            "labels": [
+              "MappingStatus constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+            "labels": [
+              "NamespaceURI constraint"
+            ],
+            "parent_shapes": [
+              "Server SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+            "labels": [
+              "OPCUABrowsePath constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+            "labels": [
+              "OPCUANodeId constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+            "labels": [
+              "RelatedInventoryAssetIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasServer",
+            "labels": [
+              "Server constraint"
+            ],
+            "parent_shapes": [
+              "Servers SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasServers",
+            "labels": [
+              "Servers constraint"
+            ],
+            "parent_shapes": [
+              "TEP_OPCUAConnectivity SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasSignalDirection",
+            "labels": [
+              "SignalDirection constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasSignalMapping",
+            "labels": [
+              "SignalMapping constraint"
+            ],
+            "parent_shapes": [
+              "SignalMappings SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasSignalMappings",
+            "labels": [
+              "SignalMappings constraint"
+            ],
+            "parent_shapes": [
+              "TEP_OPCUAConnectivity SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/opcuaconnectivity/hasSignalName",
+            "labels": [
+              "SignalName constraint"
+            ],
+            "parent_shapes": [
+              "SignalMapping SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          }
+        ]
+      },
+      {
+        "filename": "productcatalog-template.ttl",
+        "properties": [
+          {
+            "uri": "https://example.org/productcatalog/hasECLASSClass",
+            "labels": [
+              "ECLASSClass constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasECLASSIRDI",
+            "labels": [
+              "ECLASSIRDI constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasECLASSPreferredName",
+            "labels": [
+              "ECLASSPreferredName constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasManufacturerName",
+            "labels": [
+              "ManufacturerName constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasManufacturerPartNumber",
+            "labels": [
+              "ManufacturerPartNumber constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasManufacturerProductDesignation",
+            "labels": [
+              "ManufacturerProductDesignation constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasProduct",
+            "labels": [
+              "Product constraint"
+            ],
+            "parent_shapes": [
+              "Products SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasProductDescription",
+            "labels": [
+              "ProductDescription constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasProductIdentifier",
+            "labels": [
+              "ProductIdentifier constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasProducts",
+            "labels": [
+              "Products constraint"
+            ],
+            "parent_shapes": [
+              "ProductCatalog SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasSupplierName",
+            "labels": [
+              "SupplierName constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasSupplierPartNumber",
+            "labels": [
+              "SupplierPartNumber constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "datatype"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasTechnicalProperties",
+            "labels": [
+              "TechnicalProperties constraint"
+            ],
+            "parent_shapes": [
+              "Product SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          },
+          {
+            "uri": "https://example.org/productcatalog/hasTechnicalProperty",
+            "labels": [
+              "TechnicalProperty constraint"
+            ],
+            "parent_shapes": [
+              "TechnicalProperties SHACL shape"
+            ],
+            "kind": [
+              "object"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "generated_sparql": "PREFIX dexpi: <https://example.org/dexpi/> PREFIX ecad: <https://example.org/ecad/> PREFIX engineeringbom: <https://example.org/engineeringbom/> PREFIX assetinventory: <https://example.org/assetinventory/> PREFIX opcuaconnectivity: <https://example.org/opcuaconnectivity/> PREFIX productcatalog: <https://example.org/productcatalog/> SELECT ?dexpiEngineeringIdentifier ?ecadEngineeringIdentifier ?engineeringbomBOMItemId ?assetinventoryInventoryTag ?opcuaconnectivityOperationalSignal ?productcatalogManufacturer ?productcatalogPartNumber WHERE { ?dexpiEngineeringIdentifier dexpi:hasEngineeringInterpretationNote ?note . ?ecadEngineeringIdentifier ecad:hasEngineeringInterpretationNote ?note . ?engineeringbomBOMItemId engineeringbom:hasEngineeringInterpretationNote ?note . ?assetinventoryInventoryTag assetinventory:hasEquipmentTag ?tag . ?opcuaconnectivityOperationalSignal opcuaconnectivity:hasSignalName ?signal . ?productcatalogManufacturer productcatalog:hasManufacturerName ?manufacturer . ?productcatalogPartNumber productcatalog:hasManufacturerPartNumber ?partNumber . FILTER (regex(?note, 'temperature', 'i')) }",
+  "model_rationale": "The query joins the DEXPI, ECAD, Engineering BOM, Asset Inventory, OPC UA Connectivity, and Product Catalog domains based on the engineering interpretation notes. It selects the engineering identifiers, BOM item IDs, inventory tags, operational signals, manufacturers, and part numbers. The FILTER clause is used to find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+  "raw_model_response": "{\"sparql\": \"PREFIX dexpi: <https://example.org/dexpi/> PREFIX ecad: <https://example.org/ecad/> PREFIX engineeringbom: <https://example.org/engineeringbom/> PREFIX assetinventory: <https://example.org/assetinventory/> PREFIX opcuaconnectivity: <https://example.org/opcuaconnectivity/> PREFIX productcatalog: <https://example.org/productcatalog/> SELECT ?dexpiEngineeringIdentifier ?ecadEngineeringIdentifier ?engineeringbomBOMItemId ?assetinventoryInventoryTag ?opcuaconnectivityOperationalSignal ?productcatalogManufacturer ?productcatalogPartNumber WHERE { ?dexpiEngineeringIdentifier dexpi:hasEngineeringInterpretationNote ?note . ?ecadEngineeringIdentifier ecad:hasEngineeringInterpretationNote ?note . ?engineeringbomBOMItemId engineeringbom:hasEngineeringInterpretationNote ?note . ?assetinventoryInventoryTag assetinventory:hasEquipmentTag ?tag . ?opcuaconnectivityOperationalSignal opcuaconnectivity:hasSignalName ?signal . ?productcatalogManufacturer productcatalog:hasManufacturerName ?manufacturer . ?productcatalogPartNumber productcatalog:hasManufacturerPartNumber ?partNumber . FILTER (regex(?note, 'temperature', 'i')) }\", \"rationale\": \"The query joins the DEXPI, ECAD, Engineering BOM, Asset Inventory, OPC UA Connectivity, and Product Catalog domains based on the engineering interpretation notes. It selects the engineering identifiers, BOM item IDs, inventory tags, operational signals, manufacturers, and part numbers. The FILTER clause is used to find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.\"}",
+  "syntax_and_schema_issues": [
+    "No identifier variable shared between domains.",
+    "Disconnected graph-pattern variables."
+  ],
+  "structural_validation": {
+    "domains_present": [
+      "assetinventory",
+      "dexpi",
+      "ecad",
+      "engineeringbom",
+      "opcuaconnectivity",
+      "productcatalog"
+    ],
+    "domains_missing": [],
+    "triple_count": 7,
+    "connected": false,
+    "shared_identifier_variables": [],
+    "issues": [
+      "No identifier variable shared between domains.",
+      "Disconnected graph-pattern variables."
+    ]
+  },
+  "graphdb_bindings": null,
+  "evaluation": null,
+  "error": null,
+  "first_attempt_only": true
+}

@@ -1,0 +1,127 @@
+{
+  "domain": "DEXPI",
+  "model": "qwen2.5-coder:3b",
+  "total": 5,
+  "passed": 4,
+  "predicate_selection_correct": 4,
+  "validator_accepted": 4,
+  "sparql_generated": 4,
+  "execution_succeeded": 4,
+  "nonempty_results": 4,
+  "results": [
+    {
+      "case": "equipment_identifiers",
+      "completed": true,
+      "expected_predicates": [
+        "hasAssetIdentifier"
+      ],
+      "selected_predicates": [
+        "hasActuatingFunctions",
+        "hasEquipments",
+        "hasInstrumentationFunctions"
+      ],
+      "predicate_selection_correct": false,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Missing semantic output: asset identifier",
+        "Unresolved requested output: asset identifiers in DEXPI"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\dexpi_description_regression\\equipment_identifiers.json"
+    },
+    {
+      "case": "actuated_variables",
+      "completed": true,
+      "expected_predicates": [
+        "hasActuatedVariable"
+      ],
+      "selected_predicates": [
+        "hasActuatedVariable"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": true,
+      "sparql_generated": true,
+      "execution_succeeded": true,
+      "nonempty_results": true,
+      "binding_count": 1,
+      "plan_issues": [],
+      "error": null,
+      "passed": true,
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\dexpi_description_regression\\actuated_variables.json"
+    },
+    {
+      "case": "measured_variables",
+      "completed": true,
+      "expected_predicates": [
+        "hasMeasuredVariable"
+      ],
+      "selected_predicates": [
+        "hasMeasuredVariable"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": true,
+      "sparql_generated": true,
+      "execution_succeeded": true,
+      "nonempty_results": true,
+      "binding_count": 1,
+      "plan_issues": [],
+      "error": null,
+      "passed": true,
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\dexpi_description_regression\\measured_variables.json"
+    },
+    {
+      "case": "actuation_local_ids",
+      "completed": true,
+      "expected_predicates": [
+        "hasActuatedVariable",
+        "hasLocalId"
+      ],
+      "selected_predicates": [
+        "hasActuatedVariable",
+        "hasLocalId"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": true,
+      "sparql_generated": true,
+      "execution_succeeded": true,
+      "nonempty_results": true,
+      "binding_count": 12,
+      "plan_issues": [],
+      "error": null,
+      "passed": true,
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\dexpi_description_regression\\actuation_local_ids.json"
+    },
+    {
+      "case": "instrumentation_local_ids",
+      "completed": true,
+      "expected_predicates": [
+        "hasLocalId",
+        "hasMeasuredVariable"
+      ],
+      "selected_predicates": [
+        "hasLocalId",
+        "hasMeasuredVariable"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": true,
+      "sparql_generated": true,
+      "execution_succeeded": true,
+      "nonempty_results": true,
+      "binding_count": 22,
+      "plan_issues": [],
+      "error": null,
+      "passed": true,
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\dexpi_description_regression\\instrumentation_local_ids.json"
+    }
+  ]
+}

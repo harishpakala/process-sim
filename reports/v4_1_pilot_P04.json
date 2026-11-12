@@ -1,0 +1,597 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "List the asset identifiers in Asset Inventory.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "assetIdentifier",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasAssetIdentifier"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"assetIdentifiers\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/assetinventory/hasAssetIdentifier\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?assetIdentifier WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1401"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS29"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS32"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI103"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC109"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS30"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI104"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS40"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS26"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC104"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPC001"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC103"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC102"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI102"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS28"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI102"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC106"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI108"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPR001"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI107"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS41"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI102"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1006"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1201"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI103"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS24"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC108"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS36"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1301"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC110"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS39"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS23"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS35"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI105"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1501"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI104"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1301"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI1202"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI110"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS25"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS27"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI103"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1401"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPV001"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI103"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS33"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS38"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI109"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPK001"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI102"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS34"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI106"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/JI101"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS37"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPS001"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS31"
+      }
+    }
+  ],
+  "binding_count": 62,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "hypothesis_joins_enabled": false,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "label": "Asset",
+      "description": "Inventory record for an identified asset.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier of the asset represented by this inventory record.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName",
+          "description": "Human-readable name of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType",
+          "description": "Recorded type or category of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded for a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association to information in another domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification recorded for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference",
+          "description": "Reference linking the asset record to engineering information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag",
+          "description": "Equipment tag assigned to the asset in engineering or plant documentation.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus",
+          "description": "Recorded status of fault detection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus",
+          "description": "Recorded status of fault injection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location",
+          "description": "Recorded location of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus",
+          "description": "Recorded status of modeling activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus",
+          "description": "Recorded status of monitoring activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference",
+          "description": "Reference linking the asset record to operational information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of the product associated with the asset; distinct from the asset identifier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to the inventory asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus",
+          "description": "Recorded status of simulation activities for the asset.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "label": "Assets",
+      "description": "Collection of inventory asset records.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset",
+          "description": "Inventory record for an identified asset.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "label": "AssetInventory",
+      "description": "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets",
+          "description": "Collection of inventory asset records.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "assetinventory"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "asset identifier",
+      "tokens": [
+        "asset",
+        "identifier"
+      ]
+    }
+  ],
+  "requested_outputs": [
+    "asset identifiers in Asset Inventory"
+  ],
+  "estimated_prompt_tokens": 1456,
+  "ollama_stats": {
+    "prompt_eval_count": 1243,
+    "eval_count": 58,
+    "total_duration": 13859857500
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s0"
+  ],
+  "elapsed_seconds": 16.06
+}

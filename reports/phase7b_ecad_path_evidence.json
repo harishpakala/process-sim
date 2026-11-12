@@ -1,0 +1,815 @@
+{
+  "phase": "7B",
+  "method": "ecad_explicit_path_discovery_read_only",
+  "asset_identifier": "https://aas.example.com/FI106",
+  "endpoint": "http://localhost:7200/repositories/AAS",
+  "graph_scope": "all_named_graphs",
+  "per_probe_limit": 100,
+  "status": "ok",
+  "probes": {
+    "devices": {
+      "sparql": "PREFIX ecad: <https://example.org/ecad/>\nSELECT DISTINCT * WHERE { GRAPH ?graph { ?device ecad:hasAssetIdentifier ?asset . FILTER(isLiteral(?asset) && STR(?asset) = \"https://aas.example.com/FI106\") OPTIONAL { ?device ecad:hasConnectionPoints ?collection . } } } LIMIT 100",
+      "status": "ok",
+      "bindings": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          }
+        }
+      ],
+      "binding_count": 1,
+      "possibly_truncated": false
+    },
+    "collection_outgoing": {
+      "sparql": "PREFIX ecad: <https://example.org/ecad/>\nSELECT DISTINCT * WHERE { GRAPH ?graph { ?device ecad:hasAssetIdentifier ?asset . FILTER(isLiteral(?asset) && STR(?asset) = \"https://aas.example.com/FI106\") ?device ecad:hasConnectionPoints ?collection . ?collection ?collection_predicate ?connection_point . } } LIMIT 100",
+      "status": "ok",
+      "bindings": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "https://example.org/ecad/ConnectionPoints"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "http://www.w3.org/2000/01/rdf-schema#label"
+          },
+          "connection_point": {
+            "type": "literal",
+            "value": "ConnectionPoints"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "https://example.org/ecad/hasEndPoint"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHMuU3VwcGx5UmV0dXJuX0JOX0RD"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "https://example.org/ecad/hasEndPoint"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHMuU2lnbmFsX0JLX09VVA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "collection_predicate": {
+            "type": "uri",
+            "value": "https://example.org/ecad/hasEndPoint"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHMuU3VwcGx5UG9zaXRpdmVfQk5fREM"
+          }
+        }
+      ],
+      "binding_count": 6,
+      "possibly_truncated": false
+    },
+    "collection_incoming": {
+      "sparql": "PREFIX ecad: <https://example.org/ecad/>\nSELECT DISTINCT * WHERE { GRAPH ?graph { ?device ecad:hasAssetIdentifier ?asset . FILTER(isLiteral(?asset) && STR(?asset) = \"https://aas.example.com/FI106\") ?device ecad:hasConnectionPoints ?collection . ?connection_point ?connection_predicate ?collection . } } LIMIT 100",
+      "status": "ok",
+      "bindings": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "device": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "asset": {
+            "type": "literal",
+            "value": "https://aas.example.com/FI106"
+          },
+          "collection": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAxLkNvbm5lY3Rpb25Qb2ludHM"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          },
+          "connection_predicate": {
+            "type": "uri",
+            "value": "https://example.org/ecad/hasConnectionPoints"
+          }
+        }
+      ],
+      "binding_count": 1,
+      "possibly_truncated": false
+    },
+    "plc_endpoints": {
+      "sparql": "PREFIX ecad: <https://example.org/ecad/>\nSELECT DISTINCT * WHERE { GRAPH ?graph { ?connection_point ecad:hasPLCEndPoint ?plc_endpoint . } } LIMIT 100",
+      "status": "ok",
+      "bindings": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF80"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzEw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xNQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzIx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzc"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8z"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8x"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5TdXBwbHlSZXR1cm5fMUw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzIw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzU"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMg"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF82"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5TdXBwbHlQb3NpdGl2ZV8xTA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzM"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzI"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzk"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF85"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xNA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE2"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF81"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF84"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzg"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzY"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF83"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8y"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE5"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzEz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzEx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzEy"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "connection_point": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "plc_endpoint": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8w"
+          }
+        }
+      ],
+      "binding_count": 40,
+      "possibly_truncated": false
+    }
+  },
+  "full_q2_supported": false,
+  "verified_cross_domain_identity": false,
+  "verified_physical_membership": false,
+  "router_integrated": false,
+  "limitations": [
+    "Collection edges are exploratory: their predicates and node roles require verification.",
+    "PLC endpoint edges are not assumed to belong to the target device without a complete explicit path.",
+    "Identifier matching selects ECAD subjects only; it does not establish DEXPI-to-ECAD identity.",
+    "Named graph context is not independent engineering provenance verification.",
+    "Results can be truncated at the per-probe limit.",
+    "No GraphDB updates, inferred containment, installation, or BOM membership."
+  ]
+}

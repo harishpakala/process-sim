@@ -1,0 +1,2467 @@
+@prefix dtwise: <https://example.org/dtwise/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<https://example.org/dtwise/relationship/022ca2b45331562da531c6eac35c8c8cbe6a98e82924327e192252dfb2c0ab1c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/0269f2d54e792ce7b3d1daa789dab2ae498328fe753518d5a6da4e29e77eb48c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasMappingStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/030578c5d239e1a16712d52d60286651ba6134f47ca4095f3e6ab5a2e7dd0a02> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/03acd8e619bdbebfdc50cc29ff43b30340e16d57911c7c422bed8b441225b0c9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/044546896ae649cd77775b479f53a215d76f616e73081dbd2ccc6e7577746da7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasCrossDomainAssociationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/046f63f537c57ec34deaea23bacef2aeb907e775dec2706d62055789e37f15b9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasAssemblies> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/04ea9f6a3c049ca9a8a85cd2823168978cd707f4c3bd0e0923f9e19097a274a7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasDevices> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/05121415064ec4d3859fe96f3e045161600f5d4f31bd06ea8440d10eed1934eb> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasEngineeringLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/06361ab73e0c7390c5539dc6027d680c43ebcf3d064d568d887d487014d1efd6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/080df40cad6cb2d94278d52d48ab361ca24178f6e515e91bde057ae98040cd5e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/0925ac7849b923af7ff5416b5bac9fb562249ad455396ef4434e2d26710856fa> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/098b2c2438691645a6b0e5509bd5aeb1f0df721f9c1334f97b522f26a0610be8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/0bb67a60ccd6397250f8305d211d157934cd3b9251e3d5e2f9dd32e929f13ae7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/0d7a6f5be4ce4efc50b14808446395555b026273efcf8af3b17810f2664cf3d3> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasMonitoringStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/0ee31ae5a5266abe66b076eb1f1d5a2f9f0203e7aa588cbeff6e05e6f8f04ddf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/0f48e4fdbb2396573c643bf3386ce2abf412e1cfc091fee0e12af4728639f8ad> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/0ffd3f68d6748ba1d64969cd510e1850c52b0ed94690d392c3db2d76959eee2d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasSignalDirection> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/106e3204d4362b8a87f54c6df0647b7ca942537b70a2d64340033a43b80ad3b6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/108d70fc4082161f2f34db61130f581cba623d3a7f54ab48b44de7d1be09fca2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceDomain> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/10c4582b36d9eba7b3b85c17624ab5f93f5006b8a5879f122cfce5f12c15cc30> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasCrossDomainAssociationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/1176b6f961fd8cefb94f333f20eead089279f7aef6808c44357d72dacb837f7d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/11abe05ba0f63ea7a35927308813a7a67e8ba0a94392bb1318505b105c46c97d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/145f57c610ef8c49e1621860eeb6c946fa12602d5004998c2eeb111678d8b502> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/146a353d278b73ec17b9ce0d1015194955dc94ff2e11afc63581b80307eeda0a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasMeasuredVariable> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/14f942fca8d0e7a2fa374695280ad74324077cba6236fa7311950be6d6368e87> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/16491a5379e573807f644052a83c7065fb644474b4f4fdd26d1f2c2bb1b2a2b2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/165141acfcbc859a578534f6a7fc2eefb5c59188da918fdcb0fba3d37c040c79> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/16eaf2ab7e3149d9f4e9c2bcb1285c4afdc18d4e943c3e360245d576e17ba7b7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/18349a18890aa20552b00ce18a4d93ab29956cbcf6edb554b80bf60ba93beb10> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/19810a105c508d7f04aba18ab881cb8f6d29e3fce25db65914991430365766b5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/1a59c4c77d93fdad9c142b5e66890ffeb900363009a7af99daf25967fd16de71> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/1a5f84d6bb1cc6114321d17d5c80729fae81e3f4ae038cc0761b3876cc2e395e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/1ab491ff98c67ea5247bac76a30a19ea252bdb415d01a807d09e3ef176d80301> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/1b2d9d61aa74b5a6f6b5d1cca34e4b5fd05cf6ce8b7be3f2f952ed8815e28088> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/1b374a16bc9cb3de6fb3cf011ee72c7e2e1d81fffebf614eb205995b9646d19b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/1b6fc403d764234d01e9d2efe4b017507b27211b67e5b9b8838dface8138738d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/1b9648ea5dc4d5e2175b54c51d19b1b6309c85c5f856f1a4f996e06ba9ba9d19> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/1bba9322cbd14ff09b2c714edee259ac6ace3d9da9c56d74e9c5dbff6b88150c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAddress> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/1c5d05b7724d5dde291638b65379447c72ee81fd51b66073ccee4ee3fd2d7e6d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasEndpointUrl> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/1d14a3b48570c07b90ecbc27971566045dabee5776e179456aca31bcb282b112> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasInstrumentationFunction> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/1d80237342770d0dee82b23602429115a44892ee9a28fc7dc87aa63746735da6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasFunctionalAssociations> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/1df43e7c6dd62c3ac3790106375102b6fd8cb534fbfc634833f6d5b254cd13d7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasQuantityBasis> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/1ed95ecebd0bd42cdda04f9a1aaf60f4ea422686d1b4e9316b8040446fe2ed82> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/1f568e3ded73b14c580708ce92f3f4bf830ef9a2661911accb0dcc79393214e6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/1fa8bc5a178c63454a6ed9011d1352da258735ce61a8cad2f57fbc53392b5c8c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasCrossDomainAssociationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/1fa9da8b6d8b4f09914b8e9c7eb73cf45cb8de502a33fca940240f916526a1f0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasStructureStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/1fd49343ba0a71385082957029519a31b346ed2648d4878b701df13f9c09d8ab> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasAssemblyRecord> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/20692aa9693c1e03d4b2f652fb6d582269d2e896c95c91fa22ace4777ea1ab68> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasTechnicalProperties> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/229f258885c4f417dee3758d51c1e42049239fca71cc5bdc17efe2d58ebbe3d0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasEquipments> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/231c3313fe55cab95c0f9f6c55ceb4d0d2b42f29212b3bf8838ced4cb3070b63> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/246193b13796d4907120033803150eddda648f725eb2851315cc857da81ea6d1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/252e2fb1bcb7c25d8ff4ca72582d0829e04238d6c036218fceee2deab16a9d5a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJOYW1lL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/257ceb5de6a8d1cf02495d34c003c986f6e8ee5ded2e0fa6f14b6515e8cca4d9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasActuatingFunction> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/270f6a90261e702d786d3d12ebd9125465c0b2d220c65044948535ca73591a22> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/281163417603576adb96ce0363de18cd0fbf53ca9b1a14d08c9abc3a57b51b94> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasParentReferences> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/283ac25ab519d457877fc881a6be6a6062b26f9799fd05e54bf806af230da0a2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/28dc872061e8f3694f814a9c78ad30b24c4e52f0836a5c465083a7b3b22d7e9d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasSymbols> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/29bcb81c4ceda6ca2ecf47c35adf199b7d7a8a52eea33a8096f52b86c6452604> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/29fdb45660dbd8ce16cb30000e46ab99c71402e5ea1f2a6dd9465f40beafc7a7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/2a25bc98661c97980311075c21b37d73eb7909de94172daf87ebc2867ca8dc4b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/2aa65cd75550f4f050b90a25453abb5895fd76cdd54dd46c896941ca192df85c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasSchematics> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasProductIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/2b18ce1d263f4503b904d022257f6c1ee047e81e7d04eb23ce5e2f0a8f59f04b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/2b98294774ef54d0e90cf8015fd2aa9d0a96d7197c464415e3365cc236cca3a0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/2bfac1a29052f8180b99e88160932a2c02f17457b10a620086118bc5ef369786> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasProduct> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/2c91a9794e9209c6eef2ddfabfbde24f4e74b7f6fdf89235b5150511ba8e9c2a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQYXJ0TnVtYmVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/2d17b0dbe4ce6ee5fdef9ea29b9d4e0fe95569c8174cbb98e5e25dcb8427a997> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasSymbol> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/2e203e14e6413f848afc46edf4ec0097b39b3ecc81eb18a34b9f4f1ad05f42df> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/2e34b202b2ba0d12ff1573f97f6e13d5784fa1c691984bda2085b99c8dfd6b65> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NJUkRJL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/31b6a2f8099221aeb4d5ed75343cfa5672cc4b0c6f44f67ff34ed2964b060cb0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/3294f7c737bd464f31e18408422940758aab12aadf640d9178fc06709ecd9c23> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasProducts> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/329ccb8919fbb1dd358caf77ee742df9f9544d4c72db89901665fa35bb36c605> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/3417e61a0954454f4de0c5d6b31a8aa3b4eb1c54b564df48dc39bfe958572e99> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/34c2bcf90262e45bdb366328f61fcd62c1a3cf3d202ff281ba1d22cd4bb17327> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/355c731a4d279093557fa35749e1f592162f4221ddf2513a803da1f1ac6896d9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/356b4db3cc9b60382f0dc09d231db2340016df73771bd9b63cef3d39dd93c734> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/35de6a26fca5241902ffc65175cd2176eeea270e0d8c134058f7c573ddff686b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/36cdb7dc2b5f29fc60dc722fae16d75d9a95195f036c72a1011755f565988290> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasInstrumentationFunctions> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/37846bae7200cbea1eabd821bb5b3eb5b3e2bf96a8abbdac2dbdc11c61467d08> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/37adcd1c123d704118ea4ce8058154188159c7ac9dc629135237665882c37e23> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasBOMItems> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/3a6c333f1c2cfee042962e86b0e1dcc2ffe15be95f1dfa1358c92901b36aea56> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/3a7e59acd7b64ce77e23534d6fbc5967b5493aa3d7a7a43f08d773eea6ecb0ad> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasLabel> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/3b3d66f1879b54e3f69ed8e0feb3c20569cb97c2e166ef08db17f8e0728827ce> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/3b73af9ef810cc838e4b4613233f4d6c8e6d5a58a798f55095106244d23b43ce> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasCrossDomainAssociationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/3c07254908b518197e3e234cfd968fe9ad9fd6b219aad317b795c9ebca12471b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/3e53965713a5a2d6b052960292b45a44ed5791536e2c71d96f890ff81007a103> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasServer> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/3fdd4b3cedbf40d7744a48250e22ca0aa5d2eb7ba7615d848bbd6647f42d93f4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasSupplierName> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/4085742f15a098bf70656cce3107a8a9b9b4684db048da812e28f8ff4146b2cb> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/4176a7202b2d7808608968f31e9e102ed4efee144d487199d2668f8c708d5565> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/42c0675349f6f5a12f3e07f2ec9e9661edf19b32af4eec1b6cf31357da34f649> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasEquipment> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/43bda39659425c8f1802d2c846ec67e04de8c053f0dc711a97562074db9fe19a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasPLCEndPoint> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/44101c5dc8c7c357867121d0cb35b682493c1b56477ff5e298088cb5c9dd4770> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasRelatedAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/4423de728d980d1fee747671e57251b96bc483fdd5faf903cd33bef1c324818b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/4600a909beef1ecfcdd02b42a35a4d7e3c04db0db048963951a05433dd17e2d8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/46e4d3d12c67ab50acfec1af62e2b00022e5b2d3fdaf07707adedd7d678d5ea0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/48f2101e31d108dea7939461ecfb9afd63ceb3ef656808b7caab3c77d60c527d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/496989f35062f30e61492a2ca86c60cc1bebace31a91f94f1bf7e2da83a75777> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/49fb40cdab28d5d5b8ef32dc6c8e1bca6f5a4cf96b23a7d7ffabdaf9ec97ebb1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasECLASSClass> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/4a5adcb0331416f7bd8303cfc92e58e82eb123a14eda66145df01fd06a809f39> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/4b226c556eaf76568b3fb26efa3a6885087d86c0d44f2be74074fa8458cbb2e5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasServers> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/4bf5d89c00a3803df1cdaca25c35decc73f1608c6f0f0aca0baf86db6af6480b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/4ef406d10d3ed0c8cd180e60283bb6fd396eba36f064f27a0ecbd00fe8ab5434> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/4f7bfe52525e26140c63f0fe1e7cf4bc9e94ae88e841faf7b78091abd0c2fb66> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/50f8279a815efdfae66dbfd7ec2874d5ca8c00180b00d7e20c89685626f039f0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/51aa96db1e2ca639365ca7538d5b22923b9767242830e5226b561632e2a15dba> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/527131d526ee872272554e8722d92671b59394660adb832e36087fdecc7c5197> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/530039b4fbf5fbfe1d80c42de84924d1789f45d025cbdadebe49874bb45e5c99> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/53115cfdbeb49502dbf7d60081bea944ea6a904ecf399f50ade3dbac0405cb4f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/54652a5ce97e9eadad739baf3a64bb725868f169fee6268e43b21239809930f6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0RGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/551f851452a55883c185c408b638d146839bea11639ddb00a9d5dd4d2eb13385> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/553be002f3c928150fb52b2b23d93c93587b9cc450e8c36787346172cc895189> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/560cc0f8bbad33467f5e63f94ed14cfcf0f8fd73d65957f8999c411ee81181be> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasRelatedAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/5641ea609759a12b0bf7fda61090791715c2660902b43dc7756ad6064342a10e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasLabel> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/583ec3b97fdf8d1cc3922defef491a62487ea953b9a3a90fe95f5e711682fda0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/58af9bc07f4a99db352f6252e35ac74315159db78962585f627c0567d48010d3> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/58ea23e14a736805c19d9356863bedbc9d1823123a3bfe7ab8ee13c22dfe1ba5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/595e9aed310327e0682f26e8b2431850cd67508b83d819b7924766479766d14e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/5a42eb8cd3127bb89fcb5d65fa4c101a464946616bc9811d0d3b9ca2c0f2a0be> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasBOMItemId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/5a57d86efa310d65a35a43e6433da2c42fc0fd6ded3017e8498a149b6b39b2ad> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/5ac19d9f916580cab7891a25e5db062f35fb569982682baa52ba2a60d06d06c9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/5b065c970ac0a2ca56893ddade261e117b7a30be0334ef5d23aecd669fd6db34> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasManufacturerPartNumber> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQYXJ0TnVtYmVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/5bd1eeb9e13509a26591560662a07b412501fcc4d3147c129b4dbe34bd2dec94> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/5c0aaea63287a3dc93559769b8496d17150ba50a0e55707d6ae7c93b00f2ba0e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQcm9kdWN0RGVzaWduYXRpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/5d203e1b9504dea2aefe4e94a3f7ece6302cb992620279330caf08ac68a64757> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasFaultInjectionStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/5de33f2722a23f1fc498e2840037d298e12ac09b3b4417ddbc5df83fd2eb065e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasRelatedAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/5df32df2a14893e2f1092b16b265d4cb39a1ae74c94501e811696b8b7407bf7f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/5e352b5007b9a55acc5d3ef42b37dc2f87dc4c27f57988e3925457b6aad8b795> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/5f19af60480834338bf5c1020b161212106401d30ba0115ef53985791d409604> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/608c4ffe9238b3ebaeef907eeb7d1749eed6a33e00b8b2ee66dd7772dbd36ef1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/60f59609a6f7554646c38a2ce7b48205acc78c02358d05f5f48cb9e41f68f14d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceField> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/623ccba00b69682f22ccfcf55c7754591a42453c4c70aec088b92be33401d67f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasBOMItemId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/628e2d2552f487a1f905e7b03eab517e7105ee32d1994ede5f6eb88ae3158de1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/63af37bf481bdc6bce4375d816c080cddfb47c2cfd5dd480c98b8a5b4f240236> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasSignalName> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/63e45a3c997efc1ca16ea8d74dccb1710517dee4c93e54c7b2db09af55b11840> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/643731fce6146cc3d919cb71ba42fc142afbebddc3a93cee131b351656073ba3> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/65544e1d6c5cfc25be95eef699470dcd3f5bd22712258d173302334571432f00> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasConnectionPoints> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/65d0dced90c7f17724f96c3366830162dd53ae1f98c3c6262ac5aee8e2afb68f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasSimulationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/6609c5d0c2515976d868289c0bf6f4042a41cd89bfefc6aa7abc4f5e0cda5112> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/66260dd00e7bd53773a64a3f74f871674e3418382817c9af8fe1d0db34a5a8f9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasAssetName> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/6709c2e185cdda4c21d75ce99d5f8d4aa4cf762814f5b6d4146ac99f2dd5d07a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/6780f477dda36302bef53371890a56ee7c725235aadc3f030961fccfffb58ca1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAddress> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/6836bdad2f557f61ffdd4648a453d4ec3c5be2acf5c251b4713de4fc33e98383> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasAssociationBasis> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/685a905165496e8a814c2911b58c005498041d670110823b7ea3d3675546460b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/6920b95c4ea5e3eb2d4fcc3026ce042a3997be81dcdb4efc309ed524aec63e3b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/69e96a5131b5664284e1982edf69fa5f78848fed87fdf3bd3cb85103673e532c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/69fe9873a6d63a17bb868fdc2f921c166fa0930d6aa418f49ca134a5731df007> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/6b5bedea68161a2c7316e2700ca9498b51ce49c074c3b3afba88a9615365d99f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/6b668d18b18feeb681bca3c27830b2de97a4be568f075cc8ade7d8ea546308c8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/6c4ce8ad83e5ad86a37b62202d63e9d045351d17c88af990ee023c28c2f328e9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/6cbed965b52176f73cd469a164f95f5eb22b1e10f9fbe2781dc116bd1f20fd86> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasAssociationBasis> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/6d39393c95943c31235b6c296d0d59f230c3fa2242b70cf114b7a729f112715c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasEngineeringInterpretationNote> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/6d5c6aa90f04281eba5d6f9339812e51b7dd950bcb1709e05bb9fa65bcd140e8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasEngineeringVerificationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/6dea827256259c0fa1ed1dfc7ec3075fbe2f4cf0556a8530dad09430c18cd989> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/70b4625a4b3666a2b5bea2baf0021a5912f66a9187c6d03e3a94e71f05127be8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/70e53258700b14793267005b90d78ee6a1315d31fb7ee0905fffd04d50ec5109> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasFaultDetectionStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/71a726cf1c4a9ed3d71ff574bf37d653dcf9c1c795ed67eb941371d363b0e7ae> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/7286e0b8b370315921157974a6d3dc07436bcddbdb19a1393b006b2e1cefbe60> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/729120e47ec8dfeb35f6ef191c8c243543249d6174ae31f57ebf987a678b4766> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/72b46064df3390de6b86caf0515662c17aae9d3682ba305a0ebcb6120f9c1272> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/72e533ee58b81b26c22d0943f4e70f642e0254260cf6063c67e7f5fcb463bc5b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasEngineeringInterpretationNote> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/759c5c7c2c2af757dc2f98ac40a28f42011122087e1590e070490e243320828b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/766bc5e7009f3f5cbb20e5dcebf4df2d193c862e0d10d24d731ef1f1fca19479> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/7714d5a8fc5190dd9110a2b5c4aaa6c72dd443b4686a720ef060b02a6a9cc308> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/78213e98423a9ba926f5921af5aa4ae66bbfd471bbd40fa8dd1b2100c62846c2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/79828ca0270904ae03f81b0b199524b19756a52dd75de4bb668b9ee919025c18> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/79c084209b5a04665c07c87cd3fbf99db0277dde2c740f19745a3514cdf87f72> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/7b6cc4406537b586e19b917d2f9848d0437ab6e41909318ffce4642187b9189b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasDevice> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/7bb6183ce88b6b68a3624bd53534012571ee08020a6e5460803379ec58fd3a5b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/7ca6a4072345a2e23d51e729d96e6b4cc0ad6b6411b16887752c631c182310bb> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceRecordId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/7cc5943295c5b1fa89f5dd079f7784ebcc87fdd35ad1336355a3c2509889d2c4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/7d6f49ad476d6232e8331c3ba64653c611f4b3b8d058ce55b6bf2e12e10d6503> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/7d7660f69f7b034ce0df2aa824feb5f94eb72d95ab6d55686c5ba8bc97cd8c2c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/7e5017c771f01f82ca67bb2bc939d6bdb1b112fa9612fc86a3ad443473b6c52c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasPLCEndPoint> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/7e6b162a78cdb6c52367590d4ef6a3fe15cdf18f880d2c458a3d03d0577666a6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/7e97a018adeaee09ed4ce29a9a7d8863b8d0bc8f9d06b2fc49f173f923e20070> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasEndpointStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/7ed69a3a6271ce61f516debc8b6e93df42358cee09b03bfaddd38c8511583ab4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/7ede0b98a7773cdacc1f4b69b82dd1948b97abeac7378a0076e6e908b424b1ce> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/807312da77ae93754e0e3d59080a7d9a99543dc4bb471c4f9b9a4baf328c8a37> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/80aea3d67528ddd24c37b600dfd95aeb71054950c29858c46067a3897213d1e9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/81369f727070197460c4f9ca6f263f1b89f42b538fd304a0de5345f9101d9164> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/82bd90a23e1dd6dc5b61b96ee5c731a0a7f2dbc726692c70f196699d03cbb4b4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceField> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/84ae639223efdd9864b1c2d4f61f6d13f20e7b5d60570291d85eb899046edb75> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasECLASSIRDI> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NJUkRJL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/854bc236794e9dcd6a76cb19cf07a1e7949e5fd6524c7ede54be788842de19fa> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAddress> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/878112ba96272aa5cf8d7e09ab2b480200e1dddda0ac7a19e0a55062c9cc76b1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8821897d1dcd6abfc429fdc2731f5f768f3389fc6d3a5ea13264df4d681f8497> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/88cd6abe3c2d3848e4fb265aa0d7268b18518cd9162d7c14b229b25f0034ead5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/88e74d393a6c54de4bd8bb1375e4c1e18b99aed2376802e50dc3b05f0a622a90> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/89e5ae34e47b05414864bd88653f71d2365ce6d7a071c11f97cc2185b676ac93> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/8aba6ab0bbf813202616b8ea27a9d741448901fd6ed7b862913552839d8cd662> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/8b679d22d6507c229646f168bb26c1df840afe9b26b83c33bf8529a54a8a420a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/8bc150e60cde89c1db2752d30f7d48477ef926a83d92a6a47d952e8a88b17b6b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/8d77b55370dfec48d8168830f78ad2a703532b11dbe42f8b815d751c001e055e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasBOMItemRecord> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8e1153f85eefdcf49e4d939a7afe740e9da17e3d6293b47734f9b8d9b396e32c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8e1d3d02c959393c25f0957324bf60517e8332a5f8fc77be362272f270160ffd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasCrossDomainAssociationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8e5af77a29bec2a22da16c77ca1c245d4d52778ab2d46af7936abb933a33e1cf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8f785efc50d2d3361d46e7ac80110a6531e3827f437d209813179add398ce861> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasProductIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/8fe6cfdd8199dad04021794ed102004e63bada5d90b25c825baa429fb57928bd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasOPCUABrowsePath> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/911e34cf89bb1e7d9a780adf892b07865ce7326c204b4694456d4954103d947d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasEndPoint> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/922122dcaf7ca293620305c27dcb0162b2a670eff3b418fd0da9b94dea0d9e57> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasEngineeringFunctionReference> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/9227789ce1ca1d96d9ef0c2007d3eef2471f42cd2d414b562bcdc885e3ab571c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasActuatingFunctions> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/9698c4756af61aa6c6e0f3ab5fc2345979fa9b0e0de3ab164b5926b4138babd8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/969c9cf17fc3c76624fd21d2866002bd486f1e1d1a3714274579e3d6ef587f86> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/9738581cbf8caf9b8b96ca0b4ad1e6ab79f41da20bf49c4361cc391a6f185273> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/98574fe59b43140a92905396025cc966015e74f45cec507f3ae239278a31f9c2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/9991a8cab404bd010a0bf33f49b9ce978b4f30b1dc382f45629206848eb9b57c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasEndPoint> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/99ac0c38c6a26f7514fb1faa1f5396d3f519770e9f311f5cbff37ea7cec2ca34> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/9ae9910db4c36d79ce9a35e68df8e1392c828eee0ac288d63ff039f2ccecd47b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/9d5a6f53c23254792b600525e02f5334a00e81feb3228722f5341ba37a0109db> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/9d83956deca5b466d07b661548ea81a9d387733de589e994c23f15bbe6f992cd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/a050c5bb2940ebe540616a1f15c9432841356f805576db0f8194ae19ec2161f5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a0eac10e691e877118809304c55613e7b5e9d57b2b80dd87093348f353af5754> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasEngineeringVerificationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a23f57ae4a6b3d066ac844b99df922c07bd6779e18bd3c47bfde51235d6f3535> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a2a8fe91ff650d33bb0e517fbdd20e36aaf09ee359fb1d3cbc135a3391b91d4c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasConnections> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a3844bab5d1032403e020dce53f920f653cf6e9d8314db95217e68e2a0ce7207> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/a398b4521361fbfa8d60b872595b219ce404b6d07ce9754bb1c6abd6aacd0e0b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/a5b068815600ec07495dbd2e7a14d50ec6f38aed91000e76a6110e7afbc38687> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/a62839ec214ec7fb8f6c17fb349b9aae99f92f83bb7e1eb7e346c495facfa675> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/a637ba6bfa7bfb8be61b15edf1d19874c0e5c4d145445e9fbb12d6e866315ad9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a6a7dfcc68e4b4d1cd4214262357b604a9e231da7f923ea491ebca335e6856c1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasOPCUANodeId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a6c1681211c5f019cc9ff348bc257871dea339497fd1f9ec164c283363f50d3a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/a7e1822fc4ff27d202f6ad6b5d20f281e27dc524431bf4e41147790a1132fd6a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a81a05b62971375f82a175198cb1474577dd4f430819bb4654dc888f3e627b12> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/a8749bc1d0bed6a83303bec0d36b5e925bb45ea05a9c94edbbf48a281de132c0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/a93658fa9e105466664b06544e1e3dc3666e62ee9dcf676c8a3005fdc9f12fa6> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/a95c595d01b38d828948ecfe47c8aa402cdc248c74ee23e19aa40dc2a705bb43> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/a9c45d419f16f6d93e8c570c5fbd7e94f25d5d6f9389711098a27fcc531f0617> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NQcmVmZXJyZWROYW1lL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/ab5a46957d841c6a7eae3baeceaa9f8caffb37fb0551fffb2f8e4c3864412f2e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/adaa68a2d1678e8111026506f2392acc72553e6024660a6e2c422853d34f4030> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/ae10179c37b8f7b03f5660b402a9d02f37410fa0d5a422b59d44ac582ea79726> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/ae3b7b42f642b2fa0049cd4b8b2dd12326fcb3285edc493fdb1e4901ae432ce1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/aee9d27552e896458b3fc117b8fbc03dc5317f8ed5ad9352c585d6b044fe3a28> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/af47b0be47adfbbc30f37fc696e8546a9e7c03ddf6dbd7898028d59e3e1fa5b5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/b02273521ce84d80a9f3a828891cdab27cfb36e9ec6b80ce28bd53e42cd242ec> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/b05af9c0c55ec69b8feef3d05baae22e47ffa03ae88eeb8a3af9cc24caa7dafb> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasTechnicalProperty> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/b0abc0b8445a58472bffd605a4ffa9188b46e778c57db2111831d08aff2ecb8c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/b19d51aa5ccd058d5f92df2d0f95205d3d18cbd21ad47f09b14e8f9229e0888f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/b1bc7acf24de32a109644797d321ebdac5bed84bc555c4978ad6f89e4051f37a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/b20a60f922be46ba22c0fb219db8aaaf1c2980657d2fe6121cbcaa182a5dbe96> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/b52fd08d18064c139a6f350abefd9f810cd41e991482f5242a29954aa2e52044> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/b66c5ae750ee50d22100c98adaa7e071b8274d141fd250897370b3b65670da85> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasProductVerificationEvidence> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/b66ee32f01d377d93b39ddc99a21b409d560305baeb32d20e75503b4a9b3eaf1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/b6aa4f99b82cd4213e16c50d04b1cc7d34798fc19e7d10fa7fabb82235885145> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/b72b4ea568c389cbd4df6b5816fcb6534371a6aca87d767e662629d8a8eb8b79> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceGroup> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/b774806360b23ef4fdb27e782182b3f4ba869eea2de0190b7c9d5b6f97b468dd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/b797561c6c6c8c0782ccf7427be172f35520e1c5563c4fccc6a18d33f9ef3646> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/b7e192d775fe57421bb0d7894f363d9935696b29f3aaacd3b459e9632daadb27> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasCrossDomainAssociationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/ba44f4570ece0d4801caf485685df6eac20c3d8257c955aa019a695b0221e63b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/ba5d7337205bdb980144a340678513e5b6c158ecc94865345d5005a9a09638cf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/ba9eb60602d46eb8fd4ccc0bb2e4fd9181484e36d4943abd988fb8e2a9e4395e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasNamespaceURI> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/baa97e9d90a48741e3c06be75fd44fa6cbfbe4d6da964d3a925d211dc710920f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasProductIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/bb5a76a11b9fe2338291b913336fa58c0efc51401da8486917c736ce9c34f87e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/bb60c95575b47f0b07ab9be87d3c2ef189ca8c5ff57f98beb64cf8d6f79cc531> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasStructureStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/bb68021b05308b6b4ba6936921aeb69f34ec3ddd0438f8ba2d8ff38aaa33683f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/bb680448dedd5ff4e8daa5414637cd390677ea283d6a0b46ed9608cf70fd85e2> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/bbc3ab7d01bf0f73fe60ddc7560e8014e7895b2f8429e47b5336d2a894bef918> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasSupplierPartNumber> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/bbf7fabc580ba9310eb91b3a081057b3922c0b3ee35bcebdec90409b172492e7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/bc268a73c22ab1280391d990eb031a21686915b774a1537fee3524779dafc897> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasAddress> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/bcdfa9b3655521c1056088f9dad48c605a5859ec0f8614e407aa0692fb26fad5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/be5251af2bb7ca16a1a1461d57ce8937d5de286768974f6b1455c45dab7be8fa> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasAssets> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/be7f8c99bc5581a424818a4a7f7ec08ecebf4fc6beaa852d4aad3b1833f5fe4c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/bee3bab970b0722fac0a1c17b937eedd9bba61f9c38ed6986a3a7c321603638e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/bf3634945bf01520d06cb8f8a1a26e294f1b9fa14b1a23b4dee4329c23dcb5ab> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/bf5a9969e8bb75d71468c96aa8cd33ead47be3cbc231225300cf89c923405782> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasLocation> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/c0f5cdfed8571620ee67c92d73a6221d360ff7a1443a0a29eb3b553443406050> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasStructureStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/c106bb9febb357e7908c9c081debb6a617acc3528c2f9e6f3eaab33db62e29ca> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/c112f7c81e361fca82516edfc1c5b734593dc2c0e351237fd46299358c88595e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/c2c8375d8f12062a98b1c0ee2cb20d94ac87eb927503a375a4f4adfc4aa4dafb> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/c31cadc98d1d10f38504fbec921c22cba331c3c6ef98b6c4781fde139b75cc6f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/c40a731861faffd8d21d308b0edf903f418eb00981c3996bef1c80099cc5c7ef> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasManufacturerProductDesignation> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQcm9kdWN0RGVzaWduYXRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/c4b242d5ac437428f567967b2bb14b4964963fdf9d95b6d2e0fa8938769bcc82> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/c60c1d0fb3045335ad7625b43a4b230476d42ad7b16871fe7d4da596836f80a1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasSourceRecordId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/c9129f4f8beb877c2a009de8482e6111a7177bbf09eb87a02562450ef0cc0b05> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/c981aff11680c38762bba647d35f5ee47c4d4d2024a56c1a068754f8ac49ef06> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/c9bfa8b7339222a4b52cf4a419f5f4ca75c949a4793fda1ea5dcee5d0b34d918> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/caa21902ce703d62fb7b42a0210789530901758180a75b212ce25e9d1af409de> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasManufacturerName> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJOYW1lL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/cc9c6e29e43190dbbf39589d2e1d2fb582d76624bd51ed52a7249a5241679d83> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/ccae5f9535bfd28cd9522b381a06459f3fc1e8d67e54eaae25150774eb3ae519> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/ce24bc6a2f2062bce9f3efb75d1204d2d5f0a2a2fb55c923729069bc09764c52> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/cf1d391171f62858c722e2d02b0c5b15050da5269f31fc2c3f1a3b17c928f3a4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/cf3463411d6f467d6d512bc1a0b7ba837949991bae1e8e391720cccae6747f70> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/d031c11abe1976a4e914aaab3949579a2f3c7bcf459015f20b9004d1bf9fa353> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/d08cced09da3566231c6ff709ef1815322b4c9508a754e42c1428baa6add4c51> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/d0aa033799bec076b6fab362516c98c7ce0b33c663de4201f270882475058f9c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasParentReference> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/d32d65a77442b6ea4cfc2948332536a6ebb940d19781a81239bf166d9f02876e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasEquipmentTag> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/d4d9b02abe907b9317c961f9c246fa772e0edc351732e6c04e6046304f6f8563> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasEngineeringInterpretationNote> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/d56c4a5f10faa6e73cd14534fb46f5ad25381fa40e8b8be11e433777d811cfa0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasEngineeringInterpretationNote> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/d5fd473894b6090d4c2448ef0ddce88b562e96691a5dcdf2c920dd5def32eca7> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/d68ac5055e69e6198081591c51915d3f3227d6934fb7b3a6fa3e853ff39a7138> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasAsset> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
+
+<https://example.org/dtwise/relationship/d84fea3bf37870acba824e43a67a740bb8b2b3d263b151227f77f4eef0a36481> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasItemDescription> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/d8a0797dc71765fa7b7f8e0775b37b5310577168392d37ce69b8bfc719ff138c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/d8befbd8be81650884221602ab9cb293f99d00d8ce7be9df745d248ff7fc1ab4> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/d8d865c68c546a5076dae59fc303c66cdf611397e1423abfb6ac6e13cf8393ff> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/d8e320bb9a2b99bfec0010a8dc659bd08fe44bd1450234e6ce4971eda21546a0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/da5ea7c191e6614ba6951c09eb632049c95960d89b2edf36b2a0e3b44af0058c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/dadde3a4d0db6490471d30813956cf6e23953209534e5a9c160fb036f7917b01> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasRevision> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/db875574f2082765797f7878ba3e8008e619aa6a4b3838ef4543a0efc6f2c63a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasRelatedAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/db9a4a157837d9086c04b527a3b3034083548011313c267e25147acd46388e59> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/dc1379195b5d33834e8a24af377e1901529218012f0e3e616d57bfa609d3650d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/dc9343b2551934a1e36cbdfc069bb5dee60b13ba1a3e174c7641ac537dba4082> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasAssetType> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/dca37ab0a03ed5850978705312fde5ed7cb6104b35767f003682f72751ffd13a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasConnectionPoints> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/dcb97d8e732bf8333a6b9fcf3c5d7f86f994ba744ff5de23f3faba05506fb874> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasProductDescription> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0RGVzY3JpcHRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/ddd81e5d7a664e453e416fb45a1b9f2a99564a050bf3d37c6d4db8bf9f5391a0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/de4516c9c143d0c96fd322ba6b600e4b0f3b2191ada55d082f7e8bcdf8c4e15d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/de4a02f1596ed07b8835720b48ff112901671aa1a7ad4f5fb5454e1c7cef926f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/deebd844e9f519d72b00f346e69b2016045f92cd21ade67b447f5155b5f55cdf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasCrossDomainAssociationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/e10a35b6e638de151c476fea03ca72942adc528ab9a7f6b887574f8bf09ff278> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/e10de9b27868c440da364c50daa6c3254f9c8e82dc2db9f2f9e4250498f81d36> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/e20486100355e6ef9c35baa0238ed34fae2ce8099ab5a63de7578b06141b6ea0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasAssetIdentifier> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/e4e1360db5d2c720b1359eec43af85ce4efd204cc0d84ea0b0f5f3580c63ec49> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/e56caaee8b307fafb71a0be8ab7aef65c2cca848f9637f2d985eec9029d9e383> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasProductVerificationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/e5aed7f3d48e4fcc1c55114e299f69b0574fba13416652bd97c1ebd2d3739d09> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> .
+
+<https://example.org/dtwise/relationship/e69d2c6f326ddd22c63d47cec6a0a0ff846576392cc85d9b724cb1ad974d4161> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasItemDescription> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/e6ce480d22ca71b0678ab5b836f0dd7f98110cc811cef1826a5b28f6ad32921f> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/e7bde654ed3ac266fe1e2d117e82a69f1260a10a32267148ba1da6cb5af74cc1> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/e9212add62307d06ad5174e4111ac09ecafbf8a58bc9cb96ce4187b2821ffcc0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/eade27fe34968a79493df628555bfc879bfe978a349493b303dbc1a2f7e118fa> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasActuatedVariable> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/ec639a909e71bfce0d038736eb6fd9f4595dc5a72c3237225706bf81ca312f7a> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/assetinventory/hasModelingStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/ecdcc791a1f6e8d3ae053c202fd374054a60a81dcf6e09f9abfb2f20cada651c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/aas/SMC> ;
+    dtwise:predicate sh:class ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/ed5e4ddfea816e1bf1647d993bbf86820f70d82ab87ba80f3bd68c92c95d2b92> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/productcatalog/hasECLASSPreferredName> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NQcmVmZXJyZWROYW1lL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/ee34d262227ed3ff195db10d95a35689bf115e9b7a8f3b6a32cd4fb35401d991> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasInventoryAssociationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/f07a318203feddaef96e8a1d5c1e46e1a5fd75e6e1cced0ed62a176240817a34> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasMappingBasis> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/f1a7f9289d98fa92b3645b321c45dfedfebb83e0e01b22922da93666e9af6c0b> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/f252d7c67d164b59e8e49aa26901c4f962096dc4ae3f5da856d2c8d41d8713b3> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/f2a41b915bf60acab8a0003caba9826fbe2c30a04d25a416eae29789d9bb6b6d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/ecad/hasLocalId> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/f3dcb779433656097e5841922f9079e51d08a027fec216af4ee14293275a857c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> .
+
+<https://example.org/dtwise/relationship/f50b3ce0e377aaeeac862cd0ad4e4cff66900f42dca36fe2211f451cf979cad9> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasSignalMappings> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/f829780e1adb6095a2be35c2180960b473bd4f4a5b3b3700c910504162617fc8> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/f83378602f48acce69a1c70b1443687645df1f3cf836c077230ba1fe8d93cb2d> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/opcuaconnectivity/hasSignalMapping> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/f8952e12e40539fc42dbd56a7aa0d50cb27e66364c37efe468e42691d1c12b19> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasStructureStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> .
+
+<https://example.org/dtwise/relationship/f8eacf74a75e571192e66d76044a2e1d1dc605b5f9b75ac2d17ef64cd25be381> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/fad41e6d5c5a2169a5f28af0b51b24b78637655a557eee5fac524f435f2cf9df> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasRevision> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> .
+
+<https://example.org/dtwise/relationship/fae520eb1d04c7061fd65e3f873168f2fa673d359c28d72d6332954b4b1f6b6c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ;
+    dtwise:predicate sh:targetClass ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> .
+
+<https://example.org/dtwise/relationship/fc1e600b84d1e4e15aa0a9ec14ae4926c783af87a680ba93e9bd2a71a5e82da0> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/fdeee5077d3da9a1ecd78bb2e22e0975cfc95d32b4f6a3f9061ae091add543cc> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/fdf406bd3d5ace748241ba7f113af6bcb0cd803d4a0047214aadf14da68a3c09> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> ;
+    dtwise:predicate sh:node ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/fee7d48cbe25241dcbd012073ae3e3a8c77ceabffe8d389a16126cf782e13171> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/dexpi/hasCrossDomainAssociationStatus> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> .
+
+<https://example.org/dtwise/relationship/fef7ddd96fc4ebb2769adc1ed7d33a15980b314759f3419d609b75657ee99c6e> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <https://example.org/engineeringbom/hasFunctionalAssociation> ;
+    dtwise:predicate sh:path ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> .
+
+<https://example.org/dtwise/relationship/ff33850f83f67022252a8a4b33fee0ce5326f2d26451fef25d49b86bc6100dbf> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> .
+
+<https://example.org/dtwise/relationship/ffaacf0632382903518b1e439009caa5c6ffce09e1e37b22790b564a6b55c58c> a dtwise:RelationshipRecord ;
+    dtwise:evidenceKind "shacl" ;
+    dtwise:object <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> ;
+    dtwise:predicate sh:property ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:subject <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> .
+

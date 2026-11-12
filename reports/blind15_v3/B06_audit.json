@@ -1,0 +1,820 @@
+{
+  "method": "generic_v3_deterministic_minimum_joins",
+  "question": "List asset identifiers and monitoring statuses from AssetInventory.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "assetIdentifier",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasAssetIdentifier"
+      },
+      {
+        "name": "monitoringStatus",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasMonitoringStatus"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"assetIdentifier\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/assetinventory/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"monitoringStatus\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/assetinventory/hasMonitoringStatus\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?assetIdentifier ?monitoringStatus WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n  ?node_s0 <https://example.org/assetinventory/hasMonitoringStatus> ?monitoringStatus .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC104"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS36"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS34"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI103"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI1202"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI105"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI106"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPV001"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS40"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1401"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1501"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS24"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC110"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1006"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1301"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI107"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS31"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS29"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS25"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS23"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI109"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPC001"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/JI101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1301"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI104"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI102"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC106"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS28"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS32"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS37"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI108"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1401"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI102"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/CV1201"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI110"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS38"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI102"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC109"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI104"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI103"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/M1"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC108"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS30"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC103"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI103"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPR001"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC101"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS26"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI103"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/VC102"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI102"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS39"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS33"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS27"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS41"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPK001"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TEPS001"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    },
+    {
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/XMEAS35"
+      },
+      "monitoringStatus": {
+        "type": "literal",
+        "value": "NotConfigured"
+      }
+    }
+  ],
+  "binding_count": 62,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "assetinventory"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "asset identifier",
+      "tokens": [
+        "asset",
+        "identifier"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 1023,
+  "ollama_stats": {
+    "prompt_eval_count": 951,
+    "eval_count": 95,
+    "total_duration": 12780519600
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s0"
+  ],
+  "elapsed_seconds": 14.97
+}

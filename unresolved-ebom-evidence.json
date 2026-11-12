@@ -1,0 +1,3741 @@
+{
+  "classification": "unresolved_associations_for_domain_owner_review",
+  "semantic_approval": "not_granted",
+  "counts": {
+    "unresolved_records": 23,
+    "asset_identifiers": 12
+  },
+  "records": [
+    {
+      "asset_identifier": "https://aas.example.com/FI101",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0006"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "AFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "AFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI102",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0007"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0007"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "DFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "DFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI103",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0008"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0008"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "EFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "EFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI104",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0009"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0009"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "ACFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "ACFeedFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI105",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEw",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0010"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEwLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI105"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0010"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_105"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "RecycleFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "RecycleFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI107",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEy",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0012"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEyLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI107"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0012"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI_107"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "PurgeFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "PurgeFlow"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "InstrumentationFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC101",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0028"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0028"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "VC_101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "DFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "DFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "ActuatingFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC102",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0029"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0029"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "VC_102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "EFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "EFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "ActuatingFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC103",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0030"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMwLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0030"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "VC_103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "AFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "AFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "ActuatingFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC104",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0031"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMxLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0031"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "VC_104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "ACFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "ACFeedFlowControl"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "ActuatingFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC106",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0033"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMzLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC106"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0033"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "VC_106"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "PurgeValve"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "PurgeValve"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "DEXPI"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "ActuatingFunctions"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI103",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0044"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0044"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI104",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0045"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0045"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI105",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0046"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI105"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0046"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI101",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQy",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0042"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQyLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0042"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI102",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQz",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0043"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQzLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0043"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/FI107",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUx",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0051"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUxLlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/FI107"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0051"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "FI-1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "FI_1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "FI_1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC103",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0064"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC103"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0064"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1001"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC101",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0065"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC101"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0065"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1002"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC102",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0066"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC102"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0066"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1003"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC104",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0067"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC104"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0067"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1004"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/VC106",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0068"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/VC106"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0068"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1005"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    },
+    {
+      "asset_identifier": "https://aas.example.com/CV1006",
+      "record_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+      "properties": {
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type": [
+          {
+            "type": "uri",
+            "value": "https://example.org/aas/SMC"
+          },
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#label": [
+          {
+            "type": "literal",
+            "value": "EBOM_0069"
+          }
+        ],
+        "http://www.w3.org/2000/01/rdf-schema#seeAlso": [
+          {
+            "type": "uri",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/aas/hasSubmodelElement": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LkFzc29jaWF0aW9uQmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LkFzc2V0SWRlbnRpZmllcg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LkJPTUl0ZW1JZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LkVuZ2luZWVyaW5nTG9jYWxJZA"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5Lkl0ZW1EZXNjcmlwdGlvbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LkxhYmVs"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlByb2R1Y3RJZGVudGlmaWVy"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlF1YW50aXR5QmFzaXM"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlJldmlzaW9u"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlN0cnVjdHVyZVN0YXR1cw"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlNvdXJjZURvbWFpbg"
+          },
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5LlNvdXJjZUdyb3Vw"
+          }
+        ],
+        "https://example.org/aas/semanticId": [
+          {
+            "type": "literal",
+            "value": "https://example.org/engineeringbom/BOMItemRecord"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssetIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://aas.example.com/CV1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasAssociationBasis": [
+          {
+            "type": "literal",
+            "value": "UNRESOLVED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasBOMItemId": [
+          {
+            "type": "literal",
+            "value": "EBOM-0069"
+          }
+        ],
+        "https://example.org/engineeringbom/hasEngineeringLocalId": [
+          {
+            "type": "literal",
+            "value": "CV-1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasItemDescription": [
+          {
+            "type": "literal",
+            "value": "CV_1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasLabel": [
+          {
+            "type": "literal",
+            "value": "CV_1006"
+          }
+        ],
+        "https://example.org/engineeringbom/hasProductIdentifier": [
+          {
+            "type": "literal",
+            "value": "https://example.org/product-types/SAMSON_3241_7"
+          }
+        ],
+        "https://example.org/engineeringbom/hasQuantityBasis": [
+          {
+            "type": "literal",
+            "value": "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRecordedParent": [
+          {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/QXNzZW1ibGllcy5BU01fVU5BU1NJR05FRA"
+          }
+        ],
+        "https://example.org/engineeringbom/hasRevision": [
+          {
+            "type": "literal",
+            "value": "UNSPECIFIED"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceDomain": [
+          {
+            "type": "literal",
+            "value": "ECAD"
+          }
+        ],
+        "https://example.org/engineeringbom/hasSourceGroup": [
+          {
+            "type": "literal",
+            "value": "Devices"
+          }
+        ],
+        "https://example.org/engineeringbom/hasStructureStatus": [
+          {
+            "type": "literal",
+            "value": "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+          }
+        ]
+      }
+    }
+  ],
+  "warnings": [
+    "Direct RDF properties are evidence, not confirmation of physical membership.",
+    "Missing provenance or source descriptions must remain unresolved.",
+    "The query limit is 10000 rows; check truncation before relying on completeness."
+  ]
+}

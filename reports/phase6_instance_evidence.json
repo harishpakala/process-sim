@@ -1,0 +1,910 @@
+{
+  "method": "phase6d_read_only_graphdb_observation",
+  "endpoint": "http://localhost:7200/repositories/AAS",
+  "predicate_probes": [
+    {
+      "predicate": "https://example.org/ecad/hasPLCEndPoint",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 40,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 40,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 39,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 62,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 158,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 34,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasIRDI",
+      "declared_in_extracted_shacl": false,
+      "triple_count": 0,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasQuDTAttribute",
+      "declared_in_extracted_shacl": false,
+      "triple_count": 0,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasCatalogTechnicalSpecification",
+      "declared_in_extracted_shacl": false,
+      "triple_count": 0,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasCrossDomainAssociationEvidence",
+      "declared_in_extracted_shacl": false,
+      "triple_count": 0,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasECLASSIRDI",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 20,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasECLASSClass",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 20,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasTechnicalProperty",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 0,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasTechnicalProperties",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 16,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 20,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 38,
+      "probe_status": "ok"
+    },
+    {
+      "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "declared_in_extracted_shacl": true,
+      "triple_count": 150,
+      "probe_status": "ok"
+    }
+  ],
+  "identifier_overlap_samples": [
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1401",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1401",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://aas.example.com/DCPSU1",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "4"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "4"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1401",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "4"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "1",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "asset_identifier",
+      "left_predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://aas.example.com/CV1006",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1201",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/CV1301",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI101",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI102",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI103",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI104",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI105",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI106",
+          "leftResources": "4",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://aas.example.com/FI107",
+          "leftResources": "4",
+          "rightResources": "1"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "product_identifier",
+      "left_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate",
+          "leftResources": "1",
+          "rightResources": "3"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/EKATO_HWLN_AgitatorDrivePackage_Candidate",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_FMR62B_Candidate",
+          "leftResources": "1",
+          "rightResources": "3"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_PMP51B_Candidate",
+          "leftResources": "1",
+          "rightResources": "3"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_Prowirl_F200_Candidate",
+          "leftResources": "1",
+          "rightResources": "1"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+          "leftResources": "1",
+          "rightResources": "5"
+        },
+        {
+          "identifier": "https://example.org/product-types/IFM_TA1101",
+          "leftResources": "1",
+          "rightResources": "5"
+        },
+        {
+          "identifier": "https://example.org/product-types/SAMSON_3241_7",
+          "leftResources": "1",
+          "rightResources": "11"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "product_identifier",
+      "left_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate",
+          "leftResources": "1",
+          "rightResources": "6"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/AtlasCopco_GT_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/Didion_DSL_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_FMR62B_Candidate",
+          "leftResources": "1",
+          "rightResources": "12"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_PMP51B_Candidate",
+          "leftResources": "1",
+          "rightResources": "12"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+          "leftResources": "1",
+          "rightResources": "16"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    },
+    {
+      "family": "product_identifier",
+      "left_predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "right_predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "semantics": "literal_value_equality_only_not_verified_identity",
+      "sample_matches": [
+        {
+          "identifier": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate",
+          "leftResources": "3",
+          "rightResources": "6"
+        },
+        {
+          "identifier": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate",
+          "leftResources": "1",
+          "rightResources": "2"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_FMR62B_Candidate",
+          "leftResources": "3",
+          "rightResources": "12"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_PMP51B_Candidate",
+          "leftResources": "3",
+          "rightResources": "12"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+          "leftResources": "4",
+          "rightResources": "16"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_Prowirl_F200_Candidate",
+          "leftResources": "1",
+          "rightResources": "4"
+        },
+        {
+          "identifier": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+          "leftResources": "5",
+          "rightResources": "20"
+        },
+        {
+          "identifier": "https://example.org/product-types/IFM_TA1101",
+          "leftResources": "5",
+          "rightResources": "18"
+        },
+        {
+          "identifier": "https://example.org/product-types/SAMSON_3241_7",
+          "leftResources": "11",
+          "rightResources": "38"
+        },
+        {
+          "identifier": "https://example.org/product-types/Schneider_A9MEM3555",
+          "leftResources": "1",
+          "rightResources": "4"
+        }
+      ],
+      "probe_status": "ok",
+      "identity_verified": false,
+      "physical_membership_verified": false
+    }
+  ],
+  "limitations": [
+    "Counts depend on GraphDB repository default dataset and inference configuration.",
+    "Matching literals are not verified cross-domain identity.",
+    "Absence of a triple in the queried dataset is not proof of global absence.",
+    "No physical membership, installation, or BOM occurrence is inferred.",
+    "No query-plan repairs or GraphDB updates are performed."
+  ]
+}

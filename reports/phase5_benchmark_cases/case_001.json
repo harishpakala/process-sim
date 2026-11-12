@@ -1,0 +1,83 @@
+{
+  "route": "ebom_v2_catalog",
+  "status": "executed",
+  "plan": {
+    "intent": "all_functional_associations",
+    "equipment_tag": "C-001",
+    "outputs": [
+      "engineeringId",
+      "description",
+      "sourceDomain",
+      "sourceGroup"
+    ]
+  },
+  "path": [
+    "recorded_parent",
+    "association_target",
+    "association_source"
+  ],
+  "resolution": {
+    "tag": "C-001",
+    "equipment_uri": "https://example.org/dtwise/ebom-v2/item/EBOM-0002",
+    "assembly_uri": "https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER"
+  },
+  "sparql": "PREFIX core: <https://example.org/dtwise/core/>\nPREFIX ebom: <https://example.org/engineeringbom/>\nSELECT DISTINCT ?engineeringId ?description ?sourceDomain ?sourceGroup WHERE {\n  GRAPH <https://example.org/dtwise/graph/ebom-v2> {\n    ?equipment a core:BOMItemRecord .\n    ?equipment ebom:hasEngineeringLocalId \"C-001\" .\n    VALUES ?equipment { <https://example.org/dtwise/ebom-v2/item/EBOM-0002> }\n    VALUES ?assembly { <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> }\n    ?assembly a core:AssemblyRecord .\n    ?equipment core:hasRecordedParent ?assembly .\n    ?association a core:FunctionalAssociation .\n    ?association core:functionalAssociationTarget ?assembly .\n    ?instrument a core:BOMItemRecord .\n    ?association core:functionalAssociationSource ?instrument .\n    ?association core:sourceRecordId ?evidence0 .\n    ?association core:associationBasis ?evidence1 .\n    ?instrument ebom:hasEngineeringLocalId ?engineeringId .\n    ?instrument ebom:hasItemDescription ?description .\n    ?instrument ebom:hasSourceDomain ?sourceDomain .\n    ?instrument ebom:hasSourceGroup ?sourceGroup .\n  }\n}\nORDER BY ?engineeringId",
+  "evidence_policy": "functional_association_only_not_physical_membership",
+  "binding_count": 3,
+  "results": [
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "CV-1201"
+      },
+      "description": {
+        "type": "literal",
+        "value": "CV_1201"
+      },
+      "sourceDomain": {
+        "type": "literal",
+        "value": "ECAD"
+      },
+      "sourceGroup": {
+        "type": "literal",
+        "value": "Devices"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "TI-1202"
+      },
+      "description": {
+        "type": "literal",
+        "value": "TI_1202"
+      },
+      "sourceDomain": {
+        "type": "literal",
+        "value": "ECAD"
+      },
+      "sourceGroup": {
+        "type": "literal",
+        "value": "Devices"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "VC_111"
+      },
+      "description": {
+        "type": "literal",
+        "value": "CondenserCoolingWaterValve"
+      },
+      "sourceDomain": {
+        "type": "literal",
+        "value": "DEXPI"
+      },
+      "sourceGroup": {
+        "type": "literal",
+        "value": "ActuatingFunctions"
+      }
+    }
+  ]
+}

@@ -1,0 +1,320 @@
+{
+  "excluded_domains": [
+    "engineeringbom"
+  ],
+  "semantic_precision_checks": {
+    "dexpi_local_id": "hasLocalId",
+    "ecad_asset_id": "hasAssetIdentifier",
+    "opcua_signal": "hasSignalName",
+    "temperature_discovery": "descriptive lexical filter, not reactor-specific proof"
+  },
+  "method": "q13_v11_semantic_precision_first_attempt",
+  "question": "Trace the reactor temperature measurement across DEXPI, ECAD, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the DEXPI local engineering ID, ECAD shared asset identifier, inventory equipment tag, OPC UA signal name, manufacturer name, and manufacturer part number. Discover temperature using available descriptive properties.",
+  "model": "qwen2.5-coder:3b",
+  "schema_sources": [
+    {
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "selected_candidates": {
+    "dexpiLocalId": [
+      {
+        "domain": "dexpi",
+        "predicate": "https://example.org/dexpi/hasLocalId",
+        "label": "LocalId constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ"
+      }
+    ],
+    "ecadAssetIdentifier": [
+      {
+        "domain": "ecad",
+        "predicate": "https://example.org/ecad/hasAssetIdentifier",
+        "label": "AssetIdentifier constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl"
+      }
+    ],
+    "inventoryTag": [
+      {
+        "domain": "assetinventory",
+        "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+        "label": "EquipmentTag constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ"
+      }
+    ],
+    "opcuaSignalName": [
+      {
+        "domain": "opcuaconnectivity",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+        "label": "SignalName constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU"
+      }
+    ],
+    "manufacturer": [
+      {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerName",
+        "label": "ManufacturerName constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU"
+      }
+    ],
+    "partNumber": [
+      {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber",
+        "label": "ManufacturerPartNumber constraint",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU"
+      }
+    ]
+  },
+  "description_candidates": [
+    {
+      "domain": "assetinventory",
+      "predicate": "https://example.org/assetinventory/hasAssetName",
+      "label": "AssetName constraint",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+      "label": "SignalName constraint",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU"
+    }
+  ],
+  "missing_candidate_fields": [],
+  "estimated_prompt_tokens": 1225,
+  "validation_scope": "conservative lexical roles and exact SHACL parent-shape matching; no inference of paths",
+  "raw_model_response": "{\n  \"fields\": {\n    \"dexpiLocalId\": {\n      \"domain\": \"dexpi\",\n      \"predicate\": \"https://example.org/dexpi/hasLocalId\"\n    },\n    \"ecadAssetIdentifier\": {\n      \"domain\": \"ecad\",\n      \"predicate\": \"https://example.org/ecad/hasAssetIdentifier\"\n    },\n    \"inventoryTag\": {\n      \"domain\": \"assetinventory\",\n      \"predicate\": \"https://example.org/assetinventory/hasEquipmentTag\"\n    },\n    \"opcuaSignalName\": {\n      \"domain\": \"opcuaconnectivity\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasSignalName\"\n    },\n    \"manufacturer\": {\n      \"domain\": \"productcatalog\",\n      \"predicate\": \"https://example.org/productcatalog/hasManufacturerName\"\n    },\n    \"partNumber\": {\n      \"domain\": \"productcatalog\",\n      \"predicate\": \"https://example.org/productcatalog/hasManufacturerPartNumber\"\n    }\n  },\n  \"description_filter\": {\n    \"domain\": \"assetinventory\",\n    \"predicate\": \"https://example.org/assetinventory/hasAssetName\",\n    \"text\": \"temperature\"\n  }\n}",
+  "plan": {
+    "fields": {
+      "dexpiLocalId": {
+        "domain": "dexpi",
+        "predicate": "https://example.org/dexpi/hasLocalId"
+      },
+      "ecadAssetIdentifier": {
+        "domain": "ecad",
+        "predicate": "https://example.org/ecad/hasAssetIdentifier"
+      },
+      "inventoryTag": {
+        "domain": "assetinventory",
+        "predicate": "https://example.org/assetinventory/hasEquipmentTag"
+      },
+      "opcuaSignalName": {
+        "domain": "opcuaconnectivity",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalName"
+      },
+      "manufacturer": {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerName"
+      },
+      "partNumber": {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber"
+      }
+    },
+    "description_filter": {
+      "domain": "assetinventory",
+      "predicate": "https://example.org/assetinventory/hasAssetName",
+      "text": "temperature"
+    }
+  },
+  "plan_issues": [],
+  "predicate_issues": [],
+  "structural_validation": {
+    "domains_present": [
+      "assetinventory",
+      "dexpi",
+      "ecad",
+      "opcuaconnectivity",
+      "productcatalog"
+    ],
+    "domains_missing": [],
+    "issues": []
+  },
+  "generated_sparql": "SELECT DISTINCT ?dexpiLocalId ?ecadAssetIdentifier ?inventoryTag ?opcuaSignalName ?manufacturer ?partNumber WHERE {\n  ?s_dexpi <https://example.org/dexpi/hasAssetIdentifier> ?assetId .\n  ?s_ecad <https://example.org/ecad/hasAssetIdentifier> ?assetId .\n  ?s_assetinventory <https://example.org/assetinventory/hasAssetIdentifier> ?assetId .\n  ?s_opcuaconnectivity <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?assetId .\n  ?s_productcatalog <https://example.org/productcatalog/hasProductIdentifier> ?productId .\n  ?s_assetinventory <https://example.org/assetinventory/hasProductIdentifier> ?productId .\n  ?s_dexpi <https://example.org/dexpi/hasLocalId> ?dexpiLocalId .\n  ?s_ecad <https://example.org/ecad/hasAssetIdentifier> ?ecadAssetIdentifier .\n  ?s_assetinventory <https://example.org/assetinventory/hasEquipmentTag> ?inventoryTag .\n  ?s_opcuaconnectivity <https://example.org/opcuaconnectivity/hasSignalName> ?opcuaSignalName .\n  ?s_productcatalog <https://example.org/productcatalog/hasManufacturerName> ?manufacturer .\n  ?s_productcatalog <https://example.org/productcatalog/hasManufacturerPartNumber> ?partNumber .\n  ?s_assetinventory <https://example.org/assetinventory/hasAssetName> ?descriptionValue .\n  FILTER(CONTAINS(LCASE(STR(?descriptionValue)), \"temperature\"))\n}",
+  "time_to_first_token_seconds": 19.78,
+  "prompt_eval_count": 1431,
+  "eval_count": 255,
+  "prompt_eval_duration_ns": 14070660000,
+  "eval_duration_ns": 16191002000,
+  "total_duration_ns": 33895843900,
+  "graphdb_bindings": [
+    {
+      "dexpiLocalId": {
+        "type": "literal",
+        "value": "TI_105"
+      },
+      "ecadAssetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI1202"
+      },
+      "inventoryTag": {
+        "type": "literal",
+        "value": "TI-1202"
+      },
+      "opcuaSignalName": {
+        "type": "literal",
+        "value": "XMEAS22"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "IFM"
+      },
+      "partNumber": {
+        "type": "literal",
+        "value": "TA1101"
+      }
+    },
+    {
+      "dexpiLocalId": {
+        "type": "literal",
+        "value": "TI_101"
+      },
+      "ecadAssetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI101"
+      },
+      "inventoryTag": {
+        "type": "literal",
+        "value": "TI-1101"
+      },
+      "opcuaSignalName": {
+        "type": "literal",
+        "value": "XMEAS9"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "IFM"
+      },
+      "partNumber": {
+        "type": "literal",
+        "value": "TA1101"
+      }
+    },
+    {
+      "dexpiLocalId": {
+        "type": "literal",
+        "value": "TI_104"
+      },
+      "ecadAssetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI104"
+      },
+      "inventoryTag": {
+        "type": "literal",
+        "value": "TI-1103"
+      },
+      "opcuaSignalName": {
+        "type": "literal",
+        "value": "XMEAS21"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "IFM"
+      },
+      "partNumber": {
+        "type": "literal",
+        "value": "TA1101"
+      }
+    },
+    {
+      "dexpiLocalId": {
+        "type": "literal",
+        "value": "TI_102"
+      },
+      "ecadAssetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI102"
+      },
+      "inventoryTag": {
+        "type": "literal",
+        "value": "TI-1301"
+      },
+      "opcuaSignalName": {
+        "type": "literal",
+        "value": "XMEAS11"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "IFM"
+      },
+      "partNumber": {
+        "type": "literal",
+        "value": "TA1101"
+      }
+    },
+    {
+      "dexpiLocalId": {
+        "type": "literal",
+        "value": "TI_103"
+      },
+      "ecadAssetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI103"
+      },
+      "inventoryTag": {
+        "type": "literal",
+        "value": "TI-1501"
+      },
+      "opcuaSignalName": {
+        "type": "literal",
+        "value": "XMEAS18"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "IFM"
+      },
+      "partNumber": {
+        "type": "literal",
+        "value": "TA1101"
+      }
+    }
+  ],
+  "error": null,
+  "completed": true,
+  "semantic_selection": {
+    "dexpiLocalId": {
+      "domain": "dexpi",
+      "predicate": "https://example.org/dexpi/hasLocalId"
+    },
+    "ecadAssetIdentifier": {
+      "domain": "ecad",
+      "predicate": "https://example.org/ecad/hasAssetIdentifier"
+    },
+    "inventoryTag": {
+      "domain": "assetinventory",
+      "predicate": "https://example.org/assetinventory/hasEquipmentTag"
+    },
+    "opcuaSignalName": {
+      "domain": "opcuaconnectivity",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalName"
+    },
+    "manufacturer": {
+      "domain": "productcatalog",
+      "predicate": "https://example.org/productcatalog/hasManufacturerName"
+    },
+    "partNumber": {
+      "domain": "productcatalog",
+      "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber"
+    }
+  },
+  "unsupported_fields": [],
+  "binding_count": 5,
+  "elapsed_seconds": 36.12
+}

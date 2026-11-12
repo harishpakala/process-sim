@@ -1,0 +1,543 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "List the operational references in Asset Inventory.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "operationalReference",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasOperationalReference"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"operationalReferences\",\n      \"shape\": \"s1\",\n      \"predicate\": \"https://example.org/assetinventory/hasOperationalReference\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?operationalReference WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasOperationalReference> ?operationalReference .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS8"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS29"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS32"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS18"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV9"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS9"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV1"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS30"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS4"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS40"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS26"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV4"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV3"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV2"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS11"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS28"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS12"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS7"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV6"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS14"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS10"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS41"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS2"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV5"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV11"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV12"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS16"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS24"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV8"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS36"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV10"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS39"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS23"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS35"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS5"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS21"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV7"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS22"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS19"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS25"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS27"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS3"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS15"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS33"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS38"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS17"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS13"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS1"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS34"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS6"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS20"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS37"
+      }
+    },
+    {
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS31"
+      }
+    }
+  ],
+  "binding_count": 53,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "hypothesis_joins_enabled": false,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "label": "Asset",
+      "description": "Inventory record for an identified asset.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier of the asset represented by this inventory record.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName",
+          "description": "Human-readable name of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType",
+          "description": "Recorded type or category of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded for a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association to information in another domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification recorded for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference",
+          "description": "Reference linking the asset record to engineering information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag",
+          "description": "Equipment tag assigned to the asset in engineering or plant documentation.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus",
+          "description": "Recorded status of fault detection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus",
+          "description": "Recorded status of fault injection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location",
+          "description": "Recorded location of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus",
+          "description": "Recorded status of modeling activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus",
+          "description": "Recorded status of monitoring activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference",
+          "description": "Reference linking the asset record to operational information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of the product associated with the asset; distinct from the asset identifier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to the inventory asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus",
+          "description": "Recorded status of simulation activities for the asset.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "label": "AssetInventory",
+      "description": "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets",
+          "description": "Collection of inventory asset records.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "label": "Assets",
+      "description": "Collection of inventory asset records.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset",
+          "description": "Inventory record for an identified asset.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "assetinventory"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "operational reference",
+      "tokens": [
+        "operational",
+        "reference"
+      ]
+    }
+  ],
+  "requested_outputs": [
+    "operational references in Asset Inventory"
+  ],
+  "estimated_prompt_tokens": 1461,
+  "ollama_stats": {
+    "prompt_eval_count": 1246,
+    "eval_count": 59,
+    "total_duration": 14018147200
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s0"
+  ],
+  "elapsed_seconds": 16.28
+}

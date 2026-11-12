@@ -1,0 +1,329 @@
+{
+  "method": "generic_v4_1_grounded_filters_normalized_names",
+  "question": "Show OPC UA signal names where the signal direction is READ_WRITE.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "signalName",
+        "shape": "s2",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalName"
+      }
+    ],
+    "filters": [
+      {
+        "shape": "s2",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+        "equals": "READ_WRITE"
+      }
+    ],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"signalName\",\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasSignalName\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasSignalDirection\",\n      \"equals\": \"READ_WRITE\"\n    }\n  ],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?signalName WHERE {\n  ?node_s2 <https://example.org/opcuaconnectivity/hasSignalName> ?signalName .\n  ?node_s2 <https://example.org/opcuaconnectivity/hasSignalDirection> ?filter_0 .\n  FILTER(STR(?filter_0) = \"READ_WRITE\")\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV5"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV6"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV11"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV1"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV8"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV2"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV12"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV10"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV4"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV7"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV3"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV9"
+      }
+    }
+  ],
+  "binding_count": 12,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+          "label": "ECADConnectionPointReferenceStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEndpointStatus",
+          "label": "EndpointStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEndpointUrl",
+          "label": "EndpointUrl constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+          "label": "NamespaceURI constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasServer",
+          "label": "Server constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "label": "EngineeringDomain constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "label": "EngineeringFunctionId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "label": "EngineeringFunctionReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+          "label": "InventoryAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+          "label": "InventoryAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "label": "MappingBasis constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "label": "MappingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "label": "OPCUABrowsePath constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "label": "OPCUANodeId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+          "label": "RelatedInventoryAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "label": "SignalDirection constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "label": "SignalName constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+          "label": "SignalMapping constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasServers",
+          "label": "Servers constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+          "label": "SignalMappings constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s1",
+      "right": "s0",
+      "predicate": "https://example.org/opcuaconnectivity/hasServer",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j1": {
+      "left": "s3",
+      "right": "s2",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j2": {
+      "left": "s4",
+      "right": "s1",
+      "predicate": "https://example.org/opcuaconnectivity/hasServers",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j3": {
+      "left": "s4",
+      "right": "s3",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    }
+  },
+  "required_domains": [
+    "opcuaconnectivity"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "signal name",
+      "tokens": [
+        "name",
+        "signal"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 1462,
+  "ollama_stats": {
+    "prompt_eval_count": 1474,
+    "eval_count": 100,
+    "total_duration": 10809572500
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s2"
+  ],
+  "elapsed_seconds": 12.98
+}

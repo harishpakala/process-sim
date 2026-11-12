@@ -1,0 +1,381 @@
+{
+  "method": "generic_v4_1_grounded_filters_normalized_names",
+  "question": "Within OPC UA Connectivity, list signal names and asset identifiers for mappings whose EngineeringDomain property equals DEXPI.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "signalName",
+        "shape": "s4",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalName"
+      },
+      {
+        "name": "assetIdentifier",
+        "shape": "s4",
+        "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier"
+      }
+    ],
+    "filters": [
+      {
+        "shape": "s1",
+        "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+        "equals": "DEXPI"
+      }
+    ],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"signalName\",\n      \"shape\": \"s4\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasSignalName\"\n    },\n    {\n      \"name\": \"assetIdentifier\",\n      \"shape\": \"s4\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasAssetIdentifier\"\n    }\n  ],\n  \"filters\": [\n    {\n      \"shape\": \"s1\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasEngineeringDomain\",\n      \"equals\": \"DEXPI\"\n    }\n  ],\n  \"unsupported\": []\n}",
+  "generated_sparql": null,
+  "plan_issues": [
+    "Undeclared field property",
+    "Undeclared field property",
+    "Missing semantic output: asset identifier",
+    "Missing semantic output: signal name"
+  ],
+  "graphdb_bindings": null,
+  "binding_count": null,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatedVariable",
+          "label": "ActuatedVariable constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "label": "EngineeringDomain constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "label": "EngineeringFunctionId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "label": "EngineeringFunctionReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+          "label": "InventoryAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+          "label": "InventoryAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "label": "MappingBasis constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "label": "MappingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "label": "OPCUABrowsePath constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "label": "OPCUANodeId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+          "label": "RelatedInventoryAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "label": "SignalDirection constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "label": "SignalName constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasMeasuredVariable",
+          "label": "MeasuredVariable constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+          "label": "SignalMapping constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasServers",
+          "label": "Servers constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+          "label": "SignalMappings constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatingFunction",
+          "label": "ActuatingFunction constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasEquipment",
+          "label": "Equipment constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasInstrumentationFunction",
+          "label": "InstrumentationFunction constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatingFunctions",
+          "label": "ActuatingFunctions constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEquipments",
+          "label": "Equipments constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+          "label": "InstrumentationFunctions constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s1",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s1",
+      "right": "s2",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j2": {
+      "left": "s1",
+      "right": "s3",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "dexpi",
+    "opcuaconnectivity"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "asset identifier",
+      "tokens": [
+        "asset",
+        "identifier"
+      ]
+    },
+    {
+      "phrase": "signal name",
+      "tokens": [
+        "name",
+        "signal"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 2190,
+  "ollama_stats": {
+    "prompt_eval_count": 2317,
+    "eval_count": 139,
+    "total_duration": 22406626600
+  },
+  "elapsed_seconds": 24.53
+}

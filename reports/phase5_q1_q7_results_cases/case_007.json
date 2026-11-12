@@ -1,0 +1,588 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "What DEXPI, ECAD, AAS Asset Inventory, product-candidate, ECLASS, and operational signal information is available for reactor instrument PI-1101?",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "assetIdentifier",
+        "shape": "s2",
+        "predicate": "https://example.org/assetinventory/hasAssetIdentifier"
+      },
+      {
+        "name": "assetIdentifier_2",
+        "shape": "s3",
+        "predicate": "https://example.org/dexpi/hasAssetIdentifier"
+      },
+      {
+        "name": "assetIdentifier_3",
+        "shape": "s6",
+        "predicate": "https://example.org/dexpi/hasAssetIdentifier"
+      },
+      {
+        "name": "assetIdentifier_4",
+        "shape": "s7",
+        "predicate": "https://example.org/ecad/hasAssetIdentifier"
+      },
+      {
+        "name": "assetIdentifier_5",
+        "shape": "s8",
+        "predicate": "https://example.org/ecad/hasAssetIdentifier"
+      },
+      {
+        "name": "assetIdentifier_6",
+        "shape": "s9",
+        "predicate": "https://example.org/ecad/hasAssetIdentifier"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/assetinventory/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s3\",\n      \"predicate\": \"https://example.org/dexpi/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s6\",\n      \"predicate\": \"https://example.org/dexpi/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s7\",\n      \"predicate\": \"https://example.org/ecad/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s8\",\n      \"predicate\": \"https://example.org/ecad/hasAssetIdentifier\"\n    },\n    {\n      \"name\": \"outputName\",\n      \"shape\": \"s9\",\n      \"predicate\": \"https://example.org/ecad/hasAssetIdentifier\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": null,
+  "plan_issues": [
+    "Undeclared field property",
+    "Undeclared field property"
+  ],
+  "graphdb_bindings": null,
+  "binding_count": null,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "label": "ActuatingFunction",
+      "description": "Function that actuates or manipulates a process variable.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatedVariable",
+          "label": "ActuatedVariable",
+          "description": "Process variable acted upon by the actuating function.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Recorded evidence supporting a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association with information in another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification of the represented association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "label": "Device",
+      "description": "Electrical device represented in the engineering design.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints",
+          "description": "Collection of connection points belonging to an electrical device or symbol.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded for the cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association to another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification associated with the element.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+          "label": "EngineeringVerificationEvidence",
+          "description": "Recorded evidence supporting engineering verification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+          "label": "EngineeringVerificationStatus",
+          "description": "Recorded status of engineering verification for the device.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+          "label": "ProductVerificationEvidence",
+          "description": "Recorded evidence supporting product verification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+          "label": "ProductVerificationStatus",
+          "description": "Recorded status of verification against product information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of a related asset; distinct from the identifier of the current element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "label": "Asset",
+      "description": "Inventory record for an identified asset.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier of the asset represented by this inventory record.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName",
+          "description": "Human-readable name of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType",
+          "description": "Recorded type or category of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded for a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association to information in another domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification recorded for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference",
+          "description": "Reference linking the asset record to engineering information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag",
+          "description": "Equipment tag assigned to the asset in engineering or plant documentation.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus",
+          "description": "Recorded status of fault detection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus",
+          "description": "Recorded status of fault injection activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location",
+          "description": "Recorded location of the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus",
+          "description": "Recorded status of modeling activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus",
+          "description": "Recorded status of monitoring activities for the asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference",
+          "description": "Reference linking the asset record to operational information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of the product associated with the asset; distinct from the asset identifier.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to the inventory asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus",
+          "description": "Recorded status of simulation activities for the asset.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+      "label": "InstrumentationFunction",
+      "description": "Function that measures or observes a process variable.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Recorded evidence supporting a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association with information in another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification of the represented association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasMeasuredVariable",
+          "label": "MeasuredVariable",
+          "description": "Process variable measured by the instrumentation function.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "label": "Assets",
+      "description": "Collection of inventory asset records.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset",
+          "description": "Inventory record for an identified asset.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "label": "AssetInventory",
+      "description": "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses.",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets",
+          "description": "Collection of inventory asset records.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+      "label": "Equipment",
+      "description": "Process equipment item identified in the DEXPI engineering model.",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented engineering asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+      "label": "Schematics",
+      "description": "Collection of electrical schematic information.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasConnections",
+          "label": "Connections",
+          "description": "Collection of connections between schematic elements.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+      "label": "Symbol",
+      "description": "Graphical or logical symbol representing an electrical design element.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints",
+          "description": "Collection of connection points belonging to an electrical device or symbol.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+      "label": "ECAD",
+      "description": "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasDevices",
+          "label": "Devices",
+          "description": "Collection of electrical devices represented in the ECAD model.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasSchematics",
+          "label": "Schematics",
+          "description": "Collection of electrical schematic information.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasSymbols",
+          "label": "Symbols",
+          "description": "Collection of schematic symbols.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s1",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s0",
+      "right": "s2",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j2": {
+      "left": "s0",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j3": {
+      "left": "s1",
+      "right": "s2",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j4": {
+      "left": "s1",
+      "right": "s3",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j5": {
+      "left": "s1",
+      "right": "s6",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j6": {
+      "left": "s2",
+      "right": "s3",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j7": {
+      "left": "s2",
+      "right": "s6",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j8": {
+      "left": "s2",
+      "right": "s8",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j9": {
+      "left": "s3",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j10": {
+      "left": "s6",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "dexpi",
+    "ecad",
+    "assetinventory"
+  ],
+  "requested_concepts": [],
+  "requested_outputs": [],
+  "estimated_prompt_tokens": 3542,
+  "ollama_stats": {
+    "prompt_eval_count": 3161,
+    "eval_count": 239,
+    "total_duration": 49211414000
+  },
+  "elapsed_seconds": 51.38
+}
