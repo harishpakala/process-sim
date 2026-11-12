@@ -1,0 +1,162 @@
+{
+  "version": "dtwise-domain-concept-v1",
+  "status": "provisional_domain_labels_pending_ontology_review",
+  "notes": [
+    "Domain labels represent intended answer-bearing domains, not necessarily all traversal intermediates.",
+    "OPC UA Connectivity domain key must be aligned to schema index.",
+    "Concept gold URIs intentionally unassigned pending index inspection.",
+    "Temporal store and VTKG are not engineering domains."
+  ],
+  "cases": [
+    {
+      "id": "Q01",
+      "question": "Which instrumentation functions are represented in the reactor process design?",
+      "expected_domains": [
+        "dexpi"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q02",
+      "question": "What electrical devices are documented for the reactor?",
+      "expected_domains": [
+        "ecad"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q03",
+      "question": "Which assets and equipment tags are recorded in the asset inventory?",
+      "expected_domains": [
+        "assetinventory"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q04",
+      "question": "What manufacturer names and ECLASS classifications are available in the product catalog?",
+      "expected_domains": [
+        "productcatalog"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q05",
+      "question": "Which BOM items and functional assembly references are recorded in the engineering bill of materials?",
+      "expected_domains": [
+        "engineeringbom"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q06",
+      "question": "Which operational signal is mapped to reactor temperature function TI_101 in the process model?",
+      "expected_domains": [
+        "dexpi",
+        "opcuaconnectivity"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q07",
+      "question": "Which OPC UA NodeId and signal name correspond to electrical pressure instrument PI-1101?",
+      "expected_domains": [
+        "ecad",
+        "opcuaconnectivity"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q08",
+      "question": "What temperature-signal observations were recorded for reactor temperature function TI_101 between simulation time 0 and 60 seconds in the selected run?",
+      "expected_domains": [
+        "dexpi",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q09",
+      "question": "What pressure observations were recorded for electrical pressure instrument PI-1101 between simulation time 0 and 120 seconds in the selected run?",
+      "expected_domains": [
+        "ecad",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q10",
+      "question": "What observations were recorded for the operational signal associated with inventoried reactor level instrument LI101 between simulation time 0 and 120 seconds in the selected run?",
+      "expected_domains": [
+        "assetinventory",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q11",
+      "question": "Which process instrumentation functions correspond to electrical devices, and what operational signals are mapped to them?",
+      "expected_domains": [
+        "dexpi",
+        "ecad",
+        "opcuaconnectivity"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q12",
+      "question": "Which electrical reactor instruments correspond to engineering BOM entries and mapped operational signals?",
+      "expected_domains": [
+        "ecad",
+        "engineeringbom",
+        "opcuaconnectivity"
+      ],
+      "historical": false,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q13",
+      "question": "For reactor temperature instrument TI-1101 (XMEAS9), what process and electrical engineering references and temperature observations were recorded between simulation time 0 and 60 seconds in the selected run?",
+      "expected_domains": [
+        "dexpi",
+        "ecad",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q14",
+      "question": "What asset identifier and pressure observations are associated with reactor pressure function PI_101 between simulation time 0 and 120 seconds in the selected run?",
+      "expected_domains": [
+        "dexpi",
+        "assetinventory",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    },
+    {
+      "id": "Q15",
+      "question": "What product candidate and temperature observations are associated with reactor temperature function TI_101 between simulation time 0 and 60 seconds in the selected run?",
+      "expected_domains": [
+        "dexpi",
+        "productcatalog",
+        "opcuaconnectivity"
+      ],
+      "historical": true,
+      "gold_concepts": []
+    }
+  ]
+}
