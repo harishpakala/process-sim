@@ -34,7 +34,7 @@ class UnresolvedEvidenceTests(unittest.TestCase):
             summarize({"results": {"bindings": [
                 binding("asset1", "record1", "urn:p", "x"),
                 binding("asset2", "record1", "urn:p", "y")
-            ]})
+            ]}})
 
     def test_empty_evidence_is_not_approval(self):
         report = summarize({"results": {"bindings": []}})
