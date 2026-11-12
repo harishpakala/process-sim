@@ -29,6 +29,15 @@ def _validate_path(index, domain, path):
 
 
 def compile_cross_domain(question, index, catalog, allow_candidate=False, limit=100):
+    from semantic.dtwise_n_domain_planner import compile_n_domain
+    from semantic.dtwise_concept_resolver import _mentioned_domains
+    mentioned = {d.lower() for d in _mentioned_domains(question)}
+    return compile_n_domain(question, index, catalog, mentioned,
+                            allow_candidate, limit, _validate_path)
+
+
+def _legacy_compile_cross_domain_unused(question, index, catalog, allow_candidate=False, limit=100):
+    """Retained temporarily for comparison; no longer called by the CLI."""
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
     from semantic.dtwise_concept_resolver import _mentioned_domains
