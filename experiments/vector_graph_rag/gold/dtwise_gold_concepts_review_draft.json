@@ -1,0 +1,428 @@
+[
+  {
+    "question": "Which electrical devices correspond to process equipment?",
+    "expected_domains": [
+      "dexpi",
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasDevice"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipment"
+      }
+    ]
+  },
+  {
+    "question": "Which engineering components have inventory representations?",
+    "expected_domains": [
+      "assetinventory",
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasBOMItemRecord"
+      },
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasAsset"
+      }
+    ]
+  },
+  {
+    "question": "Which process instruments are associated with equipment?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasInstrumentationFunction"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipment"
+      }
+    ]
+  },
+  {
+    "question": "What identifier uniquely names an inventory asset record?",
+    "expected_domains": [
+      "assetinventory"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasAssetIdentifier"
+      }
+    ]
+  },
+  {
+    "question": "Where is an inventoried asset located?",
+    "expected_domains": [
+      "assetinventory"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasLocation"
+      }
+    ]
+  },
+  {
+    "question": "What equipment tag is recorded for an asset?",
+    "expected_domains": [
+      "assetinventory"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasEquipmentTag"
+      }
+    ]
+  },
+  {
+    "question": "What evidence supports a cross-domain association in the inventory?",
+    "expected_domains": [
+      "assetinventory"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence"
+      }
+    ]
+  },
+  {
+    "question": "What is the inventory monitoring status of an asset?",
+    "expected_domains": [
+      "assetinventory"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasMonitoringStatus"
+      }
+    ]
+  },
+  {
+    "question": "What process variable is measured by an instrumentation function?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasMeasuredVariable"
+      }
+    ]
+  },
+  {
+    "question": "What is the local source-model identifier of a DEXPI equipment item?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasLocalId"
+      }
+    ]
+  },
+  {
+    "question": "Which process equipment items are represented in the DEXPI model?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipment"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipments"
+      }
+    ]
+  },
+  {
+    "question": "What process variable is controlled by an actuating function?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasActuatedVariable"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasActuatingFunction"
+      }
+    ]
+  },
+  {
+    "question": "What evidence documents a DEXPI cross-domain association?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasCrossDomainAssociationEvidence"
+      }
+    ]
+  },
+  {
+    "question": "Which electrical devices appear in the ECAD model?",
+    "expected_domains": [
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasDevice"
+      },
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasDevices"
+      }
+    ]
+  },
+  {
+    "question": "What address is assigned to an electrical connection endpoint?",
+    "expected_domains": [
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasAddress"
+      }
+    ]
+  },
+  {
+    "question": "Which endpoint is associated with a PLC?",
+    "expected_domains": [
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasPLCEndPoint"
+      }
+    ]
+  },
+  {
+    "question": "What is the engineering verification status of an ECAD device?",
+    "expected_domains": [
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasEngineeringVerificationStatus"
+      }
+    ]
+  },
+  {
+    "question": "What is the local identifier for an ECAD schematic element?",
+    "expected_domains": [
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasLocalId"
+      }
+    ]
+  },
+  {
+    "question": "What is the source record identifier for an engineering BOM item?",
+    "expected_domains": [
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasSourceRecordId"
+      }
+    ]
+  },
+  {
+    "question": "What is the engineering BOM item identifier?",
+    "expected_domains": [
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasBOMItemId"
+      }
+    ]
+  },
+  {
+    "question": "What revision is recorded for an assembly entry?",
+    "expected_domains": [
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasRevision"
+      }
+    ]
+  },
+  {
+    "question": "What source field supports a BOM functional association?",
+    "expected_domains": [
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasSourceField"
+      }
+    ]
+  },
+  {
+    "question": "What is the description of a BOM item?",
+    "expected_domains": [
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasItemDescription"
+      }
+    ]
+  },
+  {
+    "question": "What OPC UA node identifier is mapped to an engineering signal?",
+    "expected_domains": [
+      "opcuaconnectivity"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "opcuaconnectivity",
+        "uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+      }
+    ]
+  },
+  {
+    "question": "What OPC UA server endpoint URL is configured?",
+    "expected_domains": [
+      "opcuaconnectivity"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "opcuaconnectivity",
+        "uri": "https://example.org/opcuaconnectivity/hasEndpointUrl"
+      }
+    ]
+  },
+  {
+    "question": "What is the mapping status of an engineering signal to an OPC UA node?",
+    "expected_domains": [
+      "opcuaconnectivity"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "opcuaconnectivity",
+        "uri": "https://example.org/opcuaconnectivity/hasMappingStatus"
+      }
+    ]
+  },
+  {
+    "question": "What is the OPC UA browse path for a mapped node?",
+    "expected_domains": [
+      "opcuaconnectivity"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "opcuaconnectivity",
+        "uri": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath"
+      }
+    ]
+  },
+  {
+    "question": "What is the signal direction for an OPC UA mapping?",
+    "expected_domains": [
+      "opcuaconnectivity"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "opcuaconnectivity",
+        "uri": "https://example.org/opcuaconnectivity/hasSignalDirection"
+      }
+    ]
+  },
+  {
+    "question": "What is the manufacturer part number of a catalog product?",
+    "expected_domains": [
+      "productcatalog"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasManufacturerPartNumber"
+      }
+    ]
+  },
+  {
+    "question": "What ECLASS IRDI identifies the product classification?",
+    "expected_domains": [
+      "productcatalog"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasECLASSIRDI"
+      }
+    ]
+  },
+  {
+    "question": "What technical characteristics are recorded for a catalog product?",
+    "expected_domains": [
+      "productcatalog"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasTechnicalProperty"
+      },
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasTechnicalProperties"
+      }
+    ]
+  },
+  {
+    "question": "What is the catalog product identifier?",
+    "expected_domains": [
+      "productcatalog"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasProductIdentifier"
+      }
+    ]
+  },
+  {
+    "question": "Which supplier part number is associated with a product?",
+    "expected_domains": [
+      "productcatalog"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "productcatalog",
+        "uri": "https://example.org/productcatalog/hasSupplierPartNumber"
+      }
+    ]
+  }
+]
