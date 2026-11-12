@@ -1,0 +1,28 @@
+{
+  "mapping_id": "engineeringbom_ecad_dexpi_assetinventory_asset_identifier",
+  "mapping_status": "candidate_pending_semantic_approval",
+  "source": "GraphDB compiler-generated four-domain SELECT DISTINCT query, LIMIT 1000, user-confirmed 2026-11-12",
+  "expected": {
+    "rows": 68,
+    "shared_identifiers": 34,
+    "engineeringbom_records": 68,
+    "ecad_devices": 34,
+    "dexpi_objects": 34,
+    "assetinventory_assets": 34,
+    "bom_records_per_identifier": 2
+  },
+  "columns": {
+    "entities": [
+      "entity0",
+      "entity1",
+      "entity2",
+      "entity3"
+    ],
+    "identifiers": [
+      "id0",
+      "id1",
+      "id2",
+      "id3"
+    ]
+  }
+}
