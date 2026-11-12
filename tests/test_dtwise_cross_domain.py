@@ -110,6 +110,41 @@ class CrossDomainRegressionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Unsupported join comparison"):
             self.compile(catalog=catalog)
 
+    def test_generic_four_domain_explicit_plan(self):
+        catalog = {"n_domain_plans": [{
+            "id": "explicit_four_domain",
+            "domains": ["engineeringbom", "ecad", "dexpi", "assetinventory"],
+            "status": "candidate_pending_semantic_approval",
+            "comparison": "string_equality",
+            "anchors": [
+                {"domain": d, "paths": [[
+                    "https://example.org/" + d + "/hasObjects",
+                    "https://example.org/" + d + "/hasAssetIdentifier"]]}
+                for d in ("engineeringbom", "ecad", "dexpi", "assetinventory")
+            ],
+        }]}
+        result = self.compile(
+            "EngineeringBOM ECAD DEXPI AssetInventory", catalog=catalog)
+        self.assertEqual(result["mapping_ids"], ["explicit_four_domain"])
+        self.assertEqual(result["sparql"].count("FILTER(STR("), 3)
+        self.assertIn("?entity3", result["sparql"])
+        self.assertEqual(result["cross_domain_join"], "candidate")
+
+    def test_four_domains_without_explicit_plan_fail_closed(self):
+        with self.assertRaisesRegex(ValueError, "exactly one explicit catalog plan"):
+            self.compile("EngineeringBOM ECAD DEXPI AssetInventory")
+
+    def test_generic_plan_rejects_missing_anchor(self):
+        catalog = {"n_domain_plans": [{
+            "id": "broken", "domains": ["engineeringbom", "ecad"],
+            "status": "verified", "comparison": "string_equality",
+            "anchors": [{"domain": "engineeringbom", "paths": [[
+                "https://example.org/engineeringbom/hasObjects",
+                "https://example.org/engineeringbom/hasAssetIdentifier"]]}],
+        }]}
+        with self.assertRaisesRegex(ValueError, "anchors must match"):
+            self.compile(QUESTION_2, catalog=catalog)
+
     def test_invalid_limit_fails_closed(self):
         with self.assertRaisesRegex(ValueError, "LIMIT"):
             compile_cross_domain(QUESTION_3, {}, self.catalog,
