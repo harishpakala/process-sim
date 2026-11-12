@@ -25,6 +25,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/37/questions":
+            try:
+                from process_sim.api.frozen_benchmark import questions
+                self.send_json(200, questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            return
         if urlsplit(self.path).path == "/api/ai/benchmarks/questions":
             try:
                 from process_sim.api.benchmark_reports import list_questions
@@ -251,6 +258,26 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/37/run":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 1024:
+                    self.send_json(413, {"error": "Invalid benchmark request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or set(payload) != {"caseId", "indexSha256", "execute"}:
+                    raise ValueError("Expected caseId, indexSha256 and execute only")
+                from process_sim.api.frozen_benchmark import run_case
+                self.send_json(200, run_case(payload["caseId"], payload["indexSha256"], payload["execute"]))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except RuntimeError as exc:
+                self.send_json(409, {"error": str(exc)})
+            except Exception as exc:
+                import logging
+                logging.exception("Benchmark 37 execution failed")
+                self.send_json(503, {"error": "Benchmark execution failed; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/q13/ontology/live/start":
             from process_sim.api import q13_live
             try:
