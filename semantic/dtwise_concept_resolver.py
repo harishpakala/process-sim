@@ -74,9 +74,33 @@ def _traversals(index, property_uri, domain, max_depth=6):
                    x["property_chain"], x["start_shape"]))
 
 
+DOMAIN_ALIASES = {
+    "engineeringbom": {"engineeringbom", "ebom", "bom", "engineering bom"},
+    "ecad": {"ecad"},
+    "dexpi": {"dexpi", "p&id", "pid"},
+    "assetinventory": {"assetinventory", "asset inventory"},
+    "opcuaconnectivity": {"opcuaconnectivity", "opcua", "opc ua"},
+    "productcatalog": {"productcatalog", "product catalog"},
+}
+
+
+def _mentioned_domains(question):
+    normalized = " ".join(re.findall(r"[a-z0-9]+", question.lower()))
+    padded = " " + normalized + " "
+    found = set()
+    for domain, aliases in DOMAIN_ALIASES.items():
+        for alias in aliases:
+            key = " ".join(re.findall(r"[a-z0-9]+", alias.lower()))
+            if key and (" " + key + " ") in padded:
+                found.add(domain)
+                break
+    return found
+
+
 def resolve(index, question, limit=10):
     """Return ranked semantic concepts with their SHACL context."""
     query_tokens = _tokens(question)
+    mentioned_domains = _mentioned_domains(question)
     scores = defaultdict(int)
     for token in query_tokens:
         for i in index.get("token_postings", {}).get(token, []):
@@ -92,8 +116,8 @@ def resolve(index, question, limit=10):
         local_tokens = _tokens(_local(concept["uri"]))
         label_tokens = set().union(*(_tokens(x) for x in concept["labels"])) if concept["labels"] else set()
         primary = len(query_tokens & (local_tokens | label_tokens))
-        domain_match = int(concept["domain"].lower() in query_tokens)
-        candidates.append((-(score + 2 * primary + 2 * domain_match),
+        domain_match = int(concept["domain"].lower() in mentioned_domains)
+        candidates.append((-(score + 2 * primary + 8 * domain_match),
                            concept["domain"], concept["uri"], concept))
     candidates.sort(key=lambda x: x[:3])
 
@@ -111,15 +135,51 @@ def resolve(index, question, limit=10):
     return results
 
 
+def resolve_compact(index, question, limit=10, max_paths=3):
+    """Small, evidence-grounded candidate list for LLM intent selection.
+
+    IDs are scoped to this response; they are not persistent ontology IDs.
+    No identifier equality, class membership, or cross-domain join is inferred.
+    """
+    hits = resolve(index, question, limit=limit)
+    candidates = []
+    for position, hit in enumerate(hits, 1):
+        concept = hit["concept"]
+        traversals = hit["traversal_candidates"]
+        candidates.append({
+            "id": "C" + str(position),
+            "score": hit["score"],
+            "domain": concept["domain"],
+            "kind": concept["kind"],
+            "uri": concept["uri"],
+            "label": concept["labels"][0] if concept["labels"] else _local(concept["uri"]),
+            "paths": [{
+                "property_chain": path["property_chain"],
+                "start_shape": path["start_shape"],
+                "complete_to_root": path["complete_to_root"],
+            } for path in traversals[:max_paths]],
+        })
+    return {
+        "question": question,
+        "mentioned_domains": sorted(_mentioned_domains(question)),
+        "candidates": candidates,
+        "join_status": "unverified",
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--index", type=Path,
                         default=Path("semantic/ontology/dtwise/dtwise-schema-index.json"))
     parser.add_argument("--query", required=True)
     parser.add_argument("--limit", type=int, default=10)
+    parser.add_argument("--verbose", action="store_true", help="Show full SHACL evidence bundles")
+    parser.add_argument("--max-paths", type=int, default=3)
     args = parser.parse_args()
     index = json.loads(args.index.read_text(encoding="utf-8"))
-    print(json.dumps(resolve(index, args.query, args.limit), indent=2, ensure_ascii=False))
+    result = (resolve(index, args.query, args.limit) if args.verbose else
+              resolve_compact(index, args.query, args.limit, args.max_paths))
+    print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":
