@@ -233,7 +233,9 @@ def plan_relationship(question, index):
     roles = _roles(question)
     subject = _discover(index, roles["subject"]["terms"])
     target = _discover(index, roles["target"]["terms"])
-    connections = _schema_connections(index, subject, target)\n    identity_candidates = _instance_resolution_candidates(index, roles["subject"])\n    reference_edges = _ontology_reference_edges(index) 
+    connections = _schema_connections(index, subject, target)
+    identity_candidates = _instance_resolution_candidates(index, roles["subject"])
+    reference_edges = _ontology_reference_edges(index) 
     missing = [role for role, matches in (("subject", subject), ("target", target))
                if not matches]
     return {
@@ -248,7 +250,9 @@ def plan_relationship(question, index):
                   ("No verified subject-to-target association path has been "
                    "established. Shared root paths or identifier equality "
                    "alone do not prove the requested relationship."),
-        "schema_connections": connections,\n        "subject_instance_candidates": identity_candidates,\n        "ontology_reference_edges": reference_edges, 
+        "schema_connections": connections,
+        "subject_instance_candidates": identity_candidates,
+        "ontology_reference_edges": reference_edges, 
         "role_plan": roles,
         "role_evidence": {"subject": subject, "target": target},
         # Retain legacy key for consumers of the initial diagnostic response.
