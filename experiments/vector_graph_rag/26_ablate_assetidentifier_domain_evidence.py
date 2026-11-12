@@ -1,8 +1,8 @@
-"""Experiment 26: ablate exact AssetIdentifier ontology concepts as domain evidence.
+"""Experiment 26: ablate exact hasAssetIdentifier ontology properties as domain evidence.
 
 Preserves all retrieval hits and ontology mappings. Only domain voting changes.
-The URI set is discovered from the index by exact local name AssetIdentifier;
-no substring matches (e.g. hasAssetIdentifier) and no gold-label leakage.
+The URI set is discovered from the index by exact local name hasAssetIdentifier;
+no substring matches (e.g. hasRelatedAssetIdentifier) and no gold-label leakage.
 """
 import argparse
 import hashlib
@@ -32,7 +32,7 @@ def excluded_uris(index):
     result = {}
     for c in index["concepts"]:
         uri = c.get("uri")
-        if c.get("kind") in ("class", "property") and uri and local_name(uri).casefold() == "assetidentifier":
+        if c.get("kind") in ("class", "property") and uri and local_name(uri).casefold() == "hasassetidentifier":
             result.setdefault(uri, set()).add(c.get("domain"))
     return {uri: sorted(ds) for uri, ds in sorted(result.items())}
 
@@ -142,7 +142,7 @@ def evaluate(index, benchmark, retrieval, k=10):
             }
     return {
         "experiment": "assetidentifier_domain_evidence_ablation_15",
-        "top_k": k, "excluded_exact_local_name": "AssetIdentifier",
+        "top_k": k, "excluded_exact_local_name": "hasAssetIdentifier",
         "excluded_uris": excluded, "excluded_hit_occurrences": occurrences,
         "methods": {
             "frozen_baseline": "Stored original rank-weighted domain selection",
@@ -152,7 +152,7 @@ def evaluate(index, benchmark, retrieval, k=10):
         },
         "results": output, "paired_changes": changes,
         "limitations": [
-            "Only exact local name AssetIdentifier is excluded; no substring or semantic matching.",
+            "Only exact local name hasAssetIdentifier is excluded; no substring or semantic matching.",
             "Index may contain zero matching concepts; a zero-effect result is then expected.",
             "Exclusion affects domain voting only, not retrieval, ontology resolution or graph traversal.",
             "15 previously inspected questions with provisional expected domains; descriptive ablation only.",
@@ -177,7 +177,7 @@ def main():
                               (("index", a.index), ("benchmark", a.benchmark), ("retrieval", a.retrieval))}
     a.output.parent.mkdir(parents=True, exist_ok=True)
     a.output.write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print("Exact AssetIdentifier URIs:", len(report["excluded_uris"]))
+    print("Exact hasAssetIdentifier URIs:", len(report["excluded_uris"]))
     for uri, ds in report["excluded_uris"].items():
         print(" ", uri, "=>", ", ".join(ds))
     print("Matching retrieved hits:", len(report["excluded_hit_occurrences"]))
