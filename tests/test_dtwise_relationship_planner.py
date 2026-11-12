@@ -81,6 +81,41 @@ class RelationshipPlannerTests(unittest.TestCase):
             result = plan_relationship(QUESTION, index)
         self.assertEqual(result["role_evidence"]["target"], [])
 
+    def test_schema_graph_finds_only_directed_ancestry(self):
+        from semantic.dtwise_relationship_planner import _schema_connections
+        a = "https://example.org/example/hasParent"
+        b = "https://example.org/example/hasChild"
+        index = {"concepts": [
+            {"kind": "property", "uri": a, "domain": "example"},
+            {"kind": "property", "uri": b, "domain": "example"}]}
+        def traversals(_index, uri, _domain):
+            return [{"complete_to_root": True, "start_shape": "root",
+                     "property_chain": [a] if uri == a else [a, b]}]
+        subject = [{"domain": "example", "property_chain": [a]}]
+        target = [{"domain": "example", "property_chain": [a, b]}]
+        with patch("semantic.dtwise_relationship_planner._traversals",
+                   side_effect=traversals):
+            paths = _schema_connections(index, subject, target)
+            self.assertEqual(paths[0]["connecting_predicates"], [b])
+            self.assertEqual(paths[0]["status"], "structural_candidate_only")
+            self.assertEqual(_schema_connections(index, target, subject), [])
+
+    def test_siblings_not_accepted_as_association(self):
+        from semantic.dtwise_relationship_planner import _schema_connections
+        a = "https://example.org/example/hasFirst"
+        b = "https://example.org/example/hasSecond"
+        index = {"concepts": [
+            {"kind": "property", "uri": a, "domain": "example"},
+            {"kind": "property", "uri": b, "domain": "example"}]}
+        def traversals(_index, uri, _domain):
+            return [{"complete_to_root": True, "start_shape": "root",
+                     "property_chain": [uri]}]
+        with patch("semantic.dtwise_relationship_planner._traversals",
+                   side_effect=traversals):
+            self.assertEqual(_schema_connections(
+                index, [{"domain": "example", "property_chain": [a]}],
+                [{"domain": "example", "property_chain": [b]}]), [])
+
     def test_deterministic(self):
         index = {"concepts": []}
         self.assertEqual(plan_relationship(QUESTION, index),
