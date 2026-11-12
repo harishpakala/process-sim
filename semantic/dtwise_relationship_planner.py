@@ -1,30 +1,63 @@
-"""Relationship-question gate and evidence-only planning diagnostics.
+"""Role-aware relationship evidence discovery, without inferred joins.
 
-A relationship lookup cannot be reduced to a terminal-property lookup.
-This module intentionally does not guess an association or a cross-domain join.
+Discover structural SHACL paths for each side of a relationship question.
+An identifier mapping alone does not establish equipment/instrument association.
 """
 import re
 
 from semantic.dtwise_concept_resolver import _tokens, _traversals
 
+RELATION_WORDS = {"associated", "association", "connected", "related",
+                  "linked", "correspond", "corresponding"}
+STOP = {"which", "what", "the", "a", "an", "are", "is", "with", "to",
+        "of", "in", "according", "integrated", "representations",
+        "representation", "engineering", "process"}
+
 
 def is_relationship_question(question):
     if not isinstance(question, str):
         return False
-    words = set(re.findall(r"[a-z0-9]+", question.casefold()))
-    return bool(words & {"associated", "association", "connected", "related",
-                         "linked", "correspond", "corresponding"})
+    return bool(set(re.findall(r"[a-z0-9]+", question.casefold())) & RELATION_WORDS)
 
 
-def plan_relationship(question, index):
-    if not is_relationship_question(question):
-        raise ValueError("Not a relationship question")
-    if not isinstance(index, dict):
-        raise ValueError("Relationship planning requires the ontology schema index")
+def _role_terms(text):
+    terms = _tokens(text) - STOP - RELATION_WORDS
+    # Normalize grammatical variants, not engineering-domain synonyms.
+    normalized = set()
+    for term in terms:
+        normalized.add(term)
+        if term.endswith("ies") and len(term) > 4:
+            normalized.add(term[:-3] + "y")
+        elif term.endswith("s") and len(term) > 3:
+            normalized.add(term[:-1])
+    return normalized
 
-    words = _tokens(question)
-    # Evidence is only the ontology's actual property names and SHACL traversals.
-    # No hardcoded TEP/ECAD/DEXPI predicates or instance-value guesses.
+
+def _roles(question):
+    match = re.search(
+        r"\b(?:which|what)\s+(.*?)\s+are\s+"
+        r"(?:associated|connected|related|linked)\s+"
+        r"(?:with|to)\s+(.*?)(?:\s*,?\s+according\s+to\b|\?|$)",
+        question, flags=re.I)
+    if not match:
+        return {"subject": {"text": None, "terms": []},
+                "target": {"text": None, "terms": []},
+                "parse_status": "unresolved"}
+    target, subject = match.group(1).strip(), match.group(2).strip()
+    return {"subject": {"text": subject, "terms": sorted(_role_terms(subject))},
+            "target": {"text": target, "terms": sorted(_role_terms(target))},
+            "parse_status": "parsed"}
+
+
+def _matches(term, token):
+    if term == token:
+        return True
+    # instrument/instruments/instrumentation share a lexical stem.
+    return (len(term) >= 6 and len(token) >= 6
+            and term.startswith("instrument") and token.startswith("instrument"))
+
+
+def _discover(index, terms):
     evidence = []
     for concept in index.get("concepts", []):
         if concept.get("kind") != "property":
@@ -32,17 +65,38 @@ def plan_relationship(question, index):
         uri, domain = concept.get("uri"), concept.get("domain")
         if not isinstance(uri, str) or not isinstance(domain, str):
             continue
-        paths = [p["property_chain"] for p in _traversals(index, uri, domain)
-                 if p.get("complete_to_root")]
-        if not paths:
-            continue
-        local = re.split(r"[/#]", uri)[-1]
-        matched = sorted(_tokens(local) & words)
-        if matched:
+        for traversal in _traversals(index, uri, domain):
+            if not traversal.get("complete_to_root"):
+                continue
+            chain = traversal.get("property_chain", [])
+            if not chain or chain[-1] != uri:
+                continue
+            # Match every edge, not only the terminal leaf property.
+            path_terms = set()
+            for edge in chain:
+                path_terms.update(_tokens(re.split(r"[/#]", edge)[-1]))
+            matched = sorted(t for t in terms if any(_matches(t, p) for p in path_terms))
+            if not matched:
+                continue
             evidence.append({"domain": domain, "uri": uri,
-                             "matched_terms": matched, "paths": paths})
-    evidence.sort(key=lambda item: (-len(item["matched_terms"]),
-                                    item["domain"], item["uri"]))
+                             "matched_terms": matched, "property_chain": chain,
+                             "match_scope": "shacl_path"})
+    evidence.sort(key=lambda e: (-len(e["matched_terms"]),
+                                 len(e["property_chain"]), e["domain"],
+                                 e["uri"], e["property_chain"]))
+    return evidence[:20]
+
+
+def plan_relationship(question, index):
+    if not is_relationship_question(question):
+        raise ValueError("Not a relationship question")
+    if not isinstance(index, dict):
+        raise ValueError("Relationship planning requires the ontology schema index")
+    roles = _roles(question)
+    subject = _discover(index, roles["subject"]["terms"])
+    target = _discover(index, roles["target"]["terms"])
+    missing = [role for role, matches in (("subject", subject), ("target", target))
+               if not matches]
     return {
         "question": question,
         "intent": "relationship_lookup",
@@ -50,8 +104,13 @@ def plan_relationship(question, index):
         "sparql": None,
         "execution_status": "not_executed",
         "cross_domain_join": "not_planned",
-        "reason": ("No verified subject-to-target association path has been "
-                   "established. Terminal property lookup is not a substitute "
-                   "for a relationship query."),
-        "ontology_evidence": evidence[:20],
+        "reason": ("Missing ontology/SHACL evidence for: " + ", ".join(missing) + ". "
+                   if missing else "") +
+                  ("No verified subject-to-target association path has been "
+                   "established. Shared root paths or identifier equality "
+                   "alone do not prove the requested relationship."),
+        "role_plan": roles,
+        "role_evidence": {"subject": subject, "target": target},
+        # Retain legacy key for consumers of the initial diagnostic response.
+        "ontology_evidence": subject + target,
     }
