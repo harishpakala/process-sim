@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from semantic.dtwise_concept_resolver import _tokens, resolve_compact
+from semantic.dtwise_concept_resolver import _tokens, _traversals, _mentioned_domains
 from semantic.dtwise_intent_selector import select_intent
 
 
@@ -39,6 +39,60 @@ def _choose_path(concept, question):
     return min(paths, key=rank)
 
 
+def _entity_count_path(index, question, domain, selected_chain):
+    """Find an entity edge from indexed SHACL paths, never from a guessed IRI.
+
+    Return None for explicit value counts. Raise for unresolved entity counts.
+    """
+    if index is None:
+        raise ValueError("Entity counting requires the schema index")
+    words = re.findall(r"[a-z0-9]+", question.lower())
+    if any(w in {"identifier", "identifiers", "id", "ids", "value", "values"}
+           for w in words):
+        return None
+    # Treat the last non-domain noun in a count request as the entity target.
+    stop = {"count", "number", "of", "how", "many", "the", "a", "an",
+            "are", "there", "in", "all", "total", "distinct", "unique"}
+    domain_words = set()
+    for alias in _mentioned_domains(question):
+        domain_words.update(_tokens(alias))
+    nouns = [w for w in words if w not in stop and w not in domain_words]
+    if not nouns:
+        raise ValueError("Entity count target is not explicit")
+    noun = nouns[-1]
+    singular = noun[:-3] + "y" if noun.endswith("ies") else (
+        noun[:-1] if noun.endswith("s") and not noun.endswith("ss") else noun)
+    candidates = []
+    for c in index.get("concepts", []):
+        if c.get("domain") != domain or c.get("kind") != "property":
+            continue
+        uri = c["uri"]
+        local = re.split(r"[/#]", uri)[-1]
+        # The terminal predicate must name an individual, not a collection.
+        # hasDevice matches device; hasDevices does not.
+        local_words = re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])", local)
+        if not local_words or local_words[-1].lower() != singular:
+            continue
+        for path in _traversals(index, uri, domain):
+            chain = path["property_chain"]
+            if not path["complete_to_root"] or chain[-1] != uri:
+                continue
+            if not all(x.startswith("https://example.org/" + domain + "/") for x in chain):
+                continue
+            # Preserve the known root path whenever the selector chose a collection.
+            if selected_chain and chain[0] != selected_chain[0]:
+                continue
+            candidates.append(chain)
+    if not candidates:
+        raise ValueError("No grounded entity path for target: " + noun)
+    candidates.sort(key=lambda p: (len(p), p))
+    shortest = len(candidates[0])
+    best = {tuple(p) for p in candidates if len(p) == shortest}
+    if len(best) != 1:
+        raise ValueError("Ambiguous entity traversal for target: " + noun)
+    return list(next(iter(best)))
+
+
 def compile_sparql(selection, limit=100, index=None):
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
@@ -62,45 +116,20 @@ def compile_sparql(selection, limit=100, index=None):
     namespace = "https://example.org/" + concept["domain"] + "/"
     if any(not iri.startswith(namespace) for iri in chain):
         raise ValueError("Cross-domain traversal is not supported")
-    # A count of devices concerns entity nodes, not their identifier values.
-    # Only apply this rewrite when the selected schema path actually contains
-    # the ECAD hasDevice relationship. Other entity counts remain unsupported.
-    entity_count = (
-        intent == "count"
-        and concept["domain"] == "ecad"
-        and bool(re.search(r"\bdevices?\b", selection["question"], re.I))
-        and not bool(re.search(r"\b(identifier|identifiers|local\s+ids?|values?)\b",
-                               selection["question"], re.I))
-    )
-    if entity_count:
-        device_iri = "https://example.org/ecad/hasDevice"
-        if device_iri not in chain:
-            # The selector can choose hasDevices (a collection property).
-            # Find a complete device traversal from the indexed SHACL evidence.
-            if index is None:
-                raise ValueError("Entity counting requires the schema index")
-            bundle = resolve_compact(index, "ECAD device local identifier", limit=30)
-            paths = [
-                p["property_chain"]
-                for c in bundle["candidates"]
-                if c["domain"] == "ecad"
-                for p in c.get("paths", [])
-                if p.get("complete_to_root")
-                and device_iri in p.get("property_chain", [])
-                and p["property_chain"][0] == chain[0]
-            ]
-            if not paths:
-                raise ValueError("No indexed SHACL evidence for ECAD device path")
-            chain = min(paths, key=lambda p: (p.index(device_iri), len(p), p))
-        chain = chain[:chain.index(device_iri) + 1]
+    entity_count = False
+    if intent == "count":
+        planned = _entity_count_path(index, selection["question"], concept["domain"], chain)
+        if planned is not None:
+            chain = planned
+            entity_count = True
     triples = []
     for i, predicate in enumerate(chain):
         subject = "?root" if i == 0 else "?n" + str(i)
-        obj = ("?device" if entity_count else "?value") if i == len(chain) - 1 else "?n" + str(i + 1)
+        obj = ("?entity" if entity_count else "?value") if i == len(chain) - 1 else "?n" + str(i + 1)
         triples.append("  " + subject + " " + _iri(predicate) + " " + obj + " .")
     body = "\n".join(triples)
     if intent == "count":
-        target = "?device" if entity_count else "?value"
+        target = "?entity" if entity_count else "?value"
         query = "SELECT (COUNT(DISTINCT " + target + ") AS ?count) WHERE {\n" + body + "\n}"
     elif intent == "exists":
         query = "ASK WHERE {\n" + body + "\n}"
@@ -108,7 +137,7 @@ def compile_sparql(selection, limit=100, index=None):
         query = "SELECT DISTINCT ?value WHERE {\n" + body + "\n} LIMIT " + str(limit)
     return {"question": selection["question"], "intent": intent,
             "selected_uri": concept["uri"], "chosen_path": chain,
-            "count_target": ("device" if entity_count else "value") if intent == "count" else None,
+            "count_target": ("entity" if entity_count else "value") if intent == "count" else None,
             "sparql": query, "execution_status": "not_executed",
             "cross_domain_join": "not_supported"}
 
