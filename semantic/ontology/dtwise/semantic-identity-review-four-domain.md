@@ -54,6 +54,23 @@ python -m semantic.dtwise_graphdb_integration --endpoint "http://localhost:7200/
 
 The live runner intentionally opts into candidate execution. The ordinary compiler must reject this four-domain mapping without `--allow-candidate` while approval remains pending.
 
+## 2a. Ontology-level findings from committed templates (2026-11-12)
+
+The four source templates were reviewed directly in `semantic/ontology/`. These are source-derived observations, not semantic approval.
+
+| Domain | Source property definition | SHACL cardinality | Source file |
+| --- | --- | --- | --- |
+| EngineeringBOM | `owl:DatatypeProperty` with label `AssetIdentifier`; no descriptive `rdfs:comment` on the property | `sh:minCount 0`, `sh:maxCount 1` | `engineeringbom-template.ttl` |
+| ECAD | “Identifier associated with the represented asset.” | `sh:minCount 1`, `sh:maxCount 1` on Device | `ecad-template.ttl` |
+| DEXPI | “Identifier associated with the represented engineering asset.” | `sh:minCount 1`, `sh:maxCount 1` on ActuatingFunction, Equipment and InstrumentationFunction | `dexpi-template.ttl` |
+| AssetInventory | “Identifier of the asset represented by this inventory record.” | `sh:minCount 0`, `sh:maxCount 1` | `assetinventory-template.ttl` |
+
+**Interpretation:** The descriptions are compatible with an asset-identifier association, but do not prove that all domains refer to an identical asset referent. No common issuing authority, global uniqueness guarantee, cross-domain equivalent-property axiom, or governed normalization rule was established from these property definitions. Per-record maximum cardinality does not guarantee uniqueness across records and does not explain the observed two-BOM-record multiplicity.
+
+DEXPI explicitly defines `hasRelatedAssetIdentifier` as the identifier of a *related* asset, not necessarily the object's own; AssetInventory explicitly distinguishes `hasProductIdentifier` from its own `hasAssetIdentifier`. Neither is an acceptable join substitute under this review.
+
+**Outstanding requirements:** Supply the authoritative identifier specification, domain-owner confirmation of the referent and namespace, revision/project/plant uniqueness policy, and a data-backed explanation for the duplicate EngineeringBOM records before requesting approval.
+
 ## 3. Required semantic review questions
 
 Each domain owner must provide an answer and a link to authoritative evidence:
