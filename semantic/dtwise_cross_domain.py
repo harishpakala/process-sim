@@ -33,7 +33,11 @@ def compile_cross_domain(question, index, catalog, allow_candidate=False, limit=
         raise ValueError("LIMIT must be between 1 and 10000")
     from semantic.dtwise_concept_resolver import _mentioned_domains
     mentioned = {d.lower() for d in _mentioned_domains(question)}
-    if len(mentioned) == 3:\n        return _compile_three_domain(question, index, catalog, mentioned, allow_candidate, limit)\n    if len(mentioned) != 2:\n        raise ValueError("Cross-domain queries require two or three explicit domains")\n    matches = [m for m in catalog.get("mappings", []) if
+    if len(mentioned) == 3:
+        return _compile_three_domain(question, index, catalog, mentioned, allow_candidate, limit)
+    if len(mentioned) != 2:
+        raise ValueError("Cross-domain queries require two or three explicit domains")
+    matches = [m for m in catalog.get("mappings", []) if
                {m["source_domain"], m["target_domain"]} == mentioned]
     if len(matches) != 1:
         raise ValueError("Expected exactly one explicit catalog mapping for the two requested domains")
