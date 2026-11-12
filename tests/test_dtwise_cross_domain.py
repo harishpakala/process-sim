@@ -94,7 +94,7 @@ class CrossDomainRegressionTests(unittest.TestCase):
     def test_missing_three_domain_mapping_fails_closed(self):
         catalog = copy.deepcopy(self.catalog)
         catalog["three_domain_mappings"] = []
-        with self.assertRaisesRegex(ValueError, "No unique explicit three-domain mapping"):
+        with self.assertRaisesRegex(ValueError, "Expected exactly one explicit catalog plan"):
             self.compile(catalog=catalog)
 
     def test_duplicate_dexpi_path_fails_closed(self):
