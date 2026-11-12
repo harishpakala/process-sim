@@ -93,6 +93,9 @@ def compile_n_domain(question, index, catalog, mentioned, allow_candidate, limit
             allow_candidate and s == "candidate_pending_semantic_approval")
            for s in statuses):
         raise ValueError("Join mapping is not semantically approved; use --allow-candidate for exploratory execution")
+    if catalog.get("governance_required") and all(s == "verified" for s in statuses):
+        from semantic.dtwise_semantic_governance import require_approval
+        require_approval(plan, catalog)
     if plan.get("comparison") != "string_equality" or (
             plan.get("base_comparison", "string_equality") != "string_equality"):
         raise ValueError("Unsupported join comparison")
