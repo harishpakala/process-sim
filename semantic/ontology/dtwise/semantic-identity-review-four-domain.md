@@ -39,7 +39,7 @@ The following is confirmed by the existing GraphDB baseline and user-executed li
 | Distinct AssetInventory assets | 34 |
 | EngineeringBOM rows per shared identifier | 2 |
 | Live baseline validator failures | 0 |
-| Automated `test_dtwise*.py` tests | 109 passed |
+| Automated `test_dtwise*.py` tests (initial checkpoint) | 109 passed |
 
 **Interpretation boundary:** These results show repeatable data-level string equality for the current dataset. They do not prove the identifiers are globally unique, stable across revisions, or semantically identical across all four domains.
 
@@ -70,6 +70,40 @@ The four source templates were reviewed directly in `semantic/ontology/`. These 
 DEXPI explicitly defines `hasRelatedAssetIdentifier` as the identifier of a *related* asset, not necessarily the object's own; AssetInventory explicitly distinguishes `hasProductIdentifier` from its own `hasAssetIdentifier`. Neither is an acceptable join substitute under this review.
 
 **Outstanding requirements:** Supply the authoritative identifier specification, domain-owner confirmation of the referent and namespace, revision/project/plant uniqueness policy, and a data-backed explanation for the duplicate EngineeringBOM records before requesting approval.
+
+## 2b. Integrated association-quality checkpoint (user-executed, 2026-11-12)
+
+The user executed the complete `test_dtwise*.py` suite and the live GraphDB integration with the optional association-quality diagnostic. These are **reported execution results**, not an independent execution by the reviewer.
+
+Commands:
+
+```powershell
+python -m unittest discover -s tests -p "test_dtwise*.py" -v
+python -m semantic.dtwise_graphdb_integration `
+  --endpoint "http://localhost:7200/repositories/AAS" `
+  --association-quality
+```
+
+| Validation | Observed |
+| --- | ---: |
+| Automated tests | **114 passed**, 0 reported failures |
+| Live four-domain baseline | **passed: true**, failures: `[]` |
+| Four-domain rows / shared identifiers | 68 / 34 |
+| EngineeringBOM / ECAD / DEXPI / AssetInventory entities | 68 / 34 / 34 / 34 |
+| Distinct EngineeringBOM records / BOM item IDs / local IDs | 68 / 68 / 68 |
+| Functional associations explicitly not physical membership | 45 records |
+| Unresolved association basis | 23 records |
+| Identifier groups with two functional-not-physical associations | 22 |
+| Identifier groups with two unresolved associations | 11 |
+| Identifier groups with mixed functional and unresolved evidence | 1 |
+| Revision `UNSPECIFIED` | 68 records |
+| Missing diagnostic fields | 0 |
+
+Diagnostic classification: `identifier_associations_only_not_semantically_confirmed`; `semantic_confirmation_assessed: false`; `semantically_confirmed_asset_relationships: 0`. The last field is **not a finding that no real-world matches exist**: no independent semantic confirmation was performed. It must not be used as a negative count of physical asset relationships.
+
+**Implications for review:** The current identifier equality join is reproducible but not sufficient for physical membership. The association-basis string explicitly distinguishes functional association from physical membership, and unresolved evidence cannot be promoted. All revisions are `UNSPECIFIED`, so the 2:1 multiplicity cannot be explained as revisions from these results. Keep all 68 records and the original baseline; do not silently filter, deduplicate, or change mapping approval.
+
+**Audit caveat:** This checkpoint captures the user's console output, not a committed machine-readable execution artifact or GraphDB dataset snapshot. Before any approval, retain an attributable execution export and obtain authoritative domain-owner evidence.
 
 ## 3. Required semantic review questions
 
