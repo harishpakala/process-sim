@@ -40,7 +40,9 @@ def ranks(records, vectors, query, qv, k, vector_weight=0.7):
     vpos = {r['id']: i for i, (r, _, _) in enumerate(vr, 1)}
     lpos = {r['id']: i for i, (r, _, _) in enumerate(lr, 1)}
     hybrid = sorted(candidates, key=lambda x: (-(vector_weight/(60+vpos[x[0]['id']])+(1-vector_weight)/(60+lpos[x[0]['id']])), x[0]['id']))
-    return {'vector': [x[0] for x in vr[:k]], 'lexical': [x[0] for x in lr if x[2]>0][:k], 'hybrid': [x[0] for x in hybrid[:k]]}
+    return {'vector': [x[0] for x in vr[:k]], 'lexical': [x[0] for x in lr if x[2]>0][:k], 'hybrid': [x[0] for x in hybrid[:k]]}, {
+        'vector': vr, 'lexical': [x for x in lr if x[2]>0], 'hybrid': hybrid
+    }
 
 def metrics(hits, gold):
     positions = [i for i,r in enumerate(hits,1) if (r['domain'],r['uri']) in gold]
@@ -60,12 +62,26 @@ def evaluate(records, vectors, questions, embed, k=10, weight=0.7):
             raise ValueError(f'No gold concepts for question: {q}')
         if missing:
             print('WARNING: gold concepts absent from schema records:', q, missing)
-        ranked = ranks(records,vectors,q,embed(q),k,weight)
+        ranked, full_ranks = ranks(records,vectors,q,embed(q),k,weight)
         row = {'question':q,'gold_concepts':item['gold_concepts'],
                'missing_gold_in_records':[{'domain':d,'uri':u} for d,u in missing]}
         for method,hits in ranked.items():
             row[method] = {'metrics':metrics(hits,gold),
                            'hits':[{'domain':r['domain'],'uri':r['uri'],'kind':r['kind'],'id':r['id']} for r in hits]}
+        # Diagnostic ranks are computed over the complete candidate set, not just top-k.
+        # Scores are for inspection only; they do not use gold labels to rerank.
+        row['gold_rank_diagnostics'] = []
+        for domain, uri in sorted(gold):
+            diagnostic = {'domain': domain, 'uri': uri}
+            for method, candidates in full_ranks.items():
+                match = next(((position, score_vector, score_lexical)
+                              for position, (record, score_vector, score_lexical)
+                              in enumerate(candidates, 1)
+                              if record['domain'] == domain and record['uri'] == uri), None)
+                diagnostic[method] = ({
+                    'rank': match[0], 'cosine': match[1], 'lexical_score': match[2]
+                } if match else {'rank': None})
+            row['gold_rank_diagnostics'].append(diagnostic)
         rows.append(row)
     summary = {}
     for method in ('vector','lexical','hybrid'):
