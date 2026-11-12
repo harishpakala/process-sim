@@ -43,7 +43,11 @@ def main():
         domain, uri = concept['domain'], concept['uri']
         paths = sorted({p['node_shape'] for p in index.get('shape_paths', [])
                         if p['domain'] == domain and p['path'] == uri})
-        descriptions = concept.get('descriptions', [])\n        if (not descriptions and domain == 'engineeringbom'\n                and uri == 'https://example.org/engineeringbom/hasBOMItemRecord'):\n            descriptions = template_descriptions.get('BOMItemRecord', [])\n        parts = [f"Ontology {concept['kind']}: {local(uri)}",
+        descriptions = concept.get('descriptions', [])
+        if (not descriptions and domain == 'engineeringbom'
+                and uri == 'https://example.org/engineeringbom/hasBOMItemRecord'):
+            descriptions = template_descriptions.get('BOMItemRecord', [])
+        parts = [f"Ontology {concept['kind']}: {local(uri)}",
                  'Labels: ' + '; '.join(concept.get('labels', [])),
                  'Descriptions: ' + '; '.join(descriptions),
                  'SHACL owning shapes: ' + '; '.join(local(p) for p in paths)]
