@@ -83,14 +83,14 @@ def run_case(case_id, index_sha256, execute=False):
         prompt = (
             "You are a constrained ontology path selector. Choose the SINGLE "
             "best path that directly answers the question, or abstain if none fits. "
-            "You may ONLY output JSON exactly {\\"path_id\\":\\"ID\\"} where ID "
+            "You may ONLY output JSON exactly {\"path_id\":\"ID\"} where ID "
             "is a listed path_id or ABSTAIN. Never invent predicates, paths, "
-            "joins or SPARQL. Follow path direction.\\nQuestion: " +
-            case["question"] + "\\nSupported candidate paths:\\n" +
-            "\\n".join(json.dumps({"path_id": d["uri"], "domain": d["domain"],
+            "joins or SPARQL. Follow path direction.\nQuestion: " +
+            case["question"] + "\nSupported candidate paths:\n" +
+            "\n".join(json.dumps({"path_id": d["uri"], "domain": d["domain"],
                                       "predicates": d["path"]["predicates"],
                                       "meaning": d["text"]}) for d in candidates) +
-            "\\nReturn only the JSON object."
+            "\nReturn only the JSON object."
         )
         raw = exp33.ollama(ollama_url, model, prompt, timeout)
         chosen = planner.parse_choice(raw, {d["uri"] for d in candidates})
