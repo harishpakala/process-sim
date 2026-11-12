@@ -107,6 +107,55 @@ class CompilerContractTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Value constraints"):
             compile_sparql(chosen)
 
+    def test_exact_identifier_filter_is_grounded(self):
+        question = "Show ECAD asset identifiers equal to https://aas.example.com/FI101"
+        chosen = selection(question)
+        chosen["value_constraints"] = [
+            {"text": "https://aas.example.com/FI101", "role": "hasAssetIdentifier"}]
+        result = compile_sparql(chosen)
+        self.assertIn('FILTER(STR(?value) = "https://aas.example.com/FI101")',
+                      result["sparql"])
+        self.assertEqual(result["value_filter"]["property"], IDENTIFIER)
+
+    def test_filter_is_supported_for_count_and_exists(self):
+        for intent in ("count", "exists"):
+            with self.subTest(intent=intent):
+                chosen = selection("ECAD asset identifier X", intent)
+                chosen["value_constraints"] = [
+                    {"text": "X", "role": "hasAssetIdentifier"}]
+                result = compile_sparql(chosen, index={"concepts": []})
+                self.assertIn('FILTER(STR(?value) = "X")', result["sparql"])
+
+    def test_invented_value_is_rejected(self):
+        chosen = selection("Show ECAD asset identifiers")
+        chosen["value_constraints"] = [
+            {"text": "invented", "role": "hasAssetIdentifier"}]
+        with self.assertRaisesRegex(ValueError, "not present"):
+            compile_sparql(chosen)
+
+    def test_filter_role_must_match_selected_property(self):
+        chosen = selection("Show ECAD asset identifiers equal to X")
+        chosen["value_constraints"] = [
+            {"text": "X", "role": "hasLocalIdentifier"}]
+        with self.assertRaisesRegex(ValueError, "does not match"):
+            compile_sparql(chosen)
+
+    def test_multiple_constraints_fail_closed(self):
+        chosen = selection("ECAD asset identifier X or Y")
+        chosen["value_constraints"] = [
+            {"text": "X", "role": "hasAssetIdentifier"},
+            {"text": "Y", "role": "hasAssetIdentifier"}]
+        with self.assertRaisesRegex(ValueError, "exactly one"):
+            compile_sparql(chosen)
+
+    def test_filter_literal_is_escaped(self):
+        chosen = selection('ECAD asset identifier A" ) . ?x ?y ?z')
+        chosen["value_constraints"] = [
+            {"text": 'A" ) . ?x ?y ?z', "role": "hasAssetIdentifier"}]
+        result = compile_sparql(chosen)
+        self.assertIn('A\\\" ) . ?x ?y ?z', result["sparql"])
+        self.assertEqual(result["sparql"].count("FILTER("), 1)
+
     def test_join_not_implicitly_approved(self):
         chosen = selection("Show ECAD identifiers")
         chosen["join_status"] = "verified"
