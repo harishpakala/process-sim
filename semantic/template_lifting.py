@@ -181,7 +181,7 @@ def lift_template(
         )
     )
 
-    add_semantic_annotations(graph, submodel, template_shape)
+    add_semantic_annotations(graph, submodel, template_shape, template_class)
 
     lift_elements(
         graph=graph,
@@ -202,7 +202,7 @@ def lift_elements(
     domain: str,
 ):
 
-    for element in elements:
+    for element in elements or []:
 
         if isinstance(
             element,
@@ -332,6 +332,9 @@ def lift_property(
     )
 
     add_semantic_annotations(graph, element, shape_uri, property_uri)
+
+    if element.value_type is not None:
+        graph.add((shape_uri, semanticDict["SH"]["datatype"], map_xsd_datatype(element.value_type)))
 
     min_count, max_count = get_cardinality(
         element
@@ -691,89 +694,36 @@ def resolve_model_reference_uri(
 
 def lift_relationship(
     graph: Graph,
-    instance_id: str,
+    template_id: str,
     element,
     parent_path: str,
-    parent_uri: URIRef,
+    parent_shape: URIRef,
     domain: str,
 ):
-    path = build_path(
-        parent_path,
-        element.id_short,
+    """Lift relationship *schema*, not an instance-level relationship assertion.
+
+    The AAS first/second ModelReferences in a template are authored references,
+    not evidence that concrete instance resources are connected. Do not emit
+    instance triples or infer cross-domain mappings from them.
+    """
+    path = build_path(parent_path, element.id_short)
+    predicate = make_semantic_predicate(domain, element.id_short)
+    shape_uri = compute_uri(template_id, path + "/shape")
+    relationship_class = ensure_aas_class(
+        graph, "RelationshipElement", "AAS Relationship Element"
     )
 
-    element_uri = compute_uri(
-        instance_id,
-        path,
-    )
+    graph.add((predicate, RDF.type, OWL.ObjectProperty))
+    graph.add((shape_uri, RDF.type, semanticDict["SH"]["PropertyShape"]))
+    graph.add((shape_uri, RDFS.label, Literal(make_shape_label(element.id_short))))
+    graph.add((shape_uri, semanticDict["SH"]["path"], predicate))
+    graph.add((shape_uri, semanticDict["SH"]["class"], relationship_class))
+    graph.add((parent_shape, semanticDict["SH"]["property"], shape_uri))
 
-    graph.add(
-        (
-            element_uri,
-            RDF.type,
-            semanticDict["AAS"]["RelationshipElement"],
-        )
-    )
-
-    graph.add(
-        (
-            element_uri,
-            RDFS.label,
-            Literal(
-                element.id_short
-            ),
-        )
-    )
-
-    predicate = make_semantic_predicate(
-        domain,
-        element.id_short,
-    )
-
-    graph.add(
-        (
-            parent_uri,
-            predicate,
-            element_uri,
-        )
-    )
-
-    if element.first is not None:
-
-        first_uri = resolve_model_reference_uri(
-            element.first,
-            instance_id,
-        )
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["AAS"]["first"],
-                first_uri,
-            )
-        )
-
-    if element.second is not None:
-
-        second_uri = resolve_model_reference_uri(
-            element.second,
-            instance_id,
-        )
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["AAS"]["second"],
-                second_uri,
-            )
-        )
-
-    lift_semantic_id(
-        graph,
-        instance_id,
-        element,
-        path,
-    )
+    add_semantic_annotations(graph, element, shape_uri, predicate)
+    min_count, max_count = get_cardinality(element)
+    add_cardinality_constraints(graph, shape_uri, min_count, max_count)
+    lift_semantic_id(graph, template_id, element, path)
 
 
 def build_template_graph(
