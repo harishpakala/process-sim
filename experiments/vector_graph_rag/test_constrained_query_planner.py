@@ -30,7 +30,13 @@ class PlannerTests(unittest.TestCase):
         self.assertNotIn('rdf:type', result['sparql'])
         self.assertFalse(result['safety']['query_executed'])
 
-    def test_cross_domain_scope_abstains_even_with_one_property(self):\n        result = planner.plan(INDEX, 'Which device corresponds to equipment?',\n                              [{'domain': DOMAIN, 'uri': URI}], HITS,\n                              requested_domains=[DOMAIN, 'ecad'])\n        self.assertEqual(result['status'], 'abstained')\n\n    def test_no_retrieval_support(self):
+    def test_cross_domain_scope_abstains_even_with_one_property(self):
+        result = planner.plan(INDEX, 'Which device corresponds to equipment?',
+                              [{'domain': DOMAIN, 'uri': URI}], HITS,
+                              requested_domains=[DOMAIN, 'ecad'])
+        self.assertEqual(result['status'], 'abstained')
+
+    def test_no_retrieval_support(self):
         result = planner.plan(INDEX, 'Question', [{'domain': DOMAIN, 'uri': URI}], [], requested_domains=[DOMAIN])
         self.assertEqual(result['status'], 'abstained')
 
