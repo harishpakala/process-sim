@@ -31,7 +31,7 @@ def load(path):
 
 def query_for(uri, limit):
     # Only use exact ontology-index URIs, validated in main().
-    if not re.fullmatch(r"https?://[^<>\\s\"{}|^\\x60]+", uri):
+    if not (uri.startswith(("http://", "https://")) and not any(ch.isspace() or ch in '<>"{}|^`\\' for ch in uri)):
         raise ValueError("Invalid SPARQL IRI")
     return ("SELECT DISTINCT ?subject ?value WHERE {\n"
             f"  ?subject <{uri}> ?value .\n"
