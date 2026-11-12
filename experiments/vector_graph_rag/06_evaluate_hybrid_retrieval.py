@@ -101,7 +101,7 @@ def main():
             return json.load(response)['embeddings'][0]
     result=evaluate(records,vectors,questions,embed,args.top_k,args.vector_weight)
     args.output.parent.mkdir(parents=True,exist_ok=True)
-    args.output.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\\n',encoding='utf-8')
+    args.output.write_text(json.dumps(result,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
     print(json.dumps(result['summary_macro'],indent=2))
     print('Wrote:',args.output)
 
