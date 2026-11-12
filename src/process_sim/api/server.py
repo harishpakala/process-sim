@@ -25,6 +25,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/questions":
+            try:
+                from process_sim.api.benchmark_reports import list_questions
+                self.send_json(200, list_questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": f"Benchmark questions unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/benchmarks/reports":
             try:
                 from process_sim.api.benchmark_reports import list_reports
