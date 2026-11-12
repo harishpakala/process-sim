@@ -62,20 +62,37 @@ def compile_sparql(selection, limit=100):
     namespace = "https://example.org/" + concept["domain"] + "/"
     if any(not iri.startswith(namespace) for iri in chain):
         raise ValueError("Cross-domain traversal is not supported")
+    # A count of devices concerns entity nodes, not their identifier values.
+    # Only apply this rewrite when the selected schema path actually contains
+    # the ECAD hasDevice relationship. Other entity counts remain unsupported.
+    entity_count = (
+        intent == "count"
+        and concept["domain"] == "ecad"
+        and bool(re.search(r"\\bdevices?\\b", selection["question"], re.I))
+        and not bool(re.search(r"\\b(identifier|identifiers|local\\s+ids?|values?)\\b",
+                               selection["question"], re.I))
+    )
+    if entity_count:
+        device_iri = "https://example.org/ecad/hasDevice"
+        if device_iri not in chain:
+            raise ValueError("No grounded ECAD device traversal for entity count")
+        chain = chain[:chain.index(device_iri) + 1]
     triples = []
     for i, predicate in enumerate(chain):
         subject = "?root" if i == 0 else "?n" + str(i)
-        obj = "?value" if i == len(chain) - 1 else "?n" + str(i + 1)
+        obj = ("?device" if entity_count else "?value") if i == len(chain) - 1 else "?n" + str(i + 1)
         triples.append("  " + subject + " " + _iri(predicate) + " " + obj + " .")
     body = "\n".join(triples)
     if intent == "count":
-        query = "SELECT (COUNT(DISTINCT ?value) AS ?count) WHERE {\n" + body + "\n}"
+        target = "?device" if entity_count else "?value"
+        query = "SELECT (COUNT(DISTINCT " + target + ") AS ?count) WHERE {\\n" + body + "\\n}"
     elif intent == "exists":
         query = "ASK WHERE {\n" + body + "\n}"
     else:
         query = "SELECT DISTINCT ?value WHERE {\n" + body + "\n} LIMIT " + str(limit)
     return {"question": selection["question"], "intent": intent,
             "selected_uri": concept["uri"], "chosen_path": chain,
+            "count_target": ("device" if entity_count else "value") if intent == "count" else None,
             "sparql": query, "execution_status": "not_executed",
             "cross_domain_join": "not_supported"}
 
