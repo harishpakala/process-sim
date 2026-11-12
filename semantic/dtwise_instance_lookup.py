@@ -12,7 +12,7 @@ def _iri(value):
     if not isinstance(value, str) or not value.startswith(("http://", "https://")):
         raise ValueError("Invalid predicate IRI")
     parsed = urlsplit(value)
-    if not parsed.netloc or any(c in value for c in '<>"{}|^\\\\\x00\n\r\t '):
+    if not parsed.netloc or any(c in value for c in '<>"{}|^\\\x00\n\r\t '):
         raise ValueError("Unsafe predicate IRI")
     return "<" + value + ">"
 
@@ -22,7 +22,7 @@ def _lookup_values(text):
         return []
     value = " ".join(text.split())
     values = [value]
-    without_article = re.sub(r"^(?:the|a|an)\\s+", "", value, flags=re.I)
+    without_article = re.sub(r"^(?:the|a|an)\s+", "", value, flags=re.I)
     if without_article != value:
         values.append(without_article)
     return values
@@ -63,8 +63,8 @@ def plan_instance_lookups(role, candidates, limit=20):
         entity = "?root" if len(chain) == 1 else "?node" + str(len(chain) - 1)
         alternatives = ", ".join(json.dumps(v.casefold(), ensure_ascii=True) for v in values)
         triples.append("  FILTER(LCASE(STR(?identity)) IN (" + alternatives + "))")
-        query = ("SELECT DISTINCT " + entity + " ?identity WHERE {\\n"
-                 + "\\n".join(triples) + "\\n} LIMIT " + str(limit))
+        query = ("SELECT DISTINCT " + entity + " ?identity WHERE {\n"
+                 + "\n".join(triples) + "\n} LIMIT " + str(limit))
         result.append({
             "domain": candidate.get("domain"),
             "identity_property": chain[-1],
