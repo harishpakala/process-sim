@@ -202,12 +202,20 @@ def main():
                         help="Allow explicitly cataloged, unapproved cross-domain mappings")
     parser.add_argument("--catalog", type=Path,
                         default=Path(__file__).parent / "ontology" / "dtwise" / "cross-domain-mappings.json")
+    parser.add_argument("--resolve-instances", action="store_true",
+                        help="Opt in to read-only GraphDB subject candidate lookups")
+    parser.add_argument("--sparql-endpoint",
+                        default="http://localhost:7200/repositories/AAS")
     args = parser.parse_args()
     index = json.loads(args.index.read_text(encoding="utf-8"))
     mentioned = {domain.lower() for domain in _mentioned_domains(args.query)}
     from semantic.dtwise_relationship_planner import is_relationship_question, plan_relationship
     if is_relationship_question(args.query):
         result = plan_relationship(args.query, index)
+        if args.resolve_instances:
+            from semantic.dtwise_instance_executor import resolve_instance_lookups
+            result["subject_instance_resolution"] = resolve_instance_lookups(
+                result["subject_instance_lookup_plans"], args.sparql_endpoint)
     elif len(mentioned) > 1:
         from semantic.dtwise_cross_domain import compile_cross_domain
         catalog = json.loads(args.catalog.read_text(encoding="utf-8"))
