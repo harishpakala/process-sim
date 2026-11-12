@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "status": "provisional_review_required",
+  "purpose": "N-domain plan feasibility and join governance, separate from 33-question concept retrieval benchmark",
+  "notes": [
+    "Domains are author-proposed evaluation labels and must be independently reviewed.",
+    "Cataloged plans are candidate_pending_semantic_approval, not verified identities.",
+    "Expected strict-mode result is abstention for every question with the current catalog.",
+    "Exploratory mode may generate SPARQL for cataloged candidates only; it does not validate instance identity.",
+    "This benchmark does not measure automatic domain discovery unless independently scored retrieval evidence is provided."
+  ],
+  "cases": [
+    {
+      "id": "ND01",
+      "question": "Which EngineeringBOM items correspond to ECAD devices by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND02",
+      "question": "Which ECAD devices match EngineeringBOM records by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND03",
+      "question": "Which EngineeringBOM records, ECAD devices, and DEXPI equipment share an asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_dexpi_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND04",
+      "question": "Which DEXPI functions correspond to ECAD devices and EngineeringBOM records by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_dexpi_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND05",
+      "question": "Which EngineeringBOM records, ECAD devices, DEXPI objects, and AssetInventory assets share an asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_dexpi_assetinventory_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND06",
+      "question": "Which AssetInventory assets correspond to DEXPI equipment, ECAD devices, and EngineeringBOM records by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "category": "cataloged_candidate",
+      "expected_catalog_plan_id": "engineeringbom_ecad_dexpi_assetinventory_asset_identifier",
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND07",
+      "question": "Which ECAD devices correspond to DEXPI equipment?",
+      "expected_domains": [
+        "ecad",
+        "dexpi"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND08",
+      "question": "Which EngineeringBOM records correspond to AssetInventory assets?",
+      "expected_domains": [
+        "engineeringbom",
+        "assetinventory"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND09",
+      "question": "Which ProductCatalog products correspond to ECAD devices?",
+      "expected_domains": [
+        "productcatalog",
+        "ecad"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND10",
+      "question": "Which OPC UA endpoints correspond to DEXPI equipment?",
+      "expected_domains": [
+        "opcuaconnectivity",
+        "dexpi"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND11",
+      "question": "Which EngineeringBOM records correspond to DEXPI equipment?",
+      "expected_domains": [
+        "engineeringbom",
+        "dexpi"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND12",
+      "question": "Which ProductCatalog products correspond to AssetInventory assets and ECAD devices?",
+      "expected_domains": [
+        "productcatalog",
+        "assetinventory",
+        "ecad"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND13",
+      "question": "Which EngineeringBOM records, ECAD devices, and AssetInventory assets correspond?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "assetinventory"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND14",
+      "question": "Which ECAD devices, DEXPI equipment, and OPC UA endpoints correspond?",
+      "expected_domains": [
+        "ecad",
+        "dexpi",
+        "opcuaconnectivity"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND15",
+      "question": "Which ProductCatalog products, EngineeringBOM records, ECAD devices, and DEXPI equipment correspond?",
+      "expected_domains": [
+        "productcatalog",
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "ND16",
+      "question": "Which ECAD devices, DEXPI equipment, AssetInventory assets, and OPC UA endpoints correspond?",
+      "expected_domains": [
+        "ecad",
+        "dexpi",
+        "assetinventory",
+        "opcuaconnectivity"
+      ],
+      "category": "uncataloged",
+      "expected_catalog_plan_id": null,
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    }
+  ]
+}
