@@ -136,5 +136,7 @@
         "cardinality_note": "GraphDB exact literal equality across four domains; semantic identity not approved. AssetInventory path complete-to-root in local SHACL index."
       }
     }
-  ]
+  ],
+  "governance_required": true,
+  "semantic_approvals": []
 }
