@@ -132,7 +132,38 @@ class CrossDomainRegressionTests(unittest.TestCase):
 
     def test_four_domains_without_explicit_plan_fail_closed(self):
         with self.assertRaisesRegex(ValueError, "exactly one explicit catalog plan"):
-            self.compile("EngineeringBOM ECAD DEXPI AssetInventory")
+            self.compile("EngineeringBOM ECAD DEXPI AssetInventory", catalog={})
+
+    def test_cataloged_assetinventory_four_domain_join(self):
+        result = self.compile(
+            "Which EngineeringBOM items correspond to ECAD devices DEXPI objects and AssetInventory assets?")
+        query = result["sparql"]
+        self.assertEqual(result["mapping_ids"], [
+            "engineeringbom_ecad_dexpi_assetinventory_asset_identifier"])
+        self.assertIn(
+            "?entity3 <https://example.org/assetinventory/hasAssetIdentifier> ?id3 .",
+            query)
+        self.assertIn(
+            "<https://example.org/assetinventory/hasAssets>", query)
+        self.assertIn(
+            "<https://example.org/assetinventory/hasAsset>", query)
+        self.assertEqual(query.count("FILTER(STR("), 3)
+        self.assertEqual(query.count("UNION"), 2)
+        self.assertEqual(result["cross_domain_join"], "candidate")
+
+    def test_cataloged_four_domain_join_requires_opt_in(self):
+        with self.assertRaisesRegex(ValueError, "not semantically approved"):
+            self.compile("EngineeringBOM ECAD DEXPI AssetInventory",
+                         allow_candidate=False)
+
+    def test_cataloged_four_domain_invalid_shacl_path_rejected(self):
+        question = "EngineeringBOM ECAD DEXPI AssetInventory"
+        def validate(index, domain, path):
+            if domain == "assetinventory":
+                raise ValueError("Catalog traversal is not grounded in SHACL: assetinventory")
+        with patch("semantic.dtwise_cross_domain._validate_path", side_effect=validate):
+            with self.assertRaisesRegex(ValueError, "not grounded in SHACL"):
+                compile_cross_domain(question, {}, self.catalog, allow_candidate=True)
 
     def test_generic_plan_rejects_missing_anchor(self):
         catalog = {"n_domain_plans": [{
