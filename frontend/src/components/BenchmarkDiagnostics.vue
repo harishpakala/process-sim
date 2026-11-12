@@ -1,95 +1,99 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
-type Benchmark = {
- id: string
- mode: 'With Run ID' | 'Without Run ID'
- description: string
- reportPath: string
- available: boolean
- report?: Record<string, unknown>
- error?: string
+type Case = { id: string; question: string; kind: string; expectedPathId: string; source: string; domain: string | null }
+type Result = {
+ caseId: string; question: string; expectedPathId: string; selectedPathId: string
+ correctPathSelection: boolean; candidatePaths: unknown[]; llmRaw: string
+ validation: string; query?: string; pathEvidence?: unknown; execution: string
+ executionError?: string; returnedRows?: number; sampleBindings?: unknown[]
+ answer: string; answerStatus: string; elapsedSeconds: number; model: string
 }
-type Question = {id:string; question:string; mode:string; expected?:string; note?:string}
-type QuestionGroup = {id:string; title:string; provenance?:string; note?:string; questions:Question[]}
-const groups = ref<QuestionGroup[]>([])
-const benchmarks = ref<Benchmark[]>([])
-const mode = ref<'Without Run ID' | 'With Run ID'>('Without Run ID')
-const selected = ref('')
+const cases = ref<Case[]>([])
+const indexSha = ref('')
+const selectedId = ref('')
 const loading = ref(false)
+const busy = ref(false)
+const execute = ref(false)
 const error = ref('')
-const active = computed(() => benchmarks.value.filter(b => b.mode === mode.value))
-const visibleGroups = computed(() => groups.value.map(g => ({...g, questions:g.questions.filter(q => q.mode === mode.value)})).filter(g => g.questions.length || g.id==='37'))
-const current = computed(() => active.value.find(b => b.id === selected.value))
-async function refresh() {
+const result = ref<Result | null>(null)
+const selected = computed(() => cases.value.find(q => q.id === selectedId.value))
+const positiveCount = computed(() => cases.value.filter(q => q.kind === 'positive').length)
+async function getJson(url: string, options?: RequestInit) {
+ const response = await fetch(url, options)
+ const data = await response.json()
+ if (!response.ok) throw new Error(data.error || 'Request failed')
+ return data
+}
+async function load() {
  loading.value = true
  error.value = ''
+ result.value = null
  try {
-  const response = await fetch('/api/ai/benchmarks/reports', {cache:'no-store'})
-  const data = await response.json()
-  if (!response.ok) throw new Error(data.error || 'Benchmark reports unavailable')
-  if (!Array.isArray(data.benchmarks)) throw new Error('Invalid benchmark registry')
-  benchmarks.value = data.benchmarks
-  const questionResponse = await fetch('/api/ai/benchmarks/questions', {cache:'no-store'})
-  const questionData = await questionResponse.json()
-  if (!questionResponse.ok || !Array.isArray(questionData.groups)) throw new Error(questionData.error || 'Question inventory unavailable')
-  groups.value = questionData.groups
-  if (!active.value.some(b => b.id === selected.value)) selected.value = active.value[0]?.id || ''
- } catch (e) {
-  error.value = e instanceof Error ? e.message : String(e)
- } finally {
-  loading.value = false
- }
+  const data = await getJson('/api/ai/benchmarks/37/questions', {cache:'no-store'})
+  if (!Array.isArray(data.questions) || !data.indexSha256) throw new Error('Invalid frozen benchmark registry')
+  cases.value = data.questions
+  indexSha.value = data.indexSha256
+  if (!cases.value.some(q => q.id === selectedId.value)) selectedId.value = cases.value[0]?.id || ''
+ } catch (e) { error.value = e instanceof Error ? e.message : String(e) }
+ finally { loading.value = false }
 }
-function changeMode(value: 'With Run ID' | 'Without Run ID') {
- mode.value = value
- selected.value = benchmarks.value.find(b => b.mode === value)?.id || ''
+async function run() {
+ if (!selected.value || busy.value) return
+ busy.value = true
+ result.value = null
+ error.value = ''
+ try {
+  result.value = await getJson('/api/ai/benchmarks/37/run', {
+   method: 'POST', headers: {'Content-Type':'application/json'},
+   body: JSON.stringify({caseId:selected.value.id,indexSha256:indexSha.value,execute:execute.value})
+  })
+ } catch (e) { error.value = e instanceof Error ? e.message : String(e) }
+ finally { busy.value = false }
 }
-onMounted(() => { void refresh() })
+onMounted(() => { void load() })
 </script>
 
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title">
-    <div><h2>TEP NEXUS — Benchmark diagnostics</h2><p>Inspect locally generated experiment reports. No benchmark is executed by this page.</p></div>
-    <span class="pill">EXPERIMENTAL · READ ONLY</span>
-   </div>
-   <div class="mode-switch" role="group" aria-label="Benchmark execution context">
-    <button type="button" :class="mode==='Without Run ID'?'primary':'secondary'" :aria-pressed="mode==='Without Run ID'" @click="changeMode('Without Run ID')">Without Run ID · GraphDB</button>
-    <button type="button" :class="mode==='With Run ID'?'primary':'secondary'" :aria-pressed="mode==='With Run ID'" @click="changeMode('With Run ID')">With Run ID · VTKG</button>
-   </div>
-   <p class="subdued">These modes group experiments by intended data context; they do not imply every experiment executed the full pipeline. Generated reports are not proof of answer correctness.</p>
+   <div class="panel-title"><div><h2>Frozen Benchmark — Experiment 37</h2><p>Select a fixed question and run the ontology-grounded hybrid retrieval and constrained Llama path planner.</p></div><span class="pill">DEVELOPMENT BENCHMARK</span></div>
+   <p class="subdued">Catalog-derived development cases, not independent held-out questions. A correct path selection is not a verified answer. No Run ID is used.</p>
    <div class="control-row">
-    <label style="display:grid;gap:6px;flex:1">Experiment
-     <select v-model="selected"><option v-for="item in active" :key="item.id" :value="item.id">Experiment {{item.id}} — {{item.description}}</option></select>
-    </label>
-    <button class="secondary" type="button" :disabled="loading" @click="refresh">{{loading?'Refreshing…':'Refresh reports'}}</button>
+    <strong>{{cases.length}} questions · {{positiveCount}} supported path cases · {{cases.length-positiveCount}} abstention cases</strong>
+    <button type="button" class="secondary" :disabled="loading||busy" @click="load">{{loading?'Loading…':'Refresh frozen questions'}}</button>
    </div>
-   <p v-if="error" role="alert">{{error}}</p>
-  </section>
-  <section class="panel">
-   <div class="panel-title"><div><h2>Benchmark question inventory</h2><p>Source-backed questions; expected results are not measured outcomes.</p></div><span class="pill">{{visibleGroups.reduce((sum,g)=>sum+g.questions.length,0)}} questions</span></div>
-   <div v-for="group in visibleGroups" :key="group.id" style="margin:16px 0">
-    <h3>{{group.title}} · {{group.questions.length}} questions</h3>
-    <p class="subdued">{{group.provenance}}</p>
-    <p v-if="group.note" class="subdued">{{group.note}}</p>
-    <details v-for="q in group.questions" :key="group.id+q.id" style="padding:9px 0;border-bottom:1px solid #294159">
-     <summary><strong>{{q.id}}</strong> — {{q.question}}</summary>
-     <p><strong>Expected:</strong> {{q.expected || "Not independently annotated"}}</p>
-     <p class="subdued">{{q.note}}</p>
-    </details>
-   </div>
-  </section>
-  <section v-if="current" class="panel">
-   <div class="panel-title"><div><h2>Experiment {{current.id}}</h2><p>{{current.description}}</p></div><span class="pill">{{current.available?'Local report found':'Not run / report missing'}}</span></div>
-   <p class="subdued">Expected report: <code>{{current.reportPath}}</code></p>
-   <p v-if="current.error" role="alert">{{current.error}}</p>
-   <template v-if="current.available && current.report">
-    <p class="subdued">Raw diagnostic report. Interpret metrics alongside the experiment's dataset provenance and limitations.</p>
-    <details open><summary>Complete report and execution trace</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere;max-height:70vh;overflow:auto">{{JSON.stringify(current.report,null,2)}}</pre></details>
+   <label style="display:grid;gap:7px">Benchmark question
+    <select v-model="selectedId" :disabled="busy" @change="result=null">
+     <option v-for="q in cases" :key="q.id" :value="q.id">{{q.id}} — {{q.question}}</option>
+    </select>
+   </label>
+   <template v-if="selected">
+    <div class="result-section">
+     <h3>{{selected.id}} — Question</h3>
+     <p>{{selected.question}}</p>
+     <p class="subdued">Expected path: <code>{{selected.expectedPathId}}</code> · {{selected.kind}} · {{selected.source}}</p>
+    </div>
+    <label class="control-row"><input v-model="execute" type="checkbox" :disabled="busy" /> Execute validated SELECT against GraphDB (optional; read-only)</label>
+    <button class="primary" type="button" :disabled="busy||loading" @click="run">{{busy?'Retrieving ontology, querying Ollama…':'Run selected benchmark question'}}</button>
    </template>
-   <p v-else class="subdued">Run this experiment locally using its existing CLI and refresh. This UI does not launch Ollama, GraphDB, or TimescaleDB jobs.</p>
+   <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
+  </section>
+  <section v-if="result" class="panel">
+   <div class="panel-title"><div><h2>{{result.caseId}} — Query result</h2><p>{{result.question}}</p></div><span class="pill">{{result.correctPathSelection?'PATH MATCH':'PATH MISMATCH'}}</span></div>
+   <div class="result-section"><h3>Answer / outcome</h3><p>{{result.answer}}</p><p class="subdued">Answer verification: {{result.answerStatus}}. Path match compares the selected path ID with the frozen development annotation only.</p></div>
+   <div class="result-section"><h3>Benchmark evaluation</h3>
+    <p>Expected: <code>{{result.expectedPathId}}</code></p>
+    <p>Selected: <code>{{result.selectedPathId}}</code></p>
+    <p>Deterministic validation: {{result.validation}}</p>
+    <p>GraphDB execution: {{result.execution}} <span v-if="result.returnedRows!==undefined">· {{result.returnedRows}} rows</span></p>
+    <p v-if="result.executionError" role="alert">{{result.executionError}}</p>
+    <p class="subdued">Model: {{result.model}} · {{result.elapsedSeconds}} s</p>
+   </div>
+   <div v-if="result.query" class="result-section"><h3>Compiled SPARQL query</h3><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{result.query}}</pre></div>
+   <div v-if="result.sampleBindings" class="result-section"><h3>GraphDB bindings (up to 10)</h3><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{JSON.stringify(result.sampleBindings,null,2)}}</pre></div>
+   <details class="result-section"><summary>Hybrid retrieval candidates</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{JSON.stringify(result.candidatePaths,null,2)}}</pre></details>
+   <details class="result-section"><summary>Raw Llama response and ontology path evidence</summary><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{result.llmRaw}}</pre><pre style="white-space:pre-wrap;overflow-wrap:anywhere">{{JSON.stringify(result.pathEvidence,null,2)}}</pre></details>
   </section>
  </div>
 </template>
