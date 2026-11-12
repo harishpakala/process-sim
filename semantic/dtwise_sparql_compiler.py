@@ -71,7 +71,14 @@ def _entity_count_path(index, question, domain, selected_chain):
         # The terminal predicate must name an individual, not a collection.
         # hasDevice matches device; hasDevices does not.
         local_words = re.findall(r"[A-Z]?[a-z]+|[A-Z]+(?![a-z])", local)
-        if not local_words or local_words[-1].lower() != singular:
+        if not local_words:
+            continue
+        parts = [word.lower() for word in local_words]
+        # Exact entity edges (hasDevice), or a documented record edge
+        # (hasBOMItemRecord) for an item request. Never count collections.
+        exact = parts[-1] == singular
+        record = (parts[-1] == "record" and singular in parts[:-1])
+        if not (exact or record):
             continue
         for path in _traversals(index, uri, domain):
             chain = path["property_chain"]
