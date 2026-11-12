@@ -106,9 +106,10 @@ def _compile_three_domain(question, index, catalog, mentioned, allow_candidate, 
     def chain(path, prefix, entity, identifier):
         lines = []
         for i, predicate in enumerate(path):
-            subject = "?" + prefix + "Root" if i == 0 else "?" + prefix + str(i)
-            obj = identifier if i == len(path) - 1 else (
-                entity if i == len(path) - 2 else "?" + prefix + str(i + 1))
+            subject = ("?" + prefix + "Root" if i == 0 else
+                       entity if i == len(path) - 1 else "?" + prefix + str(i))
+            obj = (identifier if i == len(path) - 1 else
+                   entity if i == len(path) - 2 else "?" + prefix + str(i + 1))
             lines.append("    " + subject + " " + _iri(predicate) + " " + obj + " .")
         return lines
     left = chain(source, "eb", "?bomRecord", "?assetId")
