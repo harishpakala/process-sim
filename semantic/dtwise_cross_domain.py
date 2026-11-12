@@ -33,7 +33,7 @@ def compile_cross_domain(question, index, catalog, allow_candidate=False, limit=
         raise ValueError("LIMIT must be between 1 and 10000")
     from semantic.dtwise_concept_resolver import _mentioned_domains
     mentioned = {d.lower() for d in _mentioned_domains(question)}
-    matches = [m for m in catalog.get("mappings", []) if
+    if len(mentioned) == 3:\n        return _compile_three_domain(question, index, catalog, mentioned, allow_candidate, limit)\n    if len(mentioned) != 2:\n        raise ValueError("Cross-domain queries require two or three explicit domains")\n    matches = [m for m in catalog.get("mappings", []) if
                {m["source_domain"], m["target_domain"]} == mentioned]
     if len(matches) != 1:
         raise ValueError("Expected exactly one explicit catalog mapping for the two requested domains")
@@ -64,6 +64,64 @@ def compile_cross_domain(question, index, catalog, allow_candidate=False, limit=
     return {"question": question, "mapping_id": mapping["id"], "mapping_status": status,
             "candidate_opt_in": bool(allow_candidate), "sparql": sparql,
             "execution_status": "not_executed", "cross_domain_join": "candidate" if status != "verified" else "verified"}
+
+
+def _compile_three_domain(question, index, catalog, mentioned, allow_candidate, limit):
+    """Compile only the explicitly cataloged EBOM/ECAD/DEXPI identifier join."""
+    expected = {"engineeringbom", "ecad", "dexpi"}
+    if mentioned != expected:
+        raise ValueError("No cataloged three-domain plan for requested domains")
+    mappings = [m for m in catalog.get("mappings", [])
+                if {m.get("source_domain"), m.get("target_domain")} ==
+                {"engineeringbom", "ecad"}]
+    if len(mappings) != 1:
+        raise ValueError("Three-domain plan requires exactly one EBOM/ECAD mapping")
+    base = mappings[0]
+    dexpi = [m for m in catalog.get("three_domain_mappings", [])
+             if set(m.get("domains", [])) == expected]
+    if len(dexpi) != 1:
+        raise ValueError("No unique explicit three-domain mapping")
+    plan = dexpi[0]
+    for entry in (base, plan):
+        status = entry.get("status")
+        if status != "verified" and not (
+                allow_candidate and status == "candidate_pending_semantic_approval"):
+            raise ValueError("Join mapping is not semantically approved; use --allow-candidate for exploratory execution")
+        if entry.get("comparison") != "string_equality":
+            raise ValueError("Unsupported join comparison")
+    source, target = base["source_path"], base["target_path"]
+    _validate_path(index, "engineeringbom", source)
+    _validate_path(index, "ecad", target)
+    paths = plan.get("dexpi_paths", [])
+    if not paths or len({tuple(p) for p in paths}) != len(paths):
+        raise ValueError("DEXPI paths missing or duplicated")
+    for p in paths:
+        _validate_path(index, "dexpi", p)
+        if p[-1] != "https://example.org/dexpi/hasAssetIdentifier":
+            raise ValueError("DEXPI path must terminate at the cataloged asset identifier")
+    def chain(path, prefix, entity, identifier):
+        lines = []
+        for i, predicate in enumerate(path):
+            subject = "?" + prefix + "Root" if i == 0 else "?" + prefix + str(i)
+            obj = identifier if i == len(path) - 1 else (
+                entity if i == len(path) - 2 else "?" + prefix + str(i + 1))
+            lines.append("    " + subject + " " + _iri(predicate) + " " + obj + " .")
+        return lines
+    left = chain(source, "eb", "?bomRecord", "?assetId")
+    right = chain(target, "ec", "?device", "?ecadId")
+    branches = []
+    for i, p in enumerate(paths):
+        branches.append("  {\n" + "\n".join(chain(p, "dx" + str(i), "?dexpiObject", "?dexpiId")) + "\n  }")
+    body = "\n".join(left + right) + "\n  " + "\n  UNION\n  ".join(branches)
+    body += "\n  FILTER(STR(?assetId) = STR(?ecadId))"
+    body += "\n  FILTER(STR(?assetId) = STR(?dexpiId))"
+    sparql = ("SELECT DISTINCT ?assetId ?bomRecord ?device ?dexpiObject WHERE {\n" +
+              body + "\n} LIMIT " + str(limit))
+    return {"question": question, "mapping_ids": [base["id"], plan["id"]],
+            "mapping_status": plan["status"], "candidate_opt_in": bool(allow_candidate),
+            "sparql": sparql, "execution_status": "not_executed",
+            "cross_domain_join": "candidate" if any(
+                m["status"] != "verified" for m in (base, plan)) else "verified"}
 
 
 def main():
