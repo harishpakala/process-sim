@@ -43,7 +43,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasBOMItemId"
+                    "value": "https://example.org/engineeringbom/BOMItemId"
                   }
                 ]
               },
@@ -63,7 +63,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasItemDescription"
+                    "value": "https://example.org/engineeringbom/ItemDescription"
                   }
                 ]
               },
@@ -83,7 +83,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                    "value": "https://example.org/engineeringbom/StructureStatus"
                   }
                 ]
               },
@@ -103,7 +103,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasRevision"
+                    "value": "https://example.org/engineeringbom/Revision"
                   }
                 ]
               },
@@ -123,7 +123,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasLabel"
+                    "value": "https://example.org/engineeringbom/Label"
                   }
                 ]
               },
@@ -137,13 +137,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "hasRecordedParent",
+              "idShort": "RecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                    "value": "https://example.org/engineeringbom/RecordedParent"
                   }
                 ]
               },
@@ -245,7 +245,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasBOMItemId"
+                    "value": "https://example.org/engineeringbom/BOMItemId"
                   }
                 ]
               },
@@ -265,7 +265,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasEngineeringLocalId"
+                    "value": "https://example.org/engineeringbom/EngineeringLocalId"
                   }
                 ]
               },
@@ -285,7 +285,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasItemDescription"
+                    "value": "https://example.org/engineeringbom/ItemDescription"
                   }
                 ]
               },
@@ -305,7 +305,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasAssetIdentifier"
+                    "value": "https://example.org/engineeringbom/AssetIdentifier"
                   }
                 ]
               },
@@ -325,7 +325,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasProductIdentifier"
+                    "value": "https://example.org/engineeringbom/ProductIdentifier"
                   }
                 ]
               },
@@ -345,7 +345,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceDomain"
+                    "value": "https://example.org/engineeringbom/SourceDomain"
                   }
                 ]
               },
@@ -365,7 +365,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceGroup"
+                    "value": "https://example.org/engineeringbom/SourceGroup"
                   }
                 ]
               },
@@ -385,7 +385,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                    "value": "https://example.org/engineeringbom/StructureStatus"
                   }
                 ]
               },
@@ -405,7 +405,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasRevision"
+                    "value": "https://example.org/engineeringbom/Revision"
                   }
                 ]
               },
@@ -425,7 +425,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasQuantityBasis"
+                    "value": "https://example.org/engineeringbom/QuantityBasis"
                   }
                 ]
               },
@@ -445,7 +445,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasAssociationBasis"
+                    "value": "https://example.org/engineeringbom/AssociationBasis"
                   }
                 ]
               },
@@ -465,7 +465,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasLabel"
+                    "value": "https://example.org/engineeringbom/Label"
                   }
                 ]
               },
@@ -479,13 +479,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "hasRecordedParent",
+              "idShort": "RecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                    "value": "https://example.org/engineeringbom/RecordedParent"
                   }
                 ]
               },
@@ -587,7 +587,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceField"
+                    "value": "https://example.org/engineeringbom/SourceField"
                   }
                 ]
               },
@@ -607,7 +607,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                    "value": "https://example.org/engineeringbom/StructureStatus"
                   }
                 ]
               },
@@ -627,7 +627,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                    "value": "https://example.org/engineeringbom/SourceRecordId"
                   }
                 ]
               },
@@ -641,13 +641,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "hasRecordedParent",
+              "idShort": "RecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasRecordedParent"
+                    "value": "https://example.org/engineeringbom/RecordedParent"
                   }
                 ]
               },
@@ -749,7 +749,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasAssociationBasis"
+                    "value": "https://example.org/engineeringbom/AssociationBasis"
                   }
                 ]
               },
@@ -769,7 +769,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasStructureStatus"
+                    "value": "https://example.org/engineeringbom/StructureStatus"
                   }
                 ]
               },
@@ -789,7 +789,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceRecordId"
+                    "value": "https://example.org/engineeringbom/SourceRecordId"
                   }
                 ]
               },
@@ -809,7 +809,7 @@
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/hasSourceField"
+                    "value": "https://example.org/engineeringbom/SourceField"
                   }
                 ]
               },

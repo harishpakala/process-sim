@@ -12,7 +12,9 @@
       "labels": [
         "AssetInventory"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -630,7 +632,9 @@
       "labels": [
         "DEXPI"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -1344,7 +1348,9 @@
       "labels": [
         "ECAD"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -1735,6 +1741,22 @@
       "kind": "shape"
     },
     {
+      "id": "https://example.org/dtwise/concept/e05afa5c13da3d56c401794cbe1a31dea043ecc46ae608d8c6e20731b0717fa6",
+      "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl",
+      "domain": "ecad",
+      "labels": [
+        "isConnectedTo",
+        "isConnectedTo constraint"
+      ],
+      "descriptions": [
+        "Relationship expressing a connection between two schematic elements."
+      ],
+      "types": [
+        "http://www.w3.org/ns/shacl#PropertyShape"
+      ],
+      "kind": "shape"
+    },
+    {
       "id": "https://example.org/dtwise/concept/8cc1d8122df34cdce0063531da93e40b462bfec77ec312f429f7f687a9e65abd",
       "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU",
       "domain": "ecad",
@@ -2071,6 +2093,19 @@
       "kind": "shape"
     },
     {
+      "id": "https://example.org/dtwise/concept/b54fd3c01a785bd31c95cb0766b294aeb8f561af642e3d315d78b41a670d296d",
+      "uri": "https://example.org/aas/RelationshipElement",
+      "domain": "ecad",
+      "labels": [
+        "AAS Relationship Element"
+      ],
+      "descriptions": [],
+      "types": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ],
+      "kind": "class"
+    },
+    {
       "id": "https://example.org/dtwise/concept/f78c974395bce627b3d687711303235d9de19d64879d8ab5babccfd4a6b0d6f2",
       "uri": "https://example.org/aas/SMC",
       "domain": "ecad",
@@ -2404,13 +2439,30 @@
       "kind": "property"
     },
     {
+      "id": "https://example.org/dtwise/concept/de1a641e7d865a5f65489852a055df0c896cc521e73542693ced63520159fe9b",
+      "uri": "https://example.org/ecad/hasisConnectedTo",
+      "domain": "ecad",
+      "labels": [
+        "isConnectedTo"
+      ],
+      "descriptions": [
+        "Relationship expressing a connection between two schematic elements."
+      ],
+      "types": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty"
+      ],
+      "kind": "property"
+    },
+    {
       "id": "https://example.org/dtwise/concept/22dc2fa336eaff7110cef451786890925b1a35dabe54768c77d9ac0a314b74f4",
       "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/",
       "domain": "engineeringbom",
       "labels": [
         "TEP_EngineeringBOM_V2_Template"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -2424,7 +2476,9 @@
         "BOMItemId",
         "BOMItemId constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source identifier of the engineering BOM item represented by this assembly record."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2438,7 +2492,9 @@
         "ItemDescription",
         "ItemDescription constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided description of the engineering item represented by the assembly."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2452,7 +2508,25 @@
         "Label",
         "Label constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Human-readable label for the assembly record."
+      ],
+      "types": [
+        "http://www.w3.org/ns/shacl#PropertyShape"
+      ],
+      "kind": "shape"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/a0bda0199d4fbf1811faa91bea487b7e4d04f6155d6df44528b4f8ed1c53c535",
+      "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "domain": "engineeringbom",
+      "labels": [
+        "RecordedParent",
+        "RecordedParent constraint"
+      ],
+      "descriptions": [
+        "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2466,7 +2540,9 @@
         "Revision",
         "Revision constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded revision designation for the assembly entry."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2480,7 +2556,9 @@
         "StructureStatus",
         "StructureStatus constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2494,7 +2572,9 @@
         "AssemblyRecord",
         "AssemblyRecord SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2508,7 +2588,9 @@
         "AssemblyRecord",
         "AssemblyRecord constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2522,7 +2604,9 @@
         "Assemblies",
         "Assemblies SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2536,7 +2620,9 @@
         "Assemblies",
         "Assemblies constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2550,7 +2636,9 @@
         "AssetIdentifier",
         "AssetIdentifier constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2564,7 +2652,9 @@
         "AssociationBasis",
         "AssociationBasis constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided basis or evidence category for a recorded item association."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2578,7 +2668,9 @@
         "BOMItemId",
         "BOMItemId constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2592,7 +2684,9 @@
         "EngineeringLocalId",
         "EngineeringLocalId constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Local identifier assigned by the source engineering system to this BOM item."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2606,7 +2700,9 @@
         "ItemDescription",
         "ItemDescription constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided description of the engineering BOM item or component."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2620,7 +2716,9 @@
         "Label",
         "Label constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Human-readable label of the engineering BOM item."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2634,7 +2732,9 @@
         "ProductIdentifier",
         "ProductIdentifier constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2648,7 +2748,25 @@
         "QuantityBasis",
         "QuantityBasis constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Basis for interpreting source quantity information; not itself a quantity value."
+      ],
+      "types": [
+        "http://www.w3.org/ns/shacl#PropertyShape"
+      ],
+      "kind": "shape"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/1fdbbde6b1c121704f6254e93adab2c76931b90f8b94957250a94ad3e54238a9",
+      "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "domain": "engineeringbom",
+      "labels": [
+        "RecordedParent",
+        "RecordedParent constraint"
+      ],
+      "descriptions": [
+        "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2662,7 +2780,9 @@
         "Revision",
         "Revision constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded revision designation of the BOM item."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2676,7 +2796,9 @@
         "SourceDomain",
         "SourceDomain constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Domain or system from which the BOM item record originates."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2690,7 +2812,9 @@
         "SourceGroup",
         "SourceGroup constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source grouping or category assigned to the BOM item."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2704,7 +2828,9 @@
         "StructureStatus",
         "StructureStatus constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded status of the BOM item within the engineering structure."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2718,7 +2844,9 @@
         "BOMItemRecord",
         "BOMItemRecord SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2732,7 +2860,9 @@
         "BOMItemRecord",
         "BOMItemRecord constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2746,7 +2876,9 @@
         "BOMItems",
         "BOMItems SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2760,7 +2892,9 @@
         "BOMItems",
         "BOMItems constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2774,7 +2908,9 @@
         "AssociationBasis",
         "AssociationBasis constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided basis or evidence category for this functional association."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2788,7 +2924,9 @@
         "SourceField",
         "SourceField constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Name of the source field supplying the functional association."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2802,7 +2940,9 @@
         "SourceRecordId",
         "SourceRecordId constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Identifier of the source record supporting this functional association."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2816,7 +2956,25 @@
         "StructureStatus",
         "StructureStatus constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded status of the functional association."
+      ],
+      "types": [
+        "http://www.w3.org/ns/shacl#PropertyShape"
+      ],
+      "kind": "shape"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/da3f0fa717fd8edc88afa6c7e0782e6b67f77a1a0e0be1e99d77b5dcfdde0ad5",
+      "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU",
+      "domain": "engineeringbom",
+      "labels": [
+        "functionallyAssociatedWith",
+        "functionallyAssociatedWith constraint"
+      ],
+      "descriptions": [
+        "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2830,7 +2988,9 @@
         "FunctionalAssociation",
         "FunctionalAssociation SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2844,7 +3004,9 @@
         "FunctionalAssociation",
         "FunctionalAssociation constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2858,7 +3020,9 @@
         "FunctionalAssociations",
         "FunctionalAssociations SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded functional associations between engineering records."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2872,7 +3036,9 @@
         "FunctionalAssociations",
         "FunctionalAssociations constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded functional associations between engineering records."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2886,7 +3052,9 @@
         "SourceField",
         "SourceField constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Name of the source field supplying this parent reference."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2900,7 +3068,9 @@
         "SourceRecordId",
         "SourceRecordId constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Identifier of the source record supporting this parent reference."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2914,7 +3084,25 @@
         "StructureStatus",
         "StructureStatus constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded structural status of the parent reference."
+      ],
+      "types": [
+        "http://www.w3.org/ns/shacl#PropertyShape"
+      ],
+      "kind": "shape"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/641662297045ef6f8a1698273b3156d12828d6d95fb0f5273a5cd52287dbd795",
+      "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU",
+      "domain": "engineeringbom",
+      "labels": [
+        "RecordedParent",
+        "RecordedParent constraint"
+      ],
+      "descriptions": [
+        "Explicit parent relationship preserved from the source parent-reference record."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2928,7 +3116,9 @@
         "ParentReference",
         "ParentReference SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2942,7 +3132,9 @@
         "ParentReference",
         "ParentReference constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2956,7 +3148,9 @@
         "ParentReferences",
         "ParentReferences SHACL shape"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-derived records documenting parent references in the engineering BOM."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
@@ -2970,7 +3164,9 @@
         "ParentReferences",
         "ParentReferences constraint"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-derived records documenting parent references in the engineering BOM."
+      ],
       "types": [
         "http://www.w3.org/ns/shacl#PropertyShape"
       ],
@@ -2985,12 +3181,25 @@
         "TEP_EngineeringBOM_V2_Template SHACL shape"
       ],
       "descriptions": [
-        "AAS structure template; example fields are unpopulated."
+        "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."
       ],
       "types": [
         "http://www.w3.org/ns/shacl#NodeShape"
       ],
       "kind": "shape"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/510fb75ed6ef90bf4d3abb3f789fd7daa8be4bb53d87e9e29a533be69a652742",
+      "uri": "https://example.org/aas/RelationshipElement",
+      "domain": "engineeringbom",
+      "labels": [
+        "AAS Relationship Element"
+      ],
+      "descriptions": [],
+      "types": [
+        "http://www.w3.org/2002/07/owl#Class"
+      ],
+      "kind": "class"
     },
     {
       "id": "https://example.org/dtwise/concept/71a862ef7aaac7f1fed19bd9a20409dae5a87aa19399e8057add4be08ac422a9",
@@ -3013,7 +3222,9 @@
         "Assemblies",
         "hasAssemblies"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3027,7 +3238,9 @@
         "AssemblyRecord",
         "hasAssemblyRecord"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3041,7 +3254,9 @@
         "AssetIdentifier",
         "hasAssetIdentifier"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3055,7 +3270,10 @@
         "AssociationBasis",
         "hasAssociationBasis"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided basis or evidence category for a recorded item association.",
+        "Source-provided basis or evidence category for this functional association."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3069,7 +3287,10 @@
         "BOMItemId",
         "hasBOMItemId"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier.",
+        "Source identifier of the engineering BOM item represented by this assembly record."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3083,7 +3304,9 @@
         "BOMItemRecord",
         "hasBOMItemRecord"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3097,7 +3320,9 @@
         "BOMItems",
         "hasBOMItems"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3111,7 +3336,9 @@
         "EngineeringLocalId",
         "hasEngineeringLocalId"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Local identifier assigned by the source engineering system to this BOM item."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3125,7 +3352,9 @@
         "FunctionalAssociation",
         "hasFunctionalAssociation"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3139,7 +3368,9 @@
         "FunctionalAssociations",
         "hasFunctionalAssociations"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-recorded functional associations between engineering records."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3153,7 +3384,10 @@
         "ItemDescription",
         "hasItemDescription"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-provided description of the engineering BOM item or component.",
+        "Source-provided description of the engineering item represented by the assembly."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3167,7 +3401,10 @@
         "Label",
         "hasLabel"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Human-readable label for the assembly record.",
+        "Human-readable label of the engineering BOM item."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3181,7 +3418,9 @@
         "ParentReference",
         "hasParentReference"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3195,7 +3434,9 @@
         "ParentReferences",
         "hasParentReferences"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Collection of source-derived records documenting parent references in the engineering BOM."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
@@ -3209,7 +3450,9 @@
         "ProductIdentifier",
         "hasProductIdentifier"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3223,9 +3466,28 @@
         "QuantityBasis",
         "hasQuantityBasis"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Basis for interpreting source quantity information; not itself a quantity value."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
+      ],
+      "kind": "property"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/770ced7d71910def4435100c9c67261301521cedaae8b15b9813ceb6ab337ff9",
+      "uri": "https://example.org/engineeringbom/hasRecordedParent",
+      "domain": "engineeringbom",
+      "labels": [
+        "RecordedParent"
+      ],
+      "descriptions": [
+        "Explicit parent relationship preserved from the source parent-reference record.",
+        "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy.",
+        "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."
+      ],
+      "types": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
       "kind": "property"
     },
@@ -3237,7 +3499,10 @@
         "Revision",
         "hasRevision"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded revision designation for the assembly entry.",
+        "Source-recorded revision designation of the BOM item."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3251,7 +3516,9 @@
         "SourceDomain",
         "hasSourceDomain"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Domain or system from which the BOM item record originates."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3265,7 +3532,10 @@
         "SourceField",
         "hasSourceField"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Name of the source field supplying the functional association.",
+        "Name of the source field supplying this parent reference."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3279,7 +3549,9 @@
         "SourceGroup",
         "hasSourceGroup"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source grouping or category assigned to the BOM item."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3293,7 +3565,10 @@
         "SourceRecordId",
         "hasSourceRecordId"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Identifier of the source record supporting this functional association.",
+        "Identifier of the source record supporting this parent reference."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
       ],
@@ -3307,9 +3582,29 @@
         "StructureStatus",
         "hasStructureStatus"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Source-recorded status of the BOM item within the engineering structure.",
+        "Source-recorded status of the functional association.",
+        "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary.",
+        "Source-recorded structural status of the parent reference."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#DatatypeProperty"
+      ],
+      "kind": "property"
+    },
+    {
+      "id": "https://example.org/dtwise/concept/a2fc949367112cb63717a02cacc3b8245e3e13c1090dfb57f754265364954af9",
+      "uri": "https://example.org/engineeringbom/hasfunctionallyAssociatedWith",
+      "domain": "engineeringbom",
+      "labels": [
+        "functionallyAssociatedWith"
+      ],
+      "descriptions": [
+        "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."
+      ],
+      "types": [
+        "http://www.w3.org/2002/07/owl#ObjectProperty"
       ],
       "kind": "property"
     },
@@ -3320,7 +3615,9 @@
       "labels": [
         "TEP_OPCUAConnectivity"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Template describing OPC UA server connectivity and engineering signal-to-node mappings."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -4066,7 +4363,9 @@
       "labels": [
         "ProductCatalog"
       ],
-      "descriptions": [],
+      "descriptions": [
+        "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."
+      ],
       "types": [
         "http://www.w3.org/2002/07/owl#Class"
       ],
@@ -4630,19 +4929,28 @@
       91,
       92,
       104,
-      119,
+      109,
       120,
-      144,
-      147,
-      232,
-      255
+      121,
+      146,
+      149,
+      153,
+      166,
+      167,
+      172,
+      205,
+      206,
+      217,
+      242,
+      265
     ],
     "aas": [
-      192
+      131,
+      200
     ],
     "about": [
-      227,
-      248
+      237,
+      258
     ],
     "acted": [
       44,
@@ -4680,6 +4988,7 @@
       72
     ],
     "actuation": [
+      39,
       40,
       41,
       68,
@@ -4688,21 +4997,26 @@
     "address": [
       85,
       89,
-      113,
-      117,
-      131,
-      232,
-      237,
-      238,
-      255,
-      260
+      114,
+      118,
+      133,
+      242,
+      247,
+      248,
+      265,
+      270
     ],
     "against": [
       103,
-      146
+      148,
+      165,
+      171,
+      204,
+      216
     ],
     "aided": [
-      129
+      84,
+      130
     ],
     "an": [
       3,
@@ -4721,50 +5035,80 @@
       93,
       94,
       96,
-      121,
       122,
-      125,
+      123,
       126,
-      133,
-      136,
-      149,
-      217,
-      220,
-      221,
-      222,
-      226,
-      229,
-      234,
-      237,
-      238,
+      127,
+      135,
+      138,
+      151,
+      158,
+      165,
+      173,
+      187,
+      188,
+      204,
+      210,
+      218,
+      227,
+      230,
+      231,
+      232,
+      236,
+      239,
       244,
       247,
-      250,
-      253,
-      256,
+      248,
+      254,
       257,
       260,
-      271,
-      278,
-      279,
-      290,
-      292
+      263,
+      266,
+      267,
+      270,
+      281,
+      288,
+      289,
+      300,
+      302
     ],
     "and": [
+      0,
       20,
+      39,
       68,
-      129,
-      221,
-      222,
-      237,
-      238,
-      239,
-      240,
-      241,
-      257,
-      260,
-      261,
-      282
+      84,
+      130,
+      154,
+      161,
+      162,
+      178,
+      179,
+      180,
+      181,
+      187,
+      188,
+      195,
+      196,
+      199,
+      203,
+      207,
+      208,
+      210,
+      214,
+      226,
+      231,
+      232,
+      247,
+      248,
+      249,
+      250,
+      251,
+      267,
+      270,
+      271,
+      273,
+      292
     ],
     "another": [
       11,
@@ -4773,20 +5117,43 @@
       64,
       75,
       96,
-      136
-    ],
-    "are": [
-      192
+      138
     ],
     "assemblies": [
-      159,
-      160,
-      194
+      154,
+      163,
+      164,
+      199,
+      202
     ],
     "assembly": [
+      155,
+      156,
       157,
       158,
-      195
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      202,
+      203,
+      206,
+      212,
+      213,
+      218,
+      219,
+      224
+    ],
+    "asserting": [
+      186,
+      225
+    ],
+    "assertion": [
+      187,
+      188,
+      210
     ],
     "asset": [
       0,
@@ -4832,23 +5199,26 @@
       83,
       97,
       104,
-      123,
-      132,
-      147,
-      161,
-      196,
-      225,
-      228,
-      229,
-      234,
-      243,
-      249,
-      250,
-      256,
-      271,
-      292
+      124,
+      134,
+      149,
+      165,
+      167,
+      204,
+      206,
+      235,
+      238,
+      239,
+      244,
+      253,
+      259,
+      260,
+      266,
+      281,
+      302
     ],
     "assets": [
+      0,
       1,
       2,
       20,
@@ -4859,17 +5229,21 @@
       30,
       85,
       89,
-      113,
-      117,
-      131,
-      266,
-      268,
-      269,
-      273,
-      286,
-      288,
-      289,
-      295
+      114,
+      118,
+      133,
+      168,
+      176,
+      209,
+      222,
+      276,
+      278,
+      279,
+      283,
+      296,
+      298,
+      299,
+      305
     ],
     "associated": [
       17,
@@ -4882,23 +5256,26 @@
       92,
       97,
       98,
-      119,
       120,
-      123,
-      132,
-      140,
-      144,
+      121,
+      124,
+      134,
+      142,
+      146,
+      186,
       225,
-      234,
-      243,
-      256,
-      264,
+      235,
+      244,
+      253,
+      266,
       274,
-      275,
       284,
-      296
+      285,
+      294,
+      306
     ],
     "association": [
+      0,
       10,
       11,
       20,
@@ -4915,102 +5292,166 @@
       76,
       95,
       96,
-      135,
-      136,
-      162,
-      177,
-      181,
+      137,
+      138,
+      166,
       182,
-      197,
-      202,
-      228,
-      229,
-      237,
-      238,
-      249,
-      250,
-      260
-    ],
-    "associations": [
       183,
       184,
-      203
+      185,
+      187,
+      188,
+      205,
+      210,
+      221,
+      223,
+      224,
+      238,
+      239,
+      247,
+      248,
+      259,
+      260,
+      270
+    ],
+    "associations": [
+      154,
+      178,
+      179,
+      180,
+      181,
+      189,
+      190,
+      199,
+      207,
+      208,
+      211
     ],
     "basis": [
-      162,
-      168,
-      177,
-      197,
-      209,
-      230,
-      251
+      166,
+      172,
+      182,
+      187,
+      188,
+      205,
+      210,
+      217,
+      240,
+      261
     ],
     "bc3": [
       95,
       96,
-      152,
-      153,
-      154,
       155,
       156,
       157,
       158,
+      159,
+      160,
       161,
       162,
-      225,
-      228,
-      229
+      165,
+      166,
+      235,
+      238,
+      239
     ],
     "belonging": [
       93,
       94,
-      121,
       122,
-      133
+      123,
+      135
     ],
     "between": [
       109,
       110,
-      134,
-      237,
-      238,
-      239,
-      240,
-      260,
-      261
+      111,
+      136,
+      153,
+      186,
+      189,
+      190,
+      211,
+      225,
+      247,
+      248,
+      249,
+      250,
+      270,
+      271
     ],
     "bhcn": [
-      273
+      283
+    ],
+    "bill": [
+      154,
+      163,
+      164,
+      180,
+      181,
+      199,
+      202,
+      208
     ],
     "blcn": [
-      276,
-      277
+      286,
+      287
     ],
     "bom": [
-      151,
-      192
-    ],
-    "bomitem": [
-      152,
-      163,
+      154,
+      155,
+      165,
+      167,
+      168,
+      169,
+      170,
+      171,
       173,
       174,
-      198,
-      199
-    ],
-    "bomitems": [
       175,
       176,
-      200
+      177,
+      178,
+      179,
+      197,
+      198,
+      199,
+      204,
+      206,
+      207,
+      209,
+      212,
+      213,
+      215,
+      216,
+      218,
+      219,
+      220,
+      222,
+      224
+    ],
+    "bomitem": [
+      155,
+      167,
+      178,
+      179,
+      206,
+      207
+    ],
+    "bomitems": [
+      180,
+      181,
+      208
     ],
     "browse": [
-      233,
-      254
+      243,
+      264
     ],
     "bu1": [
-      264,
-      265,
-      266
+      274,
+      275,
+      276
     ],
     "bva": [
       85,
@@ -5023,7 +5464,6 @@
       92,
       93,
       94,
-      113,
       114,
       115,
       116,
@@ -5032,7 +5472,8 @@
       119,
       120,
       121,
-      122
+      122,
+      123
     ],
     "by": [
       7,
@@ -5042,14 +5483,22 @@
       70,
       82,
       98,
-      236,
-      262,
-      268,
-      269,
-      273,
-      288,
-      289,
-      295
+      154,
+      155,
+      156,
+      168,
+      199,
+      206,
+      209,
+      212,
+      246,
+      272,
+      278,
+      279,
+      283,
+      298,
+      299,
+      305
     ],
     "byb2": [
       17
@@ -5057,62 +5506,28 @@
     "bzgry": [
       85,
       89,
-      113,
-      117
+      114,
+      118
     ],
     "c2hhc": [
       20,
       68,
-      129,
-      192,
-      241,
-      282
+      130,
+      199,
+      251,
+      292
     ],
     "c5": [
       85,
       86,
       89,
       90,
-      113,
       114,
-      117,
+      115,
       118,
-      264,
-      265,
-      266,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
-      273,
+      119,
       274,
       275,
-      276,
-      277
-    ],
-    "c9ub2": [
-      87,
-      91,
-      115,
-      119,
-      278
-    ],
-    "c9za": [
-      88,
-      92,
-      116,
-      120,
-      154,
-      166,
-      171,
-      279
-    ],
-    "catalog": [
-      263,
-      270,
-      271,
       276,
       277,
       278,
@@ -5120,29 +5535,73 @@
       280,
       281,
       282,
+      283,
+      284,
+      285,
+      286,
+      287
+    ],
+    "c9ub2": [
+      87,
+      91,
+      116,
+      120,
+      288
+    ],
+    "c9za": [
+      88,
+      92,
+      117,
+      121,
+      157,
+      158,
+      170,
+      173,
+      176,
+      289
+    ],
+    "catalog": [
+      171,
+      216,
+      273,
+      280,
+      281,
+      286,
+      287,
+      288,
+      289,
       290,
       291,
       292,
-      293,
-      297
+      300,
+      301,
+      302,
+      303,
+      307
     ],
     "category": [
       9,
-      25
+      25,
+      166,
+      176,
+      182,
+      205,
+      222
     ],
     "characteristic": [
-      276,
-      277,
-      297
+      286,
+      287,
+      307
     ],
     "classification": [
-      264,
-      265,
-      266,
-      282,
-      284,
-      285,
-      286
+      273,
+      274,
+      275,
+      276,
+      292,
+      294,
+      295,
+      296
     ],
     "collection": [
       1,
@@ -5163,49 +5622,74 @@
       94,
       107,
       108,
-      109,
       110,
       111,
       112,
-      121,
+      113,
       122,
-      127,
+      123,
       128,
-      130,
-      133,
-      134,
-      138,
-      148,
+      129,
+      132,
+      135,
+      136,
+      140,
       150,
-      193,
-      223,
-      224,
-      239,
-      240,
-      242,
-      258,
-      261,
-      274,
-      275,
-      280,
-      281,
-      283,
+      152,
+      163,
+      164,
+      180,
+      181,
+      189,
+      190,
+      197,
+      198,
+      201,
+      202,
+      208,
+      211,
+      215,
+      233,
+      234,
+      249,
+      250,
+      252,
+      268,
+      271,
+      284,
+      285,
+      290,
+      291,
       293,
-      296
+      303,
+      306
+    ],
+    "component": [
+      169,
+      178,
+      179,
+      207,
+      212
     ],
     "computer": [
-      129
+      84,
+      130
     ],
     "configured": [
-      223,
-      224,
-      258
+      233,
+      234,
+      268
     ],
     "connect": [
-      219,
-      246
+      229,
+      256
+    ],
+    "connected": [
+      109,
+      153
     ],
     "connection": [
+      84,
       85,
       87,
       88,
@@ -5214,33 +5698,37 @@
       92,
       93,
       94,
-      113,
-      115,
+      109,
+      114,
       116,
       117,
-      119,
+      118,
       120,
       121,
       122,
-      129,
-      131,
+      123,
+      130,
       133,
-      139,
-      144,
-      217,
-      221,
-      222,
-      244,
-      257
+      135,
+      141,
+      146,
+      153,
+      227,
+      231,
+      232,
+      254,
+      267
     ],
     "connections": [
-      109,
       110,
-      134
+      111,
+      136
     ],
     "connectivity": [
-      129,
-      241
+      84,
+      130,
+      226,
+      251
     ],
     "constraint": [
       2,
@@ -5301,29 +5789,27 @@
       104,
       106,
       108,
-      110,
-      112,
+      109,
+      111,
       113,
       114,
-      116,
+      115,
       117,
       118,
-      120,
-      122,
+      119,
+      121,
       123,
       124,
-      126,
-      128,
-      152,
-      153,
-      154,
+      125,
+      127,
+      129,
       155,
       156,
+      157,
       158,
+      159,
       160,
-      161,
       162,
-      163,
       164,
       165,
       166,
@@ -5333,70 +5819,82 @@
       170,
       171,
       172,
+      173,
       174,
+      175,
       176,
       177,
-      178,
       179,
-      180,
+      181,
       182,
+      183,
       184,
       185,
       186,
-      187,
-      189,
+      188,
+      190,
       191,
-      217,
-      218,
-      219,
-      220,
-      222,
-      224,
-      225,
-      226,
+      192,
+      193,
+      194,
+      196,
+      198,
       227,
       228,
       229,
       230,
-      231,
       232,
-      233,
       234,
       235,
       236,
+      237,
       238,
+      239,
       240,
-      264,
-      265,
-      266,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
-      273,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      248,
+      250,
+      274,
       275,
+      276,
       277,
+      278,
       279,
-      281
+      280,
+      281,
+      282,
+      283,
+      285,
+      287,
+      289,
+      291
     ],
     "containing": [
       86,
       90,
       101,
-      114,
-      118,
-      124,
-      143,
-      282
+      115,
+      119,
+      125,
+      145,
+      273,
+      292
     ],
     "controller": [
       91,
       92,
-      119,
       120,
-      144
+      121,
+      146
+    ],
+    "correspondence": [
+      171,
+      216
     ],
     "cross": [
       10,
@@ -5411,68 +5909,103 @@
       75,
       95,
       96,
-      135,
-      136
+      137,
+      138,
+      154,
+      173,
+      186,
+      199,
+      218,
+      225
     ],
     "ct01": [
-      152,
-      163
+      155,
+      167
     ],
     "current": [
       104,
-      147
+      149
     ],
     "cyxnpcy9za": [
-      177
+      182
     ],
     "data": [
-      235,
-      259,
-      265,
-      285
+      245,
+      269,
+      275,
+      295
     ],
     "db25u": [
       109,
-      110
+      110,
+      111
+    ],
+    "depends": [
+      160,
+      224
+    ],
+    "derived": [
+      195,
+      196,
+      197,
+      198,
+      214,
+      215
     ],
     "describing": [
+      0,
       20,
+      39,
       68,
-      129,
-      241,
-      278,
-      279,
-      290
+      84,
+      130,
+      226,
+      251,
+      288,
+      289,
+      300
     ],
     "description": [
-      153,
-      165,
-      204,
-      270,
-      291
+      156,
+      169,
+      212,
+      280,
+      301
+    ],
+    "descriptive": [
+      161,
+      162,
+      178,
+      179,
+      203,
+      207
     ],
     "design": [
+      84,
       85,
       87,
       88,
       89,
       105,
       106,
-      113,
-      115,
+      114,
       116,
       117,
-      125,
+      118,
       126,
-      129,
-      131,
-      137,
+      127,
+      130,
+      133,
       139,
-      149
+      141,
+      151
     ],
     "designation": [
-      269,
-      289
+      159,
+      174,
+      219,
+      279,
+      299
     ],
     "detection": [
       14,
@@ -5484,17 +6017,18 @@
       100,
       105,
       106,
-      121,
       122,
-      133,
-      137,
-      142
+      123,
+      135,
+      139,
+      144
     ],
     "devices": [
+      84,
       107,
       108,
-      129,
-      138
+      130,
+      140
     ],
     "dexpi": [
       39,
@@ -5504,24 +6038,35 @@
       77
     ],
     "direction": [
-      235,
-      259
+      245,
+      269
     ],
     "distinct": [
       17,
       36,
       104,
-      147,
-      271,
-      292
+      149,
+      281,
+      302
+    ],
+    "do": [
+      154,
+      199
     ],
     "documentation": [
       13,
       30
     ],
     "documenting": [
-      227,
-      248
+      197,
+      198,
+      215,
+      237,
+      258
+    ],
+    "does": [
+      165,
+      204
     ],
     "domain": [
       10,
@@ -5536,13 +6081,19 @@
       75,
       95,
       96,
-      135,
-      136,
-      170,
-      211
+      137,
+      138,
+      154,
+      173,
+      175,
+      186,
+      199,
+      218,
+      220,
+      225
     ],
     "ea": [
-      235
+      245
     ],
     "ecad": [
       84,
@@ -5551,50 +6102,52 @@
       101,
       107,
       108,
-      114,
-      118,
-      124,
-      129,
-      138,
-      143,
-      217,
-      244
+      115,
+      119,
+      125,
+      130,
+      140,
+      145,
+      227,
+      254
     ],
     "ecadconnection": [
-      217,
-      244
+      227,
+      254
     ],
     "eclass": [
-      264,
-      265,
-      266,
-      284,
-      285,
-      286
+      274,
+      275,
+      276,
+      294,
+      295,
+      296
     ],
     "eclassclass": [
-      264,
-      284
+      274,
+      294
     ],
     "eclassirdi": [
-      265,
-      285
+      275,
+      295
     ],
     "eclasspreferred": [
-      266,
-      286
+      276,
+      296
     ],
     "efzc29ja": [
-      177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
-      184
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190
     ],
     "electrical": [
+      84,
       85,
       87,
       88,
@@ -5605,24 +6158,24 @@
       106,
       107,
       108,
-      111,
       112,
       113,
-      115,
+      114,
       116,
       117,
-      121,
+      118,
       122,
-      125,
+      123,
       126,
-      129,
-      131,
+      127,
+      130,
       133,
-      137,
-      138,
+      135,
       139,
-      148,
-      149
+      140,
+      141,
+      150,
+      151
     ],
     "element": [
       21,
@@ -5632,24 +6185,30 @@
       98,
       101,
       104,
-      114,
-      118,
-      124,
+      115,
+      119,
       125,
       126,
-      130,
-      140,
-      143,
-      147,
+      127,
+      131,
+      132,
+      142,
+      145,
       149,
-      193,
-      242,
-      283
+      151,
+      200,
+      201,
+      252,
+      293
     ],
     "elements": [
       109,
       110,
-      134
+      111,
+      136,
+      153,
+      186,
+      225
     ],
     "elk": [
       18,
@@ -5657,17 +6216,17 @@
       67,
       86,
       90,
-      114,
-      118,
-      161,
-      225
+      115,
+      119,
+      165,
+      235
     ],
     "end": [
       87,
       88,
-      115,
       116,
-      139
+      117,
+      141
     ],
     "endpoint": [
       85,
@@ -5676,28 +6235,29 @@
       89,
       91,
       92,
-      113,
-      115,
+      114,
       116,
       117,
-      119,
+      118,
       120,
-      131,
-      139,
-      144,
-      218,
-      219,
-      221,
-      222,
-      245,
-      246,
-      257
+      121,
+      133,
+      141,
+      146,
+      228,
+      229,
+      231,
+      232,
+      255,
+      256,
+      267
     ],
     "engineering": [
       12,
       13,
       29,
       30,
+      39,
       45,
       47,
       48,
@@ -5725,34 +6285,84 @@
       100,
       105,
       106,
-      136,
-      137,
-      140,
-      141,
+      138,
+      139,
       142,
-      151,
+      143,
+      144,
+      154,
+      155,
+      156,
+      161,
+      162,
+      163,
       164,
-      192,
-      201,
+      167,
+      168,
+      169,
+      170,
+      177,
+      178,
+      179,
+      180,
+      181,
+      186,
+      189,
+      190,
+      197,
+      198,
+      199,
+      202,
+      203,
+      206,
+      207,
+      208,
+      209,
+      211,
+      212,
+      213,
+      215,
+      224,
+      225,
       226,
-      227,
-      231,
       236,
       237,
-      238,
-      239,
-      240,
       241,
+      246,
       247,
       248,
-      252,
-      260,
-      261,
-      262
+      249,
+      250,
+      251,
+      257,
+      258,
+      262,
+      270,
+      271,
+      272
+    ],
+    "entity": [
+      187,
+      188,
+      210
+    ],
+    "entries": [
+      163,
+      164,
+      202
+    ],
+    "entry": [
+      158,
+      159,
+      160,
+      218,
+      219,
+      224
     ],
     "equipment": [
       13,
       30,
+      39,
       53,
       54,
       55,
@@ -5766,9 +6376,18 @@
       56,
       78
     ],
+    "equivalence": [
+      187,
+      188,
+      210
+    ],
     "establish": [
-      230,
-      251
+      154,
+      165,
+      199,
+      204,
+      240,
+      261
     ],
     "evidence": [
       10,
@@ -5779,20 +6398,39 @@
       95,
       99,
       102,
-      135,
-      141,
-      145,
-      228,
-      230,
-      249,
-      251
-    ],
-    "example": [
-      192
+      137,
+      143,
+      147,
+      166,
+      171,
+      182,
+      205,
+      216,
+      238,
+      240,
+      259,
+      261
     ],
     "exchange": [
-      235,
-      259
+      245,
+      269
+    ],
+    "explicit": [
+      158,
+      173,
+      194,
+      195,
+      196,
+      214,
+      218
+    ],
+    "explicitly": [
+      186,
+      225
+    ],
+    "expressing": [
+      109,
+      153
     ],
     "ezxzp": [
       85,
@@ -5832,19 +6470,19 @@
       86,
       87,
       88,
-      113,
       114,
       115,
-      116
+      116,
+      117
     ],
     "fbmdpbm": [
-      164,
-      226,
-      227
+      168,
+      236,
+      237
     ],
     "fbyb3": [
-      276,
-      277
+      286,
+      287
     ],
     "fc": [
       51,
@@ -5859,12 +6497,9 @@
       99
     ],
     "field": [
-      178,
-      185,
-      212
-    ],
-    "fields": [
-      192
+      183,
+      191,
+      221
     ],
     "fjd": [
       42,
@@ -5876,12 +6511,12 @@
       48,
       49,
       50,
-      267,
-      268,
-      269
+      277,
+      278,
+      279
     ],
     "fjl": [
-      217
+      227
     ],
     "for": [
       3,
@@ -5903,20 +6538,33 @@
       38,
       95,
       100,
-      135,
-      142,
-      235,
-      259,
-      265,
-      276,
-      277,
-      285,
-      297
+      137,
+      144,
+      154,
+      157,
+      158,
+      159,
+      166,
+      172,
+      182,
+      199,
+      205,
+      213,
+      217,
+      218,
+      219,
+      245,
+      269,
+      275,
+      286,
+      287,
+      295,
+      307
     ],
     "fq0x": [
-      264,
-      265,
-      266
+      274,
+      275,
+      276
     ],
     "frh": [
       13
@@ -5925,40 +6573,45 @@
       17,
       36,
       104,
-      147,
-      271,
-      292
+      149,
+      175,
+      194,
+      218,
+      220,
+      281,
+      302
     ],
     "fs": [
       49,
       66,
-      164,
-      177,
-      178,
-      179,
-      180,
-      181,
+      168,
       182,
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
       235,
       236,
       237,
       238,
       239,
-      240
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250
     ],
     "ft": [
       8,
-      220
+      230
     ],
     "function": [
       42,
@@ -5974,18 +6627,35 @@
       79,
       82,
       83,
-      226,
-      247
+      236,
+      257
     ],
     "functional": [
-      181,
+      154,
       182,
       183,
       184,
-      202,
-      203
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      199,
+      205,
+      210,
+      211,
+      221,
+      223,
+      224,
+      225
+    ],
+    "functionally": [
+      186,
+      225
     ],
     "functions": [
+      39,
       40,
       41,
       57,
@@ -5999,7 +6669,7 @@
       61
     ],
     "fza": [
-      230
+      240
     ],
     "fzc2": [
       3,
@@ -6033,16 +6703,17 @@
       54
     ],
     "g9pbn": [
-      218,
-      219
+      228,
+      229
     ],
     "gd": [
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
     ],
     "gf0": [
       18,
@@ -6061,7 +6732,7 @@
       65,
       66,
       67,
-      227
+      237
     ],
     "gf0d": [
       6,
@@ -6070,9 +6741,9 @@
       47,
       64,
       100,
-      156,
-      172,
-      218
+      160,
+      177,
+      228
     ],
     "gfw": [
       1,
@@ -6101,83 +6772,92 @@
       103,
       104,
       108,
-      110,
-      112,
-      116,
-      120,
-      122,
-      124,
-      128,
-      154,
-      155,
+      111,
+      113,
+      117,
+      121,
+      123,
+      125,
+      129,
+      157,
       158,
-      160,
-      166,
-      167,
-      169,
+      159,
+      162,
+      164,
+      170,
       171,
+      173,
       174,
-      177,
-      184,
-      191,
-      217,
-      224,
+      176,
+      179,
+      182,
+      190,
+      198,
       227,
-      229,
-      232,
-      238,
-      264,
-      271,
+      234,
+      237,
+      239,
+      242,
+      248,
       274,
-      276,
-      279
+      281,
+      284,
+      286,
+      289
     ],
     "gfzcy9za": [
-      264
+      274
     ],
     "ggvc2hhc": [
-      233
+      186,
+      243
     ],
     "gl0e": [
-      168
+      172
     ],
     "gljcy5": [
       109,
-      110
-    ],
-    "gljcy9ub2": [
+      110,
       111
     ],
-    "gljcy9za": [
+    "gljcy9ub2": [
       112
     ],
+    "gljcy9za": [
+      113
+    ],
     "gllck5hb": [
-      272
+      282
     ],
     "gllcl": [
-      273
+      283
     ],
     "gllcy5": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
-      158
+      158,
+      159,
+      160,
+      161,
+      162
     ],
     "gllcy9ub2": [
-      159
+      163
     ],
     "gllcy9za": [
-      160
+      164
     ],
     "glma": [
       17,
       51,
       97,
-      123,
-      234
+      124,
+      244
+    ],
+    "globally": [
+      167,
+      206
     ],
     "glu": [
       42,
@@ -6189,22 +6869,22 @@
       48,
       49,
       50,
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
       235,
       236,
       237,
       238,
       239,
-      240
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250
     ],
     "glvbk": [
       59,
@@ -6218,8 +6898,8 @@
       67,
       95,
       102,
-      162,
-      228
+      166,
+      238
     ],
     "glvbk5vd": [
       98
@@ -6237,7 +6917,6 @@
       94,
       96,
       103,
-      113,
       114,
       115,
       116,
@@ -6247,28 +6926,34 @@
       120,
       121,
       122,
-      229
+      123,
+      239
     ],
     "glvbm": [
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
     ],
     "gqvc2hhc": [
-      178,
-      185
+      183,
+      191
     ],
     "graphical": [
-      125,
       126,
-      149
+      127,
+      151
     ],
     "group": [
-      171,
-      213
+      176,
+      222
+    ],
+    "grouping": [
+      176,
+      222
     ],
     "gu": [
       6,
@@ -6294,54 +6979,56 @@
       100,
       106,
       107,
-      109,
-      111,
-      115,
-      119,
-      121,
-      126,
+      110,
+      112,
+      116,
+      120,
+      122,
       127,
-      129,
-      152,
-      153,
+      128,
+      130,
+      155,
       156,
-      157,
-      159,
+      160,
       161,
       163,
-      164,
       165,
-      170,
-      172,
-      173,
-      176,
+      167,
+      168,
+      169,
+      175,
+      177,
       178,
-      179,
-      182,
+      181,
       183,
-      185,
+      184,
       186,
+      188,
       189,
-      190,
+      191,
       192,
-      218,
-      219,
-      222,
-      223,
-      225,
-      230,
+      194,
+      196,
+      197,
+      199,
+      228,
+      229,
+      232,
       233,
       235,
-      237,
       240,
-      241,
-      269,
-      270,
-      272,
-      273,
-      278,
-      281,
-      282
+      243,
+      245,
+      247,
+      250,
+      251,
+      279,
+      280,
+      282,
+      283,
+      288,
+      291,
+      292
     ],
     "guvc2hhc": [
       44,
@@ -6350,16 +7037,19 @@
     ],
     "gvk": [
       44,
-      234
+      244
     ],
     "gvt": [
-      152,
-      153,
-      163,
-      165
+      155,
+      156,
+      167,
+      169
     ],
     "gvyc": [
-      227
+      237
+    ],
+    "gx5": [
+      186
     ],
     "has": [
       22,
@@ -6393,8 +7083,6 @@
       81,
       82,
       83,
-      131,
-      132,
       133,
       134,
       135,
@@ -6413,14 +7101,8 @@
       148,
       149,
       150,
-      194,
-      195,
-      196,
-      197,
-      198,
-      199,
-      200,
-      201,
+      151,
+      152,
       202,
       203,
       204,
@@ -6435,16 +7117,15 @@
       213,
       214,
       215,
-      243,
-      244,
-      245,
-      246,
-      247,
-      248,
-      249,
-      250,
-      251,
-      252,
+      216,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224,
       253,
       254,
       255,
@@ -6455,24 +7136,44 @@
       260,
       261,
       262,
-      284,
-      285,
-      286,
-      287,
-      288,
-      289,
-      290,
-      291,
-      292,
-      293,
+      263,
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270,
+      271,
+      272,
       294,
       295,
       296,
-      297
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      305,
+      306,
+      307
+    ],
+    "hasfunctionally": [
+      225
+    ],
+    "hasis": [
+      153
+    ],
+    "hierarchy": [
+      158,
+      218
     ],
     "hj1": [
-      156,
-      172
+      160,
+      177
     ],
     "hj1b": [
       57,
@@ -6488,40 +7189,43 @@
       67
     ],
     "hjld": [
-      227
+      237
     ],
     "hmu": [
-      264,
-      265,
-      266,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
-      273,
       274,
       275,
       276,
       277,
       278,
-      279
+      279,
+      280,
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289
     ],
     "hmvbm9k": [
-      280
+      290
     ],
     "hmvc2hhc": [
-      281
+      291
     ],
     "hrpb24vc2hhc": [
-      153,
-      165,
-      270
+      156,
+      169,
+      280
     ],
     "human": [
       8,
-      24
+      24,
+      157,
+      170,
+      213
     ],
     "hvhd": [
       42,
@@ -6535,17 +7239,17 @@
       50
     ],
     "hvy": [
-      267,
-      268,
-      269
+      277,
+      278,
+      279
     ],
     "hvz": [
       5,
       14,
       15,
-      180,
-      187,
-      231
+      185,
+      193,
+      241
     ],
     "id": [
       49,
@@ -6555,22 +7259,31 @@
       86,
       90,
       101,
-      114,
-      118,
-      124,
-      143,
-      152,
-      163,
-      164,
+      115,
+      119,
+      125,
+      145,
+      155,
+      167,
+      168,
+      184,
+      192,
+      206,
+      209,
+      223,
+      242,
+      265
+    ],
+    "identification": [
+      161,
+      162,
+      178,
       179,
-      186,
-      198,
-      201,
-      214,
-      232,
-      255
+      203,
+      207
     ],
     "identified": [
+      0,
       3,
       4,
       20,
@@ -6578,9 +7291,9 @@
       53,
       54,
       77,
-      278,
-      279,
-      290
+      288,
+      289,
+      300
     ],
     "identifier": [
       7,
@@ -6605,33 +7318,56 @@
       97,
       101,
       104,
-      114,
-      118,
-      123,
+      115,
+      119,
       124,
-      132,
-      143,
-      147,
-      161,
+      125,
+      134,
+      145,
+      149,
+      155,
+      165,
       167,
-      196,
-      208,
-      225,
-      226,
-      234,
-      243,
-      247,
-      256,
-      265,
-      271,
-      285,
-      292
+      168,
+      171,
+      184,
+      192,
+      204,
+      206,
+      209,
+      216,
+      223,
+      235,
+      236,
+      244,
+      253,
+      257,
+      266,
+      275,
+      281,
+      295,
+      302
+    ],
+    "identifiers": [
+      154,
+      180,
+      181,
+      199,
+      208
     ],
     "identifying": [
-      220,
-      232,
-      253,
-      255
+      230,
+      242,
+      263,
+      265
+    ],
+    "identity": [
+      154,
+      165,
+      186,
+      199,
+      204,
+      225
     ],
     "in": [
       11,
@@ -6652,16 +7388,33 @@
       106,
       107,
       108,
-      113,
-      115,
+      114,
       116,
       117,
-      131,
-      137,
-      138,
+      118,
+      133,
       139,
-      232,
-      255
+      140,
+      141,
+      163,
+      164,
+      167,
+      197,
+      198,
+      202,
+      206,
+      215,
+      242,
+      265
+    ],
+    "independent": [
+      171,
+      216
+    ],
+    "inferred": [
+      158,
+      173,
+      218
     ],
     "information": [
       11,
@@ -6670,21 +7423,31 @@
       64,
       75,
       103,
-      111,
       112,
-      146,
+      113,
       148,
-      282
+      150,
+      161,
+      162,
+      172,
+      195,
+      196,
+      203,
+      214,
+      217,
+      273,
+      292
     ],
     "injection": [
       15,
       32
     ],
     "installed": [
-      271,
-      292
+      281,
+      302
     ],
     "instrumentation": [
+      39,
       57,
       58,
       59,
@@ -6696,8 +7459,8 @@
       82
     ],
     "international": [
-      265,
-      285
+      275,
+      295
     ],
     "interpretation": [
       12,
@@ -6706,9 +7469,15 @@
       65,
       76,
       98,
-      140,
-      227,
-      248
+      142,
+      160,
+      224,
+      237,
+      258
+    ],
+    "interpreting": [
+      172,
+      217
     ],
     "inventory": [
       0,
@@ -6723,59 +7492,110 @@
       23,
       26,
       37,
-      228,
-      229,
-      234,
-      249,
-      250,
-      256
+      165,
+      204,
+      238,
+      239,
+      244,
+      259,
+      260,
+      266
+    ],
+    "is": [
+      109,
+      153
     ],
     "item": [
       53,
       54,
       77,
-      153,
+      155,
+      156,
+      161,
+      162,
       165,
-      204
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      203,
+      204,
+      205,
+      206,
+      207,
+      208,
+      209,
+      212,
+      213,
+      216,
+      218,
+      219,
+      220,
+      222,
+      224
+    ],
+    "items": [
+      154,
+      199
     ],
     "its": [
-      221,
-      222,
-      257
+      231,
+      232,
+      267
+    ],
+    "itself": [
+      172,
+      217
     ],
     "j5": [
-      234
+      244
     ],
     "jbn": [
       98,
-      228,
-      229
+      238,
+      239
     ],
     "jd": [
-      152,
-      153,
-      163,
-      165
+      155,
+      156,
+      167,
+      169
     ],
     "jhc2lz": [
-      162
+      166
     ],
     "jk": [
-      179,
-      186
+      184,
+      192,
+      194
     ],
     "jlb": [
       18,
       50,
       67
     ],
+    "join": [
+      173,
+      218
+    ],
     "jpbmd": [
       6
     ],
     "jpc": [
-      153,
-      165,
-      270
+      156,
+      169,
+      280
     ],
     "jvc3": [
       95,
@@ -6784,7 +7604,7 @@
     "jzc9za": [
       52,
       101,
-      124
+      125
     ],
     "l25v": [
       1,
@@ -6793,8 +7613,8 @@
       42,
       57,
       59,
-      274,
-      276
+      284,
+      286
     ],
     "l3": [
       2,
@@ -6819,37 +7639,43 @@
       95,
       97,
       102,
-      113,
+      109,
       114,
-      117,
+      115,
       118,
-      123,
-      162,
-      168,
-      180,
-      187,
-      226,
-      228,
-      231,
-      234,
+      119,
+      124,
+      166,
+      172,
+      185,
+      193,
       236,
-      266,
-      267,
-      268,
-      275,
-      277
+      238,
+      241,
+      244,
+      246,
+      276,
+      277,
+      278,
+      285,
+      287
     ],
     "label": [
-      154,
-      166,
-      205
+      157,
+      170,
+      213
     ],
     "lifecycle": [
+      0,
       20
     ],
     "linking": [
-      226,
-      247
+      236,
+      257
+    ],
+    "links": [
+      154,
+      199
     ],
     "lk": [
       3,
@@ -6914,8 +7740,8 @@
       19,
       50,
       67,
-      276,
-      277
+      286,
+      287
     ],
     "local": [
       49,
@@ -6925,16 +7751,16 @@
       86,
       90,
       101,
-      114,
-      118,
-      124,
-      143,
-      164,
-      201
+      115,
+      119,
+      125,
+      145,
+      168,
+      209
     ],
     "locate": [
-      233,
-      254
+      243,
+      264
     ],
     "location": [
       16,
@@ -6943,14 +7769,14 @@
     "logic": [
       91,
       92,
-      119,
       120,
-      144
+      121,
+      146
     ],
     "logical": [
-      125,
       126,
-      149
+      127,
+      151
     ],
     "manipulates": [
       42,
@@ -6958,50 +7784,64 @@
       71
     ],
     "manufacturer": [
-      267,
-      268,
-      269,
-      282,
-      287,
-      288,
-      289
+      273,
+      277,
+      278,
+      279,
+      292,
+      297,
+      298,
+      299
     ],
     "mapped": [
-      232,
-      233,
-      235,
-      254,
-      255,
-      259
+      242,
+      243,
+      245,
+      264,
+      265,
+      269
     ],
     "mapping": [
+      186,
       225,
-      226,
-      227,
-      230,
-      231,
+      235,
       236,
       237,
-      238,
-      243,
-      247,
-      248,
-      251,
-      252,
-      260,
-      262
-    ],
-    "mappings": [
-      239,
       240,
       241,
-      261
+      246,
+      247,
+      248,
+      253,
+      257,
+      258,
+      261,
+      262,
+      270,
+      272
+    ],
+    "mappings": [
+      226,
+      249,
+      250,
+      251,
+      271
+    ],
+    "materials": [
+      154,
+      163,
+      164,
+      180,
+      181,
+      199,
+      202,
+      208
     ],
     "mb2": [
       86,
       90,
-      114,
-      118
+      115,
+      119
     ],
     "measured": [
       61,
@@ -7013,13 +7853,16 @@
       79
     ],
     "metadata": [
-      221,
-      222,
-      257
+      178,
+      179,
+      207,
+      231,
+      232,
+      267
     ],
     "method": [
-      230,
-      251
+      240,
+      261
     ],
     "model": [
       49,
@@ -7034,11 +7877,11 @@
       101,
       107,
       108,
-      114,
-      118,
-      124,
-      138,
-      143
+      115,
+      119,
+      125,
+      140,
+      145
     ],
     "modeling": [
       5,
@@ -7049,35 +7892,35 @@
       35
     ],
     "mu": [
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
       235,
       236,
       237,
-      238
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248
     ],
     "mvbm9k": [
-      239
+      249
     ],
     "mvc2hhc": [
-      240
+      250
     ],
     "mywjlb": [
-      154,
-      166
+      157,
+      170
     ],
     "n0": [
       96,
       103,
-      229
+      239
     ],
     "n0a": [
       42,
@@ -7098,26 +7941,29 @@
       65,
       66,
       67,
-      226
+      236
     ],
     "name": [
       8,
       24,
-      236,
-      262,
-      266,
-      267,
+      183,
+      191,
+      221,
+      246,
       272,
-      286,
-      287,
-      294
+      276,
+      277,
+      282,
+      296,
+      297,
+      304
     ],
     "namespace": [
-      220,
-      253
+      230,
+      263
     ],
     "ndb": [
-      264
+      274
     ],
     "neb21ha": [
       95,
@@ -7127,60 +7973,64 @@
       50,
       67,
       83,
-      226,
-      247
+      167,
+      206,
+      236,
+      257
     ],
     "network": [
-      219,
-      246
+      229,
+      256
     ],
     "nhb": [
       86,
       90,
-      114,
-      118
+      115,
+      119
     ],
     "njuk": [
-      265
+      275
     ],
     "nl": [
       95,
       102,
-      178,
-      179,
-      185,
-      186,
-      226,
-      228
+      183,
+      184,
+      191,
+      192,
+      236,
+      238
     ],
     "nlb": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
-      158
+      158,
+      159,
+      160,
+      161,
+      162
     ],
     "nlcy5": [
-      185,
-      186,
-      187,
-      188,
-      189
+      191,
+      192,
+      193,
+      194,
+      195,
+      196
     ],
     "nlcy9ub2": [
-      190
+      197
     ],
     "nlcy9za": [
-      191
+      198
     ],
     "nld": [
       18,
       50,
       67,
-      161,
-      225
+      165,
+      235
     ],
     "no": [
       2,
@@ -7211,47 +8061,63 @@
       112,
       113,
       114,
-      117,
+      115,
       118,
-      123,
-      162,
-      168,
-      180,
-      187,
-      220,
-      226,
-      228,
-      231,
-      234,
+      119,
+      124,
+      166,
+      172,
+      185,
+      193,
+      230,
       236,
-      265,
-      266,
-      267,
-      268,
-      275,
-      277
-    ],
-    "node": [
-      232,
-      233,
-      237,
       238,
       241,
-      254,
-      255,
-      260
+      244,
+      246,
+      275,
+      276,
+      277,
+      278,
+      285,
+      287
+    ],
+    "node": [
+      226,
+      242,
+      243,
+      247,
+      248,
+      251,
+      264,
+      265,
+      270
     ],
     "nodes": [
-      239,
-      240,
-      261
+      249,
+      250,
+      271
     ],
     "not": [
       50,
       67,
       83,
-      226,
-      247
+      154,
+      158,
+      165,
+      167,
+      172,
+      173,
+      187,
+      188,
+      199,
+      204,
+      206,
+      210,
+      217,
+      218,
+      236,
+      257
     ],
     "note": [
       12,
@@ -7260,9 +8126,9 @@
       65,
       76,
       98,
-      140,
-      227,
-      248
+      142,
+      237,
+      258
     ],
     "np": [
       10,
@@ -7271,24 +8137,21 @@
       47,
       63,
       64,
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
     ],
     "npb": [
       19
     ],
     "nqcm": [
-      266
+      276
     ],
     "nsxrlb": [
-      161,
-      162,
-      163,
-      164,
       165,
       166,
       167,
@@ -7300,20 +8163,28 @@
       173,
       174,
       175,
-      176
+      176,
+      177,
+      178,
+      179,
+      180,
+      181
     ],
     "number": [
-      268,
-      273,
-      288,
-      295
+      278,
+      283,
+      298,
+      305
     ],
     "nv": [
       95,
       96,
-      162,
-      228,
-      229
+      166,
+      238,
+      239
+    ],
+    "nvbm5l": [
+      109
     ],
     "nyb3": [
       10,
@@ -7324,13 +8195,13 @@
       64
     ],
     "nyw51": [
-      267,
-      268,
-      269
+      277,
+      278,
+      279
     ],
     "nyxbwa": [
-      230,
-      231
+      240,
+      241
     ],
     "nz": [
       10,
@@ -7404,98 +8275,144 @@
       104,
       107,
       108,
-      109,
       110,
       111,
       112,
-      121,
+      113,
       122,
-      127,
+      123,
       128,
-      133,
-      134,
+      129,
+      135,
       136,
       138,
-      142,
-      146,
-      147,
+      140,
+      144,
       148,
+      149,
       150,
-      217,
-      218,
-      223,
-      224,
-      225,
-      229,
-      231,
-      235,
-      239,
-      240,
-      243,
-      244,
-      245,
-      250,
-      252,
-      258,
-      259,
-      261,
-      266,
-      267,
-      270,
-      271,
-      272,
-      274,
-      275,
-      280,
-      281,
-      286,
-      287,
-      291,
-      292,
-      293,
-      294,
-      296
-    ],
-    "opc": [
+      152,
+      154,
+      155,
+      156,
+      160,
+      163,
+      164,
+      167,
+      169,
+      170,
+      173,
+      174,
+      177,
+      180,
+      181,
+      183,
+      184,
+      185,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      197,
+      198,
+      199,
+      202,
+      206,
+      208,
+      210,
+      211,
+      212,
+      213,
+      215,
       218,
       219,
-      220,
       221,
-      222,
       223,
       224,
-      231,
-      232,
+      227,
+      228,
       233,
-      237,
-      238,
+      234,
+      235,
       239,
-      240,
       241,
       245,
-      246,
-      252,
+      249,
+      250,
       253,
       254,
       255,
-      257,
-      258,
       260,
-      261
+      262,
+      268,
+      269,
+      271,
+      276,
+      277,
+      280,
+      281,
+      282,
+      284,
+      285,
+      290,
+      291,
+      296,
+      297,
+      301,
+      302,
+      303,
+      304,
+      306
+    ],
+    "on": [
+      160,
+      224
+    ],
+    "opc": [
+      226,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234,
+      241,
+      242,
+      243,
+      247,
+      248,
+      249,
+      250,
+      251,
+      255,
+      256,
+      262,
+      263,
+      264,
+      265,
+      267,
+      268,
+      270,
+      271
     ],
     "opcuabrowse": [
-      233,
-      254
+      243,
+      264
     ],
     "opcuaconnectivity": [
-      216,
-      241
+      226,
+      251
     ],
     "opcuanode": [
-      232,
-      255
+      242,
+      265
     ],
     "or": [
+      0,
       9,
       12,
       13,
@@ -7518,21 +8435,43 @@
       94,
       98,
       101,
-      114,
-      118,
-      121,
+      115,
+      119,
       122,
-      124,
+      123,
       125,
       126,
-      133,
-      140,
-      143,
-      149,
-      227,
-      230,
-      248,
-      251
+      127,
+      135,
+      142,
+      145,
+      151,
+      166,
+      167,
+      169,
+      173,
+      175,
+      176,
+      178,
+      179,
+      182,
+      186,
+      205,
+      206,
+      207,
+      212,
+      218,
+      220,
+      222,
+      225,
+      237,
+      240,
+      258,
+      261
+    ],
+    "originates": [
+      175,
+      220
     ],
     "own": [
       50,
@@ -7540,25 +8479,40 @@
       83
     ],
     "oyw1l": [
-      236
+      246
     ],
     "parent": [
-      188,
-      189,
-      190,
+      154,
+      158,
+      161,
+      162,
+      173,
       191,
-      206,
-      207
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      203,
+      214,
+      215,
+      218,
+      221,
+      223,
+      224
     ],
     "part": [
-      268,
-      273,
-      288,
-      295
+      278,
+      283,
+      298,
+      305
     ],
     "path": [
-      233,
-      254
+      243,
+      264
     ],
     "plant": [
       13,
@@ -7567,37 +8521,43 @@
     "plcend": [
       91,
       92,
-      119,
       120,
-      144
+      121,
+      146
     ],
     "point": [
       87,
       88,
       91,
       92,
-      115,
       116,
-      119,
+      117,
       120,
-      139,
-      144,
-      217,
-      244
+      121,
+      141,
+      146,
+      227,
+      254
     ],
     "points": [
+      84,
       93,
       94,
-      121,
       122,
-      129,
-      133
+      123,
+      130,
+      135
     ],
     "preferred": [
-      266,
-      286
+      276,
+      296
+    ],
+    "preserved": [
+      194,
+      218
     ],
     "process": [
+      39,
       40,
       41,
       42,
@@ -7624,21 +8584,14 @@
       36,
       102,
       103,
-      145,
-      146,
+      147,
+      148,
       167,
-      208,
-      263,
-      264,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
+      171,
+      206,
+      216,
+      273,
       274,
-      275,
-      276,
       277,
       278,
       279,
@@ -7646,44 +8599,75 @@
       281,
       282,
       284,
+      285,
+      286,
       287,
       288,
       289,
       290,
       291,
       292,
-      293,
       294,
-      296,
-      297
+      297,
+      298,
+      299,
+      300,
+      301,
+      302,
+      303,
+      304,
+      306,
+      307
     ],
     "products": [
-      280,
-      281,
-      293
+      290,
+      291,
+      303
     ],
     "programmable": [
       91,
       92,
-      119,
       120,
-      144
+      121,
+      146
     ],
     "properties": [
-      274,
-      275,
-      296
+      284,
+      285,
+      306
     ],
     "property": [
-      276,
-      277,
-      297
+      286,
+      287,
+      307
+    ],
+    "provenance": [
+      178,
+      179,
+      180,
+      181,
+      187,
+      188,
+      195,
+      196,
+      207,
+      208,
+      210,
+      214
+    ],
+    "provided": [
+      156,
+      166,
+      169,
+      182,
+      205,
+      212
     ],
     "puenvqu5v": [
-      232
+      242
     ],
     "puenvqujyb3dz": [
-      233
+      243
     ],
     "q29ubm": [
       85,
@@ -7696,7 +8680,6 @@
       92,
       93,
       94,
-      113,
       114,
       115,
       116,
@@ -7705,31 +8688,28 @@
       119,
       120,
       121,
-      122
+      122,
+      123
     ],
     "q3": [
       95,
       96
     ],
     "qb2lud": [
-      217
+      227
     ],
     "qcm9kd": [
-      167,
-      270,
-      271
+      171,
+      280,
+      281
     ],
     "qcm9w": [
-      274,
-      275,
-      276,
-      277
+      284,
+      285,
+      286,
+      287
     ],
     "qk9": [
-      161,
-      162,
-      163,
-      164,
       165,
       166,
       167,
@@ -7741,20 +8721,25 @@
       173,
       174,
       175,
-      176
+      176,
+      177,
+      178,
+      179,
+      180,
+      181
     ],
     "qm": [
-      230
+      240
     ],
     "qtenfbm": [
       89,
       90,
       91,
       92,
-      117,
       118,
       119,
-      120
+      120,
+      121
     ],
     "qu": [
       51,
@@ -7767,17 +8752,18 @@
       65,
       76,
       98,
-      140
+      142
     ],
     "quantity": [
-      168,
-      209
+      172,
+      217
     ],
     "qvbm9k": [
       53
     ],
     "qvc2hhc": [
-      54
+      54,
+      194
     ],
     "qwn0d": [
       40,
@@ -7814,17 +8800,18 @@
       19,
       51,
       97,
-      123,
-      152,
-      153,
-      154,
+      124,
       155,
       156,
       157,
       158,
       159,
       160,
-      234
+      161,
+      162,
+      163,
+      164,
+      244
     ],
     "qxnzb2": [
       10,
@@ -7833,37 +8820,42 @@
       47,
       63,
       64,
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
-    ],
-    "qyxjlbn": [
+      182,
+      183,
+      184,
       185,
       186,
       187,
-      188,
-      189
+      188
+    ],
+    "qyxjlbn": [
+      191,
+      192,
+      193,
+      194,
+      195,
+      196
     ],
     "r1": [
       17
     ],
     "r1cm": [
-      156,
-      172
+      160,
+      177
     ],
     "r5": [
-      276,
-      277
+      286,
+      287
     ],
     "rd": [
-      168
+      172
     ],
     "readable": [
       8,
-      24
+      24,
+      157,
+      170,
+      213
     ],
     "record": [
       3,
@@ -7871,22 +8863,36 @@
       7,
       22,
       23,
+      155,
       157,
-      158,
-      173,
-      174,
+      161,
+      162,
+      165,
+      175,
+      178,
       179,
-      186,
+      184,
+      192,
+      194,
       195,
-      199,
+      196,
+      203,
+      204,
+      206,
+      207,
+      213,
       214,
-      234,
-      256,
-      278,
-      279,
-      290
+      218,
+      220,
+      223,
+      244,
+      266,
+      288,
+      289,
+      300
     ],
     "recorded": [
+      0,
       5,
       6,
       9,
@@ -7920,46 +8926,110 @@
       100,
       102,
       103,
-      135,
-      136,
-      141,
-      142,
-      145,
-      146,
-      276,
-      277,
-      297
+      137,
+      138,
+      143,
+      144,
+      147,
+      148,
+      154,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      171,
+      173,
+      174,
+      177,
+      178,
+      179,
+      180,
+      181,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      193,
+      194,
+      199,
+      202,
+      203,
+      204,
+      205,
+      207,
+      208,
+      210,
+      211,
+      216,
+      218,
+      219,
+      224,
+      225,
+      286,
+      287,
+      307
     ],
     "records": [
       1,
       2,
       26,
-      280,
-      281,
-      293
+      180,
+      181,
+      189,
+      190,
+      197,
+      198,
+      208,
+      211,
+      215,
+      290,
+      291,
+      303
     ],
     "reference": [
-      188,
-      189,
-      206,
-      217,
-      226,
-      244,
-      247
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      214,
+      218,
+      221,
+      223,
+      224,
+      227,
+      236,
+      254,
+      257
+    ],
+    "referenced": [
+      186,
+      225
     ],
     "references": [
+      0,
       20,
-      190,
-      191,
-      207
+      154,
+      197,
+      198,
+      199,
+      215
     ],
     "referencing": [
-      234,
-      256
+      244,
+      266
     ],
     "registration": [
-      265,
-      285
+      275,
+      295
     ],
     "related": [
       18,
@@ -7968,9 +9038,27 @@
       67,
       83,
       104,
-      147,
-      234,
-      256
+      149,
+      244,
+      266
+    ],
+    "relationship": [
+      109,
+      131,
+      153,
+      158,
+      161,
+      162,
+      173,
+      186,
+      194,
+      195,
+      196,
+      200,
+      203,
+      214,
+      218,
+      225
     ],
     "representations": [
       55,
@@ -7992,22 +9080,33 @@
       106,
       107,
       108,
-      123,
-      132,
-      137,
-      138,
-      236,
-      262
+      124,
+      134,
+      139,
+      140,
+      155,
+      156,
+      206,
+      212,
+      246,
+      272
     ],
     "representing": [
-      125,
       126,
-      149
+      127,
+      151
+    ],
+    "requires": [
+      171,
+      216
     ],
     "revision": [
-      155,
-      169,
-      210
+      159,
+      161,
+      162,
+      174,
+      203,
+      219
     ],
     "rg9t": [
       10,
@@ -8047,12 +9146,12 @@
       108
     ],
     "rgvz": [
-      153,
-      165,
-      270
+      156,
+      169,
+      280
     ],
     "rgvza": [
-      269
+      279
     ],
     "rhd": [
       5,
@@ -8067,12 +9166,12 @@
       65,
       66,
       67,
-      180,
-      187,
-      231
+      185,
+      193,
+      241
     ],
     "rjl3": [
-      265
+      275
     ],
     "rjzgvud": [
       17
@@ -8087,28 +9186,31 @@
       93,
       107,
       109,
-      111,
-      115,
-      119,
-      121,
-      127,
-      157,
-      159,
+      110,
+      112,
+      116,
+      120,
+      122,
+      128,
+      158,
+      161,
+      163,
       173,
-      183,
-      190,
-      223,
-      237,
-      276,
-      277,
-      278
+      178,
+      189,
+      197,
+      233,
+      247,
+      286,
+      287,
+      288
     ],
     "rlcn": [
       98
     ],
     "rmllb": [
-      178,
-      185
+      183,
+      191
     ],
     "rn": [
       40,
@@ -8133,41 +9235,43 @@
       65,
       66,
       67,
-      177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
-      184
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190
     ],
     "rod": [
-      273
+      283
     ],
     "rp": [
       7,
       45,
       62,
       104,
-      167,
-      271
+      171,
+      281
     ],
     "rpb24vc2hhc": [
-      235
+      245
     ],
     "rpb25": [
-      217
+      227
     ],
     "rpb25hb": [
-      177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
-      184
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190
     ],
     "rpb25z": [
       40,
@@ -8202,38 +9306,39 @@
       90,
       91,
       92,
-      113,
       114,
       115,
       116,
       117,
       118,
       119,
-      120
+      120,
+      121
     ],
     "rszwzlcm": [
-      185,
-      186,
-      187,
-      188,
-      189
+      191,
+      192,
+      193,
+      194,
+      195,
+      196
     ],
     "rtd": [
-      218
+      228
     ],
     "runbrenvbm5l": [
-      217
+      227
     ],
     "rvcmwvc2hhc": [
-      219
-    ],
-    "rvcnl": [
-      228,
       229
     ],
+    "rvcnl": [
+      238,
+      239
+    ],
     "rw5kc": [
-      218,
-      219
+      228,
+      229
     ],
     "rw5na": [
       98,
@@ -8258,8 +9363,8 @@
       65,
       66,
       67,
-      180,
-      187
+      185,
+      193
     ],
     "s": [
       50,
@@ -8267,38 +9372,42 @@
       83
     ],
     "schematic": [
+      84,
       109,
       110,
       111,
       112,
-      127,
+      113,
       128,
       129,
-      134,
-      148,
-      150
+      130,
+      136,
+      150,
+      152,
+      153
     ],
     "schematics": [
-      111,
       112,
-      148
+      113,
+      150
     ],
     "server": [
-      218,
-      219,
-      221,
-      222,
+      226,
+      228,
+      229,
+      231,
       232,
-      241,
-      245,
-      246,
+      242,
+      251,
       255,
-      257
+      256,
+      265,
+      267
     ],
     "servers": [
-      223,
-      224,
-      258
+      233,
+      234,
+      268
     ],
     "shacl": [
       1,
@@ -8316,33 +9425,33 @@
       93,
       105,
       107,
-      109,
-      111,
-      115,
-      119,
-      121,
-      125,
-      127,
-      129,
-      157,
-      159,
-      173,
-      175,
-      181,
-      183,
-      188,
-      190,
-      192,
-      221,
-      223,
-      237,
-      239,
-      241,
-      274,
-      276,
-      278,
-      280,
-      282
+      110,
+      112,
+      116,
+      120,
+      122,
+      126,
+      128,
+      130,
+      161,
+      163,
+      178,
+      180,
+      187,
+      189,
+      195,
+      197,
+      199,
+      231,
+      233,
+      247,
+      249,
+      251,
+      284,
+      286,
+      288,
+      290,
+      292
     ],
     "shape": [
       1,
@@ -8360,59 +9469,60 @@
       93,
       105,
       107,
-      109,
-      111,
-      115,
-      119,
-      121,
-      125,
-      127,
-      129,
-      157,
-      159,
-      173,
-      175,
-      181,
-      183,
-      188,
-      190,
-      192,
-      221,
-      223,
-      237,
-      239,
-      241,
-      274,
-      276,
-      278,
-      280,
-      282
+      110,
+      112,
+      116,
+      120,
+      122,
+      126,
+      128,
+      130,
+      161,
+      163,
+      178,
+      180,
+      187,
+      189,
+      195,
+      197,
+      199,
+      231,
+      233,
+      247,
+      249,
+      251,
+      284,
+      286,
+      288,
+      290,
+      292
     ],
     "signal": [
-      225,
       226,
-      230,
-      231,
       235,
       236,
-      237,
-      238,
-      239,
       240,
       241,
-      243,
+      245,
+      246,
       247,
+      248,
+      249,
+      250,
       251,
-      252,
-      259,
-      260,
+      253,
+      257,
       261,
-      262
+      262,
+      269,
+      270,
+      271,
+      272
     ],
     "signals": [
-      239,
-      240,
-      261
+      249,
+      250,
+      271
     ],
     "simulation": [
       19,
@@ -8421,10 +9531,10 @@
     "smc": [
       21,
       69,
-      130,
-      193,
-      242,
-      283
+      132,
+      201,
+      252,
+      293
     ],
     "source": [
       49,
@@ -8434,27 +9544,71 @@
       86,
       90,
       101,
-      114,
-      118,
-      124,
-      143,
-      170,
-      171,
+      115,
+      119,
+      125,
+      145,
+      154,
+      155,
+      156,
+      159,
+      160,
+      163,
+      164,
+      166,
+      167,
+      168,
+      169,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
       178,
       179,
+      182,
+      183,
+      184,
       185,
-      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      202,
+      205,
+      206,
+      207,
+      209,
+      210,
       211,
       212,
-      213,
-      214
+      214,
+      215,
+      217,
+      218,
+      219,
+      220,
+      221,
+      222,
+      223,
+      224
     ],
     "space": [
-      232,
-      237,
-      238,
-      255,
-      260
+      242,
+      247,
+      248,
+      265,
+      270
     ],
     "status": [
       5,
@@ -8475,52 +9629,87 @@
       96,
       100,
       103,
-      136,
-      142,
-      146,
-      156,
-      172,
-      180,
-      187,
-      215,
-      217,
-      218,
-      229,
-      231,
-      244,
-      245,
-      250,
-      252
+      138,
+      144,
+      148,
+      160,
+      161,
+      162,
+      177,
+      185,
+      193,
+      195,
+      196,
+      203,
+      214,
+      224,
+      227,
+      228,
+      239,
+      241,
+      254,
+      255,
+      260,
+      262
     ],
     "statuses": [
+      0,
       20
     ],
+    "structural": [
+      160,
+      161,
+      162,
+      178,
+      179,
+      193,
+      195,
+      196,
+      203,
+      207,
+      214,
+      224
+    ],
     "structure": [
-      156,
-      172,
-      180,
-      187,
-      192,
-      215
+      160,
+      163,
+      164,
+      177,
+      185,
+      193,
+      202,
+      224
     ],
     "submodel": [
+      0,
       20,
       21,
+      39,
       68,
       69,
-      129,
+      84,
       130,
-      193,
-      242,
-      282,
-      283
+      132,
+      154,
+      199,
+      201,
+      252,
+      273,
+      292,
+      293
     ],
     "supplier": [
-      272,
       273,
       282,
-      294,
-      295
+      283,
+      292,
+      304,
+      305
+    ],
+    "supplying": [
+      183,
+      191,
+      221
     ],
     "supporting": [
       46,
@@ -8528,10 +9717,13 @@
       74,
       99,
       102,
-      141,
-      145,
-      228,
-      249
+      143,
+      147,
+      184,
+      192,
+      223,
+      238,
+      259
     ],
     "sw50": [
       12,
@@ -8539,7 +9731,7 @@
       65
     ],
     "sw52": [
-      234
+      244
     ],
     "sw5q": [
       15
@@ -8560,54 +9752,65 @@
     "swqvc2hhc": [
       49,
       66,
-      152,
-      163,
-      164,
-      179,
-      186
+      155,
+      167,
+      168,
+      184,
+      192
     ],
     "swrlbn": [
       7,
       45,
       62,
       104,
-      167,
-      271
+      171,
+      281
     ],
     "symbol": [
       93,
       94,
-      121,
       122,
-      125,
+      123,
       126,
-      133,
-      149
+      127,
+      135,
+      151
     ],
     "symbols": [
-      127,
+      84,
       128,
       129,
-      150
+      130,
+      152
+    ],
+    "system": [
+      168,
+      175,
+      209,
+      220
+    ],
+    "szwnvcm": [
+      158,
+      173
     ],
     "szwxhd": [
-      234
+      244
     ],
     "szxzpc2lvbi9za": [
-      155,
-      169
+      159,
+      174
     ],
     "ta": [
-      235,
-      236
+      245,
+      246
     ],
     "tag": [
       13,
       30
     ],
     "tb3": [
-      170,
-      171
+      175,
+      176
     ],
     "td": [
       6,
@@ -8616,13 +9819,12 @@
       47,
       64,
       100,
-      156,
-      172,
-      272,
-      273
+      160,
+      177,
+      282,
+      283
     ],
     "te": [
-      113,
       114,
       115,
       116,
@@ -8635,36 +9837,39 @@
       123,
       124,
       125,
-      126
+      126,
+      127
     ],
     "technical": [
-      274,
-      275,
-      276,
-      277,
-      282,
-      296,
-      297
+      273,
+      284,
+      285,
+      286,
+      287,
+      292,
+      306,
+      307
     ],
     "template": [
-      151,
-      192,
-      241
+      154,
+      199,
+      226,
+      251
     ],
     "tep": [
-      151,
-      192,
-      216,
-      241
+      154,
+      199,
+      226,
+      251
     ],
     "textual": [
-      270,
-      291
+      280,
+      301
     ],
     "tg9j": [
       52,
       101,
-      124
+      125
     ],
     "that": [
       42,
@@ -8738,77 +9943,124 @@
       106,
       107,
       108,
-      113,
       114,
       115,
       116,
       117,
       118,
-      123,
+      119,
       124,
-      131,
-      132,
-      135,
+      125,
+      133,
+      134,
       137,
-      138,
       139,
       140,
+      141,
       142,
-      143,
-      147,
-      217,
+      144,
+      145,
+      149,
+      155,
+      156,
+      157,
+      159,
+      160,
+      163,
+      164,
+      165,
+      167,
+      168,
+      169,
+      170,
+      171,
+      173,
+      174,
+      175,
+      176,
+      177,
+      183,
+      184,
+      185,
+      191,
+      192,
+      193,
+      194,
+      197,
+      198,
+      202,
+      204,
+      206,
+      209,
+      212,
+      213,
+      215,
+      216,
       218,
       219,
-      225,
-      226,
+      220,
+      221,
+      222,
+      223,
+      224,
+      227,
       228,
       229,
-      230,
-      231,
-      232,
-      233,
       235,
+      236,
+      238,
+      239,
+      240,
+      241,
+      242,
       243,
-      244,
       245,
-      246,
-      247,
-      249,
-      250,
-      251,
-      252,
+      253,
       254,
       255,
+      256,
+      257,
       259,
+      260,
+      261,
+      262,
       264,
       265,
-      266,
-      267,
-      268,
       269,
-      270,
-      271,
-      272,
-      273,
       274,
       275,
       276,
       277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
       284,
       285,
       286,
       287,
-      288,
-      289,
-      291,
-      292,
       294,
       295,
       296,
-      297
+      297,
+      298,
+      299,
+      301,
+      302,
+      304,
+      305,
+      306,
+      307
     ],
     "their": [
+      0,
       20
+    ],
+    "themselves": [
+      154,
+      199
     ],
     "this": [
       7,
@@ -8816,22 +10068,36 @@
       50,
       67,
       83,
-      225,
-      227,
-      236,
-      243,
-      248,
-      262
+      155,
+      158,
+      167,
+      168,
+      182,
+      184,
+      191,
+      192,
+      205,
+      206,
+      209,
+      218,
+      221,
+      223,
+      235,
+      237,
+      246,
+      253,
+      258,
+      272
     ],
     "tm": [
       8,
-      220
+      230
     ],
     "tm90": [
-      227
+      237
     ],
     "tn": [
-      268
+      278
     ],
     "to": [
       11,
@@ -8855,34 +10121,78 @@
       94,
       96,
       101,
-      113,
+      109,
       114,
-      117,
+      115,
       118,
-      121,
+      119,
       122,
-      124,
-      131,
+      123,
+      125,
       133,
-      136,
-      143,
-      217,
-      219,
+      135,
+      138,
+      145,
+      153,
+      168,
+      176,
+      209,
+      222,
       226,
-      230,
-      231,
-      233,
+      227,
+      229,
+      236,
+      240,
       241,
-      244,
-      246,
-      247,
+      243,
       251,
-      252,
-      254
+      254,
+      256,
+      257,
+      261,
+      262,
+      264
     ],
     "twfwc": [
-      225,
-      226,
+      235,
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250
+    ],
+    "two": [
+      109,
+      153
+    ],
+    "type": [
+      9,
+      25
+    ],
+    "tzxj2": [
+      227,
+      228,
+      229,
+      230,
+      231,
+      232
+    ],
+    "u2": [
+      109,
+      110,
+      111,
+      112,
+      113,
       227,
       228,
       229,
@@ -8890,45 +10200,13 @@
       231,
       232,
       233,
-      234,
-      235,
-      236,
-      237,
-      238,
-      239,
-      240
-    ],
-    "type": [
-      9,
-      25
-    ],
-    "tzxj2": [
-      217,
-      218,
-      219,
-      220,
-      221,
-      222
-    ],
-    "u2": [
-      109,
-      110,
-      111,
-      112,
-      217,
-      218,
-      219,
-      220,
-      221,
-      222,
-      223,
-      224
+      234
     ],
     "u291cm": [
-      178,
-      179,
-      185,
-      186
+      183,
+      184,
+      191,
+      192
     ],
     "u2hhc": [
       55,
@@ -8936,49 +10214,48 @@
       91,
       93,
       107,
-      109,
-      111,
-      115,
-      119,
-      121,
-      127,
-      157,
-      159,
-      173,
-      183,
-      190,
-      223,
-      237,
-      278
+      110,
+      112,
+      116,
+      120,
+      122,
+      128,
+      161,
+      163,
+      178,
+      189,
+      197,
+      233,
+      247,
+      288
     ],
     "u2lnbm": [
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
       235,
       236,
       237,
       238,
       239,
-      240
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250
     ],
     "u3": [
       5,
       14,
       15,
-      180,
-      187,
-      231
+      185,
+      193,
+      241
     ],
     "u3lt": [
-      113,
       114,
       115,
       116,
@@ -8993,57 +10270,50 @@
       125,
       126,
       127,
-      128
+      128,
+      129
     ],
     "ua": [
-      218,
-      219,
-      220,
-      221,
-      222,
-      223,
-      224,
+      226,
+      228,
+      229,
+      230,
       231,
       232,
       233,
-      237,
-      238,
-      239,
-      240,
+      234,
       241,
-      245,
-      246,
-      252,
-      253,
-      254,
+      242,
+      243,
+      247,
+      248,
+      249,
+      250,
+      251,
       255,
-      257,
-      258,
-      260,
-      261
+      256,
+      262,
+      263,
+      264,
+      265,
+      267,
+      268,
+      270,
+      271
     ],
     "ugfy": [
-      185,
-      186,
-      187,
-      188,
-      189,
-      190,
-      191
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198
     ],
     "uhjv": [
       102,
       103,
-      264,
-      265,
-      266,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
-      273,
       274,
       275,
       276,
@@ -9051,49 +10321,61 @@
       278,
       279,
       280,
-      281
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291
     ],
     "ujhc2lz": [
-      168
+      172
     ],
     "um": [
       104,
-      179,
-      185,
-      186,
-      187,
-      188,
-      189,
-      190,
+      184,
       191,
-      226
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      236
     ],
     "uncertainty": [
-      227,
-      248
+      237,
+      258
     ],
-    "unpopulated": [
-      192
+    "unique": [
+      167,
+      206
     ],
     "upon": [
       44,
       70
     ],
     "uri": [
-      220,
-      253
+      230,
+      263
     ],
     "url": [
-      219,
-      246
+      229,
+      256
     ],
     "used": [
-      219,
-      230,
-      233,
-      246,
-      251,
-      254
+      229,
+      240,
+      243,
+      256,
+      261,
+      264
     ],
     "uu": [
       85,
@@ -9116,23 +10398,24 @@
       102,
       103,
       104,
-      185,
-      186,
-      187
+      191,
+      192,
+      193,
+      194
     ],
     "uvbm9k": [
       105,
-      188
+      195
     ],
     "uvc2hhc": [
       106,
-      189
+      196
     ],
     "uzwnobmlj": [
-      274,
-      275,
-      276,
-      277
+      284,
+      285,
+      286,
+      287
     ],
     "v0": [
       3,
@@ -9159,13 +10442,17 @@
       104
     ],
     "v2": [
-      151,
-      192
+      154,
+      199
     ],
     "v2a": [
       95,
       102,
-      228
+      238
+    ],
+    "value": [
+      172,
+      217
     ],
     "variable": [
       42,
@@ -9180,27 +10467,32 @@
       82
     ],
     "veb21ha": [
-      170
+      175
     ],
     "verification": [
       99,
       100,
       102,
       103,
-      141,
-      142,
-      145,
-      146
+      143,
+      144,
+      147,
+      148
+    ],
+    "verified": [
+      186,
+      225
     ],
     "vhcm91c": [
-      171
+      176
     ],
     "vhlw": [
       9
     ],
     "vjb3": [
-      179,
-      186
+      184,
+      192,
+      194
     ],
     "vjd": [
       85,
@@ -9213,7 +10505,6 @@
       92,
       93,
       94,
-      113,
       114,
       115,
       116,
@@ -9222,20 +10513,18 @@
       119,
       120,
       121,
-      122
+      122,
+      123
     ],
     "vjl": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
       158,
+      159,
+      160,
       161,
       162,
-      163,
-      164,
       165,
       166,
       167,
@@ -9245,38 +10534,48 @@
       171,
       172,
       173,
-      174
+      174,
+      175,
+      176,
+      177,
+      178,
+      179
     ],
     "vk": [
       61
     ],
     "vlcmlu": [
-      164,
-      226,
-      227
+      168,
+      236,
+      237
     ],
     "vm": [
       44,
       61,
-      185,
-      186,
-      187,
-      188,
-      189,
-      190,
       191,
-      226,
-      266
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      236,
+      276
+    ],
+    "vocabulary": [
+      160,
+      224
     ],
     "vs": [
       104
     ],
     "vt": [
-      268
+      278
     ],
     "vtd": [
-      156,
-      172
+      160,
+      177
     ],
     "vu": [
       12,
@@ -9302,11 +10601,6 @@
       65,
       66,
       67,
-      177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
       184,
@@ -9314,49 +10608,59 @@
       186,
       187,
       188,
-      189
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196
+    ],
+    "vud": [
+      158,
+      173
     ],
     "vvjjl3": [
-      220
+      230
     ],
     "vxd": [
       13
     ],
     "vy": [
-      170,
-      171,
-      217,
-      268
+      175,
+      176,
+      227,
+      278
     ],
     "vycy5": [
-      217,
-      218,
-      219,
-      220,
-      221,
-      222
+      227,
+      228,
+      229,
+      230,
+      231,
+      232
     ],
     "vycy9ub2": [
-      223
+      233
     ],
     "vycy9za": [
-      224
+      234
     ],
     "vydm": [
-      217,
-      218,
-      219,
-      220,
-      221,
-      222,
-      223,
-      224
+      227,
+      228,
+      229,
+      230,
+      231,
+      232,
+      233,
+      234
     ],
     "w1i": [
-      273
+      283
     ],
     "w1ib2wu": [
-      113,
       114,
       115,
       116,
@@ -9367,13 +10671,14 @@
       121,
       122,
       123,
-      124
-    ],
-    "w1ib2wvbm9k": [
+      124,
       125
     ],
-    "w1ib2wvc2hhc": [
+    "w1ib2wvbm9k": [
       126
+    ],
+    "w1ib2wvc2hhc": [
+      127
     ],
     "w1lbn": [
       59,
@@ -9387,7 +10692,7 @@
       67
     ],
     "w4vc2hhc": [
-      170
+      175
     ],
     "w5": [
       95,
@@ -9402,30 +10707,31 @@
       90,
       91,
       92,
-      113,
       114,
       115,
       116,
       117,
       118,
       119,
-      120
+      120,
+      121
     ],
     "w50cy9ub2": [
       93,
-      121
+      122
     ],
     "w50cy9za": [
       94,
-      122
+      123
     ],
     "w5jd": [
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
     ],
     "w5l": [
       98,
@@ -9447,8 +10753,8 @@
       49,
       50,
       65,
-      230,
-      231
+      240,
+      241
     ],
     "w9u": [
       14,
@@ -9474,29 +10780,33 @@
       65,
       66,
       67,
-      226,
-      227
+      236,
+      237
     ],
     "w9ucy5": [
-      177,
-      178,
-      179,
-      180,
-      181,
-      182
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188
+    ],
+    "w9ucy5pc0": [
+      109
     ],
     "w9ucy9ub2": [
-      109,
-      183
+      110,
+      189
     ],
     "w9ucy9za": [
-      110,
-      184
+      111,
+      190
     ],
     "wdu": [
-      235,
-      236,
-      269
+      245,
+      246,
+      279
     ],
     "wf0a": [
       40,
@@ -9510,21 +10820,26 @@
       48,
       49,
       50,
-      177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
-      184
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190
     ],
     "wfib": [
       44,
       61
     ],
     "wfud": [
-      168
+      172
+    ],
+    "which": [
+      175,
+      220
     ],
     "with": [
       17,
@@ -9540,47 +10855,75 @@
       92,
       97,
       98,
-      119,
       120,
-      123,
-      132,
-      140,
-      144,
+      121,
+      124,
+      134,
+      142,
+      146,
+      161,
+      162,
+      165,
+      178,
+      179,
+      180,
+      181,
+      186,
+      187,
+      188,
+      195,
+      196,
+      203,
+      204,
+      207,
+      208,
+      210,
+      214,
       225,
-      229,
-      243,
-      250,
-      264,
+      235,
+      239,
+      253,
+      260,
       274,
-      275,
       284,
-      296
+      285,
+      294,
+      306
+    ],
+    "within": [
+      177,
+      224
+    ],
+    "without": [
+      186,
+      225
     ],
     "wjse": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
-      158
+      158,
+      159,
+      160,
+      161,
+      162
     ],
     "wlwb": [
       13
     ],
     "wn0": [
-      167,
-      269,
-      270,
-      271
+      171,
+      279,
+      280,
+      281
     ],
     "wn0d": [
-      180,
-      187
+      185,
+      193
     ],
     "wnhb": [
-      276,
-      277
+      286,
+      287
     ],
     "wnhd": [
       102,
@@ -9619,10 +10962,10 @@
     "wrlbm": [
       95,
       102,
-      228
+      238
     ],
     "wuvc2hhc": [
-      272
+      282
     ],
     "wvud": [
       13,
@@ -9642,14 +10985,14 @@
       17,
       51,
       97,
-      123,
-      234
+      124,
+      244
     ],
     "wvz": [
-      274,
-      275,
-      276,
-      277
+      284,
+      285,
+      286,
+      287
     ],
     "wx0": [
       14,
@@ -9659,8 +11002,8 @@
       18,
       50,
       67,
-      161,
-      225
+      165,
+      235
     ],
     "wzxjp": [
       99,
@@ -9675,19 +11018,15 @@
       56
     ],
     "xbwb": [
-      272,
-      273
+      282,
+      283
     ],
     "xjl": [
-      180,
-      187,
-      235
+      185,
+      193,
+      245
     ],
     "xmu": [
-      161,
-      162,
-      163,
-      164,
       165,
       166,
       167,
@@ -9697,10 +11036,15 @@
       171,
       172,
       173,
-      174
+      174,
+      175,
+      176,
+      177,
+      178,
+      179
     ],
     "xmvbm9k": [
-      175
+      180
     ],
     "xmvc2hhc": [
       6,
@@ -9709,11 +11053,11 @@
       47,
       64,
       100,
-      156,
-      172,
-      176,
-      218,
-      230
+      160,
+      177,
+      181,
+      228,
+      240
     ],
     "xvpc": [
       51,
@@ -9750,27 +11094,25 @@
       104,
       105,
       106,
-      164,
-      170,
-      171,
-      185,
-      186,
-      187,
-      188,
-      189
+      168,
+      175,
+      176,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196
     ],
     "y29y": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
       158,
+      159,
+      160,
       161,
       162,
-      163,
-      164,
       165,
       166,
       167,
@@ -9780,18 +11122,23 @@
       171,
       172,
       173,
-      174
+      174,
+      175,
+      176,
+      177,
+      178,
+      179
     ],
     "y2hua": [
-      276,
-      277
+      286,
+      287
     ],
     "y2lhd": [
       95,
       96,
-      162,
-      228,
-      229
+      166,
+      238,
+      239
     ],
     "y3": [
       17,
@@ -9817,27 +11164,28 @@
       65,
       66,
       67,
-      153,
+      109,
       156,
-      165,
-      172,
+      160,
+      169,
       177,
-      178,
-      179,
-      180,
-      181,
       182,
       183,
       184,
-      217,
-      235,
-      270
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      227,
+      245,
+      280
     ],
     "ym": [
-      268
+      278
     ],
     "ym9scy5": [
-      113,
       114,
       115,
       116,
@@ -9850,13 +11198,14 @@
       123,
       124,
       125,
-      126
-    ],
-    "ym9scy9ub2": [
+      126,
       127
     ],
-    "ym9scy9za": [
+    "ym9scy9ub2": [
       128
+    ],
+    "ym9scy9za": [
+      129
     ],
     "ywlu": [
       10,
@@ -9867,18 +11216,18 @@
       64
     ],
     "ywnl": [
-      220
+      230
     ],
     "ywx": [
       52,
       101,
-      124,
-      235,
-      236,
-      274,
-      275,
-      276,
-      277
+      125,
+      245,
+      246,
+      284,
+      285,
+      286,
+      287
     ],
     "yxbl": [
       2,
@@ -9905,34 +11254,35 @@
       97,
       102,
       105,
-      113,
+      109,
       114,
-      117,
+      115,
       118,
-      123,
-      125,
-      162,
-      168,
-      175,
+      119,
+      124,
+      126,
+      166,
+      172,
       180,
-      181,
+      185,
       187,
-      188,
-      220,
-      221,
-      226,
-      228,
+      193,
+      195,
+      230,
       231,
-      234,
       236,
-      239,
-      265,
-      266,
-      267,
-      268,
+      238,
+      241,
+      244,
+      246,
+      249,
       275,
+      276,
       277,
-      280
+      278,
+      285,
+      287,
+      290
     ],
     "yxn1cm": [
       61
@@ -9940,24 +11290,26 @@
     "yxr1cy9za": [
       96,
       103,
-      217,
-      229
+      227,
+      239
     ],
     "yxrl": [
-      104
+      104,
+      186
     ],
     "yxrpb24u": [
-      177,
-      178,
-      179,
-      180
+      182,
+      183,
+      184,
+      185,
+      186
     ],
     "yxrpb24vbm9k": [
-      181
+      187
     ],
     "yxrpb24vc2hhc": [
-      182,
-      269
+      188,
+      279
     ],
     "yxrpb25": [
       10,
@@ -9972,7 +11324,7 @@
       65,
       99,
       100,
-      177
+      182
     ],
     "z0": [
       42,
@@ -9984,13 +11336,13 @@
       48,
       49,
       50,
-      226
+      236
     ],
     "z0lud": [
-      227
+      237
     ],
     "z0xv": [
-      164
+      168
     ],
     "z1bm": [
       42,
@@ -10011,7 +11363,7 @@
       65,
       66,
       67,
-      226
+      236
     ],
     "z2lu": [
       12,
@@ -10019,33 +11371,30 @@
       65
     ],
     "z3": [
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
       235,
       236,
       237,
       238,
       239,
-      240
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250
     ],
     "zc5": [
-      152,
-      153,
-      154,
       155,
       156,
-      161,
-      162,
-      163,
-      164,
+      157,
+      158,
+      159,
+      160,
       165,
       166,
       167,
@@ -10053,21 +11402,36 @@
       169,
       170,
       171,
-      172
+      172,
+      173,
+      174,
+      175,
+      176,
+      177
     ],
     "zc9ub2": [
-      157,
-      173
+      161,
+      178
     ],
     "zc9za": [
-      158,
-      174
+      162,
+      179
     ],
     "zefzc2": [
       104
     ],
+    "zfbhcm": [
+      158,
+      173
+    ],
+    "zfdpd": [
+      186
+    ],
+    "zfrv": [
+      109
+    ],
     "zgvjzc9za": [
-      232
+      242
     ],
     "zgvsa": [
       5
@@ -10079,8 +11443,8 @@
       42,
       57,
       59,
-      274,
-      276
+      284,
+      286
     ],
     "zhd": [
       14,
@@ -10089,16 +11453,6 @@
     "zhvjd": [
       102,
       103,
-      264,
-      265,
-      266,
-      267,
-      268,
-      269,
-      270,
-      271,
-      272,
-      273,
       274,
       275,
       276,
@@ -10106,17 +11460,27 @@
       278,
       279,
       280,
-      281
+      281,
+      282,
+      283,
+      284,
+      285,
+      286,
+      287,
+      288,
+      289,
+      290,
+      291
     ],
     "zlbn": [
-      228,
-      229
+      238,
+      239
     ],
     "zm": [
-      217,
-      267,
-      268,
-      269
+      227,
+      277,
+      278,
+      279
     ],
     "zmlj": [
       99,
@@ -10127,8 +11491,11 @@
       45,
       62,
       104,
-      167,
-      271
+      171,
+      281
+    ],
+    "zn": [
+      186
     ],
     "zq": [
       1,
@@ -10157,36 +11524,38 @@
       103,
       104,
       108,
-      110,
-      112,
-      116,
-      120,
-      122,
-      124,
-      128,
-      154,
-      155,
+      111,
+      113,
+      117,
+      121,
+      123,
+      125,
+      129,
+      157,
       158,
-      160,
-      166,
-      167,
-      169,
+      159,
+      162,
+      164,
+      170,
       171,
+      173,
       174,
-      177,
-      184,
-      191,
-      217,
-      224,
+      176,
+      179,
+      182,
+      190,
+      198,
       227,
-      229,
-      232,
-      238,
-      264,
-      271,
+      234,
+      237,
+      239,
+      242,
+      248,
       274,
-      276,
-      279
+      281,
+      284,
+      286,
+      289
     ],
     "zs9za": [
       8,
@@ -10195,60 +11564,63 @@
       46,
       63,
       99,
-      227
+      237
     ],
     "zvbhd": [
-      233
+      243
     ],
     "zvn0": [
-      217
+      227
     ],
     "zvno": [
       53,
       105,
-      125,
-      175,
-      181,
-      188,
-      221,
-      239,
-      280
+      126,
+      180,
+      187,
+      195,
+      231,
+      249,
+      290
     ],
     "zw1hd": [
       109,
       110,
       111,
-      112
+      112,
+      113
     ],
     "zw1ib": [
-      152,
-      153,
-      154,
       155,
       156,
       157,
       158,
       159,
-      160
+      160,
+      161,
+      162,
+      163,
+      164
     ],
     "zw50": [
-      185,
-      186,
-      187,
-      188,
-      189,
-      190,
-      191
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198
     ],
     "zw50a": [
       18,
       50,
       67,
-      161,
-      225
+      165,
+      235
     ],
     "zw50b3": [
-      234
+      244
     ],
     "zw50cy5": [
       51,
@@ -10267,13 +11639,14 @@
       46,
       63,
       99,
-      217
+      227
     ],
     "zwn0a": [
       14,
       15,
       109,
-      110
+      110,
+      111
     ],
     "zwrbc3": [
       18,
@@ -10281,7 +11654,10 @@
       67
     ],
     "zwroyw1l": [
-      266
+      276
+    ],
+    "zwrqyxjlbn": [
+      194
     ],
     "zwvya": [
       12,
@@ -10289,41 +11665,42 @@
       65
     ],
     "zxiu": [
-      217,
-      218,
-      219,
-      220
+      227,
+      228,
+      229,
+      230
     ],
     "zxivbm9k": [
-      221
+      231
     ],
     "zxivc2hhc": [
       18,
       50,
       67,
-      161,
-      222,
-      225,
-      273
+      165,
+      232,
+      235,
+      283
     ],
     "zxj0a": [
-      274,
-      275,
-      276,
-      277
+      284,
+      285,
+      286,
+      287
     ],
     "zxjlbm": [
-      185,
-      186,
-      187,
-      188,
-      189,
-      190,
       191,
-      226
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      236
     ],
     "zxjoyw1l": [
-      267
+      277
     ],
     "zxjpbmd": [
       98,
@@ -10331,10 +11708,10 @@
       100
     ],
     "zxjqcm9kd": [
-      269
+      279
     ],
     "zxjqyxj0": [
-      268
+      278
     ],
     "zxjwcm": [
       12,
@@ -10342,16 +11719,16 @@
       65
     ],
     "zxjy": [
-      266
+      276
     ],
     "zxnw": [
-      220
+      230
     ],
     "zxnz": [
       85,
       89,
-      113,
-      117
+      114,
+      118
     ],
     "zxrhd": [
       98
@@ -10359,8 +11736,8 @@
     "zxrjzgvud": [
       51,
       97,
-      123,
-      234
+      124,
+      244
     ],
     "zxrz": [
       1,
@@ -10384,25 +11761,25 @@
       19
     ],
     "zy5": [
-      225,
-      226,
-      227,
-      228,
-      229,
-      230,
-      231,
-      232,
-      233,
-      234,
       235,
-      236
+      236,
+      237,
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246
     ],
     "zy9ub2": [
-      237
+      247
     ],
     "zy9za": [
       13,
-      238
+      248
     ]
   },
   "relationships": [
@@ -11551,6 +12928,30 @@
       "evidence": "shacl"
     },
     {
+      "id": "https://example.org/dtwise/relationship/584ee614e56c63fa19c1372b58fe27982df643011c58b3b783389aba46f38951",
+      "domain": "ecad",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl",
+      "predicate": "http://www.w3.org/ns/shacl#class",
+      "object": "https://example.org/aas/RelationshipElement",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/f55cdf421bf678cd7ec90c53b14392507a448fb8291e155009cdb588c9ea64e7",
+      "domain": "ecad",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl",
+      "predicate": "http://www.w3.org/ns/shacl#path",
+      "object": "https://example.org/ecad/hasisConnectedTo",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/0669383a37e6fbc2e777d3c7a307cbdaf8e8c02f42db9c452fa9f997bf90f773",
+      "domain": "ecad",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#property",
+      "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl",
+      "evidence": "shacl"
+    },
+    {
       "id": "https://example.org/dtwise/relationship/270f6a90261e702d786d3d12ebd9125465c0b2d220c65044948535ca73591a22",
       "domain": "ecad",
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ",
@@ -11911,6 +13312,22 @@
       "evidence": "shacl"
     },
     {
+      "id": "https://example.org/dtwise/relationship/e111f30c4eeabb46c7c10052861894572e29d703097c5cf081684d50489c3268",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "predicate": "http://www.w3.org/ns/shacl#class",
+      "object": "https://example.org/aas/RelationshipElement",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/c27a75b3ff8674422f0708bdb1a34dd3133afbd9f057f5c4d27439c600ee942c",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "predicate": "http://www.w3.org/ns/shacl#path",
+      "object": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": "shacl"
+    },
+    {
       "id": "https://example.org/dtwise/relationship/fad41e6d5c5a2169a5f28af0b51b24b78637655a557eee5fac524f435f2cf9df",
       "domain": "engineeringbom",
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ",
@@ -11948,6 +13365,14 @@
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU",
       "predicate": "http://www.w3.org/ns/shacl#property",
       "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/1ded615b254893d6630a8155fe936901dd168351f9451b83141f22dbcb462f99",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#property",
+      "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
       "evidence": "shacl"
     },
     {
@@ -12087,6 +13512,22 @@
       "evidence": "shacl"
     },
     {
+      "id": "https://example.org/dtwise/relationship/68d3f93fd0696570d81be2ff7640252fd85b294012169ac1e9328ea2ec6f8443",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "predicate": "http://www.w3.org/ns/shacl#class",
+      "object": "https://example.org/aas/RelationshipElement",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/51a85ba4784198a51cb9c7ec0be82601a21429bce1a628af6c041958d7444b8f",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "predicate": "http://www.w3.org/ns/shacl#path",
+      "object": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": "shacl"
+    },
+    {
       "id": "https://example.org/dtwise/relationship/dadde3a4d0db6490471d30813956cf6e23953209534e5a9c160fb036f7917b01",
       "domain": "engineeringbom",
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ",
@@ -12180,6 +13621,14 @@
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
       "predicate": "http://www.w3.org/ns/shacl#property",
       "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/98014d021a3b0031f15bfa86656887eaae307ce46666c823f6bedbdf4421d3a0",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#property",
+      "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
       "evidence": "shacl"
     },
     {
@@ -12303,6 +13752,22 @@
       "evidence": "shacl"
     },
     {
+      "id": "https://example.org/dtwise/relationship/8908a0545742578b7edca7f154e6a12cbc42dbd834a784a8c2137baaf621a649",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#class",
+      "object": "https://example.org/aas/RelationshipElement",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/0085c69459f16d506d9c38125800c11c5693f13fc3f39264018368c2ec8adb72",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#path",
+      "object": "https://example.org/engineeringbom/hasfunctionallyAssociatedWith",
+      "evidence": "shacl"
+    },
+    {
       "id": "https://example.org/dtwise/relationship/a8749bc1d0bed6a83303bec0d36b5e925bb45ea05a9c94edbbf48a281de132c0",
       "domain": "engineeringbom",
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl",
@@ -12332,6 +13797,14 @@
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl",
       "predicate": "http://www.w3.org/ns/shacl#property",
       "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/c0ab40f0cf3071cb7dc00ae5282b03686a9f3f73118f042c3567a9cb4fe2ea42",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl",
+      "predicate": "http://www.w3.org/ns/shacl#property",
+      "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU",
       "evidence": "shacl"
     },
     {
@@ -12415,6 +13888,22 @@
       "evidence": "shacl"
     },
     {
+      "id": "https://example.org/dtwise/relationship/0ca9b1f6daa10ce14afe44cc6518580627e1f52eff81bc392c6c67e9651ff6d9",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#class",
+      "object": "https://example.org/aas/RelationshipElement",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/04ddf486c9ccb6d5059bc578611b3ac55bf9a14252bee4b69db3a06860b7ff66",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU",
+      "predicate": "http://www.w3.org/ns/shacl#path",
+      "object": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": "shacl"
+    },
+    {
       "id": "https://example.org/dtwise/relationship/ff33850f83f67022252a8a4b33fee0ce5326f2d26451fef25d49b86bc6100dbf",
       "domain": "engineeringbom",
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl",
@@ -12436,6 +13925,14 @@
       "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl",
       "predicate": "http://www.w3.org/ns/shacl#property",
       "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl",
+      "evidence": "shacl"
+    },
+    {
+      "id": "https://example.org/dtwise/relationship/720df667a4e14ebf6fb8b18c73bd13c008b03e24221ba17c4029e4e5d8b59518",
+      "domain": "engineeringbom",
+      "subject": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl",
+      "predicate": "http://www.w3.org/ns/shacl#property",
+      "object": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU",
       "evidence": "shacl"
     },
     {
@@ -13796,6 +15293,16 @@
     },
     {
       "domain": "ecad",
+      "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU",
+      "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl",
+      "path": "https://example.org/ecad/hasisConnectedTo",
+      "evidence": [
+        "https://example.org/dtwise/relationship/0669383a37e6fbc2e777d3c7a307cbdaf8e8c02f42db9c452fa9f997bf90f773",
+        "https://example.org/dtwise/relationship/f55cdf421bf678cd7ec90c53b14392507a448fb8291e155009cdb588c9ea64e7"
+      ]
+    },
+    {
+      "domain": "ecad",
       "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
       "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ",
       "path": "https://example.org/ecad/hasConnections",
@@ -13967,6 +15474,16 @@
     {
       "domain": "engineeringbom",
       "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU",
+      "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "path": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": [
+        "https://example.org/dtwise/relationship/1ded615b254893d6630a8155fe936901dd168351f9451b83141f22dbcb462f99",
+        "https://example.org/dtwise/relationship/c27a75b3ff8674422f0708bdb1a34dd3133afbd9f057f5c4d27439c600ee942c"
+      ]
+    },
+    {
+      "domain": "engineeringbom",
+      "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU",
       "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ",
       "path": "https://example.org/engineeringbom/hasRevision",
       "evidence": [
@@ -14077,6 +15594,16 @@
     {
       "domain": "engineeringbom",
       "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ",
+      "path": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": [
+        "https://example.org/dtwise/relationship/98014d021a3b0031f15bfa86656887eaae307ce46666c823f6bedbdf4421d3a0",
+        "https://example.org/dtwise/relationship/51a85ba4784198a51cb9c7ec0be82601a21429bce1a628af6c041958d7444b8f"
+      ]
+    },
+    {
+      "domain": "engineeringbom",
+      "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
       "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ",
       "path": "https://example.org/engineeringbom/hasRevision",
       "evidence": [
@@ -14166,12 +15693,32 @@
     },
     {
       "domain": "engineeringbom",
+      "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl",
+      "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU",
+      "path": "https://example.org/engineeringbom/hasfunctionallyAssociatedWith",
+      "evidence": [
+        "https://example.org/dtwise/relationship/c0ab40f0cf3071cb7dc00ae5282b03686a9f3f73118f042c3567a9cb4fe2ea42",
+        "https://example.org/dtwise/relationship/0085c69459f16d506d9c38125800c11c5693f13fc3f39264018368c2ec8adb72"
+      ]
+    },
+    {
+      "domain": "engineeringbom",
       "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU",
       "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU",
       "path": "https://example.org/engineeringbom/hasFunctionalAssociation",
       "evidence": [
         "https://example.org/dtwise/relationship/adaa68a2d1678e8111026506f2392acc72553e6024660a6e2c422853d34f4030",
         "https://example.org/dtwise/relationship/fef7ddd96fc4ebb2769adc1ed7d33a15980b314759f3419d609b75657ee99c6e"
+      ]
+    },
+    {
+      "domain": "engineeringbom",
+      "node_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl",
+      "property_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU",
+      "path": "https://example.org/engineeringbom/hasRecordedParent",
+      "evidence": [
+        "https://example.org/dtwise/relationship/720df667a4e14ebf6fb8b18c73bd13c008b03e24221ba17c4029e4e5d8b59518",
+        "https://example.org/dtwise/relationship/04ddf486c9ccb6d5059bc578611b3ac55bf9a14252bee4b69db3a06860b7ff66"
       ]
     },
     {
@@ -14597,9 +16144,9 @@
   ],
   "ontology_edges": [],
   "diagnostics": {
-    "concept_count": 298,
-    "relationship_count": 352,
-    "shape_path_count": 137,
+    "concept_count": 308,
+    "relationship_count": 367,
+    "shape_path_count": 142,
     "ontology_edge_count": 0,
     "generic_aas_reference_count": 36,
     "verified_cross_domain_mapping_count": 0,

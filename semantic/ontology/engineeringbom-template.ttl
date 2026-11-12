@@ -5,81 +5,93 @@
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:hasBOMItemId ;
-    aas:semanticId "https://example.org/engineeringbom/hasBOMItemId" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:BOMItemId ;
+    aas:semanticId "https://example.org/engineeringbom/BOMItemId" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:hasItemDescription ;
-    aas:semanticId "https://example.org/engineeringbom/hasItemDescription" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:ItemDescription ;
+    aas:semanticId "https://example.org/engineeringbom/ItemDescription" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:hasLabel ;
-    aas:semanticId "https://example.org/engineeringbom/hasLabel" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:Label ;
+    aas:semanticId "https://example.org/engineeringbom/Label" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:hasRevision ;
-    aas:semanticId "https://example.org/engineeringbom/hasRevision" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudA> rdfs:seeAlso engineeringbom:RecordedParent ;
+    aas:semanticId "https://example.org/engineeringbom/RecordedParent" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:hasStructureStatus ;
-    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:Revision ;
+    aas:semanticId "https://example.org/engineeringbom/Revision" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXI> rdfs:seeAlso engineeringbom:hasAssetIdentifier ;
-    aas:semanticId "https://example.org/engineeringbom/hasAssetIdentifier" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:StructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/StructureStatus" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lz> rdfs:seeAlso engineeringbom:hasAssociationBasis ;
-    aas:semanticId "https://example.org/engineeringbom/hasAssociationBasis" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXI> rdfs:seeAlso engineeringbom:AssetIdentifier ;
+    aas:semanticId "https://example.org/engineeringbom/AssetIdentifier" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:hasBOMItemId ;
-    aas:semanticId "https://example.org/engineeringbom/hasBOMItemId" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lz> rdfs:seeAlso engineeringbom:AssociationBasis ;
+    aas:semanticId "https://example.org/engineeringbom/AssociationBasis" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQ> rdfs:seeAlso engineeringbom:hasEngineeringLocalId ;
-    aas:semanticId "https://example.org/engineeringbom/hasEngineeringLocalId" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQ> rdfs:seeAlso engineeringbom:BOMItemId ;
+    aas:semanticId "https://example.org/engineeringbom/BOMItemId" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:hasItemDescription ;
-    aas:semanticId "https://example.org/engineeringbom/hasItemDescription" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQ> rdfs:seeAlso engineeringbom:EngineeringLocalId ;
+    aas:semanticId "https://example.org/engineeringbom/EngineeringLocalId" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:hasLabel ;
-    aas:semanticId "https://example.org/engineeringbom/hasLabel" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24> rdfs:seeAlso engineeringbom:ItemDescription ;
+    aas:semanticId "https://example.org/engineeringbom/ItemDescription" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllcg> rdfs:seeAlso engineeringbom:hasProductIdentifier ;
-    aas:semanticId "https://example.org/engineeringbom/hasProductIdentifier" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbA> rdfs:seeAlso engineeringbom:Label ;
+    aas:semanticId "https://example.org/engineeringbom/Label" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lz> rdfs:seeAlso engineeringbom:hasQuantityBasis ;
-    aas:semanticId "https://example.org/engineeringbom/hasQuantityBasis" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllcg> rdfs:seeAlso engineeringbom:ProductIdentifier ;
+    aas:semanticId "https://example.org/engineeringbom/ProductIdentifier" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:hasRevision ;
-    aas:semanticId "https://example.org/engineeringbom/hasRevision" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lz> rdfs:seeAlso engineeringbom:QuantityBasis ;
+    aas:semanticId "https://example.org/engineeringbom/QuantityBasis" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4> rdfs:seeAlso engineeringbom:hasSourceDomain ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceDomain" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudA> rdfs:seeAlso engineeringbom:RecordedParent ;
+    aas:semanticId "https://example.org/engineeringbom/RecordedParent" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cA> rdfs:seeAlso engineeringbom:hasSourceGroup ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceGroup" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbg> rdfs:seeAlso engineeringbom:Revision ;
+    aas:semanticId "https://example.org/engineeringbom/Revision" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:hasStructureStatus ;
-    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4> rdfs:seeAlso engineeringbom:SourceDomain ;
+    aas:semanticId "https://example.org/engineeringbom/SourceDomain" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcw> rdfs:seeAlso engineeringbom:hasAssociationBasis ;
-    aas:semanticId "https://example.org/engineeringbom/hasAssociationBasis" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cA> rdfs:seeAlso engineeringbom:SourceGroup ;
+    aas:semanticId "https://example.org/engineeringbom/SourceGroup" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:hasSourceField ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceField" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXM> rdfs:seeAlso engineeringbom:StructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/StructureStatus" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:hasSourceRecordId ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceRecordId" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcw> rdfs:seeAlso engineeringbom:AssociationBasis ;
+    aas:semanticId "https://example.org/engineeringbom/AssociationBasis" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:hasStructureStatus ;
-    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:SourceField ;
+    aas:semanticId "https://example.org/engineeringbom/SourceField" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:hasSourceField ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceField" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:SourceRecordId ;
+    aas:semanticId "https://example.org/engineeringbom/SourceRecordId" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:hasSourceRecordId ;
-    aas:semanticId "https://example.org/engineeringbom/hasSourceRecordId" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:StructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/StructureStatus" .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:hasStructureStatus ;
-    aas:semanticId "https://example.org/engineeringbom/hasStructureStatus" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGg> rdfs:seeAlso engineeringbom:functionallyAssociatedWith ;
+    aas:semanticId "https://example.org/engineeringbom/functionallyAssociatedWith" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQ> rdfs:seeAlso engineeringbom:SourceField ;
+    aas:semanticId "https://example.org/engineeringbom/SourceField" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQ> rdfs:seeAlso engineeringbom:SourceRecordId ;
+    aas:semanticId "https://example.org/engineeringbom/SourceRecordId" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVz> rdfs:seeAlso engineeringbom:StructureStatus ;
+    aas:semanticId "https://example.org/engineeringbom/StructureStatus" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQ> rdfs:seeAlso engineeringbom:RecordedParent ;
+    aas:semanticId "https://example.org/engineeringbom/RecordedParent" .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> a sh:NodeShape ;
     rdfs:label "TEP_EngineeringBOM_V2_Template SHACL shape" ;
-    sh:description "AAS structure template; example fields are unpopulated."@en ;
+    sh:description "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."@en ;
     sh:name "TEP_EngineeringBOM_V2_Template" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU>,
@@ -88,10 +100,13 @@
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> a owl:Class ;
-    rdfs:label "TEP_EngineeringBOM_V2_Template" .
+    rdfs:label "TEP_EngineeringBOM_V2_Template" ;
+    rdfs:comment "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."@en .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItemId constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source identifier of the engineering BOM item represented by this assembly record."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "BOMItemId" ;
@@ -99,6 +114,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ItemDescription constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-provided description of the engineering item represented by the assembly."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "ItemDescription" ;
@@ -106,13 +123,26 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Label constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Human-readable label for the assembly record."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "Label" ;
     sh:path engineeringbom:hasLabel .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:class aas:RelationshipElement ;
+    sh:description "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RecordedParent" ;
+    sh:path engineeringbom:hasRecordedParent .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Revision constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded revision designation for the assembly entry."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "Revision" ;
@@ -120,31 +150,28 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> a aas:RelationshipElement ;
-    rdfs:label "hasRecordedParent" ;
-    rdfs:seeAlso engineeringbom:hasRecordedParent ;
-    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
-
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "AssemblyRecord SHACL shape" ;
+    sh:description "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en ;
     sh:name "AssemblyRecord" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
-    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssemblyRecord constraint" ;
     sh:class aas:SMC ;
+    sh:description "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en ;
     sh:minCount 1 ;
     sh:name "AssemblyRecord" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> ;
@@ -152,12 +179,14 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "Assemblies SHACL shape" ;
+    sh:description "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en ;
     sh:name "Assemblies" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Assemblies constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "Assemblies" ;
@@ -166,6 +195,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "AssetIdentifier" ;
@@ -173,6 +204,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssociationBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-provided basis or evidence category for a recorded item association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "AssociationBasis" ;
@@ -180,6 +213,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItemId constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "BOMItemId" ;
@@ -187,6 +222,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EngineeringLocalId constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Local identifier assigned by the source engineering system to this BOM item."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "EngineeringLocalId" ;
@@ -194,6 +231,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ItemDescription constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-provided description of the engineering BOM item or component."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "ItemDescription" ;
@@ -201,6 +240,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Label constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Human-readable label of the engineering BOM item."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "Label" ;
@@ -208,6 +249,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ProductIdentifier constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "ProductIdentifier" ;
@@ -215,13 +258,26 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "QuantityBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Basis for interpreting source quantity information; not itself a quantity value."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "QuantityBasis" ;
     sh:path engineeringbom:hasQuantityBasis .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:class aas:RelationshipElement ;
+    sh:description "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RecordedParent" ;
+    sh:path engineeringbom:hasRecordedParent .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Revision constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded revision designation of the BOM item."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "Revision" ;
@@ -229,6 +285,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceDomain constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Domain or system from which the BOM item record originates."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceDomain" ;
@@ -236,6 +294,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "SourceGroup constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source grouping or category assigned to the BOM item."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceGroup" ;
@@ -243,20 +303,16 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded status of the BOM item within the engineering structure."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> a aas:RelationshipElement ;
-    rdfs:label "hasRecordedParent" ;
-    rdfs:seeAlso engineeringbom:hasRecordedParent ;
-    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#BOMItems.BOMItemRecord> ;
-    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
-
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "BOMItemRecord SHACL shape" ;
+    sh:description "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en ;
     sh:name "BOMItemRecord" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl>,
@@ -266,15 +322,16 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
-    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5oYXNSZWNvcmRlZFBhcmVudA> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "BOMItemRecord constraint" ;
     sh:class aas:SMC ;
+    sh:description "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en ;
     sh:minCount 1 ;
     sh:name "BOMItemRecord" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> ;
@@ -282,12 +339,14 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "BOMItems SHACL shape" ;
+    sh:description "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en ;
     sh:name "BOMItems" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "BOMItems constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "BOMItems" ;
@@ -296,6 +355,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssociationBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-provided basis or evidence category for this functional association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "AssociationBasis" ;
@@ -303,6 +364,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceField constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Name of the source field supplying the functional association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceField" ;
@@ -310,6 +373,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceRecordId constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Identifier of the source record supporting this functional association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceRecordId" ;
@@ -317,30 +382,36 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded status of the functional association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGg> a aas:RelationshipElement ;
-    rdfs:label "functionallyAssociatedWith" ;
-    rdfs:seeAlso engineeringbom:functionallyAssociatedWith ;
-    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#BOMItems.BOMItemRecord> ;
-    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:semanticId "https://example.org/engineeringbom/functionallyAssociatedWith" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "functionallyAssociatedWith constraint" ;
+    sh:class aas:RelationshipElement ;
+    sh:description "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "functionallyAssociatedWith" ;
+    sh:path engineeringbom:hasfunctionallyAssociatedWith .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "FunctionalAssociation SHACL shape" ;
+    sh:description "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en ;
     sh:name "FunctionalAssociation" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
-    engineeringbom:hasfunctionallyAssociatedWith <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGg> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "FunctionalAssociation constraint" ;
     sh:class aas:SMC ;
+    sh:description "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en ;
     sh:minCount 1 ;
     sh:name "FunctionalAssociation" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> ;
@@ -348,12 +419,14 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "FunctionalAssociations SHACL shape" ;
+    sh:description "Collection of source-recorded functional associations between engineering records."@en ;
     sh:name "FunctionalAssociations" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "FunctionalAssociations constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of source-recorded functional associations between engineering records."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "FunctionalAssociations" ;
@@ -362,6 +435,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceField constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Name of the source field supplying this parent reference."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceField" ;
@@ -369,6 +444,8 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SourceRecordId constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Identifier of the source record supporting this parent reference."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "SourceRecordId" ;
@@ -376,29 +453,35 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "StructureStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Source-recorded structural status of the parent reference."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "StructureStatus" ;
     sh:path engineeringbom:hasStructureStatus .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuaGFzUmVjb3JkZWRQYXJlbnQ> a aas:RelationshipElement ;
-    rdfs:label "hasRecordedParent" ;
-    rdfs:seeAlso engineeringbom:hasRecordedParent ;
-    aas:first <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:second <https://example.org/sm/TEP_EngineeringBOM_V2_#Assemblies.AssemblyRecord> ;
-    aas:semanticId "https://example.org/engineeringbom/hasRecordedParent" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:class aas:RelationshipElement ;
+    sh:description "Explicit parent relationship preserved from the source parent-reference record."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RecordedParent" ;
+    sh:path engineeringbom:hasRecordedParent .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> a sh:NodeShape ;
     rdfs:label "ParentReference SHACL shape" ;
+    sh:description "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en ;
     sh:name "ParentReference" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
-    engineeringbom:hashasRecordedParent <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuaGFzUmVjb3JkZWRQYXJlbnQ> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ParentReference constraint" ;
     sh:class aas:SMC ;
+    sh:description "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en ;
     sh:minCount 1 ;
     sh:name "ParentReference" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> ;
@@ -406,12 +489,14 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> a sh:NodeShape ;
     rdfs:label "ParentReferences SHACL shape" ;
+    sh:description "Collection of source-derived records documenting parent references in the engineering BOM."@en ;
     sh:name "ParentReferences" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ParentReferences constraint" ;
     sh:class aas:SMC ;
+    sh:description "Collection of source-derived records documenting parent references in the engineering BOM."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
     sh:name "ParentReferences" ;
@@ -420,92 +505,137 @@
 
 engineeringbom:hasAssemblies a owl:ObjectProperty ;
     rdfs:label "Assemblies",
-        "hasAssemblies" .
+        "hasAssemblies" ;
+    rdfs:comment "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en .
 
 engineeringbom:hasAssemblyRecord a owl:ObjectProperty ;
     rdfs:label "AssemblyRecord",
-        "hasAssemblyRecord" .
-
-engineeringbom:hasBOMItemRecord a owl:ObjectProperty ;
-    rdfs:label "BOMItemRecord",
-        "hasBOMItemRecord" .
-
-engineeringbom:hasBOMItems a owl:ObjectProperty ;
-    rdfs:label "BOMItems",
-        "hasBOMItems" .
-
-engineeringbom:hasFunctionalAssociation a owl:ObjectProperty ;
-    rdfs:label "FunctionalAssociation",
-        "hasFunctionalAssociation" .
-
-engineeringbom:hasFunctionalAssociations a owl:ObjectProperty ;
-    rdfs:label "FunctionalAssociations",
-        "hasFunctionalAssociations" .
-
-engineeringbom:hasParentReference a owl:ObjectProperty ;
-    rdfs:label "ParentReference",
-        "hasParentReference" .
-
-engineeringbom:hasParentReferences a owl:ObjectProperty ;
-    rdfs:label "ParentReferences",
-        "hasParentReferences" .
+        "hasAssemblyRecord" ;
+    rdfs:comment "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en .
 
 engineeringbom:hasAssetIdentifier a owl:DatatypeProperty ;
     rdfs:label "AssetIdentifier",
-        "hasAssetIdentifier" .
+        "hasAssetIdentifier" ;
+    rdfs:comment "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."@en .
+
+engineeringbom:hasBOMItemRecord a owl:ObjectProperty ;
+    rdfs:label "BOMItemRecord",
+        "hasBOMItemRecord" ;
+    rdfs:comment "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en .
+
+engineeringbom:hasBOMItems a owl:ObjectProperty ;
+    rdfs:label "BOMItems",
+        "hasBOMItems" ;
+    rdfs:comment "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en .
 
 engineeringbom:hasEngineeringLocalId a owl:DatatypeProperty ;
     rdfs:label "EngineeringLocalId",
-        "hasEngineeringLocalId" .
+        "hasEngineeringLocalId" ;
+    rdfs:comment "Local identifier assigned by the source engineering system to this BOM item."@en .
+
+engineeringbom:hasFunctionalAssociation a owl:ObjectProperty ;
+    rdfs:label "FunctionalAssociation",
+        "hasFunctionalAssociation" ;
+    rdfs:comment "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en .
+
+engineeringbom:hasFunctionalAssociations a owl:ObjectProperty ;
+    rdfs:label "FunctionalAssociations",
+        "hasFunctionalAssociations" ;
+    rdfs:comment "Collection of source-recorded functional associations between engineering records."@en .
+
+engineeringbom:hasParentReference a owl:ObjectProperty ;
+    rdfs:label "ParentReference",
+        "hasParentReference" ;
+    rdfs:comment "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en .
+
+engineeringbom:hasParentReferences a owl:ObjectProperty ;
+    rdfs:label "ParentReferences",
+        "hasParentReferences" ;
+    rdfs:comment "Collection of source-derived records documenting parent references in the engineering BOM."@en .
 
 engineeringbom:hasProductIdentifier a owl:DatatypeProperty ;
     rdfs:label "ProductIdentifier",
-        "hasProductIdentifier" .
+        "hasProductIdentifier" ;
+    rdfs:comment "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."@en .
 
 engineeringbom:hasQuantityBasis a owl:DatatypeProperty ;
     rdfs:label "QuantityBasis",
-        "hasQuantityBasis" .
+        "hasQuantityBasis" ;
+    rdfs:comment "Basis for interpreting source quantity information; not itself a quantity value."@en .
 
 engineeringbom:hasSourceDomain a owl:DatatypeProperty ;
     rdfs:label "SourceDomain",
-        "hasSourceDomain" .
+        "hasSourceDomain" ;
+    rdfs:comment "Domain or system from which the BOM item record originates."@en .
 
 engineeringbom:hasSourceGroup a owl:DatatypeProperty ;
     rdfs:label "SourceGroup",
-        "hasSourceGroup" .
+        "hasSourceGroup" ;
+    rdfs:comment "Source grouping or category assigned to the BOM item."@en .
+
+engineeringbom:hasfunctionallyAssociatedWith a owl:ObjectProperty ;
+    rdfs:label "functionallyAssociatedWith" ;
+    rdfs:comment "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."@en .
 
 engineeringbom:hasAssociationBasis a owl:DatatypeProperty ;
     rdfs:label "AssociationBasis",
-        "hasAssociationBasis" .
+        "hasAssociationBasis" ;
+    rdfs:comment "Source-provided basis or evidence category for a recorded item association."@en,
+        "Source-provided basis or evidence category for this functional association."@en .
 
 engineeringbom:hasBOMItemId a owl:DatatypeProperty ;
     rdfs:label "BOMItemId",
-        "hasBOMItemId" .
+        "hasBOMItemId" ;
+    rdfs:comment "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier."@en,
+        "Source identifier of the engineering BOM item represented by this assembly record."@en .
 
 engineeringbom:hasItemDescription a owl:DatatypeProperty ;
     rdfs:label "ItemDescription",
-        "hasItemDescription" .
+        "hasItemDescription" ;
+    rdfs:comment "Source-provided description of the engineering BOM item or component."@en,
+        "Source-provided description of the engineering item represented by the assembly."@en .
 
 engineeringbom:hasLabel a owl:DatatypeProperty ;
     rdfs:label "Label",
-        "hasLabel" .
+        "hasLabel" ;
+    rdfs:comment "Human-readable label for the assembly record."@en,
+        "Human-readable label of the engineering BOM item."@en .
 
 engineeringbom:hasRevision a owl:DatatypeProperty ;
     rdfs:label "Revision",
-        "hasRevision" .
+        "hasRevision" ;
+    rdfs:comment "Source-recorded revision designation for the assembly entry."@en,
+        "Source-recorded revision designation of the BOM item."@en .
 
 engineeringbom:hasSourceField a owl:DatatypeProperty ;
     rdfs:label "SourceField",
-        "hasSourceField" .
+        "hasSourceField" ;
+    rdfs:comment "Name of the source field supplying the functional association."@en,
+        "Name of the source field supplying this parent reference."@en .
 
 engineeringbom:hasSourceRecordId a owl:DatatypeProperty ;
     rdfs:label "SourceRecordId",
-        "hasSourceRecordId" .
+        "hasSourceRecordId" ;
+    rdfs:comment "Identifier of the source record supporting this functional association."@en,
+        "Identifier of the source record supporting this parent reference."@en .
 
-aas:SMC a owl:Class ;
-    rdfs:label "Submodel Element Collection" .
+engineeringbom:hasRecordedParent a owl:ObjectProperty ;
+    rdfs:label "RecordedParent" ;
+    rdfs:comment "Explicit parent relationship preserved from the source parent-reference record."@en,
+        "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy."@en,
+        "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."@en .
+
+aas:RelationshipElement a owl:Class ;
+    rdfs:label "AAS Relationship Element" .
 
 engineeringbom:hasStructureStatus a owl:DatatypeProperty ;
     rdfs:label "StructureStatus",
-        "hasStructureStatus" .
+        "hasStructureStatus" ;
+    rdfs:comment "Source-recorded status of the BOM item within the engineering structure."@en,
+        "Source-recorded status of the functional association."@en,
+        "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary."@en,
+        "Source-recorded structural status of the parent reference."@en .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
 

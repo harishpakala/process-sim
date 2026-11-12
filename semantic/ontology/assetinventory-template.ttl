@@ -13,7 +13,8 @@
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> a owl:Class ;
-    rdfs:label "AssetInventory" .
+    rdfs:label "AssetInventory" ;
+    rdfs:comment "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "Assets SHACL shape" ;
@@ -62,6 +63,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ModelingStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of modeling activities for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -70,6 +72,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "MonitoringStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of monitoring activities for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -78,6 +81,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of the asset represented by this inventory record."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -86,6 +90,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetName constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Human-readable name of the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -94,6 +99,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetType constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded type or category of the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -102,6 +108,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Evidence recorded for a cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -110,6 +117,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of an association to information in another domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -118,6 +126,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Engineering interpretation or qualification recorded for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -126,6 +135,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EquipmentTag constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Equipment tag assigned to the asset in engineering or plant documentation."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -134,6 +144,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "FaultDetectionStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of fault detection activities for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -142,6 +153,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "FaultInjectionStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of fault injection activities for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -150,6 +162,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Location constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded location of the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -158,6 +171,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ProductIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of the product associated with the asset; distinct from the asset identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -166,6 +180,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of an asset related to the inventory asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -174,6 +189,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SimulationStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of simulation activities for the asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;

@@ -15,7 +15,8 @@
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> a owl:Class ;
-    rdfs:label "DEXPI" .
+    rdfs:label "DEXPI" ;
+    rdfs:comment "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."@en .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "ActuatingFunctions SHACL shape" ;
@@ -56,6 +57,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "ActuatedVariable constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Process variable acted upon by the actuating function."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -64,6 +66,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -72,6 +75,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded evidence supporting a cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -80,6 +84,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of an association with information in another engineering domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -88,6 +93,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Engineering interpretation or qualification of the represented association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -96,6 +102,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -104,6 +111,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -112,6 +120,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -120,6 +129,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -197,6 +207,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "MeasuredVariable constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Process variable measured by the instrumentation function."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -205,6 +216,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier associated with the represented engineering asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -213,6 +225,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded evidence supporting a cross-domain association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -221,6 +234,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Recorded status of an association with information in another engineering domain."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -229,6 +243,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Engineering interpretation or qualification of the represented association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -237,6 +252,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "LocalId constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier local to the source engineering model."@en ;
     sh:maxCount 1 ;
     sh:minCount 1 ;
@@ -245,6 +261,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;

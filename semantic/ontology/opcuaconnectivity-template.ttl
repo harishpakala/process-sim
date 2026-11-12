@@ -14,10 +14,12 @@
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> a owl:Class ;
-    rdfs:label "TEP_OPCUAConnectivity" .
+    rdfs:label "TEP_OPCUAConnectivity" ;
+    rdfs:comment "Template describing OPC UA server connectivity and engineering signal-to-node mappings."@en .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "ECADConnectionPointReferenceStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Status of the reference to an ECAD connection point."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -26,6 +28,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EndpointStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Status of the OPC UA server endpoint."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -34,6 +37,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EndpointUrl constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Network endpoint URL used to connect to the OPC UA server."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -42,6 +46,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "NamespaceURI constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Namespace URI identifying an OPC UA namespace."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -84,6 +89,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier of the asset associated with this signal mapping."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -92,6 +98,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "EngineeringFunctionReference constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -100,6 +107,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Engineering note documenting interpretation or uncertainty about this mapping."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -108,6 +116,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "InventoryAssociationEvidence constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Evidence supporting the inventory asset association."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -116,6 +125,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "InventoryAssociationStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Status of the association with an inventory asset."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -124,6 +134,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "MappingBasis constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Evidence or method used to establish the signal mapping."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -132,6 +143,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "MappingStatus constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Status of the engineering-to-OPC-UA signal mapping."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -140,6 +152,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "OPCUANodeId constraint" ;
+    sh:datatype xsd:string ;
     sh:description "OPC UA NodeId identifying the mapped node in a server address space."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -148,6 +161,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "OPCUABrowsePath constraint" ;
+    sh:datatype xsd:string ;
     sh:description "OPC UA browse path used to locate the mapped node."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -156,6 +170,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "RelatedInventoryAssetIdentifier constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Identifier referencing an associated asset inventory record."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -164,6 +179,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SignalDirection constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Direction of data exchange for the mapped signal."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
@@ -172,6 +188,7 @@
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "SignalName constraint" ;
+    sh:datatype xsd:string ;
     sh:description "Engineering signal name represented by this mapping."@en ;
     sh:maxCount 1 ;
     sh:minCount 0 ;
