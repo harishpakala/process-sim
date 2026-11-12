@@ -25,6 +25,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/reports":
+            try:
+                from process_sim.api.benchmark_reports import list_reports
+                self.send_json(200, list_reports())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": f"Benchmark reports unavailable: {exc}"})
+            return
         if urlsplit(self.path).path in ("/api/ai/q13/ontology/live/status", "/api/ai/q13/ontology/live/result"):
             from process_sim.api import q13_live
             if os.getenv("TEP_Q13_LIVE_ENABLED") != "1":
