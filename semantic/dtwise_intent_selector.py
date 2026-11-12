@@ -84,12 +84,19 @@ def select_intent(index, question, model="qwen2.5-coder:3b",
         if value.casefold() not in question.casefold():
             raise ValueError("Model invented a value constraint: " + value)
         checked_constraints.append({"text": value, "role": role})
+    words = set(re.findall(r"[a-z0-9]+", question.lower()))
+    if words & {"count", "number", "many"}:
+        intent = "count"
+    elif words & {"whether", "exists", "exist"} or question.lower().startswith(("is there ", "are there ")):
+        intent = "exists"
+    else:
+        intent = "lookup"
     return {
         "question": question,
         "model": model,
         "selected_ids": selected_ids,
         "selected_concepts": [allowed[i] for i in selected_ids],
-        "intent": parsed.get("intent", "") if isinstance(parsed.get("intent", ""), str) else "",
+        "intent": intent,
         "value_constraints": checked_constraints,
         "join_status": "unverified",
         "sparql_generated": False,
