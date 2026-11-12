@@ -156,6 +156,75 @@ def _schema_connections(index, subject_evidence, target_evidence):
                                         p["domain"], p["subject_path"],
                                         p["target_path"]))[:20]
 
+
+def _instance_resolution_candidates(index, role):
+    """Discover generic identity-bearing SHACL paths, without guessing values.
+
+    A proper-name role is an instance constraint, not necessarily a schema
+    label. Candidate paths are reported for later entity lookup, never used
+    to assert a match without querying and validating actual instance data.
+    """
+    if not role.get("text"):
+        return []
+    identity_tokens = {"identifier", "id", "name", "label", "designation", "tag"}
+    result = []
+    for concept in index.get("concepts", []):
+        if concept.get("kind") != "property":
+            continue
+        uri, domain = concept.get("uri"), concept.get("domain")
+        if not isinstance(uri, str) or not isinstance(domain, str):
+            continue
+        local = re.split(r"[/#]", uri)[-1]
+        labels = concept.get("labels") or []
+        tokens = _tokens(local + " " + " ".join(str(x) for x in labels))
+        if not (tokens & identity_tokens):
+            continue
+        for traversal in _traversals(index, uri, domain):
+            chain = traversal.get("property_chain", [])
+            if not traversal.get("complete_to_root") or not chain or chain[-1] != uri:
+                continue
+            result.append({
+                "domain": domain, "uri": uri,
+                "property_chain": chain,
+                "start_shape": traversal.get("start_shape"),
+                "status": "unresolved_instance_candidate",
+                "match_scope": "identity_property_shacl_path",
+            })
+    return sorted(result, key=lambda x: (len(x["property_chain"]),
+                          x["domain"], x["uri"], x["property_chain"]))[:40]
+
+
+def _ontology_reference_edges(index):
+    """Read only explicit ontology property domain/range declarations.
+
+    These are schema declarations, not instance-level association proofs.
+    No inverse edges, label-based joins, or identifier equality are inferred.
+    """
+    rdf_domain = "http://www.w3.org/2000/01/rdf-schema#domain"
+    rdf_range = "http://www.w3.org/2000/01/rdf-schema#range"
+    grouped = {}
+    property_keys = {(c.get("domain"), c.get("uri"))
+                     for c in index.get("concepts", [])
+                     if c.get("kind") == "property"}
+    for item in index.get("relationships", []):
+        if not isinstance(item, dict):
+            continue
+        domain, subject = item.get("domain"), item.get("subject")
+        predicate, obj = item.get("predicate"), item.get("object")
+        if (domain, subject) not in property_keys or predicate not in (rdf_domain, rdf_range):
+            continue
+        if not isinstance(obj, str) or not obj.startswith(("http://", "https://")):
+            continue
+        grouped.setdefault((domain, subject), {}).setdefault(predicate, set()).add(obj)
+    result = []
+    for (domain, prop), declarations in sorted(grouped.items()):
+        for source in sorted(declarations.get(rdf_domain, ())):
+            for target in sorted(declarations.get(rdf_range, ())):
+                result.append({"domain": domain, "predicate": prop,
+                               "source_class": source, "target_class": target,
+                               "status": "ontology_schema_edge_only"})
+    return result
+
 def plan_relationship(question, index):
     if not is_relationship_question(question):
         raise ValueError("Not a relationship question")
@@ -164,7 +233,8 @@ def plan_relationship(question, index):
     roles = _roles(question)
     subject = _discover(index, roles["subject"]["terms"])
     target = _discover(index, roles["target"]["terms"])
-    connections = _schema_connections(index, subject, target)\n    missing = [role for role, matches in (("subject", subject), ("target", target))
+    connections = _schema_connections(index, subject, target)\n    identity_candidates = _instance_resolution_candidates(index, roles["subject"])\n    reference_edges = _ontology_reference_edges(index) 
+    missing = [role for role, matches in (("subject", subject), ("target", target))
                if not matches]
     return {
         "question": question,
@@ -178,7 +248,8 @@ def plan_relationship(question, index):
                   ("No verified subject-to-target association path has been "
                    "established. Shared root paths or identifier equality "
                    "alone do not prove the requested relationship."),
-        "schema_connections": connections,\n        "role_plan": roles,
+        "schema_connections": connections,\n        "subject_instance_candidates": identity_candidates,\n        "ontology_reference_edges": reference_edges, 
+        "role_plan": roles,
         "role_evidence": {"subject": subject, "target": target},
         # Retain legacy key for consumers of the initial diagnostic response.
         "ontology_evidence": subject + target,
