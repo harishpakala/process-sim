@@ -9,7 +9,7 @@ import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
-from semantic.dtwise_concept_resolver import _tokens
+from semantic.dtwise_concept_resolver import _tokens, resolve_compact
 from semantic.dtwise_intent_selector import select_intent
 
 
@@ -39,7 +39,7 @@ def _choose_path(concept, question):
     return min(paths, key=rank)
 
 
-def compile_sparql(selection, limit=100):
+def compile_sparql(selection, limit=100, index=None):
     if not isinstance(limit, int) or not 1 <= limit <= 10000:
         raise ValueError("LIMIT must be between 1 and 10000")
     selected = selection.get("selected_concepts", [])
@@ -75,7 +75,23 @@ def compile_sparql(selection, limit=100):
     if entity_count:
         device_iri = "https://example.org/ecad/hasDevice"
         if device_iri not in chain:
-            raise ValueError("No grounded ECAD device traversal for entity count")
+            # The selector can choose hasDevices (a collection property).
+            # Find a complete device traversal from the indexed SHACL evidence.
+            if index is None:
+                raise ValueError("Entity counting requires the schema index")
+            bundle = resolve_compact(index, "ECAD device local identifier", limit=30)
+            paths = [
+                p["property_chain"]
+                for c in bundle["candidates"]
+                if c["domain"] == "ecad"
+                for p in c.get("paths", [])
+                if p.get("complete_to_root")
+                and device_iri in p.get("property_chain", [])
+                and p["property_chain"][0] == chain[0]
+            ]
+            if not paths:
+                raise ValueError("No indexed SHACL evidence for ECAD device path")
+            chain = min(paths, key=lambda p: (p.index(device_iri), len(p), p))
         chain = chain[:chain.index(device_iri) + 1]
     triples = []
     for i, predicate in enumerate(chain):
@@ -85,7 +101,7 @@ def compile_sparql(selection, limit=100):
     body = "\n".join(triples)
     if intent == "count":
         target = "?device" if entity_count else "?value"
-        query = "SELECT (COUNT(DISTINCT " + target + ") AS ?count) WHERE {\\n" + body + "\\n}"
+        query = "SELECT (COUNT(DISTINCT " + target + ") AS ?count) WHERE {\n" + body + "\n}"
     elif intent == "exists":
         query = "ASK WHERE {\n" + body + "\n}"
     else:
@@ -108,7 +124,7 @@ def main():
     args = parser.parse_args()
     index = json.loads(args.index.read_text(encoding="utf-8"))
     selection = select_intent(index, args.query, model=args.model, endpoint=args.endpoint)
-    print(json.dumps(compile_sparql(selection, args.limit), indent=2, ensure_ascii=False))
+    print(json.dumps(compile_sparql(selection, args.limit, index=index), indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":
