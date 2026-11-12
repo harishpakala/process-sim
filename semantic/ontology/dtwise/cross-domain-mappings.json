@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "mappings": [
+    {
+      "id": "engineeringbom_ecad_asset_identifier",
+      "source_domain": "engineeringbom",
+      "target_domain": "ecad",
+      "source_path": [
+        "https://example.org/engineeringbom/hasBOMItems",
+        "https://example.org/engineeringbom/hasBOMItemRecord",
+        "https://example.org/engineeringbom/hasAssetIdentifier"
+      ],
+      "target_path": [
+        "https://example.org/ecad/hasDevices",
+        "https://example.org/ecad/hasDevice",
+        "https://example.org/ecad/hasAssetIdentifier"
+      ],
+      "comparison": "string_equality",
+      "status": "candidate_pending_semantic_approval",
+      "identifier_namespace": "https://aas.example.com/",
+      "evidence": {
+        "shared_identifier_strings": 40,
+        "matched_bom_records": 74,
+        "matched_ecad_devices": 40,
+        "cardinality_note": "Sampled and uploaded GraphDB results; semantic identity scope not yet approved."
+      }
+    }
+  ]
+}
