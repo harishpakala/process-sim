@@ -891,6 +891,8 @@ if __name__ == "__main__":
     parser.add_argument("--domain", help="Domain for --input")
     parser.add_argument("--output", type=Path, help="Single Turtle output path")
     parser.add_argument("--push", action="store_true", help="Publish to GraphDB (off by default)")
+    parser.add_argument("--dtwise-output", type=Path, help="Directory for DTWise unified concept and relationship TTL catalogs (default: alongside batch outputs)")
+    parser.add_argument("--no-dtwise", action="store_true", help="Skip DTWise catalog generation")
     args = parser.parse_args()
     if args.input and not args.domain:
         parser.error("--domain is required when --input is supplied")
@@ -899,6 +901,7 @@ if __name__ == "__main__":
     jobs = [(args.domain, args.input)] if args.input else [(domain, template) for domain, template, _ in TARGETS]
     OUTPUT.mkdir(parents=True, exist_ok=True)
     failures = []
+    lifted_domain_graphs = []
     for domain, filename in jobs:
         try:
             with filename.open(encoding="utf-8") as stream:
@@ -908,10 +911,19 @@ if __name__ == "__main__":
             destination.parent.mkdir(parents=True, exist_ok=True)
             graph.serialize(destination=str(destination), format="turtle")
             print(f"[OK] {domain}: {len(graph)} template triples -> {destination}")
+            lifted_domain_graphs.append((domain, graph))
             if args.push:
                 push_graph_to_graphdb(graph, compute_uri(template.id))
         except Exception as exc:
             failures.append((domain, str(exc)))
             print(f"[FAILED] {domain}: {exc}")
     if failures:
-        raise SystemExit(f"{len(failures)} template lifting job(s) failed")
+        raise SystemExit(f"{len(failures)} template lifting job(s) failed; DTWise catalogs not generated")
+    if lifted_domain_graphs and not args.no_dtwise:
+        from semantic.dtwise_index import write_dtwise_catalog
+        catalog_dir = args.dtwise_output or OUTPUT / "dtwise"
+        catalog_paths = write_dtwise_catalog(lifted_domain_graphs, catalog_dir)
+        for catalog_path in catalog_paths:
+            print(f"[OK] DTWise catalog -> {catalog_path}")
+        if args.input:
+            print("[NOTE] DTWise catalog covers only the selected input template; run batch lifting for all domains.")
