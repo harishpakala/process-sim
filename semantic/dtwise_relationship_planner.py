@@ -235,7 +235,9 @@ def plan_relationship(question, index):
     target = _discover(index, roles["target"]["terms"])
     connections = _schema_connections(index, subject, target)
     identity_candidates = _instance_resolution_candidates(index, roles["subject"])
-    reference_edges = _ontology_reference_edges(index) 
+    reference_edges = _ontology_reference_edges(index)
+    from semantic.dtwise_instance_lookup import plan_instance_lookups
+    lookup_plans = plan_instance_lookups(roles["subject"], identity_candidates)
     missing = [role for role, matches in (("subject", subject), ("target", target))
                if not matches]
     return {
@@ -252,6 +254,7 @@ def plan_relationship(question, index):
                    "alone do not prove the requested relationship."),
         "schema_connections": connections,
         "subject_instance_candidates": identity_candidates,
+        "subject_instance_lookup_plans": lookup_plans,
         "ontology_reference_edges": reference_edges, 
         "role_plan": roles,
         "role_evidence": {"subject": subject, "target": target},
