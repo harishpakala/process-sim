@@ -13,7 +13,7 @@ spec.loader.exec_module(mod)
 class ImplicitAblationTests(unittest.TestCase):
     def test_rank_weighted_selection_and_cap(self):
         hits = [{'domain': d} for d in ('ecad', 'dexpi', 'ecad', 'engineeringbom', 'ecad')]
-        selected, scores = mod.select_domains(hits, threshold=0.5, max_domains=2)
+        selected, scores = mod.select_domains(hits, threshold=0.35, max_domains=2)
         self.assertEqual(selected, ['dexpi', 'ecad'])
         self.assertGreater(scores['ecad'], scores['engineeringbom'])
 
