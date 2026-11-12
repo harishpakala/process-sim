@@ -48,9 +48,7 @@ def select_domains(hits, threshold=0.5, max_domains=4):
         return [], {}
     highest = max(scores.values())
     ordered = sorted(scores, key=lambda d: (-scores[d], d))
-    selected = sorted(d for d in ordered
-                      if scores[d] >= threshold * highest)[:max_domains]
-    # Select strongest max_domains first; sorting alphabetically happens after.
+    # Select strongest max_domains first; sort alphabetically only for output.
     selected = sorted([d for d in ordered if scores[d] >= threshold * highest][:max_domains])
     return selected, dict(sorted(scores.items()))
 
