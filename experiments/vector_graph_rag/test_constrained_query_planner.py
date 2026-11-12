@@ -22,38 +22,33 @@ INDEX = {
 HITS = [{'domain': DOMAIN, 'uri': URI}]
 
 class PlannerTests(unittest.TestCase):
-    def test_single_property_generates_minimal_select(self):
-        result = planner.plan(INDEX, 'What is the manufacturer part number?', HITS)
-        # The third positional argument is selected, not hits; test explicit selection below.
-        self.assertEqual(result['status'], 'abstained')
-
     def test_validated_property(self):
         result = planner.plan(INDEX, 'What is the manufacturer part number?',
-                              [{'domain': DOMAIN, 'uri': URI}], HITS)
+                              [{'domain': DOMAIN, 'uri': URI}], HITS, requested_domains=[DOMAIN])
         self.assertEqual(result['status'], 'ready')
         self.assertIn('?subject <' + URI + '> ?value', result['sparql'])
         self.assertNotIn('rdf:type', result['sparql'])
         self.assertFalse(result['safety']['query_executed'])
 
-    def test_no_retrieval_support(self):
-        result = planner.plan(INDEX, 'Question', [{'domain': DOMAIN, 'uri': URI}], [])
+    def test_cross_domain_scope_abstains_even_with_one_property(self):\n        result = planner.plan(INDEX, 'Which device corresponds to equipment?',\n                              [{'domain': DOMAIN, 'uri': URI}], HITS,\n                              requested_domains=[DOMAIN, 'ecad'])\n        self.assertEqual(result['status'], 'abstained')\n\n    def test_no_retrieval_support(self):
+        result = planner.plan(INDEX, 'Question', [{'domain': DOMAIN, 'uri': URI}], [], requested_domains=[DOMAIN])
         self.assertEqual(result['status'], 'abstained')
 
     def test_no_cross_domain_join(self):
         result = planner.plan(INDEX, 'Cross-domain question',
                               [{'domain': DOMAIN, 'uri': URI},
-                               {'domain': 'ecad', 'uri': 'https://example.org/ecad/hasDevice'}], HITS)
+                               {'domain': 'ecad', 'uri': 'https://example.org/ecad/hasDevice'}], HITS, requested_domains=[DOMAIN, 'ecad'])
         self.assertEqual(result['status'], 'abstained')
         self.assertIsNone(result['sparql'])
 
     def test_missing_shacl_evidence(self):
         altered = dict(INDEX, relationships=[])
-        result = planner.plan(altered, 'Question', [{'domain': DOMAIN, 'uri': URI}], HITS)
+        result = planner.plan(altered, 'Question', [{'domain': DOMAIN, 'uri': URI}], HITS, requested_domains=[DOMAIN])
         self.assertEqual(result['status'], 'abstained')
 
     def test_iri_injection_rejected(self):
         result = planner.plan(INDEX, 'Question',
-                              [{'domain': DOMAIN, 'uri': URI + '> ?s ?p ?o'}], HITS)
+                              [{'domain': DOMAIN, 'uri': URI + '> ?s ?p ?o'}], HITS, requested_domains=[DOMAIN])
         self.assertEqual(result['status'], 'abstained')
 
 if __name__ == '__main__':
