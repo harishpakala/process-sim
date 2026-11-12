@@ -1,7 +1,7 @@
-"""Compile a validated DTWise semantic selection to a single-domain SPARQL query.
+"""Compile DTWise semantic selections and explicitly cataloged cross-domain joins.
 
 Run: python -m semantic.dtwise_sparql_compiler --query "ECAD device local identifier"
-This module never synthesizes cross-domain joins or SHACL hierarchy FILTERs.
+Cross-domain joins require an explicit catalog mapping and semantic approval or opt-in.
 """
 import argparse
 import json
@@ -157,10 +157,22 @@ def main():
     parser.add_argument("--model", default="qwen2.5-coder:3b")
     parser.add_argument("--endpoint", default="http://localhost:11434")
     parser.add_argument("--limit", type=int, default=100)
+    parser.add_argument("--allow-candidate", action="store_true",
+                        help="Allow explicitly cataloged, unapproved cross-domain mappings")
+    parser.add_argument("--catalog", type=Path,
+                        default=Path(__file__).parent / "ontology" / "dtwise" / "cross-domain-mappings.json")
     args = parser.parse_args()
     index = json.loads(args.index.read_text(encoding="utf-8"))
-    selection = select_intent(index, args.query, model=args.model, endpoint=args.endpoint)
-    print(json.dumps(compile_sparql(selection, args.limit, index=index), indent=2, ensure_ascii=False))
+    mentioned = {domain.lower() for domain in _mentioned_domains(args.query)}
+    if len(mentioned) > 1:
+        from semantic.dtwise_cross_domain import compile_cross_domain
+        catalog = json.loads(args.catalog.read_text(encoding="utf-8"))
+        result = compile_cross_domain(args.query, index, catalog,
+                                      allow_candidate=args.allow_candidate, limit=args.limit)
+    else:
+        selection = select_intent(index, args.query, model=args.model, endpoint=args.endpoint)
+        result = compile_sparql(selection, args.limit, index=index)
+    print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
 if __name__ == "__main__":
