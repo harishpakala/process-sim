@@ -1,14 +1,15 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
-type Case = { id: string; question: string; kind: string; expectedPathId: string; source: string; domain: string | null }
+type Case = { id: string; question: string; kind: string; expectedPathId: string | null; source: string; domain: string | null }
 type Result = {
- caseId: string; question: string; expectedPathId: string; selectedPathId: string
- correctPathSelection: boolean; candidatePaths: unknown[]; llmRaw: string
+ caseId: string; question: string; expectedPathId: string | null; selectedPathId: string
+ correctPathSelection: boolean | null; candidatePaths: unknown[]; llmRaw: string
  validation: string; query?: string; pathEvidence?: unknown; execution: string
  executionError?: string; returnedRows?: number; sampleBindings?: unknown[]
  answer: string; answerStatus: string; elapsedSeconds: number; model: string
 }
+const experiment = ref<37 | 42>(42)
 const cases = ref<Case[]>([])
 const indexSha = ref('')
 const selectedId = ref('')
@@ -30,7 +31,7 @@ async function load() {
  error.value = ''
  result.value = null
  try {
-  const data = await getJson('/api/ai/benchmarks/37/questions', {cache:'no-store'})
+  const data = await getJson('/api/ai/benchmarks/'+experiment.value+'/questions', {cache:'no-store'})
   if (!Array.isArray(data.questions) || !data.indexSha256) throw new Error('Invalid frozen benchmark registry')
   cases.value = data.questions
   indexSha.value = data.indexSha256
@@ -44,7 +45,7 @@ async function run() {
  result.value = null
  error.value = ''
  try {
-  result.value = await getJson('/api/ai/benchmarks/37/run', {
+  result.value = await getJson('/api/ai/benchmarks/'+experiment.value+'/run', {
    method: 'POST', headers: {'Content-Type':'application/json'},
    body: JSON.stringify({caseId:selected.value.id,indexSha256:indexSha.value,execute:execute.value})
   })
@@ -57,10 +58,11 @@ onMounted(() => { void load() })
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title"><div><h2>Frozen Benchmark — Experiment 37</h2><p>Select a fixed question and run the ontology-grounded hybrid retrieval and constrained Llama path planner.</p></div><span class="pill">DEVELOPMENT BENCHMARK</span></div>
-   <p class="subdued">Catalog-derived development cases, not independent held-out questions. A correct path selection is not a verified answer. No Run ID is used.</p>
+   <div class="panel-title"><div><h2>Frozen Benchmark — Experiment {{experiment}}</h2><p>Select a fixed question and run ontology-grounded hybrid retrieval and the constrained Llama path planner.</p></div><span class="pill">DEVELOPMENT BENCHMARK</span></div>
+   <p class="subdued">Experiment 42 contains eight authored engineering probes without gold-answer verification; Experiment 37 is the catalog-derived path-selection baseline. Neither uses Run ID, temporal data or aggregation. The current 36D planner supports path selection only, so some pilot questions are intentionally beyond its capabilities.</p>
+   <label>Frozen dataset <select v-model.number="experiment" :disabled="busy" @change="load"><option :value="42">Experiment 42 — Eight engineering questions</option><option :value="37">Experiment 37 — Catalog path baseline</option></select></label>
    <div class="control-row">
-    <strong>{{cases.length}} questions · {{positiveCount}} supported path cases · {{cases.length-positiveCount}} abstention cases</strong>
+    <strong>{{cases.length}} questions · {{experiment===37 ? positiveCount+' supported path cases · '+(cases.length-positiveCount)+' abstention cases' : '8 authored engineering probes; gold answers pending'}}</strong>
     <button type="button" class="secondary" :disabled="loading||busy" @click="load">{{loading?'Loading…':'Refresh frozen questions'}}</button>
    </div>
    <label style="display:grid;gap:7px">Benchmark question
@@ -72,7 +74,7 @@ onMounted(() => { void load() })
     <div class="result-section">
      <h3>{{selected.id}} — Question</h3>
      <p>{{selected.question}}</p>
-     <p class="subdued">Expected path: <code>{{selected.expectedPathId}}</code> · {{selected.kind}} · {{selected.source}}</p>
+     <p class="subdued">Expected path: <code>{{selected.expectedPathId || 'Not yet independently annotated'}}</code> · {{selected.kind}} · {{selected.source}}</p>
     </div>
     <label class="control-row"><input v-model="execute" type="checkbox" :disabled="busy" /> Execute validated SELECT against GraphDB (optional; read-only)</label>
     <button class="primary" type="button" :disabled="busy||loading" @click="run">{{busy?'Retrieving ontology, querying Ollama…':'Run selected benchmark question'}}</button>
@@ -80,10 +82,10 @@ onMounted(() => { void load() })
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
   </section>
   <section v-if="result" class="panel">
-   <div class="panel-title"><div><h2>{{result.caseId}} — Query result</h2><p>{{result.question}}</p></div><span class="pill">{{result.correctPathSelection?'PATH MATCH':'PATH MISMATCH'}}</span></div>
-   <div class="result-section"><h3>Answer / outcome</h3><p>{{result.answer}}</p><p class="subdued">Answer verification: {{result.answerStatus}}. Path match compares the selected path ID with the frozen development annotation only.</p></div>
+   <div class="panel-title"><div><h2>{{result.caseId}} — Query result</h2><p>{{result.question}}</p></div><span class="pill">{{result.correctPathSelection===null?'NOT SCORED':result.correctPathSelection?'PATH MATCH':'PATH MISMATCH'}}</span></div>
+   <div class="result-section"><h3>Answer / outcome</h3><p>{{result.answer}}</p><p class="subdued">Answer verification: {{result.answerStatus}}. Experiment 42 has no gold answer annotations, so no pass/fail is claimed. Experiment 37 path match compares against its catalog-derived annotation only.</p></div>
    <div class="result-section"><h3>Benchmark evaluation</h3>
-    <p>Expected: <code>{{result.expectedPathId}}</code></p>
+    <p>Expected: <code>{{result.expectedPathId || 'Not annotated'}}</code></p>
     <p>Selected: <code>{{result.selectedPathId}}</code></p>
     <p>Deterministic validation: {{result.validation}}</p>
     <p>GraphDB execution: {{result.execution}} <span v-if="result.returnedRows!==undefined">· {{result.returnedRows}} rows</span></p>
