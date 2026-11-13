@@ -25,6 +25,13 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/42/questions":
+            try:
+                from process_sim.api.frozen_benchmark import pilot_questions
+                self.send_json(200, pilot_questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            return
         if urlsplit(self.path).path == "/api/ai/benchmarks/37/questions":
             try:
                 from process_sim.api.frozen_benchmark import questions
@@ -258,7 +265,8 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
-        if urlsplit(self.path).path == "/api/ai/benchmarks/37/run":
+        if urlsplit(self.path).path in ("/api/ai/benchmarks/37/run", "/api/ai/benchmarks/42/run"):
+            pilot = urlsplit(self.path).path.endswith("/42/run")
             try:
                 length = int(self.headers.get("Content-Length", "0"))
                 if not 0 < length <= 1024:
@@ -268,7 +276,7 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(payload, dict) or set(payload) != {"caseId", "indexSha256", "execute"}:
                     raise ValueError("Expected caseId, indexSha256 and execute only")
                 from process_sim.api.frozen_benchmark import run_case
-                self.send_json(200, run_case(payload["caseId"], payload["indexSha256"], payload["execute"]))
+                self.send_json(200, run_case(payload["caseId"], payload["indexSha256"], payload["execute"], pilot=pilot))
             except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
                 self.send_json(400, {"error": str(exc)})
             except RuntimeError as exc:
