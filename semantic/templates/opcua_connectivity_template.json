@@ -20,6 +20,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Server"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -81,6 +86,13 @@
           "language": "en",
           "text": "Collection of configured OPC UA servers."
         }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
+        }
       ]
     },
     {
@@ -100,6 +112,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -248,6 +265,13 @@
         {
           "language": "en",
           "text": "Collection of mappings between engineering signals and OPC UA nodes."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
