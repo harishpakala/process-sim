@@ -114,6 +114,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    },
+                    {
+                      "type": "SemanticRole",
+                      "valueType": "xs:string",
+                      "value": "DomainEntity"
                     }
                   ],
                   "description": [
@@ -166,6 +171,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToMany"
+                    },
+                    {
+                      "type": "SemanticRole",
+                      "valueType": "xs:string",
+                      "value": "DomainEntity"
                     }
                   ],
                   "description": [
@@ -190,6 +200,11 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
+                },
+                {
+                  "type": "SemanticRole",
+                  "valueType": "xs:string",
+                  "value": "StructuralContainer"
                 }
               ],
               "description": [
@@ -302,6 +317,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -326,6 +346,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
@@ -446,6 +471,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    },
+                    {
+                      "type": "SemanticRole",
+                      "valueType": "xs:string",
+                      "value": "DomainEntity"
                     }
                   ],
                   "description": [
@@ -498,6 +528,11 @@
                       "type": "Cardinality",
                       "valueType": "xs:string",
                       "value": "ZeroToOne"
+                    },
+                    {
+                      "type": "SemanticRole",
+                      "valueType": "xs:string",
+                      "value": "DomainEntity"
                     }
                   ],
                   "description": [
@@ -522,6 +557,11 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "ZeroToOne"
+                },
+                {
+                  "type": "SemanticRole",
+                  "valueType": "xs:string",
+                  "value": "StructuralContainer"
                 }
               ],
               "description": [
@@ -546,6 +586,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -570,6 +615,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
