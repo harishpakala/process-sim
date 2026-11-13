@@ -209,7 +209,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "description": [
                 {
@@ -393,7 +393,7 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
+              "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "description": [
                 {
