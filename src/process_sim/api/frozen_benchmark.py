@@ -43,7 +43,7 @@ def questions():
                           for c in cases]}
 
 
-def run_case(case_id, index_sha256, execute=False, pilot=False):
+def run_case(case_id, index_sha256, execute=False, pilot=False, *, question_override=None):
     if not isinstance(case_id, str) or not isinstance(index_sha256, str) or type(execute) is not bool:
         raise ValueError("caseId, indexSha256 and boolean execute are required")
     compiler, planner, benchmark, index, docs, cases, digest = _catalog()
@@ -52,6 +52,10 @@ def run_case(case_id, index_sha256, execute=False, pilot=False):
     case = next((c for c in (PILOT_CASES if pilot else cases) if c["id"] == case_id), None)
     if case is None:
         raise ValueError("Unknown frozen benchmark case")
+    if question_override is not None:
+        if not pilot or not isinstance(question_override, str) or not question_override.strip() or len(question_override) > 1000:
+            raise ValueError("Question override is restricted to nonempty Experiment 42 local tests")
+        case = {**case, "question": question_override}
     if not _LOCK.acquire(blocking=False):
         raise RuntimeError("Another benchmark case is running")
     try:
