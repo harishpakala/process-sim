@@ -43,13 +43,13 @@ def questions():
                           for c in cases]}
 
 
-def run_case(case_id, index_sha256, execute=False):
+def run_case(case_id, index_sha256, execute=False, pilot=False):
     if not isinstance(case_id, str) or not isinstance(index_sha256, str) or type(execute) is not bool:
         raise ValueError("caseId, indexSha256 and boolean execute are required")
     compiler, planner, benchmark, index, docs, cases, digest = _catalog()
     if index_sha256 != digest:
         raise ValueError("Ontology catalog changed; refresh the benchmark question list")
-    case = next((c for c in cases if c["id"] == case_id), None)
+    case = next((c for c in (PILOT_CASES if pilot else cases) if c["id"] == case_id), None)
     if case is None:
         raise ValueError("Unknown frozen benchmark case")
     if not _LOCK.acquire(blocking=False):
@@ -96,12 +96,12 @@ def run_case(case_id, index_sha256, execute=False):
         chosen = planner.parse_choice(raw, {d["uri"] for d in candidates})
         result = {"experiment": 37, "caseId": case_id, "question": case["question"],
                   "expectedPathId": case["expected_path_id"], "selectedPathId": chosen,
-                  "correctPathSelection": chosen == case["expected_path_id"],
+                  "correctPathSelection": (chosen == case["expected_path_id"]) if case["expected_path_id"] else None,
                   "indexSha256": digest, "model": model, "embeddingModel": embedding_model,
                   "candidatePaths": [{"pathId": d["uri"], "domain": d["domain"],
                                       "predicates": d["path"]["predicates"]} for d in candidates],
                   "llmRaw": raw, "validation": "Valid catalog path selection or ABSTAIN",
-                  "execution": "not_requested", "answerStatus": "NOT_VERIFIED"}
+                  "execution": "not_requested", "answerStatus": "NOT_VERIFIED", "pilot": pilot}
         if chosen == "ABSTAIN":
             result["execution"] = "not_applicable"
             result["answer"] = "ABSTAIN — no supported path selected."
@@ -125,3 +125,27 @@ def run_case(case_id, index_sha256, execute=False):
         return result
     finally:
         _LOCK.release()
+
+
+# Frozen pilot wording. These are development probes, NOT gold-answer annotations.
+# The path-only 36D planner cannot solve every question below.
+PILOT_CASES = [
+    {"id": "E42-01", "question": "Which equipment items are defined in the DEXPI engineering model?", "kind": "entity", "domain": "dexpi"},
+    {"id": "E42-02", "question": "Which instruments are associated with reactor equipment in the engineering model?", "kind": "relationship", "domain": "dexpi"},
+    {"id": "E42-03", "question": "Which components belong to equipment assemblies through nested DEXPI equipment relationships?", "kind": "multihop", "domain": "dexpi"},
+    {"id": "E42-04", "question": "Which engineering assets have an explicitly evidenced connection to an ECAD device?", "kind": "cross_domain", "domain": None},
+    {"id": "E42-05", "question": "Which vessels have a design-pressure value above 10 bar?", "kind": "filter", "domain": None},
+    {"id": "E42-06", "question": "Which DEXPI equipment resources can be traced to their containing equipment collection?", "kind": "reverse_relationship", "domain": "dexpi"},
+    {"id": "E42-07", "question": "Which ECAD devices are verified as physically installed on the reactor, rather than merely proposed candidates?", "kind": "evidence", "domain": None},
+    {"id": "E42-08", "question": "Which equipment items have a verified connection to an asset inventory record and an ECAD device?", "kind": "multi_constraint", "domain": None},
+]
+for _case in PILOT_CASES:
+    _case.update({"expected_path_id": None, "source": "authored engineering pilot; gold annotation pending"})
+
+def pilot_questions():
+    _, _, _, _, _, _, digest = _catalog()
+    return {"experiment": 42, "indexSha256": digest,
+            "provenance": "Eight frozen authored development probes; gold answers NOT yet verified",
+            "questions": [{"id": c["id"], "question": c["question"], "kind": c["kind"],
+                           "expectedPathId": None, "source": c["source"], "domain": c["domain"]}
+                          for c in PILOT_CASES]}
