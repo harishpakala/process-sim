@@ -1,0 +1,1167 @@
+{
+  "variant": "a",
+  "requested_num_predict": 1400,
+  "requested_num_ctx": 12288,
+  "prompt_chars": 26947,
+  "estimated_prompt_tokens": 6737,
+  "actual_prompt_tokens": null,
+  "actual_generated_tokens": null,
+  "prompt_eval_duration_ns": null,
+  "eval_duration_ns": null,
+  "total_duration_ns": null,
+  "generation_tokens_per_second": null,
+  "created_at_utc": "2026-11-11T13:48:32.701423+00:00",
+  "method": "q13_v4_compact_shacl_ab_first_attempt_nl2sparql",
+  "schema_representation": "compact_extracted_owl_classes_direct_shacl_paths_only",
+  "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+  "model": "llama3.1:8b",
+  "ontology_files": [
+    {
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "prompt_system": "You generate one read-only SPARQL 1.1 SELECT query using only the\nprovided complete OWL/SHACL Turtle ontologies. Select exact predicate IRIs\ndeclared as SHACL sh:path, not invented property names. A prefixed predicate\nis prefix:property, never ?prefix:property. Use the ontology's class and shape\nconstraints to construct graph patterns. Identify the requested measurement\nthrough descriptive text, not by regex on opaque identifiers. Do not assume\ninstance facts, answer values, or a reference query. Return ONLY a JSON object\nwith keys sparql and rationale; no markdown.",
+  "prompt_user": {
+    "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+    "ontologies": {
+      "prefixes": {
+        "dexpi": "https://example.org/dexpi/",
+        "ecad": "https://example.org/ecad/",
+        "engineeringbom": "https://example.org/engineeringbom/",
+        "assetinventory": "https://example.org/assetinventory/",
+        "opcuaconnectivity": "https://example.org/opcuaconnectivity/",
+        "productcatalog": "https://example.org/productcatalog/",
+        "xsd": "http://www.w3.org/2001/XMLSchema#",
+        "sh": "http://www.w3.org/ns/shacl#"
+      },
+      "domains": [
+        {
+          "domain": "dexpi",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+              "label": "ActuatingFunctions SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasActuatingFunction",
+                  "label": "ActuatingFunction constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+              "label": "ActuatingFunction SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasActuatedVariable",
+                  "label": "ActuatedVariable constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasCrossDomainAssociationEvidence",
+                  "label": "CrossDomainAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasCrossDomainAssociationStatus",
+                  "label": "CrossDomainAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasRelatedAssetIdentifier",
+                  "label": "RelatedAssetIdentifier constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+              "label": "Equipment SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+              "label": "Equipments SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasEquipment",
+                  "label": "Equipment constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+              "label": "InstrumentationFunctions SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasInstrumentationFunction",
+                  "label": "InstrumentationFunction constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+              "label": "InstrumentationFunction SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "dexpi:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasCrossDomainAssociationEvidence",
+                  "label": "CrossDomainAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasCrossDomainAssociationStatus",
+                  "label": "CrossDomainAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasMeasuredVariable",
+                  "label": "MeasuredVariable constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "dexpi:hasRelatedAssetIdentifier",
+                  "label": "RelatedAssetIdentifier constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+              "label": "DEXPI SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/"
+              ],
+              "properties": [
+                {
+                  "path": "dexpi:hasActuatingFunctions",
+                  "label": "ActuatingFunctions constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "dexpi:hasEquipments",
+                  "label": "Equipments constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "dexpi:hasInstrumentationFunctions",
+                  "label": "InstrumentationFunctions constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "ecad",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "label": "EndPoint SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAddress",
+                  "label": "Address constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "label": "PLCEndPoint SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAddress",
+                  "label": "Address constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+              "label": "ConnectionPoints SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasEndPoint",
+                  "label": "EndPoint constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasPLCEndPoint",
+                  "label": "PLCEndPoint constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "label": "Device SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasConnectionPoints",
+                  "label": "ConnectionPoints constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasCrossDomainAssociationEvidence",
+                  "label": "CrossDomainAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasCrossDomainAssociationStatus",
+                  "label": "CrossDomainAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasEngineeringVerificationEvidence",
+                  "label": "EngineeringVerificationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasEngineeringVerificationStatus",
+                  "label": "EngineeringVerificationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasProductVerificationEvidence",
+                  "label": "ProductVerificationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasProductVerificationStatus",
+                  "label": "ProductVerificationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasRelatedAssetIdentifier",
+                  "label": "RelatedAssetIdentifier constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU",
+              "label": "Devices SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasDevice",
+                  "label": "Device constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+              "label": "Schematics SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasConnections",
+                  "label": "Connections constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "label": "EndPoint SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAddress",
+                  "label": "Address constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "label": "PLCEndPoint SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAddress",
+                  "label": "Address constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+              "label": "ConnectionPoints SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasEndPoint",
+                  "label": "EndPoint constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasPLCEndPoint",
+                  "label": "PLCEndPoint constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+              "label": "Symbol SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "ecad:hasConnectionPoints",
+                  "label": "ConnectionPoints constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasLocalId",
+                  "label": "LocalId constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU",
+              "label": "Symbols SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "ecad:hasSymbol",
+                  "label": "Symbol constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+              "label": "ECAD SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/"
+              ],
+              "properties": [
+                {
+                  "path": "ecad:hasDevices",
+                  "label": "Devices constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasSchematics",
+                  "label": "Schematics constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "ecad:hasSymbols",
+                  "label": "Symbols constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "engineeringbom",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU",
+              "label": "Assembly SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "engineeringbom:hasAssemblyKind",
+                  "label": "AssemblyKind constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasBOMItemId",
+                  "label": "BOMItemId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasBOMPosition",
+                  "label": "BOMPosition constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasItemDescription",
+                  "label": "ItemDescription constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasItemType",
+                  "label": "ItemType constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasParentItemId",
+                  "label": "ParentItemId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasQuantityPerAssembly",
+                  "label": "QuantityPerAssembly constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasRevision",
+                  "label": "Revision constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasStructureStatus",
+                  "label": "StructureStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasUnit",
+                  "label": "Unit constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+              "label": "Assemblies SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "engineeringbom:hasAssembly",
+                  "label": "Assembly constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+              "label": "BOMItem SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "engineeringbom:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasAssociationBasis",
+                  "label": "AssociationBasis constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasBOMItemId",
+                  "label": "BOMItemId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasBOMPosition",
+                  "label": "BOMPosition constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasCrossDomainAssociationEvidence",
+                  "label": "CrossDomainAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasCrossDomainAssociationStatus",
+                  "label": "CrossDomainAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasEngineeringLocalId",
+                  "label": "EngineeringLocalId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasEquivalenceStatus",
+                  "label": "EquivalenceStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasFunctionalAssemblyReference",
+                  "label": "FunctionalAssemblyReference constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasItemDescription",
+                  "label": "ItemDescription constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasItemType",
+                  "label": "ItemType constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasParentItemId",
+                  "label": "ParentItemId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasProductIdentifier",
+                  "label": "ProductIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasQuantity",
+                  "label": "Quantity constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasQuantityBasis",
+                  "label": "QuantityBasis constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasQuantityPerAssembly",
+                  "label": "QuantityPerAssembly constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasRelatedAssetIdentifier",
+                  "label": "RelatedAssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasRevision",
+                  "label": "Revision constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasSelectionStatus",
+                  "label": "SelectionStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasSourceAssetIdentifier",
+                  "label": "SourceAssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasSourceDomain",
+                  "label": "SourceDomain constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasSourceGroup",
+                  "label": "SourceGroup constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasStructureStatus",
+                  "label": "StructureStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasUnit",
+                  "label": "Unit constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "engineeringbom:hasValidationStatus",
+                  "label": "ValidationStatus constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl",
+              "label": "BOMItems SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "engineeringbom:hasBOMItem",
+                  "label": "BOMItem constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+              "label": "TEP_EngineeringBOM SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/"
+              ],
+              "properties": [
+                {
+                  "path": "engineeringbom:hasAssemblies",
+                  "label": "Assemblies constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "engineeringbom:hasBOMItems",
+                  "label": "BOMItems constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "assetinventory",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+              "label": "Assets SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "assetinventory:hasAsset",
+                  "label": "Asset constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+              "label": "Asset SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "assetinventory:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasAssetName",
+                  "label": "AssetName constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasAssetType",
+                  "label": "AssetType constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasCrossDomainAssociationEvidence",
+                  "label": "CrossDomainAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasCrossDomainAssociationStatus",
+                  "label": "CrossDomainAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasEngineeringReference",
+                  "label": "EngineeringReference constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasEquipmentTag",
+                  "label": "EquipmentTag constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasFaultDetectionStatus",
+                  "label": "FaultDetectionStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasFaultInjectionStatus",
+                  "label": "FaultInjectionStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasLocation",
+                  "label": "Location constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasModelingStatus",
+                  "label": "ModelingStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasMonitoringStatus",
+                  "label": "MonitoringStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasOperationalReference",
+                  "label": "OperationalReference constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasProductIdentifier",
+                  "label": "ProductIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasRelatedAssetIdentifier",
+                  "label": "RelatedAssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "assetinventory:hasSimulationStatus",
+                  "label": "SimulationStatus constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+              "label": "AssetInventory SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/"
+              ],
+              "properties": [
+                {
+                  "path": "assetinventory:hasAssets",
+                  "label": "Assets constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl",
+              "label": "Server SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "opcuaconnectivity:hasECADConnectionPointReferenceStatus",
+                  "label": "ECADConnectionPointReferenceStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEndpointStatus",
+                  "label": "EndpointStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEndpointUrl",
+                  "label": "EndpointUrl constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasNamespaceURI",
+                  "label": "NamespaceURI constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+              "label": "Servers SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "opcuaconnectivity:hasServer",
+                  "label": "Server constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+              "label": "SignalMapping SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "opcuaconnectivity:hasAssetIdentifier",
+                  "label": "AssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEngineeringDomain",
+                  "label": "EngineeringDomain constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEngineeringFunctionId",
+                  "label": "EngineeringFunctionId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEngineeringFunctionReference",
+                  "label": "EngineeringFunctionReference constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasEngineeringInterpretationNote",
+                  "label": "EngineeringInterpretationNote constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasInventoryAssociationEvidence",
+                  "label": "InventoryAssociationEvidence constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasInventoryAssociationStatus",
+                  "label": "InventoryAssociationStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasMappingBasis",
+                  "label": "MappingBasis constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasMappingStatus",
+                  "label": "MappingStatus constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasOPCUABrowsePath",
+                  "label": "OPCUABrowsePath constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasOPCUANodeId",
+                  "label": "OPCUANodeId constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasRelatedInventoryAssetIdentifier",
+                  "label": "RelatedInventoryAssetIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasSignalDirection",
+                  "label": "SignalDirection constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "opcuaconnectivity:hasSignalName",
+                  "label": "SignalName constraint",
+                  "kind": "datatype"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+              "label": "SignalMappings SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "opcuaconnectivity:hasSignalMapping",
+                  "label": "SignalMapping constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+              "label": "TEP_OPCUAConnectivity SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/"
+              ],
+              "properties": [
+                {
+                  "path": "opcuaconnectivity:hasServers",
+                  "label": "Servers constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                },
+                {
+                  "path": "opcuaconnectivity:hasSignalMappings",
+                  "label": "SignalMappings constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "domain": "productcatalog",
+          "classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/",
+            "https://example.org/aas/SMC"
+          ],
+          "shapes": [
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ",
+              "label": "TechnicalProperties SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "productcatalog:hasTechnicalProperty",
+                  "label": "TechnicalProperty constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+              "label": "Product SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "productcatalog:hasECLASSClass",
+                  "label": "ECLASSClass constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasECLASSIRDI",
+                  "label": "ECLASSIRDI constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasECLASSPreferredName",
+                  "label": "ECLASSPreferredName constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasManufacturerName",
+                  "label": "ManufacturerName constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasManufacturerPartNumber",
+                  "label": "ManufacturerPartNumber constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasManufacturerProductDesignation",
+                  "label": "ManufacturerProductDesignation constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasProductDescription",
+                  "label": "ProductDescription constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasProductIdentifier",
+                  "label": "ProductIdentifier constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasSupplierName",
+                  "label": "SupplierName constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasSupplierPartNumber",
+                  "label": "SupplierPartNumber constraint",
+                  "kind": "datatype"
+                },
+                {
+                  "path": "productcatalog:hasTechnicalProperties",
+                  "label": "TechnicalProperties constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl",
+              "label": "Products SHACL shape",
+              "targetClasses": [],
+              "properties": [
+                {
+                  "path": "productcatalog:hasProduct",
+                  "label": "Product constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            },
+            {
+              "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU",
+              "label": "ProductCatalog SHACL shape",
+              "targetClasses": [
+                "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/"
+              ],
+              "properties": [
+                {
+                  "path": "productcatalog:hasProducts",
+                  "label": "Products constraint",
+                  "kind": "object",
+                  "class": "https://example.org/aas/SMC"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "scope": "OWL classes and direct SHACL sh:path shape constraints extracted from six TTL files; other OWL/SHACL axioms may be omitted."
+    }
+  },
+  "generated_sparql": null,
+  "model_rationale": null,
+  "raw_model_response": null,
+  "syntax_and_schema_issues": [],
+  "structural_validation": null,
+  "graphdb_bindings": null,
+  "evaluation": null,
+  "error": "ReadTimeout: HTTPConnectionPool(host='localhost', port=11434): Read timed out. (read timeout=300)",
+  "first_attempt_only": true
+}

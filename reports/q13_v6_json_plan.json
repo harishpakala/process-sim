@@ -1,0 +1,1020 @@
+{
+  "method": "q13_v6_ontology_grounded_json_plan_deterministic_compiler",
+  "model": "qwen2.5-coder:3b",
+  "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+  "created_at_utc": "2026-11-11T14:21:15.062138+00:00",
+  "first_attempt_only": true,
+  "schema_sources": [
+    {
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "prompt_estimate": 6057,
+  "num_ctx": 12288,
+  "num_predict": 800,
+  "prompt_system": "You are an ontology-grounded query planner, NOT a SPARQL author.\nReturn a JSON plan selecting only exact predicate IRIs present in the provided\nSHACL sh:path inventory. The six domains must be linked through equal asset\nidentifier values, and ProductCatalog through a product identifier. These\njoins will be compiled deterministically, so do not write SPARQL.\nChoose predicates for requested output fields from their domain's listed\nproperties. Choose a descriptive property for finding a temperature\nmeasurement, never an opaque identifier. If no valid property exists for a\nfield, omit it rather than invent one. Do not assume instance values or\nreference answers. Output JSON only.",
+  "prompt_user": {
+    "question": "Trace the reactor temperature measurement across DEXPI, ECAD, Engineering BOM, AssetInventory, OPC UA Connectivity, and ProductCatalog. Return the engineering identifiers, BOM item IDs and source domains, inventory tag, operational signal, manufacturer, and part number. Find the relevant measurement using the available graph descriptions or labels rather than assuming its identifier.",
+    "ontology_shapes": [
+      {
+        "domain": "dexpi",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasActuatingFunction",
+                "label": "ActuatingFunction constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasActuatedVariable",
+                "label": "ActuatedVariable constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+                "label": "CrossDomainAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+                "label": "CrossDomainAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasLocalId",
+                "label": "LocalId constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+                "label": "RelatedAssetIdentifier constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasEquipment",
+                "label": "Equipment constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasInstrumentationFunction",
+                "label": "InstrumentationFunction constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+                "label": "CrossDomainAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+                "label": "CrossDomainAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasLocalId",
+                "label": "LocalId constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasMeasuredVariable",
+                "label": "MeasuredVariable constraint"
+              },
+              {
+                "path": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+                "label": "RelatedAssetIdentifier constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/dexpi/hasActuatingFunctions",
+                "label": "ActuatingFunctions constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/dexpi/hasEquipments",
+                "label": "Equipments constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/dexpi/hasInstrumentationFunctions",
+                "label": "InstrumentationFunctions constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "domain": "ecad",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAddress",
+                "label": "Address constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAddress",
+                "label": "Address constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasEndPoint",
+                "label": "EndPoint constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasPLCEndPoint",
+                "label": "PLCEndPoint constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasConnectionPoints",
+                "label": "ConnectionPoints constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+                "label": "CrossDomainAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+                "label": "CrossDomainAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+                "label": "EngineeringVerificationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasEngineeringVerificationStatus",
+                "label": "EngineeringVerificationStatus constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasProductVerificationEvidence",
+                "label": "ProductVerificationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasProductVerificationStatus",
+                "label": "ProductVerificationStatus constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasRelatedAssetIdentifier",
+                "label": "RelatedAssetIdentifier constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasDevice",
+                "label": "Device constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasConnections",
+                "label": "Connections constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAddress",
+                "label": "Address constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAddress",
+                "label": "Address constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasEndPoint",
+                "label": "EndPoint constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasPLCEndPoint",
+                "label": "PLCEndPoint constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/ecad/hasConnectionPoints",
+                "label": "ConnectionPoints constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasLocalId",
+                "label": "LocalId constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasSymbol",
+                "label": "Symbol constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/ecad/hasDevices",
+                "label": "Devices constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasSchematics",
+                "label": "Schematics constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/ecad/hasSymbols",
+                "label": "Symbols constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "domain": "engineeringbom",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/engineeringbom/hasAssemblyKind",
+                "label": "AssemblyKind constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasBOMItemId",
+                "label": "BOMItemId constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasBOMPosition",
+                "label": "BOMPosition constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasItemDescription",
+                "label": "ItemDescription constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasItemType",
+                "label": "ItemType constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasParentItemId",
+                "label": "ParentItemId constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+                "label": "QuantityPerAssembly constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasRevision",
+                "label": "Revision constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasStructureStatus",
+                "label": "StructureStatus constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasUnit",
+                "label": "Unit constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/engineeringbom/hasAssembly",
+                "label": "Assembly constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/engineeringbom/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasAssociationBasis",
+                "label": "AssociationBasis constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasBOMItemId",
+                "label": "BOMItemId constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasBOMPosition",
+                "label": "BOMPosition constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+                "label": "CrossDomainAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+                "label": "CrossDomainAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasEngineeringLocalId",
+                "label": "EngineeringLocalId constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasEquivalenceStatus",
+                "label": "EquivalenceStatus constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+                "label": "FunctionalAssemblyReference constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasItemDescription",
+                "label": "ItemDescription constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasItemType",
+                "label": "ItemType constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasParentItemId",
+                "label": "ParentItemId constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasProductIdentifier",
+                "label": "ProductIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasQuantity",
+                "label": "Quantity constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasQuantityBasis",
+                "label": "QuantityBasis constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+                "label": "QuantityPerAssembly constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+                "label": "RelatedAssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasRevision",
+                "label": "Revision constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasSelectionStatus",
+                "label": "SelectionStatus constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+                "label": "SourceAssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasSourceDomain",
+                "label": "SourceDomain constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasSourceGroup",
+                "label": "SourceGroup constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasStructureStatus",
+                "label": "StructureStatus constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasUnit",
+                "label": "Unit constraint"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasValidationStatus",
+                "label": "ValidationStatus constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/engineeringbom/hasBOMItem",
+                "label": "BOMItem constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/engineeringbom/hasAssemblies",
+                "label": "Assemblies constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/engineeringbom/hasBOMItems",
+                "label": "BOMItems constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "domain": "assetinventory",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/assetinventory/hasAsset",
+                "label": "Asset constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/assetinventory/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasAssetName",
+                "label": "AssetName constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasAssetType",
+                "label": "AssetType constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+                "label": "CrossDomainAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+                "label": "CrossDomainAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasEngineeringReference",
+                "label": "EngineeringReference constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasEquipmentTag",
+                "label": "EquipmentTag constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasFaultDetectionStatus",
+                "label": "FaultDetectionStatus constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasFaultInjectionStatus",
+                "label": "FaultInjectionStatus constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasLocation",
+                "label": "Location constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasModelingStatus",
+                "label": "ModelingStatus constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasMonitoringStatus",
+                "label": "MonitoringStatus constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasOperationalReference",
+                "label": "OperationalReference constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasProductIdentifier",
+                "label": "ProductIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+                "label": "RelatedAssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/assetinventory/hasSimulationStatus",
+                "label": "SimulationStatus constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/assetinventory/hasAssets",
+                "label": "Assets constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "domain": "opcuaconnectivity",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+                "label": "ECADConnectionPointReferenceStatus constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEndpointStatus",
+                "label": "EndpointStatus constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEndpointUrl",
+                "label": "EndpointUrl constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+                "label": "NamespaceURI constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/opcuaconnectivity/hasServer",
+                "label": "Server constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+                "label": "AssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+                "label": "EngineeringDomain constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+                "label": "EngineeringFunctionId constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+                "label": "EngineeringFunctionReference constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+                "label": "EngineeringInterpretationNote constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+                "label": "InventoryAssociationEvidence constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+                "label": "InventoryAssociationStatus constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasMappingBasis",
+                "label": "MappingBasis constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasMappingStatus",
+                "label": "MappingStatus constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+                "label": "OPCUABrowsePath constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+                "label": "OPCUANodeId constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+                "label": "RelatedInventoryAssetIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasSignalDirection",
+                "label": "SignalDirection constraint"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasSignalName",
+                "label": "SignalName constraint"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/opcuaconnectivity/hasSignalMapping",
+                "label": "SignalMapping constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/opcuaconnectivity/hasServers",
+                "label": "Servers constraint",
+                "class": "https://example.org/aas/SMC"
+              },
+              {
+                "path": "https://example.org/opcuaconnectivity/hasSignalMappings",
+                "label": "SignalMappings constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "domain": "productcatalog",
+        "shapes": [
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/productcatalog/hasTechnicalProperty",
+                "label": "TechnicalProperty constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/productcatalog/hasECLASSClass",
+                "label": "ECLASSClass constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasECLASSIRDI",
+                "label": "ECLASSIRDI constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasECLASSPreferredName",
+                "label": "ECLASSPreferredName constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasManufacturerName",
+                "label": "ManufacturerName constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasManufacturerPartNumber",
+                "label": "ManufacturerPartNumber constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasManufacturerProductDesignation",
+                "label": "ManufacturerProductDesignation constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasProductDescription",
+                "label": "ProductDescription constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasProductIdentifier",
+                "label": "ProductIdentifier constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasSupplierName",
+                "label": "SupplierName constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasSupplierPartNumber",
+                "label": "SupplierPartNumber constraint"
+              },
+              {
+                "path": "https://example.org/productcatalog/hasTechnicalProperties",
+                "label": "TechnicalProperties constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl",
+            "targets": [],
+            "properties": [
+              {
+                "path": "https://example.org/productcatalog/hasProduct",
+                "label": "Product constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          },
+          {
+            "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU",
+            "targets": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/"
+            ],
+            "properties": [
+              {
+                "path": "https://example.org/productcatalog/hasProducts",
+                "label": "Products constraint",
+                "class": "https://example.org/aas/SMC"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "integration_policy": {
+      "asset": [
+        "dexpi",
+        "ecad",
+        "engineeringbom",
+        "assetinventory",
+        "opcuaconnectivity"
+      ],
+      "product": [
+        "productcatalog",
+        "assetinventory",
+        "engineeringbom"
+      ],
+      "semantics": "candidate RDF-term equality joins from shared identifier property local names; not owl:equivalentProperty"
+    },
+    "requested_fields": {
+      "engineeringIdentifier": [
+        "dexpi",
+        "ecad",
+        "engineeringbom"
+      ],
+      "bomItemId": [
+        "engineeringbom"
+      ],
+      "sourceDomain": [
+        "engineeringbom"
+      ],
+      "inventoryTag": [
+        "assetinventory"
+      ],
+      "operationalSignal": [
+        "opcuaconnectivity",
+        "assetinventory"
+      ],
+      "manufacturer": [
+        "productcatalog"
+      ],
+      "partNumber": [
+        "productcatalog"
+      ]
+    },
+    "response_contract": {
+      "fields": {
+        "fieldName": {
+          "domain": "domainName",
+          "predicate": "full sh:path IRI"
+        }
+      },
+      "description_filter": {
+        "domain": "domainName",
+        "predicate": "full descriptive sh:path IRI",
+        "text": "temperature"
+      }
+    }
+  },
+  "raw_model_response": "{\n  \"plan\": [\n    {\n      \"domain\": \"dexpi\",\n      \"predicate\": \"https://example.org/dexpi/hasMeasuredVariable\"\n    },\n    {\n      \"domain\": \"assetinventory\",\n      \"predicate\": \"https://example.org/assetinventory/hasOperationalReference\"\n    },\n    {\n      \"domain\": \"productcatalog\",\n      \"predicate\": \"https://example.org/productcatalog/hasManufacturerName\"\n    },\n    {\n      \"domain\": \"productcatalog\",\n      \"predicate\": \"https://example.org/productcatalog/hasManufacturerPartNumber\"\n    }\n  ]\n}",
+  "llm_plan": {
+    "plan": [
+      {
+        "domain": "dexpi",
+        "predicate": "https://example.org/dexpi/hasMeasuredVariable"
+      },
+      {
+        "domain": "assetinventory",
+        "predicate": "https://example.org/assetinventory/hasOperationalReference"
+      },
+      {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerName"
+      },
+      {
+        "domain": "productcatalog",
+        "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber"
+      }
+    ]
+  },
+  "plan_issues": [
+    "Missing JSON object 'fields'."
+  ],
+  "generated_sparql": null,
+  "syntax_and_schema_issues": [],
+  "structural_validation": null,
+  "prompt_eval_count": 7111,
+  "eval_count": 126,
+  "prompt_eval_duration_ns": 96735074000,
+  "eval_duration_ns": 13092050000,
+  "total_duration_ns": 112774070000,
+  "time_to_first_chunk_seconds": 101.75,
+  "elapsed_seconds": 114.84,
+  "completed": true,
+  "error": null,
+  "graphdb_bindings": null,
+  "evaluation": null
+}

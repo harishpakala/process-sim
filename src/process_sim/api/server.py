@@ -25,6 +25,94 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/benchmarks/42/questions":
+            try:
+                from process_sim.api.frozen_benchmark import pilot_questions
+                self.send_json(200, pilot_questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            return
+        if urlsplit(self.path).path == "/api/ai/benchmarks/37/questions":
+            try:
+                from process_sim.api.frozen_benchmark import questions
+                self.send_json(200, questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            return
+        if urlsplit(self.path).path == "/api/ai/benchmarks/questions":
+            try:
+                from process_sim.api.benchmark_reports import list_questions
+                self.send_json(200, list_questions())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": f"Benchmark questions unavailable: {exc}"})
+            return
+        if urlsplit(self.path).path == "/api/ai/benchmarks/reports":
+            try:
+                from process_sim.api.benchmark_reports import list_reports
+                self.send_json(200, list_reports())
+            except (OSError, ValueError) as exc:
+                self.send_json(503, {"error": f"Benchmark reports unavailable: {exc}"})
+            return
+        if urlsplit(self.path).path in ("/api/ai/q13/ontology/live/status", "/api/ai/q13/ontology/live/result"):
+            from process_sim.api import q13_live
+            if os.getenv("TEP_Q13_LIVE_ENABLED") != "1":
+                self.send_json(503, {"error": "Live Q13 is disabled"})
+                return
+            if urlsplit(self.path).path.endswith("/status"):
+                self.send_json(200, q13_live.status())
+            else:
+                try:
+                    self.send_json(200, q13_live.result())
+                except LookupError as exc:
+                    self.send_json(409, {"error": str(exc)})
+                except (OSError, ValueError) as exc:
+                    self.send_json(503, {"error": str(exc)})
+            return
+        if urlsplit(self.path).path == "/api/ai/q13/ontology/result":
+            # Read-only integration of an explicitly configured, completed audit.
+            # This does not run Ollama or GraphDB on the request thread.
+            try:
+                from pathlib import Path
+                configured = os.environ.get("TEP_Q13_ONTOLOGY_AUDIT")
+                if not configured:
+                    self.send_json(503, {"error": "Set TEP_Q13_ONTOLOGY_AUDIT to a completed Q13 audit JSON"})
+                    return
+                source = Path(configured).expanduser().resolve()
+                if not source.is_file() or source.stat().st_size > 8_000_000:
+                    self.send_json(503, {"error": "Configured Q13 audit is missing or too large"})
+                    return
+                audit = json.loads(source.read_text(encoding="utf-8"))
+                if not isinstance(audit, dict) or not audit.get("method", "").startswith("q13_v9_6_"):
+                    raise ValueError("Configured file is not a Q13 ontology-guided audit")
+                domains = audit.get("domains", [])
+                acceptance = audit.get("acceptance", {})
+                if not isinstance(domains, list) or not isinstance(acceptance, dict):
+                    raise ValueError("Invalid Q13 audit structure")
+                if not audit.get("final_answer") or not acceptance.get("six_domain_coverage"):
+                    self.send_json(409, {"error": "Q13 audit is incomplete"})
+                    return
+                self.send_json(200, {
+                    "question": audit.get("question"),
+                    "answer": audit["final_answer"],
+                    "status": audit.get("status"),
+                    "method": audit.get("method"),
+                    "synthesisMode": audit.get("synthesis_mode"),
+                    "fallbackReason": audit.get("fallback_reason"),
+                    "acceptance": acceptance,
+                    "historian": audit.get("historian"),
+                    "domains": [{
+                        "domain": d.get("domain"),
+                        "status": d.get("status"),
+                        "summarySource": (d.get("finding") or {}).get("summary_source"),
+                        "verifiedTriples": d.get("verified_triples", []),
+                        "finding": d.get("finding"),
+                    } for d in domains],
+                })
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(422, {"error": f"Invalid Q13 audit: {exc}"})
+            except OSError as exc:
+                self.send_json(503, {"error": f"Q13 audit unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/paper/questions":
             try:
                 from process_sim.api.paper_query import questions
@@ -177,6 +265,46 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path in ("/api/ai/benchmarks/37/run", "/api/ai/benchmarks/42/run"):
+            pilot = urlsplit(self.path).path.endswith("/42/run")
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 1024:
+                    self.send_json(413, {"error": "Invalid benchmark request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or set(payload) != {"caseId", "indexSha256", "execute"}:
+                    raise ValueError("Expected caseId, indexSha256 and execute only")
+                from process_sim.api.frozen_benchmark import run_case
+                self.send_json(200, run_case(payload["caseId"], payload["indexSha256"], payload["execute"], pilot=pilot))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except RuntimeError as exc:
+                self.send_json(409, {"error": str(exc)})
+            except Exception as exc:
+                import logging
+                logging.exception("Benchmark 37 execution failed")
+                self.send_json(503, {"error": "Benchmark execution failed; check backend logs"})
+            return
+        if urlsplit(self.path).path == "/api/ai/q13/ontology/live/start":
+            from process_sim.api import q13_live
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if length != 0:
+                    self.send_json(400, {"error": "Live Q13 start accepts no request body"})
+                    return
+                self.send_json(202, q13_live.start())
+            except PermissionError as exc:
+                self.send_json(403, {"error": str(exc)})
+            except RuntimeError as exc:
+                self.send_json(409, {"error": str(exc)})
+            except (ValueError, OSError) as exc:
+                self.send_json(503, {"error": str(exc)})
+            except Exception as exc:
+                import logging
+                logging.exception("Unexpected Q13 live start failure")
+                self.send_json(500, {"error": f"Q13 live start failed ({type(exc).__name__}); check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/custom/answer":
             try:
                 length = int(self.headers.get("Content-Length", "0"))

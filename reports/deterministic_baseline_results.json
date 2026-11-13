@@ -1,0 +1,2156 @@
+{
+  "schema_version": 1,
+  "generated_at_utc": "2026-11-10T05:44:03.892739+00:00",
+  "mode": "deterministic_structured_request_no_llm",
+  "run_id": "077a3c31-44f4-4f3a-b06d-ad52b148fe10",
+  "configuration": {
+    "fixtures": "reports/tep_nexus_benchmark_full_coverage_cases.json",
+    "repeats": 3,
+    "history_limit": 1000
+  },
+  "summary": {
+    "total": 108,
+    "passed": 108,
+    "failed": 0,
+    "median_seconds": 0.4462245,
+    "p95_seconds": 0.651734
+  },
+  "limitations": [
+    "Function identifiers and request parameters come from fixtures; natural-language planning is not evaluated.",
+    "Engineering mappings are provisional; shared historian data does not verify physical sensor identity.",
+    "Sequential live queries may observe different database states than historical LLM benchmark runs.",
+    "This script measures no VTKG construction; it uses the existing GraphDB-to-TimescaleDB evidence path."
+  ],
+  "cases": [
+    {
+      "id": "fi_latest_history",
+      "function": "FI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 0.000884,
+        "graphdb_mapping_resolution": 0.092953,
+        "timescaledb_retrieval": 0.283498,
+        "evidence_construction": 0.000981,
+        "deterministic_answer_and_validation": 0.002985
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.381308,
+      "repeat": 1
+    },
+    {
+      "id": "vc_latest_history",
+      "function": "VC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.1e-05,
+        "graphdb_mapping_resolution": 0.07403,
+        "timescaledb_retrieval": 0.53483,
+        "evidence_construction": 0.000521,
+        "deterministic_answer_and_validation": 0.000408
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.609836,
+      "repeat": 1
+    },
+    {
+      "id": "ti_latest_history",
+      "function": "TI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.099283,
+        "timescaledb_retrieval": 0.213495,
+        "evidence_construction": 0.00055,
+        "deterministic_answer_and_validation": 0.000422
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.313794,
+      "repeat": 1
+    },
+    {
+      "id": "li_101_latest_history",
+      "function": "LI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.11232,
+        "timescaledb_retrieval": 0.236574,
+        "evidence_construction": 0.000593,
+        "deterministic_answer_and_validation": 0.00055
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.350091,
+      "repeat": 1
+    },
+    {
+      "id": "pi_101_latest_history",
+      "function": "PI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5e-05,
+        "graphdb_mapping_resolution": 0.107782,
+        "timescaledb_retrieval": 0.220972,
+        "evidence_construction": 0.00051,
+        "deterministic_answer_and_validation": 0.00038
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.329699,
+      "repeat": 1
+    },
+    {
+      "id": "ji_101_latest_history",
+      "function": "JI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.10183,
+        "timescaledb_retrieval": 0.484536,
+        "evidence_construction": 0.000499,
+        "deterministic_answer_and_validation": 0.000377
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS20",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.587282,
+      "repeat": 1
+    },
+    {
+      "id": "sc_101_latest_history",
+      "function": "SC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.102584,
+        "timescaledb_retrieval": 0.300585,
+        "evidence_construction": 0.000514,
+        "deterministic_answer_and_validation": 0.000512
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.404238,
+      "repeat": 1
+    },
+    {
+      "id": "unsupported_function",
+      "function": "FI_999",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 1.5e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Unsupported engineering function",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2.4e-05,
+      "repeat": 1
+    },
+    {
+      "id": "conflicting_identifiers",
+      "function": "FI_101",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 1.8e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Planned engineering function does not match the explicit identifier in the question",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2.4e-05,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_102",
+      "function": "FI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 2.5e-05,
+        "graphdb_mapping_resolution": 0.123015,
+        "timescaledb_retrieval": 0.360616,
+        "evidence_construction": 0.000475,
+        "deterministic_answer_and_validation": 0.000444
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.484582,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_103",
+      "function": "FI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.086681,
+        "timescaledb_retrieval": 0.560294,
+        "evidence_construction": 0.000632,
+        "deterministic_answer_and_validation": 0.000502
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.648153,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_104",
+      "function": "FI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.094203,
+        "timescaledb_retrieval": 0.31461,
+        "evidence_construction": 0.000519,
+        "deterministic_answer_and_validation": 0.000369
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.409752,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_105",
+      "function": "FI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.131029,
+        "timescaledb_retrieval": 0.490964,
+        "evidence_construction": 0.000499,
+        "deterministic_answer_and_validation": 0.000387
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.622918,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_106",
+      "function": "FI_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.094514,
+        "timescaledb_retrieval": 0.261052,
+        "evidence_construction": 0.000584,
+        "deterministic_answer_and_validation": 0.000374
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.356564,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_107",
+      "function": "FI_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.141807,
+        "timescaledb_retrieval": 0.475143,
+        "evidence_construction": 0.000998,
+        "deterministic_answer_and_validation": 0.00044
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.618428,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_108",
+      "function": "FI_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.074933,
+        "timescaledb_retrieval": 0.281375,
+        "evidence_construction": 0.000612,
+        "deterministic_answer_and_validation": 0.000574
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS14",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.357538,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_109",
+      "function": "FI_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.6e-05,
+        "graphdb_mapping_resolution": 0.144421,
+        "timescaledb_retrieval": 0.344999,
+        "evidence_construction": 0.000678,
+        "deterministic_answer_and_validation": 0.000375
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS17",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.490533,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_fi_110",
+      "function": "FI_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.080843,
+        "timescaledb_retrieval": 0.295634,
+        "evidence_construction": 0.000555,
+        "deterministic_answer_and_validation": 0.000372
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS19",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.377443,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_li_102",
+      "function": "LI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.093489,
+        "timescaledb_retrieval": 0.557217,
+        "evidence_construction": 0.00061,
+        "deterministic_answer_and_validation": 0.000378
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.651734,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_li_103",
+      "function": "LI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.123466,
+        "timescaledb_retrieval": 0.35104,
+        "evidence_construction": 0.000701,
+        "deterministic_answer_and_validation": 0.00051
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS15",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.475759,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_pi_102",
+      "function": "PI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.4e-05,
+        "graphdb_mapping_resolution": 0.08069,
+        "timescaledb_retrieval": 0.268686,
+        "evidence_construction": 0.00053,
+        "deterministic_answer_and_validation": 0.000402
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS13",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.350356,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_pi_103",
+      "function": "PI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.112018,
+        "timescaledb_retrieval": 0.342439,
+        "evidence_construction": 0.000569,
+        "deterministic_answer_and_validation": 0.000373
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS16",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.45544,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_ti_102",
+      "function": "TI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.087037,
+        "timescaledb_retrieval": 0.276609,
+        "evidence_construction": 0.000874,
+        "deterministic_answer_and_validation": 0.00064
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.3652,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_ti_103",
+      "function": "TI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.092477,
+        "timescaledb_retrieval": 0.347828,
+        "evidence_construction": 0.000688,
+        "deterministic_answer_and_validation": 0.000532
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS18",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.441569,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_ti_104",
+      "function": "TI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.9e-05,
+        "graphdb_mapping_resolution": 0.077018,
+        "timescaledb_retrieval": 0.277003,
+        "evidence_construction": 0.000595,
+        "deterministic_answer_and_validation": 0.00063
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS21",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.3553,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_ti_105",
+      "function": "TI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.123184,
+        "timescaledb_retrieval": 0.416407,
+        "evidence_construction": 0.000577,
+        "deterministic_answer_and_validation": 0.000387
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS22",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.540595,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_102",
+      "function": "VC_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.078541,
+        "timescaledb_retrieval": 0.272934,
+        "evidence_construction": 0.000804,
+        "deterministic_answer_and_validation": 0.00054
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.352861,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_103",
+      "function": "VC_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.089873,
+        "timescaledb_retrieval": 0.348103,
+        "evidence_construction": 0.000425,
+        "deterministic_answer_and_validation": 0.000496
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.438952,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_104",
+      "function": "VC_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.8e-05,
+        "graphdb_mapping_resolution": 0.096554,
+        "timescaledb_retrieval": 0.263598,
+        "evidence_construction": 0.000553,
+        "deterministic_answer_and_validation": 0.000354
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.361103,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_105",
+      "function": "VC_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.144,
+        "timescaledb_retrieval": 0.356661,
+        "evidence_construction": 0.000711,
+        "deterministic_answer_and_validation": 0.000488
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.501902,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_106",
+      "function": "VC_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.080817,
+        "timescaledb_retrieval": 0.409327,
+        "evidence_construction": 0.000492,
+        "deterministic_answer_and_validation": 0.000384
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.491072,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_107",
+      "function": "VC_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.124154,
+        "timescaledb_retrieval": 0.356811,
+        "evidence_construction": 0.000663,
+        "deterministic_answer_and_validation": 0.00045
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.482122,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_108",
+      "function": "VC_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.105397,
+        "timescaledb_retrieval": 0.242552,
+        "evidence_construction": 0.000595,
+        "deterministic_answer_and_validation": 0.000355
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.348952,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_109",
+      "function": "VC_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.119438,
+        "timescaledb_retrieval": 0.350981,
+        "evidence_construction": 0.000628,
+        "deterministic_answer_and_validation": 0.000725
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.471838,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_110",
+      "function": "VC_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 0.000206,
+        "graphdb_mapping_resolution": 0.098754,
+        "timescaledb_retrieval": 0.251797,
+        "evidence_construction": 0.000478,
+        "deterministic_answer_and_validation": 0.000354
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.351595,
+      "repeat": 1
+    },
+    {
+      "id": "coverage_vc_111",
+      "function": "VC_111",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.135207,
+        "timescaledb_retrieval": 0.34222,
+        "evidence_construction": 0.000419,
+        "deterministic_answer_and_validation": 0.000353
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.478238,
+      "repeat": 1
+    },
+    {
+      "id": "fi_latest_history",
+      "function": "FI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.100423,
+        "timescaledb_retrieval": 0.252988,
+        "evidence_construction": 0.000524,
+        "deterministic_answer_and_validation": 0.000315
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.35429,
+      "repeat": 2
+    },
+    {
+      "id": "vc_latest_history",
+      "function": "VC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.1e-05,
+        "graphdb_mapping_resolution": 0.121621,
+        "timescaledb_retrieval": 0.487565,
+        "evidence_construction": 0.000561,
+        "deterministic_answer_and_validation": 0.000271
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.610073,
+      "repeat": 2
+    },
+    {
+      "id": "ti_latest_history",
+      "function": "TI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.092794,
+        "timescaledb_retrieval": 0.384495,
+        "evidence_construction": 0.000547,
+        "deterministic_answer_and_validation": 0.000303
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.478178,
+      "repeat": 2
+    },
+    {
+      "id": "li_101_latest_history",
+      "function": "LI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.113308,
+        "timescaledb_retrieval": 0.349551,
+        "evidence_construction": 0.000521,
+        "deterministic_answer_and_validation": 0.000292
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.46371,
+      "repeat": 2
+    },
+    {
+      "id": "pi_101_latest_history",
+      "function": "PI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.090921,
+        "timescaledb_retrieval": 0.356308,
+        "evidence_construction": 0.000541,
+        "deterministic_answer_and_validation": 0.00035
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.448161,
+      "repeat": 2
+    },
+    {
+      "id": "ji_101_latest_history",
+      "function": "JI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.087173,
+        "timescaledb_retrieval": 0.566436,
+        "evidence_construction": 0.000492,
+        "deterministic_answer_and_validation": 0.0003
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS20",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.654443,
+      "repeat": 2
+    },
+    {
+      "id": "sc_101_latest_history",
+      "function": "SC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.077903,
+        "timescaledb_retrieval": 0.212834,
+        "evidence_construction": 0.000509,
+        "deterministic_answer_and_validation": 0.000401
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.291687,
+      "repeat": 2
+    },
+    {
+      "id": "unsupported_function",
+      "function": "FI_999",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 1.9e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Unsupported engineering function",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2.8e-05,
+      "repeat": 2
+    },
+    {
+      "id": "conflicting_identifiers",
+      "function": "FI_101",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 2.2e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Planned engineering function does not match the explicit identifier in the question",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2.7e-05,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_102",
+      "function": "FI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.122621,
+        "timescaledb_retrieval": 0.355827,
+        "evidence_construction": 0.000667,
+        "deterministic_answer_and_validation": 0.000423
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.479578,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_103",
+      "function": "FI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.078111,
+        "timescaledb_retrieval": 0.271084,
+        "evidence_construction": 0.000657,
+        "deterministic_answer_and_validation": 0.00045
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.350346,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_104",
+      "function": "FI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5e-05,
+        "graphdb_mapping_resolution": 0.13998,
+        "timescaledb_retrieval": 0.359022,
+        "evidence_construction": 0.000489,
+        "deterministic_answer_and_validation": 0.000311
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.49986,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_105",
+      "function": "FI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.1e-05,
+        "graphdb_mapping_resolution": 0.077162,
+        "timescaledb_retrieval": 0.276086,
+        "evidence_construction": 0.000752,
+        "deterministic_answer_and_validation": 0.000438
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.354494,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_106",
+      "function": "FI_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.145941,
+        "timescaledb_retrieval": 0.6363,
+        "evidence_construction": 0.000737,
+        "deterministic_answer_and_validation": 0.00042
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.783453,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_107",
+      "function": "FI_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.07378,
+        "timescaledb_retrieval": 0.354577,
+        "evidence_construction": 0.000543,
+        "deterministic_answer_and_validation": 0.000346
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.4293,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_108",
+      "function": "FI_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.073188,
+        "timescaledb_retrieval": 0.274226,
+        "evidence_construction": 0.000488,
+        "deterministic_answer_and_validation": 0.000292
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS14",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.348235,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_109",
+      "function": "FI_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.117441,
+        "timescaledb_retrieval": 0.35169,
+        "evidence_construction": 0.000556,
+        "deterministic_answer_and_validation": 0.000299
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS17",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.470025,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_fi_110",
+      "function": "FI_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.102431,
+        "timescaledb_retrieval": 0.348669,
+        "evidence_construction": 0.000738,
+        "deterministic_answer_and_validation": 0.000455
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS19",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.452336,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_li_102",
+      "function": "LI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.124845,
+        "timescaledb_retrieval": 0.350218,
+        "evidence_construction": 0.000886,
+        "deterministic_answer_and_validation": 0.000393
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.476394,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_li_103",
+      "function": "LI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.099513,
+        "timescaledb_retrieval": 0.25263,
+        "evidence_construction": 0.000888,
+        "deterministic_answer_and_validation": 0.000317
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS15",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.353392,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_pi_102",
+      "function": "PI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.8e-05,
+        "graphdb_mapping_resolution": 0.123124,
+        "timescaledb_retrieval": 0.343316,
+        "evidence_construction": 0.000601,
+        "deterministic_answer_and_validation": 0.000303
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS13",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.467386,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_pi_103",
+      "function": "PI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.074254,
+        "timescaledb_retrieval": 0.271141,
+        "evidence_construction": 0.000577,
+        "deterministic_answer_and_validation": 0.000301
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS16",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.346314,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_ti_102",
+      "function": "TI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.118202,
+        "timescaledb_retrieval": 0.345604,
+        "evidence_construction": 0.000489,
+        "deterministic_answer_and_validation": 0.000309
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.464648,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_ti_103",
+      "function": "TI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.075382,
+        "timescaledb_retrieval": 0.287086,
+        "evidence_construction": 0.000498,
+        "deterministic_answer_and_validation": 0.000369
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS18",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.36338,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_ti_104",
+      "function": "TI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.152137,
+        "timescaledb_retrieval": 0.346942,
+        "evidence_construction": 0.000632,
+        "deterministic_answer_and_validation": 0.000461
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS21",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.500225,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_ti_105",
+      "function": "TI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.7e-05,
+        "graphdb_mapping_resolution": 0.076487,
+        "timescaledb_retrieval": 0.408272,
+        "evidence_construction": 0.000547,
+        "deterministic_answer_and_validation": 0.000304
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS22",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.48566,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_102",
+      "function": "VC_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.095868,
+        "timescaledb_retrieval": 0.350569,
+        "evidence_construction": 0.00059,
+        "deterministic_answer_and_validation": 0.000431
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.4475,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_103",
+      "function": "VC_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.077783,
+        "timescaledb_retrieval": 0.269399,
+        "evidence_construction": 0.000664,
+        "deterministic_answer_and_validation": 0.000442
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.348341,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_104",
+      "function": "VC_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5e-05,
+        "graphdb_mapping_resolution": 0.094267,
+        "timescaledb_retrieval": 0.349574,
+        "evidence_construction": 0.000643,
+        "deterministic_answer_and_validation": 0.00041
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.444949,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_105",
+      "function": "VC_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.2e-05,
+        "graphdb_mapping_resolution": 0.075799,
+        "timescaledb_retrieval": 0.275281,
+        "evidence_construction": 0.000513,
+        "deterministic_answer_and_validation": 0.000276
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.351924,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_106",
+      "function": "VC_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.4e-05,
+        "graphdb_mapping_resolution": 0.100472,
+        "timescaledb_retrieval": 0.356276,
+        "evidence_construction": 0.000419,
+        "deterministic_answer_and_validation": 0.000296
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.457501,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_107",
+      "function": "VC_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.074715,
+        "timescaledb_retrieval": 0.29483,
+        "evidence_construction": 0.00051,
+        "deterministic_answer_and_validation": 0.000285
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.370379,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_108",
+      "function": "VC_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.14468,
+        "timescaledb_retrieval": 0.530964,
+        "evidence_construction": 0.000427,
+        "deterministic_answer_and_validation": 0.000299
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.676409,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_109",
+      "function": "VC_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.109671,
+        "timescaledb_retrieval": 0.548125,
+        "evidence_construction": 0.000638,
+        "deterministic_answer_and_validation": 0.000452
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.658931,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_110",
+      "function": "VC_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4e-05,
+        "graphdb_mapping_resolution": 0.087806,
+        "timescaledb_retrieval": 0.346391,
+        "evidence_construction": 0.000495,
+        "deterministic_answer_and_validation": 0.000282
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.43502,
+      "repeat": 2
+    },
+    {
+      "id": "coverage_vc_111",
+      "function": "VC_111",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.097776,
+        "timescaledb_retrieval": 0.402187,
+        "evidence_construction": 0.000492,
+        "deterministic_answer_and_validation": 0.000274
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.50077,
+      "repeat": 2
+    },
+    {
+      "id": "fi_latest_history",
+      "function": "FI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.3e-05,
+        "graphdb_mapping_resolution": 0.123943,
+        "timescaledb_retrieval": 0.358869,
+        "evidence_construction": 0.000532,
+        "deterministic_answer_and_validation": 0.000306
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.483698,
+      "repeat": 3
+    },
+    {
+      "id": "vc_latest_history",
+      "function": "VC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.112011,
+        "timescaledb_retrieval": 0.541192,
+        "evidence_construction": 0.000697,
+        "deterministic_answer_and_validation": 0.000585
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV1",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.654529,
+      "repeat": 3
+    },
+    {
+      "id": "ti_latest_history",
+      "function": "TI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.4e-05,
+        "graphdb_mapping_resolution": 0.093992,
+        "timescaledb_retrieval": 0.318815,
+        "evidence_construction": 0.000542,
+        "deterministic_answer_and_validation": 0.00034
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.413747,
+      "repeat": 3
+    },
+    {
+      "id": "li_101_latest_history",
+      "function": "LI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.130075,
+        "timescaledb_retrieval": 0.351692,
+        "evidence_construction": 0.000489,
+        "deterministic_answer_and_validation": 0.000431
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.482727,
+      "repeat": 3
+    },
+    {
+      "id": "pi_101_latest_history",
+      "function": "PI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.074478,
+        "timescaledb_retrieval": 0.280071,
+        "evidence_construction": 0.000723,
+        "deterministic_answer_and_validation": 0.000447
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.355768,
+      "repeat": 3
+    },
+    {
+      "id": "ji_101_latest_history",
+      "function": "JI_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.164675,
+        "timescaledb_retrieval": 0.347364,
+        "evidence_construction": 0.000716,
+        "deterministic_answer_and_validation": 0.000312
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS20",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.513117,
+      "repeat": 3
+    },
+    {
+      "id": "sc_101_latest_history",
+      "function": "SC_101",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.1e-05,
+        "graphdb_mapping_resolution": 0.073873,
+        "timescaledb_retrieval": 0.296678,
+        "evidence_construction": 0.000409,
+        "deterministic_answer_and_validation": 0.000356
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.371363,
+      "repeat": 3
+    },
+    {
+      "id": "unsupported_function",
+      "function": "FI_999",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 1.4e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Unsupported engineering function",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2.1e-05,
+      "repeat": 3
+    },
+    {
+      "id": "conflicting_identifiers",
+      "function": "FI_101",
+      "expected": "reject",
+      "status": "ERROR",
+      "stage_latency_seconds": {
+        "failed_stage_partial": 1.6e-05
+      },
+      "answer_validation": null,
+      "error": "ValueError: Planned engineering function does not match the explicit identifier in the question",
+      "passed": true,
+      "classification": "expected_rejection",
+      "elapsed_seconds": 2e-05,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_102",
+      "function": "FI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 2.5e-05,
+        "graphdb_mapping_resolution": 0.11094,
+        "timescaledb_retrieval": 0.352916,
+        "evidence_construction": 0.000429,
+        "deterministic_answer_and_validation": 0.000299
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.464613,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_103",
+      "function": "FI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.09755,
+        "timescaledb_retrieval": 0.258965,
+        "evidence_construction": 0.000431,
+        "deterministic_answer_and_validation": 0.000453
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.357472,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_104",
+      "function": "FI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 0.000223,
+        "graphdb_mapping_resolution": 0.10613,
+        "timescaledb_retrieval": 0.344545,
+        "evidence_construction": 0.000596,
+        "deterministic_answer_and_validation": 0.000306
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.451805,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_105",
+      "function": "FI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.094457,
+        "timescaledb_retrieval": 0.255776,
+        "evidence_construction": 0.000532,
+        "deterministic_answer_and_validation": 0.000312
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.351118,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_106",
+      "function": "FI_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.087316,
+        "timescaledb_retrieval": 0.486822,
+        "evidence_construction": 0.000914,
+        "deterministic_answer_and_validation": 0.0003
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.575391,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_107",
+      "function": "FI_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.076442,
+        "timescaledb_retrieval": 0.291568,
+        "evidence_construction": 0.000827,
+        "deterministic_answer_and_validation": 0.000543
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.369421,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_108",
+      "function": "FI_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.102191,
+        "timescaledb_retrieval": 0.416697,
+        "evidence_construction": 0.000725,
+        "deterministic_answer_and_validation": 0.000383
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS14",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.520051,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_109",
+      "function": "FI_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.074494,
+        "timescaledb_retrieval": 0.27989,
+        "evidence_construction": 0.000735,
+        "deterministic_answer_and_validation": 0.000417
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS17",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.355579,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_fi_110",
+      "function": "FI_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.145052,
+        "timescaledb_retrieval": 0.347114,
+        "evidence_construction": 0.000581,
+        "deterministic_answer_and_validation": 0.000295
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS19",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.493091,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_li_102",
+      "function": "LI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.078596,
+        "timescaledb_retrieval": 0.381526,
+        "evidence_construction": 0.00073,
+        "deterministic_answer_and_validation": 0.000418
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS12",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.461311,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_li_103",
+      "function": "LI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.8e-05,
+        "graphdb_mapping_resolution": 0.093143,
+        "timescaledb_retrieval": 0.302088,
+        "evidence_construction": 0.000665,
+        "deterministic_answer_and_validation": 0.00037
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS15",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.396321,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_pi_102",
+      "function": "PI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.4e-05,
+        "graphdb_mapping_resolution": 0.076715,
+        "timescaledb_retrieval": 0.265254,
+        "evidence_construction": 0.00047,
+        "deterministic_answer_and_validation": 0.000316
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS13",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.342803,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_pi_103",
+      "function": "PI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.121206,
+        "timescaledb_retrieval": 0.352263,
+        "evidence_construction": 0.000707,
+        "deterministic_answer_and_validation": 0.000367
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS16",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.474584,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_ti_102",
+      "function": "TI_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.073614,
+        "timescaledb_retrieval": 0.288929,
+        "evidence_construction": 0.000561,
+        "deterministic_answer_and_validation": 0.000304
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.36345,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_ti_103",
+      "function": "TI_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.124034,
+        "timescaledb_retrieval": 0.485718,
+        "evidence_construction": 0.000772,
+        "deterministic_answer_and_validation": 0.000392
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS18",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.610955,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_ti_104",
+      "function": "TI_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.7e-05,
+        "graphdb_mapping_resolution": 0.093634,
+        "timescaledb_retrieval": 0.259671,
+        "evidence_construction": 0.000856,
+        "deterministic_answer_and_validation": 0.00046
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS21",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.354664,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_ti_105",
+      "function": "TI_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 5.1e-05,
+        "graphdb_mapping_resolution": 0.106675,
+        "timescaledb_retrieval": 0.348314,
+        "evidence_construction": 0.000574,
+        "deterministic_answer_and_validation": 0.000325
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMEAS22",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.455944,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_102",
+      "function": "VC_102",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.08585,
+        "timescaledb_retrieval": 0.274125,
+        "evidence_construction": 0.000818,
+        "deterministic_answer_and_validation": 0.000305
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV2",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.361138,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_103",
+      "function": "VC_103",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.6e-05,
+        "graphdb_mapping_resolution": 0.124617,
+        "timescaledb_retrieval": 0.349096,
+        "evidence_construction": 0.000422,
+        "deterministic_answer_and_validation": 0.000288
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV3",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.474463,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_104",
+      "function": "VC_104",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.079653,
+        "timescaledb_retrieval": 0.27607,
+        "evidence_construction": 0.000489,
+        "deterministic_answer_and_validation": 0.000434
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV4",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.356697,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_105",
+      "function": "VC_105",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.8e-05,
+        "graphdb_mapping_resolution": 0.10882,
+        "timescaledb_retrieval": 0.355709,
+        "evidence_construction": 0.000529,
+        "deterministic_answer_and_validation": 0.000268
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV5",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.465369,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_106",
+      "function": "VC_106",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.3e-05,
+        "graphdb_mapping_resolution": 0.087469,
+        "timescaledb_retrieval": 0.274483,
+        "evidence_construction": 0.000441,
+        "deterministic_answer_and_validation": 0.000272
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV6",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.362703,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_107",
+      "function": "VC_107",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.121766,
+        "timescaledb_retrieval": 0.342571,
+        "evidence_construction": 0.000621,
+        "deterministic_answer_and_validation": 0.000407
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV7",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.465406,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_108",
+      "function": "VC_108",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.9e-05,
+        "graphdb_mapping_resolution": 0.075908,
+        "timescaledb_retrieval": 0.272437,
+        "evidence_construction": 0.000418,
+        "deterministic_answer_and_validation": 0.000278
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV8",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.349094,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_109",
+      "function": "VC_109",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 3.5e-05,
+        "graphdb_mapping_resolution": 0.1372,
+        "timescaledb_retrieval": 0.351898,
+        "evidence_construction": 0.000621,
+        "deterministic_answer_and_validation": 0.000401
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV9",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.490161,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_110",
+      "function": "VC_110",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.075656,
+        "timescaledb_retrieval": 0.279347,
+        "evidence_construction": 0.00068,
+        "deterministic_answer_and_validation": 0.000447
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV10",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.356182,
+      "repeat": 3
+    },
+    {
+      "id": "coverage_vc_111",
+      "function": "VC_111",
+      "expected": "complete",
+      "status": "COMPLETED",
+      "stage_latency_seconds": {
+        "structured_request_validation": 4.5e-05,
+        "graphdb_mapping_resolution": 0.138204,
+        "timescaledb_retrieval": 0.351252,
+        "evidence_construction": 0.000496,
+        "deterministic_answer_and_validation": 0.000274
+      },
+      "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+      "observation_signal": "XMV11",
+      "sample_count": 204,
+      "passed": true,
+      "classification": "completed_validated",
+      "elapsed_seconds": 0.490276,
+      "repeat": 3
+    }
+  ]
+}

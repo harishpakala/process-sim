@@ -24,7 +24,7 @@ const domain = ref('All')
 const selectedId = ref('ASM-REACTOR')
 const expanded = ref(new Set(['ASM-ROOT','ASM-REACTOR']))
 const selected = computed(()=>byId.get(selectedId.value))
-const matched = items.filter(i=>i.AssetReference).length
+const matched = items.filter(i=>i.ValidationStatus === 'ASSET_IDENTIFIER_EXACT_MATCH').length
 const filteredIds = computed(()=>{
  const term=search.value.trim().toLowerCase()
  return new Set(items.filter(i=>(domain.value==='All'||i.SourceDomain===domain.value)&&(!term||Object.values(i).some(v=>String(v).toLowerCase().includes(term)))).map(i=>i.BOMItemId))
@@ -56,7 +56,7 @@ function select(node:Node){
 }
 const related=(id:string)=>items.filter(i=>i.FunctionalAssemblyReference===id)
 const candidatePairs=(id:string)=>engineeringReconciliation.filter(p=>p.equipmentAssembly===id)
-const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>item.EngineeringReference===p.dexpiReference||item.EngineeringReference===p.ecadReference)
+const linkedPairs=(item:BomItem)=>engineeringReconciliation.filter(p=>String(item.SourceAssetIdentifier)===String(p.dexpiReference)||String(item.SourceAssetIdentifier)===String(p.ecadReference))
 const childCount=(id:string)=>items.filter(i=>i.ParentItemId===id&&!i.FunctionalAssemblyReference).length
 const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).length
 </script>
@@ -66,7 +66,7 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
   <div class="ebom-stats">
    <div><small>Engineering objects</small><strong>{{items.length}}</strong></div>
    <div><small>Equipment assemblies</small><strong>5</strong></div>
-   <div><small>Exact asset references</small><strong>{{matched}}</strong></div>
+   <div><small>Exact inventory matches</small><strong>{{matched}}</strong></div>
    <div><small>Unassigned objects</small><strong>{{childCount('ASM-UNASSIGNED')}}</strong></div>
   </div>
   <p class="ebom-notice">Equipment-oriented EBOM preview. The five equipment objects are assigned to their named assemblies; instrument, actuator and electrical component membership is not verified. Source-described functional associations appear in each equipment inspector; they are not physical BOM assignments. Mechanical, instrumentation and electrical/control branches are empty placeholders under each equipment assembly. Only items without an equipment association appear in Unassigned. Functionally associated records are displayed under equipment discipline branches, without asserting physical membership. Quantities are modeled-object counts, not purchase quantities.</p>
@@ -127,7 +127,9 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        <div><span>Assignment status</span><strong>{{selected.item.StructureStatus}}</strong></div>
        <div><span>Functional association</span><strong>{{selected.item.FunctionalAssemblyReference || "Unresolved"}}</strong></div>
        <div><span>Association evidence</span><strong>{{selected.item.AssociationBasis}}</strong></div>
-       <div><span>Asset reference</span><strong>{{selected.item.AssetReference || 'Unresolved'}}</strong></div>
+       <div><span>Asset identifier</span><strong>{{selected.item.AssetIdentifier || 'Unresolved'}}</strong></div>
+       <div><span>Catalog product identifier</span><strong>{{selected.item.ProductIdentifier || 'Not resolved'}}</strong></div>
+       <div><span>Inventory match status</span><strong>{{selected.item.ValidationStatus}}</strong></div>
        <div><span>Product selection</span><strong>{{selected.item.SelectionStatus}}</strong></div>
        <div><span>Revision</span><strong>{{selected.item.Revision}}</strong></div>
       </div>
@@ -140,11 +142,11 @@ const subassemblyCount=(id:string)=>assemblies.filter(a=>a.ParentItemId===id).le
        </div>
       </div>
       <div class="ebom-actions">
-       <button @click="emit('open-record',selected.item!.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.item!.EngineeringReference)">Open {{selected.item.SourceDomain}} source ↗</button>
-       <button v-if="selected.item.AssetReference" @click="emit('open-record','Asset Inventory',selected.item!.AssetReference)">Open asset ↗</button>
-       <button v-if="selected.item.CandidateProductReference" @click="emit('open-record','Product Catalog',selected.item!.CandidateProductReference)">Open candidate product ↗</button>
+       <button @click="emit('open-record',selected.item!.SourceDomain==='DEXPI'?'DEXPI Explorer':'ECAD Explorer',selected.item!.SourceAssetIdentifier)">Open {{selected.item.SourceDomain}} source ↗</button>
+       <button v-if="selected.item.ValidationStatus === 'ASSET_IDENTIFIER_EXACT_MATCH'" @click="emit('open-record','Asset Inventory',selected.item!.AssetIdentifier)">Open asset ↗</button>
+       <button v-if="selected.item.ProductIdentifier" @click="emit('open-record','Product Catalog',selected.item!.ProductIdentifier)">Open candidate product ↗</button>
       </div>
-      <p class="ebom-reference">{{selected.item.EngineeringReference}}</p>
+      <p class="ebom-reference">{{selected.item.SourceAssetIdentifier}}</p>
      </template>
     </template>
    </section>

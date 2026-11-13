@@ -4,6 +4,8 @@ import { selectTriples } from './lib/sparql'
 import SimulationDashboard from './components/SimulationDashboard.vue'
 import FaultManagement from './components/FaultManagement.vue'
 import PaperAiQuery from './components/PaperAiQuery.vue'
+import BenchmarkDiagnostics from './components/BenchmarkDiagnostics.vue'
+import OntologyQ13Audit from './components/OntologyQ13Audit.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringBom from './components/EngineeringBom.vue'
 import EngineeringVerificationWorkbench from './components/EngineeringVerificationWorkbench.vue'
@@ -62,6 +64,8 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <div class="section-label">WORKSPACE</div>
     <button class="nav-item" :class="{current:active==='Overview'}" @click="navigate('Overview')"><LayoutDashboard :size="16"/> Overview</button>
     <button class="nav-item" :class="{current:active==='AI Query'}" @click="navigate('AI Query')"><BrainCircuit :size="16"/> AI Query</button>
+    <button class="nav-item" :class="{current:active==='Benchmarks'}" @click="navigate('Benchmarks')"><FlaskConical :size="16"/> Benchmarks</button>
+    <button class="nav-item" :class="{current:active==='Q13 Ontology Trace'}" @click="navigate('Q13 Ontology Trace')"><GitBranch :size="16"/> Q13 Ontology Trace</button>
     <div v-for="group in sections" :key="group.name" class="nav-group">
      <button class="section-toggle" @click="opened[group.name]=!opened[group.name]">{{group.name}}<ChevronDown v-if="opened[group.name]" :size="14"/><ChevronRight v-else :size="14"/></button>
      <template v-if="opened[group.name]"><button v-for="item in group.items" :key="item" class="nav-item nested" :class="{current:active===item}" @click="navigate(item)"><span class="nav-dot"/> {{item}}</button></template>
@@ -106,10 +110,12 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
     <template v-else-if="graphView"><EngineeringRdfGraph :key="navigationKey" :domain="active==='ECAD Explorer'?'ecad':'dexpi'" :focus-identifier="destinationId" @open-record="openRecord" /></template>
     <template v-else-if="active==='AI Query'"><PaperAiQuery /></template>
+    <template v-else-if="active==='Benchmarks'"><BenchmarkDiagnostics /></template>
+    <template v-else-if="active==='Q13 Ontology Trace'"><OntologyQ13Audit /></template>
     <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
     <template v-else-if="active==='Faults & Disturbances'"><FaultManagement /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
-    <section v-if="!['Product Catalog','Asset Inventory','AI Query'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
+    <section v-if="!['Product Catalog','Asset Inventory','AI Query','Benchmarks','Q13 Ontology Trace'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
   </main>
  </div>

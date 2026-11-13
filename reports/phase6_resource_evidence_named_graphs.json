@@ -1,0 +1,1962 @@
+{
+  "method": "phase6e_resource_level_read_only_inspection",
+  "endpoint": "http://localhost:7200/repositories/AAS",
+  "named_graphs": true,
+  "identifier_resource_matches": [
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/FI106",
+      "predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/FI106",
+      "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/FI106",
+      "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/FI106",
+      "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDEx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDQ3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0011"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0047"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/FI106",
+      "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckZlZWRGbG93"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/CV1201",
+      "predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMjAx"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/CV1201",
+      "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/CV1201",
+      "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/CV1201",
+      "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDM4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDcx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0038"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0071"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "asset",
+      "identifier": "https://aas.example.com/CV1201",
+      "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29uZGVuc2VyQ29vbGluZ1dhdGVyVmFsdmU"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+      "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+      "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/EandH_Promass_F300_Candidate",
+      "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDU4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDQz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDEz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDE0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDA4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDQ0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDA3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDU1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0013"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0014"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0055"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0058"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0007"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0008"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0043"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0044"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/SAMSON_3241_7",
+      "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/SAMSON_3241_7",
+      "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "family": "product",
+      "identifier": "https://example.org/product-types/SAMSON_3241_7",
+      "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "scope": "named_graphs",
+      "interpretation": "matching_literal_only_not_verified_identity",
+      "matches": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDM1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDc0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDMz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDMx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY5"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDM3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY0"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDY2"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDc1"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDI4"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDI5"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDcy"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDMw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDcx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZW5naW5lZXJpbmctYm9tLWluc3RhbmNl/Qk9NSXRlbXMuRUJPTV8wMDM2"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/graph/ebom-v2"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "https://example.org/dtwise/ebom-v2/item/EBOM-0035"
+          }
+        }
+      ],
+      "status": "ok"
+    }
+  ],
+  "relationship_observations": [
+    {
+      "predicate": "https://example.org/ecad/hasPLCEndPoint",
+      "scope": "named_graphs",
+      "observations": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF80"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzEw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xNQ"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzIx"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzc"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8z"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8x"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5TdXBwbHlSZXR1cm5fMUw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzE3"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzIw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzU"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF8xMg"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5PdXRwdXRDaGFubmVsX1ExMF82"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5TdXBwbHlQb3NpdGl2ZV8xTA"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzM"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzI"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3guQ29ubmVjdGlvblBvaW50cy5JbnB1dENoYW5uZWxfSTEwXzk"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasTechnicalProperties",
+      "scope": "named_graphs",
+      "observations": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGVEaWV0cmljaF9IaWdoUHJlc3N1cmVSZWFjdG9yX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGVEaWV0cmljaF9IaWdoUHJlc3N1cmVSZWFjdG9yX0NhbmRpZGF0ZS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQXRsYXNDb3Bjb19HVF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQXRsYXNDb3Bjb19HVF9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU3VsemVyX1N0cmlwcGluZ0NvbHVtbl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU3VsemVyX1N0cmlwcGluZ0NvbHVtbl9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQWxmYUxhdmFsX09sbWlfQ2FuZGlkYXRl"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQWxmYUxhdmFsX09sbWlfQ2FuZGlkYXRlLlRlY2huaWNhbFByb3BlcnRpZXM"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNy5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGlkaW9uX0RTTF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGlkaW9uX0RTTF9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuUFhDXzI5Mzg1ODE"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuUFhDXzI5Mzg1ODEuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX0FNWl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX0FNWl9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          },
+          "object": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMS5UZWNobmljYWxQcm9wZXJ0aWVz"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasECLASSIRDI",
+      "scope": "named_graphs",
+      "observations": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuS1NCX011bHRpdGVjX0hpZ2hQcmVzc3VyZV9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD564#011"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAC009#022"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKP267#021"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAC010#022"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGVEaWV0cmljaF9IaWdoUHJlc3N1cmVSZWFjdG9yX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD319#012"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKA493#001"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9BZ2l0YXRvckRyaXZlUGFja2FnZV9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKP267#021"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AFZ828#022"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQXRsYXNDb3Bjb19HVF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD585#011"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU3VsemVyX1N0cmlwcGluZ0NvbHVtbl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD304#013"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfRmFtaWx5X0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD651#023"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQWxmYUxhdmFsX09sbWlfQ2FuZGlkYXRl"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD338#010"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAD651#023"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGlkaW9uX0RTTF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKL760#020"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKE138#012"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAC024#022"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuUFhDXzI5Mzg1ODE"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AFX043#011"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AAC008#022"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX0FNWl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AKE158#012"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "0173-1#01-AHB186#005"
+          }
+        }
+      ],
+      "status": "ok"
+    },
+    {
+      "predicate": "https://example.org/productcatalog/hasECLASSClass",
+      "scope": "named_graphs",
+      "observations": [
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuS1NCX011bHRpdGVjX0hpZ2hQcmVzc3VyZV9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-41-01"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-20-04-03"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-09-08-01"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-20-04-04"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGVEaWV0cmljaF9IaWdoUHJlc3N1cmVSZWFjdG9yX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-02-01"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-27-49-05"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9BZ2l0YXRvckRyaXZlUGFja2FnZV9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-09-08-01"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-14-23-16"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQXRsYXNDb3Bjb19HVF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-43"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU3VsemVyX1N0cmlwcGluZ0NvbHVtbl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-01-01"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfRmFtaWx5X0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "37-01-02-03"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQWxmYUxhdmFsX09sbWlfQ2FuZGlkYXRl"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-04"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          },
+          "object": {
+            "type": "literal",
+            "value": "37-01-02-03"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGlkaW9uX0RTTF9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "36-20-17-04"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-02-21"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-20-05-05"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuUFhDXzI5Mzg1ODE"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-04-07-04"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-20-04-02"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX0FNWl9DYW5kaWRhdGU"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-02-24"
+          }
+        },
+        {
+          "graph": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/"
+          },
+          "subject": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          },
+          "object": {
+            "type": "literal",
+            "value": "27-27-51"
+          }
+        }
+      ],
+      "status": "ok"
+    }
+  ],
+  "verified_cross_domain_identity": false,
+  "verified_physical_membership": false,
+  "limitations": [
+    "Identifier matches are RDF literal equality, not identity assertions.",
+    "Matching product candidates do not establish installed products.",
+    "Sample limits truncate observations and cannot establish completeness.",
+    "Default-dataset and named-graph scopes can differ with GraphDB configuration.",
+    "Named-graph mode reports graph context but does not independently verify source provenance.",
+    "Observed endpoint or technical-property triples do not prove cross-domain joins.",
+    "No SPARQL updates, ontology changes, or compiler repairs are performed."
+  ]
+}

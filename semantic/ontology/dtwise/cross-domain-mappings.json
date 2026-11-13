@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "mappings": [
+    {
+      "id": "engineeringbom_ecad_asset_identifier",
+      "source_domain": "engineeringbom",
+      "target_domain": "ecad",
+      "source_path": [
+        "https://example.org/engineeringbom/hasBOMItems",
+        "https://example.org/engineeringbom/hasBOMItemRecord",
+        "https://example.org/engineeringbom/hasAssetIdentifier"
+      ],
+      "target_path": [
+        "https://example.org/ecad/hasDevices",
+        "https://example.org/ecad/hasDevice",
+        "https://example.org/ecad/hasAssetIdentifier"
+      ],
+      "comparison": "string_equality",
+      "status": "candidate_pending_semantic_approval",
+      "identifier_namespace": "https://aas.example.com/",
+      "evidence": {
+        "shared_identifier_strings": 40,
+        "matched_bom_records": 74,
+        "matched_ecad_devices": 40,
+        "cardinality_note": "Sampled and uploaded GraphDB results; semantic identity scope not yet approved."
+      }
+    }
+  ],
+  "three_domain_mappings": [
+    {
+      "id": "engineeringbom_ecad_dexpi_asset_identifier",
+      "domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "base_mapping_id": "engineeringbom_ecad_asset_identifier",
+      "comparison": "string_equality",
+      "status": "candidate_pending_semantic_approval",
+      "dexpi_paths": [
+        [
+          "https://example.org/dexpi/hasActuatingFunctions",
+          "https://example.org/dexpi/hasActuatingFunction",
+          "https://example.org/dexpi/hasAssetIdentifier"
+        ],
+        [
+          "https://example.org/dexpi/hasEquipments",
+          "https://example.org/dexpi/hasEquipment",
+          "https://example.org/dexpi/hasAssetIdentifier"
+        ],
+        [
+          "https://example.org/dexpi/hasInstrumentationFunctions",
+          "https://example.org/dexpi/hasInstrumentationFunction",
+          "https://example.org/dexpi/hasAssetIdentifier"
+        ]
+      ],
+      "evidence": {
+        "shared_identifier_strings": 34,
+        "matched_bom_records": 68,
+        "matched_ecad_devices": 34,
+        "matched_dexpi_objects": 34,
+        "cardinality_note": "GraphDB data-level identifier equality; semantic identity not approved. Root-to-leaf paths must pass local SHACL schema-index validation."
+      }
+    }
+  ],
+  "n_domain_plans": [
+    {
+      "id": "engineeringbom_ecad_dexpi_assetinventory_asset_identifier",
+      "domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "status": "candidate_pending_semantic_approval",
+      "comparison": "string_equality",
+      "anchors": [
+        {
+          "domain": "engineeringbom",
+          "paths": [
+            [
+              "https://example.org/engineeringbom/hasBOMItems",
+              "https://example.org/engineeringbom/hasBOMItemRecord",
+              "https://example.org/engineeringbom/hasAssetIdentifier"
+            ]
+          ]
+        },
+        {
+          "domain": "ecad",
+          "paths": [
+            [
+              "https://example.org/ecad/hasDevices",
+              "https://example.org/ecad/hasDevice",
+              "https://example.org/ecad/hasAssetIdentifier"
+            ]
+          ]
+        },
+        {
+          "domain": "dexpi",
+          "paths": [
+            [
+              "https://example.org/dexpi/hasActuatingFunctions",
+              "https://example.org/dexpi/hasActuatingFunction",
+              "https://example.org/dexpi/hasAssetIdentifier"
+            ],
+            [
+              "https://example.org/dexpi/hasEquipments",
+              "https://example.org/dexpi/hasEquipment",
+              "https://example.org/dexpi/hasAssetIdentifier"
+            ],
+            [
+              "https://example.org/dexpi/hasInstrumentationFunctions",
+              "https://example.org/dexpi/hasInstrumentationFunction",
+              "https://example.org/dexpi/hasAssetIdentifier"
+            ]
+          ]
+        },
+        {
+          "domain": "assetinventory",
+          "paths": [
+            [
+              "https://example.org/assetinventory/hasAssets",
+              "https://example.org/assetinventory/hasAsset",
+              "https://example.org/assetinventory/hasAssetIdentifier"
+            ]
+          ]
+        }
+      ],
+      "evidence": {
+        "shared_identifier_strings": 34,
+        "matched_bom_records": 68,
+        "matched_ecad_devices": 34,
+        "matched_dexpi_objects": 34,
+        "matched_inventory_assets": 34,
+        "assetinventory_asset_identifier_occurrences": 43,
+        "cardinality_note": "GraphDB exact literal equality across four domains; semantic identity not approved. AssetInventory path complete-to-root in local SHACL index."
+      }
+    }
+  ],
+  "governance_required": true,
+  "semantic_approvals": []
+}

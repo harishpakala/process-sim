@@ -1,0 +1,329 @@
+{
+  "method": "generic_v4_1_grounded_filters_normalized_names",
+  "question": "List engineering verification statuses and engineering verification evidence of ECAD devices.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "engineeringVerificationStatus",
+        "shape": "s0",
+        "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus"
+      },
+      {
+        "name": "engineeringVerificationEvidence",
+        "shape": "s0",
+        "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"engineeringVerificationStatus\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/ecad/hasEngineeringVerificationStatus\"\n    },\n    {\n      \"name\": \"engineeringVerificationEvidence\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/ecad/hasEngineeringVerificationEvidence\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": null,
+  "plan_issues": [
+    "Unresolved requested output: engineering verification statuses",
+    "Unresolved requested output: engineering verification evidence of ECAD devices"
+  ],
+  "graphdb_bindings": null,
+  "binding_count": null,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "label": "Device",
+      "description": "Electrical device represented in the engineering design.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier associated with the represented asset.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints",
+          "description": "Collection of connection points belonging to an electrical device or symbol.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded for the cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of an association to another engineering domain.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification associated with the element.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+          "label": "EngineeringVerificationEvidence",
+          "description": "Recorded evidence supporting engineering verification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+          "label": "EngineeringVerificationStatus",
+          "description": "Recorded status of engineering verification for the device.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+          "label": "ProductVerificationEvidence",
+          "description": "Recorded evidence supporting product verification.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+          "label": "ProductVerificationStatus",
+          "description": "Recorded status of verification against product information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of a related asset; distinct from the identifier of the current element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU",
+      "label": "Devices",
+      "description": "Collection of electrical devices represented in the ECAD model.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasDevice",
+          "label": "Device",
+          "description": "Electrical device represented in the engineering design.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+      "label": "ECAD",
+      "description": "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasDevices",
+          "label": "Devices",
+          "description": "Collection of electrical devices represented in the ECAD model.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasSchematics",
+          "label": "Schematics",
+          "description": "Collection of electrical schematic information.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasSymbols",
+          "label": "Symbols",
+          "description": "Collection of schematic symbols.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "label": "EndPoint",
+      "description": "Connection endpoint in the electrical design.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address",
+          "description": "Address assigned to the connection endpoint in the electrical design.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "label": "PLCEndPoint",
+      "description": "Connection endpoint associated with a programmable logic controller.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address",
+          "description": "Address assigned to the connection endpoint in the electrical design.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "label": "ConnectionPoints",
+      "description": "Collection of connection points belonging to an electrical device or symbol.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasEndPoint",
+          "label": "EndPoint",
+          "description": "Connection endpoint in the electrical design.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasPLCEndPoint",
+          "label": "PLCEndPoint",
+          "description": "Connection endpoint associated with a programmable logic controller.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+      "label": "Schematics",
+      "description": "Collection of electrical schematic information.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasConnections",
+          "label": "Connections",
+          "description": "Collection of connections between schematic elements.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "label": "EndPoint",
+      "description": "Connection endpoint in the electrical design.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address",
+          "description": "Address assigned to the connection endpoint in the electrical design.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "label": "PLCEndPoint",
+      "description": "Connection endpoint associated with a programmable logic controller.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address",
+          "description": "Address assigned to the connection endpoint in the electrical design.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId",
+          "description": "Identifier local to the ECAD source model or containing element.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "label": "ConnectionPoints",
+      "description": "Collection of connection points belonging to an electrical device or symbol.",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasEndPoint",
+          "label": "EndPoint",
+          "description": "Connection endpoint in the electrical design.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasPLCEndPoint",
+          "label": "PLCEndPoint",
+          "description": "Connection endpoint associated with a programmable logic controller.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "ecad"
+  ],
+  "requested_concepts": [],
+  "requested_outputs": [
+    "engineering verification statuses",
+    "engineering verification evidence of ECAD devices"
+  ],
+  "estimated_prompt_tokens": 2266,
+  "ollama_stats": {
+    "prompt_eval_count": 2249,
+    "eval_count": 96,
+    "total_duration": 16954428900
+  },
+  "elapsed_seconds": 19.08
+}

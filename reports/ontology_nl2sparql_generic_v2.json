@@ -1,0 +1,966 @@
+{
+  "method": "generic_v2_balanced_semantic_fail_closed",
+  "question": "List the equipment tags and operational references from AssetInventory.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "equipmentTag",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasEquipmentTag"
+      },
+      {
+        "name": "operationalReference",
+        "shape": "s0",
+        "predicate": "https://example.org/assetinventory/hasOperationalReference"
+      }
+    ],
+    "joins": [
+      "j0",
+      "j1",
+      "j2",
+      "j3",
+      "j4",
+      "j5",
+      "j6",
+      "j7",
+      "j8",
+      "j9",
+      "j10",
+      "j11",
+      "j12",
+      "j13",
+      "j14",
+      "j15",
+      "j16"
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"equipmentTag\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/assetinventory/hasEquipmentTag\"\n    },\n    {\n      \"name\": \"operationalReference\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/assetinventory/hasOperationalReference\"\n    }\n  ],\n  \"joins\": [\n    \"j0\",\n    \"j1\",\n    \"j2\",\n    \"j3\",\n    \"j4\",\n    \"j5\",\n    \"j6\",\n    \"j7\",\n    \"j8\",\n    \"j9\",\n    \"j10\",\n    \"j11\",\n    \"j12\",\n    \"j13\",\n    \"j14\",\n    \"j15\",\n    \"j16\"\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?equipmentTag ?operationalReference WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j0 .\n  ?node_s3 <https://example.org/dexpi/hasAssetIdentifier> ?key_j0 .\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j1 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j1 .\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j2 .\n  ?node_s5 <https://example.org/dexpi/hasAssetIdentifier> ?key_j2 .\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j3 .\n  ?node_s7 <https://example.org/dexpi/hasAssetIdentifier> ?key_j3 .\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j4 .\n  ?node_s8 <https://example.org/ecad/hasAssetIdentifier> ?key_j4 .\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j5 .\n  ?node_s9 <https://example.org/ecad/hasAssetIdentifier> ?key_j5 .\n  ?node_s3 <https://example.org/dexpi/hasAssetIdentifier> ?key_j6 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j6 .\n  ?node_s3 <https://example.org/dexpi/hasAssetIdentifier> ?key_j7 .\n  ?node_s8 <https://example.org/ecad/hasAssetIdentifier> ?key_j7 .\n  ?node_s3 <https://example.org/dexpi/hasAssetIdentifier> ?key_j8 .\n  ?node_s9 <https://example.org/ecad/hasAssetIdentifier> ?key_j8 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j9 .\n  ?node_s5 <https://example.org/dexpi/hasAssetIdentifier> ?key_j9 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j10 .\n  ?node_s7 <https://example.org/dexpi/hasAssetIdentifier> ?key_j10 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j11 .\n  ?node_s8 <https://example.org/ecad/hasAssetIdentifier> ?key_j11 .\n  ?node_s4 <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?key_j12 .\n  ?node_s9 <https://example.org/ecad/hasAssetIdentifier> ?key_j12 .\n  ?node_s5 <https://example.org/dexpi/hasAssetIdentifier> ?key_j13 .\n  ?node_s8 <https://example.org/ecad/hasAssetIdentifier> ?key_j13 .\n  ?node_s5 <https://example.org/dexpi/hasAssetIdentifier> ?key_j14 .\n  ?node_s9 <https://example.org/ecad/hasAssetIdentifier> ?key_j14 .\n  ?node_s7 <https://example.org/dexpi/hasAssetIdentifier> ?key_j15 .\n  ?node_s8 <https://example.org/ecad/hasAssetIdentifier> ?key_j15 .\n  ?node_s7 <https://example.org/dexpi/hasAssetIdentifier> ?key_j16 .\n  ?node_s9 <https://example.org/ecad/hasAssetIdentifier> ?key_j16 .\n  ?node_s0 <https://example.org/assetinventory/hasEquipmentTag> ?equipmentTag .\n  ?node_s0 <https://example.org/assetinventory/hasOperationalReference> ?operationalReference .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1006"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS5"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1202"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS22"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1004"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS4"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1201"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV11"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1502"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS19"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1004"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV4"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1301"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV7"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "M1"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV12"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1101"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS8"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1006"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV5"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1301"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS13"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1003"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS3"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1501"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV8"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1005"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV6"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "JI-1401"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS20"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1005"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS10"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1501"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS18"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1301"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS11"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1101"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS9"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1002"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV1"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1101"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS7"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1001"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV3"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1101"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV10"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1301"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS14"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "TI-1103"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS21"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1003"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV2"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "CV-1502"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMV9"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1001"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS1"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1501"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS17"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1002"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS2"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1301"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS12"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "LI-1501"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS15"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "FI-1101"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS6"
+      }
+    },
+    {
+      "equipmentTag": {
+        "type": "literal",
+        "value": "PI-1501"
+      },
+      "operationalReference": {
+        "type": "literal",
+        "value": "XMEAS16"
+      }
+    }
+  ],
+  "binding_count": 34,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "label": "EngineeringDomain constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "label": "EngineeringFunctionId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "label": "EngineeringFunctionReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+          "label": "InventoryAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+          "label": "InventoryAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "label": "MappingBasis constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "label": "MappingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "label": "OPCUABrowsePath constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "label": "OPCUANodeId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+          "label": "RelatedInventoryAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "label": "SignalDirection constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "label": "SignalName constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasActuatedVariable",
+          "label": "ActuatedVariable constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasEquipment",
+          "label": "Equipment constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "dexpi",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasMeasuredVariable",
+          "label": "MeasuredVariable constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+          "label": "EngineeringVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+          "label": "EngineeringVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+          "label": "ProductVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+          "label": "ProductVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s3",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s0",
+      "right": "s4",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j2": {
+      "left": "s0",
+      "right": "s5",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j3": {
+      "left": "s0",
+      "right": "s7",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j4": {
+      "left": "s0",
+      "right": "s8",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j5": {
+      "left": "s0",
+      "right": "s9",
+      "left_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j6": {
+      "left": "s3",
+      "right": "s4",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j7": {
+      "left": "s3",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j8": {
+      "left": "s3",
+      "right": "s9",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j9": {
+      "left": "s4",
+      "right": "s5",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j10": {
+      "left": "s4",
+      "right": "s7",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j11": {
+      "left": "s4",
+      "right": "s8",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j12": {
+      "left": "s4",
+      "right": "s9",
+      "left_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j13": {
+      "left": "s5",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j14": {
+      "left": "s5",
+      "right": "s9",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j15": {
+      "left": "s7",
+      "right": "s8",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j16": {
+      "left": "s7",
+      "right": "s9",
+      "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "assetinventory"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "equipment tag",
+      "tokens": [
+        "equipment",
+        "tag"
+      ]
+    },
+    {
+      "phrase": "operational reference",
+      "tokens": [
+        "operational",
+        "reference"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 3993,
+  "ollama_stats": {
+    "prompt_eval_count": 3895,
+    "eval_count": 196,
+    "total_duration": 63746951800
+  },
+  "elapsed_seconds": 66.03
+}

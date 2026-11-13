@@ -1,0 +1,610 @@
+{
+  "method": "phase6c_full_shacl_declaration_inventory",
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "relationship_declarations": [
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "predicate": "https://example.org/dexpi/hasActuatingFunction",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/dexpi/hasEquipment",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+      "predicate": "https://example.org/dexpi/hasInstrumentationFunction",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "predicate": "https://example.org/dexpi/hasActuatingFunctions",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "predicate": "https://example.org/dexpi/hasEquipments",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "dexpi",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+      "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasEndPoint",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasPLCEndPoint",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "predicate": "https://example.org/ecad/hasConnectionPoints",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasDevice",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasConnections",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasEndPoint",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasPLCEndPoint",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+      "predicate": "https://example.org/ecad/hasConnectionPoints",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/ecad/hasSymbol",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+      "predicate": "https://example.org/ecad/hasDevices",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+      "predicate": "https://example.org/ecad/hasSchematics",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "ecad",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+      "predicate": "https://example.org/ecad/hasSymbols",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "engineeringbom",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/engineeringbom/hasAssembly",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "engineeringbom",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl",
+      "predicate": "https://example.org/engineeringbom/hasBOMItem",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "engineeringbom",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+      "predicate": "https://example.org/engineeringbom/hasAssemblies",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "engineeringbom",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+      "predicate": "https://example.org/engineeringbom/hasBOMItems",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "assetinventory",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "predicate": "https://example.org/assetinventory/hasAsset",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "assetinventory",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "predicate": "https://example.org/assetinventory/hasAssets",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "opcuaconnectivity",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+      "predicate": "https://example.org/opcuaconnectivity/hasServer",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "opcuaconnectivity",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "opcuaconnectivity",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+      "predicate": "https://example.org/opcuaconnectivity/hasServers",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "opcuaconnectivity",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "productcatalog",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ",
+      "predicate": "https://example.org/productcatalog/hasTechnicalProperty",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "productcatalog",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+      "predicate": "https://example.org/productcatalog/hasTechnicalProperties",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "productcatalog",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl",
+      "predicate": "https://example.org/productcatalog/hasProduct",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    },
+    {
+      "source_domain": "productcatalog",
+      "source_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU",
+      "predicate": "https://example.org/productcatalog/hasProducts",
+      "direction": "forward",
+      "property_kind": "object",
+      "declared_value_class": "https://example.org/aas/SMC",
+      "target_shape_candidates": [],
+      "declaration_status": "shacl_class_constraint_without_matching_target_shape",
+      "instance_triple_verified": false,
+      "cross_domain_identity_verified": false,
+      "physical_membership_verified": false,
+      "eligible_for_verified_traversal": false
+    }
+  ],
+  "investigated_predicates": {
+    "https://example.org/ecad/hasPLCEndPoint": [
+      {
+        "domain": "ecad",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+        "kind": "object",
+        "value_class": "https://example.org/aas/SMC"
+      },
+      {
+        "domain": "ecad",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+        "kind": "object",
+        "value_class": "https://example.org/aas/SMC"
+      }
+    ],
+    "https://example.org/productcatalog/hasIRDI": [],
+    "https://example.org/productcatalog/hasQuDTAttribute": [],
+    "https://example.org/productcatalog/hasCatalogTechnicalSpecification": [],
+    "https://example.org/productcatalog/hasCrossDomainAssociationEvidence": [],
+    "https://example.org/ecad/hasAssetIdentifier": [
+      {
+        "domain": "ecad",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+        "kind": "datatype",
+        "value_class": null
+      },
+      {
+        "domain": "ecad",
+        "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+        "kind": "datatype",
+        "value_class": null
+      }
+    ]
+  },
+  "identifier_equality_hypotheses": [
+    {
+      "identifier": "AssetIdentifier",
+      "evidence": "same SHACL predicate local name in multiple domains",
+      "status": "candidate_value_equality_join_not_formally_asserted",
+      "semantics": "Join on equal RDF terms only when identifiers have matching meaning and representation.",
+      "occurrences": [
+        {
+          "domain": "assetinventory",
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+          "parent_shape_label": "Asset SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+          "parent_shape_label": "ActuatingFunction SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+          "parent_shape_label": "Equipment SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+          "parent_shape_label": "InstrumentationFunction SHACL shape"
+        },
+        {
+          "domain": "ecad",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+          "parent_shape_label": "Device SHACL shape"
+        },
+        {
+          "domain": "ecad",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+          "parent_shape_label": "Symbol SHACL shape"
+        },
+        {
+          "domain": "engineeringbom",
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+          "parent_shape_label": "BOMItem SHACL shape"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+          "parent_shape_label": "SignalMapping SHACL shape"
+        }
+      ]
+    },
+    {
+      "identifier": "ProductIdentifier",
+      "evidence": "same SHACL predicate local name in multiple domains",
+      "status": "candidate_value_equality_join_not_formally_asserted",
+      "semantics": "Join on equal RDF terms only when identifiers have matching meaning and representation.",
+      "occurrences": [
+        {
+          "domain": "assetinventory",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+          "parent_shape_label": "Asset SHACL shape"
+        },
+        {
+          "domain": "engineeringbom",
+          "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+          "parent_shape_label": "BOMItem SHACL shape"
+        },
+        {
+          "domain": "productcatalog",
+          "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+          "parent_shape_label": "Product SHACL shape"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "SHACL class constraints describe allowed target types, not observed graph triples.",
+    "OWL ObjectProperty declaration alone does not establish domain/range or a verified join.",
+    "Complex SHACL paths were omitted by upstream extraction.",
+    "No GraphDB instance evidence has been inspected.",
+    "Functional association, identifier equality, and recorded parent context are not physical membership."
+  ]
+}

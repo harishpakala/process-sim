@@ -31,6 +31,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier associated with the represented engineering asset."
+                }
               ]
             },
             {
@@ -53,6 +59,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the source engineering model."
+                }
               ]
             }
           ],
@@ -71,6 +83,12 @@
               "valueType": "xs:string",
               "value": "ZeroToMany"
             }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Process equipment item identified in the DEXPI engineering model."
+            }
           ]
         }
       ],
@@ -88,6 +106,12 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "One"
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of process equipment representations."
         }
       ]
     },
@@ -119,6 +143,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier associated with the represented engineering asset."
+                }
               ]
             },
             {
@@ -140,6 +170,12 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "One"
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the source engineering model."
                 }
               ]
             },
@@ -163,6 +199,56 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Process variable acted upon by the actuating function."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of an association with information in another engineering domain."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded evidence supporting a cross-domain association."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering interpretation or qualification of the represented association."
+                }
               ]
             }
           ],
@@ -181,6 +267,12 @@
               "valueType": "xs:string",
               "value": "ZeroToMany"
             }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Function that actuates or manipulates a process variable."
+            }
           ]
         }
       ],
@@ -198,6 +290,12 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of process actuation functions."
         }
       ]
     },
@@ -229,6 +327,12 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier associated with the represented engineering asset."
+                }
               ]
             },
             {
@@ -250,6 +354,12 @@
                   "type": "Cardinality",
                   "valueType": "xs:string",
                   "value": "One"
+                }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the source engineering model."
                 }
               ]
             },
@@ -273,6 +383,56 @@
                   "valueType": "xs:string",
                   "value": "One"
                 }
+              ],
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Process variable measured by the instrumentation function."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded status of an association with information in another engineering domain."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Recorded evidence supporting a cross-domain association."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Engineering interpretation or qualification of the represented association."
+                }
               ]
             }
           ],
@@ -290,6 +450,12 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            }
+          ],
+          "description": [
+            {
+              "language": "en",
+              "text": "Function that measures or observes a process variable."
             }
           ]
         }
@@ -309,7 +475,19 @@
           "valueType": "xs:string",
           "value": "ZeroToOne"
         }
+      ],
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of instrumentation functions."
+        }
       ]
+    }
+  ],
+  "description": [
+    {
+      "language": "en",
+      "text": "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."
     }
   ]
 }

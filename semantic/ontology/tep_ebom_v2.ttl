@@ -1,0 +1,2497 @@
+@prefix core: <https://example.org/dtwise/core/> .
+@prefix ebom: <https://example.org/engineeringbom/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0011> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0011> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0011" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0013> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0013> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0013" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0014> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0014> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0014" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0015> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0015> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0015" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0016> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0016> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0016" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0017> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0017> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0017" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0018> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0018> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0018" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0019> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0019> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0019" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0020> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0020> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0020" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0021> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0021> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0021" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0022> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0022> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0022" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0023> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0023> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0023" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0024> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0024> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0024" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0025> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0025> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0025" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0026> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0026> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0026" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0027> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0027> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0027" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0032> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0032> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0032" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0034> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0034> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0034" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0035> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0035> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0035" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0036> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0036> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0036" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0037> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0037> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0037" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0038> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0038> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0038" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0039> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0039> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0039" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0047> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0047> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0047" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0048> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0048> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0048" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0049> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0049> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0049" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0050> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0050> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0050" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0052> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0052> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0052" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0053> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0053> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0053" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0054> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0054> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0054" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0055> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0055> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0055" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0056> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0056> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0056" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0057> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0057> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0057" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0058> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0058> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0058" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0059> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0059> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0059" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0060> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0060> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0060" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0061> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0061> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0061" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0062> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0062> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0062" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0063> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0063> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0063" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0070> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0070> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0070" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0071> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0071> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0071" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0072> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0072> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0072" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0073> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0073> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0073" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0074> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0074> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0074" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0075> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0075> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0075" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0076> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0076> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0076" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0077> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0077> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0077" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0078> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0078> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0078" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/functional-association/EBOM-0079> a core:FunctionalAssociation ;
+    core:associationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    core:functionalAssociationSource <https://example.org/dtwise/ebom-v2/item/EBOM-0079> ;
+    core:functionalAssociationTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "FunctionalAssemblyReference" ;
+    core:sourceRecordId "EBOM-0079" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-COMPRESSOR> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-COMPRESSOR" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-COMPRESSOR-CTRL> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-CTRL> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-COMPRESSOR-CTRL" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-COMPRESSOR-INST> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-INST> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-COMPRESSOR-INST" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-COMPRESSOR-MECH> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-MECH> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-COMPRESSOR-MECH" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-CONDENSER> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-CONDENSER" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-CONDENSER-CTRL> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-CTRL> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-CONDENSER-CTRL" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-CONDENSER-INST> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-INST> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-CONDENSER-INST" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-CONDENSER-MECH> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-MECH> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-CONDENSER-MECH" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-REACTOR> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-REACTOR" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-REACTOR-CTRL> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-CTRL> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-REACTOR-CTRL" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-REACTOR-INST> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-INST> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-REACTOR-INST" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-REACTOR-MECH> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-MECH> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-REACTOR-MECH" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-SEPARATOR> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-SEPARATOR" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-SEPARATOR-CTRL> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-CTRL> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-SEPARATOR-CTRL" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-SEPARATOR-INST> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-INST> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-SEPARATOR-INST" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-SEPARATOR-MECH> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-MECH> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-SEPARATOR-MECH" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-STRIPPER> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-STRIPPER" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-STRIPPER-CTRL> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-CTRL> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-STRIPPER-CTRL" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-STRIPPER-INST> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-INST> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-STRIPPER-INST" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-STRIPPER-MECH> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-MECH> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-STRIPPER-MECH" ;
+    core:structureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/ASM-UNASSIGNED> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "ASM-UNASSIGNED" ;
+    core:structureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0001> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0001> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0001" ;
+    core:structureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0002> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0002> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0002" ;
+    core:structureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0003> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0003> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0003" ;
+    core:structureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0004> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0004> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0004" ;
+    core:structureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0005> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0005> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0005" ;
+    core:structureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0006> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0006> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0006" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0007> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0007> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0007" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0008> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0008> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0008" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0009> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0009> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0009" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0010> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0010> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0010" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0011> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0011> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0011" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0012> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0012> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0012" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0013> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0013> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0013" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0014> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0014> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0014" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0015> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0015> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0015" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0016> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0016> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0016" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0017> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0017> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0017" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0018> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0018> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0018" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0019> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0019> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0019" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0020> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0020> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0020" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0021> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0021> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0021" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0022> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0022> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0022" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0023> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0023> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0023" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0024> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0024> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0024" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0025> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0025> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0025" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0026> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0026> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0026" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0027> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0027> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0027" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0028> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0028> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0028" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0029> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0029> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0029" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0030> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0030> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0030" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0031> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0031> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0031" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0032> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0032> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0032" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0033> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0033> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0033" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0034> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0034> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0034" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0035> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0035> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0035" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0036> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0036> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0036" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0037> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0037> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0037" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0038> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0038> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0038" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0039> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0039> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0039" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0040> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0040> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0040" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0041> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0041> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0041" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0042> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0042> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0042" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0043> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0043> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0043" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0044> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0044> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0044" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0045> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0045> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0045" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0046> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0046> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0046" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0047> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0047> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0047" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0048> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0048> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0048" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0049> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0049> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0049" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0050> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0050> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0050" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0051> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0051> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0051" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0052> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0052> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0052" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0053> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0053> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0053" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0054> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0054> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0054" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0055> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0055> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0055" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0056> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0056> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0056" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0057> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0057> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0057" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0058> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0058> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0058" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0059> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0059> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0059" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0060> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0060> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0060" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0061> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0061> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0061" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0062> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0062> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0062" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0063> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0063> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0063" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0064> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0064> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0064" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0065> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0065> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0065" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0066> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0066> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0066" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0067> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0067> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0067" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0068> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0068> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0068" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0069> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0069> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0069" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0070> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0070> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0070" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0071> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0071> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0071" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0072> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0072> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0072" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0073> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0073> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0073" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0074> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0074> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0074" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0075> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0075> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0075" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0076> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0076> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0076" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0077> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0077> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0077" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0078> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0078> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0078" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/parent-reference/EBOM-0079> a core:ParentReference ;
+    core:referenceSource <https://example.org/dtwise/ebom-v2/item/EBOM-0079> ;
+    core:referenceTarget <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    core:sourceField "ParentItemId" ;
+    core:sourceRecordId "EBOM-0079" ;
+    core:structureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-CTRL> a core:AssemblyRecord ;
+    rdfs:label "Electrical & control subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    ebom:hasBOMItemId "ASM-COMPRESSOR-CTRL" ;
+    ebom:hasItemDescription "Electrical & control subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-INST> a core:AssemblyRecord ;
+    rdfs:label "Instrumentation subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    ebom:hasBOMItemId "ASM-COMPRESSOR-INST" ;
+    ebom:hasItemDescription "Instrumentation subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR-MECH> a core:AssemblyRecord ;
+    rdfs:label "Mechanical subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    ebom:hasBOMItemId "ASM-COMPRESSOR-MECH" ;
+    ebom:hasItemDescription "Mechanical subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-CTRL> a core:AssemblyRecord ;
+    rdfs:label "Electrical & control subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    ebom:hasBOMItemId "ASM-CONDENSER-CTRL" ;
+    ebom:hasItemDescription "Electrical & control subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-INST> a core:AssemblyRecord ;
+    rdfs:label "Instrumentation subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    ebom:hasBOMItemId "ASM-CONDENSER-INST" ;
+    ebom:hasItemDescription "Instrumentation subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER-MECH> a core:AssemblyRecord ;
+    rdfs:label "Mechanical subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    ebom:hasBOMItemId "ASM-CONDENSER-MECH" ;
+    ebom:hasItemDescription "Mechanical subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-CTRL> a core:AssemblyRecord ;
+    rdfs:label "Electrical & control subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    ebom:hasBOMItemId "ASM-REACTOR-CTRL" ;
+    ebom:hasItemDescription "Electrical & control subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-INST> a core:AssemblyRecord ;
+    rdfs:label "Instrumentation subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    ebom:hasBOMItemId "ASM-REACTOR-INST" ;
+    ebom:hasItemDescription "Instrumentation subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR-MECH> a core:AssemblyRecord ;
+    rdfs:label "Mechanical subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    ebom:hasBOMItemId "ASM-REACTOR-MECH" ;
+    ebom:hasItemDescription "Mechanical subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-CTRL> a core:AssemblyRecord ;
+    rdfs:label "Electrical & control subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    ebom:hasBOMItemId "ASM-SEPARATOR-CTRL" ;
+    ebom:hasItemDescription "Electrical & control subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-INST> a core:AssemblyRecord ;
+    rdfs:label "Instrumentation subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    ebom:hasBOMItemId "ASM-SEPARATOR-INST" ;
+    ebom:hasItemDescription "Instrumentation subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR-MECH> a core:AssemblyRecord ;
+    rdfs:label "Mechanical subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    ebom:hasBOMItemId "ASM-SEPARATOR-MECH" ;
+    ebom:hasItemDescription "Mechanical subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-CTRL> a core:AssemblyRecord ;
+    rdfs:label "Electrical & control subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    ebom:hasBOMItemId "ASM-STRIPPER-CTRL" ;
+    ebom:hasItemDescription "Electrical & control subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-INST> a core:AssemblyRecord ;
+    rdfs:label "Instrumentation subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    ebom:hasBOMItemId "ASM-STRIPPER-INST" ;
+    ebom:hasItemDescription "Instrumentation subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER-MECH> a core:AssemblyRecord ;
+    rdfs:label "Mechanical subassembly" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    ebom:hasBOMItemId "ASM-STRIPPER-MECH" ;
+    ebom:hasItemDescription "Mechanical subassembly" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PLACEHOLDER_NO_VERIFIED_COMPONENTS_OR_QUANTITY" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0001> a core:BOMItemRecord ;
+    rdfs:label "Reactor" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TEPR001" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0001" ;
+    ebom:hasEngineeringLocalId "R-001" ;
+    ebom:hasItemDescription "Reactor" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "Equipments" ;
+    ebom:hasStructureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0002> a core:BOMItemRecord ;
+    rdfs:label "ProductCondenser" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TEPC001" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0002" ;
+    ebom:hasEngineeringLocalId "C-001" ;
+    ebom:hasItemDescription "ProductCondenser" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "Equipments" ;
+    ebom:hasStructureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0003> a core:BOMItemRecord ;
+    rdfs:label "VaporLiquidSeparator" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TEPV001" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0003" ;
+    ebom:hasEngineeringLocalId "V-001" ;
+    ebom:hasItemDescription "VaporLiquidSeparator" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/Didion_DSL_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "Equipments" ;
+    ebom:hasStructureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0004> a core:BOMItemRecord ;
+    rdfs:label "RecycleCompressor" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TEPK001" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0004" ;
+    ebom:hasEngineeringLocalId "K-001" ;
+    ebom:hasItemDescription "RecycleCompressor" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/AtlasCopco_GT_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "Equipments" ;
+    ebom:hasStructureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0005> a core:BOMItemRecord ;
+    rdfs:label "ProductStripper" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TEPS001" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0005" ;
+    ebom:hasEngineeringLocalId "S-001" ;
+    ebom:hasItemDescription "ProductStripper" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "Equipments" ;
+    ebom:hasStructureStatus "EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0006> a core:BOMItemRecord ;
+    rdfs:label "AFeedFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI101" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0006" ;
+    ebom:hasEngineeringLocalId "FI_101" ;
+    ebom:hasItemDescription "AFeedFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0007> a core:BOMItemRecord ;
+    rdfs:label "DFeedFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI102" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0007" ;
+    ebom:hasEngineeringLocalId "FI_102" ;
+    ebom:hasItemDescription "DFeedFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0008> a core:BOMItemRecord ;
+    rdfs:label "EFeedFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI103" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0008" ;
+    ebom:hasEngineeringLocalId "FI_103" ;
+    ebom:hasItemDescription "EFeedFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0009> a core:BOMItemRecord ;
+    rdfs:label "ACFeedFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI104" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0009" ;
+    ebom:hasEngineeringLocalId "FI_104" ;
+    ebom:hasItemDescription "ACFeedFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0010> a core:BOMItemRecord ;
+    rdfs:label "RecycleFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI105" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0010" ;
+    ebom:hasEngineeringLocalId "FI_105" ;
+    ebom:hasItemDescription "RecycleFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0012> a core:BOMItemRecord ;
+    rdfs:label "PurgeFlow" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI107" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0012" ;
+    ebom:hasEngineeringLocalId "FI_107" ;
+    ebom:hasItemDescription "PurgeFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0028> a core:BOMItemRecord ;
+    rdfs:label "DFeedFlowControl" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC101" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0028" ;
+    ebom:hasEngineeringLocalId "VC_101" ;
+    ebom:hasItemDescription "DFeedFlowControl" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0029> a core:BOMItemRecord ;
+    rdfs:label "EFeedFlowControl" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC102" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0029" ;
+    ebom:hasEngineeringLocalId "VC_102" ;
+    ebom:hasItemDescription "EFeedFlowControl" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0030> a core:BOMItemRecord ;
+    rdfs:label "AFeedFlowControl" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC103" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0030" ;
+    ebom:hasEngineeringLocalId "VC_103" ;
+    ebom:hasItemDescription "AFeedFlowControl" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0031> a core:BOMItemRecord ;
+    rdfs:label "ACFeedFlowControl" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC104" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0031" ;
+    ebom:hasEngineeringLocalId "VC_104" ;
+    ebom:hasItemDescription "ACFeedFlowControl" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0033> a core:BOMItemRecord ;
+    rdfs:label "PurgeValve" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC106" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0033" ;
+    ebom:hasEngineeringLocalId "VC_106" ;
+    ebom:hasItemDescription "PurgeValve" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0040> a core:BOMItemRecord ;
+    rdfs:label "DCPowerSupply" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/DCPSU1" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0040" ;
+    ebom:hasEngineeringLocalId "DC-PSU-1" ;
+    ebom:hasItemDescription "DCPowerSupply" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0041> a core:BOMItemRecord ;
+    rdfs:label "PLCBox" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/K1" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0041" ;
+    ebom:hasEngineeringLocalId "K1" ;
+    ebom:hasItemDescription "PLCBox" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0042> a core:BOMItemRecord ;
+    rdfs:label "FI_1001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI101" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0042" ;
+    ebom:hasEngineeringLocalId "FI-1001" ;
+    ebom:hasItemDescription "FI_1001" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0043> a core:BOMItemRecord ;
+    rdfs:label "FI_1002" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI102" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0043" ;
+    ebom:hasEngineeringLocalId "FI-1002" ;
+    ebom:hasItemDescription "FI_1002" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0044> a core:BOMItemRecord ;
+    rdfs:label "FI_1003" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI103" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0044" ;
+    ebom:hasEngineeringLocalId "FI-1003" ;
+    ebom:hasItemDescription "FI_1003" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0045> a core:BOMItemRecord ;
+    rdfs:label "FI_1004" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI104" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0045" ;
+    ebom:hasEngineeringLocalId "FI-1004" ;
+    ebom:hasItemDescription "FI_1004" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0046> a core:BOMItemRecord ;
+    rdfs:label "FI_1006" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI105" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0046" ;
+    ebom:hasEngineeringLocalId "FI-1006" ;
+    ebom:hasItemDescription "FI_1006" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0051> a core:BOMItemRecord ;
+    rdfs:label "FI_1005" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI107" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0051" ;
+    ebom:hasEngineeringLocalId "FI-1005" ;
+    ebom:hasItemDescription "FI_1005" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0064> a core:BOMItemRecord ;
+    rdfs:label "CV_1001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC103" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0064" ;
+    ebom:hasEngineeringLocalId "CV-1001" ;
+    ebom:hasItemDescription "CV_1001" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0065> a core:BOMItemRecord ;
+    rdfs:label "CV_1002" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC101" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0065" ;
+    ebom:hasEngineeringLocalId "CV-1002" ;
+    ebom:hasItemDescription "CV_1002" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0066> a core:BOMItemRecord ;
+    rdfs:label "CV_1003" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC102" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0066" ;
+    ebom:hasEngineeringLocalId "CV-1003" ;
+    ebom:hasItemDescription "CV_1003" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0067> a core:BOMItemRecord ;
+    rdfs:label "CV_1004" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC104" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0067" ;
+    ebom:hasEngineeringLocalId "CV-1004" ;
+    ebom:hasItemDescription "CV_1004" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0068> a core:BOMItemRecord ;
+    rdfs:label "CV_1005" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC106" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0068" ;
+    ebom:hasEngineeringLocalId "CV-1005" ;
+    ebom:hasItemDescription "CV_1005" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0069> a core:BOMItemRecord ;
+    rdfs:label "CV_1006" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1006" ;
+    ebom:hasAssociationBasis "UNRESOLVED" ;
+    ebom:hasBOMItemId "EBOM-0069" ;
+    ebom:hasEngineeringLocalId "CV-1006" ;
+    ebom:hasItemDescription "CV_1006" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0011> a core:BOMItemRecord ;
+    rdfs:label "ReactorFeedFlow" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI106" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0011" ;
+    ebom:hasEngineeringLocalId "FI_106" ;
+    ebom:hasItemDescription "ReactorFeedFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0013> a core:BOMItemRecord ;
+    rdfs:label "SeparatorUnderflow" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI108" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0013" ;
+    ebom:hasEngineeringLocalId "FI_108" ;
+    ebom:hasItemDescription "SeparatorUnderflow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0014> a core:BOMItemRecord ;
+    rdfs:label "StripperUnderflow" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI109" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0014" ;
+    ebom:hasEngineeringLocalId "FI_109" ;
+    ebom:hasItemDescription "StripperUnderflow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0015> a core:BOMItemRecord ;
+    rdfs:label "StripperSteamFlow" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI110" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0015" ;
+    ebom:hasEngineeringLocalId "FI_110" ;
+    ebom:hasItemDescription "StripperSteamFlow" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Prowirl_F200_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0016> a core:BOMItemRecord ;
+    rdfs:label "ReactorTemperature" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0016" ;
+    ebom:hasEngineeringLocalId "TI_101" ;
+    ebom:hasItemDescription "ReactorTemperature" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0017> a core:BOMItemRecord ;
+    rdfs:label "SeparatorTemperature" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0017" ;
+    ebom:hasEngineeringLocalId "TI_102" ;
+    ebom:hasItemDescription "SeparatorTemperature" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0018> a core:BOMItemRecord ;
+    rdfs:label "StripperTemperature" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0018" ;
+    ebom:hasEngineeringLocalId "TI_103" ;
+    ebom:hasItemDescription "StripperTemperature" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0019> a core:BOMItemRecord ;
+    rdfs:label "ReactorCoolingWaterOutletTemperature" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI104" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0019" ;
+    ebom:hasEngineeringLocalId "TI_104" ;
+    ebom:hasItemDescription "ReactorCoolingWaterOutletTemperature" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0020> a core:BOMItemRecord ;
+    rdfs:label "SeparatorCoolingWaterOutletTemperature" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI1202" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0020" ;
+    ebom:hasEngineeringLocalId "TI_105" ;
+    ebom:hasItemDescription "SeparatorCoolingWaterOutletTemperature" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0021> a core:BOMItemRecord ;
+    rdfs:label "ReactorLevel" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0021" ;
+    ebom:hasEngineeringLocalId "LI_101" ;
+    ebom:hasItemDescription "ReactorLevel" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0022> a core:BOMItemRecord ;
+    rdfs:label "SeparatorLevel" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0022" ;
+    ebom:hasEngineeringLocalId "LI_102" ;
+    ebom:hasItemDescription "SeparatorLevel" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0023> a core:BOMItemRecord ;
+    rdfs:label "StripperLevel" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0023" ;
+    ebom:hasEngineeringLocalId "LI_103" ;
+    ebom:hasItemDescription "StripperLevel" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0024> a core:BOMItemRecord ;
+    rdfs:label "ReactorPressure" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0024" ;
+    ebom:hasEngineeringLocalId "PI_101" ;
+    ebom:hasItemDescription "ReactorPressure" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0025> a core:BOMItemRecord ;
+    rdfs:label "SeparatorPressure" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0025" ;
+    ebom:hasEngineeringLocalId "PI_102" ;
+    ebom:hasItemDescription "SeparatorPressure" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0026> a core:BOMItemRecord ;
+    rdfs:label "StripperPressure" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0026" ;
+    ebom:hasEngineeringLocalId "PI_103" ;
+    ebom:hasItemDescription "StripperPressure" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0027> a core:BOMItemRecord ;
+    rdfs:label "CompressorPower" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/JI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0027" ;
+    ebom:hasEngineeringLocalId "JI_101" ;
+    ebom:hasItemDescription "CompressorPower" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/Schneider_A9MEM3555" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "InstrumentationFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0032> a core:BOMItemRecord ;
+    rdfs:label "CompressorRecycleValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1006" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0032" ;
+    ebom:hasEngineeringLocalId "VC_105" ;
+    ebom:hasItemDescription "CompressorRecycleValve" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0034> a core:BOMItemRecord ;
+    rdfs:label "SeparatorLiquidValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1301" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0034" ;
+    ebom:hasEngineeringLocalId "VC_107" ;
+    ebom:hasItemDescription "SeparatorLiquidValve" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0035> a core:BOMItemRecord ;
+    rdfs:label "StripperLiquidProductValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC108" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0035" ;
+    ebom:hasEngineeringLocalId "VC_108" ;
+    ebom:hasItemDescription "StripperLiquidProductValve" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0036> a core:BOMItemRecord ;
+    rdfs:label "StripperSteamValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC109" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0036" ;
+    ebom:hasEngineeringLocalId "VC_109" ;
+    ebom:hasItemDescription "StripperSteamValve" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0037> a core:BOMItemRecord ;
+    rdfs:label "ReactorCoolingWaterValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC110" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0037" ;
+    ebom:hasEngineeringLocalId "VC_110" ;
+    ebom:hasItemDescription "ReactorCoolingWaterValve" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0038> a core:BOMItemRecord ;
+    rdfs:label "CondenserCoolingWaterValve" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1201" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0038" ;
+    ebom:hasEngineeringLocalId "VC_111" ;
+    ebom:hasItemDescription "CondenserCoolingWaterValve" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0039> a core:BOMItemRecord ;
+    rdfs:label "AgitatorSpeedControl" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/M1" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0039" ;
+    ebom:hasEngineeringLocalId "SC_101" ;
+    ebom:hasItemDescription "AgitatorSpeedControl" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "DEXPI" ;
+    ebom:hasSourceGroup "ActuatingFunctions" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0047> a core:BOMItemRecord ;
+    rdfs:label "FI_1101" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI106" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0047" ;
+    ebom:hasEngineeringLocalId "FI-1101" ;
+    ebom:hasItemDescription "FI_1101" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_TMass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0048> a core:BOMItemRecord ;
+    rdfs:label "PI_1101" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0048" ;
+    ebom:hasEngineeringLocalId "PI-1101" ;
+    ebom:hasItemDescription "PI_1101" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0049> a core:BOMItemRecord ;
+    rdfs:label "LI_1101" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0049" ;
+    ebom:hasEngineeringLocalId "LI-1101" ;
+    ebom:hasItemDescription "LI_1101" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0050> a core:BOMItemRecord ;
+    rdfs:label "TI_1101" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0050" ;
+    ebom:hasEngineeringLocalId "TI-1101" ;
+    ebom:hasItemDescription "TI_1101" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0052> a core:BOMItemRecord ;
+    rdfs:label "TI_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0052" ;
+    ebom:hasEngineeringLocalId "TI-1301" ;
+    ebom:hasItemDescription "TI_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0053> a core:BOMItemRecord ;
+    rdfs:label "LI_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0053" ;
+    ebom:hasEngineeringLocalId "LI-1301" ;
+    ebom:hasItemDescription "LI_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0054> a core:BOMItemRecord ;
+    rdfs:label "PI_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI102" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0054" ;
+    ebom:hasEngineeringLocalId "PI-1301" ;
+    ebom:hasItemDescription "PI_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0055> a core:BOMItemRecord ;
+    rdfs:label "FI_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI108" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0055" ;
+    ebom:hasEngineeringLocalId "FI-1301" ;
+    ebom:hasItemDescription "FI_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0056> a core:BOMItemRecord ;
+    rdfs:label "LI_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/LI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0056" ;
+    ebom:hasEngineeringLocalId "LI-1501" ;
+    ebom:hasItemDescription "LI_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_FMR62B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0057> a core:BOMItemRecord ;
+    rdfs:label "PI_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/PI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0057" ;
+    ebom:hasEngineeringLocalId "PI-1501" ;
+    ebom:hasItemDescription "PI_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_PMP51B_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0058> a core:BOMItemRecord ;
+    rdfs:label "FI_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI109" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0058" ;
+    ebom:hasEngineeringLocalId "FI-1501" ;
+    ebom:hasItemDescription "FI_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Promass_F300_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0059> a core:BOMItemRecord ;
+    rdfs:label "TI_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI103" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0059" ;
+    ebom:hasEngineeringLocalId "TI-1501" ;
+    ebom:hasItemDescription "TI_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0060> a core:BOMItemRecord ;
+    rdfs:label "FI_1502" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/FI110" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0060" ;
+    ebom:hasEngineeringLocalId "FI-1502" ;
+    ebom:hasItemDescription "FI_1502" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/EandH_Prowirl_F200_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0061> a core:BOMItemRecord ;
+    rdfs:label "JI_1401" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/JI101" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0061" ;
+    ebom:hasEngineeringLocalId "JI-1401" ;
+    ebom:hasItemDescription "JI_1401" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/Schneider_A9MEM3555" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0062> a core:BOMItemRecord ;
+    rdfs:label "TI_1103" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI104" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0062" ;
+    ebom:hasEngineeringLocalId "TI-1103" ;
+    ebom:hasItemDescription "TI_1103" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0063> a core:BOMItemRecord ;
+    rdfs:label "TI_1202" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/TI1202" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0063" ;
+    ebom:hasEngineeringLocalId "TI-1202" ;
+    ebom:hasItemDescription "TI_1202" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/IFM_TA1101" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0070> a core:BOMItemRecord ;
+    rdfs:label "CV_1101" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC110" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0070" ;
+    ebom:hasEngineeringLocalId "CV-1101" ;
+    ebom:hasItemDescription "CV_1101" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0071> a core:BOMItemRecord ;
+    rdfs:label "CV_1201" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1201" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0071" ;
+    ebom:hasEngineeringLocalId "CV-1201" ;
+    ebom:hasItemDescription "CV_1201" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0072> a core:BOMItemRecord ;
+    rdfs:label "CV_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1301" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0072" ;
+    ebom:hasEngineeringLocalId "CV-1301" ;
+    ebom:hasItemDescription "CV_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0073> a core:BOMItemRecord ;
+    rdfs:label "CV_1401" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/CV1401" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0073" ;
+    ebom:hasEngineeringLocalId "CV-1401" ;
+    ebom:hasItemDescription "CV_1401" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/SAMSON_3241_Family_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0074> a core:BOMItemRecord ;
+    rdfs:label "CV_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC108" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0074" ;
+    ebom:hasEngineeringLocalId "CV-1501" ;
+    ebom:hasItemDescription "CV_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0075> a core:BOMItemRecord ;
+    rdfs:label "CV_1502" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/VC109" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0075" ;
+    ebom:hasEngineeringLocalId "CV-1502" ;
+    ebom:hasItemDescription "CV_1502" ;
+    ebom:hasProductIdentifier "https://example.org/product-types/SAMSON_3241_7" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0076> a core:BOMItemRecord ;
+    rdfs:label "M1" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/M1" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0076" ;
+    ebom:hasEngineeringLocalId "M1" ;
+    ebom:hasItemDescription "M1" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0077> a core:BOMItemRecord ;
+    rdfs:label "M_1301" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/M1301" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0077" ;
+    ebom:hasEngineeringLocalId "M-1301" ;
+    ebom:hasItemDescription "M_1301" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0078> a core:BOMItemRecord ;
+    rdfs:label "M_1401" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/M1401" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0078" ;
+    ebom:hasEngineeringLocalId "M-1401" ;
+    ebom:hasItemDescription "M_1401" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/item/EBOM-0079> a core:BOMItemRecord ;
+    rdfs:label "M_1501" ;
+    core:functionallyAssociatedWith <https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> ;
+    ebom:hasAssetIdentifier "https://aas.example.com/M1501" ;
+    ebom:hasAssociationBasis "SOURCE_NAME_OR_DESCRIPTION_FUNCTIONAL_ASSOCIATION_NOT_PHYSICAL_MEMBERSHIP" ;
+    ebom:hasBOMItemId "EBOM-0079" ;
+    ebom:hasEngineeringLocalId "M-1501" ;
+    ebom:hasItemDescription "M_1501" ;
+    ebom:hasProductIdentifier "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate" ;
+    ebom:hasQuantityBasis "ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasSourceDomain "ECAD" ;
+    ebom:hasSourceGroup "Devices" ;
+    ebom:hasStructureStatus "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> a core:AssemblyRecord ;
+    rdfs:label "TEP Plant" ;
+    ebom:hasBOMItemId "ASM-ROOT" ;
+    ebom:hasItemDescription "TEP Plant" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> a core:AssemblyRecord ;
+    rdfs:label "Condenser Assembly — C-001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-CONDENSER" ;
+    ebom:hasItemDescription "Condenser Assembly — C-001" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-COMPRESSOR> a core:AssemblyRecord ;
+    rdfs:label "Compressor Assembly — K-001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-COMPRESSOR" ;
+    ebom:hasItemDescription "Compressor Assembly — K-001" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-SEPARATOR> a core:AssemblyRecord ;
+    rdfs:label "Separator Assembly — V-001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-SEPARATOR" ;
+    ebom:hasItemDescription "Separator Assembly — V-001" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-REACTOR> a core:AssemblyRecord ;
+    rdfs:label "Reactor Assembly — R-001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-REACTOR" ;
+    ebom:hasItemDescription "Reactor Assembly — R-001" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-STRIPPER> a core:AssemblyRecord ;
+    rdfs:label "Stripper Assembly — S-001" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-STRIPPER" ;
+    ebom:hasItemDescription "Stripper Assembly — S-001" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+
+<https://example.org/dtwise/ebom-v2/assembly/ASM-UNASSIGNED> a core:AssemblyRecord ;
+    rdfs:label "Unassigned Engineering Items" ;
+    core:hasRecordedParent <https://example.org/dtwise/ebom-v2/assembly/ASM-ROOT> ;
+    ebom:hasBOMItemId "ASM-UNASSIGNED" ;
+    ebom:hasItemDescription "Unassigned Engineering Items" ;
+    ebom:hasRevision "UNSPECIFIED" ;
+    ebom:hasStructureStatus "PROVISIONAL_EQUIPMENT_ASSEMBLY_NO_VERIFIED_COMPONENT_BREAKDOWN" .
+

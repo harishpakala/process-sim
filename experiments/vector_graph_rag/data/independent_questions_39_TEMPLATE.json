@@ -1,0 +1,6 @@
+{
+  "dataset_type": "independent_human_annotated",
+  "annotation_protocol": "Write questions without copying ontology predicate names; independently inspect the catalog to assign exactly one supported path ID or ABSTAIN. Document ambiguous cases as ABSTAIN and explain why. Freeze annotations before running any method.",
+  "annotation_provenance": "REPLACE with annotator(s), date, and how labels were verified",
+  "cases": []
+}

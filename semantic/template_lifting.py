@@ -49,6 +49,25 @@ from semantic.ontoutils import (
 )
 
 
+def add_semantic_annotations(graph, source, shape_uri, predicate_uri=None):
+    """Propagate authored AAS descriptions into SHACL and predicate metadata."""
+    from rdflib.namespace import SH
+    name = getattr(source, "id_short", None)
+    if name:
+        graph.add((shape_uri, SH.name, Literal(name)))
+        if predicate_uri is not None:
+            graph.add((predicate_uri, RDFS.label, Literal(name)))
+    for entry in getattr(source, "description", None) or []:
+        language = getattr(entry, "language", None)
+        value = getattr(entry, "text", None)
+        if not value:
+            continue
+        literal = Literal(value, lang=language or None)
+        graph.add((shape_uri, SH.description, literal))
+        if predicate_uri is not None:
+            graph.add((predicate_uri, RDFS.comment, literal))
+
+
 def make_semantic_predicate(
     domain: str,
     id_short: str,
@@ -162,6 +181,8 @@ def lift_template(
         )
     )
 
+    add_semantic_annotations(graph, submodel, template_shape, template_class)
+
     lift_elements(
         graph=graph,
         template_id=template_id,
@@ -181,7 +202,7 @@ def lift_elements(
     domain: str,
 ):
 
-    for element in elements:
+    for element in elements or []:
 
         if isinstance(
             element,
@@ -310,6 +331,11 @@ def lift_property(
         )
     )
 
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
+
+    if element.value_type is not None:
+        graph.add((shape_uri, semanticDict["SH"]["datatype"], map_xsd_datatype(element.value_type)))
+
     min_count, max_count = get_cardinality(
         element
     )
@@ -419,6 +445,8 @@ def lift_range(
             range_class,
         )
     )
+
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
 
     min_count, max_count = get_cardinality(
         element
@@ -531,6 +559,8 @@ def lift_smc(
         )
     )
 
+    add_semantic_annotations(graph, element, shape_uri, property_uri)
+
     min_count, max_count = get_cardinality(element)
 
     add_cardinality_constraints(
@@ -573,6 +603,8 @@ def lift_smc(
             ),
         )
     )
+
+    add_semantic_annotations(graph, element, child_shape)
 
     # IMPORTANT:
     # Do NOT use sh:targetClass aas:SMC here.
@@ -662,89 +694,36 @@ def resolve_model_reference_uri(
 
 def lift_relationship(
     graph: Graph,
-    instance_id: str,
+    template_id: str,
     element,
     parent_path: str,
-    parent_uri: URIRef,
+    parent_shape: URIRef,
     domain: str,
 ):
-    path = build_path(
-        parent_path,
-        element.id_short,
+    """Lift relationship *schema*, not an instance-level relationship assertion.
+
+    The AAS first/second ModelReferences in a template are authored references,
+    not evidence that concrete instance resources are connected. Do not emit
+    instance triples or infer cross-domain mappings from them.
+    """
+    path = build_path(parent_path, element.id_short)
+    predicate = make_semantic_predicate(domain, element.id_short)
+    shape_uri = compute_uri(template_id, path + "/shape")
+    relationship_class = ensure_aas_class(
+        graph, "RelationshipElement", "AAS Relationship Element"
     )
 
-    element_uri = compute_uri(
-        instance_id,
-        path,
-    )
+    graph.add((predicate, RDF.type, OWL.ObjectProperty))
+    graph.add((shape_uri, RDF.type, semanticDict["SH"]["PropertyShape"]))
+    graph.add((shape_uri, RDFS.label, Literal(make_shape_label(element.id_short))))
+    graph.add((shape_uri, semanticDict["SH"]["path"], predicate))
+    graph.add((shape_uri, semanticDict["SH"]["class"], relationship_class))
+    graph.add((parent_shape, semanticDict["SH"]["property"], shape_uri))
 
-    graph.add(
-        (
-            element_uri,
-            RDF.type,
-            semanticDict["AAS"]["RelationshipElement"],
-        )
-    )
-
-    graph.add(
-        (
-            element_uri,
-            RDFS.label,
-            Literal(
-                element.id_short
-            ),
-        )
-    )
-
-    predicate = make_semantic_predicate(
-        domain,
-        element.id_short,
-    )
-
-    graph.add(
-        (
-            parent_uri,
-            predicate,
-            element_uri,
-        )
-    )
-
-    if element.first is not None:
-
-        first_uri = resolve_model_reference_uri(
-            element.first,
-            instance_id,
-        )
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["AAS"]["first"],
-                first_uri,
-            )
-        )
-
-    if element.second is not None:
-
-        second_uri = resolve_model_reference_uri(
-            element.second,
-            instance_id,
-        )
-
-        graph.add(
-            (
-                element_uri,
-                semanticDict["AAS"]["second"],
-                second_uri,
-            )
-        )
-
-    lift_semantic_id(
-        graph,
-        instance_id,
-        element,
-        path,
-    )
+    add_semantic_annotations(graph, element, shape_uri, predicate)
+    min_count, max_count = get_cardinality(element)
+    add_cardinality_constraints(graph, shape_uri, min_count, max_count)
+    lift_semantic_id(graph, template_id, element, path)
 
 
 def build_template_graph(
@@ -862,6 +841,8 @@ if __name__ == "__main__":
     parser.add_argument("--domain", help="Domain for --input")
     parser.add_argument("--output", type=Path, help="Single Turtle output path")
     parser.add_argument("--push", action="store_true", help="Publish to GraphDB (off by default)")
+    parser.add_argument("--dtwise-output", type=Path, help="Directory for DTWise unified concept and relationship TTL catalogs (default: alongside batch outputs)")
+    parser.add_argument("--no-dtwise", action="store_true", help="Skip DTWise catalog generation")
     args = parser.parse_args()
     if args.input and not args.domain:
         parser.error("--domain is required when --input is supplied")
@@ -870,6 +851,7 @@ if __name__ == "__main__":
     jobs = [(args.domain, args.input)] if args.input else [(domain, template) for domain, template, _ in TARGETS]
     OUTPUT.mkdir(parents=True, exist_ok=True)
     failures = []
+    lifted_domain_graphs = []
     for domain, filename in jobs:
         try:
             with filename.open(encoding="utf-8") as stream:
@@ -879,10 +861,19 @@ if __name__ == "__main__":
             destination.parent.mkdir(parents=True, exist_ok=True)
             graph.serialize(destination=str(destination), format="turtle")
             print(f"[OK] {domain}: {len(graph)} template triples -> {destination}")
+            lifted_domain_graphs.append((domain, graph))
             if args.push:
                 push_graph_to_graphdb(graph, compute_uri(template.id))
         except Exception as exc:
             failures.append((domain, str(exc)))
             print(f"[FAILED] {domain}: {exc}")
     if failures:
-        raise SystemExit(f"{len(failures)} template lifting job(s) failed")
+        raise SystemExit(f"{len(failures)} template lifting job(s) failed; DTWise catalogs not generated")
+    if lifted_domain_graphs and not args.no_dtwise:
+        from semantic.dtwise_index import write_dtwise_catalog
+        catalog_dir = args.dtwise_output or OUTPUT / "dtwise"
+        catalog_paths = write_dtwise_catalog(lifted_domain_graphs, catalog_dir)
+        for catalog_path in catalog_paths:
+            print(f"[OK] DTWise catalog -> {catalog_path}")
+        if args.input:
+            print("[NOTE] DTWise catalog covers only the selected input template; run batch lifting for all domains.")

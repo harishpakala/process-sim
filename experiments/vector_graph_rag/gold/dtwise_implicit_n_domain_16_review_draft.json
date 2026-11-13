@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "status": "provisional_review_required",
+  "purpose": "Implicit-domain paraphrases of 16 N-domain cases for retrieval-only domain selection ablation",
+  "notes": [
+    "Questions are author-generated paraphrases, not independently validated.",
+    "Gold domain sets and expected planning decisions are used for scoring only.",
+    "Domain names are intentionally replaced by descriptive terms; ambiguous descriptions may require expert review.",
+    "No inferred instance identity or unapproved cross-domain joins."
+  ],
+  "cases": [
+    {
+      "id": "IMP01",
+      "source_case_id": "ND01",
+      "question": "Which engineering bill-of-materials records correspond to electrical design devices by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP02",
+      "source_case_id": "ND02",
+      "question": "Which electrical design devices match engineering bill-of-materials records by asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP03",
+      "source_case_id": "ND03",
+      "question": "Which engineering bill-of-materials records, electrical design devices, and process engineering equipment share an asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP04",
+      "source_case_id": "ND04",
+      "question": "Which process engineering functions correspond to electrical design devices and engineering bill-of-materials records?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP05",
+      "source_case_id": "ND05",
+      "question": "Which engineering bill-of-materials records, electrical design devices, process engineering objects, and registered inventory assets share an asset identifier?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP06",
+      "source_case_id": "ND06",
+      "question": "Which registered inventory assets correspond to process engineering equipment, electrical design devices, and engineering bill-of-materials records?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "dexpi",
+        "assetinventory"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "ready",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP07",
+      "source_case_id": "ND07",
+      "question": "Which electrical design devices correspond to process engineering equipment?",
+      "expected_domains": [
+        "ecad",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP08",
+      "source_case_id": "ND08",
+      "question": "Which engineering bill-of-materials records correspond to registered inventory assets?",
+      "expected_domains": [
+        "engineeringbom",
+        "assetinventory"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP09",
+      "source_case_id": "ND09",
+      "question": "Which catalog products correspond to electrical design devices?",
+      "expected_domains": [
+        "productcatalog",
+        "ecad"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP10",
+      "source_case_id": "ND10",
+      "question": "Which industrial communication endpoints correspond to process engineering equipment?",
+      "expected_domains": [
+        "opcuaconnectivity",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP11",
+      "source_case_id": "ND11",
+      "question": "Which engineering bill-of-materials records correspond to process engineering equipment?",
+      "expected_domains": [
+        "engineeringbom",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP12",
+      "source_case_id": "ND12",
+      "question": "Which catalog products correspond to registered inventory assets and electrical design devices?",
+      "expected_domains": [
+        "productcatalog",
+        "assetinventory",
+        "ecad"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP13",
+      "source_case_id": "ND13",
+      "question": "Which engineering bill-of-materials records, electrical design devices, and registered inventory assets correspond?",
+      "expected_domains": [
+        "engineeringbom",
+        "ecad",
+        "assetinventory"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP14",
+      "source_case_id": "ND14",
+      "question": "Which electrical design devices, process engineering equipment, and industrial communication endpoints correspond?",
+      "expected_domains": [
+        "ecad",
+        "dexpi",
+        "opcuaconnectivity"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP15",
+      "source_case_id": "ND15",
+      "question": "Which catalog products, engineering bill-of-materials records, electrical design devices, and process engineering equipment correspond?",
+      "expected_domains": [
+        "productcatalog",
+        "engineeringbom",
+        "ecad",
+        "dexpi"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    },
+    {
+      "id": "IMP16",
+      "source_case_id": "ND16",
+      "question": "Which electrical design devices, process engineering equipment, registered inventory assets, and industrial communication endpoints correspond?",
+      "expected_domains": [
+        "ecad",
+        "dexpi",
+        "assetinventory",
+        "opcuaconnectivity"
+      ],
+      "expected_strict_status": "abstained",
+      "expected_exploratory_status": "abstained",
+      "review_status": "pending_independent_review"
+    }
+  ]
+}

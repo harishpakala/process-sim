@@ -1,0 +1,52 @@
+[
+  {
+    "question": "Which electrical devices correspond to process equipment?",
+    "expected_domains": [
+      "dexpi",
+      "ecad"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "ecad",
+        "uri": "https://example.org/ecad/hasDevice"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipment"
+      }
+    ]
+  },
+  {
+    "question": "Which engineering components have inventory representations?",
+    "expected_domains": [
+      "assetinventory",
+      "engineeringbom"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "engineeringbom",
+        "uri": "https://example.org/engineeringbom/hasBOMItemRecord"
+      },
+      {
+        "domain": "assetinventory",
+        "uri": "https://example.org/assetinventory/hasAsset"
+      }
+    ]
+  },
+  {
+    "question": "Which process instruments are associated with equipment?",
+    "expected_domains": [
+      "dexpi"
+    ],
+    "gold_concepts": [
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasInstrumentationFunction"
+      },
+      {
+        "domain": "dexpi",
+        "uri": "https://example.org/dexpi/hasEquipment"
+      }
+    ]
+  }
+]

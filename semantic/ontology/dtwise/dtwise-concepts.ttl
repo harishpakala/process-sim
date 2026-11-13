@@ -1,0 +1,2456 @@
+@prefix dtwise: <https://example.org/dtwise/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+<https://example.org/dtwise/concept/00a0146666c0c931d7ffe1cc9638bb5b632c5270984b6e15b06d5b29352a4701> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerPartNumber constraint" ;
+    sh:description "Part number assigned by the product manufacturer."@en ;
+    sh:name "ManufacturerPartNumber" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQYXJ0TnVtYmVyL3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/00a711a88e16c0dafbba8bb02955a284291ff6cda1deefd8d11ce736bf21ebc9> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier constraint" ;
+    sh:description "Identifier of the product associated with the asset; distinct from the asset identifier."@en ;
+    sh:name "ProductIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/01969777de7f8cd17e822992f6b06ef4b5dd77b602b40ce51bed2eae16b1fdf2> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunctions SHACL shape" ;
+    sh:description "Collection of instrumentation functions."@en ;
+    sh:name "InstrumentationFunctions" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/01a4e6bc599115cd309e48080ee1e60482484900a53555606c5b549bc9ff7004> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerName",
+        "hasManufacturerName" ;
+    rdfs:comment "Name of the product manufacturer."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasManufacturerName> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/02c08dff524be2fd79444a8ad97a4c11ad8d8b4e63843368d28dc5111aad037b> a dtwise:ConceptRecord ;
+    rdfs:label "Devices",
+        "hasDevices" ;
+    rdfs:comment "Collection of electrical devices represented in the ECAD model."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasDevices> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/033d7c1b779a1d84b6316656e61a0b6a5b5c9345f0eaab087c4f3d62d3883baa> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus",
+        "hasCrossDomainAssociationStatus" ;
+    rdfs:comment "Recorded status of an association to information in another domain."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasCrossDomainAssociationStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/03c7993a402792aa4f9bc1505961d3f7527e5b4fc62c7c1d863c7f926257a4e2> a dtwise:ConceptRecord ;
+    rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
+    sh:name "Address" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/06b7293af9283920332959515331971021f4a2529bc054a6afd76c66c5639a8f> a dtwise:ConceptRecord ;
+    rdfs:label "EndPoint SHACL shape" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/071304e57bc0f95b96667f0def176fa8c772934eb669f094d0a0c359421c538b> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItems",
+        "hasBOMItems" ;
+    rdfs:comment "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasBOMItems> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/096f20fb6edb5c4c81b4baca0b7b491db0efcc18d5f90e263b0763ca2379e7b9> a dtwise:ConceptRecord ;
+    rdfs:label "Assets SHACL shape" ;
+    sh:description "Collection of inventory asset records."@en ;
+    sh:name "Assets" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/09f53a9a75fda4f6d6e64d7334343f4ef72d137e8ed4e8fe6cd641c6163e8d4c> a dtwise:ConceptRecord ;
+    rdfs:label "MappingStatus constraint" ;
+    sh:description "Status of the engineering-to-OPC-UA signal mapping."@en ;
+    sh:name "MappingStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/0a38edaa38ee604af666be9293c6859c891b7ac840dbe2b7e2e697783c373834> a dtwise:ConceptRecord ;
+    rdfs:label "Device SHACL shape" ;
+    sh:description "Electrical device represented in the engineering design."@en ;
+    sh:name "Device" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/0c02b9fbefdc7e29c5dfc06cb0b05154470ddca87bfbc3ae9ee7ff4471526461> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification recorded for the asset."@en ;
+    sh:name "EngineeringInterpretationNote" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/0d1d728008ebccf43d1c8880192d10cb67601b2e22ce7706cf99b1a25000e670> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association with information in another engineering domain."@en ;
+    sh:name "CrossDomainAssociationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/0d26e4cb85b448fa2e2a75b6858f112ee00f1d07747b2df6102a8255e723c31f> a dtwise:ConceptRecord ;
+    rdfs:label "Products SHACL shape" ;
+    sh:description "Collection of catalog product records."@en ;
+    sh:name "Products" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/0de91e172c49fd3c8431d613c46a31088d4e7324d76e329b379d43ec450d9f1e> a dtwise:ConceptRecord ;
+    rdfs:label "ProductVerificationEvidence constraint" ;
+    sh:description "Recorded evidence supporting product verification."@en ;
+    sh:name "ProductVerificationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/0f0543262466a00d89f8deacf12ebf9e9238203c6bec9b55ec069a85bdc880c0> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunction SHACL shape" ;
+    sh:description "Function that actuates or manipulates a process variable."@en ;
+    sh:name "ActuatingFunction" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/0f80264b56f6c3f1fde3fcd4f257f03cfcf01b6218ddc93e68897825bcd7a249> a dtwise:ConceptRecord ;
+    rdfs:label "Symbol SHACL shape" ;
+    sh:description "Graphical or logical symbol representing an electrical design element."@en ;
+    sh:name "Symbol" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/107d06e296835e1b2cd6a65eacfe4eabfc2cc3c357cebbdeaa6b02ea6214df25> a dtwise:ConceptRecord ;
+    rdfs:label "SourceField constraint" ;
+    sh:description "Name of the source field supplying the functional association."@en ;
+    sh:name "SourceField" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlRmllbGQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/109a0e8b53c450b954390c3d93f1ff0030d0b7c8d22369e502a04eca8faf10e5> a dtwise:ConceptRecord ;
+    rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/117b42ed14f9458aa54b70ead9cf21f9427c8a7f78d2965cbb935413be084b28> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification of the represented association."@en ;
+    sh:name "EngineeringInterpretationNote" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/11f8155744512d3c63e6adb86fbf9f11f2465bbf00527652404b8af4095e2fa2> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Recorded evidence supporting a cross-domain association."@en ;
+    sh:name "CrossDomainAssociationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/12859c014b90fdb3db1e29f19fa594e811044d60868a3976c65593b85ebdfbc2> a dtwise:ConceptRecord ;
+    rdfs:label "ModelingStatus constraint" ;
+    sh:description "Recorded status of modeling activities for the asset."@en ;
+    sh:name "ModelingStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/1325c8551983db6a86543764ef52842630077d1799253970df4cffa91b7e9515> a dtwise:ConceptRecord ;
+    rdfs:label "StructureStatus",
+        "hasStructureStatus" ;
+    rdfs:comment "Source-recorded status of the BOM item within the engineering structure."@en,
+        "Source-recorded status of the functional association."@en,
+        "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary."@en,
+        "Source-recorded structural status of the parent reference."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasStructureStatus> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/1327e8e3924edc24ca7579ed287ba9a22326082916841e4900b0a189122f684e> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMappings SHACL shape" ;
+    sh:description "Collection of mappings between engineering signals and OPC UA nodes."@en ;
+    sh:name "SignalMappings" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/13a59b637057671b44a86d82b3177cff38ebed7c70fb8a78782ea43bb889d89a> a dtwise:ConceptRecord ;
+    rdfs:label "MappingBasis",
+        "hasMappingBasis" ;
+    rdfs:comment "Evidence or method used to establish the signal mapping."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasMappingBasis> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/149833de6f3cce3a684a10eea57f022c830890ad16388e006dcde83a9b7500b5> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringLocalId constraint" ;
+    sh:description "Local identifier assigned by the source engineering system to this BOM item."@en ;
+    sh:name "EngineeringLocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5FbmdpbmVlcmluZ0xvY2FsSWQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/14bb470be378b3ffcb614546711faa6887f2974a9b22629c04d5b225898b06ce> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus",
+        "hasCrossDomainAssociationStatus" ;
+    rdfs:comment "Recorded status of an association to another engineering domain."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasCrossDomainAssociationStatus> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/14f15a4e1acbbc2089b03f9b4dd0dff04a1862378b6978b3fdd9fee4c59c73c6> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMapping SHACL shape" ;
+    sh:description "Association between an engineering signal and an OPC UA address-space node."@en ;
+    sh:name "SignalMapping" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/169601e0ae034b7b86c6ac747e724536f637cddbd379f2058ecd290d516d773f> a dtwise:ConceptRecord ;
+    rdfs:label "EndpointUrl constraint" ;
+    sh:description "Network endpoint URL used to connect to the OPC UA server."@en ;
+    sh:name "EndpointUrl" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/180c580a08d3cff676cc250c02f281f8ee0a904cc3ab666ef0b8dbb722c8d2eb> a dtwise:ConceptRecord ;
+    rdfs:label "Symbols SHACL shape" ;
+    sh:description "Collection of schematic symbols."@en ;
+    sh:name "Symbols" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/192d6a182e2650db570bb7f57ac4af339e39285d0e2918ca46f59ab0d0aaf76b> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperty constraint" ;
+    sh:description "Technical characteristic recorded for the catalog product."@en ;
+    sh:name "TechnicalProperty" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/1b1a15e3d3385be54b4c55ec680b1aa89cddb6bc86cc3a47f9beea6fb7134754> a dtwise:ConceptRecord ;
+    rdfs:label "EquipmentTag",
+        "hasEquipmentTag" ;
+    rdfs:comment "Equipment tag assigned to the asset in engineering or plant documentation."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasEquipmentTag> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/1cc8866eb4e8de1d4b5589aa76d6cce5723612cca739dd1e1743aaa1c06b2025> a dtwise:ConceptRecord ;
+    rdfs:label "Revision constraint" ;
+    sh:description "Source-recorded revision designation for the assembly entry."@en ;
+    sh:name "Revision" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/1d8d1664019d2fff170abb466fce4a0f7586c668e1f54395718c96dbb5f38493> a dtwise:ConceptRecord ;
+    rdfs:label "AssemblyRecord",
+        "hasAssemblyRecord" ;
+    rdfs:comment "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasAssemblyRecord> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/1e171e77a5fc93e354db90e03bcbbb3cc5b170f0e9e873fe4747635d470f7f07> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering note documenting interpretation or uncertainty about this mapping."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/1f71a7f97ddc5ebc0372e1d33c9802eab0f00d978a2287dbbf5d46902916d823> a dtwise:ConceptRecord ;
+    rdfs:label "Equipments constraint" ;
+    sh:description "Collection of process equipment representations."@en ;
+    sh:name "Equipments" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/1fdbbde6b1c121704f6254e93adab2c76931b90f8b94957250a94ad3e54238a9> a dtwise:ConceptRecord ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:description "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."@en ;
+    sh:name "RecordedParent" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2001fa382552df35a74037ec6ff6613431f783b63510593ca68dd1bd45e580c0> a dtwise:ConceptRecord ;
+    rdfs:label "SupplierPartNumber",
+        "hasSupplierPartNumber" ;
+    rdfs:comment "Part number assigned by the supplier."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasSupplierPartNumber> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/20a9a01d849ae127fbaec7bc793de2f575b33336f38839c243971173fe8f1b3c> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkxvY2FsSWQvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/21796b651a58d177a50eb0d861706db0bc6c3f6988a96458837c04e9b2b57500> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSPreferredName constraint" ;
+    sh:description "Preferred name of the assigned ECLASS classification."@en ;
+    sh:name "ECLASSPreferredName" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NQcmVmZXJyZWROYW1lL3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/22dc2fa336eaff7110cef451786890925b1a35dabe54768c77d9ac0a314b74f4> a dtwise:ConceptRecord ;
+    rdfs:label "TEP_EngineeringBOM_V2_Template" ;
+    rdfs:comment "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/236032ad340009f16e7be5347370e7684aea10e35df2fb1fd502b1d4c6521495> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier",
+        "hasRelatedAssetIdentifier" ;
+    rdfs:comment "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasRelatedAssetIdentifier> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/23b82cbf94104b27025e845288f9d70e85a40c4b3c35786348adc433570484be> a dtwise:ConceptRecord ;
+    rdfs:label "ProductVerificationStatus constraint" ;
+    sh:description "Recorded status of verification against product information."@en ;
+    sh:name "ProductVerificationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/25819f12973465e651d6e098e3523e6713b79f9ef591655736c7f75d9027630d> a dtwise:ConceptRecord ;
+    rdfs:label "MonitoringStatus constraint" ;
+    sh:description "Recorded status of monitoring activities for the asset."@en ;
+    sh:name "MonitoringStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/27a98f6074d2f0de26506cb63209caa35b1c718c9825fac71ca818b548017bc8> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier constraint" ;
+    sh:description "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."@en ;
+    sh:name "ProductIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/27bbe8a2105a6a8c5d94ae33645889fcfd7dc2eafbab6132aa2cc319182cde79> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/28973947bf54615b44a3003af3c02027750aa1786959c3769c2e344740b78f36> a dtwise:ConceptRecord ;
+    rdfs:label "EndPoint SHACL shape" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/29c1a01f50e45946b7b8a23ff278d1109e94028ffc8eccd63965e4ce97735f1a> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReference constraint" ;
+    sh:description "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en ;
+    sh:name "ParentReference" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2a4949da31aff8039d7eeb4f98dfd7c7cf09b628beabf43aaac7922fa2af0c85> a dtwise:ConceptRecord ;
+    rdfs:label "Symbols constraint" ;
+    sh:description "Collection of schematic symbols."@en ;
+    sh:name "Symbols" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2aa9c34105c070017ade88156008a1895a66de56014b55a5de5c8e31cc61081d> a dtwise:ConceptRecord ;
+    rdfs:label "EndpointStatus",
+        "hasEndpointStatus" ;
+    rdfs:comment "Status of the OPC UA server endpoint."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasEndpointStatus> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/2b917216cf35cea36fe849e3ecf5e6e2bc8e5a61b9ed4480f623d4a4dfc45958> a dtwise:ConceptRecord ;
+    rdfs:label "ProductVerificationStatus",
+        "hasProductVerificationStatus" ;
+    rdfs:comment "Recorded status of verification against product information."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasProductVerificationStatus> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/2bafb690ea935bab51121c900e6ae393455f76f5bc2e278c4e1e951b286b2a39> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence",
+        "hasCrossDomainAssociationEvidence" ;
+    rdfs:comment "Recorded evidence supporting a cross-domain association."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasCrossDomainAssociationEvidence> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/2c2adf476e531be46960854e5bbf2a4651039684c513ca0abc9c80dc2dbdd722> a dtwise:ConceptRecord ;
+    rdfs:label "Server SHACL shape" ;
+    sh:description "An OPC UA server connection and its endpoint metadata."@en ;
+    sh:name "Server" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/2d1fc68717ffc11e1dc44290b283a88004f905e93da29bba1b12aace4aa6db1e> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier of the asset associated with this signal mapping."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2dd45d7cde8a5ccbf120f68d70cd0cf0bcf405d4d6957f364b9063649229905b> a dtwise:ConceptRecord ;
+    rdfs:label "SourceGroup constraint" ;
+    sh:description "Source grouping or category assigned to the BOM item."@en ;
+    sh:name "SourceGroup" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VHcm91cC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2f09faa99612427aaecea11e30028c5fb39b29336cc4b48b54cf8e9c9fe562a1> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMappings constraint" ;
+    sh:description "Collection of mappings between engineering signals and OPC UA nodes."@en ;
+    sh:name "SignalMappings" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2f5ed132fc428f6f3086f2dc3f1a844080ee90e25d13c808ffaeb1c52a27aff8> a dtwise:ConceptRecord ;
+    rdfs:label "AssetType constraint" ;
+    sh:description "Recorded type or category of the asset."@en ;
+    sh:name "AssetType" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/2f79cc5288b91eb31f64796249bef48376d908986c00efe16bc709338707f386> a dtwise:ConceptRecord ;
+    rdfs:label "AssociationBasis constraint" ;
+    sh:description "Source-provided basis or evidence category for this functional association."@en ;
+    sh:name "AssociationBasis" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uQXNzb2NpYXRpb25CYXNpcy9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/34de2d9e56906044a30f50a84b0a2a61b50fa2f1a78ec1d7c4f5d24335d03549> a dtwise:ConceptRecord ;
+    rdfs:label "Devices SHACL shape" ;
+    sh:description "Collection of electrical devices represented in the ECAD model."@en ;
+    sh:name "Devices" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/361ac962ba44b49cf89da517d4eec4dd55731e945e68662b6616def09679774d> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/36282f766f8f25becc5906909765ede1f61802a6dafd43c0554036ab44a92b3e> a dtwise:ConceptRecord ;
+    rdfs:label "FaultInjectionStatus constraint" ;
+    sh:description "Recorded status of fault injection activities for the asset."@en ;
+    sh:name "FaultInjectionStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/364183db1b27adec0f43014562032f59cda9e967b6b12fe2538d130d0afd376e> a dtwise:ConceptRecord ;
+    rdfs:label "Product",
+        "hasProduct" ;
+    rdfs:comment "Catalog record describing an identified product."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasProduct> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/36752cd63d35f5542f7cd2f57c3a6f2ba4b4a311a4c4f390f1db3bf10f4b0037> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReference",
+        "hasParentReference" ;
+    rdfs:comment "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasParentReference> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/374b450b028d4d1d12afdfe0d17f034e9e3765599719c23ce80e7e256d0e20a9> a dtwise:ConceptRecord ;
+    rdfs:label "PLCEndPoint constraint" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/37a9d6e70040e4e1642c70bccb5889a8de12750651b403bf886fab6b0371c43b> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier constraint" ;
+    sh:description "Identifier of the catalog product; distinct from an installed asset identifier."@en ;
+    sh:name "ProductIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/3a296767e3c24b9193c60037cddd043fd962a5b7c8f25a562b62110997b8a3f6> a dtwise:ConceptRecord ;
+    rdfs:label "Assemblies",
+        "hasAssemblies" ;
+    rdfs:comment "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasAssemblies> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/3a4158124950b3d12322ebaca14a2489cc2479b245bd318491a3977a083207af> a dtwise:ConceptRecord ;
+    rdfs:label "Equipment SHACL shape" ;
+    sh:description "Process equipment item identified in the DEXPI engineering model."@en ;
+    sh:name "Equipment" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/3c0a1633187934378ee119625aaa0bb278952c360ccb09f1efd29fb286e51405> a dtwise:ConceptRecord ;
+    rdfs:label "PLCEndPoint",
+        "hasPLCEndPoint" ;
+    rdfs:comment "Connection endpoint associated with a programmable logic controller."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasPLCEndPoint> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/3f17a1484cc58a2e468bca4da2f7b295ef7304ddfb025058f21d19ba55c36f32> a dtwise:ConceptRecord ;
+    rdfs:label "AssetName constraint" ;
+    sh:description "Human-readable name of the asset."@en ;
+    sh:name "AssetName" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/4002af37a1a56b37ed5aac024551f79f0dee7fffdc49af63b7d5a6473a4639a4> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier associated with the represented asset."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasAssetIdentifier> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/4209df836162512def1142a3917906683ae4d53d6eca392ad44e39c24aba3a0f> a dtwise:ConceptRecord ;
+    rdfs:label "SourceGroup",
+        "hasSourceGroup" ;
+    rdfs:comment "Source grouping or category assigned to the BOM item."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasSourceGroup> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/426819148fe50c0a382088eca895b69b8f63045e5efc576e29a214fee0db1f4c> a dtwise:ConceptRecord ;
+    rdfs:label "AssemblyRecord constraint" ;
+    sh:description "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en ;
+    sh:name "AssemblyRecord" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/42864f0d32b4b5a2736abcb33091532de876f84875c96e6dd5da7b0091e072f5> a dtwise:ConceptRecord ;
+    rdfs:label "SupplierName constraint" ;
+    sh:description "Name of the product supplier."@en ;
+    sh:name "SupplierName" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/42bf294b94abba18d0c1e9fe2e479c17682d82c6cc9098002d1b827f7a0aafe3> a dtwise:ConceptRecord ;
+    rdfs:label "Asset constraint" ;
+    sh:description "Inventory record for an identified asset."@en ;
+    sh:name "Asset" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/43c62ffba0de845de3fc39f0d2f3a3553e4053733f9ae64e4991900fe77f55c3> a dtwise:ConceptRecord ;
+    rdfs:label "OPCUABrowsePath",
+        "hasOPCUABrowsePath" ;
+    rdfs:comment "OPC UA browse path used to locate the mapped node."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasOPCUABrowsePath> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/441319cb419d330c7cfcc18d059b7c9ba52c8af6b06adfef8b6023ef45e5dc69> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReferences constraint" ;
+    sh:description "Collection of source-derived records documenting parent references in the engineering BOM."@en ;
+    sh:name "ParentReferences" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/452836d3387e5d38c2414ab702d39be742c357a5f028941000c4325d8982254a> a dtwise:ConceptRecord ;
+    rdfs:label "ECADConnectionPointReferenceStatus constraint" ;
+    sh:description "Status of the reference to an ECAD connection point."@en ;
+    sh:name "ECADConnectionPointReferenceStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/45643ecb417a2f48255704838b447721b97add30987747d67b668899c8e26780> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringVerificationEvidence",
+        "hasEngineeringVerificationEvidence" ;
+    rdfs:comment "Recorded evidence supporting engineering verification."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasEngineeringVerificationEvidence> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/464f8b89170e91157f9b8d2a4a8f62244aae8bfcc2b7e0d914fca249fe30b038> a dtwise:ConceptRecord ;
+    rdfs:label "Asset SHACL shape" ;
+    sh:description "Inventory record for an identified asset."@en ;
+    sh:name "Asset" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/46e8e0768241616241b2213c1027a906cc24cf5712a4249d0452f37a44641710> a dtwise:ConceptRecord ;
+    rdfs:label "ProductCatalog SHACL shape" ;
+    sh:description "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."@en ;
+    sh:name "ProductCatalog" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/47033b6d00a224d9382d44766542fb5f56a3a1c2bdd882644584b32b79763eb9> a dtwise:ConceptRecord ;
+    rdfs:label "Asset",
+        "hasAsset" ;
+    rdfs:comment "Inventory record for an identified asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasAsset> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/48176c7e6c4c410fa8c381bab367817ab33a68c94b657a607374723d4ebac507> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunction",
+        "hasInstrumentationFunction" ;
+    rdfs:comment "Function that measures or observes a process variable."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasInstrumentationFunction> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/496f5ccf2f9cabe0ddc6df2fcc5fee6f5b412a0fe3d7005c80fb73378329a7d7> a dtwise:ConceptRecord ;
+    rdfs:label "Product constraint" ;
+    sh:description "Catalog record describing an identified product."@en ;
+    sh:name "Product" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/49f5ee9cbb9be0dac3114849291058fe3137697f67c72ef0f4eef3c54251b21d> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringVerificationStatus constraint" ;
+    sh:description "Recorded status of engineering verification for the device."@en ;
+    sh:name "EngineeringVerificationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/4ada9c6672bf3dd2d2ab8118ee979f012b0c3605522be90a64f1c809c0c5ed45> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerPartNumber",
+        "hasManufacturerPartNumber" ;
+    rdfs:comment "Part number assigned by the product manufacturer."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasManufacturerPartNumber> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/4b20a0f0f2f1271d365edda749e9bc042f30de1918d94d3400a59d32caf45b8e> a dtwise:ConceptRecord ;
+    rdfs:label "Connections",
+        "hasConnections" ;
+    rdfs:comment "Collection of connections between schematic elements."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasConnections> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/4b95e4ed6c1c9337dcc9764372f3f942927cc866b3e6f694864e3e8868120096> a dtwise:ConceptRecord ;
+    rdfs:label "ModelingStatus",
+        "hasModelingStatus" ;
+    rdfs:comment "Recorded status of modeling activities for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasModelingStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/4bc5440639c3b944524dbee45ee55f1c4f7c098d79b6b981c2a9ab3cb2c8b1d8> a dtwise:ConceptRecord ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:description "Source-recorded status of the BOM item within the engineering structure."@en ;
+    sh:name "StructureStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/4be6ad53ad2a5074d65413d7672e2e57dad3f5ff0e94852bc3ac0421ab630fab> a dtwise:ConceptRecord ;
+    rdfs:label "SourceRecordId",
+        "hasSourceRecordId" ;
+    rdfs:comment "Identifier of the source record supporting this functional association."@en,
+        "Identifier of the source record supporting this parent reference."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasSourceRecordId> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/4c2a2b3a682348cc16a9342d301a8cab57e6c64f496a6cbd9171b42ce72bf662> a dtwise:ConceptRecord ;
+    rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/4d45921e931c210fc9fbe2208457d2523bed68a2e265ef67cee304a47a0cfb37> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItems constraint" ;
+    sh:description "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en ;
+    sh:name "BOMItems" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/4e2c7c81bac43cef3cdcbcacf2d5562c47bc6c00a512abfc363dc37bf1e8d5c8> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunction",
+        "hasActuatingFunction" ;
+    rdfs:comment "Function that actuates or manipulates a process variable."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasActuatingFunction> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/4f2b4d92682b3849a84c206e3e0189780b6b051357114ceb4b4ec6ccfd525163> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerProductDesignation",
+        "hasManufacturerProductDesignation" ;
+    rdfs:comment "Product designation assigned by the manufacturer."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasManufacturerProductDesignation> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/500a63948af17898409480a7561426f70510951a99a2f73aaa9a80524e438181> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/510fb75ed6ef90bf4d3abb3f789fd7daa8be4bb53d87e9e29a533be69a652742> a dtwise:ConceptRecord ;
+    rdfs:label "AAS Relationship Element" ;
+    dtwise:refersTo <https://example.org/aas/RelationshipElement> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/52e488039cc4d7c6c73ff12227afd938f8ff3fc91c1d017b77caac3f1b978e7c> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemRecord constraint" ;
+    sh:description "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en ;
+    sh:name "BOMItemRecord" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5605f8b68464f88068d456a1ae36fa7d3e7dd781274d0991b2150599b4c3bf9e> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringFunctionReference",
+        "hasEngineeringFunctionReference" ;
+    rdfs:comment "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasEngineeringFunctionReference> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/56ad5a7f538bd72f577f56f34e0146f39b79c554d56e3fa1e12b689450285eaa> a dtwise:ConceptRecord ;
+    rdfs:label "SourceField constraint" ;
+    sh:description "Name of the source field supplying this parent reference."@en ;
+    sh:name "SourceField" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlRmllbGQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/59518ebab5d6b2595e794f04fc071b4fdb26cf952c769a2e528d227d244fe803> a dtwise:ConceptRecord ;
+    rdfs:label "Equipments SHACL shape" ;
+    sh:description "Collection of process equipment representations."@en ;
+    sh:name "Equipments" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/5956f3a67d3814b965983544def4c01210302e5a5e4659319645a04d5997f7d2> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/597077b41aa444edd31b0ba8f5590a79e69e09bc1e8d433d33370f04223d2a6d> a dtwise:ConceptRecord ;
+    rdfs:label "Symbol",
+        "hasSymbol" ;
+    rdfs:comment "Graphical or logical symbol representing an electrical design element."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasSymbol> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/59954712acc01107c64e09f91f319414080b1fe18934da143bb235c18be75654> a dtwise:ConceptRecord ;
+    rdfs:label "Assemblies SHACL shape" ;
+    sh:description "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en ;
+    sh:name "Assemblies" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/59c186181c00a78fbe338e3c60484e6f62da09a8c17c6c35b8966bf4ec36955a> a dtwise:ConceptRecord ;
+    rdfs:label "Assets",
+        "hasAssets" ;
+    rdfs:comment "Collection of inventory asset records."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasAssets> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/5a58567295afadf1eb2fca7e77314cff2622cf62ab9dbabce14fd9e6ae7d9133> a dtwise:ConceptRecord ;
+    rdfs:label "EquipmentTag constraint" ;
+    sh:description "Equipment tag assigned to the asset in engineering or plant documentation."@en ;
+    sh:name "EquipmentTag" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5a67e5c8c489993a740fc9fa45f146b0d8cee85e1f38fe9d123f575e7e1965e0> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunctions SHACL shape" ;
+    sh:description "Collection of process actuation functions."@en ;
+    sh:name "ActuatingFunctions" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/5aa27fb3ed7d588f5a6acafefe59bea5b49e9727e2b5caed9911f8a9157746bc> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociation constraint" ;
+    sh:description "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en ;
+    sh:name "FunctionalAssociation" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5afe7457a7f10600380f3f02223b6573b56e921586ba69089f3cb2dc1cdb189b> a dtwise:ConceptRecord ;
+    rdfs:label "NamespaceURI",
+        "hasNamespaceURI" ;
+    rdfs:comment "Namespace URI identifying an OPC UA namespace."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasNamespaceURI> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/5bb7a92bdcac1248328eaeee2cf6d73752f81e18d938f0f925d8802ffe0f6802> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of an asset related to the inventory asset."@en ;
+    sh:name "RelatedAssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5bcf24d18dbaeb046da43da4e3675ee531bbfb9e48beb6c5be3196857899acda> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier",
+        "hasProductIdentifier" ;
+    rdfs:comment "Product identifier recorded against the BOM item; catalog correspondence requires independent evidence."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasProductIdentifier> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/5c0b68f04a37407fa976bf6210b4143893c5f84052ff779ce3459d0e1813b2f2> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReference SHACL shape" ;
+    sh:description "Source-derived parent-reference record with provenance, structural status, and explicit relationship information."@en ;
+    sh:name "ParentReference" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2Uvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/5c92fc230418a4b3416ed7989d912b295a16e892e02673b9e808e33b5672d1ac> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5d8af992d729f7e39c485553d823efc270f878802c9f04cb91d541c9a8ae6033> a dtwise:ConceptRecord ;
+    rdfs:label "SourceDomain constraint" ;
+    sh:description "Domain or system from which the BOM item record originates."@en ;
+    sh:name "SourceDomain" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Tb3VyY2VEb21haW4vc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5d9835ca5d2368a575d4fa5a6720e61a7981225c5e54a9487c98b7eddb67ec23> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the source engineering model."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkxvY2FsSWQvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/5ecb5c80d10c8efcfa6e2a7a9003defc1b703cb062a7e1804ca13b4eb3c92616> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociation",
+        "hasFunctionalAssociation" ;
+    rdfs:comment "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasFunctionalAssociation> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/60fbc892aa317fd4930ee300b047ab6c8949d5c1f4098bbb72dcb7473a9b168f> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReferences",
+        "hasParentReferences" ;
+    rdfs:comment "Collection of source-derived records documenting parent references in the engineering BOM."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasParentReferences> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/6281af67648147db1a2aea0246c637a01165559026895d0be59d7e1152c9d35a> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItems SHACL shape" ;
+    sh:description "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."@en ;
+    sh:name "BOMItems" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/636c6e8811caf000e41acb2b286b493708c91d6ccdf02b6bb695e83fed536daa> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier associated with the represented engineering asset."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasAssetIdentifier> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/641662297045ef6f8a1698273b3156d12828d6d95fb0f5273a5cd52287dbd795> a dtwise:ConceptRecord ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:description "Explicit parent relationship preserved from the source parent-reference record."@en ;
+    sh:name "RecordedParent" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuUmVjb3JkZWRQYXJlbnQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/64dfc6626ef992837c6590cf02afbaee7f6b9fde715328d8f55de67d062e71dc> a dtwise:ConceptRecord ;
+    rdfs:label "TEP_OPCUAConnectivity SHACL shape" ;
+    sh:description "Template describing OPC UA server connectivity and engineering signal-to-node mappings."@en ;
+    sh:name "TEP_OPCUAConnectivity" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/658f0d5d1cd3048348f380570603f7bba8b876e3b568685f7c14e1cf32198008> a dtwise:ConceptRecord ;
+    rdfs:label "QuantityBasis",
+        "hasQuantityBasis" ;
+    rdfs:comment "Basis for interpreting source quantity information; not itself a quantity value."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasQuantityBasis> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/65d9afd42b9761e9888bfac58a7cdb581b4a9c2c09ebad2c1f1138e52263cd2b> a dtwise:ConceptRecord ;
+    rdfs:label "AssociationBasis constraint" ;
+    sh:description "Source-provided basis or evidence category for a recorded item association."@en ;
+    sh:name "AssociationBasis" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NvY2lhdGlvbkJhc2lzL3NoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/686d067ca4d29efc222d8f40200a1a9255ff4d1cff12248772cf4921d97c3f1a> a dtwise:ConceptRecord ;
+    rdfs:label "OPCUANodeId constraint" ;
+    sh:description "OPC UA NodeId identifying the mapped node in a server address space."@en ;
+    sh:name "OPCUANodeId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/6914de96423be09941b2ccf17836506c86e63f7446fbc1032e17d651a446c8d0> a dtwise:ConceptRecord ;
+    rdfs:label "InventoryAssociationStatus constraint" ;
+    sh:description "Status of the association with an inventory asset."@en ;
+    sh:name "InventoryAssociationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/69441a84333be7e5eaf3445c1f1ca0e3b9a3aff2263d39d7756fcedd690fd7c0> a dtwise:ConceptRecord ;
+    rdfs:label "EndPoint constraint" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/6d235d70e3d2d23907bfc7934060dfdb93761991cda7d1057022dcefc2db7a1b> a dtwise:ConceptRecord ;
+    rdfs:label "ConnectionPoints",
+        "hasConnectionPoints" ;
+    rdfs:comment "Collection of connection points belonging to an electrical device or symbol."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasConnectionPoints> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/6eb9940409a80fc7ff36a19c842fa91c83960c0d56db5ca4e869c91501d3346b> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering interpretation or qualification of the represented association."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasEngineeringInterpretationNote> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/6f8673f7fa415966766dbaf1875961ed65b8dcb8f7f585814ec4016cffb4a170> a dtwise:ConceptRecord ;
+    rdfs:label "AssetName",
+        "hasAssetName" ;
+    rdfs:comment "Human-readable name of the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasAssetName> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/71a862ef7aaac7f1fed19bd9a20409dae5a87aa19399e8057add4be08ac422a9> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/71db617005530a7a698f9bc27e4d08df602b0820f0dbc2f8e6aa5d0e5f418214> a dtwise:ConceptRecord ;
+    rdfs:label "Label constraint" ;
+    sh:description "Human-readable label for the assembly record."@en ;
+    sh:name "Label" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5MYWJlbC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/721c42a7532fa06d4f6be0b28fd1d65463afb6c74a161b84522a3a22bf1ffe21> a dtwise:ConceptRecord ;
+    rdfs:label "ParentReferences SHACL shape" ;
+    sh:description "Collection of source-derived records documenting parent references in the engineering BOM."@en ;
+    sh:name "ParentReferences" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/72a1fdfc77f1a68fdb13b5254b8adf558b70dd1a279fd361daaa1ddf1fc3a5cb> a dtwise:ConceptRecord ;
+    rdfs:label "Server",
+        "hasServer" ;
+    rdfs:comment "An OPC UA server connection and its endpoint metadata."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasServer> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/72f4da3b6ee555860cba294c050409bc71bbb7a3cca4ec8ee6452e59db18916f> a dtwise:ConceptRecord ;
+    rdfs:label "Assemblies constraint" ;
+    sh:description "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."@en ;
+    sh:name "Assemblies" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/76839dfa78a3113b3cba3d5c009d1ead27e3a567ce658420e9f437c561672046> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier",
+        "hasProductIdentifier" ;
+    rdfs:comment "Identifier of the product associated with the asset; distinct from the asset identifier."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasProductIdentifier> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/769545e1744d3322c949a130982aba18b0b89119e98d778089905914aeec5aa3> a dtwise:ConceptRecord ;
+    rdfs:label "Address",
+        "hasAddress" ;
+    rdfs:comment "Address assigned to the connection endpoint in the electrical design."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasAddress> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/77073697a14443f50392242c95871a6305032dc66c0d2347f16035d1a275909d> a dtwise:ConceptRecord ;
+    rdfs:label "SignalName",
+        "hasSignalName" ;
+    rdfs:comment "Engineering signal name represented by this mapping."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasSignalName> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/770ced7d71910def4435100c9c67261301521cedaae8b15b9813ceb6ab337ff9> a dtwise:ConceptRecord ;
+    rdfs:label "RecordedParent" ;
+    rdfs:comment "Explicit parent relationship preserved from the source parent-reference record."@en,
+        "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy."@en,
+        "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasRecordedParent> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/78417585a4943342cd47c397f1389aa6e3fef9169755dbc0e661733c33279a60> a dtwise:ConceptRecord ;
+    rdfs:label "NamespaceURI constraint" ;
+    sh:description "Namespace URI identifying an OPC UA namespace."@en ;
+    sh:name "NamespaceURI" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/785f9ce5b55a146323a45fc71387ee514325e1196a63d123414ef0c2b2f266c1> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId",
+        "hasLocalId" ;
+    rdfs:comment "Identifier local to the source engineering model."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasLocalId> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/78c99a122e82e0e27ef367e92c7569b5f992bfa217e045d13304e349216deba1> a dtwise:ConceptRecord ;
+    rdfs:label "Product SHACL shape" ;
+    sh:description "Catalog record describing an identified product."@en ;
+    sh:name "Product" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/7a032df10e82f7edc20814fad1facff0075c210337f6e12f5a778e8c440156cb> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association with information in another engineering domain."@en ;
+    sh:name "CrossDomainAssociationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/7a5b98fec1c11d7031c7ef0f0c330164f21290589a5f431908193144bde048e6> a dtwise:ConceptRecord ;
+    rdfs:label "ECAD SHACL shape" ;
+    sh:description "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."@en ;
+    sh:name "ECAD" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/7ce4494e81383ceb1c2a1f142821b49354ff51472a5beb0e9867fe25bcf0d67f> a dtwise:ConceptRecord ;
+    rdfs:label "AssetInventory" ;
+    rdfs:comment "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/7eacebeaa187468cf9fc7070d175f7f0573b0d9559bf5d4da5a17d919b77a49e> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSIRDI",
+        "hasECLASSIRDI" ;
+    rdfs:comment "International Registration Data Identifier for the ECLASS classification."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasECLASSIRDI> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/7f1ba1d29cd9b8d13d38136e7da67d0d25b48d93449d43b67f688e4e151db518> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedInventoryAssetIdentifier constraint" ;
+    sh:description "Identifier referencing an associated asset inventory record."@en ;
+    sh:name "RelatedInventoryAssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5SZWxhdGVkSW52ZW50b3J5QXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/80a5e3acb0f61955d51d7586eb47cee19cb55c1facbcbe939a91bdb4c4c83578> a dtwise:ConceptRecord ;
+    rdfs:label "InventoryAssociationStatus",
+        "hasInventoryAssociationStatus" ;
+    rdfs:comment "Status of the association with an inventory asset."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasInventoryAssociationStatus> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/8194bd05de0241cb23f8707658b30eb6bb63bb35d081c867ed49d08d306daa96> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification of the represented association."@en ;
+    sh:name "EngineeringInterpretationNote" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/81a8b153b870929df3200e0790ea01bfd1a5797d56c488b49e2ee0ee3721e7a2> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunctions",
+        "hasActuatingFunctions" ;
+    rdfs:comment "Collection of process actuation functions."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasActuatingFunctions> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/8206d93fc6605a9df99eb3dc355e381277f463b0201fcb02e4e25d7493a89ad7> a dtwise:ConceptRecord ;
+    rdfs:label "MonitoringStatus",
+        "hasMonitoringStatus" ;
+    rdfs:comment "Recorded status of monitoring activities for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasMonitoringStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/8272d6fc0467c59c3ad6fb67542f0fe7142d836d15accbad7cd65967375c9b50> a dtwise:ConceptRecord ;
+    rdfs:label "Label constraint" ;
+    sh:description "Human-readable label of the engineering BOM item."@en ;
+    sh:name "Label" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5MYWJlbC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/84413c774185404fb34574b6982f8d54e21d81876d62b94ee5e4f99adc23a1b8> a dtwise:ConceptRecord ;
+    rdfs:label "ProductDescription",
+        "hasProductDescription" ;
+    rdfs:comment "Textual description of the catalog product."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasProductDescription> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/845974daa86aa6983fdffe0b6134e100b9f2f170b1e479dc6e60cf6cdd4641fd> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence",
+        "hasCrossDomainAssociationEvidence" ;
+    rdfs:comment "Evidence recorded for the cross-domain association."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasCrossDomainAssociationEvidence> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/847aa8f3e6ad07887c3b9bfeee678b2912c616e47f8e684ffffea05634cd5df0> a dtwise:ConceptRecord ;
+    rdfs:label "AssemblyRecord SHACL shape" ;
+    sh:description "Engineering assembly record with item identification, descriptive information, revision, structural status, and recorded parent relationship."@en ;
+    sh:name "AssemblyRecord" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/8484d1d21c0d8d0754fd77598552b1b62ec976baa1f139b56cb08adf8880d0e5> a dtwise:ConceptRecord ;
+    rdfs:label "FaultDetectionStatus constraint" ;
+    sh:description "Recorded status of fault detection activities for the asset."@en ;
+    sh:name "FaultDetectionStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/84c9af72c7f0f3e2572770bd0cd1d5ce6704eee3f165ce8a331105d83adcc122> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering interpretation or qualification associated with the element."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasEngineeringInterpretationNote> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/8567e4d5d4967dc96d27a5c81d7832b06aa282d3dc7f10dc34d27614e7b3c97d> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering note documenting interpretation or uncertainty about this mapping."@en ;
+    sh:name "EngineeringInterpretationNote" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/871d3fd867bd48b4c6e331e745182b1965c7d450508e6796c945e74273866895> a dtwise:ConceptRecord ;
+    rdfs:label "EndpointStatus constraint" ;
+    sh:description "Status of the OPC UA server endpoint."@en ;
+    sh:name "EndpointStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/875a364b56d52da11537ddaaeb829858219c04bef9a43649420dbefc76dbe74e> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociations",
+        "hasFunctionalAssociations" ;
+    rdfs:comment "Collection of source-recorded functional associations between engineering records."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasFunctionalAssociations> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/885644b79540671f181791e7a8b65f867502c7bbf103ff5f0f41def1b3bd5766> a dtwise:ConceptRecord ;
+    rdfs:label "TEP_OPCUAConnectivity" ;
+    rdfs:comment "Template describing OPC UA server connectivity and engineering signal-to-node mappings."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/8952b2d8351c0f6ee37265e9ebf15b14adaaac8e8758b995c0019cfcfc5c25cd> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperties",
+        "hasTechnicalProperties" ;
+    rdfs:comment "Collection of technical properties associated with the product."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasTechnicalProperties> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/8965069ff3b6052447a1b33209fc3f24367d1c83fd212e399e30eb9f071ba3d2> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunction SHACL shape" ;
+    sh:description "Function that measures or observes a process variable."@en ;
+    sh:name "InstrumentationFunction" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/899eba7ee5f363f988092a621cfb58d6c7742346e30f76a7e82122098798d8b5> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Evidence recorded for a cross-domain association."@en ;
+    sh:name "CrossDomainAssociationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/89a42bda8af76c0572463cbbbc8d2b1bcb323cba444da2fba29215a11922e8ab> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/8cc1d8122df34cdce0063531da93e40b462bfec77ec312f429f7f687a9e65abd> a dtwise:ConceptRecord ;
+    rdfs:label "Connections SHACL shape" ;
+    sh:description "Collection of connections between schematic elements."@en ;
+    sh:name "Connections" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/8d0f08825da15e60c64fc598b302041e0dd007e8bbc4bb8aa022c6b9aab3ba2d> a dtwise:ConceptRecord ;
+    rdfs:label "MeasuredVariable",
+        "hasMeasuredVariable" ;
+    rdfs:comment "Process variable measured by the instrumentation function."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasMeasuredVariable> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/8d2247ee8489a8f56178985974968513bdaaa6db1d9865c212bdb1bb12655437> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSClass",
+        "hasECLASSClass" ;
+    rdfs:comment "ECLASS classification associated with the product."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasECLASSClass> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/8d8289ea8624f22f81c8cbc3f93e66075c8c1317d3e26f46e7bfcd592bfeb85a> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented engineering asset."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/8d88bffcf751cd1ccba220a3b5f99afc59ac8e626780120fa0cd61ad90d2f8d9> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5Bc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/8dc59ad7a5c07527c44220373c108715c1ecc4faf95a71e0c6c09e5b76aca184> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/8de7b7d86d40ca80ffbdfc498442b0c428b54d23fda999b94ee75c3f54d61f8d> a dtwise:ConceptRecord ;
+    rdfs:label "Servers constraint" ;
+    sh:description "Collection of configured OPC UA servers."@en ;
+    sh:name "Servers" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/8e0ecb8c9ebd4eed3352d2b058d728723af42068121da23b2b37c007a5410913> a dtwise:ConceptRecord ;
+    rdfs:label "SignalDirection",
+        "hasSignalDirection" ;
+    rdfs:comment "Direction of data exchange for the mapped signal."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasSignalDirection> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/903b007ebbcffc4750ad470ab85e8c29d91ad243420f9b28a48ad0c934f2cfcc> a dtwise:ConceptRecord ;
+    rdfs:label "Equipments",
+        "hasEquipments" ;
+    rdfs:comment "Collection of process equipment representations."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasEquipments> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/90b2eaa8c9e58dd6728d512442d2e3be830d4c891c0427ef42b80175a689f261> a dtwise:ConceptRecord ;
+    rdfs:label "PLCEndPoint SHACL shape" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/9323d13954907d12f8d03f98bfbc4a62972e1ef58ec1ccaa13957405d104aa38> a dtwise:ConceptRecord ;
+    rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
+    sh:name "Address" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/937abdcd743fda4589096a9fda7d7f855b94010469cc891af7e5489021b86041> a dtwise:ConceptRecord ;
+    rdfs:label "EndPoint constraint" ;
+    sh:description "Connection endpoint in the electrical design."@en ;
+    sh:name "EndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/93c8023493457f207dad541cc8d639be490c2e91bf70a9bd3e2ab4045e14ce50> a dtwise:ConceptRecord ;
+    rdfs:label "Devices constraint" ;
+    sh:description "Collection of electrical devices represented in the ECAD model."@en ;
+    sh:name "Devices" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/93e11e7f9127435fcda3b8e7f8857b39ed1f67186c1eb363daec4083b9d4c592> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Asset identifier recorded against the BOM item; does not establish identity with an AssetInventory record."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasAssetIdentifier> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/943088c34822a0615019d1479ada91d4a7a4d380013397e5f8b1f13a1c806c62> a dtwise:ConceptRecord ;
+    rdfs:label "AssociationBasis",
+        "hasAssociationBasis" ;
+    rdfs:comment "Source-provided basis or evidence category for a recorded item association."@en,
+        "Source-provided basis or evidence category for this functional association."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasAssociationBasis> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/94cd5bdc07928a4fd15cc67a6c36a7ece3aad24336027867fb9b10c657fcec8f> a dtwise:ConceptRecord ;
+    rdfs:label "OPCUANodeId",
+        "hasOPCUANodeId" ;
+    rdfs:comment "OPC UA NodeId identifying the mapped node in a server address space."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasOPCUANodeId> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/967d887a52939f6b85163b16dec1db46c113902bc0b27f065b5c86be34149164> a dtwise:ConceptRecord ;
+    rdfs:label "ECAD" ;
+    rdfs:comment "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/96d947b518df10aa8cb9177b7a8e0b911cae0d15b678368e1d130f572fe43674> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemRecord",
+        "hasBOMItemRecord" ;
+    rdfs:comment "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasBOMItemRecord> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/9700c8d48c96e324ae3a98022c712176737c95a5613229e0b847fa31b32aff13> a dtwise:ConceptRecord ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:description "Source-recorded status of the functional association."@en ;
+    sh:name "StructureStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/97302599ade127aefafc25694eb8f2d6463f6bb433c5759518e9cba081e21077> a dtwise:ConceptRecord ;
+    rdfs:label "ItemDescription",
+        "hasItemDescription" ;
+    rdfs:comment "Source-provided description of the engineering BOM item or component."@en,
+        "Source-provided description of the engineering item represented by the assembly."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasItemDescription> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/97330c3edb359cd3bcfdbda35fdc192f8ed5c21041e49edc7919b9d472cf38e3> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociations constraint" ;
+    sh:description "Collection of source-recorded functional associations between engineering records."@en ;
+    sh:name "FunctionalAssociations" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/989c0335041dcb8302694be15ff7c063e6e92fcb5a330574c3b9a59e0265056d> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId",
+        "hasLocalId" ;
+    rdfs:comment "Identifier local to the ECAD source model or containing element."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasLocalId> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/98ee782f9f4e9465a6d85709ee76453860cef5a939700d2f0321c294ed58557b> a dtwise:ConceptRecord ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:description "Source-recorded structural status of the assembly entry; interpretation depends on the source vocabulary."@en ;
+    sh:name "StructureStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5TdHJ1Y3R1cmVTdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/9b27beba32584af33f466f0513508f869de29510123feb01d46ee7ec209d1ad0> a dtwise:ConceptRecord ;
+    rdfs:label "TEP_EngineeringBOM_V2_Template SHACL shape" ;
+    sh:description "Engineering bill-of-materials submodel template for source-recorded assemblies, BOM items, parent references, and functional associations. Recorded identifiers and links do not by themselves establish cross-domain identity."@en ;
+    sh:name "TEP_EngineeringBOM_V2_Template" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/c2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/9beb1f2a07ab443c00f651d18559f32024dbe68430fb1591a79190d2586ee5fd> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringFunctionReference constraint" ;
+    sh:description "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."@en ;
+    sh:name "EngineeringFunctionReference" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/9cbce8e472b92e10c7e7bd27524f056c196418094b64fda2082561d07b633a51> a dtwise:ConceptRecord ;
+    rdfs:label "SupplierPartNumber constraint" ;
+    sh:description "Part number assigned by the supplier."@en ;
+    sh:name "SupplierPartNumber" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/9dcdc0d9b0673023c945f029838baacbea9048c9bc2eea91ef48befa066f3182> a dtwise:ConceptRecord ;
+    rdfs:label "AssetInventory SHACL shape" ;
+    sh:description "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en ;
+    sh:name "AssetInventory" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/9ef2e0c48f5ba28fb3b80fe666122cd874f7721b2cb78afae71c663db46aa127> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/a0bda0199d4fbf1811faa91bea487b7e4d04f6155d6df44528b4f8ed1c53c535> a dtwise:ConceptRecord ;
+    rdfs:label "RecordedParent constraint" ;
+    sh:description "Explicit parent relationship recorded for this assembly entry; not an inferred hierarchy."@en ;
+    sh:name "RecordedParent" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5SZWNvcmRlZFBhcmVudC9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/a0e2cfe4efd542b2d1cc69f6e30ff13f81595a51a1467392e2c1058e5b21ecfd> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote",
+        "hasEngineeringInterpretationNote" ;
+    rdfs:comment "Engineering interpretation or qualification recorded for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasEngineeringInterpretationNote> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/a0f3815457f53430f40d5c160c90ce8b846c23ad24064e3e47b83299e9b18603> a dtwise:ConceptRecord ;
+    rdfs:label "Device constraint" ;
+    sh:description "Electrical device represented in the engineering design."@en ;
+    sh:name "Device" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvc2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/a2ed1ed5eaf28347953a9afe5b3e1fc3d8d9348535df949be5fe67585e885685> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSPreferredName",
+        "hasECLASSPreferredName" ;
+    rdfs:comment "Preferred name of the assigned ECLASS classification."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasECLASSPreferredName> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/a2fc949367112cb63717a02cacc3b8245e3e13c1090dfb57f754265364954af9> a dtwise:ConceptRecord ;
+    rdfs:label "functionallyAssociatedWith" ;
+    rdfs:comment "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasfunctionallyAssociatedWith> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/a36671297326a0878170dbbed318cbb9b29f6b2d51298554d3216b471aeb7a08> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of a related asset; distinct from the identifier of the current element."@en ;
+    sh:name "RelatedAssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUmVsYXRlZEFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/a4a3a8d03ee54f5b0895d1b34860b5aeab315c4c323f633f189d11df9f3102b8> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunction constraint" ;
+    sh:description "Function that measures or observes a process variable."@en ;
+    sh:name "InstrumentationFunction" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/a4e96567f5fe479670ac732a4e61278109f89c05c2f373bc18df4183a22fe03f> a dtwise:ConceptRecord ;
+    rdfs:label "ECADConnectionPointReferenceStatus",
+        "hasECADConnectionPointReferenceStatus" ;
+    rdfs:comment "Status of the reference to an ECAD connection point."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/a56be691bcb42d7d87011c19c9da65becf7de95d8c415cdc91c240fef17c5121> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier of the asset represented by this inventory record."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/a601ec718f715bae83c49eddf1d8de295895bdb66dbc2087245c7dd0a1f0ef9b> a dtwise:ConceptRecord ;
+    rdfs:label "DEXPI" ;
+    rdfs:comment "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/a7aee7bc7c808bd7ecd9c998ec8d165b29911d08ca59cb33cc7bf128a6a98f44> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/a7deff04a3ebadfcfa404144f4f8b2ae96d7f09a20da8faac11bea32717cfb75> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
+    sh:name "RelatedAssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/aa24a6f01609763f6493896178f3ec1dbbf4ae19be1ba4ef70d8a8ed8c8deccf> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperties constraint" ;
+    sh:description "Collection of technical properties associated with the product."@en ;
+    sh:name "TechnicalProperties" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/aaa93e2870be89bfc0fd2778feb62755fddbe12dfa9e8bd33a648d7bb5e194a1> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/ab00f6dde2b50e2d2eb2adce740474e9f8721f2419fac38a603a53edcc170520> a dtwise:ConceptRecord ;
+    rdfs:label "InventoryAssociationEvidence constraint" ;
+    sh:description "Evidence supporting the inventory asset association."@en ;
+    sh:name "InventoryAssociationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/abb0e90b639b83617019451c60f299671333920329520857dc0c9015ef4e364f> a dtwise:ConceptRecord ;
+    rdfs:label "Symbol constraint" ;
+    sh:description "Graphical or logical symbol representing an electrical design element."@en ;
+    sh:name "Symbol" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvc2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/abc3c2db94b830b7f74e67f682e32b787830b21926cfa15c41bb416e0a0db2a3> a dtwise:ConceptRecord ;
+    rdfs:label "Device",
+        "hasDevice" ;
+    rdfs:comment "Electrical device represented in the engineering design."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasDevice> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/ac48e600f79e0c103369b1c97b71a303dd9bcadf4d112a47e487acfad98b8a49> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier of the asset represented by this inventory record."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasAssetIdentifier> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/ac6cdfed76c9e6fc5feff1093eecda682d4c703d7b444d8cd31989c300556e8d> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemRecord SHACL shape" ;
+    sh:description "Source-recorded engineering BOM item or component with identification, descriptive metadata, provenance, and structural associations."@en ;
+    sh:name "BOMItemRecord" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/acd78cb57808bb934135f0fa195081dcac2e37c2345c682d70052dc46604f44d> a dtwise:ConceptRecord ;
+    rdfs:label "ItemDescription constraint" ;
+    sh:description "Source-provided description of the engineering BOM item or component."@en ;
+    sh:name "ItemDescription" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/ad34e0216e27d6cf5d14724c5af63a36312b2d56165e30c04fa85272ed1dc3db> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperty",
+        "hasTechnicalProperty" ;
+    rdfs:comment "Technical characteristic recorded for the catalog product."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasTechnicalProperty> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/aeb84e9d19b4c6de2f0401e1fc98ed9cffc470e25e21561dc36d448ed0d24971> a dtwise:ConceptRecord ;
+    rdfs:label "ProductCatalog" ;
+    rdfs:comment "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."@en ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/af36af4ee2748670645f0c2809116f4e31e2950c34d725e4e1f6a89f6ee616bf> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association to another engineering domain."@en ;
+    sh:name "CrossDomainAssociationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b0e53aabec1c7cd00d1833a591f2c030875117669648d7532972cb885c23f1fe> a dtwise:ConceptRecord ;
+    rdfs:label "MappingStatus",
+        "hasMappingStatus" ;
+    rdfs:comment "Status of the engineering-to-OPC-UA signal mapping."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasMappingStatus> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/b1591ee5721cd7a5fa5b91b6f3f01488e9b804e75101f510632a59c33fe457f9> a dtwise:ConceptRecord ;
+    rdfs:label "EndpointUrl",
+        "hasEndpointUrl" ;
+    rdfs:comment "Network endpoint URL used to connect to the OPC UA server."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasEndpointUrl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/b2bbe7a9d5f0317c3ee89ce6e8a62148ebacfd7ccef0b7e2e1dabb0a255b9950> a dtwise:ConceptRecord ;
+    rdfs:label "Location constraint" ;
+    sh:description "Recorded location of the asset."@en ;
+    sh:name "Location" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b36fc3abc1a397c1608f80949a141388a6b298521c5170973ce137a84183b5aa> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemId constraint" ;
+    sh:description "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier."@en ;
+    sh:name "BOMItemId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5CT01JdGVtSWQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b380716cc5c662f1ea83cc07d25a0652e56732e48861413dc1588e8a30d23051> a dtwise:ConceptRecord ;
+    rdfs:label "Schematics SHACL shape" ;
+    sh:description "Collection of electrical schematic information."@en ;
+    sh:name "Schematics" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/b4734786af5692c76b3e36a6fd243578dd7c4111cf30ba0c114702dbc10dd041> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b54fd3c01a785bd31c95cb0766b294aeb8f561af642e3d315d78b41a670d296d> a dtwise:ConceptRecord ;
+    rdfs:label "AAS Relationship Element" ;
+    dtwise:refersTo <https://example.org/aas/RelationshipElement> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/b750f892192a8a71e2da2abbd03398497509dfad3994c141d4366d8921a87a28> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence",
+        "hasCrossDomainAssociationEvidence" ;
+    rdfs:comment "Evidence recorded for a cross-domain association."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasCrossDomainAssociationEvidence> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/b7eeee0fb086fc0be3ce9284b93abb3e0a5725bdd3f188faa2d11db1e8f24470> a dtwise:ConceptRecord ;
+    rdfs:label "ProductDescription constraint" ;
+    sh:description "Textual description of the catalog product."@en ;
+    sh:name "ProductDescription" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0RGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b81b45f78c0e16e29f2164d8d9a8359380f784f92ab28df74ca0871c91c974e1> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier constraint" ;
+    sh:description "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."@en ;
+    sh:name "RelatedAssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/b8258fbb4d9eaee9abde84f1928fd888084730761a2e7e26d567fcbc47e83b76> a dtwise:ConceptRecord ;
+    rdfs:label "Symbols",
+        "hasSymbols" ;
+    rdfs:comment "Collection of schematic symbols."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasSymbols> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/ba3c4e1c8bdcff23ac65ce93b8762eee873da8ad36e9b9c43b48419ac9aaf7d0> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier",
+        "hasRelatedAssetIdentifier" ;
+    rdfs:comment "Identifier of an asset related to the inventory asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasRelatedAssetIdentifier> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/ba9afa6dfcc07287616090120f74b19d255b88fa00285ce9b9a5eba28957dc55> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMapping constraint" ;
+    sh:description "Association between an engineering signal and an OPC UA address-space node."@en ;
+    sh:name "SignalMapping" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/bb02e267ae2cec9161fdc979866e368595d80f69fe10cc26e0f74e733293bd49> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringVerificationEvidence constraint" ;
+    sh:description "Recorded evidence supporting engineering verification."@en ;
+    sh:name "EngineeringVerificationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/bdeb964241b95f07e085c3830afdbf3bf8fa266afc2bd59f88cc39cac6999529> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented asset."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/be03f7cbb0f800c2372bdc0f6b19dcd4f28a5495d65e9ebe68d9fda888ea6a14> a dtwise:ConceptRecord ;
+    rdfs:label "ConnectionPoints constraint" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/bf3fbceb214fa84cdece38933b6204793a436a3dcee4b2f64da29f25eae67ae2> a dtwise:ConceptRecord ;
+    rdfs:label "QuantityBasis constraint" ;
+    sh:description "Basis for interpreting source quantity information; not itself a quantity value."@en ;
+    sh:name "QuantityBasis" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5RdWFudGl0eUJhc2lzL3NoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/bfd8e2b5aa86e4b3e7c345b12be5daaa7120221385931af337774093e6ce1acb> a dtwise:ConceptRecord ;
+    rdfs:label "PLCEndPoint constraint" ;
+    sh:description "Connection endpoint associated with a programmable logic controller."@en ;
+    sh:name "PLCEndPoint" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/c0b5307aaccb3c71d60b756705370a39e9fa94e5afc5c9b098627151f9b0ec0d> a dtwise:ConceptRecord ;
+    rdfs:label "SourceDomain",
+        "hasSourceDomain" ;
+    rdfs:comment "Domain or system from which the BOM item record originates."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasSourceDomain> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/c18c666135b7bf356376f96f96c119b8c6b2fc132a6a248725356355de4fc075> a dtwise:ConceptRecord ;
+    rdfs:label "DEXPI SHACL shape" ;
+    sh:description "DEXPI process engineering submodel describing equipment, actuation functions, and instrumentation functions."@en ;
+    sh:name "DEXPI" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/c23ec2a3e8bf1ab7ac09a4c7bddff463e8032c71e0267194783db21b1b97e191> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerName constraint" ;
+    sh:description "Name of the product manufacturer."@en ;
+    sh:name "ManufacturerName" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJOYW1lL3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/c35d742a8d94135386d3680a7cd06f93f38423eb9279576a9908f0e36fc7b6ee> a dtwise:ConceptRecord ;
+    rdfs:label "Schematics",
+        "hasSchematics" ;
+    rdfs:comment "Collection of electrical schematic information."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasSchematics> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/c3f9f54729fd852112f0ebc6caeadbf5f0b5a33cb1fb641f52ffa3eaa8a1a9b8> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMapping",
+        "hasSignalMapping" ;
+    rdfs:comment "Association between an engineering signal and an OPC UA address-space node."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasSignalMapping> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/c57a6bff26e0d08eeb461880b5e4a5c91430486318ba272d37a9440961359b04> a dtwise:ConceptRecord ;
+    rdfs:label "SimulationStatus constraint" ;
+    sh:description "Recorded status of simulation activities for the asset."@en ;
+    sh:name "SimulationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/c6079716c242d4d51204cfc091cca885b35ffd5c825f942e2029ed1e3d36fec4> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunctions constraint" ;
+    sh:description "Collection of instrumentation functions."@en ;
+    sh:name "InstrumentationFunctions" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/c77c780377e9f1bbca697a7108eadd150dcf6cd7ba0dabbd25cd4bf7319c54d3> a dtwise:ConceptRecord ;
+    rdfs:label "OPCUABrowsePath constraint" ;
+    sh:description "OPC UA browse path used to locate the mapped node."@en ;
+    sh:name "OPCUABrowsePath" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/c9b753a3f2d6bebf82125eaa88d542088c6f8f1841c21ab1e013f918ab78371e> a dtwise:ConceptRecord ;
+    rdfs:label "Servers SHACL shape" ;
+    sh:description "Collection of configured OPC UA servers."@en ;
+    sh:name "Servers" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/cc6a6d13f99124adf2eff19739b38d49cdd7fa0180ea66b76f876573a85a5632> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus constraint" ;
+    sh:description "Recorded status of an association to information in another domain."@en ;
+    sh:name "CrossDomainAssociationStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/cc6e29bb3b68203a4be5b519304503e47b4538e6a03da17041d8dd8e8f466404> a dtwise:ConceptRecord ;
+    rdfs:label "Products constraint" ;
+    sh:description "Collection of catalog product records."@en ;
+    sh:name "Products" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/cda1a164f2b59f3e34fb951b5fbecb51a86faba54fd033d2c152e56a12310ccf> a dtwise:ConceptRecord ;
+    rdfs:label "SignalDirection constraint" ;
+    sh:description "Direction of data exchange for the mapped signal."@en ;
+    sh:name "SignalDirection" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d108b376e0a266e380196b91801f68fad8b1047bcdde0f37003e108260524bf1> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemId",
+        "hasBOMItemId" ;
+    rdfs:comment "Identifier of this item in the engineering BOM source; not necessarily a globally unique asset or product identifier."@en,
+        "Source identifier of the engineering BOM item represented by this assembly record."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasBOMItemId> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d247968d52fae1a47866d16b58672e88f0c73be1677505866e60b651b05af9c6> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatedVariable",
+        "hasActuatedVariable" ;
+    rdfs:comment "Process variable acted upon by the actuating function."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasActuatedVariable> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d28c85df09e39640c1fd7a2f208bf9458ba61c74b3011c2a6dda5247dd16504e> a dtwise:ConceptRecord ;
+    rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
+    sh:name "Address" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d2a83da3a42f7fb50bcf6c900a0943dad40469eda8899e543762a164e8f16833> a dtwise:ConceptRecord ;
+    rdfs:label "Label",
+        "hasLabel" ;
+    rdfs:comment "Human-readable label for the assembly record."@en,
+        "Human-readable label of the engineering BOM item."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasLabel> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d3c63e2054f17e99f3e734a4a406fa961b9041b0127939d84f5a275dd0bca91b> a dtwise:ConceptRecord ;
+    rdfs:label "Address constraint" ;
+    sh:description "Address assigned to the connection endpoint in the electrical design."@en ;
+    sh:name "Address" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5BZGRyZXNzL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d4f74033e9bf0355d6cb4d2f9d5b24686fa6a552528b6af43f5334ac3ae30727> a dtwise:ConceptRecord ;
+    rdfs:label "ProductVerificationEvidence",
+        "hasProductVerificationEvidence" ;
+    rdfs:comment "Recorded evidence supporting product verification."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasProductVerificationEvidence> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d6037f077a6ee2e1212f46c13dc27eeeb28234ea005af8ea0ef1a8f08390b4f6> a dtwise:ConceptRecord ;
+    rdfs:label "Equipment constraint" ;
+    sh:description "Process equipment item identified in the DEXPI engineering model."@en ;
+    sh:name "Equipment" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d609cccac4cbfd9e57ec8945837ef300cf9017753d45eebcdf5387c76b7ddd3f> a dtwise:ConceptRecord ;
+    rdfs:label "StructureStatus constraint" ;
+    sh:description "Source-recorded structural status of the parent reference."@en ;
+    sh:name "StructureStatus" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU3RydWN0dXJlU3RhdHVzL3NoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d612f2a1485e75924f7d0ac1bcef975f0f3b95acccbe2e951e4ca1044a50d3c5> a dtwise:ConceptRecord ;
+    rdfs:label "SignalName constraint" ;
+    sh:description "Engineering signal name represented by this mapping."@en ;
+    sh:name "SignalName" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d65afca4097d1ebd1fa0440aa3831421e0bd4416b87cf13b08821f812263c3a7> a dtwise:ConceptRecord ;
+    rdfs:label "Location",
+        "hasLocation" ;
+    rdfs:comment "Recorded location of the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasLocation> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d6c7ab1f87149471af7f533444cacadc0e1e82f719997f19112902a5f73c2a01> a dtwise:ConceptRecord ;
+    rdfs:label "Revision",
+        "hasRevision" ;
+    rdfs:comment "Source-recorded revision designation for the assembly entry."@en,
+        "Source-recorded revision designation of the BOM item."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasRevision> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d6ceaa81ad94385d52aaeb74a4ee3770b47820b98bc0648dc0aebca0d78518b7> a dtwise:ConceptRecord ;
+    rdfs:label "BOMItemId constraint" ;
+    sh:description "Source identifier of the engineering BOM item represented by this assembly record."@en ;
+    sh:name "BOMItemId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5CT01JdGVtSWQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/d71b7676e346322cda1eeba38e1615989592cc6a9f0dbb7fcb84994db6645db8> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringVerificationStatus",
+        "hasEngineeringVerificationStatus" ;
+    rdfs:comment "Recorded status of engineering verification for the device."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasEngineeringVerificationStatus> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/d7af014a8ce7316195e2324b0fa6a493034555b4906e0d9fd5b780ca94d8b48a> a dtwise:ConceptRecord ;
+    rdfs:label "ConnectionPoints SHACL shape" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/d975f7174ed23bc8c96738e72f43fe76f88e2f29f1708a6a2e16aa0993f93b38> a dtwise:ConceptRecord ;
+    rdfs:label "Connections constraint" ;
+    sh:description "Collection of connections between schematic elements."@en ;
+    sh:name "Connections" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/da3f0fa717fd8edc88afa6c7e0782e6b67f77a1a0e0be1e99d77b5dcfdde0ad5> a dtwise:ConceptRecord ;
+    rdfs:label "functionallyAssociatedWith constraint" ;
+    sh:description "Explicitly recorded functional relationship between referenced engineering elements, without asserting identity or verified cross-domain mapping."@en ;
+    sh:name "functionallyAssociatedWith" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uZnVuY3Rpb25hbGx5QXNzb2NpYXRlZFdpdGgvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/da80ce65167fb3dbd51e01d34fb3a88115cf2ec28fddccad5776ccab48e50184> a dtwise:ConceptRecord ;
+    rdfs:label "ManufacturerProductDesignation constraint" ;
+    sh:description "Product designation assigned by the manufacturer."@en ;
+    sh:name "ManufacturerProductDesignation" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQcm9kdWN0RGVzaWduYXRpb24vc2hhcGU> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/daca64552a670f2b23a81eb7923735a784477382b4d1af1f1db46235025aef01> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringLocalId",
+        "hasEngineeringLocalId" ;
+    rdfs:comment "Local identifier assigned by the source engineering system to this BOM item."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasEngineeringLocalId> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/db9b1139d4ba336be569a4a204195ba33be0dd141692f9e25b6d34af70b998c5> a dtwise:ConceptRecord ;
+    rdfs:label "SimulationStatus",
+        "hasSimulationStatus" ;
+    rdfs:comment "Recorded status of simulation activities for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasSimulationStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/dc8d6c3498782c1563986dd8e61cc41ef54592c55b2fbe96ae9b2b678d39afdb> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSClass constraint" ;
+    sh:description "ECLASS classification associated with the product."@en ;
+    sh:name "ECLASSClass" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzcy9zaGFwZQ> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/dcbbb0bb1fa921b9d9c572e766cb8d11f4711ba6768f8452472f9230a2ea64f1> a dtwise:ConceptRecord ;
+    rdfs:label "SourceField",
+        "hasSourceField" ;
+    rdfs:comment "Name of the source field supplying the functional association."@en,
+        "Name of the source field supplying this parent reference."@en ;
+    dtwise:refersTo <https://example.org/engineeringbom/hasSourceField> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/de1a641e7d865a5f65489852a055df0c896cc521e73542693ced63520159fe9b> a dtwise:ConceptRecord ;
+    rdfs:label "isConnectedTo" ;
+    rdfs:comment "Relationship expressing a connection between two schematic elements."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasisConnectedTo> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/de7ac0c72f2ac1e90b553a2bacdf76bd6693ad2a473d1e7210b7fcd6cbbd19c3> a dtwise:ConceptRecord ;
+    rdfs:label "SourceRecordId constraint" ;
+    sh:description "Identifier of the source record supporting this functional association."@en ;
+    sh:name "SourceRecordId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24uU291cmNlUmVjb3JkSWQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/dec13118adfdc63763dd6370626b6df703cebe43c7660e22b12e4bcab331fdcb> a dtwise:ConceptRecord ;
+    rdfs:label "ProductIdentifier",
+        "hasProductIdentifier" ;
+    rdfs:comment "Identifier of the catalog product; distinct from an installed asset identifier."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasProductIdentifier> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/e05afa5c13da3d56c401794cbe1a31dea043ecc46ae608d8c6e20731b0717fa6> a dtwise:ConceptRecord ;
+    rdfs:label "isConnectedTo constraint" ;
+    sh:description "Relationship expressing a connection between two schematic elements."@en ;
+    sh:name "isConnectedTo" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy5pc0Nvbm5lY3RlZFRvL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e166a440fab3d0fc8201ed1a2f9cc4c2c3162fbd80141f896b3c843c918d5508> a dtwise:ConceptRecord ;
+    rdfs:label "MappingBasis constraint" ;
+    sh:description "Evidence or method used to establish the signal mapping."@en ;
+    sh:name "MappingBasis" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5NYXBwaW5nQmFzaXMvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e1b1045e023cb42daabfd5adfe2dce185ad491d70ad1a3be750b1b367d02fef1> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociations SHACL shape" ;
+    sh:description "Collection of source-recorded functional associations between engineering records."@en ;
+    sh:name "FunctionalAssociations" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy9ub2RlU2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/e1d58193dff8456ab5e491eb9653c73e1bf19a36063a7a29daee8b4676353ca5> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier constraint" ;
+    sh:description "Identifier associated with the represented asset."@en ;
+    sh:name "AssetIdentifier" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e3ae5cd379c05adf78fdabf1d70540c7b9b9f8ee649b939c0c373115302c4a43> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Recorded evidence supporting a cross-domain association."@en ;
+    sh:name "CrossDomainAssociationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e423506cfcf45815c19cda6fb465fcb0ffeafe5ed540c814d8f3387a604aabec> a dtwise:ConceptRecord ;
+    rdfs:label "AssetType",
+        "hasAssetType" ;
+    rdfs:comment "Recorded type or category of the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasAssetType> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/e4675752bd0f20642f1d6a3727048642eb916fb3592a794376595e472beff06d> a dtwise:ConceptRecord ;
+    rdfs:label "EngineeringInterpretationNote constraint" ;
+    sh:description "Engineering interpretation or qualification associated with the element."@en ;
+    sh:name "EngineeringInterpretationNote" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdJbnRlcnByZXRhdGlvbk5vdGUvc2hhcGU> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e5507bc457ac84893b1bac534badd0b93a57a9d6c80a646ae913c3babdc4aa6d> a dtwise:ConceptRecord ;
+    rdfs:label "LocalId constraint" ;
+    sh:description "Identifier local to the ECAD source model or containing element."@en ;
+    sh:name "LocalId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e663069a9c9e37f64d7bf12fa55b2cbfe97f25d91c4432c34e12d99873b201d4> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunction constraint" ;
+    sh:description "Function that actuates or manipulates a process variable."@en ;
+    sh:name "ActuatingFunction" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e6ecdd41a666d2d1196eec7baeb75bb73dc5313291535368bc7269b8dcbcd0d0> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationStatus",
+        "hasCrossDomainAssociationStatus" ;
+    rdfs:comment "Recorded status of an association with information in another engineering domain."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasCrossDomainAssociationStatus> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/e71f30dbbe6f87aa1c04af0a89507ce12408856d90a197177dc393544ac70c0a> a dtwise:ConceptRecord ;
+    rdfs:label "Schematics constraint" ;
+    sh:description "Collection of electrical schematic information."@en ;
+    sh:name "Schematics" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/e7dbb30c807dc2411ec6ef059da81b64f402baac0c52cb482eec6a0620c025bc> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperty SHACL shape" ;
+    sh:description "Technical characteristic recorded for the catalog product."@en ;
+    sh:name "TechnicalProperty" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/e8b19ffc8f64559f16fbd60858dafc43e14f1c68ea6f1c94e889e07f0c6af0eb> a dtwise:ConceptRecord ;
+    rdfs:label "FunctionalAssociation SHACL shape" ;
+    sh:description "Source-recorded functional association with provenance and association basis; not an assertion of entity equivalence."@en ;
+    sh:name "FunctionalAssociation" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/RnVuY3Rpb25hbEFzc29jaWF0aW9ucy5GdW5jdGlvbmFsQXNzb2NpYXRpb24vbm9kZVNoYXBl> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/eb03d9221d4f73b004fb34ba1a34e13253af99b72a282c8e2d0a3adff1cf0438> a dtwise:ConceptRecord ;
+    rdfs:label "MeasuredVariable constraint" ;
+    sh:description "Process variable measured by the instrumentation function."@en ;
+    sh:name "MeasuredVariable" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uLk1lYXN1cmVkVmFyaWFibGUvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/ebfb17964d032225eefcfc311dd72094fc17a52120c3fb0613d9784ea2a040ed> a dtwise:ConceptRecord ;
+    rdfs:label "SignalMappings",
+        "hasSignalMappings" ;
+    rdfs:comment "Collection of mappings between engineering signals and OPC UA nodes."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasSignalMappings> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/ecd2066484ea9a6ab86bd91e527117345c85d83b4af5a2139bfacf1ac9849e8b> a dtwise:ConceptRecord ;
+    rdfs:label "InstrumentationFunctions",
+        "hasInstrumentationFunctions" ;
+    rdfs:comment "Collection of instrumentation functions."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasInstrumentationFunctions> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/ed3d1389600653be4a0c0d891d6185756fb8e9ef6be2cd1c63847c1674b713db> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/ef2e83747191c16dc69c1b2f28035a317c888374fca8b9046f3e27f7634e61ae> a dtwise:ConceptRecord ;
+    rdfs:label "Server constraint" ;
+    sh:description "An OPC UA server connection and its endpoint metadata."@en ;
+    sh:name "Server" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/f03cd779568f4e7d7faa08904b3e36d6292caee9377e57b4f168927f823a2662> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedAssetIdentifier",
+        "hasRelatedAssetIdentifier" ;
+    rdfs:comment "Identifier of a related asset; distinct from the identifier of the current element."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasRelatedAssetIdentifier> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/f15aa1b643312ea89739e48086dd836b0773c9df8ece134fe547ee141557f2d7> a dtwise:ConceptRecord ;
+    rdfs:label "RelatedInventoryAssetIdentifier",
+        "hasRelatedInventoryAssetIdentifier" ;
+    rdfs:comment "Identifier referencing an associated asset inventory record."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/f260fae469fa05468d7e94ac064d3f5abbabc1a9885b4060ce882f331f6ecf0a> a dtwise:ConceptRecord ;
+    rdfs:label "TechnicalProperties SHACL shape" ;
+    sh:description "Collection of technical properties associated with the product."@en ;
+    sh:name "TechnicalProperties" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:NodeShape .
+
+<https://example.org/dtwise/concept/f292568b6ec50ae1e1c8137c9476a17f54dc7777390d7423b5a3ed7a2d729bfe> a dtwise:ConceptRecord ;
+    rdfs:label "FaultInjectionStatus",
+        "hasFaultInjectionStatus" ;
+    rdfs:comment "Recorded status of fault injection activities for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasFaultInjectionStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/f308712462099bfd19f6f203633fee1c19e787bb9611f95fed3506a1c33ca6d0> a dtwise:ConceptRecord ;
+    rdfs:label "Assets constraint" ;
+    sh:description "Collection of inventory asset records."@en ;
+    sh:name "Assets" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/f3d63882a05357e7cee93afd01dfe0f477f6fcba8f7151cafd6cc4f200bba8d4> a dtwise:ConceptRecord ;
+    rdfs:label "EndPoint",
+        "hasEndPoint" ;
+    rdfs:comment "Connection endpoint in the electrical design."@en ;
+    dtwise:refersTo <https://example.org/ecad/hasEndPoint> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/f3e52e9f4432e1452eaf98639bb1c4bbf8b06f58334e15588ff21b2afa23f2a3> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatedVariable constraint" ;
+    sh:description "Process variable acted upon by the actuating function."@en ;
+    sh:name "ActuatedVariable" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uLkFjdHVhdGVkVmFyaWFibGUvc2hhcGU> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/f53f7a766a04135c975e2cde805da997b6a8d5480b80d4fed53fe6761afd2ca0> a dtwise:ConceptRecord ;
+    rdfs:label "InventoryAssociationEvidence",
+        "hasInventoryAssociationEvidence" ;
+    rdfs:comment "Evidence supporting the inventory asset association."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/f54a229656fcc36de27eb418fe6ae1b7edbc9af3edf25b49234886e3c51c52ef> a dtwise:ConceptRecord ;
+    rdfs:label "SourceRecordId constraint" ;
+    sh:description "Identifier of the source record supporting this parent reference."@en ;
+    sh:name "SourceRecordId" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/UGFyZW50UmVmZXJlbmNlcy5QYXJlbnRSZWZlcmVuY2UuU291cmNlUmVjb3JkSWQvc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/f566fa3aac77244e3f8df2603ed984e285f7dd173d0083c9cac3e502663692d0> a dtwise:ConceptRecord ;
+    rdfs:label "Revision constraint" ;
+    sh:description "Source-recorded revision designation of the BOM item."@en ;
+    sh:name "Revision" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC5SZXZpc2lvbi9zaGFwZQ> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/f6fce62fc72fd7f2142aeeb7acb680a42ba41b82b48ed2117984a7051c028acc> a dtwise:ConceptRecord ;
+    rdfs:label "AssetIdentifier",
+        "hasAssetIdentifier" ;
+    rdfs:comment "Identifier of the asset associated with this signal mapping."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasAssetIdentifier> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/f75a4e1f63c25c64b8f5e15d1142ef30af5d5498821551499ef01af5b0e32117> a dtwise:ConceptRecord ;
+    rdfs:label "Products",
+        "hasProducts" ;
+    rdfs:comment "Collection of catalog product records."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasProducts> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/f78c974395bce627b3d687711303235d9de19d64879d8ab5babccfd4a6b0d6f2> a dtwise:ConceptRecord ;
+    rdfs:label "Submodel Element Collection" ;
+    dtwise:refersTo <https://example.org/aas/SMC> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType owl:Class .
+
+<https://example.org/dtwise/concept/f85e1cfe05e05736fb4d725f9b92f5564fdce6d9c473f4a9cc9dc0956a7e78ba> a dtwise:ConceptRecord ;
+    rdfs:label "ActuatingFunctions constraint" ;
+    sh:description "Collection of process actuation functions."@en ;
+    sh:name "ActuatingFunctions" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL3NoYXBl> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/fb02c2e60f2276c302f06f9e6b7fdf9aad9a302e4d04c3f06175476c03b75c43> a dtwise:ConceptRecord ;
+    rdfs:label "ConnectionPoints constraint" ;
+    sh:description "Collection of connection points belonging to an electrical device or symbol."@en ;
+    sh:name "ConnectionPoints" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9zaGFwZQ> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/fc1de4703ab6e064f2fda3f19a1e9f7012449f7e2ec26d035df862137a387c11> a dtwise:ConceptRecord ;
+    rdfs:label "SupplierName",
+        "hasSupplierName" ;
+    rdfs:comment "Name of the product supplier."@en ;
+    dtwise:refersTo <https://example.org/productcatalog/hasSupplierName> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/fd0d2e568bf64e7563b7dc0ab4de60502885622c000004f8886deccae1859b1d> a dtwise:ConceptRecord ;
+    rdfs:label "ECLASSIRDI constraint" ;
+    sh:description "International Registration Data Identifier for the ECLASS classification."@en ;
+    sh:name "ECLASSIRDI" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NJUkRJL3NoYXBl> ;
+    dtwise:sourceDomain "productcatalog" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/fd375225e268ce987246f6d3ccd7ccaed166913e5c5fadee50527ee90d62d46c> a dtwise:ConceptRecord ;
+    rdfs:label "Servers",
+        "hasServers" ;
+    rdfs:comment "Collection of configured OPC UA servers."@en ;
+    dtwise:refersTo <https://example.org/opcuaconnectivity/hasServers> ;
+    dtwise:sourceDomain "opcuaconnectivity" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/fe227691cf170407dc61eb707cbea70f2c15fe313cd302a720200712a1962a06> a dtwise:ConceptRecord ;
+    rdfs:label "ItemDescription constraint" ;
+    sh:description "Source-provided description of the engineering item represented by the assembly."@en ;
+    sh:name "ItemDescription" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseVJlY29yZC5JdGVtRGVzY3JpcHRpb24vc2hhcGU> ;
+    dtwise:sourceDomain "engineeringbom" ;
+    dtwise:sourceType sh:PropertyShape .
+
+<https://example.org/dtwise/concept/fe47ff3e70bd7dc950c4a1b3f56e071c3b43115b5d46d9a51500b31fd8c657b4> a dtwise:ConceptRecord ;
+    rdfs:label "FaultDetectionStatus",
+        "hasFaultDetectionStatus" ;
+    rdfs:comment "Recorded status of fault detection activities for the asset."@en ;
+    dtwise:refersTo <https://example.org/assetinventory/hasFaultDetectionStatus> ;
+    dtwise:sourceDomain "assetinventory" ;
+    dtwise:sourceType owl:DatatypeProperty .
+
+<https://example.org/dtwise/concept/fe672e907a4b23ffc7c3f5b5d38bdd24c104e35e28eda70181c4aabe5e97fbb9> a dtwise:ConceptRecord ;
+    rdfs:label "Equipment",
+        "hasEquipment" ;
+    rdfs:comment "Process equipment item identified in the DEXPI engineering model."@en ;
+    dtwise:refersTo <https://example.org/dexpi/hasEquipment> ;
+    dtwise:sourceDomain "dexpi" ;
+    dtwise:sourceType owl:ObjectProperty .
+
+<https://example.org/dtwise/concept/ff29b36ac1168a0bc730ad245f400e291573dea188bd406148050732cdf68a3c> a dtwise:ConceptRecord ;
+    rdfs:label "CrossDomainAssociationEvidence constraint" ;
+    sh:description "Evidence recorded for the cross-domain association."@en ;
+    sh:name "CrossDomainAssociationEvidence" ;
+    dtwise:refersTo <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl> ;
+    dtwise:sourceDomain "ecad" ;
+    dtwise:sourceType sh:PropertyShape .
+

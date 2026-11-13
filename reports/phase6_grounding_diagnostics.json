@@ -1,0 +1,251 @@
+{
+  "cases": [
+    {
+      "audit_file": "reports\\phase5_q1_q7_results_cases\\case_002.json",
+      "question": "What ECAD electrical references are associated with the reactor instruments identified in the engineering data?",
+      "findings": [
+        {
+          "section": "fields",
+          "index": 0,
+          "name": "pLCEndPoint",
+          "predicate": "https://example.org/ecad/hasPLCEndPoint",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [
+            "s2",
+            "s5"
+          ],
+          "classification": "declared_on_other_candidate_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        }
+      ]
+    },
+    {
+      "audit_file": "reports\\phase5_q1_q7_results_cases\\case_005.json",
+      "question": "What ECLASS classifications, IRDIs, QUDT attributes, and catalog technical specifications are recorded for the product candidates associated with the reactor instruments?",
+      "findings": [
+        {
+          "section": "fields",
+          "index": 0,
+          "name": "eCLASSClass",
+          "predicate": "https://example.org/productcatalog/hasECLASSClass",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 1,
+          "name": "eCLASSIRDI",
+          "predicate": "https://example.org/productcatalog/hasECLASSIRDI",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 2,
+          "name": "eCLASSPreferredName",
+          "predicate": "https://example.org/productcatalog/hasECLASSPreferredName",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 3,
+          "name": "iRDI",
+          "predicate": "https://example.org/productcatalog/hasIRDI",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [],
+          "classification": "absent_from_candidate_schema",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 4,
+          "name": "quDTAttribute",
+          "predicate": "https://example.org/productcatalog/hasQuDTAttribute",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [],
+          "classification": "absent_from_candidate_schema",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 5,
+          "name": "catalogTechnicalSpecification",
+          "predicate": "https://example.org/productcatalog/hasCatalogTechnicalSpecification",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [],
+          "classification": "absent_from_candidate_schema",
+          "auto_repaired": false,
+          "join_verified": false
+        }
+      ]
+    },
+    {
+      "audit_file": "reports\\phase5_q1_q7_results_cases\\case_006.json",
+      "question": "Which verified identifier relationships connect the DEXPI, ECAD, AAS Asset Inventory, and Product Catalog representations of the reactor instruments?",
+      "findings": [
+        {
+          "section": "fields",
+          "index": 0,
+          "name": "crossDomainAssociationEvidence",
+          "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+          "selected_shape": "s0",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [
+            "s5"
+          ],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 1,
+          "name": "crossDomainAssociationEvidence_2",
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "selected_shape": "s1",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 2,
+          "name": "crossDomainAssociationEvidence_3",
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "selected_shape": "s2",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 3,
+          "name": "crossDomainAssociationEvidence_4",
+          "predicate": "https://example.org/productcatalog/hasCrossDomainAssociationEvidence",
+          "selected_shape": "s3",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [],
+          "classification": "absent_from_candidate_schema",
+          "auto_repaired": false,
+          "join_verified": false
+        }
+      ]
+    },
+    {
+      "audit_file": "reports\\phase5_q1_q7_results_cases\\case_007.json",
+      "question": "What DEXPI, ECAD, AAS Asset Inventory, product-candidate, ECLASS, and operational signal information is available for reactor instrument PI-1101?",
+      "findings": [
+        {
+          "section": "fields",
+          "index": 0,
+          "name": "assetIdentifier",
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "selected_shape": "s2",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 1,
+          "name": "assetIdentifier_2",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "selected_shape": "s3",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [
+            "s0",
+            "s6"
+          ],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 2,
+          "name": "assetIdentifier_3",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "selected_shape": "s6",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [
+            "s0",
+            "s3"
+          ],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 3,
+          "name": "assetIdentifier_4",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "selected_shape": "s7",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [
+            "s1",
+            "s8"
+          ],
+          "classification": "declared_on_other_candidate_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 4,
+          "name": "assetIdentifier_5",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "selected_shape": "s8",
+          "declared_on_selected_shape": true,
+          "other_candidate_shapes": [
+            "s1"
+          ],
+          "classification": "valid_on_selected_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        },
+        {
+          "section": "fields",
+          "index": 5,
+          "name": "assetIdentifier_6",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "selected_shape": "s9",
+          "declared_on_selected_shape": false,
+          "other_candidate_shapes": [
+            "s1",
+            "s8"
+          ],
+          "classification": "declared_on_other_candidate_shape",
+          "auto_repaired": false,
+          "join_verified": false
+        }
+      ]
+    }
+  ]
+}

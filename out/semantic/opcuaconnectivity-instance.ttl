@@ -99,7 +99,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29tcHJlc3NvclBvd2VyLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "JI_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/JI_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS20"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS20"^^xsd:string ;
@@ -147,7 +147,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.CompressorPower.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/JI_101"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS20"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29tcHJlc3NvclBvd2VyLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -324,7 +324,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvd0NvbnRyb2wuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_104"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_104"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV4"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV4"^^xsd:string ;
@@ -348,7 +348,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ACFeedFlowControl.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_104"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV4"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvd0NvbnRyb2wuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -399,7 +399,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvdy5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_104"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_104"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS4"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS4"^^xsd:string ;
@@ -423,7 +423,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ACFeedFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_104"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS4"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvdy5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -474,7 +474,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS1"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS1"^^xsd:string ;
@@ -522,7 +522,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.AFeedFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_101"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS1"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -549,7 +549,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93Q29udHJvbC5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_103"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_103"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV3"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV3"^^xsd:string ;
@@ -573,7 +573,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.AFeedFlowControl.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV3"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93Q29udHJvbC5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -699,7 +699,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_102"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_102"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS2"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS2"^^xsd:string ;
@@ -747,7 +747,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.DFeedFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_102"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS2"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -774,7 +774,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93Q29udHJvbC5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV1"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV1"^^xsd:string ;
@@ -798,7 +798,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.DFeedFlowControl.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_101"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV1"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93Q29udHJvbC5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -849,7 +849,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_103"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_103"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS3"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS3"^^xsd:string ;
@@ -897,7 +897,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.EFeedFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS3"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -924,7 +924,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93Q29udHJvbC5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_102"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_102"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV2"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV2"^^xsd:string ;
@@ -948,7 +948,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.EFeedFlowControl.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_102"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV2"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93Q29udHJvbC5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -1074,7 +1074,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yTGV2ZWwuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "LI_102"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/LI_102"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS12"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS12"^^xsd:string ;
@@ -1098,7 +1098,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.SeparatorLevel.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/LI_102"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS12"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yTGV2ZWwuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1224,7 +1224,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yUHJlc3N1cmUuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "PI_102"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/PI_102"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS13"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS13"^^xsd:string ;
@@ -1248,7 +1248,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.SeparatorPressure.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/PI_102"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS13"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yUHJlc3N1cmUuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1299,7 +1299,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVGVtcGVyYXR1cmUuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "TI_102"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/TI_102"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS11"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS11"^^xsd:string ;
@@ -1323,7 +1323,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.SeparatorTemperature.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/TI_102"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS11"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVGVtcGVyYXR1cmUuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1374,7 +1374,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVW5kZXJmbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_108"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_108"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS14"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS14"^^xsd:string ;
@@ -1422,7 +1422,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.SeparatorUnderflow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_108"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS14"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVW5kZXJmbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -1449,7 +1449,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMZXZlbC5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "LI_103"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/LI_103"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS15"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS15"^^xsd:string ;
@@ -1473,7 +1473,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperLevel.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/LI_103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS15"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMZXZlbC5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -1524,7 +1524,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMaXF1aWRQcm9kdWN0VmFsdmUuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_108"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_108"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV8"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV8"^^xsd:string ;
@@ -1548,7 +1548,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperLiquidProductValve.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_108"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV8"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMaXF1aWRQcm9kdWN0VmFsdmUuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1599,7 +1599,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJQcmVzc3VyZS5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "PI_103"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/PI_103"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS16"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS16"^^xsd:string ;
@@ -1623,7 +1623,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperPressure.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/PI_103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS16"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJQcmVzc3VyZS5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -1674,7 +1674,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbUZsb3cuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_110"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_110"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS19"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS19"^^xsd:string ;
@@ -1698,7 +1698,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperSteamFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_110"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS19"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbUZsb3cuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1749,7 +1749,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbVZhbHZlLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_109"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_109"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV9"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV9"^^xsd:string ;
@@ -1797,7 +1797,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperSteamValve.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_109"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV9"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbVZhbHZlLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -1824,7 +1824,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJUZW1wZXJhdHVyZS5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "TI_103"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/TI_103"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS18"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS18"^^xsd:string ;
@@ -1848,7 +1848,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperTemperature.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/TI_103"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS18"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJUZW1wZXJhdHVyZS5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -1899,7 +1899,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJVbmRlcmZsb3cuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_109"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_109"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS17"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS17"^^xsd:string ;
@@ -1923,7 +1923,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.StripperUnderflow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_109"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS17"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJVbmRlcmZsb3cuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;
@@ -1974,7 +1974,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VGbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_107"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_107"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS10"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS10"^^xsd:string ;
@@ -2022,7 +2022,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.PurgeFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_107"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS10"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VGbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2049,7 +2049,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VWYWx2ZS5TaWduYWxOYW1l> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_106"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_106"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV6"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV6"^^xsd:string ;
@@ -2073,7 +2073,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.PurgeValve.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_106"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV6"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VWYWx2ZS5NYXBwaW5nQmFzaXM> a owl:NamedIndividual,
         aas:Property ;
@@ -2124,7 +2124,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "TI_104"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/TI_104"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS21"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS21"^^xsd:string ;
@@ -2172,7 +2172,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorCoolingWaterOutletTemperature.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/TI_104"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS21"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJlLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2199,7 +2199,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZlLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "VC_110"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/VC_110"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMV10"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/ManipulatedVariables/XMV10"^^xsd:string ;
@@ -2247,7 +2247,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorCoolingWaterValve.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/VC_110"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMV10"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZlLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2274,7 +2274,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckZlZWRGbG93LlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_106"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_106"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI106"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS6"^^xsd:string ;
@@ -2322,7 +2322,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorFeedFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_106"^^xsd:string .
+    aas:value "https://aas.example.com/FI106"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckZlZWRGbG93LlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2349,7 +2349,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckxldmVsLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "LI_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/LI_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/LI101"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS8"^^xsd:string ;
@@ -2397,7 +2397,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorLevel.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/LI_101"^^xsd:string .
+    aas:value "https://aas.example.com/LI101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckxldmVsLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2424,7 +2424,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclByZXNzdXJlLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "PI_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/PI_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/PI101"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS7"^^xsd:string ;
@@ -2472,7 +2472,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorPressure.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/PI_101"^^xsd:string .
+    aas:value "https://aas.example.com/PI101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclByZXNzdXJlLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2499,7 +2499,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLlNpZ25hbERpcmVjdGlvbg> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "TI_101"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/TI_101"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/TI101"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS9"^^xsd:string ;
@@ -2547,7 +2547,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.ReactorTemperature.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/TI_101"^^xsd:string .
+    aas:value "https://aas.example.com/TI101"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJlLlNpZ25hbE5hbWU> a owl:NamedIndividual,
         aas:Property ;
@@ -2574,7 +2574,7 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVjeWNsZUZsb3cuU2lnbmFsTmFtZQ> ;
     opcuaconnectivity:hasEngineeringDomain "DEXPI"^^xsd:string ;
     opcuaconnectivity:hasEngineeringFunctionId "FI_105"^^xsd:string ;
-    opcuaconnectivity:hasEngineeringFunctionReference "https://aas.example.com/FI_105"^^xsd:string ;
+    opcuaconnectivity:hasEngineeringFunctionReference "https://example.org/tep/assets/TEP_XMEAS5"^^xsd:string ;
     opcuaconnectivity:hasMappingBasis "TEP benchmark signal meaning; live OPC UA binding not verified"^^xsd:string ;
     opcuaconnectivity:hasMappingStatus "PROVISIONAL_ENGINEERING_MATCH"^^xsd:string ;
     opcuaconnectivity:hasOPCUABrowsePath "Objects/TEP/Measurements/XMEAS5"^^xsd:string ;
@@ -2598,7 +2598,7 @@
         aas:Property ;
     rdfs:label "EngineeringFunctionReference" ;
     aas:elementPath "SignalMappings.RecycleFlow.EngineeringFunctionReference" ;
-    aas:value "https://aas.example.com/FI_105"^^xsd:string .
+    aas:value "https://example.org/tep/assets/TEP_XMEAS5"^^xsd:string .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVjeWNsZUZsb3cuT1BDVUFCcm93c2VQYXRo> a owl:NamedIndividual,
         aas:Property ;

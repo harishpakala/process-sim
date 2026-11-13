@@ -1,0 +1,25 @@
+{
+  "interface": "TEP NEXUS hybrid LLM planning deterministic answer",
+  "generated_at_utc": "2026-11-10T10:08:11.009072+00:00",
+  "question": "Show the latest measurement for FI_101 and VC_101.",
+  "model": "llama3.1:8b",
+  "status": "ERROR",
+  "raw_plan": {
+    "intent": "latest",
+    "engineering_function": "FI_101",
+    "history_window_minutes": 0,
+    "include_asset": false,
+    "include_provenance": false
+  },
+  "validated_plan": null,
+  "evidence": null,
+  "answer": null,
+  "answer_validation": "NOT_AUTOMATICALLY_VERIFIED",
+  "stage_latency_seconds": {
+    "registry_load": 0.00125,
+    "llm_planning": 6.240609,
+    "failed_stage_partial": 0.000381
+  },
+  "error": "ValueError: Planned engineering function does not match the explicit identifier in the question",
+  "elapsed_seconds": 6.24225
+}

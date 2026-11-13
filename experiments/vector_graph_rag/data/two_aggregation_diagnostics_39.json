@@ -1,0 +1,19 @@
+{
+  "dataset_type": "independent_human_annotated",
+  "annotation_protocol": "Two targeted diagnostic questions. Gold ABSTAIN means no supported 2-3 hop path answers the requested aggregation; it does not imply that the underlying data source is unsupported. These cases test limitations of frozen Experiment 36D, not VTKG routing or numerical answer correctness.",
+  "annotation_provenance": "Targeted development diagnostics agreed in conversation; NOT independent held-out annotation.",
+  "cases": [
+    {
+      "id": "VTKG_DIAG_01",
+      "question": "What is the average measured temperature of TI_101 over the last hour?",
+      "expected_path_id": "ABSTAIN",
+      "annotation_note": "Temporal aggregate; frozen 36D only selects SHACL multi-hop graph paths. A path cannot compute this average. Requires validated run/time basis and VTKG mapping for execution."
+    },
+    {
+      "id": "VTKG_DIAG_02",
+      "question": "What is the average design pressure of the vessels?",
+      "expected_path_id": "ABSTAIN",
+      "annotation_note": "Static engineering aggregate, but frozen 36D cannot compute averages or validate design-pressure numeric data; no supported multi-hop path alone answers it."
+    }
+  ]
+}

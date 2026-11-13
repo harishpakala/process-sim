@@ -1,0 +1,5 @@
+[
+  {"question":"Which electrical devices correspond to process equipment?","expected_domains":["ecad","dexpi"]},
+  {"question":"Which engineering components have inventory representations?","expected_domains":["engineeringbom","assetinventory"]},
+  {"question":"Which process instruments are associated with equipment?","expected_domains":["dexpi"]}
+]

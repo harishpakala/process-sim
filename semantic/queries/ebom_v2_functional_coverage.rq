@@ -1,0 +1,17 @@
+# GraphDB AAS: execute after importing semantic/derived/tep_ebom_v2.ttl
+# into https://example.org/dtwise/graph/ebom-v2.
+# Independent cross-assembly functional association inventory.
+PREFIX core: <https://example.org/dtwise/core/>
+PREFIX ebom: <https://example.org/engineeringbom/>
+SELECT ?assemblyId (COUNT(DISTINCT ?association) AS ?functionalAssociations)
+WHERE {
+  GRAPH <https://example.org/dtwise/graph/ebom-v2> {
+    ?assembly ebom:hasBOMItemId ?assemblyId .
+    ?association a core:FunctionalAssociation ;
+      core:functionalAssociationTarget ?assembly ;
+      core:functionalAssociationSource ?source ;
+      core:associationBasis ?basis .
+  }
+}
+GROUP BY ?assemblyId
+ORDER BY ?assemblyId

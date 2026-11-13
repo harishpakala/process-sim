@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "description": "Verified condenser Phase 3/4 functional association cases; NOT the historical Q1-Q7 benchmark.",
+  "cases": [
+    {
+      "id": "COND-ALL",
+      "question": "Which engineering items are functionally associated with condenser C-001?",
+      "expected_route": "ebom_v2_catalog",
+      "expected_engineering_ids": [
+        "CV-1201",
+        "TI-1202",
+        "VC_111"
+      ]
+    },
+    {
+      "id": "COND-ECAD",
+      "question": "Which ECAD devices are functionally associated with condenser C-001?",
+      "expected_route": "ebom_v2_catalog",
+      "expected_engineering_ids": [
+        "CV-1201",
+        "TI-1202"
+      ]
+    },
+    {
+      "id": "COND-DEXPI-ACT",
+      "question": "Which DEXPI actuating functions are functionally associated with condenser C-001?",
+      "expected_route": "ebom_v2_catalog",
+      "expected_engineering_ids": [
+        "VC_111"
+      ]
+    },
+    {
+      "id": "COND-DEXPI-INST",
+      "question": "Which DEXPI instrumentation functions are functionally associated with condenser C-001?",
+      "expected_route": "ebom_v2_catalog",
+      "expected_engineering_ids": []
+    }
+  ]
+}

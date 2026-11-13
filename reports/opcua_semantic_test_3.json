@@ -1,0 +1,737 @@
+{
+  "method": "generic_v4_1_grounded_filters_normalized_names",
+  "question": "List OPC UA signal names, engineering function IDs, and mapping statuses.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "signalName",
+        "shape": "s2",
+        "predicate": "https://example.org/opcuaconnectivity/hasSignalName"
+      },
+      {
+        "name": "engineeringFunctionId",
+        "shape": "s2",
+        "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId"
+      },
+      {
+        "name": "mappingStatus",
+        "shape": "s2",
+        "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"signalName\",\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasSignalName\"\n    },\n    {\n      \"name\": \"engineeringFunctionId\",\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasEngineeringFunctionId\"\n    },\n    {\n      \"name\": \"mappingStatus\",\n      \"shape\": \"s2\",\n      \"predicate\": \"https://example.org/opcuaconnectivity/hasMappingStatus\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?signalName ?engineeringFunctionId ?mappingStatus WHERE {\n  ?node_s2 <https://example.org/opcuaconnectivity/hasSignalName> ?signalName .\n  ?node_s2 <https://example.org/opcuaconnectivity/hasEngineeringFunctionId> ?engineeringFunctionId .\n  ?node_s2 <https://example.org/opcuaconnectivity/hasMappingStatus> ?mappingStatus .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV5"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_105"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS22"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "TI_105"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV6"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_106"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS3"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_103"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS9"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "TI_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS15"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "LI_103"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS1"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS18"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "TI_103"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS2"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_102"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS14"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_108"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS12"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "LI_102"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS4"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_104"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV11"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_111"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV1"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV8"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_108"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS8"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "LI_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV2"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_102"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS7"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "PI_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV12"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "SC_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS10"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_107"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS6"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_106"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS21"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "TI_104"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV10"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_110"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS16"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "PI_103"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS11"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "TI_102"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV4"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_104"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS17"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_109"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS19"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_110"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS20"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "JI_101"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS13"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "PI_102"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV7"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_107"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV3"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_103"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMV9"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "VC_109"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    },
+    {
+      "signalName": {
+        "type": "literal",
+        "value": "XMEAS5"
+      },
+      "engineeringFunctionId": {
+        "type": "literal",
+        "value": "FI_105"
+      },
+      "mappingStatus": {
+        "type": "literal",
+        "value": "PROVISIONAL_ENGINEERING_MATCH"
+      }
+    }
+  ],
+  "binding_count": 34,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+          "label": "ECADConnectionPointReferenceStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEndpointStatus",
+          "label": "EndpointStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEndpointUrl",
+          "label": "EndpointUrl constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+          "label": "NamespaceURI constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasServer",
+          "label": "Server constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+          "label": "EngineeringDomain constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+          "label": "EngineeringFunctionId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+          "label": "EngineeringFunctionReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+          "label": "InventoryAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+          "label": "InventoryAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+          "label": "MappingBasis constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+          "label": "MappingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+          "label": "OPCUABrowsePath constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+          "label": "OPCUANodeId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+          "label": "RelatedInventoryAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+          "label": "SignalDirection constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+          "label": "SignalName constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+          "label": "SignalMapping constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "opcuaconnectivity",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasServers",
+          "label": "Servers constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+          "label": "SignalMappings constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s1",
+      "right": "s0",
+      "predicate": "https://example.org/opcuaconnectivity/hasServer",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j1": {
+      "left": "s3",
+      "right": "s2",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j2": {
+      "left": "s4",
+      "right": "s1",
+      "predicate": "https://example.org/opcuaconnectivity/hasServers",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    },
+    "j3": {
+      "left": "s4",
+      "right": "s3",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+      "kind": "shacl_object_path",
+      "evidence": "sh:property / sh:path / sh:node"
+    }
+  },
+  "required_domains": [
+    "opcuaconnectivity"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "signal name",
+      "tokens": [
+        "name",
+        "signal"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 1463,
+  "ollama_stats": {
+    "prompt_eval_count": 1475,
+    "eval_count": 139,
+    "total_duration": 12654865700
+  },
+  "selected_joins": [],
+  "joined_shapes": [
+    "s2"
+  ],
+  "elapsed_seconds": 14.8
+}

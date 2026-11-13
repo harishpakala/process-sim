@@ -20,10 +20,13 @@ for domain,model,groups in [("DEXPI",dex,("Equipments","InstrumentationFunctions
         if group["idShort"] not in groups:continue
         for item in group["value"]:
             fields=props(item)
-            key=(domain,fields["AssetIdentifier"])
+            source_id=fields.get("SourceAssetIdentifier") or fields["AssetIdentifier"]
+            key=(domain,source_id)
             assert key not in sources,key
-            sources[key]=(group["idShort"],item["idShort"],fields["LocalId"])
-assets={p["EngineeringReference"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("EngineeringReference")}
+            sources[key]=(group["idShort"],item["idShort"],fields["LocalId"],fields["AssetIdentifier"])
+assets={p["AssetIdentifier"]:p for p in map(props,inventory["submodelElements"][0]["value"]) if p.get("AssetIdentifier")}
+catalog=load("examples/aas/product_catalog_instance.json")
+product_ids={p["ProductIdentifier"] for p in map(props,catalog["submodelElements"][0]["value"]) if p.get("ProductIdentifier")}
 assemblies=bom["submodelElements"][0]["value"]
 items=bom["submodelElements"][1]["value"]
 assembly_map={props(a)["BOMItemId"]:props(a) for a in assemblies}
@@ -45,10 +48,14 @@ assert len(items)==len(sources)==79
 seen=set()
 for item in items:
     p=props(item)
-    key=(p["SourceDomain"],p["EngineeringReference"])
+    # Match the original DEXPI/ECAD identity, not the reconciled inventory URI.
+    key=(p["SourceDomain"],p["SourceAssetIdentifier"])
     assert key in sources and key not in seen,key
     seen.add(key)
-    assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"])==sources[key]
+    assert (p["SourceGroup"],p["ItemDescription"],p["EngineeringLocalId"],p["AssetIdentifier"])==sources[key],key
+    # SourceAssetIdentifier preserves the original source URI; it is not the
+    # current canonical AssetIdentifier after DEXPI/ECAD identity reconciliation.
+    assert p.get("SourceAssetIdentifier"), p["BOMItemId"]
     assert p["Quantity"]=="1" and p["Unit"]=="EA"
     parent=equipment_parents.get(p["EngineeringLocalId"]) if p["SourceDomain"]=="DEXPI" and p["SourceGroup"]=="Equipments" else None
     assert p["ParentItemId"]==(parent or "ASM-UNASSIGNED")
@@ -60,9 +67,11 @@ for item in items:
     assert p["BOMPosition"]==p["BOMItemId"]
     assert p["StructureStatus"]==("EQUIPMENT_OBJECT_UNDER_NAMED_ASSEMBLY_COMPONENT_BREAKDOWN_UNVERIFIED" if parent else "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP")
     assert p["QuantityBasis"]=="ONE_MODELED_ENGINEERING_OBJECT_NOT_PROCUREMENT_QUANTITY"
-    asset=assets.get(p["EngineeringReference"])
-    assert p["AssetReference"]==(asset.get("AssetId","") if asset else "")
-    assert p["CandidateProductReference"]==(asset.get("CandidateProductReference","") if asset else "")
-    assert p["ValidationStatus"]==("ASSET_REFERENCE_EXACT_MATCH" if asset else "UNRESOLVED_ASSET_REFERENCE")
+    asset=assets.get(p["AssetIdentifier"])
+    assert "AssetReference" not in p and "CandidateProductReference" not in p
+    product=(asset.get("ProductIdentifier") or asset.get("CandidateProductReference") or "") if asset else ""
+    assert p["ProductIdentifier"]==(product if product in product_ids else "")
+    assert not p["ProductIdentifier"] or p["ProductIdentifier"] in product_ids
+    assert p["ValidationStatus"]==("ASSET_IDENTIFIER_EXACT_MATCH" if asset else "ASSET_INVENTORY_MATCH_UNRESOLVED")
     assert p["EquivalenceStatus"]=="NOT_ASSESSED_ACROSS_DOMAINS"
-print(f"PASS: {len(items)} EBOM lines, {sum(bool(props(i)['AssetReference']) for i in items)} exact asset matches; no inferred cross-domain equivalence")
+print(f"PASS: {len(items)} EBOM lines, {sum(props(i)['ValidationStatus']=='ASSET_IDENTIFIER_EXACT_MATCH' for i in items)} exact asset identifiers, {sum(bool(props(i)['ProductIdentifier']) for i in items)} catalog product identifiers; no inferred physical installation")

@@ -1,0 +1,763 @@
+{
+  "method": "generic_v4_grounded_filters_fail_closed",
+  "question": "For assets represented in ECAD and AssetInventory, show ECAD local IDs and inventory asset names.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "ecadLocalId",
+        "shape": "s0",
+        "predicate": "https://example.org/ecad/hasLocalId"
+      },
+      {
+        "name": "assetName",
+        "shape": "s8",
+        "predicate": "https://example.org/assetinventory/hasAssetName"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"ecadLocalId\",\n      \"shape\": \"s0\",\n      \"predicate\": \"https://example.org/ecad/hasLocalId\"\n    },\n    {\n      \"name\": \"assetName\",\n      \"shape\": \"s8\",\n      \"predicate\": \"https://example.org/assetinventory/hasAssetName\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": "SELECT DISTINCT ?ecadLocalId ?assetName WHERE {\n  ?node_s0 <https://example.org/ecad/hasAssetIdentifier> ?key_j0 .\n  ?node_s8 <https://example.org/assetinventory/hasAssetIdentifier> ?key_j0 .\n  ?node_s0 <https://example.org/ecad/hasLocalId> ?ecadLocalId .\n  ?node_s8 <https://example.org/assetinventory/hasAssetName> ?assetName .\n}",
+  "plan_issues": [],
+  "graphdb_bindings": [
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "M-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper Pump Motor"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1005"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Purge Flow Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1202"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Condenser Cooling-Water Outlet Temperature"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1101"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor feed flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Separator Liquid Outlet / Stripper Inlet Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1101"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor level"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "M-1401"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Compressor Pump Motor"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Separator liquid level"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1401"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Compressor Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1004"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed A and C flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1002"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed D Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1003"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed E flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1502"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper Stream Feed Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Separator temperature"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Separator underflow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "M1"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor Stirrer Motor"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1101"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor temperature"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1001"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed A flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1201"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Condenser Cooling-Water Return Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1002"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed D flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Product Outlet Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1101"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor pressure"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1006"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Recycle flow rate"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper underflow"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper temperature"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper pressure"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "PI-1301"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Separator pressure"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "JI-1401"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Compressor work"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "LI-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper level"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1003"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed E Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1101"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor Cooling Water Return (CWR) Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1001"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed A Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1004"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Feed A and C Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1502"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Stripper stream flow"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "M-1501"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Product Pump Motor"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "TI-1103"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Reactor cooling-water outlet temperature"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "CV-1006"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Recycle Flow Control Valve"
+      }
+    },
+    {
+      "ecadLocalId": {
+        "type": "literal",
+        "value": "FI-1005"
+      },
+      "assetName": {
+        "type": "literal",
+        "value": "Purge flow rate"
+      }
+    }
+  ],
+  "binding_count": 38,
+  "error": null,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+          "label": "EngineeringVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+          "label": "EngineeringVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+          "label": "ProductVerificationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+          "label": "ProductVerificationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssets",
+          "label": "Assets constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasConnectionPoints",
+          "label": "ConnectionPoints constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s5": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s6": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasAddress",
+          "label": "Address constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasLocalId",
+          "label": "LocalId constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s7": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAsset",
+          "label": "Asset constraint",
+          "kind": "object"
+        }
+      ]
+    },
+    "s8": {
+      "domain": "assetinventory",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "properties": [
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "label": "AssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetName",
+          "label": "AssetName constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasAssetType",
+          "label": "AssetType constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+          "label": "EngineeringReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+          "label": "EquipmentTag constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+          "label": "FaultDetectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+          "label": "FaultInjectionStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasLocation",
+          "label": "Location constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasModelingStatus",
+          "label": "ModelingStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+          "label": "MonitoringStatus constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasOperationalReference",
+          "label": "OperationalReference constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "label": "ProductIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier constraint",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+          "label": "SimulationStatus constraint",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s9": {
+      "domain": "ecad",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+      "properties": [
+        {
+          "predicate": "https://example.org/ecad/hasEndPoint",
+          "label": "EndPoint constraint",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/ecad/hasPLCEndPoint",
+          "label": "PLCEndPoint constraint",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {
+    "j0": {
+      "left": "s0",
+      "right": "s8",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    },
+    "j1": {
+      "left": "s2",
+      "right": "s8",
+      "left_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "right_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "identifier": "hasAssetIdentifier",
+      "evidence": "same identifier local name; RDF-term equality is a hypothesis"
+    }
+  },
+  "required_domains": [
+    "ecad",
+    "assetinventory"
+  ],
+  "requested_concepts": [
+    {
+      "phrase": "local id",
+      "tokens": [
+        "id",
+        "local"
+      ]
+    }
+  ],
+  "estimated_prompt_tokens": 2041,
+  "ollama_stats": {
+    "prompt_eval_count": 2191,
+    "eval_count": 95,
+    "total_duration": 16545321700
+  },
+  "selected_joins": [
+    "j0"
+  ],
+  "joined_shapes": [
+    "s0",
+    "s8"
+  ],
+  "elapsed_seconds": 18.7
+}

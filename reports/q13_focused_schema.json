@@ -1,0 +1,1369 @@
+{
+  "method": "schema_only_shacl_owl_extraction",
+  "limitations": [
+    "Cross-domain equality joins are candidates inferred from property naming; TTL SHACL paths alone do not prove identifier equivalence.",
+    "Complex SHACL paths are not flattened.",
+    "No instance data or expected answer is included."
+  ],
+  "domains": [
+    {
+      "domain": "dexpi",
+      "source_file": "dexpi-template.ttl",
+      "source_sha256": "9af51542e2a12ce5dd17d6cdd8a052c0658f06e97f25863d3d0f0502f4d02e71",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/",
+          "label": "DEXPI"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zL25vZGVTaGFwZQ",
+          "label": "ActuatingFunctions SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasActuatingFunction",
+              "label": "ActuatingFunction constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+          "label": "ActuatingFunction SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasActuatedVariable",
+              "label": "ActuatedVariable constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+              "label": "CrossDomainAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+              "label": "CrossDomainAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+              "label": "RelatedAssetIdentifier constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+          "label": "Equipment SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy9ub2RlU2hhcGU",
+          "label": "Equipments SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasEquipment",
+              "label": "Equipment constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zL25vZGVTaGFwZQ",
+          "label": "InstrumentationFunctions SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasInstrumentationFunction",
+              "label": "InstrumentationFunction constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+          "label": "InstrumentationFunction SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+              "label": "CrossDomainAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+              "label": "CrossDomainAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasMeasuredVariable",
+              "label": "MeasuredVariable constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasRelatedAssetIdentifier",
+              "label": "RelatedAssetIdentifier constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/c2hhcGU",
+          "label": "DEXPI SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/dexpi/hasActuatingFunctions",
+              "label": "ActuatingFunctions constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasEquipments",
+              "label": "Equipments constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/dexpi/hasInstrumentationFunctions",
+              "label": "InstrumentationFunctions constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/dexpi/hasActuatedVariable",
+        "https://example.org/dexpi/hasActuatingFunction",
+        "https://example.org/dexpi/hasActuatingFunctions",
+        "https://example.org/dexpi/hasAssetIdentifier",
+        "https://example.org/dexpi/hasCrossDomainAssociationEvidence",
+        "https://example.org/dexpi/hasCrossDomainAssociationStatus",
+        "https://example.org/dexpi/hasEngineeringInterpretationNote",
+        "https://example.org/dexpi/hasEquipment",
+        "https://example.org/dexpi/hasEquipments",
+        "https://example.org/dexpi/hasInstrumentationFunction",
+        "https://example.org/dexpi/hasInstrumentationFunctions",
+        "https://example.org/dexpi/hasLocalId",
+        "https://example.org/dexpi/hasMeasuredVariable",
+        "https://example.org/dexpi/hasRelatedAssetIdentifier"
+      ]
+    },
+    {
+      "domain": "ecad",
+      "source_file": "ecad-template.ttl",
+      "source_sha256": "79b9b81134bec71cf5f4bd04d75ed4441e8f988d12406ecd121be7655c9cbe1e",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/",
+          "label": "ECAD"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+          "label": "EndPoint SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAddress",
+              "label": "Address constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+          "label": "PLCEndPoint SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAddress",
+              "label": "Address constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+          "label": "ConnectionPoints SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasEndPoint",
+              "label": "EndPoint constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasPLCEndPoint",
+              "label": "PLCEndPoint constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+          "label": "Device SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasConnectionPoints",
+              "label": "ConnectionPoints constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+              "label": "CrossDomainAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+              "label": "CrossDomainAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+              "label": "EngineeringVerificationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+              "label": "EngineeringVerificationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasProductVerificationEvidence",
+              "label": "ProductVerificationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+              "label": "ProductVerificationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasRelatedAssetIdentifier",
+              "label": "RelatedAssetIdentifier constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy9ub2RlU2hhcGU",
+          "label": "Devices SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasDevice",
+              "label": "Device constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy9ub2RlU2hhcGU",
+          "label": "Schematics SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasConnections",
+              "label": "Connections constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+          "label": "EndPoint SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAddress",
+              "label": "Address constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+          "label": "PLCEndPoint SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAddress",
+              "label": "Address constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy9ub2RlU2hhcGU",
+          "label": "ConnectionPoints SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasEndPoint",
+              "label": "EndPoint constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasPLCEndPoint",
+              "label": "PLCEndPoint constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+          "label": "Symbol SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasConnectionPoints",
+              "label": "ConnectionPoints constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "label": "LocalId constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy9ub2RlU2hhcGU",
+          "label": "Symbols SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasSymbol",
+              "label": "Symbol constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+          "label": "ECAD SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/ecad/hasDevices",
+              "label": "Devices constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasSchematics",
+              "label": "Schematics constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/ecad/hasSymbols",
+              "label": "Symbols constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/ecad/hasAddress",
+        "https://example.org/ecad/hasAssetIdentifier",
+        "https://example.org/ecad/hasConnectionPoints",
+        "https://example.org/ecad/hasConnections",
+        "https://example.org/ecad/hasCrossDomainAssociationEvidence",
+        "https://example.org/ecad/hasCrossDomainAssociationStatus",
+        "https://example.org/ecad/hasDevice",
+        "https://example.org/ecad/hasDevices",
+        "https://example.org/ecad/hasEndPoint",
+        "https://example.org/ecad/hasEngineeringInterpretationNote",
+        "https://example.org/ecad/hasEngineeringVerificationEvidence",
+        "https://example.org/ecad/hasEngineeringVerificationStatus",
+        "https://example.org/ecad/hasLocalId",
+        "https://example.org/ecad/hasPLCEndPoint",
+        "https://example.org/ecad/hasProductVerificationEvidence",
+        "https://example.org/ecad/hasProductVerificationStatus",
+        "https://example.org/ecad/hasRelatedAssetIdentifier",
+        "https://example.org/ecad/hasSchematics",
+        "https://example.org/ecad/hasSymbol",
+        "https://example.org/ecad/hasSymbols"
+      ]
+    },
+    {
+      "domain": "engineeringbom",
+      "source_file": "engineeringbom-template.ttl",
+      "source_sha256": "611916653e9cccd72163ed8af0cf39ea4d1d8389c76f721e916dd590b51d1ada",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/",
+          "label": "TEP_EngineeringBOM"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU",
+          "label": "Assembly SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssemblyKind",
+              "label": "AssemblyKind constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+              "label": "BOMItemId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+              "label": "BOMPosition constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemDescription",
+              "label": "ItemDescription constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemType",
+              "label": "ItemType constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasParentItemId",
+              "label": "ParentItemId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+              "label": "QuantityPerAssembly constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasRevision",
+              "label": "Revision constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+              "label": "StructureStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasUnit",
+              "label": "Unit constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+          "label": "Assemblies SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssembly",
+              "label": "Assembly constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+          "label": "BOMItem SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssociationBasis",
+              "label": "AssociationBasis constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+              "label": "BOMItemId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+              "label": "BOMPosition constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+              "label": "CrossDomainAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+              "label": "CrossDomainAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasEngineeringLocalId",
+              "label": "EngineeringLocalId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasEquivalenceStatus",
+              "label": "EquivalenceStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+              "label": "FunctionalAssemblyReference constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemDescription",
+              "label": "ItemDescription constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasItemType",
+              "label": "ItemType constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasParentItemId",
+              "label": "ParentItemId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+              "label": "ProductIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasQuantity",
+              "label": "Quantity constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasQuantityBasis",
+              "label": "QuantityBasis constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+              "label": "QuantityPerAssembly constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+              "label": "RelatedAssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasRevision",
+              "label": "Revision constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSelectionStatus",
+              "label": "SelectionStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+              "label": "SourceAssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceDomain",
+              "label": "SourceDomain constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasSourceGroup",
+              "label": "SourceGroup constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+              "label": "StructureStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasUnit",
+              "label": "Unit constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasValidationStatus",
+              "label": "ValidationStatus constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl",
+          "label": "BOMItems SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMItem",
+              "label": "BOMItem constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+          "label": "TEP_EngineeringBOM SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/engineeringbom/hasAssemblies",
+              "label": "Assemblies constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/engineeringbom/hasBOMItems",
+              "label": "BOMItems constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/engineeringbom/hasAssemblies",
+        "https://example.org/engineeringbom/hasAssembly",
+        "https://example.org/engineeringbom/hasAssemblyKind",
+        "https://example.org/engineeringbom/hasAssetIdentifier",
+        "https://example.org/engineeringbom/hasAssociationBasis",
+        "https://example.org/engineeringbom/hasBOMItem",
+        "https://example.org/engineeringbom/hasBOMItemId",
+        "https://example.org/engineeringbom/hasBOMItems",
+        "https://example.org/engineeringbom/hasBOMPosition",
+        "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+        "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+        "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+        "https://example.org/engineeringbom/hasEngineeringLocalId",
+        "https://example.org/engineeringbom/hasEquivalenceStatus",
+        "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+        "https://example.org/engineeringbom/hasItemDescription",
+        "https://example.org/engineeringbom/hasItemType",
+        "https://example.org/engineeringbom/hasParentItemId",
+        "https://example.org/engineeringbom/hasProductIdentifier",
+        "https://example.org/engineeringbom/hasQuantity",
+        "https://example.org/engineeringbom/hasQuantityBasis",
+        "https://example.org/engineeringbom/hasQuantityPerAssembly",
+        "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+        "https://example.org/engineeringbom/hasRevision",
+        "https://example.org/engineeringbom/hasSelectionStatus",
+        "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+        "https://example.org/engineeringbom/hasSourceDomain",
+        "https://example.org/engineeringbom/hasSourceGroup",
+        "https://example.org/engineeringbom/hasStructureStatus",
+        "https://example.org/engineeringbom/hasUnit",
+        "https://example.org/engineeringbom/hasValidationStatus"
+      ]
+    },
+    {
+      "domain": "assetinventory",
+      "source_file": "assetinventory-template.ttl",
+      "source_sha256": "737633cf14e97569e65cfd3675118882382a0eaa63b8a8c0ed3b427bc0e153e4",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/",
+          "label": "AssetInventory"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ",
+          "label": "Assets SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/assetinventory/hasAsset",
+              "label": "Asset constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+          "label": "Asset SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetName",
+              "label": "AssetName constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasAssetType",
+              "label": "AssetType constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+              "label": "CrossDomainAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+              "label": "CrossDomainAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasEngineeringReference",
+              "label": "EngineeringReference constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasEquipmentTag",
+              "label": "EquipmentTag constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasFaultDetectionStatus",
+              "label": "FaultDetectionStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasFaultInjectionStatus",
+              "label": "FaultInjectionStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasLocation",
+              "label": "Location constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasModelingStatus",
+              "label": "ModelingStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasMonitoringStatus",
+              "label": "MonitoringStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasOperationalReference",
+              "label": "OperationalReference constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+              "label": "ProductIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+              "label": "RelatedAssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/assetinventory/hasSimulationStatus",
+              "label": "SimulationStatus constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/c2hhcGU",
+          "label": "AssetInventory SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/assetinventory/hasAssets",
+              "label": "Assets constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/assetinventory/hasAsset",
+        "https://example.org/assetinventory/hasAssetIdentifier",
+        "https://example.org/assetinventory/hasAssetName",
+        "https://example.org/assetinventory/hasAssetType",
+        "https://example.org/assetinventory/hasAssets",
+        "https://example.org/assetinventory/hasCrossDomainAssociationEvidence",
+        "https://example.org/assetinventory/hasCrossDomainAssociationStatus",
+        "https://example.org/assetinventory/hasEngineeringInterpretationNote",
+        "https://example.org/assetinventory/hasEngineeringReference",
+        "https://example.org/assetinventory/hasEquipmentTag",
+        "https://example.org/assetinventory/hasFaultDetectionStatus",
+        "https://example.org/assetinventory/hasFaultInjectionStatus",
+        "https://example.org/assetinventory/hasLocation",
+        "https://example.org/assetinventory/hasModelingStatus",
+        "https://example.org/assetinventory/hasMonitoringStatus",
+        "https://example.org/assetinventory/hasOperationalReference",
+        "https://example.org/assetinventory/hasProductIdentifier",
+        "https://example.org/assetinventory/hasRelatedAssetIdentifier",
+        "https://example.org/assetinventory/hasSimulationStatus"
+      ]
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "source_file": "opcuaconnectivity-template.ttl",
+      "source_sha256": "8478ff9ce5e5a94fe92a9d5cbab8ff4f77380e6eaacb5add4809640eb00988ef",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/",
+          "label": "TEP_OPCUAConnectivity"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl",
+          "label": "Server SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+              "label": "ECADConnectionPointReferenceStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEndpointStatus",
+              "label": "EndpointStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEndpointUrl",
+              "label": "EndpointUrl constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasNamespaceURI",
+              "label": "NamespaceURI constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU",
+          "label": "Servers SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasServer",
+              "label": "Server constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+          "label": "SignalMapping SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+              "label": "AssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+              "label": "EngineeringDomain constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+              "label": "EngineeringFunctionId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+              "label": "EngineeringFunctionReference constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+              "label": "EngineeringInterpretationNote constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+              "label": "InventoryAssociationEvidence constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+              "label": "InventoryAssociationStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasMappingBasis",
+              "label": "MappingBasis constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasMappingStatus",
+              "label": "MappingStatus constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+              "label": "OPCUABrowsePath constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+              "label": "OPCUANodeId constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+              "label": "RelatedInventoryAssetIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalDirection",
+              "label": "SignalDirection constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+              "label": "SignalName constraint",
+              "kind": "datatype"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl",
+          "label": "SignalMappings SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalMapping",
+              "label": "SignalMapping constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+          "label": "TEP_OPCUAConnectivity SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasServers",
+              "label": "Servers constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            },
+            {
+              "predicate": "https://example.org/opcuaconnectivity/hasSignalMappings",
+              "label": "SignalMappings constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+        "https://example.org/opcuaconnectivity/hasECADConnectionPointReferenceStatus",
+        "https://example.org/opcuaconnectivity/hasEndpointStatus",
+        "https://example.org/opcuaconnectivity/hasEndpointUrl",
+        "https://example.org/opcuaconnectivity/hasEngineeringDomain",
+        "https://example.org/opcuaconnectivity/hasEngineeringFunctionId",
+        "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference",
+        "https://example.org/opcuaconnectivity/hasEngineeringInterpretationNote",
+        "https://example.org/opcuaconnectivity/hasInventoryAssociationEvidence",
+        "https://example.org/opcuaconnectivity/hasInventoryAssociationStatus",
+        "https://example.org/opcuaconnectivity/hasMappingBasis",
+        "https://example.org/opcuaconnectivity/hasMappingStatus",
+        "https://example.org/opcuaconnectivity/hasNamespaceURI",
+        "https://example.org/opcuaconnectivity/hasOPCUABrowsePath",
+        "https://example.org/opcuaconnectivity/hasOPCUANodeId",
+        "https://example.org/opcuaconnectivity/hasRelatedInventoryAssetIdentifier",
+        "https://example.org/opcuaconnectivity/hasServer",
+        "https://example.org/opcuaconnectivity/hasServers",
+        "https://example.org/opcuaconnectivity/hasSignalDirection",
+        "https://example.org/opcuaconnectivity/hasSignalMapping",
+        "https://example.org/opcuaconnectivity/hasSignalMappings",
+        "https://example.org/opcuaconnectivity/hasSignalName"
+      ]
+    },
+    {
+      "domain": "productcatalog",
+      "source_file": "productcatalog-template.ttl",
+      "source_sha256": "2f73cc0795553973e5225b0475537fce63511343d10991da726d9a5f6df2d6e7",
+      "classes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/",
+          "label": "ProductCatalog"
+        },
+        {
+          "uri": "https://example.org/aas/SMC",
+          "label": "Submodel Element Collection"
+        }
+      ],
+      "node_shapes": [
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ",
+          "label": "TechnicalProperties SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/productcatalog/hasTechnicalProperty",
+              "label": "TechnicalProperty constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+          "label": "Product SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/productcatalog/hasECLASSClass",
+              "label": "ECLASSClass constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasECLASSIRDI",
+              "label": "ECLASSIRDI constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasECLASSPreferredName",
+              "label": "ECLASSPreferredName constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerName",
+              "label": "ManufacturerName constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerPartNumber",
+              "label": "ManufacturerPartNumber constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasManufacturerProductDesignation",
+              "label": "ManufacturerProductDesignation constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasProductDescription",
+              "label": "ProductDescription constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+              "label": "ProductIdentifier constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasSupplierName",
+              "label": "SupplierName constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasSupplierPartNumber",
+              "label": "SupplierPartNumber constraint",
+              "kind": "datatype"
+            },
+            {
+              "predicate": "https://example.org/productcatalog/hasTechnicalProperties",
+              "label": "TechnicalProperties constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl",
+          "label": "Products SHACL shape",
+          "target_classes": [],
+          "properties": [
+            {
+              "predicate": "https://example.org/productcatalog/hasProduct",
+              "label": "Product constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        },
+        {
+          "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU",
+          "label": "ProductCatalog SHACL shape",
+          "target_classes": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/"
+          ],
+          "properties": [
+            {
+              "predicate": "https://example.org/productcatalog/hasProducts",
+              "label": "Products constraint",
+              "kind": "object",
+              "value_class": "https://example.org/aas/SMC"
+            }
+          ]
+        }
+      ],
+      "valid_predicates": [
+        "https://example.org/productcatalog/hasECLASSClass",
+        "https://example.org/productcatalog/hasECLASSIRDI",
+        "https://example.org/productcatalog/hasECLASSPreferredName",
+        "https://example.org/productcatalog/hasManufacturerName",
+        "https://example.org/productcatalog/hasManufacturerPartNumber",
+        "https://example.org/productcatalog/hasManufacturerProductDesignation",
+        "https://example.org/productcatalog/hasProduct",
+        "https://example.org/productcatalog/hasProductDescription",
+        "https://example.org/productcatalog/hasProductIdentifier",
+        "https://example.org/productcatalog/hasProducts",
+        "https://example.org/productcatalog/hasSupplierName",
+        "https://example.org/productcatalog/hasSupplierPartNumber",
+        "https://example.org/productcatalog/hasTechnicalProperties",
+        "https://example.org/productcatalog/hasTechnicalProperty"
+      ]
+    }
+  ],
+  "cross_domain_identifier_candidates": [
+    {
+      "identifier": "AssetIdentifier",
+      "evidence": "same SHACL predicate local name in multiple domains",
+      "status": "candidate_value_equality_join_not_formally_asserted",
+      "semantics": "Join on equal RDF terms only when identifiers have matching meaning and representation.",
+      "occurrences": [
+        {
+          "domain": "assetinventory",
+          "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+          "parent_shape_label": "Asset SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkluc3RydW1lbnRhdGlvbkZ1bmN0aW9uL25vZGVTaGFwZQ",
+          "parent_shape_label": "InstrumentationFunction SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/RXF1aXBtZW50cy5FcXVpcG1lbnQvbm9kZVNoYXBl",
+          "parent_shape_label": "Equipment SHACL shape"
+        },
+        {
+          "domain": "dexpi",
+          "predicate": "https://example.org/dexpi/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+          "parent_shape_label": "ActuatingFunction SHACL shape"
+        },
+        {
+          "domain": "ecad",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+          "parent_shape_label": "Symbol SHACL shape"
+        },
+        {
+          "domain": "ecad",
+          "predicate": "https://example.org/ecad/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+          "parent_shape_label": "Device SHACL shape"
+        },
+        {
+          "domain": "engineeringbom",
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+          "parent_shape_label": "BOMItem SHACL shape"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+          "parent_shape_label": "SignalMapping SHACL shape"
+        }
+      ]
+    },
+    {
+      "identifier": "ProductIdentifier",
+      "evidence": "same SHACL predicate local name in multiple domains",
+      "status": "candidate_value_equality_join_not_formally_asserted",
+      "semantics": "Join on equal RDF terms only when identifiers have matching meaning and representation.",
+      "occurrences": [
+        {
+          "domain": "assetinventory",
+          "predicate": "https://example.org/assetinventory/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+          "parent_shape_label": "Asset SHACL shape"
+        },
+        {
+          "domain": "engineeringbom",
+          "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+          "parent_shape_label": "BOMItem SHACL shape"
+        },
+        {
+          "domain": "productcatalog",
+          "predicate": "https://example.org/productcatalog/hasProductIdentifier",
+          "parent_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+          "parent_shape_label": "Product SHACL shape"
+        }
+      ]
+    }
+  ]
+}

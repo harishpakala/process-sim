@@ -1,0 +1,126 @@
+{
+  "total": 7,
+  "passed": 4,
+  "results": [
+    {
+      "case": "baseline",
+      "expected": "success",
+      "passed": true,
+      "selected_predicates": [
+        "hasOPCUANodeId",
+        "hasSignalName"
+      ],
+      "rows": 34,
+      "issues": [],
+      "errors": [],
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\baseline.json"
+    },
+    {
+      "case": "node_identifier_paraphrase",
+      "expected": "success",
+      "passed": false,
+      "selected_predicates": [
+        "hasOPCUANodeId",
+        "hasSignalName"
+      ],
+      "rows": null,
+      "issues": [
+        "Unresolved requested output: OPC UA node identifiers"
+      ],
+      "errors": [
+        "plan rejected: ['Unresolved requested output: OPC UA node identifiers']",
+        "SPARQL not generated",
+        "expected 34 rows, got None"
+      ],
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\node_identifier_paraphrase.json"
+    },
+    {
+      "case": "endpoint_paraphrase",
+      "expected": "success",
+      "passed": false,
+      "selected_predicates": [
+        "hasEndpointStatus",
+        "hasEndpointUrl"
+      ],
+      "rows": null,
+      "issues": [
+        "Unresolved requested output: endpoint statuses"
+      ],
+      "errors": [
+        "plan rejected: ['Unresolved requested output: endpoint statuses']",
+        "SPARQL not generated",
+        "expected 1 rows, got None"
+      ],
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\endpoint_paraphrase.json"
+    },
+    {
+      "case": "mapping_status",
+      "expected": "success",
+      "passed": false,
+      "selected_predicates": [
+        "hasMappingStatus",
+        "hasSignalName"
+      ],
+      "rows": null,
+      "issues": [
+        "Unresolved requested output: mapping statuses"
+      ],
+      "errors": [
+        "plan rejected: ['Unresolved requested output: mapping statuses']",
+        "SPARQL not generated",
+        "expected 34 rows, got None"
+      ],
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\mapping_status.json"
+    },
+    {
+      "case": "reference_distinction",
+      "expected": "success",
+      "passed": true,
+      "selected_predicates": [
+        "hasEngineeringFunctionReference",
+        "hasSignalName"
+      ],
+      "rows": 34,
+      "issues": [],
+      "errors": [],
+      "translator_exit_code": 0,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\reference_distinction.json"
+    },
+    {
+      "case": "removed_function_id",
+      "expected": "reject",
+      "passed": true,
+      "selected_predicates": [
+        "hasEngineeringFunctionReference",
+        "hasSignalName"
+      ],
+      "rows": null,
+      "issues": [
+        "Unresolved requested output: engineering function IDs"
+      ],
+      "errors": [],
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\removed_function_id.json"
+    },
+    {
+      "case": "removed_engineering_domain",
+      "expected": "reject",
+      "passed": true,
+      "selected_predicates": [
+        "hasEngineeringFunctionReference",
+        "hasSignalName"
+      ],
+      "rows": null,
+      "issues": [
+        "Unresolved requested output: engineering domains"
+      ],
+      "errors": [],
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\opcua_description_regression\\removed_engineering_domain.json"
+    }
+  ]
+}

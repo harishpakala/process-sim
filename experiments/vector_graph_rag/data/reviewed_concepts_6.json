@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "status": "user_reviewed",
+  "scope": "concept_retrieval_only",
+  "source_annotation_files": [
+    "data/proposed_concepts_q01_q05.json",
+    "data/reviewed_concepts_q07.json"
+  ],
+  "notes": "Six user-reviewed cases; Q06 and Q08-Q15 remain unannotated. No oracle domain filtering or approved instance mappings implied.",
+  "cases": [
+    {
+      "id": "Q01",
+      "required": [
+        {
+          "domain": "dexpi",
+          "uri": "https://example.org/dexpi/hasInstrumentationFunction"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "dexpi",
+          "uri": "https://example.org/dexpi/hasInstrumentationFunctions"
+        },
+        {
+          "domain": "dexpi",
+          "uri": "https://example.org/dexpi/hasMeasuredVariable"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [],
+      "historical": false,
+      "notes": "User approved the proposed Q01-Q05 classification without changes."
+    },
+    {
+      "id": "Q02",
+      "required": [
+        {
+          "domain": "ecad",
+          "uri": "https://example.org/ecad/hasDevice"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "ecad",
+          "uri": "https://example.org/ecad/hasDevices"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [],
+      "historical": false,
+      "notes": "User approved the proposed Q01-Q05 classification without changes."
+    },
+    {
+      "id": "Q03",
+      "required": [
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasAsset"
+        },
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasEquipmentTag"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasAssets"
+        },
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasAssetIdentifier"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [],
+      "historical": false,
+      "notes": "User approved the proposed Q01-Q05 classification without changes."
+    },
+    {
+      "id": "Q04",
+      "required": [
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasManufacturerName"
+        },
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasECLASSClass"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasECLASSIRDI"
+        },
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasECLASSPreferredName"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [],
+      "historical": false,
+      "notes": "User approved the proposed Q01-Q05 classification without changes."
+    },
+    {
+      "id": "Q05",
+      "required": [
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasBOMItems"
+        },
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasFunctionalAssociations"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasBOMItemRecord"
+        },
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasAssemblyRecord"
+        },
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasParentReferences"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [],
+      "historical": false,
+      "notes": "User approved the proposed Q01-Q05 classification without changes."
+    },
+    {
+      "id": "Q07",
+      "required": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasSignalName"
+        },
+        {
+          "domain": "ecad",
+          "uri": "https://example.org/ecad/hasDevice"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasSignalMapping"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [
+        "PI-1101"
+      ],
+      "historical": false,
+      "notes": "Required vs supporting concepts reviewed by user. Does not assert an approved cross-domain mapping or instance-level correspondence."
+    }
+  ]
+}

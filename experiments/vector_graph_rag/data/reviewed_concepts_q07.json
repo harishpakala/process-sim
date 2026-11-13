@@ -1,0 +1,40 @@
+{
+  "schema_version": "1.0",
+  "status": "user_reviewed",
+  "scope": "concept_retrieval_only",
+  "cases": [
+    {
+      "id": "Q07",
+      "required": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasSignalName"
+        },
+        {
+          "domain": "ecad",
+          "uri": "https://example.org/ecad/hasDevice"
+        }
+      ],
+      "supporting": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasSignalMapping"
+        },
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasEngineeringFunctionReference"
+        }
+      ],
+      "excluded": [],
+      "instance_identifiers": [
+        "PI-1101"
+      ],
+      "historical": false,
+      "notes": "Required vs supporting concepts reviewed by user. Does not assert an approved cross-domain mapping or instance-level correspondence."
+    }
+  ]
+}

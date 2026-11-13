@@ -1,0 +1,287 @@
+{
+  "version": "0.3.0",
+  "graph": "https://example.org/dtwise/graph/ebom-v2",
+  "prefixes": {
+    "core": "https://example.org/dtwise/core/",
+    "ebom": "https://example.org/engineeringbom/"
+  },
+  "nodes": {
+    "equipment": {
+      "rdf_type": "core:BOMItemRecord"
+    },
+    "assembly": {
+      "rdf_type": "core:AssemblyRecord"
+    },
+    "association": {
+      "rdf_type": "core:FunctionalAssociation"
+    },
+    "instrument": {
+      "rdf_type": "core:BOMItemRecord"
+    }
+  },
+  "edges": [
+    {
+      "id": "recorded_parent",
+      "from": "equipment",
+      "to": "assembly",
+      "predicate": "core:hasRecordedParent",
+      "direction": "forward",
+      "semantics": "recorded_context_not_physical_membership",
+      "evidence": "source ParentItemId"
+    },
+    {
+      "id": "association_target",
+      "from": "assembly",
+      "to": "association",
+      "predicate": "core:functionalAssociationTarget",
+      "direction": "reverse",
+      "semantics": "functional_association",
+      "evidence": "FunctionalAssociation resource"
+    },
+    {
+      "id": "association_source",
+      "from": "association",
+      "to": "instrument",
+      "predicate": "core:functionalAssociationSource",
+      "direction": "forward",
+      "semantics": "functional_association",
+      "evidence": "sourceRecordId and associationBasis"
+    }
+  ],
+  "intents": {
+    "dexpi_instrumentation_functional_association": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "DEXPI"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "InstrumentationFunctions"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "assetIdentifier": {
+          "node": "instrument",
+          "predicate": "ebom:hasAssetIdentifier"
+        }
+      }
+    },
+    "all_functional_associations": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "ecad_devices_functional_association": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "ECAD"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "Devices"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "dexpi_actuating_functional_association": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "DEXPI"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "ActuatingFunctions"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    },
+    "dexpi_instrumentation_phase3": {
+      "start": "equipment",
+      "end": "instrument",
+      "allowed_edges": [
+        "recorded_parent",
+        "association_target",
+        "association_source"
+      ],
+      "required_filters": [
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain",
+          "value": "DEXPI"
+        },
+        {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup",
+          "value": "InstrumentationFunctions"
+        }
+      ],
+      "required_evidence": [
+        {
+          "node": "association",
+          "predicate": "core:sourceRecordId"
+        },
+        {
+          "node": "association",
+          "predicate": "core:associationBasis"
+        }
+      ],
+      "outputs": {
+        "engineeringId": {
+          "node": "instrument",
+          "predicate": "ebom:hasEngineeringLocalId"
+        },
+        "description": {
+          "node": "instrument",
+          "predicate": "ebom:hasItemDescription"
+        },
+        "sourceDomain": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceDomain"
+        },
+        "sourceGroup": {
+          "node": "instrument",
+          "predicate": "ebom:hasSourceGroup"
+        }
+      }
+    }
+  },
+  "constraints": {
+    "physical_membership_inferred": false,
+    "bom_occurrences_verified": false
+  }
+}

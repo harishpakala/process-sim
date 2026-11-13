@@ -1,0 +1,2480 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-product-catalog-instance",
+  "idShort": "TEP_ProductCatalog",
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Products",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Schneider_A9MEM3555",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/Schneider_A9MEM3555"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Schneider"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "A9MEM3555"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-14-23-16"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Electronic electricity meter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AFZ828#022"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Three-phase electrical energy meter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentSensorType",
+                  "valueType": "xs:string",
+                  "value": "Rogowski coil"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "Modbus RS485"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeteringPurpose",
+                  "valueType": "xs:string",
+                  "value": "Electrical power and energy monitoring"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.se.com/de/de/product/A9MEM3555/"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActiveEnergy"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloW"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ActivePower"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/V"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Voltage"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/HZ"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Frequency"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "CONDITIONAL_SIMULATION_MAPPING"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AFZ828#022"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SAMSON_3241_7",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/SAMSON_3241_7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SAMSON"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Type 3241-7"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Pneumatic globe control valve assembly, DN25, Kvs 10 m3/h, DIN PN40, normally closed, Type 3277 actuator and Type 3730-1 4-20 mA positioner"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "37-01-02-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Control globe valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD651#023"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplierName",
+              "valueType": "xs:string",
+              "value": "Tetra Pak"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SupplierPartNumber",
+              "valueType": "xs:string",
+              "value": "90533-1149"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Pneumatic globe control valve"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ValveBodyType",
+                  "valueType": "xs:string",
+                  "value": "Type 3241"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActuatorType",
+                  "valueType": "xs:string",
+                  "value": "3277"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerType",
+                  "valueType": "xs:string",
+                  "value": "3730-1"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalSize",
+                  "valueType": "xs:string",
+                  "value": "DN25"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FlowCoefficientKvs",
+                  "valueType": "xs:string",
+                  "value": "10 m3/h"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FlangePressureRating",
+                  "valueType": "xs:string",
+                  "value": "DIN PN40"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "HousingMaterial",
+                  "valueType": "xs:string",
+                  "value": "Cast steel GS-C25"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NormalPosition",
+                  "valueType": "xs:string",
+                  "value": "Normally closed"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInput",
+                  "valueType": "xs:string",
+                  "value": "4 to 20 mA"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "InstrumentAir",
+                  "valueType": "xs:string",
+                  "value": "Required; air reducing station included in supplier listing"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not verified; Type 3241-7 is a model designation, and 90533-1149 is a supplier catalog number"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://plantcomponents.tetrapak.com/default.aspx?NavID=001.002.020"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaterialNote",
+                  "valueType": "xs:string",
+                  "value": "Supplier heading states SS/SS, while detailed housing material states cast steel GS-C25; verify exact material specification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliA"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/ElectricCurrent"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD651#023"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PXC_2938581",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/PXC_2938581"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Phoenix Contact"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "2938581"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-04-07-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "AC-DC supply"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AFX043#011"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "DIN-rail DC power supply"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerModel",
+                  "valueType": "xs:string",
+                  "value": "QUINT-PS-100-240AC/24DC/5"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalACInput",
+                  "valueType": "xs:string",
+                  "value": "100 to 240 V AC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ACInputRange",
+                  "valueType": "xs:string",
+                  "value": "85 to 264 V AC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalOutputVoltage",
+                  "valueType": "xs:string",
+                  "value": "24 V DC"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputCurrent",
+                  "valueType": "xs:string",
+                  "value": "5 A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputPower",
+                  "valueType": "xs:string",
+                  "value": "120 W"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PowerBoostCurrent",
+                  "valueType": "xs:string",
+                  "value": "7.5 A"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Efficiency",
+                  "valueType": "xs:string",
+                  "value": ">89%"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.phoenixcontact.com/ro-ro/produse/power-supply-quint-ps-100-240ac24dc-5-2938581"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AFX043#011"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "IFM_TA1101",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/IFM_TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "IFM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "TA1101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-27-51"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Temperature sensor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AHB186#005"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Integrated temperature sensor / transmitter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementVariable",
+                  "valueType": "xs:string",
+                  "value": "Temperature"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SignalInterfaceNote",
+                  "valueType": "xs:string",
+                  "value": "Confirm exact output and IO-Link capabilities against TA1101 product-specific datasheet"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.ifm.com/de/de/product/TA1101"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-50 to 200 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FactoryConfiguredRange",
+                  "valueType": "xs:string",
+                  "value": "-10 to 150 °C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/DEG_C"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Temperature"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_APPROVED_FAMILY"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AHB186#005"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DeDietrich_HighPressureReactor_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "De Dietrich"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Customized high-pressure reactor inquiry (standard BE excluded)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-02-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Reactor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD319#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "REQUIRES_ALTERNATIVE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.dedietrich.com/en/equipment/process/reaction-agitation/glass-lined-reactors"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Reactor pressure and temperature, 24-hour fault-free TEP recording; not design limits"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Standard BE rated only +6 bar; observed reactor 26.78–27.31 bar(g); no certified custom configuration"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD319#012"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AlfaLaval_Olmi_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Alfa Laval"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Olmi engineered shell-and-tube heat exchanger"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Heat exchanger"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD338#010"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.alfalaval.com/en-GB/products/heat-transfer/tubular-heat-exchangers/process-shell-and-tube-heat-exchangers/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "24-hour fault-free TEP recording; condenser valve command is not thermal duty"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Condenser heat duty, process composition, approach temperatures and design pressure unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD338#010"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Didion_DSL_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Didion Vessel"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Type DSL gas-liquid separator family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-20-17-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Vessel separator (for gases)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKL760#020"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://didionvessel.com/gas-separators/gas-liquid-separators/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Separator pressure 26.05–26.61 bar(g) observed over 24 hours; not a design rating"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Selected-unit pressure rating, gas/liquid loads, droplet removal and materials unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKL760#020"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AtlasCopco_GT_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Atlas Copco"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "GT-Series engineered centrifugal compressor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-43"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Compressor, ventilator, vacuum pump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD585#011"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.atlascopco.com/gas-and-process/en/products/centrifugal-compressors/gt-series"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Compressor work 333.79–346.48 kW observed; not nameplate motor rating"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Gas composition, suction/discharge pressures, compressor map, efficiency, motor and ECLASS leaf unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD585#011"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Sulzer_StrippingColumn_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Sulzer"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Engineered stripping column or turnkey unit"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-01-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Column"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD304#013"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.sulzer.com/en/shared/products/stripping"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "24-hour observed stripper pressure; not certified design pressure"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "No configuration-specific rating verified for stripper 30.82–31.24 bar(g); separation design missing"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AAD304#013"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EKATO_HWLN_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/EKATO_HWLN_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "EKATO"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "HWL-N reactor agitator family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-09-08-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Agitator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKP267#021"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.ekato.com/products/agitators/reactor-agitators-ekato-hwl-n/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "XMV(12) is a control signal, not RPM"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Shaft speed, torque, sealing, mixing duty and selected configuration unverified"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKP267#021"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ABB_AMZ_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/ABB_AMZ_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "ABB"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "AMZ synchronous motor family (comparison only)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Research-only conceptual equipment candidate; NOT selected, approved, procured, or installed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-02-24"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Synchronous motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKE158#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_CANDIDATE"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://new.abb.com/motors-generators/synchronous-motors/synchronous-motors/synchronous-dol-8-40-poles-motors/technical-data"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "value": "Compressor work is not electric motor nameplate power"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Synchronous technology and individual motor sizes unverified; family may be oversized"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "value": "Controller tuning/logic, nonlinear control, revised process model, operating/fault envelopes, vendor datasheet, design basis, ECLASS verification, engineering approval"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Provisional engineered equipment family"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "value": "Not assigned or verified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "value": "Candidate may be changed or replaced after further investigation; no installed-asset linkage"
+                }
+              ]
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ],
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "0173-1#01-AKE158#012"
+              }
+            ]
+          }
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_FMR62B_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "FMR62B (family; ordering code pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Micropilot FMR62B"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Continuous non-contact radar level transmitter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasuringPrinciple",
+                  "valueType": "xs:string",
+                  "value": "80 GHz radar"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistance",
+                  "valueType": "xs:string",
+                  "value": "80 m (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "160 bar (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "value": "±1 mm (manufacturer family specification)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "4 to 20 mA HART available; configuration pending"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/level-measurement/Radar-Micropilot-FMR62B"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "LevelScalingStatus",
+                  "valueType": "xs:string",
+                  "value": "UNVERIFIED: TEP percent level to radar distance conversion requires vessel calibration"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/MilliM"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Length"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-05-05"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Free-space radar level transmitter/switch"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC024#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_TMass_F300_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "6F3B (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "t-mass F 300"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Thermal mass gas flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN40 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/thermal-mass-flowmeter-t-mass-f300-6f3b"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-04-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Thermal mass flow transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC009#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_Promass_F300_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "8F3B (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Promass F 300"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Coriolis liquid mass and volume flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "0 to 2200000 kg/h (family-wide range; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN100 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/coriolis-flowmeter-promass-f300-8f3b"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-04-02"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Coriolis mass flow transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC008#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_Prowirl_F200_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "7F2C (family code; configuration pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Prowirl F 200"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Vortex steam mass flowmeter"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "value": "Steam/gas 1.5 to 28000 m3/h (reference conditions; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "value": "PN100 (family maximum; configuration dependent)"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/flow-measurement-product-overview/vortex-flowmeter-prowirl-f200-7f2c"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/M3-PER-HR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/VolumeFlowRate"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-20-04-04"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Vortex flow transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAC010#022"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EandH_PMP51B_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-types/EandH_PMP51B_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "Endress+Hauser"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerPartNumber",
+              "valueType": "xs:string",
+              "value": "PMP51B (family; ordering code pending)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Cerabar PMP51B"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_APPROVED_FAMILY"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "SubmodelElementCollection",
+              "idShort": "TechnicalProperties",
+              "value": [
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "value": "Gauge pressure transmitter candidate"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementVariable",
+                  "valueType": "xs:string",
+                  "value": "Pressure"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProposedMeasurementCell",
+                  "valueType": "xs:string",
+                  "value": "40 bar gauge class; exact ordering code unverified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "value": "4 to 20 mA HART available; exact configuration unverified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "value": "https://www.endress.com/en/field-instruments-overview/pressure/Cerabar-PMP51B"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionLimitation",
+                  "valueType": "xs:string",
+                  "value": "Simulation nominal vessel pressures only; configuration, process compatibility, ECLASS and installation unverified"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "value": "-1 to 40 bar gauge"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/unit/BAR"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "value": "http://qudt.org/vocab/quantitykind/Pressure"
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PressureReference",
+                  "valueType": "xs:string",
+                  "value": "Gauge"
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-27-49-05"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Pressure transmitter"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKA493#001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "KSB_Multitec_HighPressure_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/KSB_Multitec_HighPressure_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "KSB"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Multitec engineered high-pressure multistage centrifugal pump family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Optional physical-plant extension only; provisional common family for two conceptual liquid transfer pumps; NOT a configured, installed or engineering-approved pump."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "OPTIONAL_EXTENSION_PREFERRED_FAMILY_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://live-commerce-proxy-e2e-sales.ksb.com/rest/v2/ksb/users/anonymous/odata/disfile?application=PDF&checksum=8a6a794c81f0a755dc5d172834d124bbb0a194c270843aaed6c96be2f5235a6a&documentNumber=1777.021&documentPart=EN&documentType=YTO&documentVersion=14&extension=PDF&mimetype=application%2Fpdf&salesOrg=9953"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FamilyPublishedEnvelope",
+              "valueType": "xs:string",
+              "value": "Brochure family: up to 1500 m3/h, 1000 m head, 100 bar discharge pressure, -10 to +200 C; limits variant-dependent, not simultaneously guaranteed."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DutyFlowBasis",
+              "valueType": "xs:string",
+              "value": "XMEAS14 25.160 m3/h; XMEAS17 22.949 m3/h; stream flows not validated pump operating points."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Pump existence, local casing pressure, fluid composition/temperature, min/normal/max Q, head, NPSH, vendor curves, motor sizing, seal materials, order code"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-41-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Centrifugal pump"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD564#011"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ABB_ProcessPerformance_InductionMotor_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "ABB"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Process performance low-voltage induction motor family"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Family-level candidate for simulation/optional physical extension; not a selected orderable configuration or installed item."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_MOTOR_FAMILY_UNSIZED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://new.abb.com/motors-generators/low-voltage-motors/process-performance-motors"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Motor duty, shaft speed, torque, efficiency, enclosure, power, voltage and installation are unverified. No particular catalog motor is selected."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "27-02-21"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Low-voltage three-phase current asynchronous motor"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKE138#012"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_CONDITIONAL_ON_LOW_VOLTAGE_THREE_PHASE_VARIANT"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EKATO_HWLN_AgitatorDrivePackage_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/EKATO_HWLN_AgitatorDrivePackage_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "EKATO"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "HWL-N agitator with engineered drive package (concept)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Family-level candidate for simulation/optional physical extension; not a selected orderable configuration or installed item."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "PROVISIONAL_AGITATOR_PACKAGE_UNSIZED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.ekato.com/products/agitators/reactor-agitators-ekato-hwl-n/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "Drive motor is not separately specified by manufacturer reference; XMV12 is a logical command, not shaft speed. Mixing torque, sealing and motor power unverified."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "36-09-08-01"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Agitator"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AKP267#021"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SAMSON_3241_Family_Candidate",
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "ProductIdentifier",
+              "valueType": "xs:string",
+              "value": "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerName",
+              "valueType": "xs:string",
+              "value": "SAMSON"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ManufacturerProductDesignation",
+              "valueType": "xs:string",
+              "value": "Type 3241 industrial globe valve family (not configured assembly)"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ProductDescription",
+              "valueType": "xs:string",
+              "value": "Family-level candidate for simulation/optional physical extension; not a selected orderable configuration or installed item."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "value": "https://www.samsongroup.com/en/products-applications/products/control-valves/globe-valves/type-3241/"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "value": "No DN/Kvs, actuator, fail action, differential pressure or trim verified for compressor control duty."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "value": "NOT_INSTALLED_VERIFIED"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "value": "PENDING_ECLASS_VERIFICATION"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClass",
+              "valueType": "xs:string",
+              "value": "37-01-02-03"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSPreferredName",
+              "valueType": "xs:string",
+              "value": "Control globe valve"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSIRDI",
+              "valueType": "xs:string",
+              "value": "0173-1#01-AAD651#023"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

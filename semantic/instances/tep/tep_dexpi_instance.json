@@ -1,0 +1,1797 @@
+{
+  "modelType": "Submodel",
+  "id": "https://example.org/sm/tep-dexpi-instance",
+  "idShort": "TEP_DEXPI",
+  "semanticId": {
+    "type": "ExternalReference",
+    "keys": [
+      {
+        "type": "GlobalReference",
+        "value": "https://example.org/smt/dexpi"
+      }
+    ]
+  },
+  "submodelElements": [
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "Equipments",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "Reactor",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEPR001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-R-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "R-001"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ProductCondenser",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEPC001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-C-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "C-001"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "VaporLiquidSeparator",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEPV001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-V-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "V-001"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "RecycleCompressor",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEPK001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-K-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "K-001"
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ProductStripper",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Equipment"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEPS001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TEP-S-001"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "S-001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "InstrumentationFunctions",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AFeedFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DFeedFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EFeedFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ACFeedFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "RecycleFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorFeedFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PurgeFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorUnderflow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperUnderflow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperSteamFlow",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/FI_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "FI_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/MassFlowRate"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "TI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/DEG_C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "TI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/DEG_C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "TI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/DEG_C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorCoolingWaterOutletTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "TI_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/DEG_C"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorCoolingWaterOutletTemperature",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI1202"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "TI_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Temperature"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/DEG_C"
+                  }
+                ]
+              }
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/TI1202"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png places TI-1202 at condenser cooling-water outlet (CWR), adjacent to CV-1201. DEXPI source function SeparatorCoolingWaterOutletTemperature names separator; intended function-to-device identity remains unverified. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "User-approved canonical identifier alignment (TI_105 -> https://aas.example.com/TI1202). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. DEXPI source name retains separator/condenser discrepancy."
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorLevel",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "LI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Dimensionless"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/PERCENT"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorLevel",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "LI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Dimensionless"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/PERCENT"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperLevel",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/LI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "LI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Dimensionless"
+                  },
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/unit/PERCENT"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorPressure",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "PI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Pressure"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorPressure",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "PI_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Pressure"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperPressure",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/PI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "PI_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Pressure"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CompressorPower",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "InstrumentationFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/JI101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/JI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "JI_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasuredVariable",
+              "valueType": "xs:float",
+              "value": "",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://qudt.org/vocab/quantitykind/Power"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
+      "idShort": "ActuatingFunctions",
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "DFeedFlowControl",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "EFeedFlowControl",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_102"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AFeedFlowControl",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_103"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ACFeedFlowControl",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_104"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CompressorRecycleValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1006"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_105"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1006"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1005 on PURGE and P-1401 on recycle loop; CV-1006 is not depicted. ECAD/Inventory call CV-1006 recycle valve, so no P&ID confirmation of physical tag or identity. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "User-approved canonical identifier alignment (VC_105 -> https://aas.example.com/CV1006). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof. CV-1006 remains absent from reviewed P&ID."
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "PurgeValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_106"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "SeparatorLiquidValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_107"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1301"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png shows CV-1301 on the line from vapor-liquid separator liquid outlet toward stripper TK-003; DEXPI SeparatorLiquidValve and ECAD Stripper Inlet Control Valve describe this process connection. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "User-approved canonical identifier alignment (VC_107 -> https://aas.example.com/CV1301). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperLiquidProductValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_108"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "StripperSteamValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_109"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ReactorCoolingWaterValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_110"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "CondenserCoolingWaterValve",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1201"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/VC_111"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "VC_111"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/CV1201"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "P&ID docs/engineering-models/tep-reactor-pid.png labels CV-1201 on condenser cooling-water return (CWR) line downstream of condenser, near TI-1202. Supports VC_111 condenser cooling-water control function; not a process condensate outlet valve. Functional link supported; identity not asserted. Canonical URI alignment explicitly approved by user; P&ID evidence limitations retained."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "User-approved canonical identifier alignment (VC_111 -> https://aas.example.com/CV1201). Original DEXPI LocalId and SourceAssetIdentifier preserved. This is a modeling identity decision, not independent P&ID proof."
+            }
+          ]
+        },
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "AgitatorSpeedControl",
+          "qualifiers": [
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "ActuatingFunction"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "AssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/M1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SourceAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/SC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "value": "SC_101"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ActuatedVariable",
+              "valueType": "xs:float",
+              "value": ""
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RelatedAssetIdentifier",
+              "valueType": "xs:string",
+              "value": "https://aas.example.com/M1"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationStatus",
+              "valueType": "xs:string",
+              "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CrossDomainAssociationEvidence",
+              "valueType": "xs:string",
+              "value": "User-approved SC_101 -> M1 modeling alignment; P&ID docs/engineering-models/tep-reactor-pid.png shows M1 reactor agitator motor. XMV12 remains a logical control signal, not physical motor identity."
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EngineeringInterpretationNote",
+              "valueType": "xs:string",
+              "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

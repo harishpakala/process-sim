@@ -1,0 +1,153 @@
+{
+  "schema_version": "1.0",
+  "status": "curated_proposed_not_independently_reviewed",
+  "scope": "simple_single_domain_concept_grounding",
+  "notes": [
+    "Ten intentionally direct single-domain questions; authored after exploratory model experiments, not a held-out benchmark.",
+    "All required concept URIs and domains verified against dtwise-schema-index.json on the source branch.",
+    "Expected concepts are used only for scoring, not included in prompts.",
+    "No instance retrieval, cross-domain reasoning, or graph traversal evaluated."
+  ],
+  "cases": [
+    {
+      "id": "S01",
+      "question": "Who is the manufacturer of this product?",
+      "expected_domains": [
+        "productcatalog"
+      ],
+      "required": [
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasManufacturerName"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S02",
+      "question": "What is the ECLASS classification of this product?",
+      "expected_domains": [
+        "productcatalog"
+      ],
+      "required": [
+        {
+          "domain": "productcatalog",
+          "uri": "https://example.org/productcatalog/hasECLASSClass"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S03",
+      "question": "What is the equipment tag of this asset?",
+      "expected_domains": [
+        "assetinventory"
+      ],
+      "required": [
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasEquipmentTag"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S04",
+      "question": "Which assets are recorded in the asset inventory?",
+      "expected_domains": [
+        "assetinventory"
+      ],
+      "required": [
+        {
+          "domain": "assetinventory",
+          "uri": "https://example.org/assetinventory/hasAsset"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S05",
+      "question": "Which devices are included in the electrical design?",
+      "expected_domains": [
+        "ecad"
+      ],
+      "required": [
+        {
+          "domain": "ecad",
+          "uri": "https://example.org/ecad/hasDevice"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S06",
+      "question": "What is the OPC UA NodeId of this signal?",
+      "expected_domains": [
+        "opcuaconnectivity"
+      ],
+      "required": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S07",
+      "question": "What is the name of this signal?",
+      "expected_domains": [
+        "opcuaconnectivity"
+      ],
+      "required": [
+        {
+          "domain": "opcuaconnectivity",
+          "uri": "https://example.org/opcuaconnectivity/hasSignalName"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S08",
+      "question": "Which items are included in the engineering bill of materials?",
+      "expected_domains": [
+        "engineeringbom"
+      ],
+      "required": [
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasBOMItems"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S09",
+      "question": "What functional associations are defined in the engineering BOM?",
+      "expected_domains": [
+        "engineeringbom"
+      ],
+      "required": [
+        {
+          "domain": "engineeringbom",
+          "uri": "https://example.org/engineeringbom/hasFunctionalAssociations"
+        }
+      ],
+      "historical": false
+    },
+    {
+      "id": "S10",
+      "question": "What instrumentation function is assigned to this process element?",
+      "expected_domains": [
+        "dexpi"
+      ],
+      "required": [
+        {
+          "domain": "dexpi",
+          "uri": "https://example.org/dexpi/hasInstrumentationFunction"
+        }
+      ],
+      "historical": false
+    }
+  ]
+}

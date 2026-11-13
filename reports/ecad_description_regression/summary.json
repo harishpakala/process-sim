@@ -1,0 +1,138 @@
+{
+  "domain": "ECAD",
+  "model": "qwen2.5-coder:3b",
+  "total": 5,
+  "passed": 0,
+  "predicate_selection_correct": 5,
+  "validator_accepted": 0,
+  "sparql_generated": 0,
+  "execution_succeeded": 0,
+  "nonempty_results": 0,
+  "results": [
+    {
+      "case": "device_local_ids",
+      "completed": true,
+      "expected_predicates": [
+        "hasLocalId"
+      ],
+      "selected_predicates": [
+        "hasLocalId"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Unresolved requested output: local IDs of ECAD devices"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\ecad_description_regression\\device_local_ids.json"
+    },
+    {
+      "case": "device_asset_identifiers",
+      "completed": true,
+      "expected_predicates": [
+        "hasAssetIdentifier"
+      ],
+      "selected_predicates": [
+        "hasAssetIdentifier"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Undeclared field property",
+        "Missing semantic output: asset identifier",
+        "Unresolved requested output: asset identifiers of ECAD devices"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\ecad_description_regression\\device_asset_identifiers.json"
+    },
+    {
+      "case": "device_engineering_verification",
+      "completed": true,
+      "expected_predicates": [
+        "hasEngineeringVerificationEvidence",
+        "hasEngineeringVerificationStatus"
+      ],
+      "selected_predicates": [
+        "hasEngineeringVerificationEvidence",
+        "hasEngineeringVerificationStatus"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Unresolved requested output: engineering verification statuses",
+        "Unresolved requested output: engineering verification evidence of ECAD devices"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\ecad_description_regression\\device_engineering_verification.json"
+    },
+    {
+      "case": "device_product_verification",
+      "completed": true,
+      "expected_predicates": [
+        "hasProductVerificationEvidence",
+        "hasProductVerificationStatus"
+      ],
+      "selected_predicates": [
+        "hasProductVerificationEvidence",
+        "hasProductVerificationStatus"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Unresolved requested output: product verification statuses",
+        "Unresolved requested output: product verification evidence of ECAD devices"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\ecad_description_regression\\device_product_verification.json"
+    },
+    {
+      "case": "device_association",
+      "completed": true,
+      "expected_predicates": [
+        "hasCrossDomainAssociationEvidence",
+        "hasRelatedAssetIdentifier"
+      ],
+      "selected_predicates": [
+        "hasCrossDomainAssociationEvidence",
+        "hasRelatedAssetIdentifier"
+      ],
+      "predicate_selection_correct": true,
+      "validator_accepted": false,
+      "sparql_generated": false,
+      "execution_succeeded": false,
+      "nonempty_results": false,
+      "binding_count": null,
+      "plan_issues": [
+        "Unresolved requested output: cross-domain association evidence of ECAD devices"
+      ],
+      "error": null,
+      "passed": false,
+      "translator_exit_code": 1,
+      "report_file": "C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\ecad_description_regression\\device_association.json"
+    }
+  ]
+}

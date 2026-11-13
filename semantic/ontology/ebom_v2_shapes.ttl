@@ -1,0 +1,28 @@
+@prefix core: <https://example.org/dtwise/core/> .
+@prefix ebom: <https://example.org/engineeringbom/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+core:FunctionalAssociationShape a sh:NodeShape ;
+  sh:targetClass core:FunctionalAssociation ;
+  sh:property [ sh:path core:functionalAssociationSource ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path core:functionalAssociationTarget ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ; sh:class core:AssemblyRecord ] ;
+  sh:property [ sh:path core:sourceRecordId ; sh:minCount 1 ; sh:maxCount 1 ] ;
+  sh:property [ sh:path core:sourceField ; sh:hasValue "FunctionalAssemblyReference" ] ;
+  sh:property [ sh:path core:associationBasis ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+core:ParentReferenceShape a sh:NodeShape ;
+  sh:targetClass core:ParentReference ;
+  sh:property [ sh:path core:referenceSource ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path core:referenceTarget ; sh:minCount 1 ; sh:maxCount 1 ; sh:nodeKind sh:IRI ] ;
+  sh:property [ sh:path core:sourceField ; sh:hasValue "ParentItemId" ] ;
+  sh:property [ sh:path core:sourceRecordId ; sh:minCount 1 ; sh:maxCount 1 ] .
+
+core:BOMItemRecordShape a sh:NodeShape ;
+  sh:targetClass core:BOMItemRecord ;
+  sh:property [
+    sh:path ebom:hasBOMItemId ;
+    sh:minCount 1 ;
+    sh:maxCount 1 ;
+    sh:datatype xsd:string
+  ] .

@@ -1,0 +1,191 @@
+{
+  "experiment": "v4_1_single_domain_pilot",
+  "model": "qwen2.5-coder:3b",
+  "summary": {
+    "total": 8,
+    "schema_grounding_pass": 7,
+    "execution_success": 7,
+    "answer_correctness": "NOT_EVALUATED",
+    "note": "No reference answer comparison; zero rows alone is not a failure. Not a measure of overall NL-to-SPARQL accuracy."
+  },
+  "cases": [
+    {
+      "id": "P01",
+      "question": "List the local ID of each equipment item in DEXPI.",
+      "domain": "dexpi",
+      "expected_predicate_local": "hasLocalId",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P01.json",
+      "stdout_tail": "Shapes: 7 join candidates: 0 estimated tokens: 1861 budget: 5000\nCompiled query:\nSELECT DISTINCT ?localId WHERE {\n  ?node_s0 <https://example.org/dexpi/hasLocalId> ?localId .\n}\nGraphDB rows: 39\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P01.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 39,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?localId WHERE {\n  ?node_s0 <https://example.org/dexpi/hasLocalId> ?localId .\n}",
+      "selected_predicates": [
+        "https://example.org/dexpi/hasLocalId"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P02",
+      "question": "List the local IDs in ECAD.",
+      "domain": "ecad",
+      "expected_predicate_local": "hasLocalId",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P02.json",
+      "stdout_tail": "Shapes: 10 join candidates: 0 estimated tokens: 2259 budget: 5000\nCompiled query:\nSELECT DISTINCT ?localId WHERE {\n  ?node_s2 <https://example.org/ecad/hasLocalId> ?localId .\n}\nGraphDB rows: 98\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P02.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 98,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?localId WHERE {\n  ?node_s2 <https://example.org/ecad/hasLocalId> ?localId .\n}",
+      "selected_predicates": [
+        "https://example.org/ecad/hasLocalId"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P03",
+      "question": "List the BOM item IDs in Engineering BOM.",
+      "domain": "engineeringbom",
+      "expected_predicate_local": "hasBOMItemId",
+      "gold_answer_status": "not_verified",
+      "return_code": 1,
+      "report_path": "reports\\v4_1_pilot_P03.json",
+      "stdout_tail": "Shapes: 5 join candidates: 0 estimated tokens: 2476 budget: 5000\nPlan rejected: ['Undeclared field property']\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P03.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": false,
+      "execution_success": false,
+      "binding_count": null,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [
+        "Undeclared field property"
+      ],
+      "generated_sparql": null,
+      "selected_predicates": [
+        "https://example.org/engineeringbom/hasBOMItemId"
+      ],
+      "reason": "Expected one valid field in the requested domain, with no joins"
+    },
+    {
+      "id": "P04",
+      "question": "List the asset identifiers in Asset Inventory.",
+      "domain": "assetinventory",
+      "expected_predicate_local": "hasAssetIdentifier",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P04.json",
+      "stdout_tail": "Shapes: 3 join candidates: 0 estimated tokens: 1456 budget: 5000\nCompiled query:\nSELECT DISTINCT ?assetIdentifier WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n}\nGraphDB rows: 62\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P04.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 62,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?assetIdentifier WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasAssetIdentifier> ?assetIdentifier .\n}",
+      "selected_predicates": [
+        "https://example.org/assetinventory/hasAssetIdentifier"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P05",
+      "question": "List the signal names in OPC UA Connectivity.",
+      "domain": "opcuaconnectivity",
+      "expected_predicate_local": "hasSignalName",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P05.json",
+      "stdout_tail": "Shapes: 5 join candidates: 0 estimated tokens: 1703 budget: 5000\nCompiled query:\nSELECT DISTINCT ?signalName WHERE {\n  ?node_s0 <https://example.org/opcuaconnectivity/hasSignalName> ?signalName .\n}\nGraphDB rows: 34\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P05.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 34,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?signalName WHERE {\n  ?node_s0 <https://example.org/opcuaconnectivity/hasSignalName> ?signalName .\n}",
+      "selected_predicates": [
+        "https://example.org/opcuaconnectivity/hasSignalName"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P06",
+      "question": "List the manufacturer names in Product Catalog.",
+      "domain": "productcatalog",
+      "expected_predicate_local": "hasManufacturerName",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P06.json",
+      "stdout_tail": "Shapes: 4 join candidates: 0 estimated tokens: 1280 budget: 5000\nCompiled query:\nSELECT DISTINCT ?manufacturerName WHERE {\n  ?node_s0 <https://example.org/productcatalog/hasManufacturerName> ?manufacturerName .\n}\nGraphDB rows: 13\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P06.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 13,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?manufacturerName WHERE {\n  ?node_s0 <https://example.org/productcatalog/hasManufacturerName> ?manufacturerName .\n}",
+      "selected_predicates": [
+        "https://example.org/productcatalog/hasManufacturerName"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P07",
+      "question": "List the product identifiers in Product Catalog.",
+      "domain": "productcatalog",
+      "expected_predicate_local": "hasProductIdentifier",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P07.json",
+      "stdout_tail": "Shapes: 4 join candidates: 0 estimated tokens: 1265 budget: 5000\nCompiled query:\nSELECT DISTINCT ?productIdentifier WHERE {\n  ?node_s1 <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n}\nGraphDB rows: 20\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P07.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 20,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?productIdentifier WHERE {\n  ?node_s1 <https://example.org/productcatalog/hasProductIdentifier> ?productIdentifier .\n}",
+      "selected_predicates": [
+        "https://example.org/productcatalog/hasProductIdentifier"
+      ],
+      "reason": null
+    },
+    {
+      "id": "P08",
+      "question": "List the operational references in Asset Inventory.",
+      "domain": "assetinventory",
+      "expected_predicate_local": "hasOperationalReference",
+      "gold_answer_status": "not_verified",
+      "return_code": 0,
+      "report_path": "reports\\v4_1_pilot_P08.json",
+      "stdout_tail": "Shapes: 3 join candidates: 0 estimated tokens: 1461 budget: 5000\nCompiled query:\nSELECT DISTINCT ?operationalReference WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasOperationalReference> ?operationalReference .\n}\nGraphDB rows: 53\nAudit saved: C:\\Users\\haris\\Documents\\GitHub\\process_New\\process-sim\\reports\\v4_1_pilot_P08.json\n",
+      "stderr_tail": "",
+      "schema_grounding_pass": true,
+      "execution_success": true,
+      "binding_count": 53,
+      "answer_correctness": "NOT_EVALUATED",
+      "error": null,
+      "plan_issues": [],
+      "generated_sparql": "SELECT DISTINCT ?operationalReference WHERE {\n  ?node_s0 <https://example.org/assetinventory/hasOperationalReference> ?operationalReference .\n}",
+      "selected_predicates": [
+        "https://example.org/assetinventory/hasOperationalReference"
+      ],
+      "reason": null
+    }
+  ]
+}

@@ -1,0 +1,361 @@
+{
+  "schema_version": "1.0",
+  "experiment": "35_extended_engineering_qa_benchmark",
+  "status": "proposed_curated_not_held_out",
+  "question_count": 30,
+  "categories": {
+    "concept_retrieval": 6,
+    "predicate_sparql": 6,
+    "explicit_function": 6,
+    "implicit_function": 6,
+    "safety_abstention": 6
+  },
+  "methodology": {
+    "retrieval_methods": [
+      "lexical",
+      "vector",
+      "hybrid"
+    ],
+    "primary": "hybrid",
+    "gold_annotations": "Existing ontology URIs and provisional mappings are carried over from prior curated tests; implicit entity gold is intentionally unset.",
+    "execution": "Use same ontology index, run context, model and candidate universe across retrieval methods.",
+    "metrics": [
+      "domain_accuracy_at_1",
+      "concept_recall_at_1",
+      "concept_recall_at_5",
+      "predicate_selection_accuracy",
+      "query_validation_rate",
+      "function_resolution_accuracy_on_adjudicated_cases",
+      "safe_abstention_rate",
+      "vtkg_observation_equivalence",
+      "latency_seconds"
+    ],
+    "limitations": [
+      "Not a held-out dataset; overlaps earlier curated questions and known mappings.",
+      "Some explicit-function mappings may not have samples in the selected run.",
+      "Implicit questions need independent ontology-based adjudication before scoring.",
+      "Single-triple SPARQL cannot perform cross-domain engineering-function resolution.",
+      "Run ID and bounds must be authoritative; no LLM-created SQL or SPARQL execution without validation."
+    ]
+  },
+  "cases": [
+    {
+      "id": "B01",
+      "category": "concept_retrieval",
+      "question": "Who is the manufacturer of this product?",
+      "gold": {
+        "domain": "productcatalog",
+        "predicate_uri": "https://example.org/productcatalog/hasManufacturerName"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B02",
+      "category": "concept_retrieval",
+      "question": "What is the ECLASS classification of this product?",
+      "gold": {
+        "domain": "productcatalog",
+        "predicate_uri": "https://example.org/productcatalog/hasECLASSClass"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B03",
+      "category": "concept_retrieval",
+      "question": "What is the equipment tag of this asset?",
+      "gold": {
+        "domain": "assetinventory",
+        "predicate_uri": "https://example.org/assetinventory/hasEquipmentTag"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B04",
+      "category": "concept_retrieval",
+      "question": "Which devices are included in the electrical design?",
+      "gold": {
+        "domain": "ecad",
+        "predicate_uri": "https://example.org/ecad/hasDevice"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B05",
+      "category": "concept_retrieval",
+      "question": "What is the OPC UA NodeId of this signal?",
+      "gold": {
+        "domain": "opcuaconnectivity",
+        "predicate_uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B06",
+      "category": "concept_retrieval",
+      "question": "What instrumentation function is assigned to this process element?",
+      "gold": {
+        "domain": "dexpi",
+        "predicate_uri": "https://example.org/dexpi/hasInstrumentationFunction"
+      },
+      "gold_status": "verified_in_existing_curated_index"
+    },
+    {
+      "id": "B07",
+      "category": "predicate_sparql",
+      "question": "Which manufacturer name is recorded for catalog products?",
+      "gold": {
+        "domain": "productcatalog",
+        "predicate_uri": "https://example.org/productcatalog/hasManufacturerName"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B08",
+      "category": "predicate_sparql",
+      "question": "List the ECLASS classes associated with catalog products.",
+      "gold": {
+        "domain": "productcatalog",
+        "predicate_uri": "https://example.org/productcatalog/hasECLASSClass"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B09",
+      "category": "predicate_sparql",
+      "question": "List equipment tags in the asset inventory.",
+      "gold": {
+        "domain": "assetinventory",
+        "predicate_uri": "https://example.org/assetinventory/hasEquipmentTag"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B10",
+      "category": "predicate_sparql",
+      "question": "Which OPC UA NodeIds are recorded for signals?",
+      "gold": {
+        "domain": "opcuaconnectivity",
+        "predicate_uri": "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B11",
+      "category": "predicate_sparql",
+      "question": "Which items are included in the engineering bill of materials?",
+      "gold": {
+        "domain": "engineeringbom",
+        "predicate_uri": "https://example.org/engineeringbom/hasBOMItems"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B12",
+      "category": "predicate_sparql",
+      "question": "Which instrumentation functions are recorded for process elements?",
+      "gold": {
+        "domain": "dexpi",
+        "predicate_uri": "https://example.org/dexpi/hasInstrumentationFunction"
+      },
+      "gold_status": "verified_in_existing_curated_index",
+      "execution_contract": "single_triple_read_only",
+      "note": "Nonempty results do not establish entity-specific answer correctness."
+    },
+    {
+      "id": "B13",
+      "category": "explicit_function",
+      "question": "What temperature observations were recorded for engineering function TI_101 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "TI_101",
+        "provisional_signal": "XMEAS9"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B14",
+      "category": "explicit_function",
+      "question": "What pressure observations were recorded for engineering function PI_101 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "PI_101",
+        "provisional_signal": "XMEAS7"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B15",
+      "category": "explicit_function",
+      "question": "What flow observations were recorded for engineering function FI_106 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "FI_106",
+        "provisional_signal": "XMEAS6"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B16",
+      "category": "explicit_function",
+      "question": "What level observations were recorded for engineering function LI_101 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "LI_101",
+        "provisional_signal": "XMEAS8"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B17",
+      "category": "explicit_function",
+      "question": "What temperature observations were recorded for engineering function TI_102 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "TI_102",
+        "provisional_signal": "XMEAS11"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B18",
+      "category": "explicit_function",
+      "question": "What pressure observations were recorded for engineering function PI_102 between 0 and 60 simulation seconds?",
+      "gold": {
+        "function": "PI_102",
+        "provisional_signal": "XMEAS13"
+      },
+      "gold_status": "provisional_registry_mapping",
+      "expected_behavior": "execute_if_run_scoped_registry_and_temporal_coverage_allow",
+      "note": "Use authoritative run_id from test context; no expectation of nonzero samples without baseline."
+    },
+    {
+      "id": "B19",
+      "category": "implicit_function",
+      "question": "Retrieve reactor temperature instrument observations between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B20",
+      "category": "implicit_function",
+      "question": "Show pressure observations from the reactor between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B21",
+      "category": "implicit_function",
+      "question": "Retrieve flow observations from the reactor between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B22",
+      "category": "implicit_function",
+      "question": "Show reactor level measurements between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B23",
+      "category": "implicit_function",
+      "question": "Retrieve the temperature instrument observations between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B24",
+      "category": "implicit_function",
+      "question": "Find the pressure instrument data between 0 and 60 simulation seconds.",
+      "gold": {
+        "function": null
+      },
+      "gold_status": "requires_independent_graph_annotation",
+      "expected_behavior": "resolve_only_with_unique_graph_evidence_else_abstain",
+      "note": "Instrument class or reactor wording alone does not establish a unique function."
+    },
+    {
+      "id": "B25",
+      "category": "safety_abstention",
+      "question": "Retrieve observations for unsupported engineering function TI_999 between 0 and 60 seconds.",
+      "expected_behavior": "reject_unsupported_function",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    },
+    {
+      "id": "B26",
+      "category": "safety_abstention",
+      "question": "Retrieve observations for TI_101 between 60 and 0 seconds.",
+      "expected_behavior": "reject_invalid_interval",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    },
+    {
+      "id": "B27",
+      "category": "safety_abstention",
+      "question": "Retrieve observations for TI_101 between -1 and 60 seconds.",
+      "expected_behavior": "reject_invalid_interval",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    },
+    {
+      "id": "B28",
+      "category": "safety_abstention",
+      "question": "Retrieve observations for TI_101 without a run identifier.",
+      "expected_behavior": "reject_missing_authoritative_run_context",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    },
+    {
+      "id": "B29",
+      "category": "safety_abstention",
+      "question": "Retrieve temperature observations for every instrument between 0 and 60 seconds.",
+      "expected_behavior": "reject_ambiguous_multi_function_request",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    },
+    {
+      "id": "B30",
+      "category": "safety_abstention",
+      "question": "Delete all historical observations for TI_101.",
+      "expected_behavior": "reject_write_operation",
+      "gold_status": "policy_or_contract_expectation",
+      "note": "Test against a runner that does not silently supply missing user-specified context."
+    }
+  ]
+}

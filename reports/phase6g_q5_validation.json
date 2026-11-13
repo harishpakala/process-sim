@@ -1,0 +1,89 @@
+{
+  "phase": "6G",
+  "intent": "catalog_product_properties_only",
+  "product_identifier": "https://example.org/product-types/EandH_TMass_F300_Candidate",
+  "scope": "product_catalog_only",
+  "route_integrated": false,
+  "full_q5_supported": false,
+  "gold_status": "missing_not_scored",
+  "verified_cross_domain_identity": false,
+  "verified_physical_membership": false,
+  "sparql": "PREFIX pc: <https://example.org/productcatalog/>\nSELECT DISTINCT ?product ?product_identifier ?properties ?manufacturer ?designation ?eclass_class ?eclass_irdi ?eclass_verification ?selection_status ?installation_verification ?family_range ?qudt_quantity_kind ?qudt_unit ?maximum_pressure ?qualification ?category ?disclaimer\nWHERE {\n  ?product pc:hasProductIdentifier ?product_identifier .\n  FILTER(isLiteral(?product_identifier) && STR(?product_identifier) = \"https://example.org/product-types/EandH_TMass_F300_Candidate\")\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . }\n  OPTIONAL { ?product pc:hasManufacturerName ?manufacturer . }\n  OPTIONAL { ?product pc:hasManufacturerProductDesignation ?designation . }\n  OPTIONAL { ?product pc:hasECLASSClass ?eclass_class . }\n  OPTIONAL { ?product pc:hasECLASSIRDI ?eclass_irdi . }\n  OPTIONAL { ?product pc:hasECLASSVerificationStatus ?eclass_verification . }\n  OPTIONAL { ?product pc:hasSelectionStatus ?selection_status . }\n  OPTIONAL { ?product pc:hasInstallationVerificationStatus ?installation_verification . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasFamilyMeasuringRange ?family_range . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasFamilyMeasuringRangeQUDTQuantityKind ?qudt_quantity_kind . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasFamilyMeasuringRangeQUDTUnit ?qudt_unit . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasFamilyMaximumProcessPressure ?maximum_pressure . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasApplicationQualification ?qualification . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasProductCategory ?category . }\n  OPTIONAL { ?product pc:hasTechnicalProperties ?properties . ?properties pc:hasSelectionDisclaimer ?disclaimer . }\n}\nORDER BY STR(?product)",
+  "status": "executed",
+  "limitations": [
+    "No verified reactor-instrument-to-product-candidate association is established.",
+    "ECLASS and QUDT values are recorded catalog metadata, not independently verified standards mappings.",
+    "Missing optional fields do not imply absence outside the queried dataset.",
+    "No installed asset, physical containment, or BOM membership is inferred.",
+    "No router or GraphDB updates are performed."
+  ],
+  "binding_count": 1,
+  "bindings": [
+    {
+      "product": {
+        "type": "uri",
+        "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+      },
+      "product_identifier": {
+        "type": "literal",
+        "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
+      },
+      "properties": {
+        "type": "uri",
+        "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGUuVGVjaG5pY2FsUHJvcGVydGllcw"
+      },
+      "manufacturer": {
+        "type": "literal",
+        "value": "Endress+Hauser"
+      },
+      "designation": {
+        "type": "literal",
+        "value": "t-mass F 300"
+      },
+      "eclass_class": {
+        "type": "literal",
+        "value": "27-20-04-03"
+      },
+      "eclass_irdi": {
+        "type": "literal",
+        "value": "0173-1#01-AAC009#022"
+      },
+      "eclass_verification": {
+        "type": "literal",
+        "value": "PENDING_ECLASS_VERIFICATION"
+      },
+      "selection_status": {
+        "type": "literal",
+        "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
+      },
+      "installation_verification": {
+        "type": "literal",
+        "value": "NOT_INSTALLED_VERIFIED"
+      },
+      "family_range": {
+        "type": "literal",
+        "value": "0.5 to 3750 kg/h (family range; configuration and gas dependent)"
+      },
+      "qudt_quantity_kind": {
+        "type": "literal",
+        "value": "http://qudt.org/vocab/quantitykind/MassFlowRate"
+      },
+      "qudt_unit": {
+        "type": "literal",
+        "value": "http://qudt.org/vocab/unit/KiloGM-PER-HR"
+      },
+      "maximum_pressure": {
+        "type": "literal",
+        "value": "PN40 (family maximum; configuration dependent)"
+      },
+      "qualification": {
+        "type": "literal",
+        "value": "Individual TEP signal units, conversion, flow range, and ordered configuration require verification"
+      },
+      "category": {
+        "type": "literal",
+        "value": "Thermal mass gas flowmeter"
+      }
+    }
+  ]
+}

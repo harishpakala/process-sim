@@ -1,0 +1,356 @@
+{
+  "method": "generic_v4_1_ontology_structural_validation",
+  "question": "List the BOM item IDs in Engineering BOM.",
+  "model": "qwen2.5-coder:3b",
+  "completed": true,
+  "plan": {
+    "fields": [
+      {
+        "name": "bOMItemId",
+        "shape": "s4",
+        "predicate": "https://example.org/engineeringbom/hasBOMItemId"
+      }
+    ],
+    "filters": [],
+    "unsupported": []
+  },
+  "raw_model_response": "{\n  \"fields\": [\n    {\n      \"name\": \"BOMItemId\",\n      \"shape\": \"s4\",\n      \"predicate\": \"https://example.org/engineeringbom/hasBOMItemId\"\n    }\n  ],\n  \"filters\": [],\n  \"unsupported\": []\n}",
+  "generated_sparql": null,
+  "plan_issues": [
+    "Undeclared field property"
+  ],
+  "graphdb_bindings": null,
+  "binding_count": null,
+  "error": null,
+  "validation_policy": "ontology_structural_without_lexical_projection_coverage",
+  "hypothesis_joins_enabled": false,
+  "schema_sources": [
+    {
+      "domain": "dexpi",
+      "file": "dexpi-template.ttl",
+      "sha256": "9282d43907e22179e33cea05fb34ad8f9923cf2128bef019310fcffa28eea2fe"
+    },
+    {
+      "domain": "ecad",
+      "file": "ecad-template.ttl",
+      "sha256": "b6a82cf912cb76f55a2f57932c4b30f06df14fa52f44446807669b32a0fabf47"
+    },
+    {
+      "domain": "engineeringbom",
+      "file": "engineeringbom-template.ttl",
+      "sha256": "657a6df492589c5dee046e8ac1862c62b9e0f430017e21c52b3ca71877fe2609"
+    },
+    {
+      "domain": "assetinventory",
+      "file": "assetinventory-template.ttl",
+      "sha256": "d99eac97e4159c3c26fc5a9dc8c3151d360424c484844f7281582ac1ff6ca5f9"
+    },
+    {
+      "domain": "opcuaconnectivity",
+      "file": "opcuaconnectivity-template.ttl",
+      "sha256": "b8c395e5e0522e8737f85c604f36adedb130ff777a07f693ea525a4a9a059ae7"
+    },
+    {
+      "domain": "productcatalog",
+      "file": "productcatalog-template.ttl",
+      "sha256": "d4a838f3a22e282be3c143480af8f702ea714d518208c505d977805ba41a7b6b"
+    }
+  ],
+  "candidate_shapes": {
+    "s0": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbS9ub2RlU2hhcGU",
+      "label": "BOMItem",
+      "description": "Item record in the engineering bill of materials.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssetIdentifier",
+          "label": "AssetIdentifier",
+          "description": "Identifier of an asset associated with the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssociationBasis",
+          "label": "AssociationBasis",
+          "description": "Recorded basis for an association between the BOM item and other information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+          "label": "BOMItemId",
+          "description": "Identifier of a bill-of-materials item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+          "label": "BOMPosition",
+          "description": "Position of the item within the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationEvidence",
+          "label": "CrossDomainAssociationEvidence",
+          "description": "Evidence recorded in support of a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasCrossDomainAssociationStatus",
+          "label": "CrossDomainAssociationStatus",
+          "description": "Recorded status of a cross-domain association.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEngineeringInterpretationNote",
+          "label": "EngineeringInterpretationNote",
+          "description": "Engineering interpretation or qualification recorded for the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEngineeringLocalId",
+          "label": "EngineeringLocalId",
+          "description": "Identifier local to the source engineering model.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasEquivalenceStatus",
+          "label": "EquivalenceStatus",
+          "description": "Recorded status of an equivalence assessment.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasFunctionalAssemblyReference",
+          "label": "FunctionalAssemblyReference",
+          "description": "Reference to a functional assembly associated with the item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemDescription",
+          "label": "ItemDescription",
+          "description": "Textual description of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemType",
+          "label": "ItemType",
+          "description": "Recorded type of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasParentItemId",
+          "label": "ParentItemId",
+          "description": "Identifier of the parent item in the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+          "label": "ProductIdentifier",
+          "description": "Identifier of a product associated with the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantity",
+          "label": "Quantity",
+          "description": "Recorded quantity of the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityBasis",
+          "label": "QuantityBasis",
+          "description": "Basis used to interpret the recorded quantity.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+          "label": "QuantityPerAssembly",
+          "description": "Quantity of the item required per containing assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRelatedAssetIdentifier",
+          "label": "RelatedAssetIdentifier",
+          "description": "Identifier of an asset related to the BOM item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRevision",
+          "label": "Revision",
+          "description": "Revision designation of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSelectionStatus",
+          "label": "SelectionStatus",
+          "description": "Recorded status of item selection.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceAssetIdentifier",
+          "label": "SourceAssetIdentifier",
+          "description": "Asset identifier as recorded in the source information.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceDomain",
+          "label": "SourceDomain",
+          "description": "Engineering domain from which the BOM item information originates.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasSourceGroup",
+          "label": "SourceGroup",
+          "description": "Source grouping from which the BOM item information originates.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+          "label": "StructureStatus",
+          "description": "Recorded status of the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasUnit",
+          "label": "Unit",
+          "description": "Unit associated with the recorded quantity.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasValidationStatus",
+          "label": "ValidationStatus",
+          "description": "Recorded status of BOM item validation.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s1": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/c2hhcGU",
+      "label": "TEP_EngineeringBOM",
+      "description": "Engineering bill-of-materials submodel describing assembly structures, BOM items, quantities, and engineering associations.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssemblies",
+          "label": "Assemblies",
+          "description": "Collection of assembly records in the engineering bill of materials.",
+          "kind": "object"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItems",
+          "label": "BOMItems",
+          "description": "Collection of engineering bill-of-materials item records.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s2": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy5Bc3NlbWJseS9ub2RlU2hhcGU",
+      "label": "Assembly",
+      "description": "Assembly record describing a grouping or structure of BOM items.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssemblyKind",
+          "label": "AssemblyKind",
+          "description": "Recorded kind of assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItemId",
+          "label": "BOMItemId",
+          "description": "Identifier of a bill-of-materials item.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMPosition",
+          "label": "BOMPosition",
+          "description": "Position of the item within the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemDescription",
+          "label": "ItemDescription",
+          "description": "Textual description of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasItemType",
+          "label": "ItemType",
+          "description": "Recorded type of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasParentItemId",
+          "label": "ParentItemId",
+          "description": "Identifier of the parent item in the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasQuantityPerAssembly",
+          "label": "QuantityPerAssembly",
+          "description": "Quantity of the item required per containing assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasRevision",
+          "label": "Revision",
+          "description": "Revision designation of the BOM item or assembly.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasStructureStatus",
+          "label": "StructureStatus",
+          "description": "Recorded status of the BOM structure.",
+          "kind": "datatype"
+        },
+        {
+          "predicate": "https://example.org/engineeringbom/hasUnit",
+          "label": "Unit",
+          "description": "Unit associated with the recorded quantity.",
+          "kind": "datatype"
+        }
+      ]
+    },
+    "s3": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/QXNzZW1ibGllcy9ub2RlU2hhcGU",
+      "label": "Assemblies",
+      "description": "Collection of assembly records in the engineering bill of materials.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasAssembly",
+          "label": "Assembly",
+          "description": "Assembly record describing a grouping or structure of BOM items.",
+          "kind": "object"
+        }
+      ]
+    },
+    "s4": {
+      "domain": "engineeringbom",
+      "shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lbmdpbmVlcmluZy1ib20tdGVtcGxhdGU/Qk9NSXRlbXMvbm9kZVNoYXBl",
+      "label": "BOMItems",
+      "description": "Collection of engineering bill-of-materials item records.",
+      "properties": [
+        {
+          "predicate": "https://example.org/engineeringbom/hasBOMItem",
+          "label": "BOMItem",
+          "description": "Item record in the engineering bill of materials.",
+          "kind": "object"
+        }
+      ]
+    }
+  },
+  "join_candidates": {},
+  "required_domains": [
+    "engineeringbom"
+  ],
+  "requested_concepts": [],
+  "requested_outputs": [
+    "BOM item IDs in Engineering BOM"
+  ],
+  "estimated_prompt_tokens": 2476,
+  "ollama_stats": {
+    "prompt_eval_count": 2258,
+    "eval_count": 60,
+    "total_duration": 25701338700
+  },
+  "elapsed_seconds": 27.88
+}

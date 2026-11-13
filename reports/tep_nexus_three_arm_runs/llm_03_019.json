@@ -1,0 +1,317 @@
+{
+  "interface": "TEP NEXUS constrained LLM query planner",
+  "generated_at_utc": "2026-11-10T10:16:08.731501+00:00",
+  "question": "For engineering function LI_103, show the latest measurement and the trend over the last 10 simulation minutes, including the associated asset and provenance.",
+  "model": "llama3.1:8b",
+  "raw_plan": {
+    "intent": "latest_and_history",
+    "engineering_function": "LI_103",
+    "history_window_minutes": 10,
+    "include_asset": true,
+    "include_provenance": true
+  },
+  "validated_plan": {
+    "intent": "latest_and_history",
+    "engineering_function": "LI_103",
+    "history_window_minutes": 10.0,
+    "include_asset": true,
+    "include_provenance": true
+  },
+  "evidence": {
+    "engineering_function": "LI_103",
+    "aas_function_reference": "https://example.org/tep/assets/TEP_XMEAS15",
+    "operational_signal": "XMEAS15",
+    "mapping_status": "PROVISIONAL_ENGINEERING_MATCH",
+    "latest_persisted_observation": {
+      "simulation_seconds": 1173.0,
+      "value": 50.753591255513,
+      "observed_at": "2026-11-08T16:28:40.043987+01:00",
+      "record_age_seconds": 154055.568
+    },
+    "run_id": "077a3c31-44f4-4f3a-b06d-ad52b148fe10",
+    "run_identity_source": "operator_supplied",
+    "limitations": {
+      "engineering_mapping": "PROVISIONAL",
+      "shared_run_provenance": "NOT_VERIFIED",
+      "physical_sensor_binding": "NOT_VERIFIED",
+      "temporal_storage": "TimescaleDB",
+      "engineering_semantics": "GraphDB"
+    },
+    "associated_asset_uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1",
+    "history": {
+      "window_basis": "simulation_time",
+      "requested_minutes": 10.0,
+      "sample_count": 204,
+      "truncated": false,
+      "minimum": 47.174952851329664,
+      "maximum": 52.39487216198311,
+      "first": {
+        "simulation_seconds": 573.0,
+        "value": 49.674056307043436,
+        "observed_at": "2026-11-08T16:15:26.995515+01:00"
+      },
+      "last": {
+        "simulation_seconds": 1173.0,
+        "value": 50.753591255513,
+        "observed_at": "2026-11-08T16:28:40.043987+01:00"
+      }
+    },
+    "quantitative_temporal_analytics": {
+      "status": "OK",
+      "sample_count": 204,
+      "time_basis": "simulation_time",
+      "slope_unit": "signal_value_per_simulation_minute",
+      "mean": 50.011924006723945,
+      "standard_deviation_population": 0.951852129562883,
+      "minimum": 47.174952851329664,
+      "maximum": 52.39487216198311,
+      "history_truncated_by_limit": false,
+      "elapsed_simulation_minutes": 10.0,
+      "endpoint_change": 1.0795349484695649,
+      "endpoint_rate_per_simulation_minute": 0.10795349484695649,
+      "linear_regression_slope_per_simulation_minute": 0.04970053869309718,
+      "regression_method": "ordinary_least_squares_unweighted",
+      "trend_interpretation": "descriptive_only"
+    }
+  },
+  "answer": {
+    "answer": "For engineering function LI_103, the latest persisted measurement is 50.753591255513 at simulation time 1173.0 seconds. Associated asset: http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1. Mean 50.011924006723945, standard deviation 0.951852129562883. Regression slope 0.04970053869309718 signal value per simulation minute; endpoint change 1.0795349484695649. These are descriptive simulation-time statistics, not a verified physical trend.",
+    "limitations": [
+      "Engineering mapping is provisional.",
+      "Shared run provenance is unverified.",
+      "Physical sensor binding is not verified.",
+      "The run identifier was supplied by an operator.",
+      "The latest persisted record is stale (154055.568 seconds old at query time)."
+    ]
+  },
+  "status": "COMPLETED",
+  "stage_latency_seconds": {
+    "registry_load": 0.001272,
+    "llm_planning": 6.518219,
+    "plan_validation": 0.000921,
+    "graphdb_mapping_resolution": 0.101577,
+    "timescaledb_retrieval": 0.258911,
+    "evidence_construction": 0.00098,
+    "llm_answer_generation": 33.39664,
+    "initial_answer_validation": 0.003554,
+    "deterministic_repair_and_final_validation": 0.000321
+  },
+  "answer_validation": "CHECKS_PASSED_LIMITED_SCOPE",
+  "supported_functions": [
+    "FI_101",
+    "FI_102",
+    "FI_103",
+    "FI_104",
+    "FI_105",
+    "FI_106",
+    "FI_107",
+    "FI_108",
+    "FI_109",
+    "FI_110",
+    "JI_101",
+    "LI_101",
+    "LI_102",
+    "LI_103",
+    "PI_101",
+    "PI_102",
+    "PI_103",
+    "SC_101",
+    "TI_101",
+    "TI_102",
+    "TI_103",
+    "TI_104",
+    "TI_105",
+    "VC_101",
+    "VC_102",
+    "VC_103",
+    "VC_104",
+    "VC_105",
+    "VC_106",
+    "VC_107",
+    "VC_108",
+    "VC_109",
+    "VC_110",
+    "VC_111"
+  ],
+  "original_answer": {
+    "answer": "For engineering function LI_103, the latest measurement is 50.753591255513, recorded at simulation time 1173.0 seconds, with associated asset http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1. The trend over the last 10 simulation minutes is provisional, with a mean of 50.011924006723945, standard deviation of 0.951852129562883, and a linear regression slope of 0.04970053869309718 signal value per simulation minute.",
+    "limitations": [
+      "engineering_mapping is provisional",
+      "shared run provenance is unverified",
+      "the run identifier was supplied by an operator",
+      "history is not truncated"
+    ]
+  },
+  "original_answer_validation_details": {
+    "status": "FAILED",
+    "scope": "selected_explicit_numeric_claims_and_required_caveats_only",
+    "checked_count": 14,
+    "failed_checks": [
+      "no_trend_mapping_conflation",
+      "stale_record_disclosure",
+      "endpoint_change"
+    ],
+    "checks": [
+      {
+        "check": "function_identifier",
+        "passed": true,
+        "detail": "Engineering function must be named"
+      },
+      {
+        "check": "latest_value",
+        "passed": true,
+        "detail": "Latest value must be explicitly stated and match evidence"
+      },
+      {
+        "check": "provisional_mapping",
+        "passed": true,
+        "detail": "Mapping must be described as provisional"
+      },
+      {
+        "check": "shared_run_provenance",
+        "passed": true,
+        "detail": "Shared run provenance must be unverified"
+      },
+      {
+        "check": "no_physical_verification_claim",
+        "passed": true,
+        "detail": "No physical verification claim"
+      },
+      {
+        "check": "no_trend_mapping_conflation",
+        "passed": false,
+        "detail": "Do not call statistical trend provisional because mapping is provisional"
+      },
+      {
+        "check": "stale_record_disclosure",
+        "passed": false,
+        "detail": "Old persisted data must be disclosed as stale"
+      },
+      {
+        "check": "no_unqualified_live_claim",
+        "passed": true,
+        "detail": "Do not imply live sensor data"
+      },
+      {
+        "check": "asset_uri",
+        "passed": true,
+        "detail": "Requested asset URI must match"
+      },
+      {
+        "check": "mean",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "standard_deviation_population",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "linear_regression_slope",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "endpoint_change",
+        "passed": false,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "slope_time_basis",
+        "passed": true,
+        "detail": "Slope units must refer to simulation time"
+      }
+    ],
+    "limitations": [
+      "Does not verify arbitrary free-form factual claims",
+      "Does not verify source-system correctness or physical provenance"
+    ]
+  },
+  "answer_repair": {
+    "method": "deterministic_evidence_only_reconstruction",
+    "repair_success": true
+  },
+  "answer_validation_details": {
+    "status": "CHECKS_PASSED_LIMITED_SCOPE",
+    "scope": "selected_explicit_numeric_claims_and_required_caveats_only",
+    "checked_count": 14,
+    "failed_checks": [],
+    "checks": [
+      {
+        "check": "function_identifier",
+        "passed": true,
+        "detail": "Engineering function must be named"
+      },
+      {
+        "check": "latest_value",
+        "passed": true,
+        "detail": "Latest value must be explicitly stated and match evidence"
+      },
+      {
+        "check": "provisional_mapping",
+        "passed": true,
+        "detail": "Mapping must be described as provisional"
+      },
+      {
+        "check": "shared_run_provenance",
+        "passed": true,
+        "detail": "Shared run provenance must be unverified"
+      },
+      {
+        "check": "no_physical_verification_claim",
+        "passed": true,
+        "detail": "No physical verification claim"
+      },
+      {
+        "check": "no_trend_mapping_conflation",
+        "passed": true,
+        "detail": "Do not call statistical trend provisional because mapping is provisional"
+      },
+      {
+        "check": "stale_record_disclosure",
+        "passed": true,
+        "detail": "Old persisted data must be disclosed as stale"
+      },
+      {
+        "check": "no_unqualified_live_claim",
+        "passed": true,
+        "detail": "Do not imply live sensor data"
+      },
+      {
+        "check": "asset_uri",
+        "passed": true,
+        "detail": "Requested asset URI must match"
+      },
+      {
+        "check": "mean",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "standard_deviation_population",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "linear_regression_slope",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "endpoint_change",
+        "passed": true,
+        "detail": "Metric must be explicitly stated and match computed evidence"
+      },
+      {
+        "check": "slope_time_basis",
+        "passed": true,
+        "detail": "Slope units must refer to simulation time"
+      }
+    ],
+    "limitations": [
+      "Does not verify arbitrary free-form factual claims",
+      "Does not verify source-system correctness or physical provenance"
+    ]
+  }
+}

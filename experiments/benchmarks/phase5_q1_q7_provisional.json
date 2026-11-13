@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "source": "reports/independent_questions_v2.json",
+  "source_version": "INDEPENDENT_QUESTIONS_V2",
+  "provenance_note": "Standalone proposed wording, explicitly NOT frozen paper baseline. No verified gold answers available in source.",
+  "cases": [
+    {
+      "id": "Q1",
+      "question": "Which instruments are associated with the reactor in the available DEXPI engineering data?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q2",
+      "question": "What ECAD electrical references are associated with the reactor instruments identified in the engineering data?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q3",
+      "question": "What canonical AAS AssetIdentifiers and operational signal references are associated with the reactor instruments?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q4",
+      "question": "Which product candidates and manufacturers are associated with the reactor instruments in the AAS Asset Inventory and Product Catalog?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q5",
+      "question": "What ECLASS classifications, IRDIs, QUDT attributes, and catalog technical specifications are recorded for the product candidates associated with the reactor instruments?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q6",
+      "question": "Which verified identifier relationships connect the DEXPI, ECAD, AAS Asset Inventory, and Product Catalog representations of the reactor instruments?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    },
+    {
+      "id": "Q7",
+      "question": "What DEXPI, ECAD, AAS Asset Inventory, product-candidate, ECLASS, and operational signal information is available for reactor instrument PI-1101?",
+      "expected_route": "generic_v4_1",
+      "gold_status": "missing_not_scored"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "status": "executed",
+  "plan": {
+    "intent": "dexpi_instrumentation_functional_association",
+    "equipment_tag": "R-001",
+    "outputs": [
+      "engineeringId",
+      "description",
+      "assetIdentifier"
+    ]
+  },
+  "sparql": "PREFIX core: <https://example.org/dtwise/core/>\nPREFIX ebom: <https://example.org/engineeringbom/>\nSELECT DISTINCT ?engineeringId ?description ?assetIdentifier\nWHERE {\n  GRAPH <https://example.org/dtwise/graph/ebom-v2> {\n    ?equipment a core:BOMItemRecord ;\n      ebom:hasEngineeringLocalId \"R-001\" ;\n      core:hasRecordedParent ?assembly .\n    ?assembly a core:AssemblyRecord .\n    ?association a core:FunctionalAssociation ;\n      core:functionalAssociationTarget ?assembly ;\n      core:functionalAssociationSource ?instrument ;\n      core:associationBasis ?associationBasis ;\n      core:sourceRecordId ?sourceRecordId .\n    ?instrument a core:BOMItemRecord ;\n      ebom:hasSourceDomain \"DEXPI\" ;\n      ebom:hasSourceGroup \"InstrumentationFunctions\" ;\n      ebom:hasEngineeringLocalId ?engineeringId ;\n      ebom:hasItemDescription ?description ;\n      ebom:hasAssetIdentifier ?assetIdentifier .\n  }\n}\nORDER BY ?engineeringId",
+  "binding_count": 5,
+  "results": [
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "FI_106"
+      },
+      "description": {
+        "type": "literal",
+        "value": "ReactorFeedFlow"
+      },
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/FI106"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "LI_101"
+      },
+      "description": {
+        "type": "literal",
+        "value": "ReactorLevel"
+      },
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/LI101"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "PI_101"
+      },
+      "description": {
+        "type": "literal",
+        "value": "ReactorPressure"
+      },
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/PI101"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "TI_101"
+      },
+      "description": {
+        "type": "literal",
+        "value": "ReactorTemperature"
+      },
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI101"
+      }
+    },
+    {
+      "engineeringId": {
+        "type": "literal",
+        "value": "TI_104"
+      },
+      "description": {
+        "type": "literal",
+        "value": "ReactorCoolingWaterOutletTemperature"
+      },
+      "assetIdentifier": {
+        "type": "literal",
+        "value": "https://aas.example.com/TI104"
+      }
+    }
+  ]
+}

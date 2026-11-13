@@ -1,0 +1,25 @@
+{
+  "status": "executed",
+  "plan": {
+    "intent": "dexpi_instrumentation_functional_association",
+    "equipment_tag": "C-001",
+    "outputs": [
+      "engineeringId",
+      "description",
+      "assetIdentifier"
+    ]
+  },
+  "path": [
+    "recorded_parent",
+    "association_target",
+    "association_source"
+  ],
+  "resolution": {
+    "tag": "C-001",
+    "equipment_uri": "https://example.org/dtwise/ebom-v2/item/EBOM-0002",
+    "assembly_uri": "https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER"
+  },
+  "sparql": "PREFIX core: <https://example.org/dtwise/core/>\nPREFIX ebom: <https://example.org/engineeringbom/>\nSELECT DISTINCT ?engineeringId ?description ?assetIdentifier WHERE {\n  GRAPH <https://example.org/dtwise/graph/ebom-v2> {\n    ?equipment a core:BOMItemRecord .\n    VALUES ?equipment { <https://example.org/dtwise/ebom-v2/item/EBOM-0002> }\n    VALUES ?assembly { <https://example.org/dtwise/ebom-v2/assembly/ASM-CONDENSER> }\n    ?equipment ebom:hasEngineeringLocalId \"C-001\" .\n    ?assembly a core:AssemblyRecord .\n    ?equipment core:hasRecordedParent ?assembly .\n    ?association a core:FunctionalAssociation .\n    ?association core:functionalAssociationTarget ?assembly .\n    ?instrument a core:BOMItemRecord .\n    ?association core:functionalAssociationSource ?instrument .\n    ?instrument ebom:hasSourceDomain \"DEXPI\" .\n    ?instrument ebom:hasSourceGroup \"InstrumentationFunctions\" .\n    ?association core:sourceRecordId ?evidence_12 .\n    ?association core:associationBasis ?evidence_13 .\n    ?instrument ebom:hasEngineeringLocalId ?engineeringId .\n    ?instrument ebom:hasItemDescription ?description .\n    ?instrument ebom:hasAssetIdentifier ?assetIdentifier .\n  }\n}\nORDER BY ?engineeringId",
+  "binding_count": 0,
+  "results": []
+}

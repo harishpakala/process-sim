@@ -32,6 +32,29 @@ def test_identifiers_and_product_links():
         text = json.dumps(load(name))
         assert '"idShort": "' + new + '"' in text
         assert '"idShort": "' + old + '"' not in text
+    ebom = next(x["value"] for x in load("tep_engineering_bom_instance.json")["submodelElements"] if x["idShort"] == "BOMItems")
+    ebom_items = {
+        field(x, "BOMItemId"): x for x in ebom
+    }
+    product_set = set(product_ids)
+    asset_set = set(asset_ids)
+    for item in ebom:
+        names = [p["idShort"] for p in item["value"] if p.get("modelType") == "Property"]
+        assert len(names) == len(set(names)), field(item, "BOMItemId")
+        assert "AssetIdentifier" in names and "ProductIdentifier" in names
+        assert "AssetReference" not in names and "CandidateProductReference" not in names
+        assert not field(item, "ProductIdentifier") or field(item, "ProductIdentifier") in product_set
+        assert field(item, "ValidationStatus") == (
+            "ASSET_IDENTIFIER_EXACT_MATCH" if field(item, "AssetIdentifier") in asset_set
+            else "ASSET_INVENTORY_MATCH_UNRESOLVED"
+        )
+    for identifier in ("EBOM-0016", "EBOM-0050"):
+        item = ebom_items[identifier]
+        assert field(item, "AssetIdentifier") == "https://aas.example.com/TI101"
+        assert field(item, "ProductIdentifier") == "https://example.org/product-types/IFM_TA1101"
+        assert field(item, "StructureStatus") == "UNASSIGNED_NO_VERIFIED_EQUIPMENT_MEMBERSHIP"
+    assert len(ebom_items) == len(ebom) == 79
+    assert sum(bool(field(x, "ProductIdentifier")) for x in ebom) == 63
     print(f"PASS: {len(assets)} distinct asset identifiers, {len(products)} distinct product identifiers, {len(links)} resolved product links")
 
 if __name__ == "__main__":
