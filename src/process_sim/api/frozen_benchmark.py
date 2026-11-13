@@ -94,7 +94,7 @@ def run_case(case_id, index_sha256, execute=False, pilot=False):
         )
         raw = exp33.ollama(ollama_url, model, prompt, timeout)
         chosen = planner.parse_choice(raw, {d["uri"] for d in candidates})
-        result = {"experiment": 37, "caseId": case_id, "question": case["question"],
+        result = {"experiment": 42 if pilot else 37, "caseId": case_id, "question": case["question"],
                   "expectedPathId": case["expected_path_id"], "selectedPathId": chosen,
                   "correctPathSelection": (chosen == case["expected_path_id"]) if case["expected_path_id"] else None,
                   "indexSha256": digest, "model": model, "embeddingModel": embedding_model,
