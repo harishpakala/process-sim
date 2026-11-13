@@ -303,6 +303,11 @@
                           }
                         ]
                       }
+                    },
+                    {
+                      "type": "SemanticRole",
+                      "valueType": "xs:string",
+                      "value": "DomainEntity"
                     }
                   ],
                   "description": [
@@ -327,6 +332,11 @@
                       }
                     ]
                   }
+                },
+                {
+                  "type": "SemanticRole",
+                  "valueType": "xs:string",
+                  "value": "StructuralContainer"
                 }
               ],
               "description": [
@@ -351,6 +361,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -375,6 +390,11 @@
               }
             ]
           }
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
