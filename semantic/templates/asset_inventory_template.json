@@ -15,6 +15,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -196,6 +201,13 @@
         {
           "language": "en",
           "text": "Collection of inventory asset records."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
