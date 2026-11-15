@@ -26,23 +26,18 @@ foreach ($case in $cases) {
     Remove-Item -LiteralPath $out -ErrorAction SilentlyContinue
     $watch = [System.Diagnostics.Stopwatch]::StartNew()
     Write-Host "=== $id : $($case.question) ===" -ForegroundColor Cyan
-    # Redirect at the native process level to avoid Windows PowerShell 5.1
-    # turning Python stderr into a terminating NativeCommandError.
-    $argsList = @($bridge, "--dtwise-root", $DtwiseRoot, "--schema", $schema,
-        "--graphdb-url", $Endpoint, "--question", $case.question,
-        "--execute", "--output", $out)
-    $stdoutLog = Join-Path $OutputDir "$id.stdout.log"
-    $stderrLog = Join-Path $OutputDir "$id.stderr.log"
+    # Windows PowerShell 5.1 promotes native stderr to an error record.
+    # Temporarily relax error handling for this subprocess only.
+    $previousPreference = $ErrorActionPreference
     $exit = -1
     try {
-        $proc = Start-Process -FilePath $Python -ArgumentList $argsList -Wait -PassThru -NoNewWindow `
-            -RedirectStandardOutput $stdoutLog -RedirectStandardError $stderrLog
-        $exit = $proc.ExitCode
-        $stdOutText = Get-Content -LiteralPath $stdoutLog -Raw -ErrorAction SilentlyContinue
-        $stdErrText = Get-Content -LiteralPath $stderrLog -Raw -ErrorAction SilentlyContinue
-        [string]::Concat($stdOutText, "`n", $stdErrText) | Set-Content -LiteralPath $log -Encoding UTF8
+        $ErrorActionPreference = "Continue"
+        & $Python $bridge --dtwise-root $DtwiseRoot --schema $schema --graphdb-url $Endpoint --question $case.question --execute --output $out 2>&1 | Out-File -LiteralPath $log -Encoding utf8
+        $exit = $LASTEXITCODE
     } catch {
-        $_.Exception.ToString() | Set-Content -LiteralPath $log -Encoding UTF8
+        $_.Exception.ToString() | Out-File -LiteralPath $log -Append -Encoding utf8
+    } finally {
+        $ErrorActionPreference = $previousPreference
     }
     $watch.Stop()
     $status = "FAILED"
