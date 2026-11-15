@@ -243,6 +243,50 @@ async function ask() {
   busy.value = false
  }
 }
+
+type HistorianResult = {engineeringFunction:string;mapping:{operational_signal:string;asset_identifier:string};observationCount:number;truncated:boolean;observations:Array<{simulationTimeHours:number;value:number;observedAt:string}>}
+const hRuns = ref<string[]>([]), hRun = ref(''), hDomain = ref('DEXPI'), hFunction = ref(''), hQuestion = ref('')
+const hFunctions = ref<Array<{engineering_function:string;operational_signal:string;sample_count:number}>>([])
+const hStart = ref(''), hEnd = ref(''), hError = ref(''), hBusy = ref(false), hResult = ref<HistorianResult|null>(null)
+async function hLoadRuns() {
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/runs'), data = await r.json()
+  if (!r.ok) throw Error(data.error || 'Run discovery failed')
+  hRuns.value = data.runs
+ } catch(e) { hError.value = String(e) }
+}
+async function hLoadFunctions() {
+ hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null
+ if (!hRun.value) return
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/functions?run_id=' + encodeURIComponent(hRun.value)), data = await r.json()
+  if (!r.ok) throw Error(data.error || 'Function discovery failed')
+  hFunctions.value = data.functions
+ } catch(e) { hError.value = String(e) }
+}
+function hSelectFunction() {
+ hQuestion.value = hFunction.value ? `For the DEXPI InstrumentationFunction with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName using the shared hasAssetIdentifier, then retrieve all recorded values from TimescaleDB.` : ''
+ hResult.value = null
+}
+async function hAsk() {
+ hResult.value = null; hError.value = ''
+ const start = hStart.value === '' ? null : Number(hStart.value)
+ const end = hEnd.value === '' ? null : Number(hEnd.value)
+ if ((start !== null && (!Number.isFinite(start) || start < 0)) || (end !== null && (!Number.isFinite(end) || end < 0)) || (start !== null && end !== null && start > end)) {
+  hError.value = 'Invalid simulation-time interval'; return
+ }
+ hBusy.value = true
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/answer', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+   question:hQuestion.value,engineering_function:hFunction.value,run_id:hRun.value,start_simulation_seconds:start,end_simulation_seconds:end
+  })})
+  const data = await r.json()
+  if (!r.ok) throw Error(data.error || 'Historian query failed')
+  hResult.value = data
+ } catch(e) { hError.value = String(e) }
+ finally { hBusy.value = false }
+}
+onMounted(hLoadRuns)
 </script>
 
 <template>
@@ -294,79 +338,30 @@ async function ask() {
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
   </section>
   <section class="panel">
-   <div class="panel-title"><div><h2>VTKG — Simulation observations</h2><p>Existing constrained virtual temporal graph · TimescaleDB historian · no RDF materialization</p></div></div>
-   <form class="custom-query" @submit.prevent="askVtkg">
-    <label for="vtkg-run">Simulation run UUID</label>
-    <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" @input="vtkgFunctions = []; vtkgFunction = ''" />
-    <button type="button" :disabled="vtkgFunctionsBusy || !vtkgRunId.trim()" @click="discoverVtkgFunctions">{{vtkgFunctionsBusy ? 'Retrieving AAS functions…' : 'Retrieve engineering functions from GraphDB AAS'}}</button>
-    <p v-if="vtkgFunctionsError" role="alert" style="color:#b45309">{{vtkgFunctionsError}}</p>
-    <p v-if="vtkgRejectedFunctions.length" role="status" style="color:#b45309">{{vtkgFunctions.length}} functions verified; {{vtkgRejectedFunctions.length}} rejected by live GraphDB mapping validation. Rejected functions are not selectable.</p>
-    <details v-if="vtkgRejectedFunctions.length"><summary>Rejected mappings and reasons</summary><ul><li v-for="item in vtkgRejectedFunctions" :key="item.engineering_function">{{item.engineering_function}} — {{item.reason}}</li></ul></details>
-    <label for="vtkg-function">Engineering function (live GraphDB AAS mapping, run-scoped)</label>
-    <select id="vtkg-function" v-model="vtkgFunction" required :disabled="!vtkgFunctions.length">
-     <option value="">Select a discovered supported function</option>
-     <option v-for="item in vtkgFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}} → {{item.operational_signal}} (PROVISIONAL)</option>
-    </select>
-    <p class="subdued">Only functions rechecked against GraphDB and the existing run-scoped temporal-coverage registry are selectable. Physical sensor binding and shared run provenance remain NOT_VERIFIED.</p>
-    <label for="vtkg-start">Start simulation seconds</label>
-    <input id="vtkg-start" v-model.number="vtkgStart" type="number" min="0" step="any" required />
-    <label for="vtkg-end">End simulation seconds</label>
-    <input id="vtkg-end" v-model.number="vtkgEnd" type="number" min="0" step="any" required />
-    <label for="vtkg-limit">Observation limit</label>
-    <input id="vtkg-limit" v-model.number="vtkgLimit" type="number" min="1" max="5000" step="1" required />
-    <label for="vtkg-question">Question (must name the function and the same explicit time interval)</label>
-    <textarea id="vtkg-question" :value="vtkgEffectiveQuestion" readonly required maxlength="1000" rows="3"
-     placeholder="Show observations for TI_101 between 0 seconds and 60 seconds." />
-    <p class="subdued">The question is generated from the selected GraphDB engineering function and editable bounds. The existing VTKG contract still rejects mismatches. No inferred joins.</p>
-    <button class="primary" type="submit" :disabled="vtkgBusy">{{vtkgBusy ? 'Querying VTKG…' : 'Query VTKG'}}</button>
-    <p v-if="vtkgError" role="alert" style="color:#b45309">{{vtkgError}}</p>
+   <div class="panel-title"><div><h2>VTKG — Semantic historian query</h2><p>DEXPI → OPCUAConnectivity → TimescaleDB · read-only</p></div></div>
+   <form class="custom-query" @submit.prevent="hAsk">
+    <label for="h-run">Simulation run (required; TimescaleDB)</label>
+    <select id="h-run" v-model="hRun" required @change="hLoadFunctions"><option value="">Select run</option><option v-for="run in hRuns" :key="run" :value="run">{{run}}</option></select>
+    <button type="button" @click="hLoadRuns">Refresh runs</button>
+    <label for="h-domain">Engineering domain</label>
+    <select id="h-domain" v-model="hDomain"><option value="DEXPI">DEXPI</option><option value="ECAD" disabled>ECAD (not yet verified)</option></select>
+    <label for="h-function">LocalId (verified for selected run)</label>
+    <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}} → {{item.operational_signal}} ({{item.sample_count}} samples)</option></select>
+    <label for="h-question">Natural-language question (editable)</label>
+    <textarea id="h-question" v-model="hQuestion" required maxlength="1000" rows="4" />
+    <label for="h-start">Start simulation seconds (optional)</label>
+    <input id="h-start" v-model="hStart" type="number" min="0" step="any" placeholder="No lower bound" />
+    <label for="h-end">End simulation seconds (optional)</label>
+    <input id="h-end" v-model="hEnd" type="number" min="0" step="any" placeholder="No upper bound" />
+    <p class="subdued">Empty bounds retrieve the entire series. One bound applies an open-ended filter. Live hasAssetIdentifier join; physical sensor binding NOT_VERIFIED.</p>
+    <button class="primary" type="submit" :disabled="hBusy || !hRun || !hFunction">{{hBusy ? 'Retrieving…' : 'Query historian'}}</button>
+    <p v-if="hError" role="alert">{{hError}}</p>
    </form>
-   <div v-if="vtkgResult" class="result-section">
-    <h3>Virtual temporal graph result</h3>
-    <div v-if="vtkgSemanticTrace" class="vtkg-source-trace" aria-label="Semantic-to-temporal execution provenance">
-     <h3>Semantic-to-temporal execution</h3>
-     <div class="vtkg-trace-steps">
-      <div><strong>1 · Engineering function</strong><span>{{vtkgSemanticTrace.engineeringFunction}}</span><small>Explicitly supplied by the query</small></div>
-      <div><strong>2 · GraphDB semantic resolution</strong><span>Operational signal: {{vtkgSemanticTrace.signal}}</span><small>Source: {{vtkgSemanticTrace.semanticSource}} · Mapping: {{vtkgSemanticTrace.mappingConfidence}}</small></div>
-      <div><strong>3 · TimescaleDB historian retrieval</strong><span>{{vtkgResult.evidence.observationCount}} observations</span><small>Source: {{vtkgSemanticTrace.temporalSource}} · Explicit run and simulation-time bounds</small></div>
-     </div>
-     <p class="subdued">Physical sensor binding: {{vtkgSemanticTrace.physicalSensorBinding}} · Shared run provenance: {{vtkgSemanticTrace.sharedRunProvenance}}. This is the constrained VTKG path, not a DTwise federated SPARQL join.</p>
-    </div>
-    <p>{{vtkgResult.answer}}</p>
-    <p>Observations: {{vtkgResult.evidence.observationCount}} · Truncated: {{vtkgResult.evidence.truncated ? 'Yes' : 'No'}} · Materialized in GraphDB: {{vtkgResult.materializedInGraphDB ? 'Yes' : 'No'}}</p>
-    <div class="vtkg-chart" v-if="vtkgChart">
-     <h3>Historian time series</h3>
-     <p class="subdued">Simulation time (seconds) vs. recorded value · {{vtkgChart.points.length}} numeric observations · units NOT_VERIFIED</p>
-     <div class="vtkg-chart-scroll">
-      <svg viewBox="0 0 780 295" role="img" aria-label="Historian values plotted against simulation time in seconds">
-       <g stroke="currentColor" opacity="0.22" stroke-width="1">
-        <line v-for="tick in vtkgChart.yTicks" :key="'grid-'+tick.y" :x1="vtkgChart.left" :x2="vtkgChart.right" :y1="tick.y" :y2="tick.y" />
-       </g>
-       <g stroke="currentColor" stroke-width="1.5">
-        <line :x1="vtkgChart.left" :y1="vtkgChart.top" :x2="vtkgChart.left" :y2="vtkgChart.bottom" />
-        <line :x1="vtkgChart.left" :y1="vtkgChart.bottom" :x2="vtkgChart.right" :y2="vtkgChart.bottom" />
-       </g>
-       <g fill="currentColor" font-size="12">
-        <text v-for="tick in vtkgChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
-        <text v-for="tick in vtkgChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
-        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
-        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
-       </g>
-       <polyline v-if="vtkgChart.points.length > 1" :points="vtkgChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
-       <circle v-for="(point,i) in vtkgChart.points" :key="i" :cx="point.x" :cy="point.y" r="3.5" fill="#38bdf8">
-        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
-       </circle>
-      </svg>
-     </div>
-    </div>
-    <p v-else class="subdued">No numeric historian observations available to plot.</p>
-    <div class="table-scroll"><table class="evidence-table">
-     <thead><tr><th>#</th><th>Simulation time (hours)</th><th>Value</th><th>Observed at</th></tr></thead>
-     <tbody><tr v-for="(observation,i) in vtkgResult.evidence.observations" :key="i">
-      <td>{{i+1}}</td><td>{{display(observation.simulationTimeHours)}}</td><td>{{display(observation.value)}}</td><td>{{display(observation.observedAt)}}</td>
-     </tr></tbody>
-    </table></div>
-    <details class="detail-toggle"><summary>VTKG provenance and validated plan</summary><pre>{{JSON.stringify({provenance:vtkgResult.evidence.provenance,validatedPlan:vtkgResult.validatedPlan},null,2)}}</pre></details>
+   <div v-if="hResult" class="result-section">
+    <h3>{{hResult.engineeringFunction}} → {{hResult.mapping.operational_signal}}</h3>
+    <p>Asset: {{hResult.mapping.asset_identifier}}</p>
+    <p>Observations: {{hResult.observationCount}} · Truncated: {{hResult.truncated ? 'Yes' : 'No'}}</p>
+    <div class="table-scroll"><table class="evidence-table"><thead><tr><th>#</th><th>Simulation hours</th><th>Value</th><th>Observed at</th></tr></thead><tbody><tr v-for="(sample,i) in hResult.observations" :key="i"><td>{{i+1}}</td><td>{{sample.simulationTimeHours}}</td><td>{{sample.value}}</td><td>{{sample.observedAt}}</td></tr></tbody></table></div>
    </div>
   </section>
   <section v-if="result" class="panel result-panel">
