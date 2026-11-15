@@ -120,3 +120,103 @@ def discover_functions(run_id: str, *, environ=None):
             "mappingConfidence": "PROVISIONAL",
             "physicalSensorBinding": "NOT_VERIFIED",
             "sharedRunProvenance": "NOT_VERIFIED"}
+
+
+def discover_historian_runs(*, environ=None):
+    """Run IDs come from the actual historian, not the provisional registry."""
+    from uuid import UUID
+    import psycopg
+    env = os.environ if environ is None else environ
+    dsn = env.get("TEP_TIMESCALE_DSN")
+    if not dsn:
+        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN")
+    with psycopg.connect(dsn) as conn:
+        with conn.transaction():
+            conn.execute("SET TRANSACTION READ ONLY")
+            with conn.cursor() as cur:
+                cur.execute("SELECT DISTINCT run_id FROM public.signal_samples ORDER BY run_id")
+                runs = [str(UUID(str(row[0]))) for row in cur.fetchall()]
+    return {"runs": runs}
+
+
+def discover_historian_functions(run_id, *, environ=None):
+    """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
+    from uuid import UUID
+    import psycopg
+    import requests
+    env = os.environ if environ is None else environ
+    dsn = env.get("TEP_TIMESCALE_DSN")
+    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not dsn or not graphdb:
+        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
+    run = str(UUID(str(run_id)))
+    query = """
+PREFIX dexpi: <https://example.org/dexpi/>
+PREFIX opcua: <https://example.org/opcuaconnectivity/>
+SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
+ GRAPH ?dg {
+  ?function a dexpi:InstrumentationFunction ;
+            dexpi:hasLocalId ?localId ;
+            dexpi:hasAssetIdentifier ?assetIdentifier .
+ }
+ GRAPH ?og {
+  ?mapping opcua:hasAssetIdentifier ?assetIdentifier ;
+           opcua:hasSignalName ?signalName .
+ }
+} ORDER BY ?localId ?signalName
+"""
+    response = requests.post(graphdb, data={"query": query},
+                             headers={"Accept": "application/sparql-results+json"}, timeout=30)
+    response.raise_for_status()
+    grouped = {}
+    for row in response.json()["results"]["bindings"]:
+        function = row["localId"]["value"].strip()
+        pair = (row["assetIdentifier"]["value"].strip(), row["signalName"]["value"].strip())
+        grouped.setdefault(function, set()).add(pair)
+    with psycopg.connect(dsn) as conn:
+        with conn.transaction():
+            conn.execute("SET TRANSACTION READ ONLY")
+            with conn.cursor() as cur:
+                cur.execute("""SELECT signal_id, COUNT(*) FROM public.signal_samples
+                               WHERE run_id = %s::uuid GROUP BY signal_id""", (run,))
+                counts = dict(cur.fetchall())
+    functions = []
+    rejected = []
+    for function, mappings in sorted(grouped.items()):
+        if len(mappings) != 1:
+            rejected.append({"engineering_function": function, "reason": "Ambiguous live semantic mapping"})
+            continue
+        asset, signal = next(iter(mappings))
+        if not asset or not signal or counts.get(signal, 0) <= 0:
+            rejected.append({"engineering_function": function, "reason": "No matching run-scoped observations or incomplete mapping"})
+            continue
+        functions.append({"engineering_function": function, "operational_signal": signal,
+                          "asset_identifier": asset, "sample_count": counts[signal]})
+    return {"run_id": run, "functions": functions, "rejected_functions": rejected,
+            "domain": "DEXPI", "source": "live GraphDB DEXPI/OPCUAConnectivity + TimescaleDB"}
+
+
+def run_historian_question(payload, *, environ=None):
+    """Execute the independently validated DEXPI historian path, without Ollama."""
+    from uuid import UUID
+    env = os.environ if environ is None else environ
+    if not isinstance(payload, dict) or set(payload) != {
+        "question", "engineering_function", "run_id",
+        "start_simulation_seconds", "end_simulation_seconds"
+    }:
+        raise ValueError("Expected question, engineering_function, run_id and optional time fields")
+    if not isinstance(payload["question"], str) or not 5 <= len(payload["question"].strip()) <= 1000:
+        raise ValueError("Question must contain 5–1000 characters")
+    dsn = env.get("TEP_TIMESCALE_DSN")
+    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not dsn or not graphdb:
+        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
+    scripts = ROOT / "scripts"
+    sys.path.insert(0, str(scripts))
+    try:
+        from tep_nexus_dexpi_historian import execute
+        return execute(payload["question"].strip(), payload["engineering_function"],
+                       str(UUID(str(payload["run_id"]))), dsn, graphdb,
+                       payload["start_simulation_seconds"], payload["end_simulation_seconds"])
+    finally:
+        sys.path.remove(str(scripts))
