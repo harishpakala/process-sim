@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 withDefaults(defineProps<{ page?: 'engineering' | 'historian' }>(), {page: 'engineering'})
 
@@ -130,10 +130,29 @@ async function hLoadFunctions() {
   hFunctions.value = data.functions
  } catch(e) { hError.value = String(e) }
 }
+function hGeneratedQuestion(): string {
+ if (!hFunction.value) return ''
+ const element = hDomain.value === 'DEXPI' ? 'DEXPI InstrumentationFunction' : 'ECAD Device'
+ const run = hRun.value ? ` for simulation run ${hRun.value}` : ''
+ const interval = hStart.value !== '' && hEnd.value !== ''
+  ? ` between simulation seconds ${hStart.value} and ${hEnd.value}`
+  : hStart.value !== '' ? ` from simulation second ${hStart.value} onward`
+  : hEnd.value !== '' ? ` up to simulation second ${hEnd.value}`
+  : ' for all simulation times'
+ return `Get historian values for the ${element} with LocalID ${hFunction.value}${run},${interval}.`
+}
+let hLastGeneratedQuestion = ''
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? `Get historian values for the ${hDomain.value === 'DEXPI' ? 'DEXPI InstrumentationFunction' : 'ECAD Device'} with LocalID ${hFunction.value}.` : ''
+ hQuestion.value = hGeneratedQuestion()
+ hLastGeneratedQuestion = hQuestion.value
  hResult.value = null
 }
+watch([hRun, hStart, hEnd], () => {
+ if (hQuestion.value === hLastGeneratedQuestion && hFunction.value) {
+  hQuestion.value = hGeneratedQuestion()
+  hLastGeneratedQuestion = hQuestion.value
+ }
+})
 async function hAsk() {
  hResult.value = null; hError.value = ''
  const start = hStart.value === '' ? null : Number(hStart.value)
