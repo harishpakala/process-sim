@@ -6,6 +6,7 @@ SPARQL compilation, answer rewriting, or fallback occurs here.
 from __future__ import annotations
 
 import json
+import logging
 import os
 from pathlib import Path
 import subprocess
@@ -52,8 +53,9 @@ def run_question(question: str, *, runner=subprocess.run, environ=None):
     except OSError as exc:
         raise DtwiseUnavailable("DTwise process could not start") from exc
     if completed.returncode != 0:
-        # Never expose raw tracebacks, environment details, or arbitrary paths.
-        raise DtwiseRejected("Frozen DTwise planner/executor rejected the request; check backend logs")
+        # Keep process details in backend logs, not in the browser response.
+        logging.error("DTwise bridge exited %s; stderr: %s", completed.returncode, (completed.stderr or "")[-6000:])
+        raise DtwiseRejected("DTwise bridge failed; inspect backend stderr for the underlying error")
     try:
         result = json.loads(completed.stdout)
     except (TypeError, ValueError) as exc:
