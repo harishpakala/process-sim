@@ -10,8 +10,9 @@ const benchmarkQuestions = ref<BenchmarkQuestion[]>([])
 const category = ref('')
 const benchmarkId = ref('')
 const manifestError = ref('')
-const categories = computed(() => [...new Set(benchmarkQuestions.value.map(q => q.category))])
-const categoryQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category === category.value))
+const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop'))
+const categories = computed(() => [...new Set(selectableQuestions.value.map(q => q.category))])
+const categoryQuestions = computed(() => selectableQuestions.value.filter(q => q.category === category.value))
 const selectedBenchmark = computed(() => benchmarkQuestions.value.find(q => q.id === benchmarkId.value))
 function selectCategory(next:string) {
  category.value = next
@@ -111,7 +112,7 @@ async function ask() {
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
     <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p class="subdued">55 nonblank questions from the B01–B60 manifest. Category names and question wording are preserved. Inclusion does not mean a question passed validation.</p>
+    <p class="subdued">Benchmark questions are drawn from the B01–B60 manifest; untested multi-domain multi-hop cases are excluded. Inclusion does not mean every listed question passed validation.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
