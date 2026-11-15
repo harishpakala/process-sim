@@ -33,21 +33,16 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
-type VtkgExample = {id:string;label:string;question:string;engineeringFunction:string;start:number;end:number}
-const vtkgExamples: VtkgExample[] = [
- {id:'VTKG-01',label:'TI_101 · 0–60 seconds (tested)',question:'Show observations for TI_101 between 0 seconds and 60 seconds.',engineeringFunction:'TI_101',start:0,end:60},
- {id:'VTKG-02',label:'TI_101 · 30–90 seconds (tested)',question:'Show observations for TI_101 between 30 seconds and 90 seconds.',engineeringFunction:'TI_101',start:30,end:90}
-]
-const vtkgExampleId = ref('')
-function selectVtkgExample(id:string) {
- vtkgExampleId.value = id
- const example = vtkgExamples.find(item => item.id === id)
- if (!example) return
- vtkgQuestion.value = example.question
- vtkgFunction.value = example.engineeringFunction
- vtkgStart.value = example.start
- vtkgEnd.value = example.end
- vtkgLimit.value = 100
+// Only the TI_101 observation template has been validated end-to-end.
+// Run identity and time bounds remain user-controlled.
+const vtkgTemplate = ref('')
+function selectVtkgTemplate(id:string) {
+ vtkgTemplate.value = id
+ if (id === 'ti101_observations') {
+  vtkgFunction.value = 'TI_101'
+  if (vtkgStart.value === null) vtkgStart.value = 0
+  if (vtkgEnd.value === null) vtkgEnd.value = 60
+ }
  vtkgResult.value = null
  vtkgError.value = ''
 }
@@ -61,6 +56,13 @@ const vtkgBusy = ref(false)
 const vtkgError = ref('')
 type VtkgReport = {answer:string; evidence:{observations: Array<Record<string,unknown>>; observationCount:number; truncated:boolean; provenance:Record<string,unknown>}; validatedPlan:unknown; materializedInGraphDB:boolean}
 const vtkgResult = ref<VtkgReport | null>(null)
+const vtkgEffectiveQuestion = computed(() =>
+ vtkgTemplate.value === 'ti101_observations' &&
+ vtkgStart.value !== null && vtkgEnd.value !== null
+  ? `Show observations for TI_101 between ${vtkgStart.value} seconds and ${vtkgEnd.value} seconds.`
+  : vtkgQuestion.value
+)
+
 // Plot only finite historian samples returned by the existing validated VTKG API.
 // The source stores simulation time in hours; the chart labels it in seconds.
 const vtkgChart = computed(() => {
@@ -103,7 +105,7 @@ async function askVtkg() {
   const response = await fetch('/api/ai/vtkg/answer', {
    method:'POST', headers:{'Content-Type':'application/json'},
    body:JSON.stringify({
-    question:vtkgQuestion.value, engineering_function:vtkgFunction.value,
+    question:vtkgEffectiveQuestion.value, engineering_function:vtkgFunction.value,
     run_id:vtkgRunId.value, start_simulation_seconds:vtkgStart.value,
     end_simulation_seconds:vtkgEnd.value, limit:vtkgLimit.value
    })
@@ -207,14 +209,14 @@ async function ask() {
   <section class="panel">
    <div class="panel-title"><div><h2>VTKG — Simulation observations</h2><p>Existing constrained virtual temporal graph · TimescaleDB historian · no RDF materialization</p></div></div>
    <form class="custom-query" @submit.prevent="askVtkg">
-    <label for="vtkg-example">Validated VTKG query example</label>
-    <select id="vtkg-example" :value="vtkgExampleId" @change="selectVtkgExample(($event.target as HTMLSelectElement).value)">
-     <option value="">Choose a tested observation query (optional)</option>
-     <option v-for="example in vtkgExamples" :key="example.id" :value="example.id">{{example.id}} — {{example.label}}</option>
+    <label for="vtkg-template">VTKG query type</label>
+    <select id="vtkg-template" :value="vtkgTemplate" @change="selectVtkgTemplate(($event.target as HTMLSelectElement).value)">
+     <option value="">Manual question</option>
+     <option value="ti101_observations">TI_101 — historian observations (validated query type)</option>
     </select>
-    <p class="subdued">Examples fill the question, function, and simulation bounds. Enter the run UUID explicitly; all requests are still validated by the existing backend.</p>
+    <p class="subdued">Choose the observation query, then set your simulation run and time window below. The question automatically follows the selected bounds.</p>
     <label for="vtkg-function">Engineering function (supported registry ID)</label>
-    <input id="vtkg-function" v-model="vtkgFunction" required placeholder="TI_101" />
+    <input id="vtkg-function" v-model="vtkgFunction" :readonly="vtkgTemplate === 'ti101_observations'" required placeholder="TI_101" />
     <label for="vtkg-run">Simulation run UUID</label>
     <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" />
     <label for="vtkg-start">Start simulation seconds</label>
@@ -224,7 +226,7 @@ async function ask() {
     <label for="vtkg-limit">Observation limit</label>
     <input id="vtkg-limit" v-model.number="vtkgLimit" type="number" min="1" max="5000" step="1" required />
     <label for="vtkg-question">Question (must name the function and the same explicit time interval)</label>
-    <textarea id="vtkg-question" v-model="vtkgQuestion" required maxlength="1000" rows="3"
+    <textarea id="vtkg-question" :value="vtkgEffectiveQuestion" @input="vtkgQuestion = ($event.target as HTMLTextAreaElement).value" :readonly="vtkgTemplate === 'ti101_observations'" required maxlength="1000" rows="3"
      placeholder="Show observations for TI_101 between 0 seconds and 60 seconds." />
     <p class="subdued">The existing VTKG contract rejects mismatched functions or time bounds. No automatic query routing or inferred joins.</p>
     <button class="primary" type="submit" :disabled="vtkgBusy">{{vtkgBusy ? 'Querying VTKG…' : 'Query VTKG'}}</button>
