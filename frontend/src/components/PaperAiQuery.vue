@@ -47,25 +47,6 @@ function selectVerifiedExample(id:string) {
   error.value = ''
  }
 }
-const joinAssistanceEnabled = ref(false)
-const joinKeyConfirmed = ref(false)
-const verifiedJoinKey = 'hasAssetIdentifier'
-const shortFi101Question = 'Find the OPCUAConnectivity SignalName for DEXPI InstrumentationFunction with localId FI_101.'
-const explicitFi101Question = 'Find the OPCUAConnectivity SignalName for DEXPI InstrumentationFunction with localId FI_101, joining the DEXPI hasAssetIdentifier to the OPCUAConnectivity hasAssetIdentifier.'
-const joinAssistanceApplicable = computed(() => question.value.trim() === shortFi101Question)
-const submittedDtwiseQuestion = computed(() =>
- joinAssistanceEnabled.value && joinKeyConfirmed.value && joinAssistanceApplicable.value
-  ? explicitFi101Question : question.value.trim()
-)
-function useShortFi101Question() {
- question.value = shortFi101Question
- joinAssistanceEnabled.value = true
- joinKeyConfirmed.value = false
- benchmarkId.value = ''
- verifiedExampleId.value = ''
- result.value = null
- error.value = ''
-}
 const question = ref('')
 const busy = ref(false)
 const error = ref('')
@@ -102,15 +83,7 @@ function entityLabel(value: unknown): string {
 async function ask() {
  result.value = null
  error.value = ''
- if (joinAssistanceEnabled.value && !joinAssistanceApplicable.value) {
-  error.value = 'Join assistance is currently supported only for the exact FI_101 DEXPI → OPCUAConnectivity question.'
-  return
- }
- if (joinAssistanceEnabled.value && !joinKeyConfirmed.value) {
-  error.value = 'Confirm the hasAssetIdentifier join key before submitting.'
-  return
- }
- const text = submittedDtwiseQuestion.value
+ const text = question.value.trim()
  if (text.length < 5 || text.length > 1000) {
   error.value = 'Enter a question between 5 and 1000 characters'
   return
@@ -255,23 +228,12 @@ onMounted(hLoadRuns)
      <option v-for="item in verifiedExamples" :key="item.id" :value="item.id">{{item.label}}</option>
     </select>
     <p class="subdued">FI_101 → XMEAS1 was confirmed in a CLI GraphDB execution supplied by the operator. This example does not modify the frozen B01–B60 manifest.</p>
-    <div class="join-assistance">
-     <button type="button" @click="useShortFi101Question">Use short FI_101 question with join assistance</button>
-     <label for="dtwise-join-assistance"><input id="dtwise-join-assistance" type="checkbox" v-model="joinAssistanceEnabled" /> Enable explicit join assistance (FI_101 only)</label>
-     <template v-if="joinAssistanceEnabled">
-      <p class="subdued">Supported only for the exact short FI_101 question. No automatic join inference; the frozen planner remains unchanged.</p>
-      <p v-if="!joinAssistanceApplicable" role="alert" style="color:#b45309">This question does not match the verified FI_101 short question. Disable assistance or use the button above.</p>
-      <label for="dtwise-join-confirm"><input id="dtwise-join-confirm" type="checkbox" v-model="joinKeyConfirmed" :disabled="!joinAssistanceApplicable" /> I confirm joining DEXPI {{verifiedJoinKey}} to OPCUAConnectivity {{verifiedJoinKey}}</label>
-      <label for="dtwise-expanded-question">Question submitted to frozen DTwise (read-only)</label>
-      <textarea id="dtwise-expanded-question" :value="submittedDtwiseQuestion" readonly rows="4" />
-     </template>
-    </div>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
     <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
    </div>
-   <button class="primary" type="button" :disabled="busy || question.trim().length < 5 || (joinAssistanceEnabled && (!joinAssistanceApplicable || !joinKeyConfirmed))" @click="ask">
+   <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
     {{busy ? 'Executing DTwise query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
