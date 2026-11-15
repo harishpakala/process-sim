@@ -9,7 +9,24 @@ const question = ref('')
 const busy = ref(false)
 const error = ref('')
 const result = ref<DtwiseResult | null>(null)
-const entities = computed(() => Array.isArray(result.value?.answer?.entities) ? result.value.answer.entities : [])
+type ResultRow = { entity?: unknown; value?: unknown; [key: string]: unknown }
+const rows = computed<ResultRow[]>(() => {
+ const answer = result.value?.answer
+ const items = Array.isArray(answer?.values) ? answer.values :
+               Array.isArray(answer?.entities) ? answer.entities : []
+ return items.map(item => item !== null && typeof item === 'object' && !Array.isArray(item)
+  ? item as ResultRow : {value: item})
+})
+function display(value: unknown): string {
+ return typeof value === 'string' ? value : value == null ? '—' : JSON.stringify(value)
+}
+function entityLabel(value: unknown): string {
+ const text = display(value)
+ if (typeof value !== 'string') return text
+ const clean = text.replace(/^<|>$/g, '')
+ const tail = clean.split('/').filter(Boolean).pop()
+ return tail || clean
+}
 async function ask() {
  result.value = null
  error.value = ''
@@ -63,17 +80,22 @@ async function ask() {
     <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
     <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
-    <div v-if="entities.length" class="table-scroll">
+    <div v-if="rows.length" class="table-scroll">
      <table class="evidence-table">
-      <thead><tr><th>#</th><th>Returned entity / value</th></tr></thead>
-      <tbody><tr v-for="(entity,i) in entities" :key="i">
-       <td>{{i+1}}</td><td><pre>{{JSON.stringify(entity,null,2)}}</pre></td>
+      <thead><tr><th>#</th><th>Signal Name / Value</th><th>Signal Mapping / Entity</th></tr></thead>
+      <tbody><tr v-for="(row,i) in rows" :key="i">
+       <td>{{i+1}}</td>
+       <td class="mono">{{display(row.value)}}</td>
+       <td class="mono"><span :title="display(row.entity)">{{entityLabel(row.entity)}}</span>
+        <details v-if="row.entity != null" class="detail-toggle"><summary>Full URI</summary><span class="full-id">{{display(row.entity)}}</span></details>
+       </td>
       </tr></tbody>
      </table>
     </div>
+    <p v-else class="subdued">No tabular rows returned. See full structured answer below.</p>
     <details class="detail-toggle"><summary>Full structured answer</summary><pre>{{JSON.stringify(result.answer,null,2)}}</pre></details>
    </div>
-   <div class="result-section"><h3>Generated SPARQL</h3><pre>{{result.sparql}}</pre></div>
+   <div class="result-section"><details class="detail-toggle"><summary>Generated SPARQL</summary><pre>{{result.sparql}}</pre></details></div>
    <div class="result-section">
     <h3>Planner and provenance</h3>
     <p class="subdued">Mode: {{result.mode}} · Graph scope: {{result.graph_mode}}</p>
