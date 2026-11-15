@@ -16,7 +16,7 @@ def replace_once(path, old, new):
 cross = Path('dtwise/cross_domain_join.py')
 replace_once(cross,
     "    if ('productcatalog' in domains and 'assetinventory' in domains and len(domains) >= 3",
-    "    from dtwise.schema_join_graph import plan_schema_join_graph\n"
+    "    from process_sim.dtwise.schema_join_graph import plan_schema_join_graph\n"
     "    graph_plan = plan_schema_join_graph(question, catalog, schema, domains)\n"
     "    if graph_plan is not None:\n"
     "        return graph_plan\n"
@@ -26,7 +26,7 @@ sparql = Path('dtwise/sparql_generator.py')
 replace_once(sparql,
     '    if plan.get("join_type") == "schema_bridge_join":',
     '    if plan.get("join_type") == "schema_join_graph":\n'
-    '        from dtwise.schema_join_graph import compile_schema_join_graph\n'
+    '        from process_sim.dtwise.schema_join_graph import compile_schema_join_graph\n'
     '        return compile_schema_join_graph(plan, schema, limit, graph_mode, graph_iri,\n'
     '                                         include_graph, count_per_graph, iri)\n'
     '    if plan.get("join_type") == "schema_bridge_join":')

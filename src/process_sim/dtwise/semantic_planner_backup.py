@@ -1,4 +1,4 @@
-﻿"""SHACL-grounded semantic query planner for DTwise.
+"""SHACL-grounded semantic query planner for DTwise.
 
 Qwen selects a requested entity, path and supported intent from a bounded
 catalog. Only schema-validated SHACL hops may become SPARQL predicates.
@@ -10,7 +10,7 @@ import re
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from dtwise.query_planner import validate_hops
+from process_sim.dtwise.query_planner import validate_hops
 
 
 def _labels(schema, uri):
@@ -461,7 +461,7 @@ def plan_question_semantic(question, paths, schema, *,
     if not catalog:
         raise ValueError("No SHACL root-to-entity candidates available")
 
-    from dtwise.cross_domain_join import plan_join
+    from process_sim.dtwise.cross_domain_join import plan_join
     cross_domain_plan = plan_join(question, catalog, schema)
     if cross_domain_plan is not None:
         return cross_domain_plan

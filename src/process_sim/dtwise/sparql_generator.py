@@ -60,23 +60,23 @@ def compile_sparql(plan, schema, limit=100, *, graph_mode="default", graph_iri=N
         return _compile_identifier_anti_join(plan, schema, limit, graph_mode,
                                              graph_iri, include_graph, count_per_graph)
     if plan.get("join_type") == "cross_domain_projection":
-        from dtwise.cross_domain_projection import compile_cross_domain_projection
+        from process_sim.dtwise.cross_domain_projection import compile_cross_domain_projection
         return compile_cross_domain_projection(plan, schema, limit, graph_mode, graph_iri,
                                                include_graph, count_per_graph, iri)
     if plan.get("join_type") == "schema_join_graph":
-        from dtwise.schema_join_graph import compile_schema_join_graph
+        from process_sim.dtwise.schema_join_graph import compile_schema_join_graph
         return compile_schema_join_graph(plan, schema, limit, graph_mode, graph_iri,
                                          include_graph, count_per_graph, iri)
     if plan.get("join_type") == "schema_bridge_join":
-        from dtwise.cross_domain_join import compile_schema_bridge_join
+        from process_sim.dtwise.cross_domain_join import compile_schema_bridge_join
         return compile_schema_bridge_join(plan, schema, limit, graph_mode, graph_iri,
                                           include_graph, count_per_graph, iri)
     if plan.get("join_type") is not None:
         if plan['join_type'] == 'multi_key_bridge_join':
-            from dtwise.cross_domain_join import compile_bridge_join
+            from process_sim.dtwise.cross_domain_join import compile_bridge_join
             return compile_bridge_join(plan, schema, limit, graph_mode, graph_iri,
                                        include_graph, count_per_graph, iri)
-        from dtwise.cross_domain_join import compile_join
+        from process_sim.dtwise.cross_domain_join import compile_join
         return compile_join(plan, schema, limit, graph_mode, graph_iri,
                             include_graph, count_per_graph, iri)
     if graph_mode not in ("default", "all_named", "selected"):
@@ -512,7 +512,7 @@ def _compile_identifier_anti_join(plan, schema, limit, graph_mode, graph_iri,
         raise ValueError("Cross-domain anti-join requires all_named graph scope")
     if type(include_graph) is not bool:
         raise ValueError("include_graph must be boolean")
-    from dtwise.cross_domain_join import compile_join
+    from process_sim.dtwise.cross_domain_join import compile_join
     validated = dict(plan, join_type="identifier_equality")
     positive = compile_join(validated, schema, limit, graph_mode, graph_iri,
                             False, False, iri)

@@ -9,28 +9,12 @@
     rdfs:label "AssetInventory SHACL shape" ;
     sh:description "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en ;
     sh:name "AssetInventory" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> ;
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> a owl:Class ;
     rdfs:label "AssetInventory" ;
     rdfs:comment "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> a sh:NodeShape ;
-    rdfs:label "Assets SHACL shape" ;
-    sh:description "Collection of inventory asset records."@en ;
-    sh:name "Assets" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "Assets constraint" ;
-    sh:class aas:SMC ;
-    sh:description "Collection of inventory asset records."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:name "Assets" ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> ;
-    sh:path assetinventory:hasAssets .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "Asset SHACL shape" ;
@@ -49,12 +33,12 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> ;
+    sh:targetClass assetinventory:Asset .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Asset constraint" ;
-    sh:class aas:SMC ;
+    sh:class assetinventory:Asset ;
     sh:description "Inventory record for an identified asset."@en ;
     sh:minCount 0 ;
     sh:name "Asset" ;
@@ -178,15 +162,6 @@
     sh:name "ProductIdentifier" ;
     sh:path assetinventory:hasProductIdentifier .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlbGF0ZWRBc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "RelatedAssetIdentifier constraint" ;
-    sh:datatype xsd:string ;
-    sh:description "Identifier of an asset related to the inventory asset."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:name "RelatedAssetIdentifier" ;
-    sh:path assetinventory:hasRelatedAssetIdentifier .
-
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SimulationStatus constraint" ;
     sh:datatype xsd:string ;
@@ -195,6 +170,9 @@
     sh:minCount 0 ;
     sh:name "SimulationStatus" ;
     sh:path assetinventory:hasSimulationStatus .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
 
 assetinventory:hasAsset a owl:ObjectProperty ;
     rdfs:label "Asset",
@@ -215,11 +193,6 @@ assetinventory:hasAssetType a owl:DatatypeProperty ;
     rdfs:label "AssetType",
         "hasAssetType" ;
     rdfs:comment "Recorded type or category of the asset."@en .
-
-assetinventory:hasAssets a owl:ObjectProperty ;
-    rdfs:label "Assets",
-        "hasAssets" ;
-    rdfs:comment "Collection of inventory asset records."@en .
 
 assetinventory:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
     rdfs:label "CrossDomainAssociationEvidence",
@@ -271,16 +244,13 @@ assetinventory:hasProductIdentifier a owl:DatatypeProperty ;
         "hasProductIdentifier" ;
     rdfs:comment "Identifier of the product associated with the asset; distinct from the asset identifier."@en .
 
-assetinventory:hasRelatedAssetIdentifier a owl:DatatypeProperty ;
-    rdfs:label "RelatedAssetIdentifier",
-        "hasRelatedAssetIdentifier" ;
-    rdfs:comment "Identifier of an asset related to the inventory asset."@en .
-
 assetinventory:hasSimulationStatus a owl:DatatypeProperty ;
     rdfs:label "SimulationStatus",
         "hasSimulationStatus" ;
     rdfs:comment "Recorded status of simulation activities for the asset."@en .
 
-aas:SMC a owl:Class ;
-    rdfs:label "Submodel Element Collection" .
+assetinventory:Asset a owl:Class ;
+    rdfs:label "Asset" ;
+    rdfs:comment "Inventory record for an identified asset."@en ;
+    rdfs:subClassOf aas:SMC .
 

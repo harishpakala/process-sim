@@ -1,4 +1,4 @@
-﻿"""SHACL-grounded semantic query planner for DTwise.
+"""SHACL-grounded semantic query planner for DTwise.
 
 Qwen selects a requested entity, path and supported intent from a bounded
 catalog. Only schema-validated SHACL hops may become SPARQL predicates.
@@ -1196,20 +1196,20 @@ def plan_question_semantic(question, paths, schema, *,
 
     # Two-domain natural-language joins: model proposes roles; SHACL validates all paths.
     # Keep explicit negative joins on their dedicated anti-join path.
-    from dtwise.cross_domain_join import _mentioned as _join_domain_mentioned
+    from process_sim.dtwise.cross_domain_join import _mentioned as _join_domain_mentioned
     _named_domains = {str(c['domain']) for c in schema.concepts
                       if c.get('domain') and _join_domain_mentioned(c['domain'], question)}
     _negative_join = re.search(
         r"\b(?:no|without)\s+matching\b|\b(?:do(?:es)?\s+not|don't|doesn't)\s+have\s+(?:a\s+)?match\b",
         question, re.I)
     if len(_named_domains) == 2 and not _negative_join:
-        from dtwise.structured_join import plan_structured_join
+        from process_sim.dtwise.structured_join import plan_structured_join
         structured = plan_structured_join(question, catalog, schema,
                                           host=host, model=model, timeout=timeout)
         if structured is not None:
             return structured
 
-    from dtwise.cross_domain_projection import plan_cross_domain_projection
+    from process_sim.dtwise.cross_domain_projection import plan_cross_domain_projection
     projection_join = plan_cross_domain_projection(question, catalog, schema)
     if projection_join is not None:
         return projection_join
@@ -1218,7 +1218,7 @@ def plan_question_semantic(question, paths, schema, *,
     # Resolve both sides using the existing SHACL-evidence join planner, then
     # retain the caller's explicit anti-match semantics in a separate IR type.
     if re.search(r"\b(?:no|without)\s+matching\b|\b(?:do(?:es)?\s+not|don't|doesn't)\s+have\s+(?:a\s+)?match\b", question, re.I):
-        from dtwise.cross_domain_join import plan_join
+        from process_sim.dtwise.cross_domain_join import plan_join
         anti_plan = plan_join(question, catalog, schema)
         if anti_plan is None or anti_plan.get("join_type") != "identifier_equality":
             raise ValueError("Cross-domain anti-join requires a SHACL-validated identifier equality plan")
@@ -1239,7 +1239,7 @@ def plan_question_semantic(question, paths, schema, *,
         anti_plan["validation_scope"] = "SHACL paths verified; identifier equality explicitly requested"
         return anti_plan
 
-    from dtwise.cross_domain_join import plan_join
+    from process_sim.dtwise.cross_domain_join import plan_join
     cross_domain_plan = plan_join(question, catalog, schema)
     if cross_domain_plan is not None:
         return cross_domain_plan

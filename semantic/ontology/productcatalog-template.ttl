@@ -9,7 +9,7 @@
     rdfs:label "ProductCatalog SHACL shape" ;
     sh:description "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."@en ;
     sh:name "ProductCatalog" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> ;
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> a owl:Class ;
@@ -106,30 +106,15 @@
     sh:name "SupplierPartNumber" ;
     sh:path productcatalog:hasSupplierPartNumber .
 
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ> a sh:NodeShape ;
-    rdfs:label "TechnicalProperties SHACL shape" ;
-    sh:description "Collection of technical properties associated with the product."@en ;
-    sh:name "TechnicalProperties" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "TechnicalProperties constraint" ;
-    sh:class aas:SMC ;
-    sh:description "Collection of technical properties associated with the product."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 1 ;
-    sh:name "TechnicalProperties" ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL25vZGVTaGFwZQ> ;
-    sh:path productcatalog:hasTechnicalProperties .
-
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "TechnicalProperty SHACL shape" ;
     sh:description "Technical characteristic recorded for the catalog product."@en ;
-    sh:name "TechnicalProperty" .
+    sh:name "TechnicalProperty" ;
+    sh:targetClass productcatalog:TechnicalProperty .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> a sh:PropertyShape ;
     rdfs:label "TechnicalProperty constraint" ;
-    sh:class aas:SMC ;
+    sh:class productcatalog:TechnicalProperty ;
     sh:description "Technical characteristic recorded for the catalog product."@en ;
     sh:minCount 0 ;
     sh:name "TechnicalProperty" ;
@@ -150,32 +135,17 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzL3NoYXBl> .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> ;
+    sh:targetClass productcatalog:Product .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "Product constraint" ;
-    sh:class aas:SMC ;
+    sh:class productcatalog:Product ;
     sh:description "Catalog record describing an identified product."@en ;
     sh:minCount 0 ;
     sh:name "Product" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> ;
     sh:path productcatalog:hasProduct .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl> a sh:NodeShape ;
-    rdfs:label "Products SHACL shape" ;
-    sh:description "Collection of catalog product records."@en ;
-    sh:name "Products" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvc2hhcGU> a sh:PropertyShape ;
-    rdfs:label "Products constraint" ;
-    sh:class aas:SMC ;
-    sh:description "Collection of catalog product records."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 1 ;
-    sh:name "Products" ;
-    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMvbm9kZVNoYXBl> ;
-    sh:path productcatalog:hasProducts .
 
 productcatalog:hasECLASSClass a owl:DatatypeProperty ;
     rdfs:label "ECLASSClass",
@@ -222,11 +192,6 @@ productcatalog:hasProductIdentifier a owl:DatatypeProperty ;
         "hasProductIdentifier" ;
     rdfs:comment "Identifier of the catalog product; distinct from an installed asset identifier."@en .
 
-productcatalog:hasProducts a owl:ObjectProperty ;
-    rdfs:label "Products",
-        "hasProducts" ;
-    rdfs:comment "Collection of catalog product records."@en .
-
 productcatalog:hasSupplierName a owl:DatatypeProperty ;
     rdfs:label "SupplierName",
         "hasSupplierName" ;
@@ -237,11 +202,6 @@ productcatalog:hasSupplierPartNumber a owl:DatatypeProperty ;
         "hasSupplierPartNumber" ;
     rdfs:comment "Part number assigned by the supplier."@en .
 
-productcatalog:hasTechnicalProperties a owl:ObjectProperty ;
-    rdfs:label "TechnicalProperties",
-        "hasTechnicalProperties" ;
-    rdfs:comment "Collection of technical properties associated with the product."@en .
-
 productcatalog:hasTechnicalProperty a owl:ObjectProperty ;
     rdfs:label "TechnicalProperty",
         "hasTechnicalProperty" ;
@@ -249,4 +209,14 @@ productcatalog:hasTechnicalProperty a owl:ObjectProperty ;
 
 aas:SMC a owl:Class ;
     rdfs:label "Submodel Element Collection" .
+
+productcatalog:Product a owl:Class ;
+    rdfs:label "Product" ;
+    rdfs:comment "Catalog record describing an identified product."@en ;
+    rdfs:subClassOf aas:SMC .
+
+productcatalog:TechnicalProperty a owl:Class ;
+    rdfs:label "TechnicalProperty" ;
+    rdfs:comment "Technical characteristic recorded for the catalog product."@en ;
+    rdfs:subClassOf aas:SMC .
 
