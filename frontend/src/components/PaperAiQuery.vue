@@ -39,7 +39,39 @@ const categoryQuestions = computed(() => {
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
 const isMultihop = computed(() => result.value?.answer?.join_type === 'shacl_multihop_identifier_join')
 const projectedProperties = computed(() => Array.isArray(result.value?.answer?.properties) ? result.value.answer.properties as string[] : [])
-const propertyLabel = (iri: string) => iri.split(/[/#]/).pop()?.replace(/^has(?=[A-Z])/, '') || iri
+const propertyLabel = (iri: string) => {
+ const raw = iri.split(/[/#]/).pop()?.replace(/^has(?=[A-Z])/, '') || iri
+ return raw.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+}
+const domainLabel = (domain: unknown): string => {
+ if (typeof domain !== 'string' || !domain) return 'Unknown domain'
+ const names: Record<string, string> = {dexpi:'DEXPI', ecad:'ECAD', assetinventory:'Asset Inventory', productcatalog:'Product Catalog', opcuaconnectivity:'OPC UA Connectivity'}
+ return names[domain.toLowerCase()] || domain.replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+}
+const joinRoute = computed(() => {
+ const answer = result.value?.answer
+ if (!answer || typeof answer.source_domain !== 'string' || typeof answer.target_domain !== 'string') return []
+ return [answer.source_domain, answer.bridge_domain, answer.target_domain]
+  .filter((domain): domain is string => typeof domain === 'string' && domain.length > 0)
+})
+const joinKeys = computed(() => {
+ const plan = result.value?.plan
+ if (!plan || typeof plan !== 'object') return []
+ const record = plan as Record<string, unknown>
+ const keys = record.join_keys
+ return Array.isArray(keys) ? keys.filter((key): key is string => typeof key === 'string') :
+  typeof record.join_key === 'string' ? [record.join_key] :
+  typeof record.key_label === 'string' ? [record.key_label] : []
+})
+const resultCell = (row: ResultRow, property: string): unknown => {
+ const properties = row.properties
+ return properties && typeof properties === 'object' && !Array.isArray(properties)
+  ? (properties as Record<string, unknown>)[property] : undefined
+}
+const missingCell = (value: unknown) => value === null || value === undefined || value === ''
+const missingCount = computed(() => isMultihop.value
+ ? rows.value.reduce((count, row) => count + projectedProperties.value.filter(p => missingCell(resultCell(row, p))).length, 0)
+ : 0)
 function selectCategory(next:string) {
  category.value = next
  benchmarkId.value = ''
@@ -291,11 +323,17 @@ onMounted(hLoadRuns)
     <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
     <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
-    <p v-if="isMultihop" class="subdued">Join route: {{result.answer.source_domain}} → {{result.answer.bridge_domain}} → {{result.answer.target_domain}}</p>
+    <div v-if="joinRoute.length > 1" class="join-provenance" aria-label="SHACL join provenance">
+     <strong>SHACL-validated domain join</strong>
+     <div class="join-steps"><template v-for="(domain,i) in joinRoute" :key="i"><span class="join-domain">{{domainLabel(domain)}}</span><span v-if="i < joinRoute.length - 1" class="join-arrow" aria-hidden="true">→</span></template></div>
+     <p v-if="joinKeys.length" class="subdued">Join identifiers: {{joinKeys.join(' · ')}}</p>
+     <p class="subdued">Structural paths verified against SHACL; returned values come from GraphDB.</p>
+    </div>
+    <p v-if="isMultihop && missingCount" class="subdued">{{missingCount}} unavailable property value{{missingCount === 1 ? '' : 's'}} shown as Not available (optional data).</p>
     <div v-if="isMultihop && rows.length" class="table-scroll">
      <table class="evidence-table">
       <thead><tr><th>#</th><th v-for="property in projectedProperties" :key="property" :title="property">{{propertyLabel(property)}}</th></tr></thead>
-      <tbody><tr v-for="(row,i) in rows" :key="i"><td>{{i+1}}</td><td v-for="property in projectedProperties" :key="property" class="mono">{{display((row.properties as Record<string, unknown> | undefined)?.[property])}}</td></tr></tbody>
+      <tbody><tr v-for="(row,i) in rows" :key="i"><td>{{i+1}}</td><td v-for="property in projectedProperties" :key="property" class="mono" :class="{'missing-value':missingCell(resultCell(row,property))}"><span v-if="missingCell(resultCell(row,property))" title="This optional property was not returned by GraphDB">Not available</span><span v-else :title="display(resultCell(row,property))">{{display(resultCell(row,property))}}</span></td></tr></tbody>
      </table>
     </div>
     <div v-else-if="rows.length" class="table-scroll">
@@ -324,6 +362,8 @@ onMounted(hLoadRuns)
 </template>
 
 <style scoped>
+.join-provenance{display:grid;gap:8px;padding:12px;border:1px solid #334a62;border-radius:8px}.join-provenance p{margin:0}.join-steps{display:flex;align-items:center;flex-wrap:wrap;gap:8px}.join-domain{padding:5px 9px;border:1px solid #476078;border-radius:6px;font-weight:600}.join-arrow{opacity:.75}.missing-value{font-style:italic;opacity:.7}
+
 .vtkg-source-trace{display:grid;gap:10px;padding:12px;border:1px solid #334a62;border-radius:8px}.vtkg-source-trace h3{margin:0}.vtkg-trace-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.vtkg-trace-steps>div{display:grid;align-content:start;gap:6px;padding:10px;border:1px solid #334a62;border-radius:7px}.vtkg-trace-steps span{font-weight:600;overflow-wrap:anywhere}.vtkg-trace-steps small{opacity:.8;overflow-wrap:anywhere}
 
 .vtkg-chart{display:grid;gap:8px}.vtkg-chart h3{margin:0}.vtkg-chart-scroll{overflow-x:auto}.vtkg-chart svg{display:block;width:100%;min-width:520px;height:auto;max-height:370px}
