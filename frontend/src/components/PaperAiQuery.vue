@@ -33,6 +33,39 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
+const vtkgQuestion = ref('')
+const vtkgFunction = ref('')
+const vtkgRunId = ref('')
+const vtkgStart = ref<number | null>(null)
+const vtkgEnd = ref<number | null>(null)
+const vtkgLimit = ref(100)
+const vtkgBusy = ref(false)
+const vtkgError = ref('')
+type VtkgReport = {answer:string; evidence:{observations: Array<Record<string,unknown>>; observationCount:number; truncated:boolean; provenance:Record<string,unknown>}; validatedPlan:unknown; materializedInGraphDB:boolean}
+const vtkgResult = ref<VtkgReport | null>(null)
+async function askVtkg() {
+ vtkgResult.value = null
+ vtkgError.value = ''
+ if (vtkgStart.value === null || vtkgEnd.value === null) {
+  vtkgError.value = 'Explicit simulation-time bounds are required'
+  return
+ }
+ vtkgBusy.value = true
+ try {
+  const response = await fetch('/api/ai/vtkg/answer', {
+   method:'POST', headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({
+    question:vtkgQuestion.value, engineering_function:vtkgFunction.value,
+    run_id:vtkgRunId.value, start_simulation_seconds:vtkgStart.value,
+    end_simulation_seconds:vtkgEnd.value, limit:vtkgLimit.value
+   })
+  })
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'VTKG query failed')
+  vtkgResult.value = data as VtkgReport
+ } catch(e) { vtkgError.value = e instanceof Error ? e.message : String(e) }
+ finally { vtkgBusy.value = false }
+}
 const question = ref('')
 const busy = ref(false)
 const error = ref('')
@@ -122,6 +155,39 @@ async function ask() {
     {{busy ? 'Executing DTwise query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
+  </section>
+  <section class="panel">
+   <div class="panel-title"><div><h2>VTKG — Simulation observations</h2><p>Existing constrained virtual temporal graph · TimescaleDB historian · no RDF materialization</p></div></div>
+   <form class="custom-query" @submit.prevent="askVtkg">
+    <label for="vtkg-function">Engineering function (supported registry ID)</label>
+    <input id="vtkg-function" v-model="vtkgFunction" required placeholder="TI_101" />
+    <label for="vtkg-run">Simulation run UUID</label>
+    <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" />
+    <label for="vtkg-start">Start simulation seconds</label>
+    <input id="vtkg-start" v-model.number="vtkgStart" type="number" min="0" step="any" required />
+    <label for="vtkg-end">End simulation seconds</label>
+    <input id="vtkg-end" v-model.number="vtkgEnd" type="number" min="0" step="any" required />
+    <label for="vtkg-limit">Observation limit</label>
+    <input id="vtkg-limit" v-model.number="vtkgLimit" type="number" min="1" max="5000" step="1" required />
+    <label for="vtkg-question">Question (must name the function and the same explicit time interval)</label>
+    <textarea id="vtkg-question" v-model="vtkgQuestion" required maxlength="1000" rows="3"
+     placeholder="Show observations for TI_101 between 0 seconds and 60 seconds." />
+    <p class="subdued">The existing VTKG contract rejects mismatched functions or time bounds. No automatic query routing or inferred joins.</p>
+    <button class="primary" type="submit" :disabled="vtkgBusy">{{vtkgBusy ? 'Querying VTKG…' : 'Query VTKG'}}</button>
+    <p v-if="vtkgError" role="alert" style="color:#b45309">{{vtkgError}}</p>
+   </form>
+   <div v-if="vtkgResult" class="result-section">
+    <h3>Virtual temporal graph result</h3>
+    <p>{{vtkgResult.answer}}</p>
+    <p>Observations: {{vtkgResult.evidence.observationCount}} · Truncated: {{vtkgResult.evidence.truncated ? 'Yes' : 'No'}} · Materialized in GraphDB: {{vtkgResult.materializedInGraphDB ? 'Yes' : 'No'}}</p>
+    <div class="table-scroll"><table class="evidence-table">
+     <thead><tr><th>#</th><th>Simulation time (hours)</th><th>Value</th><th>Observed at</th></tr></thead>
+     <tbody><tr v-for="(observation,i) in vtkgResult.evidence.observations" :key="i">
+      <td>{{i+1}}</td><td>{{display(observation.simulationTimeHours)}}</td><td>{{display(observation.value)}}</td><td>{{display(observation.observedAt)}}</td>
+     </tr></tbody>
+    </table></div>
+    <details class="detail-toggle"><summary>VTKG provenance and validated plan</summary><pre>{{JSON.stringify({provenance:vtkgResult.evidence.provenance,validatedPlan:vtkgResult.validatedPlan},null,2)}}</pre></details>
+   </div>
   </section>
   <section v-if="result" class="panel result-panel">
    <div class="panel-title">
