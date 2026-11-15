@@ -19,6 +19,7 @@ from pathlib import Path
 # python scripts/dtwise_bridge.py ...
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "src"
+SCHEMA_PATH = ROOT / "semantic" / "ontology" / "dtwise" / "dtwise-schema-index.json"
 
 if str(SRC) not in sys.path:
     sys.path.insert(0, str(SRC))
@@ -31,7 +32,6 @@ from process_sim.dtwise.sparql_generator import compile_sparql
 
 def run(
     question,
-    schema_path,
     graphdb_url,
     *,
     limit=100,
@@ -41,7 +41,7 @@ def run(
 ):
     """Plan a question and optionally execute it against GraphDB."""
 
-    schema_file = Path(schema_path).expanduser().resolve()
+    schema_file = SCHEMA_PATH
 
     if not schema_file.is_file():
         raise ValueError(
@@ -113,12 +113,6 @@ def main():
     )
 
     parser.add_argument(
-        "--schema",
-        required=True,
-        help="Path to the DTWise schema index JSON file",
-    )
-
-    parser.add_argument(
         "--graphdb-url",
         default=os.environ.get(
             "GRAPHDB_SPARQL_ENDPOINT",
@@ -159,7 +153,6 @@ def main():
 
     result = run(
         args.question,
-        args.schema,
         args.graphdb_url,
         limit=args.limit,
         execute=args.execute,
