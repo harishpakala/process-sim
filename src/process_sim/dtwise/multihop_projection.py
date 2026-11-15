@@ -63,9 +63,26 @@ def plan_multihop_projection(question, catalog, schema):
             outputs_by_domain.setdefault(c["domain"], []).append((c, props, named))
     targets = [(domain, entries) for domain, entries in outputs_by_domain.items()
                if domain not in {c["domain"] for c, _ in sources}]
-    if len(targets) != 1:
+    # A bridge entity may expose an identifier also requested on the output
+    # entity (e.g. ProductIdentifier on both Asset and Product). Do not
+    # interpret that shared join key as a second requested output domain.
+    # Prefer the unique explicitly named entity with the most requested
+    # terminal properties; ties remain unresolved rather than guessed.
+    scored_targets = []
+    for domain, entries in targets:
+        matching = [(c, props, named) for c, props, named in entries
+                    if any(_mentioned(label, question) for label in c["target_labels"])]
+        if matching:
+            score = max(len(named) for _, _, named in matching)
+            scored_targets.append((score, domain, matching))
+    if not scored_targets:
         return None
-    target_domain, target_entries = targets[0]
+    highest = max(score for score, _, _ in scored_targets)
+    winners = [(domain, entries) for score, domain, entries in scored_targets
+               if score == highest]
+    if len(winners) != 1:
+        return None
+    target_domain, target_entries = winners[0]
     # All requested output properties must belong to one SHACL entity.
     target_options = [(c, p) for c, p, named in target_entries
                       if any(_mentioned(label, question) for label in c["target_labels"])]
