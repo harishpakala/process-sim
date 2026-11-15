@@ -1163,6 +1163,11 @@ def plan_question_semantic(question, paths, schema, *,
     if direct_boolean is not None:
         return direct_boolean
     catalog = _candidates(schema)
+    # Resolve schema-evidenced two-key bridges before single-entity output selection.
+    from process_sim.dtwise.multihop_projection import plan_multihop_projection
+    multihop = plan_multihop_projection(question, catalog, schema)
+    if multihop is not None:
+        return multihop
     explicit_property_plan = _plan_explicit_property_operations(question, catalog, schema)
     if explicit_property_plan is not None:
         return explicit_property_plan
