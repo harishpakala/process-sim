@@ -37,8 +37,10 @@ type DiscoveredVtkgFunction = {engineering_function:string;operational_signal:st
 const vtkgFunctions = ref<DiscoveredVtkgFunction[]>([])
 const vtkgFunctionsBusy = ref(false)
 const vtkgFunctionsError = ref('')
+const vtkgRejectedFunctions = ref<Array<{engineering_function:string;reason:string}>>([])
 async function discoverVtkgFunctions() {
  vtkgFunctions.value = []
+ vtkgRejectedFunctions.value = []
  vtkgFunction.value = ''
  vtkgResult.value = null
  vtkgFunctionsError.value = ''
@@ -53,6 +55,7 @@ async function discoverVtkgFunctions() {
   if (!response.ok) throw new Error(data.error || 'Engineering-function discovery failed')
   if (!Array.isArray(data.functions)) throw new Error('Invalid function discovery response')
   vtkgFunctions.value = data.functions
+  vtkgRejectedFunctions.value = Array.isArray(data.rejected_functions) ? data.rejected_functions : []
  } catch(e) { vtkgFunctionsError.value = e instanceof Error ? e.message : String(e) }
  finally { vtkgFunctionsBusy.value = false }
 }
@@ -297,6 +300,8 @@ async function ask() {
     <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" @input="vtkgFunctions = []; vtkgFunction = ''" />
     <button type="button" :disabled="vtkgFunctionsBusy || !vtkgRunId.trim()" @click="discoverVtkgFunctions">{{vtkgFunctionsBusy ? 'Retrieving AAS functions…' : 'Retrieve engineering functions from GraphDB AAS'}}</button>
     <p v-if="vtkgFunctionsError" role="alert" style="color:#b45309">{{vtkgFunctionsError}}</p>
+    <p v-if="vtkgRejectedFunctions.length" role="status" style="color:#b45309">{{vtkgFunctions.length}} functions verified; {{vtkgRejectedFunctions.length}} rejected by live GraphDB mapping validation. Rejected functions are not selectable.</p>
+    <details v-if="vtkgRejectedFunctions.length"><summary>Rejected mappings and reasons</summary><ul><li v-for="item in vtkgRejectedFunctions" :key="item.engineering_function">{{item.engineering_function}} — {{item.reason}}</li></ul></details>
     <label for="vtkg-function">Engineering function (live GraphDB AAS mapping, run-scoped)</label>
     <select id="vtkg-function" v-model="vtkgFunction" required :disabled="!vtkgFunctions.length">
      <option value="">Select a discovered supported function</option>
