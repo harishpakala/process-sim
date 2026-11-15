@@ -53,6 +53,10 @@ def _scope_query(query, graph_mode, graph_iri):
 
 def compile_sparql(plan, schema, limit=100, *, graph_mode="default", graph_iri=None, include_graph=False, count_per_graph=False):
     """Compile verified plan; graph_mode: default, all_named, or selected."""
+    if plan.get("join_type") == "shacl_multihop_identifier_join":
+        from process_sim.dtwise.multihop_projection import compile_multihop_projection
+        return compile_multihop_projection(plan, schema, limit, graph_mode,
+                                           graph_iri, include_graph, count_per_graph, iri)
     if plan.get("entity_anchor") == "direct_shacl_target":
         return _compile_direct_shacl_target(plan, schema, limit, graph_mode,
                                             graph_iri, include_graph, count_per_graph)
