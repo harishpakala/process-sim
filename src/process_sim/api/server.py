@@ -305,6 +305,24 @@ class Handler(BaseHTTPRequestHandler):
                 logging.exception("Unexpected Q13 live start failure")
                 self.send_json(500, {"error": f"Q13 live start failed ({type(exc).__name__}); check backend logs"})
             return
+        if urlsplit(self.path).path == "/api/ai/vtkg/answer":
+            from process_sim.api.vtkg_query import VtkgUnavailable, run_question as run_vtkg_question
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                self.send_json(200, run_vtkg_question(payload))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except VtkgUnavailable as exc:
+                self.send_json(503, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("VTKG query failed")
+                self.send_json(503, {"error": "VTKG query failed; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/dtwise/answer":
             from process_sim.api.dtwise_query import (
                 DtwiseUnavailable, run_question,
