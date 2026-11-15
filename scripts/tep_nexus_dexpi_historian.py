@@ -39,11 +39,30 @@ ORDER BY ?assetIdentifier ?signalName
 """
 
 
-def resolve_signal(graphdb_url, function, *, post=requests.post):
-    if not FUNCTION_RE.fullmatch(function):
+def resolve_signal(graphdb_url, function, *, domain="DEXPI", post=requests.post):
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported domain")
+    pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|LI|PI|TI)-[0-9]+$")
+    if not pattern.fullmatch(function):
         raise ValueError("Invalid engineering function LocalId")
     # JSON-quoted literal prevents SPARQL injection; the function is additionally allow-pattern checked.
     query = SPARQL % json.dumps(function)
+    if domain == "ECAD":
+        query = """
+PREFIX ecad: <https://example.org/ecad/>
+PREFIX opcua: <https://example.org/opcuaconnectivity/>
+SELECT DISTINCT ?assetIdentifier ?signalName WHERE {
+ GRAPH ?eg {
+  ?component ecad:hasLocalId ?localId ;
+             ecad:hasAssetIdentifier ?assetIdentifier .
+ }
+ GRAPH ?og {
+  ?mapping opcua:hasAssetIdentifier ?assetIdentifier ;
+           opcua:hasSignalName ?signalName .
+ }
+ FILTER(STR(?localId) = %s)
+} ORDER BY ?assetIdentifier ?signalName
+""" % json.dumps(function)
     response = post(
         graphdb_url, data={"query": query},
         headers={"Accept": "application/sparql-results+json"}, timeout=30,
@@ -58,13 +77,13 @@ def resolve_signal(graphdb_url, function, *, post=requests.post):
         pairs.add((asset, signal))
     if len(pairs) != 1:
         raise RuntimeError(
-            f"Expected exactly one live DEXPI/OPCUAConnectivity mapping for {function}; "
+            f"Expected exactly one live {domain}/OPCUAConnectivity mapping for {function}; "
             f"found {len(pairs)} distinct mappings"
         )
     asset, signal = next(iter(pairs))
     return {"engineering_function": function, "asset_identifier": asset,
             "operational_signal": signal,
-            "resolution_method": "live DEXPI/OPCUAConnectivity hasAssetIdentifier equality",
+            "resolution_method": f"live {domain}/OPCUAConnectivity hasAssetIdentifier equality",
             "physical_sensor_binding": "NOT_VERIFIED"}
 
 
@@ -100,12 +119,15 @@ def retrieve(dsn, run_id, signal, start_seconds=None, end_seconds=None, *,
 
 def execute(question, function, run_id, dsn, graphdb_url,
             start_seconds=None, end_seconds=None, *,
-            resolver=resolve_signal, retriever=retrieve):
+            resolver=resolve_signal, retriever=retrieve, domain="DEXPI"):
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported domain")
     function = function.upper()
     run_id = str(UUID(str(run_id)))
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Question is required")
-    mentioned = {x.upper() for x in QUESTION_FUNCTION_RE.findall(question)}
+    id_pattern = re.compile(r"(?<![A-Za-z0-9_-])(?:[A-Za-z]{2}[_-][0-9]+)(?![A-Za-z0-9_-])", re.I)
+    mentioned = {x.upper() for x in id_pattern.findall(question)}
     if mentioned != {function}:
         raise ValueError("Question and requested engineering function must agree")
     for bound in (start_seconds, end_seconds):
@@ -115,21 +137,22 @@ def execute(question, function, run_id, dsn, graphdb_url,
             raise ValueError("Optional simulation-second bounds must be nonnegative finite numbers")
     if start_seconds is not None and end_seconds is not None and start_seconds > end_seconds:
         raise ValueError("Start time must not exceed end time")
-    mapping = resolver(graphdb_url, function)
+    mapping = (resolver(graphdb_url, function) if domain == "DEXPI"
+               else resolver(graphdb_url, function, domain=domain))
     if mapping["engineering_function"] != function:
         raise ValueError("Resolved function differs from requested function")
     samples = retriever(dsn, run_id, mapping["operational_signal"],
                         start_seconds, end_seconds)
     return {
         "interface": "TEP NEXUS DEXPI/OPCUAConnectivity historian query v1",
-        "question": question, "engineeringFunction": function, "runId": run_id,
+        "question": question, "engineeringFunction": function, "domain": domain, "runId": run_id,
         "mapping": mapping, "timeBasis": "simulation_time",
         "startSimulationSeconds": start_seconds,
         "endSimulationSeconds": end_seconds,
         "observationCount": len(samples), "truncated": False,
         "observations": samples, "materializedInGraphDB": False,
         "provenance": {
-            "semanticSource": "live GraphDB DEXPI and OPCUAConnectivity",
+            "semanticSource": f"live GraphDB {domain} and OPCUAConnectivity",
             "temporalSource": "TimescaleDB public.signal_samples",
             "physicalSensorBinding": "NOT_VERIFIED",
             "sharedRunProvenance": "NOT_VERIFIED",
