@@ -1,259 +1,84 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
-import SimulationEvidenceTimeline from './SimulationEvidenceTimeline.vue'
+import { computed, ref } from 'vue'
 
-type Question = { id: string; question: string; requiresRun: boolean }
-type Run = { run_id?: string; runId?: string; [key:string]: unknown }
-type FaultEvent = { event_id: string; fault_id: string; action: string; simulation_time_hours?: number; simulation_seconds?: number; event_source?: string; target?: string }
-type Answer = { id: string; question: string; answer: string; limitations: string[]; status: string; evidence?: unknown; reason?: string; model?: string; promptVersion: string; answerValidation: string; validationFlags?: string[]; validationFlagsScope?: string; displayedAnswerValidationFlags?: string[]; answerSource?: string; warning: string; runId?: string; eventId?: string; questionAdaptation?: string }
-type Mapping = { assetId?: string; dexpiLocal?: string; ecadLocal?: string; signal?: string; productId?: string; eclassCode?: string }
-type Sample = { simulation_seconds?: number; value?: number }
-type SamplePair = { before?: Sample | null; after?: Sample | null }
-type EngineeringRecord = { equipment_tag?: string; asset_id?: string; signal?: string; manufacturer?: string; product_key?: string; product_uri?: string; eclass_class?: string; eclass_irdi?: string; eclass_verification?: string; installation_verification?: string | null; catalog_technical_specifications?: unknown; qudt_product_specification?: unknown }
-function object(value: unknown): Record<string, unknown> { return value && typeof value==='object' && !Array.isArray(value) ? value as Record<string,unknown> : {} }
-const evidence = computed(()=>object(answer.value?.evidence))
-const mappings = computed<Mapping[]>(()=>Array.isArray(evidence.value.graphdb_verified_mappings) ? evidence.value.graphdb_verified_mappings as Mapping[] : [])
-const engineering = computed<EngineeringRecord[]>(()=> Object.values({...evidence.value, ...object(evidence.value.engineering_catalog)}).filter(v=>object(v).equipment_tag).map(v=>v as EngineeringRecord))
-const temporal = computed(()=>object(evidence.value.temporal))
-const event = computed(()=>object(evidence.value.activation || temporal.value.activation))
-const measurements = computed<Record<string,SamplePair>>(()=>{
- const raw = object(evidence.value.measurements || temporal.value.measurements)
- if(temporal.value.signal && raw.before !== undefined) return { [String(temporal.value.signal)]: raw as SamplePair }
- return raw as Record<string,SamplePair>
-})
-const observationRows = computed(() => Array.isArray(evidence.value.observations) ? evidence.value.observations as Array<{simulation_seconds:number;value:number;observed_at?:string}> : [])
-const isFaultQuestion = computed(() => ['Q8','Q9','Q10'].includes(questionId.value))
-const sampleRows = computed(()=>Object.entries(measurements.value).map(([signal,pair])=>({signal,before:pair?.before,after:pair?.after})))
-const evidenceCount = computed(()=>mappings.value.length + engineering.value.length + sampleRows.value.length + observationRows.value.length + (event.value.fault_id ? 1 : 0))
-const hasCatalog = computed(()=>engineering.value.some(record=>Boolean(record.product_key)))
-function seconds(value:unknown):string { return typeof value==='number' && Number.isFinite(value) ? value.toFixed(3)+' s' : 'Not recorded' }
-function sampleValue(sample?:Sample|null):string { return sample && typeof sample.value==='number' ? String(sample.value) : 'Not recorded' }
-function assetShort(uri?:string):string { return uri ? uri.split('/').pop() || uri : '—' }
-const responseLabel = computed(()=>{
- const source = answer.value?.answerSource || ''
- if(source==='DETERMINISTIC_EVIDENCE_FALLBACK') return 'Evidence fallback — model answer rejected'
- if(source==='REJECTED_MODEL_ANSWER') return 'Model answer rejected'
- if(source==='OLLAMA_HEURISTIC_CHECKS_PASSED') return 'Model answer — heuristic checks passed'
- return 'Verification not established'
-})
-const evidenceSources = computed(()=>{
- const sources:string[]=[]
- if(observationRows.value.length) sources.push('TimescaleDB: run-scoped XMEAS9 observations, simulation timestamps and recording timestamps (direct historian retrieval)')
- if(mappings.value.length) sources.push('GraphDB: logical DEXPI / ECAD / AAS / product mappings (not physical installation proof)')
- if(hasCatalog.value) sources.push('AAS Asset Inventory and ProductCatalog: candidate products; ECLASS verification status shown per record')
- if(event.value.fault_id || sampleRows.value.length) sources.push('TimescaleDB: persisted fault events and signal samples')
- return sources
-})
-const relevantLimitations = computed(()=>{
- const q=Number(answer.value?.id.slice(1) || 0)
- return (answer.value?.limitations || []).filter(s=>{
-  const t=s.toLowerCase()
-  if(q<=3 && (t.includes('product information') || t.includes('product unavailable') || t.includes('product not available')))return false
-  if(q<=7 && (t.includes('fault activation') || t.includes('causal fault')))return false
-  return true
- })
-})
-type DtwiseResult = { question:string; mode:string; sparql:string; executed:boolean; graph_mode:string; answer:Record<string,unknown>; plan:unknown }
-const dtwiseResult = ref<DtwiseResult|null>(null)
-const dtwiseEntities = computed(()=>Array.isArray(dtwiseResult.value?.answer?.entities) ? dtwiseResult.value!.answer.entities : [])
-const mode = ref<'custom'|'paper'|'dtwise'>('custom')
-const customQuestion = ref('')
-const examples = [
- 'Which reactor instruments are linked to operational signals?',
- 'Show the product and manufacturer associated with TI-1101.',
- 'What ECLASS and QUDT attributes are recorded for PI-1101?',
- 'What measurements were recorded before and after the selected fault command?'
-]
-const temporalCustom = computed(()=>/fault|inject|before|after|historian|recorded value|measurement|timeseries|time series|simulation time|operational history|trend/i.test(customQuestion.value))
-const questions = ref<Question[]>([])
-const questionsLoading = ref(false)
-const runs = ref<Run[]>([])
-const events = ref<FaultEvent[]>([])
-const runId = ref('')
-const eventId = ref('')
-const questionId = ref('Q1')
+type DtwiseResult = {
+ question: string; mode: string; sparql: string; executed: boolean;
+ graph_mode: string; answer: Record<string, unknown>; plan: unknown
+}
+const question = ref('')
 const busy = ref(false)
 const error = ref('')
-const historyError = ref('')
-const answer = ref<Answer | null>(null)
-const selectedQuestion = computed(() => questions.value.find(q => q.id === questionId.value))
-const available = computed(() => questions.value.filter(q => !q.requiresRun || Boolean(runId.value)))
-const selectedEvent = computed(() => events.value.find(e => e.event_id === eventId.value))
-const firstInjection = computed(() => events.value.find(e => ['inject','activate','enable','start'].includes(e.action.toLowerCase())))
-const runOptions = computed(() => runs.value.map(r => String(r.run_id || r.runId || '')).filter(Boolean))
-function clearAnswer(){ answer.value = null; dtwiseResult.value = null; error.value = '' }
-async function getJson(url:string, options?:RequestInit) {
- const response = await fetch(url,options)
- const data = await response.json()
- if(!response.ok) throw new Error(data.error || 'Request failed')
- return data
-}
-async function loadQuestions(){
- questionsLoading.value=true
- try {
-  const data = await getJson('/api/ai/paper/questions?refresh='+Date.now(), {cache:'no-store'})
-  if(!Array.isArray(data.questions) || data.questions.length!==12) throw new Error('Expected Q1–Q12')
-  questions.value = data.questions
- } catch(e){error.value = e instanceof Error ? e.message : String(e)}
- finally {questionsLoading.value=false}
-}
-async function loadRuns(){
- historyError.value=''
- try {
-  const data = await getJson('/api/simulation/runs?limit=100')
-  runs.value = Array.isArray(data.runs) ? data.runs : []
- } catch(e){historyError.value = 'Run history unavailable: '+(e instanceof Error ? e.message : String(e))}
-}
-async function loadEvents(){
- events.value=[]; eventId.value=''
- if(!runId.value)return
- historyError.value=''
- try {
-  const data=await getJson('/api/simulation/fault-events/history?runId='+encodeURIComponent(runId.value))
-  events.value=Array.isArray(data.events)?data.events:[]
-  eventId.value=events.value.find(e=>['inject','activate','enable','start'].includes(e.action.toLowerCase()))?.event_id || ''
- } catch(e){historyError.value = 'Fault history unavailable: '+(e instanceof Error ? e.message : String(e))}
-}
-watch(runId,()=>{clearAnswer();void loadEvents();if(!runId.value && ['Q8','Q9','Q10','Q12'].includes(questionId.value))questionId.value='Q1'})
-watch(questionId,clearAnswer)
-watch(mode,clearAnswer)
-watch(customQuestion,clearAnswer)
-watch(eventId,clearAnswer)
-async function ask(){
- clearAnswer()
- if(mode.value==='dtwise') {
-  if(customQuestion.value.trim().length<5 || customQuestion.value.length>1000){error.value='Enter a question between 5 and 1000 characters';return}
-  busy.value=true
-  try {
-   dtwiseResult.value=await getJson('/api/ai/dtwise/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:customQuestion.value.trim()})})
-  }catch(e){error.value=e instanceof Error?e.message:String(e)}
-  finally{busy.value=false}
+const result = ref<DtwiseResult | null>(null)
+const entities = computed(() => Array.isArray(result.value?.answer?.entities) ? result.value.answer.entities : [])
+async function ask() {
+ result.value = null
+ error.value = ''
+ const text = question.value.trim()
+ if (text.length < 5 || text.length > 1000) {
+  error.value = 'Enter a question between 5 and 1000 characters'
   return
  }
- if(mode.value==='paper' && !selectedQuestion.value)return
- if(mode.value==='custom' && (customQuestion.value.trim().length<5 || customQuestion.value.length>1000)){error.value='Enter a question between 5 and 1000 characters';return}
- if(mode.value==='paper' && selectedQuestion.value?.requiresRun && !runId.value){error.value='Select a recorded run';return}
- if(mode.value==='paper' && isFaultQuestion.value && !eventId.value){error.value='Select a recorded injection event';return}
- if(mode.value==='custom' && temporalCustom.value && !runId.value){error.value='Select a recorded run for this temporal question';return}
- busy.value=true
- try{
-  answer.value=await getJson(mode.value==='custom' ? '/api/ai/custom/answer' : '/api/ai/paper/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(mode.value==='custom' ? {question:customQuestion.value.trim(),runId:temporalCustom.value ? runId.value||null : null,eventId:temporalCustom.value ? eventId.value||null : null} : {questionId:questionId.value,runId:runId.value||null,eventId:isFaultQuestion.value ? eventId.value : null})})
- }catch(e){error.value=e instanceof Error?e.message:String(e)}
- finally{busy.value=false}
+ busy.value = true
+ try {
+  const response = await fetch('/api/ai/dtwise/answer', {
+   method: 'POST',
+   headers: {'Content-Type': 'application/json'},
+   body: JSON.stringify({question: text})
+  })
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'DTwise query failed')
+  result.value = data as DtwiseResult
+ } catch (e) {
+  error.value = e instanceof Error ? e.message : String(e)
+ } finally {
+  busy.value = false
+ }
 }
-onMounted(()=>{void loadQuestions();void loadRuns()})
 </script>
 
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask engineering questions or explore the TEP Nexus Paper Q1–Q12 question set.</p></div><span class="pill">{{mode==='paper'?'TEP Nexus Paper':mode==='dtwise'?'DTwise engineering':'Exploratory'}}</span></div>
-   <div class="mode-switch" role="group" aria-label="Query mode">
-    <button type="button" :class="mode==='custom'?'primary':'secondary'" :aria-pressed="mode==='custom'" @click="mode='custom'">Ask a question</button>
-    <button type="button" :class="mode==='paper'?'primary':'secondary'" :aria-pressed="mode==='paper'" @click="mode='paper'">TEP Nexus Paper</button>
-    <button type="button" :class="mode==='dtwise'?'primary':'secondary'" :aria-pressed="mode==='dtwise'" @click="mode='dtwise'">DTwise engineering</button>
+   <div class="panel-title">
+    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
    </div>
-   <div v-if="mode==='custom' || mode==='dtwise'" class="custom-query">
-    <label for="custom-question">Your question</label>
-    <textarea id="custom-question" v-model="customQuestion" maxlength="1000" rows="4" placeholder="Which reactor instruments are linked to operational signals?" />
-    <p v-if="mode==='custom'" class="subdued">Questions use supported engineering, catalog and historian evidence only. Free-text exploration is not included in the paper evaluation scores.</p>
-    <p v-else class="subdued">Frozen DTwise planner · read-only GraphDB engineering query. No fallback planner or generated narrative. Results are not independently verified.</p>
-    <div v-if="mode==='custom'" class="example-list"><strong>Example questions</strong><button v-for="example in examples" :key="example" type="button" class="secondary example-button" @click="customQuestion=example">{{example}}</button></div>
+   <div class="custom-query">
+    <label for="dtwise-question">Engineering question</label>
+    <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
+      placeholder="List OPCUA SignalNames." @keydown.ctrl.enter="ask" />
+    <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
    </div>
-   <div style="display:grid;gap:14px">
-    <label v-if="mode!=='dtwise'" style="display:grid;gap:6px">Recorded simulation run (optional for Q1–Q7)
-     <select v-model="runId"><option value="">Engineering only — no run selected</option><option v-for="id in runOptions" :key="id" :value="id">{{id}}</option></select>
-    </label>
-    <div v-if="mode!=='dtwise'" class="control-row"><button class="secondary" type="button" @click="loadRuns">Refresh runs</button><button class="secondary" type="button" :disabled="!runId" @click="loadEvents">Refresh recorded faults</button></div>
-    <p v-if="mode!=='dtwise' && historyError" role="status" style="color:#b45309">{{historyError}}. Engineering-only queries remain available.</p>
-    <label v-if="mode!=='dtwise' && runId" style="display:grid;gap:6px">Recorded fault command
-     <select v-model="eventId"><option value="">Select recorded injection event</option><option v-for="event in events.filter(e=>['inject','activate','enable','start'].includes(e.action.toLowerCase()))" :key="event.event_id" :value="event.event_id">{{event.fault_id}} · {{event.action}} · {{event.target || 'target not recorded'}} · {{event.simulation_seconds ?? (event.simulation_time_hours === undefined ? '?' : event.simulation_time_hours*3600)}} s</option></select>
-    </label>
-    <p v-if="mode!=='dtwise' && runId && !events.length" class="subdued">No persisted fault events found for this run.</p>
-    <p v-if="mode!=='dtwise' && selectedEvent && firstInjection && selectedEvent.event_id!==firstInjection.event_id" role="alert" style="color:#b45309">The current evidence generator uses the first injection command. Select that event to avoid incorrect temporal attribution.</p>
-    <label v-if="mode==='paper'" style="display:grid;gap:6px">TEP Nexus Paper question
-     <select v-model="questionId"><option v-for="q in available" :key="q.id" :value="q.id">{{q.id}} — {{q.question}}</option></select>
-    </label>
-    <div v-if="mode==='paper'" class="control-row"><button type="button" class="secondary" :disabled="questionsLoading" @click="loadQuestions">{{questionsLoading ? 'Refreshing…' : 'Refresh paper questions'}}</button><span class="subdued">{{questions.length}} loaded</span></div>
-    <p v-if="mode==='paper' && selectedQuestion" class="subdued">{{selectedQuestion.requiresRun ? isFaultQuestion ? 'Requires a recorded run and fault command; the simulator may be stopped.' : 'Requires a recorded run with XMEAS9 samples; no fault command is required.' : 'Engineering evidence only; simulation is not required.'}}</p>
-    <button class="primary" type="button"  :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && !runId) || (isFaultQuestion && !eventId)) : (customQuestion.trim().length<5 || (mode==='custom' && temporalCustom && !runId)))" @click="ask">{{busy?'Executing query…':mode==='dtwise'?'Ask DTwise':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
-    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
-   </div>
+   <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
+    {{busy ? 'Executing DTwise query…' : 'Ask DTwise'}}
+   </button>
+   <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
   </section>
-  <section v-if="dtwiseResult" class="panel result-panel">
-   <div class="panel-title"><div><h2>DTwise engineering result</h2><p>{{dtwiseResult.question}}</p></div><span class="pill">{{dtwiseResult.executed?'Executed':'Not executed'}}</span></div>
+  <section v-if="result" class="panel result-panel">
+   <div class="panel-title">
+    <div><h2>Engineering result</h2><p>{{result.question}}</p></div>
+    <span class="pill">{{result.executed ? 'Executed' : 'Not executed'}}</span>
+   </div>
    <div class="result-section">
     <h3>Structured answer</h3>
-    <p class="subdued">Source: frozen DTwise planner + GraphDB · no narrative LLM answer · not independently verified</p>
-    <p v-if="dtwiseResult.answer.truncated_possible" class="result-notice" role="status">Result may be truncated by the query limit. Do not treat the displayed count as a complete total.</p>
-    <p v-if="dtwiseResult.answer.count !== undefined">Reported count: <strong>{{dtwiseResult.answer.count}}</strong></p>
-    <p v-if="dtwiseResult.answer.join_type">Join type: {{dtwiseResult.answer.join_type}} · Key: {{dtwiseResult.answer.join_key || 'not specified'}}</p>
-    <div v-if="dtwiseEntities.length" class="table-scroll"><table class="evidence-table"><thead><tr><th>#</th><th>Returned entity / value</th></tr></thead><tbody><tr v-for="(entity,i) in dtwiseEntities" :key="i"><td>{{i+1}}</td><td class="mono"><pre>{{JSON.stringify(entity,null,2)}}</pre></td></tr></tbody></table></div>
-    <p v-else class="subdued">No entity rows returned; inspect the structured answer below for other result fields.</p>
-    <details class="detail-toggle"><summary>Full structured answer</summary><pre>{{JSON.stringify(dtwiseResult.answer,null,2)}}</pre></details>
-   </div>
-   <div class="result-section"><h3>Generated read-only SPARQL</h3><pre class="mono">{{dtwiseResult.sparql}}</pre></div>
-   <div class="result-section"><h3>Planner details and provenance</h3><p class="subdued">Mode: {{dtwiseResult.mode}} · Graph scope: {{dtwiseResult.graph_mode}} · Execution: {{dtwiseResult.executed}}</p><details class="detail-toggle"><summary>Frozen planner output</summary><pre>{{JSON.stringify(dtwiseResult.plan,null,2)}}</pre></details></div>
-  </section>
-  <section v-if="answer" class="panel result-panel">
-   <div class="panel-title"><div><h2>{{answer.id==='CUSTOM'?'Exploratory query':answer.id+' — Query result'}}</h2><p>{{answer.question}}</p></div><span class="pill">{{answer.status}}</span></div>
-   <div v-if="answer.status!=='EVIDENCE_AVAILABLE'" class="result-notice" role="status">{{answer.reason || 'Required evidence is incomplete. This is not a verified answer.'}}</div>
-   <div class="result-section">
-    <h3>Answer</h3>
-    <p class="source-row"><strong>{{responseLabel}}</strong></p>
-    <p v-if="answer.validationFlags?.length && answer.validationFlagsScope==='REJECTED_MODEL_ANSWER'" class="result-notice" role="status">Original Ollama answer rejected: {{answer.validationFlags.join('; ')}}. These flags refer to the rejected model output, not the displayed fallback.</p>
-    <p v-else-if="answer.validationFlags?.length" class="result-notice" role="alert">Answer validation flags: {{answer.validationFlags.join('; ')}}</p>
-    <p v-if="answer.displayedAnswerValidationFlags?.length" class="result-notice" role="alert">Displayed answer also requires review: {{answer.displayedAnswerValidationFlags.join('; ')}}</p>
-    <p v-else-if="answer.answerSource==='DETERMINISTIC_EVIDENCE_FALLBACK' && answer.displayedAnswerValidationFlags" class="subdued">Displayed fallback passed the configured structural checks; this is not independent verification.</p>
-    <p class="answer-text">{{answer.answer}}</p>
-    <p class="subdued">Heuristic checks and deterministic fallbacks are not independent proof of correctness. Verify claims against the structured evidence below.</p>
-   </div>
-   <div class="result-section">
-    <div class="section-heading"><h3>Supporting evidence</h3><span class="pill">{{evidenceCount}} record(s)</span></div>
-    <div v-if="mappings.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>ECAD instrument</th><th>AAS asset identifier</th><th>DEXPI reference</th><th>Signal</th><th v-if="mappings.some(m=>m.productId)">Product candidate</th></tr></thead>
-      <tbody><tr v-for="(m,i) in mappings" :key="i"><td>{{m.ecadLocal || '—'}}</td><td><span class="mono">{{assetShort(m.assetId)}}</span><small class="full-id">{{m.assetId}}</small></td><td>{{m.dexpiLocal || '—'}}</td><td><strong>{{m.signal || '—'}}</strong></td><td v-if="mappings.some(m=>m.productId)">{{m.productId || '—'}}</td></tr></tbody>
+    <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
+    <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
+    <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
+    <div v-if="entities.length" class="table-scroll">
+     <table class="evidence-table">
+      <thead><tr><th>#</th><th>Returned entity / value</th></tr></thead>
+      <tbody><tr v-for="(entity,i) in entities" :key="i">
+       <td>{{i+1}}</td><td><pre>{{JSON.stringify(entity,null,2)}}</pre></td>
+      </tr></tbody>
      </table>
     </div>
-    <div v-if="engineering.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>Instrument</th><th>Asset</th><th>Signal</th><th>Product candidate</th><th>Manufacturer</th><th>Installation</th><th v-if="engineering.some(r=>r.eclass_class)">ProductCatalog ECLASS</th></tr></thead>
-      <tbody><tr v-for="(m,i) in engineering" :key="i"><td>{{m.equipment_tag || '—'}}</td><td class="mono">{{assetShort(m.asset_id)}}</td><td>{{m.signal || '—'}}</td><td>{{m.product_key || '—'}}</td><td>{{m.manufacturer || '—'}}</td><td>{{m.installation_verification ?? 'Unknown / not recorded'}}</td><td v-if="engineering.some(r=>r.eclass_class)">{{m.eclass_class || '—'}}<small class="full-id">{{m.eclass_irdi || 'No IRDI recorded'}}</small><small class="full-id">{{m.eclass_verification || 'Verification not recorded'}}</small></td></tr></tbody>
-     </table>
-     <details v-if="engineering.some(r=>r.catalog_technical_specifications || r.qudt_product_specification)" class="detail-toggle"><summary>Catalog specifications and QUDT attributes</summary><div v-for="(m,i) in engineering" :key="i" class="spec-block"><strong>{{m.equipment_tag}} — {{m.eclass_verification || 'Verification status not provided'}}</strong><pre>{{JSON.stringify({specifications:m.catalog_technical_specifications,qudt:m.qudt_product_specification},null,2)}}</pre></div></details>
-    </div>
-    <div v-if="event.fault_id" class="event-summary">
-     <strong>Recorded operator command</strong>
-     <div>Fault: {{event.fault_id}} · Action: {{event.action}} · Simulation time: {{seconds(event.simulation_seconds)}} · Source: {{event.event_source || 'not specified'}}</div>
-     <small>Recording an operator command does not independently verify activation or causality.</small>
-    </div>
-    <div v-if="sampleRows.length" class="table-scroll">
-     <table class="evidence-table"><thead><tr><th>Signal</th><th>Before time</th><th>Before value</th><th>After time</th><th>After value</th></tr></thead>
-      <tbody><tr v-for="row in sampleRows" :key="row.signal"><td><strong>{{row.signal}}</strong></td><td>{{seconds(row.before?.simulation_seconds)}}</td><td>{{sampleValue(row.before)}}</td><td>{{seconds(row.after?.simulation_seconds)}}</td><td>{{sampleValue(row.after)}}</td></tr></tbody>
-     </table>
-    </div>
-    <div v-if="answer.id==='Q12'" class="table-scroll"><p class="subdued">Run-scoped XMEAS9 observations in the inclusive 0–60 s interval. {{evidence.truncated ? 'Result truncated.' : 'No truncation reported.'}} Recording timestamps are distinct from simulation time.</p><table class="evidence-table"><thead><tr><th>Simulation time (s)</th><th>Value (raw; units not verified)</th><th>Recorded at (UTC)</th></tr></thead><tbody><tr v-for="(o,i) in observationRows" :key="i"><td>{{o.simulation_seconds}}</td><td>{{o.value}}</td><td>{{o.observed_at || '—'}}</td></tr></tbody></table></div>
-    <SimulationEvidenceTimeline v-if="sampleRows.length" :command="event" :measurements="measurements" />
-    <p v-if="!mappings.length && !engineering.length && !sampleRows.length && !observationRows.length && !event.fault_id" class="subdued">No structured evidence records were returned for this question.</p>
+    <details class="detail-toggle"><summary>Full structured answer</summary><pre>{{JSON.stringify(result.answer,null,2)}}</pre></details>
    </div>
+   <div class="result-section"><h3>Generated SPARQL</h3><pre>{{result.sparql}}</pre></div>
    <div class="result-section">
-    <h3>Limitations and qualifications</h3>
-    <ul v-if="relevantLimitations.length"><li v-for="(item,i) in relevantLimitations" :key="i">{{item}}</li></ul>
-    <p v-else class="subdued">No question-specific limitations were supplied by the model. This does not imply the answer has been verified.</p>
-    <p v-if="isFaultQuestion" class="subdued">{{answer.warning}}</p>
-    <p v-if="answer.id==='Q4' || answer.id==='Q5' || answer.id==='Q7' || answer.id==='Q10' || answer.id==='Q11'" class="subdued">Catalog product associations are candidates, not proof of installed hardware. ECLASS verification must be assessed separately.</p>
+    <h3>Planner and provenance</h3>
+    <p class="subdued">Mode: {{result.mode}} · Graph scope: {{result.graph_mode}}</p>
+    <details class="detail-toggle"><summary>Frozen planner output</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
    </div>
-   <div class="result-section">
-    <h3>Evidence provenance and evaluation</h3>
-    <p v-for="source in evidenceSources" :key="source" class="source-row">{{source}}</p>
-    <p v-if="!evidenceSources.length" class="subdued">No structured source provenance was returned.</p>
-    <p v-if="answer.runId" class="source-row">Run: <span class="mono">{{answer.runId}}</span></p>
-    <p v-if="answer.eventId" class="source-row">Event: <span class="mono">{{answer.eventId}}</span></p>
-    <p class="subdued">Answer source: {{answer.answerSource || 'Not specified'}} · Model: {{answer.model || 'No LLM answer'}} · Prompt: {{answer.promptVersion}} · {{answer.answerValidation}} · Manual rubric grading required</p>
-    <p v-if="answer.questionAdaptation==='EXPLORATORY_NOT_PAPER_EVALUATION'" class="subdued">Exploratory question: not part of the fixed Q1–Q12 evaluation or reported scores.</p>
-    <p v-if="answer.id==='Q11' || answer.id==='Q12'" class="subdued">Web UI live evidence retrieval; not a replay of the separate evidence-conditioned 12-question paper assessment.</p>
-    <p v-if="answer.questionAdaptation==='UI_CONTEXTUAL_TEMPORAL_WORDING'" class="subdued">Temporal question wording was adapted for the selected run; this is not an exact frozen-question replay.</p>
-   </div>
-   <details class="detail-toggle"><summary>Technical details — raw evidence JSON</summary><pre>{{JSON.stringify(answer.evidence,null,2)}}</pre></details>
   </section>
  </div>
 </template>
