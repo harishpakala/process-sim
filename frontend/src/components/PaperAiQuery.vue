@@ -53,7 +53,10 @@ const relevantLimitations = computed(()=>{
   return true
  })
 })
-const mode = ref<'custom'|'paper'>('custom')
+type DtwiseResult = { question:string; mode:string; sparql:string; executed:boolean; graph_mode:string; answer:Record<string,unknown>; plan:unknown }
+const dtwiseResult = ref<DtwiseResult|null>(null)
+const dtwiseEntities = computed(()=>Array.isArray(dtwiseResult.value?.answer?.entities) ? dtwiseResult.value!.answer.entities : [])
+const mode = ref<'custom'|'paper'|'dtwise'>('custom')
 const customQuestion = ref('')
 const examples = [
  'Which reactor instruments are linked to operational signals?',
@@ -78,7 +81,7 @@ const available = computed(() => questions.value.filter(q => !q.requiresRun || B
 const selectedEvent = computed(() => events.value.find(e => e.event_id === eventId.value))
 const firstInjection = computed(() => events.value.find(e => ['inject','activate','enable','start'].includes(e.action.toLowerCase())))
 const runOptions = computed(() => runs.value.map(r => String(r.run_id || r.runId || '')).filter(Boolean))
-function clearAnswer(){ answer.value = null; error.value = '' }
+function clearAnswer(){ answer.value = null; dtwiseResult.value = null; error.value = '' }
 async function getJson(url:string, options?:RequestInit) {
  const response = await fetch(url,options)
  const data = await response.json()
@@ -118,6 +121,15 @@ watch(customQuestion,clearAnswer)
 watch(eventId,clearAnswer)
 async function ask(){
  clearAnswer()
+ if(mode.value==='dtwise') {
+  if(customQuestion.value.trim().length<5 || customQuestion.value.length>1000){error.value='Enter a question between 5 and 1000 characters';return}
+  busy.value=true
+  try {
+   dtwiseResult.value=await getJson('/api/ai/dtwise/answer',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:customQuestion.value.trim()})})
+  }catch(e){error.value=e instanceof Error?e.message:String(e)}
+  finally{busy.value=false}
+  return
+ }
  if(mode.value==='paper' && !selectedQuestion.value)return
  if(mode.value==='custom' && (customQuestion.value.trim().length<5 || customQuestion.value.length>1000)){error.value='Enter a question between 5 and 1000 characters';return}
  if(mode.value==='paper' && selectedQuestion.value?.requiresRun && !runId.value){error.value='Select a recorded run';return}
@@ -135,36 +147,53 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
 <template>
  <div style="display:grid;gap:16px">
   <section class="panel">
-   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask engineering questions or explore the TEP Nexus Paper Q1–Q12 question set.</p></div><span class="pill">{{mode==='paper'?'TEP Nexus Paper':'Exploratory'}}</span></div>
+   <div class="panel-title"><div><h2>TEP NEXUS — AI Query</h2><p>Ask engineering questions or explore the TEP Nexus Paper Q1–Q12 question set.</p></div><span class="pill">{{mode==='paper'?'TEP Nexus Paper':mode==='dtwise'?'DTwise engineering':'Exploratory'}}</span></div>
    <div class="mode-switch" role="group" aria-label="Query mode">
     <button type="button" :class="mode==='custom'?'primary':'secondary'" :aria-pressed="mode==='custom'" @click="mode='custom'">Ask a question</button>
     <button type="button" :class="mode==='paper'?'primary':'secondary'" :aria-pressed="mode==='paper'" @click="mode='paper'">TEP Nexus Paper</button>
+    <button type="button" :class="mode==='dtwise'?'primary':'secondary'" :aria-pressed="mode==='dtwise'" @click="mode='dtwise'">DTwise engineering</button>
    </div>
-   <div v-if="mode==='custom'" class="custom-query">
+   <div v-if="mode==='custom' || mode==='dtwise'" class="custom-query">
     <label for="custom-question">Your question</label>
     <textarea id="custom-question" v-model="customQuestion" maxlength="1000" rows="4" placeholder="Which reactor instruments are linked to operational signals?" />
-    <p class="subdued">Questions use supported engineering, catalog and historian evidence only. Free-text exploration is not included in the paper evaluation scores.</p>
-    <div class="example-list"><strong>Example questions</strong><button v-for="example in examples" :key="example" type="button" class="secondary example-button" @click="customQuestion=example">{{example}}</button></div>
+    <p v-if="mode==='custom'" class="subdued">Questions use supported engineering, catalog and historian evidence only. Free-text exploration is not included in the paper evaluation scores.</p>
+    <p v-else class="subdued">Frozen DTwise planner · read-only GraphDB engineering query. No fallback planner or generated narrative. Results are not independently verified.</p>
+    <div v-if="mode==='custom'" class="example-list"><strong>Example questions</strong><button v-for="example in examples" :key="example" type="button" class="secondary example-button" @click="customQuestion=example">{{example}}</button></div>
    </div>
    <div style="display:grid;gap:14px">
-    <label style="display:grid;gap:6px">Recorded simulation run (optional for Q1–Q7)
+    <label v-if="mode!=='dtwise'" style="display:grid;gap:6px">Recorded simulation run (optional for Q1–Q7)
      <select v-model="runId"><option value="">Engineering only — no run selected</option><option v-for="id in runOptions" :key="id" :value="id">{{id}}</option></select>
     </label>
-    <div class="control-row"><button class="secondary" type="button" @click="loadRuns">Refresh runs</button><button class="secondary" type="button" :disabled="!runId" @click="loadEvents">Refresh recorded faults</button></div>
-    <p v-if="historyError" role="status" style="color:#b45309">{{historyError}}. Engineering-only queries remain available.</p>
-    <label v-if="runId" style="display:grid;gap:6px">Recorded fault command
+    <div v-if="mode!=='dtwise'" class="control-row"><button class="secondary" type="button" @click="loadRuns">Refresh runs</button><button class="secondary" type="button" :disabled="!runId" @click="loadEvents">Refresh recorded faults</button></div>
+    <p v-if="mode!=='dtwise' && historyError" role="status" style="color:#b45309">{{historyError}}. Engineering-only queries remain available.</p>
+    <label v-if="mode!=='dtwise' && runId" style="display:grid;gap:6px">Recorded fault command
      <select v-model="eventId"><option value="">Select recorded injection event</option><option v-for="event in events.filter(e=>['inject','activate','enable','start'].includes(e.action.toLowerCase()))" :key="event.event_id" :value="event.event_id">{{event.fault_id}} · {{event.action}} · {{event.target || 'target not recorded'}} · {{event.simulation_seconds ?? (event.simulation_time_hours === undefined ? '?' : event.simulation_time_hours*3600)}} s</option></select>
     </label>
-    <p v-if="runId && !events.length" class="subdued">No persisted fault events found for this run.</p>
-    <p v-if="selectedEvent && firstInjection && selectedEvent.event_id!==firstInjection.event_id" role="alert" style="color:#b45309">The current evidence generator uses the first injection command. Select that event to avoid incorrect temporal attribution.</p>
+    <p v-if="mode!=='dtwise' && runId && !events.length" class="subdued">No persisted fault events found for this run.</p>
+    <p v-if="mode!=='dtwise' && selectedEvent && firstInjection && selectedEvent.event_id!==firstInjection.event_id" role="alert" style="color:#b45309">The current evidence generator uses the first injection command. Select that event to avoid incorrect temporal attribution.</p>
     <label v-if="mode==='paper'" style="display:grid;gap:6px">TEP Nexus Paper question
      <select v-model="questionId"><option v-for="q in available" :key="q.id" :value="q.id">{{q.id}} — {{q.question}}</option></select>
     </label>
     <div v-if="mode==='paper'" class="control-row"><button type="button" class="secondary" :disabled="questionsLoading" @click="loadQuestions">{{questionsLoading ? 'Refreshing…' : 'Refresh paper questions'}}</button><span class="subdued">{{questions.length}} loaded</span></div>
     <p v-if="mode==='paper' && selectedQuestion" class="subdued">{{selectedQuestion.requiresRun ? isFaultQuestion ? 'Requires a recorded run and fault command; the simulator may be stopped.' : 'Requires a recorded run with XMEAS9 samples; no fault command is required.' : 'Engineering evidence only; simulation is not required.'}}</p>
-    <button class="primary" type="button" :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && !runId) || (isFaultQuestion && !eventId)) : (customQuestion.trim().length<5 || (temporalCustom && !runId)))" @click="ask">{{busy?'Retrieving evidence and querying Ollama…':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
+    <button class="primary" type="button"  :disabled="busy || (mode==='paper' ? (!selectedQuestion || (selectedQuestion.requiresRun && !runId) || (isFaultQuestion && !eventId)) : (customQuestion.trim().length<5 || (mode==='custom' && temporalCustom && !runId)))" @click="ask">{{busy?'Executing query…':mode==='dtwise'?'Ask DTwise':mode==='custom'?'Ask TEP NEXUS':'Ask selected question'}}</button>
     <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
    </div>
+  </section>
+  <section v-if="dtwiseResult" class="panel result-panel">
+   <div class="panel-title"><div><h2>DTwise engineering result</h2><p>{{dtwiseResult.question}}</p></div><span class="pill">{{dtwiseResult.executed?'Executed':'Not executed'}}</span></div>
+   <div class="result-section">
+    <h3>Structured answer</h3>
+    <p class="subdued">Source: frozen DTwise planner + GraphDB · no narrative LLM answer · not independently verified</p>
+    <p v-if="dtwiseResult.answer.truncated_possible" class="result-notice" role="status">Result may be truncated by the query limit. Do not treat the displayed count as a complete total.</p>
+    <p v-if="dtwiseResult.answer.count !== undefined">Reported count: <strong>{{dtwiseResult.answer.count}}</strong></p>
+    <p v-if="dtwiseResult.answer.join_type">Join type: {{dtwiseResult.answer.join_type}} · Key: {{dtwiseResult.answer.join_key || 'not specified'}}</p>
+    <div v-if="dtwiseEntities.length" class="table-scroll"><table class="evidence-table"><thead><tr><th>#</th><th>Returned entity / value</th></tr></thead><tbody><tr v-for="(entity,i) in dtwiseEntities" :key="i"><td>{{i+1}}</td><td class="mono"><pre>{{JSON.stringify(entity,null,2)}}</pre></td></tr></tbody></table></div>
+    <p v-else class="subdued">No entity rows returned; inspect the structured answer below for other result fields.</p>
+    <details class="detail-toggle"><summary>Full structured answer</summary><pre>{{JSON.stringify(dtwiseResult.answer,null,2)}}</pre></details>
+   </div>
+   <div class="result-section"><h3>Generated read-only SPARQL</h3><pre class="mono">{{dtwiseResult.sparql}}</pre></div>
+   <div class="result-section"><h3>Planner details and provenance</h3><p class="subdued">Mode: {{dtwiseResult.mode}} · Graph scope: {{dtwiseResult.graph_mode}} · Execution: {{dtwiseResult.executed}}</p><details class="detail-toggle"><summary>Frozen planner output</summary><pre>{{JSON.stringify(dtwiseResult.plan,null,2)}}</pre></details></div>
   </section>
   <section v-if="answer" class="panel result-panel">
    <div class="panel-title"><div><h2>{{answer.id==='CUSTOM'?'Exploratory query':answer.id+' — Query result'}}</h2><p>{{answer.question}}</p></div><span class="pill">{{answer.status}}</span></div>
@@ -231,7 +260,7 @@ onMounted(()=>{void loadQuestions();void loadRuns()})
 
 <style scoped>
 .mode-switch{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.custom-query{display:grid;gap:10px;margin:12px 0}.custom-query textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #334a62;border-radius:8px;background:#0c192a;color:#eaf4ff;font:inherit;resize:vertical}.example-list{display:grid;gap:8px}.example-list strong{font-size:12px}.example-button{text-align:left;white-space:normal;padding:9px 12px}
-.result-panel{display:grid;gap:16px}.result-section{border-top:1px solid #334a62;padding-top:15px;display:grid;gap:9px}.result-section h3{font-size:14px;margin:0}.answer-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.table-scroll{overflow-x:auto}.evidence-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}.evidence-table th,.evidence-table td{padding:10px;border-bottom:1px solid #334a62;vertical-align:top}.evidence-table th{color:#a9bfd0;font-weight:600}.full-id{display:block;overflow-wrap:anywhere;font-size:10px;opacity:.75;margin-top:3px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.event-summary{display:grid;gap:7px;padding:12px;border:1px solid #334a62;border-radius:8px}.event-summary small{color:#a9bfd0}.source-row{font-size:12px;margin:0}.detail-toggle{font-size:12px;overflow:hidden}.detail-toggle summary{cursor:pointer}.detail-toggle pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto;font-size:11px}.spec-block{padding:12px 0}.result-notice{padding:12px;border:1px solid #b45309;border-radius:8px}.result-section ul{margin:0;padding-left:22px}.result-section li{margin:6px 0}
+.result-panel{display:grid;gap:16px}.result-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:480px;overflow:auto}.result-section{border-top:1px solid #334a62;padding-top:15px;display:grid;gap:9px}.result-section h3{font-size:14px;margin:0}.answer-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.table-scroll{overflow-x:auto}.evidence-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}.evidence-table th,.evidence-table td{padding:10px;border-bottom:1px solid #334a62;vertical-align:top}.evidence-table th{color:#a9bfd0;font-weight:600}.full-id{display:block;overflow-wrap:anywhere;font-size:10px;opacity:.75;margin-top:3px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.event-summary{display:grid;gap:7px;padding:12px;border:1px solid #334a62;border-radius:8px}.event-summary small{color:#a9bfd0}.source-row{font-size:12px;margin:0}.detail-toggle{font-size:12px;overflow:hidden}.detail-toggle summary{cursor:pointer}.detail-toggle pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto;font-size:11px}.spec-block{padding:12px 0}.result-notice{padding:12px;border:1px solid #b45309;border-radius:8px}.result-section ul{margin:0;padding-left:22px}.result-section li{margin:6px 0}
 select{padding:10px;border:1px solid #657b92;border-radius:7px;background:#101820;color:#fff;max-width:100%;width:100%;color-scheme:dark}
 select option,select optgroup{background:#101820;color:#fff}
 select:focus-visible{outline:2px solid #79b8ff;outline-offset:2px}
