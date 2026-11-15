@@ -43,6 +43,36 @@ const vtkgBusy = ref(false)
 const vtkgError = ref('')
 type VtkgReport = {answer:string; evidence:{observations: Array<Record<string,unknown>>; observationCount:number; truncated:boolean; provenance:Record<string,unknown>}; validatedPlan:unknown; materializedInGraphDB:boolean}
 const vtkgResult = ref<VtkgReport | null>(null)
+// Plot only finite historian samples returned by the existing validated VTKG API.
+// The source stores simulation time in hours; the chart labels it in seconds.
+const vtkgChart = computed(() => {
+ const observations = vtkgResult.value?.evidence?.observations ?? []
+ const samples = observations.flatMap(observation => {
+  const hours = observation.simulationTimeHours
+  const value = observation.value
+  return typeof hours === 'number' && Number.isFinite(hours) &&
+         typeof value === 'number' && Number.isFinite(value)
+   ? [{seconds:hours * 3600, value}] : []
+ }).sort((a,b) => a.seconds - b.seconds)
+ if (!samples.length) return null
+ const left = 72, right = 728, top = 18, bottom = 242
+ const minX = samples[0]!.seconds
+ const maxX = samples[samples.length - 1]!.seconds
+ const minValue = Math.min(...samples.map(p => p.value))
+ const maxValue = Math.max(...samples.map(p => p.value))
+ const padding = (maxValue - minValue || Math.max(Math.abs(minValue), 1)) * 0.08
+ const minY = minValue - padding, maxY = maxValue + padding
+ const x = (v:number) => left + (v - minX) / (maxX - minX || 1) * (right - left)
+ const y = (v:number) => bottom - (v - minY) / (maxY - minY) * (bottom - top)
+ const points = samples.map(p => ({x:x(p.seconds),y:y(p.value),...p}))
+ return {
+  points, polyline:points.map(p => `${p.x},${p.y}`).join(' '),
+  left,right,top,bottom,
+  xTicks:[0,1,2,3,4].map(i => ({x:left+(right-left)*i,label:(minX+(maxX-minX)*i/4).toFixed(1)})),
+  yTicks:[0,1,2,3,4].map(i => ({y:bottom-(bottom-top)*i/4,label:(minY+(maxY-minY)*i/4).toFixed(2)}))
+ }
+})
+
 async function askVtkg() {
  vtkgResult.value = null
  vtkgError.value = ''
@@ -180,6 +210,32 @@ async function ask() {
     <h3>Virtual temporal graph result</h3>
     <p>{{vtkgResult.answer}}</p>
     <p>Observations: {{vtkgResult.evidence.observationCount}} · Truncated: {{vtkgResult.evidence.truncated ? 'Yes' : 'No'}} · Materialized in GraphDB: {{vtkgResult.materializedInGraphDB ? 'Yes' : 'No'}}</p>
+    <div class="vtkg-chart" v-if="vtkgChart">
+     <h3>Historian time series</h3>
+     <p class="subdued">Simulation time (seconds) vs. recorded value · {{vtkgChart.points.length}} numeric observations · units NOT_VERIFIED</p>
+     <div class="vtkg-chart-scroll">
+      <svg viewBox="0 0 780 295" role="img" aria-label="Historian values plotted against simulation time in seconds">
+       <g stroke="currentColor" opacity="0.22" stroke-width="1">
+        <line v-for="tick in vtkgChart.yTicks" :key="'grid-'+tick.y" :x1="vtkgChart.left" :x2="vtkgChart.right" :y1="tick.y" :y2="tick.y" />
+       </g>
+       <g stroke="currentColor" stroke-width="1.5">
+        <line :x1="vtkgChart.left" :y1="vtkgChart.top" :x2="vtkgChart.left" :y2="vtkgChart.bottom" />
+        <line :x1="vtkgChart.left" :y1="vtkgChart.bottom" :x2="vtkgChart.right" :y2="vtkgChart.bottom" />
+       </g>
+       <g fill="currentColor" font-size="12">
+        <text v-for="tick in vtkgChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
+        <text v-for="tick in vtkgChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
+        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
+        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
+       </g>
+       <polyline v-if="vtkgChart.points.length > 1" :points="vtkgChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+       <circle v-for="(point,i) in vtkgChart.points" :key="i" :cx="point.x" :cy="point.y" r="3.5" fill="#38bdf8">
+        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
+       </circle>
+      </svg>
+     </div>
+    </div>
+    <p v-else class="subdued">No numeric historian observations available to plot.</p>
     <div class="table-scroll"><table class="evidence-table">
      <thead><tr><th>#</th><th>Simulation time (hours)</th><th>Value</th><th>Observed at</th></tr></thead>
      <tbody><tr v-for="(observation,i) in vtkgResult.evidence.observations" :key="i">
@@ -225,6 +281,8 @@ async function ask() {
 </template>
 
 <style scoped>
+.vtkg-chart{display:grid;gap:8px}.vtkg-chart h3{margin:0}.vtkg-chart-scroll{overflow-x:auto}.vtkg-chart svg{display:block;width:100%;min-width:520px;height:auto;max-height:370px}
+
 .mode-switch{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.custom-query{display:grid;gap:10px;margin:12px 0}.custom-query textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #334a62;border-radius:8px;background:#0c192a;color:#eaf4ff;font:inherit;resize:vertical}.example-list{display:grid;gap:8px}.example-list strong{font-size:12px}.example-button{text-align:left;white-space:normal;padding:9px 12px}
 .result-panel{display:grid;gap:16px}.result-panel pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:480px;overflow:auto}.result-section{border-top:1px solid #334a62;padding-top:15px;display:grid;gap:9px}.result-section h3{font-size:14px;margin:0}.answer-text{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.65}.section-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.table-scroll{overflow-x:auto}.evidence-table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}.evidence-table th,.evidence-table td{padding:10px;border-bottom:1px solid #334a62;vertical-align:top}.evidence-table th{color:#a9bfd0;font-weight:600}.full-id{display:block;overflow-wrap:anywhere;font-size:10px;opacity:.75;margin-top:3px}.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}.event-summary{display:grid;gap:7px;padding:12px;border:1px solid #334a62;border-radius:8px}.event-summary small{color:#a9bfd0}.source-row{font-size:12px;margin:0}.detail-toggle{font-size:12px;overflow:hidden}.detail-toggle summary{cursor:pointer}.detail-toggle pre{white-space:pre-wrap;overflow-wrap:anywhere;max-height:420px;overflow:auto;font-size:11px}.spec-block{padding:12px 0}.result-notice{padding:12px;border:1px solid #b45309;border-radius:8px}.result-section ul{margin:0;padding-left:22px}.result-section li{margin:6px 0}
 select{padding:10px;border:1px solid #657b92;border-radius:7px;background:#101820;color:#fff;max-width:100%;width:100%;color-scheme:dark}
