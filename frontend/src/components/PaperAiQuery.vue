@@ -244,7 +244,7 @@ onMounted(hLoadRuns)
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
-     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{item.id}} — {{item.question}}</option>
+     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{category === crossDomainCategory ? item.question : item.id + ' — ' + item.question}}</option>
     </select>
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
