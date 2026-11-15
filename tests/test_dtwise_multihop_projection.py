@@ -7,6 +7,7 @@ from process_sim.dtwise.semantic_planner import _candidates
 from process_sim.dtwise.multihop_projection import (
     plan_multihop_projection, compile_multihop_projection)
 from process_sim.dtwise.sparql_generator import iri
+from process_sim.dtwise.rdf_executor import build_answer
 
 ROOT = Path(__file__).resolve().parents[1]
 SCHEMA = ROOT / "semantic" / "ontology" / "dtwise" / "dtwise-schema-index.json"
@@ -40,6 +41,21 @@ class MultihopProjectionTests(unittest.TestCase):
     def test_no_inferred_bridge_without_relationship_request(self):
         self.assertIsNone(plan_multihop_projection(
             "List DEXPI instrumentation functions.", self.catalog, self.schema))
+
+    def test_formats_three_projected_product_properties(self):
+        plan = plan_multihop_projection(QUESTION, self.catalog, self.schema)
+        self.assertIsNotNone(plan)
+        answer = build_answer([{"value0": "ACME", "value1": "Description",
+                                "value2": "P-001"}], plan)
+        self.assertEqual(answer["count"], 1)
+        self.assertEqual(answer["join_type"], "shacl_multihop_identifier_join")
+        self.assertEqual(set(answer["values"][0]["properties"]),
+                         {p["predicate"] for p in plan["projections"]})
+
+    def test_rejects_unexpected_multihop_result_columns(self):
+        plan = plan_multihop_projection(QUESTION, self.catalog, self.schema)
+        with self.assertRaises(ValueError):
+            build_answer([{"value0": "only one"}], plan)
 
     def test_compiler_rejects_tampered_projection(self):
         plan = plan_multihop_projection(QUESTION, self.catalog, self.schema)
