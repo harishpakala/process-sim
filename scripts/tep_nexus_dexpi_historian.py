@@ -165,6 +165,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--question", required=True)
     parser.add_argument("--function", required=True)
+    parser.add_argument("--domain", choices=("DEXPI", "ECAD"), default="DEXPI")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--start-seconds", type=float)
     parser.add_argument("--end-seconds", type=float)
@@ -175,7 +176,8 @@ def main():
     if not dsn:
         parser.error("TEP_TIMESCALE_DSN is not set")
     result = execute(args.question, args.function, args.run_id, dsn,
-                     args.graphdb_url, args.start_seconds, args.end_seconds)
+                     args.graphdb_url, args.start_seconds, args.end_seconds,
+                     domain=args.domain)
     output = Path(args.output)
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(result, indent=2, allow_nan=False), encoding="utf-8")
