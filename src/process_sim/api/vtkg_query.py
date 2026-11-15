@@ -73,3 +73,37 @@ def run_question(payload: dict, *, runner=subprocess.run, environ=None):
             or not isinstance(report.get("validatedPlan"), dict)):
         raise VtkgUnavailable("VTKG CLI returned unexpected evidence")
     return report
+
+
+def discover_functions(run_id: str, *, environ=None):
+    """Discover run-supported engineering functions, rechecked against live GraphDB.
+
+    Reuses the existing evidence-gated registry and live resolver. No inferred
+    mappings or unverified GraphDB functions are offered as executable queries.
+    """
+    from uuid import UUID
+    env = os.environ if environ is None else environ
+    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not graphdb:
+        raise VtkgUnavailable("Configure GRAPHDB_SPARQL_ENDPOINT")
+    normalized_run = str(UUID(str(run_id)))
+    scripts = ROOT / "scripts"
+    sys.path.insert(0, str(scripts))
+    try:
+        from tep_nexus_function_registry import load_supported_functions, resolve_supported_mapping
+        registry = load_supported_functions(
+            ROOT / "reports/tep_nexus_mapping_discovery.json",
+            ROOT / "reports/tep_nexus_temporal_coverage.json",
+            normalized_run,
+        )
+        functions = [
+            resolve_supported_mapping(graphdb, function, registry)
+            for function in sorted(registry)
+        ]
+    finally:
+        sys.path.remove(str(scripts))
+    return {"run_id": normalized_run, "functions": functions,
+            "source": "GraphDB AAS live resolution + run-scoped evidence-gated registry",
+            "mappingConfidence": "PROVISIONAL",
+            "physicalSensorBinding": "NOT_VERIFIED",
+            "sharedRunProvenance": "NOT_VERIFIED"}
