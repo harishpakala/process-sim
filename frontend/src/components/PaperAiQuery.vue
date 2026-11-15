@@ -13,29 +13,33 @@ const category = ref('')
 const benchmarkId = ref('')
 const manifestError = ref('')
 const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop'))
-const crossDomainCategory = 'Cross-Domain Semantic Join'
-const crossDomainQuestions: BenchmarkQuestion[] = [
- {id:'CJ-ECAD-FI1003',category:crossDomainCategory,question:'For the ECAD engineering element with LocalId FI-1003, identify its corresponding OPCUAConnectivity SignalName.',version:'semantic-resolver'},
- {id:'CJ-ECAD-LI1101',category:crossDomainCategory,question:'For the ECAD engineering element with LocalId LI-1101, identify its corresponding OPCUAConnectivity SignalName.',version:'semantic-resolver'},
- {id:'CJ-ECAD-PI1101',category:crossDomainCategory,question:'For the ECAD engineering element with LocalId PI-1101, identify its corresponding OPCUAConnectivity SignalName.',version:'semantic-resolver'},
- {id:'CJ-DEXPI-FI105',category:crossDomainCategory,question:'For the DEXPI engineering element with LocalId FI_105, identify its corresponding OPCUAConnectivity SignalName.',version:'semantic-resolver'}
+const supplementalQuestions: BenchmarkQuestion[] = [
+ {id:'B23.1',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID FI-1003.',version:'supplemental'}
 ]
-const categories = computed(() => [...new Set([...selectableQuestions.value.map(q => q.category), crossDomainCategory])])
+const categories = computed(() => [...new Set(selectableQuestions.value.map(q => q.category))])
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
  item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' : item.question
-const categoryQuestions = computed(() => category.value === crossDomainCategory ? crossDomainQuestions : selectableQuestions.value.filter(q => q.category === category.value))
-const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...crossDomainQuestions].find(q => q.id === benchmarkId.value))
+const categoryQuestions = computed(() => {
+ const questions = [...selectableQuestions.value, ...supplementalQuestions].filter(q => q.category === category.value)
+ const b23 = questions.findIndex(q => q.id === 'B23')
+ const extra = questions.findIndex(q => q.id === 'B23.1')
+ if (b23 >= 0 && extra >= 0) {
+  const [item] = questions.splice(extra, 1)
+  questions.splice(b23 + 1, 0, item!)
+ }
+ return questions
+})
+const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
 function selectCategory(next:string) {
  category.value = next
  benchmarkId.value = ''
 }
 function selectBenchmark(id:string) {
  benchmarkId.value = id
- const item = [...benchmarkQuestions.value, ...crossDomainQuestions].find(q => q.id === id)
+ const item = [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === id)
  if (item) question.value = displayedQuestion(item)
  result.value = null
- dtwiseSemanticResult.value = null
  error.value = ''
 }
 onMounted(async () => {
@@ -48,7 +52,6 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
-const dtwiseSemanticResult = ref<{signalName:string;engineeringFunction:string}|null>(null)
 const question = ref('')
 const busy = ref(false)
 const error = ref('')
@@ -84,7 +87,6 @@ function entityLabel(value: unknown): string {
 }
 async function ask() {
  result.value = null
- dtwiseSemanticResult.value = null
  error.value = ''
  const text = question.value.trim()
  if (text.length < 5 || text.length > 1000) {
@@ -93,22 +95,6 @@ async function ask() {
  }
  busy.value = true
  try {
-  if (category.value === crossDomainCategory) {
-   const item = crossDomainQuestions.find(q => q.id === benchmarkId.value)
-   if (!item) throw Error('Select a cross-domain benchmark question')
-   const match = item.id.match(/^CJ-(ECAD|DEXPI)-(.+)$/)
-   if (!match) throw Error('Invalid cross-domain benchmark')
-   const domain = match[1]!
-   const localId = match[2] === 'FI1003' ? 'FI-1003' : match[2] === 'LI1101' ? 'LI-1101' : match[2] === 'PI1101' ? 'PI-1101' : 'FI_105'
-   const response = await fetch('/api/ai/vtkg/semantic/answer', {
-    method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({question:text,domain,engineering_function:localId})
-   })
-   const data = await response.json()
-   if (!response.ok) throw Error(data.error || 'Cross-domain semantic join failed')
-   dtwiseSemanticResult.value = data
-   return
-  }
   const response = await fetch('/api/ai/dtwise/answer', {
    method: 'POST',
    headers: {'Content-Type': 'application/json'},
@@ -203,24 +189,21 @@ onMounted(hLoadRuns)
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
-     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{category === crossDomainCategory ? displayedQuestion(item) : item.id + ' — ' + displayedQuestion(item)}}</option>
+     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{item.id + ' — ' + displayedQuestion(item)}}</option>
     </select>
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
     <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p class="subdued" v-else>Cross-domain semantic join questions use the read-only GraphDB resolver, not the frozen DTwise planner. The original B01–B60 manifest is unchanged.</p>
+    <p v-else class="subdued">Original B01–B60 manifest unchanged; B23.1 is a supplemental UI test.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
-    <p v-if="category !== crossDomainCategory" class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
+    <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
    </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
-    {{busy ? 'Executing query…' : (category === crossDomainCategory ? 'Resolve SignalName' : 'Ask DTwise')}}
+    {{busy ? 'Executing query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
-   <div v-if="dtwiseSemanticResult" class="result-section" role="status">
-    <p><strong>OPCUAConnectivity SignalName:</strong> {{dtwiseSemanticResult.signalName}}</p>
-   </div>
   </section>
   <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
