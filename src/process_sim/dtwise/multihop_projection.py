@@ -1,4 +1,4 @@
-"""Schema-grounded two-key, three-domain product/asset traceability joins.
+"""Schema-grounded two-key, three-domain entity projection joins.
 
 No domain names, identifier names, or RDF predicates are embedded here.
 The intermediate domain is discovered from SHACL terminal-property evidence.
@@ -35,7 +35,7 @@ def _choose(options, role):
 
 def plan_multihop_projection(question, catalog, schema):
     """Return a verified three-domain, two-identifier plan, or None."""
-    if not re.search(r"\b(?:associated|used|belong|linked|corresponding|matching|connected)\b",
+    if not re.search(r"\b(?:associated|used|belong|linked|corresponding|matching|connected|related|traced|mapped|via|through)\b",
                      question, re.I):
         return None
     prepared = []
@@ -48,10 +48,19 @@ def plan_multihop_projection(question, catalog, schema):
                         if _mentioned(c["domain"], question)}
     if len(explicit_domains) > 2:
         return None
-    sources = [(c, p) for c, p in prepared
-               if c["domain"] in explicit_domains
-               and any(_mentioned(label, question) for label in c["target_labels"]
-                       if not label.endswith(("SHACL shape", "constraint")))]
+    # Entity labels can identify a source even when its domain name is omitted.
+    # Require an unambiguous source domain and a distinct output entity; never
+    # infer a relationship solely from coincidentally shared property names.
+    entity_mentions = [(c, p) for c, p in prepared
+                       if any(_mentioned(label, question) for label in c["target_labels"]
+                              if not label.endswith(("SHACL shape", "constraint")))]
+    source_domains = {c["domain"] for c, _ in entity_mentions
+                      if c["domain"] in explicit_domains}
+    if not source_domains and len({c["domain"] for c, _ in entity_mentions}) == 2:
+        # Without a domain anchor the direction is not grounded.
+        return None
+    sources = [(c, p) for c, p in entity_mentions
+               if c["domain"] in source_domains]
     if not sources:
         return None
     # A single output property is sufficient only when the target entity is
