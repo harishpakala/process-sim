@@ -97,12 +97,17 @@ def build_answer(bindings, plan, limit=100, *, include_graph=False, count_per_gr
         graphs = [f"graph{i}" for i in range(3)] if include_graph else []
         expected = set(columns + graphs)
         records = set()
+        required = {f"value{i}" for i, p in enumerate(projections)
+                    if p.get("label") in plan.get("join_keys", [])} | set(graphs)
         for row in bindings:
-            if set(row) != expected or any(row[key] is None for key in expected):
+            if (not set(row).issubset(expected) or not required.issubset(row)
+                    or any(row[key] is None for key in required)
+                    or any(value is None for value in row.values())):
                 raise ValueError("Unexpected or unbound multihop projection columns")
-            records.add(tuple(row[key] for key in graphs + columns))
+            records.add(tuple(row.get(key) for key in graphs + columns))
         rows = []
-        for record in sorted(records):
+        for record in sorted(records, key=lambda values: tuple(
+                (v is None, "" if v is None else str(v)) for v in values)):
             item = {"properties": dict(zip(predicates, record[len(graphs):]))}
             if include_graph:
                 item["source_graph"], item["bridge_graph"], item["target_graph"] = record[:3]
