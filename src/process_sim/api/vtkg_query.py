@@ -245,3 +245,34 @@ def run_historian_question(payload, *, environ=None):
                        domain=domain)
     finally:
         sys.path.remove(str(scripts))
+
+
+def run_semantic_join_question(payload, *, environ=None):
+    """Read-only semantic join, without historian access or NL model execution."""
+    import re
+    env = os.environ if environ is None else environ
+    if not isinstance(payload, dict) or set(payload) != {"question", "engineering_function", "domain"}:
+        raise ValueError("Expected question, engineering_function and domain")
+    question, function, domain = payload["question"], payload["engineering_function"], payload["domain"]
+    if domain not in ("DEXPI", "ECAD") or not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
+        raise ValueError("Invalid semantic query")
+    if not isinstance(function, str):
+        raise ValueError("Invalid LocalId")
+    ids = {v.upper() for v in re.findall(r"(?<![A-Za-z0-9_-])[A-Za-z]{2}[_-][0-9]+(?![A-Za-z0-9_-])", question)}
+    if ids != {function.upper()}:
+        raise ValueError("Question and requested engineering function must agree")
+    if "signalname" not in question.lower() or "timescaledb" in question.lower() or "recorded values" in question.lower():
+        raise ValueError("Semantic-only question must request SignalName without historian retrieval")
+    endpoint = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not endpoint:
+        raise VtkgUnavailable("Configure GRAPHDB_SPARQL_ENDPOINT")
+    scripts = ROOT / "scripts"
+    sys.path.insert(0, str(scripts))
+    try:
+        from tep_nexus_dexpi_historian import resolve_signal
+        mapping = resolve_signal(endpoint, function.upper(), domain=domain)
+    finally:
+        sys.path.remove(str(scripts))
+    return {"domain": domain, "engineeringFunction": function.upper(),
+            "signalName": mapping["operational_signal"],
+            "mapping": mapping, "mode": "semantic_only", "historianQueried": False}
