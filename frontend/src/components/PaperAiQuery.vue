@@ -33,20 +33,29 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
-// Only the TI_101 observation template has been validated end-to-end.
-// Run identity and time bounds remain user-controlled.
-const vtkgTemplate = ref('')
-function selectVtkgTemplate(id:string) {
- vtkgTemplate.value = id
- if (id === 'ti101_observations') {
-  vtkgFunction.value = 'TI_101'
-  if (vtkgStart.value === null) vtkgStart.value = 0
-  if (vtkgEnd.value === null) vtkgEnd.value = 60
- }
+type DiscoveredVtkgFunction = {engineering_function:string;operational_signal:string;asset_uri:string;mapping_status:string}
+const vtkgFunctions = ref<DiscoveredVtkgFunction[]>([])
+const vtkgFunctionsBusy = ref(false)
+const vtkgFunctionsError = ref('')
+async function discoverVtkgFunctions() {
+ vtkgFunctions.value = []
+ vtkgFunction.value = ''
  vtkgResult.value = null
- vtkgError.value = ''
+ vtkgFunctionsError.value = ''
+ if (!vtkgRunId.value.trim()) {
+  vtkgFunctionsError.value = 'Enter a simulation run UUID before retrieving AAS engineering functions'
+  return
+ }
+ vtkgFunctionsBusy.value = true
+ try {
+  const response = await fetch('/api/ai/vtkg/functions?run_id=' + encodeURIComponent(vtkgRunId.value.trim()))
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'Engineering-function discovery failed')
+  if (!Array.isArray(data.functions)) throw new Error('Invalid function discovery response')
+  vtkgFunctions.value = data.functions
+ } catch(e) { vtkgFunctionsError.value = e instanceof Error ? e.message : String(e) }
+ finally { vtkgFunctionsBusy.value = false }
 }
-const vtkgQuestion = ref('')
 const vtkgFunction = ref('')
 const vtkgRunId = ref('')
 const vtkgStart = ref<number | null>(null)
@@ -76,12 +85,10 @@ const vtkgSemanticTrace = computed(() => {
 })
 
 const vtkgEffectiveQuestion = computed(() =>
- vtkgTemplate.value === 'ti101_observations' &&
- vtkgStart.value !== null && vtkgEnd.value !== null
-  ? `Show observations for TI_101 between ${vtkgStart.value} seconds and ${vtkgEnd.value} seconds.`
-  : vtkgQuestion.value
+ vtkgFunction.value && vtkgStart.value !== null && vtkgEnd.value !== null
+  ? `Show observations for ${vtkgFunction.value} between ${vtkgStart.value} seconds and ${vtkgEnd.value} seconds.`
+  : ''
 )
-
 // Plot only finite historian samples returned by the existing validated VTKG API.
 // The source stores simulation time in hours; the chart labels it in seconds.
 const vtkgChart = computed(() => {
@@ -228,16 +235,16 @@ async function ask() {
   <section class="panel">
    <div class="panel-title"><div><h2>VTKG — Simulation observations</h2><p>Existing constrained virtual temporal graph · TimescaleDB historian · no RDF materialization</p></div></div>
    <form class="custom-query" @submit.prevent="askVtkg">
-    <label for="vtkg-template">VTKG query type</label>
-    <select id="vtkg-template" :value="vtkgTemplate" @change="selectVtkgTemplate(($event.target as HTMLSelectElement).value)">
-     <option value="">Manual question</option>
-     <option value="ti101_observations">TI_101 — historian observations (validated query type)</option>
-    </select>
-    <p class="subdued">Choose the observation query, then set your simulation run and time window below. The question automatically follows the selected bounds.</p>
-    <label for="vtkg-function">Engineering function (supported registry ID)</label>
-    <input id="vtkg-function" v-model="vtkgFunction" :readonly="vtkgTemplate === 'ti101_observations'" required placeholder="TI_101" />
     <label for="vtkg-run">Simulation run UUID</label>
-    <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" />
+    <input id="vtkg-run" v-model="vtkgRunId" required placeholder="Run UUID" @input="vtkgFunctions = []; vtkgFunction = ''" />
+    <button type="button" :disabled="vtkgFunctionsBusy || !vtkgRunId.trim()" @click="discoverVtkgFunctions">{{vtkgFunctionsBusy ? 'Retrieving AAS functions…' : 'Retrieve engineering functions from GraphDB AAS'}}</button>
+    <p v-if="vtkgFunctionsError" role="alert" style="color:#b45309">{{vtkgFunctionsError}}</p>
+    <label for="vtkg-function">Engineering function (live GraphDB AAS mapping, run-scoped)</label>
+    <select id="vtkg-function" v-model="vtkgFunction" required :disabled="!vtkgFunctions.length">
+     <option value="">Select a discovered supported function</option>
+     <option v-for="item in vtkgFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}} → {{item.operational_signal}} (PROVISIONAL)</option>
+    </select>
+    <p class="subdued">Only functions rechecked against GraphDB and the existing run-scoped temporal-coverage registry are selectable. Physical sensor binding and shared run provenance remain NOT_VERIFIED.</p>
     <label for="vtkg-start">Start simulation seconds</label>
     <input id="vtkg-start" v-model.number="vtkgStart" type="number" min="0" step="any" required />
     <label for="vtkg-end">End simulation seconds</label>
@@ -245,9 +252,9 @@ async function ask() {
     <label for="vtkg-limit">Observation limit</label>
     <input id="vtkg-limit" v-model.number="vtkgLimit" type="number" min="1" max="5000" step="1" required />
     <label for="vtkg-question">Question (must name the function and the same explicit time interval)</label>
-    <textarea id="vtkg-question" :value="vtkgEffectiveQuestion" @input="vtkgQuestion = ($event.target as HTMLTextAreaElement).value" :readonly="vtkgTemplate === 'ti101_observations'" required maxlength="1000" rows="3"
+    <textarea id="vtkg-question" :value="vtkgEffectiveQuestion" readonly required maxlength="1000" rows="3"
      placeholder="Show observations for TI_101 between 0 seconds and 60 seconds." />
-    <p class="subdued">The existing VTKG contract rejects mismatched functions or time bounds. No automatic query routing or inferred joins.</p>
+    <p class="subdued">The question is generated from the selected GraphDB engineering function and editable bounds. The existing VTKG contract still rejects mismatches. No inferred joins.</p>
     <button class="primary" type="submit" :disabled="vtkgBusy">{{vtkgBusy ? 'Querying VTKG…' : 'Query VTKG'}}</button>
     <p v-if="vtkgError" role="alert" style="color:#b45309">{{vtkgError}}</p>
    </form>
