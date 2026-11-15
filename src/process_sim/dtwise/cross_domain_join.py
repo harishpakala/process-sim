@@ -1,7 +1,6 @@
 """Evidence-checked N-domain identifier equality joins; no inferred RDF edges."""
 import re
-from dtwise.query_planner import validate_hops
-
+from process_sim.dtwise.query_planner import validate_hops
 
 def _words(text):
     text = re.sub(r'([a-z0-9])([A-Z])', r'\1 \2', str(text))
@@ -224,7 +223,7 @@ def _generic_bridge_candidates(question, catalog, schema, domains):
 def plan_join(question, catalog, schema):
     schema_domains = sorted({str(c['domain']) for c in schema.concepts if c.get('domain')})
     domains = sorted(d for d in schema_domains if _mentioned(d, question))
-    from dtwise.schema_join_graph import plan_schema_join_graph
+    from process_sim.dtwise.schema_join_graph import plan_schema_join_graph
     graph_plan = plan_schema_join_graph(question, catalog, schema, domains)
     if graph_plan is not None:
         return graph_plan

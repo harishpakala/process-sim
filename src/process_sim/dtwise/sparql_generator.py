@@ -1,7 +1,7 @@
 """Compile schema-verified plans into read-only SPARQL SELECT."""
 import re
 import json
-from dtwise.query_planner import validate_hops
+from process_sim.dtwise.query_planner import validate_hops
 
 LABEL = 'http://www.w3.org/2000/01/rdf-schema#label'
 

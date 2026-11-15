@@ -4,7 +4,7 @@ No ontology-specific class, domain, predicate or identifier is embedded here.
 """
 import json
 import re
-from dtwise.query_planner import validate_hops
+from process_sim.dtwise.query_planner import validate_hops
 
 
 def _words(value):

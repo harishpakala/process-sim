@@ -6,9 +6,9 @@ import json
 import re
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
-from dtwise.query_planner import validate_hops
-from dtwise.cross_domain_join import _mentioned
-from dtwise.cross_domain_projection import _same
+from process_sim.dtwise.query_planner import validate_hops
+from process_sim.dtwise.cross_domain_join import _mentioned
+from process_sim.dtwise.cross_domain_projection import _same
 
 
 def _ask(question, catalog, domains, host, model, timeout):

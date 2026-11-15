@@ -4,8 +4,8 @@ This is additive to existing two-key bridge and identifier-equality planners.
 """
 import itertools
 import re
-from dtwise.query_planner import validate_hops
-from dtwise.cross_domain_join import _mentioned, _words
+from process_sim.dtwise.query_planner import validate_hops
+from process_sim.dtwise.cross_domain_join import _mentioned, _words
 
 
 def _explicit_bridge(domain, question):
