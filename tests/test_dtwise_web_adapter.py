@@ -28,18 +28,18 @@ class DtwiseWebAdapterTests(unittest.TestCase):
         def runner(args, **kwargs):
             calls.append((args, kwargs))
             return subprocess.CompletedProcess(args, 0, json.dumps({
-                "question": "List OPCUA SignalNames.",
+                "question": "List OPCUAconnectivity SignalNames.",
                 "mode": "frozen_dtwise_graphdb", "sparql": "SELECT * WHERE {}",
                 "executed": True, "answer": {"count": 0, "entities": [],
                 "truncated_possible": False}}), "")
         with patch.object(dtwise_query, "ROOT", self.root):
-            result = dtwise_query.run_question(" List OPCUA SignalNames. ",
+            result = dtwise_query.run_question(" List OPCUAconnectivity SignalNames. ",
                                                runner=runner, environ=self.env)
         self.assertEqual(result["answer"]["count"], 0)
         self.assertEqual(len(calls), 1)
         args, options = calls[0]
         self.assertIn("--execute", args)
-        self.assertEqual(args[args.index("--question") + 1], "List OPCUA SignalNames.")
+        self.assertEqual(args[args.index("--question") + 1], "List OPCUAconnectivity SignalNames.")
         self.assertEqual(args[args.index("--dtwise-root") + 1], str(self.root))
         self.assertEqual(options["timeout"], 120)
         self.assertFalse(options["check"])
@@ -51,7 +51,7 @@ class DtwiseWebAdapterTests(unittest.TestCase):
 
     def test_missing_configuration_fails_closed(self):
         with self.assertRaises(dtwise_query.DtwiseUnavailable):
-            dtwise_query.run_question("List OPCUA SignalNames.", environ={})
+            dtwise_query.run_question("List OPCUAconnectivity SignalNames.", environ={})
 
     def test_frozen_planner_failure_is_not_replanned(self):
         def runner(args, **kwargs):
@@ -68,7 +68,7 @@ class DtwiseWebAdapterTests(unittest.TestCase):
                 "sparql": "SELECT * WHERE {}", "answer": {}}), "")
         with patch.object(dtwise_query, "ROOT", self.root):
             with self.assertRaises(dtwise_query.DtwiseUnavailable):
-                dtwise_query.run_question("List OPCUA SignalNames.",
+                dtwise_query.run_question("List OPCUAconnectivity SignalNames.",
                                           runner=runner, environ=self.env)
 
     def test_timeout_is_explicit(self):
@@ -76,7 +76,7 @@ class DtwiseWebAdapterTests(unittest.TestCase):
             raise subprocess.TimeoutExpired(args, 120)
         with patch.object(dtwise_query, "ROOT", self.root):
             with self.assertRaises(dtwise_query.DtwiseUnavailable):
-                dtwise_query.run_question("List OPCUA SignalNames.",
+                dtwise_query.run_question("List OPCUAconnectivity SignalNames.",
                                           runner=runner, environ=self.env)
 
 
