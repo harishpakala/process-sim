@@ -78,6 +78,43 @@ def build_answer(bindings, plan, limit=100, *, include_graph=False, count_per_gr
             "truncated_possible": len(bindings) >= limit,
         }
 
+    # Multi-hop joins project product attributes from a different domain than
+    # the source entity. Their result columns intentionally omit ?entity.
+    if plan.get("join_type") == "shacl_multihop_identifier_join":
+        if plan.get("intent") != "list" or count_per_graph:
+            raise ValueError("Unsupported multihop result mode")
+        projections = plan.get("projections")
+        sides = plan.get("sides")
+        if (not isinstance(projections, list) or not 1 <= len(projections) <= 12
+                or not isinstance(sides, list) or len(sides) != 3
+                or not all(isinstance(p, dict) and isinstance(p.get("predicate"), str)
+                           and p.get("predicate") for p in projections)):
+            raise ValueError("Invalid multihop projection plan")
+        predicates = [p["predicate"] for p in projections]
+        if len(set(predicates)) != len(predicates):
+            raise ValueError("Duplicate multihop projection predicates")
+        columns = [f"value{i}" for i in range(len(projections))]
+        graphs = [f"graph{i}" for i in range(3)] if include_graph else []
+        expected = set(columns + graphs)
+        records = set()
+        for row in bindings:
+            if set(row) != expected or any(row[key] is None for key in expected):
+                raise ValueError("Unexpected or unbound multihop projection columns")
+            records.add(tuple(row[key] for key in graphs + columns))
+        rows = []
+        for record in sorted(records):
+            item = {"properties": dict(zip(predicates, record[len(graphs):]))}
+            if include_graph:
+                item["source_graph"], item["bridge_graph"], item["target_graph"] = record[:3]
+            rows.append(item)
+        return {"count": len(rows), "values": rows, "intent": "list",
+                "join_type": "shacl_multihop_identifier_join",
+                "source_domain": sides[0]["domain"],
+                "bridge_domain": sides[1]["domain"],
+                "target_domain": sides[2]["domain"],
+                "properties": predicates,
+                "truncated_possible": len(bindings) >= limit}
+
     # Handle cross-domain JOINs before single-domain logic.
     if plan.get("join_type") in ("identifier_equality", "multi_key_bridge_join", "schema_bridge_join", "schema_join_graph"):
         return build_join_answer(bindings, plan)
