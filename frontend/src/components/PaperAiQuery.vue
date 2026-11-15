@@ -147,13 +147,13 @@ async function hLoadFunctions() {
  hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null
  if (!hRun.value) return
  try {
-  const r = await fetch('/api/ai/vtkg/historian/functions?run_id=' + encodeURIComponent(hRun.value)), data = await r.json()
+  const r = await fetch('/api/ai/vtkg/historian/functions?run_id=' + encodeURIComponent(hRun.value) + '&domain=' + encodeURIComponent(hDomain.value)), data = await r.json()
   if (!r.ok) throw Error(data.error || 'Function discovery failed')
   hFunctions.value = data.functions
  } catch(e) { hError.value = String(e) }
 }
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? `For the DEXPI InstrumentationFunction with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName using the shared hasAssetIdentifier, then retrieve all recorded values from TimescaleDB.` : ''
+ hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName using the shared hasAssetIdentifier, then retrieve all recorded values from TimescaleDB.` : ''
  hResult.value = null
 }
 async function hAsk() {
@@ -166,7 +166,7 @@ async function hAsk() {
  hBusy.value = true
  try {
   const r = await fetch('/api/ai/vtkg/historian/answer', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-   question:hQuestion.value,engineering_function:hFunction.value,run_id:hRun.value,start_simulation_seconds:start,end_simulation_seconds:end
+   question:hQuestion.value,engineering_function:hFunction.value,run_id:hRun.value,domain:hDomain.value,start_simulation_seconds:start,end_simulation_seconds:end
   })})
   const data = await r.json()
   if (!r.ok) throw Error(data.error || 'Historian query failed')
@@ -245,13 +245,13 @@ onMounted(hLoadRuns)
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
   </section>
   <section class="panel">
-   <div class="panel-title"><div><h2>VTKG — Semantic historian query</h2><p>DEXPI → OPCUAConnectivity → TimescaleDB · read-only</p></div></div>
+   <div class="panel-title"><div><h2>VTKG — Semantic historian query</h2><p>DEXPI / ECAD → OPCUAConnectivity → TimescaleDB · read-only</p></div></div>
    <form class="custom-query" @submit.prevent="hAsk">
     <label for="h-run">Simulation run (required; TimescaleDB)</label>
     <select id="h-run" v-model="hRun" required @change="hLoadFunctions"><option value="">Select run</option><option v-for="run in hRuns" :key="run" :value="run">{{run}}</option></select>
     <button type="button" @click="hLoadRuns">Refresh runs</button>
     <label for="h-domain">Engineering domain</label>
-    <select id="h-domain" v-model="hDomain"><option value="DEXPI">DEXPI</option><option value="ECAD" disabled>ECAD (not yet verified)</option></select>
+    <select id="h-domain" v-model="hDomain" @change="hLoadFunctions"><option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option></select>
     <label for="h-function">LocalId (verified for selected run)</label>
     <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
     <label for="h-question">Natural-language question (editable)</label>
