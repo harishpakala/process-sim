@@ -12,13 +12,18 @@ const benchmarkQuestions = ref<BenchmarkQuestion[]>([])
 const category = ref('')
 const benchmarkId = ref('')
 const manifestError = ref('')
+const MULTIHOP_CATEGORY = 'Multi Domain Multi Hop'
 const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop' || q.id === 'B50'))
 const supplementalQuestions: BenchmarkQuestion[] = [
+ {id:'MH1',category:MULTIHOP_CATEGORY,question:'Show the ProductIdentifier and ManufacturerName of products associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
+ {id:'MH2',category:MULTIHOP_CATEGORY,question:'Show the ProductIdentifier and ProductDescription of products associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
+ {id:'MH3',category:MULTIHOP_CATEGORY,question:'Show the ManufacturerName of products associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
+ {id:'MH4',category:MULTIHOP_CATEGORY,question:'Show the AssetIdentifier and ProductIdentifier of assets associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
  {id:'B23.1',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID FI-1003.',version:'supplemental'},
  {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
  {id:'B23.3',category:'Cross-domain',question:'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_105.',version:'supplemental'}
 ]
-const categories = computed(() => [...new Set(selectableQuestions.value.map(q => q.category))])
+const categories = computed(() => [...new Set([...selectableQuestions.value.map(q => q.category), MULTIHOP_CATEGORY])])
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
  item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' :
@@ -32,6 +37,9 @@ const categoryQuestions = computed(() => {
  return questions
 })
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
+const isMultihop = computed(() => result.value?.answer?.join_type === 'shacl_multihop_identifier_join')
+const projectedProperties = computed(() => Array.isArray(result.value?.answer?.properties) ? result.value.answer.properties as string[] : [])
+const propertyLabel = (iri: string) => iri.split(/[/#]/).pop()?.replace(/^has(?=[A-Z])/, '') || iri
 function selectCategory(next:string) {
  category.value = next
  benchmarkId.value = ''
@@ -214,7 +222,8 @@ onMounted(hLoadRuns)
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
     <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p v-else class="subdued">Original B01–B60 manifest unchanged; B23.1 is a supplemental UI test.</p>
+    <p v-else class="subdued">Original B01–B60 manifest unchanged; supplemental questions are UI-only.</p>
+    <p v-if="category === MULTIHOP_CATEGORY" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
@@ -282,7 +291,14 @@ onMounted(hLoadRuns)
     <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
     <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
-    <div v-if="rows.length" class="table-scroll">
+    <p v-if="isMultihop" class="subdued">Join route: {{result.answer.source_domain}} → {{result.answer.bridge_domain}} → {{result.answer.target_domain}}</p>
+    <div v-if="isMultihop && rows.length" class="table-scroll">
+     <table class="evidence-table">
+      <thead><tr><th>#</th><th v-for="property in projectedProperties" :key="property" :title="property">{{propertyLabel(property)}}</th></tr></thead>
+      <tbody><tr v-for="(row,i) in rows" :key="i"><td>{{i+1}}</td><td v-for="property in projectedProperties" :key="property" class="mono">{{display((row.properties as Record<string, unknown> | undefined)?.[property])}}</td></tr></tbody>
+     </table>
+    </div>
+    <div v-else-if="rows.length" class="table-scroll">
      <table class="evidence-table">
       <thead><tr><th>#</th><th>{{primaryColumn}}</th><th>{{secondaryColumn}}</th></tr></thead>
       <tbody><tr v-for="(row,i) in rows" :key="i">
