@@ -54,12 +54,12 @@ def plan_multihop_projection(question, catalog, schema):
                        if not label.endswith(("SHACL shape", "constraint")))]
     if not sources:
         return None
-    # Output domain is established by multiple requested terminal labels,
-    # not guessed from the wording of an entity name.
+    # A single output property is sufficient only when the target entity is
+    # explicitly mentioned and the SHACL-grounded route is unique.
     outputs_by_domain = {}
     for c, props in prepared:
         named = {label for label in props if _mentioned(label, question)}
-        if len(named) >= 2:
+        if named:
             outputs_by_domain.setdefault(c["domain"], []).append((c, props, named))
     targets = [(domain, entries) for domain, entries in outputs_by_domain.items()
                if domain not in {c["domain"] for c, _ in sources}]
@@ -80,7 +80,7 @@ def plan_multihop_projection(question, catalog, schema):
     # A pluralized entity name must not become an accidental projection.
     output_names = [name for name in output_names
                     if name not in {label for label in target_c["target_labels"]}]
-    if len(output_names) < 2:
+    if not output_names:
         return None
     # Only identifiers present as terminal properties on the same SHACL entity
     # can bridge two independent equalities.
