@@ -1,0 +1,39 @@
+{
+  "question": "Get SignalName from OPCUAConnectivity.",
+  "mode": "frozen_dtwise_graphdb",
+  "graph_mode": "all_named",
+  "plan": {
+    "query_type": "SELECT",
+    "intent": "list",
+    "domain": "opcuaconnectivity",
+    "target_variable": "entity",
+    "predicates": [
+      "https://example.org/opcuaconnectivity/hasSignalMapping"
+    ],
+    "start_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/c2hhcGU",
+    "end_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/d6360f90d86c1edb4cc49a9fc903cbc6df752bd03882ecc75894a5b0e650dfd4",
+      "https://example.org/dtwise/relationship/f83378602f48acce69a1c70b1443687645df1f3cf836c077230ba1fe8d93cb2d",
+      "https://example.org/dtwise/relationship/2b98294774ef54d0e90cf8015fd2aa9d0a96d7197c464415e3365cc236cca3a0"
+    ],
+    "planner": "qwen_shacl",
+    "target_id": 13,
+    "target_labels": [
+      "SignalMapping",
+      "SignalMapping SHACL shape"
+    ],
+    "validation_scope": "Verified SHACL structural triples; instance data not verified",
+    "projection": {
+      "type": "terminal_property",
+      "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+      "from_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "evidence_ids": [
+        "https://example.org/dtwise/relationship/63e45a3c997efc1ca16ea8d74dccb1710517dee4c93e54c7b2db09af55b11840",
+        "https://example.org/dtwise/relationship/63af37bf481bdc6bce4375d816c080cddfb47c2cfd5dd480c98b8a5b4f240236"
+      ]
+    }
+  },
+  "sparql": "SELECT DISTINCT ?entity ?value\nWHERE {\n  GRAPH ?graph {\n    ?source <https://example.org/opcuaconnectivity/hasSignalMapping> ?entity .\n    ?entity <https://example.org/opcuaconnectivity/hasSignalName> ?value .\n  }\n}\nORDER BY ?entity ?value\nLIMIT 100",
+  "executed": false
+}
