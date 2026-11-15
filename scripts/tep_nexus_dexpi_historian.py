@@ -122,14 +122,21 @@ def execute(question, function, run_id, dsn, graphdb_url,
             resolver=resolve_signal, retriever=retrieve, domain="DEXPI"):
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported domain")
-    function = function.upper()
     run_id = str(UUID(str(run_id)))
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Question is required")
     id_pattern = re.compile(r"(?<![A-Za-z0-9_-])(?:[A-Za-z]{2}[_-][0-9]+)(?![A-Za-z0-9_-])", re.I)
     mentioned = {x.upper() for x in id_pattern.findall(question)}
-    if mentioned != {function}:
-        raise ValueError("Question and requested engineering function must agree")
+    if len(mentioned) != 1:
+        raise ValueError("Question must contain exactly one engineering LocalId")
+    extracted_function = next(iter(mentioned))
+    if function is not None:
+        if not isinstance(function, str) or function.upper() != extracted_function:
+            raise ValueError("Question and requested engineering function must agree")
+    function = extracted_function
+    valid_pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|LI|PI|TI)-[0-9]+$")
+    if not valid_pattern.fullmatch(function):
+        raise ValueError("Question LocalId is invalid for the selected domain")
     for bound in (start_seconds, end_seconds):
         if bound is not None and (isinstance(bound, bool)
                                   or not isinstance(bound, (int, float))
@@ -164,7 +171,7 @@ def execute(question, function, run_id, dsn, graphdb_url,
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--question", required=True)
-    parser.add_argument("--function", required=True)
+    parser.add_argument("--function", help="Optional; must match the LocalId in --question when supplied")
     parser.add_argument("--domain", choices=("DEXPI", "ECAD"), default="DEXPI")
     parser.add_argument("--run-id", required=True)
     parser.add_argument("--start-seconds", type=float)
