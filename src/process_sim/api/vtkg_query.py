@@ -139,7 +139,7 @@ def discover_historian_runs(*, environ=None):
     return {"runs": runs}
 
 
-def discover_historian_functions(run_id, *, environ=None):
+def discover_historian_functions(run_id, *, domain="DEXPI", environ=None):
     """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
     from uuid import UUID
     import psycopg
@@ -149,6 +149,8 @@ def discover_historian_functions(run_id, *, environ=None):
     graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
     if not dsn or not graphdb:
         raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported engineering domain")
     run = str(UUID(str(run_id)))
     query = """
 PREFIX dexpi: <https://example.org/dexpi/>
@@ -165,12 +167,31 @@ SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
  }
 } ORDER BY ?localId ?signalName
 """
+    if domain == "ECAD":
+        query = """
+PREFIX ecad: <https://example.org/ecad/>
+PREFIX opcua: <https://example.org/opcuaconnectivity/>
+SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
+ GRAPH ?eg {
+  ?component ecad:hasLocalId ?localId ;
+             ecad:hasAssetIdentifier ?assetIdentifier .
+ }
+ GRAPH ?og {
+  ?mapping opcua:hasAssetIdentifier ?assetIdentifier ;
+           opcua:hasSignalName ?signalName .
+ }
+} ORDER BY ?localId ?signalName
+"""
     response = requests.post(graphdb, data={"query": query},
                              headers={"Accept": "application/sparql-results+json"}, timeout=30)
     response.raise_for_status()
     grouped = {}
     for row in response.json()["results"]["bindings"]:
         function = row["localId"]["value"].strip()
+        if domain == "ECAD":
+            import re
+            if not re.fullmatch(r"(?:FI|LI|PI|TI)-[0-9]+", function):
+                continue
         pair = (row["assetIdentifier"]["value"].strip(), row["signalName"]["value"].strip())
         grouped.setdefault(function, set()).add(pair)
     with psycopg.connect(dsn) as conn:
@@ -193,7 +214,7 @@ SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
         functions.append({"engineering_function": function, "operational_signal": signal,
                           "asset_identifier": asset, "sample_count": counts[signal]})
     return {"run_id": run, "functions": functions, "rejected_functions": rejected,
-            "domain": "DEXPI", "source": "live GraphDB DEXPI/OPCUAConnectivity + TimescaleDB"}
+            "domain": domain, "source": f"live GraphDB {domain}/OPCUAConnectivity + TimescaleDB"}
 
 
 def run_historian_question(payload, *, environ=None):
@@ -202,11 +223,14 @@ def run_historian_question(payload, *, environ=None):
     env = os.environ if environ is None else environ
     if not isinstance(payload, dict) or set(payload) != {
         "question", "engineering_function", "run_id",
-        "start_simulation_seconds", "end_simulation_seconds"
+        "start_simulation_seconds", "end_simulation_seconds", "domain"
     }:
         raise ValueError("Expected question, engineering_function, run_id and optional time fields")
     if not isinstance(payload["question"], str) or not 5 <= len(payload["question"].strip()) <= 1000:
         raise ValueError("Question must contain 5–1000 characters")
+    domain = payload["domain"]
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported engineering domain")
     dsn = env.get("TEP_TIMESCALE_DSN")
     graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
     if not dsn or not graphdb:
@@ -217,6 +241,7 @@ def run_historian_question(payload, *, environ=None):
         from tep_nexus_dexpi_historian import execute
         return execute(payload["question"].strip(), payload["engineering_function"],
                        str(UUID(str(payload["run_id"]))), dsn, graphdb,
-                       payload["start_simulation_seconds"], payload["end_simulation_seconds"])
+                       payload["start_simulation_seconds"], payload["end_simulation_seconds"],
+                       domain=domain)
     finally:
         sys.path.remove(str(scripts))
