@@ -174,6 +174,25 @@ async function hAsk() {
  } catch(e) { hError.value = String(e) }
  finally { hBusy.value = false }
 }
+const hChart = computed(() => {
+ const samples = (hResult.value?.observations ?? [])
+  .filter(p => Number.isFinite(p.simulationTimeHours) && Number.isFinite(p.value))
+  .map(p => ({seconds:p.simulationTimeHours * 3600,value:p.value}))
+  .sort((a,b) => a.seconds - b.seconds)
+ if (!samples.length) return null
+ const left=72,right=728,top=18,bottom=242
+ const minX=samples[0]!.seconds,maxX=samples[samples.length-1]!.seconds
+ const minV=Math.min(...samples.map(p=>p.value)),maxV=Math.max(...samples.map(p=>p.value))
+ const pad=(maxV-minV || Math.max(Math.abs(minV),1))*0.08
+ const low=minV-pad,high=maxV+pad
+ const x=(v:number)=>left+(v-minX)/(maxX-minX||1)*(right-left)
+ const y=(v:number)=>bottom-(v-low)/(high-low)*(bottom-top)
+ return {points:samples.map(p=>({...p,x:x(p.seconds),y:y(p.value)})),
+  polyline:samples.map(p=>`${x(p.seconds)},${y(p.value)}`).join(' '),
+  left,right,top,bottom,
+  xTicks:[0,1,2,3,4].map(i=>({x:left+(right-left)*i,label:(minX+(maxX-minX)*i/4).toFixed(1)})),
+  yTicks:[0,1,2,3,4].map(i=>({y:bottom-(bottom-top)*i/4,label:(low+(high-low)*i/4).toFixed(2)}))}
+})
 onMounted(hLoadRuns)
 </script>
 
@@ -246,10 +265,30 @@ onMounted(hLoadRuns)
     <p v-if="hError" role="alert">{{hError}}</p>
    </form>
    <div v-if="hResult" class="result-section">
-    <h3>{{hResult.engineeringFunction}} → {{hResult.mapping.operational_signal}}</h3>
-    <p>Asset: {{hResult.mapping.asset_identifier}}</p>
-    <p>Observations: {{hResult.observationCount}} · Truncated: {{hResult.truncated ? 'Yes' : 'No'}}</p>
-    <div class="table-scroll"><table class="evidence-table"><thead><tr><th>#</th><th>Simulation hours</th><th>Value</th><th>Observed at</th></tr></thead><tbody><tr v-for="(sample,i) in hResult.observations" :key="i"><td>{{i+1}}</td><td>{{sample.simulationTimeHours}}</td><td>{{sample.value}}</td><td>{{sample.observedAt}}</td></tr></tbody></table></div>
+    <div v-if="hChart" class="vtkg-chart">
+     <div class="vtkg-chart-scroll">
+      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + hResult.engineeringFunction">
+       <g stroke="currentColor" opacity="0.22" stroke-width="1">
+        <line v-for="tick in hChart.yTicks" :key="'grid-'+tick.y" :x1="hChart.left" :x2="hChart.right" :y1="tick.y" :y2="tick.y" />
+       </g>
+       <g stroke="currentColor" stroke-width="1.5">
+        <line :x1="hChart.left" :y1="hChart.top" :x2="hChart.left" :y2="hChart.bottom" />
+        <line :x1="hChart.left" :y1="hChart.bottom" :x2="hChart.right" :y2="hChart.bottom" />
+       </g>
+       <g fill="currentColor" font-size="12">
+        <text v-for="tick in hChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
+        <text v-for="tick in hChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
+        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
+        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
+       </g>
+       <polyline v-if="hChart.points.length > 1" :points="hChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+       <circle v-for="(point,i) in hChart.points" :key="i" :cx="point.x" :cy="point.y" r="2.5" fill="#38bdf8">
+        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
+       </circle>
+      </svg>
+     </div>
+    </div>
+    <p v-else class="subdued">No numeric observations available to graph.</p>
    </div>
   </section>
   <section v-if="result" class="panel result-panel">
