@@ -96,13 +96,26 @@ def discover_functions(run_id: str, *, environ=None):
             ROOT / "reports/tep_nexus_temporal_coverage.json",
             normalized_run,
         )
-        functions = [
-            resolve_supported_mapping(graphdb, function, registry)
-            for function in sorted(registry)
-        ]
+        functions = []
+        rejected_functions = []
+        for function in sorted(registry):
+            try:
+                functions.append(resolve_supported_mapping(graphdb, function, registry))
+            except RuntimeError as exc:
+                # Only isolate known mapping-validation rejections. Transport and
+                # unexpected errors must still fail the request, not look like
+                # an empty or partially verified GraphDB result.
+                reason = str(exc)
+                if reason not in (
+                    "GraphDB mapping missing or ambiguous for selected function",
+                    "GraphDB mapping changed since discovery; regenerate reports",
+                ):
+                    raise
+                rejected_functions.append({"engineering_function": function, "reason": reason})
     finally:
         sys.path.remove(str(scripts))
     return {"run_id": normalized_run, "functions": functions,
+            "rejected_functions": rejected_functions,
             "source": "GraphDB AAS live resolution + run-scoped evidence-gated registry",
             "mappingConfidence": "PROVISIONAL",
             "physicalSensorBinding": "NOT_VERIFIED",
