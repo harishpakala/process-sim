@@ -20,7 +20,7 @@ class MultiHopRejected(ValueError):
 def _mentions(text: str, label: str) -> bool:
     words = re.findall(r"[a-z0-9]+", label.casefold())
     return bool(words) and bool(re.search(
-        r"(?<![a-z0-9])" + r"\\s*".join(map(re.escape, words)) + r"(?![a-z0-9])",
+        r"(?<![a-z0-9])" + r"\s*".join(map(re.escape, words)) + r"(?![a-z0-9])",
         text.casefold(),
     ))
 
@@ -63,7 +63,7 @@ def plan(question: str, schema_path):
     if not (_mentions(question, "DEXPI")
             and (_mentions(question, "OPCUA") or _mentions(question, "OPCUAConnectivity"))
             and _mentions(question, "AssetInventory")
-            and re.search(r"\\b(?:via|through)\\s+AssetInventory\\b", question, re.I)
+            and re.search(r"\b(?:via|through)\s+AssetInventory\b", question, re.I)
             and _mentions(question, "InstrumentationFunctions")
             and _mentions(question, "SignalMappings")):
         raise MultiHopRejected("Requires explicit DEXPI InstrumentationFunctions, OPCUA SignalMappings through AssetInventory")
@@ -103,4 +103,4 @@ def compile_sparql(plan_data, *, limit=100):
         lines.append(f"  {variable} a <{entity['class']}> .")
         lines.append(f"  {variable} <{entity['identifier_predicate']}> ?assetIdentifier .")
     lines.extend(["}", "ORDER BY ?assetIdentifier", f"LIMIT {limit}"])
-    return "\\n".join(lines)
+    return "\n".join(lines)
