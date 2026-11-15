@@ -36,14 +36,25 @@ const question = ref('')
 const busy = ref(false)
 const error = ref('')
 const result = ref<DtwiseResult | null>(null)
-type ResultRow = { entity?: unknown; value?: unknown; [key: string]: unknown }
+type ResultRow = { entity?: unknown; value?: unknown; uri?: unknown; label?: unknown; [key: string]: unknown }
+const rowKind = computed(() => Array.isArray(result.value?.answer?.values) ? 'values' :
+                            Array.isArray(result.value?.answer?.entities) ? 'entities' : 'none')
 const rows = computed<ResultRow[]>(() => {
  const answer = result.value?.answer
- const items = Array.isArray(answer?.values) ? answer.values :
-               Array.isArray(answer?.entities) ? answer.entities : []
- return items.map(item => item !== null && typeof item === 'object' && !Array.isArray(item)
-  ? item as ResultRow : {value: item})
+ const items = rowKind.value === 'values' ? answer?.values :
+               rowKind.value === 'entities' ? answer?.entities : []
+ return (Array.isArray(items) ? items : []).map(item =>
+  item !== null && typeof item === 'object' && !Array.isArray(item)
+   ? item as ResultRow : {value: item})
 })
+const primaryColumn = computed(() => rowKind.value === 'entities' ? 'Entity label' : 'Signal Name / Value')
+const secondaryColumn = computed(() => rowKind.value === 'entities' ? 'Entity URI' : 'Signal Mapping / Entity')
+function primaryValue(row: ResultRow): unknown {
+ return rowKind.value === 'entities' ? row.label : row.value
+}
+function secondaryValue(row: ResultRow): unknown {
+ return rowKind.value === 'entities' ? row.uri : row.entity
+}
 function display(value: unknown): string {
  return typeof value === 'string' ? value : value == null ? '—' : JSON.stringify(value)
 }
@@ -123,12 +134,12 @@ async function ask() {
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
     <div v-if="rows.length" class="table-scroll">
      <table class="evidence-table">
-      <thead><tr><th>#</th><th>Signal Name / Value</th><th>Signal Mapping / Entity</th></tr></thead>
+      <thead><tr><th>#</th><th>{{primaryColumn}}</th><th>{{secondaryColumn}}</th></tr></thead>
       <tbody><tr v-for="(row,i) in rows" :key="i">
        <td>{{i+1}}</td>
-       <td class="mono">{{display(row.value)}}</td>
-       <td class="mono"><span :title="display(row.entity)">{{entityLabel(row.entity)}}</span>
-        <details v-if="row.entity != null" class="detail-toggle"><summary>Full URI</summary><span class="full-id">{{display(row.entity)}}</span></details>
+       <td class="mono">{{display(primaryValue(row))}}</td>
+       <td class="mono"><span :title="display(secondaryValue(row))">{{entityLabel(secondaryValue(row))}}</span>
+        <details v-if="secondaryValue(row) != null" class="detail-toggle"><summary>Full URI</summary><span class="full-id">{{display(row.entity)}}</span></details>
        </td>
       </tr></tbody>
      </table>
