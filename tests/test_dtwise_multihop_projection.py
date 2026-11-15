@@ -38,6 +38,22 @@ class MultihopProjectionTests(unittest.TestCase):
                      "hasManufacturerName", "hasProductDescription"):
             self.assertIn(name, sparql)
 
+    def test_single_manufacturer_projection_uses_verified_bridge(self):
+        question = ("Show the ManufacturerName of products associated with "
+                    "DEXPI InstrumentationFunction entities.")
+        plan = plan_multihop_projection(question, self.catalog, self.schema)
+        self.assertIsNotNone(plan)
+        self.assertEqual([s["domain"] for s in plan["sides"]],
+                         ["dexpi", "assetinventory", "productcatalog"])
+        self.assertEqual([p["label"] for p in plan["projections"]],
+                         ["ManufacturerName"])
+        sparql = compile_multihop_projection(
+            plan, self.schema, 100, "all_named", None, False, False, iri)
+        self.assertIn("SELECT DISTINCT ?value0", sparql)
+        self.assertIn("OPTIONAL { ?entity2", sparql)
+        answer = build_answer([{"value0": "IFM"}], plan)
+        self.assertEqual(answer["count"], 1)
+
     def test_no_inferred_bridge_without_relationship_request(self):
         self.assertIsNone(plan_multihop_projection(
             "List DEXPI instrumentation functions.", self.catalog, self.schema))
