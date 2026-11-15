@@ -54,8 +54,27 @@ const vtkgEnd = ref<number | null>(null)
 const vtkgLimit = ref(100)
 const vtkgBusy = ref(false)
 const vtkgError = ref('')
-type VtkgReport = {answer:string; evidence:{observations: Array<Record<string,unknown>>; observationCount:number; truncated:boolean; provenance:Record<string,unknown>}; validatedPlan:unknown; materializedInGraphDB:boolean}
+type VtkgReport = {answer:string; evidence:{observations: Array<Record<string,unknown>>; observationCount:number; truncated:boolean; provenance:Record<string,unknown>}; validatedPlan:unknown; graph?:{nodes?:Array<Record<string,unknown>>}; request?:{engineering_function?:string}; materializedInGraphDB:boolean}
 const vtkgResult = ref<VtkgReport | null>(null)
+const vtkgSemanticTrace = computed(() => {
+ const report = vtkgResult.value
+ if (!report) return null
+ const nodes = report.graph?.nodes ?? []
+ const signals = nodes.filter(node => node.type === 'OperationalSignal')
+ const signal = signals.length === 1 && typeof signals[0]?.signalId === 'string'
+  ? signals[0].signalId : 'UNKNOWN'
+ const provenance = report.evidence.provenance
+ return {
+  engineeringFunction:report.request?.engineering_function ?? 'UNKNOWN',
+  signal,
+  semanticSource:display(provenance.semanticSource),
+  temporalSource:display(provenance.temporalSource),
+  mappingConfidence:display(provenance.mappingConfidence),
+  physicalSensorBinding:display(provenance.physicalSensorBinding),
+  sharedRunProvenance:display(provenance.sharedRunProvenance)
+ }
+})
+
 const vtkgEffectiveQuestion = computed(() =>
  vtkgTemplate.value === 'ti101_observations' &&
  vtkgStart.value !== null && vtkgEnd.value !== null
@@ -234,6 +253,15 @@ async function ask() {
    </form>
    <div v-if="vtkgResult" class="result-section">
     <h3>Virtual temporal graph result</h3>
+    <div v-if="vtkgSemanticTrace" class="vtkg-source-trace" aria-label="Semantic-to-temporal execution provenance">
+     <h3>Semantic-to-temporal execution</h3>
+     <div class="vtkg-trace-steps">
+      <div><strong>1 · Engineering function</strong><span>{{vtkgSemanticTrace.engineeringFunction}}</span><small>Explicitly supplied by the query</small></div>
+      <div><strong>2 · GraphDB semantic resolution</strong><span>Operational signal: {{vtkgSemanticTrace.signal}}</span><small>Source: {{vtkgSemanticTrace.semanticSource}} · Mapping: {{vtkgSemanticTrace.mappingConfidence}}</small></div>
+      <div><strong>3 · TimescaleDB historian retrieval</strong><span>{{vtkgResult.evidence.observationCount}} observations</span><small>Source: {{vtkgSemanticTrace.temporalSource}} · Explicit run and simulation-time bounds</small></div>
+     </div>
+     <p class="subdued">Physical sensor binding: {{vtkgSemanticTrace.physicalSensorBinding}} · Shared run provenance: {{vtkgSemanticTrace.sharedRunProvenance}}. This is the constrained VTKG path, not a DTwise federated SPARQL join.</p>
+    </div>
     <p>{{vtkgResult.answer}}</p>
     <p>Observations: {{vtkgResult.evidence.observationCount}} · Truncated: {{vtkgResult.evidence.truncated ? 'Yes' : 'No'}} · Materialized in GraphDB: {{vtkgResult.materializedInGraphDB ? 'Yes' : 'No'}}</p>
     <div class="vtkg-chart" v-if="vtkgChart">
@@ -307,6 +335,8 @@ async function ask() {
 </template>
 
 <style scoped>
+.vtkg-source-trace{display:grid;gap:10px;padding:12px;border:1px solid #334a62;border-radius:8px}.vtkg-source-trace h3{margin:0}.vtkg-trace-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}.vtkg-trace-steps>div{display:grid;align-content:start;gap:6px;padding:10px;border:1px solid #334a62;border-radius:7px}.vtkg-trace-steps span{font-weight:600;overflow-wrap:anywhere}.vtkg-trace-steps small{opacity:.8;overflow-wrap:anywhere}
+
 .vtkg-chart{display:grid;gap:8px}.vtkg-chart h3{margin:0}.vtkg-chart-scroll{overflow-x:auto}.vtkg-chart svg{display:block;width:100%;min-width:520px;height:auto;max-height:370px}
 
 .mode-switch{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.custom-query{display:grid;gap:10px;margin:12px 0}.custom-query textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #334a62;border-radius:8px;background:#0c192a;color:#eaf4ff;font:inherit;resize:vertical}.example-list{display:grid;gap:8px}.example-list strong{font-size:12px}.example-button{text-align:left;white-space:normal;padding:9px 12px}
