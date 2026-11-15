@@ -21,6 +21,9 @@ const crossDomainQuestions: BenchmarkQuestion[] = [
  {id:'CJ-DEXPI-FI105',category:crossDomainCategory,question:'For the DEXPI engineering element with LocalId FI_105, identify its corresponding OPCUAConnectivity SignalName.',version:'semantic-resolver'}
 ]
 const categories = computed(() => [...new Set([...selectableQuestions.value.map(q => q.category), crossDomainCategory])])
+// UI-only dataset correction: preserve the frozen B23 manifest verbatim.
+const displayedQuestion = (item: BenchmarkQuestion): string =>
+ item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' : item.question
 const categoryQuestions = computed(() => category.value === crossDomainCategory ? crossDomainQuestions : selectableQuestions.value.filter(q => q.category === category.value))
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...crossDomainQuestions].find(q => q.id === benchmarkId.value))
 function selectCategory(next:string) {
@@ -30,7 +33,7 @@ function selectCategory(next:string) {
 function selectBenchmark(id:string) {
  benchmarkId.value = id
  const item = [...benchmarkQuestions.value, ...crossDomainQuestions].find(q => q.id === id)
- if (item) question.value = item.question
+ if (item) question.value = displayedQuestion(item)
  result.value = null
  dtwiseSemanticResult.value = null
  error.value = ''
@@ -200,7 +203,7 @@ onMounted(hLoadRuns)
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
-     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{category === crossDomainCategory ? item.question : item.id + ' — ' + item.question}}</option>
+     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{category === crossDomainCategory ? displayedQuestion(item) : item.id + ' — ' + displayedQuestion(item)}}</option>
     </select>
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
