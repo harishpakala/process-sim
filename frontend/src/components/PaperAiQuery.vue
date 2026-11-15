@@ -136,6 +136,25 @@ type HistorianResult = {engineeringFunction:string;mapping:{operational_signal:s
 const hRuns = ref<string[]>([]), hRun = ref(''), hDomain = ref('DEXPI'), hFunction = ref(''), hQuestion = ref('')
 const hFunctions = ref<Array<{engineering_function:string;operational_signal:string;sample_count:number}>>([])
 const hQuestionType = ref('historian')
+const hPreset = ref('')
+const hSemanticPresets = [
+ {id:'ecad-fi1003', label:'ECAD · FI-1003 → SignalName', domain:'ECAD', localId:'FI-1003'},
+ {id:'ecad-li1101', label:'ECAD · LI-1101 → SignalName', domain:'ECAD', localId:'LI-1101'},
+ {id:'ecad-pi1101', label:'ECAD · PI-1101 → SignalName', domain:'ECAD', localId:'PI-1101'},
+ {id:'dexpi-fi105', label:'DEXPI · FI_105 → SignalName', domain:'DEXPI', localId:'FI_105'}
+]
+async function hSelectPreset() {
+ const preset = hSemanticPresets.find(item => item.id === hPreset.value)
+ if (!preset) return
+ hDomain.value = preset.domain
+ hQuestionType.value = 'semantic'
+ await hLoadFunctions()
+ hFunction.value = preset.localId
+ hSelectFunction()
+ if (hRun.value && !hFunctions.value.some(item => item.engineering_function === preset.localId)) {
+  hError.value = 'This LocalId has no verified historian coverage for the selected run; semantic-only resolution can still be tested.'
+ }
+}
 const hSemanticResult = ref<{engineeringFunction:string;signalName:string}|null>(null)
 const hStart = ref(''), hEnd = ref(''), hError = ref(''), hBusy = ref(false), hResult = ref<HistorianResult|null>(null)
 async function hLoadRuns() {
@@ -267,6 +286,11 @@ onMounted(hLoadRuns)
     <select id="h-domain" v-model="hDomain" @change="hLoadFunctions"><option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option></select>
     <label for="h-function">LocalId (verified for selected run)</label>
     <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
+    <label for="h-preset">Semantic-only benchmark questions</label>
+    <select id="h-preset" v-model="hPreset" @change="hSelectPreset">
+     <option value="">Choose a benchmark question (optional)</option>
+     <option v-for="item in hSemanticPresets" :key="item.id" :value="item.id">{{item.label}}</option>
+    </select>
     <label for="h-question-type">Join Query question</label>
     <select id="h-question-type" v-model="hQuestionType" @change="hSelectFunction">
      <option value="historian">Identify SignalName and retrieve all recorded values from TimescaleDB</option>
