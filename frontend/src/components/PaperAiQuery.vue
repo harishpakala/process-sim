@@ -124,27 +124,6 @@ async function ask() {
 type HistorianResult = {engineeringFunction:string;mapping:{operational_signal:string;asset_identifier:string};observationCount:number;truncated:boolean;observations:Array<{simulationTimeHours:number;value:number;observedAt:string}>}
 const hRuns = ref<string[]>([]), hRun = ref(''), hDomain = ref('DEXPI'), hFunction = ref(''), hQuestion = ref('')
 const hFunctions = ref<Array<{engineering_function:string;operational_signal:string;sample_count:number}>>([])
-const hQuestionType = ref('semantic')
-const hPreset = ref('')
-const hSemanticPresets = [
- {id:'ecad-fi1003', label:'ECAD · FI-1003 → SignalName', domain:'ECAD', localId:'FI-1003'},
- {id:'ecad-li1101', label:'ECAD · LI-1101 → SignalName', domain:'ECAD', localId:'LI-1101'},
- {id:'ecad-pi1101', label:'ECAD · PI-1101 → SignalName', domain:'ECAD', localId:'PI-1101'},
- {id:'dexpi-fi105', label:'DEXPI · FI_105 → SignalName', domain:'DEXPI', localId:'FI_105'}
-]
-async function hSelectPreset() {
- const preset = hSemanticPresets.find(item => item.id === hPreset.value)
- if (!preset) return
- hDomain.value = preset.domain
- hQuestionType.value = 'semantic'
- if (hRun.value) await hLoadFunctions()
- hFunction.value = preset.localId
- hSelectFunction()
- if (hRun.value && !hFunctions.value.some(item => item.engineering_function === preset.localId)) {
-  hError.value = 'This LocalId has no verified historian coverage for the selected run; semantic-only resolution can still be tested.'
- }
-}
-const hSemanticResult = ref<{engineeringFunction:string;signalName:string}|null>(null)
 const hStart = ref(''), hEnd = ref(''), hError = ref(''), hBusy = ref(false), hResult = ref<HistorianResult|null>(null)
 async function hLoadRuns() {
  try {
@@ -154,7 +133,7 @@ async function hLoadRuns() {
  } catch(e) { hError.value = String(e) }
 }
 async function hLoadFunctions() {
- hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null; hSemanticResult.value = null
+ hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null
  if (!hRun.value) return
  try {
   const r = await fetch('/api/ai/vtkg/historian/functions?run_id=' + encodeURIComponent(hRun.value) + '&domain=' + encodeURIComponent(hDomain.value)), data = await r.json()
@@ -163,22 +142,11 @@ async function hLoadFunctions() {
  } catch(e) { hError.value = String(e) }
 }
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? (hQuestionType.value === 'semantic' ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName.` : `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.`) : ''
+ hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.` : ''
  hResult.value = null
 }
 async function hAsk() {
- hResult.value = null; hSemanticResult.value = null; hError.value = ''
- if (hQuestionType.value === 'semantic') {
-  hBusy.value = true
-  try {
-   const r = await fetch('/api/ai/vtkg/semantic/answer', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:hQuestion.value,engineering_function:hFunction.value,domain:hDomain.value})})
-   const data = await r.json()
-   if (!r.ok) throw Error(data.error || 'Semantic join failed')
-   hSemanticResult.value = data
-  } catch(e) { hError.value = String(e) }
-  finally { hBusy.value = false }
-  return
- }
+ hResult.value = null; hError.value = ''
  const start = hStart.value === '' ? null : Number(hStart.value)
  const end = hEnd.value === '' ? null : Number(hEnd.value)
  if ((start !== null && (!Number.isFinite(start) || start < 0)) || (end !== null && (!Number.isFinite(end) || end < 0)) || (start !== null && end !== null && start > end)) {
@@ -252,38 +220,25 @@ onMounted(hLoadRuns)
    </div>
   </section>
   <section v-if="page === 'historian'" class="panel">
-   <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join; optional TimescaleDB historian · read-only</p></div></div>
+   <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
    <form class="custom-query" @submit.prevent="hAsk">
-    <label v-if="hQuestionType === 'historian'" for="h-run">Simulation run (required for historian queries)</label>
-    <select v-if="hQuestionType === 'historian'" id="h-run" v-model="hRun" required @change="hLoadFunctions"><option value="">Select run</option><option v-for="run in hRuns" :key="run" :value="run">{{run}}</option></select>
-    <button v-if="hQuestionType === 'historian'" type="button" @click="hLoadRuns">Refresh runs</button>
+    <label for="h-run">Simulation run (required for historian queries)</label>
+    <select id="h-run" v-model="hRun" required @change="hLoadFunctions"><option value="">Select run</option><option v-for="run in hRuns" :key="run" :value="run">{{run}}</option></select>
+    <button type="button" @click="hLoadRuns">Refresh runs</button>
     <label for="h-domain">Engineering domain</label>
     <select id="h-domain" v-model="hDomain" @change="hLoadFunctions"><option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option></select>
-    <label for="h-function">LocalId {{hQuestionType === 'historian' ? '(verified for selected run)' : '(or choose a benchmark question below)'}}</label>
-    <select id="h-function" v-model="hFunction" :required="hQuestionType === 'historian'" :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
-    <label for="h-preset">Cross-Domain Semantic Join — benchmark questions</label>
-    <select id="h-preset" v-model="hPreset" @change="hSelectPreset">
-     <option value="">Choose a benchmark question (optional)</option>
-     <option v-for="item in hSemanticPresets" :key="item.id" :value="item.id">{{item.label}}</option>
-    </select>
-    <label for="h-question-type">Query category</label>
-    <select id="h-question-type" v-model="hQuestionType" @change="hSelectFunction">
-     <option value="historian">Cross-Domain Join + Historian (TimescaleDB)</option>
-     <option value="semantic">Cross-Domain Semantic Join (GraphDB only)</option>
-    </select>
+    <label for="h-function">LocalId (verified for selected run)</label>
+    <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
     <label for="h-question">Natural-language question (editable)</label>
     <textarea id="h-question" v-model="hQuestion" required maxlength="1000" rows="4" />
-    <label v-if="hQuestionType === 'historian'" for="h-start">Start simulation seconds (optional)</label>
-    <input v-if="hQuestionType === 'historian'" id="h-start" v-model="hStart" type="number" min="0" step="any" placeholder="No lower bound" />
-    <label v-if="hQuestionType === 'historian'" for="h-end">End simulation seconds (optional)</label>
-    <input v-if="hQuestionType === 'historian'" id="h-end" v-model="hEnd" type="number" min="0" step="any" placeholder="No upper bound" />
-    <p v-if="hQuestionType === 'historian'" class="subdued">Empty bounds retrieve the entire series. One bound applies an open-ended filter. Live hasAssetIdentifier join; physical sensor binding NOT_VERIFIED.</p>
-    <button class="primary" type="submit" :disabled="hBusy || !hFunction || (hQuestionType === 'historian' && !hRun)">{{hBusy ? 'Executing…' : (hQuestionType === 'semantic' ? 'Resolve SignalName' : 'Query historian')}}</button>
+    <label for="h-start">Start simulation seconds (optional)</label>
+    <input id="h-start" v-model="hStart" type="number" min="0" step="any" placeholder="No lower bound" />
+    <label for="h-end">End simulation seconds (optional)</label>
+    <input id="h-end" v-model="hEnd" type="number" min="0" step="any" placeholder="No upper bound" />
+    <p class="subdued">Empty bounds retrieve the entire series. One bound applies an open-ended filter. Live hasAssetIdentifier join; physical sensor binding NOT_VERIFIED.</p>
+    <button class="primary" type="submit"  :disabled="hBusy || !hFunction || !hRun">{{hBusy ? 'Executing…' : 'Query historian'}}</button>
     <p v-if="hError" role="alert">{{hError}}</p>
    </form>
-   <div v-if="hSemanticResult" class="result-section" role="status">
-    <p><strong>OPCUAConnectivity SignalName:</strong> {{hSemanticResult.signalName}}</p>
-   </div>
    <div v-if="hResult" class="result-section">
     <div v-if="hChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
