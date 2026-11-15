@@ -36,13 +36,13 @@ $env:GRAPHDB_SPARQL_ENDPOINT = "http://pakala:7200/repositories/AAS"
 # Plan + compile only (no GraphDB query):
 python scripts\dtwise_bridge.py `
   --dtwise-root $dtwise --schema $schema `
-  --question "List OPCUA SignalNames." `
+  --question "List OPCUAconnectivity SignalNames." `
   --output reports\dtwise_bridge_smoke.json
 
 # Once reviewed, execute a read-only SELECT:
 python scripts\dtwise_bridge.py `
   --dtwise-root $dtwise --schema $schema `
-  --question "List OPCUA SignalNames." --execute `
+  --question "List OPCUAconnectivity SignalNames." --execute `
   --output reports\dtwise_bridge_live.json
 ```
 
@@ -68,7 +68,7 @@ No live GraphDB/TimescaleDB/Ollama execution is claimed by this commit.
 
 The existing `PaperAiQuery.vue` now has an explicit **DTwise engineering** mode.
 It calls `POST /api/ai/dtwise/answer` with exactly
-`{"question":"List OPCUA SignalNames."}`. The endpoint invokes the unchanged
+`{"question":"List OPCUAconnectivity SignalNames."}`. The endpoint invokes the unchanged
 `scripts/dtwise_bridge.py` in a fresh Python process with `--execute`.
 The frozen DTwise checkout remains external and unchanged. This endpoint
 does not use the old `paper_query.custom_answer` keyword router, does not
