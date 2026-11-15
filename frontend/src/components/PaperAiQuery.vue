@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 
+withDefaults(defineProps<{ page?: 'engineering' | 'historian' }>(), {page: 'engineering'})
+
 type DtwiseResult = {
  question: string; mode: string; sparql: string; executed: boolean;
  graph_mode: string; answer: Record<string, unknown>; plan: unknown
@@ -231,7 +233,7 @@ onMounted(hLoadRuns)
 
 <template>
  <div style="display:grid;gap:16px">
-  <section class="panel">
+  <section v-if="page === 'engineering'" class="panel">
    <div class="panel-title">
     <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
    </div>
@@ -270,7 +272,7 @@ onMounted(hLoadRuns)
     <p><strong>OPCUAConnectivity SignalName:</strong> {{dtwiseSemanticResult.signalName}}</p>
    </div>
   </section>
-  <section class="panel">
+  <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join; optional TimescaleDB historian · read-only</p></div></div>
    <form class="custom-query" @submit.prevent="hAsk">
     <label v-if="hQuestionType === 'historian'" for="h-run">Simulation run (required for historian queries)</label>
@@ -330,7 +332,7 @@ onMounted(hLoadRuns)
     <p v-else class="subdued">No numeric observations available to graph.</p>
    </div>
   </section>
-  <section v-if="result" class="panel result-panel">
+  <section v-if="page === 'engineering' && result" class="panel result-panel">
    <div class="panel-title">
     <div><h2>Engineering result</h2><p>{{result.question}}</p></div>
     <span class="pill">{{result.executed ? 'Executed' : 'Not executed'}}</span>
