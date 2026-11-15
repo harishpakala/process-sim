@@ -129,13 +129,13 @@ def extract_historian_context(question, run_id, start_seconds, end_seconds):
     if run_id is not None and str(UUID(str(run_id))) != extracted_run:
         raise ValueError("Question and requested simulation run must agree")
 
-    number = r"([0-9]+(?:\\.[0-9]+)?)"
+    number = r"([0-9]+(?:\.[0-9]+)?)"
     interval = re.search(
-        rf"\\bbetween simulation seconds\\s+{number}\\s+and\\s+{number}\\b",
+        rf"\bbetween simulation seconds\s+{number}\s+and\s+{number}\b",
         question, re.I)
-    lower = re.search(rf"\\bfrom simulation second\\s+{number}\\s+onward\\b", question, re.I)
-    upper = re.search(rf"\\bup to simulation second\\s+{number}\\b", question, re.I)
-    all_times = re.search(r"\\bfor all simulation times\\b", question, re.I)
+    lower = re.search(rf"\bfrom simulation second\s+{number}\s+onward\b", question, re.I)
+    upper = re.search(rf"\bup to simulation second\s+{number}\b", question, re.I)
+    all_times = re.search(r"\bfor all simulation times\b", question, re.I)
     found = sum(bool(x) for x in (interval, lower, upper, all_times))
     if found != 1:
         raise ValueError("Question must specify one supported simulation-time interval")
