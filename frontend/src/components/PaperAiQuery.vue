@@ -45,20 +45,6 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
-const verifiedExamples = [
- {id:'FI101_OPCUA_SIGNAL',label:'DEXPI → OPCUAConnectivity · FI_101 SignalName',question:'Find the OPCUAConnectivity SignalName for DEXPI InstrumentationFunction with localId FI_101, joining the DEXPI hasAssetIdentifier to the OPCUAConnectivity hasAssetIdentifier.'}
-]
-const verifiedExampleId = ref('')
-function selectVerifiedExample(id:string) {
- verifiedExampleId.value = id
- const example = verifiedExamples.find(item => item.id === id)
- if (example) {
-  question.value = example.question
-  benchmarkId.value = ''
-  result.value = null
-  error.value = ''
- }
-}
 const dtwiseSemanticResult = ref<{signalName:string;engineeringFunction:string}|null>(null)
 const question = ref('')
 const busy = ref(false)
@@ -251,14 +237,7 @@ onMounted(hLoadRuns)
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
     <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p class="subdued" v-if="category !== crossDomainCategory">Benchmark questions are drawn from the B01–B60 manifest; untested multi-domain multi-hop cases are excluded. Inclusion does not mean every listed question passed validation.</p>
     <p class="subdued" v-else>Cross-domain semantic join questions use the read-only GraphDB resolver, not the frozen DTwise planner. The original B01–B60 manifest is unchanged.</p>
-    <label v-if="category !== crossDomainCategory" for="dtwise-verified-example">Additional verified cross-domain query (separate from frozen benchmark)</label>
-    <select v-if="category !== crossDomainCategory" id="dtwise-verified-example" :value="verifiedExampleId" @change="selectVerifiedExample(($event.target as HTMLSelectElement).value)">
-     <option value="">Select a verified cross-domain example</option>
-     <option v-for="item in verifiedExamples" :key="item.id" :value="item.id">{{item.label}}</option>
-    </select>
-    <p v-if="category !== crossDomainCategory" class="subdued">FI_101 → XMEAS1 was confirmed in a CLI GraphDB execution supplied by the operator. This example does not modify the frozen B01–B60 manifest.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
