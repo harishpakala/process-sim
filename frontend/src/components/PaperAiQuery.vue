@@ -153,7 +153,7 @@ async function hLoadFunctions() {
  } catch(e) { hError.value = String(e) }
 }
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName using the shared hasAssetIdentifier, then retrieve all recorded values from TimescaleDB.` : ''
+ hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.` : ''
  hResult.value = null
 }
 async function hAsk() {
