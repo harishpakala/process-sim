@@ -1,10 +1,37 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 type DtwiseResult = {
  question: string; mode: string; sparql: string; executed: boolean;
  graph_mode: string; answer: Record<string, unknown>; plan: unknown
 }
+type BenchmarkQuestion = {id:string;category:string;question:string;version:string}
+const benchmarkQuestions = ref<BenchmarkQuestion[]>([])
+const category = ref('')
+const benchmarkId = ref('')
+const manifestError = ref('')
+const categories = computed(() => [...new Set(benchmarkQuestions.value.map(q => q.category))])
+const categoryQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category === category.value))
+const selectedBenchmark = computed(() => benchmarkQuestions.value.find(q => q.id === benchmarkId.value))
+function selectCategory(next:string) {
+ category.value = next
+ benchmarkId.value = ''
+}
+function selectBenchmark(id:string) {
+ benchmarkId.value = id
+ const item = benchmarkQuestions.value.find(q => q.id === id)
+ if (item) question.value = item.question
+}
+onMounted(async () => {
+ try {
+  const response = await fetch('/dtwise-benchmark-manifest.json', {cache:'no-store'})
+  if (!response.ok) throw new Error('Benchmark manifest unavailable')
+  const data:unknown = await response.json()
+  if (!Array.isArray(data) || !data.every(item => item && typeof item.id === 'string' && typeof item.category === 'string' && typeof item.question === 'string'))
+   throw new Error('Invalid benchmark manifest')
+  benchmarkQuestions.value = data as BenchmarkQuestion[]
+ } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
+})
 const question = ref('')
 const busy = ref(false)
 const error = ref('')
@@ -60,7 +87,21 @@ async function ask() {
     <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
-    <label for="dtwise-question">Engineering question</label>
+    <label for="benchmark-category">Benchmark category</label>
+    <select id="benchmark-category" :value="category" @change="selectCategory(($event.target as HTMLSelectElement).value)">
+     <option value="">Select a category</option>
+     <option v-for="item in categories" :key="item" :value="item">{{item}}</option>
+    </select>
+    <label for="benchmark-question">Benchmark question</label>
+    <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
+     <option value="">Select a question</option>
+     <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{item.id}} — {{item.question}}</option>
+    </select>
+    <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
+    <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
+    <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
+    <p class="subdued">55 nonblank questions from the B01–B60 manifest. Category names and question wording are preserved. Inclusion does not mean a question passed validation.</p>
+    <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
     <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
