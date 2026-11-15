@@ -14,20 +14,20 @@ const benchmarkId = ref('')
 const manifestError = ref('')
 const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop'))
 const supplementalQuestions: BenchmarkQuestion[] = [
- {id:'B23.1',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID FI-1003.',version:'supplemental'}
+ {id:'B23.1',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID FI-1003.',version:'supplemental'},
+ {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
+ {id:'B23.3',category:'Cross-domain',question:'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_105.',version:'supplemental'}
 ]
 const categories = computed(() => [...new Set(selectableQuestions.value.map(q => q.category))])
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
  item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' : item.question
 const categoryQuestions = computed(() => {
- const questions = [...selectableQuestions.value, ...supplementalQuestions].filter(q => q.category === category.value)
+ const questions = selectableQuestions.value.filter(q => q.category === category.value)
  const b23 = questions.findIndex(q => q.id === 'B23')
- const extra = questions.findIndex(q => q.id === 'B23.1')
- if (b23 >= 0 && extra >= 0) {
-  const [item] = questions.splice(extra, 1)
-  questions.splice(b23 + 1, 0, item!)
- }
+ const additions = supplementalQuestions.filter(q => q.category === category.value)
+ if (b23 >= 0) questions.splice(b23 + 1, 0, ...additions)
+ else questions.push(...additions)
  return questions
 })
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
