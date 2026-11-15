@@ -25,6 +25,19 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/vtkg/functions":
+            try:
+                from process_sim.api.vtkg_query import discover_functions, VtkgUnavailable
+                params = parse_qs(urlsplit(self.path).query)
+                run_ids = params.get("run_id", [])
+                if len(run_ids) != 1:
+                    raise ValueError("Exactly one run_id is required")
+                self.send_json(200, discover_functions(run_ids[0]))
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except (VtkgUnavailable, OSError, RuntimeError, KeyError) as exc:
+                self.send_json(503, {"error": f"VTKG function discovery unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/benchmarks/42/questions":
             try:
                 from process_sim.api.frozen_benchmark import pilot_questions
