@@ -131,7 +131,7 @@ async function hLoadFunctions() {
  } catch(e) { hError.value = String(e) }
 }
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.` : ''
+ hQuestion.value = hFunction.value ? `Get historian values for the ${hDomain.value === 'DEXPI' ? 'DEXPI InstrumentationFunction' : 'ECAD Device'} with LocalID ${hFunction.value}.` : ''
  hResult.value = null
 }
 async function hAsk() {
