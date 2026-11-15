@@ -12,7 +12,7 @@ const benchmarkQuestions = ref<BenchmarkQuestion[]>([])
 const category = ref('')
 const benchmarkId = ref('')
 const manifestError = ref('')
-const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop'))
+const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop' || q.id === 'B50'))
 const supplementalQuestions: BenchmarkQuestion[] = [
  {id:'B23.1',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID FI-1003.',version:'supplemental'},
  {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
@@ -21,7 +21,8 @@ const supplementalQuestions: BenchmarkQuestion[] = [
 const categories = computed(() => [...new Set(selectableQuestions.value.map(q => q.category))])
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
- item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' : item.question
+ item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' :
+ item.id === 'B50' ? 'List AssetNames whose AssetIdentifier is https://aas.example.com/FI103 or https://aas.example.com/FI104.' : item.question
 const categoryQuestions = computed(() => {
  const questions = selectableQuestions.value.filter(q => q.category === category.value)
  const b23 = questions.findIndex(q => q.id === 'B23')
