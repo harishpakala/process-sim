@@ -234,7 +234,7 @@ onMounted(hLoadRuns)
     <label for="h-domain">Engineering domain</label>
     <select id="h-domain" v-model="hDomain"><option value="DEXPI">DEXPI</option><option value="ECAD" disabled>ECAD (not yet verified)</option></select>
     <label for="h-function">LocalId (verified for selected run)</label>
-    <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}} → {{item.operational_signal}} ({{item.sample_count}} samples)</option></select>
+    <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
     <label for="h-question">Natural-language question (editable)</label>
     <textarea id="h-question" v-model="hQuestion" required maxlength="1000" rows="4" />
     <label for="h-start">Start simulation seconds (optional)</label>
