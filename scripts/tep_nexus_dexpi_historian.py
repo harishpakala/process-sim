@@ -117,14 +117,46 @@ def retrieve(dsn, run_id, signal, start_seconds=None, end_seconds=None, *,
     return samples
 
 
+def extract_historian_context(question, run_id, start_seconds, end_seconds):
+    """Extract only the supported, explicit run and simulation-time phrases."""
+    uuid_pattern = re.compile(
+        r"(?<![A-Za-z0-9-])[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-"
+        r"[0-9a-f]{4}-[0-9a-f]{12}(?![A-Za-z0-9-])", re.I)
+    uuids = uuid_pattern.findall(question)
+    if len(uuids) != 1:
+        raise ValueError("Question must contain exactly one simulation run UUID")
+    extracted_run = str(UUID(uuids[0]))
+    if run_id is not None and str(UUID(str(run_id))) != extracted_run:
+        raise ValueError("Question and requested simulation run must agree")
+
+    number = r"([0-9]+(?:\\.[0-9]+)?)"
+    interval = re.search(
+        rf"\\bbetween simulation seconds\\s+{number}\\s+and\\s+{number}\\b",
+        question, re.I)
+    lower = re.search(rf"\\bfrom simulation second\\s+{number}\\s+onward\\b", question, re.I)
+    upper = re.search(rf"\\bup to simulation second\\s+{number}\\b", question, re.I)
+    all_times = re.search(r"\\bfor all simulation times\\b", question, re.I)
+    found = sum(bool(x) for x in (interval, lower, upper, all_times))
+    if found != 1:
+        raise ValueError("Question must specify one supported simulation-time interval")
+    extracted_start = float(interval.group(1)) if interval else float(lower.group(1)) if lower else None
+    extracted_end = float(interval.group(2)) if interval else float(upper.group(1)) if upper else None
+    if start_seconds is not None and start_seconds != extracted_start:
+        raise ValueError("Question and requested start simulation seconds must agree")
+    if end_seconds is not None and end_seconds != extracted_end:
+        raise ValueError("Question and requested end simulation seconds must agree")
+    return extracted_run, extracted_start, extracted_end
+
+
 def execute(question, function, run_id, dsn, graphdb_url,
             start_seconds=None, end_seconds=None, *,
             resolver=resolve_signal, retriever=retrieve, domain="DEXPI"):
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported domain")
-    run_id = str(UUID(str(run_id)))
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Question is required")
+    run_id, start_seconds, end_seconds = extract_historian_context(
+        question, run_id, start_seconds, end_seconds)
     id_pattern = re.compile(r"(?<![A-Za-z0-9_-])(?:[A-Za-z]{2}[_-][0-9]+)(?![A-Za-z0-9_-])", re.I)
     mentioned = {x.upper() for x in id_pattern.findall(question)}
     if len(mentioned) != 1:
@@ -173,7 +205,7 @@ def main():
     parser.add_argument("--question", required=True)
     parser.add_argument("--function", help="Optional; must match the LocalId in --question when supplied")
     parser.add_argument("--domain", choices=("DEXPI", "ECAD"), default="DEXPI")
-    parser.add_argument("--run-id", required=True)
+    parser.add_argument("--run-id", help="Optional; must match the run UUID in --question")
     parser.add_argument("--start-seconds", type=float)
     parser.add_argument("--end-seconds", type=float)
     parser.add_argument("--graphdb-url", default="http://localhost:7200/repositories/AAS")
