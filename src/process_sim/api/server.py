@@ -40,7 +40,10 @@ class Handler(BaseHTTPRequestHandler):
                 ids = parse_qs(urlsplit(self.path).query).get("run_id", [])
                 if len(ids) != 1:
                     raise ValueError("Exactly one run_id is required")
-                self.send_json(200, discover_historian_functions(ids[0]))
+                domains = parse_qs(urlsplit(self.path).query).get("domain", ["DEXPI"])
+                if len(domains) != 1:
+                    raise ValueError("Exactly one domain is required")
+                self.send_json(200, discover_historian_functions(ids[0], domain=domains[0]))
             except ValueError as exc:
                 self.send_json(400, {"error": str(exc)})
             except Exception:
