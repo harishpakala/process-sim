@@ -45,7 +45,7 @@ async function ask() {
    <div class="custom-query">
     <label for="dtwise-question">Engineering question</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
-      placeholder="List OPCUA SignalNames." @keydown.ctrl.enter="ask" />
+      placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
     <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
    </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
