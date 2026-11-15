@@ -190,7 +190,11 @@ def compile_multihop_projection(plan, schema, limit, graph_mode, graph_iri,
                 if (not terminal(output)
                         or output.get("label") not in schema.by_uri[output["predicate"]].get("labels", [])):
                     raise ValueError("Unverified multihop projection")
-                triples.append(f"?entity{i} {iri(output['predicate'])} ?value{j} .")
+                pattern = f"?entity{i} {iri(output['predicate'])} ?value{j} ."
+                if output["label"] in keys:
+                    triples.append(pattern)
+                else:
+                    triples.append(f"OPTIONAL {{ {pattern} }}")
         body = "\n".join("    " + t for t in triples)
         blocks.append(f"  GRAPH ?graph{i} {{\n{body}\n  }}" if graph_mode == "all_named"
                       else body)
