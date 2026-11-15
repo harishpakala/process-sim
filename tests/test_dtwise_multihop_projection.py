@@ -38,6 +38,26 @@ class MultihopProjectionTests(unittest.TestCase):
                      "hasManufacturerName", "hasProductDescription"):
             self.assertIn(name, sparql)
 
+    def test_exact_ui_two_property_questions_select_product_catalog(self):
+        questions = [
+            ("Show the ProductIdentifier and ManufacturerName of products associated "
+             "with DEXPI InstrumentationFunction entities.",
+             {"ProductIdentifier", "ManufacturerName"}),
+            ("Show the ProductIdentifier and ProductDescription of products associated "
+             "with DEXPI InstrumentationFunction entities.",
+             {"ProductIdentifier", "ProductDescription"}),
+        ]
+        for question, expected in questions:
+            with self.subTest(question=question):
+                plan = plan_multihop_projection(question, self.catalog, self.schema)
+                self.assertIsNotNone(plan)
+                self.assertEqual([s["domain"] for s in plan["sides"]],
+                                 ["dexpi", "assetinventory", "productcatalog"])
+                self.assertEqual({p["label"] for p in plan["projections"]}, expected)
+                sparql = compile_multihop_projection(
+                    plan, self.schema, 100, "all_named", None, False, False, iri)
+                self.assertEqual(sparql.count("GRAPH ?graph"), 3)
+
     def test_single_manufacturer_projection_uses_verified_bridge(self):
         question = ("Show the ManufacturerName of products associated with "
                     "DEXPI InstrumentationFunction entities.")
