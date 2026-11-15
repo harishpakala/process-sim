@@ -135,6 +135,8 @@ async function ask() {
 type HistorianResult = {engineeringFunction:string;mapping:{operational_signal:string;asset_identifier:string};observationCount:number;truncated:boolean;observations:Array<{simulationTimeHours:number;value:number;observedAt:string}>}
 const hRuns = ref<string[]>([]), hRun = ref(''), hDomain = ref('DEXPI'), hFunction = ref(''), hQuestion = ref('')
 const hFunctions = ref<Array<{engineering_function:string;operational_signal:string;sample_count:number}>>([])
+const hQuestionType = ref('historian')
+const hSemanticResult = ref<{engineeringFunction:string;signalName:string}|null>(null)
 const hStart = ref(''), hEnd = ref(''), hError = ref(''), hBusy = ref(false), hResult = ref<HistorianResult|null>(null)
 async function hLoadRuns() {
  try {
@@ -144,7 +146,7 @@ async function hLoadRuns() {
  } catch(e) { hError.value = String(e) }
 }
 async function hLoadFunctions() {
- hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null
+ hFunction.value = ''; hQuestion.value = ''; hFunctions.value = []; hResult.value = null; hSemanticResult.value = null
  if (!hRun.value) return
  try {
   const r = await fetch('/api/ai/vtkg/historian/functions?run_id=' + encodeURIComponent(hRun.value) + '&domain=' + encodeURIComponent(hDomain.value)), data = await r.json()
@@ -153,11 +155,22 @@ async function hLoadFunctions() {
  } catch(e) { hError.value = String(e) }
 }
 function hSelectFunction() {
- hQuestion.value = hFunction.value ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.` : ''
+ hQuestion.value = hFunction.value ? (hQuestionType.value === 'semantic' ? `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName.` : `For the ${hDomain.value} engineering element with LocalId ${hFunction.value}, identify its corresponding OPCUAConnectivity SignalName and retrieve all recorded values from TimescaleDB.`) : ''
  hResult.value = null
 }
 async function hAsk() {
- hResult.value = null; hError.value = ''
+ hResult.value = null; hSemanticResult.value = null; hError.value = ''
+ if (hQuestionType.value === 'semantic') {
+  hBusy.value = true
+  try {
+   const r = await fetch('/api/ai/vtkg/semantic/answer', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({question:hQuestion.value,engineering_function:hFunction.value,domain:hDomain.value})})
+   const data = await r.json()
+   if (!r.ok) throw Error(data.error || 'Semantic join failed')
+   hSemanticResult.value = data
+  } catch(e) { hError.value = String(e) }
+  finally { hBusy.value = false }
+  return
+ }
  const start = hStart.value === '' ? null : Number(hStart.value)
  const end = hEnd.value === '' ? null : Number(hEnd.value)
  if ((start !== null && (!Number.isFinite(start) || start < 0)) || (end !== null && (!Number.isFinite(end) || end < 0)) || (start !== null && end !== null && start > end)) {
@@ -254,16 +267,24 @@ onMounted(hLoadRuns)
     <select id="h-domain" v-model="hDomain" @change="hLoadFunctions"><option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option></select>
     <label for="h-function">LocalId (verified for selected run)</label>
     <select id="h-function" v-model="hFunction" required :disabled="!hRun" @change="hSelectFunction"><option value="">Select LocalId</option><option v-for="item in hFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option></select>
+    <label for="h-question-type">Join Query question</label>
+    <select id="h-question-type" v-model="hQuestionType" @change="hSelectFunction">
+     <option value="historian">Identify SignalName and retrieve all recorded values from TimescaleDB</option>
+     <option value="semantic">Identify corresponding OPCUAConnectivity SignalName (semantic-only)</option>
+    </select>
     <label for="h-question">Natural-language question (editable)</label>
     <textarea id="h-question" v-model="hQuestion" required maxlength="1000" rows="4" />
-    <label for="h-start">Start simulation seconds (optional)</label>
-    <input id="h-start" v-model="hStart" type="number" min="0" step="any" placeholder="No lower bound" />
-    <label for="h-end">End simulation seconds (optional)</label>
-    <input id="h-end" v-model="hEnd" type="number" min="0" step="any" placeholder="No upper bound" />
-    <p class="subdued">Empty bounds retrieve the entire series. One bound applies an open-ended filter. Live hasAssetIdentifier join; physical sensor binding NOT_VERIFIED.</p>
-    <button class="primary" type="submit" :disabled="hBusy || !hRun || !hFunction">{{hBusy ? 'Retrieving…' : 'Query historian'}}</button>
+    <label v-if="hQuestionType === 'historian'" for="h-start">Start simulation seconds (optional)</label>
+    <input v-if="hQuestionType === 'historian'" id="h-start" v-model="hStart" type="number" min="0" step="any" placeholder="No lower bound" />
+    <label v-if="hQuestionType === 'historian'" for="h-end">End simulation seconds (optional)</label>
+    <input v-if="hQuestionType === 'historian'" id="h-end" v-model="hEnd" type="number" min="0" step="any" placeholder="No upper bound" />
+    <p v-if="hQuestionType === 'historian'" class="subdued">Empty bounds retrieve the entire series. One bound applies an open-ended filter. Live hasAssetIdentifier join; physical sensor binding NOT_VERIFIED.</p>
+    <button class="primary" type="submit" :disabled="hBusy || !hRun || !hFunction">{{hBusy ? 'Executing…' : (hQuestionType === 'semantic' ? 'Resolve SignalName' : 'Query historian')}}</button>
     <p v-if="hError" role="alert">{{hError}}</p>
    </form>
+   <div v-if="hSemanticResult" class="result-section" role="status">
+    <p><strong>OPCUAConnectivity SignalName:</strong> {{hSemanticResult.signalName}}</p>
+   </div>
    <div v-if="hResult" class="result-section">
     <div v-if="hChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
