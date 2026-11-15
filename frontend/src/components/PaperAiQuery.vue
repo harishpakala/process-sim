@@ -33,6 +33,24 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
+type VtkgExample = {id:string;label:string;question:string;engineeringFunction:string;start:number;end:number}
+const vtkgExamples: VtkgExample[] = [
+ {id:'VTKG-01',label:'TI_101 · 0–60 seconds (tested)',question:'Show observations for TI_101 between 0 seconds and 60 seconds.',engineeringFunction:'TI_101',start:0,end:60},
+ {id:'VTKG-02',label:'TI_101 · 30–90 seconds (tested)',question:'Show observations for TI_101 between 30 seconds and 90 seconds.',engineeringFunction:'TI_101',start:30,end:90}
+]
+const vtkgExampleId = ref('')
+function selectVtkgExample(id:string) {
+ vtkgExampleId.value = id
+ const example = vtkgExamples.find(item => item.id === id)
+ if (!example) return
+ vtkgQuestion.value = example.question
+ vtkgFunction.value = example.engineeringFunction
+ vtkgStart.value = example.start
+ vtkgEnd.value = example.end
+ vtkgLimit.value = 100
+ vtkgResult.value = null
+ vtkgError.value = ''
+}
 const vtkgQuestion = ref('')
 const vtkgFunction = ref('')
 const vtkgRunId = ref('')
@@ -189,6 +207,12 @@ async function ask() {
   <section class="panel">
    <div class="panel-title"><div><h2>VTKG — Simulation observations</h2><p>Existing constrained virtual temporal graph · TimescaleDB historian · no RDF materialization</p></div></div>
    <form class="custom-query" @submit.prevent="askVtkg">
+    <label for="vtkg-example">Validated VTKG query example</label>
+    <select id="vtkg-example" :value="vtkgExampleId" @change="selectVtkgExample(($event.target as HTMLSelectElement).value)">
+     <option value="">Choose a tested observation query (optional)</option>
+     <option v-for="example in vtkgExamples" :key="example.id" :value="example.id">{{example.id}} — {{example.label}}</option>
+    </select>
+    <p class="subdued">Examples fill the question, function, and simulation bounds. Enter the run UUID explicitly; all requests are still validated by the existing backend.</p>
     <label for="vtkg-function">Engineering function (supported registry ID)</label>
     <input id="vtkg-function" v-model="vtkgFunction" required placeholder="TI_101" />
     <label for="vtkg-run">Simulation run UUID</label>
