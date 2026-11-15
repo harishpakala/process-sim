@@ -33,15 +33,13 @@ def run_question(question: str, *, runner=subprocess.run, environ=None):
 
     question = question.strip()
 
-    schema = env.get("DTWISE_SCHEMA")
     graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
 
-    if not schema or not graphdb:
+    if not graphdb:
         raise DtwiseUnavailable(
-            "Configure DTWISE_SCHEMA and GRAPHDB_SPARQL_ENDPOINT"
+            "Configure GRAPHDB_SPARQL_ENDPOINT"
         )
 
-    schema_path = Path(schema).expanduser().resolve()
     bridge = ROOT / "scripts" / "dtwise_bridge.py"
     local_dtwise = ROOT / "src" / "process_sim" / "dtwise"
 
@@ -50,16 +48,12 @@ def run_question(question: str, *, runner=subprocess.run, environ=None):
             "Repository-local DTWise semantic planner is unavailable"
         )
 
-    if not schema_path.is_file():
-        raise DtwiseUnavailable("Configured DTWISE_SCHEMA does not exist")
-
     if not bridge.is_file():
         raise DtwiseUnavailable("DTWise bridge script is unavailable")
 
     args = [
         sys.executable,
         str(bridge),
-        "--schema", str(schema_path),
         "--graphdb-url", graphdb,
         "--question", question,
         "--execute",
