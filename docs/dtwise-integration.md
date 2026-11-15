@@ -63,3 +63,33 @@ required with `--execute`. The bridge compiles with
    from string resemblance or copy historian samples into GraphDB.
 
 No live GraphDB/TimescaleDB/Ollama execution is claimed by this commit.
+
+## Web UI engineering-query integration (feature branch)
+
+The existing `PaperAiQuery.vue` now has an explicit **DTwise engineering** mode.
+It calls `POST /api/ai/dtwise/answer` with exactly
+`{"question":"List OPCUA SignalNames."}`. The endpoint invokes the unchanged
+`scripts/dtwise_bridge.py` in a fresh Python process with `--execute`.
+The frozen DTwise checkout remains external and unchanged. This endpoint
+does not use the old `paper_query.custom_answer` keyword router, does not
+generate a narrative Ollama answer, and does not fall back to other planners.
+
+Before starting `python -m process_sim.api.server`, configure the backend
+process environment (PowerShell):
+
+```powershell
+$env:DTWISE_ROOT = "C:\Users\haris\eclipse-workspace\Vectorized_Retr"
+$env:DTWISE_SCHEMA = Join-Path $env:DTWISE_ROOT "semantic\ontology\dtwise\dtwise-schema-index.json"
+$env:GRAPHDB_SPARQL_ENDPOINT = "http://pakala:7200/repositories/AAS"
+```
+
+The DTwise mode displays structured answers, generated SPARQL, execution
+status, planner output, and `truncated_possible` when present. It does
+not claim independent GraphDB verification. Planner rejection is returned
+as an error, not silently repaired or routed elsewhere. The separate
+Q1–Q12 paper path and the run-scoped temporal executor are unchanged.
+
+Adapter unit tests: `python -m unittest tests.test_dtwise_web_adapter`.
+A local end-to-end smoke test still requires the configured frozen checkout,
+GraphDB, Ollama, and the running API/frontend. These live checks have not
+been performed by this commit.
