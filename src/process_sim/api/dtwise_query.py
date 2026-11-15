@@ -1,114 +1,56 @@
+"""HTTP adapter for direct, in-process DTWise planning and GraphDB execution.
 
-"""HTTP-facing adapter for the repository-local DTWise integration.
-
-Transports natural-language questions to the Process-Sim DTWise bridge.
-Planning, SPARQL compilation and GraphDB execution happen in the bridge.
+The CLI bridge is intentionally not used by the web API.
 """
-
 from __future__ import annotations
 
-import json
-import logging
 import os
 from pathlib import Path
-import subprocess
-import sys
+
+from process_sim.dtwise.schema import Schema
+from process_sim.dtwise.semantic_planner import plan_question_semantic
+from process_sim.dtwise.sparql_generator import compile_sparql
+from process_sim.dtwise.rdf_executor import execute_select, build_answer
 
 ROOT = Path(__file__).resolve().parents[3]
+SCHEMA_PATH = ROOT / "semantic" / "ontology" / "dtwise" / "dtwise-schema-index.json"
 
 
 class DtwiseUnavailable(RuntimeError):
-    """DTWise runtime, configuration, or dependencies are unavailable."""
+    """DTWise configuration or runtime is unavailable."""
 
 
 class DtwiseRejected(ValueError):
-    """DTWise rejected the question or execution failed."""
+    """DTWise rejected the requested question."""
 
 
-def run_question(question: str, *, runner=subprocess.run, environ=None):
+def run_question(question: str, *, environ=None):
     env = os.environ if environ is None else environ
-
     if not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
         raise ValueError("Question must contain 5–1000 characters")
-
     question = question.strip()
 
-    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
-
-    if not graphdb:
-        raise DtwiseUnavailable(
-            "Configure GRAPHDB_SPARQL_ENDPOINT"
-        )
-
-    bridge = ROOT / "scripts" / "dtwise_bridge.py"
-    local_dtwise = ROOT / "src" / "process_sim" / "dtwise"
-
-    if not (local_dtwise / "semantic_planner.py").is_file():
-        raise DtwiseUnavailable(
-            "Repository-local DTWise semantic planner is unavailable"
-        )
-
-    if not bridge.is_file():
-        raise DtwiseUnavailable("DTWise bridge script is unavailable")
-
-    args = [
-        sys.executable,
-        str(bridge),
-        "--graphdb-url", graphdb,
-        "--question", question,
-        "--execute",
-    ]
-
-    process_env = dict(env)
-    src_path = str(ROOT / "src")
-    existing_path = process_env.get("PYTHONPATH", "")
-    process_env["PYTHONPATH"] = os.pathsep.join(
-        p for p in (src_path, existing_path) if p
-    )
+    endpoint = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not endpoint:
+        raise DtwiseUnavailable("Configure GRAPHDB_SPARQL_ENDPOINT")
+    if not SCHEMA_PATH.is_file():
+        raise DtwiseUnavailable("DTWise schema index is unavailable")
 
     try:
-        completed = runner(
-            args,
-            cwd=str(ROOT),
-            env=process_env,
-            capture_output=True,
-            text=True,
-            timeout=120,
-            check=False,
-        )
-    except subprocess.TimeoutExpired as exc:
-        raise DtwiseUnavailable("DTWise execution timed out") from exc
-    except OSError as exc:
-        raise DtwiseUnavailable(
-            "DTWise process could not start"
-        ) from exc
+        schema = Schema(str(SCHEMA_PATH))
+        plan = plan_question_semantic(question, [], schema)
+        sparql = compile_sparql(plan, schema, limit=100, graph_mode="all_named")
+        bindings = execute_select(endpoint, sparql)
+        answer = build_answer(bindings, plan, limit=100)
+    except ValueError as exc:
+        raise DtwiseRejected(str(exc)) from exc
 
-    if completed.returncode != 0:
-        logging.error(
-            "DTWise bridge exited %s; stderr: %s",
-            completed.returncode,
-            (completed.stderr or "")[-6000:],
-        )
-        raise DtwiseRejected(
-            "DTWise bridge failed; inspect backend stderr for details"
-        )
-
-    try:
-        result = json.loads(completed.stdout)
-    except (TypeError, ValueError) as exc:
-        raise DtwiseUnavailable(
-            "DTWise bridge returned invalid JSON"
-        ) from exc
-
-    if (
-        not isinstance(result, dict)
-        or result.get("mode") != "frozen_dtwise_graphdb"
-        or result.get("executed") is not True
-        or not isinstance(result.get("sparql"), str)
-        or not isinstance(result.get("answer"), dict)
-    ):
-        raise DtwiseUnavailable(
-            "DTWise bridge returned an unexpected result"
-        )
-
-    return result
+    return {
+        "question": question,
+        "mode": "frozen_dtwise_graphdb",
+        "graph_mode": "all_named",
+        "plan": plan,
+        "sparql": sparql,
+        "executed": True,
+        "answer": answer,
+    }
