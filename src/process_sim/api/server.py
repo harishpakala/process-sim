@@ -25,6 +25,30 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/runs":
+            try:
+                from process_sim.api.vtkg_query import discover_historian_runs
+                self.send_json(200, discover_historian_runs())
+            except Exception:
+                import logging
+                logging.exception("Historian run discovery failed")
+                self.send_json(503, {"error": "Historian run discovery unavailable; check backend logs"})
+            return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/functions":
+            try:
+                from process_sim.api.vtkg_query import discover_historian_functions
+                ids = parse_qs(urlsplit(self.path).query).get("run_id", [])
+                if len(ids) != 1:
+                    raise ValueError("Exactly one run_id is required")
+                self.send_json(200, discover_historian_functions(ids[0]))
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Historian function discovery failed")
+                self.send_json(503, {"error": "Historian function discovery unavailable; check backend logs"})
+            return
+
         if urlsplit(self.path).path == "/api/ai/vtkg/functions":
             try:
                 from process_sim.api.vtkg_query import discover_functions, VtkgUnavailable
@@ -278,6 +302,25 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/answer":
+            try:
+                from process_sim.api.vtkg_query import run_historian_question
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                self.send_json(200, run_historian_question(payload))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except RuntimeError as exc:
+                self.send_json(422, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Historian query failed")
+                self.send_json(503, {"error": "Historian query unavailable; check backend logs"})
+            return
+
         if urlsplit(self.path).path in ("/api/ai/benchmarks/37/run", "/api/ai/benchmarks/42/run"):
             pilot = urlsplit(self.path).path.endswith("/42/run")
             try:
