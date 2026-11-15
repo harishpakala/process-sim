@@ -52,6 +52,20 @@ class MultihopProjectionTests(unittest.TestCase):
         self.assertEqual(set(answer["values"][0]["properties"]),
                          {p["predicate"] for p in plan["projections"]})
 
+    def test_missing_description_is_optional(self):
+        plan = plan_multihop_projection(QUESTION, self.catalog, self.schema)
+        sparql = compile_multihop_projection(
+            plan, self.schema, 100, "all_named", None, False, False, iri)
+        self.assertIn("OPTIONAL { ?entity2", sparql)
+        labels = [p["label"] for p in plan["projections"]]
+        values = {"ManufacturerName": "IFM", "ProductIdentifier": "product-1"}
+        binding = {f"value{i}": values[label] for i, label in enumerate(labels)
+                   if label in values}
+        answer = build_answer([binding], plan)
+        self.assertEqual(answer["count"], 1)
+        properties = answer["values"][0]["properties"]
+        self.assertIsNone(properties[plan["projections"][labels.index("ProductDescription")]["predicate"]])
+
     def test_rejects_unexpected_multihop_result_columns(self):
         plan = plan_multihop_projection(QUESTION, self.catalog, self.schema)
         with self.assertRaises(ValueError):
