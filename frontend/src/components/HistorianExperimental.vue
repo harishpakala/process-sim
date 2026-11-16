@@ -78,8 +78,6 @@ const experimentalChart = computed(() => {
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <template v-if="response">
-   <h3>Validated query plan</h3>
-   <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre>
    <h3>Historian result</h3>
     <div v-if="experimentalChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
@@ -106,11 +104,8 @@ const experimentalChart = computed(() => {
     </div>
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
-   <table v-if="response.result.observations?.length">
-    <thead><tr><th>Simulation time (hours)</th><th>Value</th><th>Observed at</th></tr></thead>
-    <tbody><tr v-for="(sample, index) in response.result.observations" :key="index"><td>{{sample.simulationTimeHours}}</td><td>{{sample.value}}</td><td>{{sample.observedAt}}</td></tr></tbody>
-   </table>
-   <p v-else>No observations returned.</p>
+   <h3>Validated query plan</h3>
+   <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre>
   </template>
  </section>
 </template>
