@@ -35,12 +35,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-R-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "R-001"
@@ -63,12 +57,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEPC001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-C-001"
             },
             {
               "modelType": "Property",
@@ -97,12 +85,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-V-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "V-001"
@@ -128,12 +110,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-K-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "K-001"
@@ -156,12 +132,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TEPS001"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-S-001"
             },
             {
               "modelType": "Property",
@@ -193,12 +163,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_101"
             },
             {
               "modelType": "Property",
@@ -242,12 +206,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_102"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "FI_102"
@@ -285,12 +243,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_103"
             },
             {
               "modelType": "Property",
@@ -334,12 +286,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_104"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "FI_104"
@@ -377,12 +323,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI105"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_105"
             },
             {
               "modelType": "Property",
@@ -426,12 +366,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_106"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "FI_106"
@@ -469,12 +403,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI107"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_107"
             },
             {
               "modelType": "Property",
@@ -518,12 +446,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_108"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "FI_108"
@@ -561,12 +483,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/FI109"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_109"
             },
             {
               "modelType": "Property",
@@ -610,12 +526,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/FI_110"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "FI_110"
@@ -653,12 +563,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_101"
             },
             {
               "modelType": "Property",
@@ -706,12 +610,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_102"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "TI_102"
@@ -753,12 +651,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/TI103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_103"
             },
             {
               "modelType": "Property",
@@ -806,12 +698,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_104"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "TI_104"
@@ -856,12 +742,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI_105"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "TI_105"
@@ -884,12 +764,6 @@
                   }
                 ]
               }
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI1202"
             },
             {
               "modelType": "Property",
@@ -927,12 +801,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_101"
             },
             {
               "modelType": "Property",
@@ -980,12 +848,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_102"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "LI_102"
@@ -1027,12 +889,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/LI103"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/LI_103"
             },
             {
               "modelType": "Property",
@@ -1080,12 +936,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_101"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "PI_101"
@@ -1123,12 +973,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/PI102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_102"
             },
             {
               "modelType": "Property",
@@ -1172,12 +1016,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/PI_103"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "PI_103"
@@ -1215,12 +1053,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/JI101"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/JI_101"
             },
             {
               "modelType": "Property",
@@ -1270,12 +1102,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_101"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_101"
@@ -1304,12 +1130,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC102"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_102"
             },
             {
               "modelType": "Property",
@@ -1344,12 +1164,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_103"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_103"
@@ -1378,12 +1192,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC104"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_104"
             },
             {
               "modelType": "Property",
@@ -1418,12 +1226,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_105"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_105"
@@ -1433,12 +1235,6 @@
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
               "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1006"
             },
             {
               "modelType": "Property",
@@ -1479,12 +1275,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_106"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_106"
@@ -1516,12 +1306,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_107"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_107"
@@ -1531,12 +1315,6 @@
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
               "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1301"
             },
             {
               "modelType": "Property",
@@ -1577,12 +1355,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_108"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_108"
@@ -1611,12 +1383,6 @@
               "idShort": "AssetIdentifier",
               "valueType": "xs:string",
               "value": "https://aas.example.com/VC109"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_109"
             },
             {
               "modelType": "Property",
@@ -1651,12 +1417,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_110"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_110"
@@ -1688,12 +1448,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/VC_111"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "VC_111"
@@ -1703,12 +1457,6 @@
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
               "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1201"
             },
             {
               "modelType": "Property",
@@ -1749,12 +1497,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/SC_101"
-            },
-            {
-              "modelType": "Property",
               "idShort": "LocalId",
               "valueType": "xs:string",
               "value": "SC_101"
@@ -1764,12 +1506,6 @@
               "idShort": "ActuatedVariable",
               "valueType": "xs:float",
               "value": ""
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/M1"
             },
             {
               "modelType": "Property",
