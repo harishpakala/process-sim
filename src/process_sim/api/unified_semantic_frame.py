@@ -137,6 +137,15 @@ def interpret_semantic_frame(question, schema, *, context=None, interpret=None):
                    context.get("start_simulation_seconds"))
     end = _merge("end_seconds", proposed["end_seconds"],
                  context.get("end_simulation_seconds"))
+    for key, proposed_time in (("start_simulation_seconds", proposed["start_seconds"]),
+                               ("end_simulation_seconds", proposed["end_seconds"])):
+        if proposed_time is not None:
+            if isinstance(proposed_time, bool) or not isinstance(proposed_time, (int, float)):
+                raise ValueError("Model proposed an invalid simulation time")
+            if not any(float(token) == proposed_time for token in re.findall(
+                r"(?<![A-Za-z0-9_.])\\d+(?:\\.\\d+)?(?![A-Za-z0-9_.])",
+                re.sub(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", "", question))):
+                raise ValueError("Model invented a simulation time")
     temporal = TemporalWindow(start, end)
     if intent in ("observations", "mixed") and (not domain or not local_id or not run_id):
         raise ValueError("Observations require domain, LocalID and run UUID")
