@@ -51,9 +51,9 @@ def plan_historian_question(question: str, *, schema: Schema | None = None) -> d
     if not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
         raise ValueError("Question must contain 5–1000 characters")
     q = question.strip()
-    if not re.search(r"\\b(historian|historical|recorded|time.series|observations?)\\b", q, re.I):
+    if not re.search(r"\b(historian|historical|recorded|time.series|observations?)\b", q, re.I):
         raise ValueError("Question does not request historian observations")
-    domains = [name for name in ("DEXPI", "ECAD") if re.search(r"\\b" + name + r"\\b", q, re.I)]
+    domains = [name for name in ("DEXPI", "ECAD") if re.search(r"\b" + name + r"\b", q, re.I)]
     if len(domains) != 1:
         raise ValueError("Specify exactly one engineering domain: DEXPI or ECAD")
     ids = {v.upper() for v in _LOCAL_ID.findall(q)}
@@ -70,7 +70,7 @@ def plan_historian_question(question: str, *, schema: Schema | None = None) -> d
         start = float(matched[1])
     elif matched := _UPTO.search(q):
         end = float(matched[1])
-    elif re.search(r"\\b(between|from|until|before|after|last|first)\\b", q, re.I) and not re.search(r"\\ball (?:simulation )?times\\b", q, re.I):
+    elif re.search(r"\b(between|from|until|before|after|last|first)\b", q, re.I) and not re.search(r"\ball (?:simulation )?times\b", q, re.I):
         raise ValueError("Unsupported or incomplete time interval; use 'between simulation seconds X and Y'")
     if start is not None and end is not None and start > end:
         raise ValueError("Start simulation second must not exceed end")
