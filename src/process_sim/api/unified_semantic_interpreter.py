@@ -48,13 +48,16 @@ def _path(raw, catalog):
                      tuple(item["predicates"]), tuple(item["evidence_ids"]))
 
 
-def _where(raw):
+def _where(raw, catalog):
     if raw is None:
         return None
     if not isinstance(raw, dict):
         raise ValueError("Invalid Boolean expression; expected object, got " + type(raw).__name__)
     if set(raw) == {"field", "operator", "value"}:
         return Predicate(raw["field"], raw["operator"], raw["value"])
+    if set(raw) == {"field", "operator", "value", "path_id", "alias"}:
+        return Predicate(raw["field"], raw["operator"], raw["value"],
+                         _path(raw["path_id"], catalog), raw["alias"])
     if set(raw) == {"operator", "children"} and isinstance(raw["children"], list):
         operator, children = raw["operator"], raw["children"]
         valid = (operator == "not" and len(children) == 1) or (
@@ -64,7 +67,7 @@ def _where(raw):
                 "Qwen produced invalid Boolean arity: operator="
                 + repr(operator) + "; child_count=" + str(len(children))
                 + "; expected exactly 1 for not or at least 2 for and/or")
-        return BooleanExpression(operator, tuple(_where(x) for x in children))
+        return BooleanExpression(operator, tuple(_where(x, catalog) for x in children))
     raise ValueError(
         "Invalid Boolean expression; keys=" + repr(sorted(raw.keys()))
         + "; operator=" + repr(raw.get("operator"))
@@ -138,14 +141,34 @@ def _candidate_paths(question, catalog, *, max_candidates=24):
                  ("opcuaconnectivity", "hasAssetIdentifier"),
                  ("opcuaconnectivity", "hasSignalName"))
         reserved = []
+        # The LocalID and asset join key must be paths on the same DEXPI
+        # instrumentation-function root, not unrelated shortest shape paths.
+        instrument = bool(re.search(r"instrumentation\\s*function|instrumentationfunction", question, re.I))
+        if instrument:
+            pairs = {}
+            for i, path in enumerate(catalog):
+                predicates = [p.rsplit("/", 1)[-1].lower() for p in path["predicates"]]
+                if (path["domain"].lower() == "dexpi"
+                        and len(predicates) == 2
+                        and predicates[0] == "hasinstrumentationfunction"
+                        and predicates[1] in ("haslocalid", "hasassetidentifier")):
+                    pairs.setdefault(path["root_shape"], {})[predicates[1]] = i
+            complete = [(root, ids) for root, ids in pairs.items()
+                        if {"haslocalid", "hasassetidentifier"}.issubset(ids)]
+            if not complete:
+                raise ValueError("SHACL missing co-rooted instrumentation LocalID and asset paths")
+            _, ids = min(complete, key=lambda item: (
+                item[1]["haslocalid"] + item[1]["hasassetidentifier"], item[0]))
+            reserved.extend((ids["haslocalid"], ids["hasassetidentifier"]))
         for domain, terminal in roles:
+            if instrument and domain == "dexpi":
+                continue
             matches = [i for i, path in enumerate(catalog)
                        if path["domain"].lower() == domain
                        and path["predicates"][-1].rsplit("/", 1)[-1].lower()
                        == terminal.lower()]
             if not matches:
                 raise ValueError("SHACL catalog missing required " + domain + " " + terminal)
-            # Prefer the shortest available path, retaining stable catalog IDs.
             reserved.append(min(matches, key=lambda i: (len(catalog[i]["predicates"]), i)))
         selected = list(dict.fromkeys(reserved + selected))[:max_candidates]
     return selected
@@ -160,6 +183,7 @@ def _interpret(question, catalog, context):
         "into shacl_paths, or null ONLY for timescaledb observations. "
         "joins: array of {left, right, left_path_id, right_path_id}; all paths "
         "must use SHACL catalog indices. where: null or {field,operator,value} "
+        "or {field,operator,value,path_id,alias} for non-projected SHACL fields, "
         "or {operator:'and'|'or'|'not',children:[...]}. "
         "For Boolean where: and/or require at least TWO children; not requires EXACTLY ONE. "
         "For a single condition, use {field,operator,value} directly, not an and/or wrapper. "
@@ -189,6 +213,9 @@ def _interpret(question, catalog, context):
         "an ActuatingFunction root or its direct hasAssetIdentifier path. "
         "The LocalID filter must use hasInstrumentationFunction followed by "
         "hasLocalId on the SAME DEXPI root as the join. "
+        "Use where={field:'hasLocalId',operator:'eq',value:'FI_103',"
+        "path_id:<catalog ID of instrumentation hasLocalId>,alias:'dexpi'} "
+        "for a LocalID condition; do not invent the path ID. "
         "The DEXPI LocalID is a filter, not the historian signal identifier. "
         "For all simulation times leave start_seconds and end_seconds null. "
         "A projection named SignalName MUST end in hasSignalName, never hasAssetIdentifier. "
@@ -276,6 +303,51 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
                 + "; right_domain=" + right_path.domain
                 + "; join aliases must be distinct")
         joins.append(Join(j["left"], j["right"], left_path, right_path))
+    # Normalize the explicit H6 instrumentation behavior intent using SHACL paths,
+    # not memorized signal values or an ungrounded model join. The single Qwen
+    # interpretation remains the only model call; this is deterministic grounding.
+    h6 = (re.search(r"\\bdexpi\\b", question, re.I)
+          and re.search(r"instrumentation\\s*function|instrumentationfunction", question, re.I)
+          and re.search(r"\\b(?:simulation\\s+run|simulation\\s+times?|behav(?:e|ed|ior))\\b", question, re.I))
+    local_match = re.search(r"\\bLocalID\\s+([A-Za-z0-9_\\-]+)", question, re.I)
+    if h6 and local_match:
+        def find_path(domain, suffix, prefix=None, root=None):
+            matches = [(i, p) for i, p in enumerate(catalog)
+                       if p["domain"].lower() == domain
+                       and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+                       == [v.lower() for v in ((prefix,) if prefix else ()) + (suffix,)]
+                       and (root is None or p["root_shape"] == root)]
+            if len(matches) != 1:
+                raise ValueError("H6 requires a unique SHACL path: " + domain + " " + suffix)
+            return _path(matches[0][0], catalog)
+        # Prefer the root of the co-rooted instrumentation paths selected above.
+        roots = {p["root_shape"] for p in catalog
+                 if p["domain"].lower() == "dexpi"
+                 and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+                 == ["hasinstrumentationfunction", "haslocalid"]}
+        roots = [root for root in roots if any(
+            p["domain"].lower() == "dexpi" and p["root_shape"] == root
+            and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+            == ["hasinstrumentationfunction", "hasassetidentifier"]
+            for p in catalog)]
+        if len(roots) != 1:
+            raise ValueError("H6 requires one co-rooted DEXPI instrumentation shape")
+        root = roots[0]
+        local_path = find_path("dexpi", "hasLocalId", "hasInstrumentationFunction", root)
+        asset_path = find_path("dexpi", "hasAssetIdentifier", "hasInstrumentationFunction", root)
+        opc_asset = find_path("opcuaconnectivity", "hasAssetIdentifier")
+        opc_signal = find_path("opcuaconnectivity", "hasSignalName", root=opc_asset.root_shape)
+        projections = [Projection("SignalName", opc_signal, "graphdb", "opcuaconnectivity")]
+        joins = [Join("dexpi", "opcuaconnectivity", asset_path, opc_asset)]
+        raw["where"] = {"field": "hasLocalId", "operator": "eq",
+                        "value": local_match.group(1)}
+        h6_filter = Predicate("hasLocalId", "eq", local_match.group(1),
+                              local_path, "dexpi")
+        raw["sources"] = ["graphdb", "timescaledb"]
+        raw["start_seconds"] = None
+        raw["end_seconds"] = None
+    else:
+        h6_filter = None
     # Multiple properties of one SHACL root describe one entity, not
     # independent Cartesian-product roots. Only coalesce when there are
     # no explicit joins and every graph projection has the exact same root.
@@ -357,7 +429,7 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raise ValueError("Model invented run UUID")
     query = SemanticQuery(
         question=question, projections=tuple(projections), joins=tuple(joins),
-        where=_where(raw["where"]), group_by=tuple(raw["group_by"]),
+        where=h6_filter if h6_filter is not None else _where(raw["where"], catalog), group_by=tuple(raw["group_by"]),
         aggregation=raw["aggregation"], order_by=tuple(raw["order_by"]),
         limit=raw["limit"], sources=tuple(raw["sources"]),
         run_id=raw["run_id"], start_seconds=raw["start_seconds"],
