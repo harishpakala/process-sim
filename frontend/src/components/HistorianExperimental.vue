@@ -163,7 +163,7 @@ const experimentalChart = computed(() => {
 
 <template>
  <section class="panel">
-  <div class="panel-title"><h2>Ask DTWise</h2><span class="pill">PREVIEW</span></div>
+  <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
   <p>Ask about engineering information or explore recorded simulation data in your own words.</p>
   <p>Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
   <div class="experiment-fields">
@@ -191,6 +191,7 @@ const experimentalChart = computed(() => {
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
    <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
   </div>
+  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'} } to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
   <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
   <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
