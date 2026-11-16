@@ -13,7 +13,7 @@ from process_sim.dtwise.schema import Schema
 from process_sim.api.vtkg_query import run_historian_question
 
 _LOCAL_ID = re.compile(r"(?<![A-Za-z0-9_-])(?:FI|LI|PI|TI)[_-][0-9]+(?![A-Za-z0-9_-])", re.I)
-_UUID = re.compile(r"(?<![a-fA-F0-9])(?:[a-fA-F0-9]{8}-){4}[a-fA-F0-9]{12}(?![a-fA-F0-9])")
+_UUID = re.compile(r"(?<![a-fA-F0-9])[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}(?![a-fA-F0-9])")
 _RANGE = re.compile(r"\\bbetween\\s+(?:simulation\\s+)?(?:seconds?\\s+)?(\\d+(?:\\.\\d+)?)\\s+and\\s+(\\d+(?:\\.\\d+)?)\\s*(?:seconds?)?\\b", re.I)
 _FROM = re.compile(r"\\bfrom\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\s+onward\\b", re.I)
 _UPTO = re.compile(r"\\bup\\s+to\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\b", re.I)
