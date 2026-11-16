@@ -52,7 +52,14 @@ def _where(raw):
     if raw is None:
         return None
     if not isinstance(raw, dict):
-        raise ValueError("Invalid Boolean expression")
+        raise ValueError(
+        "Invalid Boolean expression; keys="
+        + repr(sorted(raw.keys()))
+        + "; operator=" + repr(raw.get("operator"))
+        + "; field=" + repr(raw.get("field"))
+        + "; child_count="
+        + repr(len(raw["children"]) if isinstance(raw.get("children"), list) else None)
+    )
     if set(raw) == {"field", "operator", "value"}:
         return Predicate(raw["field"], raw["operator"], raw["value"])
     if set(raw) == {"operator", "children"} and isinstance(raw["children"], list):
