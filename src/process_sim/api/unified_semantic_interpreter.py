@@ -56,7 +56,15 @@ def _where(raw):
     if set(raw) == {"field", "operator", "value"}:
         return Predicate(raw["field"], raw["operator"], raw["value"])
     if set(raw) == {"operator", "children"} and isinstance(raw["children"], list):
-        return BooleanExpression(raw["operator"], tuple(_where(x) for x in raw["children"]))
+        operator, children = raw["operator"], raw["children"]
+        valid = (operator == "not" and len(children) == 1) or (
+            operator in ("and", "or") and len(children) >= 2)
+        if not valid:
+            raise ValueError(
+                "Qwen produced invalid Boolean arity: operator="
+                + repr(operator) + "; child_count=" + str(len(children))
+                + "; expected exactly 1 for not or at least 2 for and/or")
+        return BooleanExpression(operator, tuple(_where(x) for x in children))
     raise ValueError(
         "Invalid Boolean expression; keys=" + repr(sorted(raw.keys()))
         + "; operator=" + repr(raw.get("operator"))
@@ -132,6 +140,8 @@ def _interpret(question, catalog, context):
         "joins: array of {left, right, left_path_id, right_path_id}; all paths "
         "must use SHACL catalog indices. where: null or {field,operator,value} "
         "or {operator:'and'|'or'|'not',children:[...]}. "
+        "For Boolean where: and/or require at least TWO children; not requires EXACTLY ONE. "
+        "For a single condition, use {field,operator,value} directly, not an and/or wrapper. "
         "sources: nonempty array containing graphdb and/or timescaledb. "
         "Do not invent paths, IDs, run UUIDs, or simulation times. "
         "Use supplied context for run_id and time boundaries when provided. "
