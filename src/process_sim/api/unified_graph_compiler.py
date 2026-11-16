@@ -74,29 +74,58 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
         limit = min(limit, plan.limit)
     fields = {}
     clauses = []
-    for index, projection in enumerate(plan.projections):
+    alias_shapes = {}
+    for projection in plan.projections:
         if projection.source != "graphdb" or projection.path is None:
             raise ValueError("Graph projection requires a SHACL path")
         if not _NAME.fullmatch(projection.name) or projection.name in fields:
             raise ValueError("Projection names must be unique safe identifiers")
-        subject = "?entity" + str(index)
-        current = subject
+        if not _NAME.fullmatch(projection.alias):
+            raise ValueError("Invalid entity alias")
+        shape = (projection.path.domain, projection.path.root_shape)
+        if projection.alias in alias_shapes and alias_shapes[projection.alias] != shape:
+            raise ValueError("Entity alias refers to conflicting root shapes")
+        alias_shapes[projection.alias] = shape
+        current = "?root_" + projection.alias
         for hop, predicate in enumerate(projection.path.predicates):
-            next_var = "?p" + str(index) + "_" + str(hop)
+            next_var = "?v_" + projection.name + "_" + str(hop)
             clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
             current = next_var
         fields[projection.name] = current
-    # A join must connect to the projected entity roots. The current IR has
-    # alias names but no root-to-alias binding, so compiling it as independent
-    # graph patterns would produce a misleading Cartesian product.
-    if plan.joins:
-        raise ValueError("Join alias-to-entity binding is not implemented")
+    connected = set()
+    for index, join in enumerate(plan.joins):
+        if join.left not in alias_shapes or join.right not in alias_shapes:
+            raise ValueError("Join references an unbound entity alias")
+        for alias, path in ((join.left, join.left_path), (join.right, join.right_path)):
+            if alias_shapes[alias] != (path.domain, path.root_shape):
+                raise ValueError("Join path does not match entity alias root shape")
+        endpoints = []
+        for side, alias, path in (("left", join.left, join.left_path),
+                                  ("right", join.right, join.right_path)):
+            current = "?root_" + alias
+            for hop, predicate in enumerate(path.predicates):
+                next_var = "?join_" + str(index) + "_" + side + "_" + str(hop)
+                clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
+                current = next_var
+            endpoints.append(current)
+        clauses.append("FILTER(" + endpoints[0] + " = " + endpoints[1] + ")")
+        connected.add(frozenset((join.left, join.right)))
+    # All projected entity aliases must be connected by explicit joins.
+    aliases = set(alias_shapes)
+    if len(aliases) > 1:
+        reached = {next(iter(aliases))}
+        while True:
+            expanded = reached | {alias for edge in connected if edge & reached for alias in edge}
+            if expanded == reached:
+                break
+            reached = expanded
+        if reached != aliases:
+            raise ValueError("Disconnected entity aliases would cause Cartesian product")
     if plan.where is not None:
         clauses.append("FILTER(" + _condition(plan.where, fields) + ")")
     for field in plan.order_by:
         if field not in fields:
             raise ValueError("Ordering field is not projected")
-    selects = ["(" + var + " AS ?" + name + ")" for name, var in fields.items()]
     # SPARQL projection expressions cannot be used with SELECT DISTINCT and
     # arbitrary aliases without GROUP BY in all stores; use a subquery-free
     # BIND form to keep selected aliases visible to ORDER BY and FILTER.
