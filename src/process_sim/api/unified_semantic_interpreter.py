@@ -64,7 +64,7 @@ def _interpret(question, catalog, context):
         "You are ONE semantic interpreter for engineering, historian and mixed queries. "
         "Return JSON only, with exactly these keys: projections, joins, where, "
         "group_by, aggregation, order_by, limit, sources, run_id, start_seconds, end_seconds. "
-        "projections: array of {name, path_id, source}; path_id is an integer index "
+        "projections: array of {name, path_id, source, alias}; alias is a shared entity root name (e.g. entity, device, signal); path_id is an integer index "
         "into shacl_paths, or null ONLY for timescaledb observations. "
         "joins: array of {left, right, left_path_id, right_path_id}; all paths "
         "must use SHACL catalog indices. where: null or {field,operator,value} "
@@ -115,12 +115,12 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raise ValueError("Invalid projections or joins")
     projections = []
     for p in raw["projections"]:
-        if not isinstance(p, dict) or set(p) != {"name", "path_id", "source"}:
+        if not isinstance(p, dict) or not {"name", "path_id", "source"}.issubset(p) or set(p) - {"name", "path_id", "source", "alias"}:
             raise ValueError("Invalid projection")
         path = _path(p["path_id"], catalog) if p["path_id"] is not None else None
         if path is None and p["source"] != "timescaledb":
             raise ValueError("GraphDB projection requires SHACL path")
-        projections.append(Projection(p["name"], path, p["source"]))
+        projections.append(Projection(p["name"], path, p["source"], p.get("alias", "entity")))
     joins = []
     for j in raw["joins"]:
         if not isinstance(j, dict) or set(j) != {
