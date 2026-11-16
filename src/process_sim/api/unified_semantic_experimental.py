@@ -75,7 +75,7 @@ def plan_unified_question_v3(question: str, *, context=None, schema=None,
 
     Historical details no longer use the legacy regex historian planner.
     Engineering graph paths still use the established SHACL/Qwen planner.
-    Mixed queries fail closed until cross-source joins are implemented.
+    Mixed questions produce a combined plan only if the engineering graph\n    planner also succeeds. Execution and cross-source joins are not implemented.
     """
     from process_sim.api.unified_semantic_frame import interpret_semantic_frame
     from process_sim.api.historian_nl_experimental import _shacl_evidence
@@ -83,9 +83,7 @@ def plan_unified_question_v3(question: str, *, context=None, schema=None,
     schema = schema if schema is not None else Schema(str(SCHEMA_PATH))
     frame = interpret_semantic_frame(question, schema, context=context,
                                      interpret=interpret_frame)
-    if frame.intent == "mixed":
-        raise ValueError("Mixed graph and observation execution is not yet supported")
-    if frame.intent == "observations":
+    if frame.intent in ("observations", "mixed"):
         evidence = _shacl_evidence(schema, frame.domain)
         legacy_shape = {
             "domain": frame.domain, "engineering_function": frame.local_id,
@@ -95,6 +93,19 @@ def plan_unified_question_v3(question: str, *, context=None, schema=None,
             "shacl_evidence": evidence,
         }
         result = from_historian_plan(question, legacy_shape)
+        if frame.intent == "mixed":
+            # Graph planning is independent of observation execution. A mixed
+            # question is never downgraded to observations if graph grounding
+            # fails. The graph planner must validate the requested path.
+            options = {"interpret": interpret_graph} if interpret_graph is not None else {}
+            graph_plan = plan_question_semantic(question, [], schema, **options)
+            graph_result = from_engineering_plan(question, graph_plan)
+            result = UnifiedQueryPlan(
+                question=question,
+                operations=graph_result.operations + result.operations,
+                temporal=frame.temporal,
+                interpretation="single_semantic_frame_mixed_plan_v4",
+            )
     else:
         options = {"interpret": interpret_graph} if interpret_graph is not None else {}
         graph_plan = plan_question_semantic(question, [], schema, **options)
@@ -102,5 +113,5 @@ def plan_unified_question_v3(question: str, *, context=None, schema=None,
     return UnifiedQueryPlan(
         question=result.question, operations=result.operations,
         temporal=result.temporal,
-        interpretation="single_semantic_frame_v3",
+        interpretation=result.interpretation if frame.intent == "mixed" else "single_semantic_frame_v3",
     )
