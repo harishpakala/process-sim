@@ -151,7 +151,7 @@ def _interpret(question, catalog, context):
                                  for i in candidates for path in [catalog[i]]],
                              "selected_context": context})}],
         }).encode(), headers={"Content-Type": "application/json"}, method="POST")
-    with urlopen(request, timeout=90) as response:
+    with urlopen(request, timeout=float(os.environ.get("DTWISE_QWEN_TIMEOUT_SECONDS", "300"))) as response:
         return json.loads(json.load(response)["message"]["content"])
 
 
