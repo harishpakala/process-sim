@@ -79,6 +79,20 @@ def add_semantic_role(graph: Graph, element, shape_uri: URIRef):
         graph.add((shape_uri, semanticDict["AAS"]["semanticRole"], Literal(role)))
 
 
+def get_semantic_role(element):
+    """Return the authored role, or None for legacy/unqualified SMCs."""
+    roles = [
+        str(getattr(qualifier, "value", "") or "").strip()
+        for qualifier in (getattr(element, "qualifiers", None) or [])
+        if str(getattr(qualifier, "type", "")).lower() == "semanticrole"
+    ]
+    if len(roles) > 1:
+        raise ValueError(f"Multiple SemanticRole qualifiers on {element.id_short!r}")
+    if roles and roles[0] not in ("StructuralContainer", "DomainEntity"):
+        raise ValueError(f"Unsupported SemanticRole {roles[0]!r} on {element.id_short!r}")
+    return roles[0] if roles else None
+
+
 def make_relationship_predicate(domain: str, id_short: str) -> URIRef:
     """Use the exact authored relationship name (never hash as double prefix)."""
     if not id_short:
@@ -505,145 +519,67 @@ def lift_smc(
     parent_shape: URIRef,
     domain: str,
 ):
-    path = build_path(
-        parent_path,
-        element.id_short,
-    )
+    # Preserve the full source path for deterministic shape identifiers and
+    # SemanticId traceability, even when a structural wrapper is omitted.
+    path = build_path(parent_path, element.id_short)
+    role = get_semantic_role(element)
 
-    property_uri = make_semantic_predicate(
-        domain,
-        element.id_short,
-    )
-
-    shape_uri = compute_uri(
-        template_id,
-        path + "/shape",
-    )
-
-    smc_class = ensure_aas_class(
-        graph,
-        "SMC",
-        "Submodel Element Collection",
-    )
-
-    graph.add(
-        (
-            property_uri,
-            RDF.type,
-            OWL.ObjectProperty,
+    if role == "StructuralContainer":
+        # Structural grouping is an AAS serialization detail, not an edge
+        # or intermediate resource in the flattened domain semantic graph.
+        # Children attach to the nearest retained semantic ancestor.
+        # Its own cardinality cannot be independently enforced in a graph
+        # where the container itself does not exist.
+        lift_elements(
+            graph=graph,
+            template_id=template_id,
+            elements=element.value,
+            parent_path=path,
+            parent_shape=parent_shape,
+            domain=domain,
         )
-    )
+        return
 
-    graph.add(
-        (
-            property_uri,
-            RDFS.label,
-            Literal(
-                "has" + element.id_short
-            ),
-        )
-    )
+    property_uri = make_semantic_predicate(domain, element.id_short)
+    shape_uri = compute_uri(template_id, path + "/shape")
+    smc_class = ensure_aas_class(graph, "SMC", "Submodel Element Collection")
 
-    # PropertyShape for the SMC relationship
-    graph.add(
-        (
-            shape_uri,
-            RDF.type,
-            semanticDict["SH"]["PropertyShape"],
-        )
-    )
+    graph.add((property_uri, RDF.type, OWL.ObjectProperty))
+    graph.add((property_uri, RDFS.label, Literal("has" + element.id_short)))
+    graph.add((shape_uri, RDF.type, semanticDict["SH"]["PropertyShape"]))
+    graph.add((shape_uri, RDFS.label, Literal(make_shape_label(element.id_short))))
+    graph.add((shape_uri, semanticDict["SH"]["path"], property_uri))
 
-    graph.add(
-        (
-            shape_uri,
-            RDFS.label,
-            Literal(
-                make_shape_label(
-                    element.id_short
-                )
-            ),
-        )
-    )
-
-    graph.add(
-        (
-            shape_uri,
-            semanticDict["SH"]["path"],
-            property_uri,
-        )
-    )
-
-    # The value reached through this property must be an SMC
-    graph.add(
-        (
-            shape_uri,
-            semanticDict["SH"]["class"],
-            smc_class,
-        )
-    )
+    if role == "DomainEntity":
+        # The template's idShort names the reusable ontology class.
+        # Concrete instance idShorts can differ; instance OntoConcept
+        # resolves those occurrences to this class and predicate.
+        domain_upper = domain.upper()
+        if domain_upper not in semanticDict:
+            raise ValueError(f"Unknown domain namespace: {domain}")
+        entity_class = URIRef(str(semanticDict[domain_upper]) + element.id_short)
+        graph.add((entity_class, RDF.type, OWL.Class))
+        graph.add((entity_class, RDFS.label, Literal(element.id_short)))
+        graph.add((entity_class, RDFS.subClassOf, smc_class))
+        graph.add((shape_uri, semanticDict["SH"]["class"], entity_class))
+    else:
+        # Backward-compatible behavior for unqualified SMCs.
+        graph.add((shape_uri, semanticDict["SH"]["class"], smc_class))
 
     add_semantic_annotations(graph, element, shape_uri, property_uri)
     add_semantic_role(graph, element, shape_uri)
-
     min_count, max_count = get_cardinality(element)
+    add_cardinality_constraints(graph, shape_uri, min_count, max_count)
+    graph.add((parent_shape, semanticDict["SH"]["property"], shape_uri))
 
-    add_cardinality_constraints(
-        graph,
-        shape_uri,
-        min_count,
-        max_count,
-    )
-
-    graph.add(
-        (
-            parent_shape,
-            semanticDict["SH"]["property"],
-            shape_uri,
-        )
-    )
-
-    # NodeShape for the contents of this SMC
-    child_shape = compute_uri(
-        template_id,
-        path + "/nodeShape",
-    )
-
-    graph.add(
-        (
-            child_shape,
-            RDF.type,
-            semanticDict["SH"]["NodeShape"],
-        )
-    )
-
-    graph.add(
-        (
-            child_shape,
-            RDFS.label,
-            Literal(
-                make_node_shape_label(
-                    element.id_short
-                )
-            ),
-        )
-    )
-
+    child_shape = compute_uri(template_id, path + "/nodeShape")
+    graph.add((child_shape, RDF.type, semanticDict["SH"]["NodeShape"]))
+    graph.add((child_shape, RDFS.label, Literal(make_node_shape_label(element.id_short))))
     add_semantic_annotations(graph, element, child_shape)
     add_semantic_role(graph, element, child_shape)
-
-    # IMPORTANT:
-    # Do NOT use sh:targetClass aas:SMC here.
-    #
-    # The child shape is applied through sh:node from
-    # the parent PropertyShape.
-
-    graph.add(
-        (
-            shape_uri,
-            semanticDict["SH"]["node"],
-            child_shape,
-        )
-    )
+    # Use sh:node, not sh:targetClass aas:SMC: only the reached
+    # entity's own children should be checked by this NodeShape.
+    graph.add((shape_uri, semanticDict["SH"]["node"], child_shape))
 
     lift_elements(
         graph=graph,
