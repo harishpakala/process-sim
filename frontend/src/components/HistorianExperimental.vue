@@ -3,6 +3,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 type HistorianResponse = {
  mode: string
+ intent?: string
  plan: {
   domain: string
   engineering_function: string
@@ -102,10 +103,16 @@ async function run() {
  }
  busy.value = true
  try {
-  const r = await fetch('/api/ai/vtkg/historian/experimental/answer', {
+  const context = selectedRun.value && selectedLocalId.value ? {
+   domain: selectedDomain.value, engineering_function: selectedLocalId.value,
+   run_id: selectedRun.value,
+   start_simulation_seconds: startSeconds.value === '' ? null : Number(startSeconds.value),
+   end_simulation_seconds: endSeconds.value === '' ? null : Number(endSeconds.value)
+  } : undefined
+  const r = await fetch('/api/ai/unified/experimental/answer', {
    method: 'POST',
    headers: {'Content-Type':'application/json'},
-   body: JSON.stringify({question: question.value.trim()})
+   body: JSON.stringify({question: question.value.trim(), ...(context ? {context} : {})})
   })
   const body = await r.json()
   if (!r.ok) throw new Error(body.error || 'Experimental historian query failed')
@@ -139,9 +146,9 @@ const experimentalChart = computed(() => {
 
 <template>
  <section class="panel">
-  <div class="panel-title"><h2>Historian Experimental — Natural Language</h2><span class="pill">ISOLATED EXPERIMENT</span></div>
-  <p>Ask a free-text historian question. The experiment validates SHACL schema evidence and reuses the existing VTKG Historian executor. Existing Historian Queries remain unchanged.</p>
-  <p>For this first prototype, include DEXPI or ECAD, exactly one LocalID, and the full simulation run UUID. Time bounds are optional.</p>
+  <div class="panel-title"><h2>Unified Query Experimental — Natural Language</h2><span class="pill">ISOLATED EXPERIMENT</span></div>
+  <p>Ask an engineering or Historian question. The shared experimental router dispatches to the existing SHACL-grounded engineering planner or VTKG Historian executor. Existing query pages remain unchanged.</p>
+  <p>For Historian questions, select a run, domain, and LocalID or include them explicitly in the question. Time bounds are optional. Engineering questions can be entered directly without selections.</p>
   <div class="experiment-fields">
    <div class="experiment-field"><label for="historian-experiment-run">Simulation run</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
@@ -170,7 +177,11 @@ const experimentalChart = computed(() => {
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <template v-if="response">
-   <h3>Historian result</h3>
+   <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
+   <template v-if="response.intent === 'engineering_query'">
+    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.result, null, 2)}}</pre>
+   </template>
+   <template v-else>
     <div v-if="experimentalChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
       <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + (response.result.engineeringFunction || response.plan.engineering_function)">
@@ -196,6 +207,7 @@ const experimentalChart = computed(() => {
     </div>
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
+   </template>
    <h3>Validated query plan</h3>
    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre>
   </template>
