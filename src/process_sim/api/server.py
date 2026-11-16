@@ -323,6 +323,24 @@ class Handler(BaseHTTPRequestHandler):
                 logging.exception("Semantic join query failed")
                 self.send_json(503, {"error": "Semantic join unavailable; check backend logs"})
             return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/experimental/answer":
+            try:
+                from process_sim.api.historian_nl_experimental import run_historian_nl_experiment
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or set(payload) != {"question"}:
+                    raise ValueError("Expected only a question")
+                self.send_json(200, run_historian_nl_experiment(payload["question"]))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Experimental NL historian query failed")
+                self.send_json(503, {"error": "Experimental historian unavailable; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/historian/answer":
             try:
                 from process_sim.api.vtkg_query import run_historian_question
