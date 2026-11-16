@@ -1,8 +1,8 @@
 """Experimental shared semantic planning entry point (planning only).
 
-The same schema instance and typed contract are used for graph and observation
-questions. This is a transitional planner: historian extraction still uses the
-legacy constrained parser, so it is NOT yet a single Qwen interpretation model.
+One Qwen-assisted, SHACL-catalog-grounded intent selector is shared across
+both question classes. Detailed historian extraction still uses the legacy
+constrained parser, so interpretation is NOT yet fully unified.
 No production endpoint is changed.
 """
 from __future__ import annotations
@@ -10,6 +10,7 @@ from __future__ import annotations
 import re
 
 from process_sim.api.dtwise_query import SCHEMA_PATH
+from process_sim.api.unified_intent_selector import select_semantic_intent
 from process_sim.api.historian_nl_experimental import plan_historian_question
 from process_sim.api.unified_query_plan import (
     UnifiedQueryPlan, from_engineering_plan, from_historian_plan,
@@ -27,7 +28,8 @@ _TEMPORAL_TERMS = re.compile(
 
 
 def plan_unified_question(
-    question: str, *, context: dict | None = None, schema: Schema | None = None
+    question: str, *, context: dict | None = None, schema: Schema | None = None,
+    interpret_intent=None
 ) -> UnifiedQueryPlan:
     """Produce the common plan without executing GraphDB or TimescaleDB.
 
@@ -41,7 +43,10 @@ def plan_unified_question(
         raise ValueError("Context must be a dictionary")
     question = question.strip()
     schema = schema if schema is not None else Schema(str(SCHEMA_PATH))
-    if _OBSERVATION_TERMS.search(question):
+    intent = select_semantic_intent(question, schema, interpret=interpret_intent)
+    if intent == "mixed":
+        raise ValueError("Mixed graph and observation queries are not yet supported")
+    if intent == "observations":
         # A question that explicitly asks for an engineering relationship as
         # well as observations must not be reduced to observations alone.
         if re.search(
@@ -54,13 +59,11 @@ def plan_unified_question(
         result = from_historian_plan(question, legacy)
     else:
         # Context is a hint, never permission to silently switch to historian.
-        if _TEMPORAL_TERMS.search(question):
-            raise ValueError("Temporal question lacks a supported observation intent")
         graph_plan = plan_question_semantic(question, [], schema)
         result = from_engineering_plan(question, graph_plan)
     return UnifiedQueryPlan(
         question=result.question,
         operations=result.operations,
         temporal=result.temporal,
-        interpretation="shared_schema_transitional_v1",
+        interpretation="qwen_shared_intent_specialized_details_v2",
     )
