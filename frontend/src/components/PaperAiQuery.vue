@@ -23,17 +23,18 @@ const supplementalQuestions: BenchmarkQuestion[] = [
  {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
  {id:'B23.3',category:'Cross-domain',question:'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_105.',version:'supplemental'}
 ]
-const categories = computed(() => [...new Set([...selectableQuestions.value.map(q => q.category), MULTIHOP_CATEGORY])])
+const benchmarkStages = [["01 · Basic retrieval",1,5],["02 · Filters",6,12],["03 · Multiple projections",13,15],["04 · Aggregation and ordering",16,19],["05 · Language variation",20,22],["06 · Cross-domain Engineering",23,27],["07 · Single-domain relationships",28,31],["08 · Missing cross-domain links",32,32],["09 · Simulation Historian / VTKG — use Historian tab",33,37],["10 · String filtering",38,42],["11 · Boolean conditions",43,47],["12 · Compound filters",48,50],["13 · Multi-domain multi-hop",51,60]] as [string,number,number][]
+const categories = computed(() => benchmarkStages.map(s => s[0]))
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
  item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' :
  item.id === 'B50' ? 'List AssetNames whose AssetIdentifier is https://aas.example.com/FI103 or https://aas.example.com/FI104.' : item.question
 const categoryQuestions = computed(() => {
- const questions = selectableQuestions.value.filter(q => q.category === category.value)
- const b23 = questions.findIndex(q => q.id === 'B23')
- const additions = supplementalQuestions.filter(q => q.category === category.value)
- if (b23 >= 0) questions.splice(b23 + 1, 0, ...additions)
- else questions.push(...additions)
+ const selectedStage = benchmarkStages.find(s => s[0] === category.value)
+ if (!selectedStage) return []
+ const questions = benchmarkQuestions.value.filter(q => /^B[0-9]+$/.test(q.id) && Number(q.id.slice(1)) >= selectedStage[1] && Number(q.id.slice(1)) <= selectedStage[2])
+ if (selectedStage[1] === 23) questions.splice(1, 0, ...supplementalQuestions.filter(q => q.category === 'Cross-domain'))
+ if (selectedStage[1] === 51) questions.push(...supplementalQuestions.filter(q => q.category.startsWith('13 ·')))
  return questions
 })
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
@@ -241,11 +242,12 @@ onMounted(hLoadRuns)
     <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
-    <label for="benchmark-category">Benchmark category</label>
+    <label for="benchmark-category">Benchmark stage (B01–B60)</label>
     <select id="benchmark-category" :value="category" @change="selectCategory(($event.target as HTMLSelectElement).value)">
-     <option value="">Select a category</option>
+     <option value="">Select a stage</option>
      <option v-for="item in categories" :key="item" :value="item">{{item}}</option>
     </select>
+    <p v-if="category.startsWith('09 ·')" class="subdued">B33–B37: use the Historian tab to select a simulation run, source, instrument, question style and time window.</p>
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
