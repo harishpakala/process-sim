@@ -25,21 +25,19 @@ def compile_entity_signal_query(domain: str, local_id: str, *, evidence: dict) -
     if not isinstance(evidence, dict) or not evidence.get("properties"):
         raise ValueError("SHACL evidence required for entity resolution")
     namespace = "https://example.org/dexpi/" if domain == "DEXPI" else "https://example.org/ecad/"
-    entity_type = ("  ?entity a eng:InstrumentationFunction ;\n"
+    entity_type = (f"  ?entity a <{namespace}InstrumentationFunction> ;\n"
                    if domain == "DEXPI" else "  ?entity ")
     # Fixed vocabulary and JSON-quoted literal: never interpolate model paths.
     return (
-        f"PREFIX eng: <{namespace}>\n"
-        "PREFIX opcua: <https://example.org/opcuaconnectivity/>\n"
         "SELECT DISTINCT ?entity ?assetIdentifier ?signalName WHERE {\n"
         " GRAPH ?engineeringGraph {\n"
         + entity_type +
-        "eng:hasLocalId ?localId ;\n"
-        "          eng:hasAssetIdentifier ?assetIdentifier .\n"
+        f"<{namespace}hasLocalId> ?localId ;\n"
+        f"          <{namespace}hasAssetIdentifier> ?assetIdentifier .\n"
         " }\n"
         " GRAPH ?mappingGraph {\n"
-        "  ?mapping opcua:hasAssetIdentifier ?assetIdentifier ;\n"
-        "           opcua:hasSignalName ?signalName .\n"
+        "  ?mapping <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?assetIdentifier ;\n"
+        "           <https://example.org/opcuaconnectivity/hasSignalName> ?signalName .\n"
         " }\n"
         f" FILTER(STR(?localId) = {json.dumps(local_id)})\n"
         "}\nORDER BY ?entity ?assetIdentifier ?signalName"
