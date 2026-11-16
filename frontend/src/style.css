@@ -117,3 +117,17 @@ select:disabled {
   opacity: .6;
   cursor: not-allowed;
 }
+
+
+/* Navigation hierarchy: a section is not a second selected page. */
+.nav-item.expanded:not(.current) { background: transparent; color: #cbdbea; font-weight: 600; }
+.nav-item.expanded:not(.current):hover { background: #182c40; }
+.nav-item.nested { position: relative; margin: 2px 0; padding: 10px 12px 10px 24px; border-radius: 6px; line-height: 1.45; }
+.nav-item.nested.current {
+  background: rgba(92,229,224,.075);
+  color: #7af0e8;
+  box-shadow: inset 3px 0 0 #5ce5e0;
+}
+.nav-item.nested.current:hover { background: rgba(92,229,224,.12); }
+.nav-item.nested:not(.current):hover { background: #182c40; }
+.nav-item.nested .nav-dot { flex: 0 0 6px; }
