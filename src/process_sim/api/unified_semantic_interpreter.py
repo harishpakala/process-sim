@@ -409,7 +409,7 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
     signal_lookup = re.fullmatch(
         r"\s*(?:show|list|get)\s+(?:the\s+)?opcuaconnectivity\s+"
         r"SignalMapping\s+SignalName\s+where\s+AssetIdentifier\s+"
-        r"(?:is|=|equals)\s+(https?://[^\s?]+)\s*[?.]?\s*",
+        r"(?:is|=|equals)\s+(https?://[^\s?]+?)\s*[?.]?\s*",
         question, re.I)
     if signal_lookup:
         def matching_paths(terminal):
