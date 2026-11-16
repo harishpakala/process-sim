@@ -126,3 +126,56 @@ def test_same_root_multiple_engineering_properties_share_entity_alias():
         TwoPropertySchema(), interpret=lambda q, c, x: raw)
     assert query.validated
     assert {p.alias for p in query.projections} == {"entity"}
+
+
+def test_h6_normalizes_model_to_same_function_shacl_paths():
+    from process_sim.api.unified_semantic_interpreter import shacl_catalog
+    from process_sim.api.unified_graph_compiler import compile_unified_graph_query
+    from dataclasses import replace
+    d = "https://example.org/dexpi/"
+    o = "https://example.org/opcuaconnectivity/"
+    class H6Schema:
+        concepts = [
+            {"kind": "shape", "domain": "dexpi", "uri": "shape:dexpi"},
+            {"kind": "shape", "domain": "opcuaconnectivity", "uri": "shape:opcua"},
+        ]
+        by_uri = {}
+        def shacl_paths(self, root, max_depth=5, domain=None):
+            paths = {
+                ("shape:dexpi", "dexpi"): [
+                    (d + "hasInstrumentationFunction", d + "hasLocalId"),
+                    (d + "hasInstrumentationFunction", d + "hasAssetIdentifier")],
+                ("shape:opcua", "opcuaconnectivity"): [
+                    (o + "hasAssetIdentifier",), (o + "hasSignalName",)],
+            }
+            return [[{"property": pred, "evidence_ids": []} for pred in path]
+                    for path in paths.get((root, domain), [])
+                    if len(path) <= max_depth]
+    schema = H6Schema()
+    catalog = shacl_catalog(schema)
+    signal_id = next(i for i, p in enumerate(catalog)
+                     if p["predicates"] == [o + "hasSignalName"])
+    question = ("How did DEXPI InstrumentationFunction with LocalID FI_103 behave "
+                "during simulation run 077a3c31-44f4-4f3a-b06d-ad52b148fe10, "
+                "for all simulation times?")
+    calls = []
+    def model(q, paths, ctx):
+        calls.append(q)
+        return response(projections=[
+            {"name": "SignalName", "path_id": signal_id, "source": "graphdb",
+             "alias": "opcuaconnectivity"}],
+            sources=["graphdb", "timescaledb"],
+            run_id=ctx["run_id"])
+    plan = interpret_unified_semantics(
+        question, schema,
+        context={"run_id": "077a3c31-44f4-4f3a-b06d-ad52b148fe10"},
+        interpret=model)
+    assert len(calls) == 1
+    assert plan.where.path.predicates == (
+        d + "hasInstrumentationFunction", d + "hasLocalId")
+    assert plan.joins[0].left_path.predicates == (
+        d + "hasInstrumentationFunction", d + "hasAssetIdentifier")
+    assert plan.start_seconds is None and plan.end_seconds is None
+    graph_plan = replace(plan, sources=("graphdb",), run_id=None, validated=True)
+    sparql = compile_unified_graph_query(graph_plan)
+    assert "?join_0_left_0 <" + d + "hasLocalId> ?filter_0_1 ." in sparql
