@@ -122,6 +122,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -272,6 +277,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -422,6 +432,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -572,6 +587,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -722,6 +742,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -872,6 +897,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1022,6 +1052,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1172,6 +1207,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1322,6 +1362,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1472,6 +1517,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1622,6 +1672,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1772,6 +1827,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1922,6 +1982,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2072,6 +2137,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2222,6 +2292,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2372,6 +2447,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2522,6 +2602,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2672,6 +2757,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2822,6 +2912,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2972,6 +3067,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -3122,6 +3222,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -3272,8 +3377,20 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "AssemblyRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -3542,6 +3659,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -3797,6 +3919,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -4052,6 +4179,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -4307,6 +4439,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -4562,6 +4699,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -4817,6 +4959,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -5072,6 +5219,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -5327,6 +5479,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -5582,6 +5739,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -5837,6 +5999,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -6139,6 +6306,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -6394,6 +6566,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -6696,6 +6873,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -6998,6 +7180,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -7300,6 +7487,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -7602,6 +7794,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -7904,6 +8101,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -8206,6 +8408,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -8508,6 +8715,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -8795,6 +9007,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -9097,6 +9314,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -9399,6 +9621,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -9701,6 +9928,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -10003,6 +10235,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -10305,6 +10542,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -10607,6 +10849,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -10909,6 +11156,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11164,6 +11416,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11419,6 +11676,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11674,6 +11936,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11929,6 +12196,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12216,6 +12488,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12471,6 +12748,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12758,6 +13040,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13060,6 +13347,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13362,6 +13654,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13664,6 +13961,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13951,6 +14253,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14238,6 +14545,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14478,6 +14790,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14718,6 +15035,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14973,6 +15295,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15228,6 +15555,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15483,6 +15815,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15738,6 +16075,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15993,6 +16335,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16295,6 +16642,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16597,6 +16949,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16899,6 +17256,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17201,6 +17563,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17456,6 +17823,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17758,6 +18130,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18060,6 +18437,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18362,6 +18744,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18664,6 +19051,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18966,6 +19358,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -19268,6 +19665,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -19570,6 +19972,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -19872,6 +20279,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -20174,6 +20586,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -20476,6 +20893,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -20778,6 +21200,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -21080,6 +21507,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -21335,6 +21767,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -21590,6 +22027,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -21845,6 +22287,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -22100,6 +22547,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -22355,6 +22807,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -22610,6 +23067,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -22912,6 +23374,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -23214,6 +23681,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -23516,6 +23988,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -23818,6 +24295,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -24120,6 +24602,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -24422,6 +24909,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -24709,6 +25201,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -25011,6 +25508,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -25313,6 +25815,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -25615,14 +26122,26 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "BOMItemRecord"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
     {
       "modelType": "SubmodelElementCollection",
-      "idShort": "ParentReferences",
+      "idShort": "ParentLinks",
       "semanticId": {
         "type": "ExternalReference",
         "keys": [
@@ -25749,7 +26268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -25869,7 +26393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -25989,7 +26518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26109,7 +26643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26229,7 +26768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26349,7 +26893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26469,7 +27018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26589,7 +27143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26709,7 +27268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26829,7 +27393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -26949,7 +27518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27069,7 +27643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27189,7 +27768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27309,7 +27893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27429,7 +28018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27549,7 +28143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27669,7 +28268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27789,7 +28393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -27909,7 +28518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28029,7 +28643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28149,7 +28768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28269,7 +28893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28389,7 +29018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28509,7 +29143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28629,7 +29268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28749,7 +29393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28869,7 +29518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -28989,7 +29643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29109,7 +29768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29229,7 +29893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29349,7 +30018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29469,7 +30143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29589,7 +30268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29709,7 +30393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29829,7 +30518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -29949,7 +30643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30069,7 +30768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30189,7 +30893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30309,7 +31018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30429,7 +31143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30549,7 +31268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30669,7 +31393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30789,7 +31518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -30909,7 +31643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31029,7 +31768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31149,7 +31893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31269,7 +32018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31389,7 +32143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31509,7 +32268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31629,7 +32393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31749,7 +32518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31869,7 +32643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -31989,7 +32768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32109,7 +32893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32229,7 +33018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32349,7 +33143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32469,7 +33268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32589,7 +33393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32709,7 +33518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32829,7 +33643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -32949,7 +33768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33069,7 +33893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33189,7 +34018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33309,7 +34143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33429,7 +34268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33549,7 +34393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33669,7 +34518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33789,7 +34643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -33909,7 +34768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34029,7 +34893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34149,7 +35018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34269,7 +35143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34389,7 +35268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34509,7 +35393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34629,7 +35518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34749,7 +35643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34869,7 +35768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -34989,7 +35893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35109,7 +36018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35229,7 +36143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35349,7 +36268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35469,7 +36393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35589,7 +36518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35709,7 +36643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35829,7 +36768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -35949,7 +36893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36069,7 +37018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36189,7 +37143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36309,7 +37268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36429,7 +37393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36549,7 +37518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36669,7 +37643,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36789,7 +37768,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -36909,7 +37893,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37029,7 +38018,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37149,7 +38143,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37269,7 +38268,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37389,7 +38393,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37509,7 +38518,12 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37629,9 +38643,21 @@
             {
               "type": "ontoConcept",
               "valueType": "xs:string",
-              "value": "ParentReference"
+              "value": "ParentLink"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -37780,6 +38806,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -37915,6 +38946,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38050,6 +39086,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38185,6 +39226,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38320,6 +39366,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38455,6 +39506,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38590,6 +39646,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38725,6 +39786,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38860,6 +39926,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -38995,6 +40066,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39130,6 +40206,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39265,6 +40346,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39400,6 +40486,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39535,6 +40626,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39670,6 +40766,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39805,6 +40906,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -39940,6 +41046,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40075,6 +41186,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40210,6 +41326,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40345,6 +41466,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40480,6 +41606,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40615,6 +41746,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40750,6 +41886,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -40885,6 +42026,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41020,6 +42166,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41155,6 +42306,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41290,6 +42446,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41425,6 +42586,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41560,6 +42726,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41695,6 +42866,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41830,6 +43006,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -41965,6 +43146,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42100,6 +43286,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42235,6 +43426,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42370,6 +43566,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42505,6 +43706,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42640,6 +43846,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42775,6 +43986,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -42910,6 +44126,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43045,6 +44266,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43180,6 +44406,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43315,6 +44546,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43450,6 +44686,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43585,6 +44826,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43720,6 +44966,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43855,6 +45106,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -43990,6 +45246,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -44125,6 +45386,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -44260,8 +45526,20 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "FunctionalAssociation"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
