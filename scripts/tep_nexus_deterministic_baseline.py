@@ -93,7 +93,7 @@ def main():
     p.add_argument("--history-limit", type=int, default=1000)
     p.add_argument("--repeats", type=int, default=1)
     p.add_argument("--output", default="reports/deterministic_baseline_results.json")
-    p.add_argument("--csv", default="reports/deterministic_baseline_cases.csv")
+    p.add_argument("--csv", default="reports/deterministic_baseline_execution_results.csv")
     a = p.parse_args()
     if a.repeats < 1 or a.history_limit < 1:
         p.error("--repeats and --history-limit must be positive")
