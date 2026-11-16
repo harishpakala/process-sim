@@ -2264,12 +2264,6 @@
                   "idShort": "MeasurementRangeQUDTQuantityKind",
                   "valueType": "xs:string",
                   "value": "http://qudt.org/vocab/quantitykind/Pressure"
-                },
-                {
-                  "modelType": "Property",
-                  "idShort": "PressureReference",
-                  "valueType": "xs:string",
-                  "value": "Gauge"
                 }
               ],
               "qualifiers": [
@@ -2418,6 +2412,11 @@
               "type": "SemanticRole",
               "valueType": "xs:string",
               "value": "DomainEntity"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
             }
           ]
         },
@@ -2509,6 +2508,11 @@
               "type": "SemanticRole",
               "valueType": "xs:string",
               "value": "DomainEntity"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
             }
           ]
         },
@@ -2600,6 +2604,11 @@
               "type": "SemanticRole",
               "valueType": "xs:string",
               "value": "DomainEntity"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
             }
           ]
         },
@@ -2691,6 +2700,11 @@
               "type": "SemanticRole",
               "valueType": "xs:string",
               "value": "DomainEntity"
+            },
+            {
+              "type": "OntoConcept",
+              "valueType": "xs:string",
+              "value": "Product"
             }
           ]
         }
