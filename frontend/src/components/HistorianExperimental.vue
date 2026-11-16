@@ -21,6 +21,14 @@ type HistorianResponse = {
  }
 }
 const question = ref('')
+const queryStyle = ref('historian')
+const queryStyles = [
+ {value:'historian', label:'Historian values'},
+ {value:'show', label:'Show readings'},
+ {value:'plot', label:'Plot trend'},
+ {value:'behave', label:'How did it behave?'},
+ {value:'chart', label:'Chart measurements'}
+]
 const busy = ref(false)
 const error = ref('')
 const response = ref<HistorianResponse | null>(null)
@@ -80,7 +88,16 @@ function generatedQuestion(): string {
   : startSeconds.value !== '' ? ` from simulation second ${startSeconds.value} onward`
   : endSeconds.value !== '' ? ` up to simulation second ${endSeconds.value}`
   : ' for all simulation times'
- return `Get historian values for the ${entity} with LocalID ${selectedLocalId.value} for simulation run ${selectedRun.value},${interval}.`
+ const subject = `${entity} with LocalID ${selectedLocalId.value}`
+ const run = `simulation run ${selectedRun.value}`
+ const time = interval.trim()
+ switch (queryStyle.value) {
+  case 'show': return `Show historical readings for ${subject} in ${run}, ${time}.`
+  case 'plot': return `Plot recorded measurements of ${subject} for ${run}, ${time}.`
+  case 'behave': return `How did ${subject} behave during ${run}, ${time}?`
+  case 'chart': return `Chart historical measurements for ${subject} in ${run}, ${time}.`
+  default: return `Get historian values for ${subject} for ${run}, ${time}.`
+ }
 }
 function updateGeneratedQuestion() {
  const next = generatedQuestion()
@@ -90,7 +107,7 @@ function updateGeneratedQuestion() {
  lastGeneratedQuestion = next
 }
 watch([selectedRun, selectedDomain], () => { void loadFunctions() })
-watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds], updateGeneratedQuestion)
+watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds, queryStyle], updateGeneratedQuestion)
 onMounted(() => { void loadRuns() })
 
 
@@ -165,14 +182,16 @@ const experimentalChart = computed(() => {
     <option value="">Select LocalID</option>
     <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
    </select></div>
+   <div class="experiment-field"><label for="historian-experiment-style">Query wording (editable template)</label>
+   <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
    <div class="experiment-field"><label for="historian-experiment-start">Start simulation seconds (optional)</label>
    <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
    <div class="experiment-field"><label for="historian-experiment-end">End simulation seconds (optional)</label>
    <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">Selections help compose the question for testing. Only the editable natural-language question is submitted to the experimental planner.</p>
+   <p class="subdued experiment-wide">Selections and wording templates help compose questions. The editable question determines intent; optional selections provide context. Blank time bounds mean the complete available run.</p>
   </div>
-  <label class="experiment-question-label" for="historian-experiment-question">Historian question</label>
+  <label class="experiment-question-label" for="historian-experiment-question">Natural-language question</label>
   <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 for simulation run 00000000-0000-0000-0000-000000000001, between simulation seconds 100 and 300." />
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
