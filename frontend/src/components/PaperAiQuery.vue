@@ -23,7 +23,7 @@ const supplementalQuestions: BenchmarkQuestion[] = [
  {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
  {id:'B23.3',category:'Cross-domain',question:'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_105.',version:'supplemental'}
 ]
-const benchmarkStages = [["01 · Basic retrieval",1,5],["02 · Filters",6,12],["03 · Multiple projections",13,15],["04 · Aggregation and ordering",16,19],["05 · Language variation",20,22],["06 · Cross-domain Engineering",23,27],["07 · Single-domain relationships",28,31],["08 · Missing cross-domain links",32,32],["09 · Simulation Historian / VTKG — use Historian tab",33,37],["10 · String filtering",38,42],["11 · Boolean conditions",43,47],["12 · Compound filters",48,50],["13 · Multi-domain multi-hop",51,60]] as [string,number,number][]
+const benchmarkStages = [["01 · Basic retrieval",1,5],["02 · Exact-Match and Logical Filtering",6,12],["03 · Multiple projections",13,15],["04 · Aggregation and ordering",16,19],["05 · Language variation",20,22],["06 · Cross-domain Engineering",23,27],["07 · Single-domain relationships",28,31],["08 · Missing cross-domain links",32,32],["09 · Simulation Historian / VTKG — use Historian tab",33,37],["10 · String Pattern Matching",38,42],["11 · Boolean conditions",43,47],["12 · Compound filters",48,50],["13 · Multi-domain multi-hop",51,60]] as [string,number,number][]
 const categories = computed(() => benchmarkStages.map(s => s[0]))
 // UI-only dataset correction: preserve the frozen B23 manifest verbatim.
 const displayedQuestion = (item: BenchmarkQuestion): string =>
