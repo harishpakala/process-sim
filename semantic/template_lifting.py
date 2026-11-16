@@ -68,6 +68,26 @@ def add_semantic_annotations(graph, source, shape_uri, predicate_uri=None):
             graph.add((predicate_uri, RDFS.comment, literal))
 
 
+def add_semantic_role(graph: Graph, element, shape_uri: URIRef):
+    """Preserve authored SemanticRole qualifiers as explicit RDF metadata."""
+    for qualifier in getattr(element, "qualifiers", None) or []:
+        if str(getattr(qualifier, "type", "")).lower() != "semanticrole":
+            continue
+        role = str(getattr(qualifier, "value", "") or "").strip()
+        if role not in ("StructuralContainer", "DomainEntity"):
+            raise ValueError(f"Unsupported SemanticRole {role!r} on {element.id_short!r}")
+        graph.add((shape_uri, semanticDict["AAS"]["semanticRole"], Literal(role)))
+
+
+def make_relationship_predicate(domain: str, id_short: str) -> URIRef:
+    """Use the exact authored relationship name (never hash as double prefix)."""
+    if not id_short:
+        raise ValueError("Relationship idShort cannot be empty.")
+    domain_upper = domain.upper()
+    if domain_upper not in semanticDict:
+        raise ValueError(f"Unknown domain namespace: {domain}")
+    return URIRef(str(semanticDict[domain_upper]) + id_short)
+
 def make_semantic_predicate(
     domain: str,
     id_short: str,
@@ -182,6 +202,7 @@ def lift_template(
     )
 
     add_semantic_annotations(graph, submodel, template_shape, template_class)
+    add_semantic_role(graph, submodel, template_shape)
 
     lift_elements(
         graph=graph,
@@ -332,6 +353,7 @@ def lift_property(
     )
 
     add_semantic_annotations(graph, element, shape_uri, property_uri)
+    add_semantic_role(graph, element, shape_uri)
 
     if element.value_type is not None:
         graph.add((shape_uri, semanticDict["SH"]["datatype"], map_xsd_datatype(element.value_type)))
@@ -447,6 +469,7 @@ def lift_range(
     )
 
     add_semantic_annotations(graph, element, shape_uri, property_uri)
+    add_semantic_role(graph, element, shape_uri)
 
     min_count, max_count = get_cardinality(
         element
@@ -560,6 +583,7 @@ def lift_smc(
     )
 
     add_semantic_annotations(graph, element, shape_uri, property_uri)
+    add_semantic_role(graph, element, shape_uri)
 
     min_count, max_count = get_cardinality(element)
 
@@ -605,6 +629,7 @@ def lift_smc(
     )
 
     add_semantic_annotations(graph, element, child_shape)
+    add_semantic_role(graph, element, child_shape)
 
     # IMPORTANT:
     # Do NOT use sh:targetClass aas:SMC here.
@@ -707,7 +732,7 @@ def lift_relationship(
     instance triples or infer cross-domain mappings from them.
     """
     path = build_path(parent_path, element.id_short)
-    predicate = make_semantic_predicate(domain, element.id_short)
+    predicate = make_relationship_predicate(domain, element.id_short)
     shape_uri = compute_uri(template_id, path + "/shape")
     relationship_class = ensure_aas_class(
         graph, "RelationshipElement", "AAS Relationship Element"
@@ -721,6 +746,7 @@ def lift_relationship(
     graph.add((parent_shape, semanticDict["SH"]["property"], shape_uri))
 
     add_semantic_annotations(graph, element, shape_uri, predicate)
+    add_semantic_role(graph, element, shape_uri)
     min_count, max_count = get_cardinality(element)
     add_cardinality_constraints(graph, shape_uri, min_count, max_count)
     lift_semantic_id(graph, template_id, element, path)
