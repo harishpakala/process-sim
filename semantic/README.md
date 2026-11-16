@@ -10,7 +10,7 @@ Run commands from the repository root using Python 3.12.
 python -m pip install -r requirements.txt
 ```
 
-Semantic lifting uses `rdflib`, `pyshacl`, `aas-core3.1`, and `requests`. Start GraphDB only if you intend to publish RDF or run GraphDB-backed queries.
+Semantic lifting uses `rdflib`, `pyshacl`, `aas-core3.1`, and `requests`. GraphDB is required for the TEP NEXUS semantic retrieval workflow. Start GraphDB and create repository `AAST` before publishing RDF.
 
 ## 2. Environment variables
 
@@ -66,9 +66,9 @@ Default inputs come from `semantic/config.py`. Generated Turtle files are writte
 
 Local lifting does **not** publish to GraphDB. `--validate` performs local SHACL validation for instances; inspect the results before publishing.
 
-## 4. Publish to GraphDB (optional)
+## 4. Publish to GraphDB (required)
 
-Create the matching GraphDB repository first. Then:
+**Mandatory for TEP NEXUS semantic retrieval:** Start GraphDB and create repository `AAST` before running these commands. Local Turtle generation alone does not populate the engineering knowledge graph. Then:
 
 ```powershell
 python -m semantic.template_lifting --push
@@ -77,7 +77,7 @@ python -m semantic.instance_lifting --validate --push
 
 `--push` uploads named RDF graphs to the configured lifting endpoint. A GraphDB read/query URL uses the repository path **without** `/statements`.
 
-## 5. Start the API (optional)
+## 5. Start the API
 
 After configuring the environment and starting the required services:
 
