@@ -122,3 +122,45 @@ def test_multiple_properties_share_one_root_without_join():
     ))
     sparql = compile_unified_graph_query(plan)
     assert sparql.count("?root_instrument <" + URI + ">") == 2
+
+
+def test_h6_nonprojected_localid_filter_uses_joined_instrument_root():
+    dexpi = "https://example.org/dexpi/"
+    opc = "https://example.org/opcuaconnectivity/"
+    root = "shape:dexpi"
+    mapping = "shape:opcua"
+    local = GraphPath("dexpi", root, (dexpi + "hasInstrumentationFunction",
+                                       dexpi + "hasLocalId"))
+    asset = GraphPath("dexpi", root, (dexpi + "hasInstrumentationFunction",
+                                       dexpi + "hasAssetIdentifier"))
+    op_asset = GraphPath("opcuaconnectivity", mapping, (opc + "hasAssetIdentifier",))
+    signal = GraphPath("opcuaconnectivity", mapping, (opc + "hasSignalName",))
+    class H6Schema:
+        def shacl_paths(self, shape, max_depth=5, domain=None):
+            paths = (local, asset, op_asset, signal)
+            return [[{"property": pred, "evidence_ids": []} for pred in p.predicates]
+                    for p in paths if p.root_shape == shape and p.domain == domain
+                    and len(p.predicates) <= max_depth]
+    plan = SemanticQuery(
+        question="How did DEXPI InstrumentationFunction with LocalID FI_103 behave during simulation run?",
+        projections=(Projection("SignalName", signal, alias="opcuaconnectivity"),),
+        joins=(Join("dexpi", "opcuaconnectivity", asset, op_asset),),
+        where=Predicate("hasLocalId", "eq", "FI_103", local, "dexpi"),
+    ).validate(H6Schema())
+    sparql = compile_unified_graph_query(plan)
+    assert "?root_dexpi <" + dexpi + "hasInstrumentationFunction> ?filter_0_0 ." in sparql
+    assert "?filter_0_0 <" + dexpi + "hasLocalId> ?filter_0_1 ." in sparql
+    assert "?root_dexpi <" + dexpi + "hasInstrumentationFunction> ?join_0_left_0 ." in sparql
+    assert "?join_0_left_0 <" + dexpi + "hasAssetIdentifier> ?join_0_left_1 ." in sparql
+    assert 'FILTER((?filter_0_1 = "FI_103"))' in sparql
+    assert sparql.startswith("SELECT DISTINCT ?SignalName WHERE")
+
+
+def test_nonprojected_filter_on_unbound_root_rejected():
+    path = GraphPath("DEXPI", "shape:instrument", (URI,))
+    with pytest.raises(ValueError, match="bound entity alias"):
+        SemanticQuery(
+            question="Show asset identifiers for a filtered instrument",
+            projections=(Projection("assetIdentifier", path),),
+            where=Predicate("hasAssetIdentifier", "eq", "A", path, "other"),
+        ).validate(Schema())
