@@ -63,11 +63,10 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
    <div class="nav-scroll">
     <div class="section-label">WORKSPACE</div>
     <button class="nav-item" :class="{current:active==='Overview'}" @click="navigate('Overview')"><LayoutDashboard :size="16"/> Overview</button>
-    <button class="nav-item" :class="{current:active==='AI Query — Engineering'||active==='AI Query — Historian'||active==='AI Query — Historian Experimental'}" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
+    <button class="nav-item" :class="{current:active==='AI Query — Engineering'||active==='AI Query — Historian Experimental'}" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
     <template v-if="aiQueryOpen">
      <button class="nav-item nested" :class="{current:active==='AI Query — Engineering'}" @click="navigate('AI Query — Engineering')"><span class="nav-dot"/> Engineering Queries</button>
-     <button class="nav-item nested" :class="{current:active==='AI Query — Historian'}" @click="navigate('AI Query — Historian')"><span class="nav-dot"/> Historian Queries</button>
-     <button class="nav-item nested" :class="{current:active==='AI Query — Historian Experimental'}" @click="navigate('AI Query — Historian Experimental')"><span class="nav-dot"/> Historian Experimental</button>
+     <button class="nav-item nested" :class="{current:active==='AI Query — Historian Experimental'}" @click="navigate('AI Query — Historian Experimental')"><span class="nav-dot"/> Ask DTWise (Historian &amp; more)</button>
     </template>
     <div v-for="group in sections" :key="group.name" class="nav-group">
      <button class="section-toggle" @click="opened[group.name]=!opened[group.name]">{{group.name}}<ChevronDown v-if="opened[group.name]" :size="14"/><ChevronRight v-else :size="14"/></button>
@@ -113,12 +112,11 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <template v-else-if="active==='Multi-Signal Replay'"><MultiSignalReplay /></template>
     <template v-else-if="graphView"><EngineeringRdfGraph :key="navigationKey" :domain="active==='ECAD Explorer'?'ecad':'dexpi'" :focus-identifier="destinationId" @open-record="openRecord" /></template>
     <template v-else-if="active==='AI Query — Engineering'"><PaperAiQuery page="engineering" /></template>
-    <template v-else-if="active==='AI Query — Historian'"><PaperAiQuery page="historian" /></template>
     <template v-else-if="active==='AI Query — Historian Experimental'"><HistorianExperimental /></template>
     <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
     <template v-else-if="active==='Faults & Disturbances'"><FaultManagement /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
-    <section v-if="!['Product Catalog','Asset Inventory','AI Query — Engineering','AI Query — Historian'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
+    <section v-if="!['Product Catalog','Asset Inventory','AI Query — Engineering','AI Query — Historian Experimental'].includes(active)" class="context panel"><div class="panel-title"><h2>Selection context</h2><span class="pill">{{selected}}</span></div><div class="context-grid"><div><small>Engineering identifier</small><strong>{{selected}}</strong></div><div><small>Cross-domain links</small><strong>Not resolved</strong></div><div><small>Simulation signal mapping</small><strong>Not loaded</strong></div></div></section>
    </div>
   </main>
  </div>
