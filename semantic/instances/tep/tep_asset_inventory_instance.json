@@ -55,12 +55,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-R-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "value": "EngineeringDefined"
@@ -88,12 +82,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
             },
             {
               "modelType": "Property",
@@ -160,12 +148,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-C-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "value": "EngineeringDefined"
@@ -193,12 +175,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
             },
             {
               "modelType": "Property",
@@ -265,12 +241,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-V-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "value": "EngineeringDefined"
@@ -298,12 +268,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/Didion_DSL_Candidate"
             },
             {
               "modelType": "Property",
@@ -370,12 +334,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-K-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "value": "EngineeringDefined"
@@ -403,12 +361,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
             },
             {
               "modelType": "Property",
@@ -475,12 +427,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "EngineeringReference",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TEP-S-001"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ModelingStatus",
               "valueType": "xs:string",
               "value": "EngineeringDefined"
@@ -508,12 +454,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "CandidateProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
             },
             {
               "modelType": "Property",
@@ -580,12 +520,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS1"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.3"
@@ -634,12 +568,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -649,12 +577,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -715,12 +637,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS2"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.4"
@@ -769,12 +685,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -784,12 +694,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -850,12 +754,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS3"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.5"
@@ -904,12 +802,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -919,12 +811,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -985,12 +871,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS4"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.6"
@@ -1039,12 +919,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -1054,12 +928,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -1120,12 +988,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS5"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.8"
@@ -1174,12 +1036,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -1189,12 +1045,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -1255,12 +1105,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS6"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.9"
@@ -1309,12 +1153,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -1324,12 +1162,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -1390,12 +1222,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.19"
@@ -1435,12 +1261,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSE550"
             },
             {
               "modelType": "Property",
@@ -1507,12 +1327,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS8"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.0"
@@ -1555,12 +1369,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
@@ -1570,12 +1378,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/IFM_LW2720"
             }
           ],
           "semanticId": {
@@ -1636,12 +1438,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS9"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.13"
@@ -1681,12 +1477,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
             },
             {
               "modelType": "Property",
@@ -1753,12 +1543,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS10"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.7"
@@ -1807,12 +1591,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_TMass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -1822,12 +1600,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -1888,12 +1660,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS11"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.16"
@@ -1933,12 +1699,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
             },
             {
               "modelType": "Property",
@@ -2005,12 +1765,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS12"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.1"
@@ -2053,12 +1807,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
@@ -2068,12 +1816,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/IFM_LW2720"
             }
           ],
           "semanticId": {
@@ -2134,12 +1876,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS13"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.20"
@@ -2179,12 +1915,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSE550"
             },
             {
               "modelType": "Property",
@@ -2251,12 +1981,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS14"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.10"
@@ -2305,12 +2029,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -2320,12 +2038,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -2386,12 +2098,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS15"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.2"
@@ -2434,12 +2140,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_FMR62B_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_PREFERRED_FAMILY"
@@ -2449,12 +2149,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Existing IFM_LW2720 reference retained for provenance; no verified installation or percent-to-distance calibration"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/IFM_LW2720"
             }
           ],
           "semanticId": {
@@ -2515,12 +2209,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS16"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.18"
@@ -2560,12 +2248,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSE550"
             },
             {
               "modelType": "Property",
@@ -2632,12 +2314,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS17"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.11"
@@ -2686,12 +2362,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_Promass_F300_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -2701,12 +2371,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -2767,12 +2431,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS18"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.17"
@@ -2812,12 +2470,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
             },
             {
               "modelType": "Property",
@@ -2884,12 +2536,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS19"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.12"
@@ -2938,12 +2584,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -2953,12 +2593,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Original SMC_PFMV505_1 ProductReference retained; instrument configuration and signal conversion unverified"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PFMV505_1"
             }
           ],
           "semanticId": {
@@ -3016,12 +2650,6 @@
               "idShort": "Location",
               "valueType": "xs:string",
               "value": "TEP simulation"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS20"
             },
             {
               "modelType": "Property",
@@ -3136,12 +2764,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS21"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.14"
@@ -3181,12 +2803,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
             },
             {
               "modelType": "Property",
@@ -3253,12 +2869,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMEAS22"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "I10.15"
@@ -3301,21 +2911,9 @@
             },
             {
               "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SMC_PSH_L2_01_W"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_APPROVED_FAMILY"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI1202"
             },
             {
               "modelType": "Property",
@@ -3394,12 +2992,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV1"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.1"
@@ -3448,12 +3040,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -3463,12 +3049,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -3529,12 +3109,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV2"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.2"
@@ -3583,12 +3157,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -3598,12 +3166,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -3664,12 +3226,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV3"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.0"
@@ -3718,12 +3274,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -3733,12 +3283,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -3799,12 +3343,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV4"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.3"
@@ -3853,12 +3391,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -3868,12 +3400,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -3934,12 +3460,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV5"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.5"
@@ -3988,12 +3508,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4003,18 +3517,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1006"
             },
             {
               "modelType": "Property",
@@ -4093,12 +3595,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV6"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.4"
@@ -4147,12 +3643,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4162,12 +3652,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -4228,12 +3712,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.8"
@@ -4282,12 +3760,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4297,18 +3769,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1301"
             },
             {
               "modelType": "Property",
@@ -4387,12 +3847,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV8"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.10"
@@ -4441,12 +3895,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4456,12 +3904,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -4522,12 +3964,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV9"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.11"
@@ -4576,12 +4012,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4591,12 +4021,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -4657,12 +4081,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV10"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.6"
@@ -4711,12 +4129,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4726,12 +4138,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             }
           ],
           "semanticId": {
@@ -4792,12 +4198,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV11"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.7"
@@ -4846,12 +4246,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "ProposedReplacementProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/SAMSON_3241_7"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "SIMULATION_SCOPE_CANDIDATE_UNVERIFIED"
@@ -4861,18 +4255,6 @@
               "idShort": "ReplacementReviewNote",
               "valueType": "xs:string",
               "value": "Catalog SAMSON_3241_7 denotes a specific DN25/Kvs10/PN40 assembly; reference is used as provisional Type 3241 family proxy only. Exact configuration, Kv, actuator and fail position unverified; NOT engineering approved."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1201"
             },
             {
               "modelType": "Property",
@@ -4951,12 +4333,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "OperationalReference",
-              "valueType": "xs:string",
-              "value": "XMV12"
-            },
-            {
-              "modelType": "Property",
               "idShort": "PLCMapping",
               "valueType": "xs:string",
               "value": "Q10.12"
@@ -4999,12 +4375,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "PROVISIONAL_AGITATOR_PACKAGE_UNSIZED"
@@ -5023,12 +4393,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/M1"
-            },
-            {
-              "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -5044,12 +4408,6 @@
               "idShort": "EngineeringInterpretationNote",
               "valueType": "xs:string",
               "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
-            },
-            {
-              "modelType": "Property",
-              "idShort": "SourceAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://example.org/tep/assets/TEP_XMV12"
             }
           ],
           "semanticId": {
@@ -5149,12 +4507,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
             },
             {
               "modelType": "Property",
@@ -5266,12 +4618,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
             },
             {
               "modelType": "Property",
@@ -5392,12 +4738,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Rittal_3244100"
-            },
-            {
-              "modelType": "Property",
               "idShort": "ReplacementSelectionStatus",
               "valueType": "xs:string",
               "value": "OPTIONAL_EXTENSION_MOTOR_FAMILY_UNSIZED"
@@ -5506,12 +4846,6 @@
               "idShort": "FaultDetectionStatus",
               "valueType": "xs:string",
               "value": "NotEvaluated"
-            },
-            {
-              "modelType": "Property",
-              "idShort": "PreviousProductReference",
-              "valueType": "xs:string",
-              "value": "https://example.org/product-types/Siemens_S55264_V193"
             },
             {
               "modelType": "Property",
