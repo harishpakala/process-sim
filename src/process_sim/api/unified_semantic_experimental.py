@@ -67,3 +67,40 @@ def plan_unified_question(
         temporal=result.temporal,
         interpretation="qwen_shared_intent_specialized_details_v2",
     )
+
+
+def plan_unified_question_v3(question: str, *, context=None, schema=None,
+                             interpret_frame=None, interpret_graph=None):
+    """Opt-in one-pass semantic frame planning; no execution or API migration.
+
+    Historical details no longer use the legacy regex historian planner.
+    Engineering graph paths still use the established SHACL/Qwen planner.
+    Mixed queries fail closed until cross-source joins are implemented.
+    """
+    from process_sim.api.unified_semantic_frame import interpret_semantic_frame
+    from process_sim.api.historian_nl_experimental import _shacl_evidence
+
+    schema = schema if schema is not None else Schema(str(SCHEMA_PATH))
+    frame = interpret_semantic_frame(question, schema, context=context,
+                                     interpret=interpret_frame)
+    if frame.intent == "mixed":
+        raise ValueError("Mixed graph and observation execution is not yet supported")
+    if frame.intent == "observations":
+        evidence = _shacl_evidence(schema, frame.domain)
+        legacy_shape = {
+            "domain": frame.domain, "engineering_function": frame.local_id,
+            "run_id": frame.run_id,
+            "start_simulation_seconds": frame.temporal.start_seconds,
+            "end_simulation_seconds": frame.temporal.end_seconds,
+            "shacl_evidence": evidence,
+        }
+        result = from_historian_plan(question, legacy_shape)
+    else:
+        options = {"interpret": interpret_graph} if interpret_graph is not None else {}
+        graph_plan = plan_question_semantic(question, [], schema, **options)
+        result = from_engineering_plan(question, graph_plan)
+    return UnifiedQueryPlan(
+        question=result.question, operations=result.operations,
+        temporal=result.temporal,
+        interpretation="single_semantic_frame_v3",
+    )
