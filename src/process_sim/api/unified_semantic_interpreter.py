@@ -368,6 +368,41 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raw["end_seconds"] = None
     else:
         h6_filter = None
+    # Engineering-only canonical LocalID lookup. Qwen may incorrectly apply the
+    # historian-specific SignalName/AssetIdentifier example to a simple DEXPI
+    # InstrumentationFunction LocalID question. Preserve its raw JSON for
+    # diagnostics, but ground the explicit requested projection and equality
+    # filter to the unique SHACL path. No historian routing or extra model call.
+    engineering_localid = re.fullmatch(
+        r"\\s*(?:show|list|get)\\s+(?:the\\s+)?dexpi\\s+"
+        r"InstrumentationFunction\\s+LocalID\\s+where\\s+LocalID\\s+"
+        r"(?:is|=|equals)\\s+([A-Za-z0-9_-]+)\\s*[?.]?\\s*",
+        question, re.I)
+    if engineering_localid:
+        candidates = [
+            p for p in catalog
+            if p["domain"].lower() == "dexpi"
+            and len(p["predicates"]) == 2
+            and p["predicates"][0].rsplit("/", 1)[-1].lower() == "hasinstrumentationfunction"
+            and p["predicates"][1].rsplit("/", 1)[-1].lower() == "haslocalid"
+        ]
+        if len(candidates) != 1:
+            raise ValueError(
+                "Expected exactly one SHACL DEXPI InstrumentationFunction/LocalID path")
+        item = candidates[0]
+        local_path = GraphPath(item["domain"], item["root_shape"],
+                               tuple(item["predicates"]), tuple(item["evidence_ids"]))
+        projections = [Projection("LocalID", local_path, "graphdb", "entity")]
+        joins = []
+        h6_filter = Predicate("LocalID", "eq", engineering_localid.group(1),
+                              local_path, "entity")
+        raw["sources"] = ["graphdb"]
+        raw["group_by"] = []
+        raw["aggregation"] = None
+        raw["order_by"] = []
+        raw["run_id"] = None
+        raw["start_seconds"] = None
+        raw["end_seconds"] = None
     # Multiple properties of one SHACL root describe one entity, not
     # independent Cartesian-product roots. Only coalesce when there are
     # no explicit joins and every graph projection has the exact same root.
