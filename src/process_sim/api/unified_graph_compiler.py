@@ -86,16 +86,11 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
             clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
             current = next_var
         fields[projection.name] = current
-    for index, join in enumerate(plan.joins):
-        left, right = [], []
-        for side, path in (("left", join.left_path), ("right", join.right_path)):
-            current = "?join" + str(index) + "_" + side
-            for hop, predicate in enumerate(path.predicates):
-                next_var = "?j" + str(index) + "_" + side + "_" + str(hop)
-                clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
-                current = next_var
-            (left if side == "left" else right).append(current)
-        clauses.append("FILTER(" + left[0] + " = " + right[0] + ")")
+    # A join must connect to the projected entity roots. The current IR has
+    # alias names but no root-to-alias binding, so compiling it as independent
+    # graph patterns would produce a misleading Cartesian product.
+    if plan.joins:
+        raise ValueError("Join alias-to-entity binding is not implemented")
     if plan.where is not None:
         clauses.append("FILTER(" + _condition(plan.where, fields) + ")")
     for field in plan.order_by:
