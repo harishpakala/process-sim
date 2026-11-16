@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 
 type HistorianResponse = {
  mode: string
@@ -23,6 +23,75 @@ const question = ref('')
 const busy = ref(false)
 const error = ref('')
 const response = ref<HistorianResponse | null>(null)
+
+type FunctionOption = {engineering_function: string; operational_signal: string; sample_count: number}
+const runs = ref<string[]>([])
+const selectedRun = ref('')
+const selectedDomain = ref<'DEXPI' | 'ECAD'>('DEXPI')
+const functions = ref<FunctionOption[]>([])
+const selectedLocalId = ref('')
+const discoveryBusy = ref(false)
+const discoveryError = ref('')
+const startSeconds = ref('')
+const endSeconds = ref('')
+let lastGeneratedQuestion = ''
+
+async function loadRuns() {
+ discoveryError.value = ''
+ discoveryBusy.value = true
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/runs')
+  const data = await r.json()
+  if (!r.ok) throw new Error(data.error || 'Run discovery failed')
+  runs.value = data.runs
+ } catch (e) {
+  discoveryError.value = e instanceof Error ? e.message : String(e)
+ } finally {
+  discoveryBusy.value = false
+ }
+}
+
+async function loadFunctions() {
+ selectedLocalId.value = ''
+ functions.value = []
+ discoveryError.value = ''
+ if (!selectedRun.value) return
+ discoveryBusy.value = true
+ try {
+  const url = '/api/ai/vtkg/historian/functions?run_id=' +
+    encodeURIComponent(selectedRun.value) + '&domain=' + encodeURIComponent(selectedDomain.value)
+  const r = await fetch(url)
+  const data = await r.json()
+  if (!r.ok) throw new Error(data.error || 'LocalID discovery failed')
+  functions.value = data.functions
+ } catch (e) {
+  discoveryError.value = e instanceof Error ? e.message : String(e)
+ } finally {
+  discoveryBusy.value = false
+ }
+}
+
+function generatedQuestion(): string {
+ if (!selectedRun.value || !selectedLocalId.value) return ''
+ const entity = selectedDomain.value === 'DEXPI' ? 'DEXPI InstrumentationFunction' : 'ECAD Device'
+ const interval = startSeconds.value !== '' && endSeconds.value !== ''
+  ? ` between simulation seconds ${startSeconds.value} and ${endSeconds.value}`
+  : startSeconds.value !== '' ? ` from simulation second ${startSeconds.value} onward`
+  : endSeconds.value !== '' ? ` up to simulation second ${endSeconds.value}`
+  : ' for all simulation times'
+ return `Get historian values for the ${entity} with LocalID ${selectedLocalId.value} for simulation run ${selectedRun.value},${interval}.`
+}
+function updateGeneratedQuestion() {
+ const next = generatedQuestion()
+ if (question.value === '' || question.value === lastGeneratedQuestion) {
+  question.value = next
+ }
+ lastGeneratedQuestion = next
+}
+watch([selectedRun, selectedDomain], () => { void loadFunctions() })
+watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds], updateGeneratedQuestion)
+onMounted(() => { void loadRuns() })
+
 
 async function run() {
  error.value = ''
@@ -73,6 +142,29 @@ const experimentalChart = computed(() => {
   <div class="panel-title"><h2>Historian Experimental — Natural Language</h2><span class="pill">ISOLATED EXPERIMENT</span></div>
   <p>Ask a free-text historian question. The experiment validates SHACL schema evidence and reuses the existing VTKG Historian executor. Existing Historian Queries remain unchanged.</p>
   <p>For this first prototype, include DEXPI or ECAD, exactly one LocalID, and the full simulation run UUID. Time bounds are optional.</p>
+  <div class="custom-query">
+   <label for="historian-experiment-run">Simulation run</label>
+   <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
+    <option value="">Select simulation run</option>
+    <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
+   </select>
+   <button type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button>
+   <label for="historian-experiment-domain">Engineering domain</label>
+   <select id="historian-experiment-domain" v-model="selectedDomain">
+    <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
+   </select>
+   <label for="historian-experiment-localid">LocalID (verified for selected run)</label>
+   <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
+    <option value="">Select LocalID</option>
+    <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
+   </select>
+   <label for="historian-experiment-start">Start simulation seconds (optional)</label>
+   <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" />
+   <label for="historian-experiment-end">End simulation seconds (optional)</label>
+   <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" />
+   <p v-if="discoveryError" role="alert">{{discoveryError}}</p>
+   <p class="subdued">Selections help compose the question for testing. Only the editable natural-language question is submitted to the experimental planner.</p>
+  </div>
   <label for="historian-experiment-question">Historian question</label>
   <textarea id="historian-experiment-question" v-model="question" rows="4" style="width:100%;margin-top:8px" placeholder="Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 for simulation run 00000000-0000-0000-0000-000000000001, between simulation seconds 100 and 300." />
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
@@ -81,7 +173,7 @@ const experimentalChart = computed(() => {
    <h3>Historian result</h3>
     <div v-if="experimentalChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
-      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + response.result.engineeringFunction || response.plan.engineering_function">
+      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + (response.result.engineeringFunction || response.plan.engineering_function)">
        <g stroke="currentColor" opacity="0.22" stroke-width="1">
         <line v-for="tick in experimentalChart.yTicks" :key="'grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y" />
        </g>
