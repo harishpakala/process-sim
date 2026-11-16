@@ -101,3 +101,35 @@ def from_engineering_plan(question: str, plan: dict[str, Any]) -> UnifiedQueryPl
                                    {"validated_engineering_plan": plan},
                                    {"evidence_ids": plan.get("evidence_ids", [])}),),
     )
+
+
+def consolidate_graph_stage(plan: UnifiedQueryPlan) -> UnifiedQueryPlan:
+    """Represent mixed GraphDB work as one logical graph stage.
+
+    This is a *logical* consolidation only: the existing historian backend
+    still performs its own live GraphDB signal lookup. It does not imply a
+    single SPARQL request or a verified row-level graph/historian join.
+    """
+    kinds = tuple(op.kind for op in plan.operations)
+    if kinds != ("graph_query", "signal_resolution", "observations"):
+        raise ValueError("Expected mixed engineering and historian plan")
+    graph, resolution, observations = plan.operations
+    if not resolution.shacl_evidence.get("properties"):
+        raise ValueError("Signal mapping requires SHACL property evidence")
+    if not graph.parameters.get("validated_engineering_plan"):
+        raise ValueError("Graph stage requires validated engineering plan")
+    combined = QueryOperation(
+        kind="graph_query", source="graphdb",
+        parameters={**graph.parameters,
+                    "signal_resolution": dict(resolution.parameters)},
+        shacl_evidence={
+            "engineering": dict(graph.shacl_evidence),
+            "signal_resolution": dict(resolution.shacl_evidence),
+        },
+    )
+    return UnifiedQueryPlan(
+        question=plan.question,
+        operations=(combined, observations),
+        temporal=plan.temporal,
+        interpretation="logical_graph_stage_v5",
+    )
