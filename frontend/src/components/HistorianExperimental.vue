@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import UnifiedResultTable from './UnifiedResultTable.vue'
 
 type HistorianResponse = {
  mode: string
@@ -22,6 +23,13 @@ type HistorianResponse = {
 }
 const useUnified = ref(true)
 const unifiedReport = ref<Record<string, unknown> | null>(null)
+const unifiedRows = computed<Array<Record<string, unknown>>>(() => {
+ const answer = unifiedReport.value?.answer
+ if (!answer || typeof answer !== 'object') return []
+ const rows = (answer as Record<string, unknown>).rows
+ return Array.isArray(rows) ? rows.filter((row): row is Record<string, unknown> =>
+  row !== null && typeof row === 'object' && !Array.isArray(row)) : []
+})
 const question = ref('')
 const queryStyle = ref('historian')
 const queryStyles = [
@@ -209,7 +217,9 @@ const experimentalChart = computed(() => {
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <div v-if="unifiedReport">
    <h3>Unified historian result</h3>
-   <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.answer, null, 2)}}</pre>
+   <p>{{unifiedRows.length}} rows</p>
+    <UnifiedResultTable :rows="unifiedRows" />
+    <details><summary>Qwen original JSON output</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.qwen_output, null, 2)}}</pre></details>
    <details><summary>SHACL plan and generated SPARQL</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify({plan: unifiedReport.plan, sparql: unifiedReport.sparql}, null, 2)}}</pre></details>
   </div>
   <template v-if="response">
