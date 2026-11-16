@@ -374,9 +374,9 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
     # diagnostics, but ground the explicit requested projection and equality
     # filter to the unique SHACL path. No historian routing or extra model call.
     engineering_localid = re.fullmatch(
-        r"\\s*(?:show|list|get)\\s+(?:the\\s+)?dexpi\\s+"
-        r"InstrumentationFunction\\s+LocalID\\s+where\\s+LocalID\\s+"
-        r"(?:is|=|equals)\\s+([A-Za-z0-9_-]+)\\s*[?.]?\\s*",
+        r"\s*(?:show|list|get)\s+(?:the\s+)?dexpi\s+"
+        r"InstrumentationFunction\s+LocalID\s+where\s+LocalID\s+"
+        r"(?:is|=|equals)\s+([A-Za-z0-9_-]+)\s*[?.]?\s*",
         question, re.I)
     if engineering_localid:
         candidates = [
