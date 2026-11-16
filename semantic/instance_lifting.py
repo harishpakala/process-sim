@@ -405,6 +405,18 @@ def lift_relationship(
     )
 
 
+def get_instance_semantic_role(element):
+    """Read the authored role; unqualified elements retain legacy behavior."""
+    roles = [
+        str(getattr(q, "value", "") or "").strip()
+        for q in (getattr(element, "qualifiers", None) or [])
+        if str(getattr(q, "type", "")).lower() == "semanticrole"
+    ]
+    if len(roles) > 1 or (roles and roles[0] not in ("StructuralContainer", "DomainEntity")):
+        raise ValueError(f"Invalid SemanticRole on {element.id_short!r}: {roles!r}")
+    return roles[0] if roles else None
+
+
 def lift_smc(
     graph: Graph,
     instance_id: str,
@@ -422,6 +434,20 @@ def lift_smc(
         element.id_short,
     )
 
+    role = get_instance_semantic_role(element)
+    if role == "StructuralContainer":
+        # Keep the source path for deterministic descendant identifiers,
+        # but do not emit a wrapper resource or semantic edge.
+        lift_instance_elements(
+            graph=graph,
+            instance_id=instance_id,
+            elements=element.value,
+            parent_path=path,
+            parent_uri=parent_uri,
+            domain=domain,
+        )
+        return
+
     element_uri = compute_uri(
         instance_id,
         path,
@@ -430,6 +456,11 @@ def lift_smc(
     concept = resolve_instance_concept(
         element
     )
+    if role == "DomainEntity" and not concept:
+        raise ValueError(
+            f"DomainEntity {path!r} is missing OntoConcept; "
+            "cannot resolve the template-defined predicate or class."
+        )
 
     if concept:
         instance_class = make_domain_class(
