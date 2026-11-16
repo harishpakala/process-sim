@@ -368,34 +368,42 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raw["end_seconds"] = None
     else:
         h6_filter = None
-    # Engineering-only canonical LocalID lookup. Qwen may incorrectly apply the
-    # historian-specific SignalName/AssetIdentifier example to a simple DEXPI
-    # InstrumentationFunction LocalID question. Preserve its raw JSON for
-    # diagnostics, but ground the explicit requested projection and equality
-    # filter to the unique SHACL path. No historian routing or extra model call.
-    engineering_localid = re.fullmatch(
+    # Ground simple DEXPI InstrumentationFunction property lookups to the
+    # requested SHACL terminal property, not Qwen's output label or source.
+    # This handles LocalID, MeasuredVariable, and any other uniquely grounded
+    # property on the same instrumentation-function root.
+    engineering_property = re.fullmatch(
         r"\s*(?:show|list|get)\s+(?:the\s+)?dexpi\s+"
-        r"InstrumentationFunction\s+LocalID\s+where\s+LocalID\s+"
-        r"(?:is|=|equals)\s+([A-Za-z0-9_-]+)\s*[?.]?\s*",
+        r"InstrumentationFunction\s+([A-Za-z][A-Za-z0-9]*)\s+where\s+"
+        r"LocalID\s+(?:is|=|equals)\s+([A-Za-z0-9_-]+)\s*[?.]?\s*",
         question, re.I)
-    if engineering_localid:
-        candidates = [
-            p for p in catalog
-            if p["domain"].lower() == "dexpi"
-            and len(p["predicates"]) == 2
-            and p["predicates"][0].rsplit("/", 1)[-1].lower() == "hasinstrumentationfunction"
-            and p["predicates"][1].rsplit("/", 1)[-1].lower() == "haslocalid"
-        ]
-        if len(candidates) != 1:
+    if engineering_property:
+        property_name, local_value = engineering_property.groups()
+        local_paths = [p for p in catalog
+                       if p["domain"].lower() == "dexpi"
+                       and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+                       == ["hasinstrumentationfunction", "haslocalid"]]
+        requested_terminal = "has" + property_name.lower().removeprefix("has")
+        pairs = [(target, local) for local in local_paths for target in catalog
+                 if target["domain"].lower() == "dexpi"
+                 and target["root_shape"] == local["root_shape"]
+                 and len(target["predicates"]) >= 2
+                 and target["predicates"][0] == local["predicates"][0]
+                 and target["predicates"][-1].rsplit("/", 1)[-1].lower()
+                 == requested_terminal]
+        if len(pairs) != 1:
             raise ValueError(
-                "Expected exactly one SHACL DEXPI InstrumentationFunction/LocalID path")
-        item = candidates[0]
-        local_path = GraphPath(item["domain"], item["root_shape"],
-                               tuple(item["predicates"]), tuple(item["evidence_ids"]))
-        projections = [Projection("LocalID", local_path, "graphdb", "entity")]
+                "Expected a unique co-rooted DEXPI InstrumentationFunction SHACL "
+                "property path for " + property_name)
+        target, local = pairs[0]
+        def grounded_path(item):
+            return GraphPath(item["domain"], item["root_shape"],
+                             tuple(item["predicates"]), tuple(item["evidence_ids"]))
+        projections = [Projection(property_name[0].upper() + property_name[1:],
+                                  grounded_path(target), "graphdb", "entity")]
         joins = []
-        h6_filter = Predicate("LocalID", "eq", engineering_localid.group(1),
-                              local_path, "entity")
+        h6_filter = Predicate("LocalID", "eq", local_value,
+                              grounded_path(local), "entity")
         raw["sources"] = ["graphdb"]
         raw["group_by"] = []
         raw["aggregation"] = None
