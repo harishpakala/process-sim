@@ -2412,6 +2412,13 @@
               "valueType": "xs:string",
               "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_TECHNICALLY_MATCHED"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
+            }
           ]
         },
         {
@@ -2495,6 +2502,13 @@
               "idShort": "ECLASSClassificationBasis",
               "valueType": "xs:string",
               "value": "USER_PROVIDED_ECLASS_CLASS_DETAILS_CONDITIONAL_ON_LOW_VOLTAGE_THREE_PHASE_VARIANT"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2580,6 +2594,13 @@
               "valueType": "xs:string",
               "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
             }
+          ],
+          "qualifiers": [
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
+            }
           ]
         },
         {
@@ -2663,6 +2684,13 @@
               "idShort": "ECLASSClassificationBasis",
               "valueType": "xs:string",
               "value": "INHERITED_FROM_EXISTING_CATALOG_CATEGORY_PENDING_OFFICIAL_VERIFICATION"
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         }
