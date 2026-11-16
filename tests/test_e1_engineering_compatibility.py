@@ -4,8 +4,6 @@ Offline tests for the new compiler plus the original Engineering API contract.
 These are structural regression checks, not proof of equivalent answers on live
 GraphDB data. Legacy and unified execution must remain separate until parity.
 """
-from dataclasses import replace
-
 import pytest
 
 from process_sim.api import dtwise_query
@@ -153,8 +151,12 @@ def test_e1_legacy_engineering_adapter_contract_is_unchanged(monkeypatch):
     monkeypatch.setattr(dtwise_query, "execute_select", executor)
     monkeypatch.setattr(dtwise_query, "build_answer",
                         lambda bindings, plan, limit: {"rows": bindings})
-    monkeypatch.setattr(dtwise_query.SCHEMA_PATH.__class__, "is_file",
-                        lambda self: True)
+    class SchemaPath:
+        def is_file(self):
+            return True
+        def __str__(self):
+            return "schema-index.json"
+    monkeypatch.setattr(dtwise_query, "SCHEMA_PATH", SchemaPath())
     result = dtwise_query.run_question(
         "Show engineering identifiers",
         environ={"GRAPHDB_SPARQL_ENDPOINT": "http://graphdb.invalid/sparql"})
