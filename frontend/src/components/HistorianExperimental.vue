@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
 type HistorianResponse = {
  mode: string
@@ -47,6 +47,25 @@ async function run() {
   busy.value = false
  }
 }
+const experimentalChart = computed(() => {
+ const samples = (response.value?.result?.observations ?? [])
+  .filter(p => Number.isFinite(p.simulationTimeHours) && Number.isFinite(p.value))
+  .map(p => ({seconds:p.simulationTimeHours * 3600,value:p.value}))
+  .sort((a,b) => a.seconds - b.seconds)
+ if (!samples.length) return null
+ const left=72,right=728,top=18,bottom=242
+ const minX=samples[0]!.seconds,maxX=samples[samples.length-1]!.seconds
+ const minV=Math.min(...samples.map(p=>p.value)),maxV=Math.max(...samples.map(p=>p.value))
+ const pad=(maxV-minV || Math.max(Math.abs(minV),1))*0.08
+ const low=minV-pad,high=maxV+pad
+ const x=(v:number)=>left+(v-minX)/(maxX-minX||1)*(right-left)
+ const y=(v:number)=>bottom-(v-low)/(high-low)*(bottom-top)
+ return {points:samples.map(p=>({...p,x:x(p.seconds),y:y(p.value)})),
+  polyline:samples.map(p=>`${x(p.seconds)},${y(p.value)}`).join(' '),
+  left,right,top,bottom,
+  xTicks:[0,1,2,3,4].map(i=>({x:left+(right-left)*i,label:(minX+(maxX-minX)*i/4).toFixed(1)})),
+  yTicks:[0,1,2,3,4].map(i=>({y:bottom-(bottom-top)*i/4,label:(low+(high-low)*i/4).toFixed(2)}))}
+})
 </script>
 
 <template>
@@ -62,6 +81,30 @@ async function run() {
    <h3>Validated query plan</h3>
    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre>
    <h3>Historian result</h3>
+    <div v-if="experimentalChart" class="vtkg-chart">
+     <div class="vtkg-chart-scroll">
+      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + response.result.engineeringFunction || response.plan.engineering_function">
+       <g stroke="currentColor" opacity="0.22" stroke-width="1">
+        <line v-for="tick in experimentalChart.yTicks" :key="'grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y" />
+       </g>
+       <g stroke="currentColor" stroke-width="1.5">
+        <line :x1="experimentalChart.left" :y1="experimentalChart.top" :x2="experimentalChart.left" :y2="experimentalChart.bottom" />
+        <line :x1="experimentalChart.left" :y1="experimentalChart.bottom" :x2="experimentalChart.right" :y2="experimentalChart.bottom" />
+       </g>
+       <g fill="currentColor" font-size="12">
+        <text v-for="tick in experimentalChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
+        <text v-for="tick in experimentalChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
+        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
+        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
+       </g>
+       <polyline v-if="experimentalChart.points.length > 1" :points="experimentalChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+       <circle v-for="(point,i) in experimentalChart.points" :key="i" :cx="point.x" :cy="point.y" r="2.5" fill="#38bdf8">
+        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
+       </circle>
+      </svg>
+     </div>
+    </div>
+    <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    <table v-if="response.result.observations?.length">
     <thead><tr><th>Simulation time (hours)</th><th>Value</th><th>Observed at</th></tr></thead>
