@@ -1,53 +1,94 @@
-## Run all three domains without arguments
+# Semantic lifting and GraphDB setup
 
-From the repository root:
+This package converts AAS Submodel Templates and Instances into RDF for the TEP NEXUS engineering knowledge graph. The default batch covers **six domains**: DEXPI, ECAD, ProductCatalog, AssetInventory, OPC UA Connectivity, and Engineering BOM.
 
-```bash
-python3.12 -m semantic.template_lifting
-python3.12 -m semantic.instance_lifting
+Run commands from the repository root using Python 3.12.
+
+## 1. Install dependencies
+
+```powershell
+python -m pip install -r requirements.txt
 ```
 
-The default targets are defined in `semantic/config.py` and include DEXPI, ECAD and ProductCatalog. Turtle outputs are written to `out/semantic/{domain}-template.ttl` and `out/semantic/{domain}-instance.ttl`. Defaults do **not** push to GraphDB or run SHACL validation; use `--push` or `--validate` explicitly. Existing single-target CLI arguments remain supported.
+Semantic lifting uses `rdflib`, `pyshacl`, `aas-core3.1`, and `requests`. Start GraphDB only if you intend to publish RDF or run GraphDB-backed queries.
 
-Note: scripts use absolute paths derived from their package location, so inputs resolve regardless of the working directory, but execute as modules from the repository root to make the package importable.
+## 2. Environment variables
 
-# Generic AAS semantic lifting (SAFSL integration)
+These are the relevant **documented application settings** for the semantic and TEP NEXUS workflows, not variables required by the local lifting commands themselves.
 
-Adapted from [SAFSL Compiler Tool Chain](https://github.com/harishpakala/SAFSL_Compiler_Tool_Chain), Apache-2.0. The original lifting implementation is preserved in structure and extended with a domain namespace and command-line entry points.
+| Variable | Purpose | Default / requirement |
+| --- | --- | --- |
+| `GRAPHDB_SPARQL_ENDPOINT` | GraphDB read/query endpoint for the API, DTWise and historian resolution | **Required for DTWise and historian queries**; API-level default is `http://localhost:7200/repositories/AAST` |
+| `TEP_TIMESCALE_DSN` | TimescaleDB connection for run-scoped history | **Required for persistent historian and semantic–temporal queries**; otherwise optional |
+| `TEP_DB_PASSWORD` | Password consumed by `docker-compose.timeseries.yml` | Compose default: `tep-local-dev` (local development only) |
+| `TEP_OPCUA_ENDPOINT` | OPC UA address used by the API client | `opc.tcp://127.0.0.1:4841/process-sim/` |
+| `PROCESS_SIM_API_HOST` | API bind host | `127.0.0.1` |
+| `PROCESS_SIM_API_PORT` | API port | `8000` |
+| `PYTHONPATH` | Enables imports from `src` when launching the API from the repository root | Set to `src` for the commands below |
+| `TEP_GRAPH_SYNC` | Enables run-provenance RDF synchronization when TimescaleDB is configured | `1`; use `0` to disable |
+| `TEP_GRAPH_SYNC_SECONDS` | Run-provenance synchronization interval | `15` seconds (minimum `5`) |
+| `DTWISE_PLANNER_DEBUG` | Additional diagnostic output from the engineering semantic planner | Off; use `1`, `true`, or `yes` |
+| `TEP_Q13_LIVE_ENABLED` | Opt-in for the experimental live Q13 workflow | Disabled; use `1` to enable |
+| `TEP_Q13_ONTOLOGY_AUDIT` | File path to a completed Q13 ontology audit JSON | Required only by the relevant live Q13 API endpoints |
 
-## Dependencies
+**Example: Windows PowerShell** (set values in the terminal that launches the API):
 
-Python 3.12, `rdflib`, `pyshacl`, `aas-core3.1` (module `aas_core3_1`), and `requests`. See upstream `requirements.txt` for compatible pinned versions. Run commands from the **repository root** so `semantic` imports resolve.
-
-## Generic template lifting
-
-```bash
-python3.12 -m semantic.template_lifting --domain dexpi --input semantic/templates/dexpi_template.json --output out/dexpi-template.ttl
-python3.12 -m semantic.template_lifting --domain ecad --input semantic/templates/ecad_template.json --output out/ecad-template.ttl
-python3.12 -m semantic.template_lifting --domain productcatalog --input semantic/templates/product_catalog_template.json --output out/product-catalog-template.ttl
+```powershell
+$env:PYTHONPATH = "$PWD\src"
+$env:GRAPHDB_SPARQL_ENDPOINT = "http://localhost:7200/repositories/AAST"
+$env:TEP_TIMESCALE_DSN = "postgresql://tep:tep-local-dev@127.0.0.1:5432/tep_nexus"
+$env:TEP_OPCUA_ENDPOINT = "opc.tcp://127.0.0.1:4841/process-sim/"
+$env:PROCESS_SIM_API_HOST = "127.0.0.1"
+$env:PROCESS_SIM_API_PORT = "8000"
 ```
 
-Add `--push` to upload a named graph to GraphDB (default configured in `semantic/ontoutils.py`: `http://localhost:7200/repositories/AAS/statements`). Local generation does not require GraphDB.
+For a local TimescaleDB container, start it separately:
 
-## Generic instance lifting
-
-```bash
-python3.12 -m semantic.instance_lifting --domain productcatalog --template semantic/templates/product_catalog_template.json --input examples/aas/product_catalog_instance.json --validate --output out/product-catalog-instance.ttl
-python3.12 -m semantic.instance_lifting --domain ecad --template semantic/templates/ecad_template.json --input examples/aas/tep_ecad_instance.json --validate --output out/ecad-instance.ttl
-python3.12 -m semantic.instance_lifting --domain dexpi --template semantic/templates/dexpi_template.json --input examples/aas/tep_dexpi_instance.json --validate --output out/dexpi-instance.ttl
+```powershell
+docker compose -f docker-compose.timeseries.yml up -d
 ```
 
-`--validate` performs local pySHACL validation using the supplied template. `--push` publishes the RDF graph to GraphDB. Do not add `--push` until the graph and validation output have been reviewed.
+The DSN password must match the container's `TEP_DB_PASSWORD`. Do not commit real passwords or production DSNs.
 
-## ProductCatalog repeating products
+**Important — GraphDB publishing:** The lifting scripts currently use the literal `GRAPHDB_ENDPOINT = "http://localhost:7200/repositories/AAST/statements"` in `semantic/ontoutils.py`. Setting `GRAPHDB_SPARQL_ENDPOINT` **does not change that lifting write endpoint**. If the repository differs, verify its configuration before using `--push`. This README does not change runtime behavior.
 
-The ProductCatalog template declares a `Products.Product` collection with `ZeroToMany` cardinality, whereas the instance names individual product collections `Products.SMC_PSE550`, etc. Instance lifting automatically infers the template's repeated-child predicate (`hasProduct`) for the children of `Products`. The RDF resources retain distinct deterministic URIs and original `idShort` labels.
+## 3. Generate RDF locally
 
-The ProductCatalog namespace is `https://example.org/productcatalog/`. Other domains can be added to `semanticDict` in `semantic/ontoutils.py`; the lifting scripts do not require per-domain branches.
+```powershell
+python -m semantic.template_lifting
+python -m semantic.instance_lifting --validate
+```
 
-## Current limits
+Default inputs come from `semantic/config.py`. Generated Turtle files are written to `semantic/ontology2/`:
 
-- The template's `TechnicalProperties` collection does not constrain the many manufacturer-specific property names. These are lifted as string literals with predicates based on their `idShort`, including `SpecificationSourceURL`. QUDT typed quantities and explicit unit resources are not yet implemented.
-- Only AAS Property, Range, SubmodelElementCollection, and RelationshipElement are lifted by upstream logic; other element types are skipped with a warning.
-- The GraphDB endpoint remains a local default and must be configured for the deployment environment.
-- Copying and adapting the scripts is not evidence that end-to-end RDF/SHACL/GraphDB tests have passed. Run the commands above in an environment with dependencies and GraphDB installed.
+- `{domain}-template.ttl` and `{domain}-instance.ttl`
+- `dtwise/` — unified concept and relationship catalogs generated by template lifting
+
+Local lifting does **not** publish to GraphDB. `--validate` performs local SHACL validation for instances; inspect the results before publishing.
+
+## 4. Publish to GraphDB (optional)
+
+Create the matching GraphDB repository first. Then:
+
+```powershell
+python -m semantic.template_lifting --push
+python -m semantic.instance_lifting --validate --push
+```
+
+`--push` uploads named RDF graphs to the configured lifting endpoint. A GraphDB read/query URL uses the repository path **without** `/statements`.
+
+## 5. Start the API (optional)
+
+After configuring the environment and starting the required services:
+
+```powershell
+python -m process_sim.api.server
+```
+
+Check `http://127.0.0.1:8000/api/health`. Engineering-only queries require GraphDB and the existing DTWise schema index at `semantic/ontology/dtwise/dtwise-schema-index.json`; running the lifting commands above does **not** automatically replace that index. Historian queries additionally require TimescaleDB, a valid run, and an eligible engineering-to-signal mapping.
+
+## Notes
+
+- The default batch and filenames are defined in [`semantic/config.py`](config.py). Use `--domain`, `--input`, and `--output` for individual templates; instance lifting also requires `--template` with `--input`.
+- Only supported AAS element types are lifted; unsupported types may be skipped with a warning. Manufacturer-specific technical properties are not automatically verified physical quantities or units.
+- For historian persistence and run semantics, see [TimescaleDB setup](../docs/opcua/TIMESERIES.md). For evaluated experiments, see [TEP NEXUS artifact evaluation](../docs/artifact_evaluation/README.md).
