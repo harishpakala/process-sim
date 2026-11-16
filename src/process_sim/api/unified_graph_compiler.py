@@ -125,6 +125,9 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
                 raise ValueError("Join alias conflicts with projected root shape: " + alias)
             alias_shapes.setdefault(alias, shape)
     connected = set()
+    # Reuse variables for common SHACL path prefixes on the same entity.
+    # Otherwise LocalID could match a different function under the same root.
+    path_prefixes = {}
     for index, join in enumerate(plan.joins):
         if join.left not in alias_shapes or join.right not in alias_shapes:
             raise ValueError("Join references an unbound entity alias")
@@ -136,8 +139,12 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
                                   ("right", join.right, join.right_path)):
             current = "?root_" + alias
             for hop, predicate in enumerate(path.predicates):
-                next_var = "?join_" + str(index) + "_" + side + "_" + str(hop)
-                clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
+                key = (alias, tuple(path.predicates[:hop + 1]))
+                next_var = path_prefixes.setdefault(
+                    key, "?join_" + str(index) + "_" + side + "_" + str(hop))
+                triple = current + " " + _iri(predicate) + " " + next_var + " ."
+                if triple not in clauses:
+                    clauses.append(triple)
                 current = next_var
             endpoints.append(current)
         clauses.append("FILTER(" + endpoints[0] + " = " + endpoints[1] + ")")
@@ -169,8 +176,12 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
                     current = "?root_" + node.alias
                     idx = len(path_filters)
                     for hop, predicate in enumerate(node.path.predicates):
-                        next_var = "?filter_" + str(idx) + "_" + str(hop)
-                        clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
+                        prefix = (node.alias, tuple(node.path.predicates[:hop + 1]))
+                        next_var = path_prefixes.setdefault(
+                            prefix, "?filter_" + str(idx) + "_" + str(hop))
+                        triple = current + " " + _iri(predicate) + " " + next_var + " ."
+                        if triple not in clauses:
+                            clauses.append(triple)
                         current = next_var
                     path_filters[key] = current
                 filter_vars[id(node)] = path_filters[key]
