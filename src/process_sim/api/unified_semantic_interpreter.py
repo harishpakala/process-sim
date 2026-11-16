@@ -52,19 +52,18 @@ def _where(raw):
     if raw is None:
         return None
     if not isinstance(raw, dict):
-        raise ValueError(
-        "Invalid Boolean expression; keys="
-        + repr(sorted(raw.keys()))
+        raise ValueError("Invalid Boolean expression; expected object, got " + type(raw).__name__)
+    if set(raw) == {"field", "operator", "value"}:
+        return Predicate(raw["field"], raw["operator"], raw["value"])
+    if set(raw) == {"operator", "children"} and isinstance(raw["children"], list):
+        return BooleanExpression(raw["operator"], tuple(_where(x) for x in raw["children"]))
+    raise ValueError(
+        "Invalid Boolean expression; keys=" + repr(sorted(raw.keys()))
         + "; operator=" + repr(raw.get("operator"))
         + "; field=" + repr(raw.get("field"))
         + "; child_count="
         + repr(len(raw["children"]) if isinstance(raw.get("children"), list) else None)
     )
-    if set(raw) == {"field", "operator", "value"}:
-        return Predicate(raw["field"], raw["operator"], raw["value"])
-    if set(raw) == {"operator", "children"} and isinstance(raw["children"], list):
-        return BooleanExpression(raw["operator"], tuple(_where(x) for x in raw["children"]))
-    raise ValueError("Invalid Boolean expression")
 
 
 _RESPONSE_SCHEMA = {
@@ -137,6 +136,8 @@ def _interpret(question, catalog, context):
         "Do not invent paths, IDs, run UUIDs, or simulation times. "
         "Use supplied context for run_id and time boundaries when provided. "
         "Use null for unspecified scalar values, [] for unspecified arrays. "
+        "Use where=null unless the question explicitly asks to filter rows by a value or condition. "
+        "Do not use where to describe entity associations; represent relationships with SHACL paths and joins. "
         "Choose path_id from the id values in shacl_paths; do not return a path object. "
         "Return ONE semantic query object, never an individual shacl_paths entry. "
         "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
