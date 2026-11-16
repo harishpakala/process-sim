@@ -92,6 +92,15 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
             clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
             current = next_var
         fields[projection.name] = current
+    # A joined engineering entity can constrain projected signal rows without
+    # itself contributing a SELECT column. Bind its root from the SHACL join path.
+    for join in plan.joins:
+        for alias, path in ((join.left, join.left_path),
+                            (join.right, join.right_path)):
+            shape = (path.domain, path.root_shape)
+            if alias in alias_shapes and alias_shapes[alias] != shape:
+                raise ValueError("Join alias conflicts with projected root shape: " + alias)
+            alias_shapes.setdefault(alias, shape)
     connected = set()
     for index, join in enumerate(plan.joins):
         if join.left not in alias_shapes or join.right not in alias_shapes:
