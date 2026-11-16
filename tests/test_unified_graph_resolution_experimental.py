@@ -13,14 +13,14 @@ def test_dexpi_compiler_uses_one_select_and_named_graphs():
     assert query.count("SELECT ") == 1
     assert "GRAPH ?engineeringGraph" in query
     assert "GRAPH ?mappingGraph" in query
-    assert "eng:InstrumentationFunction" in query
+    assert "<https://example.org/dexpi/InstrumentationFunction>" in query
     assert 'FILTER(STR(?localId) = "FI_101")' in query
 
 
 def test_ecad_compiler_does_not_assume_dexpi_class():
     query = compile_entity_signal_query("ECAD", "FI-101", evidence=EVIDENCE)
-    assert "eng:InstrumentationFunction" not in query
-    assert "https://example.org/ecad/" in query
+    assert "<https://example.org/dexpi/InstrumentationFunction>" not in query
+    assert "<https://example.org/ecad/hasLocalId>" in query
 
 
 def test_resolution_one_call_unique_identity_and_signal():
@@ -51,3 +51,17 @@ def test_resolution_rejects_missing_shacl_evidence_and_invalid_id_before_io():
         compile_entity_signal_query("DEXPI", "FI_101", evidence={})
     with pytest.raises(ValueError, match="LocalId"):
         compile_entity_signal_query("DEXPI", 'FI_101" } UNION {', evidence=EVIDENCE)
+
+
+def test_generated_query_accepted_by_existing_read_only_executor():
+    from unittest.mock import Mock, patch
+    from process_sim.dtwise.rdf_executor import execute_select
+    query = compile_entity_signal_query("DEXPI", "FI_101", evidence=EVIDENCE)
+    assert query.startswith("SELECT ")
+    response = Mock()
+    response.json.return_value = {"results": {"bindings": []}}
+    with patch("process_sim.dtwise.rdf_executor.requests.post",
+               return_value=response) as post:
+        assert execute_select("http://example.invalid/sparql", query) == []
+    assert post.call_count == 1
+    assert post.call_args.kwargs["data"]["query"] == query
