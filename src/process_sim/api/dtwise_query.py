@@ -13,7 +13,7 @@ from process_sim.dtwise.sparql_generator import compile_sparql
 from process_sim.dtwise.rdf_executor import execute_select, build_answer
 
 ROOT = Path(__file__).resolve().parents[3]
-SCHEMA_PATH = ROOT / "semantic" / "ontology" / "dtwise" / "dtwise-schema-index.json"
+SCHEMA_PATH = ROOT / "semantic" / "ontology2" / "dtwise" / "dtwise-schema-index.json"
 
 
 class DtwiseUnavailable(RuntimeError):
