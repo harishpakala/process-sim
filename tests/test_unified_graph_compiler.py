@@ -56,10 +56,22 @@ def test_unsupported_aggregation_fails_closed():
         compile_unified_graph_query(query(aggregation="count"))
 
 
-def test_unbound_join_fails_closed():
+def test_join_only_alias_is_allowed_when_connected_to_projected_entity():
     path = GraphPath("DEXPI", "shape:instrument", (URI,))
-    with pytest.raises(ValueError, match="unbound entity alias"):
-        compile_unified_graph_query(query(joins=(Join("a", "b", path, path),)))
+    plan = query(projections=(Projection("assetIdentifier", path, alias="signal"),),
+                 joins=(Join("engineering", "signal", path, path),))
+    sparql = compile_unified_graph_query(plan)
+    assert "?root_engineering <" + URI + ">" in sparql
+    assert "FILTER(?join_0_left_0 = ?join_0_right_0)" in sparql
+    assert sparql.startswith("SELECT DISTINCT ?assetIdentifier WHERE")
+
+
+def test_disconnected_join_only_aliases_fail_closed():
+    path = GraphPath("DEXPI", "shape:instrument", (URI,))
+    plan = query(projections=(Projection("assetIdentifier", path, alias="signal"),),
+                 joins=(Join("engineering", "other", path, path),))
+    with pytest.raises(ValueError, match="Cartesian"):
+        compile_unified_graph_query(plan)
 
 
 def test_mixed_query_not_silently_reduced_to_graph():
