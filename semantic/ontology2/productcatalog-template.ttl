@@ -1,0 +1,1272 @@
+@prefix aas: <https://example.org/aas/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix productcatalog: <https://example.org/productcatalog/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/c2hhcGU> a sh:NodeShape ;
+    rdfs:label "ProductCatalog SHACL shape" ;
+    sh:description "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."@en ;
+    sh:name "ProductCatalog" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> ;
+    sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/> a owl:Class ;
+    rdfs:label "ProductCatalog" ;
+    rdfs:comment "Product catalog submodel containing manufacturer, supplier, classification, and technical product information."@en .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5EdXR5Rmxvd0Jhc2lzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "DutyFlowBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "DutyFlowBasis recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "DutyFlowBasis" ;
+    sh:path productcatalog:hasDutyFlowBasis .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzc2lmaWNhdGlvbkJhc2lzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ECLASSClassificationBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ECLASSClassificationBasis recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ECLASSClassificationBasis" ;
+    sh:path productcatalog:hasECLASSClassificationBasis .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzcy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ECLASSClass constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ECLASS classification associated with the product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "ECLASSClass" ;
+    sh:path productcatalog:hasECLASSClass .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NJUkRJL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ECLASSIRDI constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "International Registration Data Identifier for the ECLASS classification."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "ECLASSIRDI" ;
+    sh:path productcatalog:hasECLASSIRDI .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NQcmVmZXJyZWROYW1lL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ECLASSPreferredName constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Preferred name of the assigned ECLASS classification."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "ECLASSPreferredName" ;
+    sh:path productcatalog:hasECLASSPreferredName .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ECLASSVerificationStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ECLASSVerificationStatus recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ECLASSVerificationStatus" ;
+    sh:path productcatalog:hasECLASSVerificationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FdmlkZW5jZVNvdXJjZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EvidenceSource constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "EvidenceSource recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "EvidenceSource" ;
+    sh:path productcatalog:hasEvidenceSource .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5GYW1pbHlQdWJsaXNoZWRFbnZlbG9wZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "FamilyPublishedEnvelope constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FamilyPublishedEnvelope recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FamilyPublishedEnvelope" ;
+    sh:path productcatalog:hasFamilyPublishedEnvelope .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5GaXRHYXBzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FitGaps constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FitGaps recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FitGaps" ;
+    sh:path productcatalog:hasFitGaps .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5JbnN0YWxsYXRpb25WZXJpZmljYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "InstallationVerificationStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "InstallationVerificationStatus recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "InstallationVerificationStatus" ;
+    sh:path productcatalog:hasInstallationVerificationStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJOYW1lL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ManufacturerName constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Name of the product manufacturer."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "ManufacturerName" ;
+    sh:path productcatalog:hasManufacturerName .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQYXJ0TnVtYmVyL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ManufacturerPartNumber constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Part number assigned by the product manufacturer."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ManufacturerPartNumber" ;
+    sh:path productcatalog:hasManufacturerPartNumber .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQcm9kdWN0RGVzaWduYXRpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ManufacturerProductDesignation constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Product designation assigned by the manufacturer."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ManufacturerProductDesignation" ;
+    sh:path productcatalog:hasManufacturerProductDesignation .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5PcGVyYXRpbmdFbnZlbG9wZUJhc2lzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "OperatingEnvelopeBasis constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "OperatingEnvelopeBasis recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "OperatingEnvelopeBasis" ;
+    sh:path productcatalog:hasOperatingEnvelopeBasis .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0RGVzY3JpcHRpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ProductDescription constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Textual description of the catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ProductDescription" ;
+    sh:path productcatalog:hasProductDescription .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ProductIdentifier constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Identifier of the catalog product; distinct from an installed asset identifier."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "ProductIdentifier" ;
+    sh:path productcatalog:hasProductIdentifier .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5SZXZhbGlkYXRpb25UcmlnZ2Vycy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "RevalidationTriggers constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "RevalidationTriggers recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RevalidationTriggers" ;
+    sh:path productcatalog:hasRevalidationTriggers .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TZWxlY3Rpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SelectionStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "SelectionStatus recorded for this catalog product."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SelectionStatus" ;
+    sh:path productcatalog:hasSelectionStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SupplierName constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Name of the product supplier."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SupplierName" ;
+    sh:path productcatalog:hasSupplierName .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SupplierPartNumber constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Part number assigned by the supplier."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SupplierPartNumber" ;
+    sh:path productcatalog:hasSupplierPartNumber .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hbnVmYWN0dXJlck1vZGVsL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ManufacturerModel constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ManufacturerModel recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ManufacturerModel" ;
+    sh:path productcatalog:hasManufacturerModel .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hbnVmYWN0dXJlclBhcnROdW1iZXJTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ManufacturerPartNumberStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ManufacturerPartNumberStatus recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ManufacturerPartNumberStatus" ;
+    sh:path productcatalog:hasManufacturerPartNumberStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hdGVyaWFsTm90ZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "MaterialNote constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MaterialNote recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MaterialNote" ;
+    sh:path productcatalog:hasMaterialNote .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "MaximumMeasuringDistance constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MaximumMeasuringDistance recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MaximumMeasuringDistance" ;
+    sh:path productcatalog:hasMaximumMeasuringDistance .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZVFVRFRRdWFudGl0eUtpbmQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MaximumMeasuringDistanceQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MaximumMeasuringDistanceQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MaximumMeasuringDistanceQUDTQuantityKind" ;
+    sh:path productcatalog:hasMaximumMeasuringDistanceQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZVFVRFRVbml0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "MaximumMeasuringDistanceQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MaximumMeasuringDistanceQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MaximumMeasuringDistanceQUDTUnit" ;
+    sh:path productcatalog:hasMaximumMeasuringDistanceQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1Qcm9jZXNzUHJlc3N1cmUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MaximumProcessPressure constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MaximumProcessPressure recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MaximumProcessPressure" ;
+    sh:path productcatalog:hasMaximumProcessPressure .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2Uvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MeasurementRange constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasurementRange recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasurementRange" ;
+    sh:path productcatalog:hasMeasurementRange .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2VRVURUUXVhbnRpdHlLaW5kL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "MeasurementRangeQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasurementRangeQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasurementRangeQUDTQuantityKind" ;
+    sh:path productcatalog:hasMeasurementRangeQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2VRVURUVW5pdC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "MeasurementRangeQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasurementRangeQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasurementRangeQUDTUnit" ;
+    sh:path productcatalog:hasMeasurementRangeQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50VmFyaWFibGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MeasurementVariable constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasurementVariable recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasurementVariable" ;
+    sh:path productcatalog:hasMeasurementVariable .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmluZ1ByaW5jaXBsZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "MeasuringPrinciple constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasuringPrinciple recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasuringPrinciple" ;
+    sh:path productcatalog:hasMeasuringPrinciple .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1ldGVyaW5nUHVycG9zZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "MeteringPurpose constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeteringPurpose recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeteringPurpose" ;
+    sh:path productcatalog:hasMeteringPurpose .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxBQ0lucHV0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "NominalACInput constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "NominalACInput recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "NominalACInput" ;
+    sh:path productcatalog:hasNominalACInput .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxPdXRwdXRWb2x0YWdlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "NominalOutputVoltage constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "NominalOutputVoltage recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "NominalOutputVoltage" ;
+    sh:path productcatalog:hasNominalOutputVoltage .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxTaXplL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "NominalSize constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "NominalSize recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "NominalSize" ;
+    sh:path productcatalog:hasNominalSize .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vcm1hbFBvc2l0aW9uL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "NormalPosition constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "NormalPosition recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "NormalPosition" ;
+    sh:path productcatalog:hasNormalPosition .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFDSW5wdXRSYW5nZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ACInputRange constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ACInputRange recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ACInputRange" ;
+    sh:path productcatalog:hasACInputRange .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Accuracy constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Accuracy recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "Accuracy" ;
+    sh:path productcatalog:hasAccuracy .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5UVVEVFF1YW50aXR5S2luZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "AccuracyQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "AccuracyQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "AccuracyQUDTQuantityKind" ;
+    sh:path productcatalog:hasAccuracyQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5UVVEVFVuaXQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "AccuracyQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "AccuracyQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "AccuracyQUDTUnit" ;
+    sh:path productcatalog:hasAccuracyQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZUVuZXJneVFVRFRRdWFudGl0eUtpbmQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ActiveEnergyQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ActiveEnergyQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ActiveEnergyQUDTQuantityKind" ;
+    sh:path productcatalog:hasActiveEnergyQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZUVuZXJneVFVRFRVbml0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ActiveEnergyQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ActiveEnergyQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ActiveEnergyQUDTUnit" ;
+    sh:path productcatalog:hasActiveEnergyQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZVBvd2VyUVVEVFF1YW50aXR5S2luZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ActivePowerQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ActivePowerQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ActivePowerQUDTQuantityKind" ;
+    sh:path productcatalog:hasActivePowerQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZVBvd2VyUVVEVFVuaXQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ActivePowerQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ActivePowerQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ActivePowerQUDTUnit" ;
+    sh:path productcatalog:hasActivePowerQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdHVhdG9yVHlwZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ActuatorType constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ActuatorType recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ActuatorType" ;
+    sh:path productcatalog:hasActuatorType .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFwcGxpY2F0aW9uUXVhbGlmaWNhdGlvbi9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ApplicationQualification constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ApplicationQualification recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ApplicationQualification" ;
+    sh:path productcatalog:hasApplicationQualification .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRRVURUUXVhbnRpdHlLaW5kL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "CurrentQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "CurrentQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "CurrentQUDTQuantityKind" ;
+    sh:path productcatalog:hasCurrentQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRRVURUVW5pdC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CurrentQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "CurrentQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "CurrentQUDTUnit" ;
+    sh:path productcatalog:hasCurrentQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRTZW5zb3JUeXBlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "CurrentSensorType constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "CurrentSensorType recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "CurrentSensorType" ;
+    sh:path productcatalog:hasCurrentSensorType .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkNvbW11bmljYXRpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Communication constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Communication recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "Communication" ;
+    sh:path productcatalog:hasCommunication .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkVmZmljaWVuY3kvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "Efficiency constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "Efficiency recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "Efficiency" ;
+    sh:path productcatalog:hasEfficiency .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhY3RvcnlDb25maWd1cmVkUmFuZ2Uvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "FactoryConfiguredRange constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FactoryConfiguredRange recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FactoryConfiguredRange" ;
+    sh:path productcatalog:hasFactoryConfiguredRange .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1heGltdW1Qcm9jZXNzUHJlc3N1cmUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "FamilyMaximumProcessPressure constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FamilyMaximumProcessPressure recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FamilyMaximumProcessPressure" ;
+    sh:path productcatalog:hasFamilyMaximumProcessPressure .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FamilyMeasuringRange constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FamilyMeasuringRange recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FamilyMeasuringRange" ;
+    sh:path productcatalog:hasFamilyMeasuringRange .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlUVVEVFF1YW50aXR5S2luZC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "FamilyMeasuringRangeQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FamilyMeasuringRangeQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FamilyMeasuringRangeQUDTQuantityKind" ;
+    sh:path productcatalog:hasFamilyMeasuringRangeQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlUVVEVFVuaXQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "FamilyMeasuringRangeQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FamilyMeasuringRangeQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FamilyMeasuringRangeQUDTUnit" ;
+    sh:path productcatalog:hasFamilyMeasuringRangeQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZsYW5nZVByZXNzdXJlUmF0aW5nL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FlangePressureRating constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FlangePressureRating recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FlangePressureRating" ;
+    sh:path productcatalog:hasFlangePressureRating .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZsb3dDb2VmZmljaWVudEt2cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "FlowCoefficientKvs constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FlowCoefficientKvs recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FlowCoefficientKvs" ;
+    sh:path productcatalog:hasFlowCoefficientKvs .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZyZXF1ZW5jeVFVRFRRdWFudGl0eUtpbmQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "FrequencyQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FrequencyQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FrequencyQUDTQuantityKind" ;
+    sh:path productcatalog:hasFrequencyQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZyZXF1ZW5jeVFVRFRVbml0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FrequencyQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FrequencyQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FrequencyQUDTUnit" ;
+    sh:path productcatalog:hasFrequencyQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkhvdXNpbmdNYXRlcmlhbC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "HousingMaterial constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "HousingMaterial recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "HousingMaterial" ;
+    sh:path productcatalog:hasHousingMaterial .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkluc3RydW1lbnRBaXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "InstrumentAir constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "InstrumentAir recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "InstrumentAir" ;
+    sh:path productcatalog:hasInstrumentAir .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkxldmVsU2NhbGluZ1N0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "LevelScalingStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "LevelScalingStatus recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "LevelScalingStatus" ;
+    sh:path productcatalog:hasLevelScalingStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "PositionerInput constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PositionerInput recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PositionerInput" ;
+    sh:path productcatalog:hasPositionerInput .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dFFVRFRRdWFudGl0eUtpbmQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "PositionerInputQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PositionerInputQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PositionerInputQUDTQuantityKind" ;
+    sh:path productcatalog:hasPositionerInputQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dFFVRFRVbml0L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "PositionerInputQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PositionerInputQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PositionerInputQUDTUnit" ;
+    sh:path productcatalog:hasPositionerInputQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJUeXBlL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "PositionerType constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PositionerType recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PositionerType" ;
+    sh:path productcatalog:hasPositionerType .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvd2VyQm9vc3RDdXJyZW50L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "PowerBoostCurrent constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PowerBoostCurrent recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PowerBoostCurrent" ;
+    sh:path productcatalog:hasPowerBoostCurrent .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlByb2R1Y3RDYXRlZ29yeS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ProductCategory constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ProductCategory recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ProductCategory" ;
+    sh:path productcatalog:hasProductCategory .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlByb3Bvc2VkTWVhc3VyZW1lbnRDZWxsL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ProposedMeasurementCell constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ProposedMeasurementCell recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ProposedMeasurementCell" ;
+    sh:path productcatalog:hasProposedMeasurementCell .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlJhdGVkT3V0cHV0Q3VycmVudC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "RatedOutputCurrent constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "RatedOutputCurrent recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RatedOutputCurrent" ;
+    sh:path productcatalog:hasRatedOutputCurrent .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlJhdGVkT3V0cHV0UG93ZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "RatedOutputPower constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "RatedOutputPower recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "RatedOutputPower" ;
+    sh:path productcatalog:hasRatedOutputPower .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNlbGVjdGlvbkRpc2NsYWltZXIvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SelectionDisclaimer constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "SelectionDisclaimer recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SelectionDisclaimer" ;
+    sh:path productcatalog:hasSelectionDisclaimer .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNlbGVjdGlvbkxpbWl0YXRpb24vc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SelectionLimitation constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "SelectionLimitation recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SelectionLimitation" ;
+    sh:path productcatalog:hasSelectionLimitation .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNpZ25hbEludGVyZmFjZU5vdGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SignalInterfaceNote constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "SignalInterfaceNote recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SignalInterfaceNote" ;
+    sh:path productcatalog:hasSignalInterfaceNote .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNwZWNpZmljYXRpb25Tb3VyY2VVUkwvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SpecificationSourceURL constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "SpecificationSourceURL recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "SpecificationSourceURL" ;
+    sh:path productcatalog:hasSpecificationSourceURL .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "TechnicalProperty SHACL shape" ;
+    sh:description "Technical characteristic recorded for the catalog product."@en ;
+    sh:name "TechnicalProperty" ;
+    aas:semanticRole "DomainEntity" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "TechnicalProperty constraint" ;
+    sh:class productcatalog:TechnicalProperty ;
+    sh:description "Technical characteristic recorded for the catalog product."@en ;
+    sh:minCount 0 ;
+    sh:name "TechnicalProperty" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L25vZGVTaGFwZQ> ;
+    sh:path productcatalog:hasTechnicalProperty ;
+    aas:semanticRole "DomainEntity" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZhbHZlQm9keVR5cGUvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "ValveBodyType constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ValveBodyType recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ValveBodyType" ;
+    sh:path productcatalog:hasValveBodyType .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZvbHRhZ2VRVURUUXVhbnRpdHlLaW5kL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "VoltageQUDTQuantityKind constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "VoltageQUDTQuantityKind recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "VoltageQUDTQuantityKind" ;
+    sh:path productcatalog:hasVoltageQUDTQuantityKind .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZvbHRhZ2VRVURUVW5pdC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "VoltageQUDTUnit constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "VoltageQUDTUnit recorded in product technical specifications."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "VoltageQUDTUnit" ;
+    sh:path productcatalog:hasVoltageQUDTUnit .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Product SHACL shape" ;
+    sh:description "Catalog record describing an identified product."@en ;
+    sh:name "Product" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5EdXR5Rmxvd0Jhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzc2lmaWNhdGlvbkJhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NDbGFzcy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NJUkRJL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NQcmVmZXJyZWROYW1lL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FQ0xBU1NWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5FdmlkZW5jZVNvdXJjZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5GYW1pbHlQdWJsaXNoZWRFbnZlbG9wZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5GaXRHYXBzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5JbnN0YWxsYXRpb25WZXJpZmljYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJOYW1lL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQYXJ0TnVtYmVyL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5NYW51ZmFjdHVyZXJQcm9kdWN0RGVzaWduYXRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5PcGVyYXRpbmdFbnZlbG9wZUJhc2lzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0RGVzY3JpcHRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5Qcm9kdWN0SWRlbnRpZmllci9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5SZXZhbGlkYXRpb25UcmlnZ2Vycy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TZWxlY3Rpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllck5hbWUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5TdXBwbGllclBhcnROdW1iZXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hbnVmYWN0dXJlck1vZGVsL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hbnVmYWN0dXJlclBhcnROdW1iZXJTdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1hdGVyaWFsTm90ZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZVFVRFRRdWFudGl0eUtpbmQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1NZWFzdXJpbmdEaXN0YW5jZVFVRFRVbml0L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1heGltdW1Qcm9jZXNzUHJlc3N1cmUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2Uvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2VRVURUUXVhbnRpdHlLaW5kL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50UmFuZ2VRVURUVW5pdC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmVtZW50VmFyaWFibGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1lYXN1cmluZ1ByaW5jaXBsZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk1ldGVyaW5nUHVycG9zZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxBQ0lucHV0L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxPdXRwdXRWb2x0YWdlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vbWluYWxTaXplL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLk5vcm1hbFBvc2l0aW9uL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFDSW5wdXRSYW5nZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5UVVEVFF1YW50aXR5S2luZC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjY3VyYWN5UVVEVFVuaXQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZUVuZXJneVFVRFRRdWFudGl0eUtpbmQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZUVuZXJneVFVRFRVbml0L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZVBvd2VyUVVEVFF1YW50aXR5S2luZC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdGl2ZVBvd2VyUVVEVFVuaXQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFjdHVhdG9yVHlwZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkFwcGxpY2F0aW9uUXVhbGlmaWNhdGlvbi9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRRVURUUXVhbnRpdHlLaW5kL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRRVURUVW5pdC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkN1cnJlbnRTZW5zb3JUeXBlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkNvbW11bmljYXRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkVmZmljaWVuY3kvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhY3RvcnlDb25maWd1cmVkUmFuZ2Uvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1heGltdW1Qcm9jZXNzUHJlc3N1cmUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlUVVEVFF1YW50aXR5S2luZC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZhbWlseU1lYXN1cmluZ1JhbmdlUVVEVFVuaXQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZsYW5nZVByZXNzdXJlUmF0aW5nL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZsb3dDb2VmZmljaWVudEt2cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZyZXF1ZW5jeVFVRFRRdWFudGl0eUtpbmQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkZyZXF1ZW5jeVFVRFRVbml0L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkhvdXNpbmdNYXRlcmlhbC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkluc3RydW1lbnRBaXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLkxldmVsU2NhbGluZ1N0YXR1cy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dFFVRFRRdWFudGl0eUtpbmQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJJbnB1dFFVRFRVbml0L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvc2l0aW9uZXJUeXBlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlBvd2VyQm9vc3RDdXJyZW50L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlByb2R1Y3RDYXRlZ29yeS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlByb3Bvc2VkTWVhc3VyZW1lbnRDZWxsL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlJhdGVkT3V0cHV0Q3VycmVudC9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlJhdGVkT3V0cHV0UG93ZXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNlbGVjdGlvbkRpc2NsYWltZXIvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNlbGVjdGlvbkxpbWl0YXRpb24vc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNpZ25hbEludGVyZmFjZU5vdGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlNwZWNpZmljYXRpb25Tb3VyY2VVUkwvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlRlY2huaWNhbFByb3BlcnR5L3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZhbHZlQm9keVR5cGUvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZvbHRhZ2VRVURUUXVhbnRpdHlLaW5kL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC5UZWNobmljYWxQcm9wZXJ0aWVzLlZvbHRhZ2VRVURUVW5pdC9zaGFwZQ> ;
+    aas:semanticRole "DomainEntity" .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Product constraint" ;
+    sh:class productcatalog:Product ;
+    sh:description "Catalog record describing an identified product."@en ;
+    sh:minCount 0 ;
+    sh:name "Product" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU> ;
+    sh:path productcatalog:hasProduct ;
+    aas:semanticRole "DomainEntity" .
+
+productcatalog:Product a owl:Class ;
+    rdfs:label "Product" ;
+    rdfs:subClassOf aas:SMC .
+
+productcatalog:TechnicalProperty a owl:Class ;
+    rdfs:label "TechnicalProperty" ;
+    rdfs:subClassOf aas:SMC .
+
+productcatalog:hasACInputRange a owl:DatatypeProperty ;
+    rdfs:label "ACInputRange",
+        "hasACInputRange" ;
+    rdfs:comment "ACInputRange recorded in product technical specifications."@en .
+
+productcatalog:hasAccuracy a owl:DatatypeProperty ;
+    rdfs:label "Accuracy",
+        "hasAccuracy" ;
+    rdfs:comment "Accuracy recorded in product technical specifications."@en .
+
+productcatalog:hasAccuracyQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "AccuracyQUDTQuantityKind",
+        "hasAccuracyQUDTQuantityKind" ;
+    rdfs:comment "AccuracyQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasAccuracyQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "AccuracyQUDTUnit",
+        "hasAccuracyQUDTUnit" ;
+    rdfs:comment "AccuracyQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasActiveEnergyQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "ActiveEnergyQUDTQuantityKind",
+        "hasActiveEnergyQUDTQuantityKind" ;
+    rdfs:comment "ActiveEnergyQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasActiveEnergyQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "ActiveEnergyQUDTUnit",
+        "hasActiveEnergyQUDTUnit" ;
+    rdfs:comment "ActiveEnergyQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasActivePowerQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "ActivePowerQUDTQuantityKind",
+        "hasActivePowerQUDTQuantityKind" ;
+    rdfs:comment "ActivePowerQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasActivePowerQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "ActivePowerQUDTUnit",
+        "hasActivePowerQUDTUnit" ;
+    rdfs:comment "ActivePowerQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasActuatorType a owl:DatatypeProperty ;
+    rdfs:label "ActuatorType",
+        "hasActuatorType" ;
+    rdfs:comment "ActuatorType recorded in product technical specifications."@en .
+
+productcatalog:hasApplicationQualification a owl:DatatypeProperty ;
+    rdfs:label "ApplicationQualification",
+        "hasApplicationQualification" ;
+    rdfs:comment "ApplicationQualification recorded in product technical specifications."@en .
+
+productcatalog:hasCommunication a owl:DatatypeProperty ;
+    rdfs:label "Communication",
+        "hasCommunication" ;
+    rdfs:comment "Communication recorded in product technical specifications."@en .
+
+productcatalog:hasCurrentQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "CurrentQUDTQuantityKind",
+        "hasCurrentQUDTQuantityKind" ;
+    rdfs:comment "CurrentQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasCurrentQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "CurrentQUDTUnit",
+        "hasCurrentQUDTUnit" ;
+    rdfs:comment "CurrentQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasCurrentSensorType a owl:DatatypeProperty ;
+    rdfs:label "CurrentSensorType",
+        "hasCurrentSensorType" ;
+    rdfs:comment "CurrentSensorType recorded in product technical specifications."@en .
+
+productcatalog:hasDutyFlowBasis a owl:DatatypeProperty ;
+    rdfs:label "DutyFlowBasis",
+        "hasDutyFlowBasis" ;
+    rdfs:comment "DutyFlowBasis recorded for this catalog product."@en .
+
+productcatalog:hasECLASSClass a owl:DatatypeProperty ;
+    rdfs:label "ECLASSClass",
+        "hasECLASSClass" ;
+    rdfs:comment "ECLASS classification associated with the product."@en .
+
+productcatalog:hasECLASSClassificationBasis a owl:DatatypeProperty ;
+    rdfs:label "ECLASSClassificationBasis",
+        "hasECLASSClassificationBasis" ;
+    rdfs:comment "ECLASSClassificationBasis recorded for this catalog product."@en .
+
+productcatalog:hasECLASSIRDI a owl:DatatypeProperty ;
+    rdfs:label "ECLASSIRDI",
+        "hasECLASSIRDI" ;
+    rdfs:comment "International Registration Data Identifier for the ECLASS classification."@en .
+
+productcatalog:hasECLASSPreferredName a owl:DatatypeProperty ;
+    rdfs:label "ECLASSPreferredName",
+        "hasECLASSPreferredName" ;
+    rdfs:comment "Preferred name of the assigned ECLASS classification."@en .
+
+productcatalog:hasECLASSVerificationStatus a owl:DatatypeProperty ;
+    rdfs:label "ECLASSVerificationStatus",
+        "hasECLASSVerificationStatus" ;
+    rdfs:comment "ECLASSVerificationStatus recorded for this catalog product."@en .
+
+productcatalog:hasEfficiency a owl:DatatypeProperty ;
+    rdfs:label "Efficiency",
+        "hasEfficiency" ;
+    rdfs:comment "Efficiency recorded in product technical specifications."@en .
+
+productcatalog:hasEvidenceSource a owl:DatatypeProperty ;
+    rdfs:label "EvidenceSource",
+        "hasEvidenceSource" ;
+    rdfs:comment "EvidenceSource recorded for this catalog product."@en .
+
+productcatalog:hasFactoryConfiguredRange a owl:DatatypeProperty ;
+    rdfs:label "FactoryConfiguredRange",
+        "hasFactoryConfiguredRange" ;
+    rdfs:comment "FactoryConfiguredRange recorded in product technical specifications."@en .
+
+productcatalog:hasFamilyMaximumProcessPressure a owl:DatatypeProperty ;
+    rdfs:label "FamilyMaximumProcessPressure",
+        "hasFamilyMaximumProcessPressure" ;
+    rdfs:comment "FamilyMaximumProcessPressure recorded in product technical specifications."@en .
+
+productcatalog:hasFamilyMeasuringRange a owl:DatatypeProperty ;
+    rdfs:label "FamilyMeasuringRange",
+        "hasFamilyMeasuringRange" ;
+    rdfs:comment "FamilyMeasuringRange recorded in product technical specifications."@en .
+
+productcatalog:hasFamilyMeasuringRangeQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "FamilyMeasuringRangeQUDTQuantityKind",
+        "hasFamilyMeasuringRangeQUDTQuantityKind" ;
+    rdfs:comment "FamilyMeasuringRangeQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasFamilyMeasuringRangeQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "FamilyMeasuringRangeQUDTUnit",
+        "hasFamilyMeasuringRangeQUDTUnit" ;
+    rdfs:comment "FamilyMeasuringRangeQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasFamilyPublishedEnvelope a owl:DatatypeProperty ;
+    rdfs:label "FamilyPublishedEnvelope",
+        "hasFamilyPublishedEnvelope" ;
+    rdfs:comment "FamilyPublishedEnvelope recorded for this catalog product."@en .
+
+productcatalog:hasFitGaps a owl:DatatypeProperty ;
+    rdfs:label "FitGaps",
+        "hasFitGaps" ;
+    rdfs:comment "FitGaps recorded for this catalog product."@en .
+
+productcatalog:hasFlangePressureRating a owl:DatatypeProperty ;
+    rdfs:label "FlangePressureRating",
+        "hasFlangePressureRating" ;
+    rdfs:comment "FlangePressureRating recorded in product technical specifications."@en .
+
+productcatalog:hasFlowCoefficientKvs a owl:DatatypeProperty ;
+    rdfs:label "FlowCoefficientKvs",
+        "hasFlowCoefficientKvs" ;
+    rdfs:comment "FlowCoefficientKvs recorded in product technical specifications."@en .
+
+productcatalog:hasFrequencyQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "FrequencyQUDTQuantityKind",
+        "hasFrequencyQUDTQuantityKind" ;
+    rdfs:comment "FrequencyQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasFrequencyQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "FrequencyQUDTUnit",
+        "hasFrequencyQUDTUnit" ;
+    rdfs:comment "FrequencyQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasHousingMaterial a owl:DatatypeProperty ;
+    rdfs:label "HousingMaterial",
+        "hasHousingMaterial" ;
+    rdfs:comment "HousingMaterial recorded in product technical specifications."@en .
+
+productcatalog:hasInstallationVerificationStatus a owl:DatatypeProperty ;
+    rdfs:label "InstallationVerificationStatus",
+        "hasInstallationVerificationStatus" ;
+    rdfs:comment "InstallationVerificationStatus recorded for this catalog product."@en .
+
+productcatalog:hasInstrumentAir a owl:DatatypeProperty ;
+    rdfs:label "InstrumentAir",
+        "hasInstrumentAir" ;
+    rdfs:comment "InstrumentAir recorded in product technical specifications."@en .
+
+productcatalog:hasLevelScalingStatus a owl:DatatypeProperty ;
+    rdfs:label "LevelScalingStatus",
+        "hasLevelScalingStatus" ;
+    rdfs:comment "LevelScalingStatus recorded in product technical specifications."@en .
+
+productcatalog:hasManufacturerModel a owl:DatatypeProperty ;
+    rdfs:label "ManufacturerModel",
+        "hasManufacturerModel" ;
+    rdfs:comment "ManufacturerModel recorded in product technical specifications."@en .
+
+productcatalog:hasManufacturerName a owl:DatatypeProperty ;
+    rdfs:label "ManufacturerName",
+        "hasManufacturerName" ;
+    rdfs:comment "Name of the product manufacturer."@en .
+
+productcatalog:hasManufacturerPartNumber a owl:DatatypeProperty ;
+    rdfs:label "ManufacturerPartNumber",
+        "hasManufacturerPartNumber" ;
+    rdfs:comment "Part number assigned by the product manufacturer."@en .
+
+productcatalog:hasManufacturerPartNumberStatus a owl:DatatypeProperty ;
+    rdfs:label "ManufacturerPartNumberStatus",
+        "hasManufacturerPartNumberStatus" ;
+    rdfs:comment "ManufacturerPartNumberStatus recorded in product technical specifications."@en .
+
+productcatalog:hasManufacturerProductDesignation a owl:DatatypeProperty ;
+    rdfs:label "ManufacturerProductDesignation",
+        "hasManufacturerProductDesignation" ;
+    rdfs:comment "Product designation assigned by the manufacturer."@en .
+
+productcatalog:hasMaterialNote a owl:DatatypeProperty ;
+    rdfs:label "MaterialNote",
+        "hasMaterialNote" ;
+    rdfs:comment "MaterialNote recorded in product technical specifications."@en .
+
+productcatalog:hasMaximumMeasuringDistance a owl:DatatypeProperty ;
+    rdfs:label "MaximumMeasuringDistance",
+        "hasMaximumMeasuringDistance" ;
+    rdfs:comment "MaximumMeasuringDistance recorded in product technical specifications."@en .
+
+productcatalog:hasMaximumMeasuringDistanceQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "MaximumMeasuringDistanceQUDTQuantityKind",
+        "hasMaximumMeasuringDistanceQUDTQuantityKind" ;
+    rdfs:comment "MaximumMeasuringDistanceQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasMaximumMeasuringDistanceQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "MaximumMeasuringDistanceQUDTUnit",
+        "hasMaximumMeasuringDistanceQUDTUnit" ;
+    rdfs:comment "MaximumMeasuringDistanceQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasMaximumProcessPressure a owl:DatatypeProperty ;
+    rdfs:label "MaximumProcessPressure",
+        "hasMaximumProcessPressure" ;
+    rdfs:comment "MaximumProcessPressure recorded in product technical specifications."@en .
+
+productcatalog:hasMeasurementRange a owl:DatatypeProperty ;
+    rdfs:label "MeasurementRange",
+        "hasMeasurementRange" ;
+    rdfs:comment "MeasurementRange recorded in product technical specifications."@en .
+
+productcatalog:hasMeasurementRangeQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "MeasurementRangeQUDTQuantityKind",
+        "hasMeasurementRangeQUDTQuantityKind" ;
+    rdfs:comment "MeasurementRangeQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasMeasurementRangeQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "MeasurementRangeQUDTUnit",
+        "hasMeasurementRangeQUDTUnit" ;
+    rdfs:comment "MeasurementRangeQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasMeasurementVariable a owl:DatatypeProperty ;
+    rdfs:label "MeasurementVariable",
+        "hasMeasurementVariable" ;
+    rdfs:comment "MeasurementVariable recorded in product technical specifications."@en .
+
+productcatalog:hasMeasuringPrinciple a owl:DatatypeProperty ;
+    rdfs:label "MeasuringPrinciple",
+        "hasMeasuringPrinciple" ;
+    rdfs:comment "MeasuringPrinciple recorded in product technical specifications."@en .
+
+productcatalog:hasMeteringPurpose a owl:DatatypeProperty ;
+    rdfs:label "MeteringPurpose",
+        "hasMeteringPurpose" ;
+    rdfs:comment "MeteringPurpose recorded in product technical specifications."@en .
+
+productcatalog:hasNominalACInput a owl:DatatypeProperty ;
+    rdfs:label "NominalACInput",
+        "hasNominalACInput" ;
+    rdfs:comment "NominalACInput recorded in product technical specifications."@en .
+
+productcatalog:hasNominalOutputVoltage a owl:DatatypeProperty ;
+    rdfs:label "NominalOutputVoltage",
+        "hasNominalOutputVoltage" ;
+    rdfs:comment "NominalOutputVoltage recorded in product technical specifications."@en .
+
+productcatalog:hasNominalSize a owl:DatatypeProperty ;
+    rdfs:label "NominalSize",
+        "hasNominalSize" ;
+    rdfs:comment "NominalSize recorded in product technical specifications."@en .
+
+productcatalog:hasNormalPosition a owl:DatatypeProperty ;
+    rdfs:label "NormalPosition",
+        "hasNormalPosition" ;
+    rdfs:comment "NormalPosition recorded in product technical specifications."@en .
+
+productcatalog:hasOperatingEnvelopeBasis a owl:DatatypeProperty ;
+    rdfs:label "OperatingEnvelopeBasis",
+        "hasOperatingEnvelopeBasis" ;
+    rdfs:comment "OperatingEnvelopeBasis recorded for this catalog product."@en .
+
+productcatalog:hasPositionerInput a owl:DatatypeProperty ;
+    rdfs:label "PositionerInput",
+        "hasPositionerInput" ;
+    rdfs:comment "PositionerInput recorded in product technical specifications."@en .
+
+productcatalog:hasPositionerInputQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "PositionerInputQUDTQuantityKind",
+        "hasPositionerInputQUDTQuantityKind" ;
+    rdfs:comment "PositionerInputQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasPositionerInputQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "PositionerInputQUDTUnit",
+        "hasPositionerInputQUDTUnit" ;
+    rdfs:comment "PositionerInputQUDTUnit recorded in product technical specifications."@en .
+
+productcatalog:hasPositionerType a owl:DatatypeProperty ;
+    rdfs:label "PositionerType",
+        "hasPositionerType" ;
+    rdfs:comment "PositionerType recorded in product technical specifications."@en .
+
+productcatalog:hasPowerBoostCurrent a owl:DatatypeProperty ;
+    rdfs:label "PowerBoostCurrent",
+        "hasPowerBoostCurrent" ;
+    rdfs:comment "PowerBoostCurrent recorded in product technical specifications."@en .
+
+productcatalog:hasProduct a owl:ObjectProperty ;
+    rdfs:label "Product",
+        "hasProduct" ;
+    rdfs:comment "Catalog record describing an identified product."@en .
+
+productcatalog:hasProductCategory a owl:DatatypeProperty ;
+    rdfs:label "ProductCategory",
+        "hasProductCategory" ;
+    rdfs:comment "ProductCategory recorded in product technical specifications."@en .
+
+productcatalog:hasProductDescription a owl:DatatypeProperty ;
+    rdfs:label "ProductDescription",
+        "hasProductDescription" ;
+    rdfs:comment "Textual description of the catalog product."@en .
+
+productcatalog:hasProductIdentifier a owl:DatatypeProperty ;
+    rdfs:label "ProductIdentifier",
+        "hasProductIdentifier" ;
+    rdfs:comment "Identifier of the catalog product; distinct from an installed asset identifier."@en .
+
+productcatalog:hasProposedMeasurementCell a owl:DatatypeProperty ;
+    rdfs:label "ProposedMeasurementCell",
+        "hasProposedMeasurementCell" ;
+    rdfs:comment "ProposedMeasurementCell recorded in product technical specifications."@en .
+
+productcatalog:hasRatedOutputCurrent a owl:DatatypeProperty ;
+    rdfs:label "RatedOutputCurrent",
+        "hasRatedOutputCurrent" ;
+    rdfs:comment "RatedOutputCurrent recorded in product technical specifications."@en .
+
+productcatalog:hasRatedOutputPower a owl:DatatypeProperty ;
+    rdfs:label "RatedOutputPower",
+        "hasRatedOutputPower" ;
+    rdfs:comment "RatedOutputPower recorded in product technical specifications."@en .
+
+productcatalog:hasRevalidationTriggers a owl:DatatypeProperty ;
+    rdfs:label "RevalidationTriggers",
+        "hasRevalidationTriggers" ;
+    rdfs:comment "RevalidationTriggers recorded for this catalog product."@en .
+
+productcatalog:hasSelectionDisclaimer a owl:DatatypeProperty ;
+    rdfs:label "SelectionDisclaimer",
+        "hasSelectionDisclaimer" ;
+    rdfs:comment "SelectionDisclaimer recorded in product technical specifications."@en .
+
+productcatalog:hasSelectionLimitation a owl:DatatypeProperty ;
+    rdfs:label "SelectionLimitation",
+        "hasSelectionLimitation" ;
+    rdfs:comment "SelectionLimitation recorded in product technical specifications."@en .
+
+productcatalog:hasSelectionStatus a owl:DatatypeProperty ;
+    rdfs:label "SelectionStatus",
+        "hasSelectionStatus" ;
+    rdfs:comment "SelectionStatus recorded for this catalog product."@en .
+
+productcatalog:hasSignalInterfaceNote a owl:DatatypeProperty ;
+    rdfs:label "SignalInterfaceNote",
+        "hasSignalInterfaceNote" ;
+    rdfs:comment "SignalInterfaceNote recorded in product technical specifications."@en .
+
+productcatalog:hasSpecificationSourceURL a owl:DatatypeProperty ;
+    rdfs:label "SpecificationSourceURL",
+        "hasSpecificationSourceURL" ;
+    rdfs:comment "SpecificationSourceURL recorded in product technical specifications."@en .
+
+productcatalog:hasSupplierName a owl:DatatypeProperty ;
+    rdfs:label "SupplierName",
+        "hasSupplierName" ;
+    rdfs:comment "Name of the product supplier."@en .
+
+productcatalog:hasSupplierPartNumber a owl:DatatypeProperty ;
+    rdfs:label "SupplierPartNumber",
+        "hasSupplierPartNumber" ;
+    rdfs:comment "Part number assigned by the supplier."@en .
+
+productcatalog:hasTechnicalProperty a owl:ObjectProperty ;
+    rdfs:label "TechnicalProperty",
+        "hasTechnicalProperty" ;
+    rdfs:comment "Technical characteristic recorded for the catalog product."@en .
+
+productcatalog:hasValveBodyType a owl:DatatypeProperty ;
+    rdfs:label "ValveBodyType",
+        "hasValveBodyType" ;
+    rdfs:comment "ValveBodyType recorded in product technical specifications."@en .
+
+productcatalog:hasVoltageQUDTQuantityKind a owl:DatatypeProperty ;
+    rdfs:label "VoltageQUDTQuantityKind",
+        "hasVoltageQUDTQuantityKind" ;
+    rdfs:comment "VoltageQUDTQuantityKind recorded in product technical specifications."@en .
+
+productcatalog:hasVoltageQUDTUnit a owl:DatatypeProperty ;
+    rdfs:label "VoltageQUDTUnit",
+        "hasVoltageQUDTUnit" ;
+    rdfs:comment "VoltageQUDTUnit recorded in product technical specifications."@en .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
+
