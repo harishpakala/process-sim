@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import UnifiedResultTable from './UnifiedResultTable.vue'
 
 withDefaults(defineProps<{ page?: 'engineering' | 'historian' }>(), {page: 'engineering'})
 
@@ -96,6 +97,13 @@ onMounted(async () => {
 const question = ref('')
 const useUnified = ref(true)
 const unifiedReport = ref<Record<string, unknown> | null>(null)
+const unifiedRows = computed<Array<Record<string, unknown>>>(() => {
+ const answer = unifiedReport.value?.answer
+ if (!answer || typeof answer !== 'object') return []
+ const rows = (answer as Record<string, unknown>).rows
+ return Array.isArray(rows) ? rows.filter((row): row is Record<string, unknown> =>
+  row !== null && typeof row === 'object' && !Array.isArray(row)) : []
+})
 const busy = ref(false)
 const error = ref('')
 const result = ref<DtwiseResult | null>(null)
@@ -272,7 +280,9 @@ onMounted(hLoadRuns)
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
    <div v-if="unifiedReport" class="custom-query">
     <h3>Unified planner result</h3>
-    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.answer, null, 2)}}</pre>
+    <p>{{unifiedRows.length}} rows</p>
+    <UnifiedResultTable :rows="unifiedRows" />
+    <details><summary>Qwen original JSON output</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.qwen_output, null, 2)}}</pre></details>
     <details><summary>SHACL plan and generated SPARQL</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify({plan: unifiedReport.plan, sparql: unifiedReport.sparql}, null, 2)}}</pre></details>
    </div>
   </section>
