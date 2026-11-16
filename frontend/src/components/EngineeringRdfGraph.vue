@@ -30,20 +30,25 @@ const known = computed(() => new Set([root.value, ...triples.value.map(t => t.su
 const label = (id: string) => triples.value.find(t => t.subject === id && t.predicate === labelPredicate)?.object || localName(id)
 const kind = (id: string) => localName(triples.value.find(t => t.subject === id && t.predicate === rdfType && t.object.startsWith(namespace.value))?.object || 'Resource')
 const links = computed(() => triples.value.filter(t => t.resource && t.predicate !== rdfType && t.subject !== t.object))
-// Presentation-only groups: no structural containers are added to RDF.
-const dexpiRootGroups = computed(() => {
-  if (props.domain !== 'dexpi' || !root.value) return []
-  return ['hasEquipment', 'hasInstrumentationFunction', 'hasActuatingFunction'].map(name => ({
-    name, label: name.slice(3),
-    count: new Set(links.value.filter(t => t.subject === root.value && t.predicate === namespace.value + name).map(t => t.object)).size,
-  })).filter(group => group.count > 0)
+// Root branches are derived from RDF predicates and exist only in the UI.
+const rootGroups = computed(() => {
+  if (!['dexpi', 'ecad', 'productcatalog'].includes(props.domain) || !root.value) return []
+  const groups = new Map<string, Set<string>>()
+  for (const triple of links.value) {
+    if (triple.subject !== root.value) continue
+    if (!groups.has(triple.predicate)) groups.set(triple.predicate, new Set())
+    groups.get(triple.predicate)!.add(triple.object)
+  }
+  return [...groups].map(([predicate, targets]) => ({
+    predicate, label: localName(predicate), count: targets.size,
+  })).sort((a, b) => a.label.localeCompare(b.label))
 })
 const displayLinks = computed(() => {
-  if (!dexpiRootGroups.value.length) return links.value
-  return links.value.filter(t => t.subject !== root.value || (activeRootGroup.value !== '' && t.predicate === namespace.value + activeRootGroup.value))
+  if (!rootGroups.value.length) return links.value
+  return links.value.filter(t => t.subject !== root.value || (activeRootGroup.value !== '' && t.predicate === activeRootGroup.value))
 })
-function selectRootGroup(name: string) {
-  activeRootGroup.value = activeRootGroup.value === name ? '' : name
+function selectRootGroup(predicate: string) {
+  activeRootGroup.value = activeRootGroup.value === predicate ? '' : predicate
   if (activeRootGroup.value && !expanded.value.includes(root.value)) expanded.value = [...expanded.value, root.value]
   layoutGraph(root.value)
 }
@@ -143,9 +148,9 @@ watch(() => props.domain, () => { void load() }, { immediate: true })
 
 async function toggle(id: string) {
   selected.value = id
-  if (props.domain === 'dexpi' && id === root.value && dexpiRootGroups.value.length) {
-    const index = dexpiRootGroups.value.findIndex(group => group.name === activeRootGroup.value)
-    selectRootGroup(dexpiRootGroups.value[(index + 1) % dexpiRootGroups.value.length].name)
+  if (id === root.value && rootGroups.value.length) {
+    const index = rootGroups.value.findIndex(group => group.predicate === activeRootGroup.value)
+    selectRootGroup(rootGroups.value[(index + 1) % rootGroups.value.length].predicate)
     return
   }
   if (expanded.value.includes(id)) {
@@ -298,9 +303,9 @@ function wheel(event: WheelEvent) {
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }}</p>
     <template v-if="!loading && root">
-      <div v-if="dexpiRootGroups.length" class="graph-relationship" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-        <strong>Show DEXPI branch:</strong>
-        <button v-for="group in dexpiRootGroups" :key="group.name" type="button" :class="activeRootGroup===group.name?'':'secondary'" :aria-pressed="activeRootGroup===group.name" @click="selectRootGroup(group.name)">{{ group.label }} ({{ group.count }})</button>
+      <div v-if="rootGroups.length" class="graph-relationship" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <strong>Show relationship branch:</strong>
+        <button v-for="group in rootGroups" :key="group.predicate" type="button" :class="activeRootGroup===group.predicate?'':'secondary'" :aria-pressed="activeRootGroup===group.predicate" @click="selectRootGroup(group.predicate)">{{ group.label }} ({{ group.count }})</button>
         <button v-if="activeRootGroup" type="button" class="secondary" @click="selectRootGroup(activeRootGroup)">Hide branch</button>
       </div>
       <p class="catalog-disclaimer">{{ visible.length }} visible resources · {{ edges.length }} RDF relationships. Drag nodes to reposition, drag the background to pan, scroll to zoom, and double-click to expand. Node colors indicate RDF types; arrows show predicate direction. Dragged nodes retain their positions. Literal properties appear on the right.</p>
