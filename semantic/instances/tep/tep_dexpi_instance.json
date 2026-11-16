@@ -24,6 +24,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Equipment"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -49,6 +54,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Equipment"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -74,6 +84,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Equipment"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -99,6 +114,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Equipment"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -124,6 +144,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Equipment"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -141,6 +166,13 @@
             }
           ]
         }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
+        }
       ]
     },
     {
@@ -155,6 +187,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -195,6 +232,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -235,6 +277,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -275,6 +322,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -315,6 +367,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -355,6 +412,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -395,6 +457,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -435,6 +502,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -475,6 +547,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -515,6 +592,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -555,6 +637,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -599,6 +686,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -643,6 +735,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -687,6 +784,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -731,6 +833,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -793,6 +900,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -837,6 +949,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -881,6 +998,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -925,6 +1047,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -965,6 +1092,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1005,6 +1137,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1045,6 +1182,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "InstrumentationFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1077,6 +1219,13 @@
             }
           ]
         }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
+        }
       ]
     },
     {
@@ -1091,6 +1240,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1122,6 +1276,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1153,6 +1312,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1184,6 +1348,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1215,6 +1384,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1264,6 +1438,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1295,6 +1474,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1344,6 +1528,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1375,6 +1564,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1406,6 +1600,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1437,6 +1636,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1486,6 +1690,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "ActuatingFunction"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1526,6 +1735,13 @@
               "value": "SC_101 retains original DEXPI function tag; M1 is shared canonical asset. XMV12 is the operational manipulated variable. User-approved modeling alignment, not proof of control-function/device equivalence."
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
