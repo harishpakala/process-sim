@@ -57,3 +57,41 @@ def test_localid_question_never_projects_signalname_or_assetidentifier():
     assert "FI_103" in sparql
     assert "hasSignalName" not in sparql
     assert "hasAssetIdentifier" not in sparql
+
+
+def test_measured_variable_uses_requested_shacl_property_not_qwen_signalname():
+    class MeasuredSchema(EngineeringSchema):
+        def shacl_paths(self, root, max_depth=5, domain=None):
+            paths = super().shacl_paths(root, max_depth=max_depth, domain=domain)
+            if (root, domain) == ("shape:dexpi", "dexpi"):
+                paths.append([
+                    {"property": D + "hasInstrumentationFunction", "evidence_ids": []},
+                    {"property": D + "hasMeasuredVariable", "evidence_ids": []},
+                ])
+            return paths
+
+    question = "Show dexpi InstrumentationFunction measuredVariable where localId is FI_103."
+    calls = []
+    def wrong_label(q, catalog, context):
+        calls.append(q)
+        return {
+            "projections": [{"name": "SignalName", "path_id": 2,
+                             "source": "graphdb", "alias": "entity"}],
+            "joins": [], "where": None, "group_by": [],
+            "aggregation": None, "order_by": [], "limit": None,
+            "sources": ["graphdb", "timescaledb"], "run_id": None,
+            "start_seconds": None, "end_seconds": None,
+        }
+    plan = interpret_unified_semantics(question, MeasuredSchema(), interpret=wrong_label)
+    assert len(calls) == 1
+    assert plan.validated
+    assert plan.sources == ("graphdb",)
+    assert plan.joins == ()
+    assert plan.projections[0].name == "MeasuredVariable"
+    assert plan.projections[0].path.predicates[-1] == D + "hasMeasuredVariable"
+    assert plan.where.value == "FI_103"
+    assert plan.where.path.predicates[-1] == D + "hasLocalId"
+    sparql = compile_unified_graph_query(plan)
+    assert D + "hasMeasuredVariable" in sparql
+    assert D + "hasLocalId" in sparql
+    assert "hasSignalName" not in sparql
