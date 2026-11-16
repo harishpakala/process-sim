@@ -146,17 +146,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Identifier of an asset related to the inventory asset."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
               "description": [

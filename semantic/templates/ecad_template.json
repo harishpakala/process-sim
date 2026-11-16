@@ -216,17 +216,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedAssetIdentifier",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Identifier of a related asset; distinct from the identifier of the current element."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
               "description": [

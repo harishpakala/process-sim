@@ -210,17 +210,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Identifier referencing an associated asset inventory record."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "description": [

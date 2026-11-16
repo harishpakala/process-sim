@@ -82,6 +82,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -106,6 +111,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "One"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
@@ -209,17 +219,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
               "description": [
@@ -266,6 +265,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -290,6 +294,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
@@ -393,17 +402,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "AssetIdentifier",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Identifier of an asset related to this engineering function; not necessarily the function's own identifier."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
               "idShort": "CrossDomainAssociationStatus",
               "valueType": "xs:string",
               "description": [
@@ -450,6 +448,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -474,6 +477,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
