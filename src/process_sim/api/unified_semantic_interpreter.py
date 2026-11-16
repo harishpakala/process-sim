@@ -5,6 +5,7 @@ an engineering or historian planner, compile SQL/SPARQL, or execute queries.
 """
 import json
 import os
+import re
 from urllib.request import Request, urlopen
 
 from process_sim.api.unified_semantic_ir import (
@@ -93,6 +94,28 @@ _RESPONSE_SCHEMA = {
 }
 
 
+def _candidate_paths(question, catalog, *, max_candidates=24):
+    """Deterministic lexical retrieval, not a second semantic interpretation."""
+    def words(value):
+        value = re.sub(r"([a-z])([A-Z])", r"\\1 \\2", str(value))
+        return set(re.findall(r"[a-z0-9]+", value.lower()))
+
+    query = words(question)
+    scored = []
+    for i, path in enumerate(catalog):
+        parts = [path["domain"], path["root_shape"], *path["predicates"]]
+        labels = path.get("labels", [])
+        parts.extend(str(label) for group in labels for label in group)
+        tokens = set().union(*(words(part) for part in parts))
+        score = sum(3 if len(token) > 3 else 1 for token in query & tokens)
+        scored.append((score, i))
+    ranked = sorted(scored, key=lambda pair: (-pair[0], pair[1]))
+    selected = [i for score, i in ranked if score > 0][:max_candidates]
+    if not selected:
+        raise ValueError("No SHACL paths match question terms; cannot ground semantic plan")
+    return selected
+
+
 def _interpret(question, catalog, context):
     system = (
         "You are ONE semantic interpreter for engineering, historian and mixed queries. "
@@ -112,6 +135,7 @@ def _interpret(question, catalog, context):
         "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
         "Do not generate SPARQL or SQL. No keyword routing or external planner."
     )
+    candidates = _candidate_paths(question, catalog)
     request = Request(
         os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/") + "/api/chat",
         data=json.dumps({
@@ -124,7 +148,7 @@ def _interpret(question, catalog, context):
                                   "root_shape": path["root_shape"].rsplit("#", 1)[-1].rsplit("/", 1)[-1],
                                   "predicates": [p.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
                                                  for p in path["predicates"]]}
-                                 for i, path in enumerate(catalog)],
+                                 for i in candidates for path in [catalog[i]]],
                              "selected_context": context})}],
         }).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urlopen(request, timeout=90) as response:
