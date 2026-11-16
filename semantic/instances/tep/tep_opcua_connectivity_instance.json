@@ -41,8 +41,20 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "Server"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -108,6 +120,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -169,6 +186,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -230,6 +252,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -291,6 +318,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -352,6 +384,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -413,6 +450,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -474,6 +516,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -535,6 +582,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -596,6 +648,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -657,6 +714,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -718,6 +780,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -779,6 +846,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -840,6 +912,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -901,6 +978,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -958,12 +1040,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/TI1202"
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -986,6 +1062,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1047,6 +1128,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1108,6 +1194,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1169,6 +1260,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1230,6 +1326,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1291,6 +1392,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1352,6 +1458,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1413,6 +1524,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1474,6 +1590,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1535,6 +1656,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1596,6 +1722,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1657,6 +1788,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1714,12 +1850,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1006"
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -1742,6 +1872,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1803,6 +1938,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1860,12 +2000,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1301"
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -1888,6 +2022,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -1949,6 +2088,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2010,6 +2154,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2071,6 +2220,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2128,12 +2282,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/CV1201"
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -2156,6 +2304,11 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -2213,12 +2366,6 @@
             },
             {
               "modelType": "Property",
-              "idShort": "RelatedInventoryAssetIdentifier",
-              "valueType": "xs:string",
-              "value": "https://aas.example.com/M1"
-            },
-            {
-              "modelType": "Property",
               "idShort": "InventoryAssociationStatus",
               "valueType": "xs:string",
               "value": "USER_APPROVED_CANONICAL_ALIGNMENT"
@@ -2241,8 +2388,20 @@
               "type": "OntoConcept",
               "valueType": "xs:string",
               "value": "SignalMapping"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
