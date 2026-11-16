@@ -92,6 +92,29 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
             clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
             current = next_var
         fields[projection.name] = current
+    # Qwen sometimes names the projection after the output field while using a
+    # domain name for the join alias. Reconcile only when the SHACL root shape
+    # uniquely identifies a single join-side alias; never guess between roots.
+    join_shapes = {}
+    for join in plan.joins:
+        for alias, path in ((join.left, join.left_path),
+                            (join.right, join.right_path)):
+            join_shapes.setdefault((path.domain, path.root_shape), set()).add(alias)
+    renames = {}
+    for alias, shape in alias_shapes.items():
+        matching = join_shapes.get(shape, set())
+        if alias not in matching and len(matching) == 1:
+            target = next(iter(matching))
+            if target in alias_shapes and target != alias:
+                raise ValueError("Ambiguous projection and join aliases")
+            renames[alias] = target
+    if renames:
+        for old, new in renames.items():
+            old_root, new_root = "?root_" + old, "?root_" + new
+            clauses = [clause.replace(old_root + " ", new_root + " ")
+                       for clause in clauses]
+        alias_shapes = {renames.get(alias, alias): shape
+                        for alias, shape in alias_shapes.items()}
     # A joined engineering entity can constrain projected signal rows without
     # itself contributing a SELECT column. Bind its root from the SHACL join path.
     for join in plan.joins:
@@ -131,7 +154,22 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
         if reached != aliases:
             raise ValueError("Disconnected entity aliases would cause Cartesian product")
     if plan.where is not None:
-        clauses.append("FILTER(" + _condition(plan.where, fields) + ")")
+        # A join key can be filtered without appearing in SELECT. Only expose
+        # a name when it resolves to one unique SHACL join property.
+        filter_fields = dict(fields)
+        for index, join in enumerate(plan.joins):
+            for side, path in (("left", join.left_path),
+                               ("right", join.right_path)):
+                terminal = path.predicates[-1].rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+                variable = "?join_" + str(index) + "_" + side + "_" + str(len(path.predicates) - 1)
+                if terminal not in filter_fields:
+                    filter_fields[terminal] = variable
+                elif filter_fields[terminal] != variable and terminal not in fields:
+                    # Multiple join keys with this name must be equivalent;
+                    # a two-sided equality join is already enforced above.
+                    if not (side == "right" and join.left_path.predicates[-1] == path.predicates[-1]):
+                        raise ValueError("Ambiguous non-projected filter field: " + terminal)
+        clauses.append("FILTER(" + _condition(plan.where, filter_fields) + ")")
     for field in plan.order_by:
         if field not in fields:
             raise ValueError("Ordering field is not projected")
