@@ -11,8 +11,8 @@ from rdflib.namespace import SH
 
 DT = Namespace("https://example.org/dtwise/")
 
-INPUT_DIR = Path("out/semantic/dtwise")
-OUTPUT_FILE = INPUT_DIR / "dtwise-index.json"
+INPUT_DIR = Path("semantic/ontology2/dtwise")
+OUTPUT_FILE = INPUT_DIR / "dtwise-schema-index.json"
 
 
 def tokenize(text):
