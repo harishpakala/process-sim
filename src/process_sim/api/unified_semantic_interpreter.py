@@ -127,6 +127,26 @@ def _candidate_paths(question, catalog, *, max_candidates=24):
     selected = [i for score, i in ranked if score > 0][:max_candidates]
     if not selected:
         raise ValueError("No SHACL paths match question terms; cannot ground semantic plan")
+    # Reserve catalog slots for distinct semantic roles in mixed engineering /
+    # historian requests. Generic assetIdentifier matches otherwise crowd out
+    # the signal-name path in a small model's bounded candidate list.
+    if (re.search(r"\bdexpi\b", question, re.I)
+            and re.search(r"\bopcua(?:connectivity)?\b", question, re.I)
+            and re.search(r"\b(historian|time[- ]series|observations?)\b", question, re.I)):
+        roles = (("dexpi", "hasAssetIdentifier"),
+                 ("opcuaconnectivity", "hasAssetIdentifier"),
+                 ("opcuaconnectivity", "hasSignalName"))
+        reserved = []
+        for domain, terminal in roles:
+            matches = [i for i, path in enumerate(catalog)
+                       if path["domain"].lower() == domain
+                       and path["predicates"][-1].rsplit("/", 1)[-1].lower()
+                       == terminal.lower()]
+            if not matches:
+                raise ValueError("SHACL catalog missing required " + domain + " " + terminal)
+            # Prefer the shortest available path, retaining stable catalog IDs.
+            reserved.append(min(matches, key=lambda i: (len(catalog[i]["predicates"]), i)))
+        selected = list(dict.fromkeys(reserved + selected))[:max_candidates]
     return selected
 
 
