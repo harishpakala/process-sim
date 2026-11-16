@@ -109,8 +109,15 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
     catalog = shacl_catalog(schema)
     raw = (_interpret(question, catalog, context) if interpret is None
            else interpret(question, catalog, context))
-    if not isinstance(raw, dict) or set(raw) != _FIELDS:
-        raise ValueError("Model returned missing or unexpected semantic fields")
+    if not isinstance(raw, dict):
+        raise ValueError("Model returned a non-object semantic response: " + type(raw).__name__)
+    if set(raw) != _FIELDS:
+        missing = sorted(_FIELDS - set(raw))
+        unexpected = sorted(set(raw) - _FIELDS)
+        raise ValueError(
+            "Model returned missing or unexpected semantic fields; "
+            + "missing=" + repr(missing) + "; unexpected=" + repr(unexpected)
+        )
     if not isinstance(raw["projections"], list) or not isinstance(raw["joins"], list):
         raise ValueError("Invalid projections or joins")
     projections = []
