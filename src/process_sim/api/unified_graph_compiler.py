@@ -167,7 +167,11 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
                 elif filter_fields[terminal] != variable and terminal not in fields:
                     # Multiple join keys with this name must be equivalent;
                     # a two-sided equality join is already enforced above.
-                    if not (side == "right" and join.left_path.predicates[-1] == path.predicates[-1]):
+                    if not (side == "right" and
+                            join.left_path.predicates[-1].rsplit("/", 1)[-1]
+                            == terminal and
+                            filter_fields[terminal] ==
+                            "?join_" + str(index) + "_left_" + str(len(join.left_path.predicates) - 1)):
                         raise ValueError("Ambiguous non-projected filter field: " + terminal)
         clauses.append("FILTER(" + _condition(plan.where, filter_fields) + ")")
     for field in plan.order_by:
