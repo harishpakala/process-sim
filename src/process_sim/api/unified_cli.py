@@ -24,10 +24,12 @@ from process_sim.dtwise.schema import Schema
 
 def run_unified_cli(question, *, schema, context=None, environ=None,
                     interpret=None, graph_executor=None, connection_factory=None,
-                    signal_field=None, dry_run=False):
+                    signal_field=None, dry_run=False, include_qwen_output=False):
     """One semantic interpretation; compile/execute only supported operations."""
     env = os.environ if environ is None else environ
-    plan = interpret_unified_semantics(question, schema, context=context, interpret=interpret)
+    qwen_outputs = []
+    plan = interpret_unified_semantics(question, schema, context=context, interpret=interpret,
+                                       raw_output=qwen_outputs.append if include_qwen_output else None)
     graph_projections = tuple(p for p in plan.projections if p.source == "graphdb")
     has_historian = "timescaledb" in plan.sources
     if has_historian and not graph_projections:
@@ -42,6 +44,8 @@ def run_unified_cli(question, *, schema, context=None, environ=None,
     sparql = compile_unified_graph_query(graph_plan)
     result = {"question": question, "plan": asdict(plan),
               "sparql": sparql, "executed": False}
+    if include_qwen_output:
+        result["qwen_output"] = qwen_outputs[0]
     if dry_run:
         return result
     endpoint = env.get("GRAPHDB_SPARQL_ENDPOINT")
