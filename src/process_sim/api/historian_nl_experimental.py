@@ -59,10 +59,10 @@ def plan_historian_question(question: str, *, schema: Schema | None = None, cont
     allowed = {"domain", "engineering_function", "run_id", "start_simulation_seconds", "end_simulation_seconds"}
     if not isinstance(context, dict) or set(context) - allowed:
         raise ValueError("Invalid historian query context")
-    if not re.search(r"\\b(historian|history|historical|recorded|readings?|values?|measurements?|observations?|samples?|trends?|plot|chart|graph|time.series|behav(?:e|ior|iour))\\b", q, re.I):
+    if not re.search(r"\b(historian|history|historical|recorded|readings?|values?|measurements?|observations?|samples?|trends?|plot|chart|graph|time.series|behav(?:e|ior|iour))\b", q, re.I):
         raise ValueError("Question does not request historian observations")
 
-    domains = [d for d in ("DEXPI", "ECAD") if re.search(r"\\b" + d + r"\\b", q, re.I)]
+    domains = [d for d in ("DEXPI", "ECAD") if re.search(r"\b" + d + r"\b", q, re.I)]
     if len(domains) > 1:
         raise ValueError("Ambiguous engineering domain")
     domain = domains[0] if domains else context.get("domain")
@@ -91,14 +91,14 @@ def plan_historian_question(question: str, *, schema: Schema | None = None, cont
         raise ValueError("Specify exactly one simulation run UUID")
 
     start = end = None
-    interval = re.search(r"\\b(?:between|from)\\s+(?:simulation\\s+)?(?:seconds?\\s+)?(\\d+(?:\\.\\d+)?)\\s+(?:and|to|through|until)\\s+(\\d+(?:\\.\\d+)?)\\s*(?:seconds?)?\\b", q, re.I)
+    interval = re.search(r"\b(?:between|from)\s+(?:simulation\s+)?(?:seconds?\s+)?(\d+(?:\.\d+)?)\s+(?:and|to|through|until)\s+(\d+(?:\.\d+)?)\s*(?:seconds?)?\b", q, re.I)
     if interval:
         start, end = float(interval[1]), float(interval[2])
-    elif match := re.search(r"\\bfrom\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\s+onward\\b", q, re.I):
+    elif match := re.search(r"\bfrom\s+(?:simulation\s+)?seconds?\s+(\d+(?:\.\d+)?)\s+onward\b", q, re.I):
         start = float(match[1])
-    elif match := re.search(r"\\bup\\s+to\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\b", q, re.I):
+    elif match := re.search(r"\bup\s+to\s+(?:simulation\s+)?seconds?\s+(\d+(?:\.\d+)?)\b", q, re.I):
         end = float(match[1])
-    elif re.search(r"\\b(between|from|until|before|after|last|first|since)\\b", q, re.I):
+    elif re.search(r"\b(between|from|until|before|after|last|first|since)\b", q, re.I):
         raise ValueError("Unsupported or incomplete time interval; specify simulation seconds")
     for field, value in (("start_simulation_seconds", start), ("end_simulation_seconds", end)):
         selected = context.get(field)
