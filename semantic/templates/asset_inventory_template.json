@@ -176,6 +176,94 @@
                   "text": "Engineering interpretation or qualification recorded for the asset."
                 }
               ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "CandidateSelectionStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "CandidateSelectionStatus recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PLCMapping",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "PLCMapping recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FlowApplicationGroup",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "FlowApplicationGroup recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementSelectionStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ReplacementSelectionStatus recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ReplacementReviewNote",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ReplacementReviewNote recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "MeasurementSemanticCaveat",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "MeasurementSemanticCaveat recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ValveApplicationGroup",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ValveApplicationGroup recorded for this inventory asset."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EquipmentSemanticNote",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "EquipmentSemanticNote recorded for this inventory asset."
+                }
+              ]
             }
           ],
           "description": [
