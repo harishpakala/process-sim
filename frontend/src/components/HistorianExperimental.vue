@@ -20,6 +20,8 @@ type HistorianResponse = {
   [key: string]: unknown
  }
 }
+const useUnified = ref(true)
+const unifiedReport = ref<Record<string, unknown> | null>(null)
 const question = ref('')
 const queryStyle = ref('historian')
 const queryStyles = [
@@ -114,6 +116,7 @@ onMounted(() => { void loadRuns() })
 async function run() {
  error.value = ''
  response.value = null
+ unifiedReport.value = null
  if (question.value.trim().length < 5) {
   error.value = 'Enter a question to continue.'
   return
@@ -126,14 +129,22 @@ async function run() {
    start_simulation_seconds: startSeconds.value === '' ? null : Number(startSeconds.value),
    end_simulation_seconds: endSeconds.value === '' ? null : Number(endSeconds.value)
   } : undefined
-  const r = await fetch('/api/ai/unified/experimental/answer', {
+  const unifiedContext = context ? {
+   run_id: context.run_id,
+   ...(context.start_simulation_seconds !== null ? {start_seconds: context.start_simulation_seconds} : {}),
+   ...(context.end_simulation_seconds !== null ? {end_seconds: context.end_simulation_seconds} : {})
+  } : {}
+  const r = await fetch(useUnified.value ? '/api/ai/unified/answer' : '/api/ai/unified/experimental/answer', {
    method: 'POST',
    headers: {'Content-Type':'application/json'},
-   body: JSON.stringify({question: question.value.trim(), ...(context ? {context} : {})})
+   body: JSON.stringify(useUnified.value
+    ? {question: question.value.trim(), context: unifiedContext, signal_field: 'SignalName'}
+    : {question: question.value.trim(), ...(context ? {context} : {})})
   })
   const body = await r.json()
   if (!r.ok) throw new Error(body.error || 'Experimental historian query failed')
-  response.value = body as HistorianResponse
+  if (useUnified.value) unifiedReport.value = body as Record<string, unknown>
+  else response.value = body as HistorianResponse
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -191,10 +202,16 @@ const experimentalChart = computed(() => {
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
    <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
   </div>
+  <label><input type="checkbox" v-model="useUnified" /> Use shared unified Qwen + SHACL endpoint (uncheck for experimental legacy endpoint)</label>
   <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
   <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
+  <div v-if="unifiedReport">
+   <h3>Unified historian result</h3>
+   <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.answer, null, 2)}}</pre>
+   <details><summary>SHACL plan and generated SPARQL</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify({plan: unifiedReport.plan, sparql: unifiedReport.sparql}, null, 2)}}</pre></details>
+  </div>
   <template v-if="response">
    <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
    <template v-if="response.intent === 'engineering_query'">
