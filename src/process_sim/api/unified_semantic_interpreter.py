@@ -253,7 +253,7 @@ _FIELDS = {"projections", "joins", "where", "group_by", "aggregation",
            "order_by", "limit", "sources", "run_id", "start_seconds", "end_seconds"}
 
 
-def interpret_unified_semantics(question, schema, *, context=None, interpret=None):
+def interpret_unified_semantics(question, schema, *, context=None, interpret=None, raw_output=None):
     """Single model call, strict JSON decoding and SHACL validation.
 
     interpret is injectable for offline testing and takes (question,catalog,context).
@@ -269,6 +269,8 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
     catalog = shacl_catalog(schema)
     raw = (_interpret(question, catalog, context) if interpret is None
            else interpret(question, catalog, context))
+    if raw_output is not None:
+        raw_output(raw)
     if not isinstance(raw, dict):
         raise ValueError("Model returned a non-object semantic response: " + type(raw).__name__)
     if set(raw) != _FIELDS:
