@@ -119,7 +119,12 @@ def _interpret(question, catalog, context):
             "stream": False, "format": _RESPONSE_SCHEMA, "options": {"temperature": 0},
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": json.dumps({
-                             "question": question, "shacl_paths": [dict(id=i, **path) for i, path in enumerate(catalog)],
+                             "question": question, "shacl_paths": [
+                                 {"id": i, "domain": path["domain"],
+                                  "root_shape": path["root_shape"].rsplit("#", 1)[-1].rsplit("/", 1)[-1],
+                                  "predicates": [p.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
+                                                 for p in path["predicates"]]}
+                                 for i, path in enumerate(catalog)],
                              "selected_context": context})}],
         }).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urlopen(request, timeout=90) as response:
