@@ -23,9 +23,9 @@ from process_sim.dtwise.sparql_generator import iri
 QUESTION = re.compile(
     r"Show the engineering details of DEXPI InstrumentationFunction "
     r"(?P<function>(?:FI|LI|PI|TI)_[0-9]+) and its recorded measurements "
-    r"between simulation seconds (?P<start>[0-9]+(?:\\.[0-9]+)?) "
-    r"and (?P<end>[0-9]+(?:\\.[0-9]+)?) for run "
-    r"(?P<run>[0-9a-fA-F-]{36})\\.?", re.I)
+    r"between simulation seconds (?P<start>[0-9]+(?:\.[0-9]+)?) "
+    r"and (?P<end>[0-9]+(?:\.[0-9]+)?) for run "
+    r"(?P<run>[0-9a-fA-F-]{36})\.?", re.I)
 
 
 def parse_question(question):
@@ -42,11 +42,11 @@ def engineering_details(endpoint, entity, evidence, *, executor=execute_select):
                          if isinstance(entry, dict) and isinstance(entry.get("property"), str)})
     if not predicates:
         raise ValueError("No SHACL-verified engineering properties")
-    query = ("SELECT DISTINCT ?predicate ?value WHERE {\\n"
-             " GRAPH ?engineeringGraph {\\n"
-             f"  {iri(entity)} ?predicate ?value .\\n"
-             " }\\n"
-             " VALUES ?predicate { " + " ".join(iri(p) for p in predicates) + " }\\n"
+    query = ("SELECT DISTINCT ?predicate ?value WHERE {\n"
+             " GRAPH ?engineeringGraph {\n"
+             f"  {iri(entity)} ?predicate ?value .\n"
+             " }\n"
+             " VALUES ?predicate { " + " ".join(iri(p) for p in predicates) + " }\n"
              "} ORDER BY ?predicate ?value")
     rows = executor(endpoint, query)
     if not isinstance(rows, list):
