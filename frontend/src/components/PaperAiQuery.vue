@@ -270,6 +270,11 @@ onMounted(hLoadRuns)
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
+   <div v-if="unifiedReport" class="custom-query">
+    <h3>Unified planner result</h3>
+    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(unifiedReport.answer, null, 2)}}</pre>
+    <details><summary>SHACL plan and generated SPARQL</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify({plan: unifiedReport.plan, sparql: unifiedReport.sparql}, null, 2)}}</pre></details>
+   </div>
   </section>
   <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
