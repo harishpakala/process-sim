@@ -57,7 +57,8 @@ def run_unified_cli(question, *, schema, context=None, environ=None,
         # TimescaleDB receives only resolved signal IDs and run/time constraints.
         # Unsupported historian aggregations remain rejected.
         historian_plan = replace(plan, where=None, order_by=(), validated=True)
-        result["answer"] = execute_unified_historian(\n            historian_plan, dsn, graph_rows=graph["rows"], signal_field=signal_field,
+        result["answer"] = execute_unified_historian(
+            historian_plan, dsn, graph_rows=graph["rows"], signal_field=signal_field,
             connection_factory=connection_factory)
     else:
         result["answer"] = {"rows": graph["rows"], "count": graph["count"]}
@@ -85,7 +86,8 @@ def main(argv=None):
     if args.output:
         path = Path(args.output)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(serialized + "\n", encoding="utf-8")
+        path.write_text(serialized + "
+", encoding="utf-8")
     print(serialized)
 
 
