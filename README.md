@@ -56,14 +56,13 @@ cd frontend
 npm run dev
 ```
 
-Open the URL printed by Vite and start the simulation using the Web UI. GraphDB, historian persistence, and semantic queries require additional configuration described below.
+Open the URL printed by Vite and start the simulation using the Web UI. **GraphDB and published engineering RDF are required for TEP NEXUS semantic retrieval**; follow the [semantic setup guide](semantic/README.md) to create repository `AAST` and publish the graphs. Historian persistence and temporal queries additionally require TimescaleDB.
 
 ## Documentation
 
 - [Historian and TimescaleDB setup](docs/opcua/TIMESERIES.md)
 - [Semantic lifting and GraphDB setup](semantic/README.md)
 - [TEP NEXUS evaluation and reproducibility](docs/artifact_evaluation/README.md)
-- [Engineering models and AAS examples](semantic/README.md)
 - [SELiRA research prototype](selira_integration/README.md)
 - [Detailed project notes](docs/project-history-and-research-notes.md)
 
