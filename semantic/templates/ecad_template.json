@@ -68,6 +68,50 @@
               ]
             },
             {
+              "modelType": "Property",
+              "idShort": "DeviceType",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Device classification recorded in the ECAD source model."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Description",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Description of the ECAD device."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "Manufacturer",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Manufacturer recorded for the ECAD device."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "PartNumber",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Manufacturer part number recorded for the ECAD device."
+                }
+              ]
+            },
+            {
               "modelType": "SubmodelElementCollection",
               "idShort": "ConnectionPoints",
               "value": [
