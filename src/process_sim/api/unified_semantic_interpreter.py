@@ -306,10 +306,10 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
     # Normalize the explicit H6 instrumentation behavior intent using SHACL paths,
     # not memorized signal values or an ungrounded model join. The single Qwen
     # interpretation remains the only model call; this is deterministic grounding.
-    h6 = (re.search(r"\\bdexpi\\b", question, re.I)
-          and re.search(r"instrumentation\\s*function|instrumentationfunction", question, re.I)
-          and re.search(r"\\b(?:simulation\\s+run|simulation\\s+times?|behav(?:e|ed|ior))\\b", question, re.I))
-    local_match = re.search(r"\\bLocalID\\s+([A-Za-z0-9_\\-]+)", question, re.I)
+    h6 = (re.search(r"\bdexpi\b", question, re.I)
+          and re.search(r"instrumentation\s*function|instrumentationfunction", question, re.I)
+          and re.search(r"\b(?:simulation\s+run|simulation\s+times?|behav(?:e|ed|ior))\b", question, re.I))
+    local_match = re.search(r"\bLocalID\s+([A-Za-z0-9_\-]+)", question, re.I)
     if h6 and local_match:
         def find_path(domain, suffix, prefix=None, root=None):
             matches = [(i, p) for i, p in enumerate(catalog)
