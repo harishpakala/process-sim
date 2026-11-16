@@ -316,6 +316,666 @@
                       "text": "Technical characteristic recorded for the catalog product."
                     }
                   ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProductCategory",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ProductCategory recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentSensorType",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "CurrentSensorType recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Communication",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Communication recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeteringPurpose",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeteringPurpose recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SpecificationSourceURL",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "SpecificationSourceURL recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ActiveEnergyQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActiveEnergyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ActiveEnergyQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ActivePowerQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActivePowerQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ActivePowerQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "VoltageQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "VoltageQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "VoltageQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "CurrentQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "CurrentQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "CurrentQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FrequencyQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FrequencyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FrequencyQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ValveBodyType",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ValveBodyType recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ActuatorType",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ActuatorType recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerType",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "PositionerType recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalSize",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "NominalSize recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FlowCoefficientKvs",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FlowCoefficientKvs recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FlangePressureRating",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FlangePressureRating recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "HousingMaterial",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "HousingMaterial recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NormalPosition",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "NormalPosition recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInput",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "PositionerInput recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "InstrumentAir",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "InstrumentAir recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerPartNumberStatus",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ManufacturerPartNumberStatus recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaterialNote",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MaterialNote recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "PositionerInputQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PositionerInputQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "PositionerInputQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ManufacturerModel",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ManufacturerModel recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalACInput",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "NominalACInput recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ACInputRange",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ACInputRange recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "NominalOutputVoltage",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "NominalOutputVoltage recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputCurrent",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "RatedOutputCurrent recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "RatedOutputPower",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "RatedOutputPower recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "PowerBoostCurrent",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "PowerBoostCurrent recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Efficiency",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Efficiency recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementVariable",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeasurementVariable recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SignalInterfaceNote",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "SignalInterfaceNote recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRange",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeasurementRange recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FactoryConfiguredRange",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FactoryConfiguredRange recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeasurementRangeQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasurementRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeasurementRangeQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionDisclaimer",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "SelectionDisclaimer recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MeasuringPrinciple",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MeasuringPrinciple recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistance",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MaximumMeasuringDistance recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MaximumProcessPressure recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "Accuracy",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "Accuracy recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "LevelScalingStatus",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "LevelScalingStatus recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MaximumMeasuringDistanceQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "MaximumMeasuringDistanceQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "MaximumMeasuringDistanceQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "AccuracyQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "AccuracyQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "AccuracyQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRange",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FamilyMeasuringRange recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMaximumProcessPressure",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FamilyMaximumProcessPressure recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ApplicationQualification",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ApplicationQualification recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTUnit",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FamilyMeasuringRangeQUDTUnit recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "FamilyMeasuringRangeQUDTQuantityKind",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "FamilyMeasuringRangeQUDTQuantityKind recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "ProposedMeasurementCell",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "ProposedMeasurementCell recorded in product technical specifications."
+                    }
+                  ]
+                },
+                {
+                  "modelType": "Property",
+                  "idShort": "SelectionLimitation",
+                  "valueType": "xs:string",
+                  "description": [
+                    {
+                      "language": "en",
+                      "text": "SelectionLimitation recorded in product technical specifications."
+                    }
+                  ]
                 }
               ],
               "qualifiers": [
@@ -343,6 +1003,116 @@
                 {
                   "language": "en",
                   "text": "Collection of technical properties associated with the product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSVerificationStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ECLASSVerificationStatus recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "SelectionStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "SelectionStatus recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "EvidenceSource",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "EvidenceSource recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "OperatingEnvelopeBasis",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "OperatingEnvelopeBasis recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FitGaps",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "FitGaps recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "RevalidationTriggers",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "RevalidationTriggers recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "InstallationVerificationStatus",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "InstallationVerificationStatus recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "ECLASSClassificationBasis",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "ECLASSClassificationBasis recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "FamilyPublishedEnvelope",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "FamilyPublishedEnvelope recorded for this catalog product."
+                }
+              ]
+            },
+            {
+              "modelType": "Property",
+              "idShort": "DutyFlowBasis",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "DutyFlowBasis recorded for this catalog product."
                 }
               ]
             }
