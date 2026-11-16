@@ -335,8 +335,26 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         root = roots[0]
         local_path = find_path("dexpi", "hasLocalId", "hasInstrumentationFunction", root)
         asset_path = find_path("dexpi", "hasAssetIdentifier", "hasInstrumentationFunction", root)
-        opc_asset = find_path("opcuaconnectivity", "hasAssetIdentifier")
-        opc_signal = find_path("opcuaconnectivity", "hasSignalName", root=opc_asset.root_shape)
+        # Select an OPCUA mapping root that exposes both properties; prefer
+        # the model's projected SignalName root when it is a valid pair.
+        opc_roots = {p["root_shape"] for p in catalog
+                     if p["domain"].lower() == "opcuaconnectivity"
+                     and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+                     == ["hassignalname"]}
+        opc_roots = {root for root in opc_roots if any(
+            p["domain"].lower() == "opcuaconnectivity" and p["root_shape"] == root
+            and [v.rsplit("/", 1)[-1].lower() for v in p["predicates"]]
+            == ["hasassetidentifier"] for p in catalog)}
+        model_roots = [p.path.root_shape for p in projections if p.path is not None
+                       and p.name == "SignalName" and p.path.root_shape in opc_roots]
+        if len(set(model_roots)) == 1:
+            opc_root = model_roots[0]
+        elif len(opc_roots) == 1:
+            opc_root = next(iter(opc_roots))
+        else:
+            raise ValueError("H6 requires a unique OPCUA signal mapping SHACL root")
+        opc_asset = find_path("opcuaconnectivity", "hasAssetIdentifier", root=opc_root)
+        opc_signal = find_path("opcuaconnectivity", "hasSignalName", root=opc_root)
         projections = [Projection("SignalName", opc_signal, "graphdb", "opcuaconnectivity")]
         joins = [Join("dexpi", "opcuaconnectivity", asset_path, opc_asset)]
         raw["where"] = {"field": "hasLocalId", "operator": "eq",
