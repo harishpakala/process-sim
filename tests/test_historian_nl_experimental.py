@@ -1,0 +1,53 @@
+"""Isolated regression tests; no GraphDB, TimescaleDB or existing endpoints needed."""
+from unittest.mock import patch
+import pytest
+
+from process_sim.api.historian_nl_experimental import plan_historian_question, run_historian_nl_experiment
+
+RUN = "11111111-2222-3333-4444-555555555555"
+QUESTION = (
+    f"Get historian values for DEXPI InstrumentationFunction with LocalID FI_101 "
+    f"for simulation run {RUN} between simulation seconds 100 and 300."
+)
+
+
+def evidence(_schema, domain):
+    return {"shape": f"urn:{domain}:shape", "properties": [{"property": "urn:LocalId", "evidence_ids": ["e1", "e2"]}]}
+
+
+def test_nl_plan_explicit_fields():
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence):
+        plan = plan_historian_question(QUESTION, schema=object())
+    assert plan["domain"] == "DEXPI"
+    assert plan["engineering_function"] == "FI_101"
+    assert plan["run_id"] == RUN
+    assert plan["start_simulation_seconds"] == 100
+    assert plan["end_simulation_seconds"] == 300
+
+
+@pytest.mark.parametrize("question", [
+    QUESTION.replace("DEXPI ", ""),
+    QUESTION.replace("FI_101", ""),
+    QUESTION.replace(RUN, ""),
+    QUESTION.replace("100 and 300", "300 and 100"),
+    QUESTION.replace("between simulation seconds 100 and 300", "after a while"),
+])
+def test_ambiguous_or_unsupported_question_rejected(question):
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence):
+        with pytest.raises(ValueError):
+            plan_historian_question(question, schema=object())
+
+
+def test_existing_executor_reused_unchanged():
+    with patch("process_sim.api.historian_nl_experimental.plan_historian_question") as plan, \
+         patch("process_sim.api.historian_nl_experimental.run_historian_question") as executor:
+        plan.return_value = {
+            "domain": "DEXPI", "engineering_function": "FI_101",
+            "run_id": RUN, "start_simulation_seconds": 100,
+            "end_simulation_seconds": 300, "shacl_evidence": {"shape": "urn:shape"}
+        }
+        executor.return_value = {"observationCount": 2}
+        output = run_historian_nl_experiment(QUESTION)
+    assert output["result"]["observationCount"] == 2
+    executor.assert_called_once()
+    assert executor.call_args.args[0]["engineering_function"] == "FI_101"
