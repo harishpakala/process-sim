@@ -141,6 +141,8 @@ def _interpret(question, catalog, context):
         "Choose path_id from the id values in shacl_paths; do not return a path object. "
         "Return ONE semantic query object, never an individual shacl_paths entry. "
         "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
+        "For multiple properties of the SAME SHACL root use the SAME alias, e.g. entity. "
+        "Different root shapes require explicit SHACL joins; never fabricate join keys. "
         "Do not generate SPARQL or SQL. No keyword routing or external planner."
     )
     candidates = _candidate_paths(question, catalog)
@@ -211,6 +213,18 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         joins.append(Join(j["left"], j["right"],
                           _path(j["left_path_id"], catalog),
                           _path(j["right_path_id"], catalog)))
+    # Multiple properties of one SHACL root describe one entity, not
+    # independent Cartesian-product roots. Only coalesce when there are
+    # no explicit joins and every graph projection has the exact same root.
+    graph_items = [p for p in projections if p.source == "graphdb"]
+    if len(graph_items) > 1 and not joins and len({
+        (p.path.domain, p.path.root_shape) for p in graph_items
+    }) == 1:
+        from dataclasses import replace
+        projections = [
+            replace(p, alias="entity") if p.source == "graphdb" else p
+            for p in projections
+        ]
     for key in ("group_by", "order_by", "sources"):
         if not isinstance(raw[key], list) or any(not isinstance(x, str) for x in raw[key]):
             raise ValueError("Invalid " + key)
