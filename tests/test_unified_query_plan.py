@@ -51,3 +51,26 @@ def test_missing_shacl_evidence_is_rejected():
             "domain": "DEXPI", "engineering_function": "FI_101", "run_id": RUN,
             "shacl_evidence": {"properties": []},
         })
+
+
+def test_embedded_signal_resolution_requires_shacl_evidence():
+    from process_sim.api.unified_query_plan import QueryOperation, UnifiedQueryPlan
+    import pytest
+    graph = QueryOperation(
+        "graph_query", "graphdb",
+        {"validated_engineering_plan": {"intent": "list"},
+         "signal_resolution": {"domain": "DEXPI", "engineering_function": "FI_101"}},
+        {"engineering": {"evidence_ids": ["graph-hop"]},
+         "signal_resolution": {"properties": [{"property": "urn:localid"}]}})
+    observations = QueryOperation("observations", "timescaledb", {"run_id": "test"})
+    accepted = UnifiedQueryPlan(
+        question="Show engineering and recorded measurements",
+        operations=(graph, observations))
+    assert len(accepted.operations) == 2
+    missing_evidence = QueryOperation(
+        "graph_query", "graphdb", graph.parameters,
+        {"signal_resolution": {"properties": []}})
+    with pytest.raises(ValueError, match="signal resolution"):
+        UnifiedQueryPlan(
+            question="Show engineering and recorded measurements",
+            operations=(missing_evidence, observations))
