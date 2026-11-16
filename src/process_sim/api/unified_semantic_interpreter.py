@@ -143,6 +143,11 @@ def _interpret(question, catalog, context):
         "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
         "For multiple properties of the SAME SHACL root use the SAME alias, e.g. entity. "
         "Different root shapes require explicit SHACL joins; never fabricate join keys. "
+        "For historian time-series samples, sources MUST contain both graphdb and timescaledb. "
+        "Project the SHACL signal identifier as SignalName (not its literal value). "
+        "When a signal value such as XMEAS3 is specified, filter with "
+        "where={field:'SignalName',operator:'eq',value:'XMEAS3'}. "
+        "Historian requires run_id from selected_context; never invent it. "
         "Do not generate SPARQL or SQL. No keyword routing or external planner."
     )
     candidates = _candidate_paths(question, catalog)
@@ -225,6 +230,20 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
             replace(p, alias="entity") if p.source == "graphdb" else p
             for p in projections
         ]
+    # Fail closed when an explicitly requested historian operation is
+    # misclassified as engineering-only. Never silently return graph rows
+    # in place of requested observations.
+    historian_requested = bool(re.search(
+        r"\\b(historian|time[- ]series|historical samples?|observations?)\\b",
+        question, re.I))
+    if historian_requested:
+        if "timescaledb" not in raw["sources"]:
+            raise ValueError(
+                "Historian intent was not represented in Qwen sources; "
+                "expected timescaledb and SHACL-grounded signal resolution"
+            )
+        if not any(p.source == "graphdb" for p in projections):
+            raise ValueError("Historian requires a GraphDB signal projection")
     for key in ("group_by", "order_by", "sources"):
         if not isinstance(raw[key], list) or any(not isinstance(x, str) for x in raw[key]):
             raise ValueError("Invalid " + key)
