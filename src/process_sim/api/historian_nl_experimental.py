@@ -47,43 +47,83 @@ def _shacl_evidence(schema: Schema, domain: str) -> dict:
     return {"shape": shapes[0]["uri"], "properties": evidence}
 
 
-def plan_historian_question(question: str, *, schema: Schema | None = None) -> dict:
+def plan_historian_question(question: str, *, schema: Schema | None = None, context: dict | None = None) -> dict:
+    """Normalize supported paraphrases, then validate against SHACL evidence.
+
+    Context is explicitly user-selected; conflicting text is never silently overridden.
+    """
     if not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
         raise ValueError("Question must contain 5–1000 characters")
     q = question.strip()
-    if not re.search(r"\b(historian|historical|recorded|time.series|observations?)\b", q, re.I):
+    context = {} if context is None else context
+    allowed = {"domain", "engineering_function", "run_id", "start_simulation_seconds", "end_simulation_seconds"}
+    if not isinstance(context, dict) or set(context) - allowed:
+        raise ValueError("Invalid historian query context")
+    if not re.search(r"\\b(historian|history|historical|recorded|readings?|values?|measurements?|observations?|samples?|trends?|plot|chart|graph|time.series|behav(?:e|ior|iour))\\b", q, re.I):
         raise ValueError("Question does not request historian observations")
-    domains = [name for name in ("DEXPI", "ECAD") if re.search(r"\b" + name + r"\b", q, re.I)]
-    if len(domains) != 1:
-        raise ValueError("Specify exactly one engineering domain: DEXPI or ECAD")
+
+    domains = [d for d in ("DEXPI", "ECAD") if re.search(r"\\b" + d + r"\\b", q, re.I)]
+    if len(domains) > 1:
+        raise ValueError("Ambiguous engineering domain")
+    domain = domains[0] if domains else context.get("domain")
+    if domain not in ("DEXPI", "ECAD") or (domains and context.get("domain") not in (None, domain)):
+        raise ValueError("Specify one consistent engineering domain: DEXPI or ECAD")
+
     ids = {v.upper() for v in _LOCAL_ID.findall(q)}
-    if len(ids) != 1:
+    selected_id = context.get("engineering_function")
+    if selected_id is not None and (not isinstance(selected_id, str) or not _LOCAL_ID.fullmatch(selected_id)):
+        raise ValueError("Invalid selected LocalID")
+    if len(ids) > 1 or (ids and selected_id and ids != {selected_id.upper()}):
+        raise ValueError("Question and selected LocalID disagree")
+    function = next(iter(ids)) if ids else selected_id.upper() if selected_id else None
+    if not function:
         raise ValueError("Specify exactly one engineering LocalID")
+
     runs = {str(UUID(v)) for v in _UUID.findall(q)}
-    if len(runs) != 1:
+    try:
+        selected_run = str(UUID(str(context["run_id"]))) if context.get("run_id") else None
+    except (ValueError, TypeError, AttributeError) as exc:
+        raise ValueError("Invalid selected run UUID") from exc
+    if len(runs) > 1 or (runs and selected_run and runs != {selected_run}):
+        raise ValueError("Question and selected run disagree")
+    run_id = next(iter(runs)) if runs else selected_run
+    if not run_id:
         raise ValueError("Specify exactly one simulation run UUID")
+
     start = end = None
-    matched = _RANGE.search(q)
-    if matched:
-        start, end = float(matched[1]), float(matched[2])
-    elif matched := _FROM.search(q):
-        start = float(matched[1])
-    elif matched := _UPTO.search(q):
-        end = float(matched[1])
-    elif re.search(r"\b(between|from|until|before|after|last|first)\b", q, re.I) and not re.search(r"\ball (?:simulation )?times\b", q, re.I):
-        raise ValueError("Unsupported or incomplete time interval; use 'between simulation seconds X and Y'")
+    interval = re.search(r"\\b(?:between|from)\\s+(?:simulation\\s+)?(?:seconds?\\s+)?(\\d+(?:\\.\\d+)?)\\s+(?:and|to|through|until)\\s+(\\d+(?:\\.\\d+)?)\\s*(?:seconds?)?\\b", q, re.I)
+    if interval:
+        start, end = float(interval[1]), float(interval[2])
+    elif match := re.search(r"\\bfrom\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\s+onward\\b", q, re.I):
+        start = float(match[1])
+    elif match := re.search(r"\\bup\\s+to\\s+(?:simulation\\s+)?seconds?\\s+(\\d+(?:\\.\\d+)?)\\b", q, re.I):
+        end = float(match[1])
+    elif re.search(r"\\b(between|from|until|before|after|last|first|since)\\b", q, re.I):
+        raise ValueError("Unsupported or incomplete time interval; specify simulation seconds")
+    for field, value in (("start_simulation_seconds", start), ("end_simulation_seconds", end)):
+        selected = context.get(field)
+        if selected is not None:
+            selected = float(selected)
+            if value is not None and value != selected:
+                raise ValueError("Question and selected time interval disagree")
+            if field == "start_simulation_seconds":
+                start = selected
+            else:
+                end = selected
+    if (start is not None and not 0 <= start < float("inf")) or (end is not None and not 0 <= end < float("inf")):
+        raise ValueError("Simulation seconds must be finite and nonnegative")
     if start is not None and end is not None and start > end:
         raise ValueError("Start simulation second must not exceed end")
+
     schema = schema if schema is not None else Schema(str(SCHEMA_PATH))
-    evidence = _shacl_evidence(schema, domains[0])
-    return {"intent": "historian_observations", "domain": domains[0],
-            "engineering_function": next(iter(ids)), "run_id": next(iter(runs)),
+    evidence = _shacl_evidence(schema, domain)
+    return {"intent": "historian_observations", "domain": domain,
+            "engineering_function": function, "run_id": run_id,
             "start_simulation_seconds": start, "end_simulation_seconds": end,
             "shacl_evidence": evidence}
 
-
-def run_historian_nl_experiment(question: str, *, environ=None) -> dict:
-    plan = plan_historian_question(question)
+def run_historian_nl_experiment(question: str, *, environ=None, context=None) -> dict:
+    plan = plan_historian_question(question, context=context)
     payload = {key: plan[key] for key in ("domain", "engineering_function", "run_id",
                "start_simulation_seconds", "end_simulation_seconds")}
     payload["question"] = question.strip()
