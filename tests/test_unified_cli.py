@@ -52,8 +52,12 @@ def test_mixed_cli_joins_live_graph_rows_to_timescale_samples():
             return False
         def transaction(self):
             return self
-        def execute(self, statement):
-            self.statements.append(statement)
+        def execute(self, statement, params=None):
+            if params is None:
+                self.statements.append(statement)
+            else:
+                self.sql = statement
+                self.params = params
         def cursor(self):
             return self
         def fetchall(self):
