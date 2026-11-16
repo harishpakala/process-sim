@@ -4,6 +4,7 @@ import { selectTriples } from './lib/sparql'
 import SimulationDashboard from './components/SimulationDashboard.vue'
 import FaultManagement from './components/FaultManagement.vue'
 import PaperAiQuery from './components/PaperAiQuery.vue'
+import HistorianExperimental from './components/HistorianExperimental.vue'
 import ProductCatalog from './components/ProductCatalog.vue'
 import EngineeringBom from './components/EngineeringBom.vue'
 import EngineeringVerificationWorkbench from './components/EngineeringVerificationWorkbench.vue'
@@ -62,10 +63,11 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
    <div class="nav-scroll">
     <div class="section-label">WORKSPACE</div>
     <button class="nav-item" :class="{current:active==='Overview'}" @click="navigate('Overview')"><LayoutDashboard :size="16"/> Overview</button>
-    <button class="nav-item" :class="{current:active==='AI Query — Engineering'||active==='AI Query — Historian'}" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
+    <button class="nav-item" :class="{current:active==='AI Query — Engineering'||active==='AI Query — Historian'||active==='AI Query — Historian Experimental'}" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
     <template v-if="aiQueryOpen">
      <button class="nav-item nested" :class="{current:active==='AI Query — Engineering'}" @click="navigate('AI Query — Engineering')"><span class="nav-dot"/> Engineering Queries</button>
      <button class="nav-item nested" :class="{current:active==='AI Query — Historian'}" @click="navigate('AI Query — Historian')"><span class="nav-dot"/> Historian Queries</button>
+     <button class="nav-item nested" :class="{current:active==='AI Query — Historian Experimental'}" @click="navigate('AI Query — Historian Experimental')"><span class="nav-dot"/> Historian Experimental</button>
     </template>
     <div v-for="group in sections" :key="group.name" class="nav-group">
      <button class="section-toggle" @click="opened[group.name]=!opened[group.name]">{{group.name}}<ChevronDown v-if="opened[group.name]" :size="14"/><ChevronRight v-else :size="14"/></button>
@@ -112,6 +114,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
     <template v-else-if="graphView"><EngineeringRdfGraph :key="navigationKey" :domain="active==='ECAD Explorer'?'ecad':'dexpi'" :focus-identifier="destinationId" @open-record="openRecord" /></template>
     <template v-else-if="active==='AI Query — Engineering'"><PaperAiQuery page="engineering" /></template>
     <template v-else-if="active==='AI Query — Historian'"><PaperAiQuery page="historian" /></template>
+    <template v-else-if="active==='AI Query — Historian Experimental'"><HistorianExperimental /></template>
     <template v-else-if="active==='Simulation Control'"><SimulationDashboard /></template>
     <template v-else-if="active==='Faults & Disturbances'"><FaultManagement /></template>
     <template v-else><section class="panel placeholder"><Database :size="42"/><h2>{{active}}</h2><p>Workspace scaffold ready. Records, semantic links and validation results require backend integration.</p><span class="pill amber-pill">Not connected</span></section></template>
