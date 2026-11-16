@@ -7,7 +7,7 @@ from __future__ import annotations
 
 import re
 
-from process_sim.api.historian_nl_experimental import plan_historian_question
+from process_sim.api.historian_nl_experimental import plan_historian_question, canonical_historian_question
 from process_sim.api.dtwise_query import run_question as run_engineering_question
 from process_sim.api.vtkg_query import run_historian_question
 
@@ -36,15 +36,13 @@ def run_unified_experiment(question: str, *, context=None, environ=None) -> dict
     """Dispatch by intent, never by client-supplied executor name."""
     intent = classify_intent(question)
     if intent == "engineering_query":
-        if context:
-            raise ValueError("Historian selections cannot be applied to an engineering query")
         result = run_engineering_question(question, environ=environ)
         return {"mode": "unified_nl_experimental", "intent": intent,
                 "plan": result["plan"], "result": result}
     plan = plan_historian_question(question, context=context)
     payload = {key: plan[key] for key in ("domain", "engineering_function", "run_id",
                "start_simulation_seconds", "end_simulation_seconds")}
-    payload["question"] = question.strip()
+    payload["question"] = canonical_historian_question(plan)
     result = run_historian_question(payload, environ=environ)
     return {"mode": "unified_nl_experimental", "intent": intent,
             "plan": plan, "result": result}
