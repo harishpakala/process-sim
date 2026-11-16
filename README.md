@@ -63,7 +63,7 @@ Open the URL printed by Vite and start the simulation using the Web UI. GraphDB,
 - [Historian and TimescaleDB setup](docs/opcua/TIMESERIES.md)
 - [Semantic lifting and GraphDB setup](semantic/README.md)
 - [TEP NEXUS evaluation and reproducibility](docs/artifact_evaluation/README.md)
-- [Engineering models and examples](examples/aas/)
+- [Engineering models and AAS examples](semantic/README.md)
 - [SELiRA research prototype](selira_integration/README.md)
 - [Detailed project notes](docs/project-history-and-research-notes.md)
 
