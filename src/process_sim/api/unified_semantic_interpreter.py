@@ -59,6 +59,40 @@ def _where(raw):
     raise ValueError("Invalid Boolean expression")
 
 
+_RESPONSE_SCHEMA = {
+    "type": "object", "additionalProperties": False,
+    "required": ["projections", "joins", "where", "group_by", "aggregation",
+                 "order_by", "limit", "sources", "run_id", "start_seconds", "end_seconds"],
+    "properties": {
+        "projections": {"type": "array", "minItems": 1, "items": {
+            "type": "object", "additionalProperties": False,
+            "required": ["name", "path_id", "source", "alias"],
+            "properties": {
+                "name": {"type": "string"},
+                "path_id": {"type": ["integer", "null"]},
+                "source": {"type": "string", "enum": ["graphdb", "timescaledb"]},
+                "alias": {"type": "string"}}}},
+        "joins": {"type": "array", "items": {
+            "type": "object", "additionalProperties": False,
+            "required": ["left", "right", "left_path_id", "right_path_id"],
+            "properties": {
+                "left": {"type": "string"}, "right": {"type": "string"},
+                "left_path_id": {"type": "integer"},
+                "right_path_id": {"type": "integer"}}}},
+        "where": {"type": ["object", "null"]},
+        "group_by": {"type": "array", "items": {"type": "string"}},
+        "aggregation": {"type": ["string", "null"]},
+        "order_by": {"type": "array", "items": {"type": "string"}},
+        "limit": {"type": ["integer", "null"]},
+        "sources": {"type": "array", "minItems": 1,
+                    "items": {"type": "string", "enum": ["graphdb", "timescaledb"]}},
+        "run_id": {"type": ["string", "null"]},
+        "start_seconds": {"type": ["number", "null"]},
+        "end_seconds": {"type": ["number", "null"]},
+    },
+}
+
+
 def _interpret(question, catalog, context):
     system = (
         "You are ONE semantic interpreter for engineering, historian and mixed queries. "
@@ -73,16 +107,19 @@ def _interpret(question, catalog, context):
         "Do not invent paths, IDs, run UUIDs, or simulation times. "
         "Use supplied context for run_id and time boundaries when provided. "
         "Use null for unspecified scalar values, [] for unspecified arrays. "
+        "Choose path_id from the id values in shacl_paths; do not return a path object. "
+        "Return ONE semantic query object, never an individual shacl_paths entry. "
+        "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
         "Do not generate SPARQL or SQL. No keyword routing or external planner."
     )
     request = Request(
         os.environ.get("OLLAMA_HOST", "http://localhost:11434").rstrip("/") + "/api/chat",
         data=json.dumps({
             "model": os.environ.get("DTWISE_QWEN_MODEL", "qwen2.5-coder:3b"),
-            "stream": False, "format": "json",
+            "stream": False, "format": _RESPONSE_SCHEMA, "options": {"temperature": 0},
             "messages": [{"role": "system", "content": system},
                          {"role": "user", "content": json.dumps({
-                             "question": question, "shacl_paths": catalog,
+                             "question": question, "shacl_paths": [dict(id=i, **path) for i, path in enumerate(catalog)],
                              "selected_context": context})}],
         }).encode(), headers={"Content-Type": "application/json"}, method="POST")
     with urlopen(request, timeout=90) as response:
