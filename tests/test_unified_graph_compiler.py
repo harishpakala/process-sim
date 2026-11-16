@@ -148,8 +148,8 @@ def test_h6_nonprojected_localid_filter_uses_joined_instrument_root():
         where=Predicate("hasLocalId", "eq", "FI_103", local, "dexpi"),
     ).validate(H6Schema())
     sparql = compile_unified_graph_query(plan)
-    assert "?root_dexpi <" + dexpi + "hasInstrumentationFunction> ?filter_0_0 ." in sparql
-    assert "?filter_0_0 <" + dexpi + "hasLocalId> ?filter_0_1 ." in sparql
+    assert "?root_dexpi <" + dexpi + "hasInstrumentationFunction> ?join_0_left_0 ." in sparql
+    assert "?join_0_left_0 <" + dexpi + "hasLocalId> ?filter_0_1 ." in sparql
     assert "?root_dexpi <" + dexpi + "hasInstrumentationFunction> ?join_0_left_0 ." in sparql
     assert "?join_0_left_0 <" + dexpi + "hasAssetIdentifier> ?join_0_left_1 ." in sparql
     assert 'FILTER((?filter_0_1 = "FI_103"))' in sparql
