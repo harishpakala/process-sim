@@ -143,7 +143,7 @@ def interpret_semantic_frame(question, schema, *, context=None, interpret=None):
             if isinstance(proposed_time, bool) or not isinstance(proposed_time, (int, float)):
                 raise ValueError("Model proposed an invalid simulation time")
             if not any(float(token) == proposed_time for token in re.findall(
-                r"(?<![A-Za-z0-9_.])\\d+(?:\\.\\d+)?(?![A-Za-z0-9_.])",
+                r"(?<![A-Za-z0-9_.])\d+(?:\.\d+)?(?![A-Za-z0-9_.])",
                 re.sub(r"[0-9a-fA-F]{8}(?:-[0-9a-fA-F]{4}){3}-[0-9a-fA-F]{12}", "", question))):
                 raise ValueError("Model invented a simulation time")
     temporal = TemporalWindow(start, end)
