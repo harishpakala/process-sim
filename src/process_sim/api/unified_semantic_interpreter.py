@@ -305,6 +305,88 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
                 + "; right_domain=" + right_path.domain
                 + "; join aliases must be distinct")
         joins.append(Join(j["left"], j["right"], left_path, right_path))
+    # Generic single-domain property queries: ground the projection and every
+    # filter against co-rooted SHACL paths. Qwen remains the single model call;
+    # its incorrect alias/source/joins cannot turn a simple graph lookup into
+    # a historian request. Unknown or ambiguous paths fail closed.
+    simple = re.fullmatch(
+        r"\s*(?:show|list|get)\s+(?:the\s+)?"
+        r"(?P<domain>[A-Za-z][A-Za-z0-9]*)\s+"
+        r"(?:(?P<concept>[A-Za-z][A-Za-z0-9]*)\s+)?"
+        r"(?P<field>[A-Za-z][A-Za-z0-9]*)\s+where\s+"
+        r"(?P<conditions>.+?)\s*[.]?\s*",
+        question, re.I)
+    if simple and not re.search(
+        r"\b(historian|observations?|time[- ]series|simulation\s+run)\b",
+        question, re.I
+    ):
+        domain = simple.group("domain").lower()
+        concept = simple.group("concept")
+        field = simple.group("field")
+        condition_text = simple.group("conditions").rstrip(".")
+        pieces = re.split(r"\s+(and|or)\s+", condition_text, flags=re.I)
+        conditions = []
+        for piece in pieces[::2]:
+            match = re.fullmatch(
+                r"\s*([A-Za-z][A-Za-z0-9]*)\s+(?:is|=|equals)\s+(\S+)\s*",
+                piece, re.I)
+            if not match:
+                conditions = []
+                break
+            conditions.append(match.groups())
+        if conditions and len(set(p.lower() for p in pieces[1::2])) <= 1:
+            def terminal(name):
+                return "has" + name.lower().removeprefix("has")
+            def matches_path(path, name):
+                predicates = [p.rsplit("/", 1)[-1].lower()
+                              for p in path["predicates"]]
+                return (path["domain"].lower() == domain
+                        and predicates[-1] == terminal(name)
+                        and (concept is None or len(predicates) >= 2
+                             and predicates[0] == terminal(concept)))
+            target_paths = [p for p in catalog if matches_path(p, field)]
+            candidates = []
+            for target in target_paths:
+                filters = []
+                for name, value in conditions:
+                    matches = [p for p in catalog
+                               if matches_path(p, name)
+                               and p["root_shape"] == target["root_shape"]
+                               and p["predicates"][:-1] == target["predicates"][:-1]]
+                    if len(matches) != 1:
+                        break
+                    filters.append((matches[0], name, value))
+                if len(filters) == len(conditions):
+                    candidates.append((target, filters))
+            if len(candidates) == 1:
+                target, filters = candidates[0]
+                def to_graph_path(item):
+                    return GraphPath(item["domain"], item["root_shape"],
+                                     tuple(item["predicates"]),
+                                     tuple(item["evidence_ids"]))
+                projection_name = field[0].upper() + field[1:]
+                projections = [Projection(projection_name, to_graph_path(target),
+                                          "graphdb", "entity")]
+                joins = []
+                predicates = [Predicate(name[0].upper() + name[1:], "eq", value,
+                                        to_graph_path(path), "entity")
+                              for path, name, value in filters]
+                h6_filter_override = (BooleanExpression(pieces[1].lower(),
+                                      tuple(predicates))
+                                      if len(predicates) > 1 else predicates[0])
+                raw["sources"] = ["graphdb"]
+                raw["group_by"] = []
+                raw["aggregation"] = None
+                raw["order_by"] = []
+                raw["run_id"] = None
+                raw["start_seconds"] = None
+                raw["end_seconds"] = None
+            else:
+                h6_filter_override = None
+        else:
+            h6_filter_override = None
+    else:
+        h6_filter_override = None
     # Normalize the explicit H6 instrumentation behavior intent using SHACL paths,
     # not memorized signal values or an ungrounded model join. The single Qwen
     # interpretation remains the only model call; this is deterministic grounding.
@@ -450,6 +532,8 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raw["run_id"] = None
         raw["start_seconds"] = None
         raw["end_seconds"] = None
+    if h6_filter_override is not None:
+        h6_filter = h6_filter_override
     # Multiple properties of one SHACL root describe one entity, not
     # independent Cartesian-product roots. Only coalesce when there are
     # no explicit joins and every graph projection has the exact same root.
