@@ -58,6 +58,22 @@ npm run dev
 
 Open the URL printed by Vite and start the simulation using the Web UI. **GraphDB and published engineering RDF are required for TEP NEXUS semantic retrieval**; follow the [semantic setup guide](semantic/README.md) to create repository `AAST` and publish the graphs. Historian persistence and temporal queries additionally require TimescaleDB.
 
+## Engineering Models
+
+The Tennessee Eastman reactor engineering diagrams are available in [`docs/engineering-models/`](docs/engineering-models/).
+
+### Reactor P&ID
+
+[Open the reactor P&ID diagram](docs/engineering-models/tep-reactor-pid.png)
+
+![TEP reactor piping and instrumentation diagram](docs/engineering-models/tep-reactor-pid.png)
+
+### Reactor ECAD
+
+[Open the reactor ECAD diagram](docs/engineering-models/tep-reactor-ecad.png)
+
+![TEP reactor electrical CAD diagram](docs/engineering-models/tep-reactor-ecad.png)
+
 ## Documentation
 
 - [Historian and TimescaleDB setup](docs/opcua/TIMESERIES.md)
