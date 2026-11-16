@@ -15,6 +15,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -115,6 +120,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -215,6 +225,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -315,6 +330,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -415,6 +435,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -515,6 +540,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -645,6 +675,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -775,6 +810,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -905,6 +945,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1035,6 +1080,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1165,6 +1215,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1295,6 +1350,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1407,6 +1467,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1531,6 +1596,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1643,6 +1713,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1773,6 +1848,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -1885,6 +1965,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2009,6 +2094,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2121,6 +2211,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2251,6 +2346,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2375,6 +2475,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2487,6 +2592,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2617,6 +2727,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2729,6 +2844,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2859,6 +2979,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -2971,6 +3096,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3083,6 +3213,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3219,6 +3354,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3349,6 +3489,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3479,6 +3624,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3609,6 +3759,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3739,6 +3894,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -3893,6 +4053,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4023,6 +4188,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4177,6 +4347,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4307,6 +4482,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4437,6 +4617,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4567,6 +4752,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4721,6 +4911,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4875,6 +5070,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -4987,6 +5187,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -5105,6 +5310,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -5217,6 +5427,11 @@
               "type": "ontoConcept",
               "valueType": "xs:string",
               "value": "Asset"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "value": [
@@ -5320,6 +5535,13 @@
               }
             ]
           }
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
