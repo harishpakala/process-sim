@@ -55,10 +55,33 @@ def test_selected_context_conflict_rejected():
                                  interpret=lambda q, c: proposal())
 
 
-def test_mixed_question_not_silently_degraded():
-    with pytest.raises(ValueError, match="Mixed"):
-        plan_unified_question_v3(QUESTION, schema=object(),
-                                 interpret_frame=lambda q, c: proposal(intent="mixed"))
+def test_mixed_question_produces_three_source_operations():
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence",
+               return_value={"shape": "urn:shape", "properties": [
+                   {"property": "urn:localid", "evidence_ids": ["e1"]}]}), \
+         patch("process_sim.api.unified_semantic_experimental.plan_question_semantic",
+               return_value={"intent": "list", "evidence_ids": ["graph-hop"]}) as graph:
+        result = plan_unified_question_v3(
+            QUESTION, schema=object(),
+            interpret_frame=lambda q, c: proposal(intent="mixed"))
+    assert [op.kind for op in result.operations] == [
+        "graph_query", "signal_resolution", "observations"]
+    assert result.operations[0].shacl_evidence["evidence_ids"] == ["graph-hop"]
+    assert result.temporal.end_seconds == 300
+    assert result.interpretation == "single_semantic_frame_mixed_plan_v4"
+    graph.assert_called_once()
+
+
+def test_mixed_graph_planner_failure_cannot_become_historian_only():
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence",
+               return_value={"shape": "urn:shape", "properties": [
+                   {"property": "urn:localid", "evidence_ids": ["e1"]}]}), \
+         patch("process_sim.api.unified_semantic_experimental.plan_question_semantic",
+               side_effect=ValueError("Graph path not SHACL validated")):
+        with pytest.raises(ValueError, match="Graph path"):
+            plan_unified_question_v3(
+                QUESTION, schema=object(),
+                interpret_frame=lambda q, c: proposal(intent="mixed"))
 
 
 def test_graph_frame_uses_existing_shacl_graph_planner():
