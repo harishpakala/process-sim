@@ -63,7 +63,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
    <div class="nav-scroll">
     <div class="section-label">WORKSPACE</div>
     <button class="nav-item" :class="{current:active==='Overview'}" @click="navigate('Overview')"><LayoutDashboard :size="16"/> Overview</button>
-    <button class="nav-item" :class="{current:active==='AI Query — Engineering'||active==='AI Query — Historian Experimental'}" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
+    <button class="nav-item" :class="{expanded:aiQueryOpen}" :aria-expanded="aiQueryOpen" @click="aiQueryOpen=!aiQueryOpen"><BrainCircuit :size="16"/> AI Query <ChevronDown v-if="aiQueryOpen" :size="14"/><ChevronRight v-else :size="14"/></button>
     <template v-if="aiQueryOpen">
      <button class="nav-item nested" :class="{current:active==='AI Query — Engineering'}" @click="navigate('AI Query — Engineering')"><span class="nav-dot"/> Engineering Queries</button>
      <button class="nav-item nested" :class="{current:active==='AI Query — Historian Experimental'}" @click="navigate('AI Query — Historian Experimental')"><span class="nav-dot"/> Ask DTWise (Historian &amp; more)</button>
