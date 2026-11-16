@@ -45,6 +45,8 @@ class Predicate:
     field: str
     operator: Operator
     value: Any = None
+    path: GraphPath | None = None
+    alias: str | None = None
 
     def __post_init__(self):
         if not self.field or self.operator not in (
@@ -52,6 +54,10 @@ class Predicate:
             "lt", "lte", "exists"
         ):
             raise ValueError("Invalid predicate")
+        if (self.path is None) != (self.alias is None):
+            raise ValueError("Path filter requires both SHACL path and entity alias")
+        if self.alias is not None and not self.alias.isidentifier():
+            raise ValueError("Invalid filter entity alias")
         if self.operator != "exists" and self.value is None:
             raise ValueError("Comparison requires a value")
         if self.operator == "exists" and self.value is not None:
@@ -139,4 +145,18 @@ class SemanticQuery:
         projections = tuple(replace(p, path=p.path.validate(schema)) if p.path else p
                             for p in self.projections)
         joins = tuple(j.validate(schema) for j in self.joins)
-        return replace(self, projections=projections, joins=joins, validated=True)
+        aliases = {(j.left, j.left_path.domain, j.left_path.root_shape) for j in joins}
+        aliases.update((j.right, j.right_path.domain, j.right_path.root_shape) for j in joins)
+        aliases.update((p.alias, p.path.domain, p.path.root_shape) for p in projections if p.path)
+        def validate_filter(node):
+            if isinstance(node, BooleanExpression):
+                return replace(node, children=tuple(validate_filter(c) for c in node.children))
+            if node.path is None:
+                return node
+            path = node.path.validate(schema)
+            if (node.alias, path.domain, path.root_shape) not in aliases:
+                raise ValueError("Filter path must share a bound entity alias and SHACL root")
+            return replace(node, path=path)
+        return replace(self, projections=projections, joins=joins,
+                       where=validate_filter(self.where) if self.where else None,
+                       validated=True)
