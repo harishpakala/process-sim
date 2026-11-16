@@ -11,11 +11,14 @@ from process_sim.api.unified_query_plan import UnifiedQueryPlan, QueryOperation
 from process_sim.api.vtkg_query import run_historian_question
 from process_sim.dtwise.rdf_executor import build_answer, execute_select
 from process_sim.dtwise.sparql_generator import compile_sparql
+from process_sim.api.unified_graph_resolution_experimental import resolve_entity_signal
 
 
 def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
-                         graph_executor=None, historian_executor=None):
-    """Execute only supported operations, rejecting partial or unknown plans."""
+                         graph_executor=None, historian_executor=None,
+                         single_resolution=False, mapping_executor=None,
+                         sample_retriever=None):
+    """Execute validated operations; optionally reuse one live mapping for samples."""
     import os
     env = os.environ if environ is None else environ
     if not isinstance(plan, UnifiedQueryPlan):
@@ -56,6 +59,8 @@ def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
         raise ValueError("Configure GRAPHDB_SPARQL_ENDPOINT")
     if observation_op is not None and not env.get("TEP_TIMESCALE_DSN"):
         raise ValueError("Configure TEP_TIMESCALE_DSN")
+    if single_resolution and historian_executor is not None:
+        raise ValueError("single_resolution cannot use the legacy historian executor")
     # Validate the complete plan and required parameters before any I/O.
     if graph_op is not None:
         graph_plan = graph_op.parameters.get("validated_engineering_plan")
@@ -90,12 +95,60 @@ def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
         result["graph"] = {"sparql": sparql, "answer": build_answer(
             bindings, graph_plan, limit=100)}
     if observation_op is not None:
-        historian = historian_executor or run_historian_question
-        result["historian"] = historian(payload, environ=env)
+        if single_resolution:
+            if historian_executor is not None:
+                raise ValueError("single_resolution cannot use the legacy historian executor")
+            from pathlib import Path
+            import sys
+            from process_sim.api.vtkg_query import ROOT
+            # The existing read-only parameterized retriever is reused directly.
+            # Unlike run_historian_question, it does not resolve the signal again.
+            if sample_retriever is None:
+                scripts = str(ROOT / "scripts")
+                sys.path.insert(0, scripts)
+                try:
+                    from tep_nexus_dexpi_historian import retrieve
+                    sample_retriever = retrieve
+                finally:
+                    sys.path.remove(scripts)
+            resolver_kwargs = {"evidence": signal_op.shacl_evidence}
+            if mapping_executor is not None:
+                resolver_kwargs["executor"] = mapping_executor
+            mapping = resolve_entity_signal(
+                endpoint, domain, function, **resolver_kwargs)
+            samples = sample_retriever(
+                env["TEP_TIMESCALE_DSN"], run_id, mapping["operational_signal"],
+                plan.temporal.start_seconds, plan.temporal.end_seconds)
+            if not isinstance(samples, list):
+                raise ValueError("Invalid historian observation result")
+            result["historian"] = {
+                "domain": domain, "engineeringFunction": function,
+                "runId": run_id, "mapping": mapping,
+                "observations": samples, "observationCount": len(samples),
+                "timeBasis": "simulation_time",
+                "startSimulationSeconds": plan.temporal.start_seconds,
+                "endSimulationSeconds": plan.temporal.end_seconds,
+                "materializedInGraphDB": False,
+                "provenance": {
+                    "semanticSource": "live GraphDB engineering/OPCUA mapping",
+                    "temporalSource": "TimescaleDB public.signal_samples",
+                    "physicalSensorBinding": "NOT_VERIFIED",
+                    "sharedRunProvenance": "NOT_VERIFIED",
+                },
+            }
+            result["resolution_execution"] = {
+                "graphdb_signal_resolution_queries": 1,
+                "historian_re_resolved_signal": False,
+                "additional_engineering_query": graph_op is not None,
+            }
+        else:
+            historian = historian_executor or run_historian_question
+            result["historian"] = historian(payload, environ=env)
     if logical_plan is not plan:
         result["graph_stage"] = {
             "logical_consolidation": True,
             "single_sparql_request": False,
-            "mapping_validation": "existing_live_historian_resolver",
+            "mapping_validation": ("single_live_entity_signal_select" if single_resolution
+                                   else "existing_live_historian_resolver"),
         }
     return result
