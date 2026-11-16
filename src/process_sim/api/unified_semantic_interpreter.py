@@ -154,6 +154,11 @@ def _interpret(question, catalog, context):
         "For multiple properties of the SAME SHACL root use the SAME alias, e.g. entity. "
         "Different root shapes require explicit SHACL joins; never fabricate join keys. "
         "For historian time-series samples, sources MUST contain both graphdb and timescaledb. "
+        "A projection named SignalName MUST end in hasSignalName, never hasAssetIdentifier. "
+        "If a question mentions DEXPI and OPCUAConnectivity together, create an explicit "
+        "join between their SHACL hasAssetIdentifier paths using distinct aliases. "
+        "Do not replace an AssetIdentifier URI filter with a signal-name filter. "
+        "Never reuse example signal values unless literally present in the question. "
         "Project the SHACL signal identifier as SignalName (not its literal value). "
         "When a signal value such as XMEAS3 is specified, filter with "
         "where={field:'SignalName',operator:'eq',value:'XMEAS3'}. "
@@ -254,6 +259,22 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
             )
         if not any(p.source == "graphdb" for p in projections):
             raise ValueError("Historian requires a GraphDB signal projection")
+    # Validate the requested semantics, not just the existence of SHACL paths.
+    # A valid path to the wrong property is still an incorrect answer.
+    for p in projections:
+        if p.source == "graphdb" and p.name.lower() == "signalname":
+            if not p.path.predicates[-1].lower().endswith("/hassignalname"):
+                raise ValueError(
+                    "Semantic mismatch: SignalName projection must end in hasSignalName; "
+                    "Qwen selected " + p.path.predicates[-1])
+    if re.search(r"\bdexpi\b", question, re.I) and re.search(
+            r"\bopcua(?:connectivity)?\b", question, re.I):
+        domains = {path.domain.lower() for j in joins
+                   for path in (j.left_path, j.right_path)}
+        if not {"dexpi", "opcuaconnectivity"}.issubset(domains):
+            raise ValueError(
+                "Semantic mismatch: requested DEXPI-to-OPCUA association "
+                "requires an explicit cross-domain SHACL join")
     for key in ("group_by", "order_by", "sources"):
         if not isinstance(raw[key], list) or any(not isinstance(x, str) for x in raw[key]):
             raise ValueError("Invalid " + key)
