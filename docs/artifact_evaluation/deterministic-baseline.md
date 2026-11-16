@@ -11,7 +11,7 @@ $env:TEP_TIMESCALE_DSN="postgresql://tep:tep-local-dev@127.0.0.1:5432/tep_nexus"
 python scripts/tep_nexus_deterministic_baseline.py --run-id YOUR_RUN_ID --repeats 3
 ```
 
-The command writes `reports/deterministic_baseline_results.json` and `reports/deterministic_baseline_cases.csv`. It exits nonzero if any case fails. The run ID must match a locally available simulation/historian run; **no live measurements have been executed or verified as part of this commit**.
+The command writes `reports/deterministic_baseline_results.json` and `reports/deterministic_baseline_execution_results.csv`. The separate `reports/deterministic_baseline_cases.csv` is a UI-aligned question inventory, not a run-results file, and must not be overwritten by this benchmark. It exits nonzero if any case fails. The run ID must match a locally available simulation/historian run; **no live measurements have been executed or verified as part of this commit**.
 
 The script checks the two expected rejection cases using the same explicit identifier and error-message constraints as the existing fixture. It reports per-case stage times, elapsed time, outcomes and aggregate median/p95 latency.
 
