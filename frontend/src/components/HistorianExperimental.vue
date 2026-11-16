@@ -142,31 +142,31 @@ const experimentalChart = computed(() => {
   <div class="panel-title"><h2>Historian Experimental — Natural Language</h2><span class="pill">ISOLATED EXPERIMENT</span></div>
   <p>Ask a free-text historian question. The experiment validates SHACL schema evidence and reuses the existing VTKG Historian executor. Existing Historian Queries remain unchanged.</p>
   <p>For this first prototype, include DEXPI or ECAD, exactly one LocalID, and the full simulation run UUID. Time bounds are optional.</p>
-  <div class="custom-query">
-   <label for="historian-experiment-run">Simulation run</label>
+  <div class="experiment-fields">
+   <div class="experiment-field"><label for="historian-experiment-run">Simulation run</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
     <option value="">Select simulation run</option>
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
    </select>
-   <button type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button>
-   <label for="historian-experiment-domain">Engineering domain</label>
+   <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
+   <div class="experiment-field"><label for="historian-experiment-domain">Engineering domain</label>
    <select id="historian-experiment-domain" v-model="selectedDomain">
     <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
-   </select>
-   <label for="historian-experiment-localid">LocalID (verified for selected run)</label>
+   </select></div>
+   <div class="experiment-field"><label for="historian-experiment-localid">LocalID (verified for selected run)</label>
    <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
     <option value="">Select LocalID</option>
     <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
-   </select>
-   <label for="historian-experiment-start">Start simulation seconds (optional)</label>
-   <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" />
-   <label for="historian-experiment-end">End simulation seconds (optional)</label>
-   <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" />
-   <p v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued">Selections help compose the question for testing. Only the editable natural-language question is submitted to the experimental planner.</p>
+   </select></div>
+   <div class="experiment-field"><label for="historian-experiment-start">Start simulation seconds (optional)</label>
+   <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
+   <div class="experiment-field"><label for="historian-experiment-end">End simulation seconds (optional)</label>
+   <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
+   <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
+   <p class="subdued experiment-wide">Selections help compose the question for testing. Only the editable natural-language question is submitted to the experimental planner.</p>
   </div>
-  <label for="historian-experiment-question">Historian question</label>
-  <textarea id="historian-experiment-question" v-model="question" rows="4" style="width:100%;margin-top:8px" placeholder="Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 for simulation run 00000000-0000-0000-0000-000000000001, between simulation seconds 100 and 300." />
+  <label class="experiment-question-label" for="historian-experiment-question">Historian question</label>
+  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 for simulation run 00000000-0000-0000-0000-000000000001, between simulation seconds 100 and 300." />
   <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <template v-if="response">
@@ -201,3 +201,23 @@ const experimentalChart = computed(() => {
   </template>
  </section>
 </template>
+
+<style scoped>
+.experiment-fields {
+ display: grid;
+ grid-template-columns: repeat(2, minmax(0, 1fr));
+ gap: 16px;
+ margin: 20px 0;
+}
+.experiment-field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.experiment-field label, .experiment-question-label { display: block; font-size: 13px; color: #c7d9ea; font-weight: 600; }
+.experiment-field select, .experiment-field input, .experiment-question {
+ display: block; width: 100%; max-width: 100%; min-width: 0;
+ background: #0c192a; border: 1px solid #334a62; border-radius: 8px;
+ color: #eaf4ff; padding: 10px; font: inherit;
+}
+.experiment-refresh { align-self: flex-start; padding: 7px 12px; border: 1px solid #334a62; border-radius: 8px; background: #172d42; color: #eaf4ff; }
+.experiment-wide { grid-column: 1 / -1; }
+.experiment-question { margin-top: 8px; resize: vertical; }
+@media (max-width: 700px) { .experiment-fields { grid-template-columns: minmax(0, 1fr); } }
+</style>
