@@ -180,6 +180,11 @@ def _interpret(question, catalog, context):
         "Resolve DEXPI hasLocalId to the same engineering entity's hasAssetIdentifier, "
         "join that asset identifier to OPCUAConnectivity hasAssetIdentifier, "
         "and project OPCUAConnectivity hasSignalName as SignalName. "
+        "For InstrumentationFunction questions, the DEXPI join path MUST start with "
+        "hasInstrumentationFunction and end with hasAssetIdentifier; do not use "
+        "an ActuatingFunction root or its direct hasAssetIdentifier path. "
+        "The LocalID filter must use hasInstrumentationFunction followed by "
+        "hasLocalId on the SAME DEXPI root as the join. "
         "The DEXPI LocalID is a filter, not the historian signal identifier. "
         "For all simulation times leave start_seconds and end_seconds null. "
         "A projection named SignalName MUST end in hasSignalName, never hasAssetIdentifier. "
@@ -296,13 +301,22 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
                           and p.name == "SignalName" and p.path is not None
                           and p.path.domain.lower() == "opcuaconnectivity"
                           and p.path.predicates[-1].lower().endswith("/hassignalname")]
+        instrumentation_joins = [
+            j for j in joins
+            for path in (j.left_path, j.right_path)
+            if path.domain.lower() == "dexpi"
+            and len(path.predicates) >= 2
+            and path.predicates[0].lower().endswith("/hasinstrumentationfunction")
+            and path.predicates[-1].lower().endswith("/hasassetidentifier")
+        ]
         if ("timescaledb" not in raw["sources"] or
                 not {"dexpi", "opcuaconnectivity"}.issubset(domains) or
-                not signal_outputs):
+                not signal_outputs or not instrumentation_joins):
             raise ValueError(
                 "Semantic mismatch: DEXPI instrumentation behavior during a "
                 "simulation run requires a DEXPI-to-OPCUA SHACL join, "
-                "SignalName projection, and TimescaleDB source")
+                "instrumentation-function asset path, SignalName projection, "
+                "and TimescaleDB source")
     # Validate the requested semantics, not just the existence of SHACL paths.
     # A valid path to the wrong property is still an incorrect answer.
     for p in projections:
