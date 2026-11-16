@@ -86,8 +86,7 @@ def main(argv=None):
     if args.output:
         path = Path(args.output)
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(serialized + "
-", encoding="utf-8")
+        path.write_text(serialized + "\n", encoding="utf-8")
     print(serialized)
 
 
