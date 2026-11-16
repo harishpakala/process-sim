@@ -4,7 +4,7 @@ import pytest
 
 from process_sim.api.unified_execution_experimental import execute_unified_plan
 from process_sim.api.unified_query_plan import (
-    QueryOperation, TemporalWindow, UnifiedQueryPlan,
+    QueryOperation, TemporalWindow, UnifiedQueryPlan, consolidate_graph_stage,
 )
 
 RUN = "11111111-2222-3333-4444-555555555555"
@@ -73,3 +73,42 @@ def test_unexpected_operation_order_rejected():
         operations=(plan.operations[1], plan.operations[0], plan.operations[2]))
     with pytest.raises(ValueError, match="sequence"):
         execute_unified_plan(bad, object(), environ=ENV)
+
+
+def test_logical_graph_stage_preserves_grounding_and_observation_identity():
+    original = mixed()
+    combined = consolidate_graph_stage(original)
+    assert [op.kind for op in combined.operations] == ["graph_query", "observations"]
+    assert combined.operations[0].parameters["signal_resolution"] == {
+        "domain": "DEXPI", "engineering_function": "FI_101"}
+    assert combined.operations[0].shacl_evidence["signal_resolution"]["shape"] == "urn:shape"
+    assert combined.operations[1] == original.operations[2]
+
+
+def test_logical_graph_stage_executes_with_explicit_backend_disclosure():
+    combined = consolidate_graph_stage(mixed())
+    with patch("process_sim.api.unified_execution_experimental.compile_sparql",
+               return_value="SELECT * WHERE {}"), \
+         patch("process_sim.api.unified_execution_experimental.build_answer",
+               return_value={"rows": 1}):
+        result = execute_unified_plan(
+            combined, object(), environ=ENV,
+            graph_executor=lambda endpoint, sparql: [{"entity": "FI_101"}],
+            historian_executor=lambda payload, *, environ: {
+                "engineeringFunction": payload["engineering_function"],
+                "observations": [1]})
+    assert result["historian"]["engineeringFunction"] == "FI_101"
+    assert result["graph_stage"]["logical_consolidation"] is True
+    assert result["graph_stage"]["single_sparql_request"] is False
+
+
+def test_logical_graph_stage_rejects_missing_resolution_evidence():
+    original = mixed()
+    invalid = UnifiedQueryPlan(
+        question=original.question, temporal=original.temporal,
+        operations=(original.operations[0],
+                    QueryOperation("signal_resolution", "graphdb",
+                                   original.operations[1].parameters, {}),
+                    original.operations[2]))
+    with pytest.raises(ValueError, match="SHACL"):
+        consolidate_graph_stage(invalid)
