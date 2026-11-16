@@ -58,7 +58,7 @@ def test_unsupported_aggregation_fails_closed():
 
 def test_unbound_join_fails_closed():
     path = GraphPath("DEXPI", "shape:instrument", (URI,))
-    with pytest.raises(ValueError, match="alias-to-entity"):
+    with pytest.raises(ValueError, match="unbound entity alias"):
         compile_unified_graph_query(query(joins=(Join("a", "b", path, path),)))
 
 
@@ -78,3 +78,35 @@ def test_executor_checks_response_columns():
     with pytest.raises(ValueError, match="unexpected columns"):
         execute_unified_graph_query(plan, "http://unused",
                                      executor=lambda endpoint, sparql: [{"wrong": "A-1"}])
+
+
+def test_real_join_is_anchored_to_projection_roots():
+    path = GraphPath("DEXPI", "shape:instrument", (URI,))
+    plan = query(projections=(
+        Projection("leftId", path, alias="left"),
+        Projection("rightId", path, alias="right"),
+    ), joins=(Join("left", "right", path, path),))
+    sparql = compile_unified_graph_query(plan)
+    assert "?root_left <" + URI + ">" in sparql
+    assert "?root_right <" + URI + ">" in sparql
+    assert "FILTER(?join_0_left_0 = ?join_0_right_0)" in sparql
+
+
+def test_disconnected_roots_rejected():
+    path = GraphPath("DEXPI", "shape:instrument", (URI,))
+    plan = query(projections=(
+        Projection("leftId", path, alias="left"),
+        Projection("rightId", path, alias="right"),
+    ))
+    with pytest.raises(ValueError, match="Cartesian"):
+        compile_unified_graph_query(plan)
+
+
+def test_multiple_properties_share_one_root_without_join():
+    path = GraphPath("DEXPI", "shape:instrument", (URI,))
+    plan = query(projections=(
+        Projection("id1", path, alias="instrument"),
+        Projection("id2", path, alias="instrument"),
+    ))
+    sparql = compile_unified_graph_query(plan)
+    assert sparql.count("?root_instrument <" + URI + ">") == 2
