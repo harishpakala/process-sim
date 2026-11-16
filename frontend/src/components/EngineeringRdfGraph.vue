@@ -11,6 +11,7 @@ const triples = ref<Triple[]>([])
 const root = ref('')
 const selected = ref('')
 const expanded = ref<string[]>([])
+const activeRootGroup = ref('')
 const pending = ref<string[]>([])
 const search = ref('')
 const loading = ref(false)
@@ -29,6 +30,23 @@ const known = computed(() => new Set([root.value, ...triples.value.map(t => t.su
 const label = (id: string) => triples.value.find(t => t.subject === id && t.predicate === labelPredicate)?.object || localName(id)
 const kind = (id: string) => localName(triples.value.find(t => t.subject === id && t.predicate === rdfType && t.object.startsWith(namespace.value))?.object || 'Resource')
 const links = computed(() => triples.value.filter(t => t.resource && t.predicate !== rdfType && t.subject !== t.object))
+// Presentation-only groups: no structural containers are added to RDF.
+const dexpiRootGroups = computed(() => {
+  if (props.domain !== 'dexpi' || !root.value) return []
+  return ['hasEquipment', 'hasInstrumentationFunction', 'hasActuatingFunction'].map(name => ({
+    name, label: name.slice(3),
+    count: new Set(links.value.filter(t => t.subject === root.value && t.predicate === namespace.value + name).map(t => t.object)).size,
+  })).filter(group => group.count > 0)
+})
+const displayLinks = computed(() => {
+  if (!dexpiRootGroups.value.length) return links.value
+  return links.value.filter(t => t.subject !== root.value || (activeRootGroup.value !== '' && t.predicate === namespace.value + activeRootGroup.value))
+})
+function selectRootGroup(name: string) {
+  activeRootGroup.value = activeRootGroup.value === name ? '' : name
+  if (activeRootGroup.value && !expanded.value.includes(root.value)) expanded.value = [...expanded.value, root.value]
+  layoutGraph(root.value)
+}
 const visible = computed(() => {
   if (!root.value) return []
   const visited = new Set([root.value])
@@ -36,7 +54,7 @@ const visible = computed(() => {
   while (queue.length) {
     const id = queue.shift()!
     if (!expanded.value.includes(id)) continue
-    for (const t of links.value) {
+    for (const t of displayLinks.value) {
       const neighbor = t.subject === id ? t.object : t.object === id ? t.subject : ''
       if (neighbor && !visited.has(neighbor)) {
         visited.add(neighbor)
@@ -46,7 +64,7 @@ const visible = computed(() => {
   }
   return [...visited]
 })
-const edges = computed(() => links.value.filter(t => visible.value.includes(t.subject) && visible.value.includes(t.object)))
+const edges = computed(() => displayLinks.value.filter(t => visible.value.includes(t.subject) && visible.value.includes(t.object)))
 const attributes = computed(() => triples.value.filter(t => t.subject === selected.value && !t.resource))
 const outgoing = computed(() => links.value.filter(t => t.subject === selected.value))
 const incoming = computed(() => links.value.filter(t => t.object === selected.value))
@@ -85,6 +103,7 @@ async function load() {
   error.value = ''
   triples.value = []
   expanded.value = []
+  activeRootGroup.value = ''
   selected.value = ''
   root.value = ''
   resetView()
@@ -124,6 +143,11 @@ watch(() => props.domain, () => { void load() }, { immediate: true })
 
 async function toggle(id: string) {
   selected.value = id
+  if (props.domain === 'dexpi' && id === root.value && dexpiRootGroups.value.length) {
+    const index = dexpiRootGroups.value.findIndex(group => group.name === activeRootGroup.value)
+    selectRootGroup(dexpiRootGroups.value[(index + 1) % dexpiRootGroups.value.length].name)
+    return
+  }
   if (expanded.value.includes(id)) {
     expanded.value = expanded.value.filter(value => value !== id)
     return
@@ -138,6 +162,7 @@ async function focusOn(id: string) {
   ++generation
   triples.value = []
   expanded.value = []
+  activeRootGroup.value = ''
   error.value = ''
   root.value = id
   resetView()
@@ -273,6 +298,11 @@ function wheel(event: WheelEvent) {
     <p v-if="loading" role="status">Querying GraphDB…</p>
     <p v-if="error" role="alert" class="catalog-disclaimer">{{ error }}</p>
     <template v-if="!loading && root">
+      <div v-if="dexpiRootGroups.length" class="graph-relationship" style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <strong>Show DEXPI branch:</strong>
+        <button v-for="group in dexpiRootGroups" :key="group.name" type="button" :class="activeRootGroup===group.name?'':'secondary'" :aria-pressed="activeRootGroup===group.name" @click="selectRootGroup(group.name)">{{ group.label }} ({{ group.count }})</button>
+        <button v-if="activeRootGroup" type="button" class="secondary" @click="selectRootGroup(activeRootGroup)">Hide branch</button>
+      </div>
       <p class="catalog-disclaimer">{{ visible.length }} visible resources · {{ edges.length }} RDF relationships. Drag nodes to reposition, drag the background to pan, scroll to zoom, and double-click to expand. Node colors indicate RDF types; arrows show predicate direction. Dragged nodes retain their positions. Literal properties appear on the right.</p>
       <div class="graph-workspace">
         <div class="graph-canvas graph-rdf-scroll" role="group" :aria-label="domain + ' RDF graph'">
