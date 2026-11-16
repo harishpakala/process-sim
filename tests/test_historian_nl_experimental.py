@@ -51,3 +51,15 @@ def test_existing_executor_reused_unchanged():
     assert output["result"]["observationCount"] == 2
     executor.assert_called_once()
     assert executor.call_args.args[0]["engineering_function"] == "FI_101"
+
+def test_reported_historian_question():
+    question = ("Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 "
+                "for simulation run 077a3c31-44f4-4f3a-b06d-ad52b148fe10, "
+                "between simulation seconds 100 and 300.")
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence):
+        plan = plan_historian_question(question, schema=object())
+    assert plan["intent"] == "historian_observations"
+    assert plan["engineering_function"] == "FI_101"
+    assert plan["run_id"] == "077a3c31-44f4-4f3a-b06d-ad52b148fe10"
+    assert plan["start_simulation_seconds"] == 100
+    assert plan["end_simulation_seconds"] == 300
