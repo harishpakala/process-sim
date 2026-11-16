@@ -1,7 +1,7 @@
 """Isolated NL-to-VTKG historian experiment. Existing endpoints remain unchanged.
 
-This prototype accepts an explicit domain, LocalID, run UUID and optional
-simulation-second bounds in the question. It refuses to guess missing fields.
+This prototype accepts explicit identifiers or selected context, with optional
+simulation-second bounds. It refuses to guess missing identifiers.
 """
 from __future__ import annotations
 
@@ -98,7 +98,7 @@ def plan_historian_question(question: str, *, schema: Schema | None = None, cont
         start = float(match[1])
     elif match := re.search(r"\bup\s+to\s+(?:simulation\s+)?seconds?\s+(\d+(?:\.\d+)?)\b", q, re.I):
         end = float(match[1])
-    elif re.search(r"\b(between|from|until|before|after|last|first|since)\b", q, re.I):
+    elif re.search(r"\b(between|until|before|after|last|first|since)\b|\bfrom\s+(?:simulation\s+)?(?:seconds?\s+)?\d", q, re.I):
         raise ValueError("Unsupported or incomplete time interval; specify simulation seconds")
     for field, value in (("start_simulation_seconds", start), ("end_simulation_seconds", end)):
         selected = context.get(field)
@@ -126,6 +126,22 @@ def run_historian_nl_experiment(question: str, *, environ=None, context=None) ->
     plan = plan_historian_question(question, context=context)
     payload = {key: plan[key] for key in ("domain", "engineering_function", "run_id",
                "start_simulation_seconds", "end_simulation_seconds")}
-    payload["question"] = question.strip()
+    payload["question"] = canonical_historian_question(plan)
     result = run_historian_question(payload, environ=environ)
     return {"mode": "historian_nl_experimental", "plan": plan, "result": result}
+
+
+def canonical_historian_question(plan: dict) -> str:
+    """Adapt a validated experimental plan to the unchanged strict historian CLI."""
+    start, end = plan["start_simulation_seconds"], plan["end_simulation_seconds"]
+    if start is not None and end is not None:
+        interval = f"between simulation seconds {start:g} and {end:g}"
+    elif start is not None:
+        interval = f"from simulation second {start:g} onward"
+    elif end is not None:
+        interval = f"up to simulation second {end:g}"
+    else:
+        interval = "for all simulation times"
+    entity = "DEXPI InstrumentationFunction" if plan["domain"] == "DEXPI" else "ECAD Device"
+    return (f"Get historian values for {entity} with LocalID {plan['engineering_function']} "
+            f"for simulation run {plan['run_id']}, {interval}.")
