@@ -25,5 +25,5 @@ def run_unified_web(payload, *, runner=run_unified_cli, schema_factory=Schema):
                                       or not signal_field.isidentifier()):
         raise ValueError("Invalid signal_field")
     report = runner(question.strip(), schema=schema_factory(str(SCHEMA_PATH)),
-                    context=context, signal_field=signal_field)
+                    context=context, signal_field=signal_field, include_qwen_output=True)
     return {"mode": "unified_qwen_shacl", **report}
