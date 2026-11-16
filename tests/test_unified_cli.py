@@ -43,8 +43,23 @@ def test_engineering_cli_calls_interpreter_once():
 
 def test_mixed_cli_joins_live_graph_rows_to_timescale_samples():
     from datetime import datetime, timezone
-    from test_unified_historian_executor import factory
-    conn, connect = factory([("S1", 1.5, 3.2, datetime(2026, 1, 1, tzinfo=timezone.utc))])
+    class FakeConnection:
+        def __init__(self):
+            self.statements = []
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def transaction(self):
+            return self
+        def execute(self, statement):
+            self.statements.append(statement)
+        def cursor(self):
+            return self
+        def fetchall(self):
+            return [("S1", 1.5, 3.2, datetime(2026, 1, 1, tzinfo=timezone.utc))]
+    conn = FakeConnection()
+    connect = lambda dsn: conn
     report = run_unified_cli(
         "Show engineering signal observations", schema=Schema(),
         context={"run_id": RUN},
