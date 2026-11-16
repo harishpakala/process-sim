@@ -664,6 +664,99 @@
     },
     {
       "modelType": "SubmodelElementCollection",
+      "idShort": "ElectricalNets",
+      "description": [
+        {
+          "language": "en",
+          "text": "Collection of electrical nets referenced by schematic connections."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "Cardinality",
+          "valueType": "xs:string",
+          "value": "ZeroToOne",
+          "semanticId": {
+            "type": "ExternalReference",
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
+        }
+      ],
+      "value": [
+        {
+          "modelType": "SubmodelElementCollection",
+          "idShort": "ElectricalNet",
+          "description": [
+            {
+              "language": "en",
+              "text": "Electrical net connecting schematic endpoints."
+            }
+          ],
+          "qualifiers": [
+            {
+              "type": "Cardinality",
+              "valueType": "xs:string",
+              "value": "ZeroToMany",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                  }
+                ]
+              }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
+            }
+          ],
+          "value": [
+            {
+              "modelType": "Property",
+              "idShort": "LocalId",
+              "valueType": "xs:string",
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Identifier local to the ECAD electrical net."
+                }
+              ],
+              "qualifiers": [
+                {
+                  "type": "Cardinality",
+                  "valueType": "xs:string",
+                  "value": "One",
+                  "semanticId": {
+                    "type": "ExternalReference",
+                    "keys": [
+                      {
+                        "type": "GlobalReference",
+                        "value": "https://admin-shell.io/SubmodelTemplates/Cardinality/1/0"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "modelType": "SubmodelElementCollection",
       "idShort": "Schematics",
       "value": [
         {
@@ -745,6 +838,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "ZeroToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -769,6 +867,11 @@
           "type": "Cardinality",
           "valueType": "xs:string",
           "value": "ZeroToOne"
+        },
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ],
       "description": [
