@@ -53,7 +53,11 @@ def run_unified_cli(question, *, schema, context=None, environ=None,
         dsn = env.get("TEP_TIMESCALE_DSN")
         if not dsn:
             raise ValueError("Configure TEP_TIMESCALE_DSN")
-        # GraphDB has already applied the validated projected-field filter and\n        # ordering. Do not pass those graph-only operations to the historian\n        # executor, which supports run/signal/time filtering but not generic\n        # historian predicates or ordering. Aggregations remain rejected.\n        historian_plan = replace(plan, where=None, order_by=(), validated=True)\n        result["answer"] = execute_unified_historian(\n            historian_plan, dsn, graph_rows=graph["rows"], signal_field=signal_field,
+        # GraphDB applies the projected-field filter before signal resolution.
+        # TimescaleDB receives only resolved signal IDs and run/time constraints.
+        # Unsupported historian aggregations remain rejected.
+        historian_plan = replace(plan, where=None, order_by=(), validated=True)
+        result["answer"] = execute_unified_historian(\n            historian_plan, dsn, graph_rows=graph["rows"], signal_field=signal_field,
             connection_factory=connection_factory)
     else:
         result["answer"] = {"rows": graph["rows"], "count": graph["count"]}
