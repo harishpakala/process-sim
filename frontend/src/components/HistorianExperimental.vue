@@ -115,7 +115,7 @@ async function run() {
  error.value = ''
  response.value = null
  if (question.value.trim().length < 5) {
-  error.value = 'Enter a historian question.'
+  error.value = 'Enter a question to continue.'
   return
  }
  busy.value = true
@@ -163,37 +163,37 @@ const experimentalChart = computed(() => {
 
 <template>
  <section class="panel">
-  <div class="panel-title"><h2>Unified Query Experimental — Natural Language</h2><span class="pill">ISOLATED EXPERIMENT</span></div>
-  <p>Ask an engineering or Historian question. The shared experimental router dispatches to the existing SHACL-grounded engineering planner or VTKG Historian executor. Existing query pages remain unchanged.</p>
-  <p>For Historian questions, select a run, domain, and LocalID or include them explicitly in the question. Time bounds are optional. Engineering questions can be entered directly without selections.</p>
+  <div class="panel-title"><h2>Ask DTWise</h2><span class="pill">PREVIEW</span></div>
+  <p>Ask about engineering information or explore recorded simulation data in your own words.</p>
+  <p>Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
   <div class="experiment-fields">
-   <div class="experiment-field"><label for="historian-experiment-run">Simulation run</label>
+   <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
     <option value="">Select simulation run</option>
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
    </select>
    <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
-   <div class="experiment-field"><label for="historian-experiment-domain">Engineering domain</label>
+   <div class="experiment-field"><label for="historian-experiment-domain">Source (optional)</label>
    <select id="historian-experiment-domain" v-model="selectedDomain">
     <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
    </select></div>
-   <div class="experiment-field"><label for="historian-experiment-localid">LocalID (verified for selected run)</label>
+   <div class="experiment-field"><label for="historian-experiment-localid">Instrument / LocalID (optional)</label>
    <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
     <option value="">Select LocalID</option>
     <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
    </select></div>
-   <div class="experiment-field"><label for="historian-experiment-style">Query wording (editable template)</label>
+   <div class="experiment-field"><label for="historian-experiment-style">How would you like to ask?</label>
    <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
-   <div class="experiment-field"><label for="historian-experiment-start">Start simulation seconds (optional)</label>
+   <div class="experiment-field"><label for="historian-experiment-start">From simulation second (optional)</label>
    <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
-   <div class="experiment-field"><label for="historian-experiment-end">End simulation seconds (optional)</label>
+   <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
    <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">Selections and wording templates help compose questions. The editable question determines intent; optional selections provide context. Blank time bounds mean the complete available run.</p>
+   <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
   </div>
-  <label class="experiment-question-label" for="historian-experiment-question">Natural-language question</label>
-  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Get historian values for the DEXPI InstrumentationFunction with LocalID FI_101 for simulation run 00000000-0000-0000-0000-000000000001, between simulation seconds 100 and 300." />
-  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Running…' : 'Run experimental query'}}</button></div>
+  <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
+  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
+  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <template v-if="response">
    <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
@@ -227,8 +227,8 @@ const experimentalChart = computed(() => {
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    </template>
-   <h3>Validated query plan</h3>
-   <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre>
+   <h3>Query details</h3>
+   <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
  </section>
 </template>
