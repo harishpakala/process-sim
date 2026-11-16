@@ -18,7 +18,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlencode, urlsplit, parse_qs
 from urllib.request import Request, urlopen
 
-GRAPHDB_ENDPOINT = os.environ.get("GRAPHDB_SPARQL_ENDPOINT", "http://localhost:7200/repositories/AAS")
+GRAPHDB_ENDPOINT = os.environ.get("GRAPHDB_SPARQL_ENDPOINT", "http://localhost:7200/repositories/AAST")
 MAX_BODY = 100_000
 MAX_RESPONSE = 8_000_000
 
