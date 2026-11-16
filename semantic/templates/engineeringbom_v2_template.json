@@ -137,13 +137,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "RecordedParent",
+              "idShort": "hasRecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/RecordedParent"
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
                   }
                 ]
               },
@@ -194,6 +194,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "OneToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -208,6 +213,13 @@
         {
           "language": "en",
           "text": "Collection of source-recorded engineering assembly entries in the bill-of-materials structure."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -479,13 +491,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "RecordedParent",
+              "idShort": "hasRecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/RecordedParent"
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
                   }
                 ]
               },
@@ -529,6 +541,59 @@
                   "text": "Explicit source-recorded parent relationship of the BOM item, not an inferred or cross-domain join."
                 }
               ]
+            },
+            {
+              "modelType": "RelationshipElement",
+              "idShort": "functionallyAssociatedWith",
+              "semanticId": {
+                "type": "ExternalReference",
+                "keys": [
+                  {
+                    "type": "GlobalReference",
+                    "value": "https://example.org/engineeringbom/functionallyAssociatedWith"
+                  }
+                ]
+              },
+              "first": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItems"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "BOMItemRecord"
+                  }
+                ]
+              },
+              "second": {
+                "type": "ModelReference",
+                "keys": [
+                  {
+                    "type": "Submodel",
+                    "value": "https://example.org/sm/TEP_EngineeringBOM_V2_Template"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "Assemblies"
+                  },
+                  {
+                    "type": "SubmodelElementCollection",
+                    "value": "AssemblyRecord"
+                  }
+                ]
+              },
+              "description": [
+                {
+                  "language": "en",
+                  "text": "Explicit source-recorded functional association between a BOM item and assembly; not an identifier-based cross-domain join."
+                }
+              ]
             }
           ],
           "qualifiers": [
@@ -536,6 +601,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "OneToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -551,11 +621,18 @@
           "language": "en",
           "text": "Collection of engineering bill-of-materials item records with identifiers, provenance, and recorded associations."
         }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
+        }
       ]
     },
     {
       "modelType": "SubmodelElementCollection",
-      "idShort": "ParentReferences",
+      "idShort": "ParentLinks",
       "semanticId": {
         "type": "ExternalReference",
         "keys": [
@@ -568,7 +645,7 @@
       "value": [
         {
           "modelType": "SubmodelElementCollection",
-          "idShort": "ParentReference",
+          "idShort": "ParentLink",
           "semanticId": {
             "type": "ExternalReference",
             "keys": [
@@ -641,13 +718,13 @@
             },
             {
               "modelType": "RelationshipElement",
-              "idShort": "RecordedParent",
+              "idShort": "hasRecordedParent",
               "semanticId": {
                 "type": "ExternalReference",
                 "keys": [
                   {
                     "type": "GlobalReference",
-                    "value": "https://example.org/engineeringbom/RecordedParent"
+                    "value": "https://example.org/engineeringbom/hasRecordedParent"
                   }
                 ]
               },
@@ -698,6 +775,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "OneToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -712,6 +794,13 @@
         {
           "language": "en",
           "text": "Collection of source-derived records documenting parent references in the engineering BOM."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -880,6 +969,11 @@
               "type": "Cardinality",
               "valueType": "xs:string",
               "value": "OneToMany"
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ],
           "description": [
@@ -894,6 +988,13 @@
         {
           "language": "en",
           "text": "Collection of source-recorded functional associations between engineering records."
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
