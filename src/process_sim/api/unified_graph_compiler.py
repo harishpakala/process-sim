@@ -154,6 +154,29 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
         if reached != aliases:
             raise ValueError("Disconnected entity aliases would cause Cartesian product")
     if plan.where is not None:
+        # Materialize explicit SHACL filter paths from their already-bound entity root.
+        # The filter is not projected and must never create an independent root.
+        def bind_filter_paths(node):
+            if isinstance(node, BooleanExpression):
+                for child in node.children:
+                    bind_filter_paths(child)
+            elif node.path is not None:
+                shape = (node.path.domain, node.path.root_shape)
+                if alias_shapes.get(node.alias) != shape:
+                    raise ValueError("Filter path does not share a bound entity root")
+                key = (node.alias, shape, node.path.predicates)
+                if key not in path_filters:
+                    current = "?root_" + node.alias
+                    idx = len(path_filters)
+                    for hop, predicate in enumerate(node.path.predicates):
+                        next_var = "?filter_" + str(idx) + "_" + str(hop)
+                        clauses.append(current + " " + _iri(predicate) + " " + next_var + " .")
+                        current = next_var
+                    path_filters[key] = current
+                filter_vars[id(node)] = path_filters[key]
+        path_filters = {}
+        filter_vars = {}
+        bind_filter_paths(plan.where)
         # A join key can be filtered without appearing in SELECT. Only expose
         # a name when it resolves to one unique SHACL join property.
         filter_fields = dict(fields)
@@ -173,7 +196,17 @@ def compile_unified_graph_query(plan: SemanticQuery, *, limit=100):
                             filter_fields[terminal] ==
                             "?join_" + str(index) + "_left_" + str(len(join.left_path.predicates) - 1)):
                         raise ValueError("Ambiguous non-projected filter field: " + terminal)
-        clauses.append("FILTER(" + _condition(plan.where, filter_fields) + ")")
+        def condition_with_paths(node):
+            if isinstance(node, BooleanExpression):
+                children = [condition_with_paths(c) for c in node.children]
+                if node.operator == "not":
+                    return "(!" + children[0] + ")"
+                return "(" + (" && " if node.operator == "and" else " || ").join(children) + ")"
+            if node.path is not None:
+                return _condition(Predicate(node.field, node.operator, node.value),
+                                  {node.field: filter_vars[id(node)]})
+            return _condition(node, filter_fields)
+        clauses.append("FILTER(" + condition_with_paths(plan.where) + ")")
     for field in plan.order_by:
         if field not in fields:
             raise ValueError("Ordering field is not projected")
