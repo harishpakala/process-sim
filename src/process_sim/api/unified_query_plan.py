@@ -58,7 +58,20 @@ class UnifiedQueryPlan:
         if not self.operations:
             raise ValueError("Query plan must contain operations")
         if any(op.kind == "observations" for op in self.operations):
-            if not any(op.kind == "signal_resolution" for op in self.operations):
+            separate_resolution = any(
+                op.kind == "signal_resolution" for op in self.operations)
+            embedded_resolution = any(
+                op.kind == "graph_query"
+                and isinstance(op.parameters.get("signal_resolution"), dict)
+                and op.parameters["signal_resolution"].get("domain") in ("DEXPI", "ECAD")
+                and isinstance(op.parameters["signal_resolution"].get("engineering_function"), str)
+                and bool(op.parameters["signal_resolution"]["engineering_function"])
+                and isinstance(op.shacl_evidence.get("signal_resolution"), dict)
+                and bool(op.shacl_evidence["signal_resolution"].get("properties"))
+                and isinstance(op.parameters.get("validated_engineering_plan"), dict)
+                and bool(op.parameters["validated_engineering_plan"])
+                for op in self.operations)
+            if not (separate_resolution or embedded_resolution):
                 raise ValueError("Observations require GraphDB signal resolution")
 
     def to_dict(self) -> dict[str, Any]:
