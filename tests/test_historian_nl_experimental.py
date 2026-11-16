@@ -63,3 +63,30 @@ def test_reported_historian_question():
     assert plan["run_id"] == "077a3c31-44f4-4f3a-b06d-ad52b148fe10"
     assert plan["start_simulation_seconds"] == 100
     assert plan["end_simulation_seconds"] == 300
+
+
+@pytest.mark.parametrize("interval,expected", [
+    ("between simulation seconds 100 and 300", (100, 300)),
+    ("from 100 to 300 seconds", (100, 300)),
+    ("between 100 and 300 seconds", (100, 300)),
+    ("", (None, None)),
+])
+def test_optional_and_paraphrased_intervals(interval, expected):
+    from process_sim.api.historian_nl_experimental import canonical_historian_question
+    question = f"Plot recorded measurements for DEXPI InstrumentationFunction with LocalID FI_101 in simulation run {RUN} {interval}."
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence):
+        plan = plan_historian_question(question, schema=object())
+    assert (plan["start_simulation_seconds"], plan["end_simulation_seconds"]) == expected
+    canonical = canonical_historian_question(plan)
+    assert ("for all simulation times" in canonical) == (expected == (None, None))
+
+
+def test_experimental_executor_receives_canonical_question():
+    from process_sim.api.historian_nl_experimental import canonical_historian_question
+    question = f"Plot FI_101 from 100 to 300 seconds in DEXPI simulation run {RUN}"
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence), \\
+         patch("process_sim.api.historian_nl_experimental.run_historian_question") as executor:
+        executor.return_value = {"observationCount": 2}
+        output = run_historian_nl_experiment(question)
+    assert output["plan"]["start_simulation_seconds"] == 100
+    assert executor.call_args.args[0]["question"] == canonical_historian_question(output["plan"])
