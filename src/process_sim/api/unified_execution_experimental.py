@@ -7,7 +7,7 @@ separate with shared identity metadata; this is not a row-level semantic join.
 from __future__ import annotations
 
 from process_sim.api.historian_nl_experimental import canonical_historian_question
-from process_sim.api.unified_query_plan import UnifiedQueryPlan
+from process_sim.api.unified_query_plan import UnifiedQueryPlan, QueryOperation
 from process_sim.api.vtkg_query import run_historian_question
 from process_sim.dtwise.rdf_executor import build_answer, execute_select
 from process_sim.dtwise.sparql_generator import compile_sparql
@@ -20,7 +20,27 @@ def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
     env = os.environ if environ is None else environ
     if not isinstance(plan, UnifiedQueryPlan):
         raise ValueError("Expected a validated unified query plan")
+    logical_plan = plan
     kinds = tuple(op.kind for op in plan.operations)
+    if kinds == ("graph_query", "observations"):
+        graph, observations = plan.operations
+        resolution = graph.parameters.get("signal_resolution")
+        evidence = graph.shacl_evidence.get("signal_resolution")
+        if not isinstance(resolution, dict) or not isinstance(evidence, dict):
+            raise ValueError("Combined graph stage lacks signal resolution grounding")
+        plan = UnifiedQueryPlan(
+            question=plan.question, temporal=plan.temporal,
+            operations=(
+                QueryOperation("graph_query", "graphdb",
+                               {"validated_engineering_plan":
+                                graph.parameters.get("validated_engineering_plan")},
+                               graph.shacl_evidence.get("engineering", {})),
+                QueryOperation("signal_resolution", "graphdb", resolution, evidence),
+                observations,
+            ),
+            interpretation=plan.interpretation,
+        )
+        kinds = tuple(op.kind for op in plan.operations)
     allowed = (
         ("graph_query",),
         ("signal_resolution", "observations"),
@@ -63,7 +83,7 @@ def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
         payload = {**historian_plan,
                    "question": canonical_historian_question(historian_plan)}
     result = {"question": plan.question, "interpretation": plan.interpretation,
-              "plan": plan.to_dict(), "graph": None, "historian": None,
+              "plan": logical_plan.to_dict(), "graph": None, "historian": None,
               "join_type": "shared_entity_context_no_row_join"}
     if graph_op is not None:
         bindings = (graph_executor or execute_select)(endpoint, sparql)
@@ -72,4 +92,10 @@ def execute_unified_plan(plan: UnifiedQueryPlan, schema, *, environ=None,
     if observation_op is not None:
         historian = historian_executor or run_historian_question
         result["historian"] = historian(payload, environ=env)
+    if logical_plan is not plan:
+        result["graph_stage"] = {
+            "logical_consolidation": True,
+            "single_sparql_request": False,
+            "mapping_validation": "existing_live_historian_resolver",
+        }
     return result
