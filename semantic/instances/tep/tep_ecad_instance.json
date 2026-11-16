@@ -10968,6 +10968,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -10996,8 +11001,20 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     },
@@ -11070,6 +11087,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11138,6 +11160,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11206,6 +11233,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11274,6 +11306,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11342,6 +11379,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11410,6 +11452,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11486,6 +11533,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11554,6 +11606,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11622,6 +11679,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11698,6 +11760,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11766,6 +11833,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11834,6 +11906,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11910,6 +11987,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -11978,6 +12060,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12046,6 +12133,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12122,6 +12214,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12190,6 +12287,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12258,6 +12360,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12334,6 +12441,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12402,6 +12514,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12470,6 +12587,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12546,6 +12668,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12614,6 +12741,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12682,6 +12814,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12758,6 +12895,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12826,6 +12968,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12894,6 +13041,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -12970,6 +13122,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13038,6 +13195,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13106,6 +13268,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13182,6 +13349,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13250,6 +13422,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13318,6 +13495,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13394,6 +13576,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13462,6 +13649,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13530,6 +13722,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13606,6 +13803,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13674,6 +13876,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13742,6 +13949,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13818,6 +14030,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13886,6 +14103,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -13954,6 +14176,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14030,6 +14257,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14098,6 +14330,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14166,6 +14403,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14242,6 +14484,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14310,6 +14557,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14378,6 +14630,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14454,6 +14711,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14522,6 +14784,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14590,6 +14857,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14666,6 +14938,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14734,6 +15011,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14802,6 +15084,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14878,6 +15165,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -14946,6 +15238,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15014,6 +15311,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15090,6 +15392,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15158,6 +15465,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15226,6 +15538,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15302,6 +15619,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15370,6 +15692,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15438,6 +15765,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15514,6 +15846,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15582,6 +15919,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15650,6 +15992,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15726,6 +16073,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15794,6 +16146,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15862,6 +16219,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -15938,6 +16300,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16006,6 +16373,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16082,6 +16454,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16150,6 +16527,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16226,6 +16608,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16294,6 +16681,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16370,6 +16762,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16438,6 +16835,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16514,6 +16916,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16582,6 +16989,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16658,6 +17070,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16726,6 +17143,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16802,6 +17224,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16870,6 +17297,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -16946,6 +17378,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17014,6 +17451,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17090,6 +17532,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17158,6 +17605,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17234,6 +17686,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17302,6 +17759,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17378,6 +17840,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17446,6 +17913,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17522,6 +17994,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17590,6 +18067,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17666,6 +18148,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17734,6 +18221,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17810,6 +18302,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17878,6 +18375,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -17954,6 +18456,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18022,6 +18529,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18098,6 +18610,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18166,6 +18683,11 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
         },
@@ -18242,8 +18764,20 @@
                   }
                 ]
               }
+            },
+            {
+              "type": "SemanticRole",
+              "valueType": "xs:string",
+              "value": "DomainEntity"
             }
           ]
+        }
+      ],
+      "qualifiers": [
+        {
+          "type": "SemanticRole",
+          "valueType": "xs:string",
+          "value": "StructuralContainer"
         }
       ]
     }
