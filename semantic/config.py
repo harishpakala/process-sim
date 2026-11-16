@@ -13,4 +13,4 @@ TARGETS = (
     ("opcuaconnectivity", ROOT / "semantic/templates/opcua_connectivity_template.json", ROOT / "semantic/instances/tep/tep_opcua_connectivity_instance.json"),
     ("engineeringbom", ROOT / "semantic/templates/engineeringbom_v2_template.json", ROOT / "semantic/instances/tep/engineeringbom_v2_instance.json"),
 )
-OUTPUT = ROOT / "semantic" / "ontology"
+OUTPUT = ROOT / "semantic" / "ontology2"

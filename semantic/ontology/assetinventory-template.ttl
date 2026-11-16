@@ -9,41 +9,73 @@
     rdfs:label "AssetInventory SHACL shape" ;
     sh:description "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en ;
     sh:name "AssetInventory" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> ;
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/> a owl:Class ;
     rdfs:label "AssetInventory" ;
     rdfs:comment "Inventory submodel describing identified assets, their references, and recorded lifecycle or association statuses."@en .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> a sh:NodeShape ;
+    rdfs:label "Assets SHACL shape" ;
+    sh:description "Collection of inventory asset records."@en ;
+    sh:name "Assets" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "Assets constraint" ;
+    sh:class aas:SMC ;
+    sh:description "Collection of inventory asset records."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "Assets" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzL25vZGVTaGFwZQ> ;
+    sh:path assetinventory:hasAssets .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> a sh:NodeShape ;
     rdfs:label "Asset SHACL shape" ;
     sh:description "Inventory record for an identified asset."@en ;
     sh:name "Asset" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl>,
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1lYXN1cmVtZW50U2VtYW50aWNDYXZlYXQvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vbml0b3JpbmdTdGF0dXMvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0SWRlbnRpZmllci9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0TmFtZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkFzc2V0VHlwZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNhbmRpZGF0ZVNlbGVjdGlvblN0YXR1cy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25TdGF0dXMvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVuZ2luZWVyaW5nSW50ZXJwcmV0YXRpb25Ob3RlL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFNlbWFudGljTm90ZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0RGV0ZWN0aW9uU3RhdHVzL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZhdWx0SW5qZWN0aW9uU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZsb3dBcHBsaWNhdGlvbkdyb3VwL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlBMQ01hcHBpbmcvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> ;
-    sh:targetClass assetinventory:Asset .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlcGxhY2VtZW50U2VsZWN0aW9uU3RhdHVzL3NoYXBl>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlcGxhY2VtZW50UmV2aWV3Tm90ZS9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlZhbHZlQXBwbGljYXRpb25Hcm91cC9zaGFwZQ> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Asset constraint" ;
-    sh:class assetinventory:Asset ;
+    sh:class aas:SMC ;
     sh:description "Inventory record for an identified asset."@en ;
     sh:minCount 0 ;
     sh:name "Asset" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ> ;
     sh:path assetinventory:hasAsset .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1lYXN1cmVtZW50U2VtYW50aWNDYXZlYXQvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "MeasurementSemanticCaveat constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "MeasurementSemanticCaveat recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "MeasurementSemanticCaveat" ;
+    sh:path assetinventory:hasMeasurementSemanticCaveat .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0Lk1vZGVsaW5nU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ModelingStatus constraint" ;
@@ -90,6 +122,15 @@
     sh:name "AssetType" ;
     sh:path assetinventory:hasAssetType .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNhbmRpZGF0ZVNlbGVjdGlvblN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "CandidateSelectionStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "CandidateSelectionStatus recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "CandidateSelectionStatus" ;
+    sh:path assetinventory:hasCandidateSelectionStatus .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkNyb3NzRG9tYWluQXNzb2NpYXRpb25FdmlkZW5jZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "CrossDomainAssociationEvidence constraint" ;
     sh:datatype xsd:string ;
@@ -116,6 +157,15 @@
     sh:minCount 0 ;
     sh:name "EngineeringInterpretationNote" ;
     sh:path assetinventory:hasEngineeringInterpretationNote .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFNlbWFudGljTm90ZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "EquipmentSemanticNote constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "EquipmentSemanticNote recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "EquipmentSemanticNote" ;
+    sh:path assetinventory:hasEquipmentSemanticNote .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkVxdWlwbWVudFRhZy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EquipmentTag constraint" ;
@@ -144,6 +194,15 @@
     sh:name "FaultInjectionStatus" ;
     sh:path assetinventory:hasFaultInjectionStatus .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkZsb3dBcHBsaWNhdGlvbkdyb3VwL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "FlowApplicationGroup constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "FlowApplicationGroup recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "FlowApplicationGroup" ;
+    sh:path assetinventory:hasFlowApplicationGroup .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LkxvY2F0aW9uL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "Location constraint" ;
     sh:datatype xsd:string ;
@@ -152,6 +211,15 @@
     sh:minCount 0 ;
     sh:name "Location" ;
     sh:path assetinventory:hasLocation .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlBMQ01hcHBpbmcvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "PLCMapping constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "PLCMapping recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "PLCMapping" ;
+    sh:path assetinventory:hasPLCMapping .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlByb2R1Y3RJZGVudGlmaWVyL3NoYXBl> a sh:PropertyShape ;
     rdfs:label "ProductIdentifier constraint" ;
@@ -162,6 +230,24 @@
     sh:name "ProductIdentifier" ;
     sh:path assetinventory:hasProductIdentifier .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlcGxhY2VtZW50U2VsZWN0aW9uU3RhdHVzL3NoYXBl> a sh:PropertyShape ;
+    rdfs:label "ReplacementSelectionStatus constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ReplacementSelectionStatus recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ReplacementSelectionStatus" ;
+    sh:path assetinventory:hasReplacementSelectionStatus .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlJlcGxhY2VtZW50UmV2aWV3Tm90ZS9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ReplacementReviewNote constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ReplacementReviewNote recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ReplacementReviewNote" ;
+    sh:path assetinventory:hasReplacementReviewNote .
+
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlNpbXVsYXRpb25TdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "SimulationStatus constraint" ;
     sh:datatype xsd:string ;
@@ -171,8 +257,14 @@
     sh:name "SimulationStatus" ;
     sh:path assetinventory:hasSimulationStatus .
 
-aas:SMC a owl:Class ;
-    rdfs:label "Submodel Element Collection" .
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0LlZhbHZlQXBwbGljYXRpb25Hcm91cC9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "ValveApplicationGroup constraint" ;
+    sh:datatype xsd:string ;
+    sh:description "ValveApplicationGroup recorded for this inventory asset."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 0 ;
+    sh:name "ValveApplicationGroup" ;
+    sh:path assetinventory:hasValveApplicationGroup .
 
 assetinventory:hasAsset a owl:ObjectProperty ;
     rdfs:label "Asset",
@@ -194,6 +286,16 @@ assetinventory:hasAssetType a owl:DatatypeProperty ;
         "hasAssetType" ;
     rdfs:comment "Recorded type or category of the asset."@en .
 
+assetinventory:hasAssets a owl:ObjectProperty ;
+    rdfs:label "Assets",
+        "hasAssets" ;
+    rdfs:comment "Collection of inventory asset records."@en .
+
+assetinventory:hasCandidateSelectionStatus a owl:DatatypeProperty ;
+    rdfs:label "CandidateSelectionStatus",
+        "hasCandidateSelectionStatus" ;
+    rdfs:comment "CandidateSelectionStatus recorded for this inventory asset."@en .
+
 assetinventory:hasCrossDomainAssociationEvidence a owl:DatatypeProperty ;
     rdfs:label "CrossDomainAssociationEvidence",
         "hasCrossDomainAssociationEvidence" ;
@@ -208,6 +310,11 @@ assetinventory:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
     rdfs:label "EngineeringInterpretationNote",
         "hasEngineeringInterpretationNote" ;
     rdfs:comment "Engineering interpretation or qualification recorded for the asset."@en .
+
+assetinventory:hasEquipmentSemanticNote a owl:DatatypeProperty ;
+    rdfs:label "EquipmentSemanticNote",
+        "hasEquipmentSemanticNote" ;
+    rdfs:comment "EquipmentSemanticNote recorded for this inventory asset."@en .
 
 assetinventory:hasEquipmentTag a owl:DatatypeProperty ;
     rdfs:label "EquipmentTag",
@@ -224,10 +331,20 @@ assetinventory:hasFaultInjectionStatus a owl:DatatypeProperty ;
         "hasFaultInjectionStatus" ;
     rdfs:comment "Recorded status of fault injection activities for the asset."@en .
 
+assetinventory:hasFlowApplicationGroup a owl:DatatypeProperty ;
+    rdfs:label "FlowApplicationGroup",
+        "hasFlowApplicationGroup" ;
+    rdfs:comment "FlowApplicationGroup recorded for this inventory asset."@en .
+
 assetinventory:hasLocation a owl:DatatypeProperty ;
     rdfs:label "Location",
         "hasLocation" ;
     rdfs:comment "Recorded location of the asset."@en .
+
+assetinventory:hasMeasurementSemanticCaveat a owl:DatatypeProperty ;
+    rdfs:label "MeasurementSemanticCaveat",
+        "hasMeasurementSemanticCaveat" ;
+    rdfs:comment "MeasurementSemanticCaveat recorded for this inventory asset."@en .
 
 assetinventory:hasModelingStatus a owl:DatatypeProperty ;
     rdfs:label "ModelingStatus",
@@ -239,18 +356,36 @@ assetinventory:hasMonitoringStatus a owl:DatatypeProperty ;
         "hasMonitoringStatus" ;
     rdfs:comment "Recorded status of monitoring activities for the asset."@en .
 
+assetinventory:hasPLCMapping a owl:DatatypeProperty ;
+    rdfs:label "PLCMapping",
+        "hasPLCMapping" ;
+    rdfs:comment "PLCMapping recorded for this inventory asset."@en .
+
 assetinventory:hasProductIdentifier a owl:DatatypeProperty ;
     rdfs:label "ProductIdentifier",
         "hasProductIdentifier" ;
     rdfs:comment "Identifier of the product associated with the asset; distinct from the asset identifier."@en .
+
+assetinventory:hasReplacementReviewNote a owl:DatatypeProperty ;
+    rdfs:label "ReplacementReviewNote",
+        "hasReplacementReviewNote" ;
+    rdfs:comment "ReplacementReviewNote recorded for this inventory asset."@en .
+
+assetinventory:hasReplacementSelectionStatus a owl:DatatypeProperty ;
+    rdfs:label "ReplacementSelectionStatus",
+        "hasReplacementSelectionStatus" ;
+    rdfs:comment "ReplacementSelectionStatus recorded for this inventory asset."@en .
 
 assetinventory:hasSimulationStatus a owl:DatatypeProperty ;
     rdfs:label "SimulationStatus",
         "hasSimulationStatus" ;
     rdfs:comment "Recorded status of simulation activities for the asset."@en .
 
-assetinventory:Asset a owl:Class ;
-    rdfs:label "Asset" ;
-    rdfs:comment "Inventory record for an identified asset."@en ;
-    rdfs:subClassOf aas:SMC .
+assetinventory:hasValveApplicationGroup a owl:DatatypeProperty ;
+    rdfs:label "ValveApplicationGroup",
+        "hasValveApplicationGroup" ;
+    rdfs:comment "ValveApplicationGroup recorded for this inventory asset."@en .
+
+aas:SMC a owl:Class ;
+    rdfs:label "Submodel Element Collection" .
 

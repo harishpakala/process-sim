@@ -92,7 +92,7 @@ BASE_URI = (
 
 GRAPHDB_ENDPOINT = (
     "http://localhost:7200/"
-    "repositories/AAS/statements"
+    "repositories/AAST/statements"
 )
 
 HEADERS = {

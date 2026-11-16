@@ -9,22 +9,13 @@
     rdfs:label "TEP_OPCUAConnectivity SHACL shape" ;
     sh:description "Template describing OPC UA server connectivity and engineering signal-to-node mappings."@en ;
     sh:name "TEP_OPCUAConnectivity" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ>,
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> ;
     sh:targetClass <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/> a owl:Class ;
     rdfs:label "TEP_OPCUAConnectivity" ;
     rdfs:comment "Template describing OPC UA server connectivity and engineering signal-to-node mappings."@en .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ> a sh:PropertyShape ;
-    rdfs:label "ECADConnectionPointReferenceStatus constraint" ;
-    sh:datatype xsd:string ;
-    sh:description "Status of the reference to an ECAD connection point."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:name "ECADConnectionPointReferenceStatus" ;
-    sh:path opcuaconnectivity:hasECADConnectionPointReferenceStatus .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "EndpointStatus constraint" ;
@@ -57,20 +48,34 @@
     rdfs:label "Server SHACL shape" ;
     sh:description "An OPC UA server connection and its endpoint metadata."@en ;
     sh:name "Server" ;
-    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRUNBRENvbm5lY3Rpb25Qb2ludFJlZmVyZW5jZVN0YXR1cy9zaGFwZQ>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU>,
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRTdGF0dXMvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuRW5kcG9pbnRVcmwvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> ;
-    sh:targetClass opcuaconnectivity:Server .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIuTmFtZXNwYWNlVVJJL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "Server constraint" ;
-    sh:class opcuaconnectivity:Server ;
+    sh:class aas:SMC ;
     sh:description "An OPC UA server connection and its endpoint metadata."@en ;
     sh:minCount 0 ;
     sh:name "Server" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvbm9kZVNoYXBl> ;
     sh:path opcuaconnectivity:hasServer .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> a sh:NodeShape ;
+    rdfs:label "Servers SHACL shape" ;
+    sh:description "Collection of configured OPC UA servers."@en ;
+    sh:name "Servers" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy5TZXJ2ZXIvc2hhcGU> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9zaGFwZQ> a sh:PropertyShape ;
+    rdfs:label "Servers constraint" ;
+    sh:class aas:SMC ;
+    sh:description "Collection of configured OPC UA servers."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "Servers" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2VydmVycy9ub2RlU2hhcGU> ;
+    sh:path opcuaconnectivity:hasServers .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU> a sh:PropertyShape ;
     rdfs:label "AssetIdentifier constraint" ;
@@ -80,15 +85,6 @@
     sh:minCount 0 ;
     sh:name "AssetIdentifier" ;
     sh:path opcuaconnectivity:hasAssetIdentifier .
-
-<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl> a sh:PropertyShape ;
-    rdfs:label "EngineeringFunctionReference constraint" ;
-    sh:datatype xsd:string ;
-    sh:description "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."@en ;
-    sh:maxCount 1 ;
-    sh:minCount 0 ;
-    sh:name "EngineeringFunctionReference" ;
-    sh:path opcuaconnectivity:hasEngineeringFunctionReference .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "EngineeringInterpretationNote constraint" ;
@@ -176,7 +172,6 @@
     sh:description "Association between an engineering signal and an OPC UA address-space node."@en ;
     sh:name "SignalMapping" ;
     sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5Bc3NldElkZW50aWZpZXIvc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0Z1bmN0aW9uUmVmZXJlbmNlL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5FbmdpbmVlcmluZ0ludGVycHJldGF0aW9uTm90ZS9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvbkV2aWRlbmNlL3NoYXBl>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5JbnZlbnRvcnlBc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ>,
@@ -185,27 +180,37 @@
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQU5vZGVJZC9zaGFwZQ>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5PUENVQUJyb3dzZVBhdGgvc2hhcGU>,
         <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxEaXJlY3Rpb24vc2hhcGU>,
-        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> ;
-    sh:targetClass opcuaconnectivity:SignalMapping .
+        <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy5TaWduYWxOYW1lL3NoYXBl> .
 
 <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> a sh:PropertyShape ;
     rdfs:label "SignalMapping constraint" ;
-    sh:class opcuaconnectivity:SignalMapping ;
+    sh:class aas:SMC ;
     sh:description "Association between an engineering signal and an OPC UA address-space node."@en ;
     sh:minCount 0 ;
     sh:name "SignalMapping" ;
     sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU> ;
     sh:path opcuaconnectivity:hasSignalMapping .
 
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> a sh:NodeShape ;
+    rdfs:label "SignalMappings SHACL shape" ;
+    sh:description "Collection of mappings between engineering signals and OPC UA nodes."@en ;
+    sh:name "SignalMappings" ;
+    sh:property <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9zaGFwZQ> .
+
+<http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvc2hhcGU> a sh:PropertyShape ;
+    rdfs:label "SignalMappings constraint" ;
+    sh:class aas:SMC ;
+    sh:description "Collection of mappings between engineering signals and OPC UA nodes."@en ;
+    sh:maxCount 1 ;
+    sh:minCount 1 ;
+    sh:name "SignalMappings" ;
+    sh:node <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3Mvbm9kZVNoYXBl> ;
+    sh:path opcuaconnectivity:hasSignalMappings .
+
 opcuaconnectivity:hasAssetIdentifier a owl:DatatypeProperty ;
     rdfs:label "AssetIdentifier",
         "hasAssetIdentifier" ;
     rdfs:comment "Identifier of the asset associated with this signal mapping."@en .
-
-opcuaconnectivity:hasECADConnectionPointReferenceStatus a owl:DatatypeProperty ;
-    rdfs:label "ECADConnectionPointReferenceStatus",
-        "hasECADConnectionPointReferenceStatus" ;
-    rdfs:comment "Status of the reference to an ECAD connection point."@en .
 
 opcuaconnectivity:hasEndpointStatus a owl:DatatypeProperty ;
     rdfs:label "EndpointStatus",
@@ -216,11 +221,6 @@ opcuaconnectivity:hasEndpointUrl a owl:DatatypeProperty ;
     rdfs:label "EndpointUrl",
         "hasEndpointUrl" ;
     rdfs:comment "Network endpoint URL used to connect to the OPC UA server."@en .
-
-opcuaconnectivity:hasEngineeringFunctionReference a owl:DatatypeProperty ;
-    rdfs:label "EngineeringFunctionReference",
-        "hasEngineeringFunctionReference" ;
-    rdfs:comment "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."@en .
 
 opcuaconnectivity:hasEngineeringInterpretationNote a owl:DatatypeProperty ;
     rdfs:label "EngineeringInterpretationNote",
@@ -267,6 +267,11 @@ opcuaconnectivity:hasServer a owl:ObjectProperty ;
         "hasServer" ;
     rdfs:comment "An OPC UA server connection and its endpoint metadata."@en .
 
+opcuaconnectivity:hasServers a owl:ObjectProperty ;
+    rdfs:label "Servers",
+        "hasServers" ;
+    rdfs:comment "Collection of configured OPC UA servers."@en .
+
 opcuaconnectivity:hasSignalDirection a owl:DatatypeProperty ;
     rdfs:label "SignalDirection",
         "hasSignalDirection" ;
@@ -277,6 +282,11 @@ opcuaconnectivity:hasSignalMapping a owl:ObjectProperty ;
         "hasSignalMapping" ;
     rdfs:comment "Association between an engineering signal and an OPC UA address-space node."@en .
 
+opcuaconnectivity:hasSignalMappings a owl:ObjectProperty ;
+    rdfs:label "SignalMappings",
+        "hasSignalMappings" ;
+    rdfs:comment "Collection of mappings between engineering signals and OPC UA nodes."@en .
+
 opcuaconnectivity:hasSignalName a owl:DatatypeProperty ;
     rdfs:label "SignalName",
         "hasSignalName" ;
@@ -284,14 +294,4 @@ opcuaconnectivity:hasSignalName a owl:DatatypeProperty ;
 
 aas:SMC a owl:Class ;
     rdfs:label "Submodel Element Collection" .
-
-opcuaconnectivity:Server a owl:Class ;
-    rdfs:label "Server" ;
-    rdfs:comment "An OPC UA server connection and its endpoint metadata."@en ;
-    rdfs:subClassOf aas:SMC .
-
-opcuaconnectivity:SignalMapping a owl:Class ;
-    rdfs:label "SignalMapping" ;
-    rdfs:comment "Association between an engineering signal and an OPC UA address-space node."@en ;
-    rdfs:subClassOf aas:SMC .
 
