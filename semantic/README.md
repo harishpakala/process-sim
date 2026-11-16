@@ -85,7 +85,7 @@ After configuring the environment and starting the required services:
 python -m process_sim.api.server
 ```
 
-Check `http://127.0.0.1:8000/api/health`. Engineering-only queries require GraphDB and the existing DTWise schema index at `semantic/ontology/dtwise/dtwise-schema-index.json`; running the lifting commands above does **not** automatically replace that index. Historian queries additionally require TimescaleDB, a valid run, and an eligible engineering-to-signal mapping.
+Check `http://127.0.0.1:8000/api/health`. Engineering-only queries require GraphDB and the DTWise schema index at `semantic/ontology2/dtwise/dtwise-schema-index.json`, which is the index loaded by `src/process_sim/api/dtwise_query.py`. Verify that the generated index is current before running queries. Historian queries additionally require TimescaleDB, a valid run, and an eligible engineering-to-signal mapping.
 
 ## Notes
 
