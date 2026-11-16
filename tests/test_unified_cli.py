@@ -92,3 +92,51 @@ def test_dry_run_never_calls_database():
         interpret=lambda q, c, x: model(q, c, x), dry_run=True)
     assert report["executed"] is False
     assert "SELECT DISTINCT" in report["sparql"]
+
+
+
+def test_mixed_cli_applies_signal_filter_in_graphdb_before_historian():
+    from datetime import datetime, timezone
+    from process_sim.api.unified_semantic_ir import Predicate
+
+    class FakeConnection:
+        def __enter__(self):
+            return self
+        def __exit__(self, *args):
+            return False
+        def transaction(self):
+            return self
+        def execute(self, sql, params=None):
+            if params is not None:
+                self.sql, self.params = sql, params
+        def cursor(self):
+            return self
+        def fetchall(self):
+            return [("XMEAS3", 1.5, 3.2, datetime(2026, 1, 1, tzinfo=timezone.utc))]
+
+    from process_sim.api.unified_semantic_interpreter import interpret_unified_semantics
+    conn = FakeConnection()
+    def interpreted(q, catalog, ctx):
+        result = model(q, catalog, ctx, historian=True)
+        result["projections"][0]["name"] = "SignalName"
+        result["where"] = {"field": "SignalName", "operator": "eq", "value": "XMEAS3"}
+        return result
+
+    seen = []
+    def graph_executor(endpoint, sparql):
+        seen.append(sparql)
+        return [{"SignalName": "XMEAS3"}]
+
+    report = run_unified_cli(
+        "Show historian time-series values for signal XMEAS3",
+        schema=Schema(), context={"run_id": RUN},
+        interpret=interpreted,
+        environ={"GRAPHDB_SPARQL_ENDPOINT": "http://unused",
+                 "TEP_TIMESCALE_DSN": "unused"},
+        graph_executor=graph_executor,
+        connection_factory=lambda dsn: conn,
+        signal_field="SignalName",
+    )
+    assert 'XMEAS3' in seen[0] and 'FILTER' in seen[0]
+    assert report["answer"]["count"] == 1
+    assert conn.params[:2] == [RUN, ["XMEAS3"]]
