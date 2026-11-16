@@ -37,6 +37,7 @@ class Projection:
     name: str
     path: GraphPath | None = None
     source: Source = "graphdb"
+    alias: str = "entity"
 
 
 @dataclass(frozen=True)
@@ -133,6 +134,8 @@ class SemanticQuery:
         if (self.start_seconds is not None and self.end_seconds is not None
                 and self.start_seconds > self.end_seconds):
             raise ValueError("Invalid time window")
+        if any(not isinstance(p.alias, str) or not p.alias or not p.alias.isidentifier() for p in self.projections):
+            raise ValueError("Invalid entity alias")
         projections = tuple(replace(p, path=p.path.validate(schema)) if p.path else p
                             for p in self.projections)
         joins = tuple(j.validate(schema) for j in self.joins)
