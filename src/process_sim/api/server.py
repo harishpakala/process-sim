@@ -305,6 +305,22 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/ai/unified/answer":
+            try:
+                from process_sim.api.unified_web import run_unified_web
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                self.send_json(200, run_unified_web(payload))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(422, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Unified planner HTTP request failed")
+                self.send_json(503, {"error": "Unified planner unavailable; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/semantic/answer":
             try:
                 from process_sim.api.vtkg_query import run_semantic_join_question
