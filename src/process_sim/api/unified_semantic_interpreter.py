@@ -434,7 +434,7 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
                                   "graphdb", "entity")]
         joins = []
         h6_filter = Predicate("AssetIdentifier", "eq",
-                              signal_lookup.group(1), graph_path(asset), "entity")
+                              signal_lookup.group(1).rstrip("."), graph_path(asset), "entity")
         raw["sources"] = ["graphdb"]
         raw["group_by"] = []
         raw["aggregation"] = None
