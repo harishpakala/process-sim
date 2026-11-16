@@ -43,3 +43,23 @@ def test_signal_mapping_uses_one_root_and_no_join():
     assert O + "hasAssetIdentifier" in query
     assert "https://aas.example.com/FI103" in query
     assert "join_0" not in query
+
+
+def test_signal_name_without_signal_mapping_is_graph_only_even_if_qwen_routes_historian():
+    question = ("Show opcuaconnectivity signalName where assetIdentifier "
+                "is https://aas.example.com/FI103.")
+    def wrong_historian(q, catalog, context):
+        return {
+            "projections": [{"name": "SignalName", "path_id": 0,
+                             "source": "graphdb", "alias": "opcuaconnectivity"}],
+            "joins": [], "where": None, "group_by": [], "aggregation": None,
+            "order_by": [], "limit": None,
+            "sources": ["graphdb", "timescaledb"],
+            "run_id": None, "start_seconds": None, "end_seconds": None,
+        }
+    plan = interpret_unified_semantics(question, Schema(), interpret=wrong_historian)
+    assert plan.sources == ("graphdb",)
+    assert plan.joins == ()
+    assert plan.run_id is None
+    assert plan.where.value == "https://aas.example.com/FI103"
+    assert "hasAssetIdentifier" in compile_unified_graph_query(plan)
