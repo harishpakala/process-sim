@@ -403,6 +403,45 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
         raw["run_id"] = None
         raw["start_seconds"] = None
         raw["end_seconds"] = None
+    # Explicit OPCUA SignalMapping property lookup is a single-entity query.
+    # Resolve the projected and filtered paths on the SAME SHACL root, rather
+    # than trusting an invented cross-root Qwen join.
+    signal_lookup = re.fullmatch(
+        r"\s*(?:show|list|get)\s+(?:the\s+)?opcuaconnectivity\s+"
+        r"SignalMapping\s+SignalName\s+where\s+AssetIdentifier\s+"
+        r"(?:is|=|equals)\s+(https?://[^\s?]+)\s*[?.]?\s*",
+        question, re.I)
+    if signal_lookup:
+        def matching_paths(terminal):
+            return [p for p in catalog
+                    if p["domain"].lower() == "opcuaconnectivity"
+                    and p["predicates"][-1].rsplit("/", 1)[-1].lower()
+                    == terminal.lower()]
+        signal_paths = matching_paths("hasSignalName")
+        asset_paths = matching_paths("hasAssetIdentifier")
+        pairs = [(signal, asset) for signal in signal_paths
+                 for asset in asset_paths
+                 if signal["root_shape"] == asset["root_shape"]
+                 and signal["predicates"][:-1] == asset["predicates"][:-1]]
+        if len(pairs) != 1:
+            raise ValueError(
+                "Expected unique co-rooted OPCUA SignalMapping SignalName/AssetIdentifier SHACL paths")
+        signal, asset = pairs[0]
+        def graph_path(item):
+            return GraphPath(item["domain"], item["root_shape"],
+                             tuple(item["predicates"]), tuple(item["evidence_ids"]))
+        projections = [Projection("SignalName", graph_path(signal),
+                                  "graphdb", "entity")]
+        joins = []
+        h6_filter = Predicate("AssetIdentifier", "eq",
+                              signal_lookup.group(1), graph_path(asset), "entity")
+        raw["sources"] = ["graphdb"]
+        raw["group_by"] = []
+        raw["aggregation"] = None
+        raw["order_by"] = []
+        raw["run_id"] = None
+        raw["start_seconds"] = None
+        raw["end_seconds"] = None
     # Multiple properties of one SHACL root describe one entity, not
     # independent Cartesian-product roots. Only coalesce when there are
     # no explicit joins and every graph projection has the exact same root.
