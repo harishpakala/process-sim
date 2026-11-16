@@ -60,17 +60,6 @@
                   "text": "Status of the OPC UA server endpoint."
                 }
               ]
-            },
-            {
-              "modelType": "Property",
-              "idShort": "ECADConnectionPointReferenceStatus",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Status of the reference to an ECAD connection point."
-                }
-              ]
             }
           ],
           "description": [
@@ -128,17 +117,6 @@
                 {
                   "language": "en",
                   "text": "Identifier of the asset associated with this signal mapping."
-                }
-              ]
-            },
-            {
-              "modelType": "Property",
-              "idShort": "EngineeringFunctionReference",
-              "valueType": "xs:string",
-              "description": [
-                {
-                  "language": "en",
-                  "text": "Reference linking the signal mapping to an engineering function; not necessarily an engineering function identifier."
                 }
               ]
             },
