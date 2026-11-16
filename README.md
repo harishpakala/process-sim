@@ -76,6 +76,7 @@ The Tennessee Eastman reactor engineering diagrams are available in [`docs/engin
 
 ## Documentation
 
+- [Experimental Docker Compose development stack](docs/docker-stack.md)
 - [Historian and TimescaleDB setup](docs/opcua/TIMESERIES.md)
 - [Semantic lifting and GraphDB setup](semantic/README.md)
 - [TEP NEXUS evaluation and reproducibility](docs/artifact_evaluation/README.md)
