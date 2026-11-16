@@ -174,6 +174,10 @@ def _interpret(question, catalog, context):
         "For a simple engineering question use one graphdb projection, joins=[], sources=['graphdb']. "
         "For multiple properties of the SAME SHACL root use the SAME alias, e.g. entity. "
         "Different root shapes require explicit SHACL joins; never fabricate join keys. "
+        "Every join MUST have two DIFFERENT alias strings: use left='dexpi' "
+        "for the DEXPI engineering entity and right='opcuaconnectivity' "
+        "for the OPCUAConnectivity mapping; NEVER use the same alias on both sides. "
+        "Aliases identify entity roots, not the identical property name on both sides. "
         "For historian time-series samples, sources MUST contain both graphdb and timescaledb. "
         "Questions asking how a DEXPI instrumentation function behaved during a simulation run "
         "or for all simulation times are historian requests, even without the word historian. "
@@ -263,9 +267,15 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
             "left", "right", "left_path_id", "right_path_id"
         }:
             raise ValueError("Invalid join")
-        joins.append(Join(j["left"], j["right"],
-                          _path(j["left_path_id"], catalog),
-                          _path(j["right_path_id"], catalog)))
+        left_path = _path(j["left_path_id"], catalog)
+        right_path = _path(j["right_path_id"], catalog)
+        if j["left"] == j["right"]:
+            raise ValueError(
+                "Qwen assigned the same alias to both SHACL join entities: "
+                + repr(j["left"]) + "; left_domain=" + left_path.domain
+                + "; right_domain=" + right_path.domain
+                + "; join aliases must be distinct")
+        joins.append(Join(j["left"], j["right"], left_path, right_path))
     # Multiple properties of one SHACL root describe one entity, not
     # independent Cartesian-product roots. Only coalesce when there are
     # no explicit joins and every graph projection has the exact same root.
