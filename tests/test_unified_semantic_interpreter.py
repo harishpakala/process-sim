@@ -101,3 +101,28 @@ def test_candidate_retrieval_is_bounded_and_keeps_original_catalog_ids():
     assert _candidate_paths("Show cable length", catalog) == [1]
     with pytest.raises(ValueError, match="No SHACL paths match"):
         _candidate_paths("unrelated gibberish", catalog)
+
+
+def test_same_root_multiple_engineering_properties_share_entity_alias():
+    class TwoPropertySchema(SchemaStub):
+        by_uri = {**SchemaStub.by_uri,
+                  "dexpi:productIdentifier": {"labels": ["ProductIdentifier"]}}
+
+        def shacl_paths(self, root, max_depth=5, domain=None):
+            paths = super().shacl_paths(root, max_depth=max_depth, domain=domain)
+            if root == "shape:instrument" and domain == "DEXPI":
+                return paths + [[{"property": "dexpi:productIdentifier",
+                                  "evidence_ids": ["edge:product"]}]]
+            return paths
+
+    raw = response(projections=[
+        {"name": "AssetIdentifier", "path_id": 0, "source": "graphdb",
+         "alias": "asset"},
+        {"name": "ProductIdentifier", "path_id": 1, "source": "graphdb",
+         "alias": "product"},
+    ])
+    query = interpret_unified_semantics(
+        "Show AssetIdentifier and ProductIdentifier of instrumentation",
+        TwoPropertySchema(), interpret=lambda q, c, x: raw)
+    assert query.validated
+    assert {p.alias for p in query.projections} == {"entity"}
