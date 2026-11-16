@@ -131,9 +131,10 @@ def _candidate_paths(question, catalog, *, max_candidates=24):
     # historian requests. Generic assetIdentifier matches otherwise crowd out
     # the signal-name path in a small model's bounded candidate list.
     if (re.search(r"\bdexpi\b", question, re.I)
-            and re.search(r"\bopcua(?:connectivity)?\b", question, re.I)
-            and re.search(r"\b(historian|time[- ]series|observations?)\b", question, re.I)):
-        roles = (("dexpi", "hasAssetIdentifier"),
+            and (re.search(r"\bopcua(?:connectivity)?\b", question, re.I)
+                 or re.search(r"\b(historian|time[- ]series|observations?|simulation\s+times?)\b", question, re.I))):
+        roles = (("dexpi", "hasLocalId"),
+                 ("dexpi", "hasAssetIdentifier"),
                  ("opcuaconnectivity", "hasAssetIdentifier"),
                  ("opcuaconnectivity", "hasSignalName"))
         reserved = []
@@ -174,6 +175,13 @@ def _interpret(question, catalog, context):
         "For multiple properties of the SAME SHACL root use the SAME alias, e.g. entity. "
         "Different root shapes require explicit SHACL joins; never fabricate join keys. "
         "For historian time-series samples, sources MUST contain both graphdb and timescaledb. "
+        "Questions asking how a DEXPI instrumentation function behaved during a simulation run "
+        "or for all simulation times are historian requests, even without the word historian. "
+        "Resolve DEXPI hasLocalId to the same engineering entity's hasAssetIdentifier, "
+        "join that asset identifier to OPCUAConnectivity hasAssetIdentifier, "
+        "and project OPCUAConnectivity hasSignalName as SignalName. "
+        "The DEXPI LocalID is a filter, not the historian signal identifier. "
+        "For all simulation times leave start_seconds and end_seconds null. "
         "A projection named SignalName MUST end in hasSignalName, never hasAssetIdentifier. "
         "If a question mentions DEXPI and OPCUAConnectivity together, create an explicit "
         "join between their SHACL hasAssetIdentifier paths using distinct aliases. "
@@ -279,6 +287,22 @@ def interpret_unified_semantics(question, schema, *, context=None, interpret=Non
             )
         if not any(p.source == "graphdb" for p in projections):
             raise ValueError("Historian requires a GraphDB signal projection")
+    if (re.search(r"\bdexpi\b", question, re.I)
+            and re.search(r"\b(instrumentation\s*function|instrumentationfunction)\b", question, re.I)
+            and re.search(r"\b(simulation\s+run|simulation\s+times?|behav(?:e|ed|ior))\b", question, re.I)):
+        domains = {path.domain.lower() for join in joins
+                   for path in (join.left_path, join.right_path)}
+        signal_outputs = [p for p in projections if p.source == "graphdb"
+                          and p.name == "SignalName" and p.path is not None
+                          and p.path.domain.lower() == "opcuaconnectivity"
+                          and p.path.predicates[-1].lower().endswith("/hassignalname")]
+        if ("timescaledb" not in raw["sources"] or
+                not {"dexpi", "opcuaconnectivity"}.issubset(domains) or
+                not signal_outputs):
+            raise ValueError(
+                "Semantic mismatch: DEXPI instrumentation behavior during a "
+                "simulation run requires a DEXPI-to-OPCUA SHACL join, "
+                "SignalName projection, and TimescaleDB source")
     # Validate the requested semantics, not just the existence of SHACL paths.
     # A valid path to the wrong property is still an incorrect answer.
     for p in projections:
