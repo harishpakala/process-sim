@@ -94,6 +94,8 @@ onMounted(async () => {
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
 const question = ref('')
+const useUnified = ref(true)
+const unifiedReport = ref<Record<string, unknown> | null>(null)
 const busy = ref(false)
 const error = ref('')
 const result = ref<DtwiseResult | null>(null)
@@ -128,6 +130,7 @@ function entityLabel(value: unknown): string {
 }
 async function ask() {
  result.value = null
+ unifiedReport.value = null
  error.value = ''
  const text = question.value.trim()
  if (text.length < 5 || text.length > 1000) {
@@ -136,14 +139,15 @@ async function ask() {
  }
  busy.value = true
  try {
-  const response = await fetch('/api/ai/dtwise/answer', {
+  const response = await fetch(useUnified.value ? '/api/ai/unified/answer' : '/api/ai/dtwise/answer', {
    method: 'POST',
    headers: {'Content-Type': 'application/json'},
    body: JSON.stringify({question: text})
   })
   const data = await response.json()
   if (!response.ok) throw new Error(data.error || 'DTwise query failed')
-  result.value = data as DtwiseResult
+  if (useUnified.value) unifiedReport.value = data as Record<string, unknown>
+  else result.value = data as DtwiseResult
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -256,10 +260,11 @@ onMounted(hLoadRuns)
     <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
     <p v-else class="subdued">Original B01–B60 manifest unchanged; supplemental questions are UI-only.</p>
     <p v-if="category === MULTIHOP_CATEGORY" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
+    <label><input type="checkbox" v-model="useUnified" /> Use unified Qwen + SHACL planner (uncheck for original DTWise)</label>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
-    <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
+    <p class="subdued">Selected planner only; no automatic fallback. Existing benchmark questions are unchanged.</p>
    </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
