@@ -87,3 +87,17 @@ def test_nested_boolean_logic_survives_interpretation():
         QUESTION, SchemaStub(), interpret=lambda q, c, x: response(where=expression))
     assert query.where.operator == "and"
     assert query.where.children[1].operator == "not"
+
+
+def test_candidate_retrieval_is_bounded_and_keeps_original_catalog_ids():
+    from process_sim.api.unified_semantic_interpreter import _candidate_paths
+    catalog = [
+        {"domain": "DEXPI", "root_shape": "shape:instrument",
+         "predicates": ["dexpi:assetIdentifier"], "labels": [["AssetIdentifier"]]},
+        {"domain": "ECAD", "root_shape": "shape:cable",
+         "predicates": ["ecad:cableLength"], "labels": [["CableLength"]]},
+    ]
+    assert _candidate_paths("Show DEXPI asset identifiers", catalog) == [0]
+    assert _candidate_paths("Show cable length", catalog) == [1]
+    with pytest.raises(ValueError, match="No SHACL paths match"):
+        _candidate_paths("unrelated gibberish", catalog)
