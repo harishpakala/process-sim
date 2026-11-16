@@ -97,7 +97,7 @@ This audit recomputes counts and latency statistics from the committed summary; 
 
 ## 4. Generate and run the 36-case benchmark
 
-From the repository root in Windows PowerShell, with Python dependencies, a working query-planner/model service, and access to the required GraphDB/TimescaleDB evidence. The existing `reports/tep_nexus_mapping_discovery.json` and `reports/tep_nexus_temporal_coverage.json` snapshots must both correspond to **your selected, verified historian run**; the commands below do not generate these snapshots or restore historical data. The generator requires 34 eligible functions by default. See the [root README](../../README.md#local-startup-windows-powershell) for local service startup.
+From the repository root in Windows PowerShell, with Python dependencies, a working query-planner/model service, and access to the required GraphDB/TimescaleDB evidence. The existing `reports/tep_nexus_mapping_discovery.json` and `reports/tep_nexus_temporal_coverage.json` snapshots must both correspond to **your selected, verified historian run**; the commands below do not generate these snapshots or restore historical data. The generator requires 34 eligible functions by default. See the [root quick start](../../README.md#quick-start) and [semantic GraphDB setup](../../semantic/README.md) for local service startup and mandatory RDF publishing.
 
 Replace the placeholder with your actual run ID, not an ID copied from another experiment:
 
@@ -168,7 +168,7 @@ These measurements include application and local model execution overhead. They 
 
 ### 6.2 Run the comparative experiment (Windows PowerShell)
 
-Follow the [root startup guide](../../README.md#local-startup-windows-powershell) to configure GraphDB, TimescaleDB, and Ollama. Prepare a **verified, locally accessible historian run** and ensure the following two existing snapshots describe the **same** run and function registry:
+Follow the [root quick start](../../README.md#quick-start) and [semantic GraphDB setup](../../semantic/README.md) to configure the required services; configure Ollama separately for model-based runs. Prepare a **verified, locally accessible historian run** and ensure the following two existing snapshots describe the **same** run and function registry:
 
 - `reports/tep_nexus_mapping_discovery.json`
 - `reports/tep_nexus_temporal_coverage.json`
@@ -246,6 +246,8 @@ A fresh clone can inspect the benchmark code, questions, and committed historica
 The 12 qualitative engineering questions, eight SQL consistency comparisons, and selected negative/virtual-graph tests in the paper are **separate evaluation components**; they should not be counted as additional fixtures or repetitions in the 324-execution comparison.
 
 **Scientific interpretation:** Final harness success indicates consistency with the **implemented limited-scope checks**, not verified sensor installation, fault causality, general LLM factual accuracy, or independent validation of the engineering-to-signal mappings.
+
+**Repository-name note:** The Q13 example commands below retain the historical `--graphdb-url .../repositories/AAS` value used for those experiments. The current semantic lifting configuration publishes to `AAST`; for a fresh run, use the actual repository containing your lifted engineering RDF and record the endpoint used. Do not treat historical `AAS` and current `AAST` as interchangeable.
 
 ## Qualitative Q13 — cross-model traceability (v1 evaluated; v2 pending)
 
