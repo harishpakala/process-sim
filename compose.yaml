@@ -8,11 +8,22 @@ services:
       - graphdb_data:/opt/graphdb/home
     restart: unless-stopped
 
+  graphdb-init:
+    image: curlimages/curl:8.11.1
+    depends_on:
+      graphdb:
+        condition: service_started
+    volumes:
+      - ./docker/graphdb/AAST.ttl:/config/AAST.ttl:ro
+      - ./docker/graphdb/init.sh:/config/init.sh:ro
+    entrypoint: ["/bin/sh", "/config/init.sh"]
+    restart: "no"
+
   timescaledb:
     image: timescale/timescaledb:latest-pg16
     environment:
       POSTGRES_USER: tep
-      POSTGRES_PASSWORD: 1234
+      POSTGRES_PASSWORD: ${TEP_DB_PASSWORD:-1234}
       POSTGRES_DB: tep_nexus
     ports:
       - "127.0.0.1:5434:5432"
@@ -29,7 +40,7 @@ services:
     build:
       context: .
       dockerfile: docker/python.Dockerfile
-    command: ["python", "examples/run_opcua_server.py", "--endpoint", "opc.tcp://0.0.0.0:4845/process-sim/", "--seed", "42", "--real-time-factor", "1.0"]
+    command: ["python", "examples/run_opcua_server.py", "--endpoint", "opc.tcp://0.0.0.0:4841/process-sim/", "--seed", "42", "--real-time-factor", "1.0"]
     ports:
       - "127.0.0.1:4841:4841"
     restart: unless-stopped
@@ -42,14 +53,14 @@ services:
     environment:
       PROCESS_SIM_API_HOST: 0.0.0.0
       PROCESS_SIM_API_PORT: "8001"
-      GRAPHDB_SPARQL_ENDPOINT: http://graphdb:7201/repositories/AAST
-      TEP_TIMESCALE_DSN: postgresql://tep:${TEP_DB_PASSWORD:-tep-local-dev}@timescaledb:5434/tep_nexus
-      TEP_OPCUA_ENDPOINT: opc.tcp://simulator:4845/process-sim/
+      GRAPHDB_SPARQL_ENDPOINT: http://graphdb:7200/repositories/AAST
+      TEP_TIMESCALE_DSN: postgresql://tep:${TEP_DB_PASSWORD:-1234}@timescaledb:5432/tep_nexus
+      TEP_OPCUA_ENDPOINT: opc.tcp://simulator:4841/process-sim/
     depends_on:
       timescaledb:
         condition: service_healthy
-      graphdb:
-        condition: service_started
+      graphdb-init:
+        condition: service_completed_successfully
       simulator:
         condition: service_started
     ports:
