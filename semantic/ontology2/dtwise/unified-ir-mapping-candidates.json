@@ -1,0 +1,29 @@
+[
+  {
+    "id": "dexpi_opcuaconnectivity_asset_identifier",
+    "left_domain": "dexpi",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "verified": false,
+    "evidence_ids": [],
+    "review_status": "pending_independent_semantic_approval",
+    "review_question": "Do both properties identify the same engineering asset in the same identifier namespace, with compatible value representation and uniqueness assumptions?",
+    "schema_evidence": {
+      "dexpi_instrumentation_function": [
+        "https://example.org/dtwise/relationship/cf1d391171f62858c722e2d02b0c5b15050da5269f31fc2c3f1a3b17c928f3a4",
+        "https://example.org/dtwise/relationship/8e1153f85eefdcf49e4d939a7afe740e9da17e3d6293b47734f9b8d9b396e32c"
+      ],
+      "opcuaconnectivity_signal_mapping": [
+        "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+        "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+      ]
+    },
+    "observed_graphdb_example": {
+      "local_id": "FI_101",
+      "asset_identifier": "https://aas.example.com/FI101",
+      "signal_name": "XMEAS1"
+    },
+    "notes": "Schema evidence establishes each property path separately; observed data equality is not independent semantic approval. Leave verified false and evidence_ids empty until governance review."
+  }
+]
