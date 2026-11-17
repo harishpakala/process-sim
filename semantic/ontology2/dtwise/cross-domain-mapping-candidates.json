@@ -182,10 +182,17 @@
     "left_property": "https://example.org/dexpi/hasAssetIdentifier",
     "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
     "evidence_ids": [
-      "graphdb:FI_101:FI101:XMEAS1"
+      "https://example.org/dtwise/relationship/2e203e14e6413f848afc46edf4ec0097b39b3ecc81eb18a34b9f4f1ad05f42df",
+      "https://example.org/dtwise/relationship/3a6c333f1c2cfee042962e86b0e1dcc2ffe15be95f1dfa1358c92901b36aea56",
+      "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+      "https://example.org/dtwise/relationship/8e1153f85eefdcf49e4d939a7afe740e9da17e3d6293b47734f9b8d9b396e32c",
+      "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+      "https://example.org/dtwise/relationship/cf1d391171f62858c722e2d02b0c5b15050da5269f31fc2c3f1a3b17c928f3a4",
+      "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3",
+      "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
     ],
     "verified": false,
-    "evidence_note": "Observed read-only GraphDB equality join: DEXPI LocalId FI_101 and OPCUAConnectivity SignalName XMEAS1 share lexical AssetIdentifier https://aas.example.com/FI101. Semantic equivalence still requires independent approval.",
+    "evidence_note": "SHACL evidence supports each property independently; GraphDB confirmed a lexical join for FI_101 / XMEAS1. Neither proves universal semantic equivalence. Independent approval required.",
     "schema_evidence": {
       "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
       "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
@@ -197,6 +204,11 @@
         "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
         "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
       ]
+    },
+    "instance_evidence": {
+      "dexpi_local_id": "FI_101",
+      "shared_asset_identifier": "https://aas.example.com/FI101",
+      "opcua_signal_name": "XMEAS1"
     }
   },
   {
