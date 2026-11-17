@@ -22,11 +22,11 @@ SCHEMA = ROOT / "semantic" / "ontology2" / "dtwise" / "dtwise-schema-index.json"
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", default=os.environ.get("GRAPHDB_SPARQL_ENDPOINT"))
-    parser.add_argument("--model", default=os.environ.get("DTWISE_UNIFIED_MODEL", "llama3.1:8b"))
+    parser.add_argument("--model", default=os.environ.get("DTWISE_UNIFIED_MODEL", "qwen2.5-coder:3b"))
     parser.add_argument("--ollama-host", default=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
     parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "dtwise_unified_batch")
     parser.add_argument("--all", action="store_true", help="Run all existing manifest questions, not just B01-B10")
-    parser.add_argument("--timeout", type=int, default=420, help="Maximum wall time per question (seconds)")
+    parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
     args = parser.parse_args()
 
     if not args.endpoint:
@@ -98,6 +98,7 @@ def main() -> int:
         elapsed = round(time.perf_counter() - start, 2)
         summary.append({
             "id": case_id, "category": case["category"], "question": case["question"],
+            "model": args.model,
             "status": status, "seconds": elapsed, "result_rows": result_count,
             "exit_code": exit_code, "error": error,
             "report_file": str(report_path), "log_file": str(log_path),
