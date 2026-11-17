@@ -37,6 +37,8 @@ def main() -> int:
                         help="Ollama model residency, e.g. 30m")
     parser.add_argument("--llm-timeout", type=int, default=120,
                         help="Ollama HTTP timeout per planning attempt (seconds; default: 120)")
+    parser.add_argument("--prompt-diagnostics", action="store_true",
+                        help="Write prompt-size and Ollama request timing diagnostics per question")
     args = parser.parse_args()
 
     if not args.endpoint:
@@ -79,6 +81,8 @@ def main() -> int:
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
+        if args.prompt_diagnostics:
+            command.extend(["--prompt-diagnostics", str(args.output_dir / f"{case_id}.prompt-diagnostics.json")])
         if args.owner_hints:
             command.append("--owner-hints")
         if args.compact_prompt:
