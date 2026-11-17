@@ -93,13 +93,37 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
     body = '\n'.join('  ' + x for x in parts)
     graphs = ['?graph_' + n['alias'] for n in ir['entities']] if include_graph else []
     op = ir.get('operation', {'type': 'select'})
+    ordering = ir.get('order_by', [])
+    def order_clause():
+        return 'ORDER BY ' + ' '.join(
+            ('ASC' if item['direction'] == 'asc' else 'DESC') +
+            '(?' + item['by'] + ')' for item in ordering)
     if op['type'] == 'count':
         root = '?' + ir['entities'][0]['alias']
-        select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
-        group = ('\nGROUP BY ' + ' '.join(graphs) + '\nORDER BY ' + ' '.join(graphs)) if graphs else ''
-        return select + '\nWHERE {\n' + body + '\n}' + group
+        keys = op.get('group_by', [])
+        group_columns = graphs + ['?' + a for a in keys]
+        select_columns = group_columns + [f'(COUNT(DISTINCT {root}) AS ?count)']
+        query = 'SELECT ' + ' '.join(select_columns) + '\\nWHERE {\\n' + body + '\\n}'
+        if group_columns:
+            query += '\\nGROUP BY ' + ' '.join(group_columns)
+        having = op.get('having')
+        if having is not None:
+            comparator = {'gt': '>', 'gte': '>=', 'lt': '<', 'lte': '<=', 'eq': '='}[having['op']]
+            query += f'\\nHAVING (COUNT(DISTINCT {root}) {comparator} {having["value"]})'
+        if ordering:
+            query += '\\n' + order_clause()
+        elif graphs:
+            query += '\\nORDER BY ' + ' '.join(graphs)
+        if 'limit' in ir:
+            query += '\\nLIMIT ' + str(ir['limit'])
+        return query
     cols = graphs + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
     cols = list(dict.fromkeys(cols))
-    return 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}\nORDER BY ' + ' '.join(cols) + f'\nLIMIT {limit}'
+    query = 'SELECT DISTINCT ' + ' '.join(cols) + '\\nWHERE {\\n' + body + '\\n}'
+    if ordering:
+        query += '\\n' + order_clause()
+    else:
+        query += '\\nORDER BY ' + ' '.join(cols)
+    return query + '\\nLIMIT ' + str(ir.get('limit', limit)) + '\n'
