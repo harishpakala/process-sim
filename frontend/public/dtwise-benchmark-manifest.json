@@ -60,18 +60,6 @@
     "version": "v2_revised"
   },
   {
-    "id": "B11",
-    "category": "filters",
-    "question": "Show opcuaconnectivity SignalMapping signalName where assetIdentifier is https://aas.example.com/FI103 and mappingStatus is PROVISIONAL_ENGINEERING_MATCH.",
-    "version": "v2_revised"
-  },
-  {
-    "id": "B12",
-    "category": "filters",
-    "question": "Show opcuaconnectivity SignalMapping signalName where assetIdentifier is https://aas.example.com/FI103 or assetIdentifier is https://aas.example.com/FI104.",
-    "version": "v2_revised"
-  },
-  {
     "id": "B13",
     "category": "multiple_projections",
     "question": "Get SignalName and OPCUANodeId from OPCUAConnectivity.",
