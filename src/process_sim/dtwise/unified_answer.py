@@ -1,4 +1,5 @@
 """Opt-in DTwise unified IR end-to-end CLI; never modifies existing main.py."""
+import os
 import argparse
 import json
 import re
@@ -134,7 +135,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     return plan
 
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
-                ollama_host='http://localhost:11434', timeout=120, mappings=None):
+                ollama_host=None, timeout=120, mappings=None):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
@@ -181,7 +182,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   'count_ir_example':count_example})}]
     last_error = None
     for attempt in range(3):
-        result = _request_json(ollama_host.rstrip('/')+'/api/chat', {
+        result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', {
             'model':model,'stream':False,'format':'json','options':{'temperature':0},
             'messages':messages}, timeout)
         raw = result.get('message', {}).get('content')
@@ -256,7 +257,7 @@ def main():
     parser.add_argument('--ir',help='Existing unified IR JSON; bypass Qwen')
     parser.add_argument('--mappings',help='Independently verified mapping registry JSON')
     parser.add_argument('--endpoint',help='GraphDB SPARQL endpoint; optional for compile')
-    parser.add_argument('--ollama-host',default='http://localhost:11434')
+    parser.add_argument('--ollama-host',default=os.getenv('OLLAMA_HOST', 'http://localhost:11434'))
     parser.add_argument('--model',default='qwen2.5-coder:3b')
     parser.add_argument('--graph-mode',choices=['default','all_named','selected'],default='all_named')
     parser.add_argument('--graph-iri')
