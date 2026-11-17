@@ -15,6 +15,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "frontend" / "public" / "dtwise-benchmark-manifest.json"
 BATCH = ROOT / "scripts" / "run_dtwise_unified_batch.py"
+MAPPINGS = ROOT / "semantic" / "ontology2" / "dtwise" / "cross-domain-mappings.json"
 
 # Progression from foundational retrieval to multi-domain reasoning.
 CATEGORY_ORDER = (
@@ -53,6 +54,8 @@ def main() -> int:
     parser.add_argument("--category", choices=CATEGORY_ORDER, help="Run one category (recommended for step-by-step testing)")
     parser.add_argument("--all-categories", action="store_true", help="Run one representative per category, sequentially")
     parser.add_argument("--endpoint", default=os.environ.get("GRAPHDB_SPARQL_ENDPOINT"))
+    parser.add_argument("--mappings", type=Path, default=MAPPINGS,
+                        help="Approved ontology2 cross-domain mappings JSON")
     parser.add_argument("--model", default=os.environ.get("DTWISE_UNIFIED_MODEL", "qwen2.5-coder:3b"))
     parser.add_argument("--ollama-host", default=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
     parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "dtwise_category_smoke")
@@ -93,7 +96,7 @@ def main() -> int:
             "--model", args.model, "--ollama-host", args.ollama_host,
             "--start", str(int(case_id[1:])), "--end", str(int(case_id[1:])),
             "--timeout", str(args.timeout), "--llm-timeout", str(args.llm_timeout),
-            "--output-dir", str(target),
+            "--output-dir", str(target), "--mappings", str(args.mappings),
         ]
         if args.compact_catalog:
             command.append("--compact-catalog")
