@@ -322,6 +322,28 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         'select an owning shape from property_owner_hints when provided; '
                         'never choose a different shape merely because it is in the '
                         'same domain. Hints are candidates, not a substitute for SHACL validation.')
+    # Give a specific no-traversal reminder only for straightforward WHERE
+    # lookups whose explicitly named properties share an evidenced owner.
+    # This is advisory; the model still generates the IR and SHACL validates it.
+    if owner_hints and re.search(r'\\bwhere\\b', question, re.I) and not traversal_requirement(question, catalog):
+        requirements = _explicit_property_requirements(question, catalog)
+        if len(set(requirements.values())) >= 2:
+            owners = [
+                entity for entity in catalog['entities']
+                if set(requirements.values()).issubset(set(entity['properties']))
+            ]
+            if len(owners) == 1:
+                owner = owners[0]
+                instruction += (
+                    ' DIRECT LOOKUP WITH WHERE: the explicitly named output and '
+                    'filter properties share one SHACL-evidenced owning shape. '
+                    'Use ONE entity with domain=' + json.dumps(owner['domain']) +
+                    ' and shape=' + json.dumps(owner['shape']) +
+                    '; use edges=[]; project the requested output property and '
+                    'apply the WHERE condition as a filter on that same entity. '
+                    'Do not invent a relationship to represent the filter. '
+                    'This guidance applies only to this direct lookup.'
+                )
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':catalog,
