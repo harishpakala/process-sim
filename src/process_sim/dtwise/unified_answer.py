@@ -57,6 +57,45 @@ def catalog_from_schema(index):
             'shacl_edges':edges}
 
 
+def _compact_catalog_symbols(catalog):
+    """Lossless SHACL IRI symbols; no entity/property selection is performed."""
+    symbols = {}
+    for entity in catalog['entities']:
+        symbols.setdefault(entity['shape'], 'S' + str(sum(k.startswith('S') for k in symbols.values())))
+        for predicate in entity['properties']:
+            symbols.setdefault(predicate, 'P' + str(sum(k.startswith('P') for k in symbols.values())))
+    for edge in catalog['shacl_edges']:
+        for key in ('from_shape', 'to_shape', 'predicate'):
+            iri = edge[key]
+            prefix = 'P' if key == 'predicate' else 'S'
+            symbols.setdefault(iri, prefix + str(sum(k.startswith(prefix) for k in symbols.values())))
+    reverse = {symbol: iri for iri, symbol in symbols.items()}
+    def encode(value):
+        if isinstance(value, dict):
+            return {k: encode(v) for k, v in value.items()}
+        if isinstance(value, list):
+            return [encode(v) for v in value]
+        return symbols.get(value, value) if isinstance(value, str) else value
+    return encode(catalog), symbols, reverse
+
+
+def _resolve_catalog_symbols(plan, reverse):
+    """Resolve only IRI-bearing IR fields; never change filter literal values."""
+    def resolve(value, key=None):
+        if isinstance(value, dict):
+            return {k: resolve(v, k) for k, v in value.items()}
+        if isinstance(value, list):
+            return [resolve(v, key) for v in value]
+        if isinstance(value, str) and key in ('shape', 'predicate', 'left_predicate',
+                                               'right_predicate'):
+            if value in reverse:
+                return reverse[value]
+            if re.fullmatch(r'[SP]\\d+', value):
+                raise ValueError('Unknown catalog symbol: ' + value)
+        return value
+    return resolve(plan)
+
+
 def _request_json(url, payload, timeout):
     req = Request(url, data=json.dumps(payload).encode('utf-8'),
                   headers={'Content-Type':'application/json'}, method='POST')
@@ -297,11 +336,15 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 ollama_host=None, timeout=120, mappings=None, diagnostics=None,
                 compact_prompt=False, keep_alive=None,
-                owner_hints=False, prompt_diagnostics=None):
+                owner_hints=False, prompt_diagnostics=None, compact_catalog=False):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
     prompt_catalog = _prompt_catalog(question, catalog)
+    catalog_symbols = {}
+    reverse_symbols = {}
+    if compact_catalog:
+        prompt_catalog, catalog_symbols, reverse_symbols = _compact_catalog_symbols(prompt_catalog)
     hints = property_owner_hints(question, catalog) if owner_hints else []
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
@@ -428,6 +471,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'Do not invent a relationship to represent the filter. '
                     'This guidance applies only to this direct lookup.'
                 )
+    if compact_catalog:
+        instruction += (' Catalog shape and property IRIs are represented by S-number and P-number symbols. '
+                        'Use these exact symbols in shape and predicate fields of the IR. '
+                        'They will be resolved to canonical IRIs before validation. '
+                        'Do not invent symbols; do not use symbols for filter values.')
+        hints = [{k: catalog_symbols.get(v, v) if isinstance(v, str) else v
+                  for k, v in hint.items()} for hint in hints]
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
@@ -512,7 +562,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         if diagnostics is not None:
             diagnostics.append(attempt_record)
         try:
-            plan = normalize_single_filter(validate_planner_output(json.loads(raw)))
+            plan = normalize_single_filter(validate_planner_output(
+                _resolve_catalog_symbols(json.loads(raw), reverse_symbols)))
         except (TypeError, ValueError, json.JSONDecodeError) as exc:
             last_error = str(exc)
             attempt_record['error'] = last_error
@@ -630,6 +681,8 @@ def main():
     parser.add_argument('--model',default='qwen2.5-coder:3b')
     parser.add_argument('--owner-hints',action='store_true',
                         help='Opt-in evidence-backed property owning shape hints')
+    parser.add_argument('--compact-catalog',action='store_true',
+                        help='Experimental lossless SHACL IRI symbol compression')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -656,7 +709,8 @@ def main():
             args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
             timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
             compact_prompt=args.compact_prompt,keep_alive=args.keep_alive,
-            owner_hints=args.owner_hints,prompt_diagnostics=prompt_diagnostics)
+            owner_hints=args.owner_hints,prompt_diagnostics=prompt_diagnostics,
+            compact_catalog=args.compact_catalog)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
