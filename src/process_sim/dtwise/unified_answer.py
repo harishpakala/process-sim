@@ -322,6 +322,37 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         'select an owning shape from property_owner_hints when provided; '
                         'never choose a different shape merely because it is in the '
                         'same domain. Hints are candidates, not a substitute for SHACL validation.')
+    # Schema evidence for multi-projection lookups. This is prompt context only:
+    # the LLM still chooses the IR, and the validator checks its choices.
+    if owner_hints and not traversal_requirement(question, catalog):
+        requirements = _explicit_property_requirements(question, catalog)
+        requested = set(requirements.values())
+        if len(requested) >= 2:
+            shared_owners = [
+                entity for entity in catalog['entities']
+                if requested.issubset(set(entity['properties']))
+            ]
+            if shared_owners:
+                instruction += (
+                    ' MULTIPLE PROPERTY PROJECTIONS: SHACL evidence shows that '
+                    'all explicitly named properties have a common owning shape. '
+                    'Prefer one entity of that shape with a separate projection '
+                    'for each requested property and edges=[]; do not create '
+                    'separate entities for individual property values. '
+                    'Evidence-backed common owner candidates: '
+                    + json.dumps([
+                        {'domain': owner['domain'], 'shape': owner['shape'],
+                         'display_name': owner.get('display_name')}
+                        for owner in shared_owners
+                    ]) + '. This is schema guidance, not a precomputed plan.'
+                )
+            else:
+                instruction += (
+                    ' MULTIPLE PROPERTY PROJECTIONS: no common SHACL owning '
+                    'shape was evidenced for all named properties. Never '
+                    'invent a join or leave disconnected entities; use only '
+                    'a supported relationship when the question requires it.'
+                )
     # Give a specific no-traversal reminder only for straightforward WHERE
     # lookups whose explicitly named properties share an evidenced owner.
     # This is advisory; the model still generates the IR and SHACL validates it.
