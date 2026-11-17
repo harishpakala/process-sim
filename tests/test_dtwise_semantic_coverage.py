@@ -1,7 +1,9 @@
 """Regression checks for conservative, evidence-backed NL-to-IR coverage."""
 import unittest
+import base64
 
-from process_sim.dtwise.unified_answer import check_semantic_coverage
+from process_sim.dtwise.unified_answer import (check_semantic_coverage,
+                                              catalog_from_schema)
 
 
 SHAPE = "urn:instrumentation-shape"
@@ -19,6 +21,33 @@ def plan(projections=None, filters=None, edges=None):
                 {"entity": "instrument", "predicate": MEASURED, "as": "measuredVariable"}],
             "filters": filters, "operation": {"type": "select"},
             "return_entities": False}
+
+
+class ShapeCatalogMetadataTests(unittest.TestCase):
+    def test_encoded_shape_exposes_readable_metadata_without_replacing_iri(self):
+        source = "InstrumentationFunctions.InstrumentationFunction/nodeShape"
+        encoded = base64.urlsafe_b64encode(source.encode()).decode().rstrip("=")
+        shape = "http://org.example.com/namespace/" + encoded
+        index = {"shape_paths": [
+            {"domain": "dexpi", "node_shape": shape, "path": MEASURED,
+             "property_shape": "urn:property", "evidence": ["urn:source"]}
+        ], "relationships": []}
+        entity = catalog_from_schema(index)["entities"][0]
+        self.assertEqual(entity["shape"], shape)
+        self.assertEqual(entity["display_name"], "InstrumentationFunction")
+        self.assertEqual(entity["source_path"],
+                         "InstrumentationFunctions.InstrumentationFunction")
+        self.assertEqual(entity["properties"], [MEASURED])
+
+    def test_unrecognized_shape_iri_remains_unmodified(self):
+        index = {"shape_paths": [
+            {"domain": "dexpi", "node_shape": SHAPE, "path": MEASURED,
+             "property_shape": "urn:property", "evidence": ["urn:source"]}
+        ], "relationships": []}
+        entity = catalog_from_schema(index)["entities"][0]
+        self.assertEqual(entity["shape"], SHAPE)
+        self.assertNotIn("display_name", entity)
+        self.assertNotIn("source_path", entity)
 
 
 class SemanticCoverageTests(unittest.TestCase):
