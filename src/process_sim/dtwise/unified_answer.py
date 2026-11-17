@@ -273,10 +273,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "operation={type:'count',group_by:['group_key']}; group_by MUST be nested INSIDE operation, NEVER top-level. "
       "Copy no placeholder strings from examples: all domain, shape and predicate values MUST be real catalog values. "
       "For counts above N add operation.having={op:'gt',value:N} (integer). "
+      "An aggregate threshold belongs ONLY in operation.having, NEVER in filters. "
+      "For pure grouped aggregation use filters=null and return_entities=false. "
       "For alphabetical ordering add order_by=[{by:'projected_alias',direction:'asc'}]. "
       "For first N results add top-level limit=N. "
       "For SELECT with ordering, preserve the requested projected output. "
-      "For a direct property lookup or grouped count, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
+      "For a direct property lookup, grouped count, or ordered property listing, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
+      "Do NOT include Server or other unrelated entities in a SignalMapping property query. "
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
       "Use filters=null only when the question has no filter condition. "
@@ -364,11 +367,15 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                               'never *_FROM_CATALOG placeholders. ')
                 elif 'HAVING threshold omitted' in last_error:
                     repair = ('Use operation={"type":"count","group_by":["group_key"],'
-                              '"having":{"op":"gt","value":3}} with real catalog properties. ')
+                              '"having":{"op":"gt","value":3}} with real catalog properties. '
+                              'Set filters=null: the count threshold belongs ONLY in operation.having, '
+                              'not in a property-level gt filter. Use one owning entity and edges=[]. ')
                 elif 'ORDER BY omitted' in last_error or 'LIMIT omitted' in last_error:
                     repair = ('For alphabetical first ten results, use '
                               'order_by=[{"by":"value","direction":"asc"}], '
-                              'limit=10 and project the requested catalog property as value. ')
+                              'limit=10 and project the requested catalog property as value. '
+                              'Include ONLY the entity owning that property; edges=[] and '
+                              'return_entities=false. Do not include an unrelated Server. ')
                 elif 'traversal omitted' in last_error.lower():
                     repair = ('Explicit traversal: include the necessary entities '
                               'and only catalog-verified SHACL edges. ')
@@ -395,8 +402,17 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             attempt_record['error'] = last_error
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
+                shacl_repair = ''
+                if 'Unsupported filter operator' in last_error and plan.get('operation', {}).get('having'):
+                    shacl_repair = ('The aggregate comparison is already in operation.having. '
+                                    'REMOVE the invalid gt filter entirely: set filters=null. '
+                                    'Preserve operation.group_by and operation.having. ')
+                if 'Disconnected query graph' in last_error and not traversal_requirement(question, catalog):
+                    shacl_repair += ('Direct property request: REMOVE unrelated entities; '
+                                     'keep exactly the property-owning entity, edges=[], '
+                                     'and return_entities=false. Preserve order_by and limit. ')
                 messages.append({'role':'user','content':
-                    'The previous IR failed SHACL validation: ' + last_error +
+                    'The previous IR failed SHACL validation: ' + last_error + '. ' + shacl_repair +
                     '. If the error mentions filter: filters MUST be a single object, NOT a list; '
                     'use {"op":"eq","entity":"ALIAS","predicate":"PROPERTY_IRI","value":"EXACT_LITERAL"}. '
                     'Never put a SHACL edge with kind/from/to into filters. '
@@ -413,8 +429,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'do not add a traversal or an unrequested filter. '
                     'If the question has no WHERE clause and requests a direct '
                     'SELECT property lookup, use filters=null. '
-                    'If the error mentions COUNT: set projections=[] and operation={"type":"count"}; '
-                    'use a supported exists filter to require a property. '
+                    'For GLOBAL COUNT only, set projections=[] and operation={"type":"count"}; '
+                    'for GROUPED COUNT keep the grouping projection, operation.group_by, '
+                    'and operation.having when requested. '
                     'For every shacl edge, use the exact from_shape and to_shape '
                     'shown on ONE shacl_edges catalog record with matching domain '
                     'and predicate. The source entity MUST use from_shape; the target '
