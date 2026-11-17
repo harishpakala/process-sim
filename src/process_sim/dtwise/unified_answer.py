@@ -212,22 +212,27 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
                     v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
-    # Enforce requested query operations before accepting a plan.
+    # Enforce explicitly requested query operations before accepting a plan.
     lower_question = question.lower()
     operation = plan.get('operation', {})
+    numbers = {'one':1,'two':2,'three':3,'four':4,'five':5,
+               'six':6,'seven':7,'eight':8,'nine':9,'ten':10}
+    def quantity(token):
+        return int(token) if token.isdigit() else numbers.get(token)
     if re.search(r'\b(?:for each|per)\b', lower_question) and re.search(r'\bcount\b', lower_question):
         if operation.get('type') != 'count' or not operation.get('group_by'):
             raise ValueError('Requested grouped COUNT omitted')
-    if re.search(r'\bmore than\s+(\d+)\b', lower_question) and re.search(r'\bsignalmappings?\b', lower_question):
-        threshold = int(re.search(r'\bmore than\s+(\d+)\b', lower_question).group(1))
+    threshold_match = re.search(r'\bmore than\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b', lower_question)
+    if threshold_match and re.search(r'\bsignalmappings?\b', lower_question):
+        threshold = quantity(threshold_match.group(1))
         having = operation.get('having')
         if operation.get('type') != 'count' or not operation.get('group_by') or having != {'op':'gt','value':threshold}:
             raise ValueError('Requested HAVING threshold omitted')
     if re.search(r'\b(?:alphabetical|alphabetically)\b', lower_question):
         if not any(x.get('direction') == 'asc' for x in plan.get('order_by', []) if isinstance(x, dict)):
             raise ValueError('Requested alphabetical ORDER BY omitted')
-    first = re.search(r'\bfirst\s+(\d+)\b', lower_question)
-    if first and plan.get('limit') != int(first.group(1)):
+    first = re.search(r'\bfirst\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b', lower_question)
+    if first and plan.get('limit') != quantity(first.group(1)):
         raise ValueError('Requested LIMIT omitted')
     # A direct SELECT property lookup without a WHERE clause must not invent
     # a literal filter. COUNT/relationship questions may legitimately use
