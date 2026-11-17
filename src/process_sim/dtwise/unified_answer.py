@@ -132,6 +132,25 @@ def _focused_catalog(catalog, question):
 
 
 
+def property_owner_hints(question, catalog):
+    """Evidence-backed candidate owners for explicitly named properties.
+
+    Never infer property synonyms or select a shape on behalf of the planner.
+    Ambiguous property names are left as multiple candidates.
+    """
+    requirements = _explicit_property_requirements(question, catalog)
+    hints = []
+    for name, predicate in sorted(requirements.items()):
+        owners = [{'domain': entity['domain'], 'shape': entity['shape'],
+                   'display_name': entity.get('display_name')}
+                  for entity in catalog['entities']
+                  if predicate in entity['properties']]
+        if owners:
+            hints.append({'question_term': name, 'predicate': predicate,
+                          'candidate_owners': owners})
+    return hints
+
+
 def traversal_requirement(question, catalog):
     """Conservative structural coverage check, not a natural-language path resolver.
 
@@ -231,10 +250,12 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
 
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 ollama_host=None, timeout=120, mappings=None, diagnostics=None,
-                compact_prompt=False, keep_alive=None):
+                compact_prompt=False, keep_alive=None,
+                owner_hints=False):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
+    hints = property_owner_hints(question, catalog) if owner_hints else []
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
                        for m in (mappings or []) if m.get('verified') is True and m.get('evidence_ids')]
@@ -296,13 +317,19 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "Use display_name/source_path only to choose shape; output original shape IRI. "
             "If unsupported return {\"unsupported\":\"reason\"}."
         )
+    if owner_hints:
+        instruction += (' PROPERTY OWNERSHIP: for an explicitly requested property, '
+                        'select an owning shape from property_owner_hints when provided; '
+                        'never choose a different shape merely because it is in the '
+                        'same domain. Hints are candidates, not a substitute for SHACL validation.')
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':catalog,
                   'verified_mappings':mapping_catalog,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
-                  'count_ir_example':count_example},
+                  'count_ir_example':count_example,
+                  **({'property_owner_hints':hints} if owner_hints else {})},
                   separators=(',', ':') if compact_prompt else None)}]
     last_error = None
     # Keep constraints from earlier failures active across subsequent retries.
@@ -426,6 +453,8 @@ def main():
     parser.add_argument('--endpoint',help='GraphDB SPARQL endpoint; optional for compile')
     parser.add_argument('--ollama-host',default=os.getenv('OLLAMA_HOST', 'http://localhost:11434'))
     parser.add_argument('--model',default='qwen2.5-coder:3b')
+    parser.add_argument('--owner-hints',action='store_true',
+                        help='Opt-in evidence-backed property owning shape hints')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -449,7 +478,8 @@ def main():
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
             args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
             timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
-            compact_prompt=args.compact_prompt,keep_alive=args.keep_alive)
+            compact_prompt=args.compact_prompt,keep_alive=args.keep_alive,
+            owner_hints=args.owner_hints)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
