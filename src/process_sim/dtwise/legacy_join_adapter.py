@@ -65,8 +65,7 @@ def plan_legacy_projection_ir(question, schema_path, mappings):
                      question, re.I):
             discovered = plan_join(question, catalog, schema)
             if discovered is not None:
-                raise ValueError("Legacy identifier join discovered but not convertible "
-                                 "to a property-projection Unified IR plan")
+                return _identifier_join_ir(discovered, schema, schema_path, mappings)
         return None
     source, target = plan["source"], plan["target"]
     if explicit and (not _same(source["domain"], explicit["source"])
@@ -106,5 +105,47 @@ def plan_legacy_projection_ir(question, schema_path, mappings):
           "filters": ({"op": "eq", "entity": sa, "predicate": filt["predicate"],
                        "value": filt["value"]} if filt else None),
           "operation": {"type": "select"}, "return_entities": False}
+    validate_ir(ir, schema_path, mappings=mappings)
+    return ir
+
+
+def _identifier_join_ir(plan, schema, schema_path, mappings):
+    """Convert an unambiguous two-domain legacy identifier equality plan."""
+    if plan.get("join_type") != "identifier_equality" or len(plan.get("sides", [])) != 2:
+        raise ValueError("Legacy multi-domain/bridge join requires a separate IR adapter")
+    first, second = plan["sides"]
+    if len(first.get("branches", [])) != 1 or len(second.get("branches", [])) != 1:
+        raise ValueError("Legacy identifier join has ambiguous SHACL branches")
+    a, b = first["branches"][0], second["branches"][0]
+    source = dict(a, domain=first["domain"])
+    target = dict(b, domain=second["domain"])
+    verified = []
+    for m in mappings or []:
+        if m.get("verified") is not True or not m.get("evidence_ids"):
+            continue
+        forward = (m.get("left_domain") == source["domain"]
+                   and m.get("right_domain") == target["domain"]
+                   and m.get("left_property") == source["key_predicate"]
+                   and m.get("right_property") == target["key_predicate"])
+        reverse = (m.get("right_domain") == source["domain"]
+                   and m.get("left_domain") == target["domain"]
+                   and m.get("right_property") == source["key_predicate"]
+                   and m.get("left_property") == target["key_predicate"])
+        if forward or reverse:
+            verified.append((m, reverse))
+    if len(verified) != 1:
+        raise ValueError("Legacy identifier join requires one independently verified mapping")
+    m, reverse = verified[0]
+    se, sedges, sa = _branch(source, "source", schema)
+    te, tedges, ta = _branch(target, "target", schema)
+    left, right = (ta, sa) if reverse else (sa, ta)
+    lp, rp = ((target["key_predicate"], source["key_predicate"]) if reverse
+              else (source["key_predicate"], target["key_predicate"]))
+    ir = {"ir_version": "1.0", "entities": se + te,
+          "edges": sedges + tedges + [{
+              "kind": "mapping", "from": left, "to": right,
+              "mapping_id": m["id"], "left_predicate": lp, "right_predicate": rp}],
+          "projections": [], "filters": None, "operation": {"type": "select"},
+          "return_entities": True}
     validate_ir(ir, schema_path, mappings=mappings)
     return ir
