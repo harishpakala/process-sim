@@ -490,21 +490,6 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "Use display_name/source_path only to choose shape; output original shape IRI. "
             "If unsupported return {\"unsupported\":\"reason\"}."
         )
-    # General first-attempt guidance: mapping joins and question filters
-    # have separate roles. This changes only the LLM prompt, not its IR.
-    if len(mentioned) > 1:
-        instruction += (
-            ' CROSS-DOMAIN PLANNING: inspect verified_mappings and use only '
-            'an applicable verified mapping edge to connect domains; never '
-            'use a cross-domain SHACL edge. A mapping edge joins entities '
-            'through left_property/right_property; these join properties '
-            'are NOT substitutes for input filter predicates. '
-            'In a request of the form "Get X for Y with Z VALUE", '
-            'project X and create an exact eq filter for Z VALUE on the '
-            'correct owning entity using its SHACL-evidenced property. '
-            'Keep the literal exactly as written. Do not drop a requested '
-            'filter when adding a mapping edge. '
-            'Return a connected, fully constrained plan on the first attempt.')
     if owner_hints:
         instruction += (' PROPERTY OWNERSHIP: for an explicitly requested property, '
                         'select an owning shape from property_owner_hints when provided; '
@@ -697,6 +682,30 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 elif 'traversal omitted' in last_error.lower():
                     repair = ('Explicit traversal: include the necessary entities '
                               'and only catalog-verified SHACL edges. ')
+                elif last_error.startswith('Explicit requested projection omitted:'):
+                    # Provide only SHACL-backed ownership evidence to the LLM.
+                    # Never alter the generated plan or invent an output property.
+                    missing_predicate = last_error.split(': ', 1)[-1]
+                    owners = []
+                    for selected in plan['entities']:
+                        for entry in catalog['entities']:
+                            if (entry['domain'] == selected['domain'] and
+                                    entry['shape'] == selected['shape'] and
+                                    missing_predicate in entry['properties']):
+                                owners.append({'entity': selected['alias'],
+                                               'predicate': missing_predicate})
+                    repair = (
+                        'The requested output property is missing from projections '
+                        'or projected from the wrong entity. The required output '
+                        'predicate is ' + missing_predicate + '. '
+                        'SHACL-evidenced owning entities among selected shapes: ' +
+                        json.dumps(owners, ensure_ascii=False) + '. '
+                        'Project the requested output from its owning entity; '
+                        'do not substitute an input filter or mapping join property. '
+                        'Preserve all valid mapping edges and exact input filters '
+                        'from earlier attempts. If no selected entity owns the '
+                        'property, choose an appropriate catalog-backed entity '
+                        'rather than inventing a predicate. ')
                 elif last_error.startswith('Explicit input constraint omitted:'):
                     # Give the model specific evidence from its chosen shapes.
                     # This is retry feedback only: never mutate or synthesize IR.
