@@ -29,6 +29,10 @@ def main() -> int:
     parser.add_argument("--start", type=int, help="First benchmark number to include (inclusive)")
     parser.add_argument("--end", type=int, help="Last benchmark number to include (inclusive)")
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
+    parser.add_argument("--compact-prompt", action="store_true",
+                        help="Opt-in shorter planner prompt for A/B latency tests")
+    parser.add_argument("--keep-alive", default=None,
+                        help="Ollama model residency, e.g. 30m")
     parser.add_argument("--llm-timeout", type=int, default=120,
                         help="Ollama HTTP timeout per planning attempt (seconds; default: 120)")
     args = parser.parse_args()
@@ -73,6 +77,10 @@ def main() -> int:
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
+        if args.compact_prompt:
+            command.append("--compact-prompt")
+        if args.keep_alive is not None:
+            command.extend(["--keep-alive", args.keep_alive])
         start = time.perf_counter()
         status, error, result_count, exit_code = "ERROR", "", None, None
         planning_seconds = compilation_seconds = graphdb_seconds = None
@@ -126,6 +134,7 @@ def main() -> int:
         summary.append({
             "id": case_id, "category": case["category"], "question": case["question"],
             "model": args.model, "llm_timeout_seconds": args.llm_timeout,
+            "compact_prompt": args.compact_prompt, "keep_alive": args.keep_alive,
             "status": status, "seconds": elapsed, "result_rows": result_count,
             "planning_seconds": planning_seconds, "compilation_seconds": compilation_seconds,
             "graphdb_seconds": graphdb_seconds, "llm_attempts": llm_attempts,
