@@ -17,11 +17,14 @@ import time
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "frontend" / "public" / "dtwise-benchmark-manifest.json"
 SCHEMA = ROOT / "semantic" / "ontology2" / "dtwise" / "dtwise-schema-index.json"
+MAPPINGS = ROOT / "semantic" / "ontology2" / "dtwise" / "cross-domain-mappings.json"
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", default=os.environ.get("GRAPHDB_SPARQL_ENDPOINT"))
+    parser.add_argument("--mappings", type=Path, default=MAPPINGS,
+                        help="Approved ontology2 mapping registry JSON")
     parser.add_argument("--model", default=os.environ.get("DTWISE_UNIFIED_MODEL", "qwen2.5-coder:3b"))
     parser.add_argument("--ollama-host", default=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
     parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "dtwise_unified_batch")
@@ -45,6 +48,8 @@ def main() -> int:
 
     if not args.endpoint:
         parser.error("Set GRAPHDB_SPARQL_ENDPOINT or supply --endpoint")
+    if not args.mappings.is_file():
+        parser.error(f"Missing mapping registry: {args.mappings}")
     if not SCHEMA.is_file():
         parser.error(f"Missing schema index: {SCHEMA}")
     if args.timeout < 1:
@@ -82,6 +87,7 @@ def main() -> int:
             "--model", args.model, "--ollama-host", args.ollama_host,
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
+            "--mappings", str(args.mappings),
         ]
         if args.prompt_diagnostics:
             command.extend(["--prompt-diagnostics", str(args.output_dir / f"{case_id}.prompt-diagnostics.json")])
