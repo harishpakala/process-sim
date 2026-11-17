@@ -1,5 +1,20 @@
 [
   {
+    "id": "assetinventory-productcatalog-product-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "productcatalog",
+    "left_property": "https://example.org/assetinventory/hasProductIdentifier",
+    "right_property": "https://example.org/productcatalog/hasProductIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+      "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2",
+      "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+      "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+    ],
+    "verified": true,
+    "evidence_note": "SHACL evidence grounds both ProductIdentifier properties. Cross-domain ProductIdentifier correspondence explicitly confirmed by the mapping owner; GraphDB instance-level matching has not been independently inspected in this change."
+  },
+  {
     "id": "dexpi-opcua-asset-identifier",
     "left_domain": "dexpi",
     "right_domain": "opcuaconnectivity",
