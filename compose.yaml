@@ -16,7 +16,8 @@ services:
     volumes:
       - ./docker/graphdb/AAST.ttl:/config/AAST.ttl:ro
       - ./docker/graphdb/init.sh:/config/init.sh:ro
-    entrypoint: ["/bin/sh", "/config/init.sh"]
+    entrypoint: ["/bin/sh", "-c"]
+    command: "tr -d '\\r' < /config/init.sh > /tmp/graphdb-init.sh && /bin/sh /tmp/graphdb-init.sh"
     restart: "no"
 
   timescaledb:
