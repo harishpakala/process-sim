@@ -1156,7 +1156,7 @@ def _plan_explicit_property_operations(question, catalog, schema):
 
 
 def plan_question_semantic(question, paths, schema, *,
-                           host="http://localhost:11434",
+                           host=os.getenv("OLLAMA_HOST", "http://localhost:11434"),
                            model="qwen2.5-coder:3b", timeout=60, interpret=None):
     """Build a plan from SHACL evidence. `paths` retained for caller compatibility."""
     direct_boolean = _direct_boolean_request(question, schema)
