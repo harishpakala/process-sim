@@ -62,7 +62,7 @@ def validate_planner_output(plan):
                 'operation', 'return_entities')
     missing = [k for k in required if k not in plan]
     if missing:
-        raise ValueError('Qwen returned a schema fragment or incomplete IR; missing: '
+        raise ValueError('Planner returned a schema fragment or incomplete IR; missing: '
                          + ', '.join(missing) + '; received: '
                          + json.dumps(plan, ensure_ascii=False)[:1500])
     if plan['ir_version'] != '1.0':
@@ -110,7 +110,7 @@ def traversal_requirement(question, catalog):
     """Conservative structural coverage check, not a natural-language path resolver.
 
     A relationship expressed as a traversal must not disappear from the IR.
-    The actual hop predicates and shapes are still selected by Qwen and
+    The actual hop predicates and shapes are still selected by the model and
     independently checked against SHACL by compile_graph_ir.
     """
     traversal_words = re.search(
@@ -119,6 +119,22 @@ def traversal_requirement(question, catalog):
     if not traversal_words:
         return False
     return bool(catalog.get('shacl_edges'))
+
+
+def _explicit_property_requirements(question, catalog):
+    """Find only unambiguous, explicitly named SHACL properties; never infer synonyms."""
+    words = re.findall(r'[A-Za-z][A-Za-z0-9_]*', question)
+    tokens = {word.lower() for word in words}
+    properties = {}
+    for entity in catalog['entities']:
+        for predicate in entity['properties']:
+            local = re.split(r'[/#]', predicate)[-1]
+            names = {local.lower()}
+            if local.startswith('has') and len(local) > 3:
+                names.add(local[3:].lower())
+            for name in names & tokens:
+                properties.setdefault(name, set()).add(predicate)
+    return {name: next(iter(iris)) for name, iris in properties.items() if len(iris) == 1}
 
 
 def check_semantic_coverage(plan, question, catalog, mentioned):
@@ -132,10 +148,51 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         raise ValueError('Requested traversal omitted: edges=[]; '
                          'candidate verified SHACL edges: '
                          + json.dumps(candidates[:15], ensure_ascii=False))
+    # Only check property names explicitly present in the question and unique
+    # in the evidenced catalog. This is a conservative completeness check, not
+    # a semantic resolver: it never inserts, replaces, or guesses predicates.
+    requirements = _explicit_property_requirements(question, catalog)
+    projected = {p['predicate'] for p in plan['projections']}
+    def filter_predicates(node):
+        if not isinstance(node, dict):
+            return set()
+        found = {node['predicate']} if isinstance(node.get('predicate'), str) else set()
+        for child in node.get('args', []):
+            found |= filter_predicates(child)
+        if isinstance(node.get('arg'), dict):
+            found |= filter_predicates(node['arg'])
+        return found
+    filtered = filter_predicates(plan.get('filters'))
+    before_where = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)
+    output_names = _explicit_property_requirements(before_where[0], catalog)
+    for name, predicate in output_names.items():
+        if plan['operation']['type'] == 'select' and predicate not in projected:
+            raise ValueError('Explicit requested projection omitted: ' + predicate)
+    if len(before_where) == 2:
+        filter_names = _explicit_property_requirements(before_where[1], catalog)
+        for name, predicate in filter_names.items():
+            if predicate not in filtered:
+                raise ValueError('Explicit requested filter omitted: ' + predicate)
+        # Exact literals explicitly introduced by "is" must be preserved.
+        for literal in re.findall(r'\\bis\\s+([^\\s,;]+)', before_where[1], flags=re.I):
+            literal = literal.rstrip('.')
+            def values(node):
+                if not isinstance(node, dict):
+                    return []
+                return ([str(node['value'])] if 'value' in node else []) + [
+                    v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
+            if literal not in values(plan.get('filters')):
+                raise ValueError('Explicit requested filter literal omitted: ' + literal)
+    # An unrequested traversal cannot be added to a simple property lookup.
+    # Leave traversals allowed when the question actually requests a relationship.
+    if not traversal_requirement(question, catalog) and not re.search(
+            r'\\b(?:relationship|related|connected|link(?:ed)?|join)\\b', question, re.I):
+        if output_names and plan['edges']:
+            raise ValueError('Unrequested SHACL traversal in direct property lookup')
     return plan
 
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
-                ollama_host=None, timeout=120, mappings=None):
+                ollama_host=None, timeout=120, mappings=None, diagnostics=None):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
@@ -186,10 +243,14 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             'model':model,'stream':False,'format':'json','options':{'temperature':0},
             'messages':messages}, timeout)
         raw = result.get('message', {}).get('content')
+        attempt_record = {'attempt': attempt + 1, 'model': model, 'raw': raw}
+        if diagnostics is not None:
+            diagnostics.append(attempt_record)
         try:
             plan = normalize_single_filter(validate_planner_output(json.loads(raw)))
         except (TypeError, ValueError, json.JSONDecodeError) as exc:
             last_error = str(exc)
+            attempt_record['error'] = last_error
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw if isinstance(raw,str) else '{}'})
                 messages.append({'role':'user','content':
@@ -197,11 +258,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   '. Return a complete plan with all required keys, or an unsupported object. ' +
                   'Do not copy an edge or entity descriptor from the catalog.'})
                 continue
-            raise ValueError('Qwen failed to generate valid Unified IR after retry: '+last_error) from exc
+            raise ValueError('Model failed to generate valid Unified IR after retry: '+last_error) from exc
         try:
             check_semantic_coverage(plan, question, catalog, mentioned)
         except ValueError as exc:
             last_error = str(exc)
+            attempt_record['error'] = last_error
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
@@ -213,12 +275,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'a shortened or partial query.'})
                 continue
             raise ValueError('Semantic coverage failure after retries: '+last_error) from exc
-        # Check full SHACL evidence BEFORE accepting a Qwen plan. This is part of
+        # Check full SHACL evidence BEFORE accepting a model plan. This is part of
         # the model retry loop, not a downstream one-shot compiler failure.
         try:
             plan = resolve_shapes(plan, index, mappings=mappings)
         except (ValueError, KeyError, TypeError) as exc:
             last_error = str(exc)
+            attempt_record['error'] = last_error
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
@@ -236,9 +299,10 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'Preserve requested projections on their correct entity. '
                     'Return the complete corrected IR or unsupported.'})
                 continue
-            raise ValueError('SHACL validation failed after Qwen retries: '+last_error) from exc
+            raise ValueError('SHACL validation failed after model retries: '+last_error) from exc
+        attempt_record['status'] = 'accepted'
         return plan
-    raise ValueError('Qwen failed to generate Unified IR: '+str(last_error))
+    raise ValueError('Model failed to generate Unified IR: '+str(last_error))
 
 
 def execute_select(sparql, endpoint, timeout=60):
@@ -269,16 +333,19 @@ def main():
     if args.command=='answer' and not args.endpoint: parser.error('answer requires --endpoint')
     registry=json.loads(Path(args.mappings).read_text(encoding='utf-8')) if args.mappings else None
     try:
+        diagnostics=[]
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
-            args.question,args.schema,model=args.model,ollama_host=args.ollama_host,mappings=registry)
+            args.question,args.schema,model=args.model,ollama_host=args.ollama_host,mappings=registry,
+            diagnostics=diagnostics)
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
                                graph_iri=args.graph_iri,include_graph=args.include_graph,limit=args.limit)
-        result={'status':'compiled','ir':plan,'sparql':query}
+        result={'status':'compiled','ir':plan,'sparql':query,'planning_attempts':diagnostics}
         if args.command=='answer':
             result['results']=execute_select(query,args.endpoint)
             result['status']='executed'
     except (ValueError,HTTPError,URLError,TimeoutError,OSError,KeyError,TypeError) as exc:
-        result={'status':'rejected_or_failed','error':str(exc)}
+        result={'status':'rejected_or_failed','error':str(exc),
+                'planning_attempts':locals().get('diagnostics', [])}
     output=json.dumps(result,ensure_ascii=False,indent=2)
     if args.output: Path(args.output).write_text(output,encoding='utf-8')
     print(output)
