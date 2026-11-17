@@ -60,259 +60,259 @@
     "version": "v2_revised"
   },
   {
-    "id": "B13",
+    "id": "B11",
     "category": "multiple_projections",
     "question": "Get SignalName and OPCUANodeId from OPCUAConnectivity.",
     "version": "v1_original"
   },
   {
-    "id": "B14",
+    "id": "B12",
     "category": "multiple_projections",
     "question": "Show AssetIdentifier and AssetName for AssetInventory assets.",
     "version": "v1_original"
   },
   {
-    "id": "B15",
+    "id": "B13",
     "category": "multiple_projections",
     "question": "Get LocalId and AssetIdentifier of DEXPI InstrumentationFunctions.",
     "version": "v1_original"
   },
   {
-    "id": "B16",
+    "id": "B14",
     "category": "aggregation",
     "question": "Count SignalMappings in OPCUAConnectivity.",
     "version": "v1_original"
   },
   {
-    "id": "B17",
+    "id": "B15",
     "category": "aggregation",
     "question": "Count SignalMappings for each AssetIdentifier.",
     "version": "v1_original"
   },
   {
-    "id": "B18",
+    "id": "B16",
     "category": "aggregation",
     "question": "List AssetIdentifiers with more than three SignalMappings.",
     "version": "v1_original"
   },
   {
-    "id": "B19",
+    "id": "B17",
     "category": "aggregation",
     "question": "Get the first ten SignalNames in alphabetical order.",
     "version": "v1_original"
   },
   {
-    "id": "B20",
+    "id": "B18",
     "category": "language_variation",
     "question": "Which signal names are associated with asset https://aas.example.com/FI103?",
     "version": "opcuaconnectivity"
   },
   {
-    "id": "B21",
+    "id": "B19",
     "category": "language_variation",
     "question": "For asset https://aas.example.com/FI103, list its signals.",
     "version": "opcuaconnectivity"
   },
   {
-    "id": "B22",
+    "id": "B20",
     "category": "language_variation",
     "question": "Show me the signal names belonging to https://aas.example.com/FI103.",
     "version": "opcuaconnectivity"
   },
   {
-    "id": "B23",
+    "id": "B21",
     "category": "Cross-domain",
     "question": "Get SignalName of the DEXPI InstrumentationFunction with LocalID FI-001.",
     "version": ""
   },
   {
-    "id": "B24",
+    "id": "B22",
     "category": "Cross-domain",
     "question": "Find SignalNames associated with DEXPI InstrumentationFunctions through AssetIdentifier.",
     "version": ""
   },
   {
-    "id": "B25",
+    "id": "B23",
     "category": "Cross-domain",
     "question": "Get OPCUANodeId for ECAD Devices matched by AssetIdentifier.",
     "version": ""
   },
   {
-    "id": "B26",
+    "id": "B24",
     "category": "Cross-domain",
     "question": "Join DEXPI, ECAD, OPCUAConnectivity and ProductCatalog through AssetInventory using AssetIdentifier and ProductIdentifier.",
     "version": ""
   },
   {
-    "id": "B27",
+    "id": "B25",
     "category": "Cross-domain",
     "question": "List AssetIdentifiers shared by DEXPI and OPCUAConnectivity.",
     "version": ""
   },
   {
-    "id": "B28",
+    "id": "B26",
     "category": "Single Domain",
     "question": "Which DEXPI InstrumentationFunctions have an AssetIdentifier? ",
     "version": ""
   },
   {
-    "id": "B29",
+    "id": "B27",
     "category": "Single Domain",
     "question": "Which DEXPI InstrumentationFunctions do not have an AssetIdentifier? ",
     "version": ""
   },
   {
-    "id": "B30",
+    "id": "B28",
     "category": "Single Domain",
     "question": "List DEXPI Equipment without an AssetIdentifier.",
     "version": ""
   },
   {
-    "id": "B31",
+    "id": "B29",
     "category": "Single Domain",
     "question": "List DEXPI Equipment and their LocalId, if available. ",
     "version": ""
   },
   {
-    "id": "B32",
+    "id": "B30",
     "category": "Cross-domain",
     "question": "Which DEXPI InstrumentationFunctions have no matching OPCUAConnectivity SignalMapping by AssetIdentifier? ",
     "version": ""
   },
   {
-    "id": "B38",
+    "id": "B31",
     "category": "String filtering",
     "question": "Which DEXPI entities have a LocalId containing TI_? ",
     "version": ""
   },
   {
-    "id": "B39",
+    "id": "B32",
     "category": "String filtering",
     "question": "Which OPC UA Connectivity entities have a SignalName starting with XMEAS? ",
     "version": ""
   },
   {
-    "id": "B40",
+    "id": "B33",
     "category": "String filtering",
     "question": "Which ProductCatalog entities have a ManufacturerName containing Endress? ",
     "version": ""
   },
   {
-    "id": "B41",
+    "id": "B34",
     "category": "String filtering",
     "question": "Which ECAD entities have a LocalId matching the regular expression ^PI-? ",
     "version": ""
   },
   {
-    "id": "B42",
+    "id": "B35",
     "category": "String filtering",
     "question": "Which AssetInventory entities have an AssetName containing reactor, ignoring case? ",
     "version": ""
   },
   {
-    "id": "B43",
+    "id": "B36",
     "category": "Boolean",
     "question": "Which DEXPI entities have both AssetIdentifier and LocalId? ",
     "version": ""
   },
   {
-    "id": "B44",
+    "id": "B37",
     "category": "Boolean",
     "question": "Which inventory assets have AssetName but no EquipmentTag? ",
     "version": ""
   },
   {
-    "id": "B45",
+    "id": "B38",
     "category": "Boolean",
     "question": "Which ECAD entities have an Address or LocalId? ",
     "version": ""
   },
   {
-    "id": "B46",
+    "id": "B39",
     "category": "Boolean",
     "question": "Which signal mappings have a SignalName and a MappingStatus? ",
     "version": ""
   },
   {
-    "id": "B47",
+    "id": "B40",
     "category": "Boolean",
     "question": "Which products have ManufacturerName but no SupplierName?",
     "version": ""
   },
   {
-    "id": "B48",
+    "id": "B41",
     "category": "compound_filters",
     "question": "Count distinct SignalNames for OPCUA AssetIdentifier https://aas.example.com/FI103.",
     "version": "v2"
   },
   {
-    "id": "B49",
+    "id": "B42",
     "category": "compound_filters",
     "question": "Show SignalNames ordered descending, limit 5.",
     "version": "v2"
   },
   {
-    "id": "B50",
+    "id": "B43",
     "category": "compound_filters",
     "question": "List AssetNames whose AssetIdentifier is FI103 or FI104.",
     "version": "v2"
   },
   {
-    "id": "B51",
+    "id": "B44",
     "category": "multi_domain_multi_hop",
     "question": "Get OPCUA SignalNames associated with DEXPI InstrumentationFunctions using AssetIdentifier.",
     "version": "v2"
   },
   {
-    "id": "B52",
+    "id": "B45",
     "category": "multi_domain_multi_hop",
     "question": "Get OPCUA SignalNames for DEXPI InstrumentationFunction LocalId FI-001 using AssetIdentifier.",
     "version": "v2"
   },
   {
-    "id": "B53",
+    "id": "B46",
     "category": "multi_domain_multi_hop",
     "question": "Find ECAD Device LocalIds associated with DEXPI InstrumentationFunctions via AssetIdentifier.",
     "version": "v2"
   },
   {
-    "id": "B54",
+    "id": "B47",
     "category": "multi_domain_multi_hop",
     "question": "Show OPCUA SignalName and ECAD Device LocalId for shared AssetIdentifiers.",
     "version": "v2"
   },
   {
-    "id": "B55",
+    "id": "B48",
     "category": "multi_domain_multi_hop",
     "question": "Find DEXPI InstrumentationFunctions and OPCUA SignalMappings matched through AssetInventory.",
     "version": "v2"
   },
   {
-    "id": "B56",
+    "id": "B49",
     "category": "multi_domain_multi_hop",
     "question": "Get OPCUA SignalNames and ECAD Device LocalIds for DEXPI InstrumentationFunctions via AssetInventory.",
     "version": "v2"
   },
   {
-    "id": "B57",
+    "id": "B50",
     "category": "multi_domain_multi_hop",
     "question": "Join DEXPI, ECAD, OPCUAConnectivity, AssetInventory and ProductCatalog on AssetIdentifier and ProductIdentifier; return SignalName and ManufacturerName.",
     "version": "v2"
   },
   {
-    "id": "B58",
+    "id": "B51",
     "category": "multi_domain_multi_hop",
     "question": "For asset FI103, get OPCUA SignalName and ProductCatalog ManufacturerName through AssetInventory.",
     "version": "v2"
   },
   {
-    "id": "B59",
+    "id": "B52",
     "category": "multi_domain_multi_hop",
     "question": "Count OPCUA SignalMappings per DEXPI InstrumentationFunction through AssetIdentifier.",
     "version": "v2"
   },
   {
-    "id": "B60",
+    "id": "B53",
     "category": "multi_domain_multi_hop",
     "question": "List DEXPI InstrumentationFunctions with no matching OPCUA SignalMapping.",
     "version": "v2"
