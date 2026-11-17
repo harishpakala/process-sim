@@ -87,25 +87,25 @@
     "id": "B17",
     "category": "aggregation",
     "question": "Count SignalMappings for each AssetIdentifier in OPCUAConnectivity.",
-    "version": "v2_domain_explicit"
+    "version": "v3_exact_concept_names"
   },
   {
     "id": "B18",
     "category": "aggregation",
     "question": "List AssetIdentifiers with more than three SignalMappings in OPCUAConnectivity.",
-    "version": "v2_domain_explicit"
+    "version": "v3_exact_concept_names"
   },
   {
     "id": "B19",
     "category": "aggregation",
     "question": "Get the first ten SignalNames in alphabetical order from OPCUAConnectivity.",
-    "version": "v2_domain_explicit"
+    "version": "v3_exact_concept_names"
   },
   {
     "id": "B20",
     "category": "language_variation",
-    "question": "Which signal names in OPCUAConnectivity are associated with asset https://aas.example.com/FI103?",
-    "version": "v2_domain_explicit"
+    "question": "Which SignalNames in OPCUAConnectivity are associated with AssetIdentifier https://aas.example.com/FI103?",
+    "version": "v3_exact_concept_names"
   },
   {
     "id": "B21",
