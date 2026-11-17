@@ -2,6 +2,7 @@
 import unittest
 
 from process_sim.dtwise.graph_compiler import compile_graph_ir
+from process_sim.dtwise.unified_answer import check_semantic_coverage
 from process_sim.dtwise.unified_ir import validate_ir
 
 
@@ -74,6 +75,27 @@ class QueryOperationsTests(unittest.TestCase):
         ir["order_by"] = [{"by": "value) . DROP ALL", "direction": "asc"}]
         with self.assertRaises(ValueError):
             validate_ir(ir, SCHEMA)
+
+    def test_b17_rejects_global_count(self):
+        ir = plan()
+        ir["projections"] = []
+        ir["operation"] = {"type": "count"}
+        with self.assertRaisesRegex(ValueError, "grouped COUNT"):
+            check_semantic_coverage(ir, "Count SignalMappings for each AssetIdentifier.", {"entities": [], "shacl_edges": []}, set())
+
+    def test_b18_requires_having(self):
+        ir = plan()
+        ir["operation"] = {"type": "count", "group_by": ["value"]}
+        with self.assertRaisesRegex(ValueError, "HAVING"):
+            check_semantic_coverage(ir, "List AssetIdentifiers with more than three SignalMappings.", {"entities": [], "shacl_edges": []}, set())
+
+    def test_b19_requires_order_and_limit(self):
+        ir = plan(SIGNAL)
+        with self.assertRaisesRegex(ValueError, "ORDER BY"):
+            check_semantic_coverage(ir, "Get the first ten SignalNames in alphabetical order.", {"entities": [], "shacl_edges": []}, set())
+        ir["order_by"] = [{"by": "value", "direction": "asc"}]
+        with self.assertRaisesRegex(ValueError, "LIMIT"):
+            check_semantic_coverage(ir, "Get the first ten SignalNames in alphabetical order.", {"entities": [], "shacl_edges": []}, set())
 
     def test_legacy_select(self):
         sql = compile_graph_ir(plan(), SCHEMA)
