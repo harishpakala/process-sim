@@ -317,12 +317,42 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
                     v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
+    # Explicit substring clauses are requirements even without a WHERE keyword.
+    # This is a coverage guard only: the model must still select the entity,
+    # predicate, filter operator and literal; no IR is synthesized here.
+    substring_clauses = re.findall(
+        r'\\b([A-Za-z][A-Za-z0-9_]*)\\s+(?:containing|contains)\\s+([^\\s,;?]+)',
+        question, flags=re.I)
+    if substring_clauses:
+        requirements_by_name = _explicit_property_requirements(question, catalog)
+        def filter_leaves(node):
+            if not isinstance(node, dict):
+                return []
+            leaves = [node] if node.get('predicate') else []
+            for key in ('args', 'children'):
+                for child in node.get(key, []):
+                    leaves.extend(filter_leaves(child))
+            for key in ('arg', 'child'):
+                leaves.extend(filter_leaves(node.get(key)))
+            return leaves
+        leaves = filter_leaves(plan.get('filters'))
+        for property_name, literal in substring_clauses:
+            predicate = requirements_by_name.get(property_name.lower())
+            if predicate is None:
+                continue  # Ambiguous/unknown property: do not guess a predicate.
+            literal = literal.rstrip('.')
+            if not any(leaf.get('op') == 'contains' and
+                       leaf.get('predicate') == predicate and
+                       leaf.get('value') == literal for leaf in leaves):
+                raise ValueError('Explicit substring filter omitted or incorrect: '
+                                 + property_name + ' containing ' + literal)
     # A direct SELECT property lookup without a WHERE clause must not invent
     # a literal filter. COUNT/relationship questions may legitimately use
     # property-existence constraints without an explicit WHERE.
     if (len(before_where) == 1 and output_names and
             plan['operation']['type'] == 'select' and
             not traversal_requirement(question, catalog) and
+            not substring_clauses and
             plan.get('filters') is not None):
         raise ValueError('Unrequested filter in direct property lookup')
     # An unrequested traversal cannot be added to a simple property lookup.
@@ -357,7 +387,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "projections=[{entity,predicate,as}], filters=null or ONE JSON OBJECT (never an array), "
       "operation={type:'select'|'count'}, return_entities boolean. "
       "FILTERS ARE NOT EDGES: use {op:'eq',entity:'alias',predicate:'IRI',value:'literal'} "
-      "for exact matches; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
+      "for exact matches; use {op:'contains',entity:'alias',predicate:'IRI',value:'substring'} for 'containing' questions; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For count, projections MUST be []; use exists filter to count entities having a property. "
       "For a direct property lookup, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
