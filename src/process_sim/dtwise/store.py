@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 import uuid
 from pathlib import Path
 from typing import Any, Iterable
@@ -18,10 +19,10 @@ class VectorStore:
         path: str | Path,
         model_name: str = "nomic-embed-text:latest",
         collection: str = "dtwise_ontology",
-        ollama_host: str = "http://localhost:11434",
+        ollama_host: str | None = None,
     ) -> None:
         self.client = QdrantClient(path=str(Path(path).resolve()))
-        self.ollama = Client(host=ollama_host)
+        self.ollama = Client(host=ollama_host or os.getenv("OLLAMA_HOST", "http://localhost:11434"))
         self.model_name = model_name
         self.collection = collection
 
