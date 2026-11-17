@@ -214,7 +214,10 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "for exact matches; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For count, projections MUST be []; use exists filter to count entities having a property. "
-      "For a direct property lookup, use one owning entity and edges=[] unless a traversal is explicitly requested. Use filters=null only when the question has no filter condition. "
+      "For a direct property lookup, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
+      "A requested property value is a projection, never a second entity. "
+      "Every projection output alias MUST differ from ALL entity aliases. "
+      "Use filters=null only when the question has no filter condition. "
       "Use exact domain, shape and property IRIs from the catalog. "
       "Only use catalog SHACL edges and supplied verified mapping IDs. "
       "Preserve requested domains, paths, output properties, values and filters; do not invent values. "
@@ -242,6 +245,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   'filter_ast_example':filter_example,
                   'count_ir_example':count_example})}]
     last_error = None
+    # Keep constraints from earlier failures active across subsequent retries.
+    repair_constraints = []
     for attempt in range(3):
         result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', {
             'model':model,'stream':False,'format':'json','options':{'temperature':0},
@@ -271,23 +276,24 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
                 if last_error.startswith('Unrequested SHACL traversal'):
-                    repair = ('This question requests a direct property lookup, not a traversal. '
-                              'Remove unrequested edges and extra traversal entities. '
-                              'Project the requested property directly from its owning '
-                              'SHACL NodeShape; a literal property is not a separate entity. ')
+                    repair = ('Direct lookup: use exactly ONE entity that owns the '
+                              'requested property, edges=[], and project the property '
+                              'from that entity. A property value is not another entity. ')
                 elif 'traversal omitted' in last_error.lower():
-                    repair = ('The question explicitly requests a traversal. '
-                              'Include the necessary parent and child entities and only '
-                              'catalog-verified SHACL edges. ')
+                    repair = ('Explicit traversal: include the necessary entities '
+                              'and only catalog-verified SHACL edges. ')
                 else:
-                    repair = ('Preserve every explicitly requested projection, filter '
-                              'predicate, and literal value. Do not introduce unrequested '
-                              'traversals. ')
+                    repair = ('Preserve explicitly requested projections, filters, '
+                              'and literal values; do not invent traversals. ')
+                if repair not in repair_constraints:
+                    repair_constraints.append(repair)
                 messages.append({'role':'user','content':
                     'Your previous IR failed semantic coverage: ' + last_error +
-                    '. ' + repair + 'Regenerate the COMPLETE unified IR using only '
-                    'catalog-backed shapes and properties. If unsupported, return '
-                    '{"unsupported":"reason"}; never return a partial query.'})
+                    '. ALL constraints from prior failures remain mandatory: ' +
+                    ' '.join(repair_constraints) +
+                    'Every projection alias MUST differ from every entity alias. '
+                    'Regenerate the COMPLETE unified IR using catalog-backed '
+                    'shapes and properties, or return {"unsupported":"reason"}.'})
                 continue
             raise ValueError('Semantic coverage failure after retries: '+last_error) from exc
         # Check full SHACL evidence BEFORE accepting a model plan. This is part of
@@ -308,6 +314,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'Projection output aliases MUST differ from every entity alias; '
                     'use an entity alias such as instrument and a separate output alias '
                     'such as measured_variable. '
+                    'ALL prior semantic constraints remain mandatory: ' +
+                    ' '.join(repair_constraints) +
                     'If the error mentions COUNT: set projections=[] and operation={"type":"count"}; '
                     'use a supported exists filter to require a property. '
                     'For every shacl edge, use the exact from_shape and to_shape '
