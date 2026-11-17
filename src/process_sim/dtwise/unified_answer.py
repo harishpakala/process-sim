@@ -392,20 +392,23 @@ def main():
     parser.add_argument('--endpoint',help='GraphDB SPARQL endpoint; optional for compile')
     parser.add_argument('--ollama-host',default=os.getenv('OLLAMA_HOST', 'http://localhost:11434'))
     parser.add_argument('--model',default='qwen2.5-coder:3b')
+    parser.add_argument('--llm-timeout',type=int,default=120,
+                        help='Ollama HTTP timeout per planning attempt in seconds (default: 120)')
     parser.add_argument('--graph-mode',choices=['default','all_named','selected'],default='all_named')
     parser.add_argument('--graph-iri')
     parser.add_argument('--include-graph',action='store_true')
     parser.add_argument('--limit',type=int,default=100)
     parser.add_argument('--output',help='Write full JSON report to file')
     args=parser.parse_args()
+    if args.llm_timeout < 1: parser.error('--llm-timeout must be positive')
     if not args.ir and not args.question: parser.error('Provide --ir or --question')
     if args.command=='answer' and not args.endpoint: parser.error('answer requires --endpoint')
     registry=json.loads(Path(args.mappings).read_text(encoding='utf-8')) if args.mappings else None
     try:
         diagnostics=[]
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
-            args.question,args.schema,model=args.model,ollama_host=args.ollama_host,mappings=registry,
-            diagnostics=diagnostics)
+            args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
+            timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics)
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
                                graph_iri=args.graph_iri,include_graph=args.include_graph,limit=args.limit)
         result={'status':'compiled','ir':plan,'sparql':query,'planning_attempts':diagnostics}
