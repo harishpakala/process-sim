@@ -212,6 +212,23 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
                     v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
+    # Enforce requested query operations before accepting a plan.
+    lower_question = question.lower()
+    operation = plan.get('operation', {})
+    if re.search(r'\\b(?:for each|per)\\b', lower_question) and re.search(r'\\bcount\\b', lower_question):
+        if operation.get('type') != 'count' or not operation.get('group_by'):
+            raise ValueError('Requested grouped COUNT omitted')
+    if re.search(r'\\bmore than\\s+(\\d+)\\b', lower_question) and re.search(r'\\bsignalmappings?\\b', lower_question):
+        threshold = int(re.search(r'\\bmore than\\s+(\\d+)\\b', lower_question).group(1))
+        having = operation.get('having')
+        if operation.get('type') != 'count' or not operation.get('group_by') or having != {'op':'gt','value':threshold}:
+            raise ValueError('Requested HAVING threshold omitted')
+    if re.search(r'\\b(?:alphabetical|alphabetically)\\b', lower_question):
+        if not any(x.get('direction') == 'asc' for x in plan.get('order_by', []) if isinstance(x, dict)):
+            raise ValueError('Requested alphabetical ORDER BY omitted')
+    first = re.search(r'\\bfirst\\s+(\\d+)\\b', lower_question)
+    if first and plan.get('limit') != int(first.group(1)):
+        raise ValueError('Requested LIMIT omitted')
     # A direct SELECT property lookup without a WHERE clause must not invent
     # a literal filter. COUNT/relationship questions may legitimately use
     # property-existence constraints without an explicit WHERE.
@@ -246,7 +263,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "FILTERS ARE NOT EDGES: use {op:'eq',entity:'alias',predicate:'IRI',value:'literal'} "
       "for exact matches; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
-      "For count, projections MUST be []; use exists filter to count entities having a property. "
+      "For a global count, projections=[] and operation={type:'count'}; use an exists filter to count entities having a property. "
+      "For COUNT per property, projections=[{entity,predicate,as:'group_key'}], "
+      "operation={type:'count',group_by:['group_key']}; group_by lists projected output aliases. "
+      "For counts above N add operation.having={op:'gt',value:N} (integer). "
+      "For alphabetical ordering add order_by=[{by:'projected_alias',direction:'asc'}]. "
+      "For first N results add top-level limit=N. "
+      "For SELECT with ordering, preserve the requested projected output. "
       "For a direct property lookup, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
@@ -270,6 +293,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                'filters':None,'operation':{'type':'select'},'return_entities':False}
     filter_example = {'op':'eq','entity':'item',
                       'predicate':'PROPERTY_FROM_CATALOG','value':'EXACT_VALUE_FROM_QUESTION'}
+    grouped_count_example = dict(example, projections=[
+        {'entity':'item','predicate':'GROUPING_PROPERTY_FROM_CATALOG','as':'group_key'}],
+        filters=None, operation={'type':'count','group_by':['group_key'],
+                                 'having':{'op':'gt','value':3}},
+        return_entities=False)
+    ordered_example = dict(example, order_by=[{'by':'value','direction':'asc'}],limit=10)
     count_example = dict(example, projections=[], filters={
         'op':'exists','entity':'item','predicate':'PROPERTY_FROM_CATALOG'},
         operation={'type':'count'}, return_entities=False)
@@ -279,7 +308,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   'verified_mappings':mapping_catalog,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
-                  'count_ir_example':count_example})}]
+                  'count_ir_example':count_example,
+                  'grouped_count_ir_example':grouped_count_example,
+                  'ordered_select_ir_example':ordered_example})}]
     last_error = None
     # Keep constraints from earlier failures active across subsequent retries.
     repair_constraints = []
