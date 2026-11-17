@@ -79,6 +79,7 @@ services:
       GRAPHDB_SPARQL_ENDPOINT: http://graphdb:7200/repositories/AAST
       TEP_TIMESCALE_DSN: postgresql://tep:${TEP_DB_PASSWORD:-1234}@timescaledb:5432/tep_nexus
       TEP_OPCUA_ENDPOINT: opc.tcp://simulator:4841/process-sim/
+      OLLAMA_HOST: http://host.docker.internal:11434
     depends_on:
       timescaledb:
         condition: service_healthy
