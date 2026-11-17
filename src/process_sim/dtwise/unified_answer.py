@@ -137,6 +137,33 @@ def _focused_catalog(catalog, question):
 
 
 
+def _prompt_catalog(question, catalog):
+    """Reduce only unambiguous direct-property prompts using SHACL evidence.
+
+    All matching owning shapes are retained; ambiguity is never resolved here.
+    Traversals, joins, and questions without explicit property evidence keep the
+    full focused catalog. Validation always uses the original full index.
+    """
+    if traversal_requirement(question, catalog) or re.search(
+            r'\\b(?:relationship|related|connected|link(?:ed)?|join)\\b',
+            question, re.I):
+        return catalog
+    requested = set(_explicit_property_requirements(question, catalog).values())
+    if not requested:
+        return catalog
+    candidates = [entity for entity in catalog['entities']
+                  if requested.intersection(entity['properties'])]
+    # Do not trim if a question spans properties that require separate owners:
+    # it may need a relationship the planner must discover.
+    if not any(requested.issubset(set(entity['properties'])) for entity in candidates):
+        return catalog
+    selected = {(entity['domain'], entity['shape']) for entity in candidates}
+    edges = [edge for edge in catalog['shacl_edges']
+             if (edge['domain'], edge['from_shape']) in selected
+             and (edge['domain'], edge['to_shape']) in selected]
+    return {'entities': candidates, 'shacl_edges': edges}
+
+
 def property_owner_hints(question, catalog):
     """Evidence-backed candidate owners for explicitly named properties.
 
@@ -260,6 +287,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
+    prompt_catalog = _prompt_catalog(question, catalog)
     hints = property_owner_hints(question, catalog) if owner_hints else []
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
@@ -388,7 +416,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 )
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
-                  'required_domains':sorted(mentioned), 'catalog':catalog,
+                  'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
                   'verified_mappings':mapping_catalog,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
