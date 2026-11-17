@@ -462,6 +462,11 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                'edges':[],
                'projections':[{'entity':'item','predicate':'PROPERTY_FROM_CATALOG','as':'value'}],
                'filters':None,'operation':{'type':'select'},'return_entities':False}
+    # Generic mapping example; the model selects approved evidence itself.
+    mapping_example = {'kind':'mapping','from':'left_entity','to':'right_entity',
+                       'mapping_id':'EXACT_ID_FROM_VERIFIED_MAPPINGS',
+                       'left_predicate':'EXACT_LEFT_PROPERTY_FROM_MAPPING',
+                       'right_predicate':'EXACT_RIGHT_PROPERTY_FROM_MAPPING'}
     filter_example = {'op':'eq','entity':'item',
                       'predicate':'PROPERTY_FROM_CATALOG','value':'EXACT_VALUE_FROM_QUESTION'}
     count_example = dict(example, projections=[], filters={
@@ -559,6 +564,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
                   'verified_mappings':mapping_catalog,
+                  'cross_domain_edge_example_replace_all_placeholders':mapping_example,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
                   'count_ir_example':count_example,
@@ -740,6 +746,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         'A cross-domain mapping edge joins entities using its '
                         'left_predicate and right_predicate; those are NOT '
                         'automatically the predicates for question filters. '
+                        'For cross-domain queries use kind=mapping, an exact approved mapping_id, and the exact left_predicate/right_predicate from verified_mappings; never use kind=shacl between domains. '
                         'Preserve valid mapping edges, but independently select '
                         'the requested input filter property from the owning '
                         'entity shape. Use op=eq and preserve the exact literal. '
@@ -771,7 +778,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
-                    'The previous IR failed SHACL validation: ' + last_error +
+                    'The previous IR failed SHACL validation: ' + last_error + '. ' +
                     'For CROSS-DOMAIN queries, examine verified_mappings in the original user message. A SHACL edge must not connect entities in different domains. When a verified mapping applies, use an edge with kind="mapping", from and to set to the corresponding entity aliases, mapping_id set to the exact verified mapping id, and left_predicate and right_predicate copied exactly from its left_property and right_property. Every entity must be connected by valid edges; do not solve a cross-domain SHACL error by removing the edge. Never invent or approve a mapping. ' +
                     '. If the error mentions filter: filters MUST be a single object, NOT a list; '
                     'use {"op":"eq","entity":"ALIAS","predicate":"PROPERTY_IRI","value":"EXACT_LITERAL"}. '
