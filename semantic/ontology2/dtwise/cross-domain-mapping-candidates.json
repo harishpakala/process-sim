@@ -192,7 +192,7 @@
       "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
     ],
     "verified": false,
-    "evidence_note": "SHACL evidence supports each property independently; GraphDB confirmed a lexical join for FI_101 / XMEAS1. Neither proves universal semantic equivalence. Independent approval required.",
+    "evidence_note": "SHACL evidence grounds the mapped properties, but does not establish universal cross-domain equivalence. Independent approval is required.",
     "schema_evidence": {
       "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
       "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
@@ -204,11 +204,6 @@
         "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
         "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
       ]
-    },
-    "instance_evidence": {
-      "dexpi_local_id": "FI_101",
-      "shared_asset_identifier": "https://aas.example.com/FI101",
-      "opcua_signal_name": "XMEAS1"
     }
   },
   {
