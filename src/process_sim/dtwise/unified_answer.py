@@ -270,7 +270,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For a global count, projections=[] and operation={type:'count'}; use an exists filter to count entities having a property. "
       "For COUNT per property, projections=[{entity,predicate,as:'group_key'}], "
-      "operation={type:'count',group_by:['group_key']}; group_by lists projected output aliases. "
+      "operation={type:'count',group_by:['group_key']}; group_by MUST be nested INSIDE operation, NEVER top-level. "
+      "Copy no placeholder strings from examples: all domain, shape and predicate values MUST be real catalog values. "
       "For counts above N add operation.having={op:'gt',value:N} (integer). "
       "For alphabetical ordering add order_by=[{by:'projected_alias',direction:'asc'}]. "
       "For first N results add top-level limit=N. "
@@ -351,6 +352,20 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     repair = ('Direct lookup: use exactly ONE entity that owns the '
                               'requested property, edges=[], and project the property '
                               'from that entity. A property value is not another entity. ')
+                elif 'grouped COUNT omitted' in last_error:
+                    repair = ('The query asks for grouped aggregation. Use '
+                              'operation={"type":"count","group_by":["group_key"]}, '
+                              'and project the grouping property with as="group_key". '
+                              'group_by MUST be INSIDE operation, not top-level. '
+                              'Use real domain/shape/predicate from the catalog, '
+                              'never *_FROM_CATALOG placeholders. ')
+                elif 'HAVING threshold omitted' in last_error:
+                    repair = ('Use operation={"type":"count","group_by":["group_key"],'
+                              '"having":{"op":"gt","value":3}} with real catalog properties. ')
+                elif 'ORDER BY omitted' in last_error or 'LIMIT omitted' in last_error:
+                    repair = ('For alphabetical first ten results, use '
+                              'order_by=[{"by":"value","direction":"asc"}], '
+                              'limit=10 and project the requested catalog property as value. ')
                 elif 'traversal omitted' in last_error.lower():
                     repair = ('Explicit traversal: include the necessary entities '
                               'and only catalog-verified SHACL edges. ')
