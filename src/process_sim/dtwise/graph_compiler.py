@@ -102,4 +102,10 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
     cols = list(dict.fromkeys(cols))
-    return 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}\nORDER BY ' + ' '.join(cols) + f'\nLIMIT {limit}'
+    order_terms = ir.get('order_by', [])
+    ordering = (' '.join(('ASC' if term['direction'] == 'asc' else 'DESC') +
+                         '(?' + term['as'] + ')' for term in order_terms)
+                if order_terms else ' '.join(cols))
+    requested_limit = ir.get('result_limit')
+    effective_limit = min(limit, requested_limit) if requested_limit is not None else limit
+    return 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}\nORDER BY ' + ordering + f'\nLIMIT {effective_limit}'
