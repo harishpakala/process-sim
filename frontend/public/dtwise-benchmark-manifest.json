@@ -97,7 +97,7 @@
   },
   {
     "id": "B17",
-    "category": "aggregation",
+    "category": "sorting_pagination",
     "question": "Get the first ten SignalNames in alphabetical order.",
     "version": "v1_original"
   },
@@ -121,139 +121,139 @@
   },
   {
     "id": "B21",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "Get SignalName of the DEXPI InstrumentationFunction with LocalID FI-001.",
     "version": ""
   },
   {
     "id": "B22",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "Find SignalNames associated with DEXPI InstrumentationFunctions through AssetIdentifier.",
     "version": ""
   },
   {
     "id": "B23",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "Get OPCUANodeId for ECAD Devices matched by AssetIdentifier.",
     "version": ""
   },
   {
     "id": "B24",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "Join DEXPI, ECAD, OPCUAConnectivity and ProductCatalog through AssetInventory using AssetIdentifier and ProductIdentifier.",
     "version": ""
   },
   {
     "id": "B25",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "List AssetIdentifiers shared by DEXPI and OPCUAConnectivity.",
     "version": ""
   },
   {
     "id": "B26",
-    "category": "Single Domain",
+    "category": "single_domain",
     "question": "Which DEXPI InstrumentationFunctions have an AssetIdentifier? ",
     "version": ""
   },
   {
     "id": "B27",
-    "category": "Single Domain",
+    "category": "single_domain",
     "question": "Which DEXPI InstrumentationFunctions do not have an AssetIdentifier? ",
     "version": ""
   },
   {
     "id": "B28",
-    "category": "Single Domain",
+    "category": "single_domain",
     "question": "List DEXPI Equipment without an AssetIdentifier.",
     "version": ""
   },
   {
     "id": "B29",
-    "category": "Single Domain",
+    "category": "single_domain",
     "question": "List DEXPI Equipment and their LocalId, if available. ",
     "version": ""
   },
   {
     "id": "B30",
-    "category": "Cross-domain",
+    "category": "cross_domain",
     "question": "Which DEXPI InstrumentationFunctions have no matching OPCUAConnectivity SignalMapping by AssetIdentifier? ",
     "version": ""
   },
   {
     "id": "B31",
-    "category": "String filtering",
+    "category": "string_filtering",
     "question": "Which DEXPI entities have a LocalId containing TI_? ",
     "version": ""
   },
   {
     "id": "B32",
-    "category": "String filtering",
+    "category": "string_filtering",
     "question": "Which OPC UA Connectivity entities have a SignalName starting with XMEAS? ",
     "version": ""
   },
   {
     "id": "B33",
-    "category": "String filtering",
+    "category": "string_filtering",
     "question": "Which ProductCatalog entities have a ManufacturerName containing Endress? ",
     "version": ""
   },
   {
     "id": "B34",
-    "category": "String filtering",
+    "category": "string_filtering",
     "question": "Which ECAD entities have a LocalId matching the regular expression ^PI-? ",
     "version": ""
   },
   {
     "id": "B35",
-    "category": "String filtering",
+    "category": "string_filtering",
     "question": "Which AssetInventory entities have an AssetName containing reactor, ignoring case? ",
     "version": ""
   },
   {
     "id": "B36",
-    "category": "Boolean",
+    "category": "boolean",
     "question": "Which DEXPI entities have both AssetIdentifier and LocalId? ",
     "version": ""
   },
   {
     "id": "B37",
-    "category": "Boolean",
+    "category": "boolean",
     "question": "Which inventory assets have AssetName but no EquipmentTag? ",
     "version": ""
   },
   {
     "id": "B38",
-    "category": "Boolean",
+    "category": "boolean",
     "question": "Which ECAD entities have an Address or LocalId? ",
     "version": ""
   },
   {
     "id": "B39",
-    "category": "Boolean",
+    "category": "boolean",
     "question": "Which signal mappings have a SignalName and a MappingStatus? ",
     "version": ""
   },
   {
     "id": "B40",
-    "category": "Boolean",
+    "category": "boolean",
     "question": "Which products have ManufacturerName but no SupplierName?",
     "version": ""
   },
   {
     "id": "B41",
-    "category": "compound_filters",
+    "category": "aggregation",
     "question": "Count distinct SignalNames for OPCUA AssetIdentifier https://aas.example.com/FI103.",
     "version": "v2"
   },
   {
     "id": "B42",
-    "category": "compound_filters",
+    "category": "sorting_pagination",
     "question": "Show SignalNames ordered descending, limit 5.",
     "version": "v2"
   },
   {
     "id": "B43",
-    "category": "compound_filters",
+    "category": "filters",
     "question": "List AssetNames whose AssetIdentifier is FI103 or FI104.",
     "version": "v2"
   },
