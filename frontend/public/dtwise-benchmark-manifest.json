@@ -182,7 +182,7 @@
   {
     "id": "B31",
     "category": "string_filtering",
-    "question": "Which DEXPI entities have a LocalId containing TI_?",
+    "question": "Which DEXPI InstrumentationFunction entities have a LocalId containing TI_?",
     "version": "schema_aligned_2026_11"
   },
   {
