@@ -162,8 +162,30 @@ def validate_ir(ir, schema, *, mappings=None):
     operation = ir.get('operation', {'type':'select'})
     if operation.get('type') not in ('select', 'count'):
         raise ValueError('Unsupported operation')
-    if operation.get('type') == 'count' and projections:
-        raise ValueError('COUNT currently requires no projections')
+    group_by = operation.get('group_by', [])
+    if not isinstance(group_by, list) or len(group_by) > 12 or len(set(map(str, group_by))) != len(group_by):
+        raise ValueError('Invalid group_by')
+    aliases = {p['as'] for p in projections}
+    if any(not isinstance(a, str) or a not in aliases for a in group_by):
+        raise ValueError('GROUP BY must reference projected property aliases')
+    having = operation.get('having')
+    if operation['type'] == 'count':
+        if projections and (not group_by or set(group_by) != aliases):
+            raise ValueError('Grouped COUNT requires all projections to be group keys')
+        if having is not None:
+            if not group_by or not isinstance(having, dict) or having.get('op') not in ('gt', 'gte', 'lt', 'lte', 'eq') or type(having.get('value')) is not int or having['value'] < 0:
+                raise ValueError('Invalid grouped COUNT HAVING')
+    elif group_by or having is not None:
+        raise ValueError('Grouping and HAVING require COUNT')
+    ordering = ir.get('order_by', [])
+    if not isinstance(ordering, list) or len(ordering) > 12:
+        raise ValueError('Invalid order_by')
+    allowed_order = aliases | ({'count'} if operation['type'] == 'count' else set())
+    for item in ordering:
+        if not isinstance(item, dict) or item.get('by') not in allowed_order or item.get('direction') not in ('asc', 'desc'):
+            raise ValueError('ORDER BY must reference a projected alias or count with asc/desc')
+    if 'limit' in ir and (type(ir['limit']) is not int or not 1 <= ir['limit'] <= 10000):
+        raise ValueError('Invalid query limit')
     if not projections and operation.get('type') == 'select' and not ir.get('return_entities'):
         raise ValueError('SELECT needs projections or return_entities=true')
     return ir
