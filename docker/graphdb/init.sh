@@ -14,7 +14,7 @@ until curl --silent --fail --output /dev/null "$base/rest/repositories"; do
 done
 
 echo "Checking AAST repository..."
-status=$(curl --silent --output /dev/null --write-out '%{http_code}' "$base/repositories/AAST")
+status=$(curl --silent --output /dev/null --write-out '%{http_code}' --get --data-urlencode 'query=ASK { ?s ?p ?o }' "$base/repositories/AAST")
 if [ "$status" = "200" ]; then
   echo "AAST repository already exists; leaving it unchanged."
 elif [ "$status" = "404" ]; then
