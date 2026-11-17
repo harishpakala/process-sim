@@ -29,6 +29,8 @@ def main() -> int:
     parser.add_argument("--start", type=int, help="First benchmark number to include (inclusive)")
     parser.add_argument("--end", type=int, help="Last benchmark number to include (inclusive)")
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
+    parser.add_argument("--owner-hints", action="store_true",
+                        help="Opt-in SHACL property-owner hints for planner")
     parser.add_argument("--compact-prompt", action="store_true",
                         help="Opt-in shorter planner prompt for A/B latency tests")
     parser.add_argument("--keep-alive", default=None,
@@ -77,6 +79,8 @@ def main() -> int:
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
+        if args.owner_hints:
+            command.append("--owner-hints")
         if args.compact_prompt:
             command.append("--compact-prompt")
         if args.keep_alive is not None:
@@ -135,6 +139,7 @@ def main() -> int:
             "id": case_id, "category": case["category"], "question": case["question"],
             "model": args.model, "llm_timeout_seconds": args.llm_timeout,
             "compact_prompt": args.compact_prompt, "keep_alive": args.keep_alive,
+            "owner_hints": args.owner_hints,
             "status": status, "seconds": elapsed, "result_rows": result_count,
             "planning_seconds": planning_seconds, "compilation_seconds": compilation_seconds,
             "graphdb_seconds": graphdb_seconds, "llm_attempts": llm_attempts,
