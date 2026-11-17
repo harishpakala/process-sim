@@ -419,7 +419,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For count, projections MUST be []; use exists filter to count entities having a property. "
       "For a SAME-DOMAIN direct property lookup, use one owning entity and edges=[] unless traversal requested. "
-      "For CROSS-DOMAIN lookups, include each named domain and use ONLY verified mapping edges; never invent cross-domain SHACL edges. "
+      "For CROSS-DOMAIN lookups, include each named domain. Inspect verified_mappings in the user input. Use a mapping edge only when its domains and properties apply: kind='mapping', from=left entity alias, to=right entity alias, mapping_id=exact id, left_predicate=exact left_property, right_predicate=exact right_property. Never connect different domains with a SHACL edge. Never leave required entities disconnected or invent mappings. "
       "In 'Get X for Y with Z VALUE', X is the output and Z VALUE is an exact eq input filter, not an output projection. "
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
@@ -690,6 +690,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
                     'The previous IR failed SHACL validation: ' + last_error +
+                    'For CROSS-DOMAIN queries, examine verified_mappings in the original user message. A SHACL edge must not connect entities in different domains. When a verified mapping applies, use an edge with kind="mapping", from and to set to the corresponding entity aliases, mapping_id set to the exact verified mapping id, and left_predicate and right_predicate copied exactly from its left_property and right_property. Every entity must be connected by valid edges; do not solve a cross-domain SHACL error by removing the edge. Never invent or approve a mapping. ' +
                     '. If the error mentions filter: filters MUST be a single object, NOT a list; '
                     'use {"op":"eq","entity":"ALIAS","predicate":"PROPERTY_IRI","value":"EXACT_LITERAL"}. '
                     'Never put a SHACL edge with kind/from/to into filters. '
