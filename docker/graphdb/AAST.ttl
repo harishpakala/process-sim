@@ -1,0 +1,18 @@
+@prefix rep: <http://www.openrdf.org/config/repository#> .
+@prefix sr: <http://www.openrdf.org/config/repository/sail#> .
+@prefix sail: <http://www.openrdf.org/config/sail#> .
+@prefix graphdb: <http://www.ontotext.com/config/graphdb#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+[] a rep:Repository ;
+   rep:repositoryID "AAST" ;
+   rdfs:label "TEP NEXUS engineering repository" ;
+   rep:repositoryImpl [
+      rep:repositoryType "graphdb:SailRepository" ;
+      sr:sailImpl [
+         sail:sailType "graphdb:Sail" ;
+         graphdb:repository-type "file-repository" ;
+         graphdb:ruleset "rdfsplus-optimized" ;
+         graphdb:enable-context-index "true"
+      ]
+   ] .

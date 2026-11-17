@@ -24,6 +24,7 @@ Responsibilities:
 '''
 
 import base64
+import os
 import requests
 
 from rdflib import (
@@ -90,9 +91,9 @@ BASE_URI = (
     "http://org.example.com"
 )
 
-GRAPHDB_ENDPOINT = (
-    "http://localhost:7200/"
-    "repositories/AAST/statements"
+GRAPHDB_ENDPOINT = os.environ.get(
+    "GRAPHDB_STATEMENTS_ENDPOINT",
+    "http://localhost:7200/repositories/AAST/statements",
 )
 
 HEADERS = {
