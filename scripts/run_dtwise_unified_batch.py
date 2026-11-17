@@ -23,6 +23,7 @@ SCHEMA = ROOT / "semantic" / "ontology2" / "dtwise" / "dtwise-schema-index.json"
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--endpoint", default=os.environ.get("GRAPHDB_SPARQL_ENDPOINT"))
+    parser.add_argument("--mappings", type=Path, help="Independently verified Unified IR mapping registry JSON")
     parser.add_argument("--model", default=os.environ.get("DTWISE_UNIFIED_MODEL", "qwen2.5-coder:3b"))
     parser.add_argument("--ollama-host", default=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
     parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "dtwise_unified_batch")
@@ -83,6 +84,8 @@ def main() -> int:
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
+        if args.mappings:
+            command.extend(["--mappings", str(args.mappings.resolve())])
         start = time.perf_counter()
         status, error, result_count, exit_code = "ERROR", "", None, None
         try:
