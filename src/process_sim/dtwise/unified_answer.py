@@ -683,10 +683,46 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     repair = ('Explicit traversal: include the necessary entities '
                               'and only catalog-verified SHACL edges. ')
                 elif last_error.startswith('Explicit input constraint omitted:'):
-                    repair = ('Retain the exact input filter named in the question, '
-                              'with op=eq, the correct entity alias, SHACL-evidenced '
-                              'predicate and unchanged literal. Keep all valid '
-                              'mapping edges from the previous attempt. ')
+                    # Give the model specific evidence from its chosen shapes.
+                    # This is retry feedback only: never mutate or synthesize IR.
+                    requested = re.findall(
+                        r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+                        question, flags=re.I)
+                    filter_evidence = []
+                    for property_name, literal in requested:
+                        matches = []
+                        for selected in plan['entities']:
+                            for entry in catalog['entities']:
+                                if (entry['domain'] != selected['domain'] or
+                                        entry['shape'] != selected['shape']):
+                                    continue
+                                for iri in entry['properties']:
+                                    local = re.split(r'[/#]', iri)[-1].lower()
+                                    names = {local}
+                                    if local.startswith('has') and len(local) > 3:
+                                        names.add(local[3:])
+                                    if property_name.lower() in names:
+                                        matches.append({'entity': selected['alias'],
+                                                        'predicate': iri, 'value': literal})
+                        if len(matches) == 1:
+                            filter_evidence.append(matches[0])
+                    if plan.get('filters') is None:
+                        problem = 'The previous plan has filters=null. '
+                    else:
+                        problem = ('The previous filter is absent or uses the wrong '
+                                   'entity, predicate, operator, or literal. ')
+                    repair = (
+                        problem +
+                        'A cross-domain mapping edge joins entities using its '
+                        'left_predicate and right_predicate; those are NOT '
+                        'automatically the predicates for question filters. '
+                        'Preserve valid mapping edges, but independently select '
+                        'the requested input filter property from the owning '
+                        'entity shape. Use op=eq and preserve the exact literal. '
+                        'Unambiguous SHACL property evidence for this question: ' +
+                        json.dumps(filter_evidence, ensure_ascii=False) + '. '
+                        'Do not substitute a mapping join predicate for an '
+                        'input filter predicate. ')
                 else:
                     repair = ('Preserve explicitly requested projections, filters, '
                               'and literal values; do not invent traversals. ')
