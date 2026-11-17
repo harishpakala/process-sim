@@ -55,7 +55,7 @@ def _branch(branch, prefix, schema):
 def _identifier_words(label):
     """Normalize identifier labels, including an optional SHACL 'has' prefix."""
     words = _words(label)
-    return words[1:] if words[:1] == ["has"] else words
+    return words[1:] if words[:1] == ("has",) else words
 
 
 def plan_legacy_projection_ir(question, schema_path, mappings):
