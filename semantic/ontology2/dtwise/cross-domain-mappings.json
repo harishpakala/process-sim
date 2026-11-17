@@ -1,5 +1,80 @@
 [
   {
+    "id": "assetinventory-dexpi-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "dexpi",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+      "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd",
+      "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+      "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "assetinventory-ecad-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "ecad",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/ecad/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+      "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd",
+      "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+      "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "assetinventory-engineeringbom-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+      "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd",
+      "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+      "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "assetinventory-engineeringbom-product-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/assetinventory/hasProductIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasProductIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+      "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2",
+      "https://example.org/dtwise/relationship/99ac0c38c6a26f7514fb1faa1f5396d3f519770e9f311f5cbff37ea7cec2ca34",
+      "https://example.org/dtwise/relationship/8f785efc50d2d3361d46e7ac80110a6531e3827f437d209813179add398ce861"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain ProductIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "assetinventory-opcuaconnectivity-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+      "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd",
+      "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+      "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
     "id": "assetinventory-productcatalog-product-identifier",
     "left_domain": "assetinventory",
     "right_domain": "productcatalog",
@@ -13,6 +88,36 @@
     ],
     "verified": true,
     "evidence_note": "SHACL evidence grounds both ProductIdentifier properties. Cross-domain ProductIdentifier correspondence explicitly confirmed by the mapping owner; GraphDB instance-level matching has not been independently inspected in this change."
+  },
+  {
+    "id": "dexpi-ecad-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "ecad",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/ecad/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+      "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3",
+      "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+      "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "dexpi-engineeringbom-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+      "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3",
+      "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+      "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
   },
   {
     "id": "dexpi-opcua-asset-identifier",
@@ -31,6 +136,66 @@
       "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
     ],
     "evidence_note": "SHACL evidence grounds the mapped properties; cross-domain equivalence was independently approved. Evidence references are retained.",
+    "verified": true
+  },
+  {
+    "id": "ecad-engineeringbom-asset-identifier",
+    "left_domain": "ecad",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/ecad/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+      "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b",
+      "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+      "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "ecad-opcuaconnectivity-asset-identifier",
+    "left_domain": "ecad",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/ecad/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+      "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b",
+      "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+      "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "engineeringbom-opcuaconnectivity-asset-identifier",
+    "left_domain": "engineeringbom",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+      "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116",
+      "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+      "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "verified": true
+  },
+  {
+    "id": "engineeringbom-productcatalog-product-identifier",
+    "left_domain": "engineeringbom",
+    "right_domain": "productcatalog",
+    "left_property": "https://example.org/engineeringbom/hasProductIdentifier",
+    "right_property": "https://example.org/productcatalog/hasProductIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/99ac0c38c6a26f7514fb1faa1f5396d3f519770e9f311f5cbff37ea7cec2ca34",
+      "https://example.org/dtwise/relationship/8f785efc50d2d3361d46e7ac80110a6531e3827f437d209813179add398ce861",
+      "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+      "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+    ],
+    "evidence_note": "Approved by domain owner as a shared cross-domain ProductIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
     "verified": true
   }
 ]
