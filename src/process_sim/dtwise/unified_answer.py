@@ -490,6 +490,21 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "Use display_name/source_path only to choose shape; output original shape IRI. "
             "If unsupported return {\"unsupported\":\"reason\"}."
         )
+    # General first-attempt guidance: mapping joins and question filters
+    # have separate roles. This changes only the LLM prompt, not its IR.
+    if len(mentioned) > 1:
+        instruction += (
+            ' CROSS-DOMAIN PLANNING: inspect verified_mappings and use only '
+            'an applicable verified mapping edge to connect domains; never '
+            'use a cross-domain SHACL edge. A mapping edge joins entities '
+            'through left_property/right_property; these join properties '
+            'are NOT substitutes for input filter predicates. '
+            'In a request of the form "Get X for Y with Z VALUE", '
+            'project X and create an exact eq filter for Z VALUE on the '
+            'correct owning entity using its SHACL-evidenced property. '
+            'Keep the literal exactly as written. Do not drop a requested '
+            'filter when adding a mapping edge. '
+            'Return a connected, fully constrained plan on the first attempt.')
     if owner_hints:
         instruction += (' PROPERTY OWNERSHIP: for an explicitly requested property, '
                         'select an owning shape from property_owner_hints when provided; '
