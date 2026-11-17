@@ -187,6 +187,14 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
                     v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
+    # A direct SELECT property lookup without a WHERE clause must not invent
+    # a literal filter. COUNT/relationship questions may legitimately use
+    # property-existence constraints without an explicit WHERE.
+    if (len(before_where) == 1 and output_names and
+            plan['operation']['type'] == 'select' and
+            not traversal_requirement(question, catalog) and
+            plan.get('filters') is not None):
+        raise ValueError('Unrequested filter in direct property lookup')
     # An unrequested traversal cannot be added to a simple property lookup.
     # Leave traversals allowed when the question actually requests a relationship.
     if not traversal_requirement(question, catalog) and not re.search(
@@ -316,6 +324,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'such as measured_variable. '
                     'ALL prior semantic constraints remain mandatory: ' +
                     ' '.join(repair_constraints) +
+                    'If the error says Property lacks unique SHACL evidence, '
+                    'the requested source shape is WRONG for that property. '
+                    'Choose the owning entity shape from matching source shapes '
+                    'listed in the error, preserving the requested predicate; '
+                    'do not add a traversal or an unrequested filter. '
+                    'If the question has no WHERE clause and requests a direct '
+                    'SELECT property lookup, use filters=null. '
                     'If the error mentions COUNT: set projections=[] and operation={"type":"count"}; '
                     'use a supported exists filter to require a property. '
                     'For every shacl edge, use the exact from_shape and to_shape '
