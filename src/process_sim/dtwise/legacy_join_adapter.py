@@ -68,10 +68,23 @@ def plan_legacy_projection_ir(question, schema_path, mappings):
                 return _identifier_join_ir(discovered, schema, schema_path, mappings)
         return None
     source, target = plan["source"], plan["target"]
-    if explicit and (not _same(source["domain"], explicit["source"])
-                     or not _same(target["domain"], explicit["target"])
-                     or _words(plan["join_key_label"]) != _words(explicit["key"])):
-        raise ValueError("Legacy planner changed an explicitly requested domain or join key")
+    if explicit:
+        actual = {
+            "source_domain": source["domain"],
+            "target_domain": target["domain"],
+            "join_key": plan["join_key_label"],
+        }
+        expected = {
+            "source_domain": explicit["source"],
+            "target_domain": explicit["target"],
+            "join_key": explicit["key"],
+        }
+        if (not _same(source["domain"], explicit["source"])
+                or not _same(target["domain"], explicit["target"])
+                or _words(plan["join_key_label"]) != _words(explicit["key"])):
+            raise ValueError(
+                f"Legacy planner mismatch: expected={expected}, actual={actual}"
+            )
     approved = []
     for m in mappings or []:
         if m.get("verified") is not True or not m.get("evidence_ids"):
