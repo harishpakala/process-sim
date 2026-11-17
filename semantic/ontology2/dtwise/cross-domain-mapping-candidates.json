@@ -1,0 +1,14 @@
+[
+  {
+    "id": "dexpi-opcua-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [
+      "graphdb:FI_101:FI101:XMEAS1"
+    ],
+    "verified": false,
+    "evidence_note": "Observed read-only GraphDB equality join: DEXPI LocalId FI_101 and OPCUAConnectivity SignalName XMEAS1 share lexical AssetIdentifier https://aas.example.com/FI101. Semantic equivalence still requires independent approval."
+  }
+]
