@@ -276,7 +276,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "For alphabetical ordering add order_by=[{by:'projected_alias',direction:'asc'}]. "
       "For first N results add top-level limit=N. "
       "For SELECT with ordering, preserve the requested projected output. "
-      "For a direct property lookup, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
+      "For a direct property lookup or grouped count, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
       "Use filters=null only when the question has no filter condition. "
@@ -292,31 +292,34 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "When a question says through, via, parent, reached, or traversal, include "
       "the required parent and child entities and the verified SHACL edges between them. "
       "Do not replace a requested traversal with a direct property lookup.")
-    example = {'ir_version':'1.0',
-               'entities':[{'alias':'item','domain':'DOMAIN_FROM_CATALOG','shape':'SHAPE_FROM_CATALOG'}],
-               'edges':[],
-               'projections':[{'entity':'item','predicate':'PROPERTY_FROM_CATALOG','as':'value'}],
-               'filters':None,'operation':{'type':'select'},'return_entities':False}
-    filter_example = {'op':'eq','entity':'item',
-                      'predicate':'PROPERTY_FROM_CATALOG','value':'EXACT_VALUE_FROM_QUESTION'}
-    grouped_count_example = dict(example, projections=[
-        {'entity':'item','predicate':'GROUPING_PROPERTY_FROM_CATALOG','as':'group_key'}],
-        filters=None, operation={'type':'count','group_by':['group_key'],
-                                 'having':{'op':'gt','value':3}},
-        return_entities=False)
-    ordered_example = dict(example, order_by=[{'by':'value','direction':'asc'}],limit=10)
-    count_example = dict(example, projections=[], filters={
-        'op':'exists','entity':'item','predicate':'PROPERTY_FROM_CATALOG'},
-        operation={'type':'count'}, return_entities=False)
+    # Structural examples with fake identifiers caused small models to copy
+    # DOMAIN_FROM_CATALOG / PROPERTY_IRI verbatim. Supply only actual evidence.
+    properties = _explicit_property_requirements(question, catalog)
+    catalog_hints = []
+    for entity in catalog['entities']:
+        for predicate in entity['properties']:
+            if predicate in properties.values():
+                catalog_hints.append({'domain': entity['domain'],
+                                      'shape': entity['shape'],
+                                      'predicate': predicate})
     messages = [{'role':'system','content':instruction},
-                {'role':'user','content':json.dumps({'question':question,
-                  'required_domains':sorted(mentioned), 'catalog':catalog,
-                  'verified_mappings':mapping_catalog,
-                  'format_example_replace_all_placeholders':example,
-                  'filter_ast_example':filter_example,
-                  'count_ir_example':count_example,
-                  'grouped_count_ir_example':grouped_count_example,
-                  'ordered_select_ir_example':ordered_example})}]
+                {'role':'user','content':json.dumps({
+                    'question':question,
+                    'required_domains':sorted(mentioned),
+                    'catalog':catalog,
+                    'explicit_property_candidates':catalog_hints[:24],
+                    'verified_mappings':mapping_catalog,
+                    'required_ir_structure':{
+                        'ir_version':'1.0',
+                        'entities':'list of catalog-backed {alias,domain,shape}',
+                        'edges':'[] for direct property queries',
+                        'projections':'list of {entity,predicate,as}',
+                        'filters':'null or filter object',
+                        'operation':'{type:count,group_by:[projection alias]} for grouped count; otherwise {type:select}',
+                        'return_entities':'boolean'
+                    },
+                    'never_copy_structure_descriptions_as_values':True
+                })}]
     last_error = None
     # Keep constraints from earlier failures active across subsequent retries.
     repair_constraints = []
