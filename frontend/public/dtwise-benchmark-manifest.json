@@ -122,19 +122,19 @@
   {
     "id": "B23",
     "category": "Cross-domain",
-    "question": "Get SignalName of the DEXPI InstrumentationFunction with LocalID FI-001.",
+    "question": "Get SignalName from OPCUAConnectivity for the DEXPI InstrumentationFunction with LocalID FI-001, matched through AssetIdentifier.",
     "version": ""
   },
   {
     "id": "B24",
     "category": "Cross-domain",
-    "question": "Find SignalNames associated with DEXPI InstrumentationFunctions through AssetIdentifier.",
+    "question": "Find SignalName from OPCUAConnectivity associated with DEXPI InstrumentationFunctions through AssetIdentifier.",
     "version": ""
   },
   {
     "id": "B25",
     "category": "Cross-domain",
-    "question": "Get OPCUANodeId for ECAD Devices matched by AssetIdentifier.",
+    "question": "Get OPCUANodeId from OPCUAConnectivity for ECAD Devices matched through AssetIdentifier.",
     "version": ""
   },
   {
