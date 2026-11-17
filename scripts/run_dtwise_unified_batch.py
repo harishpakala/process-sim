@@ -26,6 +26,8 @@ def main() -> int:
     parser.add_argument("--ollama-host", default=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
     parser.add_argument("--output-dir", type=Path, default=ROOT / "reports" / "dtwise_unified_batch")
     parser.add_argument("--all", action="store_true", help="Run all existing manifest questions, not just B01-B10")
+    parser.add_argument("--start", type=int, help="First benchmark number to include (inclusive)")
+    parser.add_argument("--end", type=int, help="Last benchmark number to include (inclusive)")
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
     args = parser.parse_args()
 
@@ -36,9 +38,18 @@ def main() -> int:
     if args.timeout < 1:
         parser.error("--timeout must be positive")
 
+    if (args.start is None) != (args.end is None):
+        parser.error("--start and --end must be supplied together")
+    if args.start is not None and (args.start < 1 or args.end < args.start):
+        parser.error("Require 1 <= --start <= --end")
+    if args.all and args.start is not None:
+        parser.error("--all cannot be combined with --start/--end")
+
     questions = json.loads(MANIFEST.read_text(encoding="utf-8"))
+    lower, upper = ((args.start, args.end) if args.start is not None
+                    else (None, None) if args.all else (1, 10))
     cases = [q for q in questions if q["id"].startswith("B") and q["id"][1:].isdigit()
-             and (args.all or 1 <= int(q["id"][1:]) <= 10)]
+             and (lower is None or lower <= int(q["id"][1:]) <= upper)]
     cases.sort(key=lambda q: int(q["id"][1:]))
     if not cases:
         parser.error("No benchmark questions selected")
