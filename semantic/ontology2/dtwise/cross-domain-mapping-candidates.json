@@ -115,9 +115,14 @@
     "right_domain": "productcatalog",
     "left_property": "https://example.org/assetinventory/hasProductIdentifier",
     "right_property": "https://example.org/productcatalog/hasProductIdentifier",
-    "evidence_ids": [],
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+      "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2",
+      "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+      "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+    ],
     "verified": false,
-    "evidence_note": "SHACL candidate only: both domains define hasProductIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "evidence_note": "SHACL evidence grounds both ProductIdentifier properties. Cross-domain ProductIdentifier correspondence explicitly confirmed by the mapping owner; GraphDB instance-level matching has not been independently inspected in this change.",
     "schema_evidence": {
       "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
       "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
