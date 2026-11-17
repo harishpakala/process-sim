@@ -29,6 +29,8 @@ def main() -> int:
     parser.add_argument("--start", type=int, help="First benchmark number to include (inclusive)")
     parser.add_argument("--end", type=int, help="Last benchmark number to include (inclusive)")
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
+    parser.add_argument("--llm-timeout", type=int, default=120,
+                        help="Ollama HTTP timeout per planning attempt (seconds; default: 120)")
     args = parser.parse_args()
 
     if not args.endpoint:
@@ -37,6 +39,8 @@ def main() -> int:
         parser.error(f"Missing schema index: {SCHEMA}")
     if args.timeout < 1:
         parser.error("--timeout must be positive")
+    if args.llm_timeout < 1:
+        parser.error("--llm-timeout must be positive")
 
     if (args.start is None) != (args.end is None):
         parser.error("--start and --end must be supplied together")
@@ -66,6 +70,7 @@ def main() -> int:
             sys.executable, "-m", "process_sim.dtwise.unified_answer", "answer",
             "--schema", str(SCHEMA), "--question", case["question"],
             "--model", args.model, "--ollama-host", args.ollama_host,
+            "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
         start = time.perf_counter()
@@ -109,7 +114,7 @@ def main() -> int:
         elapsed = round(time.perf_counter() - start, 2)
         summary.append({
             "id": case_id, "category": case["category"], "question": case["question"],
-            "model": args.model,
+            "model": args.model, "llm_timeout_seconds": args.llm_timeout,
             "status": status, "seconds": elapsed, "result_rows": result_count,
             "exit_code": exit_code, "error": error,
             "report_file": str(report_path), "log_file": str(log_path),
