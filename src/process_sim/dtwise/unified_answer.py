@@ -244,9 +244,17 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         if grouping_text:
             name = grouping_text.group(1).lower()
             # Resolve plural surface forms only when the property match is unique.
-            candidates = {predicate for key, predicate in requirements.items()
-                          if key == name or key + 's' == name or
-                          (key.endswith('s') and key + 'es' == name)}
+            candidates = set()
+            for catalog_entity in catalog['entities']:
+                for predicate in catalog_entity['properties']:
+                    local = re.split(r'[/#]', predicate)[-1].lower()
+                    names = {local}
+                    if local.startswith('has') and len(local) > 3:
+                        names.add(local[3:])
+                    if any(n == name or n + 's' == name or
+                           (n.endswith('s') and n + 'es' == name)
+                           for n in names):
+                        candidates.add(predicate)
             if len(candidates) == 1:
                 expected = next(iter(candidates))
                 if not any(p.get('predicate') == expected for p in group_projections):
