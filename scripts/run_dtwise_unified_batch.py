@@ -75,6 +75,8 @@ def main() -> int:
         ]
         start = time.perf_counter()
         status, error, result_count, exit_code = "ERROR", "", None, None
+        planning_seconds = compilation_seconds = graphdb_seconds = None
+        llm_attempts = llm_seconds = prompt_tokens = generated_tokens = None
         try:
             proc = subprocess.run(
                 command, cwd=ROOT, capture_output=True, text=True,
@@ -85,14 +87,23 @@ def main() -> int:
             log_path.write_text(proc.stdout + "\n--- STDERR ---\n" + proc.stderr, encoding="utf-8")
             if report_path.exists():
                 report = json.loads(report_path.read_text(encoding="utf-8"))
+                timings = report.get("timings", {})
+                planning_seconds = timings.get("planning_seconds")
+                compilation_seconds = timings.get("compilation_seconds")
+                graphdb_seconds = timings.get("graphdb_seconds")
+                attempts = report.get("planning_attempts", [])
+                llm_attempts = len(attempts)
+                llm_seconds = round(sum(a.get("wall_seconds", 0) for a in attempts), 3)
+                prompt_tokens = sum(a.get("prompt_tokens") or 0 for a in attempts)
+                generated_tokens = sum(a.get("generated_tokens") or 0 for a in attempts)
                 if proc.returncode == 0 and report.get("status") == "executed":
                     status = "EXECUTED_REVIEW_PENDING"
                     bindings = report.get("results", {}).get("results", {}).get("bindings", [])
                     result_count = len(bindings)
                 else:
                     error = str(report.get("error", "CLI did not confirm execution"))
-                    lower = error.lower()
-                    status = ("REJECTED" if any(term in lower for term in (
+                    error_lower = error.lower()
+                    status = ("REJECTED" if any(term in error_lower for term in (
                         "shacl", "validation", "planner rejected", "semantic coverage",
                         "invalid ir", "unsupported", "failed to generate valid unified ir",
                         "unknown", "ambiguous")) else "ERROR")
@@ -116,11 +127,17 @@ def main() -> int:
             "id": case_id, "category": case["category"], "question": case["question"],
             "model": args.model, "llm_timeout_seconds": args.llm_timeout,
             "status": status, "seconds": elapsed, "result_rows": result_count,
+            "planning_seconds": planning_seconds, "compilation_seconds": compilation_seconds,
+            "graphdb_seconds": graphdb_seconds, "llm_attempts": llm_attempts,
+            "llm_seconds": llm_seconds, "prompt_tokens": prompt_tokens,
+            "generated_tokens": generated_tokens,
             "exit_code": exit_code, "error": error,
             "report_file": str(report_path), "log_file": str(log_path),
             "semantic_verification": "PENDING_REVIEW",
         })
-        print(f"  {status} | {elapsed:.2f}s | rows={result_count} | {error[:160]}", flush=True)
+        print(f"  {status} | {elapsed:.2f}s total | planning={planning_seconds}s "
+              f"| GraphDB={graphdb_seconds}s | LLM attempts={llm_attempts} "
+              f"| rows={result_count} | {error[:160]}", flush=True)
         write_reports(args.output_dir, summary)
 
     print(f"\nFinished {len(summary)} cases. Summary: {args.output_dir / 'summary.csv'}")
