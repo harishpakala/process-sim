@@ -52,6 +52,12 @@ def _branch(branch, prefix, schema):
     return entities, edges, entities[-1]["alias"]
 
 
+def _identifier_words(label):
+    """Normalize identifier labels, including an optional SHACL 'has' prefix."""
+    words = _words(label)
+    return words[1:] if words[:1] == ["has"] else words
+
+
 def plan_legacy_projection_ir(question, schema_path, mappings):
     """Translate a uniquely discovered legacy projection into validated Unified IR."""
     canonical, explicit = _legacy_question(question)
@@ -81,7 +87,7 @@ def plan_legacy_projection_ir(question, schema_path, mappings):
         }
         if (not _same(source["domain"], explicit["source"])
                 or not _same(target["domain"], explicit["target"])
-                or _words(plan["join_key_label"]) != _words(explicit["key"])):
+                or _identifier_words(plan["join_key_label"]) != _identifier_words(explicit["key"])):
             raise ValueError(
                 f"Legacy planner mismatch: expected={expected}, actual={actual}"
             )
