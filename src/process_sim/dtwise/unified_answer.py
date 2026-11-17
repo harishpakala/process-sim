@@ -163,7 +163,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             found |= filter_predicates(node['arg'])
         return found
     filtered = filter_predicates(plan.get('filters'))
-    before_where = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)
+    before_where = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)
     output_names = _explicit_property_requirements(before_where[0], catalog)
     for name, predicate in output_names.items():
         if plan['operation']['type'] == 'select' and predicate not in projected:
@@ -174,7 +174,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             if predicate not in filtered:
                 raise ValueError('Explicit requested filter omitted: ' + predicate)
         # Exact literals explicitly introduced by "is" must be preserved.
-        for literal in re.findall(r'\\bis\\s+([^\\s,;]+)', before_where[1], flags=re.I):
+        for literal in re.findall(r'\bis\s+([^\s,;]+)', before_where[1], flags=re.I):
             literal = literal.rstrip('.')
             def values(node):
                 if not isinstance(node, dict):
@@ -186,7 +186,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # An unrequested traversal cannot be added to a simple property lookup.
     # Leave traversals allowed when the question actually requests a relationship.
     if not traversal_requirement(question, catalog) and not re.search(
-            r'\\b(?:relationship|related|connected|link(?:ed)?|join)\\b', question, re.I):
+            r'\b(?:relationship|related|connected|link(?:ed)?|join)\b', question, re.I):
         if output_names and plan['edges']:
             raise ValueError('Unrequested SHACL traversal in direct property lookup')
     return plan
