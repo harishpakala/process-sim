@@ -114,6 +114,11 @@ def validate_planner_output(plan):
             raise ValueError('Malformed IR projection')
     if not plan['projections'] and plan['operation']['type'] == 'select' and not plan['return_entities']:
         raise ValueError('Select plan must project a property or return entities')
+    ordering = plan.get('order_by', [])
+    if not isinstance(ordering, list):
+        raise ValueError('order_by must be a list')
+    if plan.get('result_limit') is not None and type(plan['result_limit']) is not int:
+        raise ValueError('result_limit must be an integer')
     return plan
 
 
@@ -281,6 +286,10 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "Only use catalog SHACL edges and supplied verified mapping IDs. "
       "Preserve requested domains, paths, output properties, values and filters; do not invent values. "
       "Multiple requested outputs MUST be multiple projections. "
+      "For sorting use order_by=[{as:'PROJECTION_ALIAS',direction:'asc'|'desc'}]. "
+      "For a requested row limit use result_limit=POSITIVE_INTEGER. "
+      "Sort aliases must match projected output aliases. "
+      "If no sorting or limit requested use order_by=[] and result_limit=null. "
       "If unsupported return {\"unsupported\":\"reason\"}, not a partial plan. "
       "Never return a schema entity descriptor or SHACL edge as the top-level JSON. "
       "When a question says through, via, parent, reached, or traversal, include "
@@ -314,6 +323,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "preserve literal exactly without sentence punctuation. "
             "For traversal include all requested entities and verified edges. "
             "Preserve every requested domain, output, filter, and path. "
+            "For sorting use order_by=[{as:'OUTPUT_ALIAS',direction:'asc'|'desc'}]; "
+            "for requested limits use result_limit=INTEGER. "
             "Use display_name/source_path only to choose shape; output original shape IRI. "
             "If unsupported return {\"unsupported\":\"reason\"}."
         )
@@ -384,6 +395,14 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   'count_ir_example':count_example,
                   **({'property_owner_hints':hints} if owner_hints else {})},
                   separators=(',', ':') if compact_prompt else None)}]
+    if re.search(r'\\b(?:alphabetical|alphabetically|ascending|descending|ordered|sort(?:ed)?)\\b', question, re.I):
+        messages[0]['content'] += (
+            ' If the question requests sorting, populate order_by with the '
+            'projected alias and correct direction.')
+    if re.search(r'\\b(?:first|top|limit)\\s+\\d+\\b', question, re.I):
+        messages[0]['content'] += (
+            ' If the question requests a result limit, populate result_limit '
+            'with the exact requested integer.')
     last_error = None
     # Keep constraints from earlier failures active across subsequent retries.
     repair_constraints = []
