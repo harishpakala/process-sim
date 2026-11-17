@@ -166,6 +166,21 @@ def validate_ir(ir, schema, *, mappings=None):
         raise ValueError('COUNT currently requires no projections')
     if not projections and operation.get('type') == 'select' and not ir.get('return_entities'):
         raise ValueError('SELECT needs projections or return_entities=true')
+    # Optional LLM-authored SELECT modifiers. Never infer them from question text.
+    ordering = ir.get('order_by', [])
+    if not isinstance(ordering, list) or len(ordering) > 8:
+        raise ValueError('order_by must be a list of at most eight sort terms')
+    output_aliases = {p['as'] for p in projections}
+    for term in ordering:
+        if not isinstance(term, dict) or set(term) != {'as', 'direction'}:
+            raise ValueError('Sort term must contain as and direction')
+        if term['as'] not in output_aliases or term['direction'] not in ('asc', 'desc'):
+            raise ValueError('Sort must reference a projected alias with asc/desc direction')
+    result_limit = ir.get('result_limit')
+    if result_limit is not None and (type(result_limit) is not int or not 1 <= result_limit <= 10000):
+        raise ValueError('result_limit must be an integer from 1 to 10000')
+    if operation.get('type') != 'select' and (ordering or result_limit is not None):
+        raise ValueError('Sorting and pagination currently require SELECT')
     return ir
 
 
