@@ -126,11 +126,15 @@ def _explicit_property_requirements(question, catalog):
     words = re.findall(r'[A-Za-z][A-Za-z0-9_]*', question)
     tokens = {word.lower() for word in words}
     properties = {}
+    traversal_predicates = {edge['predicate'] for edge in catalog.get('shacl_edges', [])}
     for entity in catalog['entities']:
         for predicate in entity['properties']:
             local = re.split(r'[/#]', predicate)[-1]
             names = {local.lower()}
-            if local.startswith('has') and len(local) > 3:
+            # A relationship's object-class name (e.g. InstrumentationFunction)
+            # is not evidence that the relationship itself was requested as an
+            # output. Require its full predicate name when it is a SHACL edge.
+            if local.startswith('has') and len(local) > 3 and predicate not in traversal_predicates:
                 names.add(local[3:].lower())
             for name in names & tokens:
                 properties.setdefault(name, set()).add(predicate)
