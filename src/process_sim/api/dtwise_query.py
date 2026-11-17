@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import os
+import json
 from pathlib import Path
 
 from process_sim.dtwise.unified_answer import generate_ir, execute_select
@@ -98,11 +99,16 @@ def run_question(question: str, *, environ=None):
     if not SCHEMA_PATH.is_file():
         raise DtwiseUnavailable("DTWise schema index is unavailable")
 
+    mapping_path = env.get("DTWISE_VERIFIED_MAPPINGS")
+    mappings = json.loads(Path(mapping_path).read_text(encoding="utf-8")) if mapping_path else None
+    if mappings is not None and not isinstance(mappings, list):
+        raise ValueError("DTWISE_VERIFIED_MAPPINGS must be a JSON array of verified records")
     model = env.get("DTWISE_UNIFIED_MODEL", "llama3.1:8b")
     host = env.get("OLLAMA_HOST", "http://localhost:11434")
     try:
-        plan = generate_ir(question, str(SCHEMA_PATH), model=model, ollama_host=host)
-        sparql = compile_graph_ir(plan, str(SCHEMA_PATH), limit=100,
+        plan = generate_ir(question, str(SCHEMA_PATH), model=model, ollama_host=host,
+                           mappings=mappings)
+        sparql = compile_graph_ir(plan, str(SCHEMA_PATH), mappings=mappings, limit=100,
                                   graph_mode="all_named")
         results = execute_select(sparql, endpoint)
         answer = _answer_from_results(results, plan)
