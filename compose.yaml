@@ -3,7 +3,7 @@ services:
   graphdb:
     image: ${GRAPHDB_IMAGE:-ontotext/graphdb:10.8.0}
     ports:
-      - "127.0.0.1:7200:7200"
+      - "127.0.0.1:7201:7200"
     volumes:
       - graphdb_data:/opt/graphdb/home
     restart: unless-stopped
@@ -12,10 +12,10 @@ services:
     image: timescale/timescaledb:latest-pg16
     environment:
       POSTGRES_USER: tep
-      POSTGRES_PASSWORD: ${TEP_DB_PASSWORD:-tep-local-dev}
+      POSTGRES_PASSWORD: 1234
       POSTGRES_DB: tep_nexus
     ports:
-      - "127.0.0.1:5432:5432"
+      - "127.0.0.1:5434:5432"
     volumes:
       - tep_timeseries:/var/lib/postgresql/data
     healthcheck:
@@ -29,7 +29,7 @@ services:
     build:
       context: .
       dockerfile: docker/python.Dockerfile
-    command: ["python", "examples/run_opcua_server.py", "--endpoint", "opc.tcp://0.0.0.0:4841/process-sim/", "--seed", "42", "--real-time-factor", "1.0"]
+    command: ["python", "examples/run_opcua_server.py", "--endpoint", "opc.tcp://0.0.0.0:4845/process-sim/", "--seed", "42", "--real-time-factor", "1.0"]
     ports:
       - "127.0.0.1:4841:4841"
     restart: unless-stopped
@@ -41,10 +41,10 @@ services:
     command: ["python", "-m", "process_sim.api.server"]
     environment:
       PROCESS_SIM_API_HOST: 0.0.0.0
-      PROCESS_SIM_API_PORT: "8000"
-      GRAPHDB_SPARQL_ENDPOINT: http://graphdb:7200/repositories/AAST
-      TEP_TIMESCALE_DSN: postgresql://tep:${TEP_DB_PASSWORD:-tep-local-dev}@timescaledb:5432/tep_nexus
-      TEP_OPCUA_ENDPOINT: opc.tcp://simulator:4841/process-sim/
+      PROCESS_SIM_API_PORT: "8001"
+      GRAPHDB_SPARQL_ENDPOINT: http://graphdb:7201/repositories/AAST
+      TEP_TIMESCALE_DSN: postgresql://tep:${TEP_DB_PASSWORD:-tep-local-dev}@timescaledb:5434/tep_nexus
+      TEP_OPCUA_ENDPOINT: opc.tcp://simulator:4845/process-sim/
     depends_on:
       timescaledb:
         condition: service_healthy
@@ -53,7 +53,7 @@ services:
       simulator:
         condition: service_started
     ports:
-      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8001:8001"
     restart: unless-stopped
 
   frontend:
@@ -61,11 +61,11 @@ services:
       context: ./frontend
       dockerfile: ../docker/frontend.Dockerfile
     environment:
-      PROCESS_SIM_API_URL: http://api:8000
+      PROCESS_SIM_API_URL: http://api:8001
     depends_on:
       - api
     ports:
-      - "127.0.0.1:5173:5173"
+      - "127.0.0.1:5176:5173"
     restart: unless-stopped
 
 volumes:
