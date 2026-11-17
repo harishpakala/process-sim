@@ -31,6 +31,14 @@ class SemanticCoverageTests(unittest.TestCase):
             check_semantic_coverage(plan(edges=[{"kind": "shacl"}]),
                 "List MeasuredVariable of DEXPI InstrumentationFunctions.", CATALOG, {"dexpi"})
 
+    def test_b03_unrequested_filter_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unrequested filter"):
+            check_semantic_coverage(
+                plan(filters={"op": "eq", "entity": "instrument",
+                              "predicate": MEASURED, "value": "MeasuredVariable"}),
+                "List MeasuredVariable of DEXPI InstrumentationFunctions.",
+                CATALOG, {"dexpi"})
+
     def test_b08_missing_filter_rejected(self):
         with self.assertRaisesRegex(ValueError, "filter omitted"):
             check_semantic_coverage(plan(),
