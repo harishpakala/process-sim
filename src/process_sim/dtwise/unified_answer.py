@@ -686,7 +686,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     # Give the model specific evidence from its chosen shapes.
                     # This is retry feedback only: never mutate or synthesize IR.
                     requested = re.findall(
-                        r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+                        r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
                         question, flags=re.I)
                     filter_evidence = []
                     for property_name, literal in requested:
