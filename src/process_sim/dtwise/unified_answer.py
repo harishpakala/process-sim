@@ -298,7 +298,13 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         return found
     filtered = filter_predicates(plan.get('filters'))
     before_where = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)
-    output_names = _explicit_property_requirements(before_where[0], catalog)
+    # In cross-domain 'Get X for Y with Z VALUE', Y/Z are input
+    # constraints, not additional requested output projections.
+    output_clause = before_where[0]
+    if len(mentioned) > 1:
+        output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
+                                 maxsplit=1, flags=re.I)[0]
+    output_names = _explicit_property_requirements(output_clause, catalog)
     for name, predicate in output_names.items():
         if plan['operation']['type'] == 'select' and predicate not in projected:
             raise ValueError('Explicit requested projection omitted: ' + predicate)
@@ -317,6 +323,27 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
                     v for child in node.get('args', []) for v in values(child)] + values(node.get('arg'))
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
+    # A named property followed by an explicit value after 'with' is an
+    # input filter, even without WHERE. Check coverage; never synthesize IR.
+    if len(mentioned) > 1:
+        for property_name, literal in re.findall(
+                r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+                question, flags=re.I):
+            predicate = requirements.get(property_name.lower())
+            if predicate is None:
+                continue
+            def exact_filter(node):
+                if not isinstance(node, dict):
+                    return False
+                if (node.get('op') == 'eq' and node.get('predicate') == predicate
+                        and node.get('value') == literal):
+                    return True
+                return any(exact_filter(child) for key in ('args', 'children')
+                           for child in node.get(key, [])) or any(
+                               exact_filter(node.get(key)) for key in ('arg', 'child'))
+            if not exact_filter(plan.get('filters')):
+                raise ValueError('Explicit input constraint omitted: '
+                                 + property_name + ' = ' + literal)
     # Explicit substring clauses are requirements even without a WHERE keyword.
     # This is a coverage guard only: the model must still select the entity,
     # predicate, filter operator and literal; no IR is synthesized here.
@@ -352,12 +379,13 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     if (len(before_where) == 1 and output_names and
             plan['operation']['type'] == 'select' and
             not traversal_requirement(question, catalog) and
+            len(mentioned) <= 1 and
             not substring_clauses and
             plan.get('filters') is not None):
         raise ValueError('Unrequested filter in direct property lookup')
     # An unrequested traversal cannot be added to a simple property lookup.
     # Leave traversals allowed when the question actually requests a relationship.
-    if not traversal_requirement(question, catalog) and not re.search(
+    if len(mentioned) <= 1 and not traversal_requirement(question, catalog) and not re.search(
             r'\b(?:relationship|related|connected|link(?:ed)?|join)\b', question, re.I):
         if output_names and plan['edges']:
             raise ValueError('Unrequested SHACL traversal in direct property lookup')
@@ -390,7 +418,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "for exact matches; use {op:'contains',entity:'alias',predicate:'IRI',value:'substring'} for 'containing' questions; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For count, projections MUST be []; use exists filter to count entities having a property. "
-      "For a direct property lookup, use exactly one owning entity and edges=[] unless a traversal is explicitly requested. "
+      "For a SAME-DOMAIN direct property lookup, use one owning entity and edges=[] unless traversal requested. "
+      "For CROSS-DOMAIN lookups, include each named domain and use ONLY verified mapping edges; never invent cross-domain SHACL edges. "
+      "In 'Get X for Y with Z VALUE', X is the output and Z VALUE is an exact eq input filter, not an output projection. "
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
       "Use filters=null only when the question has no filter condition. "
