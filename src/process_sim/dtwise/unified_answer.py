@@ -214,7 +214,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "for exact matches; use {op:'exists',entity:'alias',predicate:'IRI'} for property existence. "
       "Do not put kind/from/to inside filters. Keep the exact literal without sentence punctuation. "
       "For count, projections MUST be []; use exists filter to count entities having a property. "
-      "For one entity with one output use edges=[] and filters=null. "
+      "For a direct property lookup, use one owning entity and edges=[] unless a traversal is explicitly requested. Use filters=null only when the question has no filter condition. "
       "Use exact domain, shape and property IRIs from the catalog. "
       "Only use catalog SHACL edges and supplied verified mapping IDs. "
       "Preserve requested domains, paths, output properties, values and filters; do not invent values. "
@@ -270,13 +270,24 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             attempt_record['error'] = last_error
             if attempt < 2:
                 messages.append({'role':'assistant','content':raw})
+                if last_error.startswith('Unrequested SHACL traversal'):
+                    repair = ('This question requests a direct property lookup, not a traversal. '
+                              'Remove unrequested edges and extra traversal entities. '
+                              'Project the requested property directly from its owning '
+                              'SHACL NodeShape; a literal property is not a separate entity. ')
+                elif 'traversal omitted' in last_error.lower():
+                    repair = ('The question explicitly requests a traversal. '
+                              'Include the necessary parent and child entities and only '
+                              'catalog-verified SHACL edges. ')
+                else:
+                    repair = ('Preserve every explicitly requested projection, filter '
+                              'predicate, and literal value. Do not introduce unrequested '
+                              'traversals. ')
                 messages.append({'role':'user','content':
-                    'Your plan omitted an explicit semantic requirement: ' + last_error +
-                    '. Regenerate the COMPLETE unified IR. Include the actual '
-                    'SHACL-backed traversal, with separate parent and child entities '
-                    'and the edge predicate exactly from catalog. If the path is '
-                    'unsupported, return {"unsupported":"reason"}. Never return '
-                    'a shortened or partial query.'})
+                    'Your previous IR failed semantic coverage: ' + last_error +
+                    '. ' + repair + 'Regenerate the COMPLETE unified IR using only '
+                    'catalog-backed shapes and properties. If unsupported, return '
+                    '{"unsupported":"reason"}; never return a partial query.'})
                 continue
             raise ValueError('Semantic coverage failure after retries: '+last_error) from exc
         # Check full SHACL evidence BEFORE accepting a model plan. This is part of
