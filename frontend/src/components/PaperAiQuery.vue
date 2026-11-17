@@ -39,6 +39,7 @@ const categoryQuestions = computed(() => {
 })
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
 const isMultihop = computed(() => result.value?.answer?.join_type === 'shacl_multihop_identifier_join')
+const isPropertyTable = computed(() => projectedProperties.value.length > 1)
 const projectedProperties = computed(() => Array.isArray(result.value?.answer?.properties) ? result.value.answer.properties as string[] : [])
 const propertyLabel = (iri: string) => {
  const raw = iri.split(/[/#]/).pop()?.replace(/^has(?=[A-Z])/, '') || iri
@@ -239,7 +240,7 @@ onMounted(hLoadRuns)
  <div style="display:grid;gap:16px">
   <section v-if="page === 'engineering'" class="panel">
    <div class="panel-title">
-    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
+    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Unified IR planner · SHACL-validated read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
     <label for="benchmark-category">Benchmark stage (B01–B60)</label>
@@ -261,7 +262,7 @@ onMounted(hLoadRuns)
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
-    <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
+    <p class="subdued">Results come from the LLM-driven Unified IR pipeline. Invalid plans are rejected; no automatic fallback.</p>
    </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
@@ -322,7 +323,7 @@ onMounted(hLoadRuns)
    </div>
    <div class="result-section">
     <h3>Structured answer</h3>
-    <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
+    <p class="subdued">GraphDB result via SHACL-validated Unified IR · result values not independently verified</p>
     <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
     <div v-if="joinRoute.length > 1" class="join-provenance" aria-label="SHACL join provenance">
@@ -332,7 +333,7 @@ onMounted(hLoadRuns)
      <p class="subdued">Structural paths verified against SHACL; returned values come from GraphDB.</p>
     </div>
     <p v-if="isMultihop && missingCount" class="subdued">{{missingCount}} unavailable property value{{missingCount === 1 ? '' : 's'}} shown as Not available (optional data).</p>
-    <div v-if="isMultihop && rows.length" class="table-scroll">
+    <div v-if="(isMultihop || isPropertyTable) && rows.length" class="table-scroll">
      <table class="evidence-table">
       <thead><tr><th>#</th><th v-for="property in projectedProperties" :key="property" :title="property">{{propertyLabel(property)}}</th></tr></thead>
       <tbody><tr v-for="(row,i) in rows" :key="i"><td>{{i+1}}</td><td v-for="property in projectedProperties" :key="property" class="mono" :class="{'missing-value':missingCell(resultCell(row,property))}"><span v-if="missingCell(resultCell(row,property))" title="This optional property was not returned by GraphDB">Not available</span><span v-else :title="display(resultCell(row,property))">{{display(resultCell(row,property))}}</span></td></tr></tbody>
@@ -357,7 +358,7 @@ onMounted(hLoadRuns)
    <div class="result-section">
     <h3>Planner and provenance</h3>
     <p class="subdued">Mode: {{result.mode}} · Graph scope: {{result.graph_mode}}</p>
-    <details class="detail-toggle"><summary>Frozen planner output</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
+    <details class="detail-toggle"><summary>Unified IR plan</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
    </div>
   </section>
  </div>
