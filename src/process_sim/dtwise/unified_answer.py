@@ -230,7 +230,8 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     return plan
 
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
-                ollama_host=None, timeout=120, mappings=None, diagnostics=None):
+                ollama_host=None, timeout=120, mappings=None, diagnostics=None,
+                compact_prompt=False, keep_alive=None):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
@@ -274,21 +275,45 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     count_example = dict(example, projections=[], filters={
         'op':'exists','entity':'item','predicate':'PROPERTY_FROM_CATALOG'},
         operation={'type':'count'}, return_entities=False)
+    if compact_prompt:
+        # Experimental shorter instructions. Full SHACL catalog and validation
+        # remain authoritative; no inferred or fabricated schema entries.
+        instruction = (
+            "Return ONLY complete Unified IR JSON, never catalog fragments. "
+            "Keys: ir_version='1.0', entities=[{alias,domain,shape}], "
+            "edges=[{kind:'shacl',from,to,predicate}] or verified mapping edges, "
+            "projections=[{entity,predicate,as}], filters=null or ONE object, "
+            "operation={type:'select'|'count'}, return_entities=boolean. "
+            "Use exact catalog domain/shape/property IRIs and verified edges only. "
+            "For direct property lookup use one owning entity, edges=[], "
+            "requested property as projection, filters=null unless requested. "
+            "Projection aliases must differ from entity aliases. "
+            "For count use projections=[] and exists filter if counting property presence. "
+            "For exact filters use {op:'eq',entity:'alias',predicate:'IRI',value:'literal'}; "
+            "preserve literal exactly without sentence punctuation. "
+            "For traversal include all requested entities and verified edges. "
+            "Preserve every requested domain, output, filter, and path. "
+            "Use display_name/source_path only to choose shape; output original shape IRI. "
+            "If unsupported return {\"unsupported\":\"reason\"}."
+        )
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':catalog,
                   'verified_mappings':mapping_catalog,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
-                  'count_ir_example':count_example})}]
+                  'count_ir_example':count_example},
+                  separators=(',', ':') if compact_prompt else None)}]
     last_error = None
     # Keep constraints from earlier failures active across subsequent retries.
     repair_constraints = []
     for attempt in range(3):
         request_started = time.perf_counter()
-        result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', {
-            'model':model,'stream':False,'format':'json','options':{'temperature':0},
-            'messages':messages}, timeout)
+        payload = {'model':model,'stream':False,'format':'json',
+                   'options':{'temperature':0},'messages':messages}
+        if keep_alive is not None:
+            payload['keep_alive'] = keep_alive
+        result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', payload, timeout)
         raw = result.get('message', {}).get('content')
         attempt_record = {'attempt': attempt + 1, 'model': model, 'raw': raw,
                           'wall_seconds': round(time.perf_counter() - request_started, 3),
@@ -401,6 +426,10 @@ def main():
     parser.add_argument('--endpoint',help='GraphDB SPARQL endpoint; optional for compile')
     parser.add_argument('--ollama-host',default=os.getenv('OLLAMA_HOST', 'http://localhost:11434'))
     parser.add_argument('--model',default='qwen2.5-coder:3b')
+    parser.add_argument('--compact-prompt',action='store_true',
+                        help='Experiment with shorter planner instructions (opt-in)')
+    parser.add_argument('--keep-alive',default=None,
+                        help='Ollama model residency, e.g. 30m (default: Ollama setting)')
     parser.add_argument('--llm-timeout',type=int,default=120,
                         help='Ollama HTTP timeout per planning attempt in seconds (default: 120)')
     parser.add_argument('--graph-mode',choices=['default','all_named','selected'],default='all_named')
@@ -419,7 +448,8 @@ def main():
         diagnostics=[]
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
             args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
-            timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics)
+            timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
+            compact_prompt=args.compact_prompt,keep_alive=args.keep_alive)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
