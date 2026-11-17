@@ -256,7 +256,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 ollama_host=None, timeout=120, mappings=None, diagnostics=None,
                 compact_prompt=False, keep_alive=None,
-                owner_hints=False):
+                owner_hints=False, prompt_diagnostics=None):
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
@@ -412,7 +412,52 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                    'options':{'temperature':0},'messages':messages}
         if keep_alive is not None:
             payload['keep_alive'] = keep_alive
-        result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', payload, timeout)
+        if prompt_diagnostics is not None:
+            prompt_text = ''.join(m['content'] for m in messages)
+            payload_text = json.dumps(payload, ensure_ascii=False)
+            prompt_diagnostics.update({
+                'attempt': attempt + 1,
+                'message_count': len(messages),
+                'system_characters': len(messages[0]['content']),
+                'user_characters': len(messages[1]['content']),
+                'prompt_characters': len(prompt_text),
+                'estimated_prompt_tokens': (len(prompt_text) + 3) // 4,
+                'payload_bytes': len(payload_text.encode('utf-8')),
+                'model': model,
+                'timeout_seconds': timeout,
+                'request_status': 'started',
+            })
+            if prompt_diagnostics.get('path'):
+                Path(prompt_diagnostics['path']).write_text(
+                    json.dumps({k: v for k, v in prompt_diagnostics.items() if k != 'path'},
+                               indent=2), encoding='utf-8')
+        try:
+            result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', payload, timeout)
+        except (TimeoutError, URLError, HTTPError, OSError) as exc:
+            if prompt_diagnostics is not None:
+                prompt_diagnostics.update({
+                    'request_status': 'failed',
+                    'request_wall_seconds': round(time.perf_counter() - request_started, 3),
+                    'request_error': str(exc),
+                })
+                if prompt_diagnostics.get('path'):
+                    Path(prompt_diagnostics['path']).write_text(
+                        json.dumps({k: v for k, v in prompt_diagnostics.items() if k != 'path'},
+                                   indent=2), encoding='utf-8')
+            raise
+        if prompt_diagnostics is not None:
+            prompt_diagnostics.update({
+                'request_status': 'completed',
+                'request_wall_seconds': round(time.perf_counter() - request_started, 3),
+                'ollama_prompt_tokens': result.get('prompt_eval_count'),
+                'ollama_generated_tokens': result.get('eval_count'),
+                'ollama_prompt_eval_seconds': result.get('prompt_eval_duration', 0) / 1e9,
+                'ollama_generation_seconds': result.get('eval_duration', 0) / 1e9,
+            })
+            if prompt_diagnostics.get('path'):
+                Path(prompt_diagnostics['path']).write_text(
+                    json.dumps({k: v for k, v in prompt_diagnostics.items() if k != 'path'},
+                               indent=2), encoding='utf-8')
         raw = result.get('message', {}).get('content')
         attempt_record = {'attempt': attempt + 1, 'model': model, 'raw': raw,
                           'wall_seconds': round(time.perf_counter() - request_started, 3),
@@ -554,6 +599,7 @@ def main():
     parser.add_argument('--include-graph',action='store_true')
     parser.add_argument('--limit',type=int,default=100)
     parser.add_argument('--output',help='Write full JSON report to file')
+    parser.add_argument('--prompt-diagnostics',help='Write prompt-size and request timing diagnostics JSON (no prompt text)')
     args=parser.parse_args()
     if args.llm_timeout < 1: parser.error('--llm-timeout must be positive')
     if not args.ir and not args.question: parser.error('Provide --ir or --question')
@@ -563,11 +609,12 @@ def main():
     stage_started=time.perf_counter()
     try:
         diagnostics=[]
+        prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else None
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
             args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
             timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
             compact_prompt=args.compact_prompt,keep_alive=args.keep_alive,
-            owner_hints=args.owner_hints)
+            owner_hints=args.owner_hints,prompt_diagnostics=prompt_diagnostics)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
