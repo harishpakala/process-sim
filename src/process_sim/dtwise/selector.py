@@ -4,6 +4,7 @@ Compatible with ConceptSelector(model_name, ollama_host).select(question, hits).
 The selector does not validate full ontology paths; use the schema graph for that.
 """
 
+import os
 import json
 from typing import List
 
@@ -22,8 +23,8 @@ class _ModelSelection(BaseModel):
 
 
 class ConceptSelector:
-    def __init__(self, model_name="qwen2.5-coder:3b", ollama_host="http://localhost:11434"):
-        self.client = Client(host=ollama_host,timeout=10000.0)
+    def __init__(self, model_name="qwen2.5-coder:3b", ollama_host=None):
+        self.client = Client(host=ollama_host or os.getenv("OLLAMA_HOST", "http://localhost:11434"),timeout=10000.0)
         self.model_name = model_name
 
     def select(self, question, candidates):
