@@ -148,7 +148,21 @@ def _prompt_catalog(question, catalog):
             r'\\b(?:relationship|related|connected|link(?:ed)?|join)\\b',
             question, re.I):
         return catalog
+    # Resolve exact schema-local names and their simple plural forms only.
+    # Keep every candidate when a name is ambiguous; never select an owner.
+    question_tokens = {token.lower() for token in
+                       re.findall(r'[A-Za-z][A-Za-z0-9_]*', question)}
     requested = set(_explicit_property_requirements(question, catalog).values())
+    for entity in catalog['entities']:
+        for predicate in entity['properties']:
+            local = re.split(r'[/#]', predicate)[-1]
+            names = {local.lower()}
+            if local.startswith('has') and len(local) > 3:
+                names.add(local[3:].lower())
+            if any(name + 's' in question_tokens or
+                   (name.endswith('y') and name[:-1] + 'ies' in question_tokens)
+                   for name in names):
+                requested.add(predicate)
     if not requested:
         return catalog
     candidates = [entity for entity in catalog['entities']
