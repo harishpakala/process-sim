@@ -324,18 +324,35 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             if literal not in values(plan.get('filters')):
                 raise ValueError('Explicit requested filter literal omitted: ' + literal)
     # A named property followed by an explicit value after 'with' is an
-    # input filter, even without WHERE. Check coverage; never synthesize IR.
+    # input filter, even without WHERE. Scope ambiguous names to the model's
+    # selected, SHACL-evidenced entity shapes. This checks completeness only:
+    # it never adds a filter, chooses an entity, or repairs the model's plan.
     if len(mentioned) > 1:
         for property_name, literal in re.findall(
                 r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
                 question, flags=re.I):
-            predicate = requirements.get(property_name.lower())
-            if predicate is None:
+            candidates = set()
+            for selected in plan['entities']:
+                for entity in catalog['entities']:
+                    if (entity['domain'] != selected['domain'] or
+                            entity['shape'] != selected['shape']):
+                        continue
+                    for iri in entity['properties']:
+                        local = re.split(r'[/#]', iri)[-1].lower()
+                        names = {local}
+                        if local.startswith('has') and len(local) > 3:
+                            names.add(local[3:])
+                        if property_name.lower() in names:
+                            candidates.add((selected['alias'], iri))
+            if len(candidates) != 1:
+                # No unambiguous selected-shape evidence: never guess.
                 continue
+            alias, predicate = next(iter(candidates))
             def exact_filter(node):
                 if not isinstance(node, dict):
                     return False
-                if (node.get('op') == 'eq' and node.get('predicate') == predicate
+                if (node.get('op') == 'eq' and node.get('entity') == alias
+                        and node.get('predicate') == predicate
                         and node.get('value') == literal):
                     return True
                 return any(exact_filter(child) for key in ('args', 'children')
@@ -665,6 +682,11 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 elif 'traversal omitted' in last_error.lower():
                     repair = ('Explicit traversal: include the necessary entities '
                               'and only catalog-verified SHACL edges. ')
+                elif last_error.startswith('Explicit input constraint omitted:'):
+                    repair = ('Retain the exact input filter named in the question, '
+                              'with op=eq, the correct entity alias, SHACL-evidenced '
+                              'predicate and unchanged literal. Keep all valid '
+                              'mapping edges from the previous attempt. ')
                 else:
                     repair = ('Preserve explicitly requested projections, filters, '
                               'and literal values; do not invent traversals. ')
