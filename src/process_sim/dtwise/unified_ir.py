@@ -136,6 +136,10 @@ def validate_ir(ir, schema, *, mappings=None):
         _alias(p['as'])
     if len({p['as'] for p in projections}) != len(projections):
         raise ValueError('Duplicate projection aliases')
+    collisions = sorted({p['as'] for p in projections} & set(nodes))
+    if collisions:
+        raise ValueError('Projection aliases must differ from entity aliases: ' +
+                         ', '.join(collisions))
     def filter_check(f, depth=0):
         if depth > 12 or not isinstance(f, dict):
             raise ValueError('Invalid or overly deep filter')
