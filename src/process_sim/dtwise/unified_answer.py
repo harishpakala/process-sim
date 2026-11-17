@@ -228,6 +228,29 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         having = operation.get('having')
         if operation.get('type') != 'count' or not operation.get('group_by') or having != {'op':'gt','value':threshold}:
             raise ValueError('Requested HAVING threshold omitted')
+    # Aggregate questions must group by the explicitly named catalog property.
+    # In particular, "AssetIdentifiers with more than three SignalMappings"
+    # groups on hasAssetIdentifier, not the hasSignalMapping relationship.
+    if operation.get('type') == 'count' and operation.get('group_by'):
+        group_aliases = set(operation['group_by'])
+        group_projections = [p for p in plan['projections']
+                             if p.get('as') in group_aliases]
+        grouping_text = re.search(
+            r'\b(?:for each|per)\s+([A-Za-z][A-Za-z0-9_]*)', question, re.I)
+        if grouping_text is None and threshold_match:
+            grouping_text = re.search(
+                r'\b(?:list|show|get|which)\s+([A-Za-z][A-Za-z0-9_]*)',
+                question, re.I)
+        if grouping_text:
+            name = grouping_text.group(1).lower()
+            # Resolve plural surface forms only when the property match is unique.
+            candidates = {predicate for key, predicate in requirements.items()
+                          if key == name or key + 's' == name or
+                          (key.endswith('s') and key + 'es' == name)}
+            if len(candidates) == 1:
+                expected = next(iter(candidates))
+                if not any(p.get('predicate') == expected for p in group_projections):
+                    raise ValueError('Requested grouping property omitted: ' + expected)
     if re.search(r'\b(?:alphabetical|alphabetically)\b', lower_question):
         if not any(x.get('direction') == 'asc' for x in plan.get('order_by', []) if isinstance(x, dict)):
             raise ValueError('Requested alphabetical ORDER BY omitted')
@@ -274,6 +297,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "Copy no placeholder strings from examples: all domain, shape and predicate values MUST be real catalog values. "
       "For counts above N add operation.having={op:'gt',value:N} (integer). "
       "An aggregate threshold belongs ONLY in operation.having, NEVER in filters. "
+      "For grouped counts, group by the requested grouping PROPERTY, not by a relationship named after the counted entity. "
       "For pure grouped aggregation use filters=null and return_entities=false. "
       "For alphabetical ordering add order_by=[{by:'projected_alias',direction:'asc'}]. "
       "For first N results add top-level limit=N. "
@@ -365,6 +389,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                               'group_by MUST be INSIDE operation, not top-level. '
                               'Use real domain/shape/predicate from the catalog, '
                               'never *_FROM_CATALOG placeholders. ')
+                elif 'Requested grouping property omitted' in last_error:
+                    repair = ('Group by the explicitly requested property IRI shown in the error. '
+                              'Use the entity shape that OWNS that property, not a similarly named '
+                              'relationship property. For AssetIdentifier, project hasAssetIdentifier '
+                              'from SignalMapping and group_by its projection alias. '
+                              'Use edges=[], filters=null, and retain operation.having. ')
                 elif 'HAVING threshold omitted' in last_error:
                     repair = ('Use operation={"type":"count","group_by":["group_key"],'
                               '"having":{"op":"gt","value":3}} with real catalog properties. '
