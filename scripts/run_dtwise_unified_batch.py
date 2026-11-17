@@ -56,7 +56,7 @@ def main() -> int:
     def benchmark_key(case):
         # B23.1/B23.2/B23.3 belong to benchmark 23 for range selection.
         # Preserve each full ID for independent reports and stable ordering.
-        match = re.fullmatch(r"B(\\d+)(?:\\.(\\d+))?", case.get("id", ""))
+        match = re.fullmatch(r"B(\d+)(?:\.(\d+))?", case.get("id", ""))
         if not match:
             return None
         return int(match.group(1)), (int(match.group(2)) if match.group(2) else -1)
