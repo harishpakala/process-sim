@@ -23,6 +23,25 @@ services:
         exec /bin/sh /tmp/graphdb-init.sh
     restart: "no"
 
+  semantic-lift:
+    build:
+      context: .
+      dockerfile: docker/python.Dockerfile
+    command:
+      - /bin/sh
+      - -ec
+      - |
+        python -m semantic.template_lifting --push
+        python -m semantic.instance_lifting --validate --push
+    environment:
+      GRAPHDB_STATEMENTS_ENDPOINT: http://graphdb:7200/repositories/AAST/statements
+    depends_on:
+      graphdb-init:
+        condition: service_completed_successfully
+    volumes:
+      - semantic_outputs:/app/semantic/ontology2
+    restart: "no"
+
   timescaledb:
     image: timescale/timescaledb:latest-pg16
     environment:
@@ -63,10 +82,12 @@ services:
     depends_on:
       timescaledb:
         condition: service_healthy
-      graphdb-init:
+      semantic-lift:
         condition: service_completed_successfully
       simulator:
         condition: service_started
+    volumes:
+      - semantic_outputs:/app/semantic/ontology2:ro
     ports:
       - "127.0.0.1:8001:8001"
     restart: unless-stopped
@@ -86,3 +107,4 @@ services:
 volumes:
   graphdb_data:
   tep_timeseries:
+  semantic_outputs:
