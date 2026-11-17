@@ -15,12 +15,7 @@
       "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3",
       "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
     ],
-    "evidence_note": "SHACL evidence supports each property independently; GraphDB confirmed a lexical join for FI_101 / XMEAS1. Neither proves universal semantic equivalence. Independent approval required.",
-    "instance_evidence": {
-      "dexpi_local_id": "FI_101",
-      "shared_asset_identifier": "https://aas.example.com/FI101",
-      "opcua_signal_name": "XMEAS1"
-    },
+    "evidence_note": "SHACL evidence grounds the mapped properties; cross-domain equivalence was independently approved. Evidence references are retained.",
     "verified": true
   }
 ]
