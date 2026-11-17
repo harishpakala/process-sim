@@ -439,6 +439,22 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             raise ValueError('Model failed to generate valid Unified IR after retry: '+last_error) from exc
         try:
             check_semantic_coverage(plan, question, catalog, mentioned)
+            # Coverage checks reject omitted user-requested modifiers; they do
+            # not choose sort fields, directions, or limits for the LLM.
+            sort_request = re.search(
+                r'\\b(alphabetical(?:ly)?|ascending|descending|ordered|sort(?:ed)?)\\b',
+                question, re.I)
+            if sort_request and not plan.get('order_by'):
+                raise ValueError('Requested ordering omitted from Unified IR')
+            if sort_request and re.search(r'\\b(?:alphabetical(?:ly)?|ascending)\\b', question, re.I):
+                if not any(x.get('direction') == 'asc' for x in plan.get('order_by', [])):
+                    raise ValueError('Requested ascending order omitted')
+            if sort_request and re.search(r'\\bdescending\\b', question, re.I):
+                if not any(x.get('direction') == 'desc' for x in plan.get('order_by', [])):
+                    raise ValueError('Requested descending order omitted')
+            limit_request = re.search(r'\\b(?:first|top|limit)\\s+(\\d+)\\b', question, re.I)
+            if limit_request and plan.get('result_limit') != int(limit_request.group(1)):
+                raise ValueError('Requested result limit omitted or incorrect')
         except ValueError as exc:
             last_error = str(exc)
             attempt_record['error'] = last_error
