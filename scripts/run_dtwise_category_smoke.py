@@ -61,6 +61,8 @@ def main() -> int:
     parser.add_argument("--keep-alive", default="30m")
     parser.add_argument("--no-owner-hints", action="store_true", help="Disable SHACL property-owner hints")
     parser.add_argument("--continue-on-failure", action="store_true", help="Only with --all-categories")
+    parser.add_argument("--compact-catalog", action="store_true",
+                        help="Experimental lossless SHACL IRI symbol compression")
     parser.add_argument("--prompt-diagnostics", action="store_true",
                         help="Record prompt-size and Ollama request timing diagnostics")
     args = parser.parse_args()
@@ -93,6 +95,8 @@ def main() -> int:
             "--timeout", str(args.timeout), "--llm-timeout", str(args.llm_timeout),
             "--output-dir", str(target),
         ]
+        if args.compact_catalog:
+            command.append("--compact-catalog")
         if args.prompt_diagnostics:
             command.append("--prompt-diagnostics")
         if not args.no_owner_hints:
