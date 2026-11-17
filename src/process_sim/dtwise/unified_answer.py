@@ -286,6 +286,17 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
+    # Prefer the legacy SHACL projection/join discovery for explicitly named
+    # cross-domain questions. It may only emit a mapping edge when the caller
+    # supplies independently verified identity evidence; never infer approval.
+    if len(mentioned) >= 2:
+        from .legacy_join_adapter import plan_legacy_projection_ir
+        legacy_ir = plan_legacy_projection_ir(question, schema, mappings)
+        if legacy_ir is not None:
+            if diagnostics is not None:
+                diagnostics.append({'planner': 'legacy_shacl_projection_adapter',
+                                    'status': 'accepted', 'model': None})
+            return legacy_ir
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
                        for m in (mappings or []) if m.get('verified') is True and m.get('evidence_ids')]
