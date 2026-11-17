@@ -261,16 +261,13 @@ onMounted(hLoadRuns)
      <option value="">Select a stage</option>
      <option v-for="item in categories" :key="item" :value="item">{{item}}</option>
     </select>
-    <p v-if="category.startsWith('09 ·')" class="subdued">B33–B37: use the Historian tab to select a simulation run, source, instrument, question style and time window.</p>
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
      <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{item.id + ' — ' + displayedQuestion(item)}}</option>
     </select>
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
-    <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
-    <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p v-else class="subdued">Original B01–B60 manifest unchanged; supplemental questions are UI-only.</p>
+    <p class="subdued">B01–B53 are grouped by manifest category; supplemental questions are labeled separately.</p>
     <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
