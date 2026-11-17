@@ -215,18 +215,18 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # Enforce requested query operations before accepting a plan.
     lower_question = question.lower()
     operation = plan.get('operation', {})
-    if re.search(r'\\b(?:for each|per)\\b', lower_question) and re.search(r'\\bcount\\b', lower_question):
+    if re.search(r'\b(?:for each|per)\b', lower_question) and re.search(r'\bcount\b', lower_question):
         if operation.get('type') != 'count' or not operation.get('group_by'):
             raise ValueError('Requested grouped COUNT omitted')
-    if re.search(r'\\bmore than\\s+(\\d+)\\b', lower_question) and re.search(r'\\bsignalmappings?\\b', lower_question):
-        threshold = int(re.search(r'\\bmore than\\s+(\\d+)\\b', lower_question).group(1))
+    if re.search(r'\bmore than\s+(\d+)\b', lower_question) and re.search(r'\bsignalmappings?\b', lower_question):
+        threshold = int(re.search(r'\bmore than\s+(\d+)\b', lower_question).group(1))
         having = operation.get('having')
         if operation.get('type') != 'count' or not operation.get('group_by') or having != {'op':'gt','value':threshold}:
             raise ValueError('Requested HAVING threshold omitted')
-    if re.search(r'\\b(?:alphabetical|alphabetically)\\b', lower_question):
+    if re.search(r'\b(?:alphabetical|alphabetically)\b', lower_question):
         if not any(x.get('direction') == 'asc' for x in plan.get('order_by', []) if isinstance(x, dict)):
             raise ValueError('Requested alphabetical ORDER BY omitted')
-    first = re.search(r'\\bfirst\\s+(\\d+)\\b', lower_question)
+    first = re.search(r'\bfirst\s+(\d+)\b', lower_question)
     if first and plan.get('limit') != int(first.group(1)):
         raise ValueError('Requested LIMIT omitted')
     # A direct SELECT property lookup without a WHERE clause must not invent
