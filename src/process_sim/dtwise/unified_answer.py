@@ -1,6 +1,8 @@
 """Opt-in DTwise unified IR end-to-end CLI; never modifies existing main.py."""
 import os
 import argparse
+import base64
+import binascii
 import json
 import re
 from pathlib import Path
@@ -9,6 +11,28 @@ from urllib.error import HTTPError, URLError
 from .graph_compiler import compile_graph_ir
 from .unified_ir import validate_ir
 from .shape_resolver import resolve_shapes
+
+
+def _shape_display_metadata(shape):
+    """Decode only canonical Base64 URI path segments; never alter the shape IRI."""
+    segment = shape.rstrip('/').rsplit('/', 1)[-1]
+    if not re.fullmatch(r'[A-Za-z0-9_-]+={0,2}', segment):
+        return {}
+    try:
+        encoded = segment.replace('-', '+').replace('_', '/')
+        decoded = base64.b64decode(encoded + '=' * (-len(encoded) % 4),
+                                   validate=True).decode('utf-8')
+    except (ValueError, UnicodeError, binascii.Error):
+        return {}
+    if not decoded or any(ord(c) < 32 or ord(c) == 127 for c in decoded):
+        return {}
+    if not decoded.endswith('/nodeShape'):
+        return {}
+    source_path = decoded[:-len('/nodeShape')]
+    if not source_path or not re.fullmatch(r'[A-Za-z0-9_.-]+', source_path):
+        return {}
+    return {'source_path': source_path,
+            'display_name': source_path.rsplit('.', 1)[-1]}
 
 
 def catalog_from_schema(index):
@@ -26,7 +50,8 @@ def catalog_from_schema(index):
             if target_domain == p['domain'] and (p['property_shape'], target_shape) in rel:
                 edges.append({'domain':p['domain'], 'from_shape':p['node_shape'],
                               'predicate':p['path'], 'to_shape':target_shape})
-    return {'entities':[{'domain':d,'shape':s,'properties':sorted(props)}
+    return {'entities':[{'domain':d,'shape':s,'properties':sorted(props),
+                         **_shape_display_metadata(s)}
                         for (d,s),props in sorted(shapes.items())],
             'shacl_edges':edges}
 
@@ -226,6 +251,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
       "A requested property value is a projection, never a second entity. "
       "Every projection output alias MUST differ from ALL entity aliases. "
       "Use filters=null only when the question has no filter condition. "
+      "Use readable display_name and source_path metadata, when present, to understand "
+      "the meaning of a shape; these are descriptive only. "
+      "Return the exact original shape IRI, never the readable name or decoded path. "
       "Use exact domain, shape and property IRIs from the catalog. "
       "Only use catalog SHACL edges and supplied verified mapping IDs. "
       "Preserve requested domains, paths, output properties, values and filters; do not invent values. "
