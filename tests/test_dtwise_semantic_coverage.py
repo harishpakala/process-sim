@@ -44,6 +44,18 @@ class SemanticCoverageTests(unittest.TestCase):
                 "Show dexpi InstrumentationFunction measuredVariable where localId is FI_103.",
                 CATALOG, {"dexpi"})
 
+    def test_b08_class_name_is_not_relationship_projection(self):
+        catalog = {"entities": [{"domain": "dexpi", "shape": SHAPE,
+                   "properties": [MEASURED, LOCAL,
+                                  "https://example.org/dexpi/hasInstrumentationFunction"]}],
+                   "shacl_edges": [{"domain": "dexpi", "from_shape": "urn:parent",
+                       "to_shape": SHAPE,
+                       "predicate": "https://example.org/dexpi/hasInstrumentationFunction"}]}
+        check_semantic_coverage(plan(filters={"op": "eq", "entity": "instrument",
+            "predicate": LOCAL, "value": "FI_103"}),
+            "Show dexpi InstrumentationFunction measuredVariable where localId is FI_103.",
+            catalog, {"dexpi"})
+
     def test_b08_valid_filter_accepted(self):
         check_semantic_coverage(plan(filters={"op": "eq", "entity": "instrument",
             "predicate": LOCAL, "value": "FI_103"}),
