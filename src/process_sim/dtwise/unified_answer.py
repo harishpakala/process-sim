@@ -321,7 +321,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # This is a coverage guard only: the model must still select the entity,
     # predicate, filter operator and literal; no IR is synthesized here.
     substring_clauses = re.findall(
-        r'\\b([A-Za-z][A-Za-z0-9_]*)\\s+(?:containing|contains)\\s+([^\\s,;?]+)',
+        r'\b([A-Za-z][A-Za-z0-9_]*)\s+(?:containing|contains)\s+([^\s,;?]+)',
         question, flags=re.I)
     if substring_clauses:
         requirements_by_name = _explicit_property_requirements(question, catalog)
