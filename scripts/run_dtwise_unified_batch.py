@@ -8,6 +8,7 @@ import argparse
 import csv
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 import sys
@@ -52,9 +53,18 @@ def main() -> int:
     questions = json.loads(MANIFEST.read_text(encoding="utf-8"))
     lower, upper = ((args.start, args.end) if args.start is not None
                     else (None, None) if args.all else (1, 10))
-    cases = [q for q in questions if q["id"].startswith("B") and q["id"][1:].isdigit()
-             and (lower is None or lower <= int(q["id"][1:]) <= upper)]
-    cases.sort(key=lambda q: int(q["id"][1:]))
+    def benchmark_key(case):
+        # B23.1/B23.2/B23.3 belong to benchmark 23 for range selection.
+        # Preserve each full ID for independent reports and stable ordering.
+        match = re.fullmatch(r"B(\\d+)(?:\\.(\\d+))?", case.get("id", ""))
+        if not match:
+            return None
+        return int(match.group(1)), (int(match.group(2)) if match.group(2) else -1)
+
+    cases = [q for q in questions
+             if (key := benchmark_key(q)) is not None
+             and (lower is None or lower <= key[0] <= upper)]
+    cases.sort(key=benchmark_key)
     if not cases:
         parser.error("No benchmark questions selected")
     args.output_dir.mkdir(parents=True, exist_ok=True)
