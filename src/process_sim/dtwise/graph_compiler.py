@@ -103,27 +103,27 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         keys = op.get('group_by', [])
         group_columns = graphs + ['?' + a for a in keys]
         select_columns = group_columns + [f'(COUNT(DISTINCT {root}) AS ?count)']
-        query = 'SELECT ' + ' '.join(select_columns) + '\\nWHERE {\\n' + body + '\\n}'
+        query = 'SELECT ' + ' '.join(select_columns) + '\nWHERE {\n' + body + '\n}'
         if group_columns:
-            query += '\\nGROUP BY ' + ' '.join(group_columns)
+            query += '\nGROUP BY ' + ' '.join(group_columns)
         having = op.get('having')
         if having is not None:
             comparator = {'gt': '>', 'gte': '>=', 'lt': '<', 'lte': '<=', 'eq': '='}[having['op']]
-            query += f'\\nHAVING (COUNT(DISTINCT {root}) {comparator} {having["value"]})'
+            query += f'\nHAVING (COUNT(DISTINCT {root}) {comparator} {having["value"]})'
         if ordering:
-            query += '\\n' + order_clause()
+            query += '\n' + order_clause()
         elif graphs:
-            query += '\\nORDER BY ' + ' '.join(graphs)
+            query += '\nORDER BY ' + ' '.join(graphs)
         if 'limit' in ir:
-            query += '\\nLIMIT ' + str(ir['limit'])
+            query += '\nLIMIT ' + str(ir['limit'])
         return query
     cols = graphs + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
     cols = list(dict.fromkeys(cols))
-    query = 'SELECT DISTINCT ' + ' '.join(cols) + '\\nWHERE {\\n' + body + '\\n}'
+    query = 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}'
     if ordering:
-        query += '\\n' + order_clause()
+        query += '\n' + order_clause()
     else:
-        query += '\\nORDER BY ' + ' '.join(cols)
-    return query + '\\nLIMIT ' + str(ir.get('limit', limit)) + '\n'
+        query += '\nORDER BY ' + ' '.join(cols)
+    return query + '\nLIMIT ' + str(ir.get('limit', limit)) + '\n'
