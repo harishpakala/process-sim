@@ -31,8 +31,6 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
     parser.add_argument("--llm-timeout", type=int, default=120,
                         help="Ollama HTTP timeout per planning attempt (seconds; default: 120)")
-    parser.add_argument("--llm-timeout", type=int, default=120,
-                        help="Ollama HTTP timeout per planning attempt (seconds; default: 120)")
     args = parser.parse_args()
 
     if not args.endpoint:
@@ -41,8 +39,6 @@ def main() -> int:
         parser.error(f"Missing schema index: {SCHEMA}")
     if args.timeout < 1:
         parser.error("--timeout must be positive")
-    if args.llm_timeout < 1:
-        parser.error("--llm-timeout must be positive")
     if args.llm_timeout < 1:
         parser.error("--llm-timeout must be positive")
 
@@ -74,7 +70,6 @@ def main() -> int:
             sys.executable, "-m", "process_sim.dtwise.unified_answer", "answer",
             "--schema", str(SCHEMA), "--question", case["question"],
             "--model", args.model, "--ollama-host", args.ollama_host,
-            "--llm-timeout", str(args.llm_timeout),
             "--llm-timeout", str(args.llm_timeout),
             "--endpoint", args.endpoint, "--output", str(report_path),
         ]
