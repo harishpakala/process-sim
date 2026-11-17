@@ -31,6 +31,8 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=240, help="Maximum wall time per question (seconds)")
     parser.add_argument("--owner-hints", action="store_true",
                         help="Opt-in SHACL property-owner hints for planner")
+    parser.add_argument("--compact-catalog", action="store_true",
+                        help="Use experimental lossless SHACL IRI symbols")
     parser.add_argument("--compact-prompt", action="store_true",
                         help="Opt-in shorter planner prompt for A/B latency tests")
     parser.add_argument("--keep-alive", default=None,
@@ -85,6 +87,8 @@ def main() -> int:
             command.extend(["--prompt-diagnostics", str(args.output_dir / f"{case_id}.prompt-diagnostics.json")])
         if args.owner_hints:
             command.append("--owner-hints")
+        if args.compact_catalog:
+            command.append("--compact-catalog")
         if args.compact_prompt:
             command.append("--compact-prompt")
         if args.keep_alive is not None:
@@ -142,7 +146,7 @@ def main() -> int:
         summary.append({
             "id": case_id, "category": case["category"], "question": case["question"],
             "model": args.model, "llm_timeout_seconds": args.llm_timeout,
-            "compact_prompt": args.compact_prompt, "keep_alive": args.keep_alive,
+            "compact_prompt": args.compact_prompt, "compact_catalog": args.compact_catalog, "keep_alive": args.keep_alive,
             "owner_hints": args.owner_hints,
             "status": status, "seconds": elapsed, "result_rows": result_count,
             "planning_seconds": planning_seconds, "compilation_seconds": compilation_seconds,
