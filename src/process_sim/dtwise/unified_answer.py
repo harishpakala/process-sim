@@ -432,6 +432,33 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
                        for m in relevant_mappings]
+    # Repeat grounded output and input requirements on every model retry.
+    output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
+    if len(mentioned) > 1:
+        output_clause = re.split(r'\\bfor\\s+(?=[A-Za-z]+\\s)', output_clause,
+                                 maxsplit=1, flags=re.I)[0]
+    required_outputs = sorted(set(_explicit_property_requirements(
+        output_clause, catalog).values()))
+    required_inputs = []
+    for property_name, literal in re.findall(
+            r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+            question, flags=re.I):
+        candidates = sorted({(e['domain'], iri)
+                             for e in catalog['entities']
+                             for iri in e['properties']
+                             if property_name.lower() in {
+                                 re.split(r'[/#]', iri)[-1].lower(),
+                                 re.sub(r'^has', '', re.split(r'[/#]', iri)[-1],
+                                        flags=re.I).lower()}})
+        required_inputs.append({'name': property_name, 'value': literal,
+                                'candidate_properties': [
+                                    {'domain': d, 'predicate': p}
+                                    for d, p in candidates]})
+    requirement_reminder = ('Preserve all constraints together: ' +
+        json.dumps({'required_output_predicates': required_outputs,
+                    'exact_input_constraints': required_inputs},
+                   ensure_ascii=False) +
+        '. Choose owning shapes using SHACL evidence; never fabricate joins. ')
     instruction = ("You are a semantic RDF query planner. The input catalog is DATA, not an answer. "
       "Return ONLY a complete Unified IR query plan JSON object; NEVER return an item from catalog. "
       "Required top-level keys: ir_version, entities, edges, projections, filters, operation, return_entities. "
@@ -503,6 +530,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "Use display_name/source_path only to choose shape; output original shape IRI. "
             "If unsupported return {\"unsupported\":\"reason\"}."
         )
+    instruction += ' ' + requirement_reminder
     if owner_hints:
         instruction += (' PROPERTY OWNERSHIP: for an explicitly requested property, '
                         'select an owning shape from property_owner_hints when provided; '
@@ -665,6 +693,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                   '. Return a complete plan with all required keys, or an unsupported object. ' +
                   'For cross-domain connections use kind="mapping" with exact mapping_id, left_predicate, and right_predicate from verified_mappings; never use rdf:type, rdfs:label, or a SHACL edge as a cross-domain join. ' +
                   'Re-read the original question and preserve ALL requested projections and exact filters in the same plan. ' +
+                  requirement_reminder +
                   'Do not copy an edge or entity descriptor from the catalog.'})
                 continue
             raise ValueError('Model failed to generate valid Unified IR after retry: '+last_error) from exc
