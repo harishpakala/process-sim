@@ -329,7 +329,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # it never adds a filter, chooses an entity, or repairs the model's plan.
     if len(mentioned) > 1:
         for property_name, literal in re.findall(
-                r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+                r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
                 question, flags=re.I):
             candidates = set()
             for selected in plan['entities']:
