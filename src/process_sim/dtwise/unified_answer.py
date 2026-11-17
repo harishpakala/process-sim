@@ -5,6 +5,7 @@ import base64
 import binascii
 import json
 import re
+import time
 from pathlib import Path
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
@@ -284,11 +285,19 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Keep constraints from earlier failures active across subsequent retries.
     repair_constraints = []
     for attempt in range(3):
+        request_started = time.perf_counter()
         result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', {
             'model':model,'stream':False,'format':'json','options':{'temperature':0},
             'messages':messages}, timeout)
         raw = result.get('message', {}).get('content')
-        attempt_record = {'attempt': attempt + 1, 'model': model, 'raw': raw}
+        attempt_record = {'attempt': attempt + 1, 'model': model, 'raw': raw,
+                          'wall_seconds': round(time.perf_counter() - request_started, 3),
+                          'ollama_total_seconds': result.get('total_duration', 0) / 1e9,
+                          'model_load_seconds': result.get('load_duration', 0) / 1e9,
+                          'prompt_eval_seconds': result.get('prompt_eval_duration', 0) / 1e9,
+                          'generation_seconds': result.get('eval_duration', 0) / 1e9,
+                          'prompt_tokens': result.get('prompt_eval_count'),
+                          'generated_tokens': result.get('eval_count')}
         if diagnostics is not None:
             diagnostics.append(attempt_record)
         try:
@@ -404,20 +413,30 @@ def main():
     if not args.ir and not args.question: parser.error('Provide --ir or --question')
     if args.command=='answer' and not args.endpoint: parser.error('answer requires --endpoint')
     registry=json.loads(Path(args.mappings).read_text(encoding='utf-8')) if args.mappings else None
+    timings={}
+    stage_started=time.perf_counter()
     try:
         diagnostics=[]
         plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
             args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
             timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics)
+        timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
+        stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
                                graph_iri=args.graph_iri,include_graph=args.include_graph,limit=args.limit)
+        timings['compilation_seconds']=round(time.perf_counter()-stage_started,3)
         result={'status':'compiled','ir':plan,'sparql':query,'planning_attempts':diagnostics}
         if args.command=='answer':
-            result['results']=execute_select(query,args.endpoint)
+            stage_started=time.perf_counter()
+            try:
+                result['results']=execute_select(query,args.endpoint)
+            finally:
+                timings['graphdb_seconds']=round(time.perf_counter()-stage_started,3)
             result['status']='executed'
     except (ValueError,HTTPError,URLError,TimeoutError,OSError,KeyError,TypeError) as exc:
         result={'status':'rejected_or_failed','error':str(exc),
                 'planning_attempts':locals().get('diagnostics', [])}
+    result['timings']=timings
     output=json.dumps(result,ensure_ascii=False,indent=2)
     if args.output: Path(args.output).write_text(output,encoding='utf-8')
     print(output)
