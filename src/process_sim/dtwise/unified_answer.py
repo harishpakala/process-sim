@@ -421,9 +421,17 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     if compact_catalog:
         prompt_catalog, catalog_symbols, reverse_symbols = _compact_catalog_symbols(prompt_catalog)
     hints = property_owner_hints(question, catalog) if owner_hints else []
+    # Keep mappings incident to requested domains, including possible bridge
+    # domains. Never invent or automatically select a mapping for the model.
+    approved_mappings = [m for m in (mappings or [])
+                         if m.get('verified') is True and m.get('evidence_ids')]
+    relevant_mappings = [m for m in approved_mappings
+                         if not mentioned or
+                         m.get('left_domain') in mentioned or
+                         m.get('right_domain') in mentioned]
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
-                       for m in (mappings or []) if m.get('verified') is True and m.get('evidence_ids')]
+                       for m in relevant_mappings]
     instruction = ("You are a semantic RDF query planner. The input catalog is DATA, not an answer. "
       "Return ONLY a complete Unified IR query plan JSON object; NEVER return an item from catalog. "
       "Required top-level keys: ir_version, entities, edges, projections, filters, operation, return_entities. "
@@ -655,6 +663,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 messages.append({'role':'user','content':
                   'Your previous response was not a complete Unified IR query plan: ' + last_error +
                   '. Return a complete plan with all required keys, or an unsupported object. ' +
+                  'For cross-domain connections use kind="mapping" with exact mapping_id, left_predicate, and right_predicate from verified_mappings; never use rdf:type, rdfs:label, or a SHACL edge as a cross-domain join. ' +
+                  'Re-read the original question and preserve ALL requested projections and exact filters in the same plan. ' +
                   'Do not copy an edge or entity descriptor from the catalog.'})
                 continue
             raise ValueError('Model failed to generate valid Unified IR after retry: '+last_error) from exc
