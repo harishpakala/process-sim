@@ -19,7 +19,7 @@ services:
     entrypoint: ["/bin/sh", "-c"]
     command:
       - |
-        sed 's/\\r$//' /config/init.sh > /tmp/graphdb-init.sh
+        tr -d '\015' < /config/init.sh > /tmp/graphdb-init.sh
         exec /bin/sh /tmp/graphdb-init.sh
     restart: "no"
 
