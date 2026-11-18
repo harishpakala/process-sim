@@ -415,7 +415,10 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
-    prompt_catalog = _prompt_catalog(question, catalog)
+    # Cross-domain questions require shape candidates in every named domain;
+    # output-property-only reduction can silently remove the join's input side.
+    prompt_catalog = (catalog if len(mentioned) > 1
+                      else _prompt_catalog(question, catalog))
     catalog_symbols = {}
     reverse_symbols = {}
     if compact_catalog:
@@ -439,24 +442,40 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         (m['right_domain'], m['right_property'])
                         for m in relevant_mappings}
     initial_shape_guide = []
+    question_words = set(re.findall(r'[a-z0-9]+', question.lower()))
     for domain in sorted(mentioned):
-        candidates = [e for e in prompt_catalog['entities']
+        candidates = [e for e in catalog['entities']
                       if e['domain'] == domain]
         for e in candidates:
             relevant_props = [p for p in e['properties']
                               if (domain, p) in mapping_keys]
-            if relevant_props:
-                initial_shape_guide.append({
-                    'domain': domain,
-                    'shape': e['shape'],
-                    'mapping_properties': relevant_props})
+            # Display names come from decoded SHACL shape paths, not guesses.
+            # Prefer explicitly named entity types; retain alternatives when
+            # no unique name match is supported by the evidence.
+            display = e.get('display_name', '')
+            source = e.get('source_path', '')
+            name_matches = bool(display and display.lower() in question.lower())
+            initial_shape_guide.append({
+                'domain': domain,
+                'shape': e['shape'],
+                'display_name': display,
+                'source_path': source,
+                'entity_name_mentioned': name_matches,
+                'mapping_properties': relevant_props,
+                'properties': e['properties'],
+            })
     if compact_catalog:
         initial_shape_guide = [{
             **entry,
             'shape': catalog_symbols.get(entry['shape'], entry['shape']),
             'mapping_properties': [catalog_symbols.get(p, p)
-                                   for p in entry['mapping_properties']]}
-            for entry in initial_shape_guide]
+                                   for p in entry['mapping_properties']],
+            'properties': [catalog_symbols.get(p, p)
+                           for p in entry['properties']],
+        } for entry in initial_shape_guide]
+    initial_shape_guide.sort(key=lambda e: (
+        e['domain'], not e['entity_name_mentioned'],
+        -len(e['mapping_properties']), e['shape']))
     # Repeat grounded output and input requirements on every model retry.
     output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
     if len(mentioned) > 1:
@@ -621,6 +640,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         'Do not invent symbols; do not use symbols for filter values.')
         hints = [{k: catalog_symbols.get(v, v) if isinstance(v, str) else v
                   for k, v in hint.items()} for hint in hints]
+    if len(mentioned) > 1:
+        instruction += (
+            ' Select entity shapes by matching the requested entity type to '
+            'catalog display_name/source_path and checking property ownership. '
+            ' cross_domain_shape_candidates lists evidence-backed alternatives; '
+            ' prefer entity_name_mentioned=true when its properties support the join. ')
     if len(mentioned) > 1:
         instruction += (
             ' CROSS-DOMAIN RULE: each entity shape symbol is GLOBAL across '
