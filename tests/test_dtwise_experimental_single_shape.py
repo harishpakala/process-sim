@@ -107,6 +107,23 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
             "projections": ["N0P1"], "filter": None})
         self.assertEqual(plan["operation"]["having_min"], 3)
 
+    def test_grouped_having_ignores_malformed_unrequested_filter(self):
+        plan, _ = self.plan(
+            "List AssetIdentifier values with more than three opc Signal entities.",
+            {"path_id": "PATH_0", "operation": "select",
+             "projections": ["N0P1"],
+             "filter": {"property": "N0P1", "op": "gt", "value": 3}})
+        self.assertIsNone(plan["filters"])
+        self.assertEqual(plan["operation"], {"type": "group_count", "having_min": 3})
+
+    def test_explicit_equality_still_rejects_malformed_filter(self):
+        with self.assertRaisesRegex(ValueError, "Invalid evidence-selection filter"):
+            self.plan(
+                "Get SignalName from opc Signal where AssetIdentifier is FI103.",
+                {"path_id": "PATH_0", "operation": "select",
+                 "projections": ["N0P0"],
+                 "filter": {"property": "N0P1", "op": "gt", "value": 3}})
+
     def test_grouped_having_recovers_model_select(self):
         plan, _ = self.plan(
             "List AssetIdentifier values with more than three opc Signal entities.",
