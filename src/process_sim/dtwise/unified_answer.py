@@ -830,16 +830,16 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Shape metadata is already in prompt_catalog; do not duplicate it.
     initial_shape_guide = []
     # Repeat grounded output and input requirements on every model retry.
-    output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
+    output_clause = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)[0]
     if len(mentioned) > 1:
-        output_clause = re.split(r'\\bfor\\s+(?=[A-Za-z]+\\s)', output_clause,
+        output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
     required_outputs = sorted(set(_explicit_property_requirements(
         output_clause, catalog).values()) |
         _domain_qualified_output_requirements(output_clause, catalog))
     required_inputs = []
     for property_name, literal in re.findall(
-            r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+            r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
             question, flags=re.I):
         candidates = sorted({(e['domain'], iri)
                              for e in catalog['entities']
