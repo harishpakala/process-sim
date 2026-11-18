@@ -662,7 +662,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # output projection. Only split when the property is SHACL-grounded and
     # the following token is a literal rather than a relationship preposition.
     with_constraint = re.search(
-        r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+(?!is\b|by\b|through\b|more\b)([^\s,;.]+)',
+        r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+(?!is\b|by\b|through\b|more\b)([^\s,;]+)',
         output_clause, flags=re.I)
     if with_constraint:
         with_property = with_constraint.group(1)
@@ -699,7 +699,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # selected, SHACL-evidenced entity shapes. This checks completeness only:
     # it never adds a filter, chooses an entity, or repairs the model's plan.
     if with_constraint:
-        for property_name, literal in [(with_constraint.group(1), with_constraint.group(2))]:
+        for property_name, literal in [(with_constraint.group(1), with_constraint.group(2).rstrip('.'))]:
             candidates = set()
             for selected in plan['entities']:
                 for entity in catalog['entities']:
