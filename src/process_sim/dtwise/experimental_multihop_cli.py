@@ -5,6 +5,7 @@ The default generate_ir planner is not modified.
 """
 import re
 
+from .experimental_semantic_grounding import plan_single_shape_semantic
 from .evidence_path_binding import bind_evidenced_path
 from .evidence_path_requirements import ground_path_requirements
 from .evidence_path_selection import select_evidenced_path
@@ -94,9 +95,12 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             if node not in anchors:
                 anchors.append(node)
     if len(anchors) == 1:
-        plan = _plan_single_shape_lookup(
-            question, catalog, mentioned, anchors[0], index, mappings)
-        return plan, {"status": "single_shape_grounded", "choice": None}
+        entity = next(e for e in catalog["entities"]
+                      if (e["domain"], e["shape"]) == anchors[0])
+        return plan_single_shape_semantic(
+            question, entity, index, mappings, model=model,
+            request_json=request_json or _request_json,
+            ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive)
     if len(anchors) < 2:
         raise ValueError(
             "Experimental multi-hop requires at least one named SHACL shape")
@@ -112,7 +116,7 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             for path in enumerate_evidenced_paths(
                     catalog, mappings, source, target,
                     max_hops=4, max_paths=256):
-                if len(path["steps"]) < 2 or not required.issubset(
+                if len(path["steps"]) < 1 or not required.issubset(
                         set(path["nodes"])):
                     continue
                 signature = tuple(path["nodes"]), tuple(
