@@ -157,7 +157,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
                         "op": "eq", "value": f["value"]}
     if explicit:
         property_name, literal = explicit[0]
-        literal = literal.rstrip(".")
+        literal = literal.rstrip(".,;")
         candidates = [(j, predicate) for j, predicate in lookup.values()
                       if _label(predicate).casefold() == property_name.casefold()]
         if bound_filter is None:
