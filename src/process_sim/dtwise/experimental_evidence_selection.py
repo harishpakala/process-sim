@@ -130,7 +130,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         question, flags=re.I)
     if not explicit:
         explicit = re.findall(
-            r"\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+            r"\bwith\s+(?!more\s+than\b)([A-Za-z][A-Za-z0-9_]*)\s+"
             r"(?!is\b|by\b|through\b)([^\s,;.]+)",
             question, flags=re.I)
     if len(explicit) > 1:
@@ -177,7 +177,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             if not 1 <= result_limit <= 10000:
                 raise ValueError("Requested limit out of bounds")
     if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
-            or re.search(r"\bwith\s+[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
+            or re.search(r"\bwith\s+(?!more\s+than\b)[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
         raise ValueError("LLM omitted an explicit equality filter")
     if not paths[i]["steps"]:
         node = tuple(paths[i]["nodes"][0])
