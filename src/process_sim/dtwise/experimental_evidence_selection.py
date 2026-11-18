@@ -11,7 +11,7 @@ from .unified_answer import resolve_shapes
 
 
 def _label(iri):
-    local = re.split(r"[/#]", iri)[-1]
+    local = re.split(r"[/#:]", iri)[-1]
     return local[3:] if local.lower().startswith("has") and len(local) > 3 else local
 
 
@@ -121,7 +121,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         question, flags=re.I)
     if explicit:
         if len(explicit) != 1 or bound_filter is None:
-            raise ValueError("Missing or ambiguous explicit equality filter")
+            raise ValueError("LLM omitted or ambiguously specified an explicit equality filter")
         property_name, literal = explicit[0]
         literal = literal.rstrip(".")
         selected_local = _label(bound_filter["predicate"])
