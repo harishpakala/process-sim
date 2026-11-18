@@ -140,8 +140,10 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             if (bound_filter["node_index"], bound_filter["predicate"]) not in candidates:
                 raise ValueError("LLM selected a different equality-filter property")
             bound_filter["value"] = literal
-    elif bound_filter is not None:
-        raise ValueError("LLM invented an equality filter absent from the question")
+    else:
+        # No user-specified scalar equality: ignore an invented model filter.
+        # Verified mapping joins remain part of the selected evidence path.
+        bound_filter = None
     if re.search(r"\b(?:count|group\s+by|order(?:ed)?\s+by|ascending|descending|limit)\b", question, re.I):
         raise ValueError("Unsupported aggregation or ordering requirement")
     if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
