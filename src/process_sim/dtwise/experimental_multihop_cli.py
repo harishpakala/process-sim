@@ -83,17 +83,20 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
     """Bind a named hub-and-spoke JOIN using only verified mapping evidence.
 
     This intentionally handles explicit JOIN ... THROUGH ... USING ... syntax.
-    No inferred projection: a join request returns the matched entities.
+    Explicit RETURN projects a SHACL-owned property; otherwise return entities.
     """
     match = re.fullmatch(
         r"\s*join\s+(.+?)\s+through\s+([A-Za-z][A-Za-z0-9_]*)"
         r"\s+([A-Za-z][A-Za-z0-9_]*)\s+using\s+"
         r"([A-Za-z][A-Za-z0-9_]*(?:\s+and\s+[A-Za-z][A-Za-z0-9_]*)*)"
         r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?))?"
+        r"(?:\s*,\s*return\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*))?"
         r"\s*[.]?\s*", question, re.I)
     if not match:
         return None
-    source_clause, hub_domain, hub_label, key_clause, filter_name, filter_value = match.groups()
+    (source_clause, hub_domain, hub_label, key_clause, filter_name,
+     filter_value, output_domain, output_label, output_name) = match.groups()
     keys = {key.casefold() for key in re.split(r"\s+and\s+", key_clause, flags=re.I)}
     if keys not in ({"assetidentifier"}, {"assetidentifier", "productidentifier"}):
         raise ValueError("Unsupported explicit hub-join keys")
@@ -157,11 +160,21 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
             raise ValueError("Empty hub filter value")
         bound_filter = {"op": "eq", "entity": aliases[hub],
                         "predicate": predicate, "value": filter_value}
+    projections = []
+    if output_domain is not None:
+        targets = [node for node in leaves
+                   if node[0].casefold() == output_domain.casefold()
+                   and owners[node]["display_name"].casefold() == output_label.casefold()]
+        if len(targets) != 1:
+            raise ValueError("Hub projection target is missing or ambiguous")
+        predicate = _single_shape_property(owners[targets[0]], output_name)
+        projections = [{"entity": aliases[targets[0]], "predicate": predicate,
+                        "as": "value_0"}]
     plan = {"ir_version": "1.0",
             "entities": [{"alias": aliases[node], "domain": node[0],
                           "shape": node[1]} for node in nodes],
-            "edges": edges, "projections": [], "filters": bound_filter,
-            "operation": {"type": "select"}, "return_entities": True}
+            "edges": edges, "projections": projections, "filters": bound_filter,
+            "operation": {"type": "select"}, "return_entities": not bool(projections)}
     check_semantic_coverage(plan, question, catalog, mentioned)
     return resolve_shapes(plan, index, mappings=mappings), {
         "status": "evidence_semantic_grounded", "choice": "VERIFIED_HUB_JOIN"}
