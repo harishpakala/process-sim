@@ -1579,6 +1579,8 @@ def main():
                         help='Opt-in evidence-backed property owning shape hints')
     parser.add_argument('--compact-catalog',action='store_true',
                         help='Experimental lossless SHACL IRI symbol compression')
+    parser.add_argument('--experimental-multihop',action='store_true',
+                        help='Opt-in evidence-backed LLM multi-hop planner (fails closed)')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -1601,12 +1603,24 @@ def main():
     try:
         diagnostics=[]
         prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else None
-        plan=json.loads(Path(args.ir).read_text(encoding='utf-8')) if args.ir else generate_ir(
-            args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
-            timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
-            compact_prompt=args.compact_prompt,keep_alive=args.keep_alive,
-            owner_hints=args.owner_hints,prompt_diagnostics=prompt_diagnostics,
-            compact_catalog=args.compact_catalog)
+        if args.ir:
+            plan=json.loads(Path(args.ir).read_text(encoding='utf-8'))
+        elif args.experimental_multihop:
+            from .experimental_multihop_cli import plan_experimental_multihop
+            schema_index=json.loads(Path(args.schema).read_text(encoding='utf-8'))
+            plan, selection=plan_experimental_multihop(
+                args.question,schema_index,registry,model=args.model,
+                ollama_host=args.ollama_host,timeout=args.llm_timeout,
+                keep_alive=args.keep_alive)
+            diagnostics.append({'status':'experimental_multihop',
+                                'selection':selection})
+        else:
+            plan=generate_ir(
+                args.question,args.schema,model=args.model,ollama_host=args.ollama_host,
+                timeout=args.llm_timeout,mappings=registry,diagnostics=diagnostics,
+                compact_prompt=args.compact_prompt,keep_alive=args.keep_alive,
+                owner_hints=args.owner_hints,prompt_diagnostics=prompt_diagnostics,
+                compact_catalog=args.compact_catalog)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
         query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
