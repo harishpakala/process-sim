@@ -189,6 +189,43 @@ class FilteredHubJoinTests(unittest.TestCase):
         self.assertEqual(paths, [{"nodes": [("opcuaconnectivity", "urn:SignalMapping")],
                                   "steps": []}])
 
+    def test_b19_filtered_single_shape_list(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            plan_experimental_multihop,
+        )
+        catalog = {"entities": [
+            {"domain": "opcuaconnectivity", "shape": "urn:SignalMapping",
+             "display_name": "SignalMapping",
+             "properties": [
+                 "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+                 "https://example.org/opcuaconnectivity/hasSignalName"]},
+            {"domain": "other", "shape": "urn:Other",
+             "display_name": "Other",
+             "properties": ["https://example.org/other/hasAssetIdentifier"]},
+        ], "shacl_edges": []}
+        question = ("For OPCUAConnectivity SignalMapping entities where "
+                    "AssetIdentifier is https://aas.example.com/FI103, list SignalName.")
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value=catalog), patch(
+                       "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                       return_value=(catalog, set())), patch(
+                       "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                       side_effect=lambda plan, index, mappings: plan), patch(
+                       "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"):
+            plan, selection = plan_experimental_multihop(
+                question, {}, [], model="unused", ollama_host="unused",
+                timeout=1)
+        self.assertEqual(selection["choice"], "VERIFIED_SINGLE_SHAPE_LOOKUP")
+        self.assertEqual(plan["operation"], {"type": "select"})
+        self.assertEqual(plan["projections"], [{
+            "entity": "n0",
+            "predicate": "https://example.org/opcuaconnectivity/hasSignalName",
+            "as": "value_0"}])
+        self.assertEqual(plan["filters"], {
+            "op": "eq", "entity": "n0",
+            "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+            "value": "https://aas.example.com/FI103"})
+
     def test_unrequested_filter_key_rejected(self):
         with self.assertRaisesRegex(ValueError, "Hub filter must use"):
             self.plan(question=QUESTION.replace(
