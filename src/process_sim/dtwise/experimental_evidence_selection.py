@@ -92,6 +92,8 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     requested_count = bool(re.search(r"\bcount\b|\bhow many\b|\bnumber of\b|\bmore than\b", question, re.I))
     grouped = requested_count and bool(re.search(r"\b(?:for each|per|each|more than)\b", question, re.I))
     expected_operation = "group_count" if grouped else ("count" if requested_count else "select")
+    if result["operation"] == "unsupported":
+        raise ValueError("Unsupported evidence-selection operation")
     if result["operation"] != expected_operation:
         raise ValueError("LLM selected an operation inconsistent with the question")
     path_id = result["path_id"]
