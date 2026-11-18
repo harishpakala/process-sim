@@ -100,6 +100,20 @@ class SemanticCoverageTests(unittest.TestCase):
             "Show MeasuredVariable belonging to DEXPI InstrumentationFunction entities with LocalId FI_103.",
             CATALOG, {"dexpi"})
 
+    def test_with_uri_literal_must_match_full_value(self):
+        uri = "https://aas.example.com/FI103"
+        question = ("Show MeasuredVariable belonging to DEXPI InstrumentationFunction "
+                    "entities with LocalId " + uri + ".")
+        check_semantic_coverage(
+            plan(filters={"op": "eq", "entity": "instrument",
+                          "predicate": LOCAL, "value": uri}),
+            question, CATALOG, {"dexpi"})
+        with self.assertRaisesRegex(ValueError, "Explicit input constraint omitted"):
+            check_semantic_coverage(
+                plan(filters={"op": "eq", "entity": "instrument",
+                              "predicate": LOCAL, "value": "https://aas"}),
+                question, CATALOG, {"dexpi"})
+
     def test_with_literal_does_not_hide_missing_output(self):
         with self.assertRaisesRegex(ValueError, "projection omitted"):
             check_semantic_coverage(
