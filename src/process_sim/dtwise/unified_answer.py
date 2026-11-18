@@ -656,7 +656,14 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             'Preserve every required domain in entities on every attempt. '
             'For cross-domain joins use ONLY kind="mapping" and copy the exact '
             'mapping id and oriented predicates from verified_mappings. '
-            'Never invent a mapping id or use a cross-domain SHACL edge. ')
+            'Never invent a mapping id or use a cross-domain SHACL edge. '
+            'A mapping edge MUST connect an entity in left_domain to an '
+            'entity in right_domain of that SAME verified mapping, with '
+            'left_property and right_property in their documented order. '
+            'Do not represent a join-key property as a separate entity unless '
+            'a SHACL node shape and an actual relationship require it. '
+            'Prefer the smallest connected set of evidence-backed entities '
+            'that satisfies the question. ')
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
@@ -934,6 +941,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
                     'The previous IR failed SHACL validation: ' + last_error + '. ' +
+                    (' A mapping edge must connect the verified left_domain '
+                     'to right_domain, never two entities from the same '
+                     'domain. Remove any unsupported intermediate entity '
+                     'and its invalid edge; keep the valid cross-domain '
+                     'mapping and all explicitly requested entities. '
+                     if 'Mapping evidence does not match edge' in last_error
+                     else '') +
                     shape_evidence +
                     'For CROSS-DOMAIN queries, examine verified_mappings in the original user message. A SHACL edge must not connect entities in different domains. When a verified mapping applies, use an edge with kind="mapping", from and to set to the corresponding entity aliases, mapping_id set to the exact verified mapping id, and left_predicate and right_predicate copied exactly from its left_property and right_property. Every entity must be connected by valid edges; do not solve a cross-domain SHACL error by removing the edge. Never invent or approve a mapping. ' +
                     '. If the error mentions filter: filters MUST be a single object, NOT a list; '
