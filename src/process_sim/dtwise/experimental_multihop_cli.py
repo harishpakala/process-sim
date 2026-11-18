@@ -90,13 +90,12 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         r"\s+([A-Za-z][A-Za-z0-9_]*)\s+using\s+"
         r"([A-Za-z][A-Za-z0-9_]*(?:\s+and\s+[A-Za-z][A-Za-z0-9_]*)*)"
         r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?))?"
-        r"(?:\s*,\s*return\s+([A-Za-z][A-Za-z0-9_]*)\s+"
-        r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*))?"
+        r"(?:\s*,\s*return\s+(.+?))?"
         r"\s*[.]?\s*", question, re.I)
     if not match:
         return None
     (source_clause, hub_domain, hub_label, key_clause, filter_name,
-     filter_value, output_domain, output_label, output_name) = match.groups()
+     filter_value, output_clause) = match.groups()
     keys = {key.casefold() for key in re.split(r"\s+and\s+", key_clause, flags=re.I)}
     if keys not in ({"assetidentifier"}, {"assetidentifier", "productidentifier"}):
         raise ValueError("Unsupported explicit hub-join keys")
@@ -161,15 +160,31 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         bound_filter = {"op": "eq", "entity": aliases[hub],
                         "predicate": predicate, "value": filter_value}
     projections = []
-    if output_domain is not None:
-        targets = [node for node in leaves
-                   if node[0].casefold() == output_domain.casefold()
-                   and owners[node]["display_name"].casefold() == output_label.casefold()]
-        if len(targets) != 1:
-            raise ValueError("Hub projection target is missing or ambiguous")
-        predicate = _single_shape_property(owners[targets[0]], output_name)
-        projections = [{"entity": aliases[targets[0]], "predicate": predicate,
-                        "as": "value_0"}]
+    if output_clause is not None:
+        # Each requested output is a fully qualified Domain Shape Property.
+        # Reject any partial clause rather than silently dropping a projection.
+        clauses = re.split(r"\s+and\s+", output_clause, flags=re.I)
+        if not clauses or len(clauses) > len(leaves):
+            raise ValueError("Unsupported hub projection list")
+        seen = set()
+        for i, clause in enumerate(clauses):
+            output_match = re.fullmatch(
+                r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*)"
+                r"\s+([A-Za-z][A-Za-z0-9_]*)", clause.strip(), re.I)
+            if not output_match:
+                raise ValueError("Invalid qualified hub projection")
+            output_domain, output_label, output_name = output_match.groups()
+            targets = [node for node in leaves
+                       if node[0].casefold() == output_domain.casefold()
+                       and owners[node]["display_name"].casefold() == output_label.casefold()]
+            if len(targets) != 1:
+                raise ValueError("Hub projection target is missing or ambiguous")
+            predicate = _single_shape_property(owners[targets[0]], output_name)
+            if (targets[0], predicate) in seen:
+                raise ValueError("Duplicate hub projection")
+            seen.add((targets[0], predicate))
+            projections.append({"entity": aliases[targets[0]], "predicate": predicate,
+                                "as": "value_" + str(i)})
     plan = {"ir_version": "1.0",
             "entities": [{"alias": aliases[node], "domain": node[0],
                           "shape": node[1]} for node in nodes],
