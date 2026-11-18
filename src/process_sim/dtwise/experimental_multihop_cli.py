@@ -48,8 +48,21 @@ def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
                r"\s*[.]?\s*$")
     match = re.fullmatch(pattern, question, re.I)
     if not match:
-        raise ValueError("Unsupported single-shape query syntax")
-    output_name, filter_name, filter_value = match.groups()
+        # Manifest B19: "For DOMAIN Shape entities where Key is VALUE, list Field."
+        # Match the complete question to avoid silently ignoring constraints.
+        alternate = (r"^\\s*for\\s+" + re.escape(entity["domain"]) +
+                     r"\\s+" + re.escape(label) +
+                     r"\\s+entities\\s+where\\s+([A-Za-z][A-Za-z0-9_]*)" +
+                     r"\\s+is\\s+(\\S+?)\\s*,\\s*list\\s+" +
+                     r"([A-Za-z][A-Za-z0-9_]*)\\s*[.]?\\s*$")
+        alternate_match = re.fullmatch(alternate, question, re.I)
+        if not alternate_match:
+            raise ValueError("Unsupported single-shape query syntax")
+        filter_name, filter_value, output_name = alternate_match.groups()
+        match_groups = (output_name, filter_name, filter_value)
+    else:
+        match_groups = match.groups()
+    output_name, filter_name, filter_value = match_groups
     output_predicate = _single_shape_property(entity, output_name)
     bound_filter = None
     if filter_name is not None:
@@ -339,6 +352,14 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                                   anchors, mentioned, index)
     if filtered is not None:
         return filtered
+
+    # Handle the fully specified single-shape B19 lookup before inferring
+    # cross-domain output owners from incidental words in the filter clause.
+    if len(anchors) == 1 and re.match(r"^\\s*for\\s+", question, re.I):
+        plan = _plan_single_shape_lookup(
+            question, catalog, mentioned, anchors[0], index, mappings)
+        return plan, {"status": "evidence_semantic_grounded",
+                      "choice": "VERIFIED_SINGLE_SHAPE_LOOKUP"}
 
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
