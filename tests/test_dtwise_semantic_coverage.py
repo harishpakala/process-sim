@@ -93,6 +93,23 @@ class SemanticCoverageTests(unittest.TestCase):
             "Show dexpi InstrumentationFunction measuredVariable where localId is FI_103.",
             catalog, {"dexpi"})
 
+    def test_with_literal_is_filter_not_projection(self):
+        check_semantic_coverage(
+            plan(filters={"op": "eq", "entity": "instrument",
+                          "predicate": LOCAL, "value": "FI_103"}),
+            "Show MeasuredVariable belonging to DEXPI InstrumentationFunction entities with LocalId FI_103.",
+            CATALOG, {"dexpi"})
+
+    def test_with_literal_does_not_hide_missing_output(self):
+        with self.assertRaisesRegex(ValueError, "projection omitted"):
+            check_semantic_coverage(
+                plan(projections=[{"entity": "instrument", "predicate": LOCAL,
+                                   "as": "localId"}],
+                     filters={"op": "eq", "entity": "instrument",
+                              "predicate": LOCAL, "value": "FI_103"}),
+                "Show MeasuredVariable belonging to DEXPI InstrumentationFunction entities with LocalId FI_103.",
+                CATALOG, {"dexpi"})
+
     def test_where_then_list_projection_is_not_a_second_filter(self):
         check_semantic_coverage(
             plan(filters={"op": "eq", "entity": "instrument",
