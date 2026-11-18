@@ -107,6 +107,20 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
             "projections": ["N0P1"], "filter": None})
         self.assertEqual(plan["operation"]["having_min"], 3)
 
+    def test_grouped_having_recovers_model_select(self):
+        plan, _ = self.plan(
+            "List AssetIdentifier values with more than three opc Signal entities.",
+            {"path_id": "PATH_0", "operation": "select",
+             "projections": ["N0P1"], "filter": None})
+        self.assertEqual(plan["operation"], {"type": "group_count", "having_min": 3})
+
+    def test_grouped_having_rejects_unrequested_group_key(self):
+        with self.assertRaisesRegex(ValueError, "key is not requested"):
+            self.plan(
+                "List AssetIdentifier values with more than three opc Signal entities.",
+                {"path_id": "PATH_0", "operation": "select",
+                 "projections": ["N0P0"], "filter": None})
+
     def test_sorted_limited_select(self):
         plan, _ = self.plan("Get the first ten SignalName values from opc Signal in ascending alphabetical order.", {
             "path_id": "PATH_0", "operation": "select",
