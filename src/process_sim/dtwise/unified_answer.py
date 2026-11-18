@@ -335,7 +335,8 @@ def _domain_qualified_output_requirements(clause, catalog):
                                 else '')
                 pattern = (r'(?<![A-Za-z0-9_])' + re.escape(entity['domain']) +
                            shape_option + r'\s+' + re.escape(name) +
-                           r'(?![A-Za-z0-9_])')
+                           r'(?![A-Za-z0-9_])' +
+                           r'(?=\s+(?:and|for|via|through|associated|using|with|where|on|by|of|from|matched|per|entities|values)\b|[\s]*[.,;:]|[\s]*$)')
                 if re.search(pattern, clause, re.I):
                     found.add(predicate)
     return found
