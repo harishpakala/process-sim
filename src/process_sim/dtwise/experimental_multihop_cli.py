@@ -155,6 +155,56 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         "status": "evidence_semantic_grounded", "choice": "VERIFIED_HUB_JOIN"}
 
 
+
+def _plan_shared_identifier_values(question, catalog, mappings, anchors,
+                                   mentioned, index):
+    """Ground an explicit shared-key value query without an ambiguous LLM pick."""
+    match = re.fullmatch(
+        r"\s*(?:list|show|get|find)\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+values\s+shared\s+by\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+and\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s*[.]?\s*", question, re.I)
+    if not match:
+        return None
+    key, first_domain, first_label, second_domain, second_label = match.groups()
+    owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
+    def resolve_named(domain, label):
+        found = [node for node in anchors if node[0].casefold() == domain.casefold()
+                 and owners[node].get("display_name", "").casefold() == label.casefold()]
+        if len(found) != 1:
+            raise ValueError("Shared-key endpoint is missing or ambiguous")
+        return found[0]
+    start = resolve_named(first_domain, first_label)
+    end = resolve_named(second_domain, second_label)
+    if start == end or set(anchors) != {start, end}:
+        raise ValueError("Shared-key query requires exactly two named shapes")
+    candidates = []
+    for path in enumerate_evidenced_paths(catalog, mappings, start, end,
+                                          max_hops=1, max_paths=256):
+        if len(path["steps"]) != 1 or path["steps"][0]["kind"] != "mapping":
+            continue
+        step = path["steps"][0]
+        left, right = step["left_predicate"], step["right_predicate"]
+        left_label = re.split(r"[/#]", left)[-1]
+        right_label = re.split(r"[/#]", right)[-1]
+        variants = {key.casefold(), ("has" + key).casefold()}
+        if (left_label.casefold() in variants and
+                right_label.casefold() in variants):
+            candidates.append(path)
+    if len(candidates) != 1:
+        raise ValueError("Shared identifier has no unique verified direct mapping")
+    path = candidates[0]
+    predicate = path["steps"][0]["left_predicate"]
+    plan = bind_evidenced_path(
+        path, catalog, mappings,
+        projections=[{"node_index": 0, "predicate": predicate,
+                      "as": "shared_identifier"}])
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded", "choice": "VERIFIED_SHARED_IDENTIFIER"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
@@ -190,6 +240,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                        mentioned, index)
     if hub_join is not None:
         return hub_join
+
+    shared = _plan_shared_identifier_values(question, catalog, mappings,
+                                            anchors, mentioned, index)
+    if shared is not None:
+        return shared
 
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
