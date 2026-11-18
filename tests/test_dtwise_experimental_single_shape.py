@@ -22,7 +22,7 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
                    return_value=self.catalog), patch(
                 "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
                 side_effect=lambda catalog, question: (catalog, {"opc"})), patch(
-                "process_sim.dtwise.experimental_semantic_grounding.resolve_shapes",
+                "process_sim.dtwise.experimental_evidence_selection.resolve_shapes",
                 side_effect=lambda plan, index, mappings: plan):
             result = plan_experimental_multihop(
                 question, {}, [], model="test", ollama_host="http://localhost:11434",
@@ -32,35 +32,35 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
 
     def test_basic_select_calls_llm(self):
         plan, info = self.plan("Get SignalName from opc Signal.", {
-            "operation": "select", "projections": ["P0"], "filter": None})
+            "path_id": "PATH_0", "operation": "select", "projections": ["N0P0"], "filter": None})
         self.assertEqual(plan["projections"][0]["predicate"], "urn:hasSignalName")
-        self.assertEqual(info["status"], "single_shape_llm_grounded")
+        self.assertEqual(info["status"], "evidence_semantic_grounded")
 
     def test_multiple_projections(self):
         plan, _ = self.plan("Get SignalName and OPCUANodeId from opc Signal.", {
-            "operation": "select", "projections": ["P0", "P2"], "filter": None})
+            "path_id": "PATH_0", "operation": "select", "projections": ["N0P0", "N0P2"], "filter": None})
         self.assertEqual(len(plan["projections"]), 2)
 
     def test_equality_filter(self):
         plan, _ = self.plan("Show SignalName from opc Signal where AssetIdentifier is FI103.", {
-            "operation": "select", "projections": ["P0"],
-            "filter": {"property": "P1", "op": "eq", "value": "FI103"}})
+            "path_id": "PATH_0", "operation": "select", "projections": ["N0P0"],
+            "filter": {"property": "N0P1", "op": "eq", "value": "FI103"}})
         self.assertEqual(plan["filters"]["predicate"], "urn:hasAssetIdentifier")
 
     def test_omitted_explicit_filter_rejected(self):
         with self.assertRaisesRegex(ValueError, "omitted"):
             self.plan("Get SignalName from opc Signal where AssetIdentifier is FI103.", {
-                "operation": "select", "projections": ["P0"], "filter": None})
+                "path_id": "PATH_0", "operation": "select", "projections": ["N0P0"], "filter": None})
 
     def test_invented_property_rejected(self):
         with self.assertRaisesRegex(ValueError, "invented"):
             self.plan("Get SignalName from opc Signal.", {
-                "operation": "select", "projections": ["P999"], "filter": None})
+                "path_id": "PATH_0", "operation": "select", "projections": ["N0P999"], "filter": None})
 
     def test_unsupported_operation_rejected(self):
         with self.assertRaisesRegex(ValueError, "Unsupported"):
             self.plan("Count opc Signal entities.", {
-                "operation": "unsupported", "projections": [], "filter": None})
+                "path_id": null, "operation": "unsupported", "projections": [], "filter": None})
 
 
 if __name__ == "__main__":
