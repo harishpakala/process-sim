@@ -647,9 +647,17 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     check_filter_values(plan.get('filters'))
 
     before_where = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)
+    # A trailing imperative after a comma starts an output clause, not another
+    # WHERE constraint: 'where AssetIdentifier is X, list SignalName'.
+    trailing_output = ''
+    if len(before_where) == 2:
+        clauses = re.split(r',\s*(?=(?:list|show|get|return|display)\b)',
+                           before_where[1], maxsplit=1, flags=re.I)
+        if len(clauses) == 2:
+            before_where[1], trailing_output = clauses
     # In cross-domain 'Get X for Y with Z VALUE', Y/Z are input
     # constraints, not additional requested output projections.
-    output_clause = before_where[0]
+    output_clause = before_where[0] + ' ' + trailing_output
     if len(mentioned) > 1:
         output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
