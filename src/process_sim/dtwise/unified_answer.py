@@ -678,6 +678,34 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         for p in required_outputs for e in catalog['entities']
         if p in e['properties']
     ]
+    # Evidence-backed ownership guide: never infer an owner from a domain alone.
+    # Suggested aliases are presentation hints, not prevalidated IR nodes.
+    guide_entities = []
+    used_aliases = set()
+    for entity in prompt_catalog['entities']:
+        label = entity.get('display_name') or entity['domain']
+        alias = re.sub(r'[^a-z0-9]+', '_', label.lower()).strip('_') or 'entity'
+        base = alias
+        suffix = 2
+        while alias in used_aliases:
+            alias = base + '_' + str(suffix)
+            suffix += 1
+        used_aliases.add(alias)
+        guide_entities.append({
+            'domain': entity['domain'],
+            'shape': entity['shape'],
+            'suggested_alias': alias,
+            'output_predicates': [p for p in required_outputs
+                                  if p in entity['properties']],
+            'mapping_endpoints': [
+                {'mapping_id': m['id'], 'side': side,
+                 'predicate': m[side + '_property']}
+                for m in relevant_mappings for side in ('left', 'right')
+                if m[side + '_domain'] == entity['domain']
+                and m[side + '_property'] in entity['properties']],
+        })
+    ownership_guide = [g for g in guide_entities
+                       if g['output_predicates'] or g['mapping_endpoints']]
     # Shape/property ownership is authoritative; a shape label is not an
     # instruction to project a similarly named relationship predicate.
     requirement_reminder = ('Only project explicitly requested output properties; '
@@ -856,6 +884,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
                   'verified_mappings':mapping_catalog,
+                  'shacl_ownership_guide':ownership_guide,
                   'cross_domain_edge_example_replace_all_placeholders':mapping_example,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
@@ -871,9 +900,16 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             ' If the question requests a result limit, populate result_limit '
             'with the exact requested integer.')
     last_error = None
-    # Keep constraints from earlier failures active across subsequent retries.
+    # Retain only the latest repair instruction, never previous model outputs.
+    # The original question, evidence, and requirements stay in base_messages.
     repair_constraints = []
+    base_messages = [dict(message) for message in messages]
     for attempt in range(3):
+        if attempt:
+            latest_repair = messages[-1]['content'] if len(messages) > 2 else ''
+            messages = [dict(message) for message in base_messages]
+            if latest_repair:
+                messages.append({'role': 'user', 'content': latest_repair})
         request_started = time.perf_counter()
         payload = {'model':model,'stream':False,'format':'json',
                    'options':{'temperature':0},'messages':messages}
@@ -1072,7 +1108,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 messages.append({'role':'user','content':
                     'Your previous IR failed semantic coverage: ' + last_error +
                     '. ALL constraints from prior failures remain mandatory: ' +
-                    ' '.join(repair_constraints) +
+                    ' '.join(repair_constraints[-1:]) +
                     'Every projection alias MUST differ from every entity alias. '
                     'Regenerate the COMPLETE unified IR using catalog-backed '
                     'shapes and properties, or return {"unsupported":"reason"}.'})
@@ -1151,7 +1187,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     'use an entity alias such as instrument and a separate output alias '
                     'such as measured_variable. '
                     'ALL prior semantic constraints remain mandatory: ' +
-                    ' '.join(repair_constraints) +
+                    ' '.join(repair_constraints[-1:]) +
                     'If the error says Property lacks unique SHACL evidence, '
                     'the requested source shape is WRONG for that property. '
                     'Choose the owning entity shape from matching source shapes '
