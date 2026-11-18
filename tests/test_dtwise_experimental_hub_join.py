@@ -30,7 +30,7 @@ class ExplicitHubJoinTests(unittest.TestCase):
                     if domain == "assetinventory" else ["AssetIdentifier"])
             self.catalog["entities"].append({
                 "domain": domain, "shape": shape, "display_name": label,
-                "properties": [f"urn:{domain}:has{key}" for key in keys],
+                "properties": [f"https://example.org/{domain}/has{key}" for key in keys],
             })
         self.mappings = []
         for domain, _ in self.leaves:
@@ -40,8 +40,8 @@ class ExplicitHubJoinTests(unittest.TestCase):
                 "id": "assetinventory-" + domain + "-" + key,
                 "verified": True, "evidence_ids": ["e1"],
                 "left_domain": "assetinventory", "right_domain": domain,
-                "left_property": "urn:assetinventory:has" + key,
-                "right_property": "urn:" + domain + ":has" + key,
+                "left_property": "https://example.org/assetinventory/has" + key,
+                "right_property": "https://example.org/" + domain + "/has" + key,
             })
 
     def plan(self, mappings=None):
@@ -78,7 +78,7 @@ class ExplicitHubJoinTests(unittest.TestCase):
 
     def test_missing_product_key_fails_closed(self):
         mappings = [dict(m) for m in self.mappings]
-        mappings[-1]["left_property"] = "urn:assetinventory:hasAssetIdentifier"
+        mappings[-1]["left_property"] = "https://example.org/assetinventory/hasAssetIdentifier"
         with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
             self.plan(mappings)
 
