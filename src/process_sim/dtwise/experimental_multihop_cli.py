@@ -44,7 +44,7 @@ def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
                r"\s+from\s+" + re.escape(entity["domain"]) +
                r"\s+" + re.escape(label) +
                r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+))?"
-               r"\s*$")
+               r"\s*[.]?\s*$")
     match = re.fullmatch(pattern, question, re.I)
     if not match:
         raise ValueError("Unsupported single-shape query syntax")
