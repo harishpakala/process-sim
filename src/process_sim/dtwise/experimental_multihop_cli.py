@@ -113,7 +113,7 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     # Consider only properties in the output clause, not join keys after
     # "through"/"via"/"using" or entity mentions after "associated with".
     output_clause = re.split(
-        r"\\b(?:associated\\s+with|through|via|using|where)\\b",
+        r"\b(?:associated\s+with|through|via|using|where)\b",
         question, maxsplit=1, flags=re.I)[0]
     requested_owners = set()
     for entity in catalog["entities"]:
