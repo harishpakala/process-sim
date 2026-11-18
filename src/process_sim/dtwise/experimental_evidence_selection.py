@@ -95,7 +95,8 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         if "filter" not in result:
             result["filter"] = None
         if isinstance(result.get("operation"), str):
-            result["operation"] = result["operation"].lower()
+            operation = result["operation"].strip().lower()
+            result["operation"] = "select" if operation == "get" else operation
     if not isinstance(result, dict) or set(result) != {
             "path_id", "operation", "projections", "filter"}:
         raise ValueError("Invalid evidence-selection structure")
