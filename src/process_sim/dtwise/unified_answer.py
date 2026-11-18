@@ -116,6 +116,109 @@ def _request_json(url, payload, timeout):
         return json.load(response)
 
 
+def bind_unambiguous_entity_references(plan, catalog, mappings):
+    """Rename duplicate aliases only when every reference has one evidenced owner.
+
+    Never change a mapping ID, predicate, entity shape, or requested projection.
+    Ambiguous references remain invalid for the normal validator.
+    """
+    entities = plan.get('entities')
+    if not isinstance(entities, list) or not all(isinstance(e, dict) for e in entities):
+        return plan
+    aliases = [e.get('alias') for e in entities]
+    if len(aliases) == len(set(aliases)):
+        return plan
+    if not all(isinstance(a, str) and a for a in aliases):
+        return plan
+    owners = {(e['domain'], e['shape']): set(e['properties'])
+              for e in catalog['entities']}
+    verified = {m['id']: m for m in (mappings or [])
+                if m.get('verified') is True and m.get('evidence_ids')}
+    bound = [dict(e) for e in entities]
+    taken = set(aliases)
+    for i, entity in enumerate(bound):
+        if aliases.count(entity['alias']) < 2:
+            continue
+        base = re.sub(r'[^a-zA-Z0-9_]', '_',
+                      entity.get('domain', 'entity') + '_' + entity['alias'])
+        candidate = base
+        n = 2
+        while candidate in taken:
+            candidate = base + '_' + str(n)
+            n += 1
+        taken.add(candidate)
+        entity['alias'] = candidate
+
+    def candidates(alias, domain=None, predicate=None):
+        matches = []
+        for i, e in enumerate(entities):
+            if e.get('alias') != alias or (domain is not None and e.get('domain') != domain):
+                continue
+            if predicate is not None and predicate not in owners.get(
+                    (e.get('domain'), e.get('shape')), set()):
+                continue
+            matches.append(i)
+        return matches
+
+    def reference(alias, domain=None, predicate=None):
+        matches = candidates(alias, domain, predicate)
+        if len(matches) != 1:
+            raise ValueError('Ambiguous entity alias reference: ' + str(alias))
+        return bound[matches[0]]['alias']
+
+    result = dict(plan)
+    result['entities'] = bound
+    edges = []
+    for edge in plan.get('edges', []):
+        edge = dict(edge)
+        if edge.get('kind') == 'mapping':
+            mapping = verified.get(edge.get('mapping_id'))
+            if mapping is None or any(
+                    edge.get(k) != mapping.get(v) for k, v in (
+                        ('left_predicate', 'left_property'),
+                        ('right_predicate', 'right_property'))):
+                raise ValueError('Unverified or mismatched mapping edge')
+            edge['from'] = reference(edge['from'], mapping['left_domain'],
+                                     mapping['left_property'])
+            edge['to'] = reference(edge['to'], mapping['right_domain'],
+                                   mapping['right_property'])
+        elif edge.get('kind') == 'shacl':
+            # A SHACL edge may have multiple owners. Do not guess its endpoints.
+            edge['from'] = reference(edge['from'], predicate=edge.get('predicate'))
+            edge['to'] = reference(edge['to'])
+        else:
+            raise ValueError('Cannot bind unknown edge kind')
+        edges.append(edge)
+    result['edges'] = edges
+    projections = []
+    for projection in plan.get('projections', []):
+        projection = dict(projection)
+        projection['entity'] = reference(
+            projection['entity'], predicate=projection.get('predicate'))
+        projections.append(projection)
+    result['projections'] = projections
+
+    def bind_filter(node):
+        if node is None:
+            return None
+        if isinstance(node, list):
+            return [bind_filter(x) for x in node]
+        if not isinstance(node, dict):
+            return node
+        output = dict(node)
+        if 'entity' in output:
+            output['entity'] = reference(output['entity'],
+                                         predicate=output.get('predicate'))
+        if 'args' in output:
+            output['args'] = [bind_filter(x) for x in output['args']]
+        if 'arg' in output:
+            output['arg'] = bind_filter(output['arg'])
+        return output
+
+    result['filters'] = bind_filter(plan.get('filters'))
+    return result
+
+
 def normalize_single_filter(plan):
     """Normalize only an unambiguous one-item filter list; never rewrite literals."""
     filters = plan.get('filters')
@@ -984,6 +1087,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         try:
             plan = normalize_single_filter(validate_planner_output(
                 _resolve_catalog_symbols(json.loads(raw), reverse_symbols)))
+            plan = bind_unambiguous_entity_references(plan, full_catalog, mappings)
         except (TypeError, ValueError, json.JSONDecodeError) as exc:
             last_error = str(exc)
             attempt_record['error'] = last_error
