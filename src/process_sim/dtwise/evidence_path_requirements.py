@@ -52,8 +52,8 @@ def ground_path_requirements(question, catalog, mentioned, path):
             # to a named SHACL shape immediately preceding that clause.
             # Never use path order or a domain preference as a tie-breaker.
             prefix_match = re.search(
-                r"\\bwith\\s+" + re.escape(request["name"]) +
-                r"\\s+" + re.escape(request["value"]) + r"\\b",
+                r"\bwith\s+" + re.escape(request["name"]) +
+                r"\s+" + re.escape(request["value"]) + r"\b",
                 question, re.I)
             if prefix_match:
                 prefix = question[:prefix_match.start()].rstrip()
@@ -65,9 +65,9 @@ def ground_path_requirements(question, catalog, mentioned, path):
                     label = entity.get("display_name", "")
                     if not label:
                         continue
-                    scope = (r"(?:^|\\b)" +
+                    scope = (r"(?:^|\b)" +
                              re.escape(entity["domain"]) +
-                             r"\\s+" + re.escape(label) + r"$")
+                             r"\s+" + re.escape(label) + r"$")
                     if re.search(scope, prefix, re.I):
                         scoped.append((j, predicate))
                 if len(scoped) == 1:
