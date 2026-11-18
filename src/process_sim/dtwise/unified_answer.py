@@ -889,6 +889,18 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         })
     ownership_guide = [g for g in guide_entities
                        if g['output_predicates'] or g['mapping_endpoints']]
+    if prompt_diagnostics is not None:
+        prompt_diagnostics['semantic_selection_eligibility'] = {
+            'compact_catalog': bool(compact_catalog),
+            'mentioned_domains': sorted(mentioned),
+            'required_outputs': required_outputs,
+            'required_inputs': required_inputs,
+            'complex_operator': bool(re.search(
+                r'\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\b',
+                question, re.I)),
+            'candidate_count': 0,
+            'fallback_reason': None,
+        }
     # Compact semantic-plan selection for direct two-domain lookups, including\n    # one unambiguous SHACL-owned equality filter. The model
     # selects IDs only; deterministic expansion owns aliases, IRIs and edges.
     # Other queries retain the general Unified IR planner below.
@@ -943,6 +955,11 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                             filter_binding = (bindings[0][0], bindings[0][1],
                                               request['value'])
                         options.append((m, left, right, side, filter_binding))
+        if prompt_diagnostics is not None:
+            prompt_diagnostics['semantic_selection_eligibility']['candidate_count'] = len(options)
+            if not options:
+                prompt_diagnostics['semantic_selection_eligibility']['fallback_reason'] = (
+                    'no_evidence_backed_candidates')
         if options:
             choices = [{
                 'id': 'C' + str(i),
