@@ -83,19 +83,67 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     """One LLM selection for zero-edge, direct, and multi-hop evidence."""
     from .experimental_evidence_selection import select_evidence_plan
 
-    catalog, mentioned = _focused_catalog(catalog_from_schema(index), question)
+    # Keep the full catalog for cross-domain target discovery. A question may
+    # name DEXPI explicitly while requesting a property owned by OPCUA.
+    catalog = catalog_from_schema(index)
+    _, mentioned = _focused_catalog(catalog, question)
+
+    def mentioned_name(name):
+        # Only a terminal plural "s" is normalized; never use fuzzy matching.
+        names = {name.casefold()}
+        if name.lower().endswith("s"):
+            names.add(name[:-1].casefold())
+        else:
+            names.add((name + "s").casefold())
+        return any(re.search(r"(?<![A-Za-z0-9_])" + re.escape(n)
+                             + r"(?![A-Za-z0-9_])", question, re.I)
+                   for n in names if n)
+
     anchors = []
     for entity in catalog["entities"]:
         label = entity.get("display_name")
-        if not label:
-            continue
-        pattern = r"(?<![A-Za-z0-9_])" + re.escape(label) + r"(?![A-Za-z0-9_])"
-        if re.search(pattern, question, re.I):
+        if label and mentioned_name(label):
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
     if not anchors:
         raise ValueError("Experimental planner requires a named SHACL shape")
+
+    # An explicitly requested output can identify an unnamed target shape.
+    # Consider only properties in the output clause, not join keys after
+    # "through"/"via"/"using" or entity mentions after "associated with".
+    output_clause = re.split(
+        r"\\b(?:associated\\s+with|through|via|using|where)\\b",
+        question, maxsplit=1, flags=re.I)[0]
+    requested_owners = set()
+    for entity in catalog["entities"]:
+        for predicate in entity["properties"]:
+            local = re.split(r"[/#]", predicate)[-1]
+            names = {local}
+            if local.lower().startswith("has") and len(local) > 3:
+                names.add(local[3:])
+            if any(re.search(
+                    r"(?<![A-Za-z0-9_])" + re.escape(name) + r"s?(?![A-Za-z0-9_])",
+                    output_clause, re.I) for name in names):
+                requested_owners.add((entity["domain"], entity["shape"]))
+
+    if requested_owners and not requested_owners.intersection(anchors):
+        # Only infer a target when exactly one property-owning shape has
+        # verified connectivity to an explicitly named anchor.
+        reachable = set()
+        for owner in requested_owners:
+            for anchor in anchors:
+                if enumerate_evidenced_paths(
+                        catalog, mappings, anchor, owner,
+                        max_hops=4, max_paths=1):
+                    reachable.add(owner)
+                    break
+        if len(reachable) != 1:
+            raise ValueError(
+                "Requested output property has no unique verified target shape")
+        target = next(iter(reachable))
+        if target not in anchors:
+            anchors.append(target)
     if len(anchors) == 1:
         paths = [{"nodes": [anchors[0]], "steps": []}]
     else:
