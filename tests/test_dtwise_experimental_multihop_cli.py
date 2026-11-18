@@ -44,7 +44,7 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
             self.plan("Find connected assets")
 
     def test_unverified_mapping_rejected_before_llm(self):
-        with self.assertRaisesRegex(ValueError, "No verified multi-hop"):
+        with self.assertRaisesRegex(ValueError, "No verified evidence path"):
             self.plan("Find Plant Signal", mappings=[
                 dict(self.mappings[0], verified=False)])
 
@@ -55,14 +55,14 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
 
         def fake_request(url, payload, timeout):
             seen.append(payload)
-            return {"message": {"content": '{"choice":null}'}}
+            return {"message": {"content": '{"path_id":null,"operation":"unsupported","projections":[],"filter":null}'}}
 
         with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
                    return_value=self.catalog), patch(
                 "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
                 side_effect=lambda catalog, question: (
                     catalog, {"dexpi", "opc"})):
-            with self.assertRaisesRegex(ValueError, "abstained"):
+            with self.assertRaisesRegex(ValueError, "Unsupported"):
                 plan_experimental_multihop(
                     "Get Signal from Plant through Instrument", {},
                     self.mappings, model="test",
@@ -83,13 +83,13 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
         seen = []
         def fake_request(url, payload, timeout):
             seen.append(payload)
-            return {"message": {"content": '{"choice":null}'}}
+            return {"message": {"content": '{"path_id":null,"operation":"unsupported","projections":[],"filter":null}'}}
         with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
                    return_value=self.catalog), patch(
                 "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
                 side_effect=lambda catalog, question: (
                     catalog, {"dexpi", "opc"})):
-            with self.assertRaisesRegex(ValueError, "abstained"):
+            with self.assertRaisesRegex(ValueError, "Unsupported"):
                 plan_experimental_multihop(
                     "Find Instrument Signal", {}, self.mappings,
                     model="test", ollama_host="http://localhost:11434",
