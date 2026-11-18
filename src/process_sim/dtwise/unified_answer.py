@@ -432,6 +432,31 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     mapping_catalog = [{k:v for k,v in m.items() if k in
                         ('id','left_domain','right_domain','left_property','right_property')}
                        for m in relevant_mappings]
+    # Give the model a small, evidence-backed shape/connection guide on its
+    # FIRST attempt. Symbols are global across domains, never domain-local.
+    mapping_keys = {(m['left_domain'], m['left_property'])
+                    for m in relevant_mappings} | {
+                        (m['right_domain'], m['right_property'])
+                        for m in relevant_mappings}
+    initial_shape_guide = []
+    for domain in sorted(mentioned):
+        candidates = [e for e in prompt_catalog['entities']
+                      if e['domain'] == domain]
+        for e in candidates:
+            relevant_props = [p for p in e['properties']
+                              if (domain, p) in mapping_keys]
+            if relevant_props:
+                initial_shape_guide.append({
+                    'domain': domain,
+                    'shape': e['shape'],
+                    'mapping_properties': relevant_props})
+    if compact_catalog:
+        initial_shape_guide = [{
+            **entry,
+            'shape': catalog_symbols.get(entry['shape'], entry['shape']),
+            'mapping_properties': [catalog_symbols.get(p, p)
+                                   for p in entry['mapping_properties']]}
+            for entry in initial_shape_guide]
     # Repeat grounded output and input requirements on every model retry.
     output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
     if len(mentioned) > 1:
@@ -596,10 +621,19 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         'Do not invent symbols; do not use symbols for filter values.')
         hints = [{k: catalog_symbols.get(v, v) if isinstance(v, str) else v
                   for k, v in hint.items()} for hint in hints]
+    if len(mentioned) > 1:
+        instruction += (
+            ' CROSS-DOMAIN RULE: each entity shape symbol is GLOBAL across '
+            'all domains; never reuse the same S-number for distinct shapes. '
+            'Preserve every required domain in entities on every attempt. '
+            'For cross-domain joins use ONLY kind="mapping" and copy the exact '
+            'mapping id and oriented predicates from verified_mappings. '
+            'Never invent a mapping id or use a cross-domain SHACL edge. ')
     messages = [{'role':'system','content':instruction},
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
                   'verified_mappings':mapping_catalog,
+                  'cross_domain_shape_candidates':initial_shape_guide,
                   'cross_domain_edge_example_replace_all_placeholders':mapping_example,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
