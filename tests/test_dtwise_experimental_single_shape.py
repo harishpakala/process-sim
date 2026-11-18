@@ -57,6 +57,15 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
                         "value": "https://aas.example.com/FI103."}})
         self.assertEqual(plan["filters"]["value"], uri)
 
+    def test_where_literal_before_comma_excludes_clause_punctuation(self):
+        uri = "https://aas.example.com/FI103"
+        plan, _ = self.plan(
+            "For opc Signal entities where AssetIdentifier is " + uri + ", list SignalName.",
+            {"path_id": "PATH_0", "operation": "select",
+             "projections": ["N0P0"], "filter": None})
+        self.assertEqual(plan["filters"]["value"], uri)
+        self.assertEqual(plan["projections"][0]["predicate"], "urn:hasSignalName")
+
     def test_wrong_filter_property_rejected(self):
         with self.assertRaisesRegex(ValueError, "different equality-filter property"):
             self.plan(
