@@ -217,6 +217,52 @@ def _prompt_catalog(question, catalog):
     return {'entities': candidates, 'shacl_edges': edges}
 
 
+
+def _cross_domain_prompt_catalog(question, catalog, mappings, mentioned):
+    """Keep SHACL-backed named types, property owners and mapping endpoints.
+
+    Do not resolve ambiguous owners or infer mappings. Preserve all named
+    domains and fall back to the focused catalog when evidence is insufficient.
+    """
+    if len(mentioned) < 2:
+        return _prompt_catalog(question, catalog)
+    question_lower = question.lower()
+    tokens = set(re.findall(r'[a-z0-9]+', question_lower))
+    relevant_mappings = [
+        m for m in (mappings or [])
+        if m.get('verified') is True and m.get('evidence_ids')
+        and m.get('left_domain') in mentioned
+        and m.get('right_domain') in mentioned
+    ]
+    mapping_keys = {
+        (m['left_domain'], m['left_property']) for m in relevant_mappings
+    } | {
+        (m['right_domain'], m['right_property']) for m in relevant_mappings
+    }
+    selected = []
+    for entity in catalog['entities']:
+        domain = entity['domain']
+        display = entity.get('display_name', '')
+        name_match = bool(display and re.search(
+            r'(?<![a-z0-9])' + re.escape(display.lower()) +
+            r'(?![a-z0-9])', question_lower))
+        property_match = any(
+            re.split(r'[/#]', p)[-1].lower().removeprefix('has') in tokens
+            for p in entity['properties'])
+        mapping_match = any(
+            (domain, p) in mapping_keys for p in entity['properties'])
+        if name_match or property_match or mapping_match:
+            selected.append(entity)
+    if not all(any(e['domain'] == domain for e in selected)
+               for domain in mentioned):
+        return catalog
+    selected_keys = {(e['domain'], e['shape']) for e in selected}
+    edges = [edge for edge in catalog['shacl_edges']
+             if (edge['domain'], edge['from_shape']) in selected_keys
+             and (edge['domain'], edge['to_shape']) in selected_keys]
+    return {'entities': selected, 'shacl_edges': edges}
+
+
 def property_owner_hints(question, catalog):
     """Evidence-backed candidate owners for explicitly named properties.
 
@@ -415,10 +461,10 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     index = json.loads(Path(schema).read_text(encoding='utf-8'))
     full_catalog = catalog_from_schema(index)
     catalog, mentioned = _focused_catalog(full_catalog, question)
-    # Cross-domain questions require shape candidates in every named domain;
-    # output-property-only reduction can silently remove the join's input side.
-    prompt_catalog = (catalog if len(mentioned) > 1
-                      else _prompt_catalog(question, catalog))
+    # Reduce the model-facing catalog only with positive SHACL/mapping evidence.
+    # The full indexed catalog remains authoritative for validation.
+    prompt_catalog = _cross_domain_prompt_catalog(
+        question, catalog, mappings, mentioned)
     catalog_symbols = {}
     reverse_symbols = {}
     if compact_catalog:
@@ -441,44 +487,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     for m in relevant_mappings} | {
                         (m['right_domain'], m['right_property'])
                         for m in relevant_mappings}
-    # Compact first-attempt shape hints: only named entity types and
-    # evidence-bearing properties relevant to the question or approved mappings.
-    # The full focused catalog remains available as the source of truth.
+    # Shape metadata is already in prompt_catalog; do not duplicate it.
     initial_shape_guide = []
-    question_lower = question.lower()
-    question_tokens = set(re.findall(r'[a-z0-9]+', question_lower))
-    for domain in sorted(mentioned):
-        domain_candidates = [e for e in catalog['entities']
-                             if e['domain'] == domain]
-        for e in domain_candidates:
-            display = e.get('display_name', '')
-            source = e.get('source_path', '')
-            # Token boundaries prevent substring matches such as Signal
-            # matching SignalMapping. Both names come from SHACL metadata.
-            name_matches = bool(display and re.search(
-                r'(?<![a-z0-9])' + re.escape(display.lower()) +
-                r'(?![a-z0-9])', question_lower))
-            mapping_props = [p for p in e['properties']
-                             if (domain, p) in mapping_keys]
-            mentioned_props = [p for p in e['properties']
-                               if re.split(r'[/#]', p)[-1].lower().removeprefix('has')
-                               in question_tokens]
-            if not (name_matches or mapping_props or mentioned_props):
-                continue
-            entry = {
-                'domain': domain,
-                'shape': (catalog_symbols.get(e['shape'], e['shape'])
-                          if compact_catalog else e['shape']),
-                'entity_type': display,
-                'entity_name_mentioned': name_matches,
-                'relevant_properties': [
-                    catalog_symbols.get(p, p) if compact_catalog else p
-                    for p in sorted(set(mapping_props + mentioned_props))],
-            }
-            initial_shape_guide.append(entry)
-    initial_shape_guide.sort(key=lambda e: (
-        e['domain'], not e['entity_name_mentioned'],
-        -len(e['relevant_properties']), e['shape']))
     # Repeat grounded output and input requirements on every model retry.
     output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
     if len(mentioned) > 1:
@@ -647,8 +657,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         instruction += (
             ' Select entity shapes by matching the requested entity type to '
             'catalog display_name/source_path and checking property ownership. '
-            ' cross_domain_shape_candidates lists evidence-backed alternatives; '
-            ' prefer entity_name_mentioned=true when its properties support the join. ')
+            ' Prefer explicitly named entity types with verified properties. ')
     if len(mentioned) > 1:
         instruction += (
             ' CROSS-DOMAIN RULE: each entity shape symbol is GLOBAL across '
@@ -668,7 +677,6 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 {'role':'user','content':json.dumps({'question':question,
                   'required_domains':sorted(mentioned), 'catalog':prompt_catalog,
                   'verified_mappings':mapping_catalog,
-                  'cross_domain_shape_candidates':initial_shape_guide,
                   'cross_domain_edge_example_replace_all_placeholders':mapping_example,
                   'format_example_replace_all_placeholders':example,
                   'filter_ast_example':filter_example,
