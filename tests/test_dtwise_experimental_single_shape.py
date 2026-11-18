@@ -47,6 +47,24 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
             "filter": {"property": "N0P1", "op": "eq", "value": "FI103"}})
         self.assertEqual(plan["filters"]["predicate"], "urn:hasAssetIdentifier")
 
+    def test_exact_uri_filter_value_preserved(self):
+        uri = "https://aas.example.com/FI103"
+        plan, _ = self.plan(
+            "Show SignalName from opc Signal where AssetIdentifier is " + uri + ".",
+            {"path_id": "PATH_0", "operation": "select",
+             "projections": ["N0P0"],
+             "filter": {"property": "N0P1", "op": "eq",
+                        "value": "https://aas.example.com/FI103."}})
+        self.assertEqual(plan["filters"]["value"], uri)
+
+    def test_wrong_filter_property_rejected(self):
+        with self.assertRaisesRegex(ValueError, "different equality-filter property"):
+            self.plan(
+                "Show SignalName from opc Signal where AssetIdentifier is FI103.",
+                {"path_id": "PATH_0", "operation": "select",
+                 "projections": ["N0P0"],
+                 "filter": {"property": "N0P2", "op": "eq", "value": "FI103"}})
+
     def test_omitted_explicit_filter_rejected(self):
         with self.assertRaisesRegex(ValueError, "omitted"):
             self.plan("Get SignalName from opc Signal where AssetIdentifier is FI103.", {
