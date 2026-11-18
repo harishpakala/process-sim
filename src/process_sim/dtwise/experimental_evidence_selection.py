@@ -113,6 +113,21 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         j, predicate = lookup[f["property"]]
         bound_filter = {"node_index": j, "predicate": predicate,
                         "op": "eq", "value": f["value"]}
+    # Exact equality literals belong to the question, not to the model.
+    # The model still chooses the SHACL property; only the scalar value is
+    # copied verbatim from an unambiguous explicit WHERE clause.
+    explicit = re.findall(
+        r"\bwhere\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+)",
+        question, flags=re.I)
+    if explicit:
+        if len(explicit) != 1 or bound_filter is None:
+            raise ValueError("Missing or ambiguous explicit equality filter")
+        property_name, literal = explicit[0]
+        literal = literal.rstrip(".")
+        selected_local = _label(bound_filter["predicate"])
+        if selected_local.casefold() != property_name.casefold():
+            raise ValueError("LLM selected a different equality-filter property")
+        bound_filter["value"] = literal
     if re.search(r"\b(?:count|group\s+by|order(?:ed)?\s+by|ascending|descending|limit)\b", question, re.I):
         raise ValueError("Unsupported aggregation or ordering requirement")
     if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
