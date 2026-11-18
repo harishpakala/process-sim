@@ -904,7 +904,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Multi-hop semantic path selection. Only explicitly named endpoints,
     # SHACL-owned outputs, and exact verified evidence can enter this route.
     # Keep direct one-hop queries on the established fast path below.
-    if (compact_catalog and len(required_outputs) == 1
+    if (compact_catalog and len(mentioned) >= 3
+            and len(required_outputs) == 1
             and len(required_inputs) <= 1 and not re.search(
                 r'\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\b',
                 question, re.I)):
