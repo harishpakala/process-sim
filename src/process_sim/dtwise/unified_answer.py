@@ -645,6 +645,15 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         try:
             result = _request_json((ollama_host or os.getenv('OLLAMA_HOST', 'http://localhost:11434')).rstrip('/')+'/api/chat', payload, timeout)
         except (TimeoutError, URLError, HTTPError, OSError) as exc:
+            # A timed-out HTTP request is still an LLM attempt. Keep it in the
+            # report instead of misleadingly recording zero attempts.
+            if diagnostics is not None:
+                diagnostics.append({
+                    'attempt': attempt + 1, 'model': model,
+                    'status': 'request_failed',
+                    'wall_seconds': round(time.perf_counter() - request_started, 3),
+                    'error': str(exc),
+                })
             if prompt_diagnostics is not None:
                 prompt_diagnostics.update({
                     'request_status': 'failed',
@@ -815,9 +824,34 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             last_error = str(exc)
             attempt_record['error'] = last_error
             if attempt < 2:
+                # Supply concrete schema candidates after a bad shape choice.
+                # This is evidence for the model, never an automatic IR repair.
+                shape_evidence = ''
+                if 'Entity shape not present' in last_error or 'Property lacks unique SHACL evidence' in last_error:
+                    relevant = [e for e in catalog['entities']
+                                if e['domain'] in mentioned]
+                    required = set(required_outputs)
+                    owners = [e for e in relevant
+                              if required.intersection(e['properties'])]
+                    if not owners:
+                        owners = relevant
+                    shape_evidence = (
+                        ' SHACL-backed shape candidates (use shape exactly as shown '
+                        'in the catalog, including S-number symbols in compact mode): ' +
+                        json.dumps([
+                            {'domain': e['domain'],
+                             'shape': catalog_symbols.get(e['shape'], e['shape'])
+                                      if compact_catalog else e['shape'],
+                             'properties': [
+                                 catalog_symbols.get(p, p) if compact_catalog else p
+                                 for p in e['properties'] if p in required
+                                 or p in {m['left_property'] for m in relevant_mappings}
+                                 or p in {m['right_property'] for m in relevant_mappings}]}
+                            for e in owners[:16]], ensure_ascii=False) + '. ')
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
                     'The previous IR failed SHACL validation: ' + last_error + '. ' +
+                    shape_evidence +
                     'For CROSS-DOMAIN queries, examine verified_mappings in the original user message. A SHACL edge must not connect entities in different domains. When a verified mapping applies, use an edge with kind="mapping", from and to set to the corresponding entity aliases, mapping_id set to the exact verified mapping id, and left_predicate and right_predicate copied exactly from its left_property and right_property. Every entity must be connected by valid edges; do not solve a cross-domain SHACL error by removing the edge. Never invent or approve a mapping. ' +
                     '. If the error mentions filter: filters MUST be a single object, NOT a list; '
                     'use {"op":"eq","entity":"ALIAS","predicate":"PROPERTY_IRI","value":"EXACT_LITERAL"}. '
