@@ -6,7 +6,7 @@ from .unified_ir import validate_ir, _iri, _literal, _schema_dict, _alias
 
 
 def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=None,
-                     include_graph=True, limit=100):
+                     include_graph=True, limit=None):
     validate_ir(ir, schema, mappings=mappings)
     if graph_mode not in ('default', 'all_named', 'selected'):
         raise ValueError('Unsupported graph mode')
@@ -16,8 +16,8 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         raise ValueError('graph_iri requires selected graph mode')
     if include_graph and graph_mode != 'all_named':
         raise ValueError('Graph provenance requires all_named')
-    if not isinstance(limit, int) or not 1 <= limit <= 10000:
-        raise ValueError('Invalid limit')
+    if limit is not None and (type(limit) is not int or not 1 <= limit <= 10000):
+        raise ValueError('Invalid operational limit')
     nodes = {n['alias']: n for n in ir['entities']}
     # Every triple is scoped to the graph of its SUBJECT entity. Distinct entity
     # aliases may bind to different graphs, even within one domain.
@@ -96,16 +96,22 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
     if op['type'] == 'count':
         root = '?' + ir['entities'][0]['alias']
         select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
-        group = ('\nGROUP BY ' + ' '.join(graphs) + '\nORDER BY ' + ' '.join(graphs)) if graphs else ''
+        group = ('\nGROUP BY ' + ' '.join(graphs)) if graphs else ''
         return select + '\nWHERE {\n' + body + '\n}' + group
     cols = graphs + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
     cols = list(dict.fromkeys(cols))
     order_terms = ir.get('order_by', [])
-    ordering = (' '.join(('ASC' if term['direction'] == 'asc' else 'DESC') +
-                         '(?' + term['as'] + ')' for term in order_terms)
-                if order_terms else ' '.join(cols))
+    query = 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}'
+    if order_terms:
+        ordering = ' '.join(('ASC' if term['direction'] == 'asc' else 'DESC') +
+                            '(?' + term['as'] + ')' for term in order_terms)
+        query += '\nORDER BY ' + ordering
     requested_limit = ir.get('result_limit')
-    effective_limit = min(limit, requested_limit) if requested_limit is not None else limit
-    return 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}\nORDER BY ' + ordering + f'\nLIMIT {effective_limit}'
+    if requested_limit is not None:
+        if limit is not None and requested_limit > limit:
+            raise ValueError('Requested result limit exceeds operational cap; '
+                             'do not silently truncate the semantic query')
+        query += f'\nLIMIT {requested_limit}'
+    return query
