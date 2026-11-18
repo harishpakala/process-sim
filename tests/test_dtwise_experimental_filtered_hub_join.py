@@ -60,6 +60,44 @@ class FilteredHubJoinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "target is missing or ambiguous"):
             self.plan(question=question)
 
+    def test_b29_projects_ecad_and_opcua_properties(self):
+        node_id = "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+        target = next(e for e in self.catalog["entities"]
+                      if e["domain"] == "opcuaconnectivity")
+        target["properties"].append(node_id)
+        question = (QUESTION[:-1] +
+                    ", return ECAD Device AssetIdentifier and "
+                    "OPCUAConnectivity SignalMapping OPCUANodeId.")
+        plan, selection = self.plan(question=question)
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertEqual(plan["filters"]["value"], "https://aas.example.com/VC101")
+        self.assertEqual(plan["projections"], [
+            {"entity": "n2", "predicate": "https://example.org/ecad/hasAssetIdentifier",
+             "as": "value_0"},
+            {"entity": "n3", "predicate": node_id, "as": "value_1"}])
+        self.assertFalse(plan["return_entities"])
+        self.assertEqual(selection["choice"], "VERIFIED_HUB_JOIN")
+
+    def test_b29_rejects_unknown_second_property(self):
+        question = (QUESTION[:-1] +
+                    ", return ECAD Device AssetIdentifier and "
+                    "OPCUAConnectivity SignalMapping UnknownProperty.")
+        with self.assertRaisesRegex(ValueError, "missing or ambiguous"):
+            self.plan(question=question)
+
+    def test_b29_rejects_duplicate_projection(self):
+        question = (QUESTION[:-1] +
+                    ", return ECAD Device AssetIdentifier and "
+                    "ECAD Device AssetIdentifier.")
+        with self.assertRaisesRegex(ValueError, "Duplicate hub projection"):
+            self.plan(question=question)
+
+    def test_b29_rejects_unqualified_second_projection(self):
+        question = (QUESTION[:-1] +
+                    ", return ECAD Device AssetIdentifier and OPCUANodeId.")
+        with self.assertRaisesRegex(ValueError, "Invalid qualified hub projection"):
+            self.plan(question=question)
+
     def test_unverified_spoke_rejected(self):
         mappings = [dict(m) for m in self.mappings]
         mappings[0]["verified"] = False
