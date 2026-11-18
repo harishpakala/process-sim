@@ -89,8 +89,8 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     if not isinstance(result, dict) or set(result) != {
             "path_id", "operation", "projections", "filter"}:
         raise ValueError("Invalid evidence-selection structure")
-    requested_count = bool(re.search(r"\\bcount\\b|\\bhow many\\b|\\bnumber of\\b|\\bmore than\\b", question, re.I))
-    grouped = requested_count and bool(re.search(r"\\b(?:for each|per|each|more than)\\b", question, re.I))
+    requested_count = bool(re.search(r"\bcount\b|\bhow many\b|\bnumber of\b|\bmore than\b", question, re.I))
+    grouped = requested_count and bool(re.search(r"\b(?:for each|per|each|more than)\b", question, re.I))
     expected_operation = "group_count" if grouped else ("count" if requested_count else "select")
     if result["operation"] != expected_operation:
         raise ValueError("LLM selected an operation inconsistent with the question")
@@ -156,7 +156,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         bound_filter = None
     threshold = None
     if expected_operation == 'group_count':
-        number = re.search(r"\\bmore than\\s+(\\d+|one|two|three|four|five|six|seven|eight|nine|ten)\\b", question, re.I)
+        number = re.search(r"\bmore than\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b", question, re.I)
         if number:
             words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
                      "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
@@ -166,12 +166,12 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     order = None
     result_limit = None
     if expected_operation == 'select':
-        if re.search(r"\\b(?:ascending|descending|alphabetical(?:ly)?|sorted|order(?:ed)?)\\b", question, re.I):
+        if re.search(r"\b(?:ascending|descending|alphabetical(?:ly)?|sorted|order(?:ed)?)\b", question, re.I):
             if len(specs) != 1:
                 raise ValueError("Ordering requires one unambiguous projected property")
             order = [{"as": specs[0]["as"], "direction":
-                      "desc" if re.search(r"\\bdescending\\b", question, re.I) else "asc"}]
-        m = re.search(r"\\b(?:first|top|limit)\\s+(\\d+|ten)\\b", question, re.I)
+                      "desc" if re.search(r"\bdescending\b", question, re.I) else "asc"}]
+        m = re.search(r"\b(?:first|top|limit)\s+(\d+|ten)\b", question, re.I)
         if m:
             result_limit = 10 if m.group(1).lower() == "ten" else int(m.group(1))
             if not 1 <= result_limit <= 10000:
