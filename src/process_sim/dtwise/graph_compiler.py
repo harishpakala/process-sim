@@ -104,7 +104,7 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         # Group by the requested SHACL property, never by graph provenance.
         # DISTINCT protects against duplicated evidence triples across graphs.
         query = (f'SELECT {group_var} (COUNT(DISTINCT {root}) AS ?count)'
-                 + '\nWHERE {\\n' + body + '\n}'
+                 + '\nWHERE {\n' + body + '\n}'
                  + '\nGROUP BY ' + group_var)
         threshold = op.get('having_min')
         if threshold is not None:
