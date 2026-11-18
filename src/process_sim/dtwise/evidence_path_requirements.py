@@ -3,6 +3,8 @@
 Conservative by design: ambiguity and unsupported requirements are errors,
 not excuses to drop filters or guess which shape owns a predicate.
 """
+import re
+
 from .unified_answer import extract_semantic_selection_requirements
 
 
@@ -44,6 +46,32 @@ def ground_path_requirements(question, catalog, mentioned, path):
                    if p["domain"] == node[0]
                    and p["predicate"] in owners[node]]
         matches = sorted(set(matches))
+        if len(matches) > 1:
+            # A property may exist in several domains on the same path.
+            # Resolve only when the question explicitly scopes "with P V"
+            # to a named SHACL shape immediately preceding that clause.
+            # Never use path order or a domain preference as a tie-breaker.
+            prefix_match = re.search(
+                r"\\bwith\\s+" + re.escape(request["name"]) +
+                r"\\s+" + re.escape(request["value"]) + r"\\b",
+                question, re.I)
+            if prefix_match:
+                prefix = question[:prefix_match.start()].rstrip()
+                scoped = []
+                for j, predicate in matches:
+                    entity = next(
+                        e for e in catalog["entities"]
+                        if (e["domain"], e["shape"]) == nodes[j])
+                    label = entity.get("display_name", "")
+                    if not label:
+                        continue
+                    scope = (r"(?:^|\\b)" +
+                             re.escape(entity["domain"]) +
+                             r"\\s+" + re.escape(label) + r"$")
+                    if re.search(scope, prefix, re.I):
+                        scoped.append((j, predicate))
+                if len(scoped) == 1:
+                    matches = scoped
         if len(matches) != 1:
             raise ValueError("Filter predicate has no unique path owner: "
                              + request["name"])
