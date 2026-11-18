@@ -441,41 +441,44 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                     for m in relevant_mappings} | {
                         (m['right_domain'], m['right_property'])
                         for m in relevant_mappings}
+    # Compact first-attempt shape hints: only named entity types and
+    # evidence-bearing properties relevant to the question or approved mappings.
+    # The full focused catalog remains available as the source of truth.
     initial_shape_guide = []
-    question_words = set(re.findall(r'[a-z0-9]+', question.lower()))
+    question_lower = question.lower()
+    question_tokens = set(re.findall(r'[a-z0-9]+', question_lower))
     for domain in sorted(mentioned):
-        candidates = [e for e in catalog['entities']
-                      if e['domain'] == domain]
-        for e in candidates:
-            relevant_props = [p for p in e['properties']
-                              if (domain, p) in mapping_keys]
-            # Display names come from decoded SHACL shape paths, not guesses.
-            # Prefer explicitly named entity types; retain alternatives when
-            # no unique name match is supported by the evidence.
+        domain_candidates = [e for e in catalog['entities']
+                             if e['domain'] == domain]
+        for e in domain_candidates:
             display = e.get('display_name', '')
             source = e.get('source_path', '')
-            name_matches = bool(display and display.lower() in question.lower())
-            initial_shape_guide.append({
+            # Token boundaries prevent substring matches such as Signal
+            # matching SignalMapping. Both names come from SHACL metadata.
+            name_matches = bool(display and re.search(
+                r'(?<![a-z0-9])' + re.escape(display.lower()) +
+                r'(?![a-z0-9])', question_lower))
+            mapping_props = [p for p in e['properties']
+                             if (domain, p) in mapping_keys]
+            mentioned_props = [p for p in e['properties']
+                               if re.split(r'[/#]', p)[-1].lower().removeprefix('has')
+                               in question_tokens]
+            if not (name_matches or mapping_props or mentioned_props):
+                continue
+            entry = {
                 'domain': domain,
-                'shape': e['shape'],
-                'display_name': display,
-                'source_path': source,
+                'shape': (catalog_symbols.get(e['shape'], e['shape'])
+                          if compact_catalog else e['shape']),
+                'entity_type': display,
                 'entity_name_mentioned': name_matches,
-                'mapping_properties': relevant_props,
-                'properties': e['properties'],
-            })
-    if compact_catalog:
-        initial_shape_guide = [{
-            **entry,
-            'shape': catalog_symbols.get(entry['shape'], entry['shape']),
-            'mapping_properties': [catalog_symbols.get(p, p)
-                                   for p in entry['mapping_properties']],
-            'properties': [catalog_symbols.get(p, p)
-                           for p in entry['properties']],
-        } for entry in initial_shape_guide]
+                'relevant_properties': [
+                    catalog_symbols.get(p, p) if compact_catalog else p
+                    for p in sorted(set(mapping_props + mentioned_props))],
+            }
+            initial_shape_guide.append(entry)
     initial_shape_guide.sort(key=lambda e: (
         e['domain'], not e['entity_name_mentioned'],
-        -len(e['mapping_properties']), e['shape']))
+        -len(e['relevant_properties']), e['shape']))
     # Repeat grounded output and input requirements on every model retry.
     output_clause = re.split(r'\\bwhere\\b', question, maxsplit=1, flags=re.I)[0]
     if len(mentioned) > 1:
