@@ -15,40 +15,59 @@ from .unified_answer import (
 
 
 
+def _single_shape_property(entity, name):
+    """Resolve a property only from predicates owned by the selected shape."""
+    matches = []
+    for predicate in entity["properties"]:
+        local = re.split(r"[/#]", predicate)[-1]
+        names = {local.lower()}
+        if local.lower().startswith("has") and len(local) > 3:
+            names.add(local[3:].lower())
+        if name.lower() in names:
+            matches.append(predicate)
+    if len(matches) != 1:
+        raise ValueError("Single-shape predicate is missing or ambiguous: " + name)
+    return matches[0]
+
+
 def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
                               mappings):
-    """Opt-in zero-edge SELECT for an explicit, unambiguous property lookup.
+    """Opt-in zero-edge SELECT with an optional explicit equality filter.
 
-    Unsupported syntax fails closed rather than silently dropping requirements.
+    Only SHACL-owned predicates are permitted. Unsupported query syntax
+    fails closed rather than silently dropping requirements.
     """
     entity = next(e for e in catalog["entities"]
                   if (e["domain"], e["shape"]) == anchor)
     label = entity["display_name"]
     pattern = (r"^\s*(?:get|show|list)\s+([A-Za-z][A-Za-z0-9_]*)"
                r"\s+from\s+" + re.escape(entity["domain"]) +
-               r"\s+" + re.escape(label) + r"\s*[.]?\s*$")
+               r"\s+" + re.escape(label) +
+               r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+))?"
+               r"\s*$")
     match = re.fullmatch(pattern, question, re.I)
     if not match:
         raise ValueError("Unsupported single-shape query syntax")
-    requested = match.group(1).lower()
-    predicates = []
-    for predicate in entity["properties"]:
-        local = re.split(r"[/#]", predicate)[-1]
-        names = {local.lower()}
-        if local.lower().startswith("has") and len(local) > 3:
-            names.add(local[3:].lower())
-        if requested in names:
-            predicates.append(predicate)
-    if len(predicates) != 1:
-        raise ValueError("Single-shape output predicate is missing or ambiguous")
+    output_name, filter_name, filter_value = match.groups()
+    output_predicate = _single_shape_property(entity, output_name)
+    bound_filter = None
+    if filter_name is not None:
+        filter_predicate = _single_shape_property(entity, filter_name)
+        # A final sentence period is punctuation, not part of the literal.
+        # Keep dots and slashes inside URI values unchanged.
+        value = filter_value[:-1] if filter_value.endswith(".") else filter_value
+        if not value:
+            raise ValueError("Empty single-shape equality value")
+        bound_filter = {"op": "eq", "entity": "n0",
+                        "predicate": filter_predicate, "value": value}
     plan = {
         "ir_version": "1.0",
         "entities": [{"alias": "n0", "domain": anchor[0],
                       "shape": anchor[1]}],
         "edges": [],
-        "projections": [{"entity": "n0", "predicate": predicates[0],
+        "projections": [{"entity": "n0", "predicate": output_predicate,
                          "as": "value_0"}],
-        "filters": None,
+        "filters": bound_filter,
         "operation": {"type": "select"},
         "return_entities": False,
     }
