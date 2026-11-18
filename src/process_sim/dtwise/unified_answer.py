@@ -317,6 +317,26 @@ def _explicit_property_requirements(question, catalog):
     return {name: next(iter(iris)) for name, iris in properties.items() if len(iris) == 1}
 
 
+def _domain_qualified_output_requirements(clause, catalog):
+    """Identify explicitly domain-qualified output properties from SHACL evidence."""
+    found = set()
+    for entity in catalog['entities']:
+        for predicate in entity['properties']:
+            local = re.split(r'[/#]', predicate)[-1]
+            names = {local}
+            if local.lower().startswith('has') and len(local) > 3:
+                names.add(local[3:])
+            for name in names:
+                # Accept "ECAD LocalId" or "ECAD Device LocalId", not a
+                # bare ambiguous "LocalId" occurring elsewhere in the question.
+                pattern = (r'(?<![A-Za-z0-9_])' + re.escape(entity['domain']) +
+                           r'(?:\s+[A-Za-z][A-Za-z0-9_]*){0,2}\s+' +
+                           re.escape(name) + r'(?![A-Za-z0-9_])')
+                if re.search(pattern, clause, re.I):
+                    found.add(predicate)
+    return found
+
+
 def check_semantic_coverage(plan, question, catalog, mentioned):
     actual = {x['domain'].lower() for x in plan['entities']}
     missing = mentioned - actual
@@ -366,6 +386,9 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
     output_names = _explicit_property_requirements(output_clause, catalog)
+    for predicate in _domain_qualified_output_requirements(output_clause, catalog):
+        if plan['operation']['type'] == 'select' and predicate not in projected:
+            raise ValueError('Explicit domain-qualified projection omitted: ' + predicate)
     for name, predicate in output_names.items():
         if plan['operation']['type'] == 'select' and predicate not in projected:
             raise ValueError('Explicit requested projection omitted: ' + predicate)
@@ -510,7 +533,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         output_clause = re.split(r'\\bfor\\s+(?=[A-Za-z]+\\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
     required_outputs = sorted(set(_explicit_property_requirements(
-        output_clause, catalog).values()))
+        output_clause, catalog).values()) |
+        _domain_qualified_output_requirements(output_clause, catalog))
     required_inputs = []
     for property_name, literal in re.findall(
             r'\\bwith\\s+([A-Za-z][A-Za-z0-9_]*)\\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
