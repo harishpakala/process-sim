@@ -28,6 +28,12 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
             entity["properties"].append(
                 "https://example.org/" + domain + "/has" + prop)
 
+        # B06 filters on a second property of the same SignalMapping shape.
+        signal = next(e for e in self.catalog["entities"]
+                      if e["domain"] == "opcuaconnectivity")
+        signal["properties"].append(
+            "https://example.org/opcuaconnectivity/hasAssetIdentifier")
+
     def plan(self, question):
         with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
                    return_value=self.catalog), patch(
