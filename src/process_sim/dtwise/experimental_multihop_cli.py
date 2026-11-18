@@ -205,6 +205,55 @@ def _plan_shared_identifier_values(question, catalog, mappings, anchors,
         "status": "evidence_semantic_grounded", "choice": "VERIFIED_SHARED_IDENTIFIER"}
 
 
+
+def _plan_filtered_cross_domain_lookup(question, catalog, mappings, anchors,
+                                       mentioned, index):
+    """Bind a fully specified cross-domain projection and equality constraint."""
+    match = re.fullmatch(
+        r"\s*(?:get|show|list)\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+for\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+where\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?)\s*[.]?\s*",
+        question, re.I)
+    if not match:
+        return None
+    target_domain, target_label, output_name, source_domain, source_label, filter_name, value = match.groups()
+    owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
+    def named(domain, label):
+        found = [node for node in anchors if node[0].casefold() == domain.casefold()
+                 and owners[node].get("display_name", "").casefold() == label.casefold()]
+        if len(found) != 1:
+            raise ValueError("Filtered lookup endpoint is missing or ambiguous")
+        return found[0]
+    target = named(target_domain, target_label)
+    source = named(source_domain, source_label)
+    if source == target or set(anchors) != {source, target}:
+        raise ValueError("Filtered lookup requires exactly two named shapes")
+    output_predicate = _single_shape_property(owners[target], output_name)
+    filter_predicate = _single_shape_property(owners[source], filter_name)
+    if not value:
+        raise ValueError("Empty filtered lookup value")
+    paths = []
+    for path in enumerate_evidenced_paths(catalog, mappings, source, target,
+                                          max_hops=1, max_paths=256):
+        if len(path["steps"]) != 1 or path["steps"][0]["kind"] != "mapping":
+            continue
+        step = path["steps"][0]
+        if step["left_predicate"] == filter_predicate:
+            paths.append(path)
+    if len(paths) != 1:
+        raise ValueError("Filtered lookup has no unique verified direct mapping on filter key")
+    plan = bind_evidenced_path(
+        paths[0], catalog, mappings,
+        projections=[{"node_index": 1, "predicate": output_predicate, "as": "value_0"}],
+        filter_spec={"node_index": 0, "predicate": filter_predicate,
+                     "op": "eq", "value": value})
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded", "choice": "VERIFIED_FILTERED_LOOKUP"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
@@ -245,6 +294,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                             anchors, mentioned, index)
     if shared is not None:
         return shared
+
+    filtered = _plan_filtered_cross_domain_lookup(question, catalog, mappings,
+                                                  anchors, mentioned, index)
+    if filtered is not None:
+        return filtered
 
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
