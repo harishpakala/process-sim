@@ -303,6 +303,7 @@ def _explicit_property_requirements(question, catalog):
     tokens = {word.lower() for word in words}
     properties = {}
     traversal_predicates = {edge['predicate'] for edge in catalog.get('shacl_edges', [])}
+    shape_labels = {e.get('display_name', '').lower() for e in catalog['entities'] if e.get('display_name')}
     for entity in catalog['entities']:
         for predicate in entity['properties']:
             local = re.split(r'[/#]', predicate)[-1]
@@ -310,7 +311,9 @@ def _explicit_property_requirements(question, catalog):
             # A relationship's object-class name (e.g. InstrumentationFunction)
             # is not evidence that the relationship itself was requested as an
             # output. Require its full predicate name when it is a SHACL edge.
-            if local.startswith('has') and len(local) > 3 and predicate not in traversal_predicates:
+            if (local.startswith('has') and len(local) > 3
+                    and predicate not in traversal_predicates
+                    and local[3:].lower() not in shape_labels):
                 names.add(local[3:].lower())
             for name in names & tokens:
                 properties.setdefault(name, set()).add(predicate)
@@ -320,11 +323,13 @@ def _explicit_property_requirements(question, catalog):
 def _domain_qualified_output_requirements(clause, catalog):
     """Identify explicitly domain-qualified output properties from SHACL evidence."""
     found = set()
+    shape_labels = {e.get('display_name', '').lower() for e in catalog['entities'] if e.get('display_name')}
     for entity in catalog['entities']:
         for predicate in entity['properties']:
             local = re.split(r'[/#]', predicate)[-1]
             names = {local}
-            if local.lower().startswith('has') and len(local) > 3:
+            if (local.lower().startswith('has') and len(local) > 3
+                    and local[3:].lower() not in shape_labels):
                 names.add(local[3:])
             for name in names:
                 # Accept "ECAD LocalId" or "ECAD Device LocalId", not a
