@@ -526,8 +526,18 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                                 'candidate_properties': [
                                     {'domain': d, 'predicate': p}
                                     for d, p in candidates]})
+    # Preserve explicit SHACL-backed output ownership across compact symbols.
+    required_output_owners = [
+        {'domain': e['domain'],
+         'shape': (catalog_symbols.get(e['shape'], e['shape'])
+                   if compact_catalog else e['shape']),
+         'predicate': p, 'display_name': e.get('display_name', '')}
+        for p in required_outputs for e in catalog['entities']
+        if p in e['properties']
+    ]
     requirement_reminder = ('Preserve all constraints together: ' +
         json.dumps({'required_output_predicates': required_outputs,
+                    'required_output_owners': required_output_owners,
                     'exact_input_constraints': required_inputs},
                    ensure_ascii=False) +
         '. Choose owning shapes using SHACL evidence; never fabricate joins. ')
@@ -592,6 +602,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "For direct property lookup use one owning entity, edges=[], "
             "requested property as projection, filters=null unless requested. "
             "Projection aliases must differ from entity aliases. "
+            "Entity aliases must be unique. For explicitly required outputs, "
+            "copy the full predicate IRI from required_output_owners; "
+            "do not guess a compact P-symbol. "
             "For count use projections=[] and exists filter if counting property presence. "
             "For exact filters use {op:'eq',entity:'alias',predicate:'IRI',value:'literal'}; "
             "Never use a predicate IRI as its own filter value. "
