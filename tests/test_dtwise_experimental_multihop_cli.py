@@ -40,13 +40,44 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
                     "No LLM call expected"))
 
     def test_unnamed_endpoints_rejected_before_llm(self):
-        with self.assertRaisesRegex(ValueError, "exactly two"):
+        with self.assertRaisesRegex(ValueError, "at least two"):
             self.plan("Find connected assets")
 
     def test_unverified_mapping_rejected_before_llm(self):
         with self.assertRaisesRegex(ValueError, "No verified multi-hop"):
             self.plan("Find Plant Signal", mappings=[
                 dict(self.mappings[0], verified=False)])
+
+    def test_named_intermediate_is_required_waypoint(self):
+        # Plant -> Instrument -> Signal is the only evidenced two-hop path.
+        # The explicitly named Instrument must appear in the candidate.
+        seen = []
+
+        def fake_request(url, payload, timeout):
+            seen.append(payload)
+            return {"message": {"content": '{"choice":null}'}}
+
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value=self.catalog), patch(
+                "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                side_effect=lambda catalog, question: (
+                    catalog, {"dexpi", "opc"})):
+            with self.assertRaisesRegex(ValueError, "abstained"):
+                plan_experimental_multihop(
+                    "Get Signal from Plant through Instrument", {},
+                    self.mappings, model="test",
+                    ollama_host="http://localhost:11434",
+                    timeout=1, request_json=fake_request)
+        self.assertEqual(len(seen), 1)
+        self.assertIn("urn:Instrument",
+                      seen[0]["messages"][1]["content"])
+
+    def test_unreachable_named_waypoint_rejected(self):
+        # All three shapes are named but one relationship is absent.
+        self.catalog["shacl_edges"] = []
+        with self.assertRaisesRegex(ValueError, "includes all named"):
+            self.plan("Find Plant Instrument Signal")
+
 
     def test_no_multihop_path_rejected_before_llm(self):
         with self.assertRaisesRegex(ValueError, "No verified multi-hop"):
