@@ -860,7 +860,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Shape metadata is already in prompt_catalog; do not duplicate it.
     initial_shape_guide = []
     # Repeat grounded output and input requirements on every model retry.
-    required_outputs, required_inputs = extract_semantic_selection_requirements(\n        question, catalog, mentioned)\n    # Preserve explicit SHACL-backed output ownership across compact symbols.
+    required_outputs, required_inputs = extract_semantic_selection_requirements(
+        question, catalog, mentioned)
+    # Preserve explicit SHACL-backed output ownership across compact symbols.
     required_output_owners = [
         {'domain': e['domain'],
          'shape': (catalog_symbols.get(e['shape'], e['shape'])
