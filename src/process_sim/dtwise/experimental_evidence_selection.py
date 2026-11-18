@@ -95,7 +95,24 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     if result["operation"] == "unsupported":
         raise ValueError("Unsupported evidence-selection operation")
     if result["operation"] != expected_operation:
-        raise ValueError("LLM selected an operation inconsistent with the question")
+        # A model may describe an aggregate's grouping-key projection as SELECT.
+        # Recover only when the question explicitly requests grouped counts,
+        # and the selected key is uniquely named in the question and SHACL.
+        if not (expected_operation == "group_count"
+                and result["operation"] == "select"
+                and isinstance(result["projections"], list)
+                and len(result["projections"]) == 1):
+            raise ValueError("LLM selected an operation inconsistent with the question")
+        selected = result["projections"][0]
+        chosen = result["path_id"]
+        if (not isinstance(chosen, str) or not re.fullmatch(r"PATH_\d+", chosen)
+                or int(chosen[5:]) >= len(paths)
+                or selected not in property_maps[int(chosen[5:])]):
+            raise ValueError("Invalid grouping evidence selection")
+        _, predicate = property_maps[int(chosen[5:])][selected]
+        if not re.search(r"(?<![A-Za-z0-9_])" + re.escape(_label(predicate))
+                         + r"(?![A-Za-z0-9_])", question, re.I):
+            raise ValueError("Grouped count key is not requested by the question")
     path_id = result["path_id"]
     if not isinstance(path_id, str) or not re.fullmatch(r"PATH_\d+", path_id):
         raise ValueError("Missing or invalid evidence path ID")
