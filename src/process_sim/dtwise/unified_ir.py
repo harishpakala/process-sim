@@ -160,10 +160,16 @@ def validate_ir(ir, schema, *, mappings=None):
     if ir.get('filters') is not None:
         filter_check(ir['filters'])
     operation = ir.get('operation', {'type':'select'})
-    if operation.get('type') not in ('select', 'count'):
+    if operation.get('type') not in ('select', 'count', 'group_count'):
         raise ValueError('Unsupported operation')
     if operation.get('type') == 'count' and projections:
         raise ValueError('COUNT currently requires no projections')
+    if operation.get('type') == 'group_count':
+        if len(projections) != 1:
+            raise ValueError('Grouped COUNT requires exactly one SHACL-grounded group projection')
+        threshold = operation.get('having_min')
+        if threshold is not None and (type(threshold) is not int or not 0 <= threshold <= 1000000):
+            raise ValueError('Invalid grouped count threshold')
     if not projections and operation.get('type') == 'select' and not ir.get('return_entities'):
         raise ValueError('SELECT needs projections or return_entities=true')
     # Optional LLM-authored SELECT modifiers. Never infer them from question text.
