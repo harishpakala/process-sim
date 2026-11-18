@@ -50,11 +50,11 @@ def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
     if not match:
         # Manifest B19: "For DOMAIN Shape entities where Key is VALUE, list Field."
         # Match the complete question to avoid silently ignoring constraints.
-        alternate = (r"^\\s*for\\s+" + re.escape(entity["domain"]) +
-                     r"\\s+" + re.escape(label) +
-                     r"\\s+entities\\s+where\\s+([A-Za-z][A-Za-z0-9_]*)" +
-                     r"\\s+is\\s+(\\S+?)\\s*,\\s*list\\s+" +
-                     r"([A-Za-z][A-Za-z0-9_]*)\\s*[.]?\\s*$")
+        alternate = (r"^\s*for\s+" + re.escape(entity["domain"]) +
+                     r"\s+" + re.escape(label) +
+                     r"\s+entities\s+where\s+([A-Za-z][A-Za-z0-9_]*)" +
+                     r"\s+is\s+(\S+?)\s*,\s*list\s+" +
+                     r"([A-Za-z][A-Za-z0-9_]*)\s*[.]?\s*$")
         alternate_match = re.fullmatch(alternate, question, re.I)
         if not alternate_match:
             raise ValueError("Unsupported single-shape query syntax")
@@ -355,7 +355,7 @@ def plan_experimental_multihop(question, index, mappings, *, model,
 
     # Handle the fully specified single-shape B19 lookup before inferring
     # cross-domain output owners from incidental words in the filter clause.
-    if len(anchors) == 1 and re.match(r"^\\s*for\\s+", question, re.I):
+    if len(anchors) == 1 and re.match(r"^\s*for\s+", question, re.I):
         plan = _plan_single_shape_lookup(
             question, catalog, mentioned, anchors[0], index, mappings)
         return plan, {"status": "evidence_semantic_grounded",
