@@ -46,6 +46,24 @@ class EvidencePathRequirementsTests(unittest.TestCase):
             "node_index": 0, "predicate": "https://example.org/dexpi/hasLocalId",
             "op": "eq", "value": "FI-001"})
 
+    def test_ambiguous_localid_scoped_to_named_dexpi_shape(self):
+        self.catalog["entities"][1]["properties"].append(
+            "https://example.org/opc/hasLocalId")
+        _, filter_spec = self.ground(
+            "Get OPCUAConnectivity Signal SignalName for DEXPI Instrument "
+            "with LocalId FI-001 using AssetIdentifier.")
+        self.assertEqual(filter_spec["node_index"], 0)
+        self.assertEqual(filter_spec["predicate"],
+                         "https://example.org/dexpi/hasLocalId")
+
+    def test_ambiguous_localid_without_scope_rejected(self):
+        self.catalog["entities"][1]["properties"].append(
+            "https://example.org/opc/hasLocalId")
+        with self.assertRaisesRegex(ValueError, "no unique path owner"):
+            self.ground(
+                "Get OPCUAConnectivity Signal SignalName with LocalId FI-001 "
+                "using AssetIdentifier.")
+
     def test_missing_output_owner_rejected(self):
         path = dict(self.path, nodes=[("dexpi", "urn:Instrument")])
         with self.assertRaises(ValueError):
