@@ -760,6 +760,36 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             raise ValueError('Unrequested SHACL traversal in direct property lookup')
     return plan
 
+def extract_semantic_selection_requirements(question, catalog, mentioned):
+    """Extract SHACL-grounded output and equality-input requirements."""
+    output_clause = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)[0]
+    if len(mentioned) > 1:
+        output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
+                                 maxsplit=1, flags=re.I)[0]
+    required_outputs = sorted(set(_explicit_property_requirements(
+        output_clause, catalog).values()) |
+        _domain_qualified_output_requirements(output_clause, catalog))
+    required_inputs = []
+    for property_name, literal in re.findall(
+            r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
+            question, flags=re.I):
+        candidates = sorted({(e['domain'], iri)
+                             for e in catalog['entities']
+                             for iri in e['properties']
+                             if property_name.lower() in {
+                                 re.split(r'[/#]', iri)[-1].lower(),
+                                 re.sub(r'^has', '', re.split(r'[/#]', iri)[-1],
+                                        flags=re.I).lower()}})
+        # "with DEXPI InstrumentationFunction" names an entity, not a
+        # property-value filter. Only SHACL-resolved predicates qualify.
+        if candidates:
+            required_inputs.append({'name': property_name, 'value': literal,
+                                    'candidate_properties': [
+                                        {'domain': d, 'predicate': p}
+                                        for d, p in candidates]})
+    return required_outputs, required_inputs
+
+
 def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 ollama_host=None, timeout=120, mappings=None, diagnostics=None,
                 compact_prompt=False, keep_alive=None,
@@ -830,32 +860,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Shape metadata is already in prompt_catalog; do not duplicate it.
     initial_shape_guide = []
     # Repeat grounded output and input requirements on every model retry.
-    output_clause = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)[0]
-    if len(mentioned) > 1:
-        output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
-                                 maxsplit=1, flags=re.I)[0]
-    required_outputs = sorted(set(_explicit_property_requirements(
-        output_clause, catalog).values()) |
-        _domain_qualified_output_requirements(output_clause, catalog))
-    required_inputs = []
-    for property_name, literal in re.findall(
-            r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
-            question, flags=re.I):
-        candidates = sorted({(e['domain'], iri)
-                             for e in catalog['entities']
-                             for iri in e['properties']
-                             if property_name.lower() in {
-                                 re.split(r'[/#]', iri)[-1].lower(),
-                                 re.sub(r'^has', '', re.split(r'[/#]', iri)[-1],
-                                        flags=re.I).lower()}})
-        # "with DEXPI InstrumentationFunction" names an entity, not a
-        # property-value filter. Only SHACL-resolved predicates qualify.
-        if candidates:
-            required_inputs.append({'name': property_name, 'value': literal,
-                                    'candidate_properties': [
-                                        {'domain': d, 'predicate': p}
-                                        for d, p in candidates]})
-    # Preserve explicit SHACL-backed output ownership across compact symbols.
+    required_outputs, required_inputs = extract_semantic_selection_requirements(\n        question, catalog, mentioned)\n    # Preserve explicit SHACL-backed output ownership across compact symbols.
     required_output_owners = [
         {'domain': e['domain'],
          'shape': (catalog_symbols.get(e['shape'], e['shape'])
