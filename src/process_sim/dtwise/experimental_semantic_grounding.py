@@ -78,7 +78,8 @@ def plan_single_shape_semantic(question, entity, index, mappings, *,
                         "value": spec["value"]}
     # A missing equality filter is never acceptable when the question
     # explicitly contains an equality clause.
-    if re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S) and bound_filter is None:
+    if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
+            or re.search(r"\bwith\s+[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
         raise ValueError("LLM omitted an explicit equality filter")
     plan = {
         "ir_version": "1.0",
