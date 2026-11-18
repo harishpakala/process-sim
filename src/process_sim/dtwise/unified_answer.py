@@ -698,10 +698,8 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # input filter, even without WHERE. Scope ambiguous names to the model's
     # selected, SHACL-evidenced entity shapes. This checks completeness only:
     # it never adds a filter, chooses an entity, or repairs the model's plan.
-    if len(mentioned) > 1:
-        for property_name, literal in re.findall(
-                r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z0-9][A-Za-z0-9_-]*)',
-                question, flags=re.I):
+    if with_constraint:
+        for property_name, literal in [(with_constraint.group(1), with_constraint.group(2))]:
             candidates = set()
             for selected in plan['entities']:
                 for entity in catalog['entities']:
@@ -769,6 +767,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             not traversal_requirement(question, catalog) and
             len(mentioned) <= 1 and
             not substring_clauses and
+            not with_constraint and
             plan.get('filters') is not None):
         raise ValueError('Unrequested filter in direct property lookup')
     # An unrequested traversal cannot be added to a simple property lookup.
