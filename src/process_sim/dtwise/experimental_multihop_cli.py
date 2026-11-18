@@ -14,6 +14,49 @@ from .unified_answer import (
 )
 
 
+
+def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
+                              mappings):
+    """Opt-in zero-edge SELECT for an explicit, unambiguous property lookup.
+
+    Unsupported syntax fails closed rather than silently dropping requirements.
+    """
+    entity = next(e for e in catalog["entities"]
+                  if (e["domain"], e["shape"]) == anchor)
+    label = entity["display_name"]
+    pattern = (r"^\s*(?:get|show|list)\s+([A-Za-z][A-Za-z0-9_]*)"
+               r"\s+from\s+" + re.escape(entity["domain"]) +
+               r"\s+" + re.escape(label) + r"\s*[.]?\s*$")
+    match = re.fullmatch(pattern, question, re.I)
+    if not match:
+        raise ValueError("Unsupported single-shape query syntax")
+    requested = match.group(1).lower()
+    predicates = []
+    for predicate in entity["properties"]:
+        local = re.split(r"[/#]", predicate)[-1]
+        names = {local.lower()}
+        if local.lower().startswith("has") and len(local) > 3:
+            names.add(local[3:].lower())
+        if requested in names:
+            predicates.append(predicate)
+    if len(predicates) != 1:
+        raise ValueError("Single-shape output predicate is missing or ambiguous")
+    plan = {
+        "ir_version": "1.0",
+        "entities": [{"alias": "n0", "domain": anchor[0],
+                      "shape": anchor[1]}],
+        "edges": [],
+        "projections": [{"entity": "n0", "predicate": predicates[0],
+                         "as": "value_0"}],
+        "filters": None,
+        "operation": {"type": "select"},
+        "return_entities": False,
+    }
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings)
+
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
@@ -31,9 +74,13 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
+    if len(anchors) == 1:
+        plan = _plan_single_shape_lookup(
+            question, catalog, mentioned, anchors[0], index, mappings)
+        return plan, {"status": "single_shape_grounded", "choice": None}
     if len(anchors) < 2:
         raise ValueError(
-            "Experimental multi-hop requires at least two named SHACL shapes")
+            "Experimental multi-hop requires at least one named SHACL shape")
     required = set(anchors)
     # Only keep paths that contain EVERY explicitly named shape. This prevents
     # silently dropping an intermediate waypoint named in the question.
