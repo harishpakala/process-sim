@@ -901,6 +901,125 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             'candidate_count': 0,
             'fallback_reason': None,
         }
+    # Multi-hop semantic path selection. Only explicitly named endpoints,
+    # SHACL-owned outputs, and exact verified evidence can enter this route.
+    # Keep direct one-hop queries on the established fast path below.
+    if (compact_catalog and len(required_outputs) == 1
+            and len(required_inputs) <= 1 and not re.search(
+                r'\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\b',
+                question, re.I)):
+        named_shapes = sorted({
+            (e['domain'], e['shape']) for e in catalog['entities']
+            if e.get('display_name') and re.search(
+                r'(?<![a-z0-9])' + re.escape(e['display_name'].lower())
+                + r'(?![a-z0-9])', question.lower())})
+        owners = {(e['domain'], e['shape']): e for e in catalog['entities']}
+        path_options = []
+        if len(named_shapes) >= 2:
+            for start in named_shapes:
+                for end in named_shapes:
+                    if start == end:
+                        continue
+                    for path in enumerate_evidenced_paths(
+                            catalog, mappings, start, end, max_hops=4,
+                            max_paths=32):
+                        nodes = path['nodes']
+                        if len(path['steps']) < 2:
+                            continue
+                        if not mentioned.issubset({node[0] for node in nodes}):
+                            continue
+                        projections = [i for i, node in enumerate(nodes)
+                                       if required_outputs[0] in owners[node]['properties']]
+                        if len(projections) != 1:
+                            continue
+                        filter_binding = None
+                        if required_inputs:
+                            request = required_inputs[0]
+                            bindings = [(i, p['predicate'])
+                                        for i, node in enumerate(nodes)
+                                        for p in request['candidate_properties']
+                                        if p['domain'] == node[0]
+                                        and p['predicate'] in owners[node]['properties']]
+                            if len(bindings) != 1:
+                                continue
+                            filter_binding = (bindings[0][0], bindings[0][1],
+                                              request['value'])
+                        path_options.append((path, projections[0], filter_binding))
+        # Avoid arbitrary truncation when path enumeration is ambiguous.
+        if 0 < len(path_options) <= 32:
+            path_choices = []
+            for i, (path, output_index, filter_binding) in enumerate(path_options):
+                nodes = path['nodes']
+                path_choices.append({
+                    'id': 'PATH_' + str(i),
+                    'nodes': [{'domain': d, 'shape_name':
+                               owners[(d, shape)].get('display_name', shape)}
+                              for d, shape in nodes],
+                    'steps': path['steps'],
+                    'output_node': output_index,
+                    'output_property': re.split(r'[/#]', required_outputs[0])[-1],
+                    **({'filter': {'node': filter_binding[0],
+                                    'property': re.split(r'[/#]', filter_binding[1])[-1],
+                                    'op': 'eq', 'value': filter_binding[2]}}
+                       if filter_binding else {})})
+            try:
+                response = _request_json(
+                    (ollama_host or os.getenv('OLLAMA_HOST',
+                     'http://localhost:11434')).rstrip('/') + '/api/chat',
+                    {'model': model, 'stream': False, 'format': 'json',
+                     'options': {'temperature': 0},
+                     'messages': [
+                         {'role': 'system', 'content':
+                          'Choose the evidenced path that matches the question. '
+                          'Return only JSON {"choice":"PATH_0"} with a listed ID, '
+                          'or {"choice":null} if none matches. Do not generate IR.'},
+                         {'role': 'user', 'content': json.dumps(
+                             {'question': question, 'paths': path_choices},
+                             separators=(',', ':'))}],
+                     **({'keep_alive': keep_alive} if keep_alive is not None else {})},
+                    timeout)
+                raw = response.get('message', {}).get('content', '')
+                choice = json.loads(raw).get('choice')
+                if diagnostics is not None:
+                    diagnostics.append({
+                        'attempt': 1, 'model': model, 'raw': raw,
+                        'status': 'path_selection',
+                        'prompt_tokens': response.get('prompt_eval_count'),
+                        'generated_tokens': response.get('eval_count')})
+                if isinstance(choice, str) and re.fullmatch(r'PATH_[0-9]+', choice):
+                    selected_index = int(choice[5:])
+                    if selected_index < len(path_options):
+                        path, output_index, filter_binding = path_options[selected_index]
+                        aliases = ['node_' + str(i) for i in range(len(path['nodes']))]
+                        candidate = {
+                            'ir_version': '1.0',
+                            'entities': [
+                                {'alias': aliases[i], 'domain': domain, 'shape': shape}
+                                for i, (domain, shape) in enumerate(path['nodes'])],
+                            'edges': [
+                                {'from': aliases[i], 'to': aliases[i + 1], **step}
+                                for i, step in enumerate(path['steps'])],
+                            'projections': [{
+                                'entity': aliases[output_index],
+                                'predicate': required_outputs[0], 'as': 'value'}],
+                            'filters': ({
+                                'op': 'eq', 'entity': aliases[filter_binding[0]],
+                                'predicate': filter_binding[1],
+                                'value': filter_binding[2]}
+                                if filter_binding else None),
+                            'operation': {'type': 'select'},
+                            'return_entities': False}
+                        check_semantic_coverage(candidate, question, catalog, mentioned)
+                        candidate = resolve_shapes(candidate, index, mappings=mappings)
+                        if prompt_diagnostics is not None:
+                            prompt_diagnostics['path_selection'] = {
+                                'candidate_count': len(path_options),
+                                'selected': choice,
+                                'hop_count': len(path['steps'])}
+                        return candidate
+            except (ValueError, KeyError, TypeError, TimeoutError,
+                    URLError, HTTPError, OSError, json.JSONDecodeError):
+                pass
     # Compact semantic-plan selection for direct two-domain lookups, including\n    # one unambiguous SHACL-owned equality filter. The model
     # selects IDs only; deterministic expansion owns aliases, IRIs and edges.
     # Other queries retain the general Unified IR planner below.
