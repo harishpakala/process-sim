@@ -89,12 +89,12 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         r"\s*join\s+(.+?)\s+through\s+([A-Za-z][A-Za-z0-9_]*)"
         r"\s+([A-Za-z][A-Za-z0-9_]*)\s+using\s+"
         r"([A-Za-z][A-Za-z0-9_]*(?:\s+and\s+[A-Za-z][A-Za-z0-9_]*)*)"
-        r"\s*[.]?\s*", question, re.I)
+        r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?))?"\n        r"\s*[.]?\s*", question, re.I)
     if not match:
         return None
-    source_clause, hub_domain, hub_label, key_clause = match.groups()
+    source_clause, hub_domain, hub_label, key_clause, filter_name, filter_value = match.groups()
     keys = {key.casefold() for key in re.split(r"\s+and\s+", key_clause, flags=re.I)}
-    if len(keys) != 2 or keys != {"assetidentifier", "productidentifier"}:
+    if keys not in ({"assetidentifier"}, {"assetidentifier", "productidentifier"}):
         raise ValueError("Unsupported explicit hub-join keys")
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
     hubs = [node for node in owners
@@ -145,10 +145,10 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
                       "right_predicate": mapping["right_property"]})
     if used_keys != keys:
         raise ValueError("Not all requested hub-join keys are evidenced")
-    plan = {"ir_version": "1.0",
+    bound_filter = None\n    if filter_name is not None:\n        if len(keys) != 1 or filter_name.casefold() not in keys:\n            raise ValueError("Hub filter must use the single verified join key")\n        predicate = _single_shape_property(owners[hub], filter_name)\n        if not filter_value:\n            raise ValueError("Empty hub filter value")\n        bound_filter = {"op": "eq", "entity": aliases[hub],\n                        "predicate": predicate, "value": filter_value}\n    plan = {"ir_version": "1.0",
             "entities": [{"alias": aliases[node], "domain": node[0],
                           "shape": node[1]} for node in nodes],
-            "edges": edges, "projections": [], "filters": None,
+            "edges": edges, "projections": [], "filters": bound_filter,
             "operation": {"type": "select"}, "return_entities": True}
     check_semantic_coverage(plan, question, catalog, mentioned)
     return resolve_shapes(plan, index, mappings=mappings), {
