@@ -8,18 +8,20 @@ class EvidencePathRequirementsTests(unittest.TestCase):
     def setUp(self):
         self.catalog = {"entities": [
             {"domain": "dexpi", "shape": "urn:Instrument",
-             "properties": ["urn:dexpi:hasLocalId",
-                            "urn:dexpi:hasAssetIdentifier"]},
+             "display_name": "Instrument",
+             "properties": ["https://example.org/dexpi/hasLocalId",
+                            "https://example.org/dexpi/hasAssetIdentifier"]},
             {"domain": "opcuaconnectivity", "shape": "urn:Signal",
-             "properties": ["urn:opc:hasSignalName",
-                            "urn:opc:hasAssetIdentifier"]},
+             "display_name": "Signal",
+             "properties": ["https://example.org/opc/hasSignalName",
+                            "https://example.org/opc/hasAssetIdentifier"]},
         ], "shacl_edges": []}
         self.path = {"nodes": [
             ("dexpi", "urn:Instrument"),
             ("opcuaconnectivity", "urn:Signal")],
             "steps": [{"kind": "mapping", "mapping_id": "asset",
-                       "left_predicate": "urn:dexpi:hasAssetIdentifier",
-                       "right_predicate": "urn:opc:hasAssetIdentifier"}]}
+                       "left_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+                       "right_predicate": "https://example.org/opc/hasAssetIdentifier"}]}
         self.mentioned = {"dexpi", "opcuaconnectivity"}
 
     def ground(self, question, path=None):
@@ -32,7 +34,7 @@ class EvidencePathRequirementsTests(unittest.TestCase):
             "Get OPCUAConnectivity Signal SignalName associated with "
             "DEXPI Instrument using AssetIdentifier.")
         self.assertEqual(outputs[0]["node_index"], 1)
-        self.assertEqual(outputs[0]["predicate"], "urn:opc:hasSignalName")
+        self.assertEqual(outputs[0]["predicate"], "https://example.org/opc/hasSignalName")
         self.assertIsNone(filter_spec)
 
     def test_localid_filter_bound_to_dexpi(self):
@@ -41,7 +43,7 @@ class EvidencePathRequirementsTests(unittest.TestCase):
             "with LocalId FI-001 using AssetIdentifier.")
         self.assertEqual(outputs[0]["node_index"], 1)
         self.assertEqual(filter_spec, {
-            "node_index": 0, "predicate": "urn:dexpi:hasLocalId",
+            "node_index": 0, "predicate": "https://example.org/dexpi/hasLocalId",
             "op": "eq", "value": "FI-001"})
 
     def test_missing_output_owner_rejected(self):
