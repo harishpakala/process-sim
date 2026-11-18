@@ -80,10 +80,10 @@ def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
+    """One LLM selection for zero-edge, direct, and multi-hop evidence."""
+    from .experimental_evidence_selection import select_evidence_plan
+
     catalog, mentioned = _focused_catalog(catalog_from_schema(index), question)
-    # Named shapes are required waypoints, not necessarily path endpoints.
-    # Do not guess a start/end orientation: verified mapping direction is
-    # enforced by enumerate_evidenced_paths.
     anchors = []
     for entity in catalog["entities"]:
         label = entity.get("display_name")
@@ -94,56 +94,36 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
+    if not anchors:
+        raise ValueError("Experimental planner requires a named SHACL shape")
     if len(anchors) == 1:
-        entity = next(e for e in catalog["entities"]
-                      if (e["domain"], e["shape"]) == anchors[0])
-        return plan_single_shape_semantic(
-            question, entity, index, mappings, model=model,
-            request_json=request_json or _request_json,
-            ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive)
-    if len(anchors) < 2:
-        raise ValueError(
-            "Experimental multi-hop requires at least one named SHACL shape")
-    required = set(anchors)
-    # Only keep paths that contain EVERY explicitly named shape. This prevents
-    # silently dropping an intermediate waypoint named in the question.
-    paths = []
-    seen = set()
-    for source in anchors:
-        for target in anchors:
-            if source == target:
-                continue
-            for path in enumerate_evidenced_paths(
-                    catalog, mappings, source, target,
-                    max_hops=4, max_paths=256):
-                if len(path["steps"]) < 1 or not required.issubset(
-                        set(path["nodes"])):
+        paths = [{"nodes": [anchors[0]], "steps": []}]
+    else:
+        required = set(anchors)
+        paths = []
+        seen = set()
+        for source in anchors:
+            for target in anchors:
+                if source == target:
                     continue
-                signature = tuple(path["nodes"]), tuple(
-                    tuple(sorted(step.items())) for step in path["steps"])
-                if signature not in seen:
-                    seen.add(signature)
-                    paths.append(path)
-    if not paths:
-        raise ValueError(
-            "No verified multi-hop evidence path includes all named SHACL shapes")
-    # Never truncate candidates silently: doing so could remove the
-    # semantically correct path before the LLM can consider it.
+                for path in enumerate_evidenced_paths(
+                        catalog, mappings, source, target,
+                        max_hops=4, max_paths=256):
+                    if not required.issubset(set(path["nodes"])):
+                        continue
+                    signature = (tuple(path["nodes"]), tuple(
+                        tuple(sorted(step.items())) for step in path["steps"]))
+                    if signature not in seen:
+                        seen.add(signature)
+                        paths.append(path)
+        if not paths:
+            raise ValueError(
+                "No verified evidence path includes all named SHACL shapes")
     if len(paths) > 32:
-        raise ValueError(
-            "More than 32 evidenced paths; narrow the question")
-    selected, selection = select_evidenced_path(
-        question, paths, model=model,
+        raise ValueError("More than 32 evidenced paths; narrow the question")
+    plan, selection = select_evidence_plan(
+        question, paths, catalog, index, mappings, model=model,
         request_json=request_json or _request_json,
         ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive)
-    if selected is None:
-        raise ValueError("Experimental semantic path selection failed: " +
-                         selection["status"])
-    projections, filter_spec = ground_path_requirements(
-        question, catalog, mentioned, selected)
-    plan = bind_evidenced_path(
-        selected, catalog, mappings, projections=projections,
-        filter_spec=filter_spec)
     check_semantic_coverage(plan, question, catalog, mentioned)
-    plan = resolve_shapes(plan, index, mappings=mappings)
     return plan, selection
