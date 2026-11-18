@@ -848,10 +848,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                                  re.split(r'[/#]', iri)[-1].lower(),
                                  re.sub(r'^has', '', re.split(r'[/#]', iri)[-1],
                                         flags=re.I).lower()}})
-        required_inputs.append({'name': property_name, 'value': literal,
-                                'candidate_properties': [
-                                    {'domain': d, 'predicate': p}
-                                    for d, p in candidates]})
+        # "with DEXPI InstrumentationFunction" names an entity, not a
+        # property-value filter. Only SHACL-resolved predicates qualify.
+        if candidates:
+            required_inputs.append({'name': property_name, 'value': literal,
+                                    'candidate_properties': [
+                                        {'domain': d, 'predicate': p}
+                                        for d, p in candidates]})
     # Preserve explicit SHACL-backed output ownership across compact symbols.
     required_output_owners = [
         {'domain': e['domain'],
