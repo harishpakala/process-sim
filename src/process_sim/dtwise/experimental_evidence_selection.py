@@ -86,6 +86,16 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         result = json.loads(response["message"]["content"])
     except (KeyError, TypeError, ValueError) as exc:
         raise ValueError("Invalid evidence-selection JSON") from exc
+    # Normalize harmless Ollama formatting variants before strict ID checks.
+    # Do not invent paths, projections, or literal filters.
+    if isinstance(result, dict):
+        result = dict(result)
+        if "properties" in result and "projections" not in result:
+            result["projections"] = result.pop("properties")
+        if "filter" not in result:
+            result["filter"] = None
+        if isinstance(result.get("operation"), str):
+            result["operation"] = result["operation"].lower()
     if not isinstance(result, dict) or set(result) != {
             "path_id", "operation", "projections", "filter"}:
         raise ValueError("Invalid evidence-selection structure")
