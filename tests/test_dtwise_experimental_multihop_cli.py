@@ -79,9 +79,23 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
             self.plan("Find Plant Instrument Signal")
 
 
-    def test_no_multihop_path_rejected_before_llm(self):
-        with self.assertRaisesRegex(ValueError, "No verified multi-hop"):
-            self.plan("Find Instrument Signal")
+    def test_verified_one_edge_path_is_offered_to_llm(self):
+        seen = []
+        def fake_request(url, payload, timeout):
+            seen.append(payload)
+            return {"message": {"content": '{"choice":null}'}}
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value=self.catalog), patch(
+                "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                side_effect=lambda catalog, question: (
+                    catalog, {"dexpi", "opc"})):
+            with self.assertRaisesRegex(ValueError, "abstained"):
+                plan_experimental_multihop(
+                    "Find Instrument Signal", {}, self.mappings,
+                    model="test", ollama_host="http://localhost:11434",
+                    timeout=1, request_json=fake_request)
+        self.assertEqual(len(seen), 1)
+        self.assertIn("asset", seen[0]["messages"][1]["content"])
 
 
 if __name__ == "__main__":
