@@ -65,10 +65,22 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
                  "projections": ["N0P0"],
                  "filter": {"property": "N0P2", "op": "eq", "value": "FI103"}})
 
-    def test_omitted_explicit_filter_rejected(self):
-        with self.assertRaisesRegex(ValueError, "omitted"):
-            self.plan("Get SignalName from opc Signal where AssetIdentifier is FI103.", {
-                "path_id": "PATH_0", "operation": "select", "projections": ["N0P0"], "filter": None})
+    def test_omitted_model_filter_grounded_from_explicit_question(self):
+        plan, _ = self.plan(
+            "Get SignalName from opc Signal where AssetIdentifier is FI103.",
+            {"path_id": "PATH_0", "operation": "select",
+             "projections": ["N0P0"], "filter": None})
+        self.assertEqual(plan["filters"]["predicate"], "urn:hasAssetIdentifier")
+        self.assertEqual(plan["filters"]["value"], "FI103")
+
+    def test_invented_filter_rejected(self):
+        with self.assertRaisesRegex(ValueError, "invented an equality filter"):
+            self.plan(
+                "Get SignalName from opc Signal matched by AssetIdentifier.",
+                {"path_id": "PATH_0", "operation": "select",
+                 "projections": ["N0P0"],
+                 "filter": {"property": "N0P1", "op": "eq",
+                            "value": "literal"}})
 
     def test_invented_property_rejected(self):
         with self.assertRaisesRegex(ValueError, "invented"):
