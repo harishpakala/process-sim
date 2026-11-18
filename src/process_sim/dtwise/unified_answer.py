@@ -814,7 +814,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # Other queries retain the general Unified IR planner below.
     if (compact_catalog and len(mentioned) == 2 and len(required_outputs) == 1
             and not required_inputs and not re.search(
-                r'\\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\\b',
+                r'\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\b',
                 question, re.I)):
         normalized_question = re.sub(r'[^a-z0-9]', '', question.lower())
         anchors = {
