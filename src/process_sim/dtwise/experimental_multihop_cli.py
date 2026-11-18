@@ -89,7 +89,8 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         r"\s*join\s+(.+?)\s+through\s+([A-Za-z][A-Za-z0-9_]*)"
         r"\s+([A-Za-z][A-Za-z0-9_]*)\s+using\s+"
         r"([A-Za-z][A-Za-z0-9_]*(?:\s+and\s+[A-Za-z][A-Za-z0-9_]*)*)"
-        r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?))?"\n        r"\s*[.]?\s*", question, re.I)
+        r"(?:\s+where\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+?))?"
+        r"\s*[.]?\s*", question, re.I)
     if not match:
         return None
     source_clause, hub_domain, hub_label, key_clause, filter_name, filter_value = match.groups()
@@ -104,8 +105,10 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
         raise ValueError("Explicit hub shape is missing or ambiguous")
     hub = hubs[0]
     leaves = [node for node in anchors if node != hub]
-    if not leaves or len(leaves) != 4 or len(set(leaves)) != len(leaves):
-        raise ValueError("Explicit hub join requires four distinct named shapes")
+    if (len(leaves) not in (3, 4) or len(set(leaves)) != len(leaves)
+            or (len(leaves) == 4 and len(keys) != 2)
+            or (len(leaves) == 3 and keys != {"assetidentifier"})):
+        raise ValueError("Explicit hub join requires three or four distinct named shapes")
     # Every named leaf must occur in the source clause, not merely after THROUGH.
     for node in leaves:
         entity = owners[node]
@@ -145,7 +148,16 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
                       "right_predicate": mapping["right_property"]})
     if used_keys != keys:
         raise ValueError("Not all requested hub-join keys are evidenced")
-    bound_filter = None\n    if filter_name is not None:\n        if len(keys) != 1 or filter_name.casefold() not in keys:\n            raise ValueError("Hub filter must use the single verified join key")\n        predicate = _single_shape_property(owners[hub], filter_name)\n        if not filter_value:\n            raise ValueError("Empty hub filter value")\n        bound_filter = {"op": "eq", "entity": aliases[hub],\n                        "predicate": predicate, "value": filter_value}\n    plan = {"ir_version": "1.0",
+    bound_filter = None
+    if filter_name is not None:
+        if len(keys) != 1 or filter_name.casefold() not in keys:
+            raise ValueError("Hub filter must use the single verified join key")
+        predicate = _single_shape_property(owners[hub], filter_name)
+        if not filter_value:
+            raise ValueError("Empty hub filter value")
+        bound_filter = {"op": "eq", "entity": aliases[hub],
+                        "predicate": predicate, "value": filter_value}
+    plan = {"ir_version": "1.0",
             "entities": [{"alias": aliases[node], "domain": node[0],
                           "shape": node[1]} for node in nodes],
             "edges": edges, "projections": [], "filters": bound_filter,
