@@ -132,16 +132,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     specs = [{"node_index": lookup[p][0], "predicate": lookup[p][1],
               "as": "value_" + str(j)} for j, p in enumerate(projections)]
     bound_filter = None
-    f = result["filter"]
-    if f is not None:
-        if (not isinstance(f, dict) or set(f) != {"property", "op", "value"}
-                or not isinstance(f["property"], str)
-                or f["property"] not in lookup or f["op"] != "eq"
-                or type(f["value"]) not in (str, int, float, bool)):
-            raise ValueError("Invalid evidence-selection filter")
-        j, predicate = lookup[f["property"]]
-        bound_filter = {"node_index": j, "predicate": predicate,
-                        "op": "eq", "value": f["value"]}
+    # Do not validate unsolicited model filters: the question is authoritative.
     # A join property named in prose is not an equality-to-a-literal filter.
     # Extract only unambiguous explicit scalar constraints from the question.
     explicit = re.findall(
@@ -154,6 +145,16 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             question, flags=re.I)
     if len(explicit) > 1:
         raise ValueError("Multiple equality constraints are not supported")
+    f = result["filter"]
+    if explicit and f is not None:
+        if (not isinstance(f, dict) or set(f) != {"property", "op", "value"}
+                or not isinstance(f["property"], str)
+                or f["property"] not in lookup or f["op"] != "eq"
+                or type(f["value"]) not in (str, int, float, bool)):
+            raise ValueError("Invalid evidence-selection filter")
+        j, predicate = lookup[f["property"]]
+        bound_filter = {"node_index": j, "predicate": predicate,
+                        "op": "eq", "value": f["value"]}
     if explicit:
         property_name, literal = explicit[0]
         literal = literal.rstrip(".")
