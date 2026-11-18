@@ -58,10 +58,36 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
                                  "https://example.org/" + domain + "/has" + prop)
                 self.assertEqual(selection["status"], "single_shape_grounded")
 
-    def test_filter_cannot_be_silently_dropped(self):
+    def test_b06_uri_equality_filter(self):
+        plan, selection = self.plan(
+            "Show SignalName from opcuaconnectivity SignalMapping "
+            "where AssetIdentifier is https://aas.example.com/FI103.")
+        self.assertEqual(plan["edges"], [])
+        self.assertEqual(plan["projections"][0]["predicate"],
+                         "https://example.org/opcuaconnectivity/hasSignalName")
+        self.assertEqual(plan["filters"], {
+            "op": "eq", "entity": "n0",
+            "predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+            "value": "https://aas.example.com/FI103",
+        })
+        self.assertEqual(selection["status"], "single_shape_grounded")
+
+    def test_filter_without_evidence_rejected(self):
+        with self.assertRaisesRegex(ValueError, "missing or ambiguous"):
+            self.plan("Get LocalId from dexpi InstrumentationFunction "
+                      "where UnknownProperty is FI_103.")
+
+    def test_unsupported_filter_cannot_be_silently_dropped(self):
         with self.assertRaisesRegex(ValueError, "Unsupported single-shape"):
             self.plan("Get LocalId from dexpi InstrumentationFunction "
-                      "where LocalId is FI_103.")
+                      "where LocalId contains FI_103.")
+
+    def test_filter_literal_preserves_internal_dots(self):
+        plan, _ = self.plan(
+            "Show SignalName from opcuaconnectivity SignalMapping "
+            "where AssetIdentifier is https://aas.example.com/FI.103.")
+        self.assertEqual(plan["filters"]["value"],
+                         "https://aas.example.com/FI.103")
 
     def test_unknown_output_rejected(self):
         with self.assertRaisesRegex(ValueError, "missing or ambiguous"):
