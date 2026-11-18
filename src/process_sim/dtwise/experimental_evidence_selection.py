@@ -113,7 +113,10 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         j, predicate = lookup[f["property"]]
         bound_filter = {"node_index": j, "predicate": predicate,
                         "op": "eq", "value": f["value"]}
-    if re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S) and bound_filter is None:
+    if re.search(r"\b(?:count|group\s+by|order(?:ed)?\s+by|ascending|descending|limit)\b", question, re.I):
+        raise ValueError("Unsupported aggregation or ordering requirement")
+    if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
+            or re.search(r"\bwith\s+[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
         raise ValueError("LLM omitted an explicit equality filter")
     if not paths[i]["steps"]:
         node = tuple(paths[i]["nodes"][0])
