@@ -115,7 +115,7 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
         self.assertEqual(plan["order_by"], [{"as": "value_0", "direction": "asc"}])
 
     def test_unsupported_operation_rejected(self):
-        with self.assertRaisesRegex(ValueError, "inconsistent with the question"):
+        with self.assertRaisesRegex(ValueError, "Unsupported evidence-selection operation"):
             self.plan("Count opc Signal entities.", {
                 "path_id": None, "operation": "unsupported", "projections": [], "filter": None})
 
