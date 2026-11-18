@@ -60,7 +60,7 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
     def test_unsupported_operation_rejected(self):
         with self.assertRaisesRegex(ValueError, "Unsupported"):
             self.plan("Count opc Signal entities.", {
-                "path_id": null, "operation": "unsupported", "projections": [], "filter": None})
+                "path_id": None, "operation": "unsupported", "projections": [], "filter": None})
 
 
 if __name__ == "__main__":
