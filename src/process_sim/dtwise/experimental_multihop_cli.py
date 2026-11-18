@@ -77,6 +77,84 @@ def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
 
 
 
+
+def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
+                            index):
+    """Bind a named hub-and-spoke JOIN using only verified mapping evidence.
+
+    This intentionally handles explicit JOIN ... THROUGH ... USING ... syntax.
+    No inferred projection: a join request returns the matched entities.
+    """
+    match = re.fullmatch(
+        r"\\s*join\\s+(.+?)\\s+through\\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\\s+([A-Za-z][A-Za-z0-9_]*)\\s+using\\s+"
+        r"([A-Za-z][A-Za-z0-9_]*(?:\\s+and\\s+[A-Za-z][A-Za-z0-9_]*)*)"
+        r"\\s*[.]?\\s*", question, re.I)
+    if not match:
+        return None
+    source_clause, hub_domain, hub_label, key_clause = match.groups()
+    keys = {key.casefold() for key in re.split(r"\\s+and\\s+", key_clause, flags=re.I)}
+    if len(keys) != 2 or keys != {"assetidentifier", "productidentifier"}:
+        raise ValueError("Unsupported explicit hub-join keys")
+    owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
+    hubs = [node for node in owners
+            if node[0].casefold() == hub_domain.casefold()
+            and owners[node].get("display_name", "").casefold() == hub_label.casefold()]
+    if len(hubs) != 1:
+        raise ValueError("Explicit hub shape is missing or ambiguous")
+    hub = hubs[0]
+    leaves = [node for node in anchors if node != hub]
+    if not leaves or len(leaves) != 4 or len(set(leaves)) != len(leaves):
+        raise ValueError("Explicit hub join requires four distinct named shapes")
+    # Every named leaf must occur in the source clause, not merely after THROUGH.
+    for node in leaves:
+        entity = owners[node]
+        if not re.search(r"(?<![A-Za-z0-9_])" +
+                         re.escape(node[0]) + r"\\s+" +
+                         re.escape(entity["display_name"]) +
+                         r"(?![A-Za-z0-9_])", source_clause, re.I):
+            raise ValueError("Hub-join source shape is not explicitly named")
+    nodes = [hub] + sorted(leaves)
+    aliases = {node: "n" + str(i) for i, node in enumerate(nodes)}
+    edges = []
+    used_keys = set()
+    for leaf in nodes[1:]:
+        candidates = []
+        for mapping in mappings or []:
+            if mapping.get("verified") is not True or not mapping.get("evidence_ids"):
+                continue
+            if mapping.get("left_domain") != hub[0] or mapping.get("right_domain") != leaf[0]:
+                continue
+            left, right = mapping.get("left_property"), mapping.get("right_property")
+            if left not in owners[hub]["properties"] or right not in owners[leaf]["properties"]:
+                continue
+            left_key = re.split(r"[/#]", left)[-1]
+            right_key = re.split(r"[/#]", right)[-1]
+            if left_key.casefold() != right_key.casefold():
+                continue
+            key = left_key[3:] if left_key.lower().startswith("has") else left_key
+            if key.casefold() in keys:
+                candidates.append((mapping, key.casefold()))
+        if len(candidates) != 1:
+            raise ValueError("No unique verified hub mapping for " + leaf[0])
+        mapping, key = candidates[0]
+        used_keys.add(key)
+        edges.append({"kind": "mapping", "from": aliases[hub],
+                      "to": aliases[leaf], "mapping_id": mapping["id"],
+                      "left_predicate": mapping["left_property"],
+                      "right_predicate": mapping["right_property"]})
+    if used_keys != keys:
+        raise ValueError("Not all requested hub-join keys are evidenced")
+    plan = {"ir_version": "1.0",
+            "entities": [{"alias": aliases[node], "domain": node[0],
+                          "shape": node[1]} for node in nodes],
+            "edges": edges, "projections": [], "filters": None,
+            "operation": {"type": "select"}, "return_entities": True}
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded", "choice": "VERIFIED_HUB_JOIN"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
@@ -108,6 +186,10 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                 anchors.append(node)
     if not anchors:
         raise ValueError("Experimental planner requires a named SHACL shape")
+    hub_join = _plan_explicit_hub_join(question, catalog, mappings, anchors,
+                                       mentioned, index)
+    if hub_join is not None:
+        return hub_join
 
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
