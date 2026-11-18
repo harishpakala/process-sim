@@ -790,6 +790,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             sort_request = re.search(
                 r'\\b(alphabetical(?:ly)?|ascending|descending|ordered|sort(?:ed)?)\\b',
                 question, re.I)
+            # User-requested modifiers are bidirectional constraints: do not
+            # silently truncate or reorder results when not requested.
+            if not sort_request and plan.get('order_by'):
+                raise ValueError('Unrequested ordering in Unified IR')
+            if not re.search(r'\\b(?:first|top|limit)\\s+\\d+\\b', question, re.I) and plan.get('result_limit') is not None:
+                raise ValueError('Unrequested result limit in Unified IR')
             if sort_request and not plan.get('order_by'):
                 raise ValueError('Requested ordering omitted from Unified IR')
             if sort_request and re.search(r'\\b(?:alphabetical(?:ly)?|ascending)\\b', question, re.I):
