@@ -277,48 +277,6 @@ def _cross_domain_prompt_catalog(question, catalog, mappings, mentioned):
 
 
 
-def _prune_prompt_property_evidence(question, catalog, mappings):
-    """Trim only irrelevant properties, never shapes or evidenced traversal edges.
-
-    Preserve all candidate owners, mapping endpoints, and SHACL hop predicates.
-    When no exact question-property evidence exists, retain the original
-    properties rather than guessing what the user intended.
-    """
-    tokens = {t.lower() for t in re.findall(r'[A-Za-z][A-Za-z0-9_]*', question)}
-    # Also match CamelCase identifiers written as separate natural-language words.
-    normalized_question = re.sub(r'[^a-z0-9]', '', question.lower())
-    mapping_keys = {
-        (m[side + '_domain'], m[side + '_property'])
-        for m in (mappings or [])
-        if m.get('verified') is True and m.get('evidence_ids')
-        for side in ('left', 'right')
-    }
-    edge_keys = {(e['domain'], e['from_shape'], e['predicate'])
-                 for e in catalog['shacl_edges']}
-    explicit = set()
-    for entity in catalog['entities']:
-        for predicate in entity['properties']:
-            local = re.split(r'[/#]', predicate)[-1]
-            names = {local.lower()}
-            if local.lower().startswith('has') and len(local) > 3:
-                names.add(local[3:].lower())
-            if any(name in tokens or name in normalized_question for name in names):
-                explicit.add((entity['domain'], predicate))
-    if not explicit:
-        return catalog
-    entities = []
-    for entity in catalog['entities']:
-        props = [
-            p for p in entity['properties']
-            if (entity['domain'], p) in explicit
-            or (entity['domain'], p) in mapping_keys
-            or (entity['domain'], entity['shape'], p) in edge_keys
-        ]
-        # Do not turn an evidenced shape into an empty or misleading stub.
-        entities.append({**entity, 'properties': props or entity['properties']})
-    return {**catalog, 'entities': entities}
-
-
 def property_owner_hints(question, catalog):
     """Evidence-backed candidate owners for explicitly named properties.
 
@@ -569,9 +527,6 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # The full indexed catalog remains authoritative for validation.
     prompt_catalog = _cross_domain_prompt_catalog(
         question, catalog, mappings, mentioned)
-    if compact_catalog:
-        prompt_catalog = _prune_prompt_property_evidence(
-            question, prompt_catalog, mappings)
     catalog_symbols = {}
     reverse_symbols = {}
     if compact_catalog:
