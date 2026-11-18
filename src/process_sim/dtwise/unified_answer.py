@@ -658,6 +658,17 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     # In cross-domain 'Get X for Y with Z VALUE', Y/Z are input
     # constraints, not additional requested output projections.
     output_clause = before_where[0] + ' ' + trailing_output
+    # 'with Property VALUE' introduces a scalar input constraint, not an
+    # output projection. Only split when the property is SHACL-grounded and
+    # the following token is a literal rather than a relationship preposition.
+    with_constraint = re.search(
+        r'\bwith\s+([A-Za-z][A-Za-z0-9_]*)\s+(?!is\b|by\b|through\b|more\b)([^\s,;.]+)',
+        output_clause, flags=re.I)
+    if with_constraint:
+        with_property = with_constraint.group(1)
+        named = _explicit_property_requirements(with_property, catalog)
+        if named:
+            output_clause = output_clause[:with_constraint.start()]
     if len(mentioned) > 1:
         output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
