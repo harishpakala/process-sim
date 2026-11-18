@@ -86,14 +86,14 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
     No inferred projection: a join request returns the matched entities.
     """
     match = re.fullmatch(
-        r"\\s*join\\s+(.+?)\\s+through\\s+([A-Za-z][A-Za-z0-9_]*)"
-        r"\\s+([A-Za-z][A-Za-z0-9_]*)\\s+using\\s+"
-        r"([A-Za-z][A-Za-z0-9_]*(?:\\s+and\\s+[A-Za-z][A-Za-z0-9_]*)*)"
-        r"\\s*[.]?\\s*", question, re.I)
+        r"\s*join\s+(.+?)\s+through\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+([A-Za-z][A-Za-z0-9_]*)\s+using\s+"
+        r"([A-Za-z][A-Za-z0-9_]*(?:\s+and\s+[A-Za-z][A-Za-z0-9_]*)*)"
+        r"\s*[.]?\s*", question, re.I)
     if not match:
         return None
     source_clause, hub_domain, hub_label, key_clause = match.groups()
-    keys = {key.casefold() for key in re.split(r"\\s+and\\s+", key_clause, flags=re.I)}
+    keys = {key.casefold() for key in re.split(r"\s+and\s+", key_clause, flags=re.I)}
     if len(keys) != 2 or keys != {"assetidentifier", "productidentifier"}:
         raise ValueError("Unsupported explicit hub-join keys")
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
@@ -110,7 +110,7 @@ def _plan_explicit_hub_join(question, catalog, mappings, anchors, mentioned,
     for node in leaves:
         entity = owners[node]
         if not re.search(r"(?<![A-Za-z0-9_])" +
-                         re.escape(node[0]) + r"\\s+" +
+                         re.escape(node[0]) + r"\s+" +
                          re.escape(entity["display_name"]) +
                          r"(?![A-Za-z0-9_])", source_clause, re.I):
             raise ValueError("Hub-join source shape is not explicitly named")
