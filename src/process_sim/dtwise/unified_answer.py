@@ -277,6 +277,63 @@ def _cross_domain_prompt_catalog(question, catalog, mappings, mentioned):
 
 
 
+
+def _evidence_graph_prompt_catalog(question, catalog, mappings, mentioned):
+    """Conservatively select complete SHACL owners, not isolated properties.
+
+    A candidate shape must own the verified mapping endpoint and any
+    explicitly requested output on that same shape. Preserve ambiguity,
+    same-domain traversal edges and full-schema validation.
+    """
+    if len(mentioned) < 2:
+        return catalog
+    verified = [m for m in (mappings or [])
+                if m.get('verified') is True and m.get('evidence_ids')
+                and m.get('left_domain') in mentioned
+                and m.get('right_domain') in mentioned]
+    if not verified:
+        return catalog
+    normalized = re.sub(r'[^a-z0-9]', '', question.lower())
+    def mentioned_property(predicate):
+        local = re.split(r'[/#]', predicate)[-1].lower()
+        names = {local}
+        if local.startswith('has') and len(local) > 3:
+            names.add(local[3:])
+        return any(name in normalized for name in names)
+    # Never eliminate candidate owners of an explicitly mentioned property.
+    requested = {(e['domain'], p) for e in catalog['entities']
+                 for p in e['properties'] if mentioned_property(p)}
+    endpoints = {(m[side + '_domain'], m[side + '_property'])
+                 for m in verified for side in ('left', 'right')}
+    required = requested | endpoints
+    # Retain every owning shape for relevant evidence, with ALL its original
+    # properties: trimming properties independently obscures valid ownership.
+    selected = [e for e in catalog['entities']
+                if any((e['domain'], p) in required for p in e['properties'])]
+    if not all(any(e['domain'] == d for e in selected) for d in mentioned):
+        return catalog
+    # If a named shape exists, never prune it just because another shape
+    # owns the mapping endpoint (nested SHACL paths may connect them).
+    for e in catalog['entities']:
+        label = e.get('display_name', '')
+        if (label and re.search(r'(?<![a-z0-9])' + re.escape(label.lower()) +
+                                r'(?![a-z0-9])', question.lower())
+                and e not in selected):
+            selected.append(e)
+    keys = {(e['domain'], e['shape']) for e in selected}
+    # Include intermediate nodes along evidenced SHACL edges. Conservatively
+    # keep the original catalog when a selected shape is not a direct owner:
+    # otherwise a nested path might be silently severed.
+    edges = catalog['shacl_edges']
+    if any((e['domain'], e['from_shape']) in keys
+           and (e['domain'], e['to_shape']) not in keys for e in edges):
+        return catalog
+    return {'entities': selected,
+            'shacl_edges': [e for e in edges
+                            if (e['domain'], e['from_shape']) in keys
+                            and (e['domain'], e['to_shape']) in keys]}
+
+
 def property_owner_hints(question, catalog):
     """Evidence-backed candidate owners for explicitly named properties.
 
@@ -527,6 +584,9 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     # The full indexed catalog remains authoritative for validation.
     prompt_catalog = _cross_domain_prompt_catalog(
         question, catalog, mappings, mentioned)
+    if compact_catalog:
+        prompt_catalog = _evidence_graph_prompt_catalog(
+            question, prompt_catalog, mappings, mentioned)
     catalog_symbols = {}
     reverse_symbols = {}
     if compact_catalog:
