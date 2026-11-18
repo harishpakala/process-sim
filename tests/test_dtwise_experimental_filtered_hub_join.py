@@ -123,6 +123,19 @@ class FilteredHubJoinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
             self.plan(mappings=mappings)
 
+    def test_b35_mapping_with_non_owned_predicate_rejected(self):
+        mappings = [dict(m) for m in self.mappings]
+        ecad_mapping = next(m for m in mappings if m["right_domain"] == "ecad")
+        ecad_mapping["right_property"] = (
+            "https://example.org/ecad/hasUndeclaredAssetIdentifier")
+        self.assertTrue(ecad_mapping["verified"])
+        self.assertTrue(ecad_mapping["evidence_ids"])
+        ecad_shape = next(e for e in self.catalog["entities"]
+                          if e["domain"] == "ecad")
+        self.assertNotIn(ecad_mapping["right_property"], ecad_shape["properties"])
+        with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
+            self.plan(mappings=mappings)
+
     def test_unrequested_filter_key_rejected(self):
         with self.assertRaisesRegex(ValueError, "Hub filter must use"):
             self.plan(question=QUESTION.replace(
