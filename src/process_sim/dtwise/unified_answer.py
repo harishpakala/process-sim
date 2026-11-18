@@ -889,11 +889,11 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         })
     ownership_guide = [g for g in guide_entities
                        if g['output_predicates'] or g['mapping_endpoints']]
-    # Compact evidence selection for direct two-domain lookups. The model
+    # Compact semantic-plan selection for direct two-domain lookups, including\n    # one unambiguous SHACL-owned equality filter. The model
     # selects IDs only; deterministic expansion owns aliases, IRIs and edges.
     # Other queries retain the general Unified IR planner below.
     if (compact_catalog and len(mentioned) == 2 and len(required_outputs) == 1
-            and not required_inputs and not re.search(
+            and len(required_inputs) <= 1 and not re.search(
                 r'\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\b',
                 question, re.I)):
         normalized_question = re.sub(r'[^a-z0-9]', '', question.lower())
@@ -927,7 +927,22 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                         key = re.sub(r'^has', '', key, flags=re.I)
                         if re.sub(r'[^a-z0-9]', '', key.lower()) not in normalized_question:
                             continue
-                        options.append((m, left, right, side))
+                        # Bind explicit equality filters only when one candidate
+                        # entity uniquely owns the requested SHACL predicate.
+                        filter_binding = None
+                        if required_inputs:
+                            request = required_inputs[0]
+                            bindings = [(owner_side, p['predicate'])
+                                        for owner_side, endpoint in (
+                                            ('left', left), ('right', right))
+                                        for p in request['candidate_properties']
+                                        if p['domain'] == endpoint['domain']
+                                        and p['predicate'] in endpoint['properties']]
+                            if len(bindings) != 1:
+                                continue
+                            filter_binding = (bindings[0][0], bindings[0][1],
+                                              request['value'])
+                        options.append((m, left, right, side, filter_binding))
         if options:
             choices = [{
                 'id': 'C' + str(i),
@@ -938,7 +953,12 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 'join_property': re.split(r'[/#]', m['left_property'])[-1],
                 'output_domain': (left if side == 'left' else right)['domain'],
                 'output_property': re.split(r'[/#]', required_outputs[0])[-1],
-            } for i, (m, left, right, side) in enumerate(options)]
+                **({'filter': {
+                    'entity': filter_binding[0],
+                    'property': re.split(r'[/#]', filter_binding[1])[-1],
+                    'operator': 'eq', 'value': filter_binding[2]}}
+                   if filter_binding else {}),
+            } for i, (m, left, right, side, filter_binding) in enumerate(options)]
             # Selection can abstain. Never interpret free-form IR as a choice.
             selection_messages = [
                 {'role': 'system', 'content':
@@ -968,7 +988,7 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 if isinstance(choice, str) and re.fullmatch(r'C[0-9]+', choice):
                     index_choice = int(choice[1:])
                     if index_choice < len(options):
-                        m, left, right, side = options[index_choice]
+                        m, left, right, side, filter_binding = options[index_choice]
                         output_alias = 'left_value' if side == 'left' else 'right_value'
                         candidate = {
                             'ir_version': '1.0',
@@ -986,7 +1006,11 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                                 'entity': side,
                                 'predicate': required_outputs[0],
                                 'as': output_alias}],
-                            'filters': None,
+                            'filters': ({
+                                'op': 'eq', 'entity': filter_binding[0],
+                                'predicate': filter_binding[1],
+                                'value': filter_binding[2]}
+                                if filter_binding else None),
                             'operation': {'type': 'select'},
                             'return_entities': False}
                         check_semantic_coverage(candidate, question, catalog, mentioned)
