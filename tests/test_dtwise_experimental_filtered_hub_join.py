@@ -114,6 +114,15 @@ class FilteredHubJoinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
             self.plan(mappings=mappings)
 
+    def test_b34_verified_mapping_without_evidence_rejected(self):
+        mappings = [dict(m) for m in self.mappings]
+        mappings[0]["verified"] = True
+        mappings[0]["evidence_ids"] = []
+        self.assertTrue(mappings[0]["verified"])
+        self.assertEqual(mappings[0]["evidence_ids"], [])
+        with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
+            self.plan(mappings=mappings)
+
     def test_unrequested_filter_key_rejected(self):
         with self.assertRaisesRegex(ValueError, "Hub filter must use"):
             self.plan(question=QUESTION.replace(
