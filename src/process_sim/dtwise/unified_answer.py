@@ -809,6 +809,118 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         })
     ownership_guide = [g for g in guide_entities
                        if g['output_predicates'] or g['mapping_endpoints']]
+    # Compact evidence selection for direct two-domain lookups. The model
+    # selects IDs only; deterministic expansion owns aliases, IRIs and edges.
+    # Other queries retain the general Unified IR planner below.
+    if (compact_catalog and len(mentioned) == 2 and len(required_outputs) == 1
+            and not required_inputs and not re.search(
+                r'\\b(?:where|count|how many|top|first|limit|sort|order|containing|contains)\\b',
+                question, re.I)):
+        normalized_question = re.sub(r'[^a-z0-9]', '', question.lower())
+        anchors = {
+            (e['domain'], e['shape']) for e in catalog['entities']
+            if e.get('display_name') and re.search(
+                r'(?<![a-z0-9])' + re.escape(e['display_name'].lower())
+                + r'(?![a-z0-9])', question.lower())
+        }
+        options = []
+        for m in relevant_mappings:
+            if {m['left_domain'], m['right_domain']} != mentioned:
+                continue
+            # An endpoint must be owned by the actual chosen shape.
+            lefts = [e for e in catalog['entities']
+                     if e['domain'] == m['left_domain']
+                     and m['left_property'] in e['properties']
+                     and (e['domain'], e['shape']) in anchors]
+            rights = [e for e in catalog['entities']
+                      if e['domain'] == m['right_domain']
+                      and m['right_property'] in e['properties']
+                      and (e['domain'], e['shape']) in anchors]
+            for left in lefts:
+                for right in rights:
+                    for side, owner in (('left', left), ('right', right)):
+                        if required_outputs[0] not in owner['properties']:
+                            continue
+                        # The question must name the mapping key, not merely
+                        # mention two domains that happen to share a mapping.
+                        key = re.split(r'[/#]', m['left_property'])[-1]
+                        key = re.sub(r'^has', '', key, flags=re.I)
+                        if re.sub(r'[^a-z0-9]', '', key.lower()) not in normalized_question:
+                            continue
+                        options.append((m, left, right, side))
+        if options:
+            choices = [{
+                'id': 'C' + str(i),
+                'left': {'domain': m['left_domain'],
+                         'shape_name': left.get('display_name')},
+                'right': {'domain': m['right_domain'],
+                          'shape_name': right.get('display_name')},
+                'join_property': re.split(r'[/#]', m['left_property'])[-1],
+                'output_domain': (left if side == 'left' else right)['domain'],
+                'output_property': re.split(r'[/#]', required_outputs[0])[-1],
+            } for i, (m, left, right, side) in enumerate(options)]
+            # Selection can abstain. Never interpret free-form IR as a choice.
+            selection_messages = [
+                {'role': 'system', 'content':
+                 'Select exactly one evidenced connection matching the question. '
+                 'Return JSON {"choice":"C0"} (using a listed ID), or '
+                 '{"choice":null} if none match. Do not generate IR.'},
+                {'role': 'user', 'content': json.dumps(
+                    {'question': question, 'choices': choices},
+                    separators=(',', ':'))}]
+            try:
+                response = _request_json(
+                    (ollama_host or os.getenv('OLLAMA_HOST',
+                     'http://localhost:11434')).rstrip('/') + '/api/chat',
+                    {'model': model, 'stream': False, 'format': 'json',
+                     'options': {'temperature': 0},
+                     'messages': selection_messages,
+                     **({'keep_alive': keep_alive} if keep_alive is not None else {})},
+                    timeout)
+                raw_choice = response.get('message', {}).get('content', '')
+                choice = json.loads(raw_choice).get('choice')
+                if diagnostics is not None:
+                    diagnostics.append({
+                        'attempt': 1, 'model': model, 'raw': raw_choice,
+                        'status': 'evidence_selection',
+                        'prompt_tokens': response.get('prompt_eval_count'),
+                        'generated_tokens': response.get('eval_count')})
+                if isinstance(choice, str) and re.fullmatch(r'C[0-9]+', choice):
+                    index_choice = int(choice[1:])
+                    if index_choice < len(options):
+                        m, left, right, side = options[index_choice]
+                        output_alias = 'left_value' if side == 'left' else 'right_value'
+                        candidate = {
+                            'ir_version': '1.0',
+                            'entities': [
+                                {'alias': 'left', 'domain': m['left_domain'],
+                                 'shape': left['shape']},
+                                {'alias': 'right', 'domain': m['right_domain'],
+                                 'shape': right['shape']}],
+                            'edges': [{
+                                'kind': 'mapping', 'from': 'left', 'to': 'right',
+                                'mapping_id': m['id'],
+                                'left_predicate': m['left_property'],
+                                'right_predicate': m['right_property']}],
+                            'projections': [{
+                                'entity': side,
+                                'predicate': required_outputs[0],
+                                'as': output_alias}],
+                            'filters': None,
+                            'operation': {'type': 'select'},
+                            'return_entities': False}
+                        check_semantic_coverage(candidate, question, catalog, mentioned)
+                        candidate = resolve_shapes(candidate, index, mappings=mappings)
+                        if prompt_diagnostics is not None:
+                            prompt_diagnostics['selection'] = {
+                                'candidate_count': len(options),
+                                'selected': choice,
+                                'prompt_tokens': response.get('prompt_eval_count')}
+                        return candidate
+            except (ValueError, KeyError, TypeError, TimeoutError,
+                    URLError, HTTPError, OSError, json.JSONDecodeError):
+                # Unsupported/ambiguous selection falls back to the full planner.
+                pass
     # Shape/property ownership is authoritative; a shape label is not an
     # instruction to project a similarly named relationship predicate.
     requirement_reminder = ('Only project explicitly requested output properties; '
