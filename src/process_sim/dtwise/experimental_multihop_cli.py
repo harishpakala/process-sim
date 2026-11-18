@@ -346,8 +346,13 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     output_clause = re.split(
         r"\b(?:associated\s+with|through|via|using|where)\b",
         question, maxsplit=1, flags=re.I)[0]
+    # A count of named entities requests an aggregate, not a property projection.
+    # Do not infer extra target shapes from incidental property-name matches.
+    is_entity_count = bool(re.match(
+        r"^\s*(?:count|how\s+many)\b", question, re.I)) and not re.search(
+            r"\b(?:return|show|list)\b", question, re.I)
     requested_owners = set()
-    for entity in catalog["entities"]:
+    for entity in ([] if is_entity_count else catalog["entities"]):
         for predicate in entity["properties"]:
             local = re.split(r"[/#]", predicate)[-1]
             names = {local}
