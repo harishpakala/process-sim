@@ -36,6 +36,30 @@ class FilteredHubJoinTests(unittest.TestCase):
         self.assertEqual(selection["choice"], "VERIFIED_HUB_JOIN")
         self.assertTrue(plan["return_entities"])
 
+    def test_b28_projects_opcua_node_id(self):
+        predicate = "https://example.org/opcuaconnectivity/hasOPCUANodeId"
+        target = next(e for e in self.catalog["entities"]
+                      if e["domain"] == "opcuaconnectivity")
+        target["properties"].append(predicate)
+        question = QUESTION[:-1] + ", return OPCUAConnectivity SignalMapping OPCUANodeId."
+        plan, selection = self.plan(question=question)
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertEqual(plan["filters"]["value"], "https://aas.example.com/VC101")
+        self.assertEqual(plan["projections"], [
+            {"entity": "n3", "predicate": predicate, "as": "value_0"}])
+        self.assertFalse(plan["return_entities"])
+        self.assertEqual(selection["choice"], "VERIFIED_HUB_JOIN")
+
+    def test_b28_rejects_non_owned_projection(self):
+        question = QUESTION[:-1] + ", return OPCUAConnectivity SignalMapping NotAProperty."
+        with self.assertRaisesRegex(ValueError, "missing or ambiguous"):
+            self.plan(question=question)
+
+    def test_b28_rejects_non_member_projection_target(self):
+        question = QUESTION[:-1] + ", return ProductCatalog Product ProductIdentifier."
+        with self.assertRaisesRegex(ValueError, "target is missing or ambiguous"):
+            self.plan(question=question)
+
     def test_unverified_spoke_rejected(self):
         mappings = [dict(m) for m in self.mappings]
         mappings[0]["verified"] = False
