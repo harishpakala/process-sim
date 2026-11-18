@@ -381,6 +381,65 @@ def _cross_domain_prompt_catalog(question, catalog, mappings, mentioned):
 
 
 
+def enumerate_evidenced_paths(catalog, mappings, start, end, *, max_hops=4,
+                             max_paths=32):
+    """Enumerate bounded simple paths over SHACL sh:node and verified mappings.
+
+    Nodes are (domain, shape IRI). Mapping orientation is preserved exactly:
+    registry left -> right. No inverse/qualified/sequence SHACL paths are
+    inferred. Returned steps carry exact evidence needed by Unified IR 1.0.
+    """
+    if not 1 <= max_hops <= 8 or not 1 <= max_paths <= 256:
+        raise ValueError('Invalid evidence path search bounds')
+    owners = {(e['domain'], e['shape']): set(e['properties'])
+              for e in catalog['entities']}
+    if start not in owners or end not in owners:
+        return []
+    adjacency = {node: [] for node in owners}
+    for edge in catalog['shacl_edges']:
+        source = (edge['domain'], edge['from_shape'])
+        target = (edge['domain'], edge['to_shape'])
+        if (source in owners and target in owners and
+                edge['predicate'] in owners[source]):
+            adjacency[source].append((target, {
+                'kind': 'shacl', 'predicate': edge['predicate']}))
+    for mapping in mappings or []:
+        if mapping.get('verified') is not True or not mapping.get('evidence_ids'):
+            continue
+        left = mapping.get('left_domain')
+        right = mapping.get('right_domain')
+        lp = mapping.get('left_property')
+        rp = mapping.get('right_property')
+        for source, properties in owners.items():
+            if source[0] != left or lp not in properties:
+                continue
+            for target, target_properties in owners.items():
+                if target[0] != right or rp not in target_properties:
+                    continue
+                adjacency[source].append((target, {
+                    'kind': 'mapping', 'mapping_id': mapping['id'],
+                    'left_predicate': lp, 'right_predicate': rp}))
+    for node in adjacency:
+        adjacency[node].sort(key=lambda item: (
+            item[0], item[1]['kind'], item[1].get('mapping_id', ''),
+            item[1].get('predicate', '')))
+    from collections import deque
+    pending = deque([(start, (start,), ())])
+    found = []
+    while pending and len(found) < max_paths:
+        current, nodes, steps = pending.popleft()
+        if current == end and steps:
+            found.append({'nodes': list(nodes), 'steps': list(steps)})
+            continue
+        if len(steps) >= max_hops:
+            continue
+        for target, evidence in adjacency[current]:
+            if target not in nodes:
+                pending.append((target, nodes + (target,),
+                                steps + (evidence,)))
+    return found
+
+
 def _evidence_graph_prompt_catalog(question, catalog, mappings, mentioned):
     """Anchor a compact evidence subgraph on explicitly named SHACL shapes.
 
@@ -715,6 +774,27 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
     if compact_catalog:
         prompt_catalog = _evidence_graph_prompt_catalog(
             question, catalog, mappings, mentioned)
+    # Observe available nested paths without changing the legacy planner's
+    # decisions. Path selection/expansion will be enabled only after coverage
+    # and regression tests demonstrate semantic fidelity.
+    if prompt_diagnostics is not None and len(mentioned) > 1:
+        named = [(e['domain'], e['shape']) for e in catalog['entities']
+                 if e.get('display_name') and re.search(
+                     r'(?<![a-z0-9])' + re.escape(e['display_name'].lower())
+                     + r'(?![a-z0-9])', question.lower())]
+        path_counts = []
+        for source in named[:8]:
+            for target in named[:8]:
+                if source != target and source[0] != target[0]:
+                    paths = enumerate_evidenced_paths(
+                        catalog, mappings, source, target,
+                        max_hops=4, max_paths=32)
+                    if paths:
+                        path_counts.append({
+                            'from': list(source), 'to': list(target),
+                            'count': len(paths),
+                            'hop_counts': sorted({len(p['steps']) for p in paths})})
+        prompt_diagnostics['nested_evidence_paths'] = path_counts
     if prompt_diagnostics is not None:
         prompt_diagnostics['evidence_graph'] = {
             'shapes': len(prompt_catalog['entities']),
