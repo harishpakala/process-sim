@@ -87,6 +87,33 @@ class ExperimentalSingleShapeTests(unittest.TestCase):
             self.plan("Get SignalName from opc Signal.", {
                 "path_id": "PATH_0", "operation": "select", "projections": ["N0P999"], "filter": None})
 
+    def test_count_entities(self):
+        plan, _ = self.plan("Count opc Signal entities.", {
+            "path_id": "PATH_0", "operation": "count",
+            "projections": [], "filter": None})
+        self.assertEqual(plan["operation"]["type"], "count")
+        self.assertEqual(plan["projections"], [])
+
+    def test_grouped_count(self):
+        plan, _ = self.plan("Count opc Signal entities for each AssetIdentifier.", {
+            "path_id": "PATH_0", "operation": "group_count",
+            "projections": ["N0P1"], "filter": None})
+        self.assertEqual(plan["operation"]["type"], "group_count")
+        self.assertEqual(plan["projections"][0]["predicate"], "urn:hasAssetIdentifier")
+
+    def test_grouped_count_having(self):
+        plan, _ = self.plan("List AssetIdentifier values with more than three opc Signal entities.", {
+            "path_id": "PATH_0", "operation": "group_count",
+            "projections": ["N0P1"], "filter": None})
+        self.assertEqual(plan["operation"]["having_min"], 3)
+
+    def test_sorted_limited_select(self):
+        plan, _ = self.plan("Get the first ten SignalName values from opc Signal in ascending alphabetical order.", {
+            "path_id": "PATH_0", "operation": "select",
+            "projections": ["N0P0"], "filter": None})
+        self.assertEqual(plan["result_limit"], 10)
+        self.assertEqual(plan["order_by"], [{"as": "value_0", "direction": "asc"}])
+
     def test_unsupported_operation_rejected(self):
         with self.assertRaisesRegex(ValueError, "Unsupported"):
             self.plan("Count opc Signal entities.", {
