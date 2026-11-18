@@ -40,7 +40,7 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
                     "No LLM call expected"))
 
     def test_unnamed_endpoints_rejected_before_llm(self):
-        with self.assertRaisesRegex(ValueError, "at least one named SHACL shape"):
+        with self.assertRaisesRegex(ValueError, "requires a named SHACL shape"):
             self.plan("Find connected assets")
 
     def test_unverified_mapping_rejected_before_llm(self):
@@ -69,7 +69,7 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
                     ollama_host="http://localhost:11434",
                     timeout=1, request_json=fake_request)
         self.assertEqual(len(seen), 1)
-        self.assertIn("urn:Instrument",
+        self.assertIn('"shape":"Instrument"',
                       seen[0]["messages"][1]["content"])
 
     def test_unreachable_named_waypoint_rejected(self):
