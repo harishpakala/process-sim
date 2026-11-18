@@ -160,6 +160,35 @@ class FilteredHubJoinTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "No unique verified hub mapping for ecad"):
             self.plan(mappings=mappings)
 
+    def test_b14_count_does_not_infer_property_target(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            plan_experimental_multihop,
+        )
+        catalog = {"entities": [
+            {"domain": "opcuaconnectivity", "shape": "urn:SignalMapping",
+             "display_name": "SignalMapping",
+             "properties": ["https://example.org/opcuaconnectivity/hasAssetIdentifier"]},
+            {"domain": "dexpi", "shape": "urn:InstrumentationFunction",
+             "display_name": "InstrumentationFunction",
+             "properties": ["https://example.org/dexpi/hasCount"]},
+        ], "shacl_edges": []}
+        question = "Count OPCUAConnectivity SignalMapping entities."
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value=catalog), patch(
+                       "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                       return_value=(catalog, set())), patch(
+                       "process_sim.dtwise.experimental_evidence_selection.select_evidence_plan",
+                       return_value=({"operation": {"type": "count"}}, {"choice": "TEST"})
+                   ) as select, patch(
+                       "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"):
+            plan, _ = plan_experimental_multihop(
+                question, {}, [], model="unused", ollama_host="unused",
+                timeout=1)
+        self.assertEqual(plan["operation"]["type"], "count")
+        paths = select.call_args.args[1]
+        self.assertEqual(paths, [{"nodes": [("opcuaconnectivity", "urn:SignalMapping")],
+                                  "steps": []}])
+
     def test_unrequested_filter_key_rejected(self):
         with self.assertRaisesRegex(ValueError, "Hub filter must use"):
             self.plan(question=QUESTION.replace(
