@@ -40,7 +40,7 @@ class ExperimentalMultihopCliTests(unittest.TestCase):
                     "No LLM call expected"))
 
     def test_unnamed_endpoints_rejected_before_llm(self):
-        with self.assertRaisesRegex(ValueError, "at least two"):
+        with self.assertRaisesRegex(ValueError, "at least one named SHACL shape"):
             self.plan("Find connected assets")
 
     def test_unverified_mapping_rejected_before_llm(self):
