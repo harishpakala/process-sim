@@ -343,6 +343,21 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             found |= filter_predicates(node['arg'])
         return found
     filtered = filter_predicates(plan.get('filters'))
+    # A schema predicate IRI describes a property, not an input value.
+    # Never accept a fabricated equality between a property and its own IRI.
+    def check_filter_values(node):
+        if not isinstance(node, dict):
+            return
+        if (node.get('op') == 'eq' and isinstance(node.get('predicate'), str)
+                and node.get('value') == node['predicate']):
+            raise ValueError('Filter value is a predicate IRI, not a user-supplied literal')
+        for key in ('args', 'children'):
+            for child in node.get(key, []):
+                check_filter_values(child)
+        for key in ('arg', 'child'):
+            check_filter_values(node.get(key))
+    check_filter_values(plan.get('filters'))
+
     before_where = re.split(r'\bwhere\b', question, maxsplit=1, flags=re.I)
     # In cross-domain 'Get X for Y with Z VALUE', Y/Z are input
     # constraints, not additional requested output projections.
@@ -579,6 +594,8 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
             "Projection aliases must differ from entity aliases. "
             "For count use projections=[] and exists filter if counting property presence. "
             "For exact filters use {op:'eq',entity:'alias',predicate:'IRI',value:'literal'}; "
+            "Never use a predicate IRI as its own filter value. "
+            "Do not add order_by, result_limit or literal filters unless requested. "
             "preserve literal exactly without sentence punctuation. "
             "For traversal include all requested entities and verified edges. "
             "Preserve every requested domain, output, filter, and path. "
