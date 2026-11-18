@@ -67,8 +67,11 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
              "property IDs from the chosen path. filter is null or "
              "{\"property\":\"N0P0\",\"op\":\"eq\",\"value\":\"literal\"}. "
              "Never invent IDs, never omit requested outputs or conditions. "
-             "If counting, grouping, ordering, limits, branching joins, "
-             "or other unsupported operations are requested, return "
+             "For counting all entities, use operation='count' and empty projections. "
+             "For counts grouped by a property, use operation='group_count' "
+             "and project exactly the grouping property. For sorting and "
+             "limits use operation='select' and project the sorted property. "
+             "Branching joins or other unsupported operations return "
              "operation='unsupported'. Return no SPARQL."},
             {"role": "user", "content": json.dumps(
                 {"question": question, "choices": choices},
@@ -86,8 +89,11 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     if not isinstance(result, dict) or set(result) != {
             "path_id", "operation", "projections", "filter"}:
         raise ValueError("Invalid evidence-selection structure")
-    if result["operation"] != "select":
-        raise ValueError("Unsupported evidence-selection operation")
+    requested_count = bool(re.search(r"\\bcount\\b|\\bhow many\\b|\\bnumber of\\b|\\bmore than\\b", question, re.I))
+    grouped = requested_count and bool(re.search(r"\\b(?:for each|per|each|more than)\\b", question, re.I))
+    expected_operation = "group_count" if grouped else ("count" if requested_count else "select")
+    if result["operation"] != expected_operation:
+        raise ValueError("LLM selected an operation inconsistent with the question")
     path_id = result["path_id"]
     if not isinstance(path_id, str) or not re.fullmatch(r"PATH_\d+", path_id):
         raise ValueError("Missing or invalid evidence path ID")
@@ -96,10 +102,14 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         raise ValueError("Invented evidence path ID")
     lookup = property_maps[i]
     projections = result["projections"]
-    if (not isinstance(projections, list) or not projections
+    if (not isinstance(projections, list) or (not projections and expected_operation != 'count')
             or any(not isinstance(p, str) or p not in lookup for p in projections)
             or len(set(projections)) != len(projections)):
         raise ValueError("Missing, repeated, or invented projection ID")
+    if expected_operation == 'count' and projections:
+        raise ValueError("Ungrouped count cannot have property projections")
+    if expected_operation == 'group_count' and len(projections) != 1:
+        raise ValueError("Grouped count needs one grouping property")
     specs = [{"node_index": lookup[p][0], "predicate": lookup[p][1],
               "as": "value_" + str(j)} for j, p in enumerate(projections)]
     bound_filter = None
@@ -144,8 +154,28 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         # No user-specified scalar equality: ignore an invented model filter.
         # Verified mapping joins remain part of the selected evidence path.
         bound_filter = None
-    if re.search(r"\b(?:count|group\s+by|order(?:ed)?\s+by|ascending|descending|limit)\b", question, re.I):
-        raise ValueError("Unsupported aggregation or ordering requirement")
+    threshold = None
+    if expected_operation == 'group_count':
+        number = re.search(r"\\bmore than\\s+(\\d+|one|two|three|four|five|six|seven|eight|nine|ten)\\b", question, re.I)
+        if number:
+            words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5,
+                     "six": 6, "seven": 7, "eight": 8, "nine": 9, "ten": 10}
+            threshold = words.get(number.group(1).lower())
+            if threshold is None:
+                threshold = int(number.group(1))
+    order = None
+    result_limit = None
+    if expected_operation == 'select':
+        if re.search(r"\\b(?:ascending|descending|alphabetical(?:ly)?|sorted|order(?:ed)?)\\b", question, re.I):
+            if len(specs) != 1:
+                raise ValueError("Ordering requires one unambiguous projected property")
+            order = [{"as": specs[0]["as"], "direction":
+                      "desc" if re.search(r"\\bdescending\\b", question, re.I) else "asc"}]
+        m = re.search(r"\\b(?:first|top|limit)\\s+(\\d+|ten)\\b", question, re.I)
+        if m:
+            result_limit = 10 if m.group(1).lower() == "ten" else int(m.group(1))
+            if not 1 <= result_limit <= 10000:
+                raise ValueError("Requested limit out of bounds")
     if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
             or re.search(r"\bwith\s+[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
         raise ValueError("LLM omitted an explicit equality filter")
@@ -161,11 +191,20 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
                          "predicate": bound_filter["predicate"],
                          "value": bound_filter["value"]}
                         if bound_filter else None),
-            "operation": {"type": "select"},
+            "operation": {"type": expected_operation, **({"having_min": threshold} if threshold is not None else {})},
             "return_entities": False,
         }
+        if order is not None:
+            plan["order_by"] = order
+        if result_limit is not None:
+            plan["result_limit"] = result_limit
     else:
         plan = bind_evidenced_path(paths[i], catalog, mappings,
                                   projections=specs, filter_spec=bound_filter)
+        plan["operation"] = {"type": expected_operation, **({"having_min": threshold} if threshold is not None else {})}
+        if order is not None:
+            plan["order_by"] = order
+        if result_limit is not None:
+            plan["result_limit"] = result_limit
     return resolve_shapes(plan, index, mappings=mappings), {
         "status": "evidence_semantic_grounded", "choice": path_id}
