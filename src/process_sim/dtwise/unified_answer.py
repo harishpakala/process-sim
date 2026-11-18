@@ -76,7 +76,20 @@ def _compact_catalog_symbols(catalog):
         if isinstance(value, list):
             return [encode(v) for v in value]
         return symbols.get(value, value) if isinstance(value, str) else value
-    return encode(catalog), symbols, reverse
+    encoded = encode(catalog)
+    # The model sees ownership and direction without decoding opaque shape IRIs.
+    # This is presentation metadata only; the resolver and SHACL validation
+    # continue to use the authoritative original IRIs.
+    for entity in encoded['entities']:
+        entity['property_labels'] = {
+            p: re.split(r'[/#]', iri)[-1]
+            for iri, p in symbols.items()
+            if p in entity['properties']
+        }
+    for edge in encoded['shacl_edges']:
+        edge['predicate_label'] = re.split(
+            r'[/#]', reverse[edge['predicate']])[-1]
+    return encoded, symbols, reverse
 
 
 def _resolve_catalog_symbols(plan, reverse):
@@ -569,7 +582,13 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
         for p in required_outputs for e in catalog['entities']
         if p in e['properties']
     ]
-    requirement_reminder = ('Preserve all constraints together: ' +
+    # Shape/property ownership is authoritative; a shape label is not an
+    # instruction to project a similarly named relationship predicate.
+    requirement_reminder = ('Only project explicitly requested output properties; '
+        'entity/shape names are not projections. Do not copy catalog '
+        'properties arrays into IR entities. SHACL edges must stay within '
+        'their evidenced domain; cross-domain hops use verified mappings. ' +
+        'Preserve all constraints together: ' +
         json.dumps({'required_output_predicates': required_outputs,
                     'required_output_owners': required_output_owners,
                     'exact_input_constraints': required_inputs},
