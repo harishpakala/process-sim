@@ -827,27 +827,48 @@ def generate_ir(question, schema, *, model='qwen2.5-coder:3b',
                 # Supply concrete schema candidates after a bad shape choice.
                 # This is evidence for the model, never an automatic IR repair.
                 shape_evidence = ''
-                if 'Entity shape not present' in last_error or 'Property lacks unique SHACL evidence' in last_error:
-                    relevant = [e for e in catalog['entities']
-                                if e['domain'] in mentioned]
-                    required = set(required_outputs)
-                    owners = [e for e in relevant
-                              if required.intersection(e['properties'])]
-                    if not owners:
-                        owners = relevant
+                if ('Entity shape not present' in last_error
+                        or 'Property lacks unique SHACL evidence' in last_error):
+                    # Show candidates for EVERY requested domain, not only
+                    # owners of the output property. Cross-domain inputs may
+                    # own the mapping key but not the projected property.
+                    candidates = []
+                    mapping_properties = {
+                        (m['left_domain'], m['left_property'])
+                        for m in relevant_mappings
+                    } | {
+                        (m['right_domain'], m['right_property'])
+                        for m in relevant_mappings
+                    }
+                    for domain in sorted(mentioned):
+                        domain_shapes = [e for e in catalog['entities']
+                                         if e['domain'] == domain]
+                        ranked = sorted(
+                            domain_shapes,
+                            key=lambda e: (
+                                -sum(p in required_outputs or
+                                     (domain, p) in mapping_properties
+                                     for p in e['properties']),
+                                e['shape']))
+                        for e in ranked[:8]:
+                            candidates.append({
+                                'domain': domain,
+                                'shape': (catalog_symbols.get(e['shape'], e['shape'])
+                                          if compact_catalog else e['shape']),
+                                'relevant_properties': [
+                                    (catalog_symbols.get(p, p)
+                                     if compact_catalog else p)
+                                    for p in e['properties']
+                                    if p in required_outputs
+                                    or (domain, p) in mapping_properties],
+                            })
                     shape_evidence = (
-                        ' SHACL-backed shape candidates (use shape exactly as shown '
-                        'in the catalog, including S-number symbols in compact mode): ' +
-                        json.dumps([
-                            {'domain': e['domain'],
-                             'shape': catalog_symbols.get(e['shape'], e['shape'])
-                                      if compact_catalog else e['shape'],
-                             'properties': [
-                                 catalog_symbols.get(p, p) if compact_catalog else p
-                                 for p in e['properties'] if p in required
-                                 or p in {m['left_property'] for m in relevant_mappings}
-                                 or p in {m['right_property'] for m in relevant_mappings}]}
-                            for e in owners[:16]], ensure_ascii=False) + '. ')
+                        ' SHACL-backed candidates for EACH required domain '
+                        '(select an owning shape; do not omit domains): ' +
+                        json.dumps(candidates, ensure_ascii=False) +
+                        '. Verified mapping candidates (copy exact ID, '
+                        'endpoint order and predicates): ' +
+                        json.dumps(mapping_catalog, ensure_ascii=False) + '. ')
                 messages.append({'role':'assistant','content':raw})
                 messages.append({'role':'user','content':
                     'The previous IR failed SHACL validation: ' + last_error + '. ' +
