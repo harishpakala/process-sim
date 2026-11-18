@@ -141,7 +141,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     if not explicit:
         explicit = re.findall(
             r"\bwith\s+(?!more\s+than\b)([A-Za-z][A-Za-z0-9_]*)\s+"
-            r"(?!is\b|by\b|through\b)([^\s,;.]+)",
+            r"(?!is\b|by\b|through\b)([^\s,;]+)",
             question, flags=re.I)
     if len(explicit) > 1:
         raise ValueError("Multiple equality constraints are not supported")
