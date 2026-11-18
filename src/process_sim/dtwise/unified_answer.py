@@ -329,9 +329,13 @@ def _domain_qualified_output_requirements(clause, catalog):
             for name in names:
                 # Accept "ECAD LocalId" or "ECAD Device LocalId", not a
                 # bare ambiguous "LocalId" occurring elsewhere in the question.
+                shape_name = entity.get('display_name', '')
+                shape_option = (r'(?:\s+' + re.escape(shape_name) + r')?'
+                                if shape_name and re.fullmatch(r'[A-Za-z][A-Za-z0-9_]*', shape_name)
+                                else '')
                 pattern = (r'(?<![A-Za-z0-9_])' + re.escape(entity['domain']) +
-                           r'(?:\s+[A-Za-z][A-Za-z0-9_]*){0,2}\s+' +
-                           re.escape(name) + r'(?![A-Za-z0-9_])')
+                           shape_option + r'\s+' + re.escape(name) +
+                           r'(?![A-Za-z0-9_])')
                 if re.search(pattern, clause, re.I):
                     found.add(predicate)
     return found
