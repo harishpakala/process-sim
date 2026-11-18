@@ -1,0 +1,51 @@
+"""B27 filtered three-spoke hub join regression tests."""
+import unittest
+from unittest.mock import patch
+from tests.test_dtwise_experimental_hub_join import ExplicitHubJoinTests
+from process_sim.dtwise.experimental_multihop_cli import _plan_explicit_hub_join
+
+QUESTION = ("Join DEXPI InstrumentationFunction, ECAD Device, and "
+            "OPCUAConnectivity SignalMapping through AssetInventory Asset "
+            "using AssetIdentifier where AssetIdentifier is https://aas.example.com/VC101.")
+
+class FilteredHubJoinTests(unittest.TestCase):
+    def setUp(self):
+        fixture = ExplicitHubJoinTests()
+        fixture.setUp()
+        self.catalog = fixture.catalog
+        self.leaves = fixture.leaves[:3]
+        self.mappings = fixture.mappings[:3]
+
+    def plan(self, mappings=None, question=QUESTION):
+        with patch("process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan), patch(
+                       "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"):
+            return _plan_explicit_hub_join(
+                question, self.catalog,
+                self.mappings if mappings is None else mappings,
+                self.leaves, {x[0] for x in self.leaves} | {"assetinventory"}, {})
+
+    def test_three_spoke_join_with_hub_filter(self):
+        plan, selection = self.plan()
+        self.assertEqual(len(plan["entities"]), 4)
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertEqual(plan["filters"], {
+            "op": "eq", "entity": "n0",
+            "predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+            "value": "https://aas.example.com/VC101"})
+        self.assertEqual(selection["choice"], "VERIFIED_HUB_JOIN")
+        self.assertTrue(plan["return_entities"])
+
+    def test_unverified_spoke_rejected(self):
+        mappings = [dict(m) for m in self.mappings]
+        mappings[0]["verified"] = False
+        with self.assertRaisesRegex(ValueError, "No unique verified hub mapping"):
+            self.plan(mappings)
+
+    def test_unrequested_filter_key_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Hub filter must use"):
+            self.plan(question=QUESTION.replace(
+                "where AssetIdentifier is", "where ProductIdentifier is"))
+
+if __name__ == "__main__":
+    unittest.main()
