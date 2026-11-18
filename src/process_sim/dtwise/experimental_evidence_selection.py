@@ -139,10 +139,16 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         r"\bwhere\s+([A-Za-z][A-Za-z0-9_]*)\s+is\s+(\S+)",
         question, flags=re.I)
     if not explicit:
-        explicit = re.findall(
+        # "associated with DEXPI InstrumentationFunctions" is an entity
+        # relationship, not an equality filter. Only SHACL-owned property
+        # names can introduce the compact "with Property Value" syntax.
+        possible = re.findall(
             r"\bwith\s+(?!more\s+than\b)([A-Za-z][A-Za-z0-9_]*)\s+"
-            r"(?!is\b|by\b|through\b)([^\s,;]+)",
-            question, flags=re.I)
+            r"([^\s,;]+)", question, flags=re.I)
+        owned_labels = {_label(predicate).casefold()
+                        for _, predicate in lookup.values()}
+        explicit = [(name, value) for name, value in possible
+                    if name.casefold() in owned_labels]
     if len(explicit) > 1:
         raise ValueError("Multiple equality constraints are not supported")
     f = result["filter"]
@@ -196,8 +202,9 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             result_limit = 10 if m.group(1).lower() == "ten" else int(m.group(1))
             if not 1 <= result_limit <= 10000:
                 raise ValueError("Requested limit out of bounds")
-    if (re.search(r"\bwhere\b.+?\bis\b", question, re.I | re.S)
-            or re.search(r"\bwith\s+(?!more\s+than\b)[A-Za-z][A-Za-z0-9_]*\s+\S+", question, re.I)) and bound_filter is None:
+    # Reuse the grounded equality requirements; do not independently
+    # reinterpret an entity mention following "with" as a scalar filter.
+    if explicit and bound_filter is None:
         raise ValueError("LLM omitted an explicit equality filter")
     if not paths[i]["steps"]:
         node = tuple(paths[i]["nodes"][0])
