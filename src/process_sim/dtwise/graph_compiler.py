@@ -98,6 +98,18 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
         group = ('\nGROUP BY ' + ' '.join(graphs)) if graphs else ''
         return select + '\nWHERE {\n' + body + '\n}' + group
+    if op['type'] == 'group_count':
+        group_var = '?' + ir['projections'][0]['as']
+        root = '?' + ir['entities'][0]['alias']
+        # Group by the requested SHACL property, never by graph provenance.
+        # DISTINCT protects against duplicated evidence triples across graphs.
+        query = (f'SELECT {group_var} (COUNT(DISTINCT {root}) AS ?count)'
+                 + '\nWHERE {\\n' + body + '\n}'
+                 + '\nGROUP BY ' + group_var)
+        threshold = op.get('having_min')
+        if threshold is not None:
+            query += f'\nHAVING(COUNT(DISTINCT {root}) > {threshold})'
+        return query
     cols = graphs + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
