@@ -18,8 +18,9 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None):
     catalog, mentioned = _focused_catalog(catalog_from_schema(index), question)
-    # Require exactly two explicit, uniquely identifiable endpoint shapes.
-    # Other shapes may still appear as intermediate nodes.
+    # Named shapes are required waypoints, not necessarily path endpoints.
+    # Do not guess a start/end orientation: verified mapping direction is
+    # enforced by enumerate_evidenced_paths.
     anchors = []
     for entity in catalog["entities"]:
         label = entity.get("display_name")
@@ -30,18 +31,37 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
-    if len(anchors) != 2 or anchors[0] == anchors[1]:
-        raise ValueError("Experimental multi-hop requires exactly two unambiguous named SHACL endpoint shapes")
-    # Enumerate both orientations; mappings remain strictly directional.
+    if len(anchors) < 2:
+        raise ValueError(
+            "Experimental multi-hop requires at least two named SHACL shapes")
+    required = set(anchors)
+    # Only keep paths that contain EVERY explicitly named shape. This prevents
+    # silently dropping an intermediate waypoint named in the question.
     paths = []
-    for source, target in ((anchors[0], anchors[1]),
-                           (anchors[1], anchors[0])):
-        paths.extend(enumerate_evidenced_paths(
-            catalog, mappings, source, target, max_hops=4, max_paths=32))
-    # The experimental route is for actual multi-hop paths only.
-    paths = [p for p in paths if len(p["steps"]) >= 2][:32]
+    seen = set()
+    for source in anchors:
+        for target in anchors:
+            if source == target:
+                continue
+            for path in enumerate_evidenced_paths(
+                    catalog, mappings, source, target,
+                    max_hops=4, max_paths=256):
+                if len(path["steps"]) < 2 or not required.issubset(
+                        set(path["nodes"])):
+                    continue
+                signature = tuple(path["nodes"]), tuple(
+                    tuple(sorted(step.items())) for step in path["steps"])
+                if signature not in seen:
+                    seen.add(signature)
+                    paths.append(path)
     if not paths:
-        raise ValueError("No verified multi-hop evidence path connects the named shapes")
+        raise ValueError(
+            "No verified multi-hop evidence path includes all named SHACL shapes")
+    # Never truncate candidates silently: doing so could remove the
+    # semantically correct path before the LLM can consider it.
+    if len(paths) > 32:
+        raise ValueError(
+            "More than 32 evidenced paths; narrow the question")
     selected, selection = select_evidenced_path(
         question, paths, model=model,
         request_json=request_json or _request_json,
