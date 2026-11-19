@@ -307,6 +307,55 @@ def _plan_filtered_cross_domain_lookup(question, catalog, mappings, anchors,
         "status": "evidence_semantic_grounded", "choice": "VERIFIED_FILTERED_LOOKUP"}
 
 
+
+def _plan_named_direct_mapping_lookup(question, catalog, mappings, anchors,
+                                      mentioned, index):
+    """Bind an explicit two-shape projection through a named verified mapping."""
+    match = re.fullmatch(
+        r"\s*find\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+associated\s+with\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+through\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s*[.]?\s*", question, re.I)
+    if not match:
+        return None
+    target_domain, target_label, output_name, source_domain, source_label, join_name = match.groups()
+    owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
+
+    def named(domain, label):
+        matches = [node for node in anchors
+                   if node[0].casefold() == domain.casefold()
+                   and owners[node]["display_name"].casefold() == label.casefold()]
+        if len(matches) != 1:
+            raise ValueError("Named mapping lookup endpoint missing or ambiguous")
+        return matches[0]
+
+    target, source = named(target_domain, target_label), named(source_domain, source_label)
+    if source == target or set(anchors) != {source, target}:
+        raise ValueError("Named mapping lookup requires exactly two shapes")
+    output_predicate = _single_shape_property(owners[target], output_name)
+    source_key = _single_shape_property(owners[source], join_name)
+    target_key = _single_shape_property(owners[target], join_name)
+    paths = [
+        path for path in enumerate_evidenced_paths(
+            catalog, mappings, source, target, max_hops=1, max_paths=256)
+        if len(path["steps"]) == 1
+        and path["steps"][0]["kind"] == "mapping"
+        and path["steps"][0]["left_predicate"] == source_key
+        and path["steps"][0]["right_predicate"] == target_key
+    ]
+    if len(paths) != 1:
+        raise ValueError("No unique verified direct mapping for named join key")
+    plan = bind_evidenced_path(
+        paths[0], catalog, mappings,
+        projections=[{"node_index": 1, "predicate": output_predicate,
+                      "as": "value_0"}])
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded",
+        "choice": "VERIFIED_NAMED_DIRECT_MAPPING_LOOKUP"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None, prompt_diagnostics=None):
@@ -352,6 +401,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                                   anchors, mentioned, index)
     if filtered is not None:
         return filtered
+
+    named_mapping = _plan_named_direct_mapping_lookup(
+        question, catalog, mappings, anchors, mentioned, index)
+    if named_mapping is not None:
+        return named_mapping
 
     # Handle the fully specified single-shape B19 lookup before inferring
     # cross-domain output owners from incidental words in the filter clause.
