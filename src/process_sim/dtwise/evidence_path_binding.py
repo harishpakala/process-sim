@@ -18,8 +18,8 @@ def bind_evidenced_path(path, catalog, mappings, *, projections, filter_spec=Non
         raise ValueError("Invalid selected path")
     if len(steps) > 8:
         raise ValueError("Path exceeds supported hop bound")
-    if not isinstance(projections, list) or not projections:
-        raise ValueError("At least one explicit projection is required")
+    if not isinstance(projections, list):
+        raise ValueError("Projections must be a list")
     try:
         start, end = tuple(nodes[0]), tuple(nodes[-1])
         normalized_nodes = [tuple(node) for node in nodes]
