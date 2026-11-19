@@ -611,6 +611,18 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             return domain_plan
         raise ValueError('No evidenced domain-wide LLM plan for this question')
 
+    if len(anchors) == 1:
+        from .experimental_presence_selection import select_presence_plan
+        presence = select_presence_plan(
+            question, anchors[0], catalog, index, mappings, model=model,
+            request_json=request_json or _request_json,
+            ollama_host=ollama_host, timeout=timeout,
+            keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics)
+        if presence is not None:
+            plan, selection = presence
+            check_semantic_coverage(plan, question, catalog, mentioned)
+            return plan, selection
+
     # Two explicitly named shapes: a compact, operation-aware LLM decision
     # avoids exposing the entire property catalog for entity-return joins.
     if len(anchors) == 2:
