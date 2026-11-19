@@ -167,6 +167,11 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         result = json.loads(response["message"]["content"])
     except (KeyError, TypeError, ValueError) as exc:
         raise ValueError("Invalid evidence-selection JSON") from exc
+    if prompt_diagnostics is not None:
+        # Diagnostic only: preserve the exact model selection for offline review.
+        # Do not use this field to change validation or planning behavior.
+        prompt_diagnostics["model_selection"] = result
+        _write_prompt_diagnostics(prompt_diagnostics)
     # Normalize harmless Ollama formatting variants before strict ID checks.
     # Do not invent paths, projections, or literal filters.
     if isinstance(result, dict):
