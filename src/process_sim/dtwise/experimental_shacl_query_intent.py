@@ -58,8 +58,7 @@ result_property_ids: array of exactly two supplied P IDs,
 join: {"kind":"shared_ancestor","owner":"Device"},
 boolean_operator: "and",
 filters: array of exactly two objects with property_id, owner,
-property, operator, value. Use Device LocalId then DeviceType;
-operator must be "="; copy question values exactly.
+property, operator, value. Use Device LocalId then DeviceType; use candidate property labels, NOT predicate URIs.\nThe join owner and both filter owners MUST be the label "Device", NOT a URI.\noperator must be "="; copy question values exactly. Never invent example values.
 If uncertain, do not fabricate: return JSON null.
 No SPARQL, no invented predicates, no extra keys."""
 
@@ -152,9 +151,9 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
         c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
     ]}
     prompt["shacl_subgraph"] = graph_evidence(qualified)
-    raw = ollama_select(prompt, model=model, endpoint=endpoint,
+    # Constrain model output to the independently grounded candidate registry and\n    # question literals; this is guidance, not a substitute for validation.\n    schema = json.loads(json.dumps(DIRECT_INTENT_SCHEMA))\n    candidate_ids = [c["id"] for c in prompt["candidates"]]\n    schema["properties"]["result_property_ids"]["items"]["enum"] = candidate_ids\n    schema["properties"]["join"]["properties"]["owner"]["enum"] = ["Device"]\n    filter_props = schema["properties"]["filters"]["items"]["properties"]\n    filter_props["property_id"]["enum"] = candidate_ids\n    filter_props["owner"]["enum"] = ["Device"]\n    filter_props["property"]["enum"] = ["LocalId", "DeviceType"]\n    filter_props["value"]["enum"] = list(_literals(question))\n    raw = ollama_select(prompt, model=model, endpoint=endpoint,
                         transport=transport, system_prompt=DIRECT_INTENT_PROMPT,
-                        response_format=DIRECT_INTENT_SCHEMA)
+                        response_format=schema)
     if raw.strip() == "null":
         return {"domain": index.domain, "question": question, "intent": None,
                 "qualified": qualified, "sparql": None,
