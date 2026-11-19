@@ -43,8 +43,9 @@ def _schema_words(value):
     value = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", value)
     value = re.sub(r"([A-Z])([A-Z][a-z])", r"\\1 \\2", value)
     words = re.findall(r"[A-Za-z0-9]+", value.casefold())
-    return [word[:-1] if len(word) > 3 and word.endswith("s")
-            and not word.endswith("ss") else word for word in words]
+    normalized = [word[:-1] if len(word) > 3 and word.endswith("s")
+                  and not word.endswith("ss") else word for word in words]
+    return [word for word in " ".join(normalized).replace("end point", "endpoint").split()]
 
 
 def _mentions_shape(question, label):
