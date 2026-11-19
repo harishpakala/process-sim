@@ -241,12 +241,21 @@ def validate_ir(ir, schema, *, mappings=None):
             for child in children: filter_check(child, depth+1)
         elif op == 'not':
             filter_check(f.get('child'), depth+1)
-        elif op in ('eq', 'neq', 'contains', 'exists', 'not_exists'):
-            if 'ignore_case' in f and (op != 'contains' or f['ignore_case'] is not True):
+        elif op in ('eq', 'neq', 'contains', 'starts_with', 'regex', 'exists', 'not_exists'):
+            if 'ignore_case' in f and (op not in ('contains', 'starts_with', 'regex') or f['ignore_case'] is not True):
                 raise ValueError('ignore_case is only supported for contains')
             prop(f)
-            if op in ('eq', 'neq', 'contains'):
+            if op in ('eq', 'neq', 'contains', 'starts_with', 'regex'):
                 _literal(f.get('value'))
+            if op == 'regex':
+                import re
+                pattern = f.get('value')
+                if not isinstance(pattern, str) or len(pattern) > 256:
+                    raise ValueError('Invalid regex pattern')
+                try:
+                    re.compile(pattern)
+                except re.error as exc:
+                    raise ValueError('Invalid regex pattern') from exc
         else:
             raise ValueError('Unsupported filter operator')
     if ir.get('filters') is not None:
