@@ -89,10 +89,11 @@ def run_phase2_filter_plan(index, prepared: dict, *, model="qwen2.5-coder:7b",
     # Fail closed for requests outside the one-string-equality scope.
     literals = [quoted if quoted != "" else unquoted
                 for quoted, unquoted in _LITERAL.findall(question)]
+    filter_clause = re.split(r"\bwhere\b", question, maxsplit=1, flags=re.I)[-1]
     unsupported = bool(re.search(
         r"\b(how many|count|exists|does any|is there|are there|average|sum|"
         r"group by|order by|greater than|less than)\b|(?:!=|<=|>=|<|>)", question, re.I
-    )) or len(literals) != 1 or bool(re.search(r"\b(and|or)\b", question, re.I))
+    )) or len(literals) != 1 or bool(re.search(r"\b(and|or)\b", filter_clause, re.I))
     if unsupported or not offered["prompt"]["candidates"]:
         plan = {"status": "unresolved", "result_ids": [], "filter_id": None,
                 "operator": None, "value": None,
