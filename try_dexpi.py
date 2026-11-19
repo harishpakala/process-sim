@@ -205,7 +205,12 @@ def main() -> None:
                 print("Status:", result["plan"]["status"].upper())
                 print("Reason:", result["plan"]["reason"])
                 print("Compiled SPARQL (not executed):")
-                print(result["sparql"] or "  (none)")
+                if isinstance(result["sparql"], dict):
+                    for rid, query in result["sparql"].items():
+                        print(f"  {rid}:")
+                        print(query)
+                else:
+                    print(result["sparql"] or "  (none)")
         elif args.phase2_filter:
             from process_sim.dtwise.experimental_shacl_phase2_filter import (
                 run_phase2_filter_plan, compile_phase2_filter_sparql,
