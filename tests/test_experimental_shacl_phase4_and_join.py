@@ -240,3 +240,35 @@ def test_direct_intent_unsupported_question_skips_model(sample):
         index, prepared, transport=lambda *_: pytest.fail("Must not call model"))
     assert result["intent"] is None
     assert result["sparql"] is None
+
+
+# Phase 5.5: schema-only validation; question entailment is a separate gate.
+def test_schema_intent_accepts_one_or_two_ancestor_filters(sample):
+    from process_sim.dtwise.experimental_shacl_schema_intent import validate_schema_join_intent
+    index, prepared, plan = sample
+    qualified = qualify_candidates(index, prepared)
+    intent = _direct_intent(plan)
+    assert validate_schema_join_intent(intent, qualified) is intent
+    intent["filters"] = intent["filters"][:1]
+    assert validate_schema_join_intent(intent, qualified) is intent
+
+
+@pytest.mark.parametrize("change", [
+    lambda x: x.update(domain="dexpi"),
+    lambda x: x.update(operation="delete"),
+    lambda x: x["join"].update(owner="EndPoint"),
+    lambda x: x["filters"][0].update(property_id="P999"),
+    lambda x: x["filters"][0].update(operator="!="),
+    lambda x: x["filters"][0].update(owner="EndPoint"),
+    lambda x: x["filters"][0].update(property="DeviceType"),
+    lambda x: x.update(boolean_operator="or"),
+    lambda x: x["filters"].append(dict(x["filters"][0])),
+    lambda x: x["result_property_ids"].__setitem__(1, x["result_property_ids"][0]),
+])
+def test_schema_intent_rejects_invalid_graph_structure(sample, change):
+    from process_sim.dtwise.experimental_shacl_schema_intent import validate_schema_join_intent
+    index, prepared, plan = sample
+    intent = _direct_intent(plan)
+    change(intent)
+    with pytest.raises(SelectionContractError):
+        validate_schema_join_intent(intent, qualify_candidates(index, prepared))
