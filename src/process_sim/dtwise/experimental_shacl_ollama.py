@@ -63,6 +63,7 @@ def ollama_select(
     timeout: float = 120,
     transport=None,
     system_prompt: str = SYSTEM_PROMPT,
+    response_format=None,
 ) -> str:
     """Call local Ollama /api/chat; injectable transport enables offline tests."""
     if transport is None:
@@ -79,7 +80,7 @@ def ollama_select(
     payload = {
         "model": model,
         "stream": False,
-        "format": "json",
+        "format": response_format if response_format is not None else "json",
         "options": {"temperature": 0},
         "messages": [
             {"role": "system", "content": system_prompt},
