@@ -539,5 +539,50 @@ class DomainRegexLookupTests(unittest.TestCase):
                                "properties": []}]}, {"ecad"})
 
 
+
+class CaseInsensitiveSubstringTests(unittest.TestCase):
+    def test_b35_preserves_case_insensitive_contains(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_substring_lookup)
+        from process_sim.dtwise.graph_compiler import compile_graph_ir
+        predicate = "https://example.org/assetinventory/hasAssetName"
+        entity = {"domain": "AssetInventory",
+                  "shape": "https://example.org/shapes/Asset",
+                  "display_name": "Asset", "properties": [predicate]}
+        question = ("Which AssetInventory Asset entities have an "
+                    "AssetName containing reactor, ignoring case?")
+        with patch("process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"), patch(
+                "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                side_effect=lambda plan, index, mappings: plan):
+            plan, selection = _plan_named_substring_lookup(
+                question, {"entities": [entity]}, {"assetinventory"},
+                [(entity["domain"], entity["shape"])], {}, [])
+        self.assertEqual(selection["choice"], "VERIFIED_NAMED_SUBSTRING_LOOKUP")
+        self.assertEqual(plan["filters"]["value"], "reactor")
+        self.assertTrue(plan["filters"]["ignore_case"])
+        schema = {"shape_paths": [
+            {"domain": "AssetInventory", "node_shape": entity["shape"],
+             "path": predicate, "evidence": ["e"]}]}
+        query = compile_graph_ir(plan, schema, include_graph=False)
+        self.assertIn("CONTAINS(LCASE(STR(", query)
+        self.assertIn('LCASE("reactor")', query)
+
+    def test_b33_remains_case_sensitive(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_substring_lookup)
+        predicate = "https://example.org/productcatalog/hasManufacturerName"
+        entity = {"domain": "ProductCatalog",
+                  "shape": "https://example.org/shapes/Product",
+                  "display_name": "Product", "properties": [predicate]}
+        with patch("process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"), patch(
+                "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                side_effect=lambda plan, index, mappings: plan):
+            plan, _ = _plan_named_substring_lookup(
+                "Which ProductCatalog Product entities have a ManufacturerName containing Endress?",
+                {"entities": [entity]}, {"productcatalog"},
+                [(entity["domain"], entity["shape"])], {}, [])
+        self.assertNotIn("ignore_case", plan["filters"])
+
+
 if __name__ == "__main__":
     unittest.main()
