@@ -58,5 +58,51 @@ class SemanticSelectionV2Tests(unittest.TestCase):
             self.validate(selection)
 
 
+    def test_boolean_existence_and_missing(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "where": {"op": "and", "conditions": [
+                 {"op": "exists", "property": "N0P0"},
+                 {"op": "missing", "property": "N0P1"}]}}
+        self.assertEqual(self.validate(s)["where"]["op"], "and")
+
+    def test_string_regex_and_case_insensitive_contains(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "where": {"op": "or", "conditions": [
+                 {"op": "regex", "property": "N0P0", "value": "^PI-"},
+                 {"op": "contains", "property": "N0P1",
+                  "value": "reactor", "ignore_case": True}]}}
+        self.assertEqual(len(self.validate(s)["where"]["conditions"]), 2)
+
+    def test_order_limit_and_optional_projection(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "order_by": {"property": "N0P0", "direction": "desc"},
+             "limit": 5, "optional_properties": ["N0P0"]}
+        self.assertEqual(self.validate(s)["limit"], 5)
+
+    def test_reject_unverified_boolean_property(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "where": {"op": "exists", "property": "N99P99"}}
+        with self.assertRaisesRegex(ValueError, "existence"):
+            self.validate(s)
+
+    def test_reject_bad_regex(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "where": {"op": "regex", "property": "N0P0", "value": "["}}
+        with self.assertRaisesRegex(ValueError, "regex"):
+            self.validate(s)
+
+    def test_reject_conflicting_filter_representations(self):
+        s = {**self.selection, "operation": "select", "count_target": None,
+             "group_by": [], "aggregate_condition": None,
+             "where": {"op": "exists", "property": "N0P0"},
+             "filters": [{"property": "N0P1", "op": "eq", "value": "x"}]}
+        with self.assertRaisesRegex(ValueError, "either legacy"):
+            self.validate(s)
+
 if __name__ == "__main__":
     unittest.main()
