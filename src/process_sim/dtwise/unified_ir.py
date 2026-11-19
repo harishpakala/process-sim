@@ -260,6 +260,13 @@ def validate_ir(ir, schema, *, mappings=None):
             raise ValueError('Unsupported filter operator')
     if ir.get('filters') is not None:
         filter_check(ir['filters'])
+    distinct_spec = ir.get('count_distinct_property')
+    if distinct_spec is not None:
+        if (not isinstance(distinct_spec, dict)
+                or set(distinct_spec) != {'entity', 'predicate'}
+                or ir.get('operation', {}).get('type') != 'count'):
+            raise ValueError('Invalid distinct property count specification')
+        prop(distinct_spec)
     operation = ir.get('operation', {'type':'select'})
     if operation.get('type') not in ('select', 'count', 'group_count'):
         raise ValueError('Unsupported operation')
@@ -367,6 +374,14 @@ def compile_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=N
     else:
         body = '\n'.join('  ' + line for line in lines)
     op = ir.get('operation', {'type':'select'})
+    if op['type'] == 'count' and ir.get('count_distinct_property') is not None:
+        spec = ir['count_distinct_property']
+        var = '?counted_value'
+        triple = '?' + spec['entity'] + ' ' + _iri(spec['predicate']) + ' ' + var + ' .'
+        if graph_mode != 'default':
+            triple = 'GRAPH ' + graph_term + ' { ' + triple + ' }'
+        return ('SELECT (COUNT(DISTINCT ' + var + ') AS ?count)'
+                + '\nWHERE {\n' + body + '\n  ' + triple + '\n}')
     if op['type'] == 'count':
         if include_graph:
             return 'SELECT ?graph (COUNT(DISTINCT ?' + ir['entities'][0]['alias'] + ') AS ?count)\nWHERE {\n' + body + '\n}\nGROUP BY ?graph\nORDER BY ?graph'
