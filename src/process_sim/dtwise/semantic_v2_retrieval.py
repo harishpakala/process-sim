@@ -16,7 +16,8 @@ def retrieve_shape_nodes(question, catalog, *, model, request_json,
     if len(entities) <= max_nodes:
         return [(e["domain"], e["shape"]) for e in entities]
     evidence = [{
-        "id": f"S{i}", "domain": e["domain"], "shape": e["display_name"],
+        "id": f"S{i}", "domain": e["domain"],
+        "shape": e.get("display_name") or e["shape"],
         "properties": [p.rsplit("#", 1)[-1].rsplit("/", 1)[-1]
                        for p in e["properties"]]}
         for i, e in enumerate(entities)]
