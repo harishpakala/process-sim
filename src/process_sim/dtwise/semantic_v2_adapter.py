@@ -60,15 +60,13 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
     path = paths[i]
     # Only translate semantics supported exactly by the existing compiler.
     condition = selected["aggregate_condition"]
-    if (selected.get("where") is not None
-            or selected.get("optional_properties", [])
+    if (selected.get("optional_properties", [])
             or selected.get("distinct", False)
             or (condition is not None and condition["operator"] != "gt")
             or any(f["op"] != "eq" for f in selected["filters"])
             or len(selected["filters"]) > 1):
         raise ValueError("Semantic v2 modifier not yet supported by IR adapter")
-    if selected["operation"] == "select" and not selected["projections"]:
-        raise ValueError("Semantic v2 SELECT requires explicit projections")
+    # An empty SELECT projection means return the evidenced entity aliases.
     if selected["operation"] == "group_count":
         # Existing compiler counts the first entity alias; never silently
         # reinterpret a model-selected target on a different path node.
@@ -117,6 +115,39 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         predicate = owners[tuple(path["nodes"][j])]["properties"][k]
         plan["filters"] = {"op": "eq", "entity": f"n{j}",
                            "predicate": predicate, "value": f["value"]}
+    def bind_where(node):
+        op = node["op"]
+        if op in ("and", "or"):
+            return {"op": op, "children": [
+                bind_where(child) for child in node["conditions"]]}
+        if op == "not":
+            child = node["condition"]
+            # Only negated property existence is supported by the legacy
+            # compiler without altering variable scope.
+            if child["op"] != "exists":
+                raise ValueError("Negated condition not yet supported by IR adapter")
+            return bind_where({"op": "missing", "property": child["property"]})
+        if op not in ("exists", "missing", "eq", "contains"):
+            raise ValueError("Semantic v2 condition not yet supported by IR adapter")
+        if node.get("ignore_case", False) and op != "contains":
+            raise ValueError("Case-insensitive condition not supported for this operator")
+        match = re.fullmatch(r"N(\\d+)P(\\d+)", node["property"])
+        if match is None:
+            raise ValueError("Invalid condition property ID")
+        j, k = map(int, match.groups())
+        predicate = owners[tuple(path["nodes"][j])]["properties"][k]
+        result = {"op": "not_exists" if op == "missing" else op,
+                  "entity": f"n{j}", "predicate": predicate}
+        if op in ("eq", "contains"):
+            result["value"] = node["value"]
+        if node.get("ignore_case", False):
+            result["ignore_case"] = True
+        return result
+
+    if selected.get("where") is not None:
+        plan["filters"] = bind_where(selected["where"])
+    if op == "select" and not selected["projections"]:
+        plan["return_entities"] = True
     ordering = selected.get("order_by")
     if ordering is not None:
         if ordering["property"] not in selected["projections"]:
