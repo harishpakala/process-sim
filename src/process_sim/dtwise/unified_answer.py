@@ -1665,7 +1665,9 @@ def main():
                 args.question,catalog,model=args.model,request_json=_request_json,
                 ollama_host=args.ollama_host,timeout=args.llm_timeout,
                 keep_alive=args.keep_alive,prompt_diagnostics=prompt_diagnostics)
-            diagnostics.append({'status':'semantic_v2','selection':'validated'})
+            diagnostics.append({'status':'semantic_v2','selection':'validated',
+                                'ir':plan,
+                                'scope_size':len(plan['scope'])})
         elif args.ir:
             plan=json.loads(Path(args.ir).read_text(encoding='utf-8'))
         elif args.experimental_multihop:
