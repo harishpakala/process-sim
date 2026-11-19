@@ -26,18 +26,28 @@ class SemanticV2CLITests(unittest.TestCase):
         self.assertEqual(paths, [{"nodes": [("opc", "urn:SignalMapping")],
                                   "steps": []}])
 
-    def test_v2_rejects_excessive_evidence_candidates(self):
+    def test_v2_shortlists_large_catalog_before_enumeration(self):
         catalog = {"shacl_edges": [], "entities": [
             {"domain": "opc", "shape": "urn:Shape" + str(i),
              "display_name": "Shape" + str(i), "properties": []}
             for i in range(33)]}
+        selected = [("opc", "urn:Shape0"), ("opc", "urn:Shape1")]
         with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
-                   return_value=catalog):
-            with self.assertRaisesRegex(ValueError, "candidate limit"):
-                plan_experimental_multihop(
-                    "Count all entities", {}, [], model="mock",
-                    ollama_host="http://localhost:11434", timeout=1,
-                    planning_mode="semantic_v2")
+                   return_value=catalog), patch(
+                "process_sim.dtwise.semantic_v2_retrieval.retrieve_shape_nodes",
+                return_value=selected) as retrieve, patch(
+                "process_sim.dtwise.experimental_multihop_cli.enumerate_evidenced_paths",
+                return_value=[]), patch(
+                "process_sim.dtwise.semantic_v2_adapter.select_and_bind_v2",
+                return_value=({"ir_version": "1.0"}, {"path_id": "PATH_0"})
+                ) as selector:
+            plan, selection = plan_experimental_multihop(
+                "Count selected entities", {}, [], model="mock",
+                ollama_host="http://localhost:11434", timeout=1,
+                planning_mode="semantic_v2")
+        retrieve.assert_called_once()
+        self.assertEqual(len(selector.call_args.args[1]), 2)
+        self.assertEqual(selection["path_id"], "PATH_0")
 
 
 if __name__ == "__main__":
