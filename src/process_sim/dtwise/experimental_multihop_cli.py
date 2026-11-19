@@ -447,6 +447,44 @@ def _plan_named_identifier_anti_join(question, catalog, mappings, anchors,
         "choice": "VERIFIED_IDENTIFIER_ANTI_JOIN"}
 
 
+def _plan_domain_regex_lookup(question, catalog, mentioned):
+    """Match domain-wide regex requests against all evidenced property owners."""
+    match = re.fullmatch(
+        r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+a\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+matching\s+the\s+regular\s+expression\s+"
+        r"([^\s?]+)\?\s*", question, re.I)
+    if not match:
+        return None
+    domain, property_name, pattern = match.groups()
+    import re as _re
+    try:
+        _re.compile(pattern)
+    except _re.error as exc:
+        raise ValueError("Invalid requested regular expression") from exc
+    candidates = [e for e in catalog["entities"]
+                  if e["domain"].casefold() == domain.casefold()]
+    if not candidates:
+        raise ValueError("Unknown domain for regex lookup")
+    paths = sorted({(e["shape"], predicate)
+                    for e in candidates for predicate in e["properties"]
+                    if (re.split(r"[/#]", predicate)[-1].casefold()
+                        in {property_name.casefold(),
+                            ("has" + property_name).casefold()})})
+    if not paths:
+        raise ValueError("No evidenced domain property for regex lookup")
+    plan = {
+        "ir_version": "1.0", "entities": [], "edges": [],
+        "projections": [], "filters": None,
+        "operation": {"type": "select"}, "return_entities": True,
+        "domain_regex": {"domain": candidates[0]["domain"],
+                         "property": property_name,
+                         "pattern": pattern,
+                         "paths": [list(path) for path in paths]},
+    }
+    return plan, {"status": "evidence_semantic_grounded",
+                  "choice": "VERIFIED_DOMAIN_REGEX_LOOKUP"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None, prompt_diagnostics=None):
@@ -476,6 +514,10 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
+    domain_regex = _plan_domain_regex_lookup(question, catalog, mentioned)
+    if domain_regex is not None:
+        return domain_regex
+
     if not anchors:
         raise ValueError("Experimental planner requires a named SHACL shape")
     substring = _plan_named_substring_lookup(
