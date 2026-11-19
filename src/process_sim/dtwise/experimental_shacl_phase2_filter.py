@@ -15,7 +15,7 @@ from process_sim.dtwise.experimental_shacl_sparql import _iri
 
 PROMPT = """Plan a single-domain RETRIEVE query with exactly ONE equality filter.
 Choose supplied verified PROPERTY candidate IDs only. Do not write SPARQL.
-result_id identifies the requested output property. filter_id identifies the
+result_ids lists ALL requested output properties (one or more). filter_id identifies the
 property compared to the string literal. Match complete owner chains:
 EndPoint and PLCEndPoint are distinct. The filter property owner must be on
 the result path (an ancestor or the result owner), not a sibling branch.
@@ -23,12 +23,12 @@ Copy the string value from the user's question exactly; do not invent values.
 Values may be quoted strings or unquoted identifier tokens such as FI_101.
 If unsupported, ambiguous, or missing a matching candidate, abstain.
 Return ONLY JSON with exactly these keys:
-status ("selected", "ambiguous", "unresolved"), result_id (P ID or null),
+status ("selected", "ambiguous", "unresolved"), result_ids (array of P IDs),
 filter_id (P ID or null), operator ("=" or null), value (string or null),
-reason (nonempty string). For non-selected statuses all four plan fields null.
+reason (nonempty string). For non-selected statuses result_ids must be []\nand filter_id, operator, value must be null.\nIf the question explicitly asks for both EndPoint and PLCEndPoint, include BOTH\nAddress paths. Never add sibling paths unless requested. A shared Device filter\nmay apply to both results; do not combine branches into a single query.
 No COUNT, EXISTS, AND, OR, comparisons, numeric values, or cross-domain joins."""
 
-FIELDS = {"status", "result_id", "filter_id", "operator", "value", "reason"}
+FIELDS = {"status", "result_ids", "filter_id", "operator", "value", "reason"}\nLEGACY_FIELDS = {"status", "result_id", "filter_id", "operator", "value", "reason"}
 _LITERAL = re.compile(r"""(?<!\w)(?:=|equals?)\s*(?:["']([^"'\r\n]*)["']|([A-Za-z_][A-Za-z_0-9.-]*))""", re.I)
 
 
@@ -38,6 +38,9 @@ def validate_filter_plan(raw, qualified: dict) -> dict:
             raw = json.loads(raw)
         except json.JSONDecodeError as exc:
             raise SelectionContractError("Invalid Phase 2 JSON") from exc
+    if isinstance(raw, dict) and set(raw) == LEGACY_FIELDS:
+        raw = {**raw, "result_ids": ([raw["result_id"]] if raw["result_id"] is not None else [])}
+        del raw["result_id"]
     if not isinstance(raw, dict) or set(raw) != FIELDS:
         raise SelectionContractError("Invalid Phase 2 response fields")
     status = raw["status"]
@@ -45,13 +48,17 @@ def validate_filter_plan(raw, qualified: dict) -> dict:
         raise SelectionContractError("Invalid Phase 2 status")
     if not isinstance(raw["reason"], str) or not raw["reason"].strip():
         raise SelectionContractError("Missing Phase 2 reason")
-    fields = ("result_id", "filter_id", "operator", "value")
+    fields = ("filter_id", "operator", "value")
     if status != "selected":
-        if any(raw[key] is not None for key in fields):
+        if raw["result_ids"] != [] or any(raw[key] is not None for key in fields):
             raise SelectionContractError("Uncertain Phase 2 plan must have null fields")
         return raw
     offered = {c["id"] for c in qualified["prompt"]["candidates"] if c["kind"] == "property"}
-    if raw["result_id"] not in offered or raw["filter_id"] not in offered:
+    ids = raw["result_ids"]
+    if (not isinstance(ids, list) or not ids or
+            any(not isinstance(item, str) for item in ids) or
+            len(ids) != len(set(ids)) or
+            any(item not in offered for item in ids) or raw["filter_id"] not in offered):
         raise SelectionContractError("Unknown or non-property Phase 2 candidate ID")
     if raw["operator"] != "=" or not isinstance(raw["value"], str):
         raise SelectionContractError("Only string equality is supported")
@@ -81,7 +88,7 @@ def run_phase2_filter_plan(index, prepared: dict, *, model="qwen2.5-coder:7b",
         r"group by|order by|greater than|less than)\b|(?:!=|<=|>=|<|>)", question, re.I
     )) or len(literals) != 1 or bool(re.search(r"\b(and|or)\b", question, re.I))
     if unsupported or not offered["prompt"]["candidates"]:
-        plan = {"status": "unresolved", "result_id": None, "filter_id": None,
+        plan = {"status": "unresolved", "result_ids": [], "filter_id": None,
                 "operator": None, "value": None,
                 "reason": "Unsupported or missing single string equality filter/candidates"}
     else:
@@ -100,20 +107,23 @@ def compile_phase2_filter_sparql(result: dict) -> list[dict]:
     if plan["status"] != "selected":
         return []
     registry = result["qualified"]["registry"]
-    selected = registry[plan["result_id"]]
     filtr = registry[plan["filter_id"]]
-    nodes = selected["node_uris"]
-    triples = []
-    for i, edge in enumerate(selected["edges"]):
-        if edge["from"] != nodes[i] or edge["to"] != nodes[i + 1]:
-            raise ValueError("Disconnected result path")
-        triples.append(f"  ?n{i} {_iri(edge['predicate'])} ?n{i + 1} .")
-    if selected["property"]["owner"] != nodes[-1]:
-        raise ValueError("Invalid result property owner")
-    if filtr["property"]["owner"] != filtr["node_uris"][-1]:
-        raise ValueError("Invalid filter property owner")
-    triples.append(f"  ?n{len(nodes)-1} {_iri(selected['property']['predicate'])} ?value .")
-    triples.append(f"  ?n{len(filtr['node_uris'])-1} {_iri(filtr['property']['predicate'])} ?filterValue .")
-    triples.append(f"  FILTER(?filterValue = {json.dumps(plan['value'], ensure_ascii=False)})")
-    return [{"result_id": plan["result_id"], "filter_id": plan["filter_id"],
-             "sparql": "SELECT DISTINCT ?value WHERE {\n" + "\n".join(triples) + "\n}"}]
+    queries = []
+    for result_id in plan["result_ids"]:
+        selected = registry[result_id]
+        nodes = selected["node_uris"]
+        triples = []
+        for i, edge in enumerate(selected["edges"]):
+            if edge["from"] != nodes[i] or edge["to"] != nodes[i + 1]:
+                raise ValueError("Disconnected result path")
+            triples.append(f"  ?n{i} {_iri(edge['predicate'])} ?n{i + 1} .")
+        if selected["property"]["owner"] != nodes[-1]:
+            raise ValueError("Invalid result property owner")
+        if filtr["property"]["owner"] != filtr["node_uris"][-1]:
+            raise ValueError("Invalid filter property owner")
+        triples.append(f"  ?n{len(nodes)-1} {_iri(selected['property']['predicate'])} ?value .")
+        triples.append(f"  ?n{len(filtr['node_uris'])-1} {_iri(filtr['property']['predicate'])} ?filterValue .")
+        triples.append(f"  FILTER(?filterValue = {json.dumps(plan['value'], ensure_ascii=False)})")
+        queries.append({"result_id": result_id, "filter_id": plan["filter_id"],
+                        "sparql": "SELECT DISTINCT ?value WHERE {\\n" + "\\n".join(triples) + "\\n}"})
+    return queries
