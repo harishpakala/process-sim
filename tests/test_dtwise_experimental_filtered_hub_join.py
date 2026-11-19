@@ -707,5 +707,34 @@ class LLMContainsSelectionTests(unittest.TestCase):
                          "value": "reactor", "ignore_case": True})
 
 
+
+class ExplicitOutputClauseTests(unittest.TestCase):
+    def test_where_property_not_mistaken_for_output_owner(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            plan_experimental_multihop)
+        source = {"domain": "OPCUAConnectivity", "shape": "urn:SignalMapping",
+                  "display_name": "SignalMapping",
+                  "properties": ["urn:hasAssetIdentifier", "urn:hasSignalName"]}
+        unrelated = {"domain": "AssetInventory", "shape": "urn:Asset",
+                     "display_name": "Asset",
+                     "properties": ["urn:hasAssetIdentifier"]}
+        catalog = {"entities": [source, unrelated], "shacl_edges": []}
+        question = ("For OPCUAConnectivity SignalMapping entities where "
+                    "AssetIdentifier is https://aas.example.com/FI103, list SignalName.")
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value=catalog), patch(
+                "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                return_value=(catalog, {"opcuaconnectivity"})), patch(
+                "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"), patch(
+                "process_sim.dtwise.experimental_evidence_selection.select_evidence_plan",
+                return_value=({}, {"choice": "PATH_0"})) as selector:
+            plan_experimental_multihop(
+                question, {}, [], model="mock", ollama_host="http://localhost",
+                timeout=1, planning_mode="llm_first")
+        self.assertEqual(selector.call_args.args[1],
+                         [{"nodes": [("OPCUAConnectivity", "urn:SignalMapping")],
+                           "steps": []}])
+
+
 if __name__ == "__main__":
     unittest.main()
