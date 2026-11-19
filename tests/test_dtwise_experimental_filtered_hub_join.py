@@ -663,5 +663,49 @@ class PlanningModeIsolationTests(unittest.TestCase):
                 timeout=1, planning_mode="unknown")
 
 
+
+class LLMContainsSelectionTests(unittest.TestCase):
+    def setUp(self):
+        self.predicate = "https://example.org/assetinventory/hasAssetName"
+        self.shape = "urn:shape:Asset"
+        self.catalog = {"entities": [{
+            "domain": "AssetInventory", "shape": self.shape,
+            "display_name": "Asset", "properties": [self.predicate]}]}
+        self.paths = [{"nodes": [("AssetInventory", self.shape)], "steps": []}]
+        self.question = ("Which AssetInventory Asset entities have an "
+                         "AssetName containing reactor, ignoring case?")
+
+    def select(self, filter_value):
+        from process_sim.dtwise.experimental_evidence_selection import select_evidence_plan
+        response = {"message": {"content": __import__("json").dumps({
+            "path_id": "PATH_0", "operation": "select",
+            "projections": ["N0P0"], "filter": filter_value})}}
+        with patch("process_sim.dtwise.experimental_evidence_selection.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan):
+            return select_evidence_plan(
+                self.question, self.paths, self.catalog, {}, [],
+                model="mock", request_json=lambda *args: response,
+                ollama_host="http://localhost", timeout=1)
+
+    def test_llm_contains_filter_survives_into_ir(self):
+        plan, selection = self.select({
+            "property": "N0P0", "op": "contains", "value": "reactor",
+            "ignore_case": True})
+        self.assertEqual(selection["choice"], "PATH_0")
+        self.assertEqual(plan["filters"], {
+            "op": "contains", "entity": "n0", "predicate": self.predicate,
+            "value": "reactor", "ignore_case": True})
+
+    def test_llm_missing_case_requirement_fails_closed(self):
+        with self.assertRaisesRegex(ValueError, "Case-insensitive substring requirement omitted"):
+            self.select({"property": "N0P0", "op": "contains",
+                         "value": "reactor"})
+
+    def test_llm_invented_filter_property_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Invalid evidence-selection filter"):
+            self.select({"property": "N0P99", "op": "contains",
+                         "value": "reactor", "ignore_case": True})
+
+
 if __name__ == "__main__":
     unittest.main()
