@@ -272,3 +272,37 @@ def test_schema_intent_rejects_invalid_graph_structure(sample, change):
     change(intent)
     with pytest.raises(SelectionContractError):
         validate_schema_join_intent(intent, qualify_candidates(index, prepared))
+
+
+def test_direct_intent_receives_explicit_shacl_subgraph(sample):
+    import json
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    index, prepared, plan = sample
+    observed = {}
+    proposal = _direct_intent(plan)
+
+    def capture(url, payload, timeout):
+        observed.update(json.loads(payload["messages"][1]["content"]))
+        return {"message": {"content": json.dumps(proposal)}}
+
+    result = run_direct_join_intent(index, prepared, transport=capture)
+    graph = observed["shacl_subgraph"]
+    assert graph["domain"] == "ecad"
+    assert graph["nodes"]
+    assert graph["edges"]
+    assert graph["properties"]
+    assert {p["id"] for p in graph["candidate_paths"]} >= {"P7", "P9"}
+    assert all({"from", "predicate", "to", "property_shape"} <= set(e)
+               for e in graph["edges"])
+    assert all({"owner", "predicate", "property_shape", "candidate_ids"} <= set(p)
+               for p in graph["properties"])
+    assert result["sparql"].startswith("SELECT DISTINCT")
+
+
+def test_graph_evidence_deduplicates_shared_edges(sample):
+    from process_sim.dtwise.experimental_shacl_graph_evidence import graph_evidence
+    index, prepared, _ = sample
+    graph = graph_evidence(qualify_candidates(index, prepared))
+    keys = [(e["from"], e["predicate"], e["to"], e["property_shape"])
+            for e in graph["edges"]]
+    assert len(keys) == len(set(keys))
