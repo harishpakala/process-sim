@@ -134,6 +134,7 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
     if keep_alive is not None:
         payload["keep_alive"] = keep_alive
     if prompt_diagnostics is not None:
+        prompt_diagnostics["llm_candidate_payload"] = payload
         prompt_diagnostics.update({
             "stage": "experimental_evidence_subgraph",
             "candidate_edge_count": len(candidates),
