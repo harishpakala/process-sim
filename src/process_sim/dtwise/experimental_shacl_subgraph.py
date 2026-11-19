@@ -224,9 +224,23 @@ class SubgraphIndex:
                         for covered, length, start, chain, nodes in paths
                     )
             if candidate_paths:
-                best_coverage = max(p[0] for p in candidate_paths)
-                best_length = min(p[1] for p in candidate_paths if p[0] == best_coverage)
-                best = [p for p in candidate_paths if p[0] == best_coverage and p[1] == best_length]
+                # Property names such as Address can be shared by several
+                # sibling shapes. Prefer a property owner whose *own* shape
+                # label is explicitly mentioned, not merely an ancestor
+                # mentioned in the question. Keep ties visible as ambiguity.
+                explicit_shapes = {
+                    uri for uri, concept in self.shapes.items()
+                    if any(
+                        _mentioned(question, label)
+                        for label in concept.get("labels", [])
+                        if "shacl shape" not in label.casefold()
+                    )
+                }
+                best_owner_match = max(int(p[5] in explicit_shapes) for p in candidate_paths)
+                ranked = [p for p in candidate_paths if int(p[5] in explicit_shapes) == best_owner_match]
+                best_coverage = max(p[0] for p in ranked)
+                best_length = min(p[1] for p in ranked if p[0] == best_coverage)
+                best = [p for p in ranked if p[0] == best_coverage and p[1] == best_length]
                 selected = set()
                 edges = []
                 for _, _, _, chain, nodes, _ in best:
