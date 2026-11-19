@@ -86,60 +86,92 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
             "candidate_node_count": len(nodes),
             "request_status": "started",
         })
-    start = time.perf_counter()
-    try:
-        response = request_json(ollama_host.rstrip("/") + "/api/chat",
-                                payload, timeout)
-        selection = json.loads(response["message"]["content"])
-    except (KeyError, TypeError, ValueError) as exc:
-        raise ValueError("Invalid evidence-subgraph LLM response") from exc
-    if prompt_diagnostics is not None:
-        prompt_diagnostics.update({
-            "request_status": "completed",
-            "request_wall_seconds": round(time.perf_counter() - start, 3),
-            "ollama_prompt_tokens": response.get("prompt_eval_count"),
-            "ollama_generated_tokens": response.get("eval_count"),
-        })
-    if not isinstance(selection, dict) or set(selection) != {"edge_ids"}:
-        raise ValueError("Invalid evidence-subgraph selection structure")
-    ids = selection["edge_ids"]
     by_id = {e["id"]: e for e in candidates}
-    if (not isinstance(ids, list) or not ids or
-            any(not isinstance(x, str) or x not in by_id for x in ids)
-            or len(set(ids)) != len(ids)):
-        raise ValueError("Unknown or repeated evidence-subgraph edge ID")
-    selected = [by_id[x] for x in ids]
-    # A tree is sufficient to connect the requested shapes. Reject cycles,
-    # disconnected graphs and superfluous edges rather than hiding mistakes.
-    if len(selected) != len(nodes) - 1:
-        raise ValueError("Selected evidence subgraph is not a spanning tree")
-    parent = list(range(len(nodes)))
-
-    def root(x):
-        while parent[x] != x:
-            x = parent[x]
-        return x
-
-    for edge in selected:
-        a, b = root(edge["from"]), root(edge["to"])
-        if a == b:
-            raise ValueError("Selected evidence subgraph contains a cycle")
-        parent[a] = b
-    if len({root(i) for i in range(len(nodes))}) != 1:
-        raise ValueError("Selected evidence subgraph is disconnected")
-    # Check explicit join-key requirements against the actual selected edges.
-    using = re.search(r"\busing\s+(.+?)(?:[.;]|$)", question, re.I)
+    using = re.search(r"\\busing\\s+(.+?)(?:[.;]|$)", question, re.I)
+    requested = None
     if using:
         requested = {x.strip().casefold() for x in
-                     re.split(r"\s+and\s+|,", using.group(1), flags=re.I)}
-        actual = {_label(e["left_predicate"]).casefold() for e in selected}
-        actual |= {_label(e["right_predicate"]).casefold() for e in selected}
-        if not requested.issubset(actual):
-            raise ValueError("Selected subgraph omits a requested join key")
-        if any(_label(e["left_predicate"]).casefold() not in requested
-               or _label(e["right_predicate"]).casefold() not in requested
-               for e in selected):
-            raise ValueError("Selected subgraph uses an unrequested join key")
+                     re.split(r"\\s+and\\s+|,", using.group(1), flags=re.I)}
+
+    def validate(selection):
+        if not isinstance(selection, dict) or set(selection) != {"edge_ids"}:
+            raise ValueError("Invalid evidence-subgraph selection structure")
+        ids = selection["edge_ids"]
+        if (not isinstance(ids, list) or not ids or
+                any(not isinstance(x, str) or x not in by_id for x in ids)
+                or len(set(ids)) != len(ids)):
+            raise ValueError("Unknown or repeated evidence-subgraph edge ID")
+        selected = [by_id[x] for x in ids]
+        if len(selected) != len(nodes) - 1:
+            raise ValueError(
+                "Selected evidence subgraph is not a spanning tree: "
+                + str(len(selected)) + " edges for " + str(len(nodes))
+                + " nodes; exactly " + str(len(nodes) - 1) + " required")
+        parent = list(range(len(nodes)))
+
+        def root(x):
+            while parent[x] != x:
+                x = parent[x]
+            return x
+
+        for edge in selected:
+            a, b = root(edge["from"]), root(edge["to"])
+            if a == b:
+                raise ValueError("Selected evidence subgraph contains a cycle")
+            parent[a] = b
+        if len({root(i) for i in range(len(nodes))}) != 1:
+            raise ValueError("Selected evidence subgraph is disconnected")
+        if requested is not None:
+            actual = {_label(e["left_predicate"]).casefold() for e in selected}
+            actual |= {_label(e["right_predicate"]).casefold() for e in selected}
+            if not requested.issubset(actual):
+                raise ValueError("Selected subgraph omits a requested join key")
+            if any(_label(e["left_predicate"]).casefold() not in requested
+                   or _label(e["right_predicate"]).casefold() not in requested
+                   for e in selected):
+                raise ValueError("Selected subgraph uses an unrequested join key")
+        return ids, selected
+
+    # Retry invalid LLM selections with structural feedback. Every attempt
+    # remains subject to the same deterministic evidence checks.
+    for attempt in range(2):
+        started = time.perf_counter()
+        try:
+            response = request_json(ollama_host.rstrip("/") + "/api/chat",
+                                    payload, timeout)
+            selection = json.loads(response["message"]["content"])
+            ids, selected = validate(selection)
+        except (KeyError, TypeError, ValueError) as exc:
+            if prompt_diagnostics is not None:
+                prompt_diagnostics.setdefault("subgraph_attempts", []).append({
+                    "attempt": attempt + 1, "status": "rejected",
+                    "reason": str(exc),
+                    "selected_edge_ids": selection.get("edge_ids")
+                    if isinstance(locals().get("selection"), dict) else None,
+                })
+            if attempt:
+                raise
+            payload["messages"].append({
+                "role": "assistant",
+                "content": json.dumps(selection) if isinstance(
+                    locals().get("selection"), dict) else "{}",
+            })
+            payload["messages"].append({
+                "role": "user",
+                "content": "Your edge selection failed validation: " + str(exc)
+                + ". Return a corrected JSON edge_ids array selecting exactly "
+                + str(len(nodes) - 1) + " verified edges that connect all "
+                "nodes, contain no cycle, and satisfy all stated join keys.",
+            })
+            continue
+        if prompt_diagnostics is not None:
+            prompt_diagnostics.setdefault("subgraph_attempts", []).append({
+                "attempt": attempt + 1, "status": "accepted",
+                "selected_edge_ids": ids,
+                "request_wall_seconds": round(time.perf_counter() - started, 3),
+            })
+            prompt_diagnostics["request_status"] = "completed"
+        break
     edges = [{
         "kind": "mapping", "from": "n" + str(e["from"]),
         "to": "n" + str(e["to"]), "mapping_id": e["mapping_id"],
