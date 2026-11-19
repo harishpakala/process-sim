@@ -58,17 +58,24 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         diagnostics=diagnostics)
     i = int(selected["path_id"].split("_")[1])
     path = paths[i]
-    if (selected["operation"] != "select" or selected["group_by"]
-            or selected["count_target"] is not None
-            or selected["aggregate_condition"] is not None
-            or selected["filters"] or selected.get("where") is not None
-            or selected.get("order_by") is not None
-            or selected.get("limit") is not None
+    # Only translate semantics supported exactly by the existing compiler.
+    condition = selected["aggregate_condition"]
+    if (selected.get("where") is not None
+            or selected.get("optional_properties", [])
             or selected.get("distinct", False)
-            or selected.get("optional_properties", [])):
+            or (condition is not None and condition["operator"] != "gt")
+            or any(f["op"] != "eq" for f in selected["filters"])
+            or len(selected["filters"]) > 1):
         raise ValueError("Semantic v2 modifier not yet supported by IR adapter")
-    if not selected["projections"]:
+    if selected["operation"] == "select" and not selected["projections"]:
         raise ValueError("Semantic v2 SELECT requires explicit projections")
+    if selected["operation"] == "group_count":
+        # Existing compiler counts the first entity alias; never silently
+        # reinterpret a model-selected target on a different path node.
+        if selected["count_target"] != "N0":
+            raise ValueError("Grouped count target is not compiler root")
+    if selected["operation"] == "count" and selected["count_target"] != "N0":
+        raise ValueError("Count target is not compiler root")
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
     specs = []
     for property_id in selected["projections"]:
@@ -81,6 +88,8 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         specs.append({"node_index": node_index, "predicate": predicate,
                       "as": f"value{len(specs)}"})
     if path["steps"]:
+        if not specs:
+            raise ValueError("Count over multi-hop paths needs a verified count binder")
         plan = bind_evidenced_path(
             path, catalog, mappings, projections=specs)
     else:
@@ -95,4 +104,25 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             "operation": {"type": "select"},
             "return_entities": False,
         }
+    op = selected["operation"]
+    plan["operation"] = {"type": op}
+    if op == "group_count" and condition is not None:
+        plan["operation"]["having_min"] = condition["value"]
+    if selected["filters"]:
+        f = selected["filters"][0]
+        match = re.fullmatch(r"N(\\d+)P(\\d+)", f["property"])
+        if match is None:
+            raise ValueError("Invalid filter property ID")
+        j, k = map(int, match.groups())
+        predicate = owners[tuple(path["nodes"][j])]["properties"][k]
+        plan["filters"] = {"op": "eq", "entity": f"n{j}",
+                           "predicate": predicate, "value": f["value"]}
+    ordering = selected.get("order_by")
+    if ordering is not None:
+        if ordering["property"] not in selected["projections"]:
+            raise ValueError("Order property must be projected")
+        alias = f"value{selected['projections'].index(ordering['property'])}"
+        plan["order_by"] = [{"as": alias, "direction": ordering["direction"]}]
+    if selected.get("limit") is not None:
+        plan["result_limit"] = selected["limit"]
     return resolve_shapes(plan, index, mappings=mappings), selected
