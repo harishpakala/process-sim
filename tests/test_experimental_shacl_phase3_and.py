@@ -137,3 +137,85 @@ def test_unrecognized_filter_wording_abstains_without_model(sample):
         index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
     assert result["plan"]["status"] == "unresolved"
     assert compile_phase3_and_sparql(result) is None
+
+
+@pytest.fixture
+def multi_sample(sample):
+    index, prepared, plan = sample
+    root, device, plc = "urn:ECAD", "urn:Device", "urn:PLCEndPoint"
+    # Build an independent candidate fixture using the existing schema construction.
+    e0 = {"from": root, "to": device, "predicate": "https://example.org/hasDevice",
+          "property_shape": "urn:DeviceLink"}
+    e1 = {"from": device, "to": plc, "predicate": "https://example.org/hasPLCEndPoint",
+          "property_shape": "urn:PLCLink"}
+    dev_type = {"owner": device, "predicate": "https://example.org/deviceType",
+                "property_shape": "urn:DeviceType", "name": "DeviceType"}
+    plc_address = {"owner": plc, "predicate": "https://example.org/address",
+                   "property_shape": "urn:PLCAddress", "name": "Address"}
+    index.shapes[plc] = {"labels": ["PLCEndPoint"]}
+    index.properties[device].append(dev_type)
+    index.properties[plc] = [plc_address]
+    index.edges.append(e1)
+    prepared["registry"]["C4"] = {"property": dev_type, "node_uris": [root, device],
+                                  "edges": [e0]}
+    prepared["registry"]["C5"] = {"property": plc_address,
+                                  "node_uris": [root, device, plc], "edges": [e0, e1]}
+    prepared["prompt"]["candidates"].extend([
+        {"id": "C4", "path": "4"}, {"id": "C5", "path": "5"}])
+    prepared["prompt"]["question"] = (
+        "Show Address of both EndPoint and PLCEndPoint belonging to Device "
+        "where Device LocalId = FI_101 and Device DeviceType = Sensor in ECAD")
+    qualified = qualify_candidates(index, prepared)
+    ids = {c["path"]: c["id"] for c in qualified["prompt"]["candidates"]
+           if c["kind"] == "property"}
+    multi = {"status": "selected",
+             "result_ids": [ids["ECAD → Device → EndPoint → Address"],
+                            ids["ECAD → Device → PLCEndPoint → Address"]],
+             "result_meanings": ["EndPoint.Address", "PLCEndPoint.Address"],
+             "filters": [
+                 {"filter_id": ids["ECAD → Device → LocalId"], "owner": "Device",
+                  "property": "LocalId", "operator": "=", "value": "FI_101"},
+                 {"filter_id": ids["ECAD → Device → DeviceType"], "owner": "Device",
+                  "property": "DeviceType", "operator": "=", "value": "Sensor"},
+             ], "reason": "Both result addresses share two Device filters"}
+    return index, prepared, multi
+
+
+def test_two_results_share_two_device_filters(multi_sample):
+    index, prepared, plan = multi_sample
+    result = run_phase3_and_plan(index, prepared, transport=transport(plan))
+    queries = compile_phase3_and_sparql(result)
+    assert set(queries) == set(plan["result_ids"])
+    assert len(queries) == 2
+    for query in queries.values():
+        assert "?n1 <https://example.org/localId> ?filterValue1 ." in query
+        assert "?n1 <https://example.org/deviceType> ?filterValue2 ." in query
+        assert 'FILTER(?filterValue1 = "FI_101")' in query
+        assert 'FILTER(?filterValue2 = "Sensor")' in query
+    assert any("hasEndPoint" in query for query in queries.values())
+    assert any("hasPLCEndPoint" in query for query in queries.values())
+
+
+def test_multi_result_duplicate_ids_rejected(multi_sample):
+    index, prepared, plan = multi_sample
+    plan["result_ids"][1] = plan["result_ids"][0]
+    with pytest.raises(SelectionContractError, match="multiple result"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_multi_result_descendant_filter_rejected(multi_sample):
+    index, prepared, plan = multi_sample
+    qualified = qualify_candidates(index, prepared)
+    endpoint_id = next(c["id"] for c in qualified["prompt"]["candidates"]
+                       if c["path"] == "ECAD → Device → EndPoint → LocalId")
+    plan["filters"][1].update(filter_id=endpoint_id, owner="EndPoint", property="LocalId")
+    with pytest.raises(SelectionContractError, match="Filter owner"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_multi_result_not_explicitly_requested_rejected(multi_sample):
+    index, prepared, plan = multi_sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "both EndPoint and PLCEndPoint", "EndPoint")
+    with pytest.raises(SelectionContractError, match="not explicitly requested"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
