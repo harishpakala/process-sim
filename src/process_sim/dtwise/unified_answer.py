@@ -1647,7 +1647,7 @@ def main():
     stage_started=time.perf_counter()
     try:
         diagnostics=[]
-        prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else None
+        prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else ({} if args.planning_mode == 'semantic_v2' and args.experimental_multihop else None)
         if args.ir:
             plan=json.loads(Path(args.ir).read_text(encoding='utf-8'))
         elif args.experimental_multihop:
@@ -1684,6 +1684,8 @@ def main():
     except (ValueError,HTTPError,URLError,TimeoutError,OSError,KeyError,TypeError) as exc:
         result={'status':'rejected_or_failed','error':str(exc),
                 'planning_attempts':locals().get('diagnostics', [])}
+    if prompt_diagnostics is not None and 'semantic_v2_stage_timings' in prompt_diagnostics:
+        timings.update(prompt_diagnostics['semantic_v2_stage_timings'])
     result['timings']=timings
     output=json.dumps(result,ensure_ascii=False,indent=2)
     if args.output: Path(args.output).write_text(output,encoding='utf-8')
