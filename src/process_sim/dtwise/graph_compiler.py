@@ -117,6 +117,9 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         if op == 'exists': return 'FILTER EXISTS { ' + triple + ' }'
         if op == 'not_exists': return 'FILTER NOT EXISTS { ' + triple + ' }'
         lit = _literal(f['value'])
+        if op == 'contains' and f.get('ignore_case') is True:
+            return ('FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v
+                    + ') && CONTAINS(LCASE(STR(' + v + ')), LCASE(' + lit + '))) }')
         expr = {'eq': f'isLiteral({v}) && STR({v}) = {lit}',
                 'neq': f'isLiteral({v}) && STR({v}) != {lit}',
                 'contains': f'isLiteral({v}) && CONTAINS(STR({v}), {lit})'}[op]
