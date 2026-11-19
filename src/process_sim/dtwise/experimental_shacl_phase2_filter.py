@@ -67,14 +67,15 @@ def validate_filter_plan(raw, qualified: dict) -> dict:
         raise SelectionContractError("Unknown or non-property Phase 2 candidate ID")
     if raw["operator"] != "=" or not isinstance(raw["value"], str):
         raise SelectionContractError("Only string equality is supported")
-    result = qualified["registry"][raw["result_id"]]
     filtr = qualified["registry"][raw["filter_id"]]
-    # An ancestor property can attach to an existing result-chain variable.
-    prefix = filtr["node_uris"]
-    if result["node_uris"][:len(prefix)] != prefix:
-        raise SelectionContractError("Filter owner must be on the result path")
-    if filtr["edges"] != result["edges"][:len(filtr["edges"])]:
-        raise SelectionContractError("Filter edges do not share the result path")
+    # Validate the shared ancestor path independently for every result.
+    for result_id in ids:
+        result = qualified["registry"][result_id]
+        prefix = filtr["node_uris"]
+        if result["node_uris"][:len(prefix)] != prefix:
+            raise SelectionContractError("Filter owner must be on the result path")
+        if filtr["edges"] != result["edges"][:len(filtr["edges"])]:
+            raise SelectionContractError("Filter edges do not share the result path")
     return raw
 
 
