@@ -536,8 +536,12 @@ def plan_experimental_multihop(question, index, mappings, *, model,
         # No question-text regex or deterministic NL interpretation in this
         # branch: the LLM chooses among SHACL-evidenced path candidates.
         from .semantic_v2_adapter import select_and_bind_v2
-        nodes = sorted({(entity["domain"], entity["shape"])
-                        for entity in catalog["entities"]})
+        from .semantic_v2_retrieval import retrieve_shape_nodes
+        nodes = retrieve_shape_nodes(
+            question, catalog, model=model,
+            request_json=request_json or _request_json,
+            ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
+            diagnostics=prompt_diagnostics)
         paths = [{"nodes": [node], "steps": []} for node in nodes]
         if len(paths) > 32:
             raise ValueError(
