@@ -77,6 +77,22 @@ class SemanticCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "distinct shapes"):
             compile_semantic_plan(plan, evidence)
 
+    def test_verified_target_class_anchors_entity(self):
+        evidence = build_evidence_catalog({"entities": [{
+            "domain": "ECAD", "shape": "https://example.org/DeviceShape",
+            "target_classes": ["https://example.org/Device"],
+            "properties": ["https://example.org/hasAddress"],
+        }], "shacl_edges": []})
+        prop = evidence.properties[0]["id"]
+        plan = {"version": "2.0", "scope": [evidence.entities[0]["id"]],
+                "operation": "select_entities", "projections": [],
+                "where": {"operator": "not_exists", "property_id": prop}}
+        query = compile_semantic_plan(plan, evidence)
+        self.assertIn("rdf-syntax-ns#type", query)
+        self.assertIn("<https://example.org/Device>", query)
+        self.assertNotIn("?anchor_", query)
+        self.assertIn("NOT EXISTS", query)
+
     def test_multi_entity_requires_explicit_join(self):
         second = build_evidence_catalog({"entities": [
             {"domain": "ECAD", "shape": "https://example.org/Device",
