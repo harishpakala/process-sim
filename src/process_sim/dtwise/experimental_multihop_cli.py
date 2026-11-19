@@ -606,9 +606,17 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
     # "through"/"via"/"using" or entity mentions after "associated with".
-    output_clause = re.split(
-        r"\b(?:associated\s+with|through|via|using|where)\b",
-        question, maxsplit=1, flags=re.I)[0]
+    # Prefer an explicit trailing output command over the leading WHERE
+    # clause (e.g. "For Shape where Key is X, list Field").
+    output_commands = list(re.finditer(
+        r"\b(?:list|show|return|display|get)\s+",
+        question, re.I))
+    if output_commands:
+        output_clause = question[output_commands[-1].end():]
+    else:
+        output_clause = re.split(
+            r"\b(?:associated\s+with|through|via|using|where)\b",
+            question, maxsplit=1, flags=re.I)[0]
     # A count of named entities requests an aggregate, not a property projection.
     # Do not infer extra target shapes from incidental property-name matches.
     is_entity_count = bool(re.match(
