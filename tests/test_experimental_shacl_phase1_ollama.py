@@ -284,3 +284,23 @@ def test_phase1_unresolved_compiles_no_queries(setup):
     result = run_phase1_query_plan(index, prepared,
                                    transport=mocked(response("unresolved", [])))
     assert compile_phase1_sparql(result) == []
+
+
+@pytest.mark.parametrize("ids", [["P1", "P2"], ["P1"]])
+def test_bare_address_multiple_owners_is_ambiguous(ecad_address_paths, ids):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show Address in ECAD"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=ids)))
+    assert result["plan"]["status"] == "ambiguous"
+    assert result["plan"]["selected_candidate_ids"] == []
+    assert result["selected_paths"] == []
+
+
+def test_explicit_owner_still_selects_one(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1"])))
+    assert result["plan"]["status"] == "selected"
+    assert result["plan"]["selected_candidate_ids"] == ["P1"]
