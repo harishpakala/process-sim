@@ -69,6 +69,34 @@ INTENT_FIELDS = {
 }
 INTENT_FILTER_FIELDS = {"property_id", "owner", "property", "operator", "value"}
 
+# Ollama structured-output schema constrains shape; Python remains authoritative.
+DIRECT_INTENT_SCHEMA = {
+    "type": "object", "additionalProperties": False,
+    "required": sorted(INTENT_FIELDS),
+    "properties": {
+        "domain": {"type": "string"},
+        "operation": {"type": "string", "enum": ["select"]},
+        "result_property_ids": {"type": "array", "minItems": 2, "maxItems": 2,
+                                "items": {"type": "string"}},
+        "join": {"type": "object", "additionalProperties": False,
+                 "required": ["kind", "owner"],
+                 "properties": {"kind": {"type": "string", "enum": ["shared_ancestor"]},
+                                "owner": {"type": "string"}}},
+        "boolean_operator": {"type": "string", "enum": ["and"]},
+        "filters": {"type": "array", "minItems": 2, "maxItems": 2,
+                    "items": {"type": "object", "additionalProperties": False,
+                              "required": sorted(INTENT_FILTER_FIELDS),
+                              "properties": {
+                                  "property_id": {"type": "string"},
+                                  "owner": {"type": "string"},
+                                  "property": {"type": "string"},
+                                  "operator": {"type": "string", "enum": ["="]},
+                                  "value": {"type": "string"},
+                              }}},
+    },
+}
+
+
 
 def validate_proposed_join_intent(raw, qualified):
     """Reject model fabrications; reuse the existing topology/semantic validator."""
@@ -125,12 +153,29 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
     ]}
     prompt["shacl_subgraph"] = graph_evidence(qualified)
     raw = ollama_select(prompt, model=model, endpoint=endpoint,
-                        transport=transport, system_prompt=DIRECT_INTENT_PROMPT)
+                        transport=transport, system_prompt=DIRECT_INTENT_PROMPT,
+                        response_format=DIRECT_INTENT_SCHEMA)
     if raw.strip() == "null":
         return {"domain": index.domain, "question": question, "intent": None,
                 "qualified": qualified, "sparql": None,
                 "reason": "Model abstained"}
-    intent = validate_proposed_join_intent(raw, qualified)
+    try:
+        intent = validate_proposed_join_intent(raw, qualified)
+    except SelectionContractError as exc:
+        try:
+            proposed = json.loads(raw)
+        except (ValueError, TypeError):
+            proposed = None
+        if isinstance(proposed, dict):
+            missing = sorted(INTENT_FIELDS - set(proposed))
+            extra = sorted(set(proposed) - INTENT_FIELDS)
+            detail = f"; missing={missing}; extra={extra}" if missing or extra else ""
+        else:
+            detail = ""
+        return {"domain": index.domain, "question": question, "intent": None,
+                "qualified": qualified, "sparql": None,
+                "reason": f"Model intent rejected: {exc}{detail}",
+                "raw_model_response": raw}
     plan = {
         "status": "selected", "result_ids": intent["result_property_ids"],
         "join_owner": "Device",
