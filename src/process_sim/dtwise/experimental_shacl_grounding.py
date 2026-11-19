@@ -12,7 +12,7 @@ import re
 _IDENTIFIER = r"[A-Z][A-Za-z0-9_]*"
 _QUOTED = r"[\"']([^\"']+)[\"']"
 _BEFORE = re.compile(r"\b(" + _IDENTIFIER + r")\s+propert(?:y|ies)\b")
-_AFTER = re.compile(r"\bpropert(?:y|ies)\s+(?:named\s+|called\s+)?(" + _IDENTIFIER + r")\b", re.I)
+_AFTER = re.compile(r"(?i:\bpropert(?:y|ies)\s+(?:named\s+|called\s+)?)(" + _IDENTIFIER + r")\b")
 _QUOTED_AFTER = re.compile(r"\bpropert(?:y|ies)\s+(?:named\s+|called\s+)?" + _QUOTED, re.I)
 
 
