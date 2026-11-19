@@ -233,3 +233,65 @@ def test_compact_disconnected_fragments_do_not_invent_paths():
     assert "InstrumentationFunction → MeasuredVariable" in output
     assert "ActuatingFunction → ActuatedVariable" in output
     assert "Edges: 0" in output
+
+
+def test_llm_candidates_ecad_preserve_all_four_ambiguous_paths():
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+
+    result = extract_question(_domain_index("ecad"), "Show Address in ECAD", connect=True)
+    prepared = prepare_candidates(result)
+    candidates = prepared["prompt"]["candidates"]
+    assert prepared["prompt"]["domain"] == "ecad"
+    assert [c["id"] for c in candidates] == ["C1", "C2", "C3", "C4"]
+    assert {c["path"] for c in candidates} == {
+        f"ECAD → {branch} → {leaf} → Address"
+        for branch in ("Device", "Symbol")
+        for leaf in ("EndPoint", "PLCEndPoint")
+    }
+    assert set(prepared["registry"]) == {c["id"] for c in candidates}
+    assert all(len(v["edges"]) == 2 for v in prepared["registry"].values())
+    assert all(all(e["evidence"] for e in v["edges"]) for v in prepared["registry"].values())
+    assert all(v["property"]["evidence"] for v in prepared["registry"].values())
+    assert "http" not in str(prepared["prompt"])
+
+
+def test_llm_candidates_dexpi_shared_context_keeps_two_paths():
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction belonging to the same DEXPI",
+        connect=True,
+    )
+    prepared = prepare_candidates(result)
+    assert {c["path"] for c in prepared["prompt"]["candidates"]} == {
+        "DEXPI → InstrumentationFunction → MeasuredVariable",
+        "DEXPI → ActuatingFunction → ActuatedVariable",
+    }
+
+
+def test_llm_candidates_disconnected_branches_stay_separate():
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction",
+        connect=False,
+    )
+    prepared = prepare_candidates(result)
+    assert {c["path"] for c in prepared["prompt"]["candidates"]} == {
+        "InstrumentationFunction → MeasuredVariable",
+        "ActuatingFunction → ActuatedVariable",
+    }
+    assert all(not v["edges"] for v in prepared["registry"].values())
+
+
+def test_llm_candidates_budget_rejects_excess():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+
+    result = extract_question(_domain_index("ecad"), "Show Address in ECAD", connect=True)
+    with pytest.raises(ValueError, match="Candidate budget exceeded"):
+        prepare_candidates(result, max_candidates=2)
