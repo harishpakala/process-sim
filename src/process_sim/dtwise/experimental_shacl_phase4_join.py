@@ -7,10 +7,10 @@ import json
 import re
 
 from process_sim.dtwise.experimental_shacl_join_topology import verified_shared_ancestor
+from process_sim.dtwise.experimental_shacl_join_compiler import compile_verified_sibling_join
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
-from process_sim.dtwise.experimental_shacl_sparql import _iri
 
 
 PROMPT = """Select exactly TWO verified PROPERTY candidate IDs for a within-domain
@@ -106,14 +106,17 @@ def compile_phase4_join_sparql(result):
     plan = validate_phase4_join_plan(result["plan"], result["qualified"])
     if plan["status"] != "selected":
         return None
-    registry = result["qualified"]["registry"]
-    first, second = (registry[rid] for rid in _expected_paths(result["qualified"]))
-    shared = first["edges"][0]
-    a, b = first["edges"][1], second["edges"][1]
-    return ("SELECT DISTINCT ?endpointAddress ?plcAddress WHERE {\n"
-            f"  ?ecad {_iri(shared['predicate'])} ?device .\n"
-            f"  ?device {_iri(a['predicate'])} ?endpoint .\n"
-            f"  ?endpoint {_iri(first['property']['predicate'])} ?endpointAddress .\n"
-            f"  ?device {_iri(b['predicate'])} ?plcEndpoint .\n"
-            f"  ?plcEndpoint {_iri(second['property']['predicate'])} ?plcAddress .\n"
-            "}")
+    # Preserve the established Phase 4.1 variable contract for downstream
+    # Phase 4.2/4.3 filters while delegating triple generation to the
+    # schema-derived compiler. This compatibility mapping is ECAD-specific;
+    # the standalone compiler remains domain-independent.
+    generic = compile_verified_sibling_join(
+        result["qualified"], list(_expected_paths(result["qualified"])))
+    names = {
+        "?n0": "?ecad", "?n1": "?device",
+        "?b1_2": "?endpoint", "?b2_2": "?plcEndpoint",
+        "?value1": "?endpointAddress", "?value2": "?plcAddress",
+    }
+    for original, compatible in names.items():
+        generic = generic.replace(original, compatible)
+    return generic
