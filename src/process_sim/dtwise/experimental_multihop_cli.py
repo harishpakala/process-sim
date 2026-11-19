@@ -38,10 +38,10 @@ def _plan_named_substring_lookup(question, catalog, mentioned, anchors,
         r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+"
         r"([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+a\s+"
         r"([A-Za-z][A-Za-z0-9_]*)\s+containing\s+"
-        r"([A-Za-z0-9][A-Za-z0-9_-]*)\s*\?\s*", question, re.I)
+        r"([A-Za-z0-9][A-Za-z0-9_-]*)(,\s*ignoring\s+case)?\s*\?\s*", question, re.I)
     if not match:
         return None
-    domain, label, property_name, literal = match.groups()
+    domain, label, property_name, literal, ignoring_case = match.groups()
     matches = [e for e in catalog["entities"]
                if e["domain"].casefold() == domain.casefold()
                and e.get("display_name", "").casefold() == label.casefold()]
@@ -59,7 +59,8 @@ def _plan_named_substring_lookup(question, catalog, mentioned, anchors,
         "projections": [{"entity": "n0", "predicate": predicate,
                          "as": "value_0"}],
         "filters": {"op": "contains", "entity": "n0",
-                    "predicate": predicate, "value": literal},
+                    "predicate": predicate, "value": literal,
+                    **({"ignore_case": True} if ignoring_case else {})},
         "operation": {"type": "select"},
         "return_entities": True,
     }
