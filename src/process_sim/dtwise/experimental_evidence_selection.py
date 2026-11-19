@@ -107,8 +107,11 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
              "these keys: path_id, operation, projections, filter. "
              "path_id is a listed PATH ID or null. operation is 'select', "
              "'count', 'group_count', or 'unsupported'. projections is an ordered array of listed "
-             "property IDs from the chosen path. filter is null or "
-             "{\"property\":\"N0P0\",\"op\":\"eq\",\"value\":\"literal\"}. "
+             "property IDs from the chosen path. filter is null or a JSON object "
+             "with property (listed property ID), op ('eq' or 'contains'), "
+             "value (literal), and optional ignore_case (boolean, only for contains). "
+             "Use contains for substring matching, and ignore_case=true when "
+             "the question requests case-insensitive matching. "
              "Never invent IDs, never omit requested outputs or conditions. "
              "For counting all entities, use operation='count' and empty projections. "
              "For counts grouped by a property, use operation='group_count' "
@@ -241,15 +244,22 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     if len(explicit) > 1:
         raise ValueError("Multiple equality constraints are not supported")
     f = result["filter"]
-    if explicit and f is not None:
-        if (not isinstance(f, dict) or set(f) != {"property", "op", "value"}
-                or not isinstance(f["property"], str)
-                or f["property"] not in lookup or f["op"] != "eq"
-                or type(f["value"]) not in (str, int, float, bool)):
+    if f is not None:
+        if (not isinstance(f, dict)
+                or not {'property', 'op', 'value'}.issubset(f)
+                or set(f) - {'property', 'op', 'value', 'ignore_case'}
+                or not isinstance(f['property'], str)
+                or f['property'] not in lookup
+                or f['op'] not in ('eq', 'contains')
+                or type(f['value']) not in (str, int, float, bool)
+                or ('ignore_case' in f and (
+                    f['op'] != 'contains' or type(f['ignore_case']) is not bool))):
             raise ValueError("Invalid evidence-selection filter")
-        j, predicate = lookup[f["property"]]
+        j, predicate = lookup[f['property']]
         bound_filter = {"node_index": j, "predicate": predicate,
-                        "op": "eq", "value": f["value"]}
+                        "op": f['op'], "value": f['value']}
+        if f.get('ignore_case') is True:
+            bound_filter['ignore_case'] = True
     if explicit:
         property_name, literal = explicit[0]
         literal = literal.rstrip(".,;")
@@ -264,11 +274,27 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         else:
             if (bound_filter["node_index"], bound_filter["predicate"]) not in candidates:
                 raise ValueError("LLM selected a different equality-filter property")
+            if bound_filter["op"] != "eq":
+                raise ValueError("LLM selected an incorrect equality-filter operator")
             bound_filter["value"] = literal
-    else:
-        # No user-specified scalar equality: ignore an invented model filter.
-        # Verified mapping joins remain part of the selected evidence path.
-        bound_filter = None
+    elif bound_filter is not None:
+        # Never accept a scalar filter without a corresponding user request.
+        # Semantic coverage validates the selected predicate and literal.
+        if bound_filter["op"] == "eq":
+            raise ValueError("Unrequested equality filter")
+        if bound_filter["op"] == "contains":
+            name = _label(bound_filter["predicate"])
+            if not re.search(r"\b(?:containing|contains)\b", question, re.I):
+                raise ValueError("Unrequested substring filter")
+            if not re.search(r"(?<![A-Za-z0-9_])" + re.escape(name)
+                             + r"(?![A-Za-z0-9_])", question, re.I):
+                raise ValueError("Substring filter property not requested")
+            if bound_filter.get("ignore_case") and not re.search(
+                    r"\b(?:ignoring\s+case|case[- ]insensitive)\b", question, re.I):
+                raise ValueError("Unrequested case-insensitive filter")
+    if re.search(r"\b(?:ignoring\s+case|case[- ]insensitive)\b", question, re.I):
+        if bound_filter is None or bound_filter["op"] != "contains" or not bound_filter.get("ignore_case"):
+            raise ValueError("Case-insensitive substring requirement omitted")
     threshold = None
     if expected_operation == 'group_count':
         number = re.search(r"\bmore than\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\b", question, re.I)
@@ -303,9 +329,10 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             "edges": [],
             "projections": [{"entity": "n0", "predicate": p["predicate"],
                              "as": p["as"]} for p in specs],
-            "filters": ({"op": "eq", "entity": "n0",
+            "filters": ({"op": bound_filter["op"], "entity": "n0",
                          "predicate": bound_filter["predicate"],
-                         "value": bound_filter["value"]}
+                         "value": bound_filter["value"],
+                         **({"ignore_case": True} if bound_filter.get("ignore_case") else {})}
                         if bound_filter else None),
             "operation": {"type": expected_operation, **({"having_min": threshold} if threshold is not None else {})},
             "return_entities": False,
@@ -315,6 +342,8 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         if result_limit is not None:
             plan["result_limit"] = result_limit
     else:
+        if bound_filter is not None and bound_filter["op"] != "eq":
+            raise ValueError("Non-equality filters on multi-hop paths are not yet supported")
         plan = bind_evidenced_path(paths[i], catalog, mappings,
                                   projections=specs, filter_spec=bound_filter)
         plan["operation"] = {"type": expected_operation, **({"having_min": threshold} if threshold is not None else {})}
