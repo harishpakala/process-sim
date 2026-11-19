@@ -115,7 +115,12 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         # Cross-check the selected Boolean semantics against the user's wording.
         connective = (r"\b(?:and|both|all)\b" if choice["operation"] == "has_all_properties"
                       else r"\b(?:or|either)\b")
-        if not re.search(connective, question, re.I):
+        # A connective alone does not turn a projection request such as
+        # "Show ECAD LocalId and Name" into an entity-presence query.
+        presence_intent = bool(re.search(
+            r"\\b(?:have|has|having|with|possess|possesses|containing)\\b",
+            question, re.I))
+        if not re.search(connective, question, re.I) or not presence_intent:
             if _feedback is None:
                 return select_domain_regex_plan(
                     question, catalog, model=model, request_json=request_json,
