@@ -134,6 +134,37 @@ def _explicit_filter_constraints(clause, qualified):
         constraints.append(matches[0])
     return constraints
 
+def _explicit_result_paths(question, qualified):
+    """Ground only the supported explicit result wording against full schema paths.
+
+    Do not infer a result from Qwen's proposed IDs or self-reported meanings.
+    Unknown phrasing fails closed rather than guessing an output property.
+    """
+    before_where = re.split(r"\bwhere\b", question, maxsplit=1, flags=re.I)[0].strip()
+    match = re.fullmatch(
+        r"Show\s+(?P<property>[A-Za-z_][A-Za-z_0-9]*)\s+of\s+"
+        r"(?P<owners>both\s+EndPoint\s+and\s+PLCEndPoint|EndPoint|PLCEndPoint)"
+        r"\s+belonging\s+to\s+(?P<ancestor>Device)\s*",
+        before_where, flags=re.I)
+    if match is None:
+        return None
+    labels = {c["path"] for c in qualified["prompt"]["candidates"]
+              if c["kind"] == "property"}
+    owners = (["EndPoint", "PLCEndPoint"]
+              if match.group("owners").casefold().startswith("both ")
+              else [match.group("owners")])
+    matches = []
+    for owner in owners:
+        expected = ["ECAD", match.group("ancestor"), owner, match.group("property")]
+        paths = [path for path in labels
+                 if [part.casefold() for part in path.split(" → ")] ==
+                    [part.casefold() for part in expected]]
+        if len(paths) != 1:
+            return None
+        matches.append(paths[0])
+    return matches
+
+
 def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                         endpoint="http://127.0.0.1:11434", transport=None):
     qualified = qualify_candidates(index, prepared)
@@ -150,7 +181,8 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                  not re.search(r"\bor\b", clause, re.I) and
                  not UNSUPPORTED.search(question) and bool(prompt["candidates"]))
     grounding = _explicit_filter_constraints(clause, qualified) if supported else None
-    if grounding is None:
+    result_grounding = _explicit_result_paths(question, qualified) if supported else None
+    if grounding is None or result_grounding is None:
         supported = False
     if not supported:
         plan = {"status": "unresolved", "result_id": None, "result_meaning": None, "filters": [],
@@ -160,22 +192,14 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                            transport=transport, system_prompt=PROMPT)
         plan = validate_phase3_plan(raw, qualified)
         if plan["status"] == "selected":
-            dual_requested = bool(re.search(
-                r"\bboth\s+EndPoint\s+and\s+PLCEndPoint\b",
-                question, flags=re.I))
-            if dual_requested != ("result_ids" in plan):
-                raise SelectionContractError("Result count does not match explicit request")
+            selected_ids = (plan["result_ids"] if "result_ids" in plan
+                            else [plan["result_id"]])
+            candidate_paths = {c["id"]: c["path"] for c in
+                               qualified["prompt"]["candidates"]}
+            if set(candidate_paths[rid] for rid in selected_ids) != set(result_grounding):
+                raise SelectionContractError("Result semantic grounding mismatch")
             if [f["value"] for f in plan["filters"]] != literals:
                 raise SelectionContractError("Filter values do not match question literals")
-            if "result_ids" in plan:
-                question_results = re.search(
-                    r"\bboth\s+EndPoint\s+and\s+PLCEndPoint\b",
-                    question, flags=re.I)
-                if not question_results:
-                    raise SelectionContractError("Multiple results not explicitly requested")
-                selected_meanings = set(plan["result_meanings"])
-                if selected_meanings != {"EndPoint.Address", "PLCEndPoint.Address"}:
-                    raise SelectionContractError("Multiple results do not match requested properties")
             for item, (owner, prop, value) in zip(plan["filters"], grounding):
                 if (item["owner"].casefold(), item["property"].casefold(), item["value"]) != (
                         owner.casefold(), prop.casefold(), value):
