@@ -93,6 +93,28 @@ class SemanticV2AdapterTests(unittest.TestCase):
                          {"type": "group_count", "count_entity": "n1",
                           "having_min": 2})
 
+    def test_anti_join_uses_verified_directed_mapping(self):
+        self.catalog["entities"].append({
+            "domain": "erp", "shape": "urn:ERPAsset",
+            "display_name": "ERPAsset", "properties": ["urn:hasERPId"]})
+        step = {"kind": "mapping", "mapping_id": "asset-map",
+                "left_predicate": "urn:hasAssetIdentifier",
+                "right_predicate": "urn:hasERPId"}
+        self.paths = [{"nodes": [("opc", "urn:SignalMapping"),
+                                  ("erp", "urn:ERPAsset")], "steps": [step]}]
+        selection = {**self.selection, "projections": [], "anti_join": True}
+        with patch("process_sim.dtwise.evidence_path_binding.enumerate_evidenced_paths",
+                   return_value=self.paths):
+            (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["anti_join"], {"from": "n0", "to": "n1"})
+        self.assertTrue(plan["return_entities"])
+        self.assertEqual(plan["edges"][0]["mapping_id"], "asset-map")
+
+    def test_anti_join_rejects_non_mapping_path(self):
+        selection = {**self.selection, "projections": [], "anti_join": True}
+        with self.assertRaisesRegex(ValueError, "verified directed mapping"):
+            self.run_plan(selection)
+
     def test_distinct_property_count(self):
         selection = {**self.selection, "operation": "count",
                      "projections": [], "count_target": "N0",
