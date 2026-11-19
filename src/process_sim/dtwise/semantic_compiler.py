@@ -68,8 +68,8 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
         if op == "and":
             return "\n".join(expression(child) for child in node["conditions"])
         if op == "or":
-            return " UNION ".join(
-                "{ " + expression(child) + " }" for child in node["conditions"])
+            return "{ " + " UNION ".join(
+                "{ " + expression(child) + " }" for child in node["conditions"]) + " }"
         if op == "not":
             # NOT EXISTS wraps a correlated subquery, preserving arbitrary
             # nested Boolean expressions and the outer ?entity binding.
