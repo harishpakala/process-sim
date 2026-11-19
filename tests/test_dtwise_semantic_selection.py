@@ -71,5 +71,15 @@ class SemanticSelectionTests(unittest.TestCase):
                 ollama_host="http://localhost", timeout=1)
 
 
+
+
+class SemanticSelectionContractTests(unittest.TestCase):
+    def test_entity_retrieval_distinct_from_projection(self):
+        from process_sim.dtwise.semantic_selection import SYSTEM_PROMPT
+        self.assertIn("select_entities when the user asks WHICH entities", SYSTEM_PROMPT)
+        self.assertIn("select_values ONLY when the user explicitly requests property values", SYSTEM_PROMPT)
+        self.assertIn("Never assume that multiple shapes imply a relationship", SYSTEM_PROMPT)
+
+
 if __name__ == "__main__":
     unittest.main()
