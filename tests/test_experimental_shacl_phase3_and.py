@@ -219,3 +219,11 @@ def test_multi_result_not_explicitly_requested_rejected(multi_sample):
         "both EndPoint and PLCEndPoint", "EndPoint")
     with pytest.raises(SelectionContractError, match="not explicitly requested"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_both_results_requested_but_qwen_returns_one_rejected(multi_sample):
+    index, prepared, plan = multi_sample
+    plan["result_id"] = plan.pop("result_ids")[0]
+    plan["result_meaning"] = plan.pop("result_meanings")[0]
+    with pytest.raises(SelectionContractError, match="Result count"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
