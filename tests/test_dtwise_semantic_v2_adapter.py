@@ -58,6 +58,41 @@ class SemanticV2AdapterTests(unittest.TestCase):
         self.assertEqual(plan["operation"], {"type": "group_count", "having_min": 3})
         self.assertEqual(plan["projections"][0]["predicate"], "urn:hasAssetIdentifier")
 
+    def test_multihop_count_selected_terminal_entity(self):
+        second = {"domain": "opc", "shape": "urn:Device",
+                  "display_name": "Device", "properties": ["urn:hasDeviceId"]}
+        self.catalog["entities"].append(second)
+        step = {"kind": "shacl", "predicate": "urn:hasDevice"}
+        self.paths = [{"nodes": [("opc", "urn:SignalMapping"),
+                                  ("opc", "urn:Device")], "steps": [step]}]
+        selection = {**self.selection, "operation": "count",
+                     "projections": [], "count_target": "N1"}
+        with patch("process_sim.dtwise.evidence_path_binding.enumerate_evidenced_paths",
+                   return_value=self.paths):
+            (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["operation"],
+                         {"type": "count", "count_entity": "n1"})
+        self.assertEqual(plan["edges"][0]["predicate"], "urn:hasDevice")
+        self.assertEqual(plan["projections"], [])
+
+    def test_multihop_group_count_selected_terminal_entity(self):
+        second = {"domain": "opc", "shape": "urn:Device",
+                  "display_name": "Device", "properties": ["urn:hasDeviceId"]}
+        self.catalog["entities"].append(second)
+        step = {"kind": "shacl", "predicate": "urn:hasDevice"}
+        self.paths = [{"nodes": [("opc", "urn:SignalMapping"),
+                                  ("opc", "urn:Device")], "steps": [step]}]
+        selection = {**self.selection, "operation": "group_count",
+                     "projections": ["N0P0"], "group_by": ["N0P0"],
+                     "count_target": "N1",
+                     "aggregate_condition": {"operator": "gt", "value": 2}}
+        with patch("process_sim.dtwise.evidence_path_binding.enumerate_evidenced_paths",
+                   return_value=self.paths):
+            (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["operation"],
+                         {"type": "group_count", "count_entity": "n1",
+                          "having_min": 2})
+
     def test_distinct_property_count(self):
         selection = {**self.selection, "operation": "count",
                      "projections": [], "count_target": "N0",
