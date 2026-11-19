@@ -1623,9 +1623,9 @@ def main():
                         help='Experimental lossless SHACL IRI symbol compression')
     parser.add_argument('--experimental-multihop',action='store_true',
                         help='Opt-in evidence-backed LLM multi-hop planner (fails closed)')
-    parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first'],
+    parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first', 'semantic_v2'],
                         default='hybrid',
-                        help='Experimental multihop: hybrid shortcuts or LLM-first evidence selection')
+                        help='Experimental multihop: hybrid, legacy LLM-first, or opt-in semantic v2')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
