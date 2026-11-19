@@ -164,7 +164,7 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                 raise SelectionContractError("Filter values do not match question literals")
             if "result_ids" in plan:
                 question_results = re.search(
-                    r"\\bboth\\s+EndPoint\\s+and\\s+PLCEndPoint\\b",
+                    r"\bboth\s+EndPoint\s+and\s+PLCEndPoint\b",
                     question, flags=re.I)
                 if not question_results:
                     raise SelectionContractError("Multiple results not explicitly requested")
