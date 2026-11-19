@@ -789,6 +789,13 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
         self.assertTrue(plan["return_entities"])
         self.assertEqual(selection["choice"], "VERIFIED_CONNECTED_SUBGRAPH")
 
+    def test_urn_predicate_label_normalization(self):
+        from process_sim.dtwise.experimental_subgraph_selection import _label
+        self.assertEqual(_label("urn:hasAssetIdentifier"), "AssetIdentifier")
+        self.assertEqual(
+            _label("https://example.org/hasProductIdentifier"),
+            "ProductIdentifier")
+
     def test_missing_spoke_rejected(self):
         with self.assertRaisesRegex(ValueError, "spanning tree"):
             self.select(["E0", "E1"])
