@@ -277,7 +277,11 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
         j, predicate = lookup[f['property']]
         bound_filter = {"node_index": j, "predicate": predicate,
                         "op": f['op'], "value": f['value']}
-        if f.get('ignore_case') is True:
+        # Case sensitivity is a user requirement, not an LLM preference.
+        # Preserve a case-folding request, but do not let the model silently
+        # broaden an ordinary substring match to case-insensitive matching.
+        if f.get('ignore_case') is True and re.search(
+                r"\\b(?:ignoring\\s+case|case[- ]insensitive)\\b", question, re.I):
             bound_filter['ignore_case'] = True
     if explicit:
         property_name, literal = explicit[0]
