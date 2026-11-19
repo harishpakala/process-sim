@@ -53,6 +53,7 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
         if keep_alive is not None:
             payload["keep_alive"] = keep_alive
         started = time.perf_counter()
+        raw = "{}"
         try:
             response = request_json(
                 ollama_host.rstrip("/") + "/api/chat", payload, timeout)
@@ -72,7 +73,7 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
             if attempt + 1 == max_attempts:
                 raise ValueError("Semantic selection failed validation: " + reason) from exc
             messages = messages + [
-                {"role": "assistant", "content": raw if "raw" in locals() else "{}"},
+                {"role": "assistant", "content": raw},
                 {"role": "user", "content":
                  "The previous JSON was rejected: " + reason +
                  ". Correct the selection using ONLY the supplied evidence IDs "
