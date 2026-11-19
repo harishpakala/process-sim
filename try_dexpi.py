@@ -109,6 +109,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--phase1-sparql", action="store_true", help="Compile Phase 1 verified RETRIEVE paths to read-only SPARQL (not executed)")
     parser.add_argument("--timing", action="store_true", help="Show stage latency for --phase1-plan")
     parser.add_argument("--phase1-plan", action="store_true", help="Opt-in Qwen intent and qualified path selection (requires --semantic-paths --llm; no SPARQL)")
     parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
@@ -135,6 +136,8 @@ def main() -> None:
     if question is None:
         parser.error("Supply a question for this domain")
 
+    if args.phase1_sparql and not args.phase1_plan:
+        parser.error("--phase1-sparql requires --phase1-plan")
     if args.timing and not args.phase1_plan:
         parser.error("--timing currently requires --phase1-plan")
     t_total = perf_counter()
@@ -186,6 +189,9 @@ def main() -> None:
             if timings is not None:
                 timings["total_ms"] = (perf_counter() - t_total) * 1000
                 result["timing_ms"] = timings
+            if args.phase1_sparql:
+                from process_sim.dtwise.experimental_shacl_phase1_ollama import compile_phase1_sparql
+                result["queries"] = compile_phase1_sparql(result)
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -199,6 +205,13 @@ def main() -> None:
                     print(" ", item["id"] + ".", item["path"])
                 if not result["selected_paths"]:
                     print("  (none)")
+                if args.phase1_sparql:
+                    print("Compiled SPARQL (not executed):")
+                    for item in result["queries"]:
+                        print(" ", item["candidate_id"] + ":")
+                        print(item["sparql"])
+                    if not result["queries"]:
+                        print("  (none)")
                 if timings is not None:
                     print("Timing (ms):")
                     for key, value in timings.items():
