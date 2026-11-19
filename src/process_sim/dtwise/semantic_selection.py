@@ -12,7 +12,7 @@ from .evidence_retrieval import retrieve_evidence
 SYSTEM_PROMPT = (
     "Translate the user question into a compositional semantic query using "
     "ONLY the supplied evidence IDs. Return a JSON object with exactly "
-    "version, scope, operation, projections, where. version='2.0'. "
+    "version, scope, operation, projections, where, optional scope_mode. version='2.0'. "
     "scope is a nonempty list of entity IDs; operation is select_entities, "
     "select_values, or count. projections is a list of property IDs (only "
     "for select_values). where is null or a Boolean expression tree. "
@@ -26,6 +26,9 @@ SYSTEM_PROMPT = (
     "Use select_values ONLY when the user explicitly requests property values "
     "to be returned, such as listing addresses or identifiers. "
     "Use count ONLY for a requested numeric count. "
+    "For unrelated shapes searched independently, set scope_mode='independent' "
+    "only if every selected shape has target_classes evidence. "
+    "Never use independent scope for relationship joins. "
     "Scope contains shapes to search, not shapes to join. "
     "Never assume that multiple shapes imply a relationship or that "
     "SHACL shape membership follows from sharing property predicates. "
@@ -54,7 +57,8 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
     # and compilation still use the full authoritative evidence records.
     prompt_evidence = {
         "entities": [{"id": e["id"], "domain": e["domain"],
-                      "label": e["shape"].rsplit("/", 1)[-1]}
+                      "label": e["shape"].rsplit("/", 1)[-1],
+                      "target_classes": e.get("target_classes", [])}
                      for e in evidence.entities],
         "properties": [{"id": p["id"], "entity_id": p["entity_id"],
                         "label": p["label"]} for p in evidence.properties],
