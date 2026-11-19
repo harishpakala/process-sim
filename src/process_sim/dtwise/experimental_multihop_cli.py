@@ -603,6 +603,20 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     if not anchors:
         raise ValueError('LLM evidence selection requires a named SHACL shape; domain-wide LLM planning is not yet implemented')
 
+    # Two explicitly named shapes: a compact, operation-aware LLM decision
+    # avoids exposing the entire property catalog for entity-return joins.
+    if len(anchors) == 2:
+        from .experimental_relation_selection import select_evidence_relation
+        relation = select_evidence_relation(
+            question, anchors, catalog, index, mappings, model=model,
+            request_json=request_json or _request_json,
+            ollama_host=ollama_host, timeout=timeout,
+            keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics)
+        if relation is not None:
+            plan, selection = relation
+            check_semantic_coverage(plan, question, catalog, mentioned)
+            return plan, selection
+
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
     # "through"/"via"/"using" or entity mentions after "associated with".
