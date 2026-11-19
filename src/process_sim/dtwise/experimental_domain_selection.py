@@ -118,7 +118,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         # A connective alone does not turn a projection request such as
         # "Show ECAD LocalId and Name" into an entity-presence query.
         presence_intent = bool(re.search(
-            r"\\b(?:have|has|having|with|possess|possesses|containing)\\b",
+            r"\b(?:have|has|having|with|possess|possesses|containing)\b",
             question, re.I))
         if not re.search(connective, question, re.I) or not presence_intent:
             if _feedback is None:
