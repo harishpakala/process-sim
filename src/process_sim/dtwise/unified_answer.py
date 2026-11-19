@@ -1686,6 +1686,12 @@ def main():
                 'planning_attempts':locals().get('diagnostics', [])}
     if prompt_diagnostics is not None and 'semantic_v2_stage_timings' in prompt_diagnostics:
         timings.update(prompt_diagnostics['semantic_v2_stage_timings'])
+    if (result['status'] == 'rejected_or_failed' and prompt_diagnostics is not None
+            and 'semantic_v2_attempts' in prompt_diagnostics):
+        result['semantic_v2_attempts'] = prompt_diagnostics['semantic_v2_attempts']
+    if (result['status'] == 'rejected_or_failed' and prompt_diagnostics is not None
+            and 'semantic_v2_retrieval' in prompt_diagnostics):
+        result['semantic_v2_retrieval'] = prompt_diagnostics['semantic_v2_retrieval']
     result['timings']=timings
     output=json.dumps(result,ensure_ascii=False,indent=2)
     if args.output: Path(args.output).write_text(output,encoding='utf-8')
