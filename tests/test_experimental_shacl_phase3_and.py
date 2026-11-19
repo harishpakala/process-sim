@@ -79,6 +79,7 @@ def test_invented_literal_rejected(sample):
 def test_descendant_filter_rejected(sample):
     index, prepared, plan = sample
     plan["result_id"] = plan["filters"][0]["filter_id"]
+    plan["result_meaning"] = "Device.LocalId"
     with pytest.raises(SelectionContractError, match="Filter owner"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
 
