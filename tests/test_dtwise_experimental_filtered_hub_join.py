@@ -769,11 +769,11 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
              "right_property": "urn:hasAssetIdentifier"}
             for i, (d, _) in enumerate(self.nodes[1:])]
 
-    def select(self, ids):
+    def select(self, tree_id="TREE_0"):
         import json
         from process_sim.dtwise.experimental_subgraph_selection import (
             select_evidence_subgraph)
-        response = {"message": {"content": json.dumps({"edge_ids": ids})}}
+        response = {"message": {"content": json.dumps({"tree_id": tree_id})}}
         with patch("process_sim.dtwise.experimental_subgraph_selection.resolve_shapes",
                    side_effect=lambda plan, index, mappings: plan):
             return select_evidence_subgraph(
@@ -783,7 +783,7 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
                 ollama_host="http://localhost", timeout=1)
 
     def test_verified_spanning_tree_generates_four_entity_ir(self):
-        plan, selection = self.select(["E0", "E1", "E2"])
+        plan, selection = self.select()
         self.assertEqual(len(plan["entities"]), 4)
         self.assertEqual(len(plan["edges"]), 3)
         self.assertTrue(plan["return_entities"])
@@ -801,8 +801,8 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
         from process_sim.dtwise.experimental_subgraph_selection import (
             select_evidence_subgraph)
         responses = iter([
-            {"message": {"content": json.dumps({"edge_ids": ["E0", "E1"]})}},
-            {"message": {"content": json.dumps({"edge_ids": ["E0", "E1", "E2"]})}},
+            {"message": {"content": json.dumps({"tree_id": "TREE_99"})}},
+            {"message": {"content": json.dumps({"tree_id": "TREE_0"})}},
         ])
         requests = []
         def fake_request(url, payload, timeout):
@@ -817,16 +817,27 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
                 ollama_host="http://localhost", timeout=1)
         self.assertEqual(len(plan["edges"]), 3)
         self.assertEqual(len(requests), 2)
-        self.assertIn("exactly 3 verified edges",
-                      requests[1][-1]["content"])
+        self.assertIn("Unknown verified tree ID", requests[1][-1]["content"])
 
     def test_missing_spoke_rejected(self):
-        with self.assertRaisesRegex(ValueError, "spanning tree"):
-            self.select(["E0", "E1"])
+        self.mappings.pop()
+        with self.assertRaisesRegex(ValueError, "No verified spanning tree"):
+            self.select()
 
-    def test_invented_edge_rejected(self):
-        with self.assertRaisesRegex(ValueError, "Unknown or repeated"):
-            self.select(["E0", "E1", "E99"])
+    def test_invented_tree_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unknown verified tree ID"):
+            self.select("TREE_99")
+
+    def test_cyclic_edge_candidates_still_yield_valid_trees(self):
+        self.mappings.append({
+            "id": "extra", "verified": True, "evidence_ids": ["ev"],
+            "left_domain": "LeafA", "right_domain": "LeafB",
+            "left_property": "urn:hasAssetIdentifier",
+            "right_property": "urn:hasAssetIdentifier",
+        })
+        plan, _ = self.select()
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertEqual(len({x["alias"] for x in plan["entities"]}), 4)
 
 
 if __name__ == "__main__":
