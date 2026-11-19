@@ -52,14 +52,22 @@ def infer_domain_from_shapes(question, domains, schema):
             if not isinstance(label, str) or not label.strip() or "shacl shape" in label.casefold():
                 continue
             labels.setdefault(label.casefold(), set()).add(domain)
-    hits = set()
+    unique_hits = set()
+    shared_hits = set()
     for label, owners in labels.items():
         if re.search(r"(?<![A-Za-z0-9_])" + re.escape(label) + r"(?![A-Za-z0-9_])",
                      question, re.IGNORECASE):
-            hits.update(owners)
-    if len(hits) > 1:
-        raise DomainResolutionError("Ambiguous schema-domain evidence: " + ", ".join(sorted(hits)))
-    if not hits:
+            if len(owners) == 1:
+                unique_hits.update(owners)
+            else:
+                shared_hits.update(owners)
+    if len(unique_hits) > 1:
         raise DomainResolutionError(
-            "Domain unresolved: no indexed NodeShape evidence; use --domain")
-    return next(iter(hits))
+            "Ambiguous schema-domain evidence: " + ", ".join(sorted(unique_hits)))
+    if len(unique_hits) == 1:
+        return next(iter(unique_hits))
+    if shared_hits:
+        raise DomainResolutionError(
+            "Ambiguous schema-domain evidence: " + ", ".join(sorted(shared_hits)))
+    raise DomainResolutionError(
+        "Domain unresolved: no indexed NodeShape evidence; use --domain")
