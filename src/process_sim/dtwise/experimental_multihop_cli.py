@@ -309,7 +309,7 @@ def _plan_filtered_cross_domain_lookup(question, catalog, mappings, anchors,
 
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
-                               request_json=None):
+                               request_json=None, prompt_diagnostics=None):
     """One LLM selection for zero-edge, direct, and multi-hop evidence."""
     from .experimental_evidence_selection import select_evidence_plan
 
@@ -429,6 +429,7 @@ def plan_experimental_multihop(question, index, mappings, *, model,
     plan, selection = select_evidence_plan(
         question, paths, catalog, index, mappings, model=model,
         request_json=request_json or _request_json,
-        ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive)
+        ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
+        prompt_diagnostics=prompt_diagnostics)
     check_semantic_coverage(plan, question, catalog, mentioned)
     return plan, selection
