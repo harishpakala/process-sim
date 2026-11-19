@@ -42,12 +42,15 @@ def validated_join_intent(plan, qualified):
 import json
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.experimental_shacl_graph_evidence import graph_evidence
 from process_sim.dtwise.experimental_shacl_phase4_and_join import (
     compile_phase4_and_join_sparql,
 )
 
 DIRECT_INTENT_PROMPT = """Propose a structured ECAD read-only SELECT intent.
 Use ONLY supplied SHACL-qualified property candidate IDs.
+Use the supplied directed SHACL subgraph nodes, edges, and property predicates
+to reason about common ancestors and filter ownership. Do not invent edges.
 For the two requested Address results joined on the SAME Device and
 Device LocalId AND DeviceType equality filters, return ONLY JSON:
 domain: "ecad", operation: "select",
@@ -120,6 +123,7 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
     prompt = {**qualified["prompt"], "candidates": [
         c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
     ]}
+    prompt["shacl_subgraph"] = graph_evidence(qualified)
     raw = ollama_select(prompt, model=model, endpoint=endpoint,
                         transport=transport, system_prompt=DIRECT_INTENT_PROMPT)
     if raw.strip() == "null":
