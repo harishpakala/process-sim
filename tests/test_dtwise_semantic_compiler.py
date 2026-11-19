@@ -8,8 +8,8 @@ from process_sim.dtwise.semantic_compiler import compile_semantic_plan
 class SemanticCompilerTests(unittest.TestCase):
     def setUp(self):
         self.evidence = build_evidence_catalog({"entities": [{
-            "domain": "ECAD", "shape": "urn:Device",
-            "properties": ["urn:hasAddress", "urn:hasLocalId"],
+            "domain": "ECAD", "shape": "https://example.org/Device",
+            "properties": ["https://example.org/hasAddress", "https://example.org/hasLocalId"],
         }], "shacl_edges": []})
         self.entity = self.evidence.entities[0]["id"]
         self.props = {p["label"]: p["id"] for p in self.evidence.properties}
@@ -32,7 +32,7 @@ class SemanticCompilerTests(unittest.TestCase):
         self.assertIn("GRAPH ?g_", query)
         self.assertIn(" UNION ", query)
         self.assertIn("FILTER NOT EXISTS", query)
-        self.assertIn("urn:hasLocalId", query)
+        self.assertIn("https://example.org/hasLocalId", query)
 
     def test_projection_and_count(self):
         query = compile_semantic_plan(
@@ -60,10 +60,10 @@ class SemanticCompilerTests(unittest.TestCase):
 
     def test_multi_entity_requires_explicit_join(self):
         second = build_evidence_catalog({"entities": [
-            {"domain": "ECAD", "shape": "urn:Device",
-             "properties": ["urn:hasAddress"]},
-            {"domain": "ECAD", "shape": "urn:Other",
-             "properties": ["urn:hasLocalId"]},
+            {"domain": "ECAD", "shape": "https://example.org/Device",
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/Other",
+             "properties": ["https://example.org/hasLocalId"]},
         ], "shacl_edges": []})
         plan = {"version": "2.0", "scope": [e["id"] for e in second.entities],
                 "operation": "select_entities", "projections": [], "where": None}
