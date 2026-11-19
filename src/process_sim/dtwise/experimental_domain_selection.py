@@ -1,4 +1,4 @@
-"""LLM-first selection of domain-wide, SHACL-owned regex evidence."""
+"""LLM-first selection of domain-wide, SHACL-owned property evidence."""
 import json
 import re
 import time
@@ -8,7 +8,7 @@ from .experimental_evidence_selection import _label, _write_prompt_diagnostics
 
 def select_domain_regex_plan(question, catalog, *, model, request_json,
                              ollama_host, timeout, keep_alive=None,
-                             prompt_diagnostics=None):
+                             prompt_diagnostics=None, _feedback=None):
     # Candidate discovery uses explicit domain names, not question templates.
     domains = sorted({e["domain"] for e in catalog["entities"]})
     named = [d for d in domains if re.search(
@@ -43,7 +43,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         "messages": [
             {"role": "system", "content":
              "Interpret a domain-wide query using only listed SHACL property "
-             "evidence. Return JSON with exactly operation, property_id, property_ids, pattern. "
+             "evidence. For conjunctions (AND, both, every property) choose has_all_properties; for disjunctions (OR, either) choose has_any_properties. Return JSON with exactly operation, property_id, property_ids, pattern. 
              "operation is 'regex', 'has_all_properties', 'has_any_properties', or 'unsupported'. For regex, select a listed "
              "property ID and copy the exact regex pattern from the question "
              "without modifying it. For has_all_properties or has_any_properties, select two distinct listed property IDs in property_ids and set property_id and pattern to null. For regex, set property_ids to null. Do not generate SPARQL. For any other "
@@ -55,6 +55,16 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
                                for x in choices]}, separators=(",", ":"))},
         ],
     }
+    if _feedback is not None:
+        payload["messages"].append({
+            "role": "system",
+            "content": "Your previous selection failed validation: " + _feedback
+            + ". Re-read the user question and choose the correct operation "
+              "from the supported vocabulary. AND means every selected "
+              "property must exist on the entity; OR means at least one "
+              "selected property must exist. Do not choose regex unless the "
+              "question explicitly requests a regular expression. "
+              "Keep the selected property IDs grounded in the supplied list."})
     if keep_alive is not None:
         payload["keep_alive"] = keep_alive
     if prompt_diagnostics is not None:
@@ -106,6 +116,12 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         connective = (r"\b(?:both|all)\b" if choice["operation"] == "has_all_properties"
                       else r"\b(?:or|either)\b")
         if not re.search(connective, question, re.I):
+            if _feedback is None:
+                return select_domain_regex_plan(
+                    question, catalog, model=model, request_json=request_json,
+                    ollama_host=ollama_host, timeout=timeout,
+                    keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics,
+                    _feedback="Selected Boolean operation contradicts the question")
             raise ValueError("Unrequested domain property Boolean operation")
         plan = {
             "ir_version": "1.0", "entities": [], "edges": [],
@@ -132,6 +148,12 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
     expression = re.search(
         r"\bregular\s+expression\s+(.+?)\s*$", question, re.I)
     if expression is None:
+        if _feedback is None:
+            return select_domain_regex_plan(
+                question, catalog, model=model, request_json=request_json,
+                ollama_host=ollama_host, timeout=timeout,
+                keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics,
+                _feedback="Regex selected although no regular expression was requested")
         raise ValueError("Cannot identify an explicit regular expression")
     requested = expression.group(1).strip()
     if requested.endswith("?") and requested.count("?") == 1:
