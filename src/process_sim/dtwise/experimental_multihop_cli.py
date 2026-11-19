@@ -4,7 +4,6 @@ Fails closed when endpoints, requirements or path selection are ambiguous.
 The default generate_ir planner is not modified.
 """
 import re
-import time
 
 from .experimental_semantic_grounding import plan_single_shape_semantic
 from .evidence_path_binding import bind_evidenced_path
@@ -526,66 +525,13 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                                request_json=None, prompt_diagnostics=None,
                                planning_mode='hybrid'):
     """Plan using LLM evidence selection or opt-in legacy template shortcuts."""
-    if planning_mode not in ('hybrid', 'llm_first', 'semantic_v2'):
+    if planning_mode not in ('hybrid', 'llm_first'):
         raise ValueError('Unsupported experimental planning mode')
     from .experimental_evidence_selection import select_evidence_plan
 
     # Keep the full catalog for cross-domain target discovery. A question may
     # name DEXPI explicitly while requesting a property owned by OPCUA.
     catalog = catalog_from_schema(index)
-    if planning_mode == 'semantic_v2':
-        # No question-text regex or deterministic NL interpretation in this
-        # branch: the LLM chooses among SHACL-evidenced path candidates.
-        from .semantic_v2_adapter import select_and_bind_v2
-        from .semantic_v2_retrieval import retrieve_shape_nodes
-        stage_times = {}
-        stage_start = time.perf_counter()
-        try:
-            nodes = retrieve_shape_nodes(
-            question, catalog, model=model,
-            request_json=request_json or _request_json,
-            ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
-            diagnostics=prompt_diagnostics)
-        finally:
-            stage_times['shape_retrieval_seconds'] = round(time.perf_counter() - stage_start, 3)
-            if prompt_diagnostics is not None:
-                prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
-        stage_start = time.perf_counter()
-        paths = [{"nodes": [node], "steps": []} for node in nodes]
-        if len(paths) > 32:
-            raise ValueError(
-                "Semantic v2 candidate limit exceeded; narrow the evidence catalog")
-        seen = {(tuple(path["nodes"]), ()) for path in paths}
-        for source in nodes:
-            for target in nodes:
-                if source == target:
-                    continue
-                for path in enumerate_evidenced_paths(
-                        catalog, mappings, source, target,
-                        max_hops=4, max_paths=33):
-                    signature = (tuple(path["nodes"]), tuple(
-                        tuple(sorted(step.items())) for step in path["steps"]))
-                    if signature not in seen:
-                        seen.add(signature)
-                        paths.append(path)
-                    if len(paths) > 32:
-                        raise ValueError(
-                            "Semantic v2 candidate limit exceeded; "
-                            "narrow the evidence catalog")
-        stage_times['path_enumeration_seconds'] = round(time.perf_counter() - stage_start, 3)
-        if prompt_diagnostics is not None:
-            prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
-        stage_start = time.perf_counter()
-        try:
-            return select_and_bind_v2(
-                question, paths, catalog, index, mappings, model=model,
-                request_json=request_json or _request_json,
-                ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
-                diagnostics=prompt_diagnostics)
-        finally:
-            stage_times['semantic_selection_seconds'] = round(time.perf_counter() - stage_start, 3)
-            if prompt_diagnostics is not None:
-                prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
     _, mentioned = _focused_catalog(catalog, question)
 
     def mentioned_name(name):
