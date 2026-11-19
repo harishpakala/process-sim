@@ -182,15 +182,24 @@ def run(test, args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, default=Path("shacl-integration-report.json"))
+    parser.add_argument("--case", action="append", choices=[c["name"] for c in CASES],
+                        help="Run only this named query (repeat to select multiple); default: all")
+    parser.add_argument("--list-cases", action="store_true",
+                        help="Print all registered integration queries without running Ollama")
     parser.add_argument("--model", default="qwen2.5-coder:7b")
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument("--timeout", type=float, default=240, help="Per-query timeout (seconds)")
     args = parser.parse_args()
+    if args.list_cases:
+        for test in CASES:
+            print(f"{test['name']}: [{test['mode']}] {test['question']}")
+        return 0
+    selected_cases = [test for test in CASES if not args.case or test["name"] in args.case]
     started = perf_counter()
     results = []
     print("SHACL planner live integration baseline (SPARQL compilation only)", flush=True)
-    for test in CASES:
+    for test in selected_cases:
         print(f"\nQUERY [{test['name']}]: {test['question']}", flush=True)
         outcome = run(test, args)
         outcome["query"] = test["question"]
