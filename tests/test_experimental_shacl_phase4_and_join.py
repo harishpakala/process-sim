@@ -148,3 +148,36 @@ def test_alternate_unsupported_abstains(sample, question):
         index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
     assert result["plan"]["status"] == "unresolved"
     assert compile_phase4_and_join_sparql(result) is None
+
+
+# Phase 5.4 structured intent is derived only from independently verified plans.
+def test_selected_plan_has_verified_structured_intent(sample):
+    index, prepared, plan = sample
+    result = run_phase4_and_join_plan(index, prepared, transport=transport(plan))
+    intent = result["intent"]
+    assert intent["domain"] == "ecad"
+    assert intent["operation"] == "select"
+    assert intent["result_property_ids"] == plan["result_ids"]
+    assert intent["join"] == {"kind": "shared_ancestor", "owner": "Device"}
+    assert intent["boolean_operator"] == "and"
+    assert [f["value"] for f in intent["filters"]] == ["FI_101", "Sensor"]
+    assert [f["property_id"] for f in intent["filters"]] == [
+        f["filter_id"] for f in plan["filters"]]
+
+
+def test_unresolved_plan_has_no_intent(sample):
+    index, prepared, _ = sample
+    prepared["prompt"]["question"] = "Show Address"
+    result = run_phase4_and_join_plan(
+        index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
+    assert result["plan"]["status"] == "unresolved"
+    assert result["intent"] is None
+
+
+def test_intent_rejects_fabricated_filter_value(sample):
+    from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
+    index, prepared, plan = sample
+    qualified = qualify_candidates(index, prepared)
+    plan["filters"][0]["value"] = "FI_999"
+    with pytest.raises(SelectionContractError, match="contradict"):
+        validated_join_intent(plan, qualified)
