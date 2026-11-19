@@ -375,3 +375,65 @@ def test_llm_selection_contract_rejects_registry_mismatch():
             {"status": "selected", "selected_candidate_ids": ["C2"], "reason": "test"},
             prepared,
         )
+
+
+def test_ollama_pipeline_selects_verified_ecad_path_without_network():
+    import json
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+
+    calls = []
+    def fake_transport(url, payload, timeout):
+        calls.append((url, payload))
+        return {"message": {"content": json.dumps({
+            "status": "selected", "selected_candidate_ids": ["C1"],
+            "reason": "Device EndPoint path",
+        })}}
+
+    result = run_local_selection(
+        _domain_index("ecad"), "Show Address in ECAD", transport=fake_transport,
+    )
+    assert result["selection"]["status"] == "selected"
+    assert result["selected_paths"][0]["path"] == "ECAD → Device → EndPoint → Address"
+    assert len(result["selected_paths"][0]["verified"]["edges"]) == 2
+    assert calls[0][0].endswith("/api/chat")
+    assert calls[0][1]["model"] == "qwen2.5-coder:7b"
+    assert calls[0][1]["options"]["temperature"] == 0
+    assert len(json.loads(calls[0][1]["messages"][1]["content"])["candidates"]) == 4
+
+
+def test_ollama_pipeline_preserves_ambiguous_response():
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+
+    def fake_transport(url, payload, timeout):
+        return {"message": {"content": '{"status":"ambiguous","selected_candidate_ids":[],"reason":"Four paths"}'}}
+    result = run_local_selection(
+        _domain_index("ecad"), "Show Address in ECAD", transport=fake_transport,
+    )
+    assert result["selection"]["status"] == "ambiguous"
+    assert result["selected_paths"] == []
+
+
+def test_ollama_pipeline_rejects_hallucinated_ids():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+    from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
+
+    def fake_transport(url, payload, timeout):
+        return {"message": {"content": '{"status":"selected","selected_candidate_ids":["C999"],"reason":"guess"}'}}
+    with pytest.raises(SelectionContractError, match="Unknown candidate"):
+        run_local_selection(
+            _domain_index("ecad"), "Show Address in ECAD", transport=fake_transport,
+        )
+
+
+def test_ollama_pipeline_no_candidates_skips_model():
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+
+    def forbidden_transport(url, payload, timeout):
+        raise AssertionError("Ollama should not be called")
+    result = run_local_selection(
+        _domain_index("ecad"), "Question with no schema labels",
+        transport=forbidden_transport,
+    )
+    assert result["selection"]["status"] == "unresolved"
+    assert result["selected_paths"] == []
