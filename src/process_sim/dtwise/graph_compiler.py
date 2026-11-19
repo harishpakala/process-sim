@@ -18,6 +18,22 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         raise ValueError('Graph provenance requires all_named')
     if limit is not None and (type(limit) is not int or not 1 <= limit <= 10000):
         raise ValueError('Invalid operational limit')
+    domain_both = ir.get('domain_both_properties')
+    if domain_both is not None:
+        if include_graph:
+            raise ValueError('Domain both-properties lookup does not support provenance')
+        groups = []
+        for side, paths in enumerate(domain_both['paths']):
+            alternatives = []
+            for shape, predicate in paths:
+                triple = f'?entity {_iri(predicate)} ?present_{side} .'
+                if graph_mode == 'all_named':
+                    triple = f'GRAPH ?property_graph_{side} {{ ' + triple + ' }'
+                elif graph_mode == 'selected':
+                    triple = 'GRAPH ' + fixed + ' { ' + triple + ' }'
+                alternatives.append('{ ' + triple + ' }')
+            groups.append('{ ' + ' UNION '.join(alternatives) + ' }')
+        return 'SELECT DISTINCT ?entity\nWHERE {\n  ' + '\n  '.join(groups) + '\n}'
     domain_regex = ir.get('domain_regex')
     if domain_regex is not None:
         if include_graph:
