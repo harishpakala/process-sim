@@ -169,17 +169,18 @@ def ecad_address_paths():
     return index, prepared
 
 
-def test_explicit_endpoint_rejects_plc_sibling_even_when_qwen_selects_both(ecad_address_paths):
+def test_explicit_endpoint_qwen_selects_one_with_both_offered(ecad_address_paths):
     index, prepared = ecad_address_paths
     prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
     # IDs are ordered by the verified shape URI, EndPoint before PLCEndPoint.
     result = run_phase1_query_plan(
         index, prepared, transport=mocked(response(ids=["P1"]), check=lambda prompt: (
-            len(prompt["candidates"]) == 1 or pytest.fail("Unexpected sibling offered"))))
+            len(prompt["candidates"]) == 2 or pytest.fail("Both verified paths must be offered"))))
     assert [p["path"] for p in result["selected_paths"]] == [
         "ECAD → Device → EndPoint → Address"
     ]
     assert result["plan"]["selected_candidate_ids"] == ["P1"]
+
 
 
 def test_explicit_both_endpoint_owners_keeps_both(ecad_address_paths):
@@ -220,3 +221,15 @@ def test_synonym_without_exact_shape_name_remains_selectable(ecad_address_paths)
     result = run_phase1_query_plan(
         index, prepared, transport=mocked(response(ids=["P1"])))
     assert result["plan"]["status"] == "selected"
+
+
+def test_structural_validator_does_not_guess_semantics(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
+    # A mocked wrong semantic choice is structurally valid; this test makes
+    # the responsibility boundary explicit. Live Qwen evaluation is separate.
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1", "P2"]),
+                                         check=lambda prompt: (
+            len(prompt["candidates"]) == 2 or pytest.fail("Missing sibling"))))
+    assert result["plan"]["selected_candidate_ids"] == ["P1", "P2"]
