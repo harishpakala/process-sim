@@ -113,7 +113,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
                 raise ValueError("Invented all-properties evidence ID")
             selected_properties.append(selected)
         # Cross-check the selected Boolean semantics against the user's wording.
-        connective = (r"\b(?:both|all)\b" if choice["operation"] == "has_all_properties"
+        connective = (r"\b(?:and|both|all)\b" if choice["operation"] == "has_all_properties"
                       else r"\b(?:or|either)\b")
         if not re.search(connective, question, re.I):
             if _feedback is None:
@@ -122,7 +122,8 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
                     ollama_host=ollama_host, timeout=timeout,
                     keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics,
                     _feedback="Selected Boolean operation contradicts the question")
-            raise ValueError("Unrequested domain property Boolean operation")
+            raise ValueError("Unrequested domain property Boolean operation: LLM selected "
+                             + choice["operation"] + " for question " + repr(question))
         plan = {
             "ir_version": "1.0", "entities": [], "edges": [],
             "projections": [], "filters": None,
