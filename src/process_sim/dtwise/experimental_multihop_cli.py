@@ -31,6 +31,44 @@ def _single_shape_property(entity, name):
     return matches[0]
 
 
+def _plan_named_substring_lookup(question, catalog, mentioned, anchors,
+                                 index, mappings):
+    """Ground an explicitly named shape and substring property without an LLM."""
+    match = re.fullmatch(
+        r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+a\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+containing\s+"
+        r"([A-Za-z0-9][A-Za-z0-9_-]*)\s*\?\s*", question, re.I)
+    if not match:
+        return None
+    domain, label, property_name, literal = match.groups()
+    matches = [e for e in catalog["entities"]
+               if e["domain"].casefold() == domain.casefold()
+               and e.get("display_name", "").casefold() == label.casefold()]
+    if len(matches) != 1:
+        raise ValueError("Substring lookup requires one named SHACL shape")
+    entity = matches[0]
+    anchor = (entity["domain"], entity["shape"])
+    if set(anchors) != {anchor}:
+        raise ValueError("Substring lookup requires one unambiguous named shape")
+    predicate = _single_shape_property(entity, property_name)
+    plan = {
+        "ir_version": "1.0",
+        "entities": [{"alias": "n0", "domain": anchor[0], "shape": anchor[1]}],
+        "edges": [],
+        "projections": [{"entity": "n0", "predicate": predicate,
+                         "as": "value_0"}],
+        "filters": {"op": "contains", "entity": "n0",
+                    "predicate": predicate, "value": literal},
+        "operation": {"type": "select"},
+        "return_entities": True,
+    }
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded",
+        "choice": "VERIFIED_NAMED_SUBSTRING_LOOKUP"}
+
+
 def _plan_single_shape_lookup(question, catalog, mentioned, anchor, index,
                               mappings):
     """Opt-in zero-edge SELECT with an optional explicit equality filter.
@@ -440,6 +478,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                 anchors.append(node)
     if not anchors:
         raise ValueError("Experimental planner requires a named SHACL shape")
+    substring = _plan_named_substring_lookup(
+        question, catalog, mentioned, anchors, index, mappings)
+    if substring is not None:
+        return substring
+
     anti_join = _plan_named_identifier_anti_join(
         question, catalog, mappings, anchors, mentioned, index)
     if anti_join is not None:
