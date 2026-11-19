@@ -109,6 +109,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--phase4-filtered-join", action="store_true", help="Opt-in same-Device ECAD Address join with one Device.LocalId equality; compile only")
     parser.add_argument("--phase4-join", action="store_true", help="Opt-in same-Device ECAD sibling Address join; compile only")
     parser.add_argument("--phase3-and", action="store_true", help="Opt-in RETRIEVE with two AND string equality filters; compile only")
     parser.add_argument("--phase2-filter", action="store_true", help="Opt-in RETRIEVE with one string equality filter; compile SPARQL only")
@@ -139,11 +140,13 @@ def main() -> None:
     if question is None:
         parser.error("Supply a question for this domain")
 
-    if args.phase4_join and (not args.semantic_paths or not args.llm or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
+    if args.phase4_filtered_join and (not args.semantic_paths or not args.llm or args.phase4_join or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
+        parser.error("--phase4-filtered-join requires --semantic-paths --llm and excludes other plan/SPARQL modes")
+    if args.phase4_join and (not args.semantic_paths or not args.llm or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase4_filtered_join):
         parser.error("--phase4-join requires --semantic-paths --llm and excludes other plan/SPARQL modes")
-    if args.phase3_and and (not args.semantic_paths or not args.llm or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase4_join):
+    if args.phase3_and and (not args.semantic_paths or not args.llm or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase4_join or args.phase4_filtered_join):
         parser.error("--phase3-and requires --semantic-paths --llm and excludes other plan/SPARQL modes")
-    if args.phase2_filter and (not args.semantic_paths or not args.llm or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase3_and or args.phase4_join):
+    if args.phase2_filter and (not args.semantic_paths or not args.llm or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase3_and or args.phase4_join or args.phase4_filtered_join):
         parser.error("--phase2-filter requires --semantic-paths --llm and excludes other plan/SPARQL modes")
     if args.phase1_sparql and not args.phase1_plan:
         parser.error("--phase1-sparql requires --phase1-plan")
@@ -187,13 +190,29 @@ def main() -> None:
             return
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         t_retrieval = perf_counter()
-        prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if (args.phase2_filter or args.phase4_join) else args.top_k,
-                                       top_properties=8 if (args.phase2_filter or args.phase3_and or args.phase4_join) else 2,
-                                       max_candidates=128 if (args.phase2_filter or args.phase3_and or args.phase4_join) else 64,
+        prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if (args.phase2_filter or args.phase4_join or args.phase4_filtered_join) else args.top_k,
+                                       top_properties=8 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join) else 2,
+                                       max_candidates=128 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join) else 64,
                                        model=args.embed_model, endpoint=args.ollama_url)
         if timings is not None:
             timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
-        if args.phase4_join:
+        if args.phase4_filtered_join:
+            from process_sim.dtwise.experimental_shacl_phase4_filtered_join import (
+                run_phase4_filtered_join_plan, compile_phase4_filtered_join_sparql,
+            )
+            result = run_phase4_filtered_join_plan(index, prepared, model=args.model,
+                                                   endpoint=args.ollama_url)
+            result["sparql"] = compile_phase4_filtered_join_sparql(result)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status:", result["plan"]["status"].upper())
+                print("Reason:", result["plan"]["reason"])
+                print("Compiled SPARQL (not executed):")
+                print(result["sparql"] or "  (none)")
+        elif args.phase4_join:
             from process_sim.dtwise.experimental_shacl_phase4_join import (
                 run_phase4_join_plan, compile_phase4_join_sparql,
             )
