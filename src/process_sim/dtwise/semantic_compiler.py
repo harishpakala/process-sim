@@ -79,8 +79,8 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
     # A property-presence pattern establishes the entity binding without
     # inferring rdf:type from a SHACL node shape. This is a broad SHACL-backed
     # candidate universe, not a type assertion.
-    eligible = sorted(p for p in evidence.properties
-                      if p["entity_id"] == entity_id)
+    eligible = sorted((p for p in evidence.properties
+                       if p["entity_id"] == entity_id), key=lambda p: p["id"])
     if not eligible:
         raise ValueError("Selected entity has no SHACL property evidence")
     anchors = []
