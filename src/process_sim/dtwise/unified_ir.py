@@ -128,6 +128,22 @@ def validate_ir(ir, schema, *, mappings=None):
                 seen.add(neighbor); pending.append(neighbor)
     if seen != set(nodes):
         raise ValueError('Disconnected query graph: no Cartesian products allowed')
+    anti = ir.get('anti_join')
+    if anti is not None:
+        if (not isinstance(anti, dict) or set(anti) != {'from', 'to'}
+                or len(nodes) != 2 or len(edges) != 1
+                or edges[0].get('kind') != 'mapping'
+                or anti['from'] != edges[0]['from']
+                or anti['to'] != edges[0]['to']):
+            raise ValueError('Anti-join requires one verified directed mapping edge')
+        if ir.get('filters') is not None or ir.get('projections'):
+            raise ValueError('Anti-join does not support filters or projections')
+        if ir.get('operation', {'type': 'select'}).get('type') != 'select':
+            raise ValueError('Anti-join requires SELECT')
+        if ir.get('return_entities') is not True:
+            raise ValueError('Anti-join requires return_entities=true')
+        if ir.get('order_by') or ir.get('result_limit') is not None:
+            raise ValueError('Anti-join does not support sorting or pagination')
     projections = ir.get('projections', [])
     if not isinstance(projections, list) or len(projections) > 24:
         raise ValueError('Invalid projection list')
