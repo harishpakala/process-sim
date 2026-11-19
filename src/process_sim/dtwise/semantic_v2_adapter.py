@@ -61,7 +61,7 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
     # Only translate semantics supported exactly by the existing compiler.
     condition = selected["aggregate_condition"]
     if (selected.get("optional_properties", [])
-            or selected.get("distinct", False)
+            or (selected.get("distinct", False) and not selected.get("count_property"))
             or (condition is not None and condition["operator"] != "gt")
             or any(f["op"] != "eq" for f in selected["filters"])
             or len(selected["filters"]) > 1):
@@ -102,6 +102,17 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             "operation": {"type": "select"},
             "return_entities": False,
         }
+    count_property = selected.get("count_property")
+    if count_property is not None:
+        if selected["operation"] != "count" or not selected.get("distinct", False):
+            raise ValueError("Invalid distinct count semantics")
+        match = re.fullmatch(r"N(\d+)P(\d+)", count_property)
+        if match is None:
+            raise ValueError("Invalid distinct count property ID")
+        j, k = map(int, match.groups())
+        predicate = owners[tuple(path["nodes"][j])]["properties"][k]
+        plan["count_distinct_property"] = {
+            "entity": f"n{j}", "predicate": predicate}
     op = selected["operation"]
     plan["operation"] = {"type": op}
     if op == "group_count" and condition is not None:
