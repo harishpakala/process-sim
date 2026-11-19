@@ -85,6 +85,19 @@ def validate_semantic_plan(plan: dict, evidence: EvidenceCatalog) -> dict:
         raise ValueError("Invented entity evidence ID")
     if len(set(scope)) != len(scope):
         raise ValueError("Duplicate entity evidence ID")
+    if len(scope) > 1 and plan.get("scope_mode") != "independent":
+        raise ValueError(
+            "Multi-shape scope requires explicit scope_mode='independent' "
+            "for unrelated alternatives; otherwise supply one shape. "
+            "Never infer a relationship join.")
+    if plan.get("scope_mode") == "independent" and len(scope) > 1:
+        missing = [entity_id for entity_id in scope
+                   if not entities[entity_id].get("target_classes")]
+        if missing:
+            raise ValueError(
+                "Independent scope requires verified targetClass evidence "
+                "for every shape; missing: " + repr(missing))
+
     if plan["operation"] not in ("select_entities", "select_values", "count"):
         raise ValueError("Unsupported semantic operation")
     projections = plan["projections"]
