@@ -58,6 +58,22 @@ class SemanticV2AdapterTests(unittest.TestCase):
         self.assertEqual(plan["operation"], {"type": "group_count", "having_min": 3})
         self.assertEqual(plan["projections"][0]["predicate"], "urn:hasAssetIdentifier")
 
+    def test_distinct_property_count(self):
+        selection = {**self.selection, "operation": "count",
+                     "projections": [], "count_target": "N0",
+                     "distinct": True, "count_property": "N0P1"}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["operation"], {"type": "count"})
+        self.assertEqual(plan["count_distinct_property"], {
+            "entity": "n0", "predicate": "urn:hasSignalName"})
+
+    def test_distinct_count_requires_evidenced_property(self):
+        selection = {**self.selection, "operation": "count",
+                     "projections": [], "count_target": "N0",
+                     "distinct": True, "count_property": "N0P99"}
+        with self.assertRaisesRegex(ValueError, "after two attempts"):
+            self.run_plan(selection)
+
     def test_literal_equality_filter(self):
         selection = {**self.selection, "filters": [
             {"property": "N0P0", "op": "eq", "value": "FI103"}]}
