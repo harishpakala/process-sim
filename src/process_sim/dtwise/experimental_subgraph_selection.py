@@ -72,7 +72,7 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
         if requested is None or (left in requested and right in requested):
             eligible.append(edge)
 
-    trees = []
+    trees = set()
     limit = 64
 
     def enumerate_trees(selected, visited, keys):
@@ -80,7 +80,8 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
             return
         if len(visited) == len(nodes):
             if requested is None or requested.issubset(keys):
-                trees.append(tuple(e["id"] for e in selected))
+                trees.add(tuple(sorted((e["id"] for e in selected),
+                                       key=lambda x: int(x[1:]))))
             return
         for edge in eligible:
             a, b = edge["from"], edge["to"]
@@ -96,11 +97,9 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
             if len(trees) >= limit:
                 return
 
-    # Each tree is discovered from its lowest indexed starting node.
     # Deduplicate traversal orders before exposing alternatives to the LLM.
     enumerate_trees([], {0}, set())
-    unique = sorted(set(tuple(sorted(t, key=lambda x: int(x[1:])))
-                        for t in trees))
+    unique = sorted(trees)
     if not unique:
         raise ValueError(
             "No verified spanning tree covers all named shapes and requested join keys")
