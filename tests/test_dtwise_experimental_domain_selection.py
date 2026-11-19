@@ -51,6 +51,23 @@ class DomainRegexSelectionTests(unittest.TestCase):
             self.select("ECAD LocalId matches PI-", {
                 "operation": "regex", "property_id": "P0", "pattern": "PI-"})
 
+    def test_two_required_properties_across_domain(self):
+        result, _ = self.select(
+            "Which ECAD entities have both LocalId and Name?",
+            {"operation": "has_all_properties", "property_id": None,
+             "property_ids": ["P0", "P1"], "pattern": None})
+        plan, selection = result
+        self.assertEqual(plan["domain_both_properties"]["domain"], "ECAD")
+        self.assertEqual(set(plan["domain_both_properties"]["properties"]),
+                         {"LocalId", "Name"})
+        self.assertEqual(selection["choice"], "VERIFIED_LLM_DOMAIN_ALL_PROPERTIES")
+
+    def test_two_properties_requires_conjunction(self):
+        with self.assertRaisesRegex(ValueError, "Unrequested all-properties"):
+            self.select("Show ECAD LocalId and Name", {
+                "operation": "has_all_properties", "property_id": None,
+                "property_ids": ["P0", "P1"], "pattern": None})
+
     def test_unsupported_returns_none(self):
         result, _ = self.select("Count ECAD LocalId", {
             "operation": "unsupported", "property_id": None, "pattern": None})
