@@ -93,6 +93,40 @@ class SemanticCompilerTests(unittest.TestCase):
         self.assertNotIn("?anchor_", query)
         self.assertIn("NOT EXISTS", query)
 
+    def test_independent_typed_shapes_compile_without_join(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "target_classes": ["https://example.org/ClassB"],
+             "properties": ["https://example.org/hasLocalId"]},
+        ], "shacl_edges": []})
+        plan = {"version": "2.0", "scope_mode": "independent",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": None}
+        query = compile_semantic_plan(plan, evidence)
+        self.assertIn(" UNION ", query)
+        self.assertIn("<https://example.org/ClassA>", query)
+        self.assertIn("<https://example.org/ClassB>", query)
+        self.assertEqual(query.count("SELECT DISTINCT ?entity"), 3)
+
+    def test_independent_scope_rejects_untyped_shape(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "properties": ["https://example.org/hasLocalId"]},
+        ], "shacl_edges": []})
+        plan = {"version": "2.0", "scope_mode": "independent",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": None}
+        with self.assertRaisesRegex(ValueError, "verified targetClass"):
+            compile_semantic_plan(plan, evidence)
+
     def test_multi_entity_requires_explicit_join(self):
         second = build_evidence_catalog({"entities": [
             {"domain": "ECAD", "shape": "https://example.org/Device",
