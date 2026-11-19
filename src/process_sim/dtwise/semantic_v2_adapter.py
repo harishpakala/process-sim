@@ -110,7 +110,7 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         plan["operation"]["having_min"] = condition["value"]
     if selected["filters"]:
         f = selected["filters"][0]
-        match = re.fullmatch(r"N(\\d+)P(\\d+)", f["property"])
+        match = re.fullmatch(r"N(\d+)P(\d+)", f["property"])
         if match is None:
             raise ValueError("Invalid filter property ID")
         j, k = map(int, match.groups())
