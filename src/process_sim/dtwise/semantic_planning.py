@@ -107,6 +107,14 @@ def validate_semantic_plan(plan: dict, evidence: EvidenceCatalog) -> dict:
         raise ValueError("Invented projection evidence ID")
     if any(properties[p]["entity_id"] not in scope for p in projections):
         raise ValueError("Projection property outside selected scope")
+    if (len(scope) > 1 and plan.get("scope_mode") == "independent"
+            and plan["operation"] == "select_values"):
+        raise ValueError(
+            "Independent multi-shape value projections are unsupported. "
+            "If the question asks WHICH entities match property conditions, "
+            "use operation='select_entities' and projections=[]. "
+            "Use select_values only for explicitly requested property values "
+            "on a single shape.")
     if plan["operation"] == "select_values" and not projections:
         raise ValueError("Value selection requires projections")
     if plan["operation"] != "select_values" and projections:
