@@ -45,7 +45,7 @@ def select_semantic_v2(question, candidates, *, model, request_json,
         "You are a SHACL-evidence-bound semantic planner. Return ONLY a JSON "
         "object with exactly: path_id, operation, projections, group_by, "
         "count_target, aggregate_condition, filters, and optionally where, "
-        "order_by, limit, distinct, optional_properties. Use ONLY supplied "
+        "order_by, limit, distinct, optional_properties, count_property. For COUNT DISTINCT of a property, set distinct=true and count_property to its evidenced property ID. Use ONLY supplied "
         "PATH, node and property IDs. Supported operations: select, count, "
         "group_count. For a grouped count, project and group by the grouping "
         "property, choose the counted entity ID, and represent a numeric "
