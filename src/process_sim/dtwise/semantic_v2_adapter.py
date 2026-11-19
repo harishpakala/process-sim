@@ -33,7 +33,7 @@ def build_v2_candidates(paths, catalog):
                 raise ValueError("Evidence path contains unknown shape")
             described_nodes.append({
                 "id": f"N{j}", "domain": owner["domain"],
-                "shape": owner["display_name"]})
+                "shape": owner.get("display_name") or owner["shape"]})
             for k, predicate in enumerate(owner["properties"]):
                 properties.append({
                     "id": f"N{j}P{k}", "node": f"N{j}",
