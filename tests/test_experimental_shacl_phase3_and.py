@@ -217,7 +217,7 @@ def test_multi_result_not_explicitly_requested_rejected(multi_sample):
     index, prepared, plan = multi_sample
     prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
         "both EndPoint and PLCEndPoint", "EndPoint")
-    with pytest.raises(SelectionContractError, match="Result count does not match explicit request"):
+    with pytest.raises(SelectionContractError, match="Result semantic grounding mismatch"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
 
 
@@ -227,3 +227,42 @@ def test_both_results_requested_but_qwen_returns_one_rejected(multi_sample):
     plan["result_meaning"] = plan.pop("result_meanings")[0]
     with pytest.raises(SelectionContractError, match="Result count"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_single_result_wrong_owner_with_consistent_meaning_rejected(sample):
+    index, prepared, plan = sample
+    qualified = qualify_candidates(index, prepared)
+    plan["result_id"] = next(c["id"] for c in qualified["prompt"]["candidates"]
+                             if c["path"] == "ECAD → Device → EndPoint → LocalId")
+    plan["result_meaning"] = "EndPoint.LocalId"
+    with pytest.raises(SelectionContractError, match="Result semantic grounding mismatch"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_multi_result_wrong_output_property_rejected(multi_sample):
+    index, prepared, plan = multi_sample
+    qualified = qualify_candidates(index, prepared)
+    plan["result_ids"][1] = next(c["id"] for c in qualified["prompt"]["candidates"]
+                                 if c["path"] == "ECAD → Device → DeviceType")
+    plan["result_meanings"][1] = "Device.DeviceType"
+    with pytest.raises(SelectionContractError, match="Result semantic grounding mismatch"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_unrecognized_result_wording_abstains_without_model(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "Show Address of EndPoint", "Find endpoint addresses")
+    result = run_phase3_and_plan(
+        index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
+    assert result["plan"]["status"] == "unresolved"
+    assert compile_phase3_and_sparql(result) is None
+
+
+def test_result_path_requires_device_ancestor(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "belonging to Device", "belonging to Symbol")
+    result = run_phase3_and_plan(
+        index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
+    assert result["plan"]["status"] == "unresolved"
