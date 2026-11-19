@@ -3,6 +3,7 @@ import json
 
 import pytest
 
+from process_sim.dtwise.experimental_shacl_join_compiler import compile_verified_sibling_join
 from process_sim.dtwise.experimental_shacl_phase4_join import (
     compile_phase4_join_sparql, run_phase4_join_plan, validate_phase4_join_plan,
 )
@@ -98,3 +99,23 @@ def test_non_shared_device_edge_rejected(sample):
     plc["edges"][0] = dict(plc["edges"][0], predicate="urn:invented")
     with pytest.raises(SelectionContractError, match="shared Device"):
         validate_phase4_join_plan(plan, qualified)
+
+
+def test_generic_compiler_preserves_phase41_graph_semantics(sample):
+    """Compare the two compilers using the same selected, verified paths."""
+    index, prepared, plan = sample
+    result = run_phase4_join_plan(index, prepared, transport=transport(plan))
+    legacy = compile_phase4_join_sparql(result)
+    qualified = result["qualified"]
+    # Phase 4.1 orders projections by explicit semantic paths, not model ID order.
+    from process_sim.dtwise.experimental_shacl_phase4_join import _expected_paths
+    generic = compile_verified_sibling_join(qualified, list(_expected_paths(qualified)))
+    # The graph patterns should be identical modulo variable names.
+    rename = {
+        "?n0": "?ecad", "?n1": "?device",
+        "?b1_2": "?endpoint", "?b2_2": "?plcEndpoint",
+        "?value1": "?endpointAddress", "?value2": "?plcAddress",
+    }
+    for source, target in rename.items():
+        generic = generic.replace(source, target)
+    assert generic == legacy
