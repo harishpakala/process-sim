@@ -28,7 +28,7 @@ QUESTION = re.compile(
     r"\s+belonging\s+to\s+the\s+same\s+Device\s+where\s+"
     r"Device\s+LocalId\s*=\s*" + VALUE +
     r"\s+and\s+Device\s+DeviceType\s*=\s*" + VALUE +
-    r"\s+in\s+ECAD\s*[.!]?\s*$", re.I,
+    r"(?:\s+in\s+ECAD)?\s*[.!]?\s*$", re.I,
 )
 
 
@@ -96,7 +96,7 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
     if (index.domain != "ecad" or literals is None or
             None in _expected_paths(qualified) or None in _filter_ids(qualified)):
         plan = {"status": "unresolved", "result_ids": [], "join_owner": None,
-                "filters": [], "reason": "Requires explicit ECAD shared-Device join with LocalId AND DeviceType equality"}
+                "filters": [], "reason": "Requires verified ECAD shared-Device join with LocalId AND DeviceType equality"}
     else:
         prompt = {**qualified["prompt"], "candidates": [
             c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
