@@ -124,12 +124,22 @@ class SemanticV2AdapterTests(unittest.TestCase):
         self.assertEqual(plan["filters"]["op"], "contains")
         self.assertTrue(plan["filters"]["ignore_case"])
 
-    def test_unsupported_regex_is_not_silently_dropped(self):
+    def test_regex_is_bound_to_evidenced_property(self):
         selection = {**self.selection,
                      "where": {"op": "regex", "property": "N0P0",
                                "value": "^FI-"}}
-        with self.assertRaisesRegex(ValueError, "not yet supported"):
-            self.run_plan(selection)
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["filters"]["op"], "regex")
+        self.assertEqual(plan["filters"]["predicate"], "urn:hasAssetIdentifier")
+        self.assertEqual(plan["filters"]["value"], "^FI-")
+
+    def test_prefix_is_bound_to_evidenced_property(self):
+        selection = {**self.selection,
+                     "where": {"op": "starts_with", "property": "N0P1",
+                               "value": "XMEAS"}}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["filters"]["op"], "starts_with")
+        self.assertEqual(plan["filters"]["value"], "XMEAS")
 
 
 if __name__ == "__main__":
