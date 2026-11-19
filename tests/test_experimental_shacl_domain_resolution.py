@@ -128,3 +128,23 @@ def test_phase43_rejects_missing_or_changed_filter():
     assert _literals(base) is None
     assert _literals(base + " and Device DeviceType != Sensor") is None
     assert _literals(base + " and Device DeviceType = Sensor in DEXPI") is None
+
+
+@pytest.mark.parametrize("question,expected", [
+    ("Show PLC endpoints and endpoint addresses", "ecad"),
+    ("Find instrumentation functions", "dexpi"),
+    ("List PLC End Points", "ecad"),
+])
+def test_natural_shape_wording(question, expected):
+    assert resolve_domain(question, DOMAINS, schema=SCHEMA) == expected
+
+
+def test_natural_wording_still_detects_cross_domain_ambiguity():
+    with pytest.raises(DomainResolutionError, match="Ambiguous"):
+        resolve_domain("Show PLC endpoints and instrumentation functions",
+                       DOMAINS, schema=SCHEMA)
+
+
+def test_natural_wording_does_not_match_embedded_words():
+    with pytest.raises(DomainResolutionError, match="unresolved"):
+        resolve_domain("Show superendpoints", DOMAINS, schema=SCHEMA)
