@@ -18,6 +18,13 @@ def _label(iri):
 def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
                              model, request_json, ollama_host, timeout,
                              keep_alive=None, prompt_diagnostics=None):
+    # This first subgraph implementation handles entity-return joins only.
+    # Never silently discard requested projections, aggregates or filters.
+    if re.search(r"\\b(?:return|list|show|display)\\s+"
+                 r"[A-Za-z][A-Za-z0-9_]*\\s*$", question.rstrip(" ."), re.I):
+        raise ValueError("Subgraph property projections are not yet supported")
+    if re.search(r"\\b(?:where|count|how many)\\b", question, re.I):
+        raise ValueError("Filtered or aggregate subgraphs are not yet supported")
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
     nodes = sorted(set(anchors))
     if len(nodes) < 3 or len(nodes) > 12:
