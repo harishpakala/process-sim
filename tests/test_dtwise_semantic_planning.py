@@ -44,6 +44,26 @@ class SemanticPlanningTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "verified targetClass"):
             validate_semantic_plan(plan, self.evidence)
 
+    def test_independent_values_rejected_before_compilation(self):
+        catalog = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "properties": ["https://example.org/address"],
+             "target_classes": ["https://example.org/TypeA"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "properties": ["https://example.org/localId"],
+             "target_classes": ["https://example.org/TypeB"]},
+        ], "shacl_edges": []})
+        plan = {"version": "2.0", "scope": [e["id"] for e in catalog.entities],
+                "scope_mode": "independent", "operation": "select_values",
+                "projections": [p["id"] for p in catalog.properties],
+                "where": None}
+        with self.assertRaisesRegex(ValueError, "Independent multi-shape value projections"):
+            validate_semantic_plan(plan, catalog)
+        plan["operation"] = "select_entities"
+        plan["projections"] = []
+        self.assertEqual(validate_semantic_plan(plan, catalog)["operation"],
+                         "select_entities")
+
     def test_and_or_not_are_compositional(self):
         address, local = self.props["urn:hasAddress"], self.props["urn:hasLocalId"]
         for operator in ("and", "or"):
