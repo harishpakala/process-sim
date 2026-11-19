@@ -101,3 +101,18 @@ def test_filter_on_descendant_rejected(sample):
     with pytest.raises(SelectionContractError, match="Filter owner"):
         run_phase2_filter_plan(index, prepared,
                                transport=transport(selected(ids["LocalId"], ids["Address"])))
+
+
+def test_powershell_unquoted_identifier(sample):
+    index, prepared = sample
+    prepared["prompt"]["question"] = (
+        "Show Address of EndPoint belonging to Device where Device LocalId = FI_101 in ECAD"
+    )
+    from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
+    q = qualify_candidates(index, prepared)
+    ids = {c["property_name"]: c["id"] for c in q["prompt"]["candidates"]
+           if c["kind"] == "property"}
+    result = run_phase2_filter_plan(index, prepared,
+                                    transport=transport(selected(ids["Address"], ids["LocalId"])))
+    assert result["plan"]["status"] == "selected"
+    assert 'FILTER(?filterValue = "FI_101")' in compile_phase2_filter_sparql(result)[0]["sparql"]
