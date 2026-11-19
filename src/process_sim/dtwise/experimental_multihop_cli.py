@@ -4,6 +4,7 @@ Fails closed when endpoints, requirements or path selection are ambiguous.
 The default generate_ir planner is not modified.
 """
 import re
+import time
 
 from .experimental_semantic_grounding import plan_single_shape_semantic
 from .evidence_path_binding import bind_evidenced_path
@@ -537,11 +538,19 @@ def plan_experimental_multihop(question, index, mappings, *, model,
         # branch: the LLM chooses among SHACL-evidenced path candidates.
         from .semantic_v2_adapter import select_and_bind_v2
         from .semantic_v2_retrieval import retrieve_shape_nodes
-        nodes = retrieve_shape_nodes(
+        stage_times = {}
+        stage_start = time.perf_counter()
+        try:
+            nodes = retrieve_shape_nodes(
             question, catalog, model=model,
             request_json=request_json or _request_json,
             ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
             diagnostics=prompt_diagnostics)
+        finally:
+            stage_times['shape_retrieval_seconds'] = round(time.perf_counter() - stage_start, 3)
+            if prompt_diagnostics is not None:
+                prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
+        stage_start = time.perf_counter()
         paths = [{"nodes": [node], "steps": []} for node in nodes]
         if len(paths) > 32:
             raise ValueError(
@@ -563,11 +572,20 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                         raise ValueError(
                             "Semantic v2 candidate limit exceeded; "
                             "narrow the evidence catalog")
-        return select_and_bind_v2(
-            question, paths, catalog, index, mappings, model=model,
-            request_json=request_json or _request_json,
-            ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
-            diagnostics=prompt_diagnostics)
+        stage_times['path_enumeration_seconds'] = round(time.perf_counter() - stage_start, 3)
+        if prompt_diagnostics is not None:
+            prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
+        stage_start = time.perf_counter()
+        try:
+            return select_and_bind_v2(
+                question, paths, catalog, index, mappings, model=model,
+                request_json=request_json or _request_json,
+                ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
+                diagnostics=prompt_diagnostics)
+        finally:
+            stage_times['semantic_selection_seconds'] = round(time.perf_counter() - stage_start, 3)
+            if prompt_diagnostics is not None:
+                prompt_diagnostics.setdefault('semantic_v2_stage_timings', {}).update(stage_times)
     _, mentioned = _focused_catalog(catalog, question)
 
     def mentioned_name(name):
