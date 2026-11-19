@@ -96,7 +96,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
     # comes from the user's text. Never execute a model-edited expression.
     # Recognize the explicit regex-introducing clause, not a benchmark shape.
     expression = re.search(
-        r"\\bregular\\s+expression\\s+(.+?)\\s*$", question, re.I)
+        r"\bregular\s+expression\s+(.+?)\s*$", question, re.I)
     if expression is None:
         raise ValueError("Cannot identify an explicit regular expression")
     requested = expression.group(1).strip()
