@@ -45,3 +45,40 @@ model, timeout and benchmark question for both approaches. Record:
 Do not compare this prototype with the existing B01-B04 results as if it
 already supported all their operations. Add end-to-end integration and
 benchmark adapters before claiming a 53-question comparison.
+
+## CLI integration (second increment)
+
+The opt-in flag is now `--experimental-multihop --planning-mode ontology_explore`.
+Direct one-shape single-property queries (such as B01) are supported by the
+SHACL-grounded symbol selector. For different source/target shapes, the state
+machine explores one edge at a time. The current implementation does not yet
+retrieve OWL class axioms, and it deliberately rejects filters, counts,
+multiple projections, ordering, and branching joins.
+
+Run offline tests:
+
+```powershell
+$env:PYTHONPATH = (Resolve-Path .\\src).Path
+python -m unittest discover -s tests -p "test_dtwise_ontology*py" -v
+```
+
+Compare B01 using the same GraphDB and Ollama endpoints (from repository root):
+
+```powershell
+$base = @(
+  "answer",
+  "--schema", "semantic/ontology2/dtwise/dtwise-schema-index.json",
+  "--mappings", "semantic/ontology2/dtwise/cross-domain-mappings.json",
+  "--endpoint", "http://localhost:7200/repositories/AAS",
+  "--model", "llama3.1:8b",
+  "--experimental-multihop",
+  "--question", "Get SignalName from OPCUAConnectivity SignalMapping."
+)
+python -m process_sim.dtwise.unified_answer @base --planning-mode hybrid --output baseline-b01.json
+python -m process_sim.dtwise.unified_answer @base --planning-mode ontology_explore --output explore-b01.json
+```
+
+The reports contain status, results and planning/compilation/GraphDB timings.
+These calls have **not** been executed on the user's local services by the
+GitHub integration. Check exact answer sets and output status before extending
+to other questions.
