@@ -1599,6 +1599,9 @@ def main():
                         help='Experimental lossless SHACL IRI symbol compression')
     parser.add_argument('--experimental-multihop',action='store_true',
                         help='Opt-in evidence-backed LLM multi-hop planner (fails closed)')
+    parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first'],
+                        default='hybrid',
+                        help='Experimental multihop: hybrid shortcuts or LLM-first evidence selection')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -1630,7 +1633,8 @@ def main():
                 args.question,schema_index,registry,model=args.model,
                 ollama_host=args.ollama_host,timeout=args.llm_timeout,
                 keep_alive=args.keep_alive,
-                prompt_diagnostics=prompt_diagnostics)
+                prompt_diagnostics=prompt_diagnostics,
+                planning_mode=args.planning_mode)
             diagnostics.append({'status':'experimental_multihop',
                                 'selection':selection})
         else:
