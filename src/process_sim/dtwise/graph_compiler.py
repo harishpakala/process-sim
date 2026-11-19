@@ -164,7 +164,7 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         return ('SELECT (COUNT(DISTINCT ' + var + ') AS ?count)'
                 + '\nWHERE {\n' + body + '\n}')
     if op['type'] == 'count':
-        root = '?' + ir['entities'][0]['alias']
+        root = '?' + op.get('count_entity', ir['entities'][0]['alias'])
         select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
         group = ('\nGROUP BY ' + ' '.join(graphs)) if graphs else ''
         return select + '\nWHERE {\n' + body + '\n}' + group
