@@ -67,8 +67,10 @@ CASES = [
     case("unsupported-abstains", "--phase4-and-join",
          BOTH + " where Device LocalId = FI_101 or Device DeviceType = Sensor in ECAD",
          expected="unresolved", queries=0),
-    case("ambiguous-retrieve", "--phase1-plan", "Show Address in ECAD",
-         expected="ambiguous", queries=0),
+    case("auto-join-broad-address", "--phase1-plan", "Show Address in ECAD",
+         paths=("ECAD → Device → EndPoint → Address",
+                "ECAD → Device → PLCEndPoint → Address"),
+         predicates=(ENDPOINT, PLC), queries=1),
 ]
 
 
