@@ -88,6 +88,30 @@ def validate_phase3_plan(raw, qualified):
     return raw
 
 
+
+def _explicit_filter_constraints(clause, qualified):
+    """Recognize only exact schema owner/property labels in two AND clauses."""
+    labels = {(parts[-2], parts[-1])
+              for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
+              for parts in [c["path"].split(" → ")] if len(parts) >= 2}
+    pieces = re.split(r"\\band\\b", clause, flags=re.I)
+    if len(pieces) != 2:
+        return None
+    constraints = []
+    for piece in pieces:
+        matches = []
+        for owner, prop in labels:
+            pattern = (r"^\\s*" + re.escape(owner) + r"\\s+" +
+                       re.escape(prop) +
+                       r"""\\s*=\\s*(?:"([^"\\r\\n]*)"|'([^'\\r\\n]*)'|([A-Za-z_][A-Za-z_0-9.-]*))(?:\\s+in\\s+\\w+)?\\s*$""")
+            found = re.fullmatch(pattern, piece, flags=re.I)
+            if found:
+                matches.append((owner, prop, next(v for v in found.groups() if v is not None)))
+        if len(matches) != 1:
+            return None
+        constraints.append(matches[0])
+    return constraints
+
 def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                         endpoint="http://127.0.0.1:11434", transport=None):
     qualified = qualify_candidates(index, prepared)
@@ -103,6 +127,9 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                  len(re.findall(r"\band\b", clause, re.I)) == 1 and
                  not re.search(r"\bor\b", clause, re.I) and
                  not UNSUPPORTED.search(question) and bool(prompt["candidates"]))
+    grounding = _explicit_filter_constraints(clause, qualified) if supported else None
+    if grounding is None:
+        supported = False
     if not supported:
         plan = {"status": "unresolved", "result_id": None, "result_meaning": None, "filters": [],
                 "reason": "Requires exactly two AND string equality conditions"}
@@ -113,6 +140,10 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
         if plan["status"] == "selected":
             if [f["value"] for f in plan["filters"]] != literals:
                 raise SelectionContractError("Filter values do not match question literals")
+            for item, (owner, prop, value) in zip(plan["filters"], grounding):
+                if (item["owner"].casefold(), item["property"].casefold(), item["value"]) != (
+                        owner.casefold(), prop.casefold(), value):
+                    raise SelectionContractError("Filter semantic grounding mismatch")
     return {"domain": index.domain, "question": question,
             "plan": plan, "qualified": qualified}
 
