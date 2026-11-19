@@ -5,7 +5,23 @@ import pytest
 
 from process_sim.dtwise.experimental_shacl_join_compiler import compile_verified_sibling_join
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
-from test_experimental_shacl_join_topology import fixture_paths
+def fixture_paths():
+    root, plant, unit, left, right = ("urn:root", "urn:plant", "urn:unit",
+                                      "urn:left", "urn:right")
+    def edge(a, b):
+        return {"from": a, "to": b, "predicate": "https://example.org/" + b[4:],
+                "property_shape": "urn:link:" + b}
+    common = [edge(root, plant), edge(plant, unit)]
+    def record(owner, branch):
+        return {"domain": "other", "kind": "property",
+                "node_uris": [root, plant, unit, owner],
+                "edges": copy.deepcopy(common) + [branch],
+                "property": {"owner": owner, "predicate": "https://example.org/value"}}
+    return {"prompt": {"domain": "other", "candidates": [
+        {"id": "P1", "kind": "property"}, {"id": "P2", "kind": "property"}]},
+        "registry": {"P1": record(left, edge(unit, left)),
+                     "P2": record(right, edge(unit, right))}}
+
 
 
 def test_deep_non_ecad_compiles_shared_prefix_once():
