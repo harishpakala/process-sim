@@ -131,7 +131,7 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             raise ValueError("Semantic v2 condition not yet supported by IR adapter")
         if node.get("ignore_case", False) and op != "contains":
             raise ValueError("Case-insensitive condition not supported for this operator")
-        match = re.fullmatch(r"N(\\d+)P(\\d+)", node["property"])
+        match = re.fullmatch(r"N(\d+)P(\d+)", node["property"])
         if match is None:
             raise ValueError("Invalid condition property ID")
         j, k = map(int, match.groups())
