@@ -92,15 +92,13 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
     if selected is None:
         raise ValueError("Invented domain property ID")
     pattern = choice["pattern"]
-    # A substring of the requested expression is not the same regex:
-    # dropping an anchor or quantifier silently changes query semantics.
-    # Require the exact expression token, allowing punctuation only as a
-    # sentence terminator rather than part of the expression.
-    if (not isinstance(pattern, str) or not pattern
-            or not re.search(r"(?<![A-Za-z0-9_\\^$.*+?\\[\\]{}()|\\\\-])"
-                             + re.escape(pattern)
-                             + r"(?![A-Za-z0-9_\\^$.*+?\\[\\]{}()|\\\\-])",
-                             question)):
+    # Compare complete whitespace-delimited tokens. The final '?' in a
+    # question is sentence punctuation, not part of its regex expression.
+    # Do not accept a substring that drops anchors or quantifiers.
+    tokens = question.split()
+    if tokens and tokens[-1].endswith("?"):
+        tokens[-1] = tokens[-1][:-1]
+    if not isinstance(pattern, str) or not pattern or pattern not in tokens:
         raise ValueError("Regex pattern must be copied exactly from the question")
     try:
         re.compile(pattern)
