@@ -132,5 +132,5 @@ def compile_phase2_filter_sparql(result: dict) -> list[dict]:
         triples.append(f"  ?n{len(filtr['node_uris'])-1} {_iri(filtr['property']['predicate'])} ?filterValue .")
         triples.append(f"  FILTER(?filterValue = {json.dumps(plan['value'], ensure_ascii=False)})")
         queries.append({"result_id": result_id, "filter_id": plan["filter_id"],
-                        "sparql": "SELECT DISTINCT ?value WHERE {\\n" + "\\n".join(triples) + "\\n}"})
+                        "sparql": "SELECT DISTINCT ?value WHERE {\n" + "\n".join(triples) + "\n}"})
     return queries
