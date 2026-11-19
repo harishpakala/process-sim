@@ -11,7 +11,7 @@ from .unified_answer import resolve_shapes
 
 
 def _label(iri):
-    local = re.split(r"[/#]", iri)[-1]
+    local = re.split(r"[/#:]", iri)[-1]
     return local[3:] if local.lower().startswith("has") and len(local) > 3 else local
 
 
