@@ -98,7 +98,22 @@ def check(test, result):
         raise AssertionError(f"Expected {test['expected']}, got {status}: {result.get('reason') or plan.get('reason')}")
     queries = extract_queries(result)
     if len(queries) != test["queries"]:
-        raise AssertionError(f"Expected {test['queries']} SPARQL queries, got {len(queries)}")
+        qualified = result.get("qualified", {})
+        labels = {c["id"]: c["path"] for c in qualified.get("prompt", {}).get("candidates", [])
+                  if c.get("kind") == "property"}
+        selected_ids = (result.get("intent") or {}).get("result_property_ids")
+        if selected_ids is None:
+            selected_ids = (result.get("plan") or {}).get("result_ids")
+        if selected_ids is None:
+            selected_ids = (result.get("plan") or {}).get("selected_candidate_ids", [])
+        if not selected_ids and (result.get("plan") or {}).get("result_id"):
+            selected_ids = [result["plan"]["result_id"]]
+        selected_paths = [labels.get(cid, cid) for cid in selected_ids]
+        raise AssertionError(
+            f"Expected {test['queries']} SPARQL queries, got {len(queries)}; "
+            f"selected paths: {selected_paths}; "
+            f"compiled SPARQL: {queries}"
+        )
     if test["expected"] != "selected":
         if result.get("intent") is not None:
             raise AssertionError("Non-selected case has intent")
