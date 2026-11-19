@@ -51,7 +51,17 @@ def catalog_from_schema(index):
             if target_domain == p['domain'] and (p['property_shape'], target_shape) in rel:
                 edges.append({'domain':p['domain'], 'from_shape':p['node_shape'],
                               'predicate':p['path'], 'to_shape':target_shape})
+    # Only sh:targetClass explicitly associates a node shape with instances
+    # via rdf:type. sh:class on a property shape is not a node target.
+    targets = {}
+    for relation in index['relationships']:
+        if (relation.get('predicate') ==
+                'http://www.w3.org/ns/shacl#targetClass'
+                and relation.get('evidence') == 'shacl'):
+            targets.setdefault((relation['domain'], relation['subject']), set()).add(
+                relation['object'])
     return {'entities':[{'domain':d,'shape':s,'properties':sorted(props),
+                         'target_classes':sorted(targets.get((d,s), set())),
                          **_shape_display_metadata(s)}
                         for (d,s),props in sorted(shapes.items())],
             'shacl_edges':edges}
