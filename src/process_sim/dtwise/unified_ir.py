@@ -64,10 +64,13 @@ def validate_ir(ir, schema, *, mappings=None):
         raise ValueError('Expected unified IR version 1.0')
     domain_both = ir.get('domain_both_properties')
     if domain_both is not None:
-        if not isinstance(domain_both, dict) or set(domain_both) != {
-                'domain', 'properties', 'paths'}:
+        if not isinstance(domain_both, dict) or set(domain_both) not in (
+                {'domain', 'properties', 'paths'},
+                {'domain', 'operator', 'properties', 'paths'}):
             raise ValueError('Invalid domain both-properties query')
         domain = domain_both['domain']
+        if domain_both.get('operator', 'and') not in ('and', 'or'):
+            raise ValueError('Invalid domain property Boolean operator')
         names = domain_both['properties']
         groups = domain_both['paths']
         if (not isinstance(domain, str) or not domain
