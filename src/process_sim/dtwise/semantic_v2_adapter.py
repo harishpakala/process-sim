@@ -127,9 +127,9 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             if child["op"] != "exists":
                 raise ValueError("Negated condition not yet supported by IR adapter")
             return bind_where({"op": "missing", "property": child["property"]})
-        if op not in ("exists", "missing", "eq", "contains"):
+        if op not in ("exists", "missing", "eq", "contains", "starts_with", "regex"):
             raise ValueError("Semantic v2 condition not yet supported by IR adapter")
-        if node.get("ignore_case", False) and op != "contains":
+        if node.get("ignore_case", False) and op not in ("contains", "starts_with", "regex"):
             raise ValueError("Case-insensitive condition not supported for this operator")
         match = re.fullmatch(r"N(\d+)P(\d+)", node["property"])
         if match is None:
@@ -138,7 +138,7 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         predicate = owners[tuple(path["nodes"][j])]["properties"][k]
         result = {"op": "not_exists" if op == "missing" else op,
                   "entity": f"n{j}", "predicate": predicate}
-        if op in ("eq", "contains"):
+        if op in ("eq", "contains", "starts_with", "regex"):
             result["value"] = node["value"]
         if node.get("ignore_case", False):
             result["ignore_case"] = True
