@@ -5,6 +5,8 @@ exposed to the model. Every choice is checked and rebound by trusted code.
 """
 import json
 import re
+import time
+from pathlib import Path
 
 from .evidence_path_binding import bind_evidenced_path
 from .unified_answer import resolve_shapes
@@ -15,9 +17,17 @@ def _label(iri):
     return local[3:] if local.lower().startswith("has") and len(local) > 3 else local
 
 
+def _write_prompt_diagnostics(diagnostics):
+    path = diagnostics.get("path")
+    if path:
+        Path(path).write_text(
+            json.dumps({k: v for k, v in diagnostics.items() if k != "path"}, indent=2),
+            encoding="utf-8")
+
+
 def select_evidence_plan(question, paths, catalog, index, mappings, *,
                          model, request_json, ollama_host, timeout,
-                         keep_alive=None):
+                         keep_alive=None, prompt_diagnostics=None):
     """Select path, ordered projections, and optional equality in one call.
 
     A zero-edge candidate is a single SHACL shape; nonzero paths must be
@@ -80,8 +90,43 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     }
     if keep_alive is not None:
         payload["keep_alive"] = keep_alive
-    response = request_json(ollama_host.rstrip("/") + "/api/chat",
-                            payload, timeout)
+    if prompt_diagnostics is not None:
+        prompt_text = "".join(message["content"] for message in payload["messages"])
+        prompt_diagnostics.update({
+            "stage": "experimental_evidence_selection",
+            "candidate_path_count": len(paths),
+            "candidate_property_count": sum(len(c["properties"]) for c in choices),
+            "prompt_characters": len(prompt_text),
+            "estimated_prompt_tokens": (len(prompt_text) + 3) // 4,
+            "payload_bytes": len(json.dumps(payload, ensure_ascii=False).encode("utf-8")),
+            "model": model,
+            "timeout_seconds": timeout,
+            "request_status": "started",
+        })
+        _write_prompt_diagnostics(prompt_diagnostics)
+    started = time.perf_counter()
+    try:
+        response = request_json(ollama_host.rstrip("/") + "/api/chat",
+                                payload, timeout)
+    except Exception as exc:
+        if prompt_diagnostics is not None:
+            prompt_diagnostics.update({
+                "request_status": "failed",
+                "request_wall_seconds": round(time.perf_counter() - started, 3),
+                "request_error_type": type(exc).__name__,
+            })
+            _write_prompt_diagnostics(prompt_diagnostics)
+        raise
+    if prompt_diagnostics is not None:
+        prompt_diagnostics.update({
+            "request_status": "completed",
+            "request_wall_seconds": round(time.perf_counter() - started, 3),
+            "ollama_prompt_tokens": response.get("prompt_eval_count"),
+            "ollama_generated_tokens": response.get("eval_count"),
+            "ollama_prompt_eval_seconds": response.get("prompt_eval_duration", 0) / 1e9,
+            "ollama_generation_seconds": response.get("eval_duration", 0) / 1e9,
+        })
+        _write_prompt_diagnostics(prompt_diagnostics)
     try:
         result = json.loads(response["message"]["content"])
     except (KeyError, TypeError, ValueError) as exc:
