@@ -107,3 +107,24 @@ def test_override_precedes_shape_evidence():
 def test_partial_shape_name_not_matched():
     with pytest.raises(DomainResolutionError, match="unresolved"):
         resolve_domain("Show SuperEndPointValue", DOMAINS, schema=SCHEMA)
+
+
+# Phase 5.2 integration guard: Phase 4.3 accepts the already-resolved
+# domain while retaining exact two-filter question grounding.
+from process_sim.dtwise.experimental_shacl_phase4_and_join import _literals
+
+
+def test_phase43_without_redundant_domain_suffix():
+    question = ("Show EndPoint Address and PLCEndPoint Address belonging to "
+                "the same Device where Device LocalId = FI_101 and "
+                "Device DeviceType = Sensor")
+    assert _literals(question) == ("FI_101", "Sensor")
+    assert _literals(question + " in ECAD") == ("FI_101", "Sensor")
+
+
+def test_phase43_rejects_missing_or_changed_filter():
+    base = ("Show EndPoint Address and PLCEndPoint Address belonging to "
+            "the same Device where Device LocalId = FI_101")
+    assert _literals(base) is None
+    assert _literals(base + " and Device DeviceType != Sensor") is None
+    assert _literals(base + " and Device DeviceType = Sensor in DEXPI") is None
