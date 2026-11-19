@@ -25,6 +25,33 @@ def _write_prompt_diagnostics(diagnostics):
             encoding="utf-8")
 
 
+
+def _explicit_lookup_property_labels(question):
+    """Only prune a fully specified cross-domain lookup; fail open otherwise.
+
+    The full catalog remains authoritative for evidence-path revalidation.
+    """
+    match = re.fullmatch(
+        r"\s*get\s+[A-Za-z][A-Za-z0-9_]*\s+"
+        r"[A-Za-z][A-Za-z0-9_]*\s+([A-Za-z][A-Za-z0-9_]*)"
+        r"\s+for\s+[A-Za-z][A-Za-z0-9_]*\s+"
+        r"[A-Za-z][A-Za-z0-9_]*\s+with\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+\S+\s*\.?\s*",
+        question, re.I)
+    return {part.casefold() for part in match.groups()} if match else None
+
+
+def _path_join_predicates(path):
+    """Preserve every SHACL or mapping predicate needed to describe a path."""
+    required = set()
+    for step in path["steps"]:
+        for key in ("predicate", "left_predicate", "right_predicate"):
+            predicate = step.get(key)
+            if isinstance(predicate, str):
+                required.add(predicate)
+    return required
+
+
 def select_evidence_plan(question, paths, catalog, index, mappings, *,
                          model, request_json, ollama_host, timeout,
                          keep_alive=None, prompt_diagnostics=None):
@@ -38,6 +65,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
     choices = []
     property_maps = []
+    requested_labels = _explicit_lookup_property_labels(question)
     for i, path in enumerate(paths):
         nodes, steps = path["nodes"], path["steps"]
         if not nodes or len(nodes) != len(steps) + 1:
@@ -46,6 +74,7 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             raise ValueError("Zero-edge path must have exactly one node")
         properties = {}
         labels = []
+        join_predicates = _path_join_predicates(path)
         for j, node in enumerate(nodes):
             entity = owners.get(tuple(node))
             if entity is None:
@@ -53,6 +82,10 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
             labels.append({"index": j, "domain": entity["domain"],
                            "shape": entity["display_name"]})
             for predicate in entity["properties"]:
+                if (requested_labels is not None
+                        and _label(predicate).casefold() not in requested_labels
+                        and predicate not in join_predicates):
+                    continue
                 key = "N" + str(j) + "P" + str(len(
                     [k for k in properties if k.startswith("N" + str(j) + "P")]))
                 properties[key] = (j, predicate)
