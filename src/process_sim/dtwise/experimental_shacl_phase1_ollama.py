@@ -83,6 +83,25 @@ def run_phase1_query_plan(index, prepared: dict, *,
     if timing is not None:
         timing.setdefault("qwen_selection_ms", 0.0)
         timing.setdefault("python_validation_ms", 0.0)
+    # Independently reject the narrow property-only request when the verified
+    # schema offers multiple owner paths. Qwen must not resolve this by
+    # selecting every matching path (or arbitrarily choosing one).
+    bare_request = re.fullmatch(
+        r"(?:show|find|list)\\s+(?:the\\s+)?([A-Za-z_][A-Za-z_0-9]*)"
+        r"(?:\\s+in\\s+[A-Za-z_][A-Za-z_0-9]*)?\\s*[.!]?\\s*",
+        question, flags=re.I,
+    )
+    if bare_request:
+        property_name = bare_request.group(1).casefold()
+        matches = [
+            candidate for candidate in properties
+            if candidate["path"].split(" → ")[-1].casefold() == property_name
+        ]
+        if len({candidate["path"] for candidate in matches}) > 1:
+            selection = {
+                "status": "ambiguous", "selected_candidate_ids": [],
+                "reason": "Property has multiple verified owner paths; specify the owner",
+            }
     selected = [
         {"id": c["id"], "domain": c["domain"], "kind": c["kind"], "path": c["path"]}
         for c in properties if c["id"] in selection["selected_candidate_ids"]
