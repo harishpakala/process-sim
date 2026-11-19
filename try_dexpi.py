@@ -106,6 +106,9 @@ def main() -> None:
         "--domain", default="dexpi",
         help="Single schema domain in the index (default: dexpi; e.g. ecad)",
     )
+    parser.add_argument("--llm", action="store_true", help="Use local Ollama")
+    parser.add_argument("--model", default="qwen2.5-coder:7b")
+    parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument(
         "--connect", action="store_true",
         help="Attempt verified directed SHACL connections",
@@ -124,8 +127,26 @@ def main() -> None:
         parser.error("Supply a question for this domain")
 
     index = load_index(args.index, domain=args.domain)
-    result = extract_question(index, question, connect=args.connect)
-    print(json.dumps(result, indent=2) if args.json else format_compact(result))
+    if args.llm:
+        from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+        result = run_local_selection(index, question, model=args.model, endpoint=args.ollama_url)
+        if args.json:
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            selection = result["selection"]
+            print("Question:", question)
+            print("Domain:", args.domain.upper())
+            print("Model:", args.model)
+            print("Status:", selection["status"].upper())
+            print("Reason:", selection["reason"])
+            print("Selected paths:")
+            for item in result["selected_paths"]:
+                print(" ", item["id"] + ".", item["path"])
+            if not result["selected_paths"]:
+                print("  (none)")
+    else:
+        result = extract_question(index, question, connect=args.connect)
+        print(json.dumps(result, indent=2) if args.json else format_compact(result))
 
 
 if __name__ == "__main__":
