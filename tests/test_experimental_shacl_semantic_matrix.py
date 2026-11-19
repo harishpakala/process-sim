@@ -123,8 +123,18 @@ def test_grounding_rejects_valid_id_for_wrong_explicit_property():
     from process_sim.dtwise.experimental_shacl_grounding import enforce_property_grounding
     index = load_index(INDEX, domain="ecad")
     prepared = _prepared("Show Address property of Device in ECAD")
-    wrong = next(candidate["id"] for candidate in prepared["prompt"]["candidates"]
-                 if candidate["path"].endswith("isConnectedTo"))
+    # Build a verified but intentionally wrong-property candidate independently
+    # of embedding top-k, which may not retrieve isConnectedTo.
+    wrong_prop = next(prop for props in index.properties.values() for prop in props
+                      if prop["name"] == "isConnectedTo")
+    wrong = "WRONG_PROPERTY"
+    prepared["prompt"]["candidates"].append({
+        "id": wrong, "path": "ECAD → Connections → isConnectedTo",
+    })
+    prepared["registry"][wrong] = {
+        "node_uris": [wrong_prop["owner"]], "edges": [],
+        "property": wrong_prop,
+    }
     proposed = {"status": "selected", "selected_candidate_ids": [wrong],
                 "reason": "Mock Qwen chose a known but wrong property"}
     assert enforce_property_grounding(
