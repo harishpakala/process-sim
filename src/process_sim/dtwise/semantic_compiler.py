@@ -59,16 +59,36 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
                     + predicate + " in one or more selected shapes")
             return dict(node, property_id=mapping[predicate])
 
+        def positive_conjunction(node):
+            # Missing ownership may exclude a branch only when every filter
+            # is a positive requirement. OR/NOT/absence must fail closed.
+            if node is None:
+                return True
+            if node["operator"] == "and":
+                return all(positive_conjunction(child)
+                           for child in node["conditions"])
+            return node["operator"] in ("exists", "eq", "neq",
+                                        "contains", "regex")
+
+        can_prune = positive_conjunction(plan["where"])
         branches = []
         for entity_id in plan["scope"]:
+            mapping = by_shape.get(entity_id, {})
+            missing = sorted({props[prop_id]["predicate"] for prop_id in used
+                              if props[prop_id]["predicate"] not in mapping})
+            if missing and can_prune:
+                # This shape cannot establish every required condition from
+                # its verified SHACL property ownership. Do not fabricate a
+                # predicate mapping or infer a relationship join.
+                continue
             subplan = dict(plan, scope=[entity_id], scope_mode="single",
                            operation="select_entities",
-                           where=remap(plan["where"], by_shape.get(entity_id, {})))
+                           where=remap(plan["where"], mapping))
             branch = compile_semantic_plan(subplan, evidence,
                 graph_mode=graph_mode, graph_iri=graph_iri, limit=None)
             branches.append("{ " + branch + " }")
         if not branches:
-            raise ValueError("No eligible independent entity branches")
+            raise ValueError("No independently evidenced shape supports every required property")
         if plan["operation"] == "count":
             query = "SELECT (COUNT(DISTINCT ?entity) AS ?count) WHERE { " + (
                 " UNION ".join(branches)) + " }"
