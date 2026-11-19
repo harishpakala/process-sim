@@ -11,6 +11,7 @@ from time import perf_counter
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import validate_selection
+from process_sim.dtwise.experimental_shacl_sparql import compile_selected_paths
 
 PHASE1_SYSTEM_PROMPT = """You select verified SHACL PROPERTY paths in ONE domain.
 The only supported task is RETRIEVE (show/find/list property values).
@@ -91,3 +92,28 @@ def run_phase1_query_plan(index, prepared: dict, *,
         "plan": {**selection, "operation": "RETRIEVE" if selection["status"] == "selected" else None},
         "selected_paths": selected, "qualified": qualified,
     }
+
+
+def compile_phase1_sparql(result: dict) -> list[dict]:
+    """Compile validated RETRIEVE selections; no model-authored SPARQL."""
+    plan = result["plan"]
+    if plan["status"] == "selected" and plan["operation"] != "RETRIEVE":
+        raise ValueError("Phase 1 supports RETRIEVE only")
+    qualified = result["qualified"]
+    ids = plan["selected_candidate_ids"]
+    property_ids = {c["id"] for c in qualified["prompt"]["candidates"]
+                    if c["kind"] == "property"}
+    if any(cid not in property_ids for cid in ids):
+        raise ValueError("Only verified property candidates can be compiled")
+    prepared = {
+        "prompt": {**qualified["prompt"], "candidates": [
+            c for c in qualified["prompt"]["candidates"] if c["id"] in property_ids
+        ]},
+        "registry": {cid: {
+            "node_uris": record["node_uris"], "edges": record["edges"],
+            "property": record["property"],
+        } for cid, record in qualified["registry"].items() if cid in property_ids},
+    }
+    selection = {key: plan[key] for key in
+                 ("status", "selected_candidate_ids", "reason")}
+    return compile_selected_paths(prepared, selection)
