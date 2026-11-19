@@ -42,6 +42,24 @@ class OntologyExploreAdapterTests(unittest.TestCase):
                 "source": "S0", "target": "S1", "property": "S0P0",
                 "operation": "select", "filter": None})
 
+    def test_grounding_instrumentation_and_domain_focus(self):
+        observed = []
+        metrics = {}
+        def request(url, payload, timeout):
+            observed.append(json.loads(payload['messages'][1]['content']))
+            return {'message': {'content': json.dumps({
+                'source': 'S0', 'target': 'S0', 'property': 'S0P0',
+                'operation': 'select', 'filter': None})},
+                'prompt_eval_count': 15, 'eval_count': 8}
+        plan, details = plan_ontology_explore(
+            'Get name from D A', self.index, [], model='fake',
+            ollama_host='http://localhost:11434', timeout=1,
+            request_json=request, prompt_diagnostics=metrics)
+        self.assertEqual(details['metrics']['llm_calls'], 1)
+        self.assertEqual(details['metrics']['prompt_tokens'], 15)
+        self.assertEqual(details['metrics']['generated_tokens'], 8)
+        self.assertEqual(len(observed), 1)
+
     def test_unsupported_operation_rejected(self):
         with self.assertRaisesRegex(ValueError, "does not support"):
             self.run_plan({
