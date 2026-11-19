@@ -13,7 +13,7 @@ const category = ref('')
 const benchmarkId = ref('')
 const manifestError = ref('')
 const MULTIHOP_CATEGORY = 'Multi Domain Multi Hop'
-const selectableQuestions = computed(() => benchmarkQuestions.value.filter(q => q.category !== 'multi_domain_multi_hop' || q.id === 'B50'))
+const selectableQuestions = computed(() => benchmarkQuestions.value)
 const supplementalQuestions: BenchmarkQuestion[] = [
  {id:'MH1',category:MULTIHOP_CATEGORY,question:'Show the ProductIdentifier and ManufacturerName of products associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
  {id:'MH2',category:MULTIHOP_CATEGORY,question:'Show the ProductIdentifier and ProductDescription of products associated with DEXPI InstrumentationFunction entities.',version:'supplemental'},
@@ -23,22 +23,36 @@ const supplementalQuestions: BenchmarkQuestion[] = [
  {id:'B23.2',category:'Cross-domain',question:'Get SignalName of the ECAD Device with LocalID LI-1101.',version:'supplemental'},
  {id:'B23.3',category:'Cross-domain',question:'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_105.',version:'supplemental'}
 ]
-const benchmarkStages = [["01 · Atomic Property Retrieval",1,5],["02 · Attribute-Based Selection and Logical Filtering",6,12],["03 · Multi-Attribute Projection",13,15],["04 · Aggregation, Grouping, and Result Ordering",16,19],["05 · Natural-Language Paraphrase Robustness",20,22],["06 · Cross-Domain Semantic Join Queries",23,27],["07 · Intra-Domain Relationship and Optionality Queries",28,31],["08 · Cross-Domain Relationship Absence Detection",32,32],["09 · Semantically Grounded Time-Series Retrieval (VTKG) — Historian tab",33,37],["10 · Lexical and Pattern-Based Filtering",38,42],["11 · Boolean Constraint Evaluation",43,47],["12 · Composite Query Constraints and Result Modifiers",48,50],["13 · Multi-Hop Semantic Traversal and Multi-Domain Integration",51,60]] as [string,number,number][]
-const categories = computed(() => benchmarkStages.map(s => s[0]))
-// UI-only dataset correction: preserve the frozen B23 manifest verbatim.
-const displayedQuestion = (item: BenchmarkQuestion): string =>
- item.id === 'B23' ? 'Get SignalName of the DEXPI InstrumentationFunction with LocalID FI_101.' :
- item.id === 'B50' ? 'List AssetNames whose AssetIdentifier is https://aas.example.com/FI103 or https://aas.example.com/FI104.' : item.question
+const benchmarkStages: { label: string; category: string }[] = [
+ {label:'01 · Atomic Property Retrieval',category:'basic'},
+ {label:'02 · Attribute-Based Selection and Logical Filtering',category:'filters'},
+ {label:'03 · Multi-Attribute Projection',category:'multiple_projections'},
+ {label:'04 · Aggregation and Grouping',category:'aggregation'},
+ {label:'05 · Result Ordering and Pagination',category:'sorting_pagination'},
+ {label:'06 · Natural-Language Paraphrase Robustness',category:'language_variation'},
+ {label:'07 · Cross-Domain Semantic Joins',category:'cross_domain'},
+ {label:'08 · Intra-Domain Optionality',category:'single_domain'},
+ {label:'09 · Lexical and Pattern-Based Filtering',category:'string_filtering'},
+ {label:'10 · Boolean Constraint Evaluation',category:'boolean'},
+ {label:'11 · Multi-Hop Semantic Traversal',category:'multi_domain_multi_hop'}
+]
+const categories = computed(() => benchmarkStages.map(stage => stage.label))
+const displayedQuestion = (item: BenchmarkQuestion): string => item.question
 const categoryQuestions = computed(() => {
- const selectedStage = benchmarkStages.find(s => s[0] === category.value)
+ const selectedStage = benchmarkStages.find(stage => stage.label === category.value)
  if (!selectedStage) return []
- const questions = benchmarkQuestions.value.filter(q => /^B[0-9]+$/.test(q.id) && Number(q.id.slice(1)) >= selectedStage[1] && Number(q.id.slice(1)) <= selectedStage[2])
- if (selectedStage[1] === 23) questions.splice(1, 0, ...supplementalQuestions.filter(q => q.category === 'Cross-domain'))
- if (selectedStage[1] === 51) questions.push(...supplementalQuestions.filter(q => q.category.startsWith('13 ·')))
+ const questions = benchmarkQuestions.value.filter(q => q.category === selectedStage.category)
+ if (selectedStage.category === 'cross_domain') {
+  questions.push(...supplementalQuestions.filter(q => q.id.startsWith('B23.')))
+ }
+ if (selectedStage.category === 'multi_domain_multi_hop') {
+  questions.push(...supplementalQuestions.filter(q => q.category === MULTIHOP_CATEGORY))
+ }
  return questions
 })
 const selectedBenchmark = computed(() => [...benchmarkQuestions.value, ...supplementalQuestions].find(q => q.id === benchmarkId.value))
 const isMultihop = computed(() => result.value?.answer?.join_type === 'shacl_multihop_identifier_join')
+const isPropertyTable = computed(() => projectedProperties.value.length > 1)
 const projectedProperties = computed(() => Array.isArray(result.value?.answer?.properties) ? result.value.answer.properties as string[] : [])
 const propertyLabel = (iri: string) => {
  const raw = iri.split(/[/#]/).pop()?.replace(/^has(?=[A-Z])/, '') || iri
@@ -239,29 +253,26 @@ onMounted(hLoadRuns)
  <div style="display:grid;gap:16px">
   <section v-if="page === 'engineering'" class="panel">
    <div class="panel-title">
-    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Frozen DTwise planner · read-only GraphDB execution</p></div>
+    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Unified IR planner · SHACL-validated read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
-    <label for="benchmark-category">Benchmark stage (B01–B60)</label>
+    <label for="benchmark-category">Benchmark category (B01–B53)</label>
     <select id="benchmark-category" :value="category" @change="selectCategory(($event.target as HTMLSelectElement).value)">
      <option value="">Select a stage</option>
      <option v-for="item in categories" :key="item" :value="item">{{item}}</option>
     </select>
-    <p v-if="category.startsWith('09 ·')" class="subdued">B33–B37: use the Historian tab to select a simulation run, source, instrument, question style and time window.</p>
     <label for="benchmark-question">Benchmark question</label>
     <select id="benchmark-question" :value="benchmarkId" :disabled="!category" @change="selectBenchmark(($event.target as HTMLSelectElement).value)">
      <option value="">Select a question</option>
      <option v-for="item in categoryQuestions" :key="item.id" :value="item.id">{{item.id + ' — ' + displayedQuestion(item)}}</option>
     </select>
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
-    <p v-if="selectedBenchmark?.id === 'B27'" role="status" style="color:#b45309">B27 was previously rejected because a required join key was not established.</p>
-    <p v-if="selectedBenchmark && Number(selectedBenchmark.id.slice(1)) >= 48" class="subdued">This question is in the manifest; its live pass/fail status has not been confirmed here.</p>
-    <p v-else class="subdued">Original B01–B60 manifest unchanged; supplemental questions are UI-only.</p>
-    <p v-if="category === MULTIHOP_CATEGORY" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
+    <p class="subdued">B01–B53 are grouped by manifest category; supplemental questions are labeled separately.</p>
+    <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
-    <p class="subdued">Results come from the frozen DTwise pipeline. No alternative planner or automatic fallback.</p>
+    <p class="subdued">Results come from the LLM-driven Unified IR pipeline. Invalid plans are rejected; no automatic fallback.</p>
    </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
@@ -322,7 +333,7 @@ onMounted(hLoadRuns)
    </div>
    <div class="result-section">
     <h3>Structured answer</h3>
-    <p class="subdued">GraphDB result via frozen DTwise · not independently verified</p>
+    <p class="subdued">GraphDB result via SHACL-validated Unified IR · result values not independently verified</p>
     <p v-if="result.answer.truncated_possible" role="status">Results may be truncated by the query limit.</p>
     <p v-if="result.answer.count !== undefined">Reported count: {{result.answer.count}}</p>
     <div v-if="joinRoute.length > 1" class="join-provenance" aria-label="SHACL join provenance">
@@ -332,7 +343,7 @@ onMounted(hLoadRuns)
      <p class="subdued">Structural paths verified against SHACL; returned values come from GraphDB.</p>
     </div>
     <p v-if="isMultihop && missingCount" class="subdued">{{missingCount}} unavailable property value{{missingCount === 1 ? '' : 's'}} shown as Not available (optional data).</p>
-    <div v-if="isMultihop && rows.length" class="table-scroll">
+    <div v-if="(isMultihop || isPropertyTable) && rows.length" class="table-scroll">
      <table class="evidence-table">
       <thead><tr><th>#</th><th v-for="property in projectedProperties" :key="property" :title="property">{{propertyLabel(property)}}</th></tr></thead>
       <tbody><tr v-for="(row,i) in rows" :key="i"><td>{{i+1}}</td><td v-for="property in projectedProperties" :key="property" class="mono" :class="{'missing-value':missingCell(resultCell(row,property))}"><span v-if="missingCell(resultCell(row,property))" title="This optional property was not returned by GraphDB">Not available</span><span v-else :title="display(resultCell(row,property))">{{display(resultCell(row,property))}}</span></td></tr></tbody>
@@ -357,7 +368,7 @@ onMounted(hLoadRuns)
    <div class="result-section">
     <h3>Planner and provenance</h3>
     <p class="subdued">Mode: {{result.mode}} · Graph scope: {{result.graph_mode}}</p>
-    <details class="detail-toggle"><summary>Frozen planner output</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
+    <details class="detail-toggle"><summary>Unified IR plan</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
    </div>
   </section>
  </div>

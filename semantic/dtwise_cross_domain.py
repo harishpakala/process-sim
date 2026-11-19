@@ -10,7 +10,7 @@ from pathlib import Path
 
 from semantic.dtwise_sparql_compiler import _iri
 
-DEFAULT_CATALOG = Path(__file__).parent / "ontology" / "dtwise" / "cross-domain-mappings.json"
+DEFAULT_CATALOG = Path(__file__).parent / "ontology2" / "dtwise" / "cross-domain-mappings.json"
 
 
 def _validate_path(index, domain, path):
@@ -39,7 +39,7 @@ def compile_cross_domain(question, index, catalog, allow_candidate=False, limit=
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", required=True)
-    parser.add_argument("--index", type=Path, default=Path("semantic/ontology/dtwise/dtwise-schema-index.json"))
+    parser.add_argument("--index", type=Path, default=Path("semantic/ontology2/dtwise/dtwise-schema-index.json"))
     parser.add_argument("--catalog", type=Path, default=DEFAULT_CATALOG)
     parser.add_argument("--allow-candidate", action="store_true")
     parser.add_argument("--limit", type=int, default=100)

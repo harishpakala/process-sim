@@ -1,0 +1,302 @@
+[
+  {
+    "id": "assetinventory-dexpi-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "dexpi",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+        "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+        "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
+      ]
+    }
+  },
+  {
+    "id": "assetinventory-ecad-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "ecad",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/ecad/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+        "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+        "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+      ]
+    }
+  },
+  {
+    "id": "assetinventory-engineeringbom-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+        "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+        "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+      ]
+    }
+  },
+  {
+    "id": "assetinventory-engineeringbom-product-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/assetinventory/hasProductIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasProductIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasProductIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+        "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/99ac0c38c6a26f7514fb1faa1f5396d3f519770e9f311f5cbff37ea7cec2ca34",
+        "https://example.org/dtwise/relationship/8f785efc50d2d3361d46e7ac80110a6531e3827f437d209813179add398ce861"
+      ]
+    }
+  },
+  {
+    "id": "assetinventory-opcuaconnectivity-asset-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/assetinventory/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/abb5c56ebde9e3ff0e5e354ebc019d2746c6c505c1e184937c6249e3b4fa00b4",
+        "https://example.org/dtwise/relationship/4b6535dee73d1cb0a47e0a1ff6d08aa08ee50cc977b238b02ee59762cc605abd"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+        "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+      ]
+    }
+  },
+  {
+    "id": "assetinventory-productcatalog-product-identifier",
+    "left_domain": "assetinventory",
+    "right_domain": "productcatalog",
+    "left_property": "https://example.org/assetinventory/hasProductIdentifier",
+    "right_property": "https://example.org/productcatalog/hasProductIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+      "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2",
+      "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+      "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+    ],
+    "verified": false,
+    "evidence_note": "SHACL evidence grounds both ProductIdentifier properties. Cross-domain ProductIdentifier correspondence explicitly confirmed by the mapping owner; GraphDB instance-level matching has not been independently inspected in this change.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU/QXNzZXRzLkFzc2V0L25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/8f05efe5f6b40cf76ada18dcf3fa45af446b9164754a462558dfa49fb79a99cf",
+        "https://example.org/dtwise/relationship/bab7f523a98b4718f00ec4e60a25bd82e9ca24bfc492847ab5b911ca3db778c2"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+        "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+      ]
+    }
+  },
+  {
+    "id": "dexpi-ecad-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "ecad",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/ecad/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+        "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+        "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+      ]
+    }
+  },
+  {
+    "id": "dexpi-engineeringbom-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+        "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+        "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+      ]
+    }
+  },
+  {
+    "id": "dexpi-opcua-asset-identifier",
+    "left_domain": "dexpi",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/dexpi/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [
+      "https://example.org/dtwise/relationship/2e203e14e6413f848afc46edf4ec0097b39b3ecc81eb18a34b9f4f1ad05f42df",
+      "https://example.org/dtwise/relationship/3a6c333f1c2cfee042962e86b0e1dcc2ffe15be95f1dfa1358c92901b36aea56",
+      "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+      "https://example.org/dtwise/relationship/8e1153f85eefdcf49e4d939a7afe740e9da17e3d6293b47734f9b8d9b396e32c",
+      "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+      "https://example.org/dtwise/relationship/cf1d391171f62858c722e2d02b0c5b15050da5269f31fc2c3f1a3b17c928f3a4",
+      "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3",
+      "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+    ],
+    "verified": false,
+    "evidence_note": "SHACL evidence grounds the mapped properties, but does not establish universal cross-domain equivalence. Independent approval is required.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/QWN0dWF0aW5nRnVuY3Rpb25zLkFjdHVhdGluZ0Z1bmN0aW9uL25vZGVTaGFwZQ",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
+        "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+        "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+      ]
+    }
+  },
+  {
+    "id": "ecad-engineeringbom-asset-identifier",
+    "left_domain": "ecad",
+    "right_domain": "engineeringbom",
+    "left_property": "https://example.org/ecad/hasAssetIdentifier",
+    "right_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+        "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+        "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+      ]
+    }
+  },
+  {
+    "id": "ecad-opcuaconnectivity-asset-identifier",
+    "left_domain": "ecad",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/ecad/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
+        "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+        "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+      ]
+    }
+  },
+  {
+    "id": "engineeringbom-opcuaconnectivity-asset-identifier",
+    "left_domain": "engineeringbom",
+    "right_domain": "opcuaconnectivity",
+    "left_property": "https://example.org/engineeringbom/hasAssetIdentifier",
+    "right_property": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasAssetIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl/U2lnbmFsTWFwcGluZ3MuU2lnbmFsTWFwcGluZy9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/04d5ce0a053a4d061e0342ee4cc3fa9d869a3bdf64f7bacf00b88ff5bdfff296",
+        "https://example.org/dtwise/relationship/0e78bea137f430271c764909a3e3b0d1a6104c141b59839f5f258379177fc116"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/c7d5084f796c3f93122358f52db15222e792f95eae0ba326578e7e2e4f1dbbc5",
+        "https://example.org/dtwise/relationship/e44514616c76945e1a422eb99b88ec2f7e2a4907990d4117cb8a8a7ee2eb01dd"
+      ]
+    }
+  },
+  {
+    "id": "engineeringbom-productcatalog-product-identifier",
+    "left_domain": "engineeringbom",
+    "right_domain": "productcatalog",
+    "left_property": "https://example.org/engineeringbom/hasProductIdentifier",
+    "right_property": "https://example.org/productcatalog/hasProductIdentifier",
+    "evidence_ids": [],
+    "verified": false,
+    "evidence_note": "SHACL candidate only: both domains define hasProductIdentifier. Property-name agreement does not establish cross-domain semantic equivalence or instance-level correspondence. Requires independent verification.",
+    "schema_evidence": {
+      "left_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU/Qk9NSXRlbXMuQk9NSXRlbVJlY29yZC9ub2RlU2hhcGU",
+      "right_shape": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU/UHJvZHVjdHMuUHJvZHVjdC9ub2RlU2hhcGU",
+      "left_relationship_ids": [
+        "https://example.org/dtwise/relationship/99ac0c38c6a26f7514fb1faa1f5396d3f519770e9f311f5cbff37ea7cec2ca34",
+        "https://example.org/dtwise/relationship/8f785efc50d2d3361d46e7ac80110a6531e3827f437d209813179add398ce861"
+      ],
+      "right_relationship_ids": [
+        "https://example.org/dtwise/relationship/87796b8690b9c957d0ae884f75bf799679801f6b28de38382cbde15c4c6c6023",
+        "https://example.org/dtwise/relationship/2aae4bd7c71129b8ce8af3440fdf488c70eee2312f7611f2fa8f0ccb3b2b195c"
+      ]
+    }
+  }
+]

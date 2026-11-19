@@ -62,6 +62,80 @@ def validate_ir(ir, schema, *, mappings=None):
     idx = _schema_dict(schema)
     if not isinstance(ir, dict) or ir.get('ir_version') != '1.0':
         raise ValueError('Expected unified IR version 1.0')
+    domain_both = ir.get('domain_both_properties')
+    if domain_both is not None:
+        if not isinstance(domain_both, dict) or set(domain_both) not in (
+                {'domain', 'properties', 'paths'},
+                {'domain', 'operator', 'properties', 'paths'}):
+            raise ValueError('Invalid domain both-properties query')
+        domain = domain_both['domain']
+        if domain_both.get('operator', 'and') not in ('and', 'or'):
+            raise ValueError('Invalid domain property Boolean operator')
+        names = domain_both['properties']
+        groups = domain_both['paths']
+        if (not isinstance(domain, str) or not domain
+                or not isinstance(names, list) or len(names) != 2
+                or not all(isinstance(n, str) and n for n in names)
+                or names[0].casefold() == names[1].casefold()
+                or not isinstance(groups, list) or len(groups) != 2):
+            raise ValueError('Invalid domain both-properties fields')
+        for name, paths in zip(names, groups):
+            if not isinstance(paths, list) or not paths or len(paths) > 256:
+                raise ValueError('Invalid domain both-properties paths')
+            eligible = sorted({
+                (x['node_shape'], x['path'])
+                for x in idx['shape_paths']
+                if x['domain'] == domain and x.get('evidence')
+                and x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1].casefold()
+                in {name.casefold(), ('has' + name).casefold()}
+            })
+            if (not all(isinstance(p, list) and len(p) == 2
+                        and all(isinstance(v, str) for v in p) for p in paths)
+                    or sorted(tuple(p) for p in paths) != eligible):
+                raise ValueError('Both-properties paths must equal evidenced owners')
+        if (ir.get('entities') != [] or ir.get('edges') != []
+                or ir.get('projections') != [] or ir.get('filters') is not None
+                or ir.get('operation', {}).get('type') != 'select'
+                or ir.get('return_entities') is not True
+                or ir.get('order_by') or ir.get('result_limit') is not None
+                or ir.get('domain_regex') is not None):
+            raise ValueError('Unsupported domain both-properties modifiers')
+        return ir
+    domain_regex = ir.get('domain_regex')
+    if domain_regex is not None:
+        if not isinstance(domain_regex, dict) or set(domain_regex) != {
+                'domain', 'property', 'pattern', 'paths'}:
+            raise ValueError('Invalid domain regex query')
+        domain, prop, pattern = (domain_regex[k] for k in
+                                 ('domain', 'property', 'pattern'))
+        if not all(isinstance(x, str) and x for x in (domain, prop, pattern)):
+            raise ValueError('Invalid domain regex fields')
+        if len(pattern) > 256 or any(ord(c) < 32 for c in pattern):
+            raise ValueError('Invalid regex pattern')
+        try:
+            re.compile(pattern)
+        except re.error as exc:
+            raise ValueError('Invalid regex pattern') from exc
+        paths = domain_regex['paths']
+        if not isinstance(paths, list) or not paths or len(paths) > 256:
+            raise ValueError('Invalid domain regex shape paths')
+        eligible = sorted({
+            (x['node_shape'], x['path'])
+            for x in idx['shape_paths']
+            if x['domain'] == domain and x.get('evidence')
+            and (x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1]
+                 .removeprefix('has').casefold() == prop.casefold()
+                 or x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1]
+                 .casefold() == prop.casefold())
+        })
+        if sorted(tuple(x) for x in paths if isinstance(x, list) and len(x) == 2) != eligible or len(paths) != len(eligible):
+            raise ValueError('Domain regex paths must equal all evidenced shape owners')
+        if (ir.get('edges') or ir.get('projections') or ir.get('filters') is not None
+                or ir.get('operation', {'type': 'select'}).get('type') != 'select'
+                or ir.get('return_entities') is not True
+                or ir.get('order_by') or ir.get('result_limit') is not None):
+            raise ValueError('Unsupported domain regex query modifiers')
+        return ir
     entities = ir.get('entities')
     if not isinstance(entities, list) or not 1 <= len(entities) <= 24:
         raise ValueError('entities must contain 1..24 nodes')
@@ -128,6 +202,22 @@ def validate_ir(ir, schema, *, mappings=None):
                 seen.add(neighbor); pending.append(neighbor)
     if seen != set(nodes):
         raise ValueError('Disconnected query graph: no Cartesian products allowed')
+    anti = ir.get('anti_join')
+    if anti is not None:
+        if (not isinstance(anti, dict) or set(anti) != {'from', 'to'}
+                or len(nodes) != 2 or len(edges) != 1
+                or edges[0].get('kind') != 'mapping'
+                or anti['from'] != edges[0]['from']
+                or anti['to'] != edges[0]['to']):
+            raise ValueError('Anti-join requires one verified directed mapping edge')
+        if ir.get('filters') is not None or ir.get('projections'):
+            raise ValueError('Anti-join does not support filters or projections')
+        if ir.get('operation', {'type': 'select'}).get('type') != 'select':
+            raise ValueError('Anti-join requires SELECT')
+        if ir.get('return_entities') is not True:
+            raise ValueError('Anti-join requires return_entities=true')
+        if ir.get('order_by') or ir.get('result_limit') is not None:
+            raise ValueError('Anti-join does not support sorting or pagination')
     projections = ir.get('projections', [])
     if not isinstance(projections, list) or len(projections) > 24:
         raise ValueError('Invalid projection list')
@@ -136,6 +226,10 @@ def validate_ir(ir, schema, *, mappings=None):
         _alias(p['as'])
     if len({p['as'] for p in projections}) != len(projections):
         raise ValueError('Duplicate projection aliases')
+    collisions = sorted({p['as'] for p in projections} & set(nodes))
+    if collisions:
+        raise ValueError('Projection aliases must differ from entity aliases: ' +
+                         ', '.join(collisions))
     def filter_check(f, depth=0):
         if depth > 12 or not isinstance(f, dict):
             raise ValueError('Invalid or overly deep filter')
@@ -147,21 +241,64 @@ def validate_ir(ir, schema, *, mappings=None):
             for child in children: filter_check(child, depth+1)
         elif op == 'not':
             filter_check(f.get('child'), depth+1)
-        elif op in ('eq', 'neq', 'contains', 'exists', 'not_exists'):
+        elif op in ('eq', 'neq', 'contains', 'starts_with', 'regex', 'exists', 'not_exists'):
+            if 'ignore_case' in f and (op not in ('contains', 'starts_with', 'regex') or f['ignore_case'] is not True):
+                raise ValueError('ignore_case is only supported for contains')
             prop(f)
-            if op in ('eq', 'neq', 'contains'):
+            if op in ('eq', 'neq', 'contains', 'starts_with', 'regex'):
                 _literal(f.get('value'))
+            if op == 'regex':
+                import re
+                pattern = f.get('value')
+                if not isinstance(pattern, str) or len(pattern) > 256:
+                    raise ValueError('Invalid regex pattern')
+                try:
+                    re.compile(pattern)
+                except re.error as exc:
+                    raise ValueError('Invalid regex pattern') from exc
         else:
             raise ValueError('Unsupported filter operator')
     if ir.get('filters') is not None:
         filter_check(ir['filters'])
+    distinct_spec = ir.get('count_distinct_property')
+    if distinct_spec is not None:
+        if (not isinstance(distinct_spec, dict)
+                or set(distinct_spec) != {'entity', 'predicate'}
+                or ir.get('operation', {}).get('type') != 'count'):
+            raise ValueError('Invalid distinct property count specification')
+        prop(distinct_spec)
     operation = ir.get('operation', {'type':'select'})
-    if operation.get('type') not in ('select', 'count'):
+    if operation.get('type') not in ('select', 'count', 'group_count'):
         raise ValueError('Unsupported operation')
+    count_entity = operation.get('count_entity')
+    if count_entity is not None and (operation.get('type') not in ('count', 'group_count')
+            or count_entity not in {n['alias'] for n in ir['entities']}):
+        raise ValueError('Count entity must be an evidenced IR entity')
     if operation.get('type') == 'count' and projections:
         raise ValueError('COUNT currently requires no projections')
+    if operation.get('type') == 'group_count':
+        if len(projections) != 1:
+            raise ValueError('Grouped COUNT requires exactly one SHACL-grounded group projection')
+        threshold = operation.get('having_min')
+        if threshold is not None and (type(threshold) is not int or not 0 <= threshold <= 1000000):
+            raise ValueError('Invalid grouped count threshold')
     if not projections and operation.get('type') == 'select' and not ir.get('return_entities'):
         raise ValueError('SELECT needs projections or return_entities=true')
+    # Optional LLM-authored SELECT modifiers. Never infer them from question text.
+    ordering = ir.get('order_by', [])
+    if not isinstance(ordering, list) or len(ordering) > 8:
+        raise ValueError('order_by must be a list of at most eight sort terms')
+    output_aliases = {p['as'] for p in projections}
+    for term in ordering:
+        if not isinstance(term, dict) or set(term) != {'as', 'direction'}:
+            raise ValueError('Sort term must contain as and direction')
+        if term['as'] not in output_aliases or term['direction'] not in ('asc', 'desc'):
+            raise ValueError('Sort must reference a projected alias with asc/desc direction')
+    result_limit = ir.get('result_limit')
+    if result_limit is not None and (type(result_limit) is not int or not 1 <= result_limit <= 10000):
+        raise ValueError('result_limit must be an integer from 1 to 10000')
+    if operation.get('type') != 'select' and (ordering or result_limit is not None):
+        raise ValueError('Sorting and pagination currently require SELECT')
     return ir
 
 
@@ -218,6 +355,15 @@ def compile_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=N
         if op == 'exists': return 'FILTER EXISTS { ' + triple + ' }'
         if op == 'not_exists': return 'FILTER NOT EXISTS { ' + triple + ' }'
         literal = _literal(f['value'])
+        if op in ('starts_with', 'regex'):
+            if op == 'starts_with':
+                subject = 'LCASE(STR(' + v + '))' if f.get('ignore_case') else 'STR(' + v + ')'
+                prefix = 'LCASE(' + literal + ')' if f.get('ignore_case') else literal
+                expr = 'STRSTARTS(' + subject + ', ' + prefix + ')'
+            else:
+                flags = ', "i"' if f.get('ignore_case') else ''
+                expr = 'REGEX(STR(' + v + '), ' + literal + flags + ')'
+            return 'FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v + ') && ' + expr + ') }'
         expr = {'eq': f'isLiteral({v}) && STR({v}) = {literal}',
                 'neq': f'isLiteral({v}) && STR({v}) != {literal}',
                 'contains': f'isLiteral({v}) && CONTAINS(STR({v}), {literal})'}[op]
@@ -232,9 +378,17 @@ def compile_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=N
     else:
         body = '\n'.join('  ' + line for line in lines)
     op = ir.get('operation', {'type':'select'})
+    if op['type'] == 'count' and ir.get('count_distinct_property') is not None:
+        spec = ir['count_distinct_property']
+        var = '?counted_value'
+        triple = '?' + spec['entity'] + ' ' + _iri(spec['predicate']) + ' ' + var + ' .'
+        if graph_mode != 'default':
+            triple = 'GRAPH ' + graph_term + ' { ' + triple + ' }'
+        return ('SELECT (COUNT(DISTINCT ' + var + ') AS ?count)'
+                + '\nWHERE {\n' + body + '\n  ' + triple + '\n}')
     if op['type'] == 'count':
         if include_graph:
-            return 'SELECT ?graph (COUNT(DISTINCT ?' + ir['entities'][0]['alias'] + ') AS ?count)\nWHERE {\n' + body + '\n}\nGROUP BY ?graph\nORDER BY ?graph'
+            return 'SELECT ?graph (COUNT(DISTINCT ?' + op.get('count_entity', ir['entities'][0]['alias']) + ') AS ?count)\nWHERE {\n' + body + '\n}\nGROUP BY ?graph\nORDER BY ?graph'
         return 'SELECT (COUNT(DISTINCT ?' + ir['entities'][0]['alias'] + ') AS ?count)\nWHERE {\n' + body + '\n}'
     columns = (['?graph'] if include_graph else []) + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):

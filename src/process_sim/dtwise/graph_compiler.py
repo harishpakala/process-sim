@@ -6,7 +6,7 @@ from .unified_ir import validate_ir, _iri, _literal, _schema_dict, _alias
 
 
 def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=None,
-                     include_graph=True, limit=100):
+                     include_graph=True, limit=None):
     validate_ir(ir, schema, mappings=mappings)
     if graph_mode not in ('default', 'all_named', 'selected'):
         raise ValueError('Unsupported graph mode')
@@ -16,8 +16,46 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         raise ValueError('graph_iri requires selected graph mode')
     if include_graph and graph_mode != 'all_named':
         raise ValueError('Graph provenance requires all_named')
-    if not isinstance(limit, int) or not 1 <= limit <= 10000:
-        raise ValueError('Invalid limit')
+    if limit is not None and (type(limit) is not int or not 1 <= limit <= 10000):
+        raise ValueError('Invalid operational limit')
+    domain_both = ir.get('domain_both_properties')
+    if domain_both is not None:
+        if include_graph:
+            raise ValueError('Domain both-properties lookup does not support provenance')
+        groups = []
+        for side, paths in enumerate(domain_both['paths']):
+            alternatives = []
+            for shape, predicate in paths:
+                triple = f'?entity {_iri(predicate)} ?present_{side} .'
+                if graph_mode == 'all_named':
+                    triple = f'GRAPH ?property_graph_{side} {{ ' + triple + ' }'
+                elif graph_mode == 'selected':
+                    triple = 'GRAPH ' + fixed + ' { ' + triple + ' }'
+                alternatives.append('{ ' + triple + ' }')
+            groups.append('{ ' + ' UNION '.join(alternatives) + ' }')
+        separator = '\n  UNION\n  ' if domain_both.get('operator', 'and') == 'or' else '\n  '
+        return 'SELECT DISTINCT ?entity\nWHERE {\n  ' + separator.join(groups) + '\n}'
+    domain_regex = ir.get('domain_regex')
+    if domain_regex is not None:
+        if include_graph:
+            raise ValueError('Domain regex does not support graph provenance')
+        import json
+        clauses = []
+        for shape, predicate in domain_regex['paths']:
+            triple = f'?entity {_iri(predicate)} ?regex_value .'
+            if graph_mode == 'all_named':
+                triple = 'GRAPH ?regex_graph { ' + triple + ' }'
+            elif graph_mode == 'selected':
+                triple = 'GRAPH ' + fixed + ' { ' + triple + ' }'
+            clauses.append('{ ' + triple + ' }')
+        # All shape owners are included; UNION is a set of evidenced
+        # property patterns, not an inferred rdf:type assertion.
+        pattern = json.dumps(domain_regex['pattern'], ensure_ascii=True)
+        query = ('SELECT DISTINCT ?entity\nWHERE {\n  '
+                 + '\n  UNION\n  '.join(clauses)
+                 + '\n  FILTER(isLiteral(?regex_value) && '
+                 + 'REGEX(STR(?regex_value), ' + pattern + '))\n}')
+        return query
     nodes = {n['alias']: n for n in ir['entities']}
     # Every triple is scoped to the graph of its SUBJECT entity. Distinct entity
     # aliases may bind to different graphs, even within one domain.
@@ -26,6 +64,18 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
             return body
         graph = fixed if graph_mode == 'selected' else '?graph_' + alias
         return 'GRAPH ' + graph + ' { ' + body + ' }'
+    anti = ir.get('anti_join')
+    if anti is not None:
+        if graph_mode != 'all_named' or include_graph:
+            raise ValueError('Anti-join requires all_named graphs without graph provenance')
+        edge = ir['edges'][0]  # validate_ir verifies this exact mapping edge.
+        source, target = anti['from'], anti['to']
+        left = scoped(source, f'?{source} {_iri(edge["left_predicate"])} ?anti_key .')
+        right = scoped(target, f'?{target} {_iri(edge["right_predicate"])} ?anti_other .')
+        return ('SELECT DISTINCT ?' + source + '\nWHERE {\n'
+                + '  ' + left + '\n'
+                + '  FILTER NOT EXISTS { ' + right
+                + ' FILTER(STR(?anti_key) = STR(?anti_other)) }\n}')
     parts = []
     anchor = set()
     for i, e in enumerate(ir.get('edges', [])):
@@ -84,6 +134,18 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         if op == 'exists': return 'FILTER EXISTS { ' + triple + ' }'
         if op == 'not_exists': return 'FILTER NOT EXISTS { ' + triple + ' }'
         lit = _literal(f['value'])
+        if op == 'contains' and f.get('ignore_case') is True:
+            return ('FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v
+                    + ') && CONTAINS(LCASE(STR(' + v + ')), LCASE(' + lit + '))) }')
+        if op in ('starts_with', 'regex'):
+            if op == 'starts_with':
+                subject = 'LCASE(STR(' + v + '))' if f.get('ignore_case') else 'STR(' + v + ')'
+                prefix = 'LCASE(' + lit + ')' if f.get('ignore_case') else lit
+                expr = 'STRSTARTS(' + subject + ', ' + prefix + ')'
+            else:
+                flags = ', "i"' if f.get('ignore_case') else ''
+                expr = 'REGEX(STR(' + v + '), ' + lit + flags + ')'
+            return 'FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v + ') && ' + expr + ') }'
         expr = {'eq': f'isLiteral({v}) && STR({v}) = {lit}',
                 'neq': f'isLiteral({v}) && STR({v}) != {lit}',
                 'contains': f'isLiteral({v}) && CONTAINS(STR({v}), {lit})'}[op]
@@ -93,13 +155,45 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
     body = '\n'.join('  ' + x for x in parts)
     graphs = ['?graph_' + n['alias'] for n in ir['entities']] if include_graph else []
     op = ir.get('operation', {'type': 'select'})
+    if op['type'] == 'count' and ir.get('count_distinct_property') is not None:
+        spec = ir['count_distinct_property']
+        var = '?counted_value'
+        body += '\n  ' + scoped(spec['entity'],
+            '?' + spec['entity'] + ' ' + _iri(spec['predicate']) + ' ' + var + ' .')
+        # Distinct property counts must not be partitioned by graph provenance.
+        return ('SELECT (COUNT(DISTINCT ' + var + ') AS ?count)'
+                + '\nWHERE {\n' + body + '\n}')
     if op['type'] == 'count':
-        root = '?' + ir['entities'][0]['alias']
+        root = '?' + op.get('count_entity', ir['entities'][0]['alias'])
         select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
-        group = ('\nGROUP BY ' + ' '.join(graphs) + '\nORDER BY ' + ' '.join(graphs)) if graphs else ''
+        group = ('\nGROUP BY ' + ' '.join(graphs)) if graphs else ''
         return select + '\nWHERE {\n' + body + '\n}' + group
+    if op['type'] == 'group_count':
+        group_var = '?' + ir['projections'][0]['as']
+        root = '?' + ir['entities'][0]['alias']
+        # Group by the requested SHACL property, never by graph provenance.
+        # DISTINCT protects against duplicated evidence triples across graphs.
+        query = (f'SELECT {group_var} (COUNT(DISTINCT {root}) AS ?count)'
+                 + '\nWHERE {\n' + body + '\n}'
+                 + '\nGROUP BY ' + group_var)
+        threshold = op.get('having_min')
+        if threshold is not None:
+            query += f'\nHAVING(COUNT(DISTINCT {root}) > {threshold})'
+        return query
     cols = graphs + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
         cols += ['?' + n['alias'] for n in ir['entities']]
     cols = list(dict.fromkeys(cols))
-    return 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}\nORDER BY ' + ' '.join(cols) + f'\nLIMIT {limit}'
+    order_terms = ir.get('order_by', [])
+    query = 'SELECT DISTINCT ' + ' '.join(cols) + '\nWHERE {\n' + body + '\n}'
+    if order_terms:
+        ordering = ' '.join(('ASC' if term['direction'] == 'asc' else 'DESC') +
+                            '(?' + term['as'] + ')' for term in order_terms)
+        query += '\nORDER BY ' + ordering
+    requested_limit = ir.get('result_limit')
+    if requested_limit is not None:
+        if limit is not None and requested_limit > limit:
+            raise ValueError('Requested result limit exceeds operational cap; '
+                             'do not silently truncate the semantic query')
+        query += f'\nLIMIT {requested_limit}'
+    return query
