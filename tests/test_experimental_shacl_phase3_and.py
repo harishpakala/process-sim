@@ -118,3 +118,22 @@ def test_mismatched_filter_interpretation_rejected(sample):
     plan["filters"][0]["owner"] = "EndPoint"
     with pytest.raises(SelectionContractError, match="Filter interpretation"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_swapped_filter_ids_with_consistent_labels_rejected(sample):
+    index, prepared, plan = sample
+    first, second = plan["filters"]
+    first["filter_id"], second["filter_id"] = second["filter_id"], first["filter_id"]
+    first["owner"], second["owner"] = "EndPoint", "Device"
+    with pytest.raises(SelectionContractError, match="semantic grounding"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_unrecognized_filter_wording_abstains_without_model(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "Device LocalId", "device identifier")
+    result = run_phase3_and_plan(
+        index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
+    assert result["plan"]["status"] == "unresolved"
+    assert compile_phase3_and_sparql(result) is None
