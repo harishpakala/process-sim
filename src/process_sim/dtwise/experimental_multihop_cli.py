@@ -553,7 +553,7 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                     continue
                 for path in enumerate_evidenced_paths(
                         catalog, mappings, source, target,
-                        max_hops=4, max_paths=256):
+                        max_hops=4, max_paths=33):
                     signature = (tuple(path["nodes"]), tuple(
                         tuple(sorted(step.items())) for step in path["steps"]))
                     if signature not in seen:
