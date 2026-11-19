@@ -217,7 +217,7 @@ def test_multi_result_not_explicitly_requested_rejected(multi_sample):
     index, prepared, plan = multi_sample
     prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
         "both EndPoint and PLCEndPoint", "EndPoint")
-    with pytest.raises(SelectionContractError, match="not explicitly requested"):
+    with pytest.raises(SelectionContractError, match="Result count does not match explicit request"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
 
 
