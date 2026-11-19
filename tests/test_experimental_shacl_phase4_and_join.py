@@ -119,3 +119,32 @@ def test_quoted_values(sample):
         "FI_101", '"FI_101"').replace("Sensor", "'Sensor'")
     result = run_phase4_and_join_plan(index, prepared, transport=transport(plan))
     assert 'FILTER(?filterValue2 = "Sensor")' in compile_phase4_and_join_sparql(result)
+
+
+# Phase 5.3: alternate phrasing, still subject to full SHACL validation.
+def test_alternate_question_compiles_same_join(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = (
+        "Find the addresses of EndPoint and PLCEndPoint for devices "
+        "with LocalId FI_101 and DeviceType Sensor")
+    result = run_phase4_and_join_plan(index, prepared, transport=transport(plan))
+    query = compile_phase4_and_join_sparql(result)
+    assert result["plan"]["status"] == "selected"
+    assert query.count("FILTER(") == 2
+    assert 'FILTER(?filterValue1 = "FI_101")' in query
+    assert 'FILTER(?filterValue2 = "Sensor")' in query
+
+
+@pytest.mark.parametrize("question", [
+    "Find the addresses of EndPoint and PLCEndPoint for devices with LocalId FI_101 or DeviceType Sensor",
+    "Find the addresses of EndPoint and PLCEndPoint for devices with LocalId FI_101",
+    "Find the addresses of EndPoint and PLCEndPoint for devices with LocalId FI_101 and DeviceType Sensor and Status Active",
+    "Find the addresses of EndPoint and PLCEndPoint for devices with LocalId FI_101 and DeviceType Sensor in DEXPI",
+])
+def test_alternate_unsupported_abstains(sample, question):
+    index, prepared, _ = sample
+    prepared["prompt"]["question"] = question
+    result = run_phase4_and_join_plan(
+        index, prepared, transport=lambda *_: pytest.fail("Model must not be called"))
+    assert result["plan"]["status"] == "unresolved"
+    assert compile_phase4_and_join_sparql(result) is None
