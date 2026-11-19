@@ -55,6 +55,73 @@ def _path_join_predicates(path):
 def select_evidence_plan(question, paths, catalog, index, mappings, *,
                          model, request_json, ollama_host, timeout,
                          keep_alive=None, prompt_diagnostics=None):
+    """One evidence selection plus at most one LLM correction on invalid output.
+
+    Both attempts use the same verified candidates and the same validator.
+    No rejected filter or projection is silently repaired by trusted code.
+    """
+    attempts = []
+    previous_response = None
+    feedback = None
+    for attempt_number in (1, 2):
+        received = False
+
+        def request_with_feedback(url, payload, request_timeout):
+            nonlocal received, previous_response
+            if feedback is not None:
+                payload = dict(payload)
+                payload["messages"] = list(payload["messages"]) + [
+                    {"role": "assistant", "content": previous_response},
+                    {"role": "user", "content": (
+                        "Your previous evidence selection was rejected by the "
+                        "validator: " + feedback + ". Reconsider the original "
+                        "question and supplied evidence. Return a complete "
+                        "corrected JSON selection using the required keys. "
+                        "Do not invent filters, paths, or properties. "
+                        "If the request cannot be represented, use unsupported."
+                    )},
+                ]
+            response = request_json(url, payload, request_timeout)
+            received = True
+            try:
+                previous_response = response["message"]["content"]
+            except (KeyError, TypeError):
+                previous_response = ""
+            return response
+
+        try:
+            plan, selection = _select_evidence_plan_once(
+                question, paths, catalog, index, mappings, model=model,
+                request_json=request_with_feedback, ollama_host=ollama_host,
+                timeout=timeout, keep_alive=keep_alive,
+                prompt_diagnostics=prompt_diagnostics,
+            )
+        except ValueError as exc:
+            if not received:
+                raise  # Candidate construction failed before any LLM response.
+            attempts.append({"attempt": attempt_number, "error": str(exc)})
+            if prompt_diagnostics is not None:
+                prompt_diagnostics["selection_attempts"] = list(attempts)
+                _write_prompt_diagnostics(prompt_diagnostics)
+            if attempt_number == 2:
+                raise ValueError(
+                    "Evidence selection rejected after two LLM attempts: "
+                    + "; ".join("attempt " + str(a["attempt"]) + ": " +
+                                a["error"] for a in attempts)
+                ) from exc
+            feedback = str(exc)
+            continue
+        attempts.append({"attempt": attempt_number, "status": "accepted"})
+        if prompt_diagnostics is not None:
+            prompt_diagnostics["selection_attempts"] = list(attempts)
+            _write_prompt_diagnostics(prompt_diagnostics)
+        return plan, selection
+    raise AssertionError("Unreachable evidence-selection retry state")
+
+
+def _select_evidence_plan_once(question, paths, catalog, index, mappings, *,
+                         model, request_json, ollama_host, timeout,
+                         keep_alive=None, prompt_diagnostics=None):
     """Select path, ordered projections, and optional equality in one call.
 
     A zero-edge candidate is a single SHACL shape; nonzero paths must be
