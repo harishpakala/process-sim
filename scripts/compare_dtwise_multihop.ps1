@@ -25,11 +25,15 @@ function Invoke-Mode([string]$Mode) {
     & python -m process_sim.dtwise.unified_answer @base --planning-mode $Mode --prompt-diagnostics $diag --output $out
     if ($LASTEXITCODE -ne 0) { Write-Warning "$Mode exited with code $LASTEXITCODE" }
     if (-not (Test-Path $out)) { throw "No output for $Mode at $out" }
-    return (Get-Content $out -Raw | ConvertFrom-Json)
+    $report = Get-Content $out -Raw | ConvertFrom-Json
+    if ($report.status -ne "executed") {
+        Write-Warning "$Mode failed: $($report.error)"
+    }
+    return $report
 }
 function Get-CanonicalRows($report) {
     if ($report.status -ne "executed") { return @() }
-    $bindings = @($report.results.results.bindings)
+    $bindings = @($report.results.results.bindings | Where-Object { $null -ne $_ })
     return @($bindings | ForEach-Object {
         $values = @($_.PSObject.Properties | Sort-Object Name | ForEach-Object {
             $v = $_.Value
@@ -58,8 +62,10 @@ $equal = ($hybrid.status -eq "executed" -and $explore.status -eq "executed" -and
     HybridRows = $hRows.Count
     ExploreRows = $eRows.Count
     EqualAnswerMultiset = $equal
-    HybridHops = @($hybrid.ir.edges).Count
-    ExploreHops = @($explore.ir.edges).Count
+    HybridHops = if ($null -ne $hybrid.ir -and $null -ne $hybrid.ir.edges) { @($hybrid.ir.edges).Count } else { $null }
+    ExploreHops = if ($null -ne $explore.ir -and $null -ne $explore.ir.edges) { @($explore.ir.edges).Count } else { $null }
+    HybridError = $hybrid.error
+    ExploreError = $explore.error
     HybridPlanningSeconds = $hybrid.timings.planning_seconds
     ExplorePlanningSeconds = $explore.timings.planning_seconds
 } | Format-List
