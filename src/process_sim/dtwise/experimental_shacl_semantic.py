@@ -95,3 +95,56 @@ def semantic_terms(index, question: str, *, top_k: int = 8,
                                    item["label"], item["uri"]))
     return {"domain": index.domain, "question": question,
             "model": model, "matches": matches[:top_k]}
+
+
+def semantic_grouped(index, question: str, *, top_k: int = 8,
+                     model: str = "nomic-embed-text:latest",
+                     endpoint: str = "http://127.0.0.1:11434",
+                     transport=None) -> dict:
+    """Rank shapes and properties independently; group labels, preserve members.
+
+    top_k applies separately to unique shape labels and property labels.
+    Each group retains every original SHACL term, URI, owner and predicate.
+    No similarity threshold is treated as proof of semantic equivalence.
+    """
+    if top_k < 1:
+        raise ValueError("top_k must be positive")
+    terms = schema_terms(index)
+    if not terms:
+        return {"domain": index.domain, "question": question, "model": model,
+                "shapes": [], "properties": []}
+    # Embed one representative per (kind, label) so duplicated schema owners
+    # do not consume retrieval slots or produce redundant embedding requests.
+    grouped = {}
+    for term in terms:
+        key = (term["kind"], term["label"].casefold())
+        grouped.setdefault(key, []).append(term)
+    keys = sorted(grouped)
+    texts = [question] + [
+        f"{kind} {grouped[(kind, label)][0]['label']}. "
+        + grouped[(kind, label)][0]["description"]
+        for kind, label in keys
+    ]
+    vectors = ollama_embed(texts, model=model, endpoint=endpoint,
+                           transport=transport)
+    query = vectors[0]
+
+    def cosine(a, b):
+        norm_a = math.sqrt(sum(x * x for x in a))
+        norm_b = math.sqrt(sum(x * x for x in b))
+        return sum(x * y for x, y in zip(a, b)) / (norm_a * norm_b) if norm_a and norm_b else 0.0
+
+    ranked = {"shape": [], "property": []}
+    for key, vector in zip(keys, vectors[1:]):
+        kind, _ = key
+        members = grouped[key]
+        ranked[kind].append({
+            "label": members[0]["label"],
+            "score": round(cosine(query, vector), 4),
+            "members": members,
+        })
+    for groups in ranked.values():
+        groups.sort(key=lambda group: (-group["score"], group["label"].casefold()))
+    return {"domain": index.domain, "question": question, "model": model,
+            "shapes": ranked["shape"][:top_k],
+            "properties": ranked["property"][:top_k]}
