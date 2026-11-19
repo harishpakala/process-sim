@@ -499,5 +499,45 @@ class NamedSubstringLookupTests(unittest.TestCase):
             self.catalog, {"productcatalog"}, self.anchors, {}, []))
 
 
+
+class DomainRegexLookupTests(unittest.TestCase):
+    def test_b34_preserves_question_mark_quantifier_and_all_shape_owners(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_domain_regex_lookup)
+        from process_sim.dtwise.graph_compiler import compile_graph_ir
+        predicate = "https://example.org/ecad/hasLocalId"
+        catalog = {"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/shape/A",
+             "properties": [predicate]},
+            {"domain": "ECAD", "shape": "https://example.org/shape/B",
+             "properties": [predicate]},
+            {"domain": "DEXPI", "shape": "https://example.org/shape/C",
+             "properties": [predicate]}]}
+        question = ("Which ECAD entities have a LocalId matching "
+                    "the regular expression ^PI-?")
+        plan, selection = _plan_domain_regex_lookup(
+            question, catalog, {"ecad"})
+        self.assertEqual(selection["choice"], "VERIFIED_DOMAIN_REGEX_LOOKUP")
+        self.assertEqual(plan["domain_regex"]["pattern"], "^PI-?")
+        self.assertEqual(len(plan["domain_regex"]["paths"]), 2)
+        schema = {"shape_paths": [
+            {"domain": e["domain"], "node_shape": e["shape"],
+             "path": predicate, "evidence": ["e"]}
+            for e in catalog["entities"]]}
+        query = compile_graph_ir(plan, schema, include_graph=False)
+        self.assertIn('REGEX(STR(?regex_value), "^PI-?")', query)
+        self.assertIn("UNION", query)
+        self.assertIn("SELECT DISTINCT ?entity", query)
+
+    def test_b34_missing_property_fails_closed(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_domain_regex_lookup)
+        with self.assertRaisesRegex(ValueError, "No evidenced domain property"):
+            _plan_domain_regex_lookup(
+                "Which ECAD entities have a LocalId matching the regular expression ^PI-?",
+                {"entities": [{"domain": "ECAD", "shape": "https://example.org/A",
+                               "properties": []}]}, {"ecad"})
+
+
 if __name__ == "__main__":
     unittest.main()
