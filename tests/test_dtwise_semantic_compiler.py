@@ -112,6 +112,33 @@ class SemanticCompilerTests(unittest.TestCase):
         self.assertIn("<https://example.org/ClassB>", query)
         self.assertEqual(query.count("SELECT DISTINCT ?entity"), 3)
 
+    def test_independent_duplicate_classes_and_filters_compile_once(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/C",
+             "target_classes": ["https://example.org/ClassB"],
+             "properties": ["https://example.org/hasAddress"]},
+        ], "shacl_edges": []})
+        plan = {"version": "2.0", "scope_mode": "independent",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": {"operator": "exists",
+                          "property_id": evidence.properties[0]["id"]}}
+        query = compile_semantic_plan(plan, evidence)
+        self.assertEqual(query.count("<https://example.org/ClassA>"), 1)
+        self.assertEqual(query.count("<https://example.org/ClassB>"), 1)
+        self.assertEqual(query.count("SELECT DISTINCT ?entity"), 3)
+        self.assertEqual(query.count("hasAddress"), 2)
+        plan["operation"] = "count"
+        count_query = compile_semantic_plan(plan, evidence)
+        self.assertEqual(count_query.count("<https://example.org/ClassA>"), 1)
+        self.assertIn("COUNT(DISTINCT ?entity)", count_query)
+
     def test_independent_scope_rejects_untyped_shape(self):
         evidence = build_evidence_catalog({"entities": [
             {"domain": "ECAD", "shape": "https://example.org/A",
