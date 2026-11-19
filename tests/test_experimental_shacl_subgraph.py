@@ -186,3 +186,50 @@ def test_dexpi_same_root_does_not_force_join_when_connect_disabled():
     )
     assert result["edges"] == []
     assert "shared_context" not in result
+
+
+def test_compact_ecad_ambiguity_shows_four_readable_paths():
+    from try_dexpi import format_compact
+
+    result = extract_question(
+        _domain_index("ecad"), "Show Address in ECAD", connect=True
+    )
+    output = format_compact(result)
+    assert "Status: AMBIGUOUS" in output
+    for branch in ("Device", "Symbol"):
+        for leaf in ("EndPoint", "PLCEndPoint"):
+            assert f"ECAD → {branch} → {leaf} → Address" in output
+    assert "Alternatives: 4" in output
+    assert "Unresolved: 0" in output
+    assert "http://" not in output
+
+
+def test_compact_dexpi_shared_context_shows_both_branches():
+    from try_dexpi import format_compact
+
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction belonging to the same DEXPI",
+        connect=True,
+    )
+    output = format_compact(result)
+    assert "Status: SHARED CONTEXT" in output
+    assert "DEXPI → InstrumentationFunction → MeasuredVariable" in output
+    assert "DEXPI → ActuatingFunction → ActuatedVariable" in output
+    assert "Edges: 2" in output
+
+
+def test_compact_disconnected_fragments_do_not_invent_paths():
+    from try_dexpi import format_compact
+
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction",
+        connect=False,
+    )
+    output = format_compact(result)
+    assert "InstrumentationFunction → MeasuredVariable" in output
+    assert "ActuatingFunction → ActuatedVariable" in output
+    assert "Edges: 0" in output
