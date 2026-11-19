@@ -33,7 +33,8 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
                     triple = 'GRAPH ' + fixed + ' { ' + triple + ' }'
                 alternatives.append('{ ' + triple + ' }')
             groups.append('{ ' + ' UNION '.join(alternatives) + ' }')
-        return 'SELECT DISTINCT ?entity\nWHERE {\n  ' + '\n  '.join(groups) + '\n}'
+        separator = '\n  UNION\n  ' if domain_both.get('operator', 'and') == 'or' else '\n  '
+        return 'SELECT DISTINCT ?entity\nWHERE {\n  ' + separator.join(groups) + '\n}'
     domain_regex = ir.get('domain_regex')
     if domain_regex is not None:
         if include_graph:
