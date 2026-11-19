@@ -625,10 +625,12 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         if not isinstance(node, dict):
             return set()
         found = {node['predicate']} if isinstance(node.get('predicate'), str) else set()
-        for child in node.get('args', []):
-            found |= filter_predicates(child)
-        if isinstance(node.get('arg'), dict):
-            found |= filter_predicates(node['arg'])
+        for key in ('args', 'children'):
+            for child in node.get(key, []):
+                found |= filter_predicates(child)
+        for key in ('arg', 'child'):
+            if isinstance(node.get(key), dict):
+                found |= filter_predicates(node[key])
         return found
     filtered = filter_predicates(plan.get('filters'))
     # A schema predicate IRI describes a property, not an input value.
@@ -672,12 +674,33 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
     if len(mentioned) > 1:
         output_clause = re.split(r'\bfor\s+(?=[A-Za-z]+\s)', output_clause,
                                  maxsplit=1, flags=re.I)[0]
+    # A request for entities that have/lack properties is a presence
+    # constraint, not a request to project those property values. Only
+    # apply this exception to a validated positive+negative filter plan
+    # without an explicit output-property imperative.
+    def presence_leaves(node):
+        if not isinstance(node, dict):
+            return []
+        if node.get('op') == 'and':
+            return [leaf for child in node.get('children', [])
+                    for leaf in presence_leaves(child)]
+        return [node] if node.get('op') in ('exists', 'not_exists') else []
+    leaves = presence_leaves(plan.get('filters'))
+    presence_query = (
+        plan.get('return_entities') is True
+        and not plan.get('projections')
+        and any(x['op'] == 'exists' for x in leaves)
+        and any(x['op'] == 'not_exists' for x in leaves)
+        and not re.search(r'\\b(?:list|show|return|display|get)\\s+[A-Za-z][A-Za-z0-9_]*',
+                          question, re.I))
     output_names = _explicit_property_requirements(output_clause, catalog)
     for predicate in _domain_qualified_output_requirements(output_clause, catalog):
-        if plan['operation']['type'] == 'select' and predicate not in projected:
+        if (plan['operation']['type'] == 'select' and predicate not in projected
+                and not (presence_query and predicate in filtered)):
             raise ValueError('Explicit domain-qualified projection omitted: ' + predicate)
     for name, predicate in output_names.items():
-        if plan['operation']['type'] == 'select' and predicate not in projected:
+        if (plan['operation']['type'] == 'select' and predicate not in projected
+                and not (presence_query and predicate in filtered)):
             raise ValueError('Explicit requested projection omitted: ' + predicate)
     if len(before_where) == 2:
         filter_names = _explicit_property_requirements(before_where[1], catalog)
