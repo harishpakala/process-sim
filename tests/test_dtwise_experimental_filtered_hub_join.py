@@ -630,5 +630,38 @@ class DomainBothPropertiesTests(unittest.TestCase):
             validate_ir(plan, self.schema)
 
 
+
+class PlanningModeIsolationTests(unittest.TestCase):
+    def test_llm_first_bypasses_template_planners(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            plan_experimental_multihop)
+        entity = {"domain": "AssetInventory", "shape": "urn:shape:Asset",
+                  "display_name": "Asset", "properties": []}
+        question = ("Which AssetInventory Asset entities have an "
+                    "AssetName containing reactor, ignoring case?")
+        with patch("process_sim.dtwise.experimental_multihop_cli.catalog_from_schema",
+                   return_value={"entities": [entity]}), patch(
+                "process_sim.dtwise.experimental_multihop_cli._focused_catalog",
+                return_value=({}, [])), patch(
+                "process_sim.dtwise.experimental_multihop_cli._plan_named_substring_lookup",
+                side_effect=AssertionError("Template invoked")), patch(
+                "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"), patch(
+                "process_sim.dtwise.experimental_evidence_selection.select_evidence_plan",
+                return_value=({"ir_version": "1.0"}, {"choice": "LLM"})) as selected:
+            plan, selection = plan_experimental_multihop(
+                question, {}, [], model="mock", ollama_host="http://localhost",
+                timeout=1, planning_mode="llm_first")
+        self.assertEqual(selection["choice"], "LLM")
+        selected.assert_called_once()
+
+    def test_invalid_planning_mode_fails_closed(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            plan_experimental_multihop)
+        with self.assertRaisesRegex(ValueError, "Unsupported experimental planning mode"):
+            plan_experimental_multihop(
+                "question", {}, [], model="mock", ollama_host="http://localhost",
+                timeout=1, planning_mode="unknown")
+
+
 if __name__ == "__main__":
     unittest.main()
