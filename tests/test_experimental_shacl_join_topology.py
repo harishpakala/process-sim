@@ -17,7 +17,7 @@ def fixture_paths():
     def record(owner, branch):
         return {"domain": "other", "kind": "property",
                 "node_uris": [root, plant, unit, owner],
-                "edges": common + [branch],
+                "edges": copy.deepcopy(common) + [branch],
                 "property": {"owner": owner, "predicate": "https://example.org/value"}}
     return {"prompt": {"domain": "other", "candidates": [
         {"id": "P1", "kind": "property"}, {"id": "P2", "kind": "property"}]},
