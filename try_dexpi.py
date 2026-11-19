@@ -107,6 +107,7 @@ def main() -> None:
         help="Single schema domain in the index (default: dexpi; e.g. ecad)",
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
+    parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
     parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
     parser.add_argument("--semantic-paths", action="store_true", help="Build verified paths from semantic rankings; optionally use --llm")
     parser.add_argument("--grouped", action="store_true", help="Separate shape/property ranks and group duplicate labels (requires --semantic)")
@@ -132,6 +133,8 @@ def main() -> None:
         parser.error("Supply a question for this domain")
 
     index = load_index(args.index, domain=args.domain)
+    if args.sparql and not (args.semantic_paths and args.llm):
+        parser.error("--sparql requires --semantic-paths --llm")
     if args.semantic_paths and args.semantic:
         parser.error("--semantic-paths and --semantic are separate modes")
     if args.grouped and not args.semantic:
@@ -180,6 +183,9 @@ def main() -> None:
                           candidate for candidate in prepared["prompt"]["candidates"]
                           if candidate["id"] in selection["selected_candidate_ids"]
                       ], "prepared": prepared}
+            if args.sparql:
+                from process_sim.dtwise.experimental_shacl_sparql import compile_selected_paths
+                result["queries"] = compile_selected_paths(prepared, selection)
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -192,6 +198,13 @@ def main() -> None:
                     print(" ", candidate["id"] + ".", candidate["path"])
                 if not result["selected_paths"]:
                     print("  (none)")
+                if args.sparql:
+                    print("Compiled SPARQL (not executed):")
+                    for item in result["queries"]:
+                        print(" ", item["candidate_id"] + ":")
+                        print(item["sparql"])
+                    if not result["queries"]:
+                        print("  (none)")
         elif args.json:
             print(json.dumps(prepared, indent=2, ensure_ascii=False))
         else:
