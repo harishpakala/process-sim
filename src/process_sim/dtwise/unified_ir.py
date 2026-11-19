@@ -344,6 +344,15 @@ def compile_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=N
         if op == 'exists': return 'FILTER EXISTS { ' + triple + ' }'
         if op == 'not_exists': return 'FILTER NOT EXISTS { ' + triple + ' }'
         literal = _literal(f['value'])
+        if op in ('starts_with', 'regex'):
+            if op == 'starts_with':
+                subject = 'LCASE(STR(' + v + '))' if f.get('ignore_case') else 'STR(' + v + ')'
+                prefix = 'LCASE(' + literal + ')' if f.get('ignore_case') else literal
+                expr = 'STRSTARTS(' + subject + ', ' + prefix + ')'
+            else:
+                flags = ', "i"' if f.get('ignore_case') else ''
+                expr = 'REGEX(STR(' + v + '), ' + literal + flags + ')'
+            return 'FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v + ') && ' + expr + ') }'
         expr = {'eq': f'isLiteral({v}) && STR({v}) = {literal}',
                 'neq': f'isLiteral({v}) && STR({v}) != {literal}',
                 'contains': f'isLiteral({v}) && CONTAINS(STR({v}), {literal})'}[op]
