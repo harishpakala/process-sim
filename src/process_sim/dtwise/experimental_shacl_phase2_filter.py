@@ -102,27 +102,29 @@ def run_phase2_filter_plan(index, prepared: dict, *, model="qwen2.5-coder:7b",
         raw = ollama_select(offered["prompt"], model=model, endpoint=endpoint,
                             transport=transport, system_prompt=PROMPT)
         plan = validate_filter_plan(raw, qualified)
-        # An explicit result owner constrains the LLM's selected result paths.
-        # Match complete shape tokens: EndPoint must not match PLCEndPoint.
+        # Resolve explicitly requested result owners from selected result paths,
+        # not from filter candidates or other unrelated offered properties.
         if plan["status"] == "selected":
-            result_candidates = {
-                c["id"]: c for c in offered["prompt"]["candidates"]
-                if c["id"] != plan["filter_id"]
-            }
+            result_clause = re.split(r"\\bwhere\\b", question, maxsplit=1, flags=re.I)[0]
             owners = {
-                cid: candidate["path"].split(" → ")[-2]
-                for cid, candidate in result_candidates.items()
-                if len(candidate["path"].split(" → ")) >= 2
+                cid: next(
+                    (c["path"].split(" → ")[-2]
+                     for c in offered["prompt"]["candidates"] if c["id"] == cid),
+                    "",
+                )
+                for cid in plan["result_ids"]
             }
             mentioned = {
-                owner for owner in set(owners.values())
-                if re.search(r"(?<![A-Za-z_0-9])" + re.escape(owner)
-                             + r"(?![A-Za-z_0-9])", question, re.I)
+                owner.casefold() for owner in owners.values()
+                if owner and re.search(
+                    r"(?<![A-Za-z_0-9])" + re.escape(owner) + r"(?![A-Za-z_0-9])",
+                    result_clause, re.I,
+                )
             }
             if len(mentioned) == 1:
                 explicit_owner = next(iter(mentioned))
                 kept = [cid for cid in plan["result_ids"]
-                        if owners.get(cid, "").casefold() == explicit_owner.casefold()]
+                        if owners[cid].casefold() == explicit_owner]
                 if kept and len(kept) != len(plan["result_ids"]):
                     plan = {**plan, "result_ids": kept,
                             "reason": "Explicit result owner excludes unrequested sibling paths"}
