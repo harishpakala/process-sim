@@ -137,6 +137,15 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         if op == 'contains' and f.get('ignore_case') is True:
             return ('FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v
                     + ') && CONTAINS(LCASE(STR(' + v + ')), LCASE(' + lit + '))) }')
+        if op in ('starts_with', 'regex'):
+            if op == 'starts_with':
+                subject = 'LCASE(STR(' + v + '))' if f.get('ignore_case') else 'STR(' + v + ')'
+                prefix = 'LCASE(' + lit + ')' if f.get('ignore_case') else lit
+                expr = 'STRSTARTS(' + subject + ', ' + prefix + ')'
+            else:
+                flags = ', "i"' if f.get('ignore_case') else ''
+                expr = 'REGEX(STR(' + v + '), ' + lit + flags + ')'
+            return 'FILTER EXISTS { ' + triple + ' FILTER(isLiteral(' + v + ') && ' + expr + ') }'
         expr = {'eq': f'isLiteral({v}) && STR({v}) = {lit}',
                 'neq': f'isLiteral({v}) && STR({v}) != {lit}',
                 'contains': f'isLiteral({v}) && CONTAINS(STR({v}), {lit})'}[op]
