@@ -108,6 +108,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--phase1-plan", action="store_true", help="Opt-in Qwen intent and qualified path selection (requires --semantic-paths --llm; no SPARQL)")
     parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
     parser.add_argument("--semantic-paths", action="store_true", help="Build verified paths from semantic rankings; optionally use --llm")
     parser.add_argument("--grouped", action="store_true", help="Separate shape/property ranks and group duplicate labels (requires --semantic)")
@@ -133,6 +134,8 @@ def main() -> None:
         parser.error("Supply a question for this domain")
 
     index = load_index(args.index, domain=args.domain)
+    if args.phase1_plan and (not args.semantic_paths or not args.llm or args.sparql):
+        parser.error("--phase1-plan requires --semantic-paths --llm and excludes --sparql")
     if args.sparql and not (args.semantic_paths and args.llm):
         parser.error("--sparql requires --semantic-paths --llm")
     if args.semantic_paths and args.semantic:
@@ -166,7 +169,24 @@ def main() -> None:
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         prepared = semantic_candidates(index, question, top_shapes=args.top_k,
                                        model=args.embed_model, endpoint=args.ollama_url)
-        if args.llm:
+        if args.phase1_plan:
+            from process_sim.dtwise.experimental_shacl_phase1_ollama import run_phase1_query_plan
+            result = run_phase1_query_plan(index, prepared, model=args.model,
+                                           endpoint=args.ollama_url)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status:", result["plan"]["status"].upper())
+                print("Operation:", result["plan"]["operation"])
+                print("Reason:", result["plan"]["reason"])
+                print("Selected qualified paths:")
+                for item in result["selected_paths"]:
+                    print(" ", item["id"] + ".", item["path"])
+                if not result["selected_paths"]:
+                    print("  (none)")
+        elif args.llm:
             from process_sim.dtwise.experimental_shacl_ollama import ollama_select
             from process_sim.dtwise.experimental_shacl_selection import validate_selection
             if prepared["prompt"]["candidates"]:
