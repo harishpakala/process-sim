@@ -675,7 +675,7 @@ class LLMContainsSelectionTests(unittest.TestCase):
         self.question = ("Which AssetInventory Asset entities have an "
                          "AssetName containing reactor, ignoring case?")
 
-    def select(self, filter_value):
+    def select(self, filter_value, question=None):
         from process_sim.dtwise.experimental_evidence_selection import select_evidence_plan
         response = {"message": {"content": __import__("json").dumps({
             "path_id": "PATH_0", "operation": "select",
@@ -683,7 +683,7 @@ class LLMContainsSelectionTests(unittest.TestCase):
         with patch("process_sim.dtwise.experimental_evidence_selection.resolve_shapes",
                    side_effect=lambda plan, index, mappings: plan):
             return select_evidence_plan(
-                self.question, self.paths, self.catalog, {}, [],
+                question or self.question, self.paths, self.catalog, {}, [],
                 model="mock", request_json=lambda *args: response,
                 ollama_host="http://localhost", timeout=1)
 
@@ -700,6 +700,22 @@ class LLMContainsSelectionTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "Case-insensitive substring requirement omitted"):
             self.select({"property": "N0P0", "op": "contains",
                          "value": "reactor"})
+
+    def test_equality_accepts_explicit_false_ignore_case(self):
+        plan, _ = self.select(
+            {"property": "N0P0", "op": "eq", "value": "Reactor",
+             "ignore_case": False},
+            question="For AssetInventory Asset where AssetName is Reactor, list AssetName.")
+        self.assertEqual(plan["filters"], {
+            "op": "eq", "entity": "n0", "predicate": self.predicate,
+            "value": "Reactor"})
+
+    def test_equality_rejects_true_ignore_case(self):
+        with self.assertRaisesRegex(ValueError, "Invalid evidence-selection filter"):
+            self.select(
+                {"property": "N0P0", "op": "eq", "value": "Reactor",
+                 "ignore_case": True},
+                question="For AssetInventory Asset where AssetName is Reactor, list AssetName.")
 
     def test_llm_invented_filter_property_rejected(self):
         with self.assertRaisesRegex(ValueError, "Invalid evidence-selection filter"):
