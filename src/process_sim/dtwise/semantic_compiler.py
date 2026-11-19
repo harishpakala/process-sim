@@ -72,6 +72,7 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
 
         can_prune = positive_conjunction(plan["where"])
         branches = []
+        seen_branches = set()
         for entity_id in plan["scope"]:
             mapping = by_shape.get(entity_id, {})
             missing = sorted({props[prop_id]["predicate"] for prop_id in used
@@ -86,7 +87,12 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
                            where=remap(plan["where"], mapping))
             branch = compile_semantic_plan(subplan, evidence,
                 graph_mode=graph_mode, graph_iri=graph_iri, limit=None)
-            branches.append("{ " + branch + " }")
+            # Different SHACL shapes may establish the same RDF class and
+            # predicate conditions. Identical compiled branches are
+            # semantically redundant, including for DISTINCT entity counts.
+            if branch not in seen_branches:
+                seen_branches.add(branch)
+                branches.append("{ " + branch + " }")
         if not branches:
             raise ValueError("No independently evidenced shape supports every required property")
         if plan["operation"] == "count":
