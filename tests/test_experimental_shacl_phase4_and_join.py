@@ -306,3 +306,35 @@ def test_graph_evidence_deduplicates_shared_edges(sample):
     keys = [(e["from"], e["predicate"], e["to"], e["property_shape"])
             for e in graph["edges"]]
     assert len(keys) == len(set(keys))
+
+
+def test_direct_intent_requests_schema_constrained_output(sample):
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    index, prepared, plan = sample
+    seen = {}
+
+    def capture(url, payload, timeout):
+        seen["format"] = payload["format"]
+        return {"message": {"content": json.dumps(_direct_intent(plan))}}
+
+    result = run_direct_join_intent(index, prepared, transport=capture)
+    assert seen["format"]["type"] == "object"
+    assert set(seen["format"]["required"]) == {
+        "domain", "operation", "result_property_ids", "join",
+        "boolean_operator", "filters",
+    }
+    assert result["sparql"].startswith("SELECT DISTINCT")
+
+
+def test_direct_intent_invalid_model_fields_abstains_without_sparql(sample):
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    index, prepared, _ = sample
+    raw = json.dumps({"status": "selected", "result_ids": ["P1", "P2"]})
+    result = run_direct_join_intent(index, prepared, transport=transport({
+        "status": "selected", "result_ids": ["P1", "P2"],
+    }))
+    assert result["intent"] is None
+    assert result["sparql"] is None
+    assert "missing=" in result["reason"]
+    assert "extra=" in result["reason"]
+    assert result["raw_model_response"] == raw
