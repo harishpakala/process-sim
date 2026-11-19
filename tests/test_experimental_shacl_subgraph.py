@@ -47,3 +47,53 @@ def test_root_to_instrumentation_evidence():
     result = index.extract([root, instrument], connect=True)
     assert any(e["predicate"].endswith("/hasInstrumentationFunction") for e in result["edges"])
     assert all(e["evidence"] for e in result["edges"])
+
+
+def _domain_index(domain):
+    return load_index(INDEX, domain=domain)
+
+
+def _assert_nested_path(domain, question, node_names, predicates, property_name):
+    result = extract_question(_domain_index(domain), question, connect=True)
+    assert {n["name"] for n in result["nodes"]} == set(node_names)
+    assert {e["predicate"].rsplit("/", 1)[-1] for e in result["edges"]} == set(predicates)
+    assert len(result["properties"]) == 1
+    assert result["properties"][0]["name"] == property_name
+    assert result["unresolved_connections"] == []
+    assert all(edge["evidence"] for edge in result["edges"])
+
+
+def test_opcua_nested_signal_mapping():
+    _assert_nested_path(
+        "opcuaconnectivity",
+        "Show OPCUANodeId of SignalMapping in TEP_OPCUAConnectivity",
+        {"TEP_OPCUAConnectivity", "SignalMapping"},
+        {"hasSignalMapping"},
+        "OPCUANodeId",
+    )
+
+
+def test_assetinventory_nested_asset():
+    _assert_nested_path(
+        "assetinventory",
+        "Show EquipmentTag of Asset in AssetInventory",
+        {"AssetInventory", "Asset"},
+        {"hasAsset"},
+        "EquipmentTag",
+    )
+
+
+def test_ecad_device_endpoint_not_symbol_or_plc():
+    result = extract_question(
+        _domain_index("ecad"),
+        "Show Address of EndPoint belonging to Device in ECAD",
+        connect=True,
+    )
+    assert {n["name"] for n in result["nodes"]} == {"ECAD", "Device", "EndPoint"}
+    assert len(result["nodes"]) == 3
+    assert len(result["edges"]) == 2
+    assert len(result["properties"]) == 1
+    assert result["properties"][0]["name"] == "Address"
+    assert result["unresolved_connections"] == []
+    assert "ambiguous_paths" not in result
+    assert all(e["evidence"] for e in result["edges"])
