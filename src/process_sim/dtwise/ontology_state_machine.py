@@ -98,8 +98,12 @@ def explore_ontology_path(question, catalog, mappings, start, end, *,
         raise ValueError("Decision budget exhausted before reaching target")
     # Binding re-enumerates and checks every selected SHACL/mapping edge.
     path = {"nodes": visited, "steps": steps}
+    resolved_projections = [
+        {**spec, "node_index": len(steps)} if spec.get("node_index") == -1
+        else spec for spec in projections
+    ]
     ir = bind_evidenced_path(
-        path, catalog, mappings, projections=projections,
+        path, catalog, mappings, projections=resolved_projections,
         filter_spec=filter_spec)
     return ir, {"status": "grounded", "mode": "ontology_explore",
                 "decisions": len(trace), "hops": len(steps),
