@@ -118,8 +118,14 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
         plan = validate_phase4_and_join_plan(raw, qualified)
         if plan["status"] == "selected" and tuple(f["value"] for f in plan["filters"]) != literals:
             raise SelectionContractError("Filter literals do not match question")
+    # Additive Phase 5.4 artifact: constructed only after independent validation.
+    # Lazy import avoids a module-level cycle with the intent adapter.
+    intent = None
+    if plan["status"] == "selected":
+        from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
+        intent = validated_join_intent(plan, qualified)
     return {"domain": index.domain, "question": question, "plan": plan,
-            "qualified": qualified}
+            "qualified": qualified, "intent": intent}
 
 
 def compile_phase4_and_join_sparql(result):
