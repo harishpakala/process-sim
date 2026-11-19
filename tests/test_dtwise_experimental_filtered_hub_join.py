@@ -454,5 +454,50 @@ class IdentifierAntiJoinTests(unittest.TestCase):
             compile_graph_ir(plan, schema, mappings=mappings, include_graph=True)
 
 
+
+class NamedSubstringLookupTests(unittest.TestCase):
+    def setUp(self):
+        self.predicate = "https://example.org/productcatalog/hasManufacturerName"
+        self.entity = {
+            "domain": "ProductCatalog", "shape": "https://example.org/shapes/Product",
+            "display_name": "Product", "properties": [self.predicate]}
+        self.catalog = {"entities": [self.entity]}
+        self.anchors = [("ProductCatalog", self.entity["shape"])]
+        self.question = ("Which ProductCatalog Product entities have a "
+                         "ManufacturerName containing Endress?")
+
+    def test_b33_contains_filter_preserved(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_substring_lookup)
+        with patch("process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"), patch(
+                "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                side_effect=lambda plan, index, mappings: plan):
+            plan, selection = _plan_named_substring_lookup(
+                self.question, self.catalog, {"productcatalog"},
+                self.anchors, {}, [])
+        self.assertEqual(selection["choice"], "VERIFIED_NAMED_SUBSTRING_LOOKUP")
+        self.assertEqual(plan["filters"], {
+            "op": "contains", "entity": "n0",
+            "predicate": self.predicate, "value": "Endress"})
+        self.assertTrue(plan["return_entities"])
+        self.assertEqual(plan["projections"][0]["predicate"], self.predicate)
+
+    def test_b33_missing_property_fails_closed(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_substring_lookup)
+        self.entity["properties"] = []
+        with self.assertRaisesRegex(ValueError, "missing or ambiguous"):
+            _plan_named_substring_lookup(
+                self.question, self.catalog, {"productcatalog"},
+                self.anchors, {}, [])
+
+    def test_b33_does_not_accept_unrelated_question(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_substring_lookup)
+        self.assertIsNone(_plan_named_substring_lookup(
+            "Which ProductCatalog Product entities have a ManufacturerName equal to Endress?",
+            self.catalog, {"productcatalog"}, self.anchors, {}, []))
+
+
 if __name__ == "__main__":
     unittest.main()
