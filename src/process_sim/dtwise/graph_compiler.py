@@ -26,6 +26,18 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
             return body
         graph = fixed if graph_mode == 'selected' else '?graph_' + alias
         return 'GRAPH ' + graph + ' { ' + body + ' }'
+    anti = ir.get('anti_join')
+    if anti is not None:
+        if graph_mode != 'all_named' or include_graph:
+            raise ValueError('Anti-join requires all_named graphs without graph provenance')
+        edge = ir['edges'][0]  # validate_ir verifies this exact mapping edge.
+        source, target = anti['from'], anti['to']
+        left = scoped(source, f'?{source} {_iri(edge["left_predicate"])} ?anti_key .')
+        right = scoped(target, f'?{target} {_iri(edge["right_predicate"])} ?anti_other .')
+        return ('SELECT DISTINCT ?' + source + '\nWHERE {\n'
+                + '  ' + left + '\n'
+                + '  FILTER NOT EXISTS { ' + right
+                + ' FILTER(STR(?anti_key) = STR(?anti_other)) }\n}')
     parts = []
     anchor = set()
     for i, e in enumerate(ir.get('edges', [])):
