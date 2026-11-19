@@ -65,6 +65,7 @@ def validate_semantic_selection_v2(
         raise ValueError("Invalid semantic filters")
     for f in filters:
         if (not isinstance(f, dict) or set(f) != {"property", "op", "value"}
+                or not isinstance(f["property"], str)
                 or f["property"] not in property_ids
                 or f["op"] not in ("eq", "contains")
                 or not isinstance(f["value"], str)
@@ -74,9 +75,9 @@ def validate_semantic_selection_v2(
     # interpreting benchmark wording or silently inserting constraints.
     optional_properties = selection.get("optional_properties", [])
     if (not isinstance(optional_properties, list)
-            or len(optional_properties) != len(set(optional_properties))
             or not all(isinstance(p, str) and p in property_ids
                        for p in optional_properties)
+            or len(optional_properties) != len(set(optional_properties))
             or any(p not in projections for p in optional_properties)
             or (operation != "select" and optional_properties)):
         raise ValueError("Invalid optional projection evidence IDs")
@@ -100,12 +101,14 @@ def validate_semantic_selection_v2(
                 node["condition"], depth + 1)}
         if op in ("exists", "missing"):
             if (set(node) != {"op", "property"}
+                    or not isinstance(node["property"], str)
                     or node["property"] not in property_ids):
                 raise ValueError("Invalid property existence condition")
             return {"op": op, "property": node["property"]}
         if op in ("eq", "contains", "starts_with", "regex"):
             if (set(node) not in ({"op", "property", "value"},
                                   {"op", "property", "value", "ignore_case"})
+                    or not isinstance(node["property"], str)
                     or node["property"] not in property_ids
                     or not isinstance(node["value"], str)
                     or len(node["value"]) > 1000
@@ -132,6 +135,7 @@ def validate_semantic_selection_v2(
     if order_by is not None:
         if (not isinstance(order_by, dict)
                 or set(order_by) != {"property", "direction"}
+                or not isinstance(order_by["property"], str)
                 or order_by["property"] not in property_ids
                 or order_by["direction"] not in ("asc", "desc")
                 or operation != "select"):
