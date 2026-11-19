@@ -20,7 +20,14 @@ def explicit_property_names(question: str) -> list[str]:
     """Extract only unambiguous schema-style property identifiers."""
     matches = []
     for pattern in (_BEFORE, _AFTER, _QUOTED_AFTER):
-        matches.extend((match.start(1), match.group(1)) for match in pattern.finditer(question))
+        for match in pattern.finditer(question):
+            # "Show property Address" contains the command "Show", not a
+            # property named Show. Keep the parser conservative.
+            if pattern is _BEFORE and match.group(1).casefold() in {
+                "show", "find", "get", "list", "display", "return", "select",
+            }:
+                continue
+            matches.append((match.start(1), match.group(1)))
     return list(dict.fromkeys(name for _, name in sorted(matches)))
 
 
