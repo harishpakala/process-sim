@@ -9,7 +9,7 @@ from __future__ import annotations
 import re
 
 # Restrict detection to CamelCase/PascalCase schema identifiers or quoted names.
-_IDENTIFIER = r"[A-Z][A-Za-z0-9_]*[A-Z][A-Za-z0-9_]*"
+_IDENTIFIER = r"[A-Z][A-Za-z0-9_]*"
 _QUOTED = r"[\"']([^\"']+)[\"']"
 _BEFORE = re.compile(r"\b(" + _IDENTIFIER + r")\s+propert(?:y|ies)\b")
 _AFTER = re.compile(r"\bpropert(?:y|ies)\s+(?:named\s+|called\s+)?(" + _IDENTIFIER + r")\b", re.I)
