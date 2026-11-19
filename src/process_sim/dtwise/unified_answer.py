@@ -691,7 +691,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
         and not plan.get('projections')
         and any(x['op'] == 'exists' for x in leaves)
         and any(x['op'] == 'not_exists' for x in leaves)
-        and not re.search(r'\\b(?:list|show|return|display|get)\\s+[A-Za-z][A-Za-z0-9_]*',
+        and not re.search(r'\b(?:list|show|return|display|get)\s+[A-Za-z][A-Za-z0-9_]*',
                           question, re.I))
     output_names = _explicit_property_requirements(output_clause, catalog)
     for predicate in _domain_qualified_output_requirements(output_clause, catalog):
