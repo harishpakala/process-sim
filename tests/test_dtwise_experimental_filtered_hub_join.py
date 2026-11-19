@@ -752,5 +752,51 @@ class ExplicitOutputClauseTests(unittest.TestCase):
                            "steps": []}])
 
 
+
+class EvidenceSubgraphSelectionTests(unittest.TestCase):
+    def setUp(self):
+        self.nodes = [
+            ("Hub", "urn:Hub"), ("LeafA", "urn:LeafA"),
+            ("LeafB", "urn:LeafB"), ("LeafC", "urn:LeafC")]
+        self.catalog = {"entities": [
+            {"domain": d, "shape": shape, "display_name": d,
+             "properties": ["urn:hasAssetIdentifier"]}
+            for d, shape in self.nodes]}
+        self.mappings = [
+            {"id": "m" + str(i), "verified": True, "evidence_ids": ["ev"],
+             "left_domain": "Hub", "right_domain": d,
+             "left_property": "urn:hasAssetIdentifier",
+             "right_property": "urn:hasAssetIdentifier"}
+            for i, (d, _) in enumerate(self.nodes[1:])]
+
+    def select(self, ids):
+        import json
+        from process_sim.dtwise.experimental_subgraph_selection import (
+            select_evidence_subgraph)
+        response = {"message": {"content": json.dumps({"edge_ids": ids})}}
+        with patch("process_sim.dtwise.experimental_subgraph_selection.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan):
+            return select_evidence_subgraph(
+                "Join Hub, LeafA, LeafB, and LeafC using AssetIdentifier.",
+                self.nodes, self.catalog, {}, self.mappings,
+                model="mock", request_json=lambda *args: response,
+                ollama_host="http://localhost", timeout=1)
+
+    def test_verified_spanning_tree_generates_four_entity_ir(self):
+        plan, selection = self.select(["E0", "E1", "E2"])
+        self.assertEqual(len(plan["entities"]), 4)
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertTrue(plan["return_entities"])
+        self.assertEqual(selection["choice"], "VERIFIED_CONNECTED_SUBGRAPH")
+
+    def test_missing_spoke_rejected(self):
+        with self.assertRaisesRegex(ValueError, "spanning tree"):
+            self.select(["E0", "E1"])
+
+    def test_invented_edge_rejected(self):
+        with self.assertRaisesRegex(ValueError, "Unknown or repeated"):
+            self.select(["E0", "E1", "E99"])
+
+
 if __name__ == "__main__":
     unittest.main()
