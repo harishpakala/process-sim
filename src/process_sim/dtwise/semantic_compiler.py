@@ -32,24 +32,40 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
             else:
                 used.add(node["property_id"])
         visit(plan["where"])
-        owners = {props[p]["entity_id"] for p in used}
-        if len(owners) > 1:
-            raise ValueError("Independent scope cannot combine properties owned by distinct shapes")
-        # An independent branch must have explicit type membership evidence.
-        # A shape without a target class cannot safely contribute to a
-        # domain-wide union, even if its properties overlap another shape.
+        # A predicate is a global RDF IRI, but its evidence ID belongs to
+        # one SHACL shape. Rebind every filter to an independently evidenced
+        # property of each branch, matching exact predicate IRIs only.
+        # Never equate properties by labels or invent an ownership edge.
         for entity_id in plan["scope"]:
             if not entities[entity_id].get("target_classes"):
                 raise ValueError("Independent scope requires verified targetClass for every shape")
+        by_shape = {}
+        for prop in evidence.properties:
+            by_shape.setdefault(prop["entity_id"], {})[prop["predicate"]] = prop["id"]
+
+        def remap(node, mapping):
+            if node is None:
+                return None
+            op = node["operator"]
+            if op in ("and", "or"):
+                return {"operator": op, "conditions": [
+                    remap(child, mapping) for child in node["conditions"]]}
+            if op == "not":
+                return {"operator": "not", "condition": remap(node["condition"], mapping)}
+            predicate = props[node["property_id"]]["predicate"]
+            if predicate not in mapping:
+                raise ValueError(
+                    "Independent scope lacks verified property ownership for "
+                    + predicate + " in one or more selected shapes")
+            return dict(node, property_id=mapping[predicate])
+
         branches = []
         for entity_id in plan["scope"]:
-            if owners and entity_id not in owners:
-                continue
             subplan = dict(plan, scope=[entity_id], scope_mode="single",
-                           operation="select_entities")
+                           operation="select_entities",
+                           where=remap(plan["where"], by_shape.get(entity_id, {})))
             branch = compile_semantic_plan(subplan, evidence,
                 graph_mode=graph_mode, graph_iri=graph_iri, limit=None)
-            # Subquery returns ?entity; UNION branches never imply joins.
             branches.append("{ " + branch + " }")
         if not branches:
             raise ValueError("No eligible independent entity branches")
