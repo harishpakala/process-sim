@@ -186,6 +186,16 @@ def test_explicit_endpoint_owner_prunes_llm_plc_overselection(sample):
     index.shapes[plc] = {"labels": ["PLCEndPoint"]}
     index.properties[plc] = [address]
     index.edges = [*index.edges, edge]
+    # A separate Device-owned property used to suppress the old owner guard.
+    device_type = {"owner": device, "predicate": "https://example.org/deviceType",
+                   "property_shape": "urn:DeviceType", "name": "DeviceType"}
+    index.properties[device].append(device_type)
+    prepared["prompt"]["candidates"].append({
+        "id": "C4", "path": "ECAD → Device → DeviceType"})
+    prepared["registry"]["C4"] = {
+        "node_uris": [root, device], "edges": [index.edges[0]],
+        "property": device_type,
+    }
     prepared["prompt"]["question"] = (
         "Show Address of EndPoint belonging to Device where Device LocalId = FI_101 in ECAD"
     )
