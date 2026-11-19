@@ -65,6 +65,7 @@ class SemanticV2AdapterTests(unittest.TestCase):
         self.assertEqual(plan["filters"], {
             "op": "eq", "entity": "n0",
             "predicate": "urn:hasAssetIdentifier", "value": "FI103"})
+        self.assertEqual(plan["projections"][0]["predicate"], "urn:hasSignalName")
 
     def test_order_and_limit(self):
         selection = {**self.selection,
