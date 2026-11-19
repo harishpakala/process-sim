@@ -12,7 +12,7 @@ from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_c
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 from process_sim.dtwise.experimental_shacl_sparql import _iri
 
-PROMPT = """Plan one RETRIEVE result with exactly TWO string equality filters joined by AND.
+PROMPT = """Plan one or more RETRIEVE results with exactly TWO string equality filters joined by AND.
 Use only verified PROPERTY candidate IDs. Do not write SPARQL.
 Return ONLY JSON with exactly: status ("selected", "ambiguous", "unresolved"),
 result_id (P ID or null), filters (array of two objects each with exactly
@@ -21,13 +21,13 @@ value (string)), result_meaning (string or null), reason (nonempty string).
 For selected status, result_meaning must be the complete owner.property
 (e.g. EndPoint.Address), and each filter owner/property must describe
 the selected candidate exactly.
-For non-selected status use result_id null, result_meaning null and filters [].
+For multiple results use result_ids (array of P IDs) and result_meanings\n(array of corresponding owner.property strings) INSTEAD of result_id/result_meaning.\nIf both EndPoint and PLCEndPoint Addresses are requested, select both paths.\nFor non-selected status use result_id null, result_meaning null and filters [].
 Both filter owners must be on the result path, either ancestor or result owner.
 Copy literal values exactly from the question and keep their condition order.
 No OR, COUNT, EXISTS, numeric comparison, aggregation, cross-branch joins or
-multiple result properties. Abstain if unsupported or ambiguous."""
+cross-branch filter joins. For multiple results, both filters must be\nshared ancestors or owners on EVERY result path; compile separate queries.\nAbstain if unsupported or ambiguous."""
 
-FIELDS = {"status", "result_id", "result_meaning", "filters", "reason"}
+FIELDS = {"status", "result_id", "result_meaning", "filters", "reason"}\nMULTI_FIELDS = {"status", "result_ids", "result_meanings", "filters", "reason"}
 FILTER_FIELDS = {"filter_id", "owner", "property", "operator", "value"}
 UNSUPPORTED = re.compile(
     r"\b(how many|count|exists|does any|is there|are there|average|sum|"
@@ -53,18 +53,27 @@ def validate_phase3_plan(raw, qualified):
         return raw
     offered = {c["id"] for c in qualified["prompt"]["candidates"]
                if c["kind"] == "property"}
-    if raw["result_id"] not in offered:
+    if multi:
+        result_ids = raw["result_ids"]
+        meanings = raw["result_meanings"]
+        if (not isinstance(result_ids, list) or len(result_ids) < 2 or
+                not isinstance(meanings, list) or len(meanings) != len(result_ids) or
+                len(set(result_ids)) != len(result_ids)):
+            raise SelectionContractError("Invalid multiple result selections")
+    else:
+        result_ids = [raw["result_id"]]
+        meanings = [raw["result_meaning"]]
+    if any(rid not in offered for rid in result_ids):
         raise SelectionContractError("Unknown result property ID")
     filters = raw["filters"]
     if not isinstance(filters, list) or len(filters) != 2:
         raise SelectionContractError("Exactly two filters required")
-    result = qualified["registry"][raw["result_id"]]
-    result_candidate = next(c for c in qualified["prompt"]["candidates"]
-                            if c["id"] == raw["result_id"])
-    result_path = result_candidate["path"]
-    expected_meaning = ".".join(result_path.split(" → ")[-2:])
-    if raw["result_meaning"] != expected_meaning:
-        raise SelectionContractError("Result interpretation does not match candidate")
+    candidates = {c["id"]: c for c in qualified["prompt"]["candidates"]}
+    for rid, meaning in zip(result_ids, meanings):
+        result_path = candidates[rid]["path"]
+        expected_meaning = ".".join(result_path.split(" → ")[-2:])
+        if meaning != expected_meaning:
+            raise SelectionContractError("Result interpretation does not match candidate")
     for item in filters:
         if not isinstance(item, dict) or set(item) != FILTER_FIELDS:
             raise SelectionContractError("Invalid Phase 3 filter fields")
@@ -140,6 +149,15 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
         if plan["status"] == "selected":
             if [f["value"] for f in plan["filters"]] != literals:
                 raise SelectionContractError("Filter values do not match question literals")
+            if "result_ids" in plan:
+                question_results = re.search(
+                    r"\\bboth\\s+EndPoint\\s+and\\s+PLCEndPoint\\b",
+                    question, flags=re.I)
+                if not question_results:
+                    raise SelectionContractError("Multiple results not explicitly requested")
+                selected_meanings = set(plan["result_meanings"])
+                if selected_meanings != {"EndPoint.Address", "PLCEndPoint.Address"}:
+                    raise SelectionContractError("Multiple results do not match requested properties")
             for item, (owner, prop, value) in zip(plan["filters"], grounding):
                 if (item["owner"].casefold(), item["property"].casefold(), item["value"]) != (
                         owner.casefold(), prop.casefold(), value):
@@ -163,7 +181,7 @@ def compile_phase3_and_sparql(result):
     if selected["property"]["owner"] != nodes[-1]:
         raise ValueError("Invalid result property owner")
     triples.append(f"  ?n{len(nodes)-1} {_iri(selected['property']['predicate'])} ?value .")
-    for i, item in enumerate(plan["filters"], 1):
+    for i, item in enumerate(filters, 1):
         filtr = registry[item["filter_id"]]
         if filtr["property"]["owner"] != filtr["node_uris"][-1]:
             raise ValueError("Invalid filter property owner")
