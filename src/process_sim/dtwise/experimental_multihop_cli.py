@@ -448,6 +448,40 @@ def _plan_named_identifier_anti_join(question, catalog, mappings, anchors,
         "choice": "VERIFIED_IDENTIFIER_ANTI_JOIN"}
 
 
+def _plan_domain_both_properties(question, catalog):
+    """Find same-domain entities with both evidenced predicates."""
+    match = re.fullmatch(
+        r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+both\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+and\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s*\?\s*", question, re.I)
+    if not match:
+        return None
+    domain, left_name, right_name = match.groups()
+    candidates = [e for e in catalog["entities"]
+                  if e["domain"].casefold() == domain.casefold()]
+    if not candidates:
+        raise ValueError("Unknown domain for both-property lookup")
+    def paths(name):
+        return sorted({(e["shape"], predicate)
+                       for e in candidates for predicate in e["properties"]
+                       if re.split(r"[/#]", predicate)[-1].casefold()
+                       in {name.casefold(), ("has" + name).casefold()}})
+    left, right = paths(left_name), paths(right_name)
+    if not left or not right or left_name.casefold() == right_name.casefold():
+        raise ValueError("Both requested properties require distinct evidenced predicates")
+    plan = {
+        "ir_version": "1.0", "entities": [], "edges": [],
+        "projections": [], "filters": None,
+        "operation": {"type": "select"}, "return_entities": True,
+        "domain_both_properties": {
+            "domain": candidates[0]["domain"],
+            "properties": [left_name, right_name],
+            "paths": [[list(p) for p in left], [list(p) for p in right]]},
+    }
+    return plan, {"status": "evidence_semantic_grounded",
+                  "choice": "VERIFIED_DOMAIN_BOTH_PROPERTIES"}
+
+
 def _plan_domain_regex_lookup(question, catalog, mentioned):
     """Match domain-wide regex requests against all evidenced property owners."""
     match = re.fullmatch(
@@ -515,6 +549,10 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
+    domain_both = _plan_domain_both_properties(question, catalog)
+    if domain_both is not None:
+        return domain_both
+
     domain_regex = _plan_domain_regex_lookup(question, catalog, mentioned)
     if domain_regex is not None:
         return domain_regex
