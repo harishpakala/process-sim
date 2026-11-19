@@ -42,6 +42,17 @@ class SemanticLlmV2Tests(unittest.TestCase):
         self.assertEqual(result["operation"], "group_count")
         self.assertEqual(len(calls), 1)
 
+    def test_compact_prompt_preserves_all_selection_ids(self):
+        _, calls = self.run_selection([self.valid])
+        user = json.loads(calls[0]["messages"][1]["content"])
+        self.assertEqual(len(user["evidence_paths"]), 2)
+        self.assertEqual(user["evidence_paths"][0][0], "PATH_0")
+        self.assertEqual(user["evidence_paths"][0][1][0][0], "N0")
+        self.assertEqual(
+            [p[0] for p in user["evidence_paths"][0][2]],
+            ["N0P0", "N0P1"])
+        self.assertEqual(user["evidence_paths"][0][2][1][1], "SignalName")
+
     def test_repair_after_invalid_filter(self):
         invalid = {**self.valid, "filters": [
             {"property": "N0P1", "op": "gt", "value": "3"}]}
