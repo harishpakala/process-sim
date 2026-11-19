@@ -109,6 +109,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--phase3-and", action="store_true", help="Opt-in RETRIEVE with two AND string equality filters; compile only")
     parser.add_argument("--phase2-filter", action="store_true", help="Opt-in RETRIEVE with one string equality filter; compile SPARQL only")
     parser.add_argument("--phase1-sparql", action="store_true", help="Compile Phase 1 verified RETRIEVE paths to read-only SPARQL (not executed)")
     parser.add_argument("--timing", action="store_true", help="Show stage latency for --phase1-plan")
@@ -137,7 +138,9 @@ def main() -> None:
     if question is None:
         parser.error("Supply a question for this domain")
 
-    if args.phase2_filter and (not args.semantic_paths or not args.llm or args.phase1_plan or args.phase1_sparql or args.sparql):
+    if args.phase3_and and (not args.semantic_paths or not args.llm or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
+        parser.error("--phase3-and requires --semantic-paths --llm and excludes other plan/SPARQL modes")
+    if args.phase2_filter and (not args.semantic_paths or not args.llm or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase3_and):
         parser.error("--phase2-filter requires --semantic-paths --llm and excludes other plan/SPARQL modes")
     if args.phase1_sparql and not args.phase1_plan:
         parser.error("--phase1-sparql requires --phase1-plan")
@@ -182,12 +185,28 @@ def main() -> None:
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         t_retrieval = perf_counter()
         prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if args.phase2_filter else args.top_k,
-                                       top_properties=8 if args.phase2_filter else 2,
-                                       max_candidates=128 if args.phase2_filter else 64,
+                                       top_properties=8 if (args.phase2_filter or args.phase3_and) else 2,
+                                       max_candidates=128 if (args.phase2_filter or args.phase3_and) else 64,
                                        model=args.embed_model, endpoint=args.ollama_url)
         if timings is not None:
             timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
-        if args.phase2_filter:
+        if args.phase3_and:
+            from process_sim.dtwise.experimental_shacl_phase3_and import (
+                run_phase3_and_plan, compile_phase3_and_sparql,
+            )
+            result = run_phase3_and_plan(index, prepared, model=args.model,
+                                         endpoint=args.ollama_url)
+            result["sparql"] = compile_phase3_and_sparql(result)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status:", result["plan"]["status"].upper())
+                print("Reason:", result["plan"]["reason"])
+                print("Compiled SPARQL (not executed):")
+                print(result["sparql"] or "  (none)")
+        elif args.phase2_filter:
             from process_sim.dtwise.experimental_shacl_phase2_filter import (
                 run_phase2_filter_plan, compile_phase2_filter_sparql,
             )
