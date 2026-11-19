@@ -617,6 +617,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
         output_clause = re.split(
             r"\b(?:associated\s+with|through|via|using|where)\b",
             question, maxsplit=1, flags=re.I)[0]
+        # A JOIN statement declares entity participants and join keys, not
+        # output properties. Without an explicit projection clause there is
+        # no property owner to infer.
+        if re.match(r"^\s*join\b", question, re.I):
+            output_clause = ""
     # A count of named entities requests an aggregate, not a property projection.
     # Do not infer extra target shapes from incidental property-name matches.
     is_entity_count = bool(re.match(
