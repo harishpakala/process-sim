@@ -295,3 +295,83 @@ def test_llm_candidates_budget_rejects_excess():
     result = extract_question(_domain_index("ecad"), "Show Address in ECAD", connect=True)
     with pytest.raises(ValueError, match="Candidate budget exceeded"):
         prepare_candidates(result, max_candidates=2)
+
+
+def _prepared_ecad_selection():
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+    return prepare_candidates(
+        extract_question(_domain_index("ecad"), "Show Address in ECAD", connect=True)
+    )
+
+
+def test_llm_selection_contract_accepts_known_id_from_json():
+    import json
+    from process_sim.dtwise.experimental_shacl_selection import validate_selection
+
+    response = {"status": "selected", "selected_candidate_ids": ["C1"],
+                "reason": "Device EndPoint specified"}
+    assert validate_selection(json.dumps(response), _prepared_ecad_selection()) == response
+
+
+def test_llm_selection_contract_preserves_ambiguity():
+    from process_sim.dtwise.experimental_shacl_selection import validate_selection
+
+    response = {"status": "ambiguous", "selected_candidate_ids": [],
+                "reason": "Four equally plausible Address paths"}
+    assert validate_selection(response, _prepared_ecad_selection()) == response
+
+
+def test_llm_selection_contract_accepts_multiple_branches():
+    from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+    from process_sim.dtwise.experimental_shacl_selection import validate_selection
+
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction belonging to the same DEXPI",
+        connect=True,
+    )
+    prepared = prepare_candidates(result)
+    response = {"status": "selected", "selected_candidate_ids": ["C1", "C2"],
+                "reason": "Both properties requested"}
+    assert validate_selection(response, prepared) == response
+
+
+def test_llm_selection_contract_rejects_invalid_responses():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_selection import (
+        SelectionContractError, validate_selection,
+    )
+
+    prepared = _prepared_ecad_selection()
+    invalid = [
+        "not json",
+        "[]",
+        {"status": "selected", "selected_candidate_ids": ["C99"], "reason": "invented"},
+        {"status": "selected", "selected_candidate_ids": [], "reason": "empty"},
+        {"status": "ambiguous", "selected_candidate_ids": ["C1"], "reason": "contradiction"},
+        {"status": "unresolved", "selected_candidate_ids": ["C1"], "reason": "contradiction"},
+        {"status": "selected", "selected_candidate_ids": ["C1", "C1"], "reason": "duplicate"},
+        {"status": "selected", "selected_candidate_ids": ["C1"], "reason": ""},
+        {"status": "selected", "selected_candidate_ids": "C1", "reason": "wrong type"},
+        {"status": "selected", "selected_candidate_ids": ["C1"], "reason": "extra", "domain": "dexpi"},
+        {"status": "guess", "selected_candidate_ids": [], "reason": "invalid status"},
+    ]
+    for response in invalid:
+        with pytest.raises(SelectionContractError):
+            validate_selection(response, prepared)
+
+
+def test_llm_selection_contract_rejects_registry_mismatch():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_selection import (
+        SelectionContractError, validate_selection,
+    )
+
+    prepared = _prepared_ecad_selection()
+    prepared["registry"].pop("C1")
+    with pytest.raises(SelectionContractError, match="registry disagree"):
+        validate_selection(
+            {"status": "selected", "selected_candidate_ids": ["C2"], "reason": "test"},
+            prepared,
+        )
