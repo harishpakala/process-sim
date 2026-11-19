@@ -82,3 +82,21 @@ The reports contain status, results and planning/compilation/GraphDB timings.
 These calls have **not** been executed on the user's local services by the
 GitHub integration. Check exact answer sets and output status before extending
 to other questions.
+
+## Instrumented focused grounding
+
+The `ontology_explore` adapter now uses the existing domain-focused SHACL
+catalog for non-traversal questions; traversal questions retain the full shape
+catalog. This is a prompt-scoping optimization, not new OWL axiom retrieval.
+The full catalog is still used for path validation.
+
+Add `--prompt-diagnostics explore-b01-diagnostics.json` to an ontology
+exploration CLI invocation to capture `grounding_shape_count`,
+`full_shape_count`, `llm_calls`, `prompt_tokens`,
+`generated_tokens`, and per-request wall time. Token counts are reported
+only when Ollama provides them. Compare against the original B01 timing and
+verify exact answer values before interpreting latency changes.
+
+The current CLI's `hybrid` diagnostic format is not identical to the new
+ontology exploration metrics; do not assume token-count parity until both
+instrumentation paths are normalized.
