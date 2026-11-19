@@ -90,7 +90,7 @@ def plan_ontology_explore(question, index, mappings, *, model,
     }
     if keep_alive is not None:
         payload["keep_alive"] = keep_alive
-    response = request_json(
+    response = measured_request(
         ollama_host.rstrip("/") + "/api/chat", payload, timeout)
     try:
         decision = json.loads(response["message"]["content"])
