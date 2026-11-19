@@ -8,6 +8,26 @@ import json
 from .semantic_selection_v2 import validate_semantic_selection_v2
 
 
+def _compact_evidence_paths(candidates):
+    """Lossless selection IDs with concise display evidence.
+
+    Original candidates remain authoritative for validation and IR binding.
+    Avoid repeating JSON object keys and long mapping predicates in the
+    model-facing catalog; no path, node, or property is filtered out.
+    """
+    compact = []
+    for candidate in candidates:
+        nodes = [[n["id"], n.get("domain", ""), n.get("shape", "")]
+                 for n in candidate["nodes"]]
+        properties = [[p["id"], p.get("label", "")]
+                      for p in candidate["properties"]]
+        steps = [[s["kind"], s.get("mapping_id", ""),
+                  s.get("predicate", "").rsplit("#", 1)[-1].rsplit("/", 1)[-1]]
+                 for s in candidate["steps"]]
+        compact.append([candidate["id"], nodes, properties, steps])
+    return compact
+
+
 def select_semantic_v2(question, candidates, *, model, request_json,
                        ollama_host, timeout, keep_alive=None,
                        diagnostics=None):
@@ -60,7 +80,9 @@ def select_semantic_v2(question, candidates, *, model, request_json,
     messages = [
         {"role": "system", "content": system},
         {"role": "user", "content": json.dumps(
-            {"question": question, "evidence_paths": candidates},
+            {"question": question,
+             "evidence_format": "[path_id, nodes[[node_id,domain,shape]], properties[[property_id,label]], steps[[kind,mapping_id,predicate_label]]]",
+             "evidence_paths": _compact_evidence_paths(candidates)},
             ensure_ascii=False)},
     ]
     attempts = []
