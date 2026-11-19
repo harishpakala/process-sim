@@ -43,9 +43,10 @@ def sample():
            if c["kind"] == "property"}
     plan = {"status": "selected",
             "result_id": ids["ECAD → Device → EndPoint → Address"],
+            "result_meaning": "EndPoint.Address",
             "filters": [
-                {"filter_id": ids["ECAD → Device → LocalId"], "operator": "=", "value": "FI_101"},
-                {"filter_id": ids["ECAD → Device → EndPoint → LocalId"], "operator": "=", "value": "EP_202"},
+                {"filter_id": ids["ECAD → Device → LocalId"], "owner": "Device", "property": "LocalId", "operator": "=", "value": "FI_101"},
+                {"filter_id": ids["ECAD → Device → EndPoint → LocalId"], "owner": "EndPoint", "property": "LocalId", "operator": "=", "value": "EP_202"},
             ], "reason": "Both filters belong to result path"}
     return index, prepared, plan
 
@@ -101,4 +102,18 @@ def test_duplicate_filters_rejected(sample):
     index, prepared, plan = sample
     plan["filters"][1] = dict(plan["filters"][0])
     with pytest.raises(SelectionContractError, match="Duplicate"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_mismatched_result_interpretation_rejected(sample):
+    index, prepared, plan = sample
+    plan["result_meaning"] = "PLCEndPoint.Address"
+    with pytest.raises(SelectionContractError, match="Result interpretation"):
+        run_phase3_and_plan(index, prepared, transport=transport(plan))
+
+
+def test_mismatched_filter_interpretation_rejected(sample):
+    index, prepared, plan = sample
+    plan["filters"][0]["owner"] = "EndPoint"
+    with pytest.raises(SelectionContractError, match="Filter interpretation"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
