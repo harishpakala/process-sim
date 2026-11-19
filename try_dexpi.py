@@ -11,6 +11,7 @@ import argparse
 from collections import defaultdict
 import json
 from pathlib import Path
+from time import perf_counter
 
 from process_sim.dtwise.experimental_shacl_subgraph import (
     extract_question,
@@ -108,6 +109,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--timing", action="store_true", help="Show stage latency for --phase1-plan")
     parser.add_argument("--phase1-plan", action="store_true", help="Opt-in Qwen intent and qualified path selection (requires --semantic-paths --llm; no SPARQL)")
     parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
     parser.add_argument("--semantic-paths", action="store_true", help="Build verified paths from semantic rankings; optionally use --llm")
@@ -133,7 +135,12 @@ def main() -> None:
     if question is None:
         parser.error("Supply a question for this domain")
 
+    if args.timing and not args.phase1_plan:
+        parser.error("--timing currently requires --phase1-plan")
+    t_total = perf_counter()
+    t_index = perf_counter()
     index = load_index(args.index, domain=args.domain)
+    timings = {"index_loading_ms": (perf_counter() - t_index) * 1000} if args.timing else None
     if args.phase1_plan and (not args.semantic_paths or not args.llm or args.sparql):
         parser.error("--phase1-plan requires --semantic-paths --llm and excludes --sparql")
     if args.sparql and not (args.semantic_paths and args.llm):
@@ -167,12 +174,18 @@ def main() -> None:
                 print("  (none)")
             return
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+        t_retrieval = perf_counter()
         prepared = semantic_candidates(index, question, top_shapes=args.top_k,
                                        model=args.embed_model, endpoint=args.ollama_url)
+        if timings is not None:
+            timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
         if args.phase1_plan:
             from process_sim.dtwise.experimental_shacl_phase1_ollama import run_phase1_query_plan
             result = run_phase1_query_plan(index, prepared, model=args.model,
-                                           endpoint=args.ollama_url)
+                                           endpoint=args.ollama_url, timing=timings)
+            if timings is not None:
+                timings["total_ms"] = (perf_counter() - t_total) * 1000
+                result["timing_ms"] = timings
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -186,6 +199,10 @@ def main() -> None:
                     print(" ", item["id"] + ".", item["path"])
                 if not result["selected_paths"]:
                     print("  (none)")
+                if timings is not None:
+                    print("Timing (ms):")
+                    for key, value in timings.items():
+                        print(f"  {key}: {value:.1f}")
         elif args.llm:
             from process_sim.dtwise.experimental_shacl_ollama import ollama_select
             from process_sim.dtwise.experimental_shacl_selection import validate_selection
