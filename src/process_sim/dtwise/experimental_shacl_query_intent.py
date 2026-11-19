@@ -42,15 +42,12 @@ def validated_join_intent(plan, qualified):
 import json
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_graph_evidence import graph_evidence
 from process_sim.dtwise.experimental_shacl_phase4_and_join import (
     compile_phase4_and_join_sparql,
 )
 
 DIRECT_INTENT_PROMPT = """Propose a structured ECAD read-only SELECT intent.
 Use ONLY supplied SHACL-qualified property candidate IDs.
-Use the supplied directed SHACL subgraph nodes, edges, and property predicates
-to reason about common ancestors and filter ownership. Do not invent edges.
 For the two requested Address results joined on the SAME Device and
 Device LocalId AND DeviceType equality filters, return ONLY JSON:
 domain: "ecad", operation: "select",
@@ -58,7 +55,8 @@ result_property_ids: array of exactly two supplied P IDs,
 join: {"kind":"shared_ancestor","owner":"Device"},
 boolean_operator: "and",
 filters: array of exactly two objects with property_id, owner,
-property, operator, value. Use Device LocalId then DeviceType; use candidate property labels, NOT predicate URIs.\nThe join owner and both filter owners MUST be the label "Device", NOT a URI.\noperator must be "="; copy question values exactly. Never invent example values.
+property, operator, value. Use Device LocalId then DeviceType;
+operator must be "="; copy question values exactly.
 If uncertain, do not fabricate: return JSON null.
 No SPARQL, no invented predicates, no extra keys."""
 
@@ -67,34 +65,6 @@ INTENT_FIELDS = {
     "boolean_operator", "filters",
 }
 INTENT_FILTER_FIELDS = {"property_id", "owner", "property", "operator", "value"}
-
-# Ollama structured-output schema constrains shape; Python remains authoritative.
-DIRECT_INTENT_SCHEMA = {
-    "type": "object", "additionalProperties": False,
-    "required": sorted(INTENT_FIELDS),
-    "properties": {
-        "domain": {"type": "string"},
-        "operation": {"type": "string", "enum": ["select"]},
-        "result_property_ids": {"type": "array", "minItems": 2, "maxItems": 2,
-                                "items": {"type": "string"}},
-        "join": {"type": "object", "additionalProperties": False,
-                 "required": ["kind", "owner"],
-                 "properties": {"kind": {"type": "string", "enum": ["shared_ancestor"]},
-                                "owner": {"type": "string"}}},
-        "boolean_operator": {"type": "string", "enum": ["and"]},
-        "filters": {"type": "array", "minItems": 2, "maxItems": 2,
-                    "items": {"type": "object", "additionalProperties": False,
-                              "required": sorted(INTENT_FILTER_FIELDS),
-                              "properties": {
-                                  "property_id": {"type": "string"},
-                                  "owner": {"type": "string"},
-                                  "property": {"type": "string"},
-                                  "operator": {"type": "string", "enum": ["="]},
-                                  "value": {"type": "string"},
-                              }}},
-    },
-}
-
 
 
 def validate_proposed_join_intent(raw, qualified):
@@ -150,42 +120,13 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
     prompt = {**qualified["prompt"], "candidates": [
         c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
     ]}
-    prompt["shacl_subgraph"] = graph_evidence(qualified)
-    # Constrain model output to the independently grounded candidate registry and
-    # question literals; this is guidance, not a substitute for validation.
-    schema = json.loads(json.dumps(DIRECT_INTENT_SCHEMA))
-    candidate_ids = [c["id"] for c in prompt["candidates"]]
-    schema["properties"]["result_property_ids"]["items"]["enum"] = candidate_ids
-    schema["properties"]["join"]["properties"]["owner"]["enum"] = ["Device"]
-    filter_props = schema["properties"]["filters"]["items"]["properties"]
-    filter_props["property_id"]["enum"] = candidate_ids
-    filter_props["owner"]["enum"] = ["Device"]
-    filter_props["property"]["enum"] = ["LocalId", "DeviceType"]
-    filter_props["value"]["enum"] = list(_literals(question))
     raw = ollama_select(prompt, model=model, endpoint=endpoint,
-                        transport=transport, system_prompt=DIRECT_INTENT_PROMPT,
-                        response_format=schema)
+                        transport=transport, system_prompt=DIRECT_INTENT_PROMPT)
     if raw.strip() == "null":
         return {"domain": index.domain, "question": question, "intent": None,
                 "qualified": qualified, "sparql": None,
                 "reason": "Model abstained"}
-    try:
-        intent = validate_proposed_join_intent(raw, qualified)
-    except SelectionContractError as exc:
-        try:
-            proposed = json.loads(raw)
-        except (ValueError, TypeError):
-            proposed = None
-        if isinstance(proposed, dict):
-            missing = sorted(INTENT_FIELDS - set(proposed))
-            extra = sorted(set(proposed) - INTENT_FIELDS)
-            detail = f"; missing={missing}; extra={extra}" if missing or extra else ""
-        else:
-            detail = ""
-        return {"domain": index.domain, "question": question, "intent": None,
-                "qualified": qualified, "sparql": None,
-                "reason": f"Model intent rejected: {exc}{detail}",
-                "raw_model_response": raw}
+    intent = validate_proposed_join_intent(raw, qualified)
     plan = {
         "status": "selected", "result_ids": intent["result_property_ids"],
         "join_owner": "Device",
