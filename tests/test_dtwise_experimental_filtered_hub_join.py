@@ -328,15 +328,15 @@ class NamedDirectMappingLookupTests(unittest.TestCase):
         self.catalog = {"entities": [
             {"domain": "dexpi", "shape": "urn:dexpi",
              "display_name": "InstrumentationFunction",
-             "properties": ["urn:hasAssetIdentifier", "urn:hasLocalId"]},
+             "properties": ["https://example.org/common/hasAssetIdentifier", "https://example.org/dexpi/hasLocalId"]},
             {"domain": "opcuaconnectivity", "shape": "urn:opcua",
              "display_name": "SignalMapping",
-             "properties": ["urn:hasAssetIdentifier", "urn:hasSignalName"]},
+             "properties": ["https://example.org/common/hasAssetIdentifier", "https://example.org/opcuaconnectivity/hasSignalName"]},
         ]}
         self.path = {"nodes": [self.source, self.target],
                      "steps": [{"kind": "mapping", "mapping_id": "M1",
-                                "left_predicate": "urn:hasAssetIdentifier",
-                                "right_predicate": "urn:hasAssetIdentifier"}]}
+                                "left_predicate": "https://example.org/common/hasAssetIdentifier",
+                                "right_predicate": "https://example.org/common/hasAssetIdentifier"}]}
 
     def run_plan(self, paths):
         from process_sim.dtwise.experimental_multihop_cli import (
@@ -357,7 +357,7 @@ class NamedDirectMappingLookupTests(unittest.TestCase):
         result, bind = self.run_plan([self.path])
         self.assertEqual(result[1]["choice"], "VERIFIED_NAMED_DIRECT_MAPPING_LOOKUP")
         self.assertEqual(bind.call_args.kwargs["projections"], [
-            {"node_index": 1, "predicate": "urn:hasSignalName", "as": "value_0"}])
+            {"node_index": 1, "predicate": "https://example.org/opcuaconnectivity/hasSignalName", "as": "value_0"}])
         self.assertIsNone(bind.call_args.kwargs.get("filter_spec"))
 
     def test_b22_rejects_missing_or_ambiguous_mapping(self):
@@ -369,7 +369,7 @@ class NamedDirectMappingLookupTests(unittest.TestCase):
     def test_b22_rejects_wrong_join_key(self):
         wrong = {"nodes": [self.source, self.target],
                  "steps": [{**self.path["steps"][0],
-                            "left_predicate": "urn:hasLocalId"}]}
+                            "left_predicate": "https://example.org/dexpi/hasLocalId"}]}
         with self.assertRaisesRegex(ValueError, "No unique verified"):
             self.run_plan([wrong])
 
