@@ -21,7 +21,7 @@ def validate_semantic_selection_v2(
         "path_id", "operation", "projections", "group_by", "count_target",
         "aggregate_condition", "filters",
     }
-    optional = {"where", "order_by", "limit", "distinct", "optional_properties"}
+    optional = {"where", "order_by", "limit", "distinct", "optional_properties", "count_property"}
     if (not isinstance(selection, dict) or not required.issubset(selection)
             or set(selection) - required - optional):
         raise ValueError("Invalid semantic selection v2 structure")
@@ -60,6 +60,14 @@ def validate_semantic_selection_v2(
                     or type(condition["value"]) is not int
                     or not 0 <= condition["value"] <= 1000000):
                 raise ValueError("Invalid aggregate condition")
+    count_property = selection.get("count_property")
+    if count_property is not None:
+        if (operation != "count" or not selection.get("distinct", False)
+                or not isinstance(count_property, str)
+                or count_property not in property_ids):
+            raise ValueError("Distinct property count requires evidenced count_property")
+    if operation == "count" and selection.get("distinct", False) and count_property is None:
+        raise ValueError("Distinct count requires explicit count_property")
     filters = selection["filters"]
     if not isinstance(filters, list) or len(filters) > 16:
         raise ValueError("Invalid semantic filters")
@@ -155,6 +163,7 @@ def validate_semantic_selection_v2(
         "count_target": target,
         "aggregate_condition": dict(condition) if condition is not None else None,
         "filters": [dict(f) for f in filters],
+        **({"count_property": count_property} if "count_property" in selection else {}),
         **({"where": where} if "where" in selection else {}),
         **({"order_by": dict(order_by) if order_by else None}
            if "order_by" in selection else {}),
