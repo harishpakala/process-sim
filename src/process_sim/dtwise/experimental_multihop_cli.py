@@ -36,7 +36,7 @@ def _plan_named_substring_lookup(question, catalog, mentioned, anchors,
     """Ground an explicitly named shape and substring property without an LLM."""
     match = re.fullmatch(
         r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+"
-        r"([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+a\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+an?\s+"
         r"([A-Za-z][A-Za-z0-9_]*)\s+containing\s+"
         r"([A-Za-z0-9][A-Za-z0-9_-]*)(,\s*ignoring\s+case)?\s*\?\s*", question, re.I)
     if not match:
