@@ -21,7 +21,7 @@ def validate_semantic_selection_v2(
         "path_id", "operation", "projections", "group_by", "count_target",
         "aggregate_condition", "filters",
     }
-    optional = {"where", "order_by", "limit", "distinct", "optional_properties", "count_property"}
+    optional = {"where", "order_by", "limit", "distinct", "optional_properties", "count_property", "anti_join"}
     if (not isinstance(selection, dict) or not required.issubset(selection)
             or set(selection) - required - optional):
         raise ValueError("Invalid semantic selection v2 structure")
@@ -68,6 +68,17 @@ def validate_semantic_selection_v2(
             raise ValueError("Distinct property count requires evidenced count_property")
     if operation == "count" and selection.get("distinct", False) and count_property is None:
         raise ValueError("Distinct count requires explicit count_property")
+    anti_join = selection.get("anti_join", False)
+    if type(anti_join) is not bool:
+        raise ValueError("Invalid anti-join flag")
+    if anti_join and (operation != "select" or projections or group_by
+                     or target is not None or condition is not None
+                     or selection.get("order_by") is not None
+                     or selection.get("limit") is not None
+                     or selection.get("optional_properties")
+                     or selection.get("distinct", False)
+                     or selection.get("count_property") is not None):
+        raise ValueError("Anti-join requires unmodified entity SELECT")
     filters = selection["filters"]
     if not isinstance(filters, list) or len(filters) > 16:
         raise ValueError("Invalid semantic filters")
@@ -137,6 +148,8 @@ def validate_semantic_selection_v2(
     where = selection.get("where")
     if where is not None:
         where = validate_where(where)
+    if anti_join and (filters or where is not None):
+        raise ValueError("Anti-join does not support property conditions")
     if filters and where is not None:
         raise ValueError("Use either legacy filters or Boolean where, not both")
     order_by = selection.get("order_by")
@@ -158,6 +171,7 @@ def validate_semantic_selection_v2(
     if operation == "group_count" and distinct:
         raise ValueError("Distinct count requires explicit count-target semantics")
     return {
+        "anti_join": anti_join,
         "path_id": path_id, "operation": operation,
         "projections": list(projections), "group_by": list(group_by),
         "count_target": target,
