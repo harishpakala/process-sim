@@ -86,8 +86,6 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         specs.append({"node_index": node_index, "predicate": predicate,
                       "as": f"value{len(specs)}"})
     if path["steps"]:
-        if not specs:
-            raise ValueError("Count over multi-hop paths needs a verified count binder")
         plan = bind_evidenced_path(
             path, catalog, mappings, projections=specs)
     else:
