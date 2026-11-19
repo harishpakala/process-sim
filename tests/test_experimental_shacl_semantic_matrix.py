@@ -97,3 +97,48 @@ def test_semantic_selection_rejects_unoffered_candidate_id():
             "status": "selected", "selected_candidate_ids": ["NOT_OFFERED"],
             "reason": "Invalid candidate",
         }, prepared)
+
+
+def test_explicit_unknown_property_is_rejected_before_semantic_retrieval():
+    from process_sim.dtwise.experimental_shacl_grounding import property_grounding
+    index = load_index(INDEX, domain="ecad")
+    result = property_grounding(
+        index, "Show the nonexistent QuantumFluxCode property of Device in ECAD")
+    assert result["missing_properties"] == ["QuantumFluxCode"]
+
+
+@pytest.mark.parametrize("question,expected", [
+    ("Show Address property of Device", ["Address"]),
+    ("Show property Address of Device", ["Address"]),
+    ("Show property named QuantumFluxCode", ["QuantumFluxCode"]),
+    ("Show property 'QuantumFluxCode' of Device", ["QuantumFluxCode"]),
+    ("Find the network addresses of connection points", []),
+])
+def test_explicit_property_extraction_is_conservative(question, expected):
+    from process_sim.dtwise.experimental_shacl_grounding import explicit_property_names
+    assert explicit_property_names(question) == expected
+
+
+def test_grounding_rejects_valid_id_for_wrong_explicit_property():
+    from process_sim.dtwise.experimental_shacl_grounding import enforce_property_grounding
+    index = load_index(INDEX, domain="ecad")
+    prepared = _prepared("Show Address property of Device in ECAD")
+    wrong = next(candidate["id"] for candidate in prepared["prompt"]["candidates"]
+                 if candidate["path"].endswith("isConnectedTo"))
+    proposed = {"status": "selected", "selected_candidate_ids": [wrong],
+                "reason": "Mock Qwen chose a known but wrong property"}
+    assert enforce_property_grounding(
+        index, "Show Address property of Device in ECAD", prepared, proposed
+    )["status"] == "unresolved"
+
+
+def test_grounding_preserves_semantic_synonym_selection():
+    from process_sim.dtwise.experimental_shacl_grounding import enforce_property_grounding
+    index = load_index(INDEX, domain="ecad")
+    question = "Find the network addresses of connection points attached to devices in ECAD"
+    prepared = _prepared(question)
+    ids = [candidate["id"] for candidate in prepared["prompt"]["candidates"]
+           if candidate["path"] in {DEVICE_ENDPOINT, DEVICE_PLC}]
+    selected = {"status": "selected", "selected_candidate_ids": ids,
+                "reason": "Both device endpoint addresses"}
+    assert enforce_property_grounding(index, question, prepared, selected) == selected
