@@ -89,9 +89,45 @@ class SemanticV2AdapterTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "not yet supported"):
             self.run_plan(selection)
 
-    def test_unsupported_boolean_is_not_silently_dropped(self):
+    def test_boolean_exists_and_missing(self):
         selection = {**self.selection,
+                     "where": {"op": "and", "conditions": [
+                         {"op": "exists", "property": "N0P0"},
+                         {"op": "missing", "property": "N0P1"}]}}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["filters"]["op"], "and")
+        self.assertEqual(plan["filters"]["children"][0]["op"], "exists")
+        self.assertEqual(plan["filters"]["children"][1]["op"], "not_exists")
+
+    def test_boolean_or_and_negated_exists(self):
+        selection = {**self.selection,
+                     "where": {"op": "or", "conditions": [
+                         {"op": "exists", "property": "N0P0"},
+                         {"op": "not", "condition": {
+                             "op": "exists", "property": "N0P1"}}]}}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["filters"]["op"], "or")
+        self.assertEqual(plan["filters"]["children"][1]["op"], "not_exists")
+
+    def test_empty_projection_returns_evidenced_entities(self):
+        selection = {**self.selection, "projections": [],
                      "where": {"op": "exists", "property": "N0P0"}}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertTrue(plan["return_entities"])
+        self.assertEqual(plan["filters"]["predicate"], "urn:hasAssetIdentifier")
+
+    def test_contains_ignore_case(self):
+        selection = {**self.selection, "where": {
+            "op": "contains", "property": "N0P1", "value": "reactor",
+            "ignore_case": True}}
+        (plan, _), _calls = self.run_plan(selection)
+        self.assertEqual(plan["filters"]["op"], "contains")
+        self.assertTrue(plan["filters"]["ignore_case"])
+
+    def test_unsupported_regex_is_not_silently_dropped(self):
+        selection = {**self.selection,
+                     "where": {"op": "regex", "property": "N0P0",
+                               "value": "^FI-"}}
         with self.assertRaisesRegex(ValueError, "not yet supported"):
             self.run_plan(selection)
 
