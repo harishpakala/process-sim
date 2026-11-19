@@ -97,3 +97,45 @@ def test_ecad_device_endpoint_not_symbol_or_plc():
     assert result["unresolved_connections"] == []
     assert "ambiguous_paths" not in result
     assert all(e["evidence"] for e in result["edges"])
+
+
+def test_ecad_leaf_only_address_preserves_four_alternatives():
+    """An underspecified leaf must not silently choose Device/Symbol or PLC."""
+    result = extract_question(
+        _domain_index("ecad"), "Show Address in ECAD", connect=True
+    )
+    assert len(result["nodes"]) == 7
+    assert len(result["edges"]) == 6
+    assert len(result["properties"]) == 4
+    assert len(result["ambiguous_paths"]) == 4
+    assert len({p["target"] for p in result["ambiguous_paths"]}) == 4
+    assert result["unresolved_connections"] == []
+    assert all(edge["evidence"] for edge in result["edges"])
+    assert all(prop["evidence"] for prop in result["properties"])
+
+
+def test_dexpi_independent_branches_with_explicit_root_remain_disconnected():
+    """A shared domain name alone is not an instruction to join siblings."""
+    result = extract_question(
+        _domain_index("dexpi"),
+        "In DEXPI show MeasuredVariable of InstrumentationFunction "
+        "and ActuatedVariable of ActuatingFunction",
+        connect=False,
+    )
+    assert {p["name"] for p in result["properties"]} == {
+        "MeasuredVariable", "ActuatedVariable"
+    }
+    assert result["edges"] == []
+    assert result["unresolved_connections"] == []
+
+
+def test_ecad_multiple_properties_on_device_endpoint_remain_owner_scoped():
+    """Independent property extraction must retain each property's actual owner."""
+    result = extract_question(
+        _domain_index("ecad"),
+        "Show Address and ConnectionType of EndPoint belonging to Device in ECAD",
+        connect=False,
+    )
+    assert any(p["name"] == "Address" for p in result["properties"])
+    assert all(p["owner"] in {n["uri"] for n in result["nodes"]} for p in result["properties"])
+    assert result["edges"] == []
