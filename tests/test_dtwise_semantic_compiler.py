@@ -59,6 +59,24 @@ class SemanticCompilerTests(unittest.TestCase):
                 "operator": "exists", "property_id": "P999",
             }), self.evidence)
 
+    def test_cross_shape_filters_cannot_implicitly_join(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/One",
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/Two",
+             "properties": ["https://example.org/hasLocalId"]},
+        ], "shacl_edges": []})
+        ids = [p["id"] for p in evidence.properties]
+        plan = {"version": "2.0",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": {"operator": "and", "conditions": [
+                    {"operator": "exists", "property_id": ids[0]},
+                    {"operator": "exists", "property_id": ids[1]},
+                ]}}
+        with self.assertRaisesRegex(ValueError, "distinct shapes"):
+            compile_semantic_plan(plan, evidence)
+
     def test_multi_entity_requires_explicit_join(self):
         second = build_evidence_catalog({"entities": [
             {"domain": "ECAD", "shape": "https://example.org/Device",
@@ -68,7 +86,7 @@ class SemanticCompilerTests(unittest.TestCase):
         ], "shacl_edges": []})
         plan = {"version": "2.0", "scope": [e["id"] for e in second.entities],
                 "operation": "select_entities", "projections": [], "where": None}
-        with self.assertRaisesRegex(ValueError, "explicit joins"):
+        with self.assertRaisesRegex(ValueError, "verified shape membership"):
             compile_semantic_plan(plan, second)
 
 
