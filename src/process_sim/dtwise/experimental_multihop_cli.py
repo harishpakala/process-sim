@@ -522,8 +522,11 @@ def _plan_domain_regex_lookup(question, catalog, mentioned):
 
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
-                               request_json=None, prompt_diagnostics=None):
-    """One LLM selection for zero-edge, direct, and multi-hop evidence."""
+                               request_json=None, prompt_diagnostics=None,
+                               planning_mode='hybrid'):
+    """Plan using LLM evidence selection or opt-in legacy template shortcuts."""
+    if planning_mode not in ('hybrid', 'llm_first'):
+        raise ValueError('Unsupported experimental planning mode')
     from .experimental_evidence_selection import select_evidence_plan
 
     # Keep the full catalog for cross-domain target discovery. A question may
@@ -549,53 +552,56 @@ def plan_experimental_multihop(question, index, mappings, *, model,
             node = (entity["domain"], entity["shape"])
             if node not in anchors:
                 anchors.append(node)
-    domain_both = _plan_domain_both_properties(question, catalog)
-    if domain_both is not None:
-        return domain_both
+    if planning_mode == 'hybrid':
+        domain_both = _plan_domain_both_properties(question, catalog)
+        if domain_both is not None:
+            return domain_both
 
-    domain_regex = _plan_domain_regex_lookup(question, catalog, mentioned)
-    if domain_regex is not None:
-        return domain_regex
+        domain_regex = _plan_domain_regex_lookup(question, catalog, mentioned)
+        if domain_regex is not None:
+            return domain_regex
+
+        substring = _plan_named_substring_lookup(
+            question, catalog, mentioned, anchors, index, mappings)
+        if substring is not None:
+            return substring
+
+        anti_join = _plan_named_identifier_anti_join(
+            question, catalog, mappings, anchors, mentioned, index)
+        if anti_join is not None:
+            return anti_join
+
+        hub_join = _plan_explicit_hub_join(question, catalog, mappings, anchors,
+                                           mentioned, index)
+        if hub_join is not None:
+            return hub_join
+
+        shared = _plan_shared_identifier_values(question, catalog, mappings,
+                                                anchors, mentioned, index)
+        if shared is not None:
+            return shared
+
+        filtered = _plan_filtered_cross_domain_lookup(question, catalog, mappings,
+                                                      anchors, mentioned, index)
+        if filtered is not None:
+            return filtered
+
+        named_mapping = _plan_named_direct_mapping_lookup(
+            question, catalog, mappings, anchors, mentioned, index)
+        if named_mapping is not None:
+            return named_mapping
+
+        # Handle the fully specified single-shape B19 lookup before inferring
+        # cross-domain output owners from incidental words in the filter clause.
+        if len(anchors) == 1 and re.match(r"^\s*for\s+", question, re.I):
+            plan = _plan_single_shape_lookup(
+                question, catalog, mentioned, anchors[0], index, mappings)
+            return plan, {"status": "evidence_semantic_grounded",
+                          "choice": "VERIFIED_SINGLE_SHAPE_LOOKUP"}
+
 
     if not anchors:
-        raise ValueError("Experimental planner requires a named SHACL shape")
-    substring = _plan_named_substring_lookup(
-        question, catalog, mentioned, anchors, index, mappings)
-    if substring is not None:
-        return substring
-
-    anti_join = _plan_named_identifier_anti_join(
-        question, catalog, mappings, anchors, mentioned, index)
-    if anti_join is not None:
-        return anti_join
-
-    hub_join = _plan_explicit_hub_join(question, catalog, mappings, anchors,
-                                       mentioned, index)
-    if hub_join is not None:
-        return hub_join
-
-    shared = _plan_shared_identifier_values(question, catalog, mappings,
-                                            anchors, mentioned, index)
-    if shared is not None:
-        return shared
-
-    filtered = _plan_filtered_cross_domain_lookup(question, catalog, mappings,
-                                                  anchors, mentioned, index)
-    if filtered is not None:
-        return filtered
-
-    named_mapping = _plan_named_direct_mapping_lookup(
-        question, catalog, mappings, anchors, mentioned, index)
-    if named_mapping is not None:
-        return named_mapping
-
-    # Handle the fully specified single-shape B19 lookup before inferring
-    # cross-domain output owners from incidental words in the filter clause.
-    if len(anchors) == 1 and re.match(r"^\s*for\s+", question, re.I):
-        plan = _plan_single_shape_lookup(
-            question, catalog, mentioned, anchors[0], index, mappings)
-        return plan, {"status": "evidence_semantic_grounded",
-                      "choice": "VERIFIED_SINGLE_SHAPE_LOOKUP"}
+        raise ValueError('LLM evidence selection requires a named SHACL shape; domain-wide LLM planning is not yet implemented')
 
     # An explicitly requested output can identify an unnamed target shape.
     # Consider only properties in the output clause, not join keys after
