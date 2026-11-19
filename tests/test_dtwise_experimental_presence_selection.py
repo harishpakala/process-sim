@@ -41,6 +41,30 @@ class PresenceSelectionTests(unittest.TestCase):
                          ["exists", "not_exists"])
         self.assertEqual(len(calls), 1)
 
+    def test_coverage_treats_presence_as_filters_not_projections(self):
+        from process_sim.dtwise.unified_answer import check_semantic_coverage
+        result, _ = self.select(
+            "Which AssetInventory Asset entities have AssetName but no EquipmentTag?",
+            {"operation": "presence", "present_ids": ["P0"],
+             "absent_ids": ["P1"]})
+        plan, _ = result
+        check_semantic_coverage(plan,
+            "Which AssetInventory Asset entities have AssetName but no EquipmentTag?",
+            self.catalog, {"assetinventory"})
+
+    def test_coverage_rejects_missing_presence_predicate(self):
+        from process_sim.dtwise.unified_answer import check_semantic_coverage
+        result, _ = self.select(
+            "Which AssetInventory Asset entities have AssetName but no EquipmentTag?",
+            {"operation": "presence", "present_ids": ["P0"],
+             "absent_ids": ["P1"]})
+        plan, _ = result
+        plan["filters"]["children"][0]["predicate"] = "https://example.org/hasOther"
+        with self.assertRaisesRegex(ValueError, "projection omitted"):
+            check_semantic_coverage(plan,
+                "Which AssetInventory Asset entities have AssetName but no EquipmentTag?",
+                self.catalog, {"assetinventory"})
+
     def test_invented_property_fails_closed(self):
         with self.assertRaisesRegex(ValueError, "invented"):
             self.select("Asset without EquipmentTag but with AssetName", {
