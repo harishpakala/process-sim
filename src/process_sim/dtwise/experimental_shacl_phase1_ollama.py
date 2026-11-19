@@ -90,8 +90,8 @@ def run_phase1_query_plan(index, prepared: dict, *,
     # Never join unrelated branches merely because they share the domain root.
     auto_join_groups = []
     bare_request = re.fullmatch(
-        r"(?:show|find|list)\\s+(?:the\\s+)?([A-Za-z_][A-Za-z_0-9]*)"
-        r"(?:\\s+in\\s+[A-Za-z_][A-Za-z_0-9]*)?\\s*[.!]?\\s*",
+        r"(?:show|find|list)\s+(?:the\s+)?([A-Za-z_][A-Za-z_0-9]*)"
+        r"(?:\s+in\s+[A-Za-z_][A-Za-z_0-9]*)?\s*[.!]?\s*",
         question, flags=re.I,
     )
     if bare_request:
