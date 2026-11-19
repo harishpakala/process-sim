@@ -287,14 +287,14 @@ def test_phase1_unresolved_compiles_no_queries(setup):
 
 
 @pytest.mark.parametrize("ids", [["P1", "P2"], ["P1"]])
-def test_bare_address_multiple_owners_is_ambiguous(ecad_address_paths, ids):
+def test_bare_address_auto_joins_verified_siblings(ecad_address_paths, ids):
     index, prepared = ecad_address_paths
     prepared["prompt"]["question"] = "Show Address in ECAD"
     result = run_phase1_query_plan(
         index, prepared, transport=mocked(response(ids=ids)))
-    assert result["plan"]["status"] == "ambiguous"
-    assert result["plan"]["selected_candidate_ids"] == []
-    assert result["selected_paths"] == []
+    assert result["plan"]["status"] == "selected"
+    assert set(result["plan"]["selected_candidate_ids"]) == {"P1", "P2"}
+    assert len(result["auto_join_result_ids"]) == 2
 
 
 def test_explicit_owner_still_selects_one(ecad_address_paths):
@@ -304,3 +304,24 @@ def test_explicit_owner_still_selects_one(ecad_address_paths):
         index, prepared, transport=mocked(response(ids=["P1"])))
     assert result["plan"]["status"] == "selected"
     assert result["plan"]["selected_candidate_ids"] == ["P1"]
+
+
+def test_bare_address_auto_join_compiles_single_query(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    for edge in index.edges:
+        edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+    for record in prepared["registry"].values():
+        for edge in record["edges"]:
+            edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+        record["property"]["predicate"] = "https://example.org/address"
+    for props in index.properties.values():
+        for prop in props:
+            prop["predicate"] = "https://example.org/address"
+    prepared["prompt"]["question"] = "Show Address in ECAD"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1"])))
+    queries = compile_phase1_sparql(result)
+    assert len(queries) == 1
+    assert "SELECT DISTINCT ?value1 ?value2" in queries[0]["sparql"]
+    assert "<https://example.org/endpoint>" in queries[0]["sparql"]
+    assert "<https://example.org/plc>" in queries[0]["sparql"]
