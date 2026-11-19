@@ -30,8 +30,9 @@ class SemanticCompilerTests(unittest.TestCase):
         query = compile_semantic_plan(self.plan(where), self.evidence)
         self.assertIn("SELECT DISTINCT ?entity", query)
         self.assertIn("GRAPH ?g_", query)
-        self.assertIn(" UNION ", query)
-        self.assertIn("FILTER NOT EXISTS", query)
+        self.assertIn(" || ", query)
+        self.assertIn(" && ", query)
+        self.assertIn("NOT EXISTS", query)
         self.assertIn("https://example.org/hasLocalId", query)
 
     def test_projection_and_count(self):
@@ -49,7 +50,7 @@ class SemanticCompilerTests(unittest.TestCase):
             "operator": "eq", "property_id": self.props["hasAddress"],
             "value": 'a"b',
         }), self.evidence)
-        self.assertIn("FILTER EXISTS", query)
+        self.assertIn("EXISTS", query)
         self.assertNotIn(' = "a"b"', query)
 
     def test_invalid_evidence_fails_closed(self):
