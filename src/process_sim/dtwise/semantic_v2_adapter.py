@@ -67,13 +67,6 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             or len(selected["filters"]) > 1):
         raise ValueError("Semantic v2 modifier not yet supported by IR adapter")
     # An empty SELECT projection means return the evidenced entity aliases.
-    if selected["operation"] == "group_count":
-        # Existing compiler counts the first entity alias; never silently
-        # reinterpret a model-selected target on a different path node.
-        if selected["count_target"] != "N0":
-            raise ValueError("Grouped count target is not compiler root")
-    if selected["operation"] == "count" and selected["count_target"] != "N0":
-        raise ValueError("Count target is not compiler root")
     owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
     specs = []
     for property_id in selected["projections"]:
@@ -113,6 +106,11 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
             "entity": f"n{j}", "predicate": predicate}
     op = selected["operation"]
     plan["operation"] = {"type": op}
+    if op in ("count", "group_count"):
+        match = re.fullmatch(r"N(\d+)", selected["count_target"])
+        if match is None or int(match.group(1)) >= len(path["nodes"]):
+            raise ValueError("Invalid count target")
+        plan["operation"]["count_entity"] = f"n{match.group(1)}"
     if op == "group_count" and condition is not None:
         plan["operation"]["having_min"] = condition["value"]
     if selected["filters"]:
