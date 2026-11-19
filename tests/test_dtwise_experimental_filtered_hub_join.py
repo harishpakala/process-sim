@@ -231,5 +231,42 @@ class FilteredHubJoinTests(unittest.TestCase):
             self.plan(question=QUESTION.replace(
                 "where AssetIdentifier is", "where ProductIdentifier is"))
 
+
+    def test_experimental_selection_writes_diagnostics_on_timeout(self):
+        import json
+        import tempfile
+        from pathlib import Path
+        from process_sim.dtwise.experimental_evidence_selection import select_evidence_plan
+
+        catalog = {"entities": [{
+            "domain": "dexpi", "shape": "urn:InstrumentationFunction",
+            "display_name": "InstrumentationFunction",
+            "properties": ["urn:hasLocalId"],
+        }]}
+        paths = [{"nodes": [("dexpi", "urn:InstrumentationFunction")],
+                  "steps": []}]
+        with tempfile.TemporaryDirectory() as directory:
+            diagnostic_path = Path(directory) / "b21-diagnostics.json"
+
+            def timeout_request(url, payload, timeout):
+                raise TimeoutError("timed out")
+
+            with self.assertRaisesRegex(TimeoutError, "timed out"):
+                select_evidence_plan(
+                    "Get LocalId for DEXPI InstrumentationFunction.",
+                    paths, catalog, {}, [], model="test",
+                    request_json=timeout_request,
+                    ollama_host="http://unused", timeout=60,
+                    prompt_diagnostics={"path": str(diagnostic_path)})
+            report = json.loads(diagnostic_path.read_text(encoding="utf-8"))
+            self.assertEqual(report["stage"], "experimental_evidence_selection")
+            self.assertEqual(report["candidate_path_count"], 1)
+            self.assertEqual(report["candidate_property_count"], 1)
+            self.assertGreater(report["payload_bytes"], 0)
+            self.assertEqual(report["request_status"], "failed")
+            self.assertEqual(report["request_error_type"], "TimeoutError")
+            self.assertIn("request_wall_seconds", report)
+            self.assertNotIn("path", report)
+
 if __name__ == "__main__":
     unittest.main()
