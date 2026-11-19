@@ -13,13 +13,13 @@ from process_sim.dtwise.experimental_shacl_subgraph import SubgraphIndex
 @pytest.fixture
 def sample():
     root, dev, ep, plc = "urn:ECAD", "urn:Device", "urn:EndPoint", "urn:PLCEndPoint"
-    e0 = dict(from_=root, to=dev, predicate="urn:hasDevice", property_shape="urn:e0")
+    e0 = dict(from_=root, to=dev, predicate="https://example.org/ecad/hasDevice", property_shape="urn:e0")
     e0["from"] = e0.pop("from_")
-    e1 = {"from": dev, "to": ep, "predicate": "urn:hasEndPoint", "property_shape": "urn:e1"}
-    e2 = {"from": dev, "to": plc, "predicate": "urn:hasPLCEndPoint", "property_shape": "urn:e2"}
-    p1 = {"owner": ep, "predicate": "urn:hasAddress", "property_shape": "urn:p1", "name": "Address"}
-    p2 = {"owner": plc, "predicate": "urn:hasAddress", "property_shape": "urn:p2", "name": "Address"}
-    pf = {"owner": dev, "predicate": "urn:hasLocalId", "property_shape": "urn:pf", "name": "LocalId"}
+    e1 = {"from": dev, "to": ep, "predicate": "https://example.org/ecad/hasEndPoint", "property_shape": "urn:e1"}
+    e2 = {"from": dev, "to": plc, "predicate": "https://example.org/ecad/hasPLCEndPoint", "property_shape": "urn:e2"}
+    p1 = {"owner": ep, "predicate": "https://example.org/ecad/hasAddress", "property_shape": "urn:p1", "name": "Address"}
+    p2 = {"owner": plc, "predicate": "https://example.org/ecad/hasAddress", "property_shape": "urn:p2", "name": "Address"}
+    pf = {"owner": dev, "predicate": "https://example.org/ecad/hasLocalId", "property_shape": "urn:pf", "name": "LocalId"}
     index = SubgraphIndex("ecad", {root: {"labels": ["ECAD"]}, dev: {"labels": ["Device"]},
                                    ep: {"labels": ["EndPoint"]}, plc: {"labels": ["PLCEndPoint"]}},
                           {ep: [p1], plc: [p2], dev: [pf]}, [e0, e1, e2])
@@ -52,11 +52,11 @@ def test_one_join_with_device_filter(sample):
     result = run_phase4_filtered_join_plan(index, prepared, transport=transport(plan))
     query = compile_phase4_filtered_join_sparql(result)
     assert result["plan"]["status"] == "selected"
-    assert query.count("?device <urn:hasLocalId> ?filterValue .") == 1
+    assert query.count("?device <https://example.org/ecad/hasLocalId> ?filterValue .") == 1
     assert 'FILTER(?filterValue = "FI_101")' in query
-    assert query.count("?ecad <urn:hasDevice> ?device .") == 1
-    assert "?device <urn:hasEndPoint> ?endpoint ." in query
-    assert "?device <urn:hasPLCEndPoint> ?plcEndpoint ." in query
+    assert query.count("?ecad <https://example.org/ecad/hasDevice> ?device .") == 1
+    assert "?device <https://example.org/ecad/hasEndPoint> ?endpoint ." in query
+    assert "?device <https://example.org/ecad/hasPLCEndPoint> ?plcEndpoint ." in query
 
 
 def test_invented_literal_rejected(sample):
