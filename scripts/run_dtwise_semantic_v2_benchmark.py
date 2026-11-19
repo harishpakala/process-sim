@@ -95,6 +95,10 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if args.llm_timeout < 1 or args.case_timeout < 1:
         parser.error("Timeouts must be positive")
+    if not Path(args.schema).is_file():
+        parser.error("Schema file does not exist: " + args.schema)
+    if args.mappings and not Path(args.mappings).is_file():
+        parser.error("Mapping registry file does not exist: " + args.mappings)
     cases = load_cases(args.manifest)
     if args.ids:
         unknown = set(args.ids) - {case["id"] for case in cases}
@@ -116,6 +120,8 @@ def main(argv=None):
             "answer_correctness": "unverified_no_oracle",
             "cases": rows}, ensure_ascii=False, indent=2), encoding="utf-8")
         print(f'{case["id"]}: {row["status"]}', flush=True)
+        if row["status"] == "invalid_cli_output" and row.get("error"):
+            print("  CLI error: " + row["error"][-1000:], flush=True)
     return 0 if all(x["compilation"] == "passed"
                     and (not args.endpoint or x["execution"] == "passed")
                     for x in rows) else 1
