@@ -81,6 +81,8 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
             "request_wall_seconds": round(time.perf_counter() - started, 3),
             "selection": choice})
         _write_prompt_diagnostics(prompt_diagnostics)
+    if isinstance(choice, dict) and "property_ids" not in choice:
+        choice["property_ids"] = None
     if not isinstance(choice, dict) or set(choice) != {
             "operation", "property_id", "property_ids", "pattern"}:
         raise ValueError("Invalid domain selection structure")
