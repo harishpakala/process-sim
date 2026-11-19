@@ -40,9 +40,15 @@ class DomainRegexSelectionTests(unittest.TestCase):
             self.select("ECAD LocalId matches ^PI-", {
                 "operation": "regex", "property_id": "P99", "pattern": "^PI-"})
 
-    def test_modified_regex_rejected(self):
-        with self.assertRaisesRegex(ValueError, "copied exactly"):
-            self.select("ECAD LocalId matches ^PI-", {
+    def test_modified_regex_is_grounded_to_question(self):
+        result, _ = self.select(
+            "ECAD LocalId matching the regular expression ^PI-?",
+            {"operation": "regex", "property_id": "P0", "pattern": "PI-"})
+        self.assertEqual(result[0]["domain_regex"]["pattern"], "^PI-")
+
+    def test_regex_requires_explicit_expression(self):
+        with self.assertRaisesRegex(ValueError, "explicit regular expression"):
+            self.select("ECAD LocalId matches PI-", {
                 "operation": "regex", "property_id": "P0", "pattern": "PI-"})
 
     def test_unsupported_returns_none(self):
