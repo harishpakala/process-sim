@@ -50,9 +50,9 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
         triple = scoped(triple, suffix)
         op = node["operator"]
         if op == "exists":
-            return "FILTER EXISTS { " + triple + " }"
+            return "EXISTS { " + triple + " }"
         if op == "not_exists":
-            return "FILTER NOT EXISTS { " + triple + " }"
+            return "NOT EXISTS { " + triple + " }"
         value = node["value"]
         if op == "regex":
             condition = "REGEX(STR(" + value_var + "), " + json.dumps(
@@ -61,19 +61,16 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
             condition = "CONTAINS(LCASE(STR(" + value_var + ")), LCASE(STR(" + _literal(value) + ")))"
         else:
             condition = value_var + (" = " if op == "eq" else " != ") + _literal(value)
-        return "FILTER EXISTS { " + triple + " FILTER(" + condition + ") }"
+        return "EXISTS { " + triple + " FILTER(" + condition + ") }"
 
     def expression(node):
         op = node["operator"]
-        if op == "and":
-            return "\n".join(expression(child) for child in node["conditions"])
-        if op == "or":
-            return "{ " + " UNION ".join(
-                "{ " + expression(child) + " }" for child in node["conditions"]) + " }"
+        if op in ("and", "or"):
+            joiner = " && " if op == "and" else " || "
+            return "(" + joiner.join(
+                "(" + expression(child) + ")" for child in node["conditions"]) + ")"
         if op == "not":
-            # NOT EXISTS wraps a correlated subquery, preserving arbitrary
-            # nested Boolean expressions and the outer ?entity binding.
-            return "FILTER NOT EXISTS { " + expression(node["condition"]) + " }"
+            return "!(" + expression(node["condition"]) + ")"
         return leaf(node)
 
     # A property-presence pattern establishes the entity binding without
@@ -91,7 +88,7 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
             suffix) + " }")
     body = ["{ " + " UNION ".join(anchors) + " }"]
     if plan["where"] is not None:
-        body.append(expression(plan["where"]))
+        body.append("FILTER(" + expression(plan["where"]) + ")")
     if plan["operation"] == "select_values":
         for index, prop_id in enumerate(plan["projections"]):
             prop = properties[prop_id]
