@@ -36,8 +36,13 @@ def build_evidence_catalog(catalog: dict) -> EvidenceCatalog:
         for entity in catalog["entities"]
     })
     shape_ids = {key: f"S{i}" for i, key in enumerate(shapes)}
+    targets = {}
+    for entity in catalog["entities"]:
+        key = (entity["domain"], entity["shape"])
+        targets.setdefault(key, set()).update(entity.get("target_classes", []))
     entities = tuple({
-        "id": shape_ids[key], "domain": key[0], "shape": key[1]
+        "id": shape_ids[key], "domain": key[0], "shape": key[1],
+        "target_classes": sorted(targets.get(key, set())),
     } for key in shapes)
     properties = tuple({
         "id": f"P{i}", "entity_id": shape_ids[(domain, shape)],
