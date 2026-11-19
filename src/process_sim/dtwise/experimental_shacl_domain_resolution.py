@@ -40,8 +40,8 @@ def resolve_domain(question, available_domains, override=None, *, schema=None):
 
 def _schema_words(value):
     """Normalize CamelCase and whitespace; singularize only simple plurals."""
-    value = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", value)
-    value = re.sub(r"([A-Z])([A-Z][a-z])", r"\\1 \\2", value)
+    value = re.sub(r"([a-z0-9])([A-Z])", r"\1 \2", value)
+    value = re.sub(r"([A-Z])([A-Z][a-z])", r"\1 \2", value)
     words = re.findall(r"[A-Za-z0-9]+", value.casefold())
     normalized = [word[:-1] if len(word) > 3 and word.endswith("s")
                   and not word.endswith("ss") else word for word in words]
