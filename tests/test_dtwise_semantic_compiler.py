@@ -127,6 +127,50 @@ class SemanticCompilerTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "verified targetClass"):
             compile_semantic_plan(plan, evidence)
 
+    def test_independent_boolean_conditions_rebind_by_exact_predicate(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress",
+                            "https://example.org/hasLocalId"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "target_classes": ["https://example.org/ClassB"],
+             "properties": ["https://example.org/hasAddress",
+                            "https://example.org/hasLocalId"]},
+        ], "shacl_edges": []})
+        first = evidence.entities[0]["id"]
+        owned = {p["predicate"]: p["id"] for p in evidence.properties
+                 if p["entity_id"] == first}
+        plan = {"version": "2.0", "scope_mode": "independent",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": {"operator": "and", "conditions": [
+                    {"operator": "exists", "property_id": owned["https://example.org/hasAddress"]},
+                    {"operator": "exists", "property_id": owned["https://example.org/hasLocalId"]},
+                ]}}
+        query = compile_semantic_plan(plan, evidence)
+        self.assertIn(" UNION ", query)
+        self.assertEqual(query.count("hasAddress"), 2)
+        self.assertEqual(query.count("hasLocalId"), 2)
+        self.assertEqual(query.count("&&"), 2)
+
+    def test_independent_boolean_conditions_reject_unevidenced_branch_property(self):
+        evidence = build_evidence_catalog({"entities": [
+            {"domain": "ECAD", "shape": "https://example.org/A",
+             "target_classes": ["https://example.org/ClassA"],
+             "properties": ["https://example.org/hasAddress"]},
+            {"domain": "ECAD", "shape": "https://example.org/B",
+             "target_classes": ["https://example.org/ClassB"],
+             "properties": ["https://example.org/hasLocalId"]},
+        ], "shacl_edges": []})
+        plan = {"version": "2.0", "scope_mode": "independent",
+                "scope": [e["id"] for e in evidence.entities],
+                "operation": "select_entities", "projections": [],
+                "where": {"operator": "exists",
+                          "property_id": evidence.properties[0]["id"]}}
+        with self.assertRaisesRegex(ValueError, "lacks verified property ownership"):
+            compile_semantic_plan(plan, evidence)
+
     def test_multi_entity_requires_explicit_join(self):
         second = build_evidence_catalog({"entities": [
             {"domain": "ECAD", "shape": "https://example.org/Device",
