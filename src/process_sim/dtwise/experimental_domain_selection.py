@@ -43,7 +43,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         "messages": [
             {"role": "system", "content":
              "Interpret a domain-wide query using only listed SHACL property "
-             "evidence. For conjunctions (AND, both, every property) choose has_all_properties; for disjunctions (OR, either) choose has_any_properties. Return JSON with exactly operation, property_id, property_ids, pattern. 
+             "evidence. For conjunctions (AND, both, every property) choose has_all_properties; for disjunctions (OR, either) choose has_any_properties. Return JSON with exactly operation, property_id, property_ids, pattern. "
              "operation is 'regex', 'has_all_properties', 'has_any_properties', or 'unsupported'. For regex, select a listed "
              "property ID and copy the exact regex pattern from the question "
              "without modifying it. For has_all_properties or has_any_properties, select two distinct listed property IDs in property_ids and set property_id and pattern to null. For regex, set property_ids to null. Do not generate SPARQL. For any other "
