@@ -12,6 +12,48 @@ from process_sim.dtwise import unified_answer
 
 
 class SemanticV2CLITests(unittest.TestCase):
+    def test_catalog_resolves_verified_nested_node_class_pair(self):
+        shape = "https://example.org/EndPointShape"
+        property_shape = "https://example.org/EndPointPropertyShape"
+        rdf_class = "https://example.org/EndPoint"
+        index = {
+            "shape_paths": [{
+                "domain": "ECAD", "node_shape": shape,
+                "property_shape": "https://example.org/AddressShape",
+                "path": "https://example.org/hasAddress", "evidence": ["verified"],
+            }],
+            "relationships": [
+                {"domain": "ECAD", "subject": property_shape,
+                 "predicate": "http://www.w3.org/ns/shacl#node",
+                 "object": shape, "evidence": "shacl"},
+                {"domain": "ECAD", "subject": property_shape,
+                 "predicate": "http://www.w3.org/ns/shacl#class",
+                 "object": rdf_class, "evidence": "shacl"},
+            ],
+        }
+        catalog = unified_answer.catalog_from_schema(index)
+        self.assertEqual(catalog["entities"][0]["target_classes"], [rdf_class])
+        # Both links must be present; a class constraint alone does not
+        # establish the class of the node shape.
+        index["relationships"] = index["relationships"][1:]
+        catalog = unified_answer.catalog_from_schema(index)
+        self.assertEqual(catalog["entities"][0]["target_classes"], [])
+
+    def test_real_ecad_schema_exposes_nested_type_evidence(self):
+        schema = (Path(__file__).resolve().parents[1] /
+                  "semantic/ontology2/dtwise/dtwise-schema-index.json")
+        if not schema.is_file():
+            self.skipTest("ontology2 schema index not present")
+        catalog = unified_answer.catalog_from_schema(
+            json.loads(schema.read_text(encoding="utf-8")))
+        ecad = [e for e in catalog["entities"] if e["domain"].lower() == "ecad"]
+        self.assertTrue(any(
+            "https://example.org/ecad/EndPoint" in e["target_classes"]
+            for e in ecad))
+        self.assertTrue(any(
+            "https://example.org/ecad/PLCEndPoint" in e["target_classes"]
+            for e in ecad))
+
     def test_compile_uses_new_planner_without_legacy_compiler(self):
         with tempfile.TemporaryDirectory() as directory:
             schema = Path(directory) / "schema.json"
