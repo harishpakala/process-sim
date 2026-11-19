@@ -291,7 +291,7 @@ def test_direct_intent_receives_explicit_shacl_subgraph(sample):
     assert graph["nodes"]
     assert graph["edges"]
     assert graph["properties"]
-    assert {p["id"] for p in graph["candidate_paths"]} >= {"P7", "P9"}
+    assert {p["id"] for p in graph["candidate_paths"]} >= set(plan["result_ids"])
     assert all({"from", "predicate", "to", "property_shape"} <= set(e)
                for e in graph["edges"])
     assert all({"owner", "predicate", "property_shape", "candidate_ids"} <= set(p)
