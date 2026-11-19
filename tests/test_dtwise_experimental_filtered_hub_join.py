@@ -374,5 +374,85 @@ class NamedDirectMappingLookupTests(unittest.TestCase):
             self.run_plan([wrong])
 
 
+
+class IdentifierAntiJoinTests(unittest.TestCase):
+    def setUp(self):
+        self.question = ("Which DEXPI InstrumentationFunction entities have no matching "
+                         "OPCUAConnectivity SignalMapping by AssetIdentifier?")
+        self.source = ("dexpi", "https://example.org/shape/InstrumentationFunction")
+        self.target = ("opcuaconnectivity", "https://example.org/shape/SignalMapping")
+        self.left = "https://example.org/dexpi/hasAssetIdentifier"
+        self.right = "https://example.org/opcuaconnectivity/hasAssetIdentifier"
+        self.catalog = {"entities": [
+            {"domain": self.source[0], "shape": self.source[1],
+             "display_name": "InstrumentationFunction", "properties": [self.left]},
+            {"domain": self.target[0], "shape": self.target[1],
+             "display_name": "SignalMapping", "properties": [self.right]},
+        ]}
+        self.path = {"nodes": [self.source, self.target],
+                     "steps": [{"kind": "mapping", "mapping_id": "M1",
+                                "left_predicate": self.left,
+                                "right_predicate": self.right}]}
+
+    def test_b30_planner_uses_verified_mapping_and_returns_source_only(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_identifier_anti_join)
+        with patch("process_sim.dtwise.experimental_multihop_cli.enumerate_evidenced_paths",
+                   return_value=[self.path]), patch(
+                   "process_sim.dtwise.experimental_multihop_cli.bind_evidenced_path",
+                   return_value={"entities": [], "edges": [], "projections": []}), patch(
+                   "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan), patch(
+                   "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"):
+            plan, selection = _plan_named_identifier_anti_join(
+                self.question, self.catalog, [], [self.source, self.target],
+                {"dexpi", "opcuaconnectivity"}, {})
+        self.assertEqual(selection["choice"], "VERIFIED_IDENTIFIER_ANTI_JOIN")
+        self.assertEqual(plan["anti_join"], {"from": "n0", "to": "n1"})
+        self.assertEqual(plan["projections"], [])
+        self.assertTrue(plan["return_entities"])
+
+    def test_b30_rejects_unverified_join(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_identifier_anti_join)
+        with patch("process_sim.dtwise.experimental_multihop_cli.enumerate_evidenced_paths",
+                   return_value=[]):
+            with self.assertRaisesRegex(ValueError, "unique verified"):
+                _plan_named_identifier_anti_join(
+                    self.question, self.catalog, [], [self.source, self.target],
+                    {"dexpi", "opcuaconnectivity"}, {})
+
+    def test_b30_compiler_emits_correlated_not_exists(self):
+        from process_sim.dtwise.graph_compiler import compile_graph_ir
+        plan = {
+            "ir_version": "1.0",
+            "entities": [
+                {"alias": "n0", "domain": self.source[0], "shape": self.source[1]},
+                {"alias": "n1", "domain": self.target[0], "shape": self.target[1]}],
+            "edges": [{"kind": "mapping", "from": "n0", "to": "n1",
+                       "mapping_id": "M1", "left_predicate": self.left,
+                       "right_predicate": self.right}],
+            "projections": [], "filters": None, "operation": {"type": "select"},
+            "return_entities": True, "anti_join": {"from": "n0", "to": "n1"}}
+        schema = {"shape_paths": [
+            {"domain": self.source[0], "node_shape": self.source[1],
+             "path": self.left, "evidence": ["e1"]},
+            {"domain": self.target[0], "node_shape": self.target[1],
+             "path": self.right, "evidence": ["e2"]}],
+            "relationships": []}
+        mappings = [{"id": "M1", "verified": True, "evidence_ids": ["e1"],
+                     "left_domain": self.source[0], "right_domain": self.target[0],
+                     "left_property": self.left, "right_property": self.right}]
+        query = compile_graph_ir(plan, schema, mappings=mappings,
+                                 include_graph=False)
+        self.assertIn("SELECT DISTINCT ?n0", query)
+        self.assertIn("FILTER NOT EXISTS", query)
+        self.assertIn("STR(?anti_key) = STR(?anti_other)", query)
+        self.assertIn("GRAPH ?graph_n0", query)
+        self.assertIn("GRAPH ?graph_n1", query)
+        with self.assertRaisesRegex(ValueError, "graph provenance"):
+            compile_graph_ir(plan, schema, mappings=mappings, include_graph=True)
+
+
 if __name__ == "__main__":
     unittest.main()
