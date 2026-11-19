@@ -13,6 +13,10 @@ import json
 from pathlib import Path
 from time import perf_counter
 
+from process_sim.dtwise.experimental_shacl_domain_resolution import (
+    DomainResolutionError, resolve_domain,
+)
+
 from process_sim.dtwise.experimental_shacl_subgraph import (
     extract_question,
     load_index,
@@ -104,8 +108,8 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("question", nargs="?", help="Natural-language schema question")
     parser.add_argument(
-        "--domain", default="dexpi",
-        help="Single schema domain in the index (default: dexpi; e.g. ecad)",
+        "--domain", default=None,
+        help="Optional schema domain override (otherwise resolved from question)",
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
@@ -137,9 +141,23 @@ def main() -> None:
         / "semantic/ontology2/dtwise/dtwise-schema-index.json",
     )
     args = parser.parse_args()
-    question = args.question or DEFAULT_QUESTIONS.get(args.domain)
+    # Preserve the no-argument manual smoke test; all supplied questions must
+    # resolve a domain explicitly or use --domain.
+    question = args.question or DEFAULT_QUESTIONS.get(args.domain or "dexpi")
     if question is None:
         parser.error("Supply a question for this domain")
+    if args.question is None and args.domain is None:
+        args.domain = "dexpi"
+    try:
+        with args.index.open(encoding="utf-8") as source:
+            schema = json.load(source)
+        available_domains = {
+            item["domain"] for key in ("concepts", "shape_paths")
+            for item in schema.get(key, []) if item.get("domain")
+        }
+        args.domain = resolve_domain(question, available_domains, override=args.domain)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        parser.error(str(exc))
 
     if args.phase4_and_join and (not args.semantic_paths or not args.llm or args.phase4_filtered_join or args.phase4_join or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
         parser.error("--phase4-and-join requires --semantic-paths --llm and excludes other plan/SPARQL modes")
