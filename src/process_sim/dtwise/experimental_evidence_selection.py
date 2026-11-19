@@ -254,7 +254,25 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
                 or type(f['value']) not in (str, int, float, bool)
                 or ('ignore_case' in f and (
                     f['op'] != 'contains' or type(f['ignore_case']) is not bool))):
-            raise ValueError("Invalid evidence-selection filter")
+            details = {
+                "received_type": type(f).__name__,
+                "received_keys": sorted(str(k) for k in f) if isinstance(f, dict) else [],
+                "property_id": f.get("property") if isinstance(f, dict) and
+                               isinstance(f.get("property"), str) else None,
+                "property_id_valid": (isinstance(f, dict) and
+                                      isinstance(f.get("property"), str) and
+                                      f["property"] in lookup),
+                "operator": f.get("op") if isinstance(f, dict) and
+                            isinstance(f.get("op"), str) else None,
+                "value_type": type(f.get("value")).__name__ if isinstance(f, dict) else None,
+                "ignore_case_type": type(f["ignore_case"]).__name__
+                                    if isinstance(f, dict) and "ignore_case" in f else None,
+            }
+            if prompt_diagnostics is not None:
+                prompt_diagnostics["filter_validation_error"] = details
+                _write_prompt_diagnostics(prompt_diagnostics)
+            raise ValueError("Invalid evidence-selection filter: " +
+                             json.dumps(details, sort_keys=True))
         j, predicate = lookup[f['property']]
         bound_filter = {"node_index": j, "predicate": predicate,
                         "op": f['op'], "value": f['value']}
