@@ -10,15 +10,20 @@ import re
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import validate_selection
-from process_sim.dtwise.experimental_shacl_subgraph import _mentioned, _short
 
 PHASE1_SYSTEM_PROMPT = """You select verified SHACL PROPERTY paths in ONE domain.
 The only supported task is RETRIEVE (show/find/list property values).
 Select ONLY supplied P candidate IDs. Never invent paths, properties, predicates,
 RDF classes, SPARQL, or cross-domain joins.
 A property name alone does not identify a path: use the complete owner path.
-If the user explicitly asks for multiple paths (both EndPoint and PLCEndPoint),
-select each requested property path. Otherwise do not select sibling branches.
+Compare the complete sequence of named shapes and the terminal property.
+Treat every shape name as a distinct identifier: EndPoint is NOT PLCEndPoint.
+A requested EndPoint path does NOT imply a PLCEndPoint path merely because
+one name contains the other. Do not select paths just because they share Address.
+Only select a path when its full owner chain satisfies the question.
+If the user explicitly asks for multiple paths, select each requested path.
+Otherwise do not select sibling branches. For a singular explicit owner, select
+only that owner's path. Natural-language synonyms may still identify owners.
 If multiple paths remain plausible without a specified owner, return ambiguous.
 If no offered path answers the question, return unresolved.
 COUNT, EXISTS, filters (e.g. LocalId = "FI_101"), sorting, grouping, date
@@ -32,31 +37,6 @@ Do NOT output node_index, target, operation, modifiers or path strings."""
 
 
 
-def _restrict_explicit_shape_owners(index, question: str, properties: list, registry: dict) -> list:
-    """Restrict offered paths using exact explicitly named SHACL shapes."""
-    explicit = {
-        uri for uri, concept in index.shapes.items()
-        if any(_mentioned(question, name) for name in [
-            *(label for label in concept.get("labels", [])
-              if "shacl shape" not in label.casefold()),
-            _short(uri),
-        ])
-    }
-    if not explicit:
-        return properties
-    paths = [registry[c["id"]]["node_uris"] for c in properties]
-    present = {uri for nodes in paths for uri in nodes} & explicit
-    ancestors = {
-        uri for nodes in paths for i, uri in enumerate(nodes)
-        if uri in present and any(other in present for other in nodes[i + 1:])
-    }
-    specific = present - ancestors
-    if not specific:
-        return properties
-    return [c for c in properties if any(
-        uri in registry[c["id"]]["node_uris"] for uri in specific
-    )]
-
 
 def run_phase1_query_plan(index, prepared: dict, *,
                           model: str = "qwen2.5-coder:7b",
@@ -67,7 +47,6 @@ def run_phase1_query_plan(index, prepared: dict, *,
     properties = [c for c in qualified["prompt"]["candidates"]
                   if c["kind"] == "property"]
     question = qualified["prompt"]["question"]
-    properties = _restrict_explicit_shape_owners(index, question, properties, qualified["registry"])
     offered = {
         "prompt": {**qualified["prompt"], "candidates": properties},
         "registry": {c["id"]: qualified["registry"][c["id"]] for c in properties},
