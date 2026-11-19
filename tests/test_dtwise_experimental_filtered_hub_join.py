@@ -796,6 +796,30 @@ class EvidenceSubgraphSelectionTests(unittest.TestCase):
             _label("https://example.org/hasProductIdentifier"),
             "ProductIdentifier")
 
+    def test_invalid_tree_retries_with_validation_feedback(self):
+        import json
+        from process_sim.dtwise.experimental_subgraph_selection import (
+            select_evidence_subgraph)
+        responses = iter([
+            {"message": {"content": json.dumps({"edge_ids": ["E0", "E1"]})}},
+            {"message": {"content": json.dumps({"edge_ids": ["E0", "E1", "E2"]})}},
+        ])
+        requests = []
+        def fake_request(url, payload, timeout):
+            requests.append(payload["messages"][:])
+            return next(responses)
+        with patch("process_sim.dtwise.experimental_subgraph_selection.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan):
+            plan, selection = select_evidence_subgraph(
+                "Join Hub, LeafA, LeafB, and LeafC using AssetIdentifier.",
+                self.nodes, self.catalog, {}, self.mappings,
+                model="mock", request_json=fake_request,
+                ollama_host="http://localhost", timeout=1)
+        self.assertEqual(len(plan["edges"]), 3)
+        self.assertEqual(len(requests), 2)
+        self.assertIn("exactly 3 verified edges",
+                      requests[1][-1]["content"])
+
     def test_missing_spoke_rejected(self):
         with self.assertRaisesRegex(ValueError, "spanning tree"):
             self.select(["E0", "E1"])
