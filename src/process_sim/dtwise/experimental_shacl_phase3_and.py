@@ -16,7 +16,11 @@ PROMPT = """Plan one RETRIEVE result with exactly TWO string equality filters jo
 Use only verified PROPERTY candidate IDs. Do not write SPARQL.
 Return ONLY JSON with exactly: status ("selected", "ambiguous", "unresolved"),
 result_id (P ID or null), filters (array of two objects each with exactly
-filter_id (P ID), owner (string), property (string), operator ("="),\nvalue (string)), result_meaning (string or null), reason (nonempty string).\nFor selected status, result_meaning must be the complete owner.property\n(e.g. EndPoint.Address), and each filter owner/property must describe\nthe selected candidate exactly.
+filter_id (P ID), owner (string), property (string), operator ("="), 
+value (string)), result_meaning (string or null), reason (nonempty string).
+For selected status, result_meaning must be the complete owner.property
+(e.g. EndPoint.Address), and each filter owner/property must describe
+the selected candidate exactly.
 For non-selected status use result_id null, result_meaning null and filters [].
 Both filter owners must be on the result path, either ancestor or result owner.
 Copy literal values exactly from the question and keep their condition order.
