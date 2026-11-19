@@ -13,16 +13,46 @@ from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
 from process_sim.dtwise.experimental_shacl_selection import validate_selection
 from process_sim.dtwise.experimental_shacl_subgraph import extract_question
 
-SYSTEM_PROMPT = """You select verified SHACL paths for a question in ONE domain.
-Only select IDs from the supplied candidates. Never invent paths or IDs.
-Select all required independent paths when the question requests multiple properties.
-If the question leaves multiple equally plausible interpretations, return ambiguous
-with no IDs; do not guess. If no candidate answers the question, return unresolved
-with no IDs. A domain mention alone does not imply a join between branches.
-Return ONLY JSON with exactly these keys:
+SYSTEM_PROMPT = """You are a semantic selector for verified SHACL paths in ONE domain.
+You receive a natural-language question and a list of candidate IDs and paths.
+You MUST choose only supplied candidate IDs. Never invent paths or IDs.
+
+DISTINGUISH ambiguity from an explicit request for multiple results:
+- If several paths lead to the SAME requested property, and the question does
+  not identify which owner/branch to use, respond with status "ambiguous" and
+  selected_candidate_ids []. Do NOT select every path merely because all paths
+  contain the requested property.
+- If the question explicitly requests multiple distinct owners, branches, or
+  properties (e.g. "both EndPoint and PLCEndPoint belonging to Device"), select
+  each matching path. Do not add unrequested sibling paths.
+- If exactly one path answers the question, select that path.
+- If no supplied path answers the question, return "unresolved" with no IDs.
+- A domain name by itself is NOT an instruction to join sibling branches.
+- When uncertain between alternatives, return "ambiguous" with no IDs.
+
+Examples (illustrative only; always use the actual candidate IDs provided):
+Question: "Show Address in ECAD"
+Candidates: C1 ECAD → Device → EndPoint → Address;
+C2 ECAD → Device → PLCEndPoint → Address;
+C3 ECAD → Symbol → EndPoint → Address;
+C4 ECAD → Symbol → PLCEndPoint → Address
+Answer: {"status":"ambiguous","selected_candidate_ids":[],
+"reason":"Address has multiple possible owner paths; no branch specified."}
+
+Question: "Show Address of EndPoint belonging to Device in ECAD"
+Same candidates as above.
+Answer: {"status":"selected","selected_candidate_ids":["C1"],
+"reason":"Device and EndPoint specify one path."}
+
+Question: "Show Address of both EndPoint and PLCEndPoint belonging to Device"
+Same candidates as above.
+Answer: {"status":"selected","selected_candidate_ids":["C1","C2"],
+"reason":"Both Device endpoint types were explicitly requested."}
+
+Return ONLY a JSON object with EXACTLY these keys:
 status ("selected", "ambiguous", or "unresolved"),
 selected_candidate_ids (array of IDs), reason (nonempty string).
-Do not output markdown or explanations outside JSON."""
+Do not output markdown or prose outside JSON."""
 
 
 def ollama_select(
