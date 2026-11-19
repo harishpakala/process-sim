@@ -325,3 +325,51 @@ def test_bare_address_auto_join_compiles_single_query(ecad_address_paths):
     assert "SELECT DISTINCT ?value1 ?value2" in queries[0]["sparql"]
     assert "<https://example.org/endpoint>" in queries[0]["sparql"]
     assert "<https://example.org/plc>" in queries[0]["sparql"]
+
+
+def test_bare_address_two_verified_join_groups(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    root, symbol = "urn:ECAD", "urn:Symbol"
+    index.shapes[symbol] = {"labels": ["Symbol"]}
+    symbol_edge = {"from": root, "to": symbol, "predicate": "https://example.org/symbol",
+                   "property_shape": "urn:SymbolShape"}
+    index.edges.append(symbol_edge)
+    for suffix, owner_name in (("EndPoint", "EndPoint"), ("PLCEndPoint", "PLCEndPoint")):
+        owner = f"urn:Symbol{suffix}"
+        index.shapes[owner] = {"labels": [owner_name]}
+        edge = {"from": symbol, "to": owner,
+                "predicate": f"https://example.org/symbol{suffix}",
+                "property_shape": f"urn:Symbol{suffix}Shape"}
+        index.edges.append(edge)
+        prop = {"owner": owner, "predicate": "https://example.org/address",
+                "property_shape": f"urn:Symbol{suffix}Address", "name": "Address"}
+        index.properties[owner] = [prop]
+        cid = "C3" if suffix == "EndPoint" else "C4"
+        prepared["prompt"]["candidates"].append({
+            "id": cid, "path": f"ECAD → Symbol → {owner_name} → Address"})
+        prepared["registry"][cid] = {
+            "node_uris": [root, symbol, owner],
+            "edges": [symbol_edge.copy(), edge.copy()],
+            "property": prop.copy(),
+        }
+    for edge in index.edges:
+        if edge["predicate"].startswith("urn:"):
+            edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+    for record in prepared["registry"].values():
+        for edge in record["edges"]:
+            if edge["predicate"].startswith("urn:"):
+                edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+        record["property"]["predicate"] = "https://example.org/address"
+    for props in index.properties.values():
+        for prop in props:
+            prop["predicate"] = "https://example.org/address"
+    prepared["prompt"]["question"] = "Show Address in ECAD"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1"])))
+    assert result["plan"]["status"] == "selected"
+    assert len(result["auto_join_groups"]) == 2
+    assert sorted(len(group) for group in result["auto_join_groups"]) == [2, 2]
+    queries = compile_phase1_sparql(result)
+    assert len(queries) == 2
+    assert all("SELECT DISTINCT ?value1 ?value2" in q["sparql"] for q in queries)
+    assert sum("https://example.org/symbol>" in q["sparql"] for q in queries) == 1
