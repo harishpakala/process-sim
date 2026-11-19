@@ -496,3 +496,41 @@ def test_ollama_explicit_multiple_selection_can_validate():
         "ECAD → Device → EndPoint → Address",
         "ECAD → Device → PLCEndPoint → Address",
     }
+
+
+def test_semantic_schema_terms_are_domain_local():
+    from process_sim.dtwise.experimental_shacl_semantic import schema_terms
+    index = _domain_index("ecad")
+    terms = schema_terms(index)
+    assert any(t["kind"] == "property" and t["label"] == "Address" for t in terms)
+    assert all(t["uri"] in index.shapes if t["kind"] == "shape"
+               else t["owner"] in index.shapes for t in terms)
+
+
+def test_semantic_ranking_mocked_embeddings_does_not_select_paths():
+    from process_sim.dtwise.experimental_shacl_semantic import semantic_terms
+    calls = []
+    def fake_transport(url, payload, timeout):
+        calls.append((url, payload))
+        return {"embeddings": [[1.0, 0.0]] + [
+            [1.0, 0.0] if "Address" in text else [0.0, 1.0]
+            for text in payload["input"][1:]
+        ]}
+    result = semantic_terms(
+        _domain_index("ecad"), "network addresses of connection points",
+        top_k=5, transport=fake_transport,
+    )
+    assert result["domain"] == "ecad"
+    assert any(t["label"] == "Address" for t in result["matches"])
+    assert "selected_paths" not in result
+    assert calls[0][0].endswith("/api/embed")
+    assert calls[0][1]["model"] == "nomic-embed-text:latest"
+
+
+def test_semantic_embeddings_reject_wrong_vector_count():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_semantic import ollama_embed
+    with pytest.raises(ValueError, match="Malformed"):
+        ollama_embed(["a", "b"], transport=lambda url, payload, timeout: {
+            "embeddings": [[1.0, 0.0]],
+        })
