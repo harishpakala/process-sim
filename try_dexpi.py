@@ -113,6 +113,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--sparql", action="store_true", help="Compile selected verified paths (requires --semantic-paths --llm)")
+    parser.add_argument("--direct-intent", action="store_true", help="Opt-in direct Ollama structured ECAD join intent; independently validate and compile only")
     parser.add_argument("--phase4-and-join", action="store_true", help="Opt-in same-Device ECAD Address join with LocalId AND DeviceType filters; compile only")
     parser.add_argument("--phase4-filtered-join", action="store_true", help="Opt-in same-Device ECAD Address join with one Device.LocalId equality; compile only")
     parser.add_argument("--phase4-join", action="store_true", help="Opt-in same-Device ECAD sibling Address join; compile only")
@@ -159,6 +160,8 @@ def main() -> None:
     except (OSError, ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
 
+    if args.direct_intent and (not args.semantic_paths or not args.llm or args.phase4_and_join or args.phase4_filtered_join or args.phase4_join or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
+        parser.error("--direct-intent requires --semantic-paths --llm and excludes other plan/SPARQL modes")
     if args.phase4_and_join and (not args.semantic_paths or not args.llm or args.phase4_filtered_join or args.phase4_join or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql):
         parser.error("--phase4-and-join requires --semantic-paths --llm and excludes other plan/SPARQL modes")
     if args.phase4_filtered_join and (not args.semantic_paths or not args.llm or args.phase4_join or args.phase3_and or args.phase2_filter or args.phase1_plan or args.phase1_sparql or args.sparql or args.phase4_and_join):
@@ -211,13 +214,30 @@ def main() -> None:
             return
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         t_retrieval = perf_counter()
-        prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if (args.phase2_filter or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join) else args.top_k,
-                                       top_properties=8 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join) else 2,
-                                       max_candidates=128 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join) else 64,
+        prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if (args.phase2_filter or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else args.top_k,
+                                       top_properties=8 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else 2,
+                                       max_candidates=128 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else 64,
                                        model=args.embed_model, endpoint=args.ollama_url)
         if timings is not None:
             timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
-        if args.phase4_and_join:
+        if args.direct_intent:
+            from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+            result = run_direct_join_intent(index, prepared, model=args.model,
+                                            endpoint=args.ollama_url)
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status:", "SELECTED" if result["intent"] is not None else "UNRESOLVED")
+                if result["intent"] is not None:
+                    print("Validated structured intent:")
+                    print(json.dumps(result["intent"], indent=2, ensure_ascii=False))
+                else:
+                    print("Reason:", result.get("reason", "No validated intent"))
+                print("Compiled SPARQL (not executed):")
+                print(result["sparql"] or "  (none)")
+        elif args.phase4_and_join:
             from process_sim.dtwise.experimental_shacl_phase4_and_join import (
                 run_phase4_and_join_plan, compile_phase4_and_join_sparql,
             )
