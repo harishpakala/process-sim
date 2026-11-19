@@ -16,15 +16,15 @@ PROMPT = """Plan one RETRIEVE result with exactly TWO string equality filters jo
 Use only verified PROPERTY candidate IDs. Do not write SPARQL.
 Return ONLY JSON with exactly: status ("selected", "ambiguous", "unresolved"),
 result_id (P ID or null), filters (array of two objects each with exactly
-filter_id (P ID), operator ("="), value (string)), reason (nonempty string).
-For non-selected status use result_id null and filters [].
+filter_id (P ID), owner (string), property (string), operator ("="),\nvalue (string)), result_meaning (string or null), reason (nonempty string).\nFor selected status, result_meaning must be the complete owner.property\n(e.g. EndPoint.Address), and each filter owner/property must describe\nthe selected candidate exactly.
+For non-selected status use result_id null, result_meaning null and filters [].
 Both filter owners must be on the result path, either ancestor or result owner.
 Copy literal values exactly from the question and keep their condition order.
 No OR, COUNT, EXISTS, numeric comparison, aggregation, cross-branch joins or
 multiple result properties. Abstain if unsupported or ambiguous."""
 
-FIELDS = {"status", "result_id", "filters", "reason"}
-FILTER_FIELDS = {"filter_id", "operator", "value"}
+FIELDS = {"status", "result_id", "result_meaning", "filters", "reason"}
+FILTER_FIELDS = {"filter_id", "owner", "property", "operator", "value"}
 UNSUPPORTED = re.compile(
     r"\b(how many|count|exists|does any|is there|are there|average|sum|"
     r"group by|order by|greater than|less than)\b|(?:!=|<=|>=|<|>)", re.I
@@ -44,7 +44,7 @@ def validate_phase3_plan(raw, qualified):
     if not isinstance(raw["reason"], str) or not raw["reason"].strip():
         raise SelectionContractError("Missing Phase 3 reason")
     if raw["status"] != "selected":
-        if raw["result_id"] is not None or raw["filters"] != []:
+        if raw["result_id"] is not None or raw["result_meaning"] is not None or raw["filters"] != []:
             raise SelectionContractError("Uncertain Phase 3 plan must be empty")
         return raw
     offered = {c["id"] for c in qualified["prompt"]["candidates"]
@@ -55,6 +55,12 @@ def validate_phase3_plan(raw, qualified):
     if not isinstance(filters, list) or len(filters) != 2:
         raise SelectionContractError("Exactly two filters required")
     result = qualified["registry"][raw["result_id"]]
+    result_candidate = next(c for c in qualified["prompt"]["candidates"]
+                            if c["id"] == raw["result_id"])
+    result_path = result_candidate["path"]
+    expected_meaning = ".".join(result_path.split(" → ")[-2:])
+    if raw["result_meaning"] != expected_meaning:
+        raise SelectionContractError("Result interpretation does not match candidate")
     for item in filters:
         if not isinstance(item, dict) or set(item) != FILTER_FIELDS:
             raise SelectionContractError("Invalid Phase 3 filter fields")
@@ -63,6 +69,11 @@ def validate_phase3_plan(raw, qualified):
         if item["operator"] != "=" or not isinstance(item["value"], str):
             raise SelectionContractError("Only string equality supported")
         filtr = qualified["registry"][item["filter_id"]]
+        candidate = next(c for c in qualified["prompt"]["candidates"]
+                         if c["id"] == item["filter_id"])
+        parts = candidate["path"].split(" → ")
+        if item["owner"] != parts[-2] or item["property"] != parts[-1]:
+            raise SelectionContractError("Filter interpretation does not match candidate")
         prefix = filtr["node_uris"]
         if result["node_uris"][:len(prefix)] != prefix:
             raise SelectionContractError("Filter owner must be on result path")
@@ -89,7 +100,7 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                  not re.search(r"\bor\b", clause, re.I) and
                  not UNSUPPORTED.search(question) and bool(prompt["candidates"]))
     if not supported:
-        plan = {"status": "unresolved", "result_id": None, "filters": [],
+        plan = {"status": "unresolved", "result_id": None, "result_meaning": None, "filters": [],
                 "reason": "Requires exactly two AND string equality conditions"}
     else:
         raw = ollama_select(prompt, model=model, endpoint=endpoint,
