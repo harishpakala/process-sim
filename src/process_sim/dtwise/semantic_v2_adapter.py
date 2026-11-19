@@ -58,6 +58,20 @@ def select_and_bind_v2(question, paths, catalog, index, mappings, *,
         diagnostics=diagnostics)
     i = int(selected["path_id"].split("_")[1])
     path = paths[i]
+    anti_join = selected.get("anti_join", False)
+    if anti_join:
+        if (selected["operation"] != "select" or selected["projections"]
+                or selected["filters"] or selected.get("where") is not None
+                or selected.get("optional_properties") or selected.get("order_by")
+                or selected.get("limit") is not None or selected.get("distinct")):
+            raise ValueError("Anti-join requires unmodified entity SELECT")
+        if (len(path["nodes"]) != 2 or len(path["steps"]) != 1
+                or path["steps"][0]["kind"] != "mapping"):
+            raise ValueError("Anti-join requires one verified directed mapping edge")
+        plan = bind_evidenced_path(path, catalog, mappings, projections=[])
+        plan["anti_join"] = {"from": "n0", "to": "n1"}
+        plan["return_entities"] = True
+        return resolve_shapes(plan, index, mappings=mappings), selected
     # Only translate semantics supported exactly by the existing compiler.
     condition = selected["aggregate_condition"]
     if (selected.get("optional_properties", [])
