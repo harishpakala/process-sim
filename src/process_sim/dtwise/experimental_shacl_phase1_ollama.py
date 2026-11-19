@@ -12,6 +12,9 @@ from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import validate_selection
 from process_sim.dtwise.experimental_shacl_sparql import compile_selected_paths
+from process_sim.dtwise.experimental_shacl_join_topology import verified_shared_ancestor
+from process_sim.dtwise.experimental_shacl_join_compiler import compile_verified_sibling_join
+from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 
 PHASE1_SYSTEM_PROMPT = """You select verified SHACL PROPERTY paths in ONE domain.
 The only supported task is RETRIEVE (show/find/list property values).
@@ -83,9 +86,9 @@ def run_phase1_query_plan(index, prepared: dict, *,
     if timing is not None:
         timing.setdefault("qwen_selection_ms", 0.0)
         timing.setdefault("python_validation_ms", 0.0)
-    # Independently reject the narrow property-only request when the verified
-    # schema offers multiple owner paths. Qwen must not resolve this by
-    # selecting every matching path (or arbitrarily choosing one).
+    # A bare property request can select exactly two graph-verified sibling
+    # paths for an automatic inner join. Do not guess a join for other cases.
+    auto_join_ids = []
     bare_request = re.fullmatch(
         r"(?:show|find|list)\\s+(?:the\\s+)?([A-Za-z_][A-Za-z_0-9]*)"
         r"(?:\\s+in\\s+[A-Za-z_][A-Za-z_0-9]*)?\\s*[.!]?\\s*",
@@ -93,14 +96,24 @@ def run_phase1_query_plan(index, prepared: dict, *,
     )
     if bare_request:
         property_name = bare_request.group(1).casefold()
-        matches = [
-            candidate for candidate in properties
-            if candidate["path"].split(" → ")[-1].casefold() == property_name
-        ]
-        if len({candidate["path"] for candidate in matches}) > 1:
+        matches = [c for c in properties
+                   if c["path"].split(" → ")[-1].casefold() == property_name]
+        if len(matches) == 2:
+            ids = [c["id"] for c in matches]
+            try:
+                verified_shared_ancestor(qualified, ids)
+            except SelectionContractError:
+                pass
+            else:
+                auto_join_ids = ids
+                selection = {
+                    "status": "selected", "selected_candidate_ids": ids,
+                    "reason": "Automatic join on verified shared ancestor",
+                }
+        if len(matches) > 1 and not auto_join_ids:
             selection = {
                 "status": "ambiguous", "selected_candidate_ids": [],
-                "reason": "Property has multiple verified owner paths; specify the owner",
+                "reason": "Multiple property paths without a supported verified two-path join",
             }
     selected = [
         {"id": c["id"], "domain": c["domain"], "kind": c["kind"], "path": c["path"]}
@@ -110,12 +123,20 @@ def run_phase1_query_plan(index, prepared: dict, *,
         "domain": index.domain, "question": question,
         "plan": {**selection, "operation": "RETRIEVE" if selection["status"] == "selected" else None},
         "selected_paths": selected, "qualified": qualified,
+        "auto_join_result_ids": auto_join_ids,
     }
 
 
 def compile_phase1_sparql(result: dict) -> list[dict]:
     """Compile validated RETRIEVE selections; no model-authored SPARQL."""
     plan = result["plan"]
+    join_ids = result.get("auto_join_result_ids", [])
+    if join_ids:
+        if (plan["status"] != "selected" or
+                plan["selected_candidate_ids"] != join_ids):
+            raise ValueError("Automatic join selection changed after validation")
+        return [{"candidate_id": "auto_join", "path": "verified shared ancestor",
+                 "sparql": compile_verified_sibling_join(result["qualified"], join_ids)}]
     if plan["status"] == "selected" and plan["operation"] != "RETRIEVE":
         raise ValueError("Phase 1 supports RETRIEVE only")
     qualified = result["qualified"]
