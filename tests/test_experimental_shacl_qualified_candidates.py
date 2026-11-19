@@ -20,8 +20,8 @@ def fixture(domain="ecad"):
     prepared = {
         "prompt": {"domain": domain, "question": "Show Device LocalId",
                    "candidates": [{"id": "C1", "path": "ECAD → Device → LocalId"}]},
-        "registry": {"C1": {"node_uris": [root, owner], "edges": [edge],
-                             "property": prop}},
+        "registry": {"C1": {"node_uris": [root, owner], "edges": [copy.deepcopy(edge)],
+                             "property": copy.deepcopy(prop)}},
     }
     return index, prepared
 
