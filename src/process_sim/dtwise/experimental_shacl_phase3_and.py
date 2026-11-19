@@ -21,13 +21,19 @@ value (string)), result_meaning (string or null), reason (nonempty string).
 For selected status, result_meaning must be the complete owner.property
 (e.g. EndPoint.Address), and each filter owner/property must describe
 the selected candidate exactly.
-For multiple results use result_ids (array of P IDs) and result_meanings\n(array of corresponding owner.property strings) INSTEAD of result_id/result_meaning.\nIf both EndPoint and PLCEndPoint Addresses are requested, select both paths.\nFor non-selected status use result_id null, result_meaning null and filters [].
+For multiple results use result_ids (array of P IDs) and result_meanings
+(array of corresponding owner.property strings) INSTEAD of result_id/result_meaning.
+If both EndPoint and PLCEndPoint Addresses are requested, select both paths.
+For non-selected status use result_id null, result_meaning null and filters [].
 Both filter owners must be on the result path, either ancestor or result owner.
 Copy literal values exactly from the question and keep their condition order.
 No OR, COUNT, EXISTS, numeric comparison, aggregation, cross-branch joins or
-cross-branch filter joins. For multiple results, both filters must be\nshared ancestors or owners on EVERY result path; compile separate queries.\nAbstain if unsupported or ambiguous."""
+cross-branch filter joins. For multiple results, both filters must be
+shared ancestors or owners on EVERY result path; compile separate queries.
+Abstain if unsupported or ambiguous."""
 
-FIELDS = {"status", "result_id", "result_meaning", "filters", "reason"}\nMULTI_FIELDS = {"status", "result_ids", "result_meanings", "filters", "reason"}
+FIELDS = {"status", "result_id", "result_meaning", "filters", "reason"}
+MULTI_FIELDS = {"status", "result_ids", "result_meanings", "filters", "reason"}
 FILTER_FIELDS = {"filter_id", "owner", "property", "operator", "value"}
 UNSUPPORTED = re.compile(
     r"\b(how many|count|exists|does any|is there|are there|average|sum|"
@@ -41,14 +47,19 @@ def validate_phase3_plan(raw, qualified):
             raw = json.loads(raw)
         except json.JSONDecodeError as exc:
             raise SelectionContractError("Invalid Phase 3 JSON") from exc
-    if not isinstance(raw, dict) or set(raw) != FIELDS:
+    if not isinstance(raw, dict) or set(raw) not in (FIELDS, MULTI_FIELDS):
         raise SelectionContractError("Invalid Phase 3 response fields")
+    multi = set(raw) == MULTI_FIELDS
     if raw["status"] not in ("selected", "ambiguous", "unresolved"):
         raise SelectionContractError("Invalid Phase 3 status")
     if not isinstance(raw["reason"], str) or not raw["reason"].strip():
         raise SelectionContractError("Missing Phase 3 reason")
     if raw["status"] != "selected":
-        if raw["result_id"] is not None or raw["result_meaning"] is not None or raw["filters"] != []:
+        if multi:
+            empty = raw["result_ids"] == [] and raw["result_meanings"] == [] and raw["filters"] == []
+        else:
+            empty = raw["result_id"] is None and raw["result_meaning"] is None and raw["filters"] == []
+        if not empty:
             raise SelectionContractError("Uncertain Phase 3 plan must be empty")
         return raw
     offered = {c["id"] for c in qualified["prompt"]["candidates"]
@@ -88,10 +99,12 @@ def validate_phase3_plan(raw, qualified):
         if item["owner"] != parts[-2] or item["property"] != parts[-1]:
             raise SelectionContractError("Filter interpretation does not match candidate")
         prefix = filtr["node_uris"]
-        if result["node_uris"][:len(prefix)] != prefix:
-            raise SelectionContractError("Filter owner must be on result path")
-        if filtr["edges"] != result["edges"][:len(filtr["edges"])]:
-            raise SelectionContractError("Filter edges must share result path")
+        for rid in result_ids:
+            result = qualified["registry"][rid]
+            if result["node_uris"][:len(prefix)] != prefix:
+                raise SelectionContractError("Filter owner must be on result path")
+            if filtr["edges"] != result["edges"][:len(filtr["edges"])]:
+                raise SelectionContractError("Filter edges must share result path")
     if len({(f["filter_id"], f["value"]) for f in filters}) != 2:
         raise SelectionContractError("Duplicate filter condition")
     return raw
@@ -171,7 +184,13 @@ def compile_phase3_and_sparql(result):
     if plan["status"] != "selected":
         return None
     registry = result["qualified"]["registry"]
-    selected = registry[plan["result_id"]]
+    if "result_ids" in plan:
+        return {rid: _compile_phase3_one(registry[rid], plan["filters"], registry)
+                for rid in plan["result_ids"]}
+    return _compile_phase3_one(registry[plan["result_id"]], plan["filters"], registry)
+
+
+def _compile_phase3_one(selected, filters, registry):
     nodes = selected["node_uris"]
     triples = []
     for i, edge in enumerate(selected["edges"]):
