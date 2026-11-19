@@ -74,7 +74,7 @@ class SemanticCompilerTests(unittest.TestCase):
                     {"operator": "exists", "property_id": ids[0]},
                     {"operator": "exists", "property_id": ids[1]},
                 ]}}
-        with self.assertRaisesRegex(ValueError, "distinct shapes"):
+        with self.assertRaisesRegex(ValueError, "explicit scope_mode"):
             compile_semantic_plan(plan, evidence)
 
     def test_verified_target_class_anchors_entity(self):
@@ -180,7 +180,7 @@ class SemanticCompilerTests(unittest.TestCase):
         ], "shacl_edges": []})
         plan = {"version": "2.0", "scope": [e["id"] for e in second.entities],
                 "operation": "select_entities", "projections": [], "where": None}
-        with self.assertRaisesRegex(ValueError, "verified shape membership"):
+        with self.assertRaisesRegex(ValueError, "explicit scope_mode"):
             compile_semantic_plan(plan, second)
 
 
