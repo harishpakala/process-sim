@@ -107,6 +107,9 @@ def main() -> None:
         help="Single schema domain in the index (default: dexpi; e.g. ecad)",
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
+    parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
+    parser.add_argument("--embed-model", default="nomic-embed-text:latest")
+    parser.add_argument("--top-k", type=int, default=8)
     parser.add_argument("--model", default="qwen2.5-coder:7b")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument(
@@ -127,7 +130,22 @@ def main() -> None:
         parser.error("Supply a question for this domain")
 
     index = load_index(args.index, domain=args.domain)
-    if args.llm:
+    if args.semantic and args.llm:
+        parser.error("--semantic and --llm are separate experiments")
+    if args.semantic:
+        from process_sim.dtwise.experimental_shacl_semantic import semantic_terms
+        result = semantic_terms(index, question, top_k=args.top_k,
+                                model=args.embed_model, endpoint=args.ollama_url)
+        if args.json:
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            print("Question:", question)
+            print("Domain:", args.domain.upper())
+            print("Embedding model:", args.embed_model)
+            print("Semantic matches (suggestions only; no paths selected):")
+            for item in result["matches"]:
+                print(" ", item["score"], item["kind"], item["label"])
+    elif args.llm:
         from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
         result = run_local_selection(index, question, model=args.model, endpoint=args.ollama_url)
         if args.json:
