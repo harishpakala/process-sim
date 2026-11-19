@@ -15,6 +15,55 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
                           graph_iri=None, limit=None):
     """Compile verified evidence IDs into named-graph-aware SPARQL."""
     plan = validate_semantic_plan(plan, evidence)
+    if len(plan["scope"]) > 1 and plan.get("scope_mode") == "independent":
+        if plan["operation"] == "select_values":
+            raise ValueError("Independent multi-shape value projections are not yet supported")
+        props = {p["id"]: p for p in evidence.properties}
+        entities = {e["id"]: e for e in evidence.entities}
+        used = set()
+        def visit(node):
+            if node is None:
+                return
+            if node["operator"] in ("and", "or"):
+                for child in node["conditions"]:
+                    visit(child)
+            elif node["operator"] == "not":
+                visit(node["condition"])
+            else:
+                used.add(node["property_id"])
+        visit(plan["where"])
+        owners = {props[p]["entity_id"] for p in used}
+        if len(owners) > 1:
+            raise ValueError("Independent scope cannot combine properties owned by distinct shapes")
+        # An independent branch must have explicit type membership evidence.
+        # A shape without a target class cannot safely contribute to a
+        # domain-wide union, even if its properties overlap another shape.
+        for entity_id in plan["scope"]:
+            if not entities[entity_id].get("target_classes"):
+                raise ValueError("Independent scope requires verified targetClass for every shape")
+        branches = []
+        for entity_id in plan["scope"]:
+            if owners and entity_id not in owners:
+                continue
+            subplan = dict(plan, scope=[entity_id], scope_mode="single",
+                           operation="select_entities")
+            branch = compile_semantic_plan(subplan, evidence,
+                graph_mode=graph_mode, graph_iri=graph_iri, limit=None)
+            # Subquery returns ?entity; UNION branches never imply joins.
+            branches.append("{ " + branch + " }")
+        if not branches:
+            raise ValueError("No eligible independent entity branches")
+        if plan["operation"] == "count":
+            query = "SELECT (COUNT(DISTINCT ?entity) AS ?count) WHERE { " + (
+                " UNION ".join(branches)) + " }"
+        else:
+            query = "SELECT DISTINCT ?entity WHERE { " + (
+                " UNION ".join(branches)) + " }"
+        if limit is not None:
+            if type(limit) is not int or not 1 <= limit <= 10000:
+                raise ValueError("Invalid operational limit")
+            query += "\nLIMIT " + str(limit)
+        return query
     if len(plan["scope"]) != 1:
         owners = {p["id"]: p["entity_id"] for p in evidence.properties}
         selected = set(plan["scope"])
