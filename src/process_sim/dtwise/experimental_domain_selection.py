@@ -92,14 +92,27 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
     if selected is None:
         raise ValueError("Invented domain property ID")
     pattern = choice["pattern"]
-    # Compare complete whitespace-delimited tokens. The final '?' in a
-    # question is sentence punctuation, not part of its regex expression.
-    # Do not accept a substring that drops anchors or quantifiers.
-    tokens = question.split()
-    if tokens and tokens[-1].endswith("?"):
-        tokens[-1] = tokens[-1][:-1]
-    if not isinstance(pattern, str) or not pattern or pattern not in tokens:
-        raise ValueError("Regex pattern must be copied exactly from the question")
+    # The LLM chooses the operation and property, but the literal regex
+    # comes from the user's text. Never execute a model-edited expression.
+    # Recognize the explicit regex-introducing clause, not a benchmark shape.
+    expression = re.search(
+        r"\\bregular\\s+expression\\s+(.+?)\\s*$", question, re.I)
+    if expression is None:
+        raise ValueError("Cannot identify an explicit regular expression")
+    requested = expression.group(1).strip()
+    if requested.endswith("?") and requested.count("?") == 1:
+        requested = requested[:-1]
+    if not requested:
+        raise ValueError("Empty requested regular expression")
+    if not isinstance(pattern, str) or not pattern:
+        raise ValueError("Missing LLM-selected regular expression")
+    # Reject a hallucinated expression, but normalize punctuation/anchor
+    # omissions by taking the authoritative literal from the question.
+    if pattern != requested:
+        if prompt_diagnostics is not None:
+            prompt_diagnostics["normalized_regex_from_question"] = requested
+            _write_prompt_diagnostics(prompt_diagnostics)
+    pattern = requested
     try:
         re.compile(pattern)
     except re.error as exc:
