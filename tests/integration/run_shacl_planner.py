@@ -5,6 +5,7 @@ From repository root:
     python tests/integration/run_shacl_planner.py --report shacl-baseline.json
 """
 import argparse
+import os
 import json
 from pathlib import Path
 import subprocess
@@ -140,8 +141,10 @@ def run(test, args):
                "--embed-model", args.embed_model, "--ollama-url", args.ollama_url,
                test["question"]]
     start = perf_counter()
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
     try:
-        process = subprocess.run(command, cwd=ROOT, capture_output=True, text=True,
+        process = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True,
                                  encoding="utf-8", errors="replace",
                                  timeout=args.timeout)
         if process.returncode:
@@ -169,7 +172,7 @@ def main():
     results = []
     print("SHACL planner live integration baseline (SPARQL compilation only)", flush=True)
     for test in CASES:
-        print(f"\\nQUERY [{test['name']}]: {test['question']}", flush=True)
+        print(f"\nQUERY [{test['name']}]: {test['question']}", flush=True)
         outcome = run(test, args)
         outcome["query"] = test["question"]
         results.append(outcome)
