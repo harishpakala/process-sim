@@ -791,6 +791,7 @@ def check_semantic_coverage(plan, question, catalog, mentioned):
             len(mentioned) <= 1 and
             not substring_clauses and
             not with_constraint and
+            not presence_query and
             plan.get('filters') is not None):
         raise ValueError('Unrequested filter in direct property lookup')
     # An unrequested traversal cannot be added to a simple property lookup.
