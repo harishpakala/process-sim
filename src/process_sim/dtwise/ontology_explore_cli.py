@@ -90,21 +90,8 @@ def plan_ontology_explore(question, index, mappings, *, model,
     decider = ollama_edge_decider(
         model=model, request_json=request_json,
         ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive)
-    plan, diagnostics = explore_ontology_path(
+    return explore_ontology_path(
         question, catalog, mappings, source, target, decide=decider,
-        projections=[{"node_index": 0, "predicate": owner[1],
+        projections=[{"node_index": -1, "predicate": owner[1],
                       "as": "result"}],
         max_hops=max_hops, deadline_seconds=timeout * (max_hops + 1))
-    # The output belongs to the final node, not the starting node.
-    # Rebind with the verified final-node index.
-    from .evidence_path_binding import bind_evidenced_path
-    path = {"nodes": [(e["domain"], e["shape"]) for e in plan["entities"]],
-            "steps": [
-                {k: v for k, v in edge.items()
-                 if k not in ("from", "to")}
-                for edge in plan["edges"]]}
-    plan = bind_evidenced_path(
-        path, catalog, mappings,
-        projections=[{"node_index": len(path["steps"]),
-                      "predicate": owner[1], "as": "result"}])
-    return plan, diagnostics
