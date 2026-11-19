@@ -171,6 +171,7 @@ def main():
     for test in CASES:
         print(f"\\nQUERY [{test['name']}]: {test['question']}", flush=True)
         outcome = run(test, args)
+        outcome["query"] = test["question"]
         results.append(outcome)
         print(f"{outcome['status']:<4}  {outcome['name']:<25} {outcome['seconds']:>8.3f} s", flush=True)
         if "reason" in outcome:
