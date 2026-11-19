@@ -1626,6 +1626,8 @@ def main():
     parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first'],
                         default='hybrid',
                         help='Experimental multihop: hybrid shortcuts or LLM-first evidence selection')
+    parser.add_argument('--semantic-v2',action='store_true',
+                        help='Opt in to compositional LLM-first semantic IR 2.0 (single-entity only)')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -1640,6 +1642,12 @@ def main():
     parser.add_argument('--prompt-diagnostics',help='Write prompt-size and request timing diagnostics JSON (no prompt text)')
     args=parser.parse_args()
     if args.llm_timeout < 1: parser.error('--llm-timeout must be positive')
+    if args.semantic_v2 and args.planning_mode != 'llm_first':
+        parser.error('--semantic-v2 requires --planning-mode llm_first')
+    if args.semantic_v2 and args.ir:
+        parser.error('--semantic-v2 currently requires --question, not --ir')
+    if args.semantic_v2 and args.include_graph:
+        parser.error('--semantic-v2 does not yet support --include-graph')
     if not args.ir and not args.question: parser.error('Provide --ir or --question')
     if args.command=='answer' and not args.endpoint: parser.error('answer requires --endpoint')
     registry=json.loads(Path(args.mappings).read_text(encoding='utf-8')) if args.mappings else None
@@ -1648,7 +1656,17 @@ def main():
     try:
         diagnostics=[]
         prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else None
-        if args.ir:
+        if args.semantic_v2:
+            from .semantic_selection import select_semantic_plan
+            from .semantic_compiler import compile_semantic_plan
+            schema_index=json.loads(Path(args.schema).read_text(encoding='utf-8'))
+            catalog=catalog_from_schema(schema_index)
+            plan, evidence=select_semantic_plan(
+                args.question,catalog,model=args.model,request_json=_request_json,
+                ollama_host=args.ollama_host,timeout=args.llm_timeout,
+                keep_alive=args.keep_alive,prompt_diagnostics=prompt_diagnostics)
+            diagnostics.append({'status':'semantic_v2','selection':'validated'})
+        elif args.ir:
             plan=json.loads(Path(args.ir).read_text(encoding='utf-8'))
         elif args.experimental_multihop:
             from .experimental_multihop_cli import plan_experimental_multihop
@@ -1670,8 +1688,12 @@ def main():
                 compact_catalog=args.compact_catalog)
         timings['planning_seconds']=round(time.perf_counter()-stage_started,3)
         stage_started=time.perf_counter()
-        query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
-                               graph_iri=args.graph_iri,include_graph=args.include_graph,limit=args.limit)
+        if args.semantic_v2:
+            query=compile_semantic_plan(plan,evidence,graph_mode=args.graph_mode,
+                                        graph_iri=args.graph_iri,limit=args.limit)
+        else:
+            query=compile_graph_ir(plan,args.schema,mappings=registry,graph_mode=args.graph_mode,
+                                   graph_iri=args.graph_iri,include_graph=args.include_graph,limit=args.limit)
         timings['compilation_seconds']=round(time.perf_counter()-stage_started,3)
         result={'status':'compiled','ir':plan,'sparql':query,'planning_attempts':diagnostics}
         if args.command=='answer':
