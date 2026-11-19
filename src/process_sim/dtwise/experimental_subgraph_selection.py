@@ -8,6 +8,7 @@ import re
 import time
 
 from .unified_answer import resolve_shapes
+from .experimental_evidence_selection import _write_prompt_diagnostics
 
 
 def _label(iri):
@@ -86,6 +87,7 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
             "candidate_node_count": len(nodes),
             "request_status": "started",
         })
+        _write_prompt_diagnostics(prompt_diagnostics)
     by_id = {e["id"]: e for e in candidates}
     using = re.search(r"\\busing\\s+(.+?)(?:[.;]|$)", question, re.I)
     requested = None
@@ -149,6 +151,7 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
                     "selected_edge_ids": selection.get("edge_ids")
                     if isinstance(locals().get("selection"), dict) else None,
                 })
+                _write_prompt_diagnostics(prompt_diagnostics)
             if attempt:
                 raise
             payload["messages"].append({
@@ -171,6 +174,7 @@ def select_evidence_subgraph(question, anchors, catalog, index, mappings, *,
                 "request_wall_seconds": round(time.perf_counter() - started, 3),
             })
             prompt_diagnostics["request_status"] = "completed"
+            _write_prompt_diagnostics(prompt_diagnostics)
         break
     edges = [{
         "kind": "mapping", "from": "n" + str(e["from"]),
