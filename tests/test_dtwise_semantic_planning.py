@@ -27,6 +27,23 @@ class SemanticPlanningTests(unittest.TestCase):
                 "operation": operation, "projections": projections or [],
                 "where": where}
 
+    def test_multi_shape_requires_explicit_semantics(self):
+        other = next(e["id"] for e in self.evidence.entities
+                     if e["id"] != self.device)
+        plan = self.plan(None)
+        plan["scope"] = [self.device, other]
+        with self.assertRaisesRegex(ValueError, "explicit scope_mode"):
+            validate_semantic_plan(plan, self.evidence)
+
+    def test_independent_scope_requires_target_membership(self):
+        other = next(e["id"] for e in self.evidence.entities
+                     if e["id"] != self.device)
+        plan = self.plan(None)
+        plan["scope"] = [self.device, other]
+        plan["scope_mode"] = "independent"
+        with self.assertRaisesRegex(ValueError, "verified targetClass"):
+            validate_semantic_plan(plan, self.evidence)
+
     def test_and_or_not_are_compositional(self):
         address, local = self.props["urn:hasAddress"], self.props["urn:hasLocalId"]
         for operator in ("and", "or"):
