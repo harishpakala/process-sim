@@ -155,7 +155,7 @@ def main() -> None:
             item["domain"] for key in ("concepts", "shape_paths")
             for item in schema.get(key, []) if item.get("domain")
         }
-        args.domain = resolve_domain(question, available_domains, override=args.domain)
+        args.domain = resolve_domain(question, available_domains, override=args.domain, schema=schema)
     except (OSError, ValueError, KeyError, TypeError) as exc:
         parser.error(str(exc))
 
