@@ -203,6 +203,8 @@ def validate_ir(ir, schema, *, mappings=None):
         elif op == 'not':
             filter_check(f.get('child'), depth+1)
         elif op in ('eq', 'neq', 'contains', 'exists', 'not_exists'):
+            if 'ignore_case' in f and (op != 'contains' or f['ignore_case'] is not True):
+                raise ValueError('ignore_case is only supported for contains')
             prop(f)
             if op in ('eq', 'neq', 'contains'):
                 _literal(f.get('value'))
