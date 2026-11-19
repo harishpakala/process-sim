@@ -677,8 +677,16 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                         seen.add(signature)
                         paths.append(path)
         if not paths:
-            raise ValueError(
-                "No verified evidence path includes all named SHACL shapes")
+            # A connected join graph need not be representable as a linear
+            # path. Let the LLM choose only preverified mapping-edge IDs.
+            from .experimental_subgraph_selection import select_evidence_subgraph
+            plan, selection = select_evidence_subgraph(
+                question, anchors, catalog, index, mappings, model=model,
+                request_json=request_json or _request_json,
+                ollama_host=ollama_host, timeout=timeout, keep_alive=keep_alive,
+                prompt_diagnostics=prompt_diagnostics)
+            check_semantic_coverage(plan, question, catalog, mentioned)
+            return plan, selection
     if len(paths) > 32:
         raise ValueError("More than 32 evidenced paths; narrow the question")
     plan, selection = select_evidence_plan(
