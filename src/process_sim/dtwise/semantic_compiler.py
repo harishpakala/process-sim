@@ -16,7 +16,30 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
     """Compile verified evidence IDs into named-graph-aware SPARQL."""
     plan = validate_semantic_plan(plan, evidence)
     if len(plan["scope"]) != 1:
-        raise ValueError("Multi-entity semantic compilation requires explicit joins")
+        owners = {p["id"]: p["entity_id"] for p in evidence.properties}
+        selected = set(plan["scope"])
+        used = set(plan["projections"])
+        def collect(node):
+            if node is None:
+                return
+            if node["operator"] in ("and", "or"):
+                for child in node["conditions"]:
+                    collect(child)
+            elif node["operator"] == "not":
+                collect(node["condition"])
+            else:
+                used.add(node["property_id"])
+        collect(plan["where"])
+        involved = sorted({owners[p] for p in used})
+        if len(involved) > 1:
+            raise ValueError(
+                "Multi-shape plan references properties owned by distinct shapes "
+                + repr(involved) + "; no explicit join or independent-branch "
+                "semantics are encoded. Refusing to infer either.")
+        raise ValueError(
+            "Multi-shape scope " + repr(sorted(selected)) +
+            " lacks verified shape membership and explicit independent-branch "
+            "semantics; refusing to infer joins or union results.")
     if graph_mode not in ("default", "all_named", "selected"):
         raise ValueError("Unsupported graph mode")
     if graph_mode == "selected":
