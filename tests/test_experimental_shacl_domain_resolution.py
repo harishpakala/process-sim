@@ -54,3 +54,56 @@ def test_no_substring_false_positive():
 def test_missing_index_domains():
     with pytest.raises(DomainResolutionError, match="No schema domains"):
         resolve_domain("Show Address in ECAD", set())
+
+
+# Phase 5.2: deterministic evidence from indexed SHACL NodeShape labels.
+SHAPE = "http://www.w3.org/ns/shacl#NodeShape"
+SCHEMA = {"concepts": [
+    {"domain": "ecad", "types": [SHAPE], "labels": ["EndPoint"]},
+    {"domain": "ecad", "types": [SHAPE], "labels": ["PLCEndPoint"]},
+    {"domain": "ecad", "types": [SHAPE], "labels": ["Device"]},
+    {"domain": "dexpi", "types": [SHAPE], "labels": ["InstrumentationFunction"]},
+    {"domain": "dexpi", "types": [SHAPE], "labels": ["Device"]},
+    {"domain": "ecad", "types": [], "labels": ["Address"]},
+]}
+
+
+def test_unnamed_ecad_inferred_from_unique_shapes():
+    assert resolve_domain(
+        "Show EndPoint Address and PLCEndPoint Address belonging to the same Device",
+        DOMAINS, schema=SCHEMA) == "ecad"
+
+
+def test_unnamed_dexpi_inferred_from_shape():
+    assert resolve_domain(
+        "Show InstrumentationFunction", DOMAINS, schema=SCHEMA) == "dexpi"
+
+
+def test_shared_shape_is_ambiguous():
+    with pytest.raises(DomainResolutionError, match="Ambiguous"):
+        resolve_domain("Show Device", DOMAINS, schema=SCHEMA)
+
+
+def test_cross_domain_shape_mentions_ambiguous():
+    with pytest.raises(DomainResolutionError, match="Ambiguous"):
+        resolve_domain("Show EndPoint and InstrumentationFunction", DOMAINS, schema=SCHEMA)
+
+
+def test_generic_property_without_shape_unresolved():
+    with pytest.raises(DomainResolutionError, match="unresolved"):
+        resolve_domain("Show Address", DOMAINS, schema=SCHEMA)
+
+
+def test_explicit_domain_precedes_shape_evidence():
+    assert resolve_domain(
+        "Show InstrumentationFunction in ECAD", DOMAINS, schema=SCHEMA) == "ecad"
+
+
+def test_override_precedes_shape_evidence():
+    assert resolve_domain(
+        "Show EndPoint", DOMAINS, override="dexpi", schema=SCHEMA) == "dexpi"
+
+
+def test_partial_shape_name_not_matched():
+    with pytest.raises(DomainResolutionError, match="unresolved"):
+        resolve_domain("Show SuperEndPointValue", DOMAINS, schema=SCHEMA)
