@@ -69,8 +69,10 @@ CASES = [
          expected="unresolved", queries=0),
     case("auto-join-broad-address", "--phase1-plan", "Show Address in ECAD",
          paths=("ECAD → Device → EndPoint → Address",
-                "ECAD → Device → PLCEndPoint → Address"),
-         predicates=(ENDPOINT, PLC), queries=1),
+                "ECAD → Device → PLCEndPoint → Address",
+                "ECAD → Symbol → EndPoint → Address",
+                "ECAD → Symbol → PLCEndPoint → Address"),
+         predicates=(ENDPOINT, PLC), queries=2),
 ]
 
 
