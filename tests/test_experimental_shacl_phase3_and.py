@@ -225,7 +225,7 @@ def test_both_results_requested_but_qwen_returns_one_rejected(multi_sample):
     index, prepared, plan = multi_sample
     plan["result_id"] = plan.pop("result_ids")[0]
     plan["result_meaning"] = plan.pop("result_meanings")[0]
-    with pytest.raises(SelectionContractError, match="Result count"):
+    with pytest.raises(SelectionContractError, match="Result semantic grounding mismatch"):
         run_phase3_and_plan(index, prepared, transport=transport(plan))
 
 
