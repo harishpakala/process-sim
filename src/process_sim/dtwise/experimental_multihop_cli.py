@@ -539,6 +539,9 @@ def plan_experimental_multihop(question, index, mappings, *, model,
         nodes = sorted({(entity["domain"], entity["shape"])
                         for entity in catalog["entities"]})
         paths = [{"nodes": [node], "steps": []} for node in nodes]
+        if len(paths) > 32:
+            raise ValueError(
+                "Semantic v2 candidate limit exceeded; narrow the evidence catalog")
         seen = {(tuple(path["nodes"]), ()) for path in paths}
         for source in nodes:
             for target in nodes:
