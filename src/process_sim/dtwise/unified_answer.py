@@ -1657,7 +1657,8 @@ def main():
                 plan, selection=plan_ontology_explore(
                     args.question,schema_index,registry,model=args.model,
                     ollama_host=args.ollama_host,timeout=args.llm_timeout,
-                    keep_alive=args.keep_alive)
+                    keep_alive=args.keep_alive,
+                    prompt_diagnostics=prompt_diagnostics)
             else:
                 from .experimental_multihop_cli import plan_experimental_multihop
                 plan, selection=plan_experimental_multihop(
