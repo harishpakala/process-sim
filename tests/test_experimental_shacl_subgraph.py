@@ -566,3 +566,43 @@ def test_grouped_semantic_rejects_nonpositive_budget():
     from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped
     with pytest.raises(ValueError, match="top_k"):
         semantic_grouped(_domain_index("ecad"), "Address", top_k=0)
+
+
+def test_semantic_candidates_are_verified_and_preserve_device_alternatives():
+    from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+    from process_sim.dtwise.experimental_shacl_selection import validate_selection
+    index = _domain_index("ecad")
+    def fake_transport(url, payload, timeout):
+        vectors = [[1.0, 0.0]]
+        for term in payload["input"][1:]:
+            name = term.split(".")[0]
+            wanted = any(token in name for token in (
+                "ECAD", "Device", "EndPoint", "PLCEndPoint", "Address",
+            ))
+            vectors.append([1.0, 0.0] if wanted else [0.0, 1.0])
+        return {"embeddings": vectors}
+    prepared = semantic_candidates(index, "connection point addresses",
+                                   top_shapes=8, top_properties=2,
+                                   transport=fake_transport)
+    paths = {item["path"] for item in prepared["prompt"]["candidates"]}
+    assert "ECAD → Device → EndPoint → Address" in paths
+    assert "ECAD → Device → PLCEndPoint → Address" in paths
+    for candidate_id, item in prepared["registry"].items():
+        assert candidate_id.startswith("C")
+        assert all(edge in index.edges for edge in item["edges"])
+        assert item["property"] in index.properties[item["property"]["owner"]]
+        assert all(uri in index.shapes for uri in item["node_uris"])
+    selected = [item["id"] for item in prepared["prompt"]["candidates"]
+                if item["path"] == "ECAD → Device → EndPoint → Address"]
+    assert validate_selection({"status": "selected", "selected_candidate_ids": selected,
+                               "reason": "Verified endpoint path"}, prepared)["status"] == "selected"
+
+
+def test_semantic_candidate_budget_rejects_excess_paths():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+    def fake_transport(url, payload, timeout):
+        return {"embeddings": [[1.0, 0.0] for _ in payload["input"]]}
+    with pytest.raises(ValueError, match="budget"):
+        semantic_candidates(_domain_index("ecad"), "addresses",
+                            max_candidates=1, transport=fake_transport)
