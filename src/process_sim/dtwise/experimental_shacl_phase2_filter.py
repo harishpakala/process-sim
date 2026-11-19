@@ -102,6 +102,30 @@ def run_phase2_filter_plan(index, prepared: dict, *, model="qwen2.5-coder:7b",
         raw = ollama_select(offered["prompt"], model=model, endpoint=endpoint,
                             transport=transport, system_prompt=PROMPT)
         plan = validate_filter_plan(raw, qualified)
+        # An explicit result owner constrains the LLM's selected result paths.
+        # Match complete shape tokens: EndPoint must not match PLCEndPoint.
+        if plan["status"] == "selected":
+            result_candidates = {
+                c["id"]: c for c in offered["prompt"]["candidates"]
+                if c["id"] != plan["filter_id"]
+            }
+            owners = {
+                cid: candidate["path"].split(" → ")[-2]
+                for cid, candidate in result_candidates.items()
+                if len(candidate["path"].split(" → ")) >= 2
+            }
+            mentioned = {
+                owner for owner in set(owners.values())
+                if re.search(r"(?<![A-Za-z_0-9])" + re.escape(owner)
+                             + r"(?![A-Za-z_0-9])", question, re.I)
+            }
+            if len(mentioned) == 1:
+                explicit_owner = next(iter(mentioned))
+                kept = [cid for cid in plan["result_ids"]
+                        if owners.get(cid, "").casefold() == explicit_owner.casefold()]
+                if kept and len(kept) != len(plan["result_ids"]):
+                    plan = {**plan, "result_ids": kept,
+                            "reason": "Explicit result owner excludes unrequested sibling paths"}
         # Ground literal in the user's question; never accept a fabricated value.
         if plan["status"] == "selected" and plan["value"] != literals[0]:
             raise SelectionContractError("Filter value does not match question literal")
