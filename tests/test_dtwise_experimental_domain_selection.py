@@ -62,6 +62,13 @@ class DomainRegexSelectionTests(unittest.TestCase):
                          {"LocalId", "Name"})
         self.assertEqual(selection["choice"], "VERIFIED_LLM_DOMAIN_BOOLEAN_PROPERTIES")
 
+    def test_explicit_and_property_conjunction(self):
+        result, _ = self.select(
+            "Which ECAD entities have a LocalId and Name?",
+            {"operation": "has_all_properties", "property_id": None,
+             "property_ids": ["P0", "P1"], "pattern": None})
+        self.assertEqual(result[0]["domain_both_properties"]["operator"], "and")
+
     def test_either_property_uses_or(self):
         result, _ = self.select(
             "Which ECAD entities have a LocalId or Name?",
