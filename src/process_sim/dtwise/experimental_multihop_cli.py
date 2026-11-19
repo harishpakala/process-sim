@@ -452,7 +452,7 @@ def _plan_domain_regex_lookup(question, catalog, mentioned):
     match = re.fullmatch(
         r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+a\s+"
         r"([A-Za-z][A-Za-z0-9_]*)\s+matching\s+the\s+regular\s+expression\s+"
-        r"([^\s?]+)\?\s*", question, re.I)
+        r"([^\s]+)\s*", question, re.I)
     if not match:
         return None
     domain, property_name, pattern = match.groups()
