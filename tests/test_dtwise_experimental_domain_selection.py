@@ -60,10 +60,25 @@ class DomainRegexSelectionTests(unittest.TestCase):
         self.assertEqual(plan["domain_both_properties"]["domain"], "ECAD")
         self.assertEqual(set(plan["domain_both_properties"]["properties"]),
                          {"LocalId", "Name"})
-        self.assertEqual(selection["choice"], "VERIFIED_LLM_DOMAIN_ALL_PROPERTIES")
+        self.assertEqual(selection["choice"], "VERIFIED_LLM_DOMAIN_BOOLEAN_PROPERTIES")
+
+    def test_either_property_uses_or(self):
+        result, _ = self.select(
+            "Which ECAD entities have a LocalId or Name?",
+            {"operation": "has_any_properties", "property_id": None,
+             "property_ids": ["P0", "P1"], "pattern": None})
+        plan, _ = result
+        self.assertEqual(plan["domain_both_properties"]["operator"], "or")
+        self.assertEqual(len(plan["domain_both_properties"]["paths"][0]), 2)
+
+    def test_or_requires_question_grounding(self):
+        with self.assertRaisesRegex(ValueError, "Unrequested domain property Boolean"):
+            self.select("Which ECAD entities have both LocalId and Name?", {
+                "operation": "has_any_properties", "property_id": None,
+                "property_ids": ["P0", "P1"], "pattern": None})
 
     def test_two_properties_requires_conjunction(self):
-        with self.assertRaisesRegex(ValueError, "Unrequested all-properties"):
+        with self.assertRaisesRegex(ValueError, "Unrequested domain property Boolean"):
             self.select("Show ECAD LocalId and Name", {
                 "operation": "has_all_properties", "property_id": None,
                 "property_ids": ["P0", "P1"], "pattern": None})
