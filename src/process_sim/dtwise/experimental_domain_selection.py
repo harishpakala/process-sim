@@ -103,7 +103,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
                 raise ValueError("Invented all-properties evidence ID")
             selected_properties.append(selected)
         # Verify the conjunctive requirement is expressed in the question.
-        if not re.search(r"\\b(?:both|all)\\b", question, re.I):
+        if not re.search(r"\b(?:both|all)\b", question, re.I):
             raise ValueError("Unrequested all-properties operation")
         plan = {
             "ir_version": "1.0", "entities": [], "edges": [],
