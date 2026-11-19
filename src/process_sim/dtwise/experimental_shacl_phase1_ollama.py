@@ -6,6 +6,7 @@ path metadata. No filters, joins, SPARQL compilation or execution here.
 from __future__ import annotations
 
 import re
+from time import perf_counter
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
@@ -41,9 +42,12 @@ Do NOT output node_index, target, operation, modifiers or path strings."""
 def run_phase1_query_plan(index, prepared: dict, *,
                           model: str = "qwen2.5-coder:7b",
                           endpoint: str = "http://127.0.0.1:11434",
-                          transport=None) -> dict:
+                          transport=None, timing: dict | None = None) -> dict:
     """Select one or several verified property paths without LLM node indices."""
+    t0 = perf_counter()
     qualified = qualify_candidates(index, prepared)
+    if timing is not None:
+        timing["candidate_qualification_ms"] = (perf_counter() - t0) * 1000
     properties = [c for c in qualified["prompt"]["candidates"]
                   if c["kind"] == "property"]
     question = qualified["prompt"]["question"]
@@ -66,9 +70,18 @@ def run_phase1_query_plan(index, prepared: dict, *,
                        if unsupported else "No verified SHACL property candidates"),
         }
     else:
+        t_llm = perf_counter()
         raw = ollama_select(offered["prompt"], model=model, endpoint=endpoint,
                             transport=transport, system_prompt=PHASE1_SYSTEM_PROMPT)
+        if timing is not None:
+            timing["qwen_selection_ms"] = (perf_counter() - t_llm) * 1000
+        t_validation = perf_counter()
         selection = validate_selection(raw, offered)
+        if timing is not None:
+            timing["python_validation_ms"] = (perf_counter() - t_validation) * 1000
+    if timing is not None:
+        timing.setdefault("qwen_selection_ms", 0.0)
+        timing.setdefault("python_validation_ms", 0.0)
     selected = [
         {"id": c["id"], "domain": c["domain"], "kind": c["kind"], "path": c["path"]}
         for c in properties if c["id"] in selection["selected_candidate_ids"]
