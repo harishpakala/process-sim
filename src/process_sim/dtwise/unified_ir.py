@@ -62,6 +62,42 @@ def validate_ir(ir, schema, *, mappings=None):
     idx = _schema_dict(schema)
     if not isinstance(ir, dict) or ir.get('ir_version') != '1.0':
         raise ValueError('Expected unified IR version 1.0')
+    domain_both = ir.get('domain_both_properties')
+    if domain_both is not None:
+        if not isinstance(domain_both, dict) or set(domain_both) != {
+                'domain', 'properties', 'paths'}:
+            raise ValueError('Invalid domain both-properties query')
+        domain = domain_both['domain']
+        names = domain_both['properties']
+        groups = domain_both['paths']
+        if (not isinstance(domain, str) or not domain
+                or not isinstance(names, list) or len(names) != 2
+                or not all(isinstance(n, str) and n for n in names)
+                or names[0].casefold() == names[1].casefold()
+                or not isinstance(groups, list) or len(groups) != 2):
+            raise ValueError('Invalid domain both-properties fields')
+        for name, paths in zip(names, groups):
+            if not isinstance(paths, list) or not paths or len(paths) > 256:
+                raise ValueError('Invalid domain both-properties paths')
+            eligible = sorted({
+                (x['node_shape'], x['path'])
+                for x in idx['shape_paths']
+                if x['domain'] == domain and x.get('evidence')
+                and x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1].casefold()
+                in {name.casefold(), ('has' + name).casefold()}
+            })
+            if (not all(isinstance(p, list) and len(p) == 2
+                        and all(isinstance(v, str) for v in p) for p in paths)
+                    or sorted(tuple(p) for p in paths) != eligible):
+                raise ValueError('Both-properties paths must equal evidenced owners')
+        if (ir.get('entities') != [] or ir.get('edges') != []
+                or ir.get('projections') != [] or ir.get('filters') is not None
+                or ir.get('operation', {}).get('type') != 'select'
+                or ir.get('return_entities') is not True
+                or ir.get('order_by') or ir.get('result_limit') is not None
+                or ir.get('domain_regex') is not None):
+            raise ValueError('Unsupported domain both-properties modifiers')
+        return ir
     domain_regex = ir.get('domain_regex')
     if domain_regex is not None:
         if not isinstance(domain_regex, dict) or set(domain_regex) != {
