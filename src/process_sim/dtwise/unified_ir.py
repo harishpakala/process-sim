@@ -62,6 +62,41 @@ def validate_ir(ir, schema, *, mappings=None):
     idx = _schema_dict(schema)
     if not isinstance(ir, dict) or ir.get('ir_version') != '1.0':
         raise ValueError('Expected unified IR version 1.0')
+    domain_regex = ir.get('domain_regex')
+    if domain_regex is not None:
+        if not isinstance(domain_regex, dict) or set(domain_regex) != {
+                'domain', 'property', 'pattern', 'paths'}:
+            raise ValueError('Invalid domain regex query')
+        domain, prop, pattern = (domain_regex[k] for k in
+                                 ('domain', 'property', 'pattern'))
+        if not all(isinstance(x, str) and x for x in (domain, prop, pattern)):
+            raise ValueError('Invalid domain regex fields')
+        if len(pattern) > 256 or any(ord(c) < 32 for c in pattern):
+            raise ValueError('Invalid regex pattern')
+        try:
+            re.compile(pattern)
+        except re.error as exc:
+            raise ValueError('Invalid regex pattern') from exc
+        paths = domain_regex['paths']
+        if not isinstance(paths, list) or not paths or len(paths) > 256:
+            raise ValueError('Invalid domain regex shape paths')
+        eligible = sorted({
+            (x['node_shape'], x['path'])
+            for x in idx['shape_paths']
+            if x['domain'] == domain and x.get('evidence')
+            and (x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1]
+                 .removeprefix('has').casefold() == prop.casefold()
+                 or x['path'].rsplit('/', 1)[-1].rsplit('#', 1)[-1]
+                 .casefold() == prop.casefold())
+        })
+        if sorted(tuple(x) for x in paths if isinstance(x, list) and len(x) == 2) != eligible or len(paths) != len(eligible):
+            raise ValueError('Domain regex paths must equal all evidenced shape owners')
+        if (ir.get('edges') or ir.get('projections') or ir.get('filters') is not None
+                or ir.get('operation', {'type': 'select'}).get('type') != 'select'
+                or ir.get('return_entities') is not True
+                or ir.get('order_by') or ir.get('result_limit') is not None):
+            raise ValueError('Unsupported domain regex query modifiers')
+        return ir
     entities = ir.get('entities')
     if not isinstance(entities, list) or not 1 <= len(entities) <= 24:
         raise ValueError('entities must contain 1..24 nodes')
