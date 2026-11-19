@@ -128,7 +128,8 @@ def test_two_result_paths_share_one_device_filter(sample):
                "property_shape": "urn:PLCAddress", "name": "Address"}
     index.shapes[plc] = {"labels": ["PLCEndPoint"]}
     index.properties[plc] = [address]
-    # Avoid mutating the fixture edges list also referenced by C2.\n    index.edges = [*index.edges, edge]
+    # Avoid mutating the fixture edges list also referenced by C2.
+    index.edges = [*index.edges, edge]
     prepared["prompt"]["question"] = (
         "Show Address of both EndPoint and PLCEndPoint belonging to Device "
         "where Device LocalId = FI_101 in ECAD"
