@@ -6,6 +6,7 @@ paths and compiles a single read-only SELECT. No query is executed.
 import json
 import re
 
+from process_sim.dtwise.experimental_shacl_join_topology import verified_shared_ancestor
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
@@ -66,20 +67,19 @@ def validate_phase4_join_plan(raw, qualified):
         raise SelectionContractError("Join result semantic grounding mismatch")
     if raw["join_owner"] != "Device":
         raise SelectionContractError("Join owner interpretation mismatch")
+    # Preserve Phase 4.1's exact ECAD two-level topology while delegating
+    # directed shared-ancestor validation to the schema-derived helper.
     first, second = (qualified["registry"][rid] for rid in expected)
-    if (first["domain"] != second["domain"] or first["domain"] != "ecad" or
-            len(first["node_uris"]) != 3 or len(second["node_uris"]) != 3 or
-            first["node_uris"][:2] != second["node_uris"][:2] or
-            first["node_uris"][2] == second["node_uris"][2] or
-            first["edges"][:1] != second["edges"][:1]):
+    if (first["domain"] != "ecad" or second["domain"] != "ecad" or
+            len(first["node_uris"]) != 3 or len(second["node_uris"]) != 3):
         raise SelectionContractError("No verified shared Device ancestor")
-    for path in (first, second):
-        if (len(path["edges"]) != 2 or
-                any(edge["from"] != path["node_uris"][i] or
-                    edge["to"] != path["node_uris"][i + 1]
-                    for i, edge in enumerate(path["edges"])) or
-                path["property"]["owner"] != path["node_uris"][-1]):
-            raise SelectionContractError("Disconnected or invalid join path")
+    try:
+        topology = verified_shared_ancestor(qualified, list(expected))
+    except SelectionContractError as exc:
+        raise SelectionContractError("No verified shared Device ancestor") from exc
+    if (len(topology["shared_node_uris"]) != 2 or
+            topology["ancestor_uri"] != first["node_uris"][1]):
+        raise SelectionContractError("No verified shared Device ancestor")
     return raw
 
 
