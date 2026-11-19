@@ -99,16 +99,27 @@ def compile_semantic_plan(plan, evidence, *, graph_mode="all_named",
     # A property-presence pattern establishes the entity binding without
     # inferring rdf:type from a SHACL node shape. This is a broad SHACL-backed
     # candidate universe, not a type assertion.
+    selected_entity = next(e for e in evidence.entities if e["id"] == entity_id)
+    target_classes = selected_entity.get("target_classes", [])
     eligible = sorted((p for p in evidence.properties
                        if p["entity_id"] == entity_id), key=lambda p: p["id"])
-    if not eligible:
-        raise ValueError("Selected entity has no SHACL property evidence")
     anchors = []
-    for prop in eligible:
-        suffix = fresh()
-        anchors.append("{ " + scoped(
-            "?entity " + _iri(prop["predicate"]) + " ?anchor_" + suffix + " .",
-            suffix) + " }")
+    if target_classes:
+        # A SHACL sh:targetClass is explicit rdf:type membership evidence.
+        # Never infer type membership merely from a property predicate.
+        for target_class in target_classes:
+            suffix = fresh()
+            anchors.append("{ " + scoped(
+                "?entity <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> "
+                + _iri(target_class) + " .", suffix) + " }")
+    else:
+        if not eligible:
+            raise ValueError("Selected entity has no SHACL property evidence")
+        for prop in eligible:
+            suffix = fresh()
+            anchors.append("{ " + scoped(
+                "?entity " + _iri(prop["predicate"]) + " ?anchor_" + suffix + " .",
+                suffix) + " }")
     body = ["{ " + " UNION ".join(anchors) + " }"]
     if plan["where"] is not None:
         body.append("FILTER(" + expression(plan["where"]) + ")")
