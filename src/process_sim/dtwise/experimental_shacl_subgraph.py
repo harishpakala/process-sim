@@ -201,7 +201,7 @@ class SubgraphIndex:
             uri for uri, concept in self.shapes.items()
             if any(
                 re.search(
-                    r"\\bsame\\s+" + re.escape(label) + r"(?![A-Za-z0-9])",
+                    r"\bsame\s+" + re.escape(label) + r"(?![A-Za-z0-9])",
                     question, re.I,
                 )
                 for label in concept.get("labels", [])
