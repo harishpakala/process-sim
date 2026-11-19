@@ -3,7 +3,7 @@ import json
 
 import pytest
 
-from process_sim.dtwise.experimental_shacl_phase1_ollama import run_phase1_query_plan
+from process_sim.dtwise.experimental_shacl_phase1_ollama import run_phase1_query_plan, compile_phase1_sparql
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 from process_sim.dtwise.experimental_shacl_subgraph import SubgraphIndex
 
@@ -233,3 +233,54 @@ def test_structural_validator_does_not_guess_semantics(ecad_address_paths):
                                          check=lambda prompt: (
             len(prompt["candidates"]) == 2 or pytest.fail("Missing sibling"))))
     assert result["plan"]["selected_candidate_ids"] == ["P1", "P2"]
+
+
+def test_phase1_compiles_selected_property_only(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    # Compiler intentionally accepts only absolute HTTP(S) predicate IRIs.
+    for edge in index.edges:
+        edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+    for edges_record in prepared["registry"].values():
+        for edge in edges_record["edges"]:
+            edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+    for props in index.properties.values():
+        for prop in props:
+            prop["predicate"] = "https://example.org/address"
+    for record in prepared["registry"].values():
+        record["property"]["predicate"] = "https://example.org/address"
+    prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
+    result = run_phase1_query_plan(index, prepared, transport=mocked(response(ids=["P1"])))
+    queries = compile_phase1_sparql(result)
+    assert len(queries) == 1
+    assert queries[0]["candidate_id"] == "P1"
+    assert queries[0]["sparql"].startswith("SELECT DISTINCT ?value WHERE {")
+    assert "<https://example.org/endpoint>" in queries[0]["sparql"]
+    assert "<https://example.org/plc>" not in queries[0]["sparql"]
+    assert "rdf:type" not in queries[0]["sparql"]
+
+
+def test_phase1_compiles_two_separate_queries(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    for edge in index.edges:
+        edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+    for record in prepared["registry"].values():
+        for edge in record["edges"]:
+            edge["predicate"] = edge["predicate"].replace("urn:", "https://example.org/")
+        record["property"]["predicate"] = "https://example.org/address"
+    for props in index.properties.values():
+        for prop in props:
+            prop["predicate"] = "https://example.org/address"
+    prepared["prompt"]["question"] = "Show Address of both EndPoint and PLCEndPoint in ECAD"
+    result = run_phase1_query_plan(index, prepared,
+                                   transport=mocked(response(ids=["P1", "P2"])))
+    queries = compile_phase1_sparql(result)
+    assert len(queries) == 2
+    assert {q["candidate_id"] for q in queries} == {"P1", "P2"}
+    assert all("SELECT DISTINCT ?value" in q["sparql"] for q in queries)
+
+
+def test_phase1_unresolved_compiles_no_queries(setup):
+    index, prepared = setup
+    result = run_phase1_query_plan(index, prepared,
+                                   transport=mocked(response("unresolved", [])))
+    assert compile_phase1_sparql(result) == []
