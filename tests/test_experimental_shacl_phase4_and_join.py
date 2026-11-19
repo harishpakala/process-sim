@@ -181,3 +181,62 @@ def test_intent_rejects_fabricated_filter_value(sample):
     plan["filters"][0]["value"] = "FI_999"
     with pytest.raises(SelectionContractError, match="contradict"):
         validated_join_intent(plan, qualified)
+
+
+# Phase 5.4 direct model-proposed intent: offline, no Ollama required.
+def _direct_intent(plan):
+    return {
+        "domain": "ecad", "operation": "select",
+        "result_property_ids": plan["result_ids"],
+        "join": {"kind": "shared_ancestor", "owner": "Device"},
+        "boolean_operator": "and",
+        "filters": [
+            {"property_id": f["filter_id"], "owner": f["owner"],
+             "property": f["property"], "operator": f["operator"],
+             "value": f["value"]}
+            for f in plan["filters"]
+        ],
+    }
+
+
+def test_direct_intent_compiles_only_after_validation(sample):
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    index, prepared, plan = sample
+    proposal = _direct_intent(plan)
+    result = run_direct_join_intent(
+        index, prepared, transport=transport(proposal))
+    assert result["intent"] == proposal
+    assert result["sparql"].count("FILTER(") == 2
+    assert 'FILTER(?filterValue1 = "FI_101")' in result["sparql"]
+
+
+@pytest.mark.parametrize("change", [
+    lambda x: x.update(domain="dexpi"),
+    lambda x: x.update(operation="delete"),
+    lambda x: x.update(boolean_operator="or"),
+    lambda x: x["join"].update(owner="EndPoint"),
+    lambda x: x["result_property_ids"].__setitem__(0, "P999"),
+    lambda x: x["filters"][0].update(value="FI_999"),
+    lambda x: x["filters"][1].update(operator="!="),
+    lambda x: x["filters"][1].update(owner="EndPoint"),
+    lambda x: x.update(extra="unexpected"),
+])
+def test_direct_intent_rejects_unverified_proposal(sample, change):
+    from process_sim.dtwise.experimental_shacl_query_intent import (
+        validate_proposed_join_intent,
+    )
+    index, prepared, plan = sample
+    proposal = _direct_intent(plan)
+    change(proposal)
+    with pytest.raises(SelectionContractError):
+        validate_proposed_join_intent(proposal, qualify_candidates(index, prepared))
+
+
+def test_direct_intent_unsupported_question_skips_model(sample):
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    index, prepared, _ = sample
+    prepared["prompt"]["question"] = "Find all addresses"
+    result = run_direct_join_intent(
+        index, prepared, transport=lambda *_: pytest.fail("Must not call model"))
+    assert result["intent"] is None
+    assert result["sparql"] is None
