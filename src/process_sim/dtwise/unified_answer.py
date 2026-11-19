@@ -51,15 +51,30 @@ def catalog_from_schema(index):
             if target_domain == p['domain'] and (p['property_shape'], target_shape) in rel:
                 edges.append({'domain':p['domain'], 'from_shape':p['node_shape'],
                               'predicate':p['path'], 'to_shape':target_shape})
-    # Only sh:targetClass explicitly associates a node shape with instances
-    # via rdf:type. sh:class on a property shape is not a node target.
+    # Preserve direct sh:targetClass and the explicitly paired
+    # (property shape sh:node node shape, property shape sh:class RDF class)
+    # constraint. The latter identifies the expected class of values of the
+    # property shape; it is not an inferred sh:targetClass declaration.
     targets = {}
+    node_links = {}
+    class_links = {}
     for relation in index['relationships']:
-        if (relation.get('predicate') ==
-                'http://www.w3.org/ns/shacl#targetClass'
-                and relation.get('evidence') == 'shacl'):
-            targets.setdefault((relation['domain'], relation['subject']), set()).add(
-                relation['object'])
+        if relation.get('evidence') != 'shacl':
+            continue
+        key = (relation['domain'], relation['subject'])
+        predicate = relation['predicate']
+        if predicate == 'http://www.w3.org/ns/shacl#targetClass':
+            targets.setdefault(key, set()).add(relation['object'])
+        elif predicate == 'http://www.w3.org/ns/shacl#node':
+            node_links.setdefault(key, set()).add(relation['object'])
+        elif predicate == 'http://www.w3.org/ns/shacl#class':
+            class_links.setdefault(key, set()).add(relation['object'])
+    for key, node_shapes in node_links.items():
+        for node_shape in node_shapes:
+            if (key[0], node_shape) not in shapes:
+                continue
+            targets.setdefault((key[0], node_shape), set()).update(
+                class_links.get(key, set()))
     return {'entities':[{'domain':d,'shape':s,'properties':sorted(props),
                          'target_classes':sorted(targets.get((d,s), set())),
                          **_shape_display_metadata(s)}
