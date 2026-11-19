@@ -44,9 +44,9 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
             {"role": "system", "content":
              "Interpret a domain-wide query using only listed SHACL property "
              "evidence. Return JSON with exactly operation, property_id, property_ids, pattern. "
-             "operation is 'regex', 'has_all_properties', or 'unsupported'. For regex, select a listed "
+             "operation is 'regex', 'has_all_properties', 'has_any_properties', or 'unsupported'. For regex, select a listed "
              "property ID and copy the exact regex pattern from the question "
-             "without modifying it. For has_all_properties, select two distinct listed property IDs in property_ids and set property_id and pattern to null. For regex, set property_ids to null. Do not generate SPARQL. For any other "
+             "without modifying it. For has_all_properties or has_any_properties, select two distinct listed property IDs in property_ids and set property_id and pattern to null. For regex, set property_ids to null. Do not generate SPARQL. For any other "
              "operation return unsupported with null property_id, property_ids and pattern."},
             {"role": "user", "content": json.dumps({
                 "question": question, "domain": domain,
@@ -88,7 +88,7 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
         raise ValueError("Invalid domain selection structure")
     if choice["operation"] == "unsupported":
         return None
-    if choice["operation"] == "has_all_properties":
+    if choice["operation"] in ("has_all_properties", "has_any_properties"):
         ids = choice["property_ids"]
         if (not isinstance(ids, list) or len(ids) != 2
                 or any(not isinstance(i, str) for i in ids)
@@ -102,21 +102,24 @@ def select_domain_regex_plan(question, catalog, *, model, request_json,
             if selected is None:
                 raise ValueError("Invented all-properties evidence ID")
             selected_properties.append(selected)
-        # Verify the conjunctive requirement is expressed in the question.
-        if not re.search(r"\b(?:both|all)\b", question, re.I):
-            raise ValueError("Unrequested all-properties operation")
+        # Cross-check the selected Boolean semantics against the user's wording.
+        connective = (r"\b(?:both|all)\b" if choice["operation"] == "has_all_properties"
+                      else r"\b(?:or|either)\b")
+        if not re.search(connective, question, re.I):
+            raise ValueError("Unrequested domain property Boolean operation")
         plan = {
             "ir_version": "1.0", "entities": [], "edges": [],
             "projections": [], "filters": None,
             "operation": {"type": "select"}, "return_entities": True,
             "domain_both_properties": {
                 "domain": domain,
+                "operator": ("and" if choice["operation"] == "has_all_properties" else "or"),
                 "properties": [x["label"] for x in selected_properties],
                 "paths": [[list(p) for p in sorted(set(evidence[x["key"]]))]
                           for x in selected_properties]},
         }
         return plan, {"status": "evidence_semantic_grounded",
-                      "choice": "VERIFIED_LLM_DOMAIN_ALL_PROPERTIES"}
+                      "choice": "VERIFIED_LLM_DOMAIN_BOOLEAN_PROPERTIES"}
     if choice["operation"] != "regex":
         raise ValueError("Unsupported domain operation")
     selected = next((x for x in choices if x["id"] == choice["property_id"]), None)
