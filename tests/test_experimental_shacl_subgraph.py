@@ -437,3 +437,62 @@ def test_ollama_pipeline_no_candidates_skips_model():
     )
     assert result["selection"]["status"] == "unresolved"
     assert result["selected_paths"] == []
+
+
+def test_ollama_prompt_distinguishes_ambiguity_from_multiple_selection():
+    from process_sim.dtwise.experimental_shacl_ollama import SYSTEM_PROMPT
+
+    assert 'Show Address in ECAD' in SYSTEM_PROMPT
+    assert '"status":"ambiguous"' in SYSTEM_PROMPT
+    assert '"selected_candidate_ids":[]' in SYSTEM_PROMPT
+    assert 'both EndPoint and PLCEndPoint' in SYSTEM_PROMPT
+    assert '"selected_candidate_ids":["C1","C2"]' in SYSTEM_PROMPT
+    assert "Do NOT select every path" in SYSTEM_PROMPT
+
+
+def test_ollama_prompt_is_sent_with_ambiguous_ecad_candidates():
+    import json
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+
+    def fake_transport(url, payload, timeout):
+        system = payload["messages"][0]["content"]
+        user = json.loads(payload["messages"][1]["content"])
+        assert "multiple possible owner paths" in system
+        assert user["question"] == "Show Address in ECAD"
+        assert len(user["candidates"]) == 4
+        return {"message": {"content": json.dumps({
+            "status": "ambiguous", "selected_candidate_ids": [],
+            "reason": "No owner path specified",
+        })}}
+
+    result = run_local_selection(
+        _domain_index("ecad"), "Show Address in ECAD", transport=fake_transport,
+    )
+    assert result["selection"]["status"] == "ambiguous"
+
+
+def test_ollama_explicit_multiple_selection_can_validate():
+    import json
+    from process_sim.dtwise.experimental_shacl_ollama import run_local_selection
+
+    question = "Show Address of both EndPoint and PLCEndPoint belonging to Device in ECAD"
+    def fake_transport(url, payload, timeout):
+        candidates = json.loads(payload["messages"][1]["content"])["candidates"]
+        matches = [
+            candidate["id"] for candidate in candidates
+            if candidate["path"] in (
+                "ECAD → Device → EndPoint → Address",
+                "ECAD → Device → PLCEndPoint → Address",
+            )
+        ]
+        assert len(matches) == 2
+        return {"message": {"content": json.dumps({
+            "status": "selected", "selected_candidate_ids": matches,
+            "reason": "Both endpoint types requested",
+        })}}
+
+    result = run_local_selection(_domain_index("ecad"), question, transport=fake_transport)
+    assert {p["path"] for p in result["selected_paths"]} == {
+        "ECAD → Device → EndPoint → Address",
+        "ECAD → Device → PLCEndPoint → Address",
+    }
