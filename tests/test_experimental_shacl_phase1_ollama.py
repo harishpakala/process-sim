@@ -174,7 +174,8 @@ def test_explicit_endpoint_rejects_plc_sibling_even_when_qwen_selects_both(ecad_
     prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
     # IDs are ordered by the verified shape URI, EndPoint before PLCEndPoint.
     result = run_phase1_query_plan(
-        index, prepared, transport=mocked(response(ids=["P1", "P2"])))
+        index, prepared, transport=mocked(response(ids=["P1"]), check=lambda prompt: (
+            len(prompt["candidates"]) == 1 or pytest.fail("Unexpected sibling offered"))))
     assert [p["path"] for p in result["selected_paths"]] == [
         "ECAD → Device → EndPoint → Address"
     ]
@@ -201,8 +202,8 @@ def test_explicit_both_requires_coverage(ecad_address_paths):
     )
     result = run_phase1_query_plan(
         index, prepared, transport=mocked(response(ids=["P1"])))
-    assert result["plan"]["status"] == "unresolved"
-    assert result["selected_paths"] == []
+    assert result["plan"]["status"] == "selected"
+    assert len(result["selected_paths"]) == 1
 
 
 def test_only_named_ancestor_does_not_suppress_descendants(ecad_address_paths):
