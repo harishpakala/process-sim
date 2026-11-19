@@ -268,5 +268,55 @@ class FilteredHubJoinTests(unittest.TestCase):
             self.assertIn("request_wall_seconds", report)
             self.assertNotIn("path", report)
 
+
+    def test_b21_prompt_keeps_requested_and_join_properties_only(self):
+        import json
+        from process_sim.dtwise.experimental_evidence_selection import select_evidence_plan
+
+        question = ("Get OPCUAConnectivity SignalMapping SignalName for "
+                    "DEXPI InstrumentationFunction with LocalId FI-001.")
+        catalog = {"entities": [
+            {"domain": "dexpi", "shape": "urn:InstrumentationFunction",
+             "display_name": "InstrumentationFunction",
+             "properties": ["urn:hasLocalId", "urn:hasJoinKey", "urn:hasUnused"]},
+            {"domain": "opcuaconnectivity", "shape": "urn:SignalMapping",
+             "display_name": "SignalMapping",
+             "properties": ["urn:hasSignalName", "urn:hasJoinKey", "urn:hasUnused"]},
+        ]}
+        paths = [{"nodes": [
+            ("dexpi", "urn:InstrumentationFunction"),
+            ("opcuaconnectivity", "urn:SignalMapping")],
+            "steps": [{"kind": "mapping", "mapping_id": "M1",
+                       "left_predicate": "urn:hasJoinKey",
+                       "right_predicate": "urn:hasJoinKey"}]}]
+        observed = {}
+
+        def capture_request(url, payload, timeout):
+            observed["choices"] = json.loads(payload["messages"][1]["content"])["choices"]
+            raise TimeoutError("stop before binding")
+
+        with self.assertRaises(TimeoutError):
+            select_evidence_plan(
+                question, paths, catalog, {}, [], model="test",
+                request_json=capture_request, ollama_host="http://unused",
+                timeout=1)
+        properties = observed["choices"][0]["properties"]
+        labels = [item["label"] for item in properties]
+        self.assertIn("SignalName", labels)
+        self.assertIn("LocalId", labels)
+        self.assertIn("JoinKey", labels)
+        self.assertNotIn("Unused", labels)
+        self.assertEqual(len(properties), 4)
+
+    def test_unstructured_question_keeps_full_property_catalog(self):
+        from process_sim.dtwise.experimental_evidence_selection import (
+            _explicit_lookup_property_labels)
+        self.assertIsNone(_explicit_lookup_property_labels(
+            "List all SignalMapping attributes associated with instruments."))
+        self.assertEqual(_explicit_lookup_property_labels(
+            "Get OPCUAConnectivity SignalMapping SignalName for "
+            "DEXPI InstrumentationFunction with LocalId FI-001."),
+            {"signalname", "localid"})
+
 if __name__ == "__main__":
     unittest.main()
