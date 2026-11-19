@@ -155,6 +155,14 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
     body = '\n'.join('  ' + x for x in parts)
     graphs = ['?graph_' + n['alias'] for n in ir['entities']] if include_graph else []
     op = ir.get('operation', {'type': 'select'})
+    if op['type'] == 'count' and ir.get('count_distinct_property') is not None:
+        spec = ir['count_distinct_property']
+        var = '?counted_value'
+        body += '\n  ' + scoped(spec['entity'],
+            '?' + spec['entity'] + ' ' + _iri(spec['predicate']) + ' ' + var + ' .')
+        # Distinct property counts must not be partitioned by graph provenance.
+        return ('SELECT (COUNT(DISTINCT ' + var + ') AS ?count)'
+                + '\nWHERE {\n' + body + '\n}')
     if op['type'] == 'count':
         root = '?' + ir['entities'][0]['alias']
         select = 'SELECT ' + ' '.join(graphs) + f' (COUNT(DISTINCT {root}) AS ?count)'
