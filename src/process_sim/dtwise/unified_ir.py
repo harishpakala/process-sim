@@ -270,6 +270,10 @@ def validate_ir(ir, schema, *, mappings=None):
     operation = ir.get('operation', {'type':'select'})
     if operation.get('type') not in ('select', 'count', 'group_count'):
         raise ValueError('Unsupported operation')
+    count_entity = operation.get('count_entity')
+    if count_entity is not None and (operation.get('type') not in ('count', 'group_count')
+            or count_entity not in {n['alias'] for n in ir['entities']}):
+        raise ValueError('Count entity must be an evidenced IR entity')
     if operation.get('type') == 'count' and projections:
         raise ValueError('COUNT currently requires no projections')
     if operation.get('type') == 'group_count':
@@ -384,7 +388,7 @@ def compile_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph_iri=N
                 + '\nWHERE {\n' + body + '\n  ' + triple + '\n}')
     if op['type'] == 'count':
         if include_graph:
-            return 'SELECT ?graph (COUNT(DISTINCT ?' + ir['entities'][0]['alias'] + ') AS ?count)\nWHERE {\n' + body + '\n}\nGROUP BY ?graph\nORDER BY ?graph'
+            return 'SELECT ?graph (COUNT(DISTINCT ?' + op.get('count_entity', ir['entities'][0]['alias']) + ') AS ?count)\nWHERE {\n' + body + '\n}\nGROUP BY ?graph\nORDER BY ?graph'
         return 'SELECT (COUNT(DISTINCT ?' + ir['entities'][0]['alias'] + ') AS ?count)\nWHERE {\n' + body + '\n}'
     columns = (['?graph'] if include_graph else []) + ['?' + p['as'] for p in ir.get('projections', [])]
     if ir.get('return_entities'):
