@@ -1623,9 +1623,9 @@ def main():
                         help='Experimental lossless SHACL IRI symbol compression')
     parser.add_argument('--experimental-multihop',action='store_true',
                         help='Opt-in evidence-backed LLM multi-hop planner (fails closed)')
-    parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first', 'semantic_v2'],
+    parser.add_argument('--planning-mode', choices=['hybrid', 'llm_first'],
                         default='hybrid',
-                        help='Experimental multihop: hybrid, legacy LLM-first, or opt-in semantic v2')
+                        help='Experimental multihop: hybrid shortcuts or LLM-first evidence selection')
     parser.add_argument('--compact-prompt',action='store_true',
                         help='Experiment with shorter planner instructions (opt-in)')
     parser.add_argument('--keep-alive',default=None,
@@ -1647,7 +1647,7 @@ def main():
     stage_started=time.perf_counter()
     try:
         diagnostics=[]
-        prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else ({} if args.planning_mode == 'semantic_v2' and args.experimental_multihop else None)
+        prompt_diagnostics={'path': args.prompt_diagnostics} if args.prompt_diagnostics else None
         if args.ir:
             plan=json.loads(Path(args.ir).read_text(encoding='utf-8'))
         elif args.experimental_multihop:
@@ -1684,14 +1684,6 @@ def main():
     except (ValueError,HTTPError,URLError,TimeoutError,OSError,KeyError,TypeError) as exc:
         result={'status':'rejected_or_failed','error':str(exc),
                 'planning_attempts':locals().get('diagnostics', [])}
-    if prompt_diagnostics is not None and 'semantic_v2_stage_timings' in prompt_diagnostics:
-        timings.update(prompt_diagnostics['semantic_v2_stage_timings'])
-    if (result['status'] == 'rejected_or_failed' and prompt_diagnostics is not None
-            and 'semantic_v2_attempts' in prompt_diagnostics):
-        result['semantic_v2_attempts'] = prompt_diagnostics['semantic_v2_attempts']
-    if (result['status'] == 'rejected_or_failed' and prompt_diagnostics is not None
-            and 'semantic_v2_retrieval' in prompt_diagnostics):
-        result['semantic_v2_retrieval'] = prompt_diagnostics['semantic_v2_retrieval']
     result['timings']=timings
     output=json.dumps(result,ensure_ascii=False,indent=2)
     if args.output: Path(args.output).write_text(output,encoding='utf-8')
