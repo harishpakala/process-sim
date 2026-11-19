@@ -42,7 +42,7 @@ def build_evidence_catalog(catalog: dict) -> EvidenceCatalog:
     properties = tuple({
         "id": f"P{i}", "entity_id": shape_ids[(domain, shape)],
         "predicate": predicate,
-        "label": predicate.rsplit("/", 1)[-1].rsplit("#", 1)[-1],
+        "label": predicate.rsplit("/", 1)[-1].rsplit("#", 1)[-1].rsplit(":", 1)[-1],
     } for i, (domain, shape, predicate) in enumerate(owners))
     edges = sorted({
         (edge["domain"], edge["from_shape"], edge["predicate"], edge["to_shape"])
