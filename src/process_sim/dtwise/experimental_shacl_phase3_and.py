@@ -94,16 +94,16 @@ def _explicit_filter_constraints(clause, qualified):
     labels = {(parts[-2], parts[-1])
               for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
               for parts in [c["path"].split(" → ")] if len(parts) >= 2}
-    pieces = re.split(r"\\band\\b", clause, flags=re.I)
+    pieces = re.split(r"\band\b", clause, flags=re.I)
     if len(pieces) != 2:
         return None
     constraints = []
     for piece in pieces:
         matches = []
         for owner, prop in labels:
-            pattern = (r"^\\s*" + re.escape(owner) + r"\\s+" +
+            pattern = (r"^\s*" + re.escape(owner) + r"\s+" +
                        re.escape(prop) +
-                       r"""\\s*=\\s*(?:"([^"\\r\\n]*)"|'([^'\\r\\n]*)'|([A-Za-z_][A-Za-z_0-9.-]*))(?:\\s+in\\s+\\w+)?\\s*$""")
+                       r"""\s*=\s*(?:"([^"\r\n]*)"|'([^'\r\n]*)'|([A-Za-z_][A-Za-z_0-9.-]*))(?:\s+in\s+\w+)?\s*$""")
             found = re.fullmatch(pattern, piece, flags=re.I)
             if found:
                 matches.append((owner, prop, next(v for v in found.groups() if v is not None)))
