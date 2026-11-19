@@ -151,7 +151,18 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
         c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
     ]}
     prompt["shacl_subgraph"] = graph_evidence(qualified)
-    # Constrain model output to the independently grounded candidate registry and\n    # question literals; this is guidance, not a substitute for validation.\n    schema = json.loads(json.dumps(DIRECT_INTENT_SCHEMA))\n    candidate_ids = [c["id"] for c in prompt["candidates"]]\n    schema["properties"]["result_property_ids"]["items"]["enum"] = candidate_ids\n    schema["properties"]["join"]["properties"]["owner"]["enum"] = ["Device"]\n    filter_props = schema["properties"]["filters"]["items"]["properties"]\n    filter_props["property_id"]["enum"] = candidate_ids\n    filter_props["owner"]["enum"] = ["Device"]\n    filter_props["property"]["enum"] = ["LocalId", "DeviceType"]\n    filter_props["value"]["enum"] = list(_literals(question))\n    raw = ollama_select(prompt, model=model, endpoint=endpoint,
+    # Constrain model output to the independently grounded candidate registry and
+    # question literals; this is guidance, not a substitute for validation.
+    schema = json.loads(json.dumps(DIRECT_INTENT_SCHEMA))
+    candidate_ids = [c["id"] for c in prompt["candidates"]]
+    schema["properties"]["result_property_ids"]["items"]["enum"] = candidate_ids
+    schema["properties"]["join"]["properties"]["owner"]["enum"] = ["Device"]
+    filter_props = schema["properties"]["filters"]["items"]["properties"]
+    filter_props["property_id"]["enum"] = candidate_ids
+    filter_props["owner"]["enum"] = ["Device"]
+    filter_props["property"]["enum"] = ["LocalId", "DeviceType"]
+    filter_props["value"]["enum"] = list(_literals(question))
+    raw = ollama_select(prompt, model=model, endpoint=endpoint,
                         transport=transport, system_prompt=DIRECT_INTENT_PROMPT,
                         response_format=schema)
     if raw.strip() == "null":
