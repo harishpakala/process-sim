@@ -108,6 +108,7 @@ def main() -> None:
     )
     parser.add_argument("--llm", action="store_true", help="Use local Ollama")
     parser.add_argument("--semantic", action="store_true", help="Rank schema terms using local embeddings")
+    parser.add_argument("--semantic-paths", action="store_true", help="Build verified paths from semantic rankings; optionally use --llm")
     parser.add_argument("--grouped", action="store_true", help="Separate shape/property ranks and group duplicate labels (requires --semantic)")
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--top-k", type=int, default=8)
@@ -131,11 +132,54 @@ def main() -> None:
         parser.error("Supply a question for this domain")
 
     index = load_index(args.index, domain=args.domain)
+    if args.semantic_paths and args.semantic:
+        parser.error("--semantic-paths and --semantic are separate modes")
     if args.grouped and not args.semantic:
         parser.error("--grouped requires --semantic")
     if args.semantic and args.llm:
         parser.error("--semantic and --llm are separate experiments")
-    if args.semantic:
+    if args.semantic_paths:
+        from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+        prepared = semantic_candidates(index, question, top_shapes=args.top_k,
+                                       model=args.embed_model, endpoint=args.ollama_url)
+        if args.llm:
+            from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+            from process_sim.dtwise.experimental_shacl_selection import validate_selection
+            if prepared["prompt"]["candidates"]:
+                raw = ollama_select(prepared["prompt"], model=args.model,
+                                    endpoint=args.ollama_url)
+                selection = validate_selection(raw, prepared)
+            else:
+                selection = {"status": "unresolved", "selected_candidate_ids": [],
+                             "reason": "No verified semantic candidates"}
+            result = {"selection": selection,
+                      "selected_paths": [
+                          candidate for candidate in prepared["prompt"]["candidates"]
+                          if candidate["id"] in selection["selected_candidate_ids"]
+                      ], "prepared": prepared}
+            if args.json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status:", selection["status"].upper())
+                print("Reason:", selection["reason"])
+                print("Selected paths:")
+                for candidate in result["selected_paths"]:
+                    print(" ", candidate["id"] + ".", candidate["path"])
+                if not result["selected_paths"]:
+                    print("  (none)")
+        elif args.json:
+            print(json.dumps(prepared, indent=2, ensure_ascii=False))
+        else:
+            print("Question:", question)
+            print("Domain:", args.domain.upper())
+            print("Verified semantic candidates (not yet selected):")
+            for candidate in prepared["prompt"]["candidates"]:
+                print(" ", candidate["id"] + ".", candidate["path"])
+            if not prepared["prompt"]["candidates"]:
+                print("  (none)")
+    elif args.semantic:
         from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped, semantic_terms
         search = semantic_grouped if args.grouped else semantic_terms
         result = search(index, question, top_k=args.top_k,
