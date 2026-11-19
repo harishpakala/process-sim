@@ -51,7 +51,12 @@ def _schema_words(value):
 def _mentions_shape(question, label):
     """Match complete normalized shape phrases, not partial substrings."""
     needle = _schema_words(label)
-    haystack = _schema_words(question)
+    # Keep query CamelCase tokens intact: SuperEndPointValue must not
+    # accidentally match the EndPoint shape embedded inside it.
+    haystack = _schema_words(re.sub(r"([a-z0-9])([A-Z])", r"\\1_\\2", question))
+    if re.search(r"(?<![A-Za-z0-9_])" + re.escape(label) +
+                 r"(?![A-Za-z0-9_])", question, re.IGNORECASE):
+        return True
     return bool(needle) and any(
         haystack[i:i + len(needle)] == needle
         for i in range(len(haystack) - len(needle) + 1)
@@ -71,7 +76,7 @@ def infer_domain_from_shapes(question, domains, schema):
         for label in concept.get("labels", []):
             if not isinstance(label, str) or not label.strip() or "shacl shape" in label.casefold():
                 continue
-            labels.setdefault(label.casefold(), set()).add(domain)
+            labels.setdefault(label, set()).add(domain)
     unique_hits = set()
     shared_hits = set()
     for label, owners in labels.items():
