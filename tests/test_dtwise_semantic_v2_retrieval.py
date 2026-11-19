@@ -30,6 +30,22 @@ class SemanticV2RetrievalTests(unittest.TestCase):
                                   ("opc", "urn:Shape1")])
         self.assertEqual(len(calls), 1)
 
+    def test_missing_optional_display_name_uses_evidenced_shape_iri(self):
+        for entity in self.catalog["entities"]:
+            entity.pop("display_name")
+        observed = []
+        def request(url, payload, timeout):
+            observed.append(payload)
+            return {"message": {"content": '{"shape_ids":["S0"]}'}}
+        result = retrieve_shape_nodes(
+            "Find a shape", self.catalog, model="mock",
+            request_json=request, ollama_host="http://localhost:11434",
+            timeout=1)
+        self.assertEqual(result, [("opc", "urn:Shape0")])
+        self.assertEqual(
+            json.loads(observed[0]["messages"][1]["content"])
+            ["shape_catalog"][0]["shape"], "urn:Shape0")
+
     def test_invalid_id_gets_one_llm_retry(self):
         result, calls = self.retrieve([
             {"shape_ids": ["S99"]}, {"shape_ids": ["S2"]}])
