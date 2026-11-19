@@ -78,6 +78,10 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
                         "question and supplied evidence. Return a complete "
                         "corrected JSON selection using the required keys. "
                         "Do not invent filters, paths, or properties. "
+                        "For any supported operation, path_id MUST be one of "
+                        "the supplied PATH IDs; null is not a valid path_id "
+                        "for a supported operation. Preserve the evidence path "
+                        "when correcting an unrelated filter or operation error. "
                         "If the request cannot be represented, use unsupported."
                     )},
                 ]
