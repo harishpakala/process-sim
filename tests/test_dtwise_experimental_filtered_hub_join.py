@@ -318,5 +318,61 @@ class FilteredHubJoinTests(unittest.TestCase):
             "DEXPI InstrumentationFunction with LocalId FI-001."),
             {"signalname", "localid"})
 
+
+class NamedDirectMappingLookupTests(unittest.TestCase):
+    def setUp(self):
+        self.question = ("Find OPCUAConnectivity SignalMapping SignalName associated "
+                         "with DEXPI InstrumentationFunction through AssetIdentifier.")
+        self.source = ("dexpi", "urn:dexpi")
+        self.target = ("opcuaconnectivity", "urn:opcua")
+        self.catalog = {"entities": [
+            {"domain": "dexpi", "shape": "urn:dexpi",
+             "display_name": "InstrumentationFunction",
+             "properties": ["urn:hasAssetIdentifier", "urn:hasLocalId"]},
+            {"domain": "opcuaconnectivity", "shape": "urn:opcua",
+             "display_name": "SignalMapping",
+             "properties": ["urn:hasAssetIdentifier", "urn:hasSignalName"]},
+        ]}
+        self.path = {"nodes": [self.source, self.target],
+                     "steps": [{"kind": "mapping", "mapping_id": "M1",
+                                "left_predicate": "urn:hasAssetIdentifier",
+                                "right_predicate": "urn:hasAssetIdentifier"}]}
+
+    def run_plan(self, paths):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_named_direct_mapping_lookup)
+        with patch("process_sim.dtwise.experimental_multihop_cli.enumerate_evidenced_paths",
+                   return_value=paths), patch(
+                   "process_sim.dtwise.experimental_multihop_cli.bind_evidenced_path",
+                   return_value={"verified": True}) as bind, patch(
+                   "process_sim.dtwise.experimental_multihop_cli.resolve_shapes",
+                   side_effect=lambda plan, index, mappings: plan), patch(
+                   "process_sim.dtwise.experimental_multihop_cli.check_semantic_coverage"):
+            result = _plan_named_direct_mapping_lookup(
+                self.question, self.catalog, [], [self.source, self.target],
+                {"dexpi", "opcuaconnectivity"}, {})
+        return result, bind
+
+    def test_b22_uses_named_verified_asset_identifier_mapping(self):
+        result, bind = self.run_plan([self.path])
+        self.assertEqual(result[1]["choice"], "VERIFIED_NAMED_DIRECT_MAPPING_LOOKUP")
+        self.assertEqual(bind.call_args.kwargs["projections"], [
+            {"node_index": 1, "predicate": "urn:hasSignalName", "as": "value_0"}])
+        self.assertIsNone(bind.call_args.kwargs.get("filter_spec"))
+
+    def test_b22_rejects_missing_or_ambiguous_mapping(self):
+        for paths in ([], [self.path, self.path]):
+            with self.subTest(paths=len(paths)):
+                with self.assertRaisesRegex(ValueError, "No unique verified"):
+                    self.run_plan(paths)
+
+    def test_b22_rejects_wrong_join_key(self):
+        wrong = {"nodes": [self.source, self.target],
+                 "steps": [{**self.path["steps"][0],
+                            "left_predicate": "urn:hasLocalId"}]}
+        with self.assertRaisesRegex(ValueError, "No unique verified"):
+            self.run_plan([wrong])
+
+
 if __name__ == "__main__":
     unittest.main()
