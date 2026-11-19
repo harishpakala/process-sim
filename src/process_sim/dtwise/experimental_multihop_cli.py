@@ -356,6 +356,59 @@ def _plan_named_direct_mapping_lookup(question, catalog, mappings, anchors,
         "choice": "VERIFIED_NAMED_DIRECT_MAPPING_LOOKUP"}
 
 
+
+def _plan_named_identifier_anti_join(question, catalog, mappings, anchors,
+                                     mentioned, index):
+    """Ground a two-shape negative match using an exact verified mapping."""
+    match = re.fullmatch(
+        r"\s*which\s+([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+entities\s+have\s+no\s+matching\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s+by\s+"
+        r"([A-Za-z][A-Za-z0-9_]*)\s*\?\s*", question, re.I)
+    if not match:
+        return None
+    source_domain, source_label, target_domain, target_label, key_name = match.groups()
+    owners = {(e["domain"], e["shape"]): e for e in catalog["entities"]}
+
+    def named(domain, label):
+        found = [node for node in anchors
+                 if node[0].casefold() == domain.casefold()
+                 and owners[node]["display_name"].casefold() == label.casefold()]
+        if len(found) != 1:
+            raise ValueError("Anti-join endpoint is missing or ambiguous")
+        return found[0]
+
+    source, target = named(source_domain, source_label), named(target_domain, target_label)
+    if source == target or set(anchors) != {source, target}:
+        raise ValueError("Anti-join requires exactly two named shapes")
+    source_key = _single_shape_property(owners[source], key_name)
+    target_key = _single_shape_property(owners[target], key_name)
+    paths = [
+        path for path in enumerate_evidenced_paths(
+            catalog, mappings, source, target, max_hops=1, max_paths=256)
+        if len(path["steps"]) == 1
+        and path["steps"][0]["kind"] == "mapping"
+        and path["steps"][0]["left_predicate"] == source_key
+        and path["steps"][0]["right_predicate"] == target_key
+    ]
+    if len(paths) != 1:
+        raise ValueError("Anti-join requires one unique verified direct mapping")
+    plan = bind_evidenced_path(
+        paths[0], catalog, mappings,
+        projections=[{"node_index": 0, "predicate": source_key,
+                      "as": "verified_key"}])
+    # The projection was only used to validate ownership; anti-join returns
+    # the source entity, not its key.
+    plan["projections"] = []
+    plan["return_entities"] = True
+    plan["anti_join"] = {"from": "n0", "to": "n1"}
+    check_semantic_coverage(plan, question, catalog, mentioned)
+    return resolve_shapes(plan, index, mappings=mappings), {
+        "status": "evidence_semantic_grounded",
+        "choice": "VERIFIED_IDENTIFIER_ANTI_JOIN"}
+
+
 def plan_experimental_multihop(question, index, mappings, *, model,
                                ollama_host, timeout, keep_alive=None,
                                request_json=None, prompt_diagnostics=None):
@@ -387,6 +440,11 @@ def plan_experimental_multihop(question, index, mappings, *, model,
                 anchors.append(node)
     if not anchors:
         raise ValueError("Experimental planner requires a named SHACL shape")
+    anti_join = _plan_named_identifier_anti_join(
+        question, catalog, mappings, anchors, mentioned, index)
+    if anti_join is not None:
+        return anti_join
+
     hub_join = _plan_explicit_hub_join(question, catalog, mappings, anchors,
                                        mentioned, index)
     if hub_join is not None:
