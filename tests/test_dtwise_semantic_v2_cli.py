@@ -7,7 +7,7 @@ from process_sim.dtwise.experimental_multihop_cli import plan_experimental_multi
 
 class SemanticV2CLITests(unittest.TestCase):
     def test_v2_dispatch_without_question_regex_heuristics(self):
-        catalog = {"entities": [{
+        catalog = {"shacl_edges": [], "entities": [{
             "domain": "opc", "shape": "urn:SignalMapping",
             "display_name": "SignalMapping",
             "properties": ["urn:hasSignalName"]}]}
@@ -27,7 +27,7 @@ class SemanticV2CLITests(unittest.TestCase):
                                   "steps": []}])
 
     def test_v2_rejects_excessive_evidence_candidates(self):
-        catalog = {"entities": [
+        catalog = {"shacl_edges": [], "entities": [
             {"domain": "opc", "shape": "urn:Shape" + str(i),
              "display_name": "Shape" + str(i), "properties": []}
             for i in range(33)]}
