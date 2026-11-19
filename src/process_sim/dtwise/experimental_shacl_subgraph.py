@@ -190,6 +190,84 @@ class SubgraphIndex:
                     queue.append(edge["to"])
         return None
 
+    def _shared_context_subgraph(self, question: str, grounded: dict) -> dict | None:
+        """Join requested property owners only under an explicitly shared shape.
+
+        The narrow rule recognizes 'same <ShapeName>' as a shared-context
+        instruction. It never infers a join merely from a domain mention.
+        Ambiguous owner combinations are not silently resolved.
+        """
+        shared = [
+            uri for uri, concept in self.shapes.items()
+            if any(
+                re.search(
+                    r"\\bsame\\s+" + re.escape(label) + r"(?![A-Za-z0-9])",
+                    question, re.I,
+                )
+                for label in concept.get("labels", [])
+                if "shacl shape" not in label.casefold()
+            )
+        ]
+        if len(shared) != 1 or len(grounded["properties"]) < 2:
+            return None
+        root = shared[0]
+        # A property can be attached to several shapes. Only use explicitly
+        # named owners; otherwise preserve ambiguity in the normal extractor.
+        explicit = {
+            uri for uri, concept in self.shapes.items()
+            if any(
+                _mentioned(question, label)
+                for label in concept.get("labels", [])
+                if "shacl shape" not in label.casefold()
+            )
+        }
+        grouped: dict[str, list[dict]] = defaultdict(list)
+        for prop in grounded["properties"]:
+            grouped[prop["predicate"]].append(prop)
+        chosen_properties = []
+        chains = []
+        for predicate, candidates in sorted(grouped.items()):
+            valid = []
+            for prop in candidates:
+                owner = prop["owner"]
+                if owner not in explicit:
+                    continue
+                chain = self._shortest_path(root, owner)
+                if chain is not None:
+                    valid.append((prop, chain))
+            if len(valid) != 1:
+                return None
+            chosen_properties.append(valid[0][0])
+            chains.append(valid[0][1])
+        if len({p["owner"] for p in chosen_properties}) < 2:
+            return None
+        selected = {root}
+        edges = []
+        for chain in chains:
+            for edge in chain:
+                selected.update((edge["from"], edge["to"]))
+                if edge not in edges:
+                    edges.append(edge)
+        return {
+            "domain": self.domain,
+            "nodes": [
+                {"id": f"N{i}", "uri": uri,
+                 "name": next(
+                     (label for label in self.shapes[uri].get("labels", [])
+                      if "shacl shape" not in label.casefold()),
+                     _short(uri),
+                 )}
+                for i, uri in enumerate(sorted(selected))
+            ],
+            "edges": [{"id": f"E{i}", **edge} for i, edge in enumerate(edges)],
+            "properties": [
+                {"id": f"P{i}", **prop}
+                for i, prop in enumerate(chosen_properties)
+            ],
+            "unresolved_connections": [],
+            "shared_context": root,
+        }
+
     def extract_grounded_question(self, question: str, connect: bool = False) -> dict:
         """Resolve explicitly mentioned parent context without inventing joins.
 
@@ -200,7 +278,12 @@ class SubgraphIndex:
         grounded = self.ground(question)
         property_hits = grounded["properties"]
         anchors = grounded["shapes"]
-        if not connect or not anchors:
+        shared_result = (
+            self._shared_context_subgraph(question, grounded) if connect else None
+        )
+        if shared_result is not None:
+            result = shared_result
+        elif not connect or not anchors:
             result = self.extract(anchors, [p["predicate"] for p in property_hits])
         else:
             # Named anchors which have no requested literal property are
