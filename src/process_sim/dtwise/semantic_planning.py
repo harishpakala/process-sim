@@ -68,10 +68,14 @@ def validate_semantic_plan(plan: dict, evidence: EvidenceCatalog) -> dict:
     Returns a normalized plan with original evidence IDs; the compiler can
     resolve them using the independently constructed evidence catalog.
     """
-    if not isinstance(plan, dict) or set(plan) != {
+    if not isinstance(plan, dict) or set(plan) not in ({
         "version", "scope", "operation", "projections", "where"
-    } or plan["version"] != "2.0":
+    }, {
+        "version", "scope", "scope_mode", "operation", "projections", "where"
+    }) or plan["version"] != "2.0":
         raise ValueError("Invalid semantic plan structure")
+    if plan.get("scope_mode", "single") not in ("single", "independent"):
+        raise ValueError("Unsupported scope mode")
     entities = {x["id"]: x for x in evidence.entities}
     properties = {x["id"]: x for x in evidence.properties}
     scope = plan["scope"]
@@ -138,6 +142,7 @@ def validate_semantic_plan(plan: dict, evidence: EvidenceCatalog) -> dict:
     normalized_where = None if where is None else expression(where)
     return {
         "version": "2.0", "scope": list(scope),
+        **({"scope_mode": plan["scope_mode"]} if "scope_mode" in plan else {}),
         "operation": plan["operation"], "projections": list(projections),
         "where": normalized_where,
     }
