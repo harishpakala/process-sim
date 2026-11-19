@@ -33,8 +33,6 @@ def validate_schema_join_intent(intent, qualified):
     paths = {c["id"]: c for c in qualified["prompt"]["candidates"]
              if c["kind"] == "property"}
     ancestor_uri = topology["ancestor_uri"]
-    owner_names = {c["path"].split(" → ")[-2] for c in paths.values()
-                   if c["id"] in ids and len(c["path"].split(" → ")) >= 2}
     # Owner can be the URI itself; labels are allowed only when explicitly
     # represented by the shared prefix of both verified candidate paths.
     ancestor_depth = len(topology["shared_node_uris"]) - 1
