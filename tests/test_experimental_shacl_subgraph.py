@@ -141,3 +141,48 @@ def test_ecad_cross_branch_address_candidates_remain_disconnected():
     assert len(result["properties"]) == 4
     assert len({p["owner"] for p in result["properties"]}) == 4
     assert result["unresolved_connections"] == []
+
+
+def test_dexpi_explicit_same_root_connects_both_branches():
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction belonging to the same DEXPI",
+        connect=True,
+    )
+    assert {n["name"] for n in result["nodes"]} == {
+        "DEXPI", "InstrumentationFunction", "ActuatingFunction"
+    }
+    assert {e["predicate"].rsplit("/", 1)[-1] for e in result["edges"]} == {
+        "hasInstrumentationFunction", "hasActuatingFunction"
+    }
+    assert {p["name"] for p in result["properties"]} == {
+        "MeasuredVariable", "ActuatedVariable"
+    }
+    assert len(result["edges"]) == 2
+    assert len(result["properties"]) == 2
+    assert result["unresolved_connections"] == []
+    assert "shared_context" in result
+    assert all(e["from"] == result["shared_context"] for e in result["edges"])
+    assert all(e["evidence"] for e in result["edges"])
+
+
+def test_dexpi_domain_mention_alone_does_not_assert_shared_context():
+    result = extract_question(
+        _domain_index("dexpi"),
+        "In DEXPI show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction",
+        connect=True,
+    )
+    assert "shared_context" not in result
+
+
+def test_dexpi_same_root_does_not_force_join_when_connect_disabled():
+    result = extract_question(
+        _domain_index("dexpi"),
+        "Show MeasuredVariable of InstrumentationFunction and "
+        "ActuatedVariable of ActuatingFunction belonging to the same DEXPI",
+        connect=False,
+    )
+    assert result["edges"] == []
+    assert "shared_context" not in result
