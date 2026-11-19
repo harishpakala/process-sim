@@ -20,6 +20,7 @@ property compared to the string literal. Match complete owner chains:
 EndPoint and PLCEndPoint are distinct. The filter property owner must be on
 the result path (an ancestor or the result owner), not a sibling branch.
 Copy the string value from the user's question exactly; do not invent values.
+Values may be quoted strings or unquoted identifier tokens such as FI_101.
 If unsupported, ambiguous, or missing a matching candidate, abstain.
 Return ONLY JSON with exactly these keys:
 status ("selected", "ambiguous", "unresolved"), result_id (P ID or null),
@@ -28,7 +29,7 @@ reason (nonempty string). For non-selected statuses all four plan fields null.
 No COUNT, EXISTS, AND, OR, comparisons, numeric values, or cross-domain joins."""
 
 FIELDS = {"status", "result_id", "filter_id", "operator", "value", "reason"}
-_LITERAL = re.compile(r"""(?<!\w)(?:=|equals?)(?:\s*)["']([^"'\r\n]*)["']""", re.I)
+_LITERAL = re.compile(r"""(?<!\w)(?:=|equals?)\s*(?:["']([^"'\r\n]*)["']|([A-Za-z_][A-Za-z_0-9.-]*))""", re.I)
 
 
 def validate_filter_plan(raw, qualified: dict) -> dict:
@@ -73,7 +74,8 @@ def run_phase2_filter_plan(index, prepared: dict, *, model="qwen2.5-coder:7b",
     ]}, "registry": qualified["registry"]}
     question = offered["prompt"]["question"]
     # Fail closed for requests outside the one-string-equality scope.
-    literals = _LITERAL.findall(question)
+    literals = [quoted if quoted != "" else unquoted
+                for quoted, unquoted in _LITERAL.findall(question)]
     unsupported = bool(re.search(
         r"\b(how many|count|exists|does any|is there|are there|average|sum|"
         r"group by|order by|greater than|less than)\b|(?:!=|<=|>=|<|>)", question, re.I
