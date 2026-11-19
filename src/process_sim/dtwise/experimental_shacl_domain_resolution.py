@@ -38,6 +38,25 @@ def resolve_domain(question, available_domains, override=None, *, schema=None):
     return mentioned[0]
 
 
+def _schema_words(value):
+    """Normalize CamelCase and whitespace; singularize only simple plurals."""
+    value = re.sub(r"([a-z0-9])([A-Z])", r"\\1 \\2", value)
+    value = re.sub(r"([A-Z])([A-Z][a-z])", r"\\1 \\2", value)
+    words = re.findall(r"[A-Za-z0-9]+", value.casefold())
+    return [word[:-1] if len(word) > 3 and word.endswith("s")
+            and not word.endswith("ss") else word for word in words]
+
+
+def _mentions_shape(question, label):
+    """Match complete normalized shape phrases, not partial substrings."""
+    needle = _schema_words(label)
+    haystack = _schema_words(question)
+    return bool(needle) and any(
+        haystack[i:i + len(needle)] == needle
+        for i in range(len(haystack) - len(needle) + 1)
+    )
+
+
 def infer_domain_from_shapes(question, domains, schema):
     """Infer only when indexed NodeShape labels support exactly one domain.
 
@@ -55,8 +74,7 @@ def infer_domain_from_shapes(question, domains, schema):
     unique_hits = set()
     shared_hits = set()
     for label, owners in labels.items():
-        if re.search(r"(?<![A-Za-z0-9_])" + re.escape(label) + r"(?![A-Za-z0-9_])",
-                     question, re.IGNORECASE):
+        if _mentions_shape(question, label):
             if len(owners) == 1:
                 unique_hits.update(owners)
             else:
