@@ -116,3 +116,59 @@ def test_powershell_unquoted_identifier(sample):
                                     transport=transport(selected(ids["Address"], ids["LocalId"])))
     assert result["plan"]["status"] == "selected"
     assert 'FILTER(?filterValue = "FI_101")' in compile_phase2_filter_sparql(result)[0]["sparql"]
+
+
+def test_two_result_paths_share_one_device_filter(sample):
+    index, prepared = sample
+    root, device = "urn:ECAD", "urn:Device"
+    plc = "urn:PLCEndPoint"
+    edge = {"from": device, "to": plc, "predicate": "https://example.org/hasPLCEndPoint",
+            "property_shape": "urn:PLCLink"}
+    address = {"owner": plc, "predicate": "https://example.org/address",
+               "property_shape": "urn:PLCAddress", "name": "Address"}
+    index.shapes[plc] = {"labels": ["PLCEndPoint"]}
+    index.properties[plc] = [address]
+    index.edges.append(edge)
+    prepared["prompt"]["question"] = (
+        "Show Address of both EndPoint and PLCEndPoint belonging to Device "
+        "where Device LocalId = FI_101 in ECAD"
+    )
+    prepared["prompt"]["candidates"].append(
+        {"id": "C3", "path": "ECAD → Device → PLCEndPoint → Address"})
+    prepared["registry"]["C3"] = {
+        "node_uris": [root, device, plc],
+        "edges": [index.edges[0], edge], "property": address,
+    }
+    from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
+    qualified = qualify_candidates(index, prepared)
+    ids = {c["path"]: c["id"] for c in qualified["prompt"]["candidates"]
+           if c["kind"] == "property"}
+    device_id = next(c["id"] for c in qualified["prompt"]["candidates"]
+                     if c["kind"] == "property" and c["property_name"] == "LocalId")
+    result_ids = [ids["ECAD → Device → EndPoint → Address"],
+                  ids["ECAD → Device → PLCEndPoint → Address"]]
+    plan = {"status": "selected", "result_ids": result_ids,
+            "filter_id": device_id, "operator": "=", "value": "FI_101",
+            "reason": "Both requested endpoint owners with shared Device filter"}
+    result = run_phase2_filter_plan(index, prepared, transport=transport(plan))
+    queries = compile_phase2_filter_sparql(result)
+    assert len(queries) == 2
+    assert {q["result_id"] for q in queries} == set(result_ids)
+    assert all("?n1 <https://example.org/localId> ?filterValue ." in q["sparql"]
+               for q in queries)
+    assert all('FILTER(?filterValue = "FI_101")' in q["sparql"] for q in queries)
+    assert any("<https://example.org/hasEndPoint>" in q["sparql"] for q in queries)
+    assert any("<https://example.org/hasPLCEndPoint>" in q["sparql"] for q in queries)
+
+
+def test_duplicate_result_ids_rejected(sample):
+    index, prepared = sample
+    from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
+    q = qualify_candidates(index, prepared)
+    ids = {c["property_name"]: c["id"] for c in q["prompt"]["candidates"]
+           if c["kind"] == "property"}
+    plan = {"status": "selected", "result_ids": [ids["Address"], ids["Address"]],
+            "filter_id": ids["LocalId"], "operator": "=", "value": "FI_101",
+            "reason": "duplicate"}
+    with pytest.raises(SelectionContractError, match="Unknown or non-property"):
+        run_phase2_filter_plan(index, prepared, transport=transport(plan))
