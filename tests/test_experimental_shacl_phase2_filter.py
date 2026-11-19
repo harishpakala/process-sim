@@ -173,3 +173,41 @@ def test_duplicate_result_ids_rejected(sample):
             "reason": "duplicate"}
     with pytest.raises(SelectionContractError, match="Unknown or non-property"):
         run_phase2_filter_plan(index, prepared, transport=transport(plan))
+
+
+def test_explicit_endpoint_owner_prunes_llm_plc_overselection(sample):
+    index, prepared = sample
+    root, device, plc = "urn:ECAD", "urn:Device", "urn:PLCEndPoint"
+    edge = {"from": device, "to": plc,
+            "predicate": "https://example.org/hasPLCEndPoint",
+            "property_shape": "urn:PLCLink"}
+    address = {"owner": plc, "predicate": "https://example.org/address",
+               "property_shape": "urn:PLCAddress", "name": "Address"}
+    index.shapes[plc] = {"labels": ["PLCEndPoint"]}
+    index.properties[plc] = [address]
+    index.edges = [*index.edges, edge]
+    prepared["prompt"]["question"] = (
+        "Show Address of EndPoint belonging to Device where Device LocalId = FI_101 in ECAD"
+    )
+    prepared["prompt"]["candidates"].append({
+        "id": "C3", "path": "ECAD → Device → PLCEndPoint → Address"})
+    prepared["registry"]["C3"] = {
+        "node_uris": [root, device, plc],
+        "edges": [index.edges[0], edge], "property": address,
+    }
+    from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
+    qualified = qualify_candidates(index, prepared)
+    ids = {c["path"]: c["id"] for c in qualified["prompt"]["candidates"]
+           if c["kind"] == "property"}
+    endpoint_id = ids["ECAD → Device → EndPoint → Address"]
+    plc_id = ids["ECAD → Device → PLCEndPoint → Address"]
+    local_id = ids["ECAD → Device → LocalId"]
+    raw = {"status": "selected", "result_ids": [endpoint_id, plc_id],
+           "filter_id": local_id, "operator": "=", "value": "FI_101",
+           "reason": "Both paths"}
+    result = run_phase2_filter_plan(index, prepared, transport=transport(raw))
+    assert result["plan"]["result_ids"] == [endpoint_id]
+    queries = compile_phase2_filter_sparql(result)
+    assert len(queries) == 1
+    assert "<https://example.org/hasEndPoint>" in queries[0]["sparql"]
+    assert "hasPLCEndPoint" not in queries[0]["sparql"]
