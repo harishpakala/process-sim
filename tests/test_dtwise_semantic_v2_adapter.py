@@ -55,7 +55,7 @@ class SemanticV2AdapterTests(unittest.TestCase):
                      "count_target": "N0",
                      "aggregate_condition": {"operator": "gt", "value": 3}}
         (plan, _), _calls = self.run_plan(selection)
-        self.assertEqual(plan["operation"], {"type": "group_count", "having_min": 3})
+        self.assertEqual(plan["operation"], {"type": "group_count", "count_entity": "n0", "having_min": 3})
         self.assertEqual(plan["projections"][0]["predicate"], "urn:hasAssetIdentifier")
 
     def test_multihop_count_selected_terminal_entity(self):
@@ -98,7 +98,7 @@ class SemanticV2AdapterTests(unittest.TestCase):
                      "projections": [], "count_target": "N0",
                      "distinct": True, "count_property": "N0P1"}
         (plan, _), _calls = self.run_plan(selection)
-        self.assertEqual(plan["operation"], {"type": "count"})
+        self.assertEqual(plan["operation"], {"type": "count", "count_entity": "n0"})
         self.assertEqual(plan["count_distinct_property"], {
             "entity": "n0", "predicate": "urn:hasSignalName"})
 
