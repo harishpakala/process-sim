@@ -171,7 +171,7 @@ def validate_semantic_selection_v2(
     if operation == "group_count" and distinct:
         raise ValueError("Distinct count requires explicit count-target semantics")
     return {
-        "anti_join": anti_join,
+        **({"anti_join": anti_join} if "anti_join" in selection else {}),
         "path_id": path_id, "operation": operation,
         "projections": list(projections), "group_by": list(group_by),
         "count_target": target,
