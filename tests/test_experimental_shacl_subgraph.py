@@ -534,3 +534,35 @@ def test_semantic_embeddings_reject_wrong_vector_count():
         ollama_embed(["a", "b"], transport=lambda url, payload, timeout: {
             "embeddings": [[1.0, 0.0]],
         })
+
+
+def test_grouped_semantic_ranking_keeps_property_owners_and_separate_budgets():
+    from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped
+    calls = []
+    def fake_transport(url, payload, timeout):
+        calls.append(payload)
+        return {"embeddings": [[1.0, 0.0]] + [
+            [1.0, 0.0] if "Address" in text else [0.0, 1.0]
+            for text in payload["input"][1:]
+        ]}
+    result = semantic_grouped(
+        _domain_index("ecad"), "network addresses", top_k=2,
+        transport=fake_transport,
+    )
+    assert len(result["shapes"]) <= 2
+    assert len(result["properties"]) <= 2
+    address = next(item for item in result["properties"]
+                   if item["label"] == "Address")
+    assert len(address["members"]) == 4
+    assert len({member["owner"] for member in address["members"]}) == 4
+    assert all(member["kind"] == "property" for member in address["members"])
+    # Only one Address text is embedded despite four distinct SHACL owners.
+    assert sum("property Address." in text for text in calls[0]["input"]) == 1
+    assert "selected_paths" not in result
+
+
+def test_grouped_semantic_rejects_nonpositive_budget():
+    import pytest
+    from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped
+    with pytest.raises(ValueError, match="top_k"):
+        semantic_grouped(_domain_index("ecad"), "Address", top_k=0)
