@@ -25,10 +25,15 @@ If unsupported, ambiguous, or missing a matching candidate, abstain.
 Return ONLY JSON with exactly these keys:
 status ("selected", "ambiguous", "unresolved"), result_ids (array of P IDs),
 filter_id (P ID or null), operator ("=" or null), value (string or null),
-reason (nonempty string). For non-selected statuses result_ids must be []\nand filter_id, operator, value must be null.\nIf the question explicitly asks for both EndPoint and PLCEndPoint, include BOTH\nAddress paths. Never add sibling paths unless requested. A shared Device filter\nmay apply to both results; do not combine branches into a single query.
+reason (nonempty string). For non-selected statuses result_ids must be []
+and filter_id, operator, value must be null.
+If the question explicitly asks for both EndPoint and PLCEndPoint, include BOTH
+Address paths. Never add sibling paths unless requested. A shared Device filter
+may apply to both results; do not combine branches into a single query.
 No COUNT, EXISTS, AND, OR, comparisons, numeric values, or cross-domain joins."""
 
-FIELDS = {"status", "result_ids", "filter_id", "operator", "value", "reason"}\nLEGACY_FIELDS = {"status", "result_id", "filter_id", "operator", "value", "reason"}
+FIELDS = {"status", "result_ids", "filter_id", "operator", "value", "reason"}
+LEGACY_FIELDS = {"status", "result_id", "filter_id", "operator", "value", "reason"}
 _LITERAL = re.compile(r"""(?<!\w)(?:=|equals?)\s*(?:["']([^"'\r\n]*)["']|([A-Za-z_][A-Za-z_0-9.-]*))""", re.I)
 
 
