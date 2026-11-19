@@ -5,6 +5,7 @@ import json
 import time
 
 from .semantic_planning import build_evidence_catalog, validate_semantic_plan
+from .evidence_retrieval import retrieve_evidence
 
 
 SYSTEM_PROMPT = (
@@ -37,7 +38,8 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
         raise ValueError("Question must be nonempty")
     if type(max_attempts) is not int or not 1 <= max_attempts <= 3:
         raise ValueError("Invalid selection attempt count")
-    evidence = build_evidence_catalog(catalog)
+    full_evidence = build_evidence_catalog(catalog)
+    evidence = retrieve_evidence(question, full_evidence)
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": json.dumps({
@@ -60,6 +62,8 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
             raw = response["message"]["content"]
             selected = json.loads(raw)
             validated = validate_semantic_plan(selected, evidence)
+            # Also check against the complete authoritative SHACL catalog.
+            validate_semantic_plan(validated, full_evidence)
         except (KeyError, TypeError, ValueError) as exc:
             reason = str(exc)
             history.append({"attempt": attempt + 1, "error": reason})
