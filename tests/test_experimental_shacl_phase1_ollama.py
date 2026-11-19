@@ -130,3 +130,92 @@ def test_domain_mismatch_before_qwen(setup):
     with pytest.raises(ValueError, match="different domain"):
         run_phase1_query_plan(index, prepared,
                               transport=lambda *_: pytest.fail("Must not call Qwen"))
+
+
+@pytest.fixture
+def ecad_address_paths():
+    root, device = "urn:ECAD", "urn:Device"
+    endpoint, plc = "urn:EndPoint", "urn:PLCEndPoint"
+    edges = [
+        {"from": root, "to": device, "predicate": "urn:device",
+         "property_shape": "urn:DeviceShape"},
+        {"from": device, "to": endpoint, "predicate": "urn:endpoint",
+         "property_shape": "urn:EndPointShape"},
+        {"from": device, "to": plc, "predicate": "urn:plc",
+         "property_shape": "urn:PLCShape"},
+    ]
+    props = {
+        owner: {"owner": owner, "predicate": "urn:address",
+                "property_shape": "urn:Address" + name, "name": "Address"}
+        for owner, name in ((endpoint, "EndPoint"), (plc, "PLCEndPoint"))
+    }
+    index = SubgraphIndex("ecad", {
+        root: {"labels": ["ECAD"]}, device: {"labels": ["Device"]},
+        endpoint: {"labels": ["EndPoint"]}, plc: {"labels": ["PLCEndPoint"]},
+    }, {owner: [prop] for owner, prop in props.items()}, edges)
+    prepared = {"prompt": {
+        "domain": "ecad", "question": "",
+        "candidates": [
+            {"id": "C1", "path": "ECAD → Device → EndPoint → Address"},
+            {"id": "C2", "path": "ECAD → Device → PLCEndPoint → Address"},
+        ]}, "registry": {
+        "C1": {"node_uris": [root, device, endpoint],
+               "edges": [edges[0].copy(), edges[1].copy()],
+               "property": props[endpoint].copy()},
+        "C2": {"node_uris": [root, device, plc],
+               "edges": [edges[0].copy(), edges[2].copy()],
+               "property": props[plc].copy()},
+    }}
+    return index, prepared
+
+
+def test_explicit_endpoint_rejects_plc_sibling_even_when_qwen_selects_both(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show Address of EndPoint belonging to Device in ECAD"
+    # IDs are ordered by the verified shape URI, EndPoint before PLCEndPoint.
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1", "P2"])))
+    assert [p["path"] for p in result["selected_paths"]] == [
+        "ECAD → Device → EndPoint → Address"
+    ]
+    assert result["plan"]["selected_candidate_ids"] == ["P1"]
+
+
+def test_explicit_both_endpoint_owners_keeps_both(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = (
+        "Show Address of both EndPoint and PLCEndPoint belonging to Device in ECAD"
+    )
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1", "P2"])))
+    assert {p["path"] for p in result["selected_paths"]} == {
+        "ECAD → Device → EndPoint → Address",
+        "ECAD → Device → PLCEndPoint → Address",
+    }
+
+
+def test_explicit_both_requires_coverage(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = (
+        "Show Address of both EndPoint and PLCEndPoint belonging to Device in ECAD"
+    )
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1"])))
+    assert result["plan"]["status"] == "unresolved"
+    assert result["selected_paths"] == []
+
+
+def test_only_named_ancestor_does_not_suppress_descendants(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show Address belonging to Device in ECAD"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1", "P2"])))
+    assert len(result["selected_paths"]) == 2
+
+
+def test_synonym_without_exact_shape_name_remains_selectable(ecad_address_paths):
+    index, prepared = ecad_address_paths
+    prepared["prompt"]["question"] = "Show network addresses of connection points"
+    result = run_phase1_query_plan(
+        index, prepared, transport=mocked(response(ids=["P1"])))
+    assert result["plan"]["status"] == "selected"
