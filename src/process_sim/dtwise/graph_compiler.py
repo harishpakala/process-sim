@@ -18,6 +18,27 @@ def compile_graph_ir(ir, schema, *, mappings=None, graph_mode='all_named', graph
         raise ValueError('Graph provenance requires all_named')
     if limit is not None and (type(limit) is not int or not 1 <= limit <= 10000):
         raise ValueError('Invalid operational limit')
+    domain_regex = ir.get('domain_regex')
+    if domain_regex is not None:
+        if include_graph:
+            raise ValueError('Domain regex does not support graph provenance')
+        import json
+        clauses = []
+        for shape, predicate in domain_regex['paths']:
+            triple = f'?entity {_iri(predicate)} ?regex_value .'
+            if graph_mode == 'all_named':
+                triple = 'GRAPH ?regex_graph { ' + triple + ' }'
+            elif graph_mode == 'selected':
+                triple = 'GRAPH ' + fixed + ' { ' + triple + ' }'
+            clauses.append('{ ' + triple + ' }')
+        # All shape owners are included; UNION is a set of evidenced
+        # property patterns, not an inferred rdf:type assertion.
+        pattern = json.dumps(domain_regex['pattern'], ensure_ascii=True)
+        query = ('SELECT DISTINCT ?entity\nWHERE {\n  '
+                 + '\n  UNION\n  '.join(clauses)
+                 + '\n  FILTER(isLiteral(?regex_value) && '
+                 + 'REGEX(STR(?regex_value), ' + pattern + '))\n}')
+        return query
     nodes = {n['alias']: n for n in ir['entities']}
     # Every triple is scoped to the graph of its SUBJECT entity. Distinct entity
     # aliases may bind to different graphs, even within one domain.
