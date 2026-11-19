@@ -157,7 +157,8 @@ def main() -> None:
                 print("Domain:", args.domain.upper())
                 print("Status: UNRESOLVED")
                 print("Reason:", selection["reason"])
-                print("Selected paths:\\n  (none)")
+                print("Selected paths:")
+                print("  (none)")
             return
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         prepared = semantic_candidates(index, question, top_shapes=args.top_k,
@@ -168,7 +169,9 @@ def main() -> None:
             if prepared["prompt"]["candidates"]:
                 raw = ollama_select(prepared["prompt"], model=args.model,
                                     endpoint=args.ollama_url)
-                selection = enforce_property_grounding(\n                    index, question, prepared, validate_selection(raw, prepared),\n                )
+                selection = enforce_property_grounding(
+                    index, question, prepared, validate_selection(raw, prepared),
+                )
             else:
                 selection = {"status": "unresolved", "selected_candidate_ids": [],
                              "reason": "No verified semantic candidates"}
