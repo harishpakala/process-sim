@@ -203,6 +203,9 @@ def _select_evidence_plan_once(question, paths, catalog, index, mappings, *,
     if keep_alive is not None:
         payload["keep_alive"] = keep_alive
     if prompt_diagnostics is not None:
+        # Preserve the exact initial LLM request, including PATH definitions
+        # and property IDs, for offline diagnostic inspection.
+        prompt_diagnostics["llm_candidate_payload"] = payload
         prompt_text = "".join(message["content"] for message in payload["messages"])
         prompt_diagnostics.update({
             "stage": "experimental_evidence_selection",
