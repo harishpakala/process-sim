@@ -139,6 +139,26 @@ def main() -> None:
     if args.semantic and args.llm:
         parser.error("--semantic and --llm are separate experiments")
     if args.semantic_paths:
+        from process_sim.dtwise.experimental_shacl_grounding import (
+            property_grounding, enforce_property_grounding,
+        )
+        grounding = property_grounding(index, question)
+        if grounding["missing_properties"]:
+            selection = {
+                "status": "unresolved", "selected_candidate_ids": [],
+                "reason": "Explicit SHACL property not found in domain: "
+                          + ", ".join(grounding["missing_properties"]),
+            }
+            if args.json:
+                print(json.dumps({"selection": selection, "selected_paths": [],
+                                  "grounding": grounding}, indent=2))
+            else:
+                print("Question:", question)
+                print("Domain:", args.domain.upper())
+                print("Status: UNRESOLVED")
+                print("Reason:", selection["reason"])
+                print("Selected paths:\\n  (none)")
+            return
         from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
         prepared = semantic_candidates(index, question, top_shapes=args.top_k,
                                        model=args.embed_model, endpoint=args.ollama_url)
@@ -148,7 +168,7 @@ def main() -> None:
             if prepared["prompt"]["candidates"]:
                 raw = ollama_select(prepared["prompt"], model=args.model,
                                     endpoint=args.ollama_url)
-                selection = validate_selection(raw, prepared)
+                selection = enforce_property_grounding(\n                    index, question, prepared, validate_selection(raw, prepared),\n                )
             else:
                 selection = {"status": "unresolved", "selected_candidate_ids": [],
                              "reason": "No verified semantic candidates"}
