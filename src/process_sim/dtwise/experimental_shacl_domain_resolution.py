@@ -53,7 +53,10 @@ def _mentions_shape(question, label):
     needle = _schema_words(label)
     # Keep query CamelCase tokens intact: SuperEndPointValue must not
     # accidentally match the EndPoint shape embedded inside it.
-    haystack = _schema_words(re.sub(r"([a-z0-9])([A-Z])", r"\\1_\\2", question))
+    tokens = re.findall(r"[A-Za-z0-9]+", question.casefold())
+    normalized = [word[:-1] if len(word) > 3 and word.endswith("s")
+                  and not word.endswith("ss") else word for word in tokens]
+    haystack = " ".join(normalized).replace("end point", "endpoint").split()
     if re.search(r"(?<![A-Za-z0-9_])" + re.escape(label) +
                  r"(?![A-Za-z0-9_])", question, re.IGNORECASE):
         return True
