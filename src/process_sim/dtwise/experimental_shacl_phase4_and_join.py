@@ -32,6 +32,17 @@ QUESTION = re.compile(
 )
 
 
+# Phase 5.3: a second, narrowly scoped surface form. Require both
+# explicitly named endpoint types, both Device predicates, and AND.
+# No general synonym rewriting or guessed graph relationships.
+ALTERNATE_QUESTION = re.compile(
+    r"Find\s+the\s+addresses\s+of\s+EndPoint\s+and\s+PLCEndPoint"
+    r"\s+for\s+devices\s+with\s+LocalId\s+" + VALUE +
+    r"\s+and\s+DeviceType\s+" + VALUE +
+    r"(?:\s+in\s+ECAD)?\s*[.!]?\s*$", re.I,
+)
+
+
 def _filter_ids(qualified):
     paths = {c["path"]: c["id"] for c in qualified["prompt"]["candidates"]
              if c["kind"] == "property"}
@@ -40,7 +51,8 @@ def _filter_ids(qualified):
 
 
 def _literals(question):
-    match = QUESTION.fullmatch(question.strip())
+    match = (QUESTION.fullmatch(question.strip()) or
+             ALTERNATE_QUESTION.fullmatch(question.strip()))
     if match is None:
         return None
     values = match.groups()
