@@ -584,5 +584,51 @@ class CaseInsensitiveSubstringTests(unittest.TestCase):
         self.assertNotIn("ignore_case", plan["filters"])
 
 
+
+class DomainBothPropertiesTests(unittest.TestCase):
+    def setUp(self):
+        self.left = "https://example.org/dexpi/hasAssetIdentifier"
+        self.right = "https://example.org/dexpi/hasLocalId"
+        self.shape = "https://example.org/shape/Instrumentation"
+        self.catalog = {"entities": [{
+            "domain": "DEXPI", "shape": self.shape,
+            "properties": [self.left, self.right]}]}
+        self.schema = {"shape_paths": [
+            {"domain": "DEXPI", "node_shape": self.shape,
+             "path": p, "evidence": ["e"]}
+            for p in (self.left, self.right)]}
+        self.question = "Which DEXPI entities have both AssetIdentifier and LocalId?"
+
+    def test_b36_both_properties_same_entity(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_domain_both_properties)
+        from process_sim.dtwise.graph_compiler import compile_graph_ir
+        plan, selection = _plan_domain_both_properties(self.question, self.catalog)
+        self.assertEqual(selection["choice"], "VERIFIED_DOMAIN_BOTH_PROPERTIES")
+        query = compile_graph_ir(plan, self.schema, include_graph=False)
+        self.assertIn("SELECT DISTINCT ?entity", query)
+        self.assertIn(self.left, query)
+        self.assertIn(self.right, query)
+        self.assertEqual(query.count("?entity <"), 2)
+        self.assertNotIn("UNION", query)
+
+    def test_b36_missing_property_fails_closed(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_domain_both_properties)
+        self.catalog["entities"][0]["properties"] = [self.left]
+        with self.assertRaisesRegex(ValueError, "distinct evidenced predicates"):
+            _plan_domain_both_properties(self.question, self.catalog)
+
+    def test_b36_rejects_unevidenced_predicate(self):
+        from process_sim.dtwise.experimental_multihop_cli import (
+            _plan_domain_both_properties)
+        from process_sim.dtwise.unified_ir import validate_ir
+        plan, _ = _plan_domain_both_properties(self.question, self.catalog)
+        plan["domain_both_properties"]["paths"][1][0][1] = (
+            "https://example.org/dexpi/fabricated")
+        with self.assertRaisesRegex(ValueError, "evidenced owners"):
+            validate_ir(plan, self.schema)
+
+
 if __name__ == "__main__":
     unittest.main()
