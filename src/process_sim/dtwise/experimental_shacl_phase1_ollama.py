@@ -90,8 +90,8 @@ def run_phase1_query_plan(index, prepared: dict, *,
     # paths for an automatic inner join. Do not guess a join for other cases.
     auto_join_ids = []
     bare_request = re.fullmatch(
-        r"(?:show|find|list)\\s+(?:the\\s+)?([A-Za-z_][A-Za-z_0-9]*)"
-        r"(?:\\s+in\\s+[A-Za-z_][A-Za-z_0-9]*)?\\s*[.!]?\\s*",
+        r"(?:show|find|list)\s+(?:the\s+)?([A-Za-z_][A-Za-z_0-9]*)"
+        r"(?:\s+in\s+[A-Za-z_][A-Za-z_0-9]*)?\s*[.!]?\s*",
         question, flags=re.I,
     )
     if bare_request:
