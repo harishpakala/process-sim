@@ -601,7 +601,15 @@ def plan_experimental_multihop(question, index, mappings, *, model,
 
 
     if not anchors:
-        raise ValueError('LLM evidence selection requires a named SHACL shape; domain-wide LLM planning is not yet implemented')
+        from .experimental_domain_selection import select_domain_regex_plan
+        domain_plan = select_domain_regex_plan(
+            question, catalog, model=model,
+            request_json=request_json or _request_json,
+            ollama_host=ollama_host, timeout=timeout,
+            keep_alive=keep_alive, prompt_diagnostics=prompt_diagnostics)
+        if domain_plan is not None:
+            return domain_plan
+        raise ValueError('No evidenced domain-wide LLM plan for this question')
 
     # Two explicitly named shapes: a compact, operation-aware LLM decision
     # avoids exposing the entire property catalog for entity-return joins.
