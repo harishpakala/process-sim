@@ -86,34 +86,43 @@ def run_phase1_query_plan(index, prepared: dict, *,
     if timing is not None:
         timing.setdefault("qwen_selection_ms", 0.0)
         timing.setdefault("python_validation_ms", 0.0)
-    # A bare property request can select exactly two graph-verified sibling
-    # paths for an automatic inner join. Do not guess a join for other cases.
-    auto_join_ids = []
+    # Group bare-property matches by their verified immediate parent ancestor.
+    # Never join unrelated branches merely because they share the domain root.
+    auto_join_groups = []
     bare_request = re.fullmatch(
-        r"(?:show|find|list)\s+(?:the\s+)?([A-Za-z_][A-Za-z_0-9]*)"
-        r"(?:\s+in\s+[A-Za-z_][A-Za-z_0-9]*)?\s*[.!]?\s*",
+        r"(?:show|find|list)\\s+(?:the\\s+)?([A-Za-z_][A-Za-z_0-9]*)"
+        r"(?:\\s+in\\s+[A-Za-z_][A-Za-z_0-9]*)?\\s*[.!]?\\s*",
         question, flags=re.I,
     )
     if bare_request:
         property_name = bare_request.group(1).casefold()
         matches = [c for c in properties
-                   if c["path"].split(" → ")[-1].casefold() == property_name]
-        if len(matches) == 2:
-            ids = [c["id"] for c in matches]
+                   if c.get("property_name", "").casefold() == property_name]
+        by_parent = {}
+        for candidate in matches:
+            nodes = qualified["registry"][candidate["id"]]["node_uris"]
+            if len(nodes) >= 2:
+                by_parent.setdefault(nodes[-2], []).append(candidate["id"])
+        groups = [ids for ids in by_parent.values() if len(ids) == 2]
+        if len(matches) > 1 and sum(map(len, groups)) == len(matches):
             try:
-                verified_shared_ancestor(qualified, ids)
+                for ids in groups:
+                    topology = verified_shared_ancestor(qualified, ids)
+                    if topology["ancestor_uri"] != qualified["registry"][ids[0]]["node_uris"][-2]:
+                        raise SelectionContractError("Join is not at immediate parent")
             except SelectionContractError:
                 pass
             else:
-                auto_join_ids = ids
+                auto_join_groups = groups
                 selection = {
-                    "status": "selected", "selected_candidate_ids": ids,
-                    "reason": "Automatic join on verified shared ancestor",
+                    "status": "selected",
+                    "selected_candidate_ids": [rid for ids in groups for rid in ids],
+                    "reason": "Automatic joins within verified shared-parent groups",
                 }
-        if len(matches) > 1 and not auto_join_ids:
+        if len(matches) > 1 and not auto_join_groups:
             selection = {
                 "status": "ambiguous", "selected_candidate_ids": [],
-                "reason": "Multiple property paths without a supported verified two-path join",
+                "reason": "Multiple property paths without fully verified sibling join groups",
             }
     selected = [
         {"id": c["id"], "domain": c["domain"], "kind": c["kind"], "path": c["path"]}
@@ -123,20 +132,25 @@ def run_phase1_query_plan(index, prepared: dict, *,
         "domain": index.domain, "question": question,
         "plan": {**selection, "operation": "RETRIEVE" if selection["status"] == "selected" else None},
         "selected_paths": selected, "qualified": qualified,
-        "auto_join_result_ids": auto_join_ids,
+        "auto_join_result_ids": auto_join_groups[0] if len(auto_join_groups) == 1 else [],
+        "auto_join_groups": auto_join_groups,
     }
 
 
 def compile_phase1_sparql(result: dict) -> list[dict]:
     """Compile validated RETRIEVE selections; no model-authored SPARQL."""
     plan = result["plan"]
-    join_ids = result.get("auto_join_result_ids", [])
-    if join_ids:
-        if (plan["status"] != "selected" or
-                plan["selected_candidate_ids"] != join_ids):
+    join_groups = result.get("auto_join_groups", [])
+    if join_groups:
+        flattened = [rid for ids in join_groups for rid in ids]
+        if plan["status"] != "selected" or plan["selected_candidate_ids"] != flattened:
             raise ValueError("Automatic join selection changed after validation")
-        return [{"candidate_id": "auto_join", "path": "verified shared ancestor",
-                 "sparql": compile_verified_sibling_join(result["qualified"], join_ids)}]
+        return [
+            {"candidate_id": "auto_join_" + str(i),
+             "path": "verified shared ancestor",
+             "sparql": compile_verified_sibling_join(result["qualified"], ids)}
+            for i, ids in enumerate(join_groups, 1)
+        ]
     if plan["status"] == "selected" and plan["operation"] != "RETRIEVE":
         raise ValueError("Phase 1 supports RETRIEVE only")
     qualified = result["qualified"]
