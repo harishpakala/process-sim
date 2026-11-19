@@ -253,7 +253,8 @@ def select_evidence_plan(question, paths, catalog, index, mappings, *,
                 or f['op'] not in ('eq', 'contains')
                 or type(f['value']) not in (str, int, float, bool)
                 or ('ignore_case' in f and (
-                    f['op'] != 'contains' or type(f['ignore_case']) is not bool))):
+                    type(f['ignore_case']) is not bool
+                    or (f['op'] != 'contains' and f['ignore_case'] is True)))):
             details = {
                 "received_type": type(f).__name__,
                 "received_keys": sorted(str(k) for k in f) if isinstance(f, dict) else [],
