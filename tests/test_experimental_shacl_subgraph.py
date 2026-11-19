@@ -129,13 +129,15 @@ def test_dexpi_independent_branches_with_explicit_root_remain_disconnected():
     assert result["unresolved_connections"] == []
 
 
-def test_ecad_multiple_properties_on_device_endpoint_remain_owner_scoped():
-    """Independent property extraction must retain each property's actual owner."""
+
+def test_ecad_cross_branch_address_candidates_remain_disconnected():
+    """Mentioning both branches does not imply a join when connect=False."""
     result = extract_question(
         _domain_index("ecad"),
-        "Show Address and ConnectionType of EndPoint belonging to Device in ECAD",
+        "Show Address of EndPoint in Device and Symbol in ECAD",
         connect=False,
     )
-    assert any(p["name"] == "Address" for p in result["properties"])
-    assert all(p["owner"] in {n["uri"] for n in result["nodes"]} for p in result["properties"])
     assert result["edges"] == []
+    assert len(result["properties"]) == 4
+    assert len({p["owner"] for p in result["properties"]}) == 4
+    assert result["unresolved_connections"] == []
