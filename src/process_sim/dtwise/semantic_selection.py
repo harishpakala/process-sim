@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import time
+from urllib.error import URLError
 
 from .semantic_planning import build_evidence_catalog, validate_semantic_plan
 from .evidence_retrieval import retrieve_evidence
@@ -39,22 +40,56 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
     if type(max_attempts) is not int or not 1 <= max_attempts <= 3:
         raise ValueError("Invalid selection attempt count")
     full_evidence = build_evidence_catalog(catalog)
-    evidence = retrieve_evidence(question, full_evidence)
+    evidence = retrieve_evidence(question, full_evidence,
+                                 max_entities=8, max_properties=32,
+                                 max_relationships=16)
+    # Send compact IDs and labels, not long shape/predicate IRIs. Validation
+    # and compilation still use the full authoritative evidence records.
+    prompt_evidence = {
+        "entities": [{"id": e["id"], "domain": e["domain"],
+                      "label": e["shape"].rsplit("/", 1)[-1]}
+                     for e in evidence.entities],
+        "properties": [{"id": p["id"], "entity_id": p["entity_id"],
+                        "label": p["label"]} for p in evidence.properties],
+        "relationships": [{"id": r["id"],
+                           "from_entity_id": r["from_entity_id"],
+                           "to_entity_id": r["to_entity_id"],
+                           "label": r["predicate"].rsplit("/", 1)[-1]}
+                          for r in evidence.relationships],
+    }
     messages = [
         {"role": "system", "content": SYSTEM_PROMPT},
         {"role": "user", "content": json.dumps({
-            "question": question, "evidence": evidence.as_prompt()
+            "question": question, "evidence": prompt_evidence
         }, ensure_ascii=False, separators=(",", ":"))},
     ]
     history = []
+    if prompt_diagnostics is not None:
+        prompt_diagnostics.update({
+            "stage": "semantic_selection_v2",
+            "request_status": "prepared",
+            "candidate_counts": {
+                "entities": len(evidence.entities),
+                "properties": len(evidence.properties),
+                "relationships": len(evidence.relationships),
+            },
+            "prompt_characters": sum(len(m["content"]) for m in messages),
+        })
+        from .experimental_evidence_selection import _write_prompt_diagnostics
+        _write_prompt_diagnostics(prompt_diagnostics)
     for attempt in range(max_attempts):
         payload = {
             "model": model, "stream": False, "format": "json",
-            "options": {"temperature": 0}, "messages": messages,
+            "options": {"temperature": 0, "num_predict": 384},
+            "messages": messages,
         }
         if keep_alive is not None:
             payload["keep_alive"] = keep_alive
         started = time.perf_counter()
+        if prompt_diagnostics is not None:
+            prompt_diagnostics.update({"request_status": "waiting_for_ollama",
+                                       "current_attempt": attempt + 1})
+            _write_prompt_diagnostics(prompt_diagnostics)
         raw = "{}"
         try:
             response = request_json(
@@ -64,6 +99,13 @@ def select_semantic_plan(question, catalog, *, model, request_json, ollama_host,
             validated = validate_semantic_plan(selected, evidence)
             # Also check against the complete authoritative SHACL catalog.
             validate_semantic_plan(validated, full_evidence)
+        except (TimeoutError, OSError, URLError) as exc:
+            if prompt_diagnostics is not None:
+                prompt_diagnostics.update({"request_status": "transport_failed",
+                                           "elapsed_seconds": round(time.perf_counter() - started, 3),
+                                           "error": str(exc)})
+                _write_prompt_diagnostics(prompt_diagnostics)
+            raise
         except (KeyError, TypeError, ValueError) as exc:
             reason = str(exc)
             history.append({"attempt": attempt + 1, "error": reason})
