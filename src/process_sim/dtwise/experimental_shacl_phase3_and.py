@@ -160,6 +160,11 @@ def run_phase3_and_plan(index, prepared, *, model="qwen2.5-coder:7b",
                            transport=transport, system_prompt=PROMPT)
         plan = validate_phase3_plan(raw, qualified)
         if plan["status"] == "selected":
+            dual_requested = bool(re.search(
+                r"\bboth\s+EndPoint\s+and\s+PLCEndPoint\b",
+                question, flags=re.I))
+            if dual_requested != ("result_ids" in plan):
+                raise SelectionContractError("Result count does not match explicit request")
             if [f["value"] for f in plan["filters"]] != literals:
                 raise SelectionContractError("Filter values do not match question literals")
             if "result_ids" in plan:
