@@ -13,6 +13,10 @@ Select only supplied IDs. Do not invent domains, paths, mappings, or joins.
 Result candidates describe what the question asks to return; identifier paths
 are used solely to connect selected domains through approved mapping edges.
 Choose the mapping edges and their owner-specific identifier paths together.
+When a mapping provides approved_owner_pair_candidate_ids, select only one
+of those explicitly approved endpoint ID pairs. Never combine endpoints
+from different approved pairs or infer an unlisted owner-to-owner join.
+If no mapping candidates remain, return unresolved with empty ID arrays.
 A selected result's entity owner must be the same SHACL owner as its selected
 identifier path, or connected by a supplied verified SHACL path. Matching
 predicate names alone do NOT connect different owners. For example, selecting
