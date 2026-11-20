@@ -397,21 +397,21 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
         if self.operation == "phase2-filter":
             literals = [quoted if quoted != "" else unquoted
                         for quoted, unquoted in p2._LITERAL.findall(question)]
-            clause = re.split(r"\\bwhere\\b", question, maxsplit=1, flags=re.I)[-1]
+            clause = re.split(r"\bwhere\b", question, maxsplit=1, flags=re.I)[-1]
             supported = supported and len(literals) == 1 and not re.search(
-                r"\\b(how many|count|exists|does any|is there|are there|average|sum|"
-                r"group by|order by|greater than|less than)\\b|(?:!=|<=|>=|<|>)",
+                r"\b(how many|count|exists|does any|is there|are there|average|sum|"
+                r"group by|order by|greater than|less than)\b|(?:!=|<=|>=|<|>)",
                 question, re.I,
-            ) and not re.search(r"\\b(and|or)\\b", clause, re.I)
+            ) and not re.search(r"\b(and|or)\b", clause, re.I)
             self.literals = literals
         elif self.operation == "phase3-and":
-            parts = re.split(r"\\bwhere\\b", question, maxsplit=1, flags=re.I)
+            parts = re.split(r"\bwhere\b", question, maxsplit=1, flags=re.I)
             clause = parts[1] if len(parts) == 2 else ""
             literals = [quoted if quoted != "" else unquoted
                         for quoted, unquoted in p2._LITERAL.findall(clause)]
             supported = (supported and len(literals) == 2
-                         and len(re.findall(r"\\band\\b", clause, re.I)) == 1
-                         and not re.search(r"\\bor\\b", clause, re.I)
+                         and len(re.findall(r"\band\b", clause, re.I)) == 1
+                         and not re.search(r"\bor\b", clause, re.I)
                          and not p3.UNSUPPORTED.search(question))
             self.constraints = p3._explicit_filter_constraints(clause, qualified) if supported else None
             self.result_paths = p3._explicit_result_paths(question, qualified) if supported else None
@@ -466,7 +466,7 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
         if plan["status"] == "selected":
             if self.operation == "phase2-filter":
                 # Preserve the existing explicit-owner safeguard.
-                result_clause = re.split(r"\\bwhere\\b", self.question, maxsplit=1, flags=re.I)[0]
+                result_clause = re.split(r"\bwhere\b", self.question, maxsplit=1, flags=re.I)[0]
                 owners = {
                     cid: next((c["path"].split(" → ")[-2]
                                for c in self.prompt["candidates"] if c["id"] == cid), "")
