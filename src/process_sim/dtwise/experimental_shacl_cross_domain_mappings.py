@@ -33,7 +33,7 @@ def load_cross_domain_mappings(path: str | Path) -> dict[str, dict]:
         # owner-specific correspondence has been independently approved.
         # This metadata does not change legacy property-level qualification.
         pairs = record.get("approved_owner_pairs")
-        if pairs is not None:
+        if "approved_owner_pairs" in record:
             if not isinstance(pairs, list):
                 raise SelectionContractError("Owner-pair approvals must be an array")
             seen_pairs = set()
