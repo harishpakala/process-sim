@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 
@@ -30,10 +31,51 @@ Never classify a query as supported merely because it mentions a known domain.
 Do not assess schema feasibility; downstream SHACL validators handle that."""
 
 
+def _structural_classification(question: str) -> dict | None:
+    """Route recognizable supported syntax without relying on model guesses.
+
+    A SHACL traversal (Device -> EndPoint) is NOT a sibling-result join.
+    The existing operation-specific validator remains the final authority.
+    """
+    q = question.strip()
+    lower = q.casefold()
+    if re.search(r"\\b(how many|count|average|sum|group by|order by|sort|minimum|maximum)\\b", lower):
+        return {"status": "unsupported", "operation": None,
+                "reason": "Aggregation or ordering is not supported"}
+    sibling = bool(re.search(r"\\bplcendpoint\\b", lower) and
+                   re.search(r"(?<!plc)\\bendpoint\\b", lower))
+    where = re.split(r"\\bwhere\\b", q, maxsplit=1, flags=re.I)
+    clause = where[1] if len(where) == 2 else ""
+    equality_count = len(re.findall(r"(?<![!<>])=(?!=)", clause))
+    # The existing direct-intent operation handles this alternate wording.
+    if sibling and not clause and re.search(r"\\bwith\\s+localid\\b", lower):
+        operation = "direct-intent"
+    elif sibling:
+        if equality_count >= 2 or re.search(r"\\b(and|or)\\b", clause, re.I):
+            operation = "phase4-and-join"
+        elif equality_count == 1:
+            operation = "phase4-filtered-join"
+        else:
+            operation = "phase4-join"
+    elif equality_count >= 2 and re.search(r"\\band\\b", clause, re.I):
+        operation = "phase3-and"
+    elif equality_count == 1 and not re.search(r"\\b(and|or)\\b", clause, re.I):
+        operation = "phase2-filter"
+    elif not clause or equality_count == 0:
+        operation = "phase1-plan"
+    else:
+        return None
+    return {"status": "supported", "operation": operation,
+            "reason": "Recognized query structure; SHACL validation is still required"}
+
+
 def classify_single_domain_query(question: str, *, model="qwen2.5-coder:7b",
                                  endpoint="http://127.0.0.1:11434", transport=None) -> dict:
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Question must not be empty")
+    structural = _structural_classification(question)
+    if structural is not None:
+        return structural
     raw = ollama_select(
         {"question": question, "allowed_operations": list(OPERATIONS)},
         model=model, endpoint=endpoint, transport=transport,
