@@ -286,13 +286,13 @@ def main():
     print("Unified SHACL planner live integration (SPARQL compilation only)", flush=True)
     for count, test in selected:
         name, question = (test["name"], test["question"]) if count == 1 else test[:2]
-        print(f"\\nQUERY [{count}D/{name}]: {question}", flush=True)
+        print(f"\nQUERY [{count}D/{name}]: {question}", flush=True)
         outcome = run(count, test, args, schema, mappings)
         outcome["query"] = question
         results.append(outcome)
         print(f"{outcome['status']:<4}  {count}D/{name:<25} {outcome['seconds']:>8.3f} s", flush=True)
         if "reason" in outcome:
-            print("      " + outcome["reason"].replace("\\n", "\\n      "), flush=True)
+            print("      " + outcome["reason"].replace("\n", "\n      "), flush=True)
     total = round(perf_counter()-started, 3)
     passed = sum(r["status"] == "PASS" for r in results)
     print(f"TOTAL {passed} PASS / {len(results)-passed} FAIL / {total:.3f} s")
