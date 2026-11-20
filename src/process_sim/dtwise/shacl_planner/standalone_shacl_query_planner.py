@@ -22,7 +22,7 @@ from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_c
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
 from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import (
-    resolve_domain, DomainResolutionError,
+    resolve_domain, resolve_domains, DomainResolutionError,
 )
 
 SYSTEM_PROMPT = """You are a SHACL-grounded Phase-1 query planner. Return ONE JSON object, no prose.
@@ -690,6 +690,7 @@ def main():
     ap.add_argument('--schema',type=Path,required=True)
     ap.add_argument('--domain',default=None,help='Optional domain override; otherwise resolve from question')
     ap.add_argument('--questions',type=Path,help='JSON array of question strings')
+    ap.add_argument('--mappings',type=Path,default=Path('semantic/ontology2/dtwise/cross-domain-mappings.json'),help='Approved cross-domain mapping registry')
     ap.add_argument('--model',default='qwen2.5-coder:7b')
     ap.add_argument('--endpoint',default='http://127.0.0.1:11434')
     ap.add_argument('--dry-run',action='store_true')
@@ -712,19 +713,31 @@ def main():
     methods=['exact','semantic','expanded'] if args.retrieval=='compare' else [args.retrieval]
     for i,question in enumerate(questions,1):
         try:
-            domain=resolve_domain(question,available_domains,override=args.domain,schema=schema_data)
-            if domain not in index_cache:
-                index_cache[domain]=load_index(args.schema,domain=domain)
-            index=index_cache[domain]
+            if args.domain is not None:
+                domains=(resolve_domain(question,available_domains,
+                                        override=args.domain,schema=schema_data),)
+            else:
+                domains=resolve_domains(question,available_domains,schema=schema_data)
+            for domain in domains:
+                if domain not in index_cache:
+                    index_cache[domain]=load_index(args.schema,domain=domain)
             domain_error=None
         except DomainResolutionError as exc:
             domain_error=str(exc)
+            domains=()
         for method in methods:
             if domain_error is not None:
                 rec={'question':question,'retrieval_method':method,
                      'status':'domain_unresolved','reason':domain_error}
+            elif len(domains)>1:
+                from process_sim.dtwise.shacl_planner.cross_domain_phase1 import run_cross_domain
+                rec=run_cross_domain({d:index_cache[d] for d in domains},question,
+                    mapping_file=args.mappings,method=method,dry_run=args.dry_run,
+                    model=args.model,endpoint=args.endpoint,embedding_model=args.embedding_model,
+                    top_shapes=args.top_shapes,top_properties=args.top_properties,
+                    max_candidates=args.max_candidates,max_depth=args.max_depth)
             else:
-                rec=run_one(index,question,method=method,dry_run=args.dry_run,
+                rec=run_one(index_cache[domains[0]],question,method=method,dry_run=args.dry_run,
                     model=args.model,endpoint=args.endpoint,embedding_model=args.embedding_model,
                     top_shapes=args.top_shapes,top_properties=args.top_properties,
                     max_candidates=args.max_candidates,max_depth=args.max_depth)
@@ -737,7 +750,7 @@ def main():
                 print('  Qwen:',json.dumps(rec['answer'],ensure_ascii=False),flush=True)
             if rec.get('plan_diagnostics'):
                 d=rec['plan_diagnostics']
-                print('  Topology: join=',d['derived_branch_join'],'owner=',d['derived_join_owner_id'],flush=True)
+                print('  Topology: join=',d.get('derived_branch_join'),'owner=',d.get('derived_join_owner_id'),flush=True)
             if rec.get('validation_errors'):
                 print('  Validation errors:',rec['validation_errors'],flush=True)
             if rec.get('error'):
