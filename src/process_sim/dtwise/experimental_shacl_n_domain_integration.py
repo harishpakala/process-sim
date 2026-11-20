@@ -1,6 +1,6 @@
-"""Run 2-/3-/4-domain live Qwen semantic tests in one command.
+"""Run 1-/2-/3-/4-domain live Qwen semantic tests in one command.
 
-No SPARQL generation or execution.
+SPARQL is emitted only when requested.
 """
 from __future__ import annotations
 
@@ -9,6 +9,9 @@ import json
 from pathlib import Path
 from time import perf_counter
 
+from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
+from process_sim.dtwise.experimental_shacl_planner_state_machine import run_retrieve_state_machine
+from process_sim.dtwise.experimental_shacl_subgraph import SubgraphIndex
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
@@ -26,6 +29,11 @@ from process_sim.dtwise.experimental_shacl_four_domain_integration import (
     CASES as FOUR_CASES, DOMAINS as FOUR_DOMAINS, check_semantics as check_four,
 )
 
+ONE_CASES = (
+    ("device-local-id", "Show Device LocalId in ECAD", "selected", "LocalId"),
+    ("unsupported-count", "Count Device LocalId in ECAD", "unresolved", None),
+)
+ONE_DOMAINS = ("ecad",)
 TWO_DOMAINS = ("dexpi", "ecad")
 
 
@@ -50,7 +58,7 @@ def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Live N-domain Qwen integration suite")
-    parser.add_argument("--domains", type=int, choices=(2, 3, 4),
+    parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4),
                         help="Run only one domain count (default: all)")
     parser.add_argument("--case", help="Run one case by name")
     parser.add_argument("--debug", action="store_true", help="Print offered candidates and validated selection")
@@ -62,7 +70,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="Print deterministic SELECT for independently validated selected plans")
     args = parser.parse_args(argv)
 
-    suites = [
+    suites = [(1, ONE_DOMAINS, case, None) for case in ONE_CASES] + [
         (2, TWO_DOMAINS, case, _run_two) for case in TWO_CASES
     ] + [
         (3, THREE_DOMAINS, case, _run_three) for case in THREE_CASES
@@ -92,6 +100,37 @@ def main(argv: list[str] | None = None) -> int:
         timings = {}
         prompt_bytes = 0
         try:
+            if count == 1:
+                index = SubgraphIndex.from_schema_index(schema, domains[0])
+                extracted = index.extract_grounded_question(question)
+                prepared = prepare_candidates(extracted)
+                timings["prepare"] = perf_counter() - start
+                result = run_retrieve_state_machine(
+                    index, prepared, model=args.model, timing=timings,
+                    compile_sparql=args.emit_sparql,
+                )
+                selection = result["plan"]
+                expected, property_name = case[2:]
+                selected_paths = result["selected_paths"]
+                passed = selection["status"] == expected
+                if passed and expected == "selected":
+                    passed = (len(selected_paths) == 1 and
+                              selected_paths[0]["path"].split(" → ")[-1] == property_name)
+                detail = ("Semantic assertions passed" if passed else
+                          f"Expected {expected} and property {property_name}; got {selection}")
+                if args.emit_sparql:
+                    for query in result["queries"]:
+                        print("SPARQL:\\n" + query["sparql"])
+                if args.debug:
+                    print("QUESTION:", question)
+                    print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
+                failures += not passed
+                print(f"{count}D/{name}: {'PASS' if passed else 'FAIL'} {perf_counter() - start:.2f}s")
+                print("TIMING:", " ".join(f"{stage}={seconds:.2f}s" for stage, seconds in timings.items()))
+                print("QWEN: (handled by existing single-domain state machine)")
+                if not passed or args.debug:
+                    print("DETAIL:", detail)
+                continue
             prepared = prepare_live_candidates(schema, mappings, question, domains)
             timings["prepare"] = perf_counter() - start
             prompt = prepared["prompt"]
