@@ -25,7 +25,7 @@ CASES = (
     ("equipment-device", "Find DEXPI Equipment and its corresponding ECAD Device using AssetIdentifier.",
      "selected", {"dexpi": "Equipment", "ecad": "Device"}),
     ("device-equipment-reversed", "Using AssetIdentifier, show ECAD Device corresponding to DEXPI Equipment.",
-     "selected", {"dexpi": "Equipment", "ecad": "Device"}),
+     "selected", {"dexpi": "Equipment", "ecad": "Device"}, {"ecad"}),
     ("equipment-device-join", "Match DEXPI Equipment with ECAD Device by AssetIdentifier.",
      "selected", {"dexpi": "Equipment", "ecad": "Device"}),
     ("equipment-symbol", "Find DEXPI Equipment and the corresponding ECAD Symbol using AssetIdentifier.",
@@ -41,7 +41,7 @@ CASES = (
 )
 
 
-def _check_selected(selection: dict, prompt: dict, owners: dict[str, str]) -> bool:
+def _check_selected(selection: dict, prompt: dict, owners: dict[str, str],\n                    output_domains: set[str] | None = None) -> bool:
     if selection["status"] != "selected":
         return False
     paths = {p["id"]: p for p in prompt["identifier_path_candidates"]}
@@ -49,7 +49,7 @@ def _check_selected(selection: dict, prompt: dict, owners: dict[str, str]) -> bo
     edges = {e["id"]: e for e in prompt["mapping_candidates"]}
     if len(selection["mapping_ids"]) != 1 or len(selection["identifier_path_ids"]) != 2:
         return False
-    if len(selection["result_ids"]) != 2:
+    if len(selection["result_ids"]) != len(output_domains or owners):
         return False
     selected_edge = edges[selection["mapping_ids"][0]]
     if {selected_edge["left_domain"], selected_edge["right_domain"]} != set(owners):
@@ -59,19 +59,19 @@ def _check_selected(selection: dict, prompt: dict, owners: dict[str, str]) -> bo
     for domain, owner in owners.items():
         domain_paths = [p for p in selected_paths if p["domain"] == domain]
         domain_results = [r for r in selected_results if r["domain"] == domain]
-        if len(domain_paths) != 1 or len(domain_results) != 1:
+        if len(domain_paths) != 1 or len(domain_results) != (1 if domain in (output_domains or owners) else 0):
             return False
         if domain_paths[0]["path"].split(" → ")[0].casefold() != owner.casefold():
             return False
         if domain_paths[0]["path"].split(" → ")[-1].casefold() != "assetidentifier":
             return False
-        if domain_results[0]["path"].split(" → ")[0].casefold() != owner.casefold():
+        if domain_results and domain_results[0]["path"].split(" → ")[0].casefold() != owner.casefold():
             return False
     return True
 
 
 def run_case(schema: dict, mappings: dict, case: tuple, *, debug: bool = False) -> bool:
-    _, question, expected, owners = case
+    _, question, expected, owners, *output_spec = case
     prepared = prepare_live_candidates(schema, mappings, question, ("dexpi", "ecad"))
     prompt = prepared["prompt"]
     if debug:
@@ -95,7 +95,7 @@ def run_case(schema: dict, mappings: dict, case: tuple, *, debug: bool = False) 
         return not any(selection[key] for key in (
             "result_ids", "identifier_path_ids", "mapping_ids"
         ))
-    return _check_selected(selection, prompt, owners)
+    return _check_selected(selection, prompt, owners, output_spec[0] if output_spec else None)
 
 
 def main(argv: list[str] | None = None) -> int:
