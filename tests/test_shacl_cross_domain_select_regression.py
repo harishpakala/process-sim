@@ -24,7 +24,7 @@ def _fixture():
         owner = owners[domain]
         registry = {"R1": {"domain": domain, "kind": "result", "node_uris": [owner]}}
         offered = [{"id": "R1", "kind": "result", "domain": domain,
-                    "path": f"{domain} -> {owner}"}]
+                    "path": f"{domain} → {owner}"}]
         candidates.append({**offered[0], "id": f"{domain}:R1", "node_uris": [owner]})
         for pid, name in properties:
             predicate = f"urn:{domain}:{name}"
@@ -34,7 +34,7 @@ def _fixture():
                 "owner_shape_uri": owner, "property_predicate_uri": predicate,
             }
             offered.append({"id": pid, "kind": "property", "domain": domain,
-                            "path": f"{domain} -> {owner} -> {name}"})
+                            "path": f"{domain} → {owner} → {name}"})
             candidates.append({**offered[-1], "id": f"{domain}:{pid}",
                                "node_uris": [owner], "property_name": name})
         qualified[domain] = {"prompt": {"domain": domain, "candidates": offered},
