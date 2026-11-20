@@ -14,8 +14,9 @@ from pathlib import Path
 from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
-    prepare_n_domain_selection, select_n_domain_with_ollama,
+    prepare_n_domain_selection, validate_n_domain_selection, SYSTEM_PROMPT,
 )
+from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 from process_sim.dtwise.experimental_shacl_subgraph import SubgraphIndex
@@ -64,7 +65,9 @@ def main() -> int:
         return 2
     print("=== LIVE QWEN SELECTION ===")
     try:
-        selection = select_n_domain_with_ollama(prepared)
+        raw = ollama_select(prepared["prompt"], system_prompt=SYSTEM_PROMPT)
+        print("RAW MODEL RESPONSE:", raw)
+        selection = validate_n_domain_selection(raw, prepared)
     except (SelectionContractError, RuntimeError) as exc:
         print(f"VALIDATION/TRANSPORT FAILURE: {exc}")
         return 2
