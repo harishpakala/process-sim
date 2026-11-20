@@ -269,9 +269,6 @@ def run(count, test, expected_domains, args, schema, mappings):
         if args.auto_operation and count == 1:
             classification = result.get("classification", {})
             if classification.get("status") != "supported":
-                if test["expected"] == "unresolved" and classification.get("status") == "unsupported":
-                    return dict(name=name, domains=count, status="PASS", routing=routing,
-                                seconds=round(perf_counter()-start, 3))
                 raise AssertionError(f"Unsupported classification: {classification}")
         if "error" in result:
             raise AssertionError(str(result["error"]))
