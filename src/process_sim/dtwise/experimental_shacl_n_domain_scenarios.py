@@ -59,10 +59,10 @@ def main() -> int:
                 "mappings": [m["id"] for m in prompt["mapping_candidates"]],
             }, indent=2))
             if not prompt["mapping_candidates"]:
-                print("NO APPROVED OWNER PAIRS: deterministic unresolved; Qwen not called")
+                print("NO QUALIFIED IDENTIFIER BRIDGES: deterministic unresolved; Qwen not called")
                 selection = {"status": "unresolved", "result_ids": [],
                              "identifier_path_ids": [], "mapping_ids": [],
-                             "reason": "No qualified owner-pair mapping candidates"}
+                             "reason": "No qualified identifier bridge candidates"}
             else:
                 raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
                 print("RAW QWEN:", raw)
