@@ -9,7 +9,7 @@ import re
 
 from process_sim.dtwise.experimental_shacl_n_domain_selection import validate_n_domain_selection
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
-
+_IRI = re.compile(r'^[A-Za-z][A-Za-z0-9+.-]*:[^\s<>"{}|^`\\]+$')
 _IRI = re.compile(r"^[A-Za-z][A-Za-z0-9+.-]*:[^\\s<>\\\"{}|^\x60\\\\]+$")
 
 
