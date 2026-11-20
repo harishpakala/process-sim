@@ -13,14 +13,14 @@ OPERATIONS = (
 )
 
 _UNSUPPORTED = re.compile(
-    r"\\b(?:how many|count|average|sum|group by|order by|sort|minimum|maximum|"
-    r"greater than|less than|not equal|exclude|without)\\b|!=|<=|>=|(?<![=<>])(?:<|>)(?![=])",
+    r"\b(?:how many|count|average|sum|group by|order by|sort|minimum|maximum|"
+    r"greater than|less than|not equal|exclude|without)\b|!=|<=|>=|(?<![=<>])(?:<|>)(?![=])",
     re.I,
 )
-_EQUALITY = re.compile(r"\\b([A-Za-z][\\w.]*)\\s*=\\s*([^\\s,;]+)", re.I)
+_EQUALITY = re.compile(r"\b([A-Za-z][\w.]*)\s*=\s*([^\s,;]+)", re.I)
 _NATURAL_FILTER = re.compile(
-    r"\\b(?:with|having)\\s+([A-Za-z][\\w.]*)\\s+([A-Za-z0-9_]+)"
-    r"(?:\\s+and\\s+([A-Za-z][\\w.]*)\\s+([A-Za-z0-9_]+))?", re.I,
+    r"\b(?:with|having)\s+([A-Za-z][\w.]*)\s+([A-Za-z0-9_]+)"
+    r"(?:\s+and\s+([A-Za-z][\w.]*)\s+([A-Za-z0-9_]+))?", re.I,
 )
 
 
@@ -38,13 +38,13 @@ def extract_query_structure(question: str) -> dict | None:
     # Filters can be introduced with 'where' or with a natural-language
     # 'with Property Value' clause. Never treat conjunctions in the result
     # phrase as Boolean filter operators.
-    where = re.search(r"\\bwhere\\b", q, re.I)
+    where = re.search(r"\bwhere\b", q, re.I)
     natural = _NATURAL_FILTER.search(q) if not where else None
     if where:
         head, clause = q[:where.start()], q[where.end():]
         explicit = True
         filters = _EQUALITY.findall(clause)
-        if not filters or re.search(r"\\b(?:and|or)\\b", clause, re.I) and len(filters) < 2:
+        if not filters or re.search(r"\b(?:and|or)\b", clause, re.I) and len(filters) < 2:
             return None
     elif natural:
         head, clause = q[:natural.start()], q[natural.start():]
@@ -58,9 +58,9 @@ def extract_query_structure(question: str) -> dict | None:
     # 'A and B belonging to the same Owner' and 'addresses of A and B for
     # owners ...' qualify as structural sibling requests; the operation
     # itself verifies whether the SHACL graph actually supports the join.
-    sibling = bool(re.search(r"\\b(?:and|&)\\b", head, re.I) and
-                   re.search(r"\\b(?:same|belonging to|for|of)\\b", head, re.I))
-    logic_tokens = re.findall(r"\\b(and|or)\\b", clause, re.I)
+    sibling = bool(re.search(r"\b(?:and|&)\b", head, re.I) and
+                   re.search(r"\b(?:same|belonging to|for|of)\b", head, re.I))
+    logic_tokens = re.findall(r"\b(and|or)\b", clause, re.I)
     logic = {token.upper() for token in logic_tokens}
     boolean = "MIXED" if len(logic) > 1 else next(iter(logic), None)
     return {"unsupported": False, "sibling": sibling, "filters": filters,
