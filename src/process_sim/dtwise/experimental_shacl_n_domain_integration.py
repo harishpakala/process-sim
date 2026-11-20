@@ -124,7 +124,7 @@ def main(argv: list[str] | None = None) -> int:
                 print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
             if args.emit_sparql and selection["status"] == "selected":
                 sparql = compile_n_domain_sparql(selection, prepared)
-                print("SPARQL:\\n" + sparql)
+                print("SPARQL:\n" + sparql)
         except Exception as exc:
             passed, detail = False, f"{type(exc).__name__}: {exc}"
         failures += not passed
