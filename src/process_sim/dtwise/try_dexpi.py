@@ -138,7 +138,7 @@ def run_single_domain_query(index, question: str, *, operation: str,
         top_shapes=max(top_k, 16) if broad_shapes else top_k,
         top_properties=8 if broad_properties else 2,
         max_candidates=128 if broad_properties else 64,
-        model=embed_model, endpoint=endpoint,
+        model=embed_model, endpoint=endpoint, timing=timing,
     )
     if timing is not None:
         timing["semantic_candidates_ms"] = (perf_counter() - t0) * 1000
