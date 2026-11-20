@@ -10,6 +10,7 @@ from urllib.request import Request, urlopen
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from process_sim.dtwise.experimental_shacl_subgraph import load_index
 from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
@@ -20,7 +21,7 @@ from process_sim.dtwise.experimental_shacl_phase4_join import run_phase4_join_pl
 from process_sim.dtwise.experimental_shacl_phase4_filtered_join import (
     run_phase4_filtered_join_plan, compile_phase4_filtered_join_sparql,
 )
-from tests.integration.run_shacl_planner import CASES, check
+from run_shacl_planner import CASES, check
 
 INDEX = ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json"
 MODEL = "qwen2.5-coder:7b"
