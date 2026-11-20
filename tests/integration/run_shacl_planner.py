@@ -1,4 +1,4 @@
-"""Live SHACL planner integration baseline; imports planner directly, never executes SPARQL.
+"""Unified SHACL integration for 1–4 domains; compiles but never executes SPARQL.
 
 From repository root:
     python tests/integration/run_shacl_planner.py
@@ -11,10 +11,15 @@ import sys
 from time import perf_counter
 
 ROOT = Path(__file__).resolve().parents[2]
-from process_sim.dtwise.try_dexpi import run_single_domain_query
-from process_sim.dtwise.experimental_shacl_subgraph import load_index
+from process_sim.dtwise.experimental_shacl_unified_planner import plan_question
+from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
+from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
+from process_sim.dtwise.experimental_shacl_two_domain_integration import CASES as TWO_CASES, _check_selected as check_two
+from process_sim.dtwise.experimental_shacl_three_domain_integration import CASES as THREE_CASES, DOMAINS as THREE_DOMAINS, check_semantics as check_three
+from process_sim.dtwise.experimental_shacl_four_domain_integration import CASES as FOUR_CASES, DOMAINS as FOUR_DOMAINS, check_semantics as check_four
 
 INDEX_PATH = ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json"
+MAPPINGS_PATH = ROOT / "semantic/ontology2/dtwise/cross-domain-mappings.json"
 ENDPOINT = "https://example.org/ecad/hasEndPoint"
 PLC = "https://example.org/ecad/hasPLCEndPoint"
 LOCAL = "https://example.org/ecad/hasLocalId"
@@ -197,57 +202,102 @@ def check(test, result):
                 raise AssertionError(f"Missing literal: {value}")
 
 
-def run(test, args, index):
+def check_multi(count, case, result, schema, mappings):
+    expected = case[2] if count == 2 else "selected"
+    selection = result.get("selection") or {}
+    if selection.get("status") != expected:
+        raise AssertionError(f"Expected {expected}, got {selection.get('status')}: {result.get('error') or selection}")
+    if expected != "selected":
+        if any(selection.get(key) for key in ("result_ids", "identifier_path_ids", "mapping_ids")):
+            raise AssertionError("Abstention must have empty IDs")
+        if result.get("sparql") is not None:
+            raise AssertionError("Abstention must not compile SPARQL")
+        return
+    domains = {2: ("dexpi", "ecad"), 3: THREE_DOMAINS, 4: FOUR_DOMAINS}[count]
+    prompt = prepare_live_candidates(schema, mappings, case[1], domains)["prompt"]
+    if count == 2:
+        passed = check_two(selection, prompt, case[3], case[4] if len(case) > 4 else None)
+        detail = "Two-domain owner, projection or mapping mismatch"
+    else:
+        passed, detail = (check_three if count == 3 else check_four)(selection, prompt, case[2])
+    if not passed:
+        raise AssertionError(detail)
+    query = result.get("sparql")
+    if not isinstance(query, str) or not query.lstrip().startswith("SELECT DISTINCT"):
+        raise AssertionError("Selected plan did not compile SELECT DISTINCT SPARQL")
+    if any(token in query.upper() for token in ("INSERT ", "DELETE ", "UPDATE ", "SERVICE ")):
+        raise AssertionError("SPARQL must be read-only")
+    if "FILTER(" not in query:
+        raise AssertionError("Missing cross-domain identifier equality filter")
+
+
+def run(count, test, args, schema, mappings):
     start = perf_counter()
+    name, question = (test["name"], test["question"]) if count == 1 else test[:2]
     try:
-        result = run_single_domain_query(
-            index, test["question"],
-            operation=test["mode"].removeprefix("--"),
-            model=args.model,
-            embed_model=args.embed_model,
-            endpoint=args.ollama_url,
+        result = plan_question(
+            question, schema, mappings, domains=count,
+            operation=test["mode"].removeprefix("--") if count == 1 else "phase1-plan",
+            model=args.model, embed_model=args.embed_model,
+            ollama_url=args.ollama_url, prompt_format=args.prompt_format,
+            index_path=INDEX_PATH,
         )
-        check(test, result)
-        return dict(name=test["name"], status="PASS", seconds=round(perf_counter()-start, 3))
+        if "error" in result:
+            raise AssertionError(str(result["error"]))
+        if count == 1:
+            check(test, result)
+        else:
+            check_multi(count, test, result, schema, mappings)
+        return dict(name=name, domains=count, status="PASS", seconds=round(perf_counter()-start, 3))
     except Exception as exc:
-        return dict(name=test["name"], status="FAIL", seconds=round(perf_counter()-start, 3),
-                    reason=str(exc))
+        return dict(name=name, domains=count, status="FAIL", seconds=round(perf_counter()-start, 3),
+                    reason=f"{type(exc).__name__}: {exc}")
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, default=Path("shacl-integration-report.json"))
-    parser.add_argument("--case", action="append", choices=[c["name"] for c in CASES],
-                        help="Run only this named query (repeat to select multiple); default: all")
-    parser.add_argument("--list-cases", action="store_true",
-                        help="Print all registered integration queries without running Ollama")
+    parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4))
+    parser.add_argument("--case", action="append", help="Named case; repeatable")
+    parser.add_argument("--list-cases", action="store_true")
     parser.add_argument("--model", default="qwen2.5-coder:7b")
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
-
+    parser.add_argument("--prompt-format", choices=("compact", "full"), default="compact")
     args = parser.parse_args()
+    suites = ([(1, test) for test in CASES]
+              + [(2, test) for test in TWO_CASES]
+              + [(3, test) for test in THREE_CASES]
+              + [(4, test) for test in FOUR_CASES])
     if args.list_cases:
-        for test in CASES:
-            print(f"{test['name']}: [{test['mode']}] {test['question']}")
+        for count, test in suites:
+            name, question = (test["name"], test["question"]) if count == 1 else test[:2]
+            print(f"{count}D/{name}: {question}")
         return 0
-    selected_cases = [test for test in CASES if not args.case or test["name"] in args.case]
+    selected = [(count, test) for count, test in suites
+                if (args.domains is None or count == args.domains)
+                and (not args.case or (test["name"] if count == 1 else test[0]) in args.case)]
+    if not selected:
+        parser.error("No cases match the selected domain count and case names")
     started = perf_counter()
-    index = load_index(INDEX_PATH, domain="ecad")
+    schema = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+    mappings = load_cross_domain_mappings(MAPPINGS_PATH)
     results = []
-    print("SHACL planner live integration baseline (SPARQL compilation only)", flush=True)
-    for test in selected_cases:
-        print(f"\nQUERY [{test['name']}]: {test['question']}", flush=True)
-        outcome = run(test, args, index)
-        outcome["query"] = test["question"]
+    print("Unified SHACL planner live integration (SPARQL compilation only)", flush=True)
+    for count, test in selected:
+        name, question = (test["name"], test["question"]) if count == 1 else test[:2]
+        print(f"\\nQUERY [{count}D/{name}]: {question}", flush=True)
+        outcome = run(count, test, args, schema, mappings)
+        outcome["query"] = question
         results.append(outcome)
-        print(f"{outcome['status']:<4}  {outcome['name']:<25} {outcome['seconds']:>8.3f} s", flush=True)
+        print(f"{outcome['status']:<4}  {count}D/{name:<25} {outcome['seconds']:>8.3f} s", flush=True)
         if "reason" in outcome:
-            print("      " + outcome["reason"].replace("\n", "\n      "), flush=True)
+            print("      " + outcome["reason"].replace("\\n", "\\n      "), flush=True)
     total = round(perf_counter()-started, 3)
     passed = sum(r["status"] == "PASS" for r in results)
     print(f"TOTAL {passed} PASS / {len(results)-passed} FAIL / {total:.3f} s")
-    report = dict(model=args.model, cases=results, passed=passed,
-                  failed=len(results)-passed, total_seconds=total,
+    report = dict(model=args.model, prompt_format=args.prompt_format, cases=results,
+                  passed=passed, failed=len(results)-passed, total_seconds=total,
                   note="Live model output can vary; SPARQL was compiled but never executed")
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(report, indent=2), encoding="utf-8")
