@@ -12,6 +12,11 @@ SYSTEM_PROMPT = """You select semantic intent from SHACL-qualified N-domain cand
 Select only supplied IDs. Do not invent domains, paths, mappings, or joins.
 Result candidates describe what the question asks to return; identifier paths
 are used solely to connect selected domains through approved mapping edges.
+Each mapping is a verified cross-domain identifier-equality bridge. Its
+join_alternatives enumerate SHACL-qualified pairs of entity owners and
+identifier paths; they are alternative possible joins, NOT a request to
+select all of them. Use only the listed alternatives. An offered bridge
+supports a candidate query pattern, not a proven instance-level match.
 Choose the mapping edges and their owner-specific identifier paths together.
 When a mapping provides approved_owner_pair_candidate_ids, select only one
 of those explicitly approved endpoint ID pairs. Never combine endpoints
@@ -28,8 +33,10 @@ a predicate. Choose only mapping edges necessary to connect requested domains.
 Respect explicit identifier constraints, including exclusions: never substitute
 AssetIdentifier when the question explicitly requires ProductIdentifier only.
 If no offered mapping supports the required identifier, return unresolved.
-When multiple owner paths fit and the question cannot distinguish them,
-return ambiguous, with empty ID arrays; do not select all alternatives.
+When multiple join_alternatives fit and the question does not specify the
+entity kinds, return ambiguous with empty ID arrays. Never select all owner
+alternatives to resolve ambiguity. Select multiple owners only if the user
+explicitly requests multiple entity kinds and their joins are supported.
 An approved mapping does not establish instance-level identifier equality.
 If no supported plan fits, return unresolved.
 Return ONLY JSON with exactly:
