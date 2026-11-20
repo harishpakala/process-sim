@@ -21,6 +21,7 @@ Each owner must be Device, operator must be =, and values must be copied
 exactly. Use only offered property IDs. No SPARQL. Abstain if uncertain."""
 
 FIELDS = {"status", "result_ids", "join_owner", "filters", "reason"}
+OR_FIELDS = FIELDS | {"boolean_operator"}
 FILTER_FIELDS = {"filter_id", "owner", "property", "operator", "value"}
 VALUE = r"""(?:"([^"\r\n]*)"|'([^'\r\n]*)'|([A-Za-z_][A-Za-z_0-9.-]*))"""
 QUESTION = re.compile(
@@ -31,6 +32,8 @@ QUESTION = re.compile(
     r"(?:\s+in\s+ECAD)?\s*[.!]?\s*$", re.I,
 )
 
+OR_QUESTION = re.compile(QUESTION.pattern.replace(
+    r"\s+and\s+Device\s+DeviceType", r"\s+or\s+Device\s+DeviceType"), re.I)
 
 # Phase 5.3: a second, narrowly scoped surface form. Require both
 # explicitly named endpoint types, both Device predicates, and AND.
@@ -52,6 +55,7 @@ def _filter_ids(qualified):
 
 def _literals(question):
     match = (QUESTION.fullmatch(question.strip()) or
+             OR_QUESTION.fullmatch(question.strip()) or
              ALTERNATE_QUESTION.fullmatch(question.strip()))
     if match is None:
         return None
@@ -66,8 +70,10 @@ def validate_phase4_and_join_plan(raw, qualified):
             raw = json.loads(raw)
         except json.JSONDecodeError as exc:
             raise SelectionContractError("Invalid Phase 4.3 JSON") from exc
-    if not isinstance(raw, dict) or set(raw) != FIELDS:
+    if not isinstance(raw, dict) or set(raw) not in (FIELDS, OR_FIELDS):
         raise SelectionContractError("Invalid Phase 4.3 response fields")
+    if "boolean_operator" in raw and raw["boolean_operator"] not in ("and", "or"):
+        raise SelectionContractError("Invalid filter boolean operator")
     if raw["status"] not in ("selected", "ambiguous", "unresolved"):
         raise SelectionContractError("Invalid Phase 4.3 status")
     if not isinstance(raw["reason"], str) or not raw["reason"].strip():
@@ -76,6 +82,10 @@ def validate_phase4_and_join_plan(raw, qualified):
         if raw["result_ids"] != [] or raw["join_owner"] is not None or raw["filters"] != []:
             raise SelectionContractError("Uncertain Phase 4.3 plan must be empty")
         return raw
+    question = qualified["prompt"]["question"]
+    expected_operator = "or" if OR_QUESTION.fullmatch(question.strip()) else "and"
+    if raw.get("boolean_operator", "and") != expected_operator:
+        raise SelectionContractError("Filter boolean operator contradicts question")
     validate_phase4_join_plan(
         {k: raw[k] for k in ("status", "result_ids", "join_owner", "reason")},
         qualified)
@@ -105,6 +115,7 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
     qualified = qualify_candidates(index, prepared)
     question = qualified["prompt"]["question"]
     literals = _literals(question)
+    is_or = OR_QUESTION.fullmatch(question.strip()) is not None
     if (index.domain != "ecad" or literals is None or
             None in _expected_paths(qualified) or None in _filter_ids(qualified)):
         plan = {"status": "unresolved", "result_ids": [], "join_owner": None,
@@ -113,15 +124,31 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
         prompt = {**qualified["prompt"], "candidates": [
             c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
         ]}
-        raw = ollama_select(prompt, model=model, endpoint=endpoint,
-                           transport=transport, system_prompt=PROMPT)
-        plan = validate_phase4_and_join_plan(raw, qualified)
+        if is_or:
+            # Deterministic OR selection from the exact supported question form.
+            # Validate every result/filter ID and literal against SHACL as usual.
+            result_ids = list(_expected_paths(qualified))
+            filter_ids = _filter_ids(qualified)
+            plan = {"status": "selected", "result_ids": result_ids,
+                    "join_owner": "Device", "boolean_operator": "or",
+                    "filters": [
+                        {"filter_id": fid, "owner": "Device", "property": prop,
+                         "operator": "=", "value": value}
+                        for fid, prop, value in zip(
+                            filter_ids, ("LocalId", "DeviceType"), literals)
+                    ],
+                    "reason": "Verified shared Device OR filters"}
+            plan = validate_phase4_and_join_plan(plan, qualified)
+        else:
+            raw = ollama_select(prompt, model=model, endpoint=endpoint,
+                               transport=transport, system_prompt=PROMPT)
+            plan = validate_phase4_and_join_plan(raw, qualified)
         if plan["status"] == "selected" and tuple(f["value"] for f in plan["filters"]) != literals:
             raise SelectionContractError("Filter literals do not match question")
     # Additive Phase 5.4 artifact: constructed only after independent validation.
     # Lazy import avoids a module-level cycle with the intent adapter.
     intent = None
-    if plan["status"] == "selected":
+    if plan["status"] == "selected" and not is_or:
         from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
         intent = validated_join_intent(plan, qualified)
     return {"domain": index.domain, "question": question, "plan": plan,
@@ -140,8 +167,19 @@ def compile_phase4_and_join_sparql(result):
         "qualified": result["qualified"],
     })
     lines = []
+    is_or = plan.get("boolean_operator") == "or"
     for i, item in enumerate(plan["filters"], 1):
         filtr = result["qualified"]["registry"][item["filter_id"]]
-        lines.append(f"  ?device {_iri(filtr['property']['predicate'])} ?filterValue{i} .")
-        lines.append(f"  FILTER(?filterValue{i} = {json.dumps(literals[i-1], ensure_ascii=False)})")
+        triple = f"?device {_iri(filtr['property']['predicate'])} ?filterValue{i} ."
+        if is_or:
+            lines.append(f"  OPTIONAL {{ {triple} }}")
+        else:
+            lines.append(f"  {triple}")
+            lines.append(f"  FILTER(?filterValue{i} = {json.dumps(literals[i-1], ensure_ascii=False)})")
+    if is_or:
+        expressions = [
+            f'(?filterValue{i} = {json.dumps(value, ensure_ascii=False)})'
+            for i, value in enumerate(literals, 1)
+        ]
+        lines.append("  FILTER(" + " || ".join(expressions) + ")")
     return base[:-1] + "\n".join(lines) + "\n}"
