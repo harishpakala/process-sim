@@ -21,6 +21,9 @@ from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
+from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import (
+    resolve_domain, DomainResolutionError,
+)
 
 SYSTEM_PROMPT = """You are a SHACL-grounded Phase-1 query planner. Return ONE JSON object, no prose.
 Only use candidate IDs supplied in the question. Never invent paths or literal values.
@@ -685,7 +688,7 @@ def run_one(index, question, *, method='expanded', dry_run=False,
 def main():
     ap=argparse.ArgumentParser(description=__doc__,formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--schema',type=Path,required=True)
-    ap.add_argument('--domain',default='ecad')
+    ap.add_argument('--domain',default=None,help='Optional domain override; otherwise resolve from question')
     ap.add_argument('--questions',type=Path,help='JSON array of question strings')
     ap.add_argument('--model',default='qwen2.5-coder:7b')
     ap.add_argument('--endpoint',default='http://127.0.0.1:11434')
@@ -701,15 +704,30 @@ def main():
     questions=json.loads(args.questions.read_text(encoding='utf-8')) if args.questions else DEFAULT_QUESTIONS
     if not isinstance(questions,list) or not questions or any(not isinstance(q,str) or not q.strip() for q in questions):
         ap.error('--questions must be a nonempty JSON array of nonempty strings')
-    index=load_index(args.schema,domain=args.domain)
+    schema_data=json.loads(args.schema.read_text(encoding='utf-8'))
+    available_domains=sorted({c['domain'] for c in schema_data.get('concepts', [])
+                              if isinstance(c.get('domain'), str) and c['domain']})
+    index_cache={}
     records=[]
     methods=['exact','semantic','expanded'] if args.retrieval=='compare' else [args.retrieval]
     for i,question in enumerate(questions,1):
+        try:
+            domain=resolve_domain(question,available_domains,override=args.domain,schema=schema_data)
+            if domain not in index_cache:
+                index_cache[domain]=load_index(args.schema,domain=domain)
+            index=index_cache[domain]
+            domain_error=None
+        except DomainResolutionError as exc:
+            domain_error=str(exc)
         for method in methods:
-            rec=run_one(index,question,method=method,dry_run=args.dry_run,
-                model=args.model,endpoint=args.endpoint,embedding_model=args.embedding_model,
-                top_shapes=args.top_shapes,top_properties=args.top_properties,
-                max_candidates=args.max_candidates,max_depth=args.max_depth)
+            if domain_error is not None:
+                rec={'question':question,'retrieval_method':method,
+                     'status':'domain_unresolved','reason':domain_error}
+            else:
+                rec=run_one(index,question,method=method,dry_run=args.dry_run,
+                    model=args.model,endpoint=args.endpoint,embedding_model=args.embedding_model,
+                    top_shapes=args.top_shapes,top_properties=args.top_properties,
+                    max_candidates=args.max_candidates,max_depth=args.max_depth)
             records.append(rec)
             print(f'\n[{i}/{len(questions)}] {method} {rec["status"]}: {question}',flush=True)
             print(f'  Candidates: {rec.get("candidate_count",0)} (R={rec.get("result_candidate_count",0)}, P={rec.get("property_candidate_count",0)})',flush=True)
