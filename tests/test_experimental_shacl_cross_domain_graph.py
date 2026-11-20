@@ -203,3 +203,40 @@ def test_disallowed_cross_product_of_approved_pairs_rejected():
         validate_mapping_graph_selection(
             ["de"], ["dexpi:P1", "ecad:P2"], offered, mappings
         )
+
+
+def test_predicate_approved_mapping_offers_all_shacl_qualified_owner_pairs():
+    mappings = {"de": mapping("de", "dexpi", "ecad")}
+    domains = {
+        "dexpi": qualified("dexpi", [
+            ("Equipment", "urn:dexpi:asset"),
+            ("ActuatingFunction", "urn:dexpi:asset"),
+            ("InstrumentationFunction", "urn:dexpi:asset"),
+        ]),
+        "ecad": qualified("ecad", [
+            ("Device", "urn:ecad:asset"),
+            ("Symbol", "urn:ecad:asset"),
+        ]),
+    }
+    offered = qualify_mapping_graph(mappings, domains)
+    edge = offered["mapping_candidates"][0]
+    assert edge["left_identifier_candidate_ids"] == [
+        "dexpi:P1", "dexpi:P2", "dexpi:P3"
+    ]
+    assert edge["right_identifier_candidate_ids"] == ["ecad:P1", "ecad:P2"]
+    assert len(edge["left_identifier_candidate_ids"]) * len(
+        edge["right_identifier_candidate_ids"]
+    ) == 6
+    assert len(offered["identifier_path_candidates"]) == 5
+    assert [m["id"] for m in validate_mapping_graph_selection(
+        ["de"], ["dexpi:P3", "ecad:P1"], offered, mappings
+    )] == ["de"]
+
+
+def test_predicate_approved_mapping_does_not_invent_owner_paths():
+    mappings = {"de": mapping("de", "dexpi", "ecad")}
+    domains = {
+        "dexpi": qualified("dexpi", [("Equipment", "urn:dexpi:asset")]),
+        "ecad": qualified("ecad", [("Device", "urn:ecad:other")]),
+    }
+    assert qualify_mapping_graph(mappings, domains)["mapping_candidates"] == []
