@@ -56,7 +56,7 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int,
         }
         chosen_domain = resolve_domain(question, available, override=domain, schema=schema)
         index = load_index(index_path, domain=chosen_domain)
-        from try_dexpi import run_single_domain_query
+        from process_sim.dtwise.try_dexpi import run_single_domain_query
         result = run_single_domain_query(
             index, question, operation=operation, model=model,
             embed_model=embed_model, endpoint=ollama_url,
