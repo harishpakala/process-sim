@@ -16,6 +16,7 @@ from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     validate_n_domain_selection,
 )
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.experimental_shacl_n_domain_sparql import compile_n_domain_sparql
 from process_sim.dtwise.experimental_shacl_two_domain_integration import CASES as TWO_CASES, _check_selected as check_two
 from process_sim.dtwise.experimental_shacl_three_domain_integration import (
     CASES as THREE_CASES, DOMAINS as THREE_DOMAINS, check_semantics as check_three,
@@ -57,6 +58,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Qwen input representation (default: full)")
     parser.add_argument("--model", default="qwen2.5-coder:7b",
                         help="Ollama model for semantic selection (default: qwen2.5-coder:7b)")
+    parser.add_argument("--emit-sparql", action="store_true",
+                        help="Print deterministic SELECT for independently validated selected plans")
     args = parser.parse_args(argv)
 
     suites = [
@@ -119,6 +122,9 @@ def main(argv: list[str] | None = None) -> int:
             timings["assert"] = perf_counter() - assertion_start
             if args.debug:
                 print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
+            if args.emit_sparql and selection["status"] == "selected":
+                sparql = compile_n_domain_sparql(selection, prepared)
+                print("SPARQL:\\n" + sparql)
         except Exception as exc:
             passed, detail = False, f"{type(exc).__name__}: {exc}"
         failures += not passed
