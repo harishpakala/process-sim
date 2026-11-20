@@ -239,10 +239,12 @@ def main() -> None:
                 print(result["sparql"] or "  (none)")
         elif args.phase4_and_join:
             from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_join_state_machine,
+                run_single_domain_state_machine,
             )
-            result = run_join_state_machine(index, prepared, model=args.model,
-                                            endpoint=args.ollama_url)
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase4-and-join",
+                model=args.model, endpoint=args.ollama_url,
+            )
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -331,10 +333,11 @@ def main() -> None:
                     print("  (none)")
         elif args.phase1_plan:
             from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_retrieve_state_machine,
+                run_single_domain_state_machine,
             )
-            result = run_retrieve_state_machine(
-                index, prepared, model=args.model, endpoint=args.ollama_url,
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase1-plan",
+                model=args.model, endpoint=args.ollama_url,
                 timing=timings, compile_sparql=args.phase1_sparql,
             )
             if timings is not None:
