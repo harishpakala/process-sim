@@ -233,7 +233,7 @@ def check_multi(count, case, result, schema, mappings):
         raise AssertionError("Missing cross-domain identifier equality filter")
 
 
-def run(count, test, args, schema, mappings):
+def run(count, test, expected_domains, args, schema, mappings):
     start = perf_counter()
     name, question = (test["name"], test["question"]) if count == 1 else test[:2]
     routing = "NOT_RUN"
@@ -244,8 +244,7 @@ def run(count, test, args, schema, mappings):
                 for item in schema.get(key, []) if item.get("domain")
             }
             resolved = resolve_domains(question, available, schema=schema)
-            expected = {1: ("ecad",), 2: ("dexpi", "ecad"),
-                        3: THREE_DOMAINS, 4: FOUR_DOMAINS}[count]
+            expected = expected_domains
             if set(resolved) != set(expected) or len(resolved) != count:
                 raise AssertionError(
                     f"Routing mismatch: expected {expected}, resolved {resolved}")
@@ -295,16 +294,17 @@ def main():
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument("--prompt-format", choices=("compact", "full"), default="compact")
     args = parser.parse_args()
-    suites = ([(1, test) for test in CASES]
-              + [(2, test) for test in TWO_CASES]
-              + [(3, test) for test in THREE_CASES]
-              + [(4, test) for test in FOUR_CASES])
+    # Each case carries its own expected domain membership; the count is only a label.
+    suites = ([(1, test, ("ecad",)) for test in CASES]
+              + [(2, test, ("dexpi", "ecad")) for test in TWO_CASES]
+              + [(3, test, THREE_DOMAINS) for test in THREE_CASES]
+              + [(4, test, FOUR_DOMAINS) for test in FOUR_CASES])
     if args.list_cases:
-        for count, test in suites:
+        for count, test, expected_domains in suites:
             name, question = (test["name"], test["question"]) if count == 1 else test[:2]
             print(f"{count}D/{name}: {question}")
         return 0
-    selected = [(count, test) for count, test in suites
+    selected = [(count, test, expected_domains) for count, test, expected_domains in suites
                 if (args.domains is None or count == args.domains)
                 and (not args.case or (test["name"] if count == 1 else test[0]) in args.case)]
     if not selected:
@@ -314,10 +314,10 @@ def main():
     mappings = load_cross_domain_mappings(MAPPINGS_PATH)
     results = []
     print("Unified SHACL planner live integration (SPARQL compilation only)", flush=True)
-    for count, test in selected:
+    for count, test, expected_domains in selected:
         name, question = (test["name"], test["question"]) if count == 1 else test[:2]
         print(f"\nQUERY [{count}D/{name}]: {question}", flush=True)
-        outcome = run(count, test, args, schema, mappings)
+        outcome = run(count, test, expected_domains, args, schema, mappings)
         outcome["query"] = question
         results.append(outcome)
         print(f"{outcome['status']:<4}  {count}D/{name:<25} {outcome['seconds']:>8.3f} s", flush=True)
