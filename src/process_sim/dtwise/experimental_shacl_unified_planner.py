@@ -49,19 +49,17 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
     }
     if domains is None:
         selected_domains = resolve_domains(question, available, schema=schema)
-        domains = len(selected_domains)
-        if domains > 1 and set(selected_domains) != set(DOMAIN_SETS.get(domains, ())):
-            raise ValueError(
-                "Automatically resolved domain combination is not yet supported: "
-                + ", ".join(selected_domains))
-    if domains not in (1, 2, 3, 4):
-        raise ValueError("domains must be 1, 2, 3, or 4")
+    elif isinstance(domains, int) and domains in (1, 2, 3, 4):
+        selected_domains = (resolve_domain(question, available, override=domain, schema=schema),) if domains == 1 else DOMAIN_SETS[domains]
+    else:
+        raise ValueError("domains must be 1, 2, 3, or 4, or None")
+    domains = len(selected_domains)
     if domains == 1:
         if operation not in OPERATIONS:
             raise ValueError(f"Unsupported single-domain operation: {operation}")
         if index_path is None:
             raise ValueError("Single-domain planning requires index_path")
-        chosen_domain = resolve_domain(question, available, override=domain, schema=schema)
+        chosen_domain = resolve_domain(question, available, override=domain, schema=schema) if domain else selected_domains[0]
         index = load_index(index_path, domain=chosen_domain)
         from process_sim.dtwise.try_dexpi import run_single_domain_query
         result = run_single_domain_query(
@@ -70,7 +68,6 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
         )
         return {"mode": "single-domain", "operation": operation, **result}
 
-    selected_domains = DOMAIN_SETS[domains]
     prepared = prepare_live_candidates(schema, mappings, question, selected_domains)
     prompt = prepared["prompt"]
     if not prompt["mapping_candidates"]:
