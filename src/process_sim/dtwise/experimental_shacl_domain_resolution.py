@@ -98,3 +98,23 @@ def infer_domain_from_shapes(question, domains, schema):
             "Ambiguous schema-domain evidence: " + ", ".join(sorted(shared_hits)))
     raise DomainResolutionError(
         "Domain unresolved: no indexed NodeShape evidence; use --domain")
+
+
+def resolve_domains(question, available_domains, *, schema=None):
+    """Resolve explicitly named schema domains, or one unambiguous NodeShape domain.
+
+    Multiple explicit names are valid here, unlike the single-domain resolver.
+    Do not guess a domain from generic properties or unrelated shape labels.
+    """
+    domains = sorted({d.casefold() for d in available_domains if isinstance(d, str) and d})
+    if not domains:
+        raise DomainResolutionError("No schema domains available")
+    mentioned = tuple(d for d in domains if re.search(
+        r"(?<![A-Za-z0-9_])" + re.escape(d) + r"(?![A-Za-z0-9_])",
+        question, re.IGNORECASE))
+    if mentioned:
+        return mentioned
+    if schema is not None:
+        return (infer_domain_from_shapes(question, domains, schema),)
+    raise DomainResolutionError(
+        "Domain unresolved: mention indexed domains in the question or provide schema")
