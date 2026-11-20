@@ -13,10 +13,21 @@ Select only supplied IDs. Do not invent domains, paths, mappings, or joins.
 Result candidates describe what the question asks to return; identifier paths
 are used solely to connect selected domains through approved mapping edges.
 Choose the mapping edges and their owner-specific identifier paths together.
-Do not automatically choose every mapping or every owner sharing a predicate.
-An approved mapping does not establish instance-level identifier equality.
+A selected result's entity owner must be the same SHACL owner as its selected
+identifier path, or connected by a supplied verified SHACL path. Matching
+predicate names alone do NOT connect different owners. For example, selecting
+an Equipment result does not permit an ActuatingFunction identifier path.
+For every domain requested as a result, select its result owner and a matching
+identifier owner. Do not add results or identifier owners merely because they
+are offered. Do not automatically choose every mapping or every owner sharing
+a predicate. Choose only mapping edges necessary to connect requested domains.
+Respect explicit identifier constraints, including exclusions: never substitute
+AssetIdentifier when the question explicitly requires ProductIdentifier only.
+If no offered mapping supports the required identifier, return unresolved.
 When multiple owner paths fit and the question cannot distinguish them,
-return ambiguous. If no supported plan fits, return unresolved.
+return ambiguous, with empty ID arrays; do not select all alternatives.
+An approved mapping does not establish instance-level identifier equality.
+If no supported plan fits, return unresolved.
 Return ONLY JSON with exactly:
 status ("selected", "ambiguous", "unresolved"),
 result_ids (array), identifier_path_ids (array), mapping_ids (array),
