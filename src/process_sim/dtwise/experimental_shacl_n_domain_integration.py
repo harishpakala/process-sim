@@ -19,7 +19,7 @@ from process_sim.dtwise.experimental_shacl_three_domain_integration import (
     CASES as THREE_CASES, DOMAINS as THREE_DOMAINS, check_semantics as check_three,
 )
 
-TWO_DOMAINS = ("dexpi", "ecad")
+from process_sim.dtwise.experimental_shacl_four_domain_integration import (\n    CASES as FOUR_CASES, DOMAINS as FOUR_DOMAINS, check_semantics as check_four,\n)\n\nTWO_DOMAINS = ("dexpi", "ecad")
 
 
 def _run_two(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
@@ -37,7 +37,7 @@ def _run_three(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
     return check_three(selection, prompt, case[2])
 
 
-def main(argv: list[str] | None = None) -> int:
+def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:\n    return check_four(selection, prompt, case[2])\n\n\ndef main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Live N-domain Qwen integration suite")
     parser.add_argument("--domains", type=int, choices=(2, 3, 4),
                         help="Run only one domain count (default: all)")
