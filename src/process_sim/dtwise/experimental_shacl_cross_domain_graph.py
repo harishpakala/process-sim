@@ -55,6 +55,30 @@ def qualify_mapping_graph(mappings: dict[str, dict],
         left, right = mapping["left_domain"], mapping["right_domain"]
         left_ids = sorted(by_predicate.get((left, mapping["left_property"]), []))
         right_ids = sorted(by_predicate.get((right, mapping["right_property"]), []))
+        if "approved_owner_pairs" in mapping:
+            # Explicit owner-level policy is fail-closed. An empty list offers
+            # no joins. Never infer owner correspondence from matching predicates.
+            approved_pairs = mapping["approved_owner_pairs"]
+            if not isinstance(approved_pairs, list):
+                raise SelectionContractError("Malformed owner-pair approval policy")
+            allowed_left, allowed_right = set(), set()
+            for pair in approved_pairs:
+                if not isinstance(pair, dict) or set(pair) != {
+                    "left_owner_shape_uri", "right_owner_shape_uri", "evidence_ids"
+                } or not isinstance(pair["evidence_ids"], list) or not pair["evidence_ids"] or any(
+                    not isinstance(e, str) or not e.strip() for e in pair["evidence_ids"]
+                ):
+                    raise SelectionContractError("Malformed owner-pair approval")
+                a, b = pair["left_owner_shape_uri"], pair["right_owner_shape_uri"]
+                if not isinstance(a, str) or not a.strip() or not isinstance(b, str) or not b.strip():
+                    raise SelectionContractError("Malformed owner-pair shape URI")
+                matching_left = [cid for cid in left_ids if identifiers[cid]["owner_shape_uri"] == a]
+                matching_right = [cid for cid in right_ids if identifiers[cid]["owner_shape_uri"] == b]
+                if matching_left and matching_right:
+                    allowed_left.update(matching_left)
+                    allowed_right.update(matching_right)
+            left_ids = sorted(allowed_left)
+            right_ids = sorted(allowed_right)
         if not left_ids or not right_ids:
             continue
         edges.append({
@@ -64,6 +88,16 @@ def qualify_mapping_graph(mappings: dict[str, dict],
             "right_property": mapping["right_property"],
             "left_identifier_candidate_ids": left_ids,
             "right_identifier_candidate_ids": right_ids,
+            "approved_owner_pair_candidate_ids": (
+                sorted([
+                    {"left_id": lid, "right_id": rid}
+                    for pair in mapping.get("approved_owner_pairs", [])
+                    for lid in left_ids for rid in right_ids
+                    if identifiers[lid]["owner_shape_uri"] == pair["left_owner_shape_uri"]
+                    and identifiers[rid]["owner_shape_uri"] == pair["right_owner_shape_uri"]
+                ], key=lambda p: (p["left_id"], p["right_id"]))
+                if "approved_owner_pairs" in mapping else None
+            ),
         })
     used = {cid for edge in edges for side in ("left", "right")
             for cid in edge[f"{side}_identifier_candidate_ids"]}
@@ -111,6 +145,27 @@ def validate_mapping_graph_selection(mapping_ids: list[str],
         right = selected.intersection(edge["right_identifier_candidate_ids"])
         if not left or not right:
             raise SelectionContractError("Selected mapping lacks identifier endpoints")
+        if "approved_owner_pairs" in source:
+            allowed_pairs = {
+                (p["left_id"], p["right_id"])
+                for p in edge.get("approved_owner_pair_candidate_ids", [])
+            }
+            if not allowed_pairs or any(
+                (a_id, b_id) not in allowed_pairs
+                for a_id in left for b_id in right
+            ):
+                raise SelectionContractError("Selected owner pair is not approved")
+            approved_uris = {
+                (p["left_owner_shape_uri"], p["right_owner_shape_uri"])
+                for p in source["approved_owner_pairs"]
+            }
+            offered_by_id = {p["id"]: p for p in offered["identifier_path_candidates"]}
+            if any(
+                (offered_by_id[a_id]["owner_shape_uri"],
+                 offered_by_id[b_id]["owner_shape_uri"]) not in approved_uris
+                for a_id in left for b_id in right
+            ):
+                raise SelectionContractError("Selected owner pair differs from approval")
         used_paths.update(left | right)
         a, b = edge["left_domain"], edge["right_domain"]
         domains.update((a, b))
