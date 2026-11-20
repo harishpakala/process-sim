@@ -29,6 +29,31 @@ def load_cross_domain_mappings(path: str | Path) -> dict[str, dict]:
                 not isinstance(value, str) or not value.strip()
                 for value in record["evidence_ids"]):
             raise SelectionContractError("Mapping lacks SHACL evidence references")
+        # Optional owner-level approval evidence. An empty list means no
+        # owner-specific correspondence has been independently approved.
+        # This metadata does not change legacy property-level qualification.
+        pairs = record.get("approved_owner_pairs")
+        if pairs is not None:
+            if not isinstance(pairs, list):
+                raise SelectionContractError("Owner-pair approvals must be an array")
+            seen_pairs = set()
+            for pair in pairs:
+                if not isinstance(pair, dict) or set(pair) != {
+                    "left_owner_shape_uri", "right_owner_shape_uri", "evidence_ids"
+                }:
+                    raise SelectionContractError("Invalid owner-pair approval fields")
+                if any(not isinstance(pair[k], str) or not pair[k].strip()
+                       for k in ("left_owner_shape_uri", "right_owner_shape_uri")):
+                    raise SelectionContractError("Invalid owner-pair shape URI")
+                evidence = pair["evidence_ids"]
+                if (not isinstance(evidence, list) or not evidence
+                        or any(not isinstance(e, str) or not e.strip() for e in evidence)
+                        or len(evidence) != len(set(evidence))):
+                    raise SelectionContractError("Owner-pair approval lacks distinct evidence")
+                key = (pair["left_owner_shape_uri"], pair["right_owner_shape_uri"])
+                if key in seen_pairs:
+                    raise SelectionContractError("Duplicate owner-pair approval")
+                seen_pairs.add(key)
         if record["id"] in registry:
             raise SelectionContractError("Duplicate cross-domain mapping ID")
         if record["left_domain"] == record["right_domain"]:
