@@ -194,8 +194,7 @@ def _constraint_literals(question):
     values=[]
     patterns=[r'\bwhere\s+[\w]+\s+(?:is|equals|equal\s+to)\s+([\w.-]+)',
               r'\b(?:AND|OR)\s+[\w]+\s+(?:is|equals|equal\s+to)\s+([\w.-]+)',
-              r'\b(?:identified|classified)\s+as\s+([\w.-]+)',
-              r'\bfor\s+([A-Za-z][\w-]*)\s+devices?\b']
+              r'\b(?:identified|classified)\s+as\s+([\w.-]+)']
     for pattern in patterns:
         for match in re.finditer(pattern,question,re.I):
             v=match.group(1).rstrip('.,;?!')
@@ -534,8 +533,9 @@ def requested_property_value_names(question, property_hits):
     if not names:
         return set()
     value_request = bool(re.search(r'\b(?:values?|its|their|belongs? to)\b', question, re.I))
-    property_of = bool(re.search(r'\b(?:show|list|return|retrieve|get)\s+(?:the\s+)?[A-Za-z][A-Za-z0-9]*\s+of\b', question, re.I))
-    if not (value_request or property_of):
+    property_of = bool(re.search(r'\b(?:show|list|return|retrieve|get)\s+(?:the\s+)?[A-Za-z][A-Za-z0-9]*\s+(?:of|for)\b', question, re.I))
+    possessive_request = bool(re.search(r"\b(?:retrieve|show|list|return|get)\b.*\b[A-Za-z][A-Za-z0-9]*['’]s\s+[A-Za-z][A-Za-z0-9]*\b", question, re.I))
+    if not (value_request or property_of or possessive_request):
         return set()
     return names
 
