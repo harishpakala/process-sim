@@ -24,7 +24,7 @@ from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 CASES = (
     ("equipment-device", "Find DEXPI Equipment and its corresponding ECAD Device using AssetIdentifier.",
      "selected", {"dexpi": "Equipment", "ecad": "Device"}),
-    ("device-equipment-reversed", "Using AssetIdentifier, show ECAD Device corresponding to DEXPI Equipment.",
+    ("device-equipment-reversed", "Return only ECAD Device records whose AssetIdentifier matches DEXPI Equipment. Use DEXPI Equipment for matching, not as an output.",
      "selected", {"dexpi": "Equipment", "ecad": "Device"}, {"ecad"}),
     ("equipment-device-join", "Match DEXPI Equipment with ECAD Device by AssetIdentifier.",
      "selected", {"dexpi": "Equipment", "ecad": "Device"}),
