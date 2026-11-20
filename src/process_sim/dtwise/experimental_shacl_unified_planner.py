@@ -135,7 +135,7 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
             "mode": "n-domain", "domains": selected_domains,
             "error": {"type": type(exc).__name__, "message": str(exc)},
             "raw_model_response": raw, "sparql": None,
-        }))
+        })
     if timings is not None:
         timings["python_validation_ms"] = (perf_counter() - t0) * 1000
     t0 = perf_counter()
