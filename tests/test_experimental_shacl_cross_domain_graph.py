@@ -128,14 +128,17 @@ def test_rejects_disconnected_selected_graph():
             offered, mappings)
 
 
-def test_explicit_empty_owner_policy_offers_no_mapping():
+def test_empty_owner_metadata_does_not_veto_approved_predicate_mapping():
     mappings, domains = fixture()
     mappings["de"]["approved_owner_pairs"] = []
     offered = qualify_mapping_graph(mappings, domains)
-    assert [e["id"] for e in offered["mapping_candidates"]] == ["eb"]
-    assert "dexpi:P1" not in {
-        c["id"] for c in offered["identifier_path_candidates"]
-    }
+    assert [e["id"] for e in offered["mapping_candidates"]] == ["de", "eb"]
+    assert next(e for e in offered["mapping_candidates"] if e["id"] == "de")[
+        "left_identifier_candidate_ids"
+    ] == ["dexpi:P1", "dexpi:P2"]
+    assert [m["id"] for m in validate_mapping_graph_selection(
+        ["de"], ["dexpi:P2", "ecad:P1"], offered, mappings
+    )] == ["de"]
 
 
 def test_only_explicitly_approved_owner_pair_is_offered():
