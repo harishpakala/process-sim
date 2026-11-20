@@ -309,12 +309,19 @@ def test_direct_intent_restored_rejects_invalid_model_fields(sample):
         }))
 
 
-def test_or_join_compiles_optional_filters_without_model(sample):
-    index, prepared, _ = sample
+def test_or_join_compiles_optional_filters_with_model(sample):
+    index, prepared, plan = sample
     prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
         "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
-    result = run_phase4_and_join_plan(
-        index, prepared, transport=lambda *_: pytest.fail("OR is schema-grounded"))
+    plan["boolean_operator"] = "or"
+    calls = []
+
+    def live_transport(*args):
+        calls.append(args)
+        return {"message": {"content": json.dumps(plan)}}
+
+    result = run_phase4_and_join_plan(index, prepared, transport=live_transport)
+    assert len(calls) == 1, "OR must call Ollama exactly once"
     assert result["plan"]["status"] == "selected"
     assert result["plan"]["boolean_operator"] == "or"
     assert result["intent"] is None
@@ -328,12 +335,29 @@ def test_or_join_compiles_optional_filters_without_model(sample):
     assert "<https://example.org/ecad/hasPLCEndPoint>" in query
 
 
+def test_or_model_missing_operator_rejected(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
+    with pytest.raises(SelectionContractError, match="boolean operator"):
+        run_phase4_and_join_plan(index, prepared, transport=transport(plan))
+
+
+def test_or_model_wrong_operator_rejected(sample):
+    index, prepared, plan = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
+    plan["boolean_operator"] = "and"
+    with pytest.raises(SelectionContractError, match="boolean operator"):
+        run_phase4_and_join_plan(index, prepared, transport=transport(plan))
+
+
 def test_or_plan_cannot_be_compiled_as_and(sample):
     index, prepared, _ = sample
     prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
         "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
-    result = run_phase4_and_join_plan(
-        index, prepared, transport=lambda *_: pytest.fail("No model required"))
+    plan["boolean_operator"] = "or"
+    result = run_phase4_and_join_plan(index, prepared, transport=transport(plan))
     del result["plan"]["boolean_operator"]
     with pytest.raises(SelectionContractError, match="boolean operator"):
         compile_phase4_and_join_sparql(result)
