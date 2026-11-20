@@ -257,3 +257,53 @@ def select_n_domain_with_ollama(prepared: dict, *, model="qwen2.5-coder:7b",
     raw = ollama_select(prepared["prompt"], model=model, endpoint=endpoint,
                         transport=transport, system_prompt=SYSTEM_PROMPT)
     return validate_n_domain_selection(raw, prepared)
+
+
+COMPACT_SYSTEM_PROMPT = """Select a SHACL-grounded cross-domain query plan using ONLY supplied IDs.
+Results are projected outputs; join participants need not be projected.
+For EVERY entity domain mentioned as a join participant, select its owner-specific
+identifier path, even when only another domain is returned. Select approved
+mapping edges that connect ALL participant domains, with BOTH endpoint paths
+selected for each edge. Each selected identifier path must belong to an edge.
+An allowed pair is an alternative, not an instruction to select every pair.
+Do not invent paths, owner pairs, mappings, or instance-level equivalences.
+If entity owners are unspecified and multiple alternatives fit, return
+ambiguous with empty arrays; NEVER select all alternatives to resolve ambiguity.
+If unsupported, return unresolved with empty arrays. Respect identifier exclusions.
+Return ONLY JSON with exactly: status (selected/ambiguous/unresolved),
+result_ids (array), identifier_path_ids (array), mapping_ids (array),
+reason (nonempty string). For ambiguous/unresolved all arrays must be empty."""
+
+
+def compact_n_domain_prompt(prompt: dict) -> dict:
+    """Losslessly expose semantic choices, omitting validator-only SHACL metadata.
+
+    The caller MUST validate against the original prepared prompt/registries.
+    No owner, path, or mapping alternative is chosen or pruned here.
+    """
+    def owner_and_property(path: str) -> tuple[str, str]:
+        parts = [part.strip() for part in path.split(" → ")]
+        return parts[0], parts[-1]
+
+    return {
+        "question": prompt["question"],
+        "results": [
+            {"id": item["id"], "domain": item["domain"],
+             "kind": item["kind"], "path": item["path"]}
+            for item in prompt["result_candidates"]
+        ],
+        "identifiers": [
+            {"id": item["id"], "domain": item["domain"],
+             "owner": owner_and_property(item["path"])[0],
+             "property": owner_and_property(item["path"])[1]}
+            for item in prompt["identifier_path_candidates"]
+        ],
+        "mappings": [
+            {"id": edge["id"], "domains": [edge["left_domain"], edge["right_domain"]],
+             "allowed_pairs": [
+                 [alternative["left_id"], alternative["right_id"]]
+                 for alternative in edge["join_alternatives"]
+             ]}
+            for edge in prompt["mapping_candidates"]
+        ],
+    }
