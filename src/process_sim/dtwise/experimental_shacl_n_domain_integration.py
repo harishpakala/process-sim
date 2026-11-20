@@ -79,25 +79,41 @@ def main(argv: list[str] | None = None) -> int:
         name, question = case[:2]
         start = perf_counter()
         raw = None
+        timings = {}
+        prompt_bytes = 0
         try:
             prepared = prepare_live_candidates(schema, mappings, question, domains)
+            timings["prepare"] = perf_counter() - start
             prompt = prepared["prompt"]
+            prompt_bytes = len(json.dumps(prompt, ensure_ascii=False).encode("utf-8"))
             if args.debug:
                 print("QUESTION:", question)
                 print("OFFERED:", json.dumps(prompt, ensure_ascii=False, indent=2))
             if prompt["mapping_candidates"]:
-                raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
-                selection = validate_n_domain_selection(raw, prepared)
+                qwen_start = perf_counter()
+                try:
+                    raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
+                finally:
+                    timings["qwen"] = perf_counter() - qwen_start
+                validation_start = perf_counter()
+                try:
+                    selection = validate_n_domain_selection(raw, prepared)
+                finally:
+                    timings["validate"] = perf_counter() - validation_start
             else:
                 selection = {"status": "unresolved", "result_ids": [],
                              "identifier_path_ids": [], "mapping_ids": []}
+            assertion_start = perf_counter()
             passed, detail = check(selection, prompt, case)
+            timings["assert"] = perf_counter() - assertion_start
             if args.debug:
                 print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
         except Exception as exc:
             passed, detail = False, f"{type(exc).__name__}: {exc}"
         failures += not passed
         print(f"{count}D/{name}: {'PASS' if passed else 'FAIL'} {perf_counter() - start:.2f}s")
+        print("TIMING:", " ".join(f"{stage}={seconds:.2f}s" for stage, seconds in timings.items()),
+              f"prompt={prompt_bytes:,} bytes")
         print("QWEN:", raw if raw is not None else "(not called: no qualified mapping or request failed)")
         if not passed or args.debug:
             print("DETAIL:", detail)
