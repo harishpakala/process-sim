@@ -252,7 +252,7 @@ def run(count, test, expected_domains, args, schema, mappings):
         result = plan_question(
             question, schema, mappings,
             **({} if args.auto_domains else {"domains": count}),
-            operation=test["mode"].removeprefix("--") if count == 1 else "phase1-plan",
+            operation=(None if args.auto_operation else test["mode"].removeprefix("--")) if count == 1 else "phase1-plan",
             model=args.model, embed_model=args.embed_model,
             ollama_url=args.ollama_url, prompt_format=args.prompt_format,
             index_path=INDEX_PATH,
@@ -265,6 +265,9 @@ def run(count, test, expected_domains, args, schema, mappings):
             if count > 1 and set(result.get("domains", ())) != set(expected):
                 routing = "FAIL"
                 raise AssertionError(f"Wrong planner domains: {result.get('domains')}")
+        if args.auto_operation and count == 1:
+            if result.get("classification", {}).get("status") != "supported":
+                raise AssertionError(f"Unsupported classification: {result.get('classification')}")
         if "error" in result:
             raise AssertionError(str(result["error"]))
         if count == 1:
@@ -285,6 +288,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, default=Path("shacl-integration-report.json"))
     parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4))
+    parser.add_argument("--auto-operation", action="store_true",
+                        help="Classify single-domain query operation instead of using case override")
     parser.add_argument("--auto-domains", action="store_true",
                         help="Infer domains for every case and assert correct routing")
     parser.add_argument("--case", action="append", help="Named case; repeatable")
@@ -332,7 +337,8 @@ def main():
         routing_passed = sum(r["routing"] == "PASS" for r in results)
         print(f"ROUTING {routing_passed} PASS / {len(results)-routing_passed} FAIL")
     report = dict(model=args.model, prompt_format=args.prompt_format,
-                  auto_domains=args.auto_domains, cases=results,
+                  auto_domains=args.auto_domains, auto_operation=args.auto_operation,
+                  cases=results,
                   passed=passed, failed=len(results)-passed, total_seconds=total,
                   note="Live model output can vary; SPARQL was compiled but never executed")
     args.report.parent.mkdir(parents=True, exist_ok=True)
