@@ -25,6 +25,7 @@ from process_sim.dtwise.experimental_shacl_planner_state_machine import (
     run_single_domain_state_machine,
 )
 from process_sim.dtwise.experimental_shacl_subgraph import SubgraphIndex
+from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 
 
 def plan_question(
@@ -78,7 +79,15 @@ def plan_question(
         model=model,
         system_prompt=COMPACT_SYSTEM_PROMPT if compact else SYSTEM_PROMPT,
     )
-    selection = validate_n_domain_selection(raw, prepared)
+    try:
+        selection = validate_n_domain_selection(raw, prepared)
+    except SelectionContractError as exc:
+        return {
+            "mode": "n-domain",
+            "error": {"type": type(exc).__name__, "message": str(exc)},
+            "raw_model_response": raw,
+            "sparql": None,
+        }
     sparql = (
         compile_n_domain_sparql(selection, prepared)
         if selection["status"] == "selected" else None
@@ -108,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
         model=args.model, prompt_format=args.prompt_format, operation=args.operation,
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))
-    return 0
+    return 1 if "error" in result else 0
 
 
 if __name__ == "__main__":
