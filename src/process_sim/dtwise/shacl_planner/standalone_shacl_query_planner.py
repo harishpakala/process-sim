@@ -216,13 +216,18 @@ def _unsupported_intent(question):
 
 
 def _explicit_sort(question):
-    m=re.search(r'\b(?:order(?:ed)?|sort(?:ed)?)\s+by\s+([A-Za-z_][\w]*)\s*(ascending|descending|asc|desc)?',question,re.I)
-    if m:return (m.group(1), 'DESC' if (m.group(2) or '').lower().startswith('desc') else 'ASC')
+    m=re.search(r'\b(?:order(?:ed)?|sort(?:ed|ing)?)\s+(?:the\s+results\s+)?by\s+(.+)',question,re.I)
+    if m:
+        direction = 'DESC' if re.search(r'\b(desc|descending|highest\s+to\s+lowest)\b',m.group(1),re.I) else 'ASC'
+        return (m.group(1).split()[0], direction)
     return None
 
 
 def _explicit_limit(question):
-    patterns=[r'\blimited\s+to\s+(\d+)\b',
+    number_words={'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9,'ten':10}
+    word_match=re.search(r'\bup\s+to\s+('+'|'.join(number_words)+r')\b',question,re.I)
+    if word_match:return number_words[word_match.group(1).lower()]
+    patterns=[r'\bup\s+to\s+(\d+)\b',r'\blimited\s+to\s+(\d+)\b',
               r'\b(?:limit|return|show|top|first)\s+(\d+)\b',
               r'\b(?:return|show)\s+(?:the\s+)?first\s+(\d+)\b']
     for p in patterns:
