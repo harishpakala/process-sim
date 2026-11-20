@@ -23,16 +23,19 @@ SCENARIOS = (
         "ambiguous-owner",
         "Find the corresponding DEXPI and ECAD entities using AssetIdentifier, without specifying which entity kinds.",
         {"ambiguous"},
+        ("dexpi", "ecad"),
     ),
     (
         "unsupported-identifier",
         "Match DEXPI Equipment to ECAD Device and AssetInventory entities using ProductIdentifier only; do not use AssetIdentifier.",
         {"unresolved"},
+        DOMAINS,
     ),
     (
         "three-domain-asset",
         "Show DEXPI Equipment, its corresponding ECAD Device, and matching AssetInventory entity using AssetIdentifier.",
         {"selected"},
+        DOMAINS,
     ),
 )
 
@@ -44,11 +47,11 @@ def main() -> int:
         root / "semantic/ontology2/dtwise/cross-domain-mappings.json"
     )
     failures = 0
-    for name, question, expected in SCENARIOS:
+    for name, question, expected, domains in SCENARIOS:
         print(f"\n=== {name} ===")
         print("QUESTION:", question)
         try:
-            prepared = prepare_live_candidates(schema, mappings, question, DOMAINS)
+            prepared = prepare_live_candidates(schema, mappings, question, domains)
             prompt = prepared["prompt"]
             print("OFFERED:", json.dumps({
                 "results": len(prompt["result_candidates"]),
