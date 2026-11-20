@@ -1,23 +1,43 @@
-"""Offline regression checks for existing single-domain operation routing."""
+"""Offline contract tests: routing depends on extracted structure, not schema names."""
 import unittest
 
-from process_sim.dtwise.experimental_shacl_query_classifier import _structural_classification
-from run_shacl_planner import CASES
+from process_sim.dtwise.experimental_shacl_query_classifier import (
+    operation_from_intent, validate_intent,
+)
 
 
-class SingleDomainClassificationTests(unittest.TestCase):
-    def test_existing_cases_keep_their_operations(self):
-        for case in CASES:
-            with self.subTest(case=case["name"]):
-                result = _structural_classification(case["question"])
-                self.assertIsNotNone(result)
-                self.assertEqual(result["status"], "supported")
-                self.assertEqual(result["operation"], case["mode"].removeprefix("--"))
+def intent(results, filters=(), owner=None, boolean=None, explicit=True, action="retrieve"):
+    return dict(action=action, results=list(results), shared_owner=owner,
+                filters=[dict(property=f"Owner.field{i}", operator="=", value=f"v{i}")
+                         for i in range(len(filters))],
+                boolean_operator=boolean, explicit_filter_syntax=explicit)
 
-    def test_aggregation_is_unsupported(self):
-        result = _structural_classification("Count devices in ECAD")
-        self.assertEqual(result["status"], "unsupported")
-        self.assertIsNone(result["operation"])
+
+class QueryClassificationTests(unittest.TestCase):
+    def test_operation_mapping_uses_structure_not_entity_names(self):
+        examples = [
+            (intent(["Thing.value"]), "phase1-plan"),
+            (intent(["Thing.value"], [1]), "phase2-filter"),
+            (intent(["Thing.value"], [1, 2], boolean="AND"), "phase3-and"),
+            (intent(["A.value", "B.value"], owner="Root"), "phase4-join"),
+            (intent(["A.value", "B.value"], [1], owner="Root"), "phase4-filtered-join"),
+            (intent(["A.value", "B.value"], [1, 2], owner="Root", boolean="OR"), "phase4-and-join"),
+            (intent(["A.value", "B.value"], [1, 2], owner="Root", boolean="AND", explicit=False), "direct-intent"),
+            (intent(["Thing.value"], action="aggregate"), None),
+        ]
+        for value, expected in examples:
+            with self.subTest(expected=expected):
+                result = operation_from_intent(value)
+                self.assertEqual(result["operation"], expected)
+
+    def test_malformed_intent_rejected(self):
+        with self.assertRaises(ValueError):
+            validate_intent('{"action":"retrieve"}')
+
+    def test_unsupported_operator(self):
+        value = intent(["Thing.value"], [1])
+        value["filters"][0]["operator"] = ">"
+        self.assertEqual(operation_from_intent(value)["status"], "unsupported")
 
 
 if __name__ == "__main__":
