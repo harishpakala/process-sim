@@ -1,8 +1,7 @@
 """Deterministic Phase 5.1 domain resolution from explicit question mentions."""
 import re
 
-from process_sim.dtwise.experimental_shacl_subgraph import SH_NODE_SHAPE
-
+from process_sim.dtwise.shacl_planner.grounding.subgraph import SH_NODE_SHAPE
 
 class DomainResolutionError(ValueError):
     """Domain is missing, ambiguous, or conflicts with the explicit override."""
