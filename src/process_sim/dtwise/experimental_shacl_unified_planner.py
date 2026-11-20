@@ -129,11 +129,13 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
     try:
         selection = validate_n_domain_selection(raw, prepared)
     except SelectionContractError as exc:
-        return {
+        if timings is not None:
+            timings["python_validation_ms"] = (perf_counter() - t0) * 1000
+        return finish({
             "mode": "n-domain", "domains": selected_domains,
             "error": {"type": type(exc).__name__, "message": str(exc)},
             "raw_model_response": raw, "sparql": None,
-        })
+        }))
     if timings is not None:
         timings["python_validation_ms"] = (perf_counter() - t0) * 1000
     t0 = perf_counter()
@@ -157,6 +159,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument("--prompt-format", choices=("compact", "full"), default="compact")
+    parser.add_argument("--timing", action="store_true", help="Include planner stage timings")
     args = parser.parse_args(argv)
     root = Path(__file__).resolve().parents[3]
     index_path = root / "semantic/ontology2/dtwise/dtwise-schema-index.json"
@@ -169,6 +172,7 @@ def main(argv: list[str] | None = None) -> int:
         operation=args.operation, domain=args.domain, model=args.model,
         embed_model=args.embed_model, ollama_url=args.ollama_url,
         prompt_format=args.prompt_format, index_path=index_path,
+        timing=args.timing,
     )
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return 1 if "error" in result else 0
