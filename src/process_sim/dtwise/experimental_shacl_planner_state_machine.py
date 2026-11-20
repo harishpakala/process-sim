@@ -42,7 +42,23 @@ def transition(trace, target):
     trace.append(target)
 
 
-class JoinPlannerStateMachine:
+class PlannerLifecycle:
+    """Shared state and transition contract for planner operations."""
+
+    def __init__(self):
+        self.trace = [PlannerState.START]
+
+    def _require(self, state):
+        if self.trace[-1] != state:
+            raise SelectionContractError(
+                f"Expected planner state {state.value}, got {self.trace[-1].value}"
+            )
+
+    def _advance(self, target):
+        transition(self.trace, target)
+
+
+class JoinPlannerStateMachine(PlannerLifecycle):
     """One method per stage; transitions occur only after successful gates."""
 
     def __init__(self, index, prepared, *, model="qwen2.5-coder:7b",
@@ -52,7 +68,7 @@ class JoinPlannerStateMachine:
         self.model = model
         self.endpoint = endpoint
         self.transport = transport
-        self.trace = [PlannerState.START]
+        super().__init__()
         self.qualified = None
         self.question = None
         self.literals = None
@@ -62,12 +78,6 @@ class JoinPlannerStateMachine:
         self.intent = None
         self.sparql = None
 
-    def _require(self, state):
-        if self.trace[-1] != state:
-            raise SelectionContractError(
-                f"Expected planner state {state.value}, got {self.trace[-1].value}"
-            )
-
     def qualify(self):
         self._require(PlannerState.START)
         qualified = qualify_candidates(self.index, self.prepared)
@@ -76,7 +86,7 @@ class JoinPlannerStateMachine:
         self.question = question
         self.literals = _literals(question)
         self.is_or = OR_QUESTION.fullmatch(question.strip()) is not None
-        transition(self.trace, PlannerState.QUALIFIED)
+        self._advance(PlannerState.QUALIFIED)
 
     def is_supported(self):
         self._require(PlannerState.QUALIFIED)
@@ -96,7 +106,7 @@ class JoinPlannerStateMachine:
                             transport=self.transport,
                             system_prompt=OR_PROMPT if self.is_or else PROMPT)
         self.raw = raw
-        transition(self.trace, PlannerState.MODEL_SELECTED)
+        self._advance(PlannerState.MODEL_SELECTED)
 
     def validate(self):
         self._require(PlannerState.MODEL_SELECTED)
@@ -110,7 +120,7 @@ class JoinPlannerStateMachine:
             intent = validated_join_intent(plan, self.qualified)
         self.plan = plan
         self.intent = intent
-        transition(self.trace, PlannerState.VALIDATED)
+        self._advance(PlannerState.VALIDATED)
 
     def compile(self):
         self._require(PlannerState.VALIDATED)
@@ -120,7 +130,7 @@ class JoinPlannerStateMachine:
         if sparql is None:
             raise SelectionContractError("Selected plan failed to compile")
         self.sparql = sparql
-        transition(self.trace, PlannerState.COMPILED)
+        self._advance(PlannerState.COMPILED)
 
     def abstain(self):
         if self.trace[-1] == PlannerState.QUALIFIED:
@@ -132,7 +142,7 @@ class JoinPlannerStateMachine:
         elif self.trace[-1] != PlannerState.VALIDATED or self.plan["status"] == "selected":
             raise SelectionContractError("Abstention requires unsupported or non-selected plan")
         self.sparql = None
-        transition(self.trace, PlannerState.ABSTAINED)
+        self._advance(PlannerState.ABSTAINED)
         return self._result()
 
     def _result(self):
