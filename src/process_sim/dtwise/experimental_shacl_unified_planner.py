@@ -11,7 +11,6 @@ from pathlib import Path
 
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
 from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domain
-from process_sim.dtwise.experimental_shacl_grounding import property_grounding
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     SYSTEM_PROMPT, COMPACT_SYSTEM_PROMPT, compact_n_domain_prompt,
@@ -19,10 +18,7 @@ from process_sim.dtwise.experimental_shacl_n_domain_selection import (
 )
 from process_sim.dtwise.experimental_shacl_n_domain_sparql import compile_n_domain_sparql
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_planner_state_machine import run_single_domain_state_machine
-from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
-from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
 from process_sim.dtwise.experimental_shacl_subgraph import load_index
 from process_sim.dtwise.experimental_shacl_three_domain_integration import DOMAINS as THREE_DOMAINS
 from process_sim.dtwise.experimental_shacl_four_domain_integration import DOMAINS as FOUR_DOMAINS
@@ -60,40 +56,11 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int,
         }
         chosen_domain = resolve_domain(question, available, override=domain, schema=schema)
         index = load_index(index_path, domain=chosen_domain)
-        grounding = property_grounding(index, question)
-        if grounding["missing_properties"]:
-            return {
-                "mode": "single-domain", "domain": chosen_domain,
-                "selection": {
-                    "status": "unresolved", "selected_candidate_ids": [],
-                    "reason": "Explicit SHACL property not found in domain: "
-                              + ", ".join(grounding["missing_properties"]),
-                },
-                "sparql": None, "grounding": grounding,
-            }
-        extended = operation in (
-            "phase2-filter", "phase3-and", "phase4-join",
-            "phase4-filtered-join", "phase4-and-join", "direct-intent",
+        from try_dexpi import run_single_domain_query
+        result = run_single_domain_query(
+            index, question, operation=operation, model=model,
+            embed_model=embed_model, endpoint=ollama_url,
         )
-        prepared = semantic_candidates(
-            index, question,
-            top_shapes=16 if extended else 8,
-            top_properties=8 if extended else 2,
-            max_candidates=128 if extended else 64,
-            model=embed_model, endpoint=ollama_url,
-        )
-        if operation == "direct-intent":
-            result = run_direct_join_intent(
-                index, prepared, model=model, endpoint=ollama_url,
-            )
-        else:
-            result = run_single_domain_state_machine(
-                index, prepared, operation=operation, model=model,
-                endpoint=ollama_url, compile_sparql=True,
-            ) if operation == "phase1-plan" else run_single_domain_state_machine(
-                index, prepared, operation=operation, model=model,
-                endpoint=ollama_url,
-            )
         return {"mode": "single-domain", "operation": operation, **result}
 
     selected_domains = DOMAIN_SETS[domains]
