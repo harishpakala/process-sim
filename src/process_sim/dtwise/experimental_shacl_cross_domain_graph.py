@@ -55,10 +55,11 @@ def qualify_mapping_graph(mappings: dict[str, dict],
         left, right = mapping["left_domain"], mapping["right_domain"]
         left_ids = sorted(by_predicate.get((left, mapping["left_property"]), []))
         right_ids = sorted(by_predicate.get((right, mapping["right_property"]), []))
-        if "approved_owner_pairs" in mapping:
-            # Explicit owner-level policy is fail-closed. An empty list offers
-            # no joins. Never infer owner correspondence from matching predicates.
-            approved_pairs = mapping["approved_owner_pairs"]
+        # Predicate approval qualifies SHACL-grounded owner combinations.
+        # A nonempty owner-pair allowlist optionally narrows them; an empty
+        # list does not veto a separately approved predicate-level mapping.
+        approved_pairs = mapping.get("approved_owner_pairs", [])
+        if approved_pairs:
             if not isinstance(approved_pairs, list):
                 raise SelectionContractError("Malformed owner-pair approval policy")
             allowed_left, allowed_right = set(), set()
@@ -96,7 +97,7 @@ def qualify_mapping_graph(mappings: dict[str, dict],
                     if identifiers[lid]["owner_shape_uri"] == pair["left_owner_shape_uri"]
                     and identifiers[rid]["owner_shape_uri"] == pair["right_owner_shape_uri"]
                 ], key=lambda p: (p["left_id"], p["right_id"]))
-                if "approved_owner_pairs" in mapping else None
+                if approved_pairs else None
             ),
         })
     used = {cid for edge in edges for side in ("left", "right")
@@ -145,7 +146,7 @@ def validate_mapping_graph_selection(mapping_ids: list[str],
         right = selected.intersection(edge["right_identifier_candidate_ids"])
         if not left or not right:
             raise SelectionContractError("Selected mapping lacks identifier endpoints")
-        if "approved_owner_pairs" in source:
+        if source.get("approved_owner_pairs"):
             allowed_pairs = {
                 (p["left_id"], p["right_id"])
                 for p in edge.get("approved_owner_pair_candidate_ids", [])
