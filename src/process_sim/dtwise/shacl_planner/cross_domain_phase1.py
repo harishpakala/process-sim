@@ -192,25 +192,37 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
     original_candidates, original_graph = candidates, graph
     _, graph = _prune_explicit_candidates(question, candidates, graph)
     identifier_ids = {p['id'] for p in graph['identifier_path_candidates']}
-    # Retain explicitly named result owners, explicitly named properties,
-    # and mapping endpoints. Do not infer synonyms or select join alternatives.
-    prompt_candidates = [
-        c for c in candidates
-        if (
-            c['kind'] == 'result'
-            and bool(set(c.get('node_uris') or []) & exact_shapes[c['domain']])
-        ) or (
-            c['kind'] == 'property'
-            and (
-                c['id'] in identifier_ids
-                or (
-                    (c.get('property_name') or '').casefold()
-                    in exact_properties[c['domain']]
-                    and bool(set(c.get('node_uris') or []) & exact_shapes[c['domain']])
-                )
-            )
-        )
-    ]
+    # URI ancestry alone admits unrelated descendants and domain roots.
+    # Match complete displayed SHACL labels, never substrings or synonyms.
+    def explicitly_named(label):
+        return bool(re.search(r'(?<!\\w)' + re.escape(label) + r'(?!\\w)',
+                              question, flags=re.IGNORECASE))
+
+    named_owners = {
+        d: {
+            c['path'].split(' → ')[-1].strip().casefold()
+            for c in candidates
+            if c['domain'] == d and c['kind'] == 'result'
+            and len(c['path'].split(' → ')) > 1
+            and explicitly_named(c['path'].split(' → ')[-1].strip())
+        }
+        for d in domains
+    }
+    prompt_candidates = []
+    for c in candidates:
+        parts = [part.strip() for part in c['path'].split(' → ')]
+        domain = c['domain']
+        if c['kind'] == 'result':
+            if len(parts) > 1 and parts[-1].casefold() in named_owners[domain]:
+                prompt_candidates.append(c)
+        elif c['kind'] == 'property':
+            if c['id'] in identifier_ids or (
+                len(parts) > 2
+                and parts[-2].casefold() in named_owners[domain]
+                and (c.get('property_name') or parts[-1]).casefold()
+                    in exact_properties[domain]
+            ):
+                prompt_candidates.append(c)
     # No evidence-based narrowing is possible: preserve the original choices.
     if not prompt_candidates:
         prompt_candidates, graph = original_candidates, original_graph
