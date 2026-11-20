@@ -104,6 +104,44 @@ def format_compact(result: dict) -> str:
     return "\n".join(lines)
 
 
+def run_single_domain_query(index, question: str, *, operation: str,
+                            model="qwen2.5-coder:7b",
+                            embed_model="nomic-embed-text:latest",
+                            endpoint="http://127.0.0.1:11434", top_k=8):
+    """Shared single-domain query orchestration; compile only, never execute."""
+    from process_sim.dtwise.experimental_shacl_grounding import property_grounding
+    from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+    from process_sim.dtwise.experimental_shacl_planner_state_machine import run_single_domain_state_machine
+    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+
+    allowed = {"phase1-plan", "phase2-filter", "phase3-and", "phase4-join",
+               "phase4-filtered-join", "phase4-and-join", "direct-intent"}
+    if operation not in allowed:
+        raise ValueError(f"Unsupported single-domain operation: {operation}")
+    grounding = property_grounding(index, question)
+    if grounding["missing_properties"]:
+        return {"selection": {
+            "status": "unresolved", "selected_candidate_ids": [],
+            "reason": "Explicit SHACL property not found in domain: "
+                      + ", ".join(grounding["missing_properties"]),
+        }, "selected_paths": [], "grounding": grounding}
+
+    broad_shapes = operation in ("phase2-filter", "phase4-join",
+                                 "phase4-filtered-join", "phase4-and-join", "direct-intent")
+    broad_properties = operation != "phase1-plan"
+    prepared = semantic_candidates(
+        index, question,
+        top_shapes=max(top_k, 16) if broad_shapes else top_k,
+        top_properties=8 if broad_properties else 2,
+        max_candidates=128 if broad_properties else 64,
+        model=embed_model, endpoint=endpoint,
+    )
+    if operation == "direct-intent":
+        return run_direct_join_intent(index, prepared, model=model, endpoint=endpoint)
+    return run_single_domain_state_machine(
+        index, prepared, operation=operation, model=model, endpoint=endpoint,
+    )
+
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("question", nargs="?", help="Natural-language schema question")
@@ -212,18 +250,36 @@ def main() -> None:
                 print("Selected paths:")
                 print("  (none)")
             return
-        from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
-        t_retrieval = perf_counter()
-        prepared = semantic_candidates(index, question, top_shapes=max(args.top_k, 16) if (args.phase2_filter or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else args.top_k,
-                                       top_properties=8 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else 2,
-                                       max_candidates=128 if (args.phase2_filter or args.phase3_and or args.phase4_join or args.phase4_filtered_join or args.phase4_and_join or args.direct_intent) else 64,
-                                       model=args.embed_model, endpoint=args.ollama_url)
-        if timings is not None:
-            timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
+        selected_operation = next((
+            operation for flag, operation in (
+                (args.direct_intent, "direct-intent"),
+                (args.phase4_and_join, "phase4-and-join"),
+                (args.phase4_filtered_join, "phase4-filtered-join"),
+                (args.phase4_join, "phase4-join"),
+                (args.phase3_and, "phase3-and"),
+                (args.phase2_filter, "phase2-filter"),
+                (args.phase1_plan, "phase1-plan"),
+            ) if flag
+        ), None)
+        if selected_operation is not None:
+            t_retrieval = perf_counter()
+            shared_result = run_single_domain_query(
+                index, question, operation=selected_operation, model=args.model,
+                embed_model=args.embed_model, endpoint=args.ollama_url, top_k=args.top_k,
+            )
+            if timings is not None:
+                timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
+        else:
+            from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+            t_retrieval = perf_counter()
+            prepared = semantic_candidates(
+                index, question, top_shapes=args.top_k, top_properties=2,
+                max_candidates=64, model=args.embed_model, endpoint=args.ollama_url,
+            )
+            if timings is not None:
+                timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
         if args.direct_intent:
-            from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
-            result = run_direct_join_intent(index, prepared, model=args.model,
-                                            endpoint=args.ollama_url)
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -238,13 +294,7 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_and_join:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase4-and-join",
-                model=args.model, endpoint=args.ollama_url,
-            )
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -255,13 +305,7 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_filtered_join:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase4-filtered-join",
-                model=args.model, endpoint=args.ollama_url,
-            )
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -272,13 +316,7 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_join:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase4-join",
-                model=args.model, endpoint=args.ollama_url,
-            )
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -289,13 +327,7 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase3_and:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase3-and",
-                model=args.model, endpoint=args.ollama_url,
-            )
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -311,13 +343,7 @@ def main() -> None:
                 else:
                     print(result["sparql"] or "  (none)")
         elif args.phase2_filter:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase2-filter",
-                model=args.model, endpoint=args.ollama_url,
-            )
+            result = shared_result
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -332,14 +358,7 @@ def main() -> None:
                 if not result["queries"]:
                     print("  (none)")
         elif args.phase1_plan:
-            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
-                run_single_domain_state_machine,
-            )
-            result = run_single_domain_state_machine(
-                index, prepared, operation="phase1-plan",
-                model=args.model, endpoint=args.ollama_url,
-                timing=timings, compile_sparql=args.phase1_sparql,
-            )
+            result = shared_result
             if timings is not None:
                 timings["total_ms"] = (perf_counter() - t_total) * 1000
                 result["timing_ms"] = timings
