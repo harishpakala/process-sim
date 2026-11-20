@@ -52,7 +52,7 @@ def _explicit_vocabulary_matches(question: str, labels: set[str]) -> set[str]:
     """Match complete SHACL-derived labels, never substring/domain-specific rules."""
     return {
         label for label in labels if label and re.search(
-            r"(?<![\\w])" + re.escape(label) + r"(?![\\w])",
+            r"(?<![\w])" + re.escape(label) + r"(?![\w])",
             question, flags=re.IGNORECASE,
         )
     }
@@ -75,8 +75,8 @@ def _prune_explicit_candidates(question: str, results: list[dict],
     mentioned = _explicit_vocabulary_matches(question, identifier_labels)
     excluded = {
         label for label in mentioned if re.search(
-            r"(?:do not use|don't use|without|exclude|excluding|not using)\\s+"
-            + re.escape(label) + r"(?![\\w])",
+            r"(?:do not use|don't use|without|exclude|excluding|not using)\s+"
+            + re.escape(label) + r"(?![\w])",
             question, flags=re.IGNORECASE,
         )
     }
