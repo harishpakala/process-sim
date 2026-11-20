@@ -41,6 +41,14 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     '"reason":"brief explanation",\n "mapping_ids":["approved-mapping-id"],\n '
     '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
 ) + """
+For selected plans, include every explicitly requested WHERE comparison in filters.
+Use only the offered property candidate whose exact SHACL property label is
+named in the question. Copy the literal value from the question verbatim and
+use the comparison operator requested (use "=" for "is" or "equals").
+A valid cross-domain mapping does not replace or satisfy a WHERE filter.
+Before returning selected, check that no explicitly requested filter was omitted.
+If a requested filter cannot be represented by offered candidates, return
+unresolved instead of silently dropping it.
 For ambiguous/unresolved/unsupported, mapping_ids and identifier_path_ids MUST be [].
 Do not use any additional model calls. Python verifies all selections.
 """
