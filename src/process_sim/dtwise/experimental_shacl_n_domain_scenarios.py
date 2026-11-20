@@ -22,7 +22,7 @@ SCENARIOS = (
     (
         "ambiguous-owner",
         "Find the corresponding DEXPI and ECAD entities using AssetIdentifier, without specifying which entity kinds.",
-        {"unresolved"},
+        {"ambiguous"},
         ("dexpi", "ecad"),
     ),
     (
@@ -34,7 +34,7 @@ SCENARIOS = (
     (
         "three-domain-asset",
         "Show DEXPI Equipment, its corresponding ECAD Device, and matching AssetInventory entity using AssetIdentifier.",
-        {"unresolved"},
+        {"selected"},
         DOMAINS,
     ),
 )
