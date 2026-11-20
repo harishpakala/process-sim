@@ -1,8 +1,11 @@
-"""Strict single-domain query-category selection; never generates SPARQL."""
+"""Extract query intent, then map its structure to existing single-domain planners.
+
+Extraction is model-driven; routing is deterministic. Existing operation validators
+remain authoritative for schema grounding and supported syntax.
+"""
 from __future__ import annotations
 
 import json
-import re
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 
@@ -11,87 +14,100 @@ OPERATIONS = (
     "phase4-filtered-join", "phase4-and-join", "direct-intent",
 )
 
-CLASSIFIER_PROMPT = """Classify the STRUCTURE of one natural-language SHACL query.
-Return JSON only: status (supported or unsupported), operation (one listed
-operation or null), reason (nonempty string). Do not invent operations.
-Categories:
-phase1-plan: retrieval with no conditions and no explicitly shared-owner sibling join.
-phase2-filter: one equality filter and no sibling join.
-phase3-and: multiple equality filters joined by AND and no sibling join.
-phase4-join: explicitly requested sibling result paths sharing an owner, no filters.
-phase4-filtered-join: sibling result paths sharing an owner, one equality filter.
-phase4-and-join: sibling result paths with multiple AND/OR equality conditions;
-also use for OR conditions without sibling paths when the existing operation
-supports them. Unsupported properties must still be checked by SHACL grounding.
-direct-intent: only when the question explicitly requires direct structured join
-intent not represented by the categories above.
-If the query requires aggregation, ordering, negation, comparison operators,
-unsupported joins, or another unlisted structure, return unsupported and null.
-Never classify a query as supported merely because it mentions a known domain.
-Do not assess schema feasibility; downstream SHACL validators handle that."""
+INTENT_PROMPT = """Extract the semantic query structure, NOT an operation name.
+Return only JSON with EXACTLY these fields:
+{
+  "action": "retrieve" or "aggregate" or "other",
+  "results": ["owner.property", ...],
+  "shared_owner": string or null,
+  "filters": [{"property": "owner.property", "operator": "=", "value": "literal"}, ...],
+  "boolean_operator": "AND" or "OR" or "MIXED" or null,
+  "explicit_filter_syntax": boolean
+}
+Results must list separately requested result properties, not intermediate
+SHACL traversal nodes. A path like Device -> EndPoint -> Address has ONE result,
+not a sibling join. shared_owner is non-null ONLY when multiple result branches
+are explicitly requested to share the same owner. It is NOT a traversal parent.
+Extract filters expressed in natural language (e.g. 'with LocalId FI_101')
+as well as filters written with '='. Set explicit_filter_syntax true only when
+filters are written using explicit equality signs (=) in the question.
+Extract all constraints even if the query may be unsupported. For AND/OR mixes
+use MIXED. For simple retrieval without conditions use an empty filters list.
+Do not invent schema properties, paths, filter values or a shared owner.
+Do not classify into planner operations. No prose outside JSON."""
 
 
-def _structural_classification(question: str) -> dict | None:
-    """Route recognizable supported syntax without relying on model guesses.
+def validate_intent(raw: str) -> dict:
+    try:
+        intent = json.loads(raw)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Invalid structured-intent JSON") from exc
+    required = {"action", "results", "shared_owner", "filters",
+                "boolean_operator", "explicit_filter_syntax"}
+    if not isinstance(intent, dict) or set(intent) != required:
+        raise ValueError("Invalid structured-intent fields")
+    if intent["action"] not in ("retrieve", "aggregate", "other"):
+        raise ValueError("Invalid intent action")
+    if not isinstance(intent["results"], list) or not all(
+            isinstance(x, str) and x.strip() for x in intent["results"]):
+        raise ValueError("Invalid intent results")
+    if intent["shared_owner"] is not None and (not isinstance(intent["shared_owner"], str)
+            or not intent["shared_owner"].strip()):
+        raise ValueError("Invalid shared owner")
+    if intent["boolean_operator"] not in (None, "AND", "OR", "MIXED"):
+        raise ValueError("Invalid Boolean operator")
+    if not isinstance(intent["explicit_filter_syntax"], bool):
+        raise ValueError("Invalid explicit-filter-syntax flag")
+    if not isinstance(intent["filters"], list) or not all(
+            isinstance(f, dict) and set(f) == {"property", "operator", "value"}
+            and isinstance(f["property"], str) and f["property"].strip()
+            and isinstance(f["operator"], str)
+            and isinstance(f["value"], str) and f["value"].strip()
+            for f in intent["filters"]):
+        raise ValueError("Invalid intent filters")
+    return intent
 
-    A SHACL traversal (Device -> EndPoint) is NOT a sibling-result join.
-    The existing operation-specific validator remains the final authority.
-    """
-    q = question.strip()
-    lower = q.casefold()
-    if re.search(r"\\b(how many|count|average|sum|group by|order by|sort|minimum|maximum)\\b", lower):
-        return {"status": "unsupported", "operation": None,
-                "reason": "Aggregation or ordering is not supported"}
-    sibling = bool(re.search(r"\\bplcendpoint\\b", lower) and
-                   re.search(r"(?<!plc)\\bendpoint\\b", lower))
-    where = re.split(r"\\bwhere\\b", q, maxsplit=1, flags=re.I)
-    clause = where[1] if len(where) == 2 else ""
-    equality_count = len(re.findall(r"(?<![!<>])=(?!=)", clause))
-    # The existing direct-intent operation handles this alternate wording.
-    if sibling and not clause and re.search(r"\\bwith\\s+localid\\b", lower):
-        operation = "direct-intent"
-    elif sibling:
-        if equality_count >= 2 or re.search(r"\\b(and|or)\\b", clause, re.I):
-            operation = "phase4-and-join"
-        elif equality_count == 1:
-            operation = "phase4-filtered-join"
-        else:
+
+def operation_from_intent(intent: dict) -> dict:
+    """Pure structural routing. A selected operation may still abstain."""
+    intent = validate_intent(json.dumps(intent))
+    filters = intent["filters"]
+    count = len(filters)
+    sibling = len(intent["results"]) > 1 and intent["shared_owner"] is not None
+    reason = "Mapped extracted query structure; operation validation remains authoritative"
+    unsupported = {"status": "unsupported", "operation": None,
+                   "reason": "Query structure has no supported single-domain operation"}
+    if intent["action"] != "retrieve" or not intent["results"]:
+        return unsupported
+    if any(f["operator"] != "=" for f in filters):
+        return unsupported
+    if count > 1 and intent["boolean_operator"] is None:
+        return unsupported
+    if count <= 1 and intent["boolean_operator"] is not None:
+        return unsupported
+    if sibling:
+        if count == 0:
             operation = "phase4-join"
-    elif equality_count >= 2 and re.search(r"\\band\\b", clause, re.I):
-        operation = "phase3-and"
-    elif equality_count == 1 and not re.search(r"\\b(and|or)\\b", clause, re.I):
-        operation = "phase2-filter"
-    elif not clause or equality_count == 0:
+        elif count == 1:
+            operation = "phase4-filtered-join" if intent["explicit_filter_syntax"] else "direct-intent"
+        else:
+            operation = "phase4-and-join" if intent["explicit_filter_syntax"] else "direct-intent"
+    elif count == 0:
         operation = "phase1-plan"
+    elif count == 1:
+        operation = "phase2-filter"
+    elif count == 2 and intent["boolean_operator"] == "AND":
+        operation = "phase3-and"
     else:
-        return None
-    return {"status": "supported", "operation": operation,
-            "reason": "Recognized query structure; SHACL validation is still required"}
+        return unsupported
+    return {"status": "supported", "operation": operation, "reason": reason}
 
 
 def classify_single_domain_query(question: str, *, model="qwen2.5-coder:7b",
                                  endpoint="http://127.0.0.1:11434", transport=None) -> dict:
     if not isinstance(question, str) or not question.strip():
         raise ValueError("Question must not be empty")
-    structural = _structural_classification(question)
-    if structural is not None:
-        return structural
-    raw = ollama_select(
-        {"question": question, "allowed_operations": list(OPERATIONS)},
-        model=model, endpoint=endpoint, transport=transport,
-        system_prompt=CLASSIFIER_PROMPT,
-    )
-    try:
-        result = json.loads(raw)
-    except (ValueError, TypeError) as exc:
-        raise ValueError("Invalid query-classification JSON") from exc
-    if not isinstance(result, dict) or set(result) != {"status", "operation", "reason"}:
-        raise ValueError("Invalid query-classification fields")
-    if not isinstance(result["reason"], str) or not result["reason"].strip():
-        raise ValueError("Query classification requires a reason")
-    if (result["status"] == "supported" and result["operation"] in OPERATIONS
-            and isinstance(result["operation"], str)):
-        return result
-    if result["status"] == "unsupported" and result["operation"] is None:
-        return result
-    raise ValueError("Invalid query-classification status or operation")
+    raw = ollama_select({"question": question}, model=model, endpoint=endpoint,
+                        transport=transport, system_prompt=INTENT_PROMPT)
+    intent = validate_intent(raw)
+    return {**operation_from_intent(intent), "intent": intent}
