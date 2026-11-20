@@ -118,3 +118,29 @@ def test_compilation_requires_selected_plan(monkeypatch):
         machine.compile()
     assert calls == ["qualify", "ollama", "validate"]
     assert machine.trace[-1] == sm.PlannerState.VALIDATED
+
+
+def test_retrieve_qualification_uses_shared_lifecycle(monkeypatch):
+    calls = []
+    qualified = {"prompt": {"question": "Show Address in ECAD", "candidates": [
+        {"kind": "property", "id": "P1"},
+        {"kind": "shape", "id": "S1"},
+    ]}}
+    monkeypatch.setattr(sm, "qualify_candidates",
+                        lambda index, prepared: calls.append("qualify") or qualified)
+    machine = sm.RetrievePlannerStateMachine(
+        type("Index", (), {"domain": "ecad"})(), {}
+    )
+    assert machine.qualify() is qualified
+    assert machine.properties == [{"kind": "property", "id": "P1"}]
+    assert machine.question == "Show Address in ECAD"
+    assert machine.trace == [sm.PlannerState.START, sm.PlannerState.QUALIFIED]
+    assert calls == ["qualify"]
+    with pytest.raises(SelectionContractError, match="Expected planner state"):
+        machine.qualify()
+
+
+def test_shared_lifecycle_rejects_invalid_transition():
+    machine = sm.PlannerLifecycle()
+    with pytest.raises(SelectionContractError, match="Invalid planner state"):
+        machine._advance(sm.PlannerState.COMPILED)
