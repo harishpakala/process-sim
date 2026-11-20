@@ -101,7 +101,7 @@ def test_swapped_filter_order_rejected(sample):
 @pytest.mark.parametrize("question", [
     "Show EndPoint Address and PLCEndPoint Address belonging to the same Device in ECAD",
     "Show EndPoint Address and PLCEndPoint Address belonging to the same Device where Device LocalId = FI_101 in ECAD",
-    "Show EndPoint Address and PLCEndPoint Address belonging to the same Device where Device LocalId = FI_101 or Device DeviceType = Sensor in ECAD",
+    "Show EndPoint Address and PLCEndPoint Address belonging to the same Device where Device LocalId = FI_101 or Device DeviceType = Sensor and Device Status = Active in ECAD",
     "Show EndPoint Address and PLCEndPoint Address belonging to the same Device where Device LocalId = FI_101 and EndPoint DeviceType = Sensor in ECAD",
 ])
 def test_unsupported_abstains_without_model(sample, question):
@@ -307,3 +307,33 @@ def test_direct_intent_restored_rejects_invalid_model_fields(sample):
         run_direct_join_intent(index, prepared, transport=transport({
             "status": "selected", "result_ids": ["P1", "P2"],
         }))
+
+
+def test_or_join_compiles_optional_filters_without_model(sample):
+    index, prepared, _ = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
+    result = run_phase4_and_join_plan(
+        index, prepared, transport=lambda *_: pytest.fail("OR is schema-grounded"))
+    assert result["plan"]["status"] == "selected"
+    assert result["plan"]["boolean_operator"] == "or"
+    assert result["intent"] is None
+    query = compile_phase4_and_join_sparql(result)
+    assert query.startswith("SELECT DISTINCT")
+    assert query.count("OPTIONAL {") == 2
+    assert query.count("FILTER(") == 1
+    assert 'FILTER((?filterValue1 = "FI_101") || (?filterValue2 = "Sensor"))' in query
+    assert query.count("<https://example.org/ecad/hasDevice>") == 1
+    assert "<https://example.org/ecad/hasEndPoint>" in query
+    assert "<https://example.org/ecad/hasPLCEndPoint>" in query
+
+
+def test_or_plan_cannot_be_compiled_as_and(sample):
+    index, prepared, _ = sample
+    prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
+        "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
+    result = run_phase4_and_join_plan(
+        index, prepared, transport=lambda *_: pytest.fail("No model required"))
+    del result["plan"]["boolean_operator"]
+    with pytest.raises(SelectionContractError, match="boolean operator"):
+        compile_phase4_and_join_sparql(result)
