@@ -42,60 +42,123 @@ def transition(trace, target):
     trace.append(target)
 
 
-def run_join_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
-                           endpoint="http://127.0.0.1:11434", transport=None):
-    """Qualify -> Ollama -> independently validate -> compile (never execute).
+class JoinPlannerStateMachine:
+    """One method per stage; transitions occur only after successful gates."""
 
-    Unsupported requests abstain before the model call. Contract violations
-    raise SelectionContractError, never silently select a fallback plan.
-    """
-    trace = [PlannerState.START]
-    qualified = qualify_candidates(index, prepared)
-    transition(trace, PlannerState.QUALIFIED)
-    question = qualified["prompt"]["question"]
-    literals = _literals(question)
-    is_or = OR_QUESTION.fullmatch(question.strip()) is not None
+    def __init__(self, index, prepared, *, model="qwen2.5-coder:7b",
+                 endpoint="http://127.0.0.1:11434", transport=None):
+        self.index = index
+        self.prepared = prepared
+        self.model = model
+        self.endpoint = endpoint
+        self.transport = transport
+        self.trace = [PlannerState.START]
+        self.qualified = None
+        self.question = None
+        self.literals = None
+        self.is_or = False
+        self.raw = None
+        self.plan = None
+        self.intent = None
+        self.sparql = None
 
-    if (index.domain != "ecad" or literals is None or
-            None in _expected_paths(qualified) or None in _filter_ids(qualified)):
-        transition(trace, PlannerState.ABSTAINED)
-        return {
-            "domain": index.domain, "question": question, "qualified": qualified,
-            "plan": {"status": "unresolved", "result_ids": [],
-                     "join_owner": None, "filters": [],
-                     "reason": "Requires verified ECAD shared-Device join with LocalId and DeviceType equality"},
-            "intent": None, "sparql": None,
-            "state": trace[-1].value,
-            "state_trace": [state.value for state in trace],
-        }
+    def _require(self, state):
+        if self.trace[-1] != state:
+            raise SelectionContractError(
+                f"Expected planner state {state.value}, got {self.trace[-1].value}"
+            )
 
-    prompt = {**qualified["prompt"], "candidates": [
-        candidate for candidate in qualified["prompt"]["candidates"]
-        if candidate["kind"] == "property"
-    ]}
-    raw = ollama_select(prompt, model=model, endpoint=endpoint,
-                        transport=transport,
-                        system_prompt=OR_PROMPT if is_or else PROMPT)
-    transition(trace, PlannerState.MODEL_SELECTED)
-    plan = validate_phase4_and_join_plan(raw, qualified)
-    if (plan["status"] == "selected" and
-            tuple(item["value"] for item in plan["filters"]) != literals):
-        raise SelectionContractError("Filter literals do not match question")
-    transition(trace, PlannerState.VALIDATED)
+    def qualify(self):
+        self._require(PlannerState.START)
+        qualified = qualify_candidates(self.index, self.prepared)
+        question = qualified["prompt"]["question"]
+        self.qualified = qualified
+        self.question = question
+        self.literals = _literals(question)
+        self.is_or = OR_QUESTION.fullmatch(question.strip()) is not None
+        transition(self.trace, PlannerState.QUALIFIED)
 
-    intent = None
-    if plan["status"] == "selected" and not is_or:
-        from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
-        intent = validated_join_intent(plan, qualified)
-    result = {"domain": index.domain, "question": question,
-              "plan": plan, "qualified": qualified, "intent": intent}
-    if plan["status"] != "selected":
-        transition(trace, PlannerState.ABSTAINED)
-        sparql = None
-    else:
-        sparql = compile_phase4_and_join_sparql(result)
+    def is_supported(self):
+        self._require(PlannerState.QUALIFIED)
+        return (self.index.domain == "ecad" and self.literals is not None
+                and None not in _expected_paths(self.qualified)
+                and None not in _filter_ids(self.qualified))
+
+    def select_with_ollama(self):
+        self._require(PlannerState.QUALIFIED)
+        if not self.is_supported():
+            raise SelectionContractError("Unsupported question cannot call Ollama")
+        prompt = {**self.qualified["prompt"], "candidates": [
+            candidate for candidate in self.qualified["prompt"]["candidates"]
+            if candidate["kind"] == "property"
+        ]}
+        raw = ollama_select(prompt, model=self.model, endpoint=self.endpoint,
+                            transport=self.transport,
+                            system_prompt=OR_PROMPT if self.is_or else PROMPT)
+        self.raw = raw
+        transition(self.trace, PlannerState.MODEL_SELECTED)
+
+    def validate(self):
+        self._require(PlannerState.MODEL_SELECTED)
+        plan = validate_phase4_and_join_plan(self.raw, self.qualified)
+        if (plan["status"] == "selected" and
+                tuple(item["value"] for item in plan["filters"]) != self.literals):
+            raise SelectionContractError("Filter literals do not match question")
+        intent = None
+        if plan["status"] == "selected" and not self.is_or:
+            from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
+            intent = validated_join_intent(plan, self.qualified)
+        self.plan = plan
+        self.intent = intent
+        transition(self.trace, PlannerState.VALIDATED)
+
+    def compile(self):
+        self._require(PlannerState.VALIDATED)
+        if self.plan["status"] != "selected":
+            raise SelectionContractError("Cannot compile non-selected plan")
+        sparql = compile_phase4_and_join_sparql(self._result())
         if sparql is None:
             raise SelectionContractError("Selected plan failed to compile")
-        transition(trace, PlannerState.COMPILED)
-    return {**result, "sparql": sparql, "state": trace[-1].value,
-            "state_trace": [state.value for state in trace]}
+        self.sparql = sparql
+        transition(self.trace, PlannerState.COMPILED)
+
+    def abstain(self):
+        if self.trace[-1] == PlannerState.QUALIFIED:
+            self.plan = {
+                "status": "unresolved", "result_ids": [],
+                "join_owner": None, "filters": [],
+                "reason": "Requires verified ECAD shared-Device join with LocalId and DeviceType equality",
+            }
+        elif self.trace[-1] != PlannerState.VALIDATED or self.plan["status"] == "selected":
+            raise SelectionContractError("Abstention requires unsupported or non-selected plan")
+        self.sparql = None
+        transition(self.trace, PlannerState.ABSTAINED)
+        return self._result()
+
+    def _result(self):
+        return {
+            "domain": self.index.domain, "question": self.question,
+            "qualified": self.qualified, "plan": self.plan,
+            "intent": self.intent, "sparql": self.sparql,
+            "state": self.trace[-1].value,
+            "state_trace": [state.value for state in self.trace],
+        }
+
+    def run(self):
+        self.qualify()
+        if not self.is_supported():
+            return self.abstain()
+        self.select_with_ollama()
+        self.validate()
+        if self.plan["status"] != "selected":
+            return self.abstain()
+        self.compile()
+        return self._result()
+
+
+def run_join_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
+                           endpoint="http://127.0.0.1:11434", transport=None):
+    """Backward-compatible entry point; delegates to per-state methods."""
+    return JoinPlannerStateMachine(
+        index, prepared, model=model, endpoint=endpoint, transport=transport
+    ).run()
