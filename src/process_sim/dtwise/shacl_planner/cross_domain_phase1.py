@@ -46,6 +46,11 @@ Use only the offered property candidate whose exact SHACL property label is
 named in the question. Copy the literal value from the question verbatim and
 use the comparison operator requested (use "=" for "is" or "equals").
 A valid cross-domain mapping does not replace or satisfy a WHERE filter.
+For cross-domain COUNT, count_target_id identifies the result entity being counted.
+Put other explicitly requested result entities required to establish the matching
+condition in existence_ids, even when their identifiers are mapping endpoints.
+Mapping endpoints do not replace existence requirements. Do not duplicate the
+COUNT target in existence_ids.
 Before returning selected, check that no explicitly requested filter was omitted.
 If a requested filter cannot be represented by offered candidates, return
 unresolved instead of silently dropping it.
