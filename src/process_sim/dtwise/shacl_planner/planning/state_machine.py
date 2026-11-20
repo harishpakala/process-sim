@@ -356,7 +356,7 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
                 result = self.abstain()
             else:
                 if compile_sparql:
-                    self.compile()
+                    self._timed("sparql_compilation_ms", self.compile)
                 result = self._result()
         if self.timing is not None:
             self.timing.setdefault("qwen_selection_ms", 0.0)
