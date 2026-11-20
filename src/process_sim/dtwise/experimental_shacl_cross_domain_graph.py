@@ -89,6 +89,18 @@ def qualify_mapping_graph(mappings: dict[str, dict],
             "right_property": mapping["right_property"],
             "left_identifier_candidate_ids": left_ids,
             "right_identifier_candidate_ids": right_ids,
+            "bridge_role": "cross_domain_identifier_equality",
+            "join_alternatives": [
+                {"left_id": lid, "right_id": rid,
+                 "left_owner_shape_uri": identifiers[lid]["owner_shape_uri"],
+                 "right_owner_shape_uri": identifiers[rid]["owner_shape_uri"]}
+                for lid in left_ids for rid in right_ids
+                if not approved_pairs or any(
+                    identifiers[lid]["owner_shape_uri"] == pair["left_owner_shape_uri"]
+                    and identifiers[rid]["owner_shape_uri"] == pair["right_owner_shape_uri"]
+                    for pair in approved_pairs
+                )
+            ],
             "approved_owner_pair_candidate_ids": (
                 sorted([
                     {"left_id": lid, "right_id": rid}
