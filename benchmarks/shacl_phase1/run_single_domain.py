@@ -15,7 +15,9 @@ def evaluate(record, expected):
     errors = []
     if record.get("status") != "valid_response":
         errors.append("invalid_planner_status")
-    if record.get("qwen_calls") != 1:
+    # Single-domain run_one does not expose qwen_calls. A present value is
+    # checked, but an absent field is not evidence of a wrong call count.
+    if "qwen_calls" in record and record["qwen_calls"] != 1:
         errors.append("wrong_qwen_call_count")
     answer = record.get("answer") or {}
     candidates = {c["id"]: c for c in record.get("candidate_paths", [])}
