@@ -384,7 +384,7 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
     OPERATIONS = ("phase2-filter", "phase3-and", "phase4-join", "phase4-filtered-join")
 
     def __init__(self, index, prepared, *, operation, model="qwen2.5-coder:7b",
-                 endpoint="http://127.0.0.1:11434", transport=None):
+                 endpoint="http://127.0.0.1:11434", transport=None, timing=None):
         super().__init__()
         if operation not in self.OPERATIONS:
             raise ValueError(f"Unsupported state-machine operation: {operation}")
