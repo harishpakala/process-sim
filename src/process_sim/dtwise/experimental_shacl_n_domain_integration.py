@@ -50,6 +50,8 @@ def main(argv: list[str] | None = None) -> int:
                         help="Run only one domain count (default: all)")
     parser.add_argument("--case", help="Run one case by name")
     parser.add_argument("--debug", action="store_true", help="Print offered candidates and validated selection")
+    parser.add_argument("--model", default="qwen2.5-coder:7b",
+                        help="Ollama model for semantic selection (default: qwen2.5-coder:7b)")
     args = parser.parse_args(argv)
 
     suites = [
@@ -92,7 +94,7 @@ def main(argv: list[str] | None = None) -> int:
             if prompt["mapping_candidates"]:
                 qwen_start = perf_counter()
                 try:
-                    raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
+                    raw = ollama_select(prompt, model=args.model, system_prompt=SYSTEM_PROMPT)
                 finally:
                     timings["qwen"] = perf_counter() - qwen_start
                 validation_start = perf_counter()
