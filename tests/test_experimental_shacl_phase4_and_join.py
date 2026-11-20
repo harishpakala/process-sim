@@ -353,7 +353,7 @@ def test_or_model_wrong_operator_rejected(sample):
 
 
 def test_or_plan_cannot_be_compiled_as_and(sample):
-    index, prepared, _ = sample
+    index, prepared, plan = sample
     prepared["prompt"]["question"] = prepared["prompt"]["question"].replace(
         "FI_101 and Device DeviceType", "FI_101 or Device DeviceType")
     plan["boolean_operator"] = "or"
