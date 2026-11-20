@@ -256,7 +256,7 @@ def run(count, test, expected_domains, args, schema, mappings):
             operation=(None if args.auto_operation else test["mode"].removeprefix("--")) if count == 1 else None,
             model=args.model, embed_model=args.embed_model,
             ollama_url=args.ollama_url, prompt_format=args.prompt_format,
-            index_path=INDEX_PATH,
+            index_path=INDEX_PATH, timing=args.timing,
         )
         if args.auto_domains:
             expected_mode = "single-domain" if count == 1 else "n-domain"
@@ -276,8 +276,11 @@ def run(count, test, expected_domains, args, schema, mappings):
             check(test, result)
         else:
             check_multi(count, test, result, schema, mappings)
-        return dict(name=name, domains=count, status="PASS", routing=routing,
-                    seconds=round(perf_counter()-start, 3))
+        outcome = dict(name=name, domains=count, status="PASS", routing=routing,
+                       seconds=round(perf_counter()-start, 3))
+        if args.timing:
+            outcome["timing_ms"] = result.get("timing_ms", {})
+        return outcome
     except Exception as exc:
         if args.auto_domains and routing == "NOT_RUN":
             routing = "FAIL"
@@ -304,6 +307,7 @@ def main():
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
     parser.add_argument("--prompt-format", choices=("compact", "full"), default="compact")
+    parser.add_argument("--timing", action="store_true", help="Print per-query stage timings and save them in the report")
     args = parser.parse_args()
     # Each case carries its own expected domain membership; the count is only a label.
     suites = ([(1, test, ("ecad",)) for test in CASES]
@@ -334,6 +338,9 @@ def main():
         print(f"{outcome['status']:<4}  {count}D/{name:<25} {outcome['seconds']:>8.3f} s", flush=True)
         if args.auto_domains:
             print(f"      ROUTING: {outcome['routing']}", flush=True)
+        if args.timing and outcome.get("timing_ms"):
+            for stage, milliseconds in outcome["timing_ms"].items():
+                print(f"      {stage:<36} {milliseconds:>9.1f} ms", flush=True)
         if "reason" in outcome:
             print("      " + outcome["reason"].replace("\n", "\n      "), flush=True)
     total = round(perf_counter()-started, 3)
