@@ -332,7 +332,7 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
             "state_trace": [state.value for state in self.trace],
         }
 
-    def run(self):
+    def run(self, *, compile_sparql=True):
         self.qualify()
         if not self.is_supported():
             result = self.abstain()
@@ -342,7 +342,8 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
             if self.selection["status"] != "selected":
                 result = self.abstain()
             else:
-                self.compile()
+                if compile_sparql:
+                    self.compile()
                 result = self._result()
         if self.timing is not None:
             self.timing.setdefault("qwen_selection_ms", 0.0)
@@ -352,9 +353,9 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
 
 def run_retrieve_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
                                endpoint="http://127.0.0.1:11434",
-                               transport=None, timing=None):
+                               transport=None, timing=None, compile_sparql=True):
     """Opt-in RETRIEVE state machine; not yet connected to the CLI."""
     return RetrievePlannerStateMachine(
         index, prepared, model=model, endpoint=endpoint,
         transport=transport, timing=timing,
-    ).run()
+    ).run(compile_sparql=compile_sparql)
