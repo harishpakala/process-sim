@@ -540,6 +540,39 @@ def requested_property_value_names(question, property_hits):
     return names
 
 
+def focus_unambiguous_property_candidates(question, candidates, registry,
+                                          shape_hits, property_hits):
+    """Narrow a pure property-value request to its verified direct owner.
+
+    Only focus when SHACL establishes exactly one property candidate and one
+    owner path. Keep original candidate IDs and leave ambiguous/mixed requests
+    untouched. This is retrieval/prompt scoping, never answer fabrication.
+    """
+    names = requested_property_value_names(question, property_hits)
+    if len(names) != 1 or len(shape_hits) != 1:
+        return candidates, None
+    name = next(iter(names))
+    matches = [
+        c for c in candidates
+        if c['kind'] == 'property'
+        and (c.get('property_name') or '').casefold() == name
+        and (registry.get(c['id'], {}).get('node_uris') or [None])[-1] in shape_hits
+    ]
+    if len(matches) != 1:
+        return candidates, None
+    prop = matches[0]
+    owner_nodes = registry[prop['id']]['node_uris']
+    owner_results = [
+        c for c in candidates
+        if c['kind'] == 'result'
+        and registry.get(c['id'], {}).get('node_uris') == owner_nodes
+    ]
+    focused = owner_results + matches
+    return focused, {'property_name': name, 'property_candidate_id': prop['id'],
+                     'owner_result_ids': [c['id'] for c in owner_results],
+                     'original_candidate_count': len(candidates)}
+
+
 def normalize_property_only_projections(answer, candidates, question):
     """Move redundant owner results to existence when only their properties are requested.
 
@@ -620,11 +653,14 @@ def run_one(index, question, *, method='expanded', dry_run=False,
         qualified,evidence=build_candidates(index,question,method=method,endpoint=endpoint,
             embedding_model=embedding_model,top_shapes=top_shapes,
             top_properties=top_properties,max_candidates=max_candidates,max_depth=max_depth)
-        candidates=qualified['prompt']['candidates']
+        all_candidates=qualified['prompt']['candidates']
+        candidates, candidate_focus = focus_unambiguous_property_candidates(
+            question, all_candidates, qualified['registry'], shape_hits, property_hits)
         topology_candidates=[{**c,'node_uris':qualified['registry'].get(c['id'],{}).get('node_uris',[])}
                              for c in candidates]
         prompt={**qualified['prompt'],'candidates':candidates}
-        record.update({**evidence,'candidate_count':len(candidates),
+        record.update({**evidence,'candidate_focus':candidate_focus,
+            'candidate_count':len(candidates),
             'result_candidate_count':sum(c['kind']=='result' for c in candidates),
             'property_candidate_count':sum(c['kind']=='property' for c in candidates),
             'candidate_paths':candidates,'system_prompt':SYSTEM_PROMPT,'user_prompt':prompt})
