@@ -1,0 +1,106 @@
+"""Run all available 2-/3-domain live Qwen semantic tests in one command.
+
+Four-domain cases are SKIP until a fourth SHACL-qualified, independently
+approved connected domain exists. No SPARQL generation or execution.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from time import perf_counter
+
+from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
+from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
+from process_sim.dtwise.experimental_shacl_n_domain_selection import SYSTEM_PROMPT, validate_n_domain_selection
+from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.experimental_shacl_two_domain_integration import CASES as TWO_CASES, _check_selected as check_two
+from process_sim.dtwise.experimental_shacl_three_domain_integration import (
+    CASES as THREE_CASES, DOMAINS as THREE_DOMAINS, check_semantics as check_three,
+)
+
+TWO_DOMAINS = ("dexpi", "ecad")
+
+
+def _run_two(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
+    _, _, expected, owners, *projection = case
+    if selection["status"] != expected:
+        return False, f"Expected status {expected}; got {selection['status']}"
+    if expected != "selected":
+        empty = not any(selection[key] for key in ("result_ids", "identifier_path_ids", "mapping_ids"))
+        return empty, "Correct abstention" if empty else "Abstention must have empty IDs"
+    passed = check_two(selection, prompt, owners, projection[0] if projection else None)
+    return passed, "Semantic assertions passed" if passed else "Result projection or owner/identifier mapping mismatch"
+
+
+def _run_three(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
+    return check_three(selection, prompt, case[2])
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Live N-domain Qwen integration suite")
+    parser.add_argument("--domains", type=int, choices=(2, 3, 4),
+                        help="Run only one domain count (default: all)")
+    parser.add_argument("--case", help="Run one case by name")
+    parser.add_argument("--debug", action="store_true", help="Print offered candidates and validated selection")
+    args = parser.parse_args(argv)
+
+    suites = [
+        (2, TWO_DOMAINS, case, _run_two) for case in TWO_CASES
+    ] + [
+        (3, THREE_DOMAINS, case, _run_three) for case in THREE_CASES
+    ]
+    selected = [
+        item for item in suites
+        if (args.domains is None or args.domains == item[0])
+        and (args.case is None or args.case == item[2][0])
+    ]
+    if args.case is not None and not selected:
+        parser.error(f"Unknown case for selected domain count: {args.case}")
+
+    # Four domains are not silently emulated with a duplicated or invented domain.
+    skip_four = args.domains in (None, 4) and args.case is None
+    if not selected and not skip_four:
+        parser.error("No test cases selected")
+
+    root = Path(__file__).resolve().parents[3]
+    schema = json.loads((root / "semantic/ontology2/dtwise/dtwise-schema-index.json").read_text(encoding="utf-8"))
+    mappings = load_cross_domain_mappings(root / "semantic/ontology2/dtwise/cross-domain-mappings.json")
+    failures = 0
+    start_total = perf_counter()
+    for count, domains, case, check in selected:
+        name, question = case[:2]
+        start = perf_counter()
+        raw = None
+        try:
+            prepared = prepare_live_candidates(schema, mappings, question, domains)
+            prompt = prepared["prompt"]
+            if args.debug:
+                print("QUESTION:", question)
+                print("OFFERED:", json.dumps(prompt, ensure_ascii=False, indent=2))
+            if prompt["mapping_candidates"]:
+                raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
+                selection = validate_n_domain_selection(raw, prepared)
+            else:
+                selection = {"status": "unresolved", "result_ids": [],
+                             "identifier_path_ids": [], "mapping_ids": []}
+            passed, detail = check(selection, prompt, case)
+            if args.debug:
+                print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
+        except Exception as exc:
+            passed, detail = False, f"{type(exc).__name__}: {exc}"
+        failures += not passed
+        print(f"{count}D/{name}: {'PASS' if passed else 'FAIL'} {perf_counter() - start:.2f}s")
+        print("QWEN:", raw if raw is not None else "(not called: no qualified mapping or request failed)")
+        if not passed or args.debug:
+            print("DETAIL:", detail)
+    if skip_four:
+        print("4D: SKIP (no verified connected four-domain SHACL/mapping configuration)")
+    print(f"TOTAL: {'PASS' if not failures else 'FAIL'} "
+          f"{len(selected) - failures}/{len(selected)} PASS, "
+          f"{1 if skip_four else 0} SKIP, {perf_counter() - start_total:.2f}s")
+    return 1 if failures else 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
