@@ -1,10 +1,7 @@
-"""Probe structural Phase 4 JOIN + two AND/OR filters on existing 1D cases.
+"""Offline structural flags for the existing 10 single-domain queries.
 
-Offline identification only: no Ollama, embeddings, SHACL qualification,
-SPARQL compilation, or production routing changes.
-
-From the repository root:
-    python tests/experimental/probe_complex_query_identification.py
+No Ollama, embeddings, SHACL qualification, or SPARQL compilation.
+Run: python tests/experimental/probe_complex_query_identification.py
 """
 from pathlib import Path
 import runpy
@@ -14,49 +11,48 @@ from process_sim.dtwise.shacl_planner.query_classifier import (
     extract_query_structure,
 )
 
-# Load the existing integration cases by file path. The tests directory is
-# not necessarily importable as a package in a direct script invocation.
 CASES = runpy.run_path(
     str(Path(__file__).resolve().parents[1] / "integration" / "run_shacl_planner.py")
 )["CASES"]
 
 
-def identify_type6(question):
-    """Recognize JOIN + exactly two equality filters with AND/OR syntax.
+def identify_query_flags(question):
+    """Return independent syntactic flags, not a SHACL-validated plan.
 
-    This is a syntactic probe, not proof of a SHACL-valid join. In particular,
-    the actual owner and property paths are verified later by the planner.
+    None indicates an unrecognized or unsupported structure; boolean operators
+    are counted only in the filter clause, not in result-property conjunctions.
     """
     structure = extract_query_structure(question)
-    if not structure or structure.get("unsupported"):
+    if structure is None or structure.get("unsupported"):
         return None
     filters = structure["filters"]
-    logic = structure["boolean_operator"]
-    if not structure["sibling"] or len(filters) != 2 or logic not in ("AND", "OR"):
-        return None
+    operator = structure["boolean_operator"]
     return {
-        "requires_join": True,
+        "join": bool(structure["sibling"]),
+        "boolean": operator in ("AND", "OR", "MIXED"),
+        "filter": bool(filters),
+        "boolean_operator": operator,
         "filter_count": len(filters),
-        "boolean_operator": logic,
-        "filters": [
-            {"property": property_name, "value": value}
-            for property_name, value in filters
-        ],
     }
 
 
 def main():
-    matched = 0
-    print("1D Phase 4 JOIN + two AND/OR filters: structural probe (offline)\n")
+    print("1D query identification flags (offline; no Ollama)\n")
     for test in CASES:
-        name, question = test["name"], test["question"]
-        identified = identify_type6(question)
-        routing = classify_single_domain_query(question)
-        matched += identified is not None
-        print(f"{name}: {'MATCH' if identified is not None else 'None'}")
-        print(f"  existing operation: {routing['operation']}")
-        print(f"  Type 6 identification: {identified}")
-    print(f"\nTOTAL: {matched} non-null / {len(CASES) - matched} None / {len(CASES)} 1D queries")
+        flags = identify_query_flags(test["question"])
+        routing = classify_single_domain_query(test["question"])
+        if flags is None:
+            print(f"{test['name']:<25} UNRECOGNIZED  operation={routing['operation']}")
+            continue
+        yn = lambda value: "YES" if value else "NO"
+        print(
+            f"{test['name']:<25} JOIN={yn(flags['join']):<3} "
+            f"BOOLEAN={yn(flags['boolean']):<3} "
+            f"FILTER={yn(flags['filter']):<3} "
+            f"operator={flags['boolean_operator'] or '-':<5} "
+            f"filters={flags['filter_count']} "
+            f"operation={routing['operation']}"
+        )
     return 0
 
 
