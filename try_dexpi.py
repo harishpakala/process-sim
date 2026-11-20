@@ -238,12 +238,11 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_and_join:
-            from process_sim.dtwise.experimental_shacl_phase4_and_join import (
-                run_phase4_and_join_plan, compile_phase4_and_join_sparql,
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_join_state_machine,
             )
-            result = run_phase4_and_join_plan(index, prepared, model=args.model,
-                                              endpoint=args.ollama_url)
-            result["sparql"] = compile_phase4_and_join_sparql(result)
+            result = run_join_state_machine(index, prepared, model=args.model,
+                                            endpoint=args.ollama_url)
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
