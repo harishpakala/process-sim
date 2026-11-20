@@ -51,8 +51,10 @@ def compare(name, question, expected_queries):
         model=EMBED_MODEL, endpoint=OLLAMA,
     )
     replies = []
+    requests = []
 
     def record(url, payload, timeout):
+        requests.append((url, payload))
         response = live_transport(url, payload, timeout)
         replies.append(response)
         return response
@@ -64,8 +66,8 @@ def compare(name, question, expected_queries):
         raise AssertionError(f"Expected one live Ollama response; got {len(replies)}")
 
     def replay(url, payload, timeout):
-        # Require the same actual prompt and model for meaningful parity.
-        # The recorded prompt is checked by the Ollama call's own validation.
+        if (url, payload) != requests[0]:
+            raise AssertionError(f"{name}: Ollama request differs between planners")
         return replies[0]
 
     new = run_retrieve_state_machine(
