@@ -1,5 +1,7 @@
 """Conservative SHACL-vocabulary candidate pruning regression tests."""
-from process_sim.dtwise.experimental_shacl_n_domain_selection import _prune_explicit_candidates
+from process_sim.dtwise.experimental_shacl_n_domain_selection import (
+    _prune_explicit_candidates, compact_n_domain_prompt,
+)
 
 
 def candidates():
@@ -65,3 +67,27 @@ def test_partial_owner_label_does_not_match_identifier():
         "Match an Asset across domains.", results, graph
     )
     assert len(offered["mapping_candidates"][0]["join_alternatives"]) == 4
+
+
+def test_compact_prompt_identifier_owner_uses_immediate_shacl_parent():
+    prompt = compact_n_domain_prompt({
+        "question": "Count ECAD Device with matching DEXPI Equipment using AssetIdentifier.",
+        "result_candidates": [
+            {"id": "ecad:R2", "domain": "ecad", "kind": "result", "path": "ECAD → Device"},
+            {"id": "dexpi:R3", "domain": "dexpi", "kind": "result", "path": "DEXPI → Equipment"},
+        ],
+        "identifier_path_candidates": [
+            {"id": "ecad:P1", "domain": "ecad", "path": "ECAD → Device → AssetIdentifier"},
+            {"id": "dexpi:P7", "domain": "dexpi", "path": "DEXPI → Equipment → AssetIdentifier"},
+        ],
+        "mapping_candidates": [{
+            "id": "dexpi-ecad-asset-identifier",
+            "left_domain": "dexpi", "right_domain": "ecad",
+            "join_alternatives": [{"left_id": "dexpi:P7", "right_id": "ecad:P1"}],
+        }],
+    })
+    assert {p["id"]: (p["owner"], p["property"]) for p in prompt["identifiers"]} == {
+        "ecad:P1": ("Device", "AssetIdentifier"),
+        "dexpi:P7": ("Equipment", "AssetIdentifier"),
+    }
+    assert prompt["mappings"][0]["allowed_pairs"] == [["dexpi:P7", "ecad:P1"]]
