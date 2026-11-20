@@ -3,7 +3,8 @@
 From repository root:
     python tests/integration/run_shacl_planner.py
     python tests/integration/run_shacl_planner.py --report shacl-baseline.json
-    python tests/integration/run_shacl_planner.py --auto-domains
+    python tests/integration/run_shacl_planner.py  # auto domains and operations
+    python tests/integration/run_shacl_planner.py --explicit-domains --explicit-operation  # legacy
 """
 import argparse
 import json
@@ -252,7 +253,7 @@ def run(count, test, expected_domains, args, schema, mappings):
         result = plan_question(
             question, schema, mappings,
             **({} if args.auto_domains else {"domains": count}),
-            operation=(None if args.auto_operation else test["mode"].removeprefix("--")) if count == 1 else "phase1-plan",
+            operation=(None if args.auto_operation else test["mode"].removeprefix("--")) if count == 1 else None,
             model=args.model, embed_model=args.embed_model,
             ollama_url=args.ollama_url, prompt_format=args.prompt_format,
             index_path=INDEX_PATH,
@@ -288,10 +289,14 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, default=Path("shacl-integration-report.json"))
     parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4))
-    parser.add_argument("--auto-operation", action="store_true",
-                        help="Classify single-domain query operation instead of using case override")
-    parser.add_argument("--auto-domains", action="store_true",
-                        help="Infer domains for every case and assert correct routing")
+    parser.add_argument("--auto-operation", action="store_true", default=True,
+                        help="Classify single-domain query operation (default)")
+    parser.add_argument("--explicit-operation", action="store_false", dest="auto_operation",
+                        help="Use each test case's legacy single-domain operation")
+    parser.add_argument("--auto-domains", action="store_true", default=True,
+                        help="Infer domains for every case (default)")
+    parser.add_argument("--explicit-domains", action="store_false", dest="auto_domains",
+                        help="Pass the test case's expected domain count explicitly")
     parser.add_argument("--case", action="append", help="Named case; repeatable")
     parser.add_argument("--list-cases", action="store_true")
     parser.add_argument("--model", default="qwen2.5-coder:7b")
