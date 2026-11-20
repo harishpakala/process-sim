@@ -6,6 +6,7 @@ Every candidate is assembled solely from the selected domain's SHACL index.
 from __future__ import annotations
 
 from collections import defaultdict
+from time import perf_counter
 
 from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped
 from process_sim.dtwise.experimental_shacl_subgraph import _short
@@ -15,17 +16,21 @@ def semantic_candidates(index, question: str, *, top_shapes: int = 8,
                         top_properties: int = 2, max_candidates: int = 64,
                         max_depth: int = 6, transport=None,
                         endpoint: str = "http://127.0.0.1:11434",
-                        model: str = "nomic-embed-text:latest") -> dict:
+                        model: str = "nomic-embed-text:latest", timing=None) -> dict:
     """Return normal prompt/registry candidate contract and retrieval evidence.
 
     Retains alternatives; never picks a branch by embedding score.
     """
     if min(top_shapes, top_properties, max_candidates, max_depth) < 1:
         raise ValueError("Budgets must be positive")
+    t0 = perf_counter()
     retrieval = semantic_grouped(
         index, question, top_k=max(top_shapes, top_properties),
         model=model, endpoint=endpoint, transport=transport,
     )
+    if timing is not None:
+        timing["embedding_and_ranking_ms"] = (perf_counter() - t0) * 1000
+    t0 = perf_counter()
     shape_groups = retrieval["shapes"][:top_shapes]
     property_groups = retrieval["properties"][:top_properties]
     shape_uris = {member["uri"] for group in shape_groups
@@ -87,6 +92,8 @@ def semantic_candidates(index, question: str, *, top_shapes: int = 8,
         registry[candidate_id] = {
             "node_uris": nodes, "edges": edges, "property": prop,
         }
+    if timing is not None:
+        timing["candidate_assembly_ms"] = (perf_counter() - t0) * 1000
     return {
         "prompt": {"domain": index.domain, "question": question,
                    "candidates": candidates},
