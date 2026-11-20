@@ -179,6 +179,20 @@ def validate_mapping_graph_selection(mapping_ids: list[str],
                 for a_id in left for b_id in right
             ):
                 raise SelectionContractError("Selected owner pair differs from approval")
+        # Independently check that the Qwen-facing alternative agrees with
+        # the source-approved predicates and offered SHACL-qualified paths.
+        offered_by_id = {p["id"]: p for p in offered["identifier_path_candidates"]}
+        allowed_alternatives = {
+            (p["left_id"], p["right_id"])
+            for p in edge.get("join_alternatives", [])
+        }
+        if any(
+            (a_id, b_id) not in allowed_alternatives
+            or offered_by_id[a_id]["predicate"] != source["left_property"]
+            or offered_by_id[b_id]["predicate"] != source["right_property"]
+            for a_id in left for b_id in right
+        ):
+            raise SelectionContractError("Selected join alternative is not qualified")
         used_paths.update(left | right)
         a, b = edge["left_domain"], edge["right_domain"]
         domains.update((a, b))
