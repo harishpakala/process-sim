@@ -10,6 +10,9 @@ import re
 import time
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.experimental_shacl_n_domain_selection import (
+    _prune_explicit_candidates, compact_n_domain_prompt,
+)
 from process_sim.dtwise.experimental_shacl_cross_domain_graph import (
     qualify_mapping_graph, validate_mapping_graph_selection,
 )
@@ -184,6 +187,33 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
                for p in m[f'{side}_identifier_candidate_ids']}
     graph['identifier_path_candidates'] = [
         p for p in graph['identifier_path_candidates'] if p['id'] in allowed]
+    # Reuse the existing conservative N-domain owner/identifier narrowing.
+    # Keep the full qualified graph and candidate registry for validation.
+    original_candidates, original_graph = candidates, graph
+    _, graph = _prune_explicit_candidates(question, candidates, graph)
+    identifier_ids = {p['id'] for p in graph['identifier_path_candidates']}
+    # Retain explicitly named result owners, explicitly named properties,
+    # and mapping endpoints. Do not infer synonyms or select join alternatives.
+    prompt_candidates = [
+        c for c in candidates
+        if (
+            c['kind'] == 'result'
+            and bool(set(c.get('node_uris') or []) & exact_shapes[c['domain']])
+        ) or (
+            c['kind'] == 'property'
+            and (
+                c['id'] in identifier_ids
+                or (
+                    (c.get('property_name') or '').casefold()
+                    in exact_properties[c['domain']]
+                    and bool(set(c.get('node_uris') or []) & exact_shapes[c['domain']])
+                )
+            )
+        )
+    ]
+    # No evidence-based narrowing is possible: preserve the original choices.
+    if not prompt_candidates:
+        prompt_candidates, graph = original_candidates, original_graph
     record.update(candidate_paths=candidates, candidate_count=len(candidates),
                   result_candidate_count=sum(c['kind'] == 'result' for c in candidates),
                   property_candidate_count=sum(c['kind'] == 'property' for c in candidates),
@@ -195,10 +225,22 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
                 'reason': 'No approved SHACL-qualified mapping; no Qwen call'}
     if not candidates:
         return {**record, 'status': 'no_candidates'}
+    # Reuse the existing compact N-domain representation; preserve Phase-1
+    # result/property candidates and mapping choices without validator metadata.
+    compact = compact_n_domain_prompt({
+        'question': question,
+        'result_candidates': prompt_candidates,
+        'identifier_path_candidates': graph['identifier_path_candidates'],
+        'mapping_candidates': graph['mapping_candidates'],
+    })
     prompt = {'question': question, 'domains': list(domains),
-              'candidates': candidates,
-              'mapping_candidates': graph['mapping_candidates'],
-              'identifier_path_candidates': graph['identifier_path_candidates']}
+              'candidates': compact['results'],
+              'mapping_candidates': compact['mappings'],
+              'identifier_path_candidates': compact['identifiers']}
+    record['prompt_candidate_count'] = len(prompt_candidates)
+    record['prompt_join_alternatives'] = sum(
+        len(m['allowed_pairs']) for m in compact['mappings'])
+    record['prompt_characters'] = len(json.dumps(prompt, ensure_ascii=False))
     record['user_prompt'] = prompt
     if dry_run:
         return {**record, 'status': 'dry_run'}
