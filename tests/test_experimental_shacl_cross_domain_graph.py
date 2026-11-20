@@ -155,6 +155,9 @@ def test_only_explicitly_approved_owner_pair_is_offered():
     assert edge["approved_owner_pair_candidate_ids"] == [
         {"left_id": "dexpi:P1", "right_id": "ecad:P1"}
     ]
+    assert [(j["left_id"], j["right_id"]) for j in edge["join_alternatives"]] == [
+        ("dexpi:P1", "ecad:P1")
+    ]
     assert [m["id"] for m in validate_mapping_graph_selection(
         ["de"], ["dexpi:P1", "ecad:P1"], offered, mappings
     )] == ["de"]
@@ -231,6 +234,11 @@ def test_predicate_approved_mapping_offers_all_shacl_qualified_owner_pairs():
         edge["right_identifier_candidate_ids"]
     ) == 6
     assert len(offered["identifier_path_candidates"]) == 5
+    assert edge["bridge_role"] == "cross_domain_identifier_equality"
+    assert len(edge["join_alternatives"]) == 6
+    assert {(j["left_id"], j["right_id"]) for j in edge["join_alternatives"]} == {
+        (f"dexpi:P{i}", f"ecad:P{k}") for i in (1, 2, 3) for k in (1, 2)
+    }
     assert [m["id"] for m in validate_mapping_graph_selection(
         ["de"], ["dexpi:P3", "ecad:P1"], offered, mappings
     )] == ["de"]
