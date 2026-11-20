@@ -64,6 +64,7 @@ def ollama_select(
     transport=None,
     system_prompt: str = SYSTEM_PROMPT,
     response_format=None,
+    timing=None,
 ) -> str:
     """Call local Ollama /api/chat; injectable transport enables offline tests."""
     if transport is None:
@@ -88,7 +89,30 @@ def ollama_select(
         ],
     }
     try:
-        response = transport(endpoint.rstrip("/") + "/api/chat", payload, timeout)
+        t0 = None
+        if timing is not None:
+            from time import perf_counter
+            t0 = perf_counter()
+            timing["ollama_prompt_chars"] = len(system_prompt) + len(payload["messages"][1]["content"])
+        try:
+            response = transport(endpoint.rstrip("/") + "/api/chat", payload, timeout)
+        finally:
+            if timing is not None:
+                timing["ollama_request_ms"] = (perf_counter() - t0) * 1000
+        if timing is not None:
+            for source, target in (
+                ("load_duration", "ollama_load_ms"),
+                ("prompt_eval_duration", "ollama_prompt_eval_ms"),
+                ("eval_duration", "ollama_generation_ms"),
+            ):
+                if isinstance(response.get(source), (int, float)):
+                    timing[target] = response[source] / 1_000_000
+            for source, target in (
+                ("prompt_eval_count", "ollama_prompt_tokens"),
+                ("eval_count", "ollama_generated_tokens"),
+            ):
+                if isinstance(response.get(source), int):
+                    timing[target] = response[source]
         return response["message"]["content"]
     except (URLError, HTTPError, TimeoutError) as exc:
         raise RuntimeError("Ollama is unavailable; check that ollama serve is running") from exc
