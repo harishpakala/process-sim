@@ -25,13 +25,13 @@ CASES = (
      {"dexpi": "Equipment", "ecad": "Device", "assetinventory": "Asset"}),
     ("all-three-reordered", "Using AssetIdentifier, find AssetInventory Asset, DEXPI Equipment, and corresponding ECAD Device.",
      {"dexpi": "Equipment", "ecad": "Device", "assetinventory": "Asset"}),
-    ("asset-only", "Show AssetInventory Asset corresponding to DEXPI Equipment and ECAD Device using AssetIdentifier.",
+    ("asset-only", "Return only AssetInventory Asset records whose AssetIdentifier matches both DEXPI Equipment and ECAD Device. Use DEXPI Equipment and ECAD Device for matching, not as outputs.",
      {"assetinventory": "Asset"}),
-    ("device-only", "Show ECAD Device corresponding to DEXPI Equipment and AssetInventory Asset using AssetIdentifier.",
+    ("device-only", "Return only ECAD Device records whose AssetIdentifier matches both DEXPI Equipment and AssetInventory Asset. Use DEXPI Equipment and AssetInventory Asset for matching, not as outputs.",
      {"ecad": "Device"}),
-    ("equipment-only", "Show DEXPI Equipment corresponding to ECAD Device and AssetInventory Asset using AssetIdentifier.",
+    ("equipment-only", "Return only DEXPI Equipment records whose AssetIdentifier matches both ECAD Device and AssetInventory Asset. Use ECAD Device and AssetInventory Asset for matching, not as outputs.",
      {"dexpi": "Equipment"}),
-    ("asset-device", "Show AssetInventory Asset and ECAD Device corresponding to DEXPI Equipment using AssetIdentifier.",
+    ("asset-device", "Return AssetInventory Asset and ECAD Device records whose AssetIdentifier matches DEXPI Equipment. Use DEXPI Equipment for matching, not as an output.",
      {"assetinventory": "Asset", "ecad": "Device"}),
 )
 
