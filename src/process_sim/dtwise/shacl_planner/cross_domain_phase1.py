@@ -34,7 +34,7 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     'Cross-domain joins use approved identifier equality; never invent RDF edges. '
     'Prefer an approved AssetIdentifier mapping when available and compatible. '
     'If no connected approved mapping exists, return unresolved with empty plan. '
-    'COUNT targets a result entity, not raw joined rows. '
+    'COUNT targets the entity named immediately after Count, How many, or Number of, not the entity in a matching clause. Use its result ID as count_target_id. Never count raw joined rows. '
     'Return EXACTLY these keys, using null/[] for unused fields:'
 ).replace(
     '"reason":"brief explanation"\n}',
@@ -65,6 +65,30 @@ def _scoped_candidates(domain, qualified):
             'node_uris': source.get('node_uris', []),
         })
     return candidates
+
+
+def _explicit_count_target_ids(question, candidates):
+    """Identify the exact result entity following a COUNT expression."""
+    match = re.search(r'\b(?:count|how many|number of)\s+(?:the\s+|all\s+|a\s+|an\s+)*',
+                      question, flags=re.IGNORECASE)
+    if not match:
+        return set()
+    tail = question[match.end():]
+    hits = []
+    for c in candidates:
+        if c.get('kind') != 'result':
+            continue
+        parts = [p.strip() for p in c['path'].split(' → ')]
+        if len(parts) < 2:
+            continue
+        label = parts[-1]
+        for phrase in (c['domain'] + ' ' + label, label):
+            if re.match(re.escape(phrase) + r'(?!\w)', tail, flags=re.IGNORECASE):
+                hits.append((len(phrase), c['id']))
+    if not hits:
+        return set()
+    longest = max(length for length, _ in hits)
+    return {cid for length, cid in hits if length == longest}
 
 
 def _cross_validate(answer, candidates, graph, registry, domains, question,
@@ -136,6 +160,10 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
         if bool(answer.get('count_target_id')) != bool(re.search(
                 r'\b(count|how many|number of)\b', question, re.I)):
             errors.append('COUNT disagrees with question')
+        expected_count_ids = _explicit_count_target_ids(question, candidates)
+        if len(expected_count_ids) == 1 and answer.get('count_target_id') not in expected_count_ids:
+            errors.append('COUNT target disagrees with explicitly requested entity: '
+                          + next(iter(expected_count_ids)))
         if bool(answer.get('order_by')) != bool(_explicit_sort(question)):
             errors.append('ORDER BY disagrees with question')
         if answer.get('order_by'):
