@@ -103,6 +103,8 @@ def validate_n_domain_selection(raw: str | dict, prepared: dict) -> dict:
     }
     if any(results[cid]["domain"] not in selected_domains for cid in raw["result_ids"]):
         raise SelectionContractError("Result domain is outside selected mapping graph")
+    from process_sim.dtwise.experimental_shacl_n_domain_topology import validate_selected_topology
+    validate_selected_topology(raw, prepared)
     return {**raw, "reason": reason.strip()}
 
 
