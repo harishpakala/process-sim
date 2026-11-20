@@ -50,6 +50,15 @@ class PlannerLifecycle:
     def __init__(self):
         self.trace = [PlannerState.START]
 
+    def _timed(self, name, action):
+        if getattr(self, "timing", None) is None:
+            return action()
+        t0 = perf_counter()
+        try:
+            return action()
+        finally:
+            self.timing[name] = (perf_counter() - t0) * 1000
+
     def _require(self, state):
         if self.trace[-1] != state:
             raise SelectionContractError(
@@ -64,12 +73,13 @@ class JoinPlannerStateMachine(PlannerLifecycle):
     """One method per stage; transitions occur only after successful gates."""
 
     def __init__(self, index, prepared, *, model="qwen2.5-coder:7b",
-                 endpoint="http://127.0.0.1:11434", transport=None):
+                 endpoint="http://127.0.0.1:11434", transport=None, timing=None):
         self.index = index
         self.prepared = prepared
         self.model = model
         self.endpoint = endpoint
         self.transport = transport
+        self.timing = timing
         super().__init__()
         self.qualified = None
         self.question = None
@@ -106,7 +116,8 @@ class JoinPlannerStateMachine(PlannerLifecycle):
         ]}
         raw = ollama_select(prompt, model=self.model, endpoint=self.endpoint,
                             transport=self.transport,
-                            system_prompt=OR_PROMPT if self.is_or else PROMPT)
+                            system_prompt=OR_PROMPT if self.is_or else PROMPT,
+                            timing=self.timing)
         self.raw = raw
         self._advance(PlannerState.MODEL_SELECTED)
 
@@ -157,22 +168,23 @@ class JoinPlannerStateMachine(PlannerLifecycle):
         }
 
     def run(self):
-        self.qualify()
+        self._timed("candidate_qualification_ms", self.qualify)
         if not self.is_supported():
             return self.abstain()
-        self.select_with_ollama()
-        self.validate()
+        self._timed("qwen_selection_ms", self.select_with_ollama)
+        self._timed("python_validation_ms", self.validate)
         if self.plan["status"] != "selected":
             return self.abstain()
-        self.compile()
+        self._timed("sparql_compilation_ms", self.compile)
         return self._result()
 
 
 def run_join_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
-                           endpoint="http://127.0.0.1:11434", transport=None):
+                           endpoint="http://127.0.0.1:11434", transport=None, timing=None):
     """Backward-compatible entry point; delegates to per-state methods."""
     return JoinPlannerStateMachine(
-        index, prepared, model=model, endpoint=endpoint, transport=transport
+        index, prepared, model=model, endpoint=endpoint, transport=transport,
+        timing=timing
     ).run()
 
 
@@ -236,7 +248,8 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
         t0 = perf_counter()
         raw = ollama_select(self.offered["prompt"], model=self.model,
                             endpoint=self.endpoint, transport=self.transport,
-                            system_prompt=PHASE1_SYSTEM_PROMPT)
+                            system_prompt=PHASE1_SYSTEM_PROMPT,
+                            timing=self.timing)
         self.raw = raw
         if self.timing is not None:
             self.timing["qwen_selection_ms"] = (perf_counter() - t0) * 1000
@@ -377,6 +390,7 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
             raise ValueError(f"Unsupported state-machine operation: {operation}")
         self.index, self.prepared, self.operation = index, prepared, operation
         self.model, self.endpoint, self.transport = model, endpoint, transport
+        self.timing = timing
         self.qualified = self.question = self.prompt = self.raw = self.plan = None
         self.literal = self.literals = self.constraints = self.result_paths = None
         self.supported = False
@@ -449,7 +463,8 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
                    "phase4-join": p4.PROMPT, "phase4-filtered-join": p42.PROMPT}
         self.raw = ollama_select(self.prompt, model=self.model,
                                 endpoint=self.endpoint, transport=self.transport,
-                                system_prompt=prompts[self.operation])
+                                system_prompt=prompts[self.operation],
+                                timing=self.timing)
         self._advance(PlannerState.MODEL_SELECTED)
 
     def validate(self):
@@ -558,14 +573,14 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
         return result
 
     def run(self):
-        self.qualify()
+        self._timed("candidate_qualification_ms", self.qualify)
         if not self.is_supported():
             return self.abstain()
-        self.select_with_ollama()
-        self.validate()
+        self._timed("qwen_selection_ms", self.select_with_ollama)
+        self._timed("python_validation_ms", self.validate)
         if self.plan["status"] != "selected":
             return self.abstain()
-        self.compile()
+        self._timed("sparql_compilation_ms", self.compile)
         return self._result()
 
 
@@ -581,7 +596,7 @@ def run_single_domain_state_machine(index, prepared, *, operation,
             transport=transport, timing=timing, compile_sparql=compile_sparql)
     if operation == "phase4-and-join":
         return run_join_state_machine(
-            index, prepared, model=model, endpoint=endpoint, transport=transport)
+            index, prepared, model=model, endpoint=endpoint, transport=transport, timing=timing)
     return FilterAndJoinStateMachine(
         index, prepared, operation=operation, model=model,
-        endpoint=endpoint, transport=transport).run()
+        endpoint=endpoint, transport=transport, timing=timing).run()
