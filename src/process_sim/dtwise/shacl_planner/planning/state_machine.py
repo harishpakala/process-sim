@@ -8,7 +8,7 @@ import re
 from time import perf_counter
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_phase4_and_join import (
+from process_sim.dtwise.shacl_planner.operations.phase4_and_join import (
     PROMPT, OR_PROMPT, OR_QUESTION, _expected_paths, _filter_ids, _literals,
     validate_phase4_and_join_plan, compile_phase4_and_join_sparql,
 )
@@ -118,7 +118,7 @@ class JoinPlannerStateMachine(PlannerLifecycle):
             raise SelectionContractError("Filter literals do not match question")
         intent = None
         if plan["status"] == "selected" and not self.is_or:
-            from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
+            from process_sim.dtwise.shacl_planner.planning.query_intent import validated_join_intent
             intent = validated_join_intent(plan, self.qualified)
         self.plan = plan
         self.intent = intent
@@ -232,7 +232,7 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
         self._require(PlannerState.QUALIFIED)
         if not self.is_supported():
             raise SelectionContractError("Unsupported RETRIEVE cannot call Ollama")
-        from process_sim.dtwise.experimental_shacl_phase1_ollama import PHASE1_SYSTEM_PROMPT
+        from process_sim.dtwise.shacl_planner.operations.phase1_ollama import PHASE1_SYSTEM_PROMPT
         t0 = perf_counter()
         raw = ollama_select(self.offered["prompt"], model=self.model,
                             endpoint=self.endpoint, transport=self.transport,
@@ -293,7 +293,7 @@ class RetrievePlannerStateMachine(PlannerLifecycle):
         self._require(PlannerState.VALIDATED)
         if self.selection["status"] != "selected":
             raise SelectionContractError("Cannot compile non-selected RETRIEVE")
-        from process_sim.dtwise.experimental_shacl_phase1_ollama import compile_phase1_sparql
+        from process_sim.dtwise.shacl_planner.operations.phase1_ollama import compile_phase1_sparql
         queries = compile_phase1_sparql(self._result())
         if not queries:
             raise SelectionContractError("Selected RETRIEVE produced no SPARQL")
@@ -384,10 +384,10 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
 
     def qualify(self):
         self._require(PlannerState.START)
-        from process_sim.dtwise import experimental_shacl_phase2_filter as p2
-        from process_sim.dtwise import experimental_shacl_phase3_and as p3
-        from process_sim.dtwise import experimental_shacl_phase4_join as p4
-        from process_sim.dtwise import experimental_shacl_phase4_filtered_join as p42
+        from process_sim.dtwise.shacl_planner.operations import phase2_filter as p2
+        from process_sim.dtwise.shacl_planner.operations import phase3_and as p3
+        from process_sim.dtwise.shacl_planner.operations import phase4_join as p4
+        from process_sim.dtwise.shacl_planner.operations import phase4_filtered_join as p42
         qualified = qualify_candidates(self.index, self.prepared)
         question = qualified["prompt"]["question"]
         prompt = {**qualified["prompt"], "candidates": [
@@ -441,10 +441,10 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
         self._require(PlannerState.QUALIFIED)
         if not self.supported:
             raise SelectionContractError("Unsupported operation cannot call Ollama")
-        from process_sim.dtwise import experimental_shacl_phase2_filter as p2
-        from process_sim.dtwise import experimental_shacl_phase3_and as p3
-        from process_sim.dtwise import experimental_shacl_phase4_join as p4
-        from process_sim.dtwise import experimental_shacl_phase4_filtered_join as p42
+        from process_sim.dtwise.shacl_planner.operations import phase2_filter as p2
+        from process_sim.dtwise.shacl_planner.operations import phase3_and as p3
+        from process_sim.dtwise.shacl_planner.operations import phase4_join as p4
+        from process_sim.dtwise.shacl_planner.operations import phase4_filtered_join as p42
         prompts = {"phase2-filter": p2.PROMPT, "phase3-and": p3.PROMPT,
                    "phase4-join": p4.PROMPT, "phase4-filtered-join": p42.PROMPT}
         self.raw = ollama_select(self.prompt, model=self.model,
@@ -454,10 +454,10 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
 
     def validate(self):
         self._require(PlannerState.MODEL_SELECTED)
-        from process_sim.dtwise import experimental_shacl_phase2_filter as p2
-        from process_sim.dtwise import experimental_shacl_phase3_and as p3
-        from process_sim.dtwise import experimental_shacl_phase4_join as p4
-        from process_sim.dtwise import experimental_shacl_phase4_filtered_join as p42
+        from process_sim.dtwise.shacl_planner.operations import phase2_filter as p2
+        from process_sim.dtwise.shacl_planner.operations import phase3_and as p3
+        from process_sim.dtwise.shacl_planner.operations import phase4_join as p4
+        from process_sim.dtwise.shacl_planner.operations import phase4_filtered_join as p42
         validators = {"phase2-filter": p2.validate_filter_plan,
                       "phase3-and": p3.validate_phase3_plan,
                       "phase4-join": p4.validate_phase4_join_plan,
@@ -505,10 +505,10 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
         self._require(PlannerState.VALIDATED)
         if self.plan["status"] != "selected":
             raise SelectionContractError("Cannot compile non-selected plan")
-        from process_sim.dtwise import experimental_shacl_phase2_filter as p2
-        from process_sim.dtwise import experimental_shacl_phase3_and as p3
-        from process_sim.dtwise import experimental_shacl_phase4_join as p4
-        from process_sim.dtwise import experimental_shacl_phase4_filtered_join as p42
+        from process_sim.dtwise.shacl_planner.operations import phase2_filter as p2
+        from process_sim.dtwise.shacl_planner.operations import phase3_and as p3
+        from process_sim.dtwise.shacl_planner.operations import phase4_join as p4
+        from process_sim.dtwise.shacl_planner.operations import phase4_filtered_join as p42
         compilers = {"phase2-filter": p2.compile_phase2_filter_sparql,
                      "phase3-and": p3.compile_phase3_and_sparql,
                      "phase4-join": p4.compile_phase4_join_sparql,
@@ -521,10 +521,10 @@ class FilterAndJoinStateMachine(PlannerLifecycle):
 
     def abstain(self):
         if self.trace[-1] == PlannerState.QUALIFIED:
-            from process_sim.dtwise import experimental_shacl_phase2_filter as p2
-            from process_sim.dtwise import experimental_shacl_phase3_and as p3
-            from process_sim.dtwise import experimental_shacl_phase4_join as p4
-            from process_sim.dtwise import experimental_shacl_phase4_filtered_join as p42
+            from process_sim.dtwise.shacl_planner.operations import phase2_filter as p2
+            from process_sim.dtwise.shacl_planner.operations import phase3_and as p3
+            from process_sim.dtwise.shacl_planner.operations import phase4_join as p4
+            from process_sim.dtwise.shacl_planner.operations import phase4_filtered_join as p42
             if self.operation == "phase2-filter":
                 self.plan = {"status": "unresolved", "result_ids": [], "filter_id": None,
                              "operator": None, "value": None,
