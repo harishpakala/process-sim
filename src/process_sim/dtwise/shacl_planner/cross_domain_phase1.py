@@ -41,6 +41,7 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     '"reason":"brief explanation",\n "mapping_ids":["approved-mapping-id"],\n '
     '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
 ) + """
+For SELECT queries, include every entity the user requests as an output in projection_ids, including paired or corresponding entities. Use existence_ids only for entities needed to establish matching but not requested as outputs. Mapping endpoints never replace requested projections.
 For selected plans, include every explicitly requested WHERE comparison in filters.
 boolean_operator combines WHERE filters only, not the cross-domain JOIN.
 Use AND when the question combines multiple filter conditions with AND,
