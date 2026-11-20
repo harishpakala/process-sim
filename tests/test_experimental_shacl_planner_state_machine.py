@@ -125,7 +125,7 @@ def test_retrieve_qualification_uses_shared_lifecycle(monkeypatch):
     qualified = {"prompt": {"question": "Show Address in ECAD", "candidates": [
         {"kind": "property", "id": "P1"},
         {"kind": "shape", "id": "S1"},
-    ]}}
+    ]}, "registry": {"P1": {"node_uris": ["urn:ECAD", "urn:Device"]}}}
     monkeypatch.setattr(sm, "qualify_candidates",
                         lambda index, prepared: calls.append("qualify") or qualified)
     machine = sm.RetrievePlannerStateMachine(
