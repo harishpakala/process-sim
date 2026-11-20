@@ -289,7 +289,9 @@ def compact_n_domain_prompt(prompt: dict) -> dict:
     """
     def owner_and_property(path: str) -> tuple[str, str]:
         parts = [part.strip() for part in path.split(" → ")]
-        return parts[0], parts[-1]
+        # The identifier owner is the immediately preceding SHACL path segment.
+        # Paths may be domain-prefixed (DEXPI → Equipment → AssetIdentifier).
+        return parts[-2], parts[-1]
 
     return {
         "question": prompt["question"],
