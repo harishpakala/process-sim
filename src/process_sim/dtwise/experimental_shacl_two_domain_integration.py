@@ -41,7 +41,8 @@ CASES = (
 )
 
 
-def _check_selected(selection: dict, prompt: dict, owners: dict[str, str],\n                    output_domains: set[str] | None = None) -> bool:
+def _check_selected(selection: dict, prompt: dict, owners: dict[str, str],
+                    output_domains: set[str] | None = None) -> bool:
     if selection["status"] != "selected":
         return False
     paths = {p["id"]: p for p in prompt["identifier_path_candidates"]}
