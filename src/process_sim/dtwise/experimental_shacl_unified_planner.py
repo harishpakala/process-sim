@@ -10,7 +10,7 @@ import json
 from pathlib import Path
 
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
-from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domain
+from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domain, resolve_domains
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     SYSTEM_PROMPT, COMPACT_SYSTEM_PROMPT, compact_n_domain_prompt,
@@ -34,15 +34,26 @@ OPERATIONS = (
 )
 
 
-def plan_question(question: str, schema: dict, mappings: dict, *, domains: int,
+def plan_question(question: str, schema: dict, mappings: dict, *, domains: int | None = None,
                   operation: str = "phase1-plan", model: str = "qwen2.5-coder:7b",
                   embed_model: str = "nomic-embed-text:latest",
                   ollama_url: str = "http://127.0.0.1:11434",
                   prompt_format: str = "compact",
                   domain: str | None = None, index_path: Path | None = None) -> dict:
-    """Call the established planning functions without a subprocess or new routing logic."""
+    """Route by detected domains when no explicit domain count is supplied."""
     if not question.strip():
         raise ValueError("Question must not be empty")
+    available = {
+        item["domain"] for key in ("concepts", "shape_paths")
+        for item in schema.get(key, []) if item.get("domain")
+    }
+    if domains is None:
+        selected_domains = resolve_domains(question, available, schema=schema)
+        domains = len(selected_domains)
+        if domains > 1 and set(selected_domains) != set(DOMAIN_SETS.get(domains, ())):
+            raise ValueError(
+                "Automatically resolved domain combination is not yet supported: "
+                + ", ".join(selected_domains))
     if domains not in (1, 2, 3, 4):
         raise ValueError("domains must be 1, 2, 3, or 4")
     if domains == 1:
@@ -50,10 +61,6 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int,
             raise ValueError(f"Unsupported single-domain operation: {operation}")
         if index_path is None:
             raise ValueError("Single-domain planning requires index_path")
-        available = {
-            item["domain"] for key in ("concepts", "shape_paths")
-            for item in schema.get(key, []) if item.get("domain")
-        }
         chosen_domain = resolve_domain(question, available, override=domain, schema=schema)
         index = load_index(index_path, domain=chosen_domain)
         from process_sim.dtwise.try_dexpi import run_single_domain_query
@@ -97,7 +104,8 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int,
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("question")
-    parser.add_argument("--domains", type=int, required=True, choices=(1, 2, 3, 4))
+    parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4),
+                        help="Optional domain-count override; inferred when omitted")
     parser.add_argument("--domain", help="Optional single-domain override")
     parser.add_argument("--operation", choices=OPERATIONS, default="phase1-plan",
                         help="Existing single-domain operation; explicit, not inferred")
