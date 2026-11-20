@@ -3,8 +3,6 @@
 No Ollama, embeddings, SPARQL, or hardcoded natural-language parser templates.
 Candidate IDs are synthetic and local to these tests.
 """
-from copy import deepcopy
-
 import pytest
 
 from process_sim.dtwise.experimental_shacl_cross_domain_graph import qualify_mapping_graph
