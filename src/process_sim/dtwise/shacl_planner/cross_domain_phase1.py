@@ -127,6 +127,45 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
             missing = exact_shapes[domain] - covered
             if missing:
                 errors.append(f'Explicit {domain} concepts missing from selected operations: {sorted(missing)}')
+        # Output coverage is distinct from participation in WHERE/ORDER BY.
+        # For SELECT requests that coordinate named entities in the result
+        # phrase, filters and mapping endpoints cannot stand in for projections.
+        if answer.get('count_target_id') is None:
+            result_phrase = re.split(
+                r'\\b(?:where|ordered|ordering|sort|sorting|limit|limited)\\b',
+                question, maxsplit=1, flags=re.I,
+            )[0]
+            if re.search(r'\\b(?:show|retrieve|return|list|display)\\b', result_phrase, re.I):
+                mentions = []
+                for domain in domains:
+                    for c in candidates:
+                        if c.get('domain') != domain or c.get('kind') != 'result':
+                            continue
+                        label = c.get('path', '').split(' → ')[-1].strip()
+                        if label and re.search(
+                            r'(?<!\\w)' + re.escape(label) + r's?(?!\\w)',
+                            result_phrase, re.I,
+                        ):
+                            mentions.append((domain, label))
+                            break
+                if len({d for d, _ in mentions}) > 1 and re.search(
+                    r'\\b(?:and|paired\\s+with|together\\s+with)\\b',
+                    result_phrase, re.I,
+                ):
+                    projected = set()
+                    for cid in answer.get('projection_ids') or []:
+                        c = lookup.get(cid, {})
+                        projected.update((c.get('domain'), uri)
+                                         for uri in c.get('node_uris') or [])
+                    for domain, _ in mentions:
+                        missing_output = exact_shapes[domain] - {
+                            uri for d, uri in projected if d == domain
+                        }
+                        if missing_output:
+                            errors.append(
+                                f'Explicit {domain} result concepts missing from projections: '
+                                f'{sorted(missing_output)}'
+                            )
         for f in answer.get('filters', []):
             if not isinstance(f, dict):
                 continue
