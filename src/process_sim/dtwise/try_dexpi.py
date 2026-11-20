@@ -107,7 +107,7 @@ def format_compact(result: dict) -> str:
 def run_single_domain_query(index, question: str, *, operation: str,
                             model="qwen2.5-coder:7b",
                             embed_model="nomic-embed-text:latest",
-                            endpoint="http://127.0.0.1:11434", top_k=8):
+                            endpoint="http://127.0.0.1:11434", top_k=8, timing=None):
     """Shared single-domain query orchestration; compile only, never execute."""
     from process_sim.dtwise.shacl_planner.grounding.property_grounding import property_grounding
     from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
@@ -118,7 +118,10 @@ def run_single_domain_query(index, question: str, *, operation: str,
                "phase4-filtered-join", "phase4-and-join", "direct-intent"}
     if operation not in allowed:
         raise ValueError(f"Unsupported single-domain operation: {operation}")
+    t0 = perf_counter()
     grounding = property_grounding(index, question)
+    if timing is not None:
+        timing["property_grounding_ms"] = (perf_counter() - t0) * 1000
     if grounding["missing_properties"]:
         return {"selection": {
             "status": "unresolved", "selected_candidate_ids": [],
@@ -129,6 +132,7 @@ def run_single_domain_query(index, question: str, *, operation: str,
     broad_shapes = operation in ("phase2-filter", "phase4-join",
                                  "phase4-filtered-join", "phase4-and-join", "direct-intent")
     broad_properties = operation != "phase1-plan"
+    t0 = perf_counter()
     prepared = semantic_candidates(
         index, question,
         top_shapes=max(top_k, 16) if broad_shapes else top_k,
@@ -136,11 +140,22 @@ def run_single_domain_query(index, question: str, *, operation: str,
         max_candidates=128 if broad_properties else 64,
         model=embed_model, endpoint=endpoint,
     )
+    if timing is not None:
+        timing["semantic_candidates_ms"] = (perf_counter() - t0) * 1000
     if operation == "direct-intent":
-        return run_direct_join_intent(index, prepared, model=model, endpoint=endpoint)
-    return run_single_domain_state_machine(
+        t0 = perf_counter()
+        result = run_direct_join_intent(index, prepared, model=model, endpoint=endpoint)
+        if timing is not None:
+            timing["direct_intent_ms"] = (perf_counter() - t0) * 1000
+        return result
+    t0 = perf_counter()
+    result = run_single_domain_state_machine(
         index, prepared, operation=operation, model=model, endpoint=endpoint,
+        timing=timing,
     )
+    if timing is not None:
+        timing["state_machine_ms"] = (perf_counter() - t0) * 1000
+    return result
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
