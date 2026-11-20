@@ -198,7 +198,7 @@ def check(test, result):
 
 def run(test, args):
     flags = ["--phase1-sparql"] if test["mode"] == "--phase1-plan" else []
-    command = [sys.executable, str(ROOT / "try_dexpi.py"), *COMMON,
+    command = [sys.executable, "-m", "process_sim.dtwise.try_dexpi", *COMMON,
                test["mode"], *flags, "--model", args.model,
                "--embed-model", args.embed_model, "--ollama-url", args.ollama_url,
                test["question"]]
