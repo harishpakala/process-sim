@@ -73,7 +73,7 @@ def main() -> int:
         return 2
     print(json.dumps(selection, indent=2, ensure_ascii=False))
     print("=== INTERPRETATION ===")
-    print("Contract validated only; owner/result topology and semantic intent are NOT yet verified.")
+    print("Contract and owner/result topology validated; semantic intent is NOT independently verified.")
     print("No SPARQL generated or executed.")
     return 0
 
