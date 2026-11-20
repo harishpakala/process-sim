@@ -20,6 +20,17 @@ Filter order MUST match the question: Device.LocalId then Device.DeviceType.
 Each owner must be Device, operator must be =, and values must be copied
 exactly. Use only offered property IDs. No SPARQL. Abstain if uncertain."""
 
+OR_PROMPT = """Select two ECAD Address result property IDs joined on the SAME Device
+and exactly two Device string equality filters joined by OR.
+Return ONLY JSON with exactly: status ("selected", "ambiguous", "unresolved"),
+result_ids (two P IDs or []), join_owner ("Device" or null),
+boolean_operator ("or"), filters (two objects each with exactly filter_id,
+owner, property, operator, value; [] for non-selected),
+reason (nonempty string).
+Filter order MUST match the question: Device.LocalId then Device.DeviceType.
+Each owner must be Device, operator must be =, and values must be copied
+exactly. Use only offered property IDs. No SPARQL. Abstain if uncertain."""
+
 FIELDS = {"status", "result_ids", "join_owner", "filters", "reason"}
 OR_FIELDS = FIELDS | {"boolean_operator"}
 FILTER_FIELDS = {"filter_id", "owner", "property", "operator", "value"}
@@ -72,7 +83,7 @@ def validate_phase4_and_join_plan(raw, qualified):
             raise SelectionContractError("Invalid Phase 4.3 JSON") from exc
     if not isinstance(raw, dict) or set(raw) not in (FIELDS, OR_FIELDS):
         raise SelectionContractError("Invalid Phase 4.3 response fields")
-    if "boolean_operator" in raw and raw["boolean_operator"] not in ("and", "or"):
+    if set(raw) == OR_FIELDS and raw["boolean_operator"] not in ("and", "or"):
         raise SelectionContractError("Invalid filter boolean operator")
     if raw["status"] not in ("selected", "ambiguous", "unresolved"):
         raise SelectionContractError("Invalid Phase 4.3 status")
@@ -84,7 +95,8 @@ def validate_phase4_and_join_plan(raw, qualified):
         return raw
     question = qualified["prompt"]["question"]
     expected_operator = "or" if OR_QUESTION.fullmatch(question.strip()) else "and"
-    if raw.get("boolean_operator", "and") != expected_operator:
+    if (expected_operator == "or" and set(raw) != OR_FIELDS) or (
+            raw.get("boolean_operator", "and") != expected_operator):
         raise SelectionContractError("Filter boolean operator contradicts question")
     validate_phase4_join_plan(
         {k: raw[k] for k in ("status", "result_ids", "join_owner", "reason")},
@@ -124,25 +136,10 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
         prompt = {**qualified["prompt"], "candidates": [
             c for c in qualified["prompt"]["candidates"] if c["kind"] == "property"
         ]}
-        if is_or:
-            # Deterministic OR selection from the exact supported question form.
-            # Validate every result/filter ID and literal against SHACL as usual.
-            result_ids = list(_expected_paths(qualified))
-            filter_ids = _filter_ids(qualified)
-            plan = {"status": "selected", "result_ids": result_ids,
-                    "join_owner": "Device", "boolean_operator": "or",
-                    "filters": [
-                        {"filter_id": fid, "owner": "Device", "property": prop,
-                         "operator": "=", "value": value}
-                        for fid, prop, value in zip(
-                            filter_ids, ("LocalId", "DeviceType"), literals)
-                    ],
-                    "reason": "Verified shared Device OR filters"}
-            plan = validate_phase4_and_join_plan(plan, qualified)
-        else:
-            raw = ollama_select(prompt, model=model, endpoint=endpoint,
-                               transport=transport, system_prompt=PROMPT)
-            plan = validate_phase4_and_join_plan(raw, qualified)
+        raw = ollama_select(prompt, model=model, endpoint=endpoint,
+                           transport=transport,
+                           system_prompt=OR_PROMPT if is_or else PROMPT)
+        plan = validate_phase4_and_join_plan(raw, qualified)
         if plan["status"] == "selected" and tuple(f["value"] for f in plan["filters"]) != literals:
             raise SelectionContractError("Filter literals do not match question")
     # Additive Phase 5.4 artifact: constructed only after independent validation.
