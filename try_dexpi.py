@@ -326,15 +326,16 @@ def main() -> None:
                 if not result["queries"]:
                     print("  (none)")
         elif args.phase1_plan:
-            from process_sim.dtwise.experimental_shacl_phase1_ollama import run_phase1_query_plan
-            result = run_phase1_query_plan(index, prepared, model=args.model,
-                                           endpoint=args.ollama_url, timing=timings)
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_retrieve_state_machine,
+            )
+            result = run_retrieve_state_machine(
+                index, prepared, model=args.model, endpoint=args.ollama_url,
+                timing=timings, compile_sparql=args.phase1_sparql,
+            )
             if timings is not None:
                 timings["total_ms"] = (perf_counter() - t_total) * 1000
                 result["timing_ms"] = timings
-            if args.phase1_sparql:
-                from process_sim.dtwise.experimental_shacl_phase1_ollama import compile_phase1_sparql
-                result["queries"] = compile_phase1_sparql(result)
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
