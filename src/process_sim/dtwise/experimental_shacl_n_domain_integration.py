@@ -1,7 +1,6 @@
-"""Run all available 2-/3-domain live Qwen semantic tests in one command.
+"""Run 2-/3-/4-domain live Qwen semantic tests in one command.
 
-Four-domain cases are SKIP until a fourth SHACL-qualified, independently
-approved connected domain exists. No SPARQL generation or execution.
+No SPARQL generation or execution.
 """
 from __future__ import annotations
 
@@ -19,7 +18,11 @@ from process_sim.dtwise.experimental_shacl_three_domain_integration import (
     CASES as THREE_CASES, DOMAINS as THREE_DOMAINS, check_semantics as check_three,
 )
 
-from process_sim.dtwise.experimental_shacl_four_domain_integration import (\n    CASES as FOUR_CASES, DOMAINS as FOUR_DOMAINS, check_semantics as check_four,\n)\n\nTWO_DOMAINS = ("dexpi", "ecad")
+from process_sim.dtwise.experimental_shacl_four_domain_integration import (
+    CASES as FOUR_CASES, DOMAINS as FOUR_DOMAINS, check_semantics as check_four,
+)
+
+TWO_DOMAINS = ("dexpi", "ecad")
 
 
 def _run_two(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
@@ -37,7 +40,11 @@ def _run_three(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
     return check_three(selection, prompt, case[2])
 
 
-def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:\n    return check_four(selection, prompt, case[2])\n\n\ndef main(argv: list[str] | None = None) -> int:
+def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:
+    return check_four(selection, prompt, case[2])
+
+
+def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Live N-domain Qwen integration suite")
     parser.add_argument("--domains", type=int, choices=(2, 3, 4),
                         help="Run only one domain count (default: all)")
@@ -49,6 +56,8 @@ def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:\n
         (2, TWO_DOMAINS, case, _run_two) for case in TWO_CASES
     ] + [
         (3, THREE_DOMAINS, case, _run_three) for case in THREE_CASES
+    ] + [
+        (4, FOUR_DOMAINS, case, _run_four) for case in FOUR_CASES
     ]
     selected = [
         item for item in suites
@@ -58,9 +67,7 @@ def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:\n
     if args.case is not None and not selected:
         parser.error(f"Unknown case for selected domain count: {args.case}")
 
-    # Four domains are not silently emulated with a duplicated or invented domain.
-    skip_four = args.domains in (None, 4) and args.case is None
-    if not selected and not skip_four:
+    if not selected:
         parser.error("No test cases selected")
 
     root = Path(__file__).resolve().parents[3]
@@ -94,11 +101,8 @@ def _run_four(selection: dict, prompt: dict, case: tuple) -> tuple[bool, str]:\n
         print("QWEN:", raw if raw is not None else "(not called: no qualified mapping or request failed)")
         if not passed or args.debug:
             print("DETAIL:", detail)
-    if skip_four:
-        print("4D: SKIP (no verified connected four-domain SHACL/mapping configuration)")
     print(f"TOTAL: {'PASS' if not failures else 'FAIL'} "
-          f"{len(selected) - failures}/{len(selected)} PASS, "
-          f"{1 if skip_four else 0} SKIP, {perf_counter() - start_total:.2f}s")
+          f"{len(selected) - failures}/{len(selected)} PASS, {perf_counter() - start_total:.2f}s")
     return 1 if failures else 0
 
 
