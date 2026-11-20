@@ -54,9 +54,25 @@ def main() -> int:
             prepared = prepare_live_candidates(schema, mappings, question, domains)
             prompt = prepared["prompt"]
             print("OFFERED:", json.dumps({
-                "results": len(prompt["result_candidates"]),
-                "identifiers": len(prompt["identifier_path_candidates"]),
-                "mappings": [m["id"] for m in prompt["mapping_candidates"]],
+                "result_candidate_count": len(prompt["result_candidates"]),
+                "identifier_paths": prompt["identifier_path_candidates"],
+                "mapping_bridges": [
+                    {
+                        "id": edge["id"],
+                        "bridge_role": edge.get("bridge_role"),
+                        "left_domain": edge["left_domain"],
+                        "right_domain": edge["right_domain"],
+                        "left_property": edge["left_property"],
+                        "right_property": edge["right_property"],
+                        "left_identifier_candidate_ids": edge["left_identifier_candidate_ids"],
+                        "right_identifier_candidate_ids": edge["right_identifier_candidate_ids"],
+                        "join_alternatives": edge.get("join_alternatives", []),
+                        "approved_owner_pair_candidate_ids": edge.get(
+                            "approved_owner_pair_candidate_ids"
+                        ),
+                    }
+                    for edge in prompt["mapping_candidates"]
+                ],
             }, indent=2))
             if not prompt["mapping_candidates"]:
                 print("NO QUALIFIED IDENTIFIER BRIDGES: deterministic unresolved; Qwen not called")
