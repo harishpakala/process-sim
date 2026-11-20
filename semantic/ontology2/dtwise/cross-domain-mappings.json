@@ -12,7 +12,8 @@
       "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
     ],
     "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
-    "verified": true
+    "verified": true,
+    "approved_owner_pairs": []
   },
   {
     "id": "assetinventory-ecad-asset-identifier",
@@ -27,7 +28,8 @@
       "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
     ],
     "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
-    "verified": true
+    "verified": true,
+    "approved_owner_pairs": []
   },
   {
     "id": "assetinventory-engineeringbom-asset-identifier",
@@ -102,7 +104,8 @@
       "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
     ],
     "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
-    "verified": true
+    "verified": true,
+    "approved_owner_pairs": []
   },
   {
     "id": "dexpi-engineeringbom-asset-identifier",
