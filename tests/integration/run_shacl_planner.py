@@ -1,19 +1,20 @@
-"""Live SHACL planner integration baseline; runs real CLI/Ollama, never executes SPARQL.
+"""Live SHACL planner integration baseline; imports planner directly, never executes SPARQL.
 
 From repository root:
     python tests/integration/run_shacl_planner.py
     python tests/integration/run_shacl_planner.py --report shacl-baseline.json
 """
 import argparse
-import os
 import json
 from pathlib import Path
-import subprocess
 import sys
 from time import perf_counter
 
 ROOT = Path(__file__).resolve().parents[2]
-COMMON = ("--semantic-paths", "--llm", "--json")
+from process_sim.dtwise.try_dexpi import run_single_domain_query
+from process_sim.dtwise.experimental_shacl_subgraph import load_index
+
+INDEX_PATH = ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json"
 ENDPOINT = "https://example.org/ecad/hasEndPoint"
 PLC = "https://example.org/ecad/hasPLCEndPoint"
 LOCAL = "https://example.org/ecad/hasLocalId"
@@ -196,25 +197,16 @@ def check(test, result):
                 raise AssertionError(f"Missing literal: {value}")
 
 
-def run(test, args):
-    flags = ["--phase1-sparql"] if test["mode"] == "--phase1-plan" else []
-    command = [sys.executable, "-m", "process_sim.dtwise.try_dexpi", *COMMON,
-               test["mode"], *flags, "--model", args.model,
-               "--embed-model", args.embed_model, "--ollama-url", args.ollama_url,
-               test["question"]]
+def run(test, args, index):
     start = perf_counter()
-    env = os.environ.copy()
-    env["PYTHONIOENCODING"] = "utf-8"
     try:
-        process = subprocess.run(command, cwd=ROOT, env=env, capture_output=True, text=True,
-                                 encoding="utf-8", errors="replace",
-                                 timeout=args.timeout)
-        if process.returncode:
-            raise AssertionError(f"CLI exit {process.returncode}: {(process.stderr or process.stdout)[-1500:]}")
-        try:
-            result = json.loads(process.stdout)
-        except json.JSONDecodeError as exc:
-            raise AssertionError(f"Non-JSON CLI output: {process.stdout[-1000:]}") from exc
+        result = run_single_domain_query(
+            index, test["question"],
+            operation=test["mode"].removeprefix("--"),
+            model=args.model,
+            embed_model=args.embed_model,
+            endpoint=args.ollama_url,
+        )
         check(test, result)
         return dict(name=test["name"], status="PASS", seconds=round(perf_counter()-start, 3))
     except Exception as exc:
@@ -232,7 +224,7 @@ def main():
     parser.add_argument("--model", default="qwen2.5-coder:7b")
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
-    parser.add_argument("--timeout", type=float, default=240, help="Per-query timeout (seconds)")
+
     args = parser.parse_args()
     if args.list_cases:
         for test in CASES:
@@ -240,11 +232,12 @@ def main():
         return 0
     selected_cases = [test for test in CASES if not args.case or test["name"] in args.case]
     started = perf_counter()
+    index = load_index(INDEX_PATH, domain="ecad")
     results = []
     print("SHACL planner live integration baseline (SPARQL compilation only)", flush=True)
     for test in selected_cases:
         print(f"\nQUERY [{test['name']}]: {test['question']}", flush=True)
-        outcome = run(test, args)
+        outcome = run(test, args, index)
         outcome["query"] = test["question"]
         results.append(outcome)
         print(f"{outcome['status']:<4}  {outcome['name']:<25} {outcome['seconds']:>8.3f} s", flush=True)
