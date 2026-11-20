@@ -11,7 +11,7 @@
       "https://example.org/dtwise/relationship/672d8b5ef0cde3f01b8ed6094863e82fb61c1c50fcdcc0de7494b07bfd6e643b",
       "https://example.org/dtwise/relationship/ddd1d25209005d3c5542530b72149b87d931a86bba9f7dec6d496d69113320f3"
     ],
-    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair. Owner-level join candidates are qualified from SHACL paths; no owner-pair correspondence is asserted.",
     "verified": true
   },
   {
@@ -26,7 +26,7 @@
       "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
       "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
     ],
-    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair. Owner-level join candidates are qualified from SHACL paths; no owner-pair correspondence is asserted.",
     "verified": true
   },
   {
@@ -101,7 +101,7 @@
       "https://example.org/dtwise/relationship/e8ddc28844f112de44cdd26e561b152f1c410d747fe40fafc5bf841e437c93f8",
       "https://example.org/dtwise/relationship/80e6f9e6bd9e69cfffc7ea07daf65e4e7e69aca14fcfddbd9d2055bb22c8265b"
     ],
-    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair.",
+    "evidence_note": "Approved by domain owner as a shared cross-domain AssetIdentifier key. SHACL references establish property structure; instance-level correspondence was not independently tested for this pair. Owner-level join candidates are qualified from SHACL paths; no owner-pair correspondence is asserted.",
     "verified": true
   },
   {
