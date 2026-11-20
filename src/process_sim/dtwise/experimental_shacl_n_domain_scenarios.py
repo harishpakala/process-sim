@@ -1,7 +1,7 @@
 """Live diagnostic scenarios: DEXPI, ECAD and AssetInventory only.
 
 Run: python -m process_sim.dtwise.experimental_shacl_n_domain_scenarios
-Each scenario makes exactly one Qwen call. No SPARQL is generated/executed.
+Qwen is called only when qualified mapping candidates exist. No SPARQL.
 """
 from __future__ import annotations
 
@@ -22,7 +22,7 @@ SCENARIOS = (
     (
         "ambiguous-owner",
         "Find the corresponding DEXPI and ECAD entities using AssetIdentifier, without specifying which entity kinds.",
-        {"ambiguous"},
+        {"unresolved"},
         ("dexpi", "ecad"),
     ),
     (
@@ -34,7 +34,7 @@ SCENARIOS = (
     (
         "three-domain-asset",
         "Show DEXPI Equipment, its corresponding ECAD Device, and matching AssetInventory entity using AssetIdentifier.",
-        {"selected"},
+        {"unresolved"},
         DOMAINS,
     ),
 )
@@ -58,9 +58,15 @@ def main() -> int:
                 "identifiers": len(prompt["identifier_path_candidates"]),
                 "mappings": [m["id"] for m in prompt["mapping_candidates"]],
             }, indent=2))
-            raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
-            print("RAW QWEN:", raw)
-            selection = validate_n_domain_selection(raw, prepared)
+            if not prompt["mapping_candidates"]:
+                print("NO APPROVED OWNER PAIRS: deterministic unresolved; Qwen not called")
+                selection = {"status": "unresolved", "result_ids": [],
+                             "identifier_path_ids": [], "mapping_ids": [],
+                             "reason": "No qualified owner-pair mapping candidates"}
+            else:
+                raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
+                print("RAW QWEN:", raw)
+                selection = validate_n_domain_selection(raw, prepared)
             print("VALIDATED:", json.dumps(selection, indent=2))
             if selection["status"] not in expected:
                 failures += 1
