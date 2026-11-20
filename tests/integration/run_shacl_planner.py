@@ -3,6 +3,7 @@
 From repository root:
     python tests/integration/run_shacl_planner.py
     python tests/integration/run_shacl_planner.py --report shacl-baseline.json
+    python tests/integration/run_shacl_planner.py --auto-domains
 """
 import argparse
 import json
@@ -12,6 +13,7 @@ from time import perf_counter
 
 ROOT = Path(__file__).resolve().parents[2]
 from process_sim.dtwise.experimental_shacl_unified_planner import plan_question
+from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domains
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_two_domain_integration import CASES as TWO_CASES, _check_selected as check_two
@@ -234,23 +236,49 @@ def check_multi(count, case, result, schema, mappings):
 def run(count, test, args, schema, mappings):
     start = perf_counter()
     name, question = (test["name"], test["question"]) if count == 1 else test[:2]
+    routing = "NOT_RUN"
     try:
+        if args.auto_domains:
+            available = {
+                item["domain"] for key in ("concepts", "shape_paths")
+                for item in schema.get(key, []) if item.get("domain")
+            }
+            resolved = resolve_domains(question, available, schema=schema)
+            expected = {1: ("ecad",), 2: ("dexpi", "ecad"),
+                        3: THREE_DOMAINS, 4: FOUR_DOMAINS}[count]
+            if set(resolved) != set(expected) or len(resolved) != count:
+                raise AssertionError(
+                    f"Routing mismatch: expected {expected}, resolved {resolved}")
+            routing = "PASS"
         result = plan_question(
-            question, schema, mappings, domains=count,
+            question, schema, mappings,
+            **({} if args.auto_domains else {"domains": count}),
             operation=test["mode"].removeprefix("--") if count == 1 else "phase1-plan",
             model=args.model, embed_model=args.embed_model,
             ollama_url=args.ollama_url, prompt_format=args.prompt_format,
             index_path=INDEX_PATH,
         )
+        if args.auto_domains:
+            expected_mode = "single-domain" if count == 1 else "n-domain"
+            if result.get("mode") != expected_mode:
+                routing = "FAIL"
+                raise AssertionError(f"Wrong planner mode: {result.get('mode')}")
+            if count > 1 and set(result.get("domains", ())) != set(expected):
+                routing = "FAIL"
+                raise AssertionError(f"Wrong planner domains: {result.get('domains')}")
         if "error" in result:
             raise AssertionError(str(result["error"]))
         if count == 1:
             check(test, result)
         else:
             check_multi(count, test, result, schema, mappings)
-        return dict(name=name, domains=count, status="PASS", seconds=round(perf_counter()-start, 3))
+        return dict(name=name, domains=count, status="PASS", routing=routing,
+                    seconds=round(perf_counter()-start, 3))
     except Exception as exc:
-        return dict(name=name, domains=count, status="FAIL", seconds=round(perf_counter()-start, 3),
+        if args.auto_domains and routing == "NOT_RUN":
+            routing = "FAIL"
+        return dict(name=name, domains=count, status="FAIL", routing=routing,
+                    seconds=round(perf_counter()-start, 3),
                     reason=f"{type(exc).__name__}: {exc}")
 
 
@@ -258,6 +286,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--report", type=Path, default=Path("shacl-integration-report.json"))
     parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4))
+    parser.add_argument("--auto-domains", action="store_true",
+                        help="Infer domains for every case and assert correct routing")
     parser.add_argument("--case", action="append", help="Named case; repeatable")
     parser.add_argument("--list-cases", action="store_true")
     parser.add_argument("--model", default="qwen2.5-coder:7b")
@@ -291,12 +321,18 @@ def main():
         outcome["query"] = question
         results.append(outcome)
         print(f"{outcome['status']:<4}  {count}D/{name:<25} {outcome['seconds']:>8.3f} s", flush=True)
+        if args.auto_domains:
+            print(f"      ROUTING: {outcome['routing']}", flush=True)
         if "reason" in outcome:
             print("      " + outcome["reason"].replace("\n", "\n      "), flush=True)
     total = round(perf_counter()-started, 3)
     passed = sum(r["status"] == "PASS" for r in results)
     print(f"TOTAL {passed} PASS / {len(results)-passed} FAIL / {total:.3f} s")
-    report = dict(model=args.model, prompt_format=args.prompt_format, cases=results,
+    if args.auto_domains:
+        routing_passed = sum(r["routing"] == "PASS" for r in results)
+        print(f"ROUTING {routing_passed} PASS / {len(results)-routing_passed} FAIL")
+    report = dict(model=args.model, prompt_format=args.prompt_format,
+                  auto_domains=args.auto_domains, cases=results,
                   passed=passed, failed=len(results)-passed, total_seconds=total,
                   note="Live model output can vary; SPARQL was compiled but never executed")
     args.report.parent.mkdir(parents=True, exist_ok=True)
