@@ -29,6 +29,11 @@ SYSTEM_PROMPT = """You are a SHACL-grounded Phase-1 query planner. Return ONE JS
 Only use candidate IDs supplied in the question. Never invent paths or literal values.
 Every referenced concept must be explicitly named in the question (case-insensitive, simple plural allowed). Do not infer synonyms.
 A concept may have multiple verified paths: choose the path under the explicitly named owner, or abstain when ambiguous.
+When returning a named property value, project its P (property) candidate, not R (result) candidates.
+The same property name may belong to multiple concepts: select only the SHACL-verified
+property directly owned by the requested concept. Do not select descendant or unrelated
+owners merely because their properties have the same name. If ownership is ambiguous,
+return ambiguous or unresolved; never project all matching paths.
 Supported: SELECT entity/property retrieval; simple comparisons (= != > >= < <=);
 AND/OR between filters; same-owner sibling branch JOIN; simple COUNT of entities;
 ORDER BY ASC/DESC on a grounded property; LIMIT. All other query operations
@@ -209,7 +214,7 @@ def _unsupported_intent(question):
       'OFFSET':r'\b(offset|skip\s+(?:the\s+)?first|skip\s+\d+)\b',
       'ASK':r'^(?:are there|is there|do any|does any)\b',
       'OPTIONAL/UNION/MINUS':r'\b(optional|union|minus)\b',
-      'EXISTS/BIND/VALUES':r'\b(not\s+exists|exists|bind|values)\b',
+      'EXISTS/BIND/VALUES':r'\b(not\s+exists|exists|bind)\b|\bVALUES\s*\{',
       'CONSTRUCT/DESCRIBE':r'\b(construct|describe)\b',
     }
     return [name for name,pattern in patterns.items() if re.search(pattern,question,re.I)]
@@ -516,6 +521,25 @@ def build_candidates(index, question, *, method, endpoint, embedding_model,
 
 
 
+def requested_property_value_names(question, property_hits):
+    """Detect explicit property-value retrieval, not arbitrary property mentions.
+
+    Conservative language cues; property names come from SHACL, never from a
+    query-specific vocabulary. Filters and mixed entity/property requests are
+    left to the model and the remaining validators.
+    """
+    if re.search(r'\b(?:where|filter|ordered? by|sort(?:ed)? by)\b', question, re.I):
+        return set()
+    names = {p['name'].casefold() for p in property_hits.values()}
+    if not names:
+        return set()
+    value_request = bool(re.search(r'\b(?:values?|its|their|belongs? to)\b', question, re.I))
+    property_of = bool(re.search(r'\b(?:show|list|return|retrieve|get)\s+(?:the\s+)?[A-Za-z][A-Za-z0-9]*\s+of\b', question, re.I))
+    if not (value_request or property_of):
+        return set()
+    return names
+
+
 def normalize_property_only_projections(answer, candidates, question):
     """Move redundant owner results to existence when only their properties are requested.
 
@@ -665,6 +689,30 @@ def run_one(index, question, *, method='expanded', dry_run=False,
             for label in sorted(required_labels - covered_labels):
                 diagnostics['errors'].append(
                     'Explicit concept not grounded in selected paths: ' + label)
+            # Property-value retrieval must return property IDs directly owned
+            # by an explicitly named concept, not every homonymous property
+            # reachable through descendants or unrelated branches.
+            value_names = requested_property_value_names(question, property_hits)
+            if value_names:
+                projected_properties = []
+                for cid in answer.get('projection_ids', []):
+                    c = lookup.get(cid)
+                    if not c:
+                        continue
+                    if c['kind'] != 'property':
+                        diagnostics['errors'].append(
+                            f'Property-value request projects result {cid} instead of a property')
+                        continue
+                    projected_properties.append(c)
+                    owner_nodes = c.get('node_uris') or []
+                    if not owner_nodes or owner_nodes[-1] not in shape_hits:
+                        diagnostics['errors'].append(
+                            f'Projected property {cid} is not directly owned by a named concept')
+                    if (c.get('property_name') or '').casefold() not in value_names:
+                        diagnostics['errors'].append(
+                            f'Projected property {cid} lacks explicit property-name evidence')
+                if not projected_properties:
+                    diagnostics['errors'].append('Property-value request has no property projection')
             # A chosen filter property must have the exact user-mentioned name.
             exact_names={p['name'].casefold() for p in property_hits.values()}
             for f in answer.get('filters',[]):
