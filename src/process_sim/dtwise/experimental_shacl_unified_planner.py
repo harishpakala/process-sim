@@ -1,6 +1,6 @@
 """Unified import-only entry point for existing single- and multi-domain SHACL planners.
 
-Operation selection is explicit; no new intent classifier or validation rules.
+Single-domain operation is classified when omitted; explicit overrides remain supported.
 SPARQL is compiled, never executed.
 """
 from __future__ import annotations
@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 
 from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
+from process_sim.dtwise.experimental_shacl_query_classifier import classify_single_domain_query
 from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domain, resolve_domains
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
@@ -35,7 +36,7 @@ OPERATIONS = (
 
 
 def plan_question(question: str, schema: dict, mappings: dict, *, domains: int | None = None,
-                  operation: str = "phase1-plan", model: str = "qwen2.5-coder:7b",
+                  operation: str | None = None, model: str = "qwen2.5-coder:7b",
                   embed_model: str = "nomic-embed-text:latest",
                   ollama_url: str = "http://127.0.0.1:11434",
                   prompt_format: str = "compact",
@@ -55,6 +56,20 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
         raise ValueError("domains must be 1, 2, 3, or 4, or None")
     domains = len(selected_domains)
     if domains == 1:
+        classification = None
+        if operation is None:
+            try:
+                classification = classify_single_domain_query(
+                    question, model=model, endpoint=ollama_url)
+            except ValueError as exc:
+                return {"mode": "single-domain", "operation": None,
+                        "classification": {"status": "unsupported",
+                                           "operation": None, "reason": str(exc)},
+                        "sparql": None}
+            if classification["status"] == "unsupported":
+                return {"mode": "single-domain", "operation": None,
+                        "classification": classification, "sparql": None}
+            operation = classification["operation"]
         if operation not in OPERATIONS:
             raise ValueError(f"Unsupported single-domain operation: {operation}")
         if index_path is None:
@@ -66,7 +81,8 @@ def plan_question(question: str, schema: dict, mappings: dict, *, domains: int |
             index, question, operation=operation, model=model,
             embed_model=embed_model, endpoint=ollama_url,
         )
-        return {"mode": "single-domain", "operation": operation, **result}
+        return {"mode": "single-domain", "operation": operation,
+                **({"classification": classification} if classification else {}), **result}
 
     prepared = prepare_live_candidates(schema, mappings, question, selected_domains)
     prompt = prepared["prompt"]
@@ -104,8 +120,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--domains", type=int, choices=(1, 2, 3, 4),
                         help="Optional domain-count override; inferred when omitted")
     parser.add_argument("--domain", help="Optional single-domain override")
-    parser.add_argument("--operation", choices=OPERATIONS, default="phase1-plan",
-                        help="Existing single-domain operation; explicit, not inferred")
+    parser.add_argument("--operation", choices=OPERATIONS, default=None,
+                        help="Optional single-domain operation override; inferred when omitted")
     parser.add_argument("--model", default="qwen2.5-coder:7b")
     parser.add_argument("--embed-model", default="nomic-embed-text:latest")
     parser.add_argument("--ollama-url", default="http://127.0.0.1:11434")
