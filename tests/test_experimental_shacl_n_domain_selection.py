@@ -23,7 +23,8 @@ def fixture():
             ]},
             "registry": {
                 "R1": {"domain": domain, "kind": "result",
-                       "node_uris": [owner], "target_shape_uri": owner},
+                       "node_uris": [owner], "edges": [],
+                       "target_shape_uri": owner},
                 "P1": {"domain": domain, "kind": "property",
                        "node_uris": [owner], "edges": [],
                        "property": {"owner": owner, "predicate": predicate},
