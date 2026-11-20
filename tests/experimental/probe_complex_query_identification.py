@@ -1,53 +1,53 @@
-"""Probe Phase 4 two-filter JOIN identification on the existing 1D cases.
+"""Probe structural Phase 4 JOIN + two AND/OR filters on existing 1D cases.
 
-No Ollama, embeddings, SHACL candidate qualification, or SPARQL compilation.
+Offline identification only: no Ollama, embeddings, SHACL qualification,
+SPARQL compilation, or production routing changes.
 
 From the repository root:
     python tests/experimental/probe_complex_query_identification.py
 """
-from process_sim.dtwise.shacl_planner.operations.phase4_and_join import (
-    ALTERNATE_QUESTION,
-    OR_QUESTION,
-    QUESTION,
-    _literals,
-)
-from process_sim.dtwise.shacl_planner.query_classifier import (
-    classify_single_domain_query,
-)
 from pathlib import Path
 import runpy
 
-# Load the existing integration cases by file path: tests/integration is not
-# necessarily importable as a Python package when this script runs directly.
+from process_sim.dtwise.shacl_planner.query_classifier import (
+    classify_single_domain_query,
+    extract_query_structure,
+)
+
+# Load the existing integration cases by file path. The tests directory is
+# not necessarily importable as a package in a direct script invocation.
 CASES = runpy.run_path(
     str(Path(__file__).resolve().parents[1] / "integration" / "run_shacl_planner.py")
 )["CASES"]
 
 
 def identify_type6(question):
-    """Run the actual Phase 4 two-filter question gate, without planning."""
-    literals = _literals(question)
-    if literals is None:
+    """Recognize JOIN + exactly two equality filters with AND/OR syntax.
+
+    This is a syntactic probe, not proof of a SHACL-valid join. In particular,
+    the actual owner and property paths are verified later by the planner.
+    """
+    structure = extract_query_structure(question)
+    if not structure or structure.get("unsupported"):
         return None
-    if OR_QUESTION.fullmatch(question.strip()):
-        logic = "OR"
-    elif QUESTION.fullmatch(question.strip()):
-        logic = "AND"
-    elif ALTERNATE_QUESTION.fullmatch(question.strip()):
-        logic = "AND"
-    else:
+    filters = structure["filters"]
+    logic = structure["boolean_operator"]
+    if not structure["sibling"] or len(filters) != 2 or logic not in ("AND", "OR"):
         return None
     return {
-        "join_owner": "Device",
-        "filter_count": 2,
+        "requires_join": True,
+        "filter_count": len(filters),
         "boolean_operator": logic,
-        "filter_values": literals,
+        "filters": [
+            {"property": property_name, "value": value}
+            for property_name, value in filters
+        ],
     }
 
 
 def main():
     matched = 0
-    print("1D Type 6 identification probe (no Ollama or SPARQL)\n")
+    print("1D Phase 4 JOIN + two AND/OR filters: structural probe (offline)\n")
     for test in CASES:
         name, question = test["name"], test["question"]
         identified = identify_type6(question)
