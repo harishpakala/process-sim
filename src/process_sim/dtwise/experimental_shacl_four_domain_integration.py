@@ -25,13 +25,13 @@ CASES = (
      {"dexpi": "Equipment", "ecad": "Device", "assetinventory": "Asset", "opcuaconnectivity": "SignalMapping"}),
     ("all-four-reordered", "Using AssetIdentifier, show OPCUAConnectivity SignalMapping, AssetInventory Asset, ECAD Device, and DEXPI Equipment.",
      {"dexpi": "Equipment", "ecad": "Device", "assetinventory": "Asset", "opcuaconnectivity": "SignalMapping"}),
-    ("opcua-only", "Show OPCUAConnectivity SignalMapping corresponding to DEXPI Equipment, ECAD Device, and AssetInventory Asset using AssetIdentifier.",
+    ("opcua-only", "Return only OPCUAConnectivity SignalMapping records whose AssetIdentifier matches DEXPI Equipment, ECAD Device, and AssetInventory Asset. Use the other three entities for matching, not as outputs.",
      {"opcuaconnectivity": "SignalMapping"}),
-    ("asset-only-four", "Show AssetInventory Asset corresponding to DEXPI Equipment, ECAD Device, and OPCUAConnectivity SignalMapping using AssetIdentifier.",
+    ("asset-only-four", "Return only AssetInventory Asset records whose AssetIdentifier matches DEXPI Equipment, ECAD Device, and OPCUAConnectivity SignalMapping. Use the other three entities for matching, not as outputs.",
      {"assetinventory": "Asset"}),
-    ("device-only-four", "Show ECAD Device corresponding to DEXPI Equipment, AssetInventory Asset, and OPCUAConnectivity SignalMapping using AssetIdentifier.",
+    ("device-only-four", "Return only ECAD Device records whose AssetIdentifier matches DEXPI Equipment, AssetInventory Asset, and OPCUAConnectivity SignalMapping. Use the other three entities for matching, not as outputs.",
      {"ecad": "Device"}),
-    ("equipment-only-four", "Show DEXPI Equipment corresponding to ECAD Device, AssetInventory Asset, and OPCUAConnectivity SignalMapping using AssetIdentifier.",
+    ("equipment-only-four", "Return only DEXPI Equipment records whose AssetIdentifier matches ECAD Device, AssetInventory Asset, and OPCUAConnectivity SignalMapping. Use the other three entities for matching, not as outputs.",
      {"dexpi": "Equipment"}),
 )
 
