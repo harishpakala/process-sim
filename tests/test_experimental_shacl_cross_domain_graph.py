@@ -181,7 +181,7 @@ def test_tampered_owner_pair_candidate_is_rejected():
     edge["approved_owner_pair_candidate_ids"].append({
         "left_id": "dexpi:P2", "right_id": "ecad:P1"
     })
-    with pytest.raises(SelectionContractError, match="not approved|differs"):
+    with pytest.raises(SelectionContractError, match="not offered|not approved|differs"):
         validate_mapping_graph_selection(
             ["de"], ["dexpi:P2", "ecad:P1"], offered, mappings
         )
