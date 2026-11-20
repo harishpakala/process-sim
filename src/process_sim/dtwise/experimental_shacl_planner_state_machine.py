@@ -172,3 +172,31 @@ def run_join_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
     return JoinPlannerStateMachine(
         index, prepared, model=model, endpoint=endpoint, transport=transport
     ).run()
+
+
+class RetrievePlannerStateMachine(PlannerLifecycle):
+    """RETRIEVE migration, stage 1: independent SHACL qualification.
+
+    Not wired to CLI until selection, validation, and compilation are migrated
+    and verified against the existing Phase 1 behavior.
+    """
+
+    def __init__(self, index, prepared):
+        super().__init__()
+        self.index = index
+        self.prepared = prepared
+        self.qualified = None
+        self.question = None
+        self.properties = None
+
+    def qualify(self):
+        self._require(PlannerState.START)
+        qualified = qualify_candidates(self.index, self.prepared)
+        self.qualified = qualified
+        self.question = qualified["prompt"]["question"]
+        self.properties = [
+            candidate for candidate in qualified["prompt"]["candidates"]
+            if candidate["kind"] == "property"
+        ]
+        self._advance(PlannerState.QUALIFIED)
+        return qualified
