@@ -544,12 +544,14 @@ def focus_unambiguous_property_candidates(question, candidates, registry,
                                           shape_hits, property_hits):
     """Narrow a pure property-value request to its verified direct owner.
 
-    Only focus when SHACL establishes exactly one property candidate and one
-    owner path. Keep original candidate IDs and leave ambiguous/mixed requests
-    untouched. This is retrieval/prompt scoping, never answer fabrication.
+    Only focus when SHACL establishes exactly one direct property candidate
+    under the explicitly matched concept shape(s). Several shape URIs may
+    share the same user-facing label; do not require a single shape URI.
+    Keep original candidate IDs for ambiguous/mixed requests. This scopes
+    the prompt; it never fabricates an answer.
     """
     names = requested_property_value_names(question, property_hits)
-    if len(names) != 1 or len(shape_hits) != 1:
+    if len(names) != 1 or not shape_hits:
         return candidates, None
     name = next(iter(names))
     matches = [
