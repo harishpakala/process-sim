@@ -6,6 +6,7 @@ No SPARQL compilation or RDF instance verification.
 """
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 from time import perf_counter
@@ -69,17 +70,25 @@ def _check_selected(selection: dict, prompt: dict, owners: dict[str, str]) -> bo
     return True
 
 
-def run_case(schema: dict, mappings: dict, case: tuple) -> bool:
+def run_case(schema: dict, mappings: dict, case: tuple, *, debug: bool = False) -> bool:
     _, question, expected, owners = case
     prepared = prepare_live_candidates(schema, mappings, question, ("dexpi", "ecad"))
     prompt = prepared["prompt"]
+    if debug:
+        print('QUESTION:', question)
+        print('OFFERED:', json.dumps(prompt, indent=2, ensure_ascii=False))
     if prompt["mapping_candidates"]:
         raw = ollama_select(prompt, system_prompt=SYSTEM_PROMPT)
+        if debug:
+            print('RAW QWEN:', raw)
         selection = validate_n_domain_selection(raw, prepared)
     else:
         # No approved qualified mapping is a deterministic unresolved outcome.
         selection = {"status": "unresolved", "result_ids": [],
                      "identifier_path_ids": [], "mapping_ids": []}
+    if debug:
+        print('VALIDATED:', json.dumps(selection, indent=2, ensure_ascii=False))
+        print('EXPECTED:', expected, owners)
     if selection["status"] != expected:
         return False
     if expected != "selected":
@@ -89,7 +98,13 @@ def run_case(schema: dict, mappings: dict, case: tuple) -> bool:
     return _check_selected(selection, prompt, owners)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Live two-domain Qwen integration tests")
+    parser.add_argument("--case", choices=[case[0] for case in CASES],
+                        help="Run only one named case")
+    parser.add_argument("--debug", action="store_true",
+                        help="Print candidate payload, Qwen output and validation details")
+    args = parser.parse_args(argv)
     root = Path(__file__).resolve().parents[3]
     schema = json.loads(
         (root / "semantic/ontology2/dtwise/dtwise-schema-index.json").read_text(encoding="utf-8")
@@ -99,17 +114,19 @@ def main() -> int:
     )
     failures = 0
     total_start = perf_counter()
-    for case in CASES:
+    selected_cases = [case for case in CASES if args.case is None or case[0] == args.case]
+    for case in selected_cases:
         start = perf_counter()
         try:
-            passed = run_case(schema, mappings, case)
-        except Exception:
-            # Deliberately terse output; failures include transport and contract errors.
+            passed = run_case(schema, mappings, case, debug=args.debug)
+        except Exception as exc:
+            if args.debug:
+                print('ERROR:', type(exc).__name__, str(exc))
             passed = False
         failures += not passed
         print(f"{case[0]}: {'PASS' if passed else 'FAIL'} {perf_counter() - start:.2f}s")
     print(f"TOTAL: {'PASS' if not failures else 'FAIL'} "
-          f"{len(CASES) - failures}/{len(CASES)} {perf_counter() - total_start:.2f}s")
+          f"{len(selected_cases) - failures}/{len(selected_cases)} {perf_counter() - total_start:.2f}s")
     return 1 if failures else 0
 
 
