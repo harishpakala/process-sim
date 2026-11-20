@@ -222,7 +222,8 @@ def _explicit_sort(question):
 
 
 def _explicit_limit(question):
-    patterns=[r'\b(?:limit|return|show|top|first)\s+(\d+)\b',
+    patterns=[r'\blimited\s+to\s+(\d+)\b',
+              r'\b(?:limit|return|show|top|first)\s+(\d+)\b',
               r'\b(?:return|show)\s+(?:the\s+)?first\s+(\d+)\b']
     for p in patterns:
         m=re.search(p,question,re.I)
