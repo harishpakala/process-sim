@@ -258,8 +258,24 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
         'identifier_path_candidates': graph['identifier_path_candidates'],
         'mapping_candidates': graph['mapping_candidates'],
     })
+    # Expose verified identifier ownership next to each result candidate.
+    # This is presentation only: Qwen still chooses COUNT/existence roles,
+    # and the original graph/registry remain authoritative for validation.
+    owner_identifiers = {}
+    for identifier in compact['identifiers']:
+        owner_identifiers.setdefault(
+            (identifier['domain'], identifier['owner'].casefold()), []
+        ).append(identifier['id'])
+    result_choices = []
+    for candidate in compact['results']:
+        choice = dict(candidate)
+        if choice['kind'] == 'result':
+            owner = choice['path'].split(' → ')[-1].strip().casefold()
+            choice['identifier_path_ids'] = owner_identifiers.get(
+                (choice['domain'], owner), [])
+        result_choices.append(choice)
     prompt = {'question': question, 'domains': list(domains),
-              'candidates': compact['results'],
+              'candidates': result_choices,
               'mapping_candidates': compact['mappings'],
               'identifier_path_candidates': compact['identifiers']}
     record['prompt_candidate_count'] = len(prompt_candidates)
