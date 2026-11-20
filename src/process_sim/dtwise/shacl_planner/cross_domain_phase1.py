@@ -62,7 +62,10 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
     if not isinstance(answer, dict):
         return ['Response must be a JSON object'], []
     extra = {'mapping_ids', 'identifier_path_ids'}
-    if set(answer) != (set(answer) - extra) | extra or not extra.issubset(answer):
+    expected = {'status', 'projection_ids', 'existence_ids', 'filters',
+                'boolean_operator', 'join', 'count_target_id', 'order_by',
+                'limit', 'join_owner_id', 'reason'} | extra
+    if set(answer) != expected:
         errors.append('Missing cross-domain plan fields')
     base = {k: v for k, v in answer.items() if k not in extra}
     errors.extend(validate_output(base, candidates))
@@ -155,8 +158,6 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
                     'reason': f'No explicitly named SHACL concept in {domain}; no Qwen call'}
         exact_shapes[domain] = set(shapes)
         exact_properties[domain] = {p['name'].casefold() for p in props.values()}
-        missing = [p for p in _explicit_filter_property_names(question)
-                   if p.casefold() not in set().union(*exact_properties.values())]
         # Check filter names against all domains after collecting all anchors.
         qualified, ev = build_candidates(index, question, method=method,
             endpoint=endpoint, embedding_model=embedding_model,
