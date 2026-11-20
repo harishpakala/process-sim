@@ -14,7 +14,14 @@ from process_sim.dtwise.shacl_planner.operations.phase4_and_join import (
 from process_sim.dtwise.shacl_planner.query_classifier import (
     classify_single_domain_query,
 )
-from tests.integration.run_shacl_planner import CASES
+from pathlib import Path
+import runpy
+
+# Load the existing integration cases by file path: tests/integration is not
+# necessarily importable as a Python package when this script runs directly.
+CASES = runpy.run_path(
+    str(Path(__file__).resolve().parents[1] / "integration" / "run_shacl_planner.py")
+)["CASES"]
 
 
 def identify_type6(question):
