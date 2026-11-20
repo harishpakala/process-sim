@@ -9,9 +9,9 @@ import argparse
 import json
 from pathlib import Path
 
-from process_sim.dtwise.experimental_shacl_cross_domain_mappings import load_cross_domain_mappings
-from process_sim.dtwise.experimental_shacl_query_classifier import classify_single_domain_query
-from process_sim.dtwise.experimental_shacl_domain_resolution import resolve_domain, resolve_domains
+from process_sim.dtwise.shacl_planner.multi_domain.cross_domain_mappings import load_cross_domain_mappings
+from process_sim.dtwise.shacl_planner.query_classifier import classify_single_domain_query
+from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import resolve_domain, resolve_domains
 from process_sim.dtwise.experimental_shacl_n_domain_live import prepare_live_candidates
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     SYSTEM_PROMPT, COMPACT_SYSTEM_PROMPT, compact_n_domain_prompt,
@@ -20,7 +20,7 @@ from process_sim.dtwise.experimental_shacl_n_domain_selection import (
 from process_sim.dtwise.experimental_shacl_n_domain_sparql import compile_n_domain_sparql
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
-from process_sim.dtwise.experimental_shacl_subgraph import load_index
+from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index
 from process_sim.dtwise.experimental_shacl_three_domain_integration import DOMAINS as THREE_DOMAINS
 from process_sim.dtwise.experimental_shacl_four_domain_integration import DOMAINS as FOUR_DOMAINS
 
