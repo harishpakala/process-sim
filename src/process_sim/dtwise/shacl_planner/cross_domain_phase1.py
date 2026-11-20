@@ -132,10 +132,10 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
         # phrase, filters and mapping endpoints cannot stand in for projections.
         if answer.get('count_target_id') is None:
             result_phrase = re.split(
-                r'\\b(?:where|ordered|ordering|sort|sorting|limit|limited)\\b',
+                r'\b(?:where|ordered|ordering|sort|sorting|limit|limited)\b',
                 question, maxsplit=1, flags=re.I,
             )[0]
-            if re.search(r'\\b(?:show|retrieve|return|list|display)\\b', result_phrase, re.I):
+            if re.search(r'\b(?:show|retrieve|return|list|display)\b', result_phrase, re.I):
                 mentions = []
                 for domain in domains:
                     for c in candidates:
@@ -143,13 +143,13 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
                             continue
                         label = c.get('path', '').split(' → ')[-1].strip()
                         if label and re.search(
-                            r'(?<!\\w)' + re.escape(label) + r's?(?!\\w)',
+                            r'(?<!\w)' + re.escape(label) + r's?(?!\w)',
                             result_phrase, re.I,
                         ):
                             mentions.append((domain, label))
                             break
                 if len({d for d, _ in mentions}) > 1 and re.search(
-                    r'\\b(?:and|paired\\s+with|together\\s+with)\\b',
+                    r'\b(?:and|paired\s+with|together\s+with)\b',
                     result_phrase, re.I,
                 ):
                     projected = set()
