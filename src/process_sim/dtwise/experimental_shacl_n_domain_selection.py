@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 
 from process_sim.dtwise.experimental_shacl_cross_domain_graph import (
     qualify_mapping_graph, validate_mapping_graph_selection,
@@ -46,6 +47,124 @@ reason (nonempty string).
 For ambiguous/unresolved all three arrays must be empty."""
 
 
+
+def _explicit_vocabulary_matches(question: str, labels: set[str]) -> set[str]:
+    """Match complete SHACL-derived labels, never substring/domain-specific rules."""
+    return {
+        label for label in labels if label and re.search(
+            r"(?<![\\w])" + re.escape(label) + r"(?![\\w])",
+            question, flags=re.IGNORECASE,
+        )
+    }
+
+
+def _prune_explicit_candidates(question: str, results: list[dict],
+                               graph: dict) -> tuple[list[dict], dict]:
+    """Conservatively narrow only explicit, unambiguous vocabulary references.
+
+    No ontology meaning is inferred from synonyms or free-form descriptions.
+    If evidence is insufficient, preserve alternatives for Qwen.
+    """
+    paths = graph["identifier_path_candidates"]
+    edges = graph["mapping_candidates"]
+    # Labels are taken from qualified path displays, not coded domain vocabulary.
+    identifier_labels = {
+        p["path"].split(" → ")[-1].strip() for p in paths
+        if " → " in p["path"]
+    }
+    mentioned = _explicit_vocabulary_matches(question, identifier_labels)
+    excluded = {
+        label for label in mentioned if re.search(
+            r"(?:do not use|don't use|without|exclude|excluding|not using)\\s+"
+            + re.escape(label) + r"(?![\\w])",
+            question, flags=re.IGNORECASE,
+        )
+    }
+    required = mentioned - excluded
+    # Only prune identifier vocabulary if exactly one affirmative label is named.
+    # Multiple labels or unclear wording remain for semantic selection.
+    if len(required) == 1:
+        label = next(iter(required))
+        allowed_ids = {
+            p["id"] for p in paths
+            if p["path"].split(" → ")[-1].strip().casefold() == label.casefold()
+        }
+        edges = [
+            e for e in edges
+            if set(e["left_identifier_candidate_ids"]) & allowed_ids
+            and set(e["right_identifier_candidate_ids"]) & allowed_ids
+        ]
+    elif excluded:
+        banned = {x.casefold() for x in excluded}
+        allowed_ids = {
+            p["id"] for p in paths
+            if p["path"].split(" → ")[-1].strip().casefold() not in banned
+        }
+        edges = [
+            e for e in edges
+            if set(e["left_identifier_candidate_ids"]) & allowed_ids
+            and set(e["right_identifier_candidate_ids"]) & allowed_ids
+        ]
+    else:
+        allowed_ids = {p["id"] for p in paths}
+
+    # Explicit entity owner labels are derived from identifier path displays.
+    # Do not prune a domain when multiple distinct owner labels are mentioned.
+    owner_labels = {}
+    for p in paths:
+        if " → " in p["path"]:
+            owner_labels.setdefault(p["domain"], set()).add(p["path"].split(" → ")[0].strip())
+    owner_filters = {}
+    for domain, labels in owner_labels.items():
+        matches = _explicit_vocabulary_matches(question, labels)
+        if len(matches) == 1:
+            owner_filters[domain] = next(iter(matches)).casefold()
+    kept_paths = [
+        p for p in paths
+        if p["id"] in allowed_ids
+        and (p["domain"] not in owner_filters
+             or p["path"].split(" → ")[0].strip().casefold() == owner_filters[p["domain"]])
+    ]
+    kept_ids = {p["id"] for p in kept_paths}
+    narrowed_edges = []
+    for edge in edges:
+        left = [x for x in edge["left_identifier_candidate_ids"] if x in kept_ids]
+        right = [x for x in edge["right_identifier_candidate_ids"] if x in kept_ids]
+        alternatives = [
+            a for a in edge["join_alternatives"]
+            if a["left_id"] in left and a["right_id"] in right
+        ]
+        if not alternatives:
+            continue
+        narrowed_edges.append({
+            **edge,
+            "left_identifier_candidate_ids": left,
+            "right_identifier_candidate_ids": right,
+            "join_alternatives": alternatives,
+            "approved_owner_pair_candidate_ids": (
+                [a for a in edge["approved_owner_pair_candidate_ids"]
+                 if a["left_id"] in left and a["right_id"] in right]
+                if edge.get("approved_owner_pair_candidate_ids") is not None else None
+            ),
+        })
+    used = {
+        x for e in narrowed_edges
+        for side in ("left", "right")
+        for x in e[f"{side}_identifier_candidate_ids"]
+    }
+    # A qualified result path can traverse multiple owners. Prune only when
+    # its displayed root owner is explicit and a single owner was requested.
+    narrowed_results = [
+        c for c in results
+        if c["domain"] not in owner_filters
+        or c["path"].split(" → ")[0].strip().casefold() == owner_filters[c["domain"]]
+    ]
+    return narrowed_results, {
+        "identifier_path_candidates": [p for p in kept_paths if p["id"] in used],
+        "mapping_candidates": narrowed_edges,
+    }
+
+
 def prepare_n_domain_selection(question: str, qualified_domains: dict[str, dict],
                                mappings: dict[str, dict]) -> dict:
     """Preserve all qualified result/property paths and approved mapping options."""
@@ -70,6 +189,7 @@ def prepare_n_domain_selection(question: str, qualified_domains: dict[str, dict]
             result_registry[cid] = registry[local_id]
         if {c["id"] for c in qualified["prompt"]["candidates"]} != set(registry):
             raise SelectionContractError("Candidate IDs and registry disagree")
+    results, graph = _prune_explicit_candidates(question, results, graph)
     return {
         "prompt": {
             "question": question,
