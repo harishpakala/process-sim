@@ -1,113 +1,108 @@
-"""Extract query intent, then map its structure to existing single-domain planners.
+"""Deterministic query-structure routing; SHACL validation stays in each operation.
 
-Extraction is model-driven; routing is deterministic. Existing operation validators
-remain authoritative for schema grounding and supported syntax.
+This classifier does not call Ollama, identify shapes, or generate SPARQL.
+Unrecognized structures abstain rather than selecting an arbitrary operation.
 """
 from __future__ import annotations
 
-import json
-
-from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+import re
 
 OPERATIONS = (
     "phase1-plan", "phase2-filter", "phase3-and", "phase4-join",
     "phase4-filtered-join", "phase4-and-join", "direct-intent",
 )
 
-INTENT_PROMPT = """Extract the semantic query structure, NOT an operation name.
-Return only JSON with EXACTLY these fields:
-{
-  "action": "retrieve" or "aggregate" or "other",
-  "results": ["owner.property", ...],
-  "shared_owner": string or null,
-  "filters": [{"property": "owner.property", "operator": "=", "value": "literal"}, ...],
-  "boolean_operator": "AND" or "OR" or "MIXED" or null,
-  "explicit_filter_syntax": boolean
-}
-Results must list separately requested result properties, not intermediate
-SHACL traversal nodes. A path like Device -> EndPoint -> Address has ONE result,
-not a sibling join. shared_owner is non-null ONLY when multiple result branches
-are explicitly requested to share the same owner. It is NOT a traversal parent.
-Extract filters expressed in natural language (e.g. 'with LocalId FI_101')
-as well as filters written with '='. Set explicit_filter_syntax true only when
-filters are written using explicit equality signs (=) in the question.
-Extract all constraints even if the query may be unsupported. For AND/OR mixes
-use MIXED. For simple retrieval without conditions use an empty filters list.
-Do not invent schema properties, paths, filter values or a shared owner.
-Do not classify into planner operations. No prose outside JSON."""
+_UNSUPPORTED = re.compile(
+    r"\\b(?:how many|count|average|sum|group by|order by|sort|minimum|maximum|"
+    r"greater than|less than|not equal|exclude|without)\\b|!=|<=|>=|(?<![=<>])(?:<|>)(?![=])",
+    re.I,
+)
+_EQUALITY = re.compile(r"\\b([A-Za-z][\\w.]*)\\s*=\\s*([^\\s,;]+)", re.I)
+_NATURAL_FILTER = re.compile(
+    r"\\b(?:with|having)\\s+([A-Za-z][\\w.]*)\\s+([A-Za-z0-9_]+)"
+    r"(?:\\s+and\\s+([A-Za-z][\\w.]*)\\s+([A-Za-z0-9_]+))?", re.I,
+)
 
 
-def validate_intent(raw: str) -> dict:
-    try:
-        intent = json.loads(raw)
-    except (TypeError, ValueError) as exc:
-        raise ValueError("Invalid structured-intent JSON") from exc
-    required = {"action", "results", "shared_owner", "filters",
-                "boolean_operator", "explicit_filter_syntax"}
-    if not isinstance(intent, dict) or set(intent) != required:
-        raise ValueError("Invalid structured-intent fields")
-    if intent["action"] not in ("retrieve", "aggregate", "other"):
-        raise ValueError("Invalid intent action")
-    if not isinstance(intent["results"], list) or not all(
-            isinstance(x, str) and x.strip() for x in intent["results"]):
-        raise ValueError("Invalid intent results")
-    if intent["shared_owner"] is not None and (not isinstance(intent["shared_owner"], str)
-            or not intent["shared_owner"].strip()):
-        raise ValueError("Invalid shared owner")
-    if intent["boolean_operator"] not in (None, "AND", "OR", "MIXED"):
-        raise ValueError("Invalid Boolean operator")
-    if not isinstance(intent["explicit_filter_syntax"], bool):
-        raise ValueError("Invalid explicit-filter-syntax flag")
-    if not isinstance(intent["filters"], list) or not all(
-            isinstance(f, dict) and set(f) == {"property", "operator", "value"}
-            and isinstance(f["property"], str) and f["property"].strip()
-            and isinstance(f["operator"], str)
-            and isinstance(f["value"], str) and f["value"].strip()
-            for f in intent["filters"]):
-        raise ValueError("Invalid intent filters")
-    return intent
+def extract_query_structure(question: str) -> dict | None:
+    """Extract only syntactic signals, without schema-specific identifiers.
+
+    An explicit conjunction of requested result branches is different from
+    ordinary path traversal ('Address of EndPoint belonging to Device').
+    """
+    if not isinstance(question, str) or not question.strip():
+        raise ValueError("Question must not be empty")
+    q = question.strip()
+    if _UNSUPPORTED.search(q):
+        return {"unsupported": True, "reason": "Unsupported query operator or action"}
+    # Filters can be introduced with 'where' or with a natural-language
+    # 'with Property Value' clause. Never treat conjunctions in the result
+    # phrase as Boolean filter operators.
+    where = re.search(r"\\bwhere\\b", q, re.I)
+    natural = _NATURAL_FILTER.search(q) if not where else None
+    if where:
+        head, clause = q[:where.start()], q[where.end():]
+        explicit = True
+        filters = _EQUALITY.findall(clause)
+        if not filters or re.search(r"\\b(?:and|or)\\b", clause, re.I) and len(filters) < 2:
+            return None
+    elif natural:
+        head, clause = q[:natural.start()], q[natural.start():]
+        explicit = False
+        filters = [(natural.group(1), natural.group(2))]
+        if natural.group(3):
+            filters.append((natural.group(3), natural.group(4)))
+    else:
+        head, clause, filters, explicit = q, "", [], False
+    # Requested sibling branches must be explicit in the result phrase.
+    # 'A and B belonging to the same Owner' and 'addresses of A and B for
+    # owners ...' qualify as structural sibling requests; the operation
+    # itself verifies whether the SHACL graph actually supports the join.
+    sibling = bool(re.search(r"\\b(?:and|&)\\b", head, re.I) and
+                   re.search(r"\\b(?:same|belonging to|for|of)\\b", head, re.I))
+    logic_tokens = re.findall(r"\\b(and|or)\\b", clause, re.I)
+    logic = {token.upper() for token in logic_tokens}
+    boolean = "MIXED" if len(logic) > 1 else next(iter(logic), None)
+    return {"unsupported": False, "sibling": sibling, "filters": filters,
+            "boolean_operator": boolean, "explicit_filter_syntax": explicit}
 
 
-def operation_from_intent(intent: dict) -> dict:
-    """Pure structural routing. A selected operation may still abstain."""
-    intent = validate_intent(json.dumps(intent))
-    filters = intent["filters"]
-    count = len(filters)
-    sibling = len(intent["results"]) > 1 and intent["shared_owner"] is not None
-    reason = "Mapped extracted query structure; operation validation remains authoritative"
+def operation_from_structure(structure: dict | None) -> dict:
     unsupported = {"status": "unsupported", "operation": None,
-                   "reason": "Query structure has no supported single-domain operation"}
-    if intent["action"] != "retrieve" or not intent["results"]:
+                   "reason": "Cannot safely determine a supported query structure"}
+    if structure is None:
         return unsupported
-    if any(f["operator"] != "=" for f in filters):
-        return unsupported
-    if count > 1 and intent["boolean_operator"] is None:
-        return unsupported
-    if count <= 1 and intent["boolean_operator"] is not None:
+    if structure.get("unsupported"):
+        return {**unsupported, "reason": structure["reason"]}
+    count = len(structure["filters"])
+    sibling = structure["sibling"]
+    logic = structure["boolean_operator"]
+    explicit = structure["explicit_filter_syntax"]
+    if count > 1 and logic is None or count <= 1 and logic is not None:
         return unsupported
     if sibling:
         if count == 0:
             operation = "phase4-join"
+        elif not explicit:
+            operation = "direct-intent"
         elif count == 1:
-            operation = "phase4-filtered-join" if intent["explicit_filter_syntax"] else "direct-intent"
+            operation = "phase4-filtered-join"
         else:
-            operation = "phase4-and-join" if intent["explicit_filter_syntax"] else "direct-intent"
+            operation = "phase4-and-join"
     elif count == 0:
         operation = "phase1-plan"
     elif count == 1:
         operation = "phase2-filter"
-    elif count == 2 and intent["boolean_operator"] == "AND":
+    elif count == 2 and logic == "AND":
         operation = "phase3-and"
     else:
         return unsupported
-    return {"status": "supported", "operation": operation, "reason": reason}
+    return {"status": "supported", "operation": operation,
+            "reason": "Deterministic syntax classification; operation validates SHACL"}
 
 
-def classify_single_domain_query(question: str, *, model="qwen2.5-coder:7b",
-                                 endpoint="http://127.0.0.1:11434", transport=None) -> dict:
-    if not isinstance(question, str) or not question.strip():
-        raise ValueError("Question must not be empty")
-    raw = ollama_select({"question": question}, model=model, endpoint=endpoint,
-                        transport=transport, system_prompt=INTENT_PROMPT)
-    intent = validate_intent(raw)
-    return {**operation_from_intent(intent), "intent": intent}
+def classify_single_domain_query(question: str, *, model=None,
+                                 endpoint=None, transport=None) -> dict:
+    """Compatibility signature; no model, transport, or network access is used."""
+    structure = extract_query_structure(question)
+    return {**operation_from_structure(structure), "structure": structure}
