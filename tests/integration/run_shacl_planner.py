@@ -106,6 +106,18 @@ def check(test, result):
     status = ("selected" if result.get("intent") is not None else "unresolved") if test["mode"] == "--direct-intent" else plan.get("status")
     if status != test["expected"]:
         raise AssertionError(f"Expected {test['expected']}, got {status}: {result.get('reason') or plan.get('reason')}")
+    if test["mode"] == "--phase4-and-join":
+        expected_trace = (
+            ["start", "qualified", "abstained"]
+            if test["expected"] != "selected"
+            else ["start", "qualified", "model_selected", "validated", "compiled"]
+        )
+        if result.get("state_trace") != expected_trace:
+            raise AssertionError(
+                f"State machine not exercised as expected: {result.get('state_trace')}"
+            )
+        if result.get("state") != expected_trace[-1]:
+            raise AssertionError("State machine terminal state mismatch")
     queries = extract_queries(result)
     if len(queries) != test["queries"]:
         qualified = result.get("qualified", {})
