@@ -120,7 +120,7 @@ def main(argv: list[str] | None = None) -> int:
                           f"Expected {expected} and property {property_name}; got {selection}")
                 if args.emit_sparql:
                     for query in result["queries"]:
-                        print("SPARQL:\\n" + query["sparql"])
+                        print("SPARQL:\n" + query["sparql"])
                 if args.debug:
                     print("QUESTION:", question)
                     print("VALIDATED:", json.dumps(selection, ensure_ascii=False, indent=2))
