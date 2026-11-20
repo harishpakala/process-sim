@@ -162,7 +162,12 @@ def _prune_explicit_candidates(question: str, results: list[dict],
         c for c in results
         if c["domain"] not in owner_filters
         or owner_filters[c["domain"]] in [
-            segment.strip().casefold() for segment in c["path"].split(" → ")[1:]
+            segment.strip().casefold()
+            for segment in (
+                c["path"].split(" → ")[1:]
+                if c["path"].split(" → ")[0].strip().casefold() == c["domain"].casefold()
+                else c["path"].split(" → ")
+            )
         ]
     ]
     return narrowed_results, {
