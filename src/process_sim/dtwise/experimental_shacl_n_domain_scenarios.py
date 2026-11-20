@@ -5,6 +5,7 @@ Qwen is called only when qualified mapping candidates exist. No SPARQL.
 """
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 
@@ -19,6 +20,12 @@ from process_sim.dtwise.experimental_shacl_selection import SelectionContractErr
 
 DOMAINS = ("dexpi", "ecad", "assetinventory")
 SCENARIOS = (
+    (
+        "valid-two-domain-asset",
+        "Find DEXPI Equipment and its corresponding ECAD Device using AssetIdentifier.",
+        {"selected"},
+        ("dexpi", "ecad"),
+    ),
     (
         "ambiguous-owner",
         "Find the corresponding DEXPI and ECAD entities using AssetIdentifier, without specifying which entity kinds.",
@@ -40,7 +47,11 @@ SCENARIOS = (
 )
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Run live SHACL N-domain selection scenarios")
+    parser.add_argument("--scenario", choices=[item[0] for item in SCENARIOS],
+                        help="Run only the named scenario (default: all)")
+    args = parser.parse_args(argv)
     root = Path(__file__).resolve().parents[3]
     schema = json.loads((root / "semantic/ontology2/dtwise/dtwise-schema-index.json").read_text(encoding="utf-8"))
     mappings = load_cross_domain_mappings(
@@ -48,6 +59,8 @@ def main() -> int:
     )
     failures = 0
     for name, question, expected, domains in SCENARIOS:
+        if args.scenario is not None and name != args.scenario:
+            continue
         print(f"\n=== {name} ===")
         print("QUESTION:", question)
         try:
