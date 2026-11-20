@@ -107,7 +107,7 @@ def test_supported_select_contracts(question, changes):
 def test_requested_result_entity_cannot_be_silently_dropped(question, changes):
     plan = _plan(**changes)
     plan["projection_ids"] = ["ecad:R1"]
-    assert any("Explicit dexpi concepts missing" in error
+    assert any("Explicit dexpi result concepts missing from projections" in error
                for error in _validate(question, plan))
 
 
