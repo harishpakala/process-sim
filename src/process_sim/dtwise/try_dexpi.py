@@ -13,11 +13,11 @@ import json
 from pathlib import Path
 from time import perf_counter
 
-from process_sim.dtwise.experimental_shacl_domain_resolution import (
+from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import (
     DomainResolutionError, resolve_domain,
 )
 
-from process_sim.dtwise.experimental_shacl_subgraph import (
+from process_sim.dtwise.shacl_planner.grounding.subgraph import (
     extract_question,
     load_index,
 )
@@ -109,10 +109,10 @@ def run_single_domain_query(index, question: str, *, operation: str,
                             embed_model="nomic-embed-text:latest",
                             endpoint="http://127.0.0.1:11434", top_k=8):
     """Shared single-domain query orchestration; compile only, never execute."""
-    from process_sim.dtwise.experimental_shacl_grounding import property_grounding
-    from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
-    from process_sim.dtwise.experimental_shacl_planner_state_machine import run_single_domain_state_machine
-    from process_sim.dtwise.experimental_shacl_query_intent import run_direct_join_intent
+    from process_sim.dtwise.shacl_planner.grounding.property_grounding import property_grounding
+    from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
+    from process_sim.dtwise.shacl_planner.planning.state_machine import run_single_domain_state_machine
+    from process_sim.dtwise.shacl_planner.planning.query_intent import run_direct_join_intent
 
     allowed = {"phase1-plan", "phase2-filter", "phase3-and", "phase4-join",
                "phase4-filtered-join", "phase4-and-join", "direct-intent"}
@@ -229,7 +229,7 @@ def main() -> None:
     if args.semantic and args.llm:
         parser.error("--semantic and --llm are separate experiments")
     if args.semantic_paths:
-        from process_sim.dtwise.experimental_shacl_grounding import (
+        from process_sim.dtwise.shacl_planner.grounding.property_grounding import (
             property_grounding, enforce_property_grounding,
         )
         grounding = property_grounding(index, question)
@@ -270,7 +270,7 @@ def main() -> None:
             if timings is not None:
                 timings["semantic_retrieval_ms"] = (perf_counter() - t_retrieval) * 1000
         else:
-            from process_sim.dtwise.experimental_shacl_semantic_candidates import semantic_candidates
+            from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
             t_retrieval = perf_counter()
             prepared = semantic_candidates(
                 index, question, top_shapes=args.top_k, top_properties=2,
@@ -436,7 +436,7 @@ def main() -> None:
             if not prepared["prompt"]["candidates"]:
                 print("  (none)")
     elif args.semantic:
-        from process_sim.dtwise.experimental_shacl_semantic import semantic_grouped, semantic_terms
+        from process_sim.dtwise.shacl_planner.grounding.semantic import semantic_grouped, semantic_terms
         search = semantic_grouped if args.grouped else semantic_terms
         result = search(index, question, top_k=args.top_k,
                         model=args.embed_model, endpoint=args.ollama_url)
