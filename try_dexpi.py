@@ -253,12 +253,13 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_filtered_join:
-            from process_sim.dtwise.experimental_shacl_phase4_filtered_join import (
-                run_phase4_filtered_join_plan, compile_phase4_filtered_join_sparql,
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_single_domain_state_machine,
             )
-            result = run_phase4_filtered_join_plan(index, prepared, model=args.model,
-                                                   endpoint=args.ollama_url)
-            result["sparql"] = compile_phase4_filtered_join_sparql(result)
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase4-filtered-join",
+                model=args.model, endpoint=args.ollama_url,
+            )
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -269,12 +270,13 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase4_join:
-            from process_sim.dtwise.experimental_shacl_phase4_join import (
-                run_phase4_join_plan, compile_phase4_join_sparql,
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_single_domain_state_machine,
             )
-            result = run_phase4_join_plan(index, prepared, model=args.model,
-                                          endpoint=args.ollama_url)
-            result["sparql"] = compile_phase4_join_sparql(result)
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase4-join",
+                model=args.model, endpoint=args.ollama_url,
+            )
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -285,12 +287,13 @@ def main() -> None:
                 print("Compiled SPARQL (not executed):")
                 print(result["sparql"] or "  (none)")
         elif args.phase3_and:
-            from process_sim.dtwise.experimental_shacl_phase3_and import (
-                run_phase3_and_plan, compile_phase3_and_sparql,
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_single_domain_state_machine,
             )
-            result = run_phase3_and_plan(index, prepared, model=args.model,
-                                         endpoint=args.ollama_url)
-            result["sparql"] = compile_phase3_and_sparql(result)
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase3-and",
+                model=args.model, endpoint=args.ollama_url,
+            )
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
@@ -306,12 +309,13 @@ def main() -> None:
                 else:
                     print(result["sparql"] or "  (none)")
         elif args.phase2_filter:
-            from process_sim.dtwise.experimental_shacl_phase2_filter import (
-                run_phase2_filter_plan, compile_phase2_filter_sparql,
+            from process_sim.dtwise.experimental_shacl_planner_state_machine import (
+                run_single_domain_state_machine,
             )
-            result = run_phase2_filter_plan(index, prepared, model=args.model,
-                                            endpoint=args.ollama_url)
-            result["queries"] = compile_phase2_filter_sparql(result)
+            result = run_single_domain_state_machine(
+                index, prepared, operation="phase2-filter",
+                model=args.model, endpoint=args.ollama_url,
+            )
             if args.json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
