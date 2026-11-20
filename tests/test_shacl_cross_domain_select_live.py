@@ -9,10 +9,6 @@ from pathlib import Path
 
 import pytest
 
-from process_sim.dtwise.shacl_planner.standalone_shacl_query_planner import (
-    main as _unused_main,  # CLI is invoked in a subprocess to preserve its contract
-)
-
 QUESTION = (
     "Retrieve up to five ECAD Devices paired with their corresponding DEXPI "
     "Equipment through the shared AssetIdentifier, sorting the results by "
