@@ -91,3 +91,30 @@ def test_invalid_state_transition_rejected():
     trace = [sm.PlannerState.START]
     with pytest.raises(SelectionContractError, match="Invalid planner state"):
         sm.transition(trace, sm.PlannerState.COMPILED)
+
+
+def test_state_methods_reject_out_of_order_execution():
+    machine = sm.JoinPlannerStateMachine(
+        type("Index", (), {"domain": "ecad"})(), {}
+    )
+    with pytest.raises(SelectionContractError, match="Expected planner state"):
+        machine.select_with_ollama()
+    with pytest.raises(SelectionContractError, match="Expected planner state"):
+        machine.validate()
+    with pytest.raises(SelectionContractError, match="Expected planner state"):
+        machine.compile()
+
+
+def test_compilation_requires_selected_plan(monkeypatch):
+    calls = []
+    setup_stages(monkeypatch, calls, status="unresolved")
+    machine = sm.JoinPlannerStateMachine(
+        type("Index", (), {"domain": "ecad"})(), {}, transport=object()
+    )
+    machine.qualify()
+    machine.select_with_ollama()
+    machine.validate()
+    with pytest.raises(SelectionContractError, match="non-selected"):
+        machine.compile()
+    assert calls == ["qualify", "ollama", "validate"]
+    assert machine.trace[-1] == sm.PlannerState.VALIDATED
