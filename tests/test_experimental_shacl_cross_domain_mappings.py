@@ -81,3 +81,31 @@ def test_tampered_offered_mapping_is_rejected(tmp_path):
     }]
     with pytest.raises(SelectionContractError, match="differs"):
         validate_cross_domain_mapping_selection(offered[0]["id"], offered, registry)
+
+
+def test_empty_owner_approvals_are_preserved_not_inferred(tmp_path):
+    record = mapping(approved_owner_pairs=[])
+    assert load(tmp_path, [record])[record["id"]]["approved_owner_pairs"] == []
+
+
+def test_evidenced_owner_pair_metadata_loads(tmp_path):
+    pair = {
+        "left_owner_shape_uri": "urn:dexpi:EquipmentShape",
+        "right_owner_shape_uri": "urn:ecad:DeviceShape",
+        "evidence_ids": ["urn:approval:owner-pair"],
+    }
+    record = mapping(approved_owner_pairs=[pair])
+    assert load(tmp_path, [record])[record["id"]]["approved_owner_pairs"] == [pair]
+
+
+@pytest.mark.parametrize("pairs", [
+    None, "all", {}, [""], [{"left_owner_shape_uri": "urn:left"}],
+    [{"left_owner_shape_uri": "urn:left", "right_owner_shape_uri": "urn:right",
+      "evidence_ids": []}],
+    [{"left_owner_shape_uri": "urn:left", "right_owner_shape_uri": "urn:right",
+      "evidence_ids": ["urn:proof"]}] * 2,
+])
+def test_invalid_owner_pair_metadata_rejected(tmp_path, pairs):
+    # Explicit null is invalid; absence of the optional field remains valid.
+    with pytest.raises(SelectionContractError):
+        load(tmp_path, [mapping(approved_owner_pairs=pairs)])
