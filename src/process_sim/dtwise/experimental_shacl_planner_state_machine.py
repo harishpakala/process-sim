@@ -4,6 +4,8 @@ The existing Phase 4 AND/OR entry point remains unchanged. This opt-in
 orchestrator reuses its prompts, SHACL checks, validator and compiler.
 """
 from enum import Enum
+import re
+from time import perf_counter
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_phase4_and_join import (
@@ -175,28 +177,184 @@ def run_join_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
 
 
 class RetrievePlannerStateMachine(PlannerLifecycle):
-    """RETRIEVE migration, stage 1: independent SHACL qualification.
+    """RETRIEVE stages, preserving Phase 1 selection and verified auto-joins.
 
-    Not wired to CLI until selection, validation, and compilation are migrated
-    and verified against the existing Phase 1 behavior.
+    This entry point is not wired to the CLI until parity is verified.
     """
 
-    def __init__(self, index, prepared):
+    def __init__(self, index, prepared, *, model="qwen2.5-coder:7b",
+                 endpoint="http://127.0.0.1:11434", transport=None, timing=None):
         super().__init__()
-        self.index = index
-        self.prepared = prepared
+        self.index, self.prepared = index, prepared
+        self.model, self.endpoint, self.transport = model, endpoint, transport
+        self.timing = timing
         self.qualified = None
         self.question = None
         self.properties = None
+        self.offered = None
+        self.unsupported = False
+        self.raw = None
+        self.selection = None
+        self.auto_join_groups = []
+        self.queries = []
 
     def qualify(self):
         self._require(PlannerState.START)
+        t0 = perf_counter()
         qualified = qualify_candidates(self.index, self.prepared)
-        self.qualified = qualified
-        self.question = qualified["prompt"]["question"]
-        self.properties = [
-            candidate for candidate in qualified["prompt"]["candidates"]
-            if candidate["kind"] == "property"
-        ]
+        properties = [c for c in qualified["prompt"]["candidates"]
+                      if c["kind"] == "property"]
+        question = qualified["prompt"]["question"]
+        offered = {
+            "prompt": {**qualified["prompt"], "candidates": properties},
+            "registry": {c["id"]: qualified["registry"][c["id"]] for c in properties},
+        }
+        unsupported = bool(re.search(
+            r"\b(how many|count|does (?:any|a|an)|is there|are there|"
+            r"average|sum|minimum|maximum|sort|order by|group by)\b",
+            question, re.I,
+        )) or bool(re.search(
+            r"\b[A-Za-z_][A-Za-z_0-9]*\s*(?:=|!=|<=|>=|<|>)\s*[\"'0-9]",
+            question,
+        ))
+        self.qualified, self.properties, self.question = qualified, properties, question
+        self.offered, self.unsupported = offered, unsupported
+        if self.timing is not None:
+            self.timing["candidate_qualification_ms"] = (perf_counter() - t0) * 1000
         self._advance(PlannerState.QUALIFIED)
         return qualified
+
+    def is_supported(self):
+        self._require(PlannerState.QUALIFIED)
+        return not self.unsupported and bool(self.properties)
+
+    def select_with_ollama(self):
+        self._require(PlannerState.QUALIFIED)
+        if not self.is_supported():
+            raise SelectionContractError("Unsupported RETRIEVE cannot call Ollama")
+        from process_sim.dtwise.experimental_shacl_phase1_ollama import PHASE1_SYSTEM_PROMPT
+        t0 = perf_counter()
+        raw = ollama_select(self.offered["prompt"], model=self.model,
+                            endpoint=self.endpoint, transport=self.transport,
+                            system_prompt=PHASE1_SYSTEM_PROMPT)
+        self.raw = raw
+        if self.timing is not None:
+            self.timing["qwen_selection_ms"] = (perf_counter() - t0) * 1000
+        self._advance(PlannerState.MODEL_SELECTED)
+
+    def validate(self):
+        self._require(PlannerState.MODEL_SELECTED)
+        from process_sim.dtwise.experimental_shacl_selection import validate_selection
+        from process_sim.dtwise.experimental_shacl_join_topology import verified_shared_ancestor
+        t0 = perf_counter()
+        selection = validate_selection(self.raw, self.offered)
+        groups = []
+        bare_request = re.fullmatch(
+            r"(?:show|find|list)\s+(?:the\s+)?([A-Za-z_][A-Za-z_0-9]*)"
+            r"(?:\s+in\s+[A-Za-z_][A-Za-z_0-9]*)?\s*[.!]?\s*",
+            self.question, flags=re.I,
+        )
+        if bare_request:
+            property_name = bare_request.group(1).casefold()
+            matches = [c for c in self.properties
+                       if c.get("property_name", "").casefold() == property_name]
+            by_parent = {}
+            for candidate in matches:
+                nodes = self.qualified["registry"][candidate["id"]]["node_uris"]
+                if len(nodes) >= 2:
+                    by_parent.setdefault(nodes[-2], []).append(candidate["id"])
+            possible = [ids for ids in by_parent.values() if len(ids) == 2]
+            if len(matches) > 1 and sum(map(len, possible)) == len(matches):
+                try:
+                    for ids in possible:
+                        topology = verified_shared_ancestor(self.qualified, ids)
+                        if topology["ancestor_uri"] != self.qualified["registry"][ids[0]]["node_uris"][-2]:
+                            raise SelectionContractError("Join is not at immediate parent")
+                except SelectionContractError:
+                    pass
+                else:
+                    groups = possible
+                    selection = {
+                        "status": "selected",
+                        "selected_candidate_ids": [rid for ids in groups for rid in ids],
+                        "reason": "Automatic joins within verified shared-parent groups",
+                    }
+            if len(matches) > 1 and not groups:
+                selection = {
+                    "status": "ambiguous", "selected_candidate_ids": [],
+                    "reason": "Multiple property paths without fully verified sibling join groups",
+                }
+        self.selection, self.auto_join_groups = selection, groups
+        if self.timing is not None:
+            self.timing["python_validation_ms"] = (perf_counter() - t0) * 1000
+        self._advance(PlannerState.VALIDATED)
+
+    def compile(self):
+        self._require(PlannerState.VALIDATED)
+        if self.selection["status"] != "selected":
+            raise SelectionContractError("Cannot compile non-selected RETRIEVE")
+        from process_sim.dtwise.experimental_shacl_phase1_ollama import compile_phase1_sparql
+        queries = compile_phase1_sparql(self._result())
+        if not queries:
+            raise SelectionContractError("Selected RETRIEVE produced no SPARQL")
+        self.queries = queries
+        self._advance(PlannerState.COMPILED)
+        return queries
+
+    def abstain(self):
+        if self.trace[-1] == PlannerState.QUALIFIED:
+            self.selection = {
+                "status": "unresolved", "selected_candidate_ids": [],
+                "reason": ("Unsupported operation or filter in RETRIEVE-only Phase 1"
+                           if self.unsupported else "No verified SHACL property candidates"),
+            }
+        elif self.trace[-1] != PlannerState.VALIDATED or self.selection["status"] == "selected":
+            raise SelectionContractError("Abstention requires unsupported or non-selected RETRIEVE")
+        self.queries = []
+        self._advance(PlannerState.ABSTAINED)
+        return self._result()
+
+    def _result(self):
+        selection = self.selection
+        selected = [
+            {"id": c["id"], "domain": c["domain"], "kind": c["kind"], "path": c["path"]}
+            for c in self.properties if c["id"] in selection["selected_candidate_ids"]
+        ]
+        groups = self.auto_join_groups
+        return {
+            "domain": self.index.domain, "question": self.question,
+            "plan": {**selection, "operation": "RETRIEVE" if selection["status"] == "selected" else None},
+            "selected_paths": selected, "qualified": self.qualified,
+            "auto_join_result_ids": groups[0] if len(groups) == 1 else [],
+            "auto_join_groups": groups,
+            "queries": self.queries,
+            "state": self.trace[-1].value,
+            "state_trace": [state.value for state in self.trace],
+        }
+
+    def run(self):
+        self.qualify()
+        if not self.is_supported():
+            result = self.abstain()
+        else:
+            self.select_with_ollama()
+            self.validate()
+            if self.selection["status"] != "selected":
+                result = self.abstain()
+            else:
+                self.compile()
+                result = self._result()
+        if self.timing is not None:
+            self.timing.setdefault("qwen_selection_ms", 0.0)
+            self.timing.setdefault("python_validation_ms", 0.0)
+        return result
+
+
+def run_retrieve_state_machine(index, prepared, *, model="qwen2.5-coder:7b",
+                               endpoint="http://127.0.0.1:11434",
+                               transport=None, timing=None):
+    """Opt-in RETRIEVE state machine; not yet connected to the CLI."""
+    return RetrievePlannerStateMachine(
+        index, prepared, model=model, endpoint=endpoint,
+        transport=transport, timing=timing,
+    ).run()
