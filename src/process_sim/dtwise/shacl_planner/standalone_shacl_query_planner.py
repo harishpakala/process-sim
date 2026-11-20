@@ -744,6 +744,10 @@ def main():
             records.append(rec)
             print(f'\n[{i}/{len(questions)}] {method} {rec["status"]}: {question}',flush=True)
             print(f'  Candidates: {rec.get("candidate_count",0)} (R={rec.get("result_candidate_count",0)}, P={rec.get("property_candidate_count",0)})',flush=True)
+            if 'prompt_candidate_count' in rec:
+                print(f'  Qwen prompt: {rec["prompt_candidate_count"]} candidates, '
+                      f'{rec["prompt_join_alternatives"]} JOIN alternatives, '
+                      f'{rec["prompt_characters"]} characters',flush=True)
             for c in rec.get('candidate_paths',[]):
                 print(f'    {c["id"]} [{c["kind"]}] {c["path"]}',flush=True)
             if 'answer' in rec:
