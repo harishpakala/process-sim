@@ -42,6 +42,10 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
 ) + """
 For selected plans, include every explicitly requested WHERE comparison in filters.
+boolean_operator combines WHERE filters only, not the cross-domain JOIN.
+Use AND when the question combines multiple filter conditions with AND,
+OR when it combines them with OR, and NONE only for zero or one filter.
+Do not return NONE when two or more filters are selected.
 Use only the offered property candidate whose exact SHACL property label is
 named in the question. Copy the literal value from the question verbatim and
 use the comparison operator requested (use "=" for "is" or "equals").
