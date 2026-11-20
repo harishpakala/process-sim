@@ -5,13 +5,15 @@ source of truth. Never compile a model-supplied intent without validation.
 """
 from process_sim.dtwise.experimental_shacl_phase4_join import _expected_paths
 from process_sim.dtwise.experimental_shacl_phase4_and_join import (
-    _filter_ids, _literals, validate_phase4_and_join_plan,
+    _filter_ids, _literals, OR_QUESTION, validate_phase4_and_join_plan,
 )
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 
 
 def validated_join_intent(plan, qualified):
     """Build a structured intent only from independently verified selections."""
+    if OR_QUESTION.fullmatch(qualified["prompt"]["question"].strip()):
+        raise SelectionContractError("AND intent cannot represent an OR question")
     verified = validate_phase4_and_join_plan(plan, qualified)
     if verified["status"] != "selected":
         raise SelectionContractError("Cannot build intent from unresolved selection")
@@ -112,7 +114,8 @@ def run_direct_join_intent(index, prepared, *, model="qwen2.5-coder:7b",
     from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
     qualified = qualify_candidates(index, prepared)
     question = qualified["prompt"]["question"]
-    if (index.domain != "ecad" or _literals(question) is None or
+    if (index.domain != "ecad" or OR_QUESTION.fullmatch(question.strip()) or
+            _literals(question) is None or
             None in _expected_paths(qualified) or None in _filter_ids(qualified)):
         return {"domain": index.domain, "question": question, "intent": None,
                 "qualified": qualified, "sparql": None,
