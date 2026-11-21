@@ -56,7 +56,10 @@ A Device with both endpoint types projects Device and requires both sibling
 EndPoint and PLCEndPoint paths under the SAME Device, not Symbol.
 Parent-child traversal is not a sibling JOIN. Python computes JOIN from
 verified SHACL topology; always output join=false and join_owner_id=null.
-boolean_operator describes FILTER combinations ONLY; NONE for 0 or 1 filters.
+boolean_operator describes FILTER combinations ONLY: NONE for 0 or 1 filters;
+for two or more simultaneous required conditions use AND (including "both",
+"also", "while", or multiple conditions separated by semicolons); use OR only
+when alternatives are explicitly requested. Never use NONE with multiple filters.
 COUNT is only ungrouped COUNT of a grounded result concept, with count_target_id.
 Do not add sorting, LIMIT, COUNT, or filters unless requested. For a vague or non-exact
 property name, return ambiguous. LIMIT is supported (including first N).
@@ -550,6 +553,10 @@ def requested_property_value_names(question, property_hits):
     names = {p['name'].casefold() for p in property_hits.values()}
     if not names:
         return set()
+    # A possessive pronoun in a relative filter clause describes the entity,
+    # not a request to return the mentioned property.
+    if re.search(r'\b(?:have|has|with)\s+[A-Za-z][A-Za-z0-9]*\s+\S+.*\b(?:while|and)\b', question, re.I):
+        return set()
     value_request = bool(re.search(r'\b(?:values?|its|their|belongs? to)\b', question, re.I))
     property_of = bool(re.search(r'\b(?:show|list|return|retrieve|get)\s+(?:the\s+)?[A-Za-z][A-Za-z0-9]*\s+(?:of|for)\b', question, re.I))
     possessive_request = bool(re.search(r"\b(?:retrieve|show|list|return|get)\b.*\b[A-Za-z][A-Za-z0-9]*['’]s\s+[A-Za-z][A-Za-z0-9]*\b", question, re.I))
@@ -573,6 +580,23 @@ def focus_unambiguous_property_candidates(question, candidates, registry,
     Keep original candidate IDs for ambiguous/mixed requests. This scopes
     the prompt; it never fabricates an answer.
     """
+    # For a single explicitly named filter property, retain only its verified
+    # direct owner entity and property. Do not narrow multi-filter queries.
+    if not requested_property_value_names(question, property_hits) and len({
+            p['name'].casefold() for p in property_hits.values()}) == 1 and shape_hits:
+        name = next(iter({p['name'].casefold() for p in property_hits.values()}))
+        props = [c for c in candidates if c['kind'] == 'property'
+                 and (c.get('property_name') or '').casefold() == name
+                 and (registry.get(c['id'], {}).get('node_uris') or [None])[-1] in shape_hits]
+        if len(props) == 1:
+            nodes = registry[props[0]['id']]['node_uris']
+            owners = [c for c in candidates if c['kind'] == 'result'
+                      and registry.get(c['id'], {}).get('node_uris') == nodes]
+            if len(owners) == 1:
+                return owners + props, {
+                    'filter_property_name': name, 'filter_property_candidate_id': props[0]['id'],
+                    'owner_result_ids': [owners[0]['id']],
+                    'original_candidate_count': len(candidates)}
     names = requested_property_value_names(question, property_hits)
     if len(names) != 1 or not shape_hits:
         return candidates, None
