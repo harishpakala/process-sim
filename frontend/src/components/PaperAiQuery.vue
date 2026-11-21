@@ -341,7 +341,7 @@ onMounted(hLoadRuns)
  <div style="display:grid;gap:16px">
   <section v-if="page === 'engineering'" class="panel">
    <div class="panel-title">
-    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Unified IR planner · SHACL-validated read-only GraphDB execution</p></div>
+    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Phase 1 SHACL planner · SPARQL compiler · read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
     <div class="shacl-catalog" aria-label="Phase 1 SHACL benchmark catalog">
@@ -364,7 +364,7 @@ onMounted(hLoadRuns)
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
      <button class="primary" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? 'Running Phase 1 SHACL…' : 'Run selected SHACL benchmark'}}</button>
-     <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. The separate Ask DTwise button below continues to use Unified IR.</p>
+     <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. </p>
      <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
      <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
       <h3>SHACL execution · {{shaclExecution.id}}</h3>
@@ -405,6 +405,8 @@ onMounted(hLoadRuns)
     <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     </details>
     -->
+    <p v-if="shaclVariantId" class="subdued">Selected question: {{question}}</p>
+    <!-- Legacy Unified IR question editor and Ask DTwise execution temporarily hidden.
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
@@ -414,6 +416,7 @@ onMounted(hLoadRuns)
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
+    -->
   </section>
   <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
@@ -462,6 +465,7 @@ onMounted(hLoadRuns)
     <p v-else class="subdued">No numeric observations available to graph.</p>
    </div>
   </section>
+  <!-- Legacy Unified IR result panel temporarily hidden.
   <section v-if="page === 'engineering' && result" class="panel result-panel">
    <div class="panel-title">
     <div><h2>Engineering result</h2><p>{{result.question}}</p></div>
@@ -507,6 +511,7 @@ onMounted(hLoadRuns)
     <details class="detail-toggle"><summary>Unified IR plan</summary><pre>{{JSON.stringify(result.plan,null,2)}}</pre></details>
    </div>
   </section>
+  -->
  </div>
 </template>
 
