@@ -53,16 +53,18 @@ Do not add sorting, LIMIT, COUNT, or filters unless requested. For a vague or no
 property name, return ambiguous. LIMIT is supported (including first N).
 When a necessary candidate is missing, return unresolved. If a clause cannot
 be represented, return unsupported. join_owner_id is ALWAYS null; Python derives it.
-Return EXACTLY these keys, using null/[] for unused fields:
+Return EXACTLY these keys, using null/[] for unused fields. The empty arrays
+below illustrate the JSON structure only: for selected requests populate
+projection_ids with the actual offered candidate ID(s), never an example ID:
 {
  "status":"selected|ambiguous|unresolved|unsupported",
- "projection_ids":["R1"],
+ "projection_ids":[],
  "existence_ids":[],
- "filters":[{"property_id":"P1","operator":"=","value":"literal"}],
+ "filters":[],
  "boolean_operator":"NONE",
  "join":false,
  "count_target_id":null,
- "order_by":[{"property_id":"P1","direction":"ASC"}],
+ "order_by":[],
  "limit":null,
  "join_owner_id":null,
  "reason":"brief explanation"
