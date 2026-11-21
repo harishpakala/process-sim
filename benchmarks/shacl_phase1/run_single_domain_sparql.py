@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index
-from process_sim.dtwise.shacl_planner.sparql_compiler import (
+from process_sim.dtwise.shacl_planner.legacy_candidate_recovery import (\n    RecoveryError, recover_registry,\n)\nfrom process_sim.dtwise.shacl_planner.sparql_compiler import (
     CompilationError, compile_single_domain,
 )
 
@@ -89,9 +89,11 @@ def compile_entry(entry, prior, index, schema):
         return {**base, "status": "semantic_mismatch",
                 "error": prior.get("errors") or "Phase-1 benchmark failed"}
     if not record.get("candidate_registry"):
-        return {**base, "status": "missing_candidate_registry",
-                "error": "Older Phase-1 result lacks verified topology metadata; "
-                         "rerun Phase 1 using the updated planner"}
+        try:
+            recovered = recover_registry(record, index)
+        except RecoveryError as exc:
+            return {**base, "status": "registry_recovery_failed", "error": str(exc)}
+        record = {**record, "candidate_registry": recovered}
     try:
         sparql = compile_single_domain(record, index, schema)
     except CompilationError as exc:
