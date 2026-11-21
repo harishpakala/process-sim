@@ -25,6 +25,23 @@ MAX_RESPONSE = 8_000_000
 
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/ai/shacl/benchmark/questions":
+            try:
+                from pathlib import Path
+                manifest = Path(__file__).resolve().parents[3] / "benchmarks/shacl_phase1/benchmark_queries_aast_candidate.json"
+                data = json.loads(manifest.read_text(encoding="utf-8"))
+                scenarios = data["scenarios"]
+                if not isinstance(scenarios, list):
+                    raise ValueError("Invalid SHACL benchmark manifest")
+                self.send_json(200, {
+                    "benchmark_id": data.get("benchmark_id"),
+                    "scenario_count": len(scenarios),
+                    "query_count": sum(len(s["paraphrases"]) for s in scenarios),
+                    "scenarios": scenarios,
+                })
+            except (OSError, ValueError, KeyError, TypeError) as exc:
+                self.send_json(503, {"error": f"SHACL benchmark catalog unavailable: {exc}"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/historian/runs":
             try:
                 from process_sim.api.vtkg_query import discover_historian_runs
@@ -382,7 +399,7 @@ class Handler(BaseHTTPRequestHandler):
             pilot = urlsplit(self.path).path.endswith("/42/run")
             try:
                 length = int(self.headers.get("Content-Length", "0"))
-                if not 0 < length <= 1024:
+                if not 0 < length <= 4096:
                     self.send_json(413, {"error": "Invalid benchmark request size"})
                     return
                 payload = json.loads(self.rfile.read(length))
@@ -435,6 +452,24 @@ class Handler(BaseHTTPRequestHandler):
                 import logging
                 logging.exception("VTKG query failed")
                 self.send_json(503, {"error": "VTKG query failed; check backend logs"})
+            return
+        if urlsplit(self.path).path == "/api/ai/shacl/benchmark/execute":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 1024:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or "id" not in payload or not set(payload) <= {"id", "question"}:
+                    raise ValueError("Expected benchmark question ID and optional edited question")
+                from process_sim.api.shacl_benchmark_query import run_benchmark_question
+                self.send_json(200, run_benchmark_question(payload["id"], payload.get("question")))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("SHACL benchmark execution failed")
+                self.send_json(503, {"error": "SHACL benchmark execution unavailable; check backend logs"})
             return
         if urlsplit(self.path).path == "/api/ai/dtwise/answer":
             from process_sim.api.dtwise_query import (
