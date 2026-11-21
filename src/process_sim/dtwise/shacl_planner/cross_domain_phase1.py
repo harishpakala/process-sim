@@ -407,7 +407,10 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
         if bool(answer.get('order_by')) != bool(_explicit_sort(question)):
             errors.append('ORDER BY disagrees with question')
         if answer.get('order_by'):
-            direction = 'DESC' if re.search(r'\b(desc|descending)\b', question, re.I) else 'ASC'
+            direction = 'DESC' if re.search(
+                r'\b(?:desc|descending|highest\s+to\s+lowest|'
+                r'largest\s+to\s+smallest|greatest\s+to\s+least)\b',
+                question, re.I) else 'ASC'
             if any(o.get('direction') != direction for o in answer['order_by']):
                 errors.append('ORDER BY direction disagrees with question')
     elif mids or pids:
@@ -622,6 +625,8 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
         # endpoints, never by the single-domain join_owner_id field.
         if answer.get('status') == 'selected':
             answer['join_owner_id'] = None
+        answer = _normalize_explicit_sort_and_placeholder_filters(
+            answer, candidates, question)
         answer = _normalize_mapping_owner_participation(
             answer, candidates, graph, registry, exact_shapes, question)
         errors, selected = _cross_validate(
