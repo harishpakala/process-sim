@@ -363,7 +363,7 @@ onMounted(hLoadRuns)
      </select>
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
-     <button class="primary" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? 'Running Phase 1 SHACL…' : 'Run selected SHACL benchmark'}}</button>
+     <button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? 'Running Phase 1 SHACL…' : 'Run selected SHACL benchmark'}}</button>
      <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. </p>
      <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
      <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
@@ -529,5 +529,5 @@ select option,select optgroup{background:#101820;color:#fff}
 select:focus-visible{outline:2px solid #79b8ff;outline-offset:2px}
 select:disabled{opacity:.6;cursor:not-allowed}
 .shacl-catalog{display:grid;gap:10px;padding:15px;border:1px solid #334a62;border-radius:9px}.shacl-catalog h3{margin:0;font-size:15px}.legacy-benchmark{display:grid;gap:10px}.legacy-benchmark[open]{padding:12px;border:1px solid #334a62;border-radius:8px}.legacy-benchmark summary{cursor:pointer;margin-bottom:10px}
-.shacl-output{display:grid;gap:10px;border-top:1px solid #334a62;padding-top:12px}.shacl-sparql{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;font-size:12px}
+.shacl-run-button{width:fit-content;max-width:100%;justify-self:start;padding-inline:16px}\n.shacl-output{display:grid;gap:10px;border-top:1px solid #334a62;padding-top:12px}.shacl-sparql{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;font-size:12px}
 </style>
