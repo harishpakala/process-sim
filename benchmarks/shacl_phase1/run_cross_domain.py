@@ -111,8 +111,8 @@ def evaluate(record, expected):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--benchmark", type=Path,
-                    default=ROOT / "benchmarks/shacl_phase1/cross_domain_benchmark_queries.json")
+    ap.add_argument("--suite", choices=["baseline", "robustness"], default="baseline")
+    ap.add_argument("--benchmark", type=Path, help="Override suite manifest path")
     ap.add_argument("--schema", type=Path,
                     default=ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json")
     ap.add_argument("--mappings", type=Path,
@@ -125,12 +125,18 @@ def main(argv=None):
                     default=ROOT / "shacl_cross_domain_benchmark_results.json")
     args = ap.parse_args(argv)
 
-    benchmark = json.loads(args.benchmark.read_text(encoding="utf-8"))
+    manifest = args.benchmark or ROOT / "benchmarks/shacl_phase1" / (
+        "cross_domain_baseline_queries.json" if args.suite == "baseline"
+        else "cross_domain_robustness_queries.json")
+    if not manifest.is_file():
+        ap.error(f"Benchmark manifest not found: {manifest}")
+    benchmark = json.loads(manifest.read_text(encoding="utf-8"))
     scenarios = [s for s in benchmark["scenarios"] if s["scenario_id"].startswith("CD")]
     if args.scenario:
         scenarios = [s for s in scenarios if s["scenario_id"] == args.scenario]
         if not scenarios:
             ap.error("Unknown cross-domain scenario: " + args.scenario)
+    print(f"SUITE: {args.suite} | manifest: {manifest} | scenarios: {len(scenarios)}", flush=True)
     cache = {}
     results = []
     started_all = time.perf_counter()
