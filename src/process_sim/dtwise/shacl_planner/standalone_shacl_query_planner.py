@@ -844,6 +844,10 @@ def run_one(index, question, *, method='expanded', dry_run=False,
         elif answer.get('status')=='unsupported' and not _unsupported_intent(question):
             diagnostics['errors'].append('Unsupported response for Phase-1-only request')
         record['answer']=answer
+        # Carry verified topology metadata into deterministic compilation. Candidate
+        # IDs are local to this run and cannot be resolved from labels alone.
+        record['candidate_registry']={c['id']:qualified['registry'][c['id']]
+                                      for c in candidates if c['id'] in qualified['registry']}
         record['plan_diagnostics']=diagnostics
         errors.extend(diagnostics['errors'])
         record['validation_errors']=errors
