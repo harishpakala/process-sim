@@ -61,7 +61,26 @@ def main():
     ap.add_argument("--model", default="qwen2.5-coder:7b")
     ap.add_argument("--endpoint", default="http://127.0.0.1:11434")
     ap.add_argument("--output", type=Path, default=ROOT / "shacl_single_domain_benchmark_results.json")
+    ap.add_argument("--execute-graphdb", action="store_true",
+                    help="Compile and execute each question before printing its result")
+    ap.add_argument("--graphdb-endpoint", default="http://localhost:7200/repositories/AAST")
+    ap.add_argument("--graphdb-timeout", type=float, default=60)
+    ap.add_argument("--graph-mapping", type=Path)
+    ap.add_argument("--sparql-output", type=Path)
+    ap.add_argument("--execution-output", type=Path)
     args = ap.parse_args()
+    if args.graphdb_timeout <= 0:
+        ap.error("--graphdb-timeout must be positive")
+    if args.graph_mapping and not args.execute_graphdb:
+        ap.error("--graph-mapping requires --execute-graphdb")
+    if args.execute_graphdb:
+        from benchmarks.shacl_phase1.run_single_domain_sparql import compile_entry
+        from benchmarks.shacl_phase1.execute_single_domain_sparql import execute_results
+        schema_data = json.loads(args.schema.read_text(encoding="utf-8"))
+        graph_mapping = json.loads(args.graph_mapping.read_text(encoding="utf-8")) if args.graph_mapping else None
+        compiled_results, execution_results = [], []
+        sparql_output = args.sparql_output or args.output.with_name("single_domain_sparql_results.json")
+        execution_output = args.execution_output or args.output.with_name("single_domain_sparql_execution.json")
     scenarios = [s for s in json.loads(args.benchmark.read_text(encoding="utf-8"))["scenarios"]
                  if s["scenario_id"].startswith("SD")]
     if args.scenario:
@@ -71,8 +90,12 @@ def main():
     cache = {}
     results = []
     started_all = time.perf_counter()
-    print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9}', flush=True)
-    print("-" * 32, flush=True)
+    if args.execute_graphdb:
+        print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9} {"ROWS":>8}  GRAPHDB', flush=True)
+        print("-" * 62, flush=True)
+    else:
+        print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9}', flush=True)
+        print("-" * 32, flush=True)
     for scenario in scenarios:
         expected = scenario["expected_semantics"]
         domains = expected["domains"]
@@ -94,7 +117,34 @@ def main():
             passed = not errors
             results.append({"id": variant["id"], "query": variant["query"],
                             "pass": passed, "seconds": elapsed, "errors": errors, "record": record})
-            print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} {elapsed:>7.2f}s', flush=True)
+            if args.execute_graphdb:
+                entry = {"id": variant["id"], "scenario_id": scenario["scenario_id"],
+                         "query": variant["query"], "domain": domain,
+                         "expected_semantics": expected}
+                prior = results[-1]
+                try:
+                    compiled = compile_entry(entry, prior, cache[domain], schema_data)
+                    executed = execute_results([compiled], args.graphdb_endpoint,
+                                               timeout=args.graphdb_timeout,
+                                               graph_mapping=graph_mapping)[0]
+                except Exception as exc:
+                    compiled = {**entry, "status": "compiler_error", "sparql": None,
+                                "error": f"{type(exc).__name__}: {exc}"}
+                    executed = {"id": variant["id"], "status": "execution_failed",
+                                "row_count": None, "error": str(exc)}
+                compiled_results.append(compiled)
+                execution_results.append(executed)
+                for output_path, items in ((sparql_output, compiled_results),
+                                           (execution_output, execution_results)):
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+                    output_path.write_text(json.dumps(items, indent=2, ensure_ascii=False),
+                                           encoding="utf-8")
+                row_count = executed.get("row_count")
+                rows_text = str(row_count) if row_count is not None else "-"
+                print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} '
+                      f'{elapsed:>7.2f}s {rows_text:>8}  {executed["status"]}', flush=True)
+            else:
+                print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} {elapsed:>7.2f}s', flush=True)
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
     passed = sum(x["pass"] for x in results)
