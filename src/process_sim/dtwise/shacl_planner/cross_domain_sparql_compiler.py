@@ -33,10 +33,8 @@ def compile_cross_domain(record, indices, schema, graphs, approved_mappings):
     selected += [f["property_id"] for f in answer.get("filters") or []]
     selected += [o["property_id"] for o in answer.get("order_by") or []]
     selected += sorted(selected_identifiers)
-    if not answer.get("projection_ids") or len(selected) != len(set(selected)):
-        # Repeated filter paths are legal, so only reject missing projections.
-        if not answer.get("projection_ids"):
-            raise CompilationError("Missing projections")
+    if not answer.get("projection_ids"):
+        raise CompilationError("Missing projections")
     for cid in selected:
         if cid not in offered:
             raise CompilationError("Unrecognized candidate " + cid)
@@ -44,6 +42,7 @@ def compile_cross_domain(record, indices, schema, graphs, approved_mappings):
     variables = {}
     roots = {}
     prefixes = {}
+    next_variable = 0
     for cid in dict.fromkeys(selected):
         c = offered[cid]
         domain = c.get("domain")
@@ -59,7 +58,8 @@ def compile_cross_domain(record, indices, schema, graphs, approved_mappings):
             raise CompilationError("Root shape class is ambiguous")
         root_key = (domain, root)
         if root_key not in roots:
-            roots[root_key] = "?n" + str(len(roots))
+            roots[root_key] = "?n" + str(next_variable)
+            next_variable += 1
         root_var = roots[root_key]
         graph_lines[domain].add(f"{root_var} {_iri(RDF_TYPE)} {_iri(next(iter(classes)))} .")
         prefix = (domain, root)
@@ -73,7 +73,8 @@ def compile_cross_domain(record, indices, schema, graphs, approved_mappings):
                 raise CompilationError("Ambiguous SHACL traversal")
             child_key = (domain, *nodes[:i + 1])
             if child_key not in prefixes:
-                prefixes[child_key] = "?n" + str(len(roots) + len(prefixes))
+                prefixes[child_key] = "?n" + str(next_variable)
+                next_variable += 1
             graph_lines[domain].add(f"{prefixes[(domain, *nodes[:i])]} {_iri(next(iter(predicates)))} {prefixes[child_key]} .")
         owner_var = prefixes[(domain, *nodes)]
         if c.get("kind") == "result":
