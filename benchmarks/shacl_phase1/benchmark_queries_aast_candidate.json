@@ -840,7 +840,7 @@
         },
         {
           "id": "CD19-P3",
-          "query": "List five ECAD Devices alongside associated DEXPI Equipment, matched on AssetIdentifier, with the lowest Device LocalId first."
+          "query": "List ECAD Device and DEXPI Equipment pairs matched on AssetIdentifier, ordered by ECAD Device.LocalId ascending, limited to 5. Return both entities."
         },
         {
           "id": "CD19-P4",
