@@ -221,17 +221,25 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
             domain = c.get('domain')
             if domain and (c.get('property_name') or '').casefold() not in exact_properties[domain]:
                 errors.append(f'Filter {f.get("property_id")} lacks exact property-name evidence')
-        literals = _constraint_literals(question)
-        allowed_values = {value.casefold() for value in literals}
-        values = {f.get('value', '').casefold() for f in answer.get('filters', [])
-                  if isinstance(f, dict) and isinstance(f.get('value'), str)}
-        for literal in literals:
-            if literal.casefold() not in values:
-                errors.append(f'Missing explicit filter value: {literal}')
-        # Mapping endpoint equality is a JOIN, never a literal WHERE filter.
-        # Only explicitly parsed comparison values can authorize literal filters.
-        for value in sorted(values - allowed_values):
-            errors.append(f'Unrequested literal filter value: {value}')
+        comparisons = _explicit_shacl_comparisons(question, candidates)
+        expected_comparisons = {
+            (name, op, value.casefold()) for name, op, value in comparisons
+        }
+        actual_comparisons = set()
+        for f in answer.get('filters', []):
+            if not isinstance(f, dict):
+                continue
+            c = lookup.get(f.get('property_id'), {})
+            value = f.get('value')
+            if not isinstance(value, str):
+                continue
+            triple = ((c.get('property_name') or '').casefold(),
+                      f.get('operator'), value.casefold())
+            actual_comparisons.add(triple)
+            if triple not in expected_comparisons:
+                errors.append(f'Unrequested or mismatched WHERE comparison: {triple}')
+        for triple in sorted(expected_comparisons - actual_comparisons):
+            errors.append(f'Missing explicit WHERE comparison: {triple}')
         # An identifier's direct SHACL owner must be an explicitly named
         # entity and participate as a selected result/existence/count entity.
         # Domain roots are context, not joinable entity owners.
