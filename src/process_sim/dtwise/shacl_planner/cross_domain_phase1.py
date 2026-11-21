@@ -174,11 +174,42 @@ def _cross_validate(answer, candidates, graph, registry, domains, question,
             if domain and (c.get('property_name') or '').casefold() not in exact_properties[domain]:
                 errors.append(f'Filter {f.get("property_id")} lacks exact property-name evidence')
         literals = _constraint_literals(question)
+        allowed_values = {value.casefold() for value in literals}
         values = {f.get('value', '').casefold() for f in answer.get('filters', [])
                   if isinstance(f, dict) and isinstance(f.get('value'), str)}
         for literal in literals:
             if literal.casefold() not in values:
                 errors.append(f'Missing explicit filter value: {literal}')
+        # Mapping endpoint equality is a JOIN, never a literal WHERE filter.
+        # Only explicitly parsed comparison values can authorize literal filters.
+        for value in sorted(values - allowed_values):
+            errors.append(f'Unrequested literal filter value: {value}')
+        # An identifier's direct SHACL owner must be an explicitly named
+        # entity and participate as a selected result/existence/count entity.
+        # Domain roots are context, not joinable entity owners.
+        result_ids = (list(answer.get('projection_ids') or []) +
+                      list(answer.get('existence_ids') or []))
+        if answer.get('count_target_id'):
+            result_ids.append(answer['count_target_id'])
+        selected_owners = {
+            (lookup[cid]['domain'], lookup[cid]['node_uris'][-1])
+            for cid in result_ids if cid in lookup
+            and lookup[cid].get('kind') == 'result'
+            and lookup[cid].get('node_uris')
+        }
+        offered_identifiers = {
+            p['id']: p for p in graph['identifier_path_candidates']
+        }
+        for pid in pids:
+            endpoint = offered_identifiers.get(pid)
+            if endpoint is None:
+                continue  # Existing mapping graph validation reports this.
+            domain = endpoint['domain']
+            owner = endpoint['owner_shape_uri']
+            if owner not in exact_shapes[domain]:
+                errors.append(f'Identifier {pid} owner is not an explicitly named concept')
+            if (domain, owner) not in selected_owners:
+                errors.append(f'Identifier {pid} owner is not a selected entity')
         requested_limit = _explicit_limit(question)
         if answer.get('limit') != requested_limit:
             errors.append('LIMIT disagrees with question')
