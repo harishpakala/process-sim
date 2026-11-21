@@ -249,6 +249,12 @@ def _explicit_sort(question):
     """Recognize ordering and direction independently of property vocabulary."""
     if not _ordering_intent(question):
         return None
+    # Paired endpoints express one direction; do not count each endpoint
+    # independently as competing ascending/descending instructions.
+    if re.search(r'\bfrom\s+(?:lowest|smallest)\s+to\s+(?:highest|largest)\b', question, re.I):
+        return ('explicit', 'ASC')
+    if re.search(r'\bfrom\s+(?:highest|largest)\s+to\s+(?:lowest|smallest)\b', question, re.I):
+        return ('explicit', 'DESC')
     descending = bool(re.search(
         r'\b(?:desc(?:ending)?|decreasing|highest|largest)\b|'
         r'\bfrom\s+Z\s+to\s+A\b', question, re.I))
