@@ -42,7 +42,11 @@ OPTIONAL, UNION, MINUS, subqueries, CONSTRUCT, DESCRIBE, UPDATE) are unsupported
 If the question requests any unsupported operation, set status=unsupported and
 return empty plan fields. Never silently omit an unsupported clause.
 projection_ids are only values/entities to RETURN; existence_ids are required
-concept paths not returned. Endpoint addresses require Address property projections.
+concept paths not returned. For entity retrieval with a property filter, project the
+entity R candidate and put the property P candidate in filters; do not project P
+unless its value is separately requested. Do not add an existence path just to
+represent the domain or an ancestor already present in the projected path.
+Use filter objects with the exact key property_id (never property). Endpoint addresses require Address property projections.
 A Device with both endpoint types projects Device and requires both sibling
 EndPoint and PLCEndPoint paths under the SAME Device, not Symbol.
 Parent-child traversal is not a sibling JOIN. Python computes JOIN from
@@ -529,7 +533,11 @@ def requested_property_value_names(question, property_hits):
     query-specific vocabulary. Filters and mixed entity/property requests are
     left to the model and the remaining validators.
     """
-    if re.search(r'\b(?:where|filter|ordered? by|sort(?:ed)? by)\b', question, re.I):
+    if re.search(r'\b(?:where|filter|ordered? by|sort(?:ed)? by|whose)\b', question, re.I):
+        return set()
+    # Equality/value predicates describe constraints, not output properties.
+    # Keep this syntactic: actual property names are always obtained from SHACL.
+    if re.search(r'\b[A-Za-z][A-Za-z0-9]*\s+(?:has\s+value|(?:is\s+)?equal\s+to|equals)\s+\S+', question, re.I):
         return set()
     names = {p['name'].casefold() for p in property_hits.values()}
     if not names:
