@@ -225,7 +225,7 @@ def _unsupported_intent(question):
     patterns={
       'GROUP BY':r'\b(group(?:ed|ing)?\s+by|per\s+\w+\s+type)\b',
       'HAVING':r'\bhaving\b',
-      'SUM/AVG/MIN/MAX':r'\b(sum|average|avg|minimum|maximum|min|total\s+(?:of|value))\b|\bmax\s*\(',
+      'SUM/AVG/MIN/MAX':r'\b(sum|average|avg|minimum|min|total\s+(?:of|value))\b|\bmax\s*\(',
       'DISTINCT':r'\b(distinct|unique)\b',
       'OFFSET':r'\b(offset|skip\s+(?:the\s+)?first|skip\s+\d+)\b',
       'ASK':r'^(?:are there|is there|do any|does any)\b',
