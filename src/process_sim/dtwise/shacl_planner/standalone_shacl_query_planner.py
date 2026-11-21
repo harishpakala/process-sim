@@ -535,7 +535,12 @@ def requested_property_value_names(question, property_hits):
     value_request = bool(re.search(r'\b(?:values?|its|their|belongs? to)\b', question, re.I))
     property_of = bool(re.search(r'\b(?:show|list|return|retrieve|get)\s+(?:the\s+)?[A-Za-z][A-Za-z0-9]*\s+(?:of|for)\b', question, re.I))
     possessive_request = bool(re.search(r"\b(?:retrieve|show|list|return|get)\b.*\b[A-Za-z][A-Za-z0-9]*['’]s\s+[A-Za-z][A-Za-z0-9]*\b", question, re.I))
-    if not (value_request or property_of or possessive_request):
+    named_property_request = bool(
+        re.search(r'\b(?:show|list|return|retrieve|get)\b.*\bproperty\b', question, re.I)
+        or re.search(r'\b(?:show|list|return|retrieve|get)\b.*\busing\s+[A-Za-z][A-Za-z0-9]*\b', question, re.I)
+        or re.search(r'^\s*(?:what|which)\s+[A-Za-z][A-Za-z0-9]*\s+(?:is|are)\s+(?:assigned|recorded|associated)\b', question, re.I)
+    )
+    if not (value_request or property_of or possessive_request or named_property_request):
         return set()
     return names
 
