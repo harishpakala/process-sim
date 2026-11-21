@@ -716,7 +716,7 @@
         ],
         "projections": [
           "Device",
-          "Equipment"
+          "InstrumentationFunction"
         ],
         "filters": [
           {
@@ -734,23 +734,23 @@
       "paraphrases": [
         {
           "id": "CD17-P1",
-          "query": "Show ECAD Devices and matching DEXPI Equipment by AssetIdentifier where DeviceType is Sensor."
+          "query": "Show ECAD Device and matching DEXPI InstrumentationFunction entities by AssetIdentifier where DeviceType is Sensor."
         },
         {
           "id": "CD17-P2",
-          "query": "Find ECAD Devices with DeviceType Sensor and their associated DEXPI Equipment through AssetIdentifier."
+          "query": "Find ECAD Device entities with DeviceType Sensor and their associated DEXPI InstrumentationFunction entities through AssetIdentifier."
         },
         {
           "id": "CD17-P3",
-          "query": "Retrieve ECAD Device–DEXPI Equipment pairs sharing AssetIdentifier, restricting ECAD DeviceType to Sensor."
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction pairs sharing AssetIdentifier, restricting ECAD DeviceType to Sensor."
         },
         {
           "id": "CD17-P4",
-          "query": "Which DEXPI Equipment matches ECAD Devices whose DeviceType is Sensor? Return both through AssetIdentifier."
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities whose DeviceType is Sensor? Return both through AssetIdentifier."
         },
         {
           "id": "CD17-P5",
-          "query": "List paired ECAD Devices and DEXPI Equipment where the device's DeviceType equals Sensor, using AssetIdentifier."
+          "query": "List paired ECAD Device and DEXPI InstrumentationFunction entities where Device.DeviceType equals Sensor, using AssetIdentifier."
         }
       ]
     },
