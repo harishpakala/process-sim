@@ -100,46 +100,46 @@ def compile_single_domain(record, index, schema):
     classes = class_map.get(root, set())
     if len(classes) != 1:
         raise CompilationError("Root shape lacks one unambiguous SHACL class")
-    triples = {f"?n0 {_iri(RDF_TYPE)} {_iri(next(iter(classes)))} ."}
+    root_triple = f"?n0 {_iri(RDF_TYPE)} {_iri(next(iter(classes)))} ."
+    # Allocate variables by verified path prefix, not by depth: sibling
+    # branches must never be conflated just because they have equal depth.
+    prefix_vars = {(root,): "?n0"}
+    for cid in selected:
+        nodes = registry[cid]["node_uris"]
+        for depth in range(2, len(nodes) + 1):
+            prefix = tuple(nodes[:depth])
+            if prefix not in prefix_vars:
+                prefix_vars[prefix] = f"?n{len(prefix_vars)}"
+
+    def path_triples(cid):
+        entry = registry[cid]
+        nodes = entry["node_uris"]
+        triples = set()
+        for depth, edge in enumerate(entry["edges"], 1):
+            parent = prefix_vars[tuple(nodes[:depth])]
+            child = prefix_vars[tuple(nodes[:depth + 1])]
+            triples.add(f"{parent} {_iri(edge['predicate'])} {child} .")
+        if entry["kind"] == "property":
+            variable = variables[cid]
+            owner = prefix_vars[tuple(nodes)]
+            triples.add(f"{owner} {_iri(entry['property']['predicate'])} {variable} .")
+        return triples
+
     variables = {}
     for cid in selected:
         entry = registry[cid]
-        nodes = entry["node_uris"]
-        for i, edge in enumerate(entry["edges"]):
-            triples.add(f"?n{i} {_iri(edge['predicate'])} ?n{i+1} .")
         if entry["kind"] == "result":
-            variables[cid] = f"?n{len(nodes)-1}"
+            variables[cid] = prefix_vars[tuple(entry["node_uris"])]
         else:
-            variable = "?v_" + re.sub(r"[^A-Za-z0-9_]", "_", cid)
-            triples.add(f"?n{len(nodes)-1} {_iri(entry['property']['predicate'])} {variable} .")
-            variables[cid] = variable
+            variables[cid] = "?v_" + re.sub(r"[^A-Za-z0-9_]", "_", cid)
 
-    # AND requires all properties to exist. OR uses OPTIONAL property patterns
-    # so that a missing value on one branch cannot eliminate the other branch.
     filters = answer.get("filters") or []
     boolean = answer.get("boolean_operator")
     if filters and boolean not in ("NONE", "AND", "OR"):
         raise CompilationError("Invalid boolean operator")
     if len(filters) > 1 and boolean == "NONE":
         raise CompilationError("Multiple filters without a boolean operator")
-    if boolean == "OR" and len(filters) > 1:
-        # Remove mandatory filter triples and re-add as OPTIONAL patterns.
-        for f in filters:
-            cid = f["property_id"]
-            entry = registry[cid]
-            v = variables[cid]
-            triple = f"?n{len(entry['node_uris'])-1} {_iri(entry['property']['predicate'])} {v} ."
-            triples.discard(triple)
-            # A filter path with a nested traversal is not safe to OPTIONALize
-            # independently: reject rather than accidentally require its branch.
-            if entry["edges"]:
-                raise CompilationError("OR on nested property paths is not yet supported")
-    lines = sorted(triples)
-    if boolean == "OR" and len(filters) > 1:
-        for cid in dict.fromkeys(f["property_id"] for f in filters):
-            entry = registry[cid]
-            lines.append("OPTIONAL { ?n0 " + _iri(entry["property"]["predicate"]) +
-                         " " + variables[cid] + " . }")
+
     conditions = []
     for f in filters:
         op = OPERATORS.get(f.get("operator"))
@@ -147,9 +147,30 @@ def compile_single_domain(record, index, schema):
             raise CompilationError("Unsupported comparison operator")
         conditions.append("(" + variables[f["property_id"]] + " " + op +
                           " " + _literal(f["value"]) + ")")
-    if conditions:
-        joiner = " || " if boolean == "OR" else " && "
-        lines.append("FILTER (" + joiner.join(conditions) + ")")
+
+    # Projection, existence and sorting paths remain mandatory. OR filter
+    # branches are UNION alternatives, each containing its own full verified
+    # traversal and value constraint. This handles nested paths and repeated
+    # values on the same property without requiring either branch to exist.
+    mandatory_ids = list(answer.get("projection_ids") or [])
+    mandatory_ids += list(answer.get("existence_ids") or [])
+    mandatory_ids += [o["property_id"] for o in answer.get("order_by") or []]
+    is_or = boolean == "OR" and len(filters) > 1
+    if not is_or:
+        mandatory_ids += [f["property_id"] for f in filters]
+    triples = {root_triple}
+    for cid in mandatory_ids:
+        triples.update(path_triples(cid))
+    lines = sorted(triples)
+    if is_or:
+        branches = []
+        for f, condition in zip(filters, conditions):
+            branch_lines = sorted(path_triples(f["property_id"]))
+            branch_lines.append("FILTER (" + condition + ")")
+            branches.append("{ " + " ".join(branch_lines) + " }")
+        lines.append(" UNION ".join(branches))
+    elif conditions:
+        lines.append("FILTER (" + " && ".join(conditions) + ")")
     projections = answer.get("projection_ids") or []
     if not projections:
         raise CompilationError("SELECT requires projections")
