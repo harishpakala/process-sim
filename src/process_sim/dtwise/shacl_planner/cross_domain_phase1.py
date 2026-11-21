@@ -290,6 +290,60 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
     # Keep the full qualified graph and candidate registry for validation.
     original_candidates, original_graph = candidates, graph
     _, graph = _prune_explicit_candidates(question, candidates, graph)
+    # Restrict offered mapping alternatives to directly owned, explicitly
+    # named SHACL entities. A domain root is context, not an entity owner.
+    # When a domain has no unambiguous non-root anchor, retain its alternatives.
+    explicit_owners = {}
+    for domain in domains:
+        named = {
+            c['node_uris'][-1] for c in candidates
+            if c['domain'] == domain and c['kind'] == 'result'
+            and len(c.get('node_uris') or []) > 1
+            and c['node_uris'][-1] in exact_shapes[domain]
+        }
+        if named:
+            explicit_owners[domain] = named
+    retained_paths = [
+        p for p in graph['identifier_path_candidates']
+        if p['domain'] not in explicit_owners
+        or p['owner_shape_uri'] in explicit_owners[p['domain']]
+    ]
+    retained_ids = {p['id'] for p in retained_paths}
+    narrowed_mappings = []
+    for mapping in graph['mapping_candidates']:
+        left = [pid for pid in mapping['left_identifier_candidate_ids']
+                if pid in retained_ids]
+        right = [pid for pid in mapping['right_identifier_candidate_ids']
+                 if pid in retained_ids]
+        alternatives = [
+            pair for pair in mapping['join_alternatives']
+            if pair['left_id'] in left and pair['right_id'] in right
+        ]
+        if not alternatives:
+            continue
+        approved_pairs = mapping.get('approved_owner_pair_candidate_ids')
+        narrowed_mappings.append({
+            **mapping,
+            'left_identifier_candidate_ids': left,
+            'right_identifier_candidate_ids': right,
+            'join_alternatives': alternatives,
+            'approved_owner_pair_candidate_ids': (
+                [pair for pair in approved_pairs
+                 if pair['left_id'] in left and pair['right_id'] in right]
+                if approved_pairs is not None else None
+            ),
+        })
+    used_ids = {
+        pid for mapping in narrowed_mappings
+        for side in ('left', 'right')
+        for pid in mapping[f'{side}_identifier_candidate_ids']
+    }
+    graph = {
+        'mapping_candidates': narrowed_mappings,
+        'identifier_path_candidates': [
+            p for p in retained_paths if p['id'] in used_ids
+        ],
+    }
     identifier_ids = {p['id'] for p in graph['identifier_path_candidates']}
     # URI ancestry alone admits unrelated descendants and domain roots.
     # Match complete displayed SHACL labels, never substrings or synonyms.
