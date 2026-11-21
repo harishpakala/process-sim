@@ -1,0 +1,8 @@
+{
+  "engineeringbom": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/",
+  "ecad": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/",
+  "assetinventory": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/",
+  "productcatalog": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/",
+  "opcuaconnectivity": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/",
+  "dexpi": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/"
+}
