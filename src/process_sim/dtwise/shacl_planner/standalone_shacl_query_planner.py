@@ -272,8 +272,9 @@ def _explicit_limit(question):
     number=r'(?:\d+|'+'|'.join(number_words)+r')'
     patterns=[
         r'\b(?:up\s+to|at\s+most|maximum|limited\s+to|limit(?:ed)?\s+to)\s+('+number+r')\b',
+        r'\b(?:limit|limiting(?:\s+the\s+(?:output|results))?\s+to)\s+('+number+r')\b',
         r'\b(?:first|top)\s+('+number+r')\b',
-        r'\b(?:return|show|retrieve|list|give\s+me)\s+(?:the\s+)?('+number+r')\b',
+        r'\b(?:return|show|retrieve|list|give\s+me)\s+(?:only\s+|the\s+)?('+number+r')\b',
     ]
     for pattern in patterns:
         match=re.search(pattern,question,re.I)
