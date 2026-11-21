@@ -118,6 +118,12 @@ def _explicit_shacl_comparisons(question, candidates):
                 prefix, re.I,
             ):
                 continue
+            # Sorting phrases name a property but do not compare it to a value.
+            if not operator and value.casefold() in {
+                'asc', 'desc', 'ascending', 'descending', 'from',
+                'in', 'sorted', 'ordered', 'lowest', 'highest',
+            }:
+                continue
             if value.casefold() in {
                 'and', 'or', 'by', 'where', 'with', 'through', 'using',
                 'whose', 'is', 'equals', 'equal', 'the', 'a', 'an',
