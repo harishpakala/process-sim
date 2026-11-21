@@ -108,6 +108,64 @@ onMounted(async () => {
   benchmarkQuestions.value = data as BenchmarkQuestion[]
  } catch(e) { manifestError.value = e instanceof Error ? e.message : String(e) }
 })
+type ShaclScenario = {
+ scenario_id: string
+ type: string
+ expected_semantics: {
+  domains: string[]; projections: string[]
+  filters: Array<{property:string;operator:string;value:string}>
+  boolean_operator: string; order_by: {property:string;direction:string}|null
+  limit: number|null; join: boolean
+ }
+ paraphrases: Array<{id:string;query:string}>
+}
+const shaclScenarios = ref<ShaclScenario[]>([])
+const shaclError = ref('')
+const shaclScope = ref<'single'|'cross'>('single')
+const shaclScenarioId = ref('')
+const shaclVariantId = ref('')
+const shaclSelectedScenario = computed(() => shaclScenarios.value.find(s => s.scenario_id === shaclScenarioId.value))
+const shaclVisibleScenarios = computed(() => shaclScenarios.value.filter(s => s.scenario_id.startsWith(shaclScope.value === 'single' ? 'SD' : 'CD')))
+const shaclIntent = (s: ShaclScenario): string => {
+ const x = s.expected_semantics
+ const entity = x.projections.join(', ')
+ if (x.order_by) return `Ordering / limit — ${x.order_by.property} ${x.order_by.direction}, top ${x.limit}`
+ if (x.boolean_operator === 'AND') return `Boolean AND — ${x.filters.map(f => f.property).join(' + ')}`
+ if (x.boolean_operator === 'OR') return `Boolean OR — ${x.filters.map(f => f.property).join(' / ')}`
+ if (x.join) return x.filters.length ? 'Cross-domain identifier join with filtering' : 'Cross-domain identifier join'
+ if (x.filters.length) return `Attribute filtering — ${x.filters.map(f => f.property).join(', ')}`
+ return s.type === 'entity' ? `Entity retrieval — ${entity}` : `Property projection — ${entity}`
+}
+function chooseShaclScope(scope: 'single'|'cross') {
+ shaclScope.value = scope
+ shaclScenarioId.value = ''
+ shaclVariantId.value = ''
+ result.value = null
+}
+function chooseShaclScenario(id: string) {
+ shaclScenarioId.value = id
+ shaclVariantId.value = ''
+ result.value = null
+}
+function chooseShaclVariant(id: string) {
+ shaclVariantId.value = id
+ const item = shaclSelectedScenario.value?.paraphrases.find(p => p.id === id)
+ if (item) question.value = item.query
+ result.value = null
+ error.value = ''
+}
+onMounted(async () => {
+ try {
+  const response = await fetch('/api/ai/shacl/benchmark/questions', {cache:'no-store'})
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'SHACL benchmark catalog unavailable')
+  if (!Array.isArray(data.scenarios) || data.scenarios.length !== 25 ||
+      data.scenarios.reduce((n:number,s:ShaclScenario) => n + s.paraphrases.length, 0) !== 125)
+   throw new Error('Unexpected SHACL benchmark manifest size; expected 25 scenarios and 125 questions')
+  shaclScenarios.value = data.scenarios
+ } catch(e) { shaclError.value = e instanceof Error ? e.message : String(e) }
+})
+
 const question = ref('')
 const busy = ref(false)
 const error = ref('')
@@ -256,6 +314,28 @@ onMounted(hLoadRuns)
     <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Unified IR planner · SHACL-validated read-only GraphDB execution</p></div>
    </div>
    <div class="custom-query">
+    <div class="shacl-catalog" aria-label="Phase 1 SHACL benchmark catalog">
+     <h3>Phase 1 · SHACL benchmark queries</h3>
+     <p class="subdued">14 single-domain scenarios (70 questions) · 11 cross-domain scenarios (55 questions). Intents are derived from the existing expected semantics; no new benchmark metadata is required.</p>
+     <div class="mode-switch" role="group" aria-label="SHACL domain scope">
+      <button type="button" :class="shaclScope === 'single' ? 'primary' : 'secondary'" @click="chooseShaclScope('single')">Single-domain (70)</button>
+      <button type="button" :class="shaclScope === 'cross' ? 'primary' : 'secondary'" @click="chooseShaclScope('cross')">Cross-domain (55)</button>
+     </div>
+     <label for="shacl-scenario">Scenario · query intent</label>
+     <select id="shacl-scenario" :value="shaclScenarioId" @change="chooseShaclScenario(($event.target as HTMLSelectElement).value)">
+      <option value="">Select a scenario</option>
+      <option v-for="scenario in shaclVisibleScenarios" :key="scenario.scenario_id" :value="scenario.scenario_id">{{scenario.scenario_id}} · {{shaclIntent(scenario)}}</option>
+     </select>
+     <label for="shacl-variant">Benchmark paraphrase</label>
+     <select id="shacl-variant" :value="shaclVariantId" :disabled="!shaclSelectedScenario" @change="chooseShaclVariant(($event.target as HTMLSelectElement).value)">
+      <option value="">Select one of five questions</option>
+      <option v-for="variant in shaclSelectedScenario?.paraphrases || []" :key="variant.id" :value="variant.id">{{variant.id}} · {{variant.query}}</option>
+     </select>
+     <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
+     <p v-if="shaclError" role="alert">{{shaclError}}</p>
+     <p class="subdued">Selecting a paraphrase fills the editable question below. The existing Ask DTwise button currently uses the Unified IR API, not the Phase 1 benchmark runner; benchmark-equivalent execution is not yet wired.</p>
+    </div>
+    <details class="legacy-benchmark"><summary>Legacy B01–B53 benchmark catalog</summary>
     <label for="benchmark-category">Benchmark category (B01–B53)</label>
     <select id="benchmark-category" :value="category" @change="selectCategory(($event.target as HTMLSelectElement).value)">
      <option value="">Select a stage</option>
@@ -269,6 +349,7 @@ onMounted(hLoadRuns)
     <p v-if="manifestError" role="status" style="color:#b45309">{{manifestError}}. Manual questions remain available.</p>
     <p class="subdued">B01–B53 are grouped by manifest category; supplemental questions are labeled separately.</p>
     <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
+    </details>
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
@@ -387,4 +468,5 @@ select{padding:10px;border:1px solid #657b92;border-radius:7px;background:#10182
 select option,select optgroup{background:#101820;color:#fff}
 select:focus-visible{outline:2px solid #79b8ff;outline-offset:2px}
 select:disabled{opacity:.6;cursor:not-allowed}
+.shacl-catalog{display:grid;gap:10px;padding:15px;border:1px solid #334a62;border-radius:9px}.shacl-catalog h3{margin:0;font-size:15px}.legacy-benchmark{display:grid;gap:10px}.legacy-benchmark[open]{padding:12px;border:1px solid #334a62;border-radius:8px}.legacy-benchmark summary{cursor:pointer;margin-bottom:10px}
 </style>
