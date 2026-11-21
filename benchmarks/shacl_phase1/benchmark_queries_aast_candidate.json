@@ -1,7 +1,7 @@
 {
   "benchmark_id": "shacl_phase1_data_grounded_candidate_v1",
-  "description": "Copy of the Phase-1 benchmark with DEXPI identifiers grounded in AAST sample; ECAD filter values remain illustrative pending instance verification.",
-  "grounding_note": "DEXPI R-001 and K-001 were observed with dexpi:hasLocalId in AAST. They have NOT yet been confirmed to belong to the Equipment root class used by compiled queries. ECAD filter scenarios SD07/08/10/11 remain unchanged pending verification. This is a candidate benchmark, not a proven nonzero fixture.",
+  "description": "Copy of the Phase-1 benchmark with ECAD and DEXPI filter identifiers grounded in AAST sample; execution against compiled property paths remains pending.",
+  "grounding_note": "ECAD Pressure and PI-1301 were observed together on the same device in AAST GraphDB; the exact compiled class/property paths and expected result sets have NOT yet been verified. DEXPI R-001 and K-001 were observed with dexpi:hasLocalId but are not yet confirmed to belong to the Equipment root class used by compiled queries. This remains a candidate benchmark, not a proven nonzero fixture.",
   "scenario_count": 20,
   "query_count": 100,
   "scenarios": [
@@ -259,7 +259,7 @@
           {
             "property": "Device.DeviceType",
             "operator": "=",
-            "value": "Sensor"
+            "value": "Pressure"
           }
         ],
         "boolean_operator": "NONE",
@@ -271,23 +271,23 @@
       "paraphrases": [
         {
           "id": "SD07-P1",
-          "query": "Find ECAD Devices where DeviceType is Sensor."
+          "query": "Find ECAD Devices where DeviceType is Pressure."
         },
         {
           "id": "SD07-P2",
-          "query": "Show ECAD Devices with DeviceType equal to Sensor."
+          "query": "Show ECAD Devices with DeviceType equal to Pressure."
         },
         {
           "id": "SD07-P3",
-          "query": "Which ECAD Devices have DeviceType set to Sensor?"
+          "query": "Which ECAD Devices have DeviceType set to Pressure?"
         },
         {
           "id": "SD07-P4",
-          "query": "Retrieve devices from ECAD whose DeviceType has value Sensor."
+          "query": "Retrieve devices from ECAD whose DeviceType has value Pressure."
         },
         {
           "id": "SD07-P5",
-          "query": "I only want ECAD Devices of DeviceType Sensor."
+          "query": "I only want ECAD Devices of DeviceType Pressure."
         }
       ]
     },
@@ -305,7 +305,7 @@
           {
             "property": "Device.LocalId",
             "operator": "=",
-            "value": "DEV_101"
+            "value": "PI-1301"
           }
         ],
         "boolean_operator": "NONE",
@@ -317,23 +317,23 @@
       "paraphrases": [
         {
           "id": "SD08-P1",
-          "query": "Show ECAD Devices whose LocalId is DEV_101."
+          "query": "Show ECAD Devices whose LocalId is PI-1301."
         },
         {
           "id": "SD08-P2",
-          "query": "Find the ECAD Device with LocalId DEV_101."
+          "query": "Find the ECAD Device with LocalId PI-1301."
         },
         {
           "id": "SD08-P3",
-          "query": "Retrieve ECAD Devices where LocalId equals DEV_101."
+          "query": "Retrieve ECAD Devices where LocalId equals PI-1301."
         },
         {
           "id": "SD08-P4",
-          "query": "Which ECAD Device has the identifier DEV_101 in LocalId?"
+          "query": "Which ECAD Device has the identifier PI-1301 in LocalId?"
         },
         {
           "id": "SD08-P5",
-          "query": "Limit the ECAD Device selection to LocalId DEV_101."
+          "query": "Limit the ECAD Device selection to LocalId PI-1301."
         }
       ]
     },
@@ -397,12 +397,12 @@
           {
             "property": "Device.DeviceType",
             "operator": "=",
-            "value": "Sensor"
+            "value": "Pressure"
           },
           {
             "property": "Device.LocalId",
             "operator": "=",
-            "value": "DEV_101"
+            "value": "PI-1301"
           }
         ],
         "boolean_operator": "AND",
@@ -414,23 +414,23 @@
       "paraphrases": [
         {
           "id": "SD10-P1",
-          "query": "Show ECAD Devices where DeviceType is Sensor AND LocalId is DEV_101."
+          "query": "Show ECAD Devices where DeviceType is Pressure AND LocalId is PI-1301."
         },
         {
           "id": "SD10-P2",
-          "query": "Find ECAD Devices with DeviceType Sensor that also have LocalId DEV_101."
+          "query": "Find ECAD Devices with DeviceType Pressure that also have LocalId PI-1301."
         },
         {
           "id": "SD10-P3",
-          "query": "Retrieve ECAD Devices satisfying both DeviceType = Sensor and LocalId = DEV_101."
+          "query": "Retrieve ECAD Devices satisfying both DeviceType = Pressure and LocalId = PI-1301."
         },
         {
           "id": "SD10-P4",
-          "query": "Which ECAD Devices have LocalId DEV_101 while their DeviceType is Sensor?"
+          "query": "Which ECAD Devices have LocalId PI-1301 while their DeviceType is Pressure?"
         },
         {
           "id": "SD10-P5",
-          "query": "I want ECAD Devices meeting these two conditions: DeviceType Sensor; LocalId DEV_101."
+          "query": "I want ECAD Devices meeting these two conditions: DeviceType Pressure; LocalId PI-1301."
         }
       ]
     },
@@ -448,12 +448,12 @@
           {
             "property": "Device.DeviceType",
             "operator": "=",
-            "value": "Sensor"
+            "value": "Pressure"
           },
           {
             "property": "Device.LocalId",
             "operator": "=",
-            "value": "DEV_101"
+            "value": "PI-1301"
           }
         ],
         "boolean_operator": "OR",
@@ -465,23 +465,23 @@
       "paraphrases": [
         {
           "id": "SD11-P1",
-          "query": "Show ECAD Devices where DeviceType is Sensor OR LocalId is DEV_101."
+          "query": "Show ECAD Devices where DeviceType is Pressure OR LocalId is PI-1301."
         },
         {
           "id": "SD11-P2",
-          "query": "Find ECAD Devices with either DeviceType Sensor or LocalId DEV_101."
+          "query": "Find ECAD Devices with either DeviceType Pressure or LocalId PI-1301."
         },
         {
           "id": "SD11-P3",
-          "query": "Retrieve ECAD Devices satisfying at least one: DeviceType = Sensor, LocalId = DEV_101."
+          "query": "Retrieve ECAD Devices satisfying at least one: DeviceType = Pressure, LocalId = PI-1301."
         },
         {
           "id": "SD11-P4",
-          "query": "Which ECAD Devices have DeviceType Sensor, or alternatively have LocalId DEV_101?"
+          "query": "Which ECAD Devices have DeviceType Pressure, or alternatively have LocalId PI-1301?"
         },
         {
           "id": "SD11-P5",
-          "query": "Give me ECAD Devices if DeviceType is Sensor or their LocalId equals DEV_101."
+          "query": "Give me ECAD Devices if DeviceType is Pressure or their LocalId equals PI-1301."
         }
       ]
     },
