@@ -498,12 +498,15 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
         base = normalize_property_only_projections(base, candidates, question)
         answer = {**base, 'mapping_ids': answer.get('mapping_ids'),
                   'identifier_path_ids': answer.get('identifier_path_ids')}
+        # Cross-domain join ownership is represented by approved mapping
+        # endpoints, never by the single-domain join_owner_id field.
+        if answer.get('status') == 'selected':
+            answer['join_owner_id'] = None
         errors, selected = _cross_validate(
             answer, candidates, graph, registry, domains, question,
             exact_shapes, exact_properties)
         if answer.get('status') == 'selected':
             answer['join'] = bool(selected)
-            answer['join_owner_id'] = None
         record.update(answer=answer, validation_errors=errors,
                       validated_mappings=selected,
                       status='valid_response' if not errors else 'invalid_response')
