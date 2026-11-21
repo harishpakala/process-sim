@@ -881,11 +881,11 @@
         },
         {
           "id": "CD20-P2",
-          "query": "Retrieve at most ten DEXPI Equipment–ECAD Device pairs through AssetIdentifier with equipment LocalId highest first."
+          "query": "Retrieve DEXPI Equipment and ECAD Device pairs matched on AssetIdentifier. Return both entities, ordered by DEXPI Equipment.LocalId descending, limited to 10."
         },
         {
           "id": "CD20-P3",
-          "query": "List equipment from DEXPI alongside related ECAD Devices, matched by AssetIdentifier, sorting equipment LocalId in decreasing order and taking ten."
+          "query": "List DEXPI Equipment and ECAD Device entities matched on AssetIdentifier. Return both entities, ordered by DEXPI Equipment.LocalId descending, limited to 10."
         },
         {
           "id": "CD20-P4",
