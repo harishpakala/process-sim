@@ -574,7 +574,10 @@ def focus_unambiguous_property_candidates(question, candidates, registry,
         if c['kind'] == 'result'
         and registry.get(c['id'], {}).get('node_uris') == owner_nodes
     ]
-    focused = owner_results + matches
+    # A property-only request needs the property path, not an independently
+    # projected owner entity. The verified property candidate already carries
+    # the owner path. Offering the owner as R encourages an incorrect R projection.
+    focused = matches
     return focused, {'property_name': name, 'property_candidate_id': prop['id'],
                      'owner_result_ids': [c['id'] for c in owner_results],
                      'original_candidate_count': len(candidates)}
