@@ -1,0 +1,632 @@
+[
+  {
+    "id": "SD01-P1",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Show ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD01-P2",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "List all ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD01-P3",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Retrieve the ECAD Device records.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD01-P4",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Which ECAD Devices are available?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD01-P5",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Give me the collection of devices from ECAD.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD02-P1",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD02-P2",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "List all DEXPI Equipment records.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD02-P3",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Retrieve the equipment entities in DEXPI.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD02-P4",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Which DEXPI Equipment records are defined in the model?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD02-P5",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Give me the DEXPI equipment collection.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD03-P1",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Find ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD03-P2",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Return the ECAD Device entities.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD03-P3",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Display the devices defined in ECAD.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD03-P4",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "I need the ECAD Device records.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD03-P5",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Which device entities exist in the ECAD model?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD04-P1",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Show the LocalId of ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD04-P2",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Device LocalId values.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD04-P3",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "For each ECAD Device, return its LocalId.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD04-P4",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Which LocalId belongs to each ECAD Device?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD04-P5",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Give me the LocalId values from ECAD Device records.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD05-P1",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Show DeviceType for ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD05-P2",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Retrieve each ECAD Device's DeviceType.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD05-P3",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Which DeviceType values are recorded for ECAD Devices?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD05-P4",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "List the DeviceType values of ECAD Devices.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD05-P5",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Return the DeviceType property from ECAD Device records.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD06-P1",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Show LocalId for DEXPI Equipment.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD06-P2",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Retrieve the DEXPI Equipment LocalId property.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD06-P3",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "List equipment identifiers using DEXPI LocalId.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD06-P4",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "What LocalId is assigned to each DEXPI Equipment?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD06-P5",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Give me the LocalId values of equipment in DEXPI.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD07-P1",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Find ECAD Devices where DeviceType is Sensor.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD07-P2",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Show ECAD Devices with DeviceType equal to Sensor.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD07-P3",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have DeviceType set to Sensor?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD07-P4",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Retrieve devices from ECAD whose DeviceType has value Sensor.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD07-P5",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "I only want ECAD Devices of DeviceType Sensor.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD08-P1",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Show ECAD Devices whose LocalId is DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD08-P2",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Find the ECAD Device with LocalId DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD08-P3",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices where LocalId equals DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD08-P4",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Which ECAD Device has the identifier DEV_101 in LocalId?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD08-P5",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Limit the ECAD Device selection to LocalId DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD09-P1",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Find DEXPI Equipment with LocalId EQ_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD09-P2",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment where LocalId equals EQ_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD09-P3",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Which equipment in DEXPI has LocalId EQ_101?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD09-P4",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Retrieve the DEXPI Equipment identified by EQ_101 in LocalId.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD09-P5",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "I need equipment records from DEXPI whose LocalId is EQ_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD10-P1",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Show ECAD Devices where DeviceType is Sensor AND LocalId is DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD10-P2",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Find ECAD Devices with DeviceType Sensor that also have LocalId DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD10-P3",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices satisfying both DeviceType = Sensor and LocalId = DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD10-P4",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have LocalId DEV_101 while their DeviceType is Sensor?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD10-P5",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "I want ECAD Devices meeting these two conditions: DeviceType Sensor; LocalId DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD11-P1",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Show ECAD Devices where DeviceType is Sensor OR LocalId is DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD11-P2",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Find ECAD Devices with either DeviceType Sensor or LocalId DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD11-P3",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices satisfying at least one: DeviceType = Sensor, LocalId = DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD11-P4",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have DeviceType Sensor, or alternatively have LocalId DEV_101?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD11-P5",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Give me ECAD Devices if DeviceType is Sensor or their LocalId equals DEV_101.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD12-P1",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment with LocalId EQ_101 or EQ_102.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD12-P2",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Find equipment in DEXPI whose LocalId is either EQ_101 or EQ_102.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD12-P3",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Retrieve DEXPI Equipment if LocalId equals EQ_101 OR LocalId equals EQ_102.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD12-P4",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Which DEXPI Equipment records have LocalId EQ_101 or LocalId EQ_102?",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD12-P5",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Return DEXPI Equipment matching LocalId EQ_101 or, alternatively, EQ_102.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD13-P1",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Show ECAD Devices ordered by LocalId ascending, limited to 5.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD13-P2",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "List the first five ECAD Devices sorted by LocalId from lowest to highest.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD13-P3",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Retrieve up to five ECAD Devices in increasing LocalId order.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD13-P4",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Give me five ECAD Devices with the smallest LocalId values first.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD13-P5",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Return ECAD Devices alphabetically by LocalId, maximum five results.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD14-P1",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment ordered by LocalId descending, limited to 10.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD14-P2",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "List up to ten DEXPI Equipment records with highest LocalId first.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD14-P3",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Retrieve the first ten equipment entities in decreasing DEXPI LocalId order.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD14-P4",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Sort DEXPI Equipment by LocalId from Z to A and return at most ten.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  },
+  {
+    "id": "SD14-P5",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Give me ten DEXPI Equipment records, arranged by LocalId descending.",
+    "sparql": null,
+    "error": "Older Phase-1 result lacks verified topology metadata; rerun Phase 1 using the updated planner",
+    "status": "missing_candidate_registry"
+  }
+]

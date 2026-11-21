@@ -1,0 +1,51 @@
+{
+  "benchmark_id": "shacl-phase1-cross-domain-baseline-partial",
+  "description": "Verified original CD20 integration questions only. Original CD15–CD19 questions are not available in the tracked benchmark file; do not treat this as the complete 100-question baseline.",
+  "scenarios": [
+    {
+      "scenario_id": "CD20",
+      "type": "cross_order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": {
+          "property": "Equipment.LocalId",
+          "direction": "DESC"
+        },
+        "limit": 10
+      },
+      "paraphrases": [
+        {
+          "id": "CD20-P1",
+          "query": "Show DEXPI Equipment and matching ECAD Devices joined by AssetIdentifier, ordered by DEXPI Equipment LocalId descending, limit 10."
+        },
+        {
+          "id": "CD20-P2",
+          "query": "Retrieve ECAD Devices and their corresponding DEXPI Equipment using AssetIdentifier, sort by DEXPI Equipment LocalId in descending order and return only 10 results."
+        },
+        {
+          "id": "CD20-P3",
+          "query": "List DEXPI Equipment together with associated ECAD Devices matched through AssetIdentifier, showing the first 10 results sorted by DEXPI Equipment LocalId DESC."
+        },
+        {
+          "id": "CD20-P4",
+          "query": "Find ECAD Devices associated with DEXPI Equipment via AssetIdentifier, order the results by DEXPI Equipment LocalId from highest to lowest, limiting the output to 10."
+        },
+        {
+          "id": "CD20-P5",
+          "query": "Show the top 10 DEXPI Equipment and linked ECAD Devices matched on AssetIdentifier, sorted in descending order of DEXPI Equipment LocalId."
+        }
+      ]
+    }
+  ]
+}

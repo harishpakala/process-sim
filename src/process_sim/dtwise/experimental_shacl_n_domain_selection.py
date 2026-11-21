@@ -108,12 +108,16 @@ def _prune_explicit_candidates(question: str, results: list[dict],
     else:
         allowed_ids = {p["id"] for p in paths}
 
-    # Explicit entity owner labels are derived from identifier path displays.
-    # Do not prune a domain when multiple distinct owner labels are mentioned.
+    # Qualified displays can include a domain root (DEXPI → Equipment →
+    # AssetIdentifier). The owner is the segment immediately before the
+    # identifier, not the first segment. Do not match a domain root as owner.
+    def identifier_owner(path: str) -> str:
+        return path.split(" → ")[-2].strip()
+
     owner_labels = {}
     for p in paths:
         if " → " in p["path"]:
-            owner_labels.setdefault(p["domain"], set()).add(p["path"].split(" → ")[0].strip())
+            owner_labels.setdefault(p["domain"], set()).add(identifier_owner(p["path"]))
     owner_filters = {}
     for domain, labels in owner_labels.items():
         matches = _explicit_vocabulary_matches(question, labels)
@@ -123,7 +127,7 @@ def _prune_explicit_candidates(question: str, results: list[dict],
         p for p in paths
         if p["id"] in allowed_ids
         and (p["domain"] not in owner_filters
-             or p["path"].split(" → ")[0].strip().casefold() == owner_filters[p["domain"]])
+             or identifier_owner(p["path"]).casefold() == owner_filters[p["domain"]])
     ]
     kept_ids = {p["id"] for p in kept_paths}
     narrowed_edges = []
@@ -152,12 +156,19 @@ def _prune_explicit_candidates(question: str, results: list[dict],
         for side in ("left", "right")
         for x in e[f"{side}_identifier_candidate_ids"]
     }
-    # A qualified result path can traverse multiple owners. Prune only when
-    # its displayed root owner is explicit and a single owner was requested.
+    # Preserve the requested owner and its SHACL descendants, but exclude
+    # unrelated branches. Domain-root candidates are not explicit owners.
     narrowed_results = [
         c for c in results
         if c["domain"] not in owner_filters
-        or c["path"].split(" → ")[0].strip().casefold() == owner_filters[c["domain"]]
+        or owner_filters[c["domain"]] in [
+            segment.strip().casefold()
+            for segment in (
+                c["path"].split(" → ")[1:]
+                if c["path"].split(" → ")[0].strip().casefold() == c["domain"].casefold()
+                else c["path"].split(" → ")
+            )
+        ]
     ]
     return narrowed_results, {
         "identifier_path_candidates": [p for p in kept_paths if p["id"] in used],
@@ -283,7 +294,9 @@ def compact_n_domain_prompt(prompt: dict) -> dict:
     """
     def owner_and_property(path: str) -> tuple[str, str]:
         parts = [part.strip() for part in path.split(" → ")]
-        return parts[0], parts[-1]
+        # The identifier owner is the immediately preceding SHACL path segment.
+        # Paths may be domain-prefixed (DEXPI → Equipment → AssetIdentifier).
+        return parts[-2], parts[-1]
 
     return {
         "question": prompt["question"],

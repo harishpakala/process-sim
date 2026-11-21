@@ -1,0 +1,1134 @@
+{
+  "benchmark_id": "shacl_phase1_data_grounded_candidate_v1",
+  "description": "Copy of the Phase-1 benchmark with ECAD and DEXPI filter identifiers grounded in AAST sample; execution against compiled property paths remains pending.",
+  "grounding_note": "ECAD Pressure and PI-1301 were observed together on the same device in AAST GraphDB; the exact compiled class/property paths and expected result sets have NOT yet been verified. DEXPI R-001 and K-001 were observed with dexpi:hasLocalId but are not yet confirmed to belong to the Equipment root class used by compiled queries. This remains a candidate benchmark, not a proven nonzero fixture.",
+  "scenario_count": 25,
+  "query_count": 125,
+  "scenarios": [
+    {
+      "scenario_id": "SD01",
+      "type": "entity",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD01-P1",
+          "query": "Show ECAD Devices."
+        },
+        {
+          "id": "SD01-P2",
+          "query": "List all ECAD Devices."
+        },
+        {
+          "id": "SD01-P3",
+          "query": "Retrieve the ECAD Device records."
+        },
+        {
+          "id": "SD01-P4",
+          "query": "Which ECAD Devices are available?"
+        },
+        {
+          "id": "SD01-P5",
+          "query": "Give me the collection of devices from ECAD."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD02",
+      "type": "entity",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD02-P1",
+          "query": "Show DEXPI Equipment."
+        },
+        {
+          "id": "SD02-P2",
+          "query": "List all DEXPI Equipment records."
+        },
+        {
+          "id": "SD02-P3",
+          "query": "Retrieve the equipment entities in DEXPI."
+        },
+        {
+          "id": "SD02-P4",
+          "query": "Which DEXPI Equipment records are defined in the model?"
+        },
+        {
+          "id": "SD02-P5",
+          "query": "Give me the DEXPI equipment collection."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD03",
+      "type": "entity",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD03-P1",
+          "query": "Find ECAD Devices."
+        },
+        {
+          "id": "SD03-P2",
+          "query": "Return the ECAD Device entities."
+        },
+        {
+          "id": "SD03-P3",
+          "query": "Display the devices defined in ECAD."
+        },
+        {
+          "id": "SD03-P4",
+          "query": "I need the ECAD Device records."
+        },
+        {
+          "id": "SD03-P5",
+          "query": "Which device entities exist in the ECAD model?"
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD04",
+      "type": "property",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD04-P1",
+          "query": "Show the LocalId of ECAD Devices."
+        },
+        {
+          "id": "SD04-P2",
+          "query": "Retrieve ECAD Device LocalId values."
+        },
+        {
+          "id": "SD04-P3",
+          "query": "For each ECAD Device, return its LocalId."
+        },
+        {
+          "id": "SD04-P4",
+          "query": "Which LocalId belongs to each ECAD Device?"
+        },
+        {
+          "id": "SD04-P5",
+          "query": "Give me the LocalId values from ECAD Device records."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD05",
+      "type": "property",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device.DeviceType"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD05-P1",
+          "query": "Show DeviceType for ECAD Devices."
+        },
+        {
+          "id": "SD05-P2",
+          "query": "Retrieve each ECAD Device's DeviceType."
+        },
+        {
+          "id": "SD05-P3",
+          "query": "Which DeviceType values are recorded for ECAD Devices?"
+        },
+        {
+          "id": "SD05-P4",
+          "query": "List the DeviceType values of ECAD Devices."
+        },
+        {
+          "id": "SD05-P5",
+          "query": "Return the DeviceType property from ECAD Device records."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD06",
+      "type": "property",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment.LocalId"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD06-P1",
+          "query": "Show LocalId for DEXPI Equipment."
+        },
+        {
+          "id": "SD06-P2",
+          "query": "Retrieve the DEXPI Equipment LocalId property."
+        },
+        {
+          "id": "SD06-P3",
+          "query": "List equipment identifiers using DEXPI LocalId."
+        },
+        {
+          "id": "SD06-P4",
+          "query": "What LocalId is assigned to each DEXPI Equipment?"
+        },
+        {
+          "id": "SD06-P5",
+          "query": "Give me the LocalId values of equipment in DEXPI."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD07",
+      "type": "filter",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD07-P1",
+          "query": "Find ECAD Devices where DeviceType is Pressure."
+        },
+        {
+          "id": "SD07-P2",
+          "query": "Show ECAD Devices with DeviceType equal to Pressure."
+        },
+        {
+          "id": "SD07-P3",
+          "query": "Which ECAD Devices have DeviceType set to Pressure?"
+        },
+        {
+          "id": "SD07-P4",
+          "query": "Retrieve devices from ECAD whose DeviceType has value Pressure."
+        },
+        {
+          "id": "SD07-P5",
+          "query": "I only want ECAD Devices of DeviceType Pressure."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD08",
+      "type": "filter",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD08-P1",
+          "query": "Show ECAD Devices whose LocalId is PI-1301."
+        },
+        {
+          "id": "SD08-P2",
+          "query": "Find the ECAD Device with LocalId PI-1301."
+        },
+        {
+          "id": "SD08-P3",
+          "query": "Retrieve ECAD Devices where LocalId equals PI-1301."
+        },
+        {
+          "id": "SD08-P4",
+          "query": "Which ECAD Device has the identifier PI-1301 in LocalId?"
+        },
+        {
+          "id": "SD08-P5",
+          "query": "Limit the ECAD Device selection to LocalId PI-1301."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD09",
+      "type": "filter",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "R-001"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD09-P1",
+          "query": "Find DEXPI Equipment with LocalId R-001."
+        },
+        {
+          "id": "SD09-P2",
+          "query": "Show DEXPI Equipment where LocalId equals R-001."
+        },
+        {
+          "id": "SD09-P3",
+          "query": "Which equipment in DEXPI has LocalId R-001?"
+        },
+        {
+          "id": "SD09-P4",
+          "query": "Retrieve the DEXPI Equipment identified by R-001 in LocalId."
+        },
+        {
+          "id": "SD09-P5",
+          "query": "I need equipment records from DEXPI whose LocalId is R-001."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD10",
+      "type": "boolean_and",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "AND",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD10-P1",
+          "query": "Show ECAD Devices where DeviceType is Pressure AND LocalId is PI-1301."
+        },
+        {
+          "id": "SD10-P2",
+          "query": "Find ECAD Devices with DeviceType Pressure that also have LocalId PI-1301."
+        },
+        {
+          "id": "SD10-P3",
+          "query": "Retrieve ECAD Devices satisfying both DeviceType = Pressure and LocalId = PI-1301."
+        },
+        {
+          "id": "SD10-P4",
+          "query": "Which ECAD Devices have LocalId PI-1301 while their DeviceType is Pressure?"
+        },
+        {
+          "id": "SD10-P5",
+          "query": "I want ECAD Devices meeting these two conditions: DeviceType Pressure; LocalId PI-1301."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD11",
+      "type": "boolean_or",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "OR",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD11-P1",
+          "query": "Show ECAD Devices where DeviceType is Pressure OR LocalId is PI-1301."
+        },
+        {
+          "id": "SD11-P2",
+          "query": "Find ECAD Devices with either DeviceType Pressure or LocalId PI-1301."
+        },
+        {
+          "id": "SD11-P3",
+          "query": "Retrieve ECAD Devices satisfying at least one: DeviceType = Pressure, LocalId = PI-1301."
+        },
+        {
+          "id": "SD11-P4",
+          "query": "Which ECAD Devices have DeviceType Pressure, or alternatively have LocalId PI-1301?"
+        },
+        {
+          "id": "SD11-P5",
+          "query": "Give me ECAD Devices if DeviceType is Pressure or their LocalId equals PI-1301."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD12",
+      "type": "boolean_or",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "R-001"
+          },
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "K-001"
+          }
+        ],
+        "boolean_operator": "OR",
+        "join": false,
+        "mapping_id": null,
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "SD12-P1",
+          "query": "Show DEXPI Equipment with LocalId R-001 or K-001."
+        },
+        {
+          "id": "SD12-P2",
+          "query": "Find equipment in DEXPI whose LocalId is either R-001 or K-001."
+        },
+        {
+          "id": "SD12-P3",
+          "query": "Retrieve DEXPI Equipment if LocalId equals R-001 OR LocalId equals K-001."
+        },
+        {
+          "id": "SD12-P4",
+          "query": "Which DEXPI Equipment records have LocalId R-001 or LocalId K-001?"
+        },
+        {
+          "id": "SD12-P5",
+          "query": "Return DEXPI Equipment matching LocalId R-001 or, alternatively, K-001."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD13",
+      "type": "order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad"
+        ],
+        "projections": [
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": {
+          "property": "Device.LocalId",
+          "direction": "ASC"
+        },
+        "limit": 5
+      },
+      "paraphrases": [
+        {
+          "id": "SD13-P1",
+          "query": "Show ECAD Devices ordered by LocalId ascending, limited to 5."
+        },
+        {
+          "id": "SD13-P2",
+          "query": "List the first five ECAD Devices sorted by LocalId from lowest to highest."
+        },
+        {
+          "id": "SD13-P3",
+          "query": "Retrieve up to five ECAD Devices in increasing LocalId order."
+        },
+        {
+          "id": "SD13-P4",
+          "query": "Give me five ECAD Devices with the smallest LocalId values first."
+        },
+        {
+          "id": "SD13-P5",
+          "query": "Return ECAD Devices alphabetically by LocalId, maximum five results."
+        }
+      ]
+    },
+    {
+      "scenario_id": "SD14",
+      "type": "order_limit",
+      "expected_semantics": {
+        "domains": [
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": false,
+        "mapping_id": null,
+        "order_by": {
+          "property": "Equipment.LocalId",
+          "direction": "DESC"
+        },
+        "limit": 10
+      },
+      "paraphrases": [
+        {
+          "id": "SD14-P1",
+          "query": "Show DEXPI Equipment ordered by LocalId descending, limited to 10."
+        },
+        {
+          "id": "SD14-P2",
+          "query": "List up to ten DEXPI Equipment records with highest LocalId first."
+        },
+        {
+          "id": "SD14-P3",
+          "query": "Retrieve the first ten equipment entities in decreasing DEXPI LocalId order."
+        },
+        {
+          "id": "SD14-P4",
+          "query": "Sort DEXPI Equipment by LocalId from Z to A and return at most ten."
+        },
+        {
+          "id": "SD14-P5",
+          "query": "Give me ten DEXPI Equipment records, arranged by LocalId descending."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD15",
+      "type": "cross_retrieval",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD15-P1",
+          "query": "Show ECAD Devices and matching DEXPI InstrumentationFunctions using AssetIdentifier."
+        },
+        {
+          "id": "CD15-P2",
+          "query": "Retrieve ECAD Devices paired with DEXPI InstrumentationFunctions through their shared AssetIdentifier."
+        },
+        {
+          "id": "CD15-P3",
+          "query": "List ECAD Devices and DEXPI InstrumentationFunctions matched on AssetIdentifier."
+        },
+        {
+          "id": "CD15-P4",
+          "query": "Which DEXPI InstrumentationFunctions correspond to each ECAD Device via AssetIdentifier? Return both."
+        },
+        {
+          "id": "CD15-P5",
+          "query": "Give me ECAD Devices alongside their associated DEXPI InstrumentationFunctions, linked by AssetIdentifier."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD16",
+      "type": "cross_retrieval",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "ActuatingFunction",
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD16-P1",
+          "query": "Retrieve DEXPI ActuatingFunction and corresponding ECAD Device entities by AssetIdentifier."
+        },
+        {
+          "id": "CD16-P2",
+          "query": "Show DEXPI ActuatingFunction and matching ECAD Device entities using AssetIdentifier."
+        },
+        {
+          "id": "CD16-P3",
+          "query": "List DEXPI ActuatingFunction and ECAD Device pairs sharing an AssetIdentifier."
+        },
+        {
+          "id": "CD16-P4",
+          "query": "For each DEXPI ActuatingFunction, return the related ECAD Device through AssetIdentifier, including both entities."
+        },
+        {
+          "id": "CD16-P5",
+          "query": "Which ECAD Device entities correspond to DEXPI ActuatingFunction entities based on AssetIdentifier? Return both."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD17",
+      "type": "cross_filter",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Sensor"
+          }
+        ],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD17-P1",
+          "query": "Show ECAD Device and matching DEXPI InstrumentationFunction entities by AssetIdentifier where DeviceType is Sensor."
+        },
+        {
+          "id": "CD17-P2",
+          "query": "Find ECAD Device entities with DeviceType Sensor and their associated DEXPI InstrumentationFunction entities through AssetIdentifier."
+        },
+        {
+          "id": "CD17-P3",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction pairs sharing AssetIdentifier, restricting ECAD DeviceType to Sensor."
+        },
+        {
+          "id": "CD17-P4",
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities whose DeviceType is Sensor? Return both through AssetIdentifier."
+        },
+        {
+          "id": "CD17-P5",
+          "query": "List paired ECAD Device and DEXPI InstrumentationFunction entities where Device.DeviceType equals Sensor, using AssetIdentifier."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD18",
+      "type": "cross_and",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "Equipment"
+        ],
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Sensor"
+          },
+          {
+            "property": "Equipment.LocalId",
+            "operator": "=",
+            "value": "EQ_101"
+          }
+        ],
+        "boolean_operator": "AND",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD18-P1",
+          "query": "Show ECAD Devices and DEXPI Equipment matched on AssetIdentifier where DeviceType is Sensor AND DEXPI Equipment LocalId is EQ_101."
+        },
+        {
+          "id": "CD18-P2",
+          "query": "Find ECAD Devices with DeviceType Sensor paired with DEXPI Equipment having LocalId EQ_101, using AssetIdentifier."
+        },
+        {
+          "id": "CD18-P3",
+          "query": "Retrieve both entities through AssetIdentifier when ECAD DeviceType equals Sensor and DEXPI Equipment LocalId equals EQ_101."
+        },
+        {
+          "id": "CD18-P4",
+          "query": "Which ECAD Device and DEXPI Equipment pairs have ECAD Device.DeviceType = Sensor and DEXPI Equipment.LocalId = EQ_101? Match by AssetIdentifier."
+        },
+        {
+          "id": "CD18-P5",
+          "query": "List ECAD Device and DEXPI Equipment entities matched on AssetIdentifier where ECAD Device.DeviceType equals Sensor AND DEXPI Equipment.LocalId equals EQ_101. Return both entities."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD19",
+      "type": "cross_order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "Equipment"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": {
+          "property": "Device.LocalId",
+          "direction": "ASC"
+        },
+        "limit": 5
+      },
+      "paraphrases": [
+        {
+          "id": "CD19-P1",
+          "query": "Show ECAD Devices and matching DEXPI Equipment by AssetIdentifier, ordered by ECAD Device LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD19-P2",
+          "query": "Retrieve up to five ECAD Devices paired with their corresponding DEXPI Equipment through the shared AssetIdentifier, sorting by the ECAD Device's LocalId from lowest to highest."
+        },
+        {
+          "id": "CD19-P3",
+          "query": "List ECAD Device and DEXPI Equipment pairs matched on AssetIdentifier, ordered by ECAD Device.LocalId ascending, limited to 5. Return both entities."
+        },
+        {
+          "id": "CD19-P4",
+          "query": "Find DEXPI Equipment corresponding to ECAD Devices via AssetIdentifier; return both in increasing ECAD Device LocalId order, maximum five."
+        },
+        {
+          "id": "CD19-P5",
+          "query": "Give me the first five ECAD Device–DEXPI Equipment pairs sharing AssetIdentifier, arranged by ECAD Device LocalId ascending."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD20",
+      "type": "cross_order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment",
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": {
+          "property": "Equipment.LocalId",
+          "direction": "DESC"
+        },
+        "limit": 10
+      },
+      "paraphrases": [
+        {
+          "id": "CD20-P1",
+          "query": "Show DEXPI Equipment and matching ECAD Devices via AssetIdentifier, ordered by DEXPI Equipment LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-P2",
+          "query": "Retrieve DEXPI Equipment and ECAD Device pairs matched on AssetIdentifier. Return both entities, ordered by DEXPI Equipment.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-P3",
+          "query": "List DEXPI Equipment and ECAD Device entities matched on AssetIdentifier. Return both entities, ordered by DEXPI Equipment.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-P4",
+          "query": "Give me ten matching DEXPI Equipment and ECAD Device pairs by AssetIdentifier, arranged from largest to smallest Equipment LocalId."
+        },
+        {
+          "id": "CD20-P5",
+          "query": "Which ECAD Devices correspond to DEXPI Equipment via AssetIdentifier? Return both, sorted by DEXPI Equipment LocalId descending, maximum ten."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD16-1",
+      "type": "cross_retrieval",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment",
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD16-1-P1",
+          "query": "Retrieve DEXPI Equipment and corresponding ECAD Devices by AssetIdentifier."
+        },
+        {
+          "id": "CD16-1-P2",
+          "query": "Show DEXPI Equipment together with its matching ECAD Device using AssetIdentifier."
+        },
+        {
+          "id": "CD16-1-P3",
+          "query": "List DEXPI Equipment–ECAD Device pairs sharing an AssetIdentifier."
+        },
+        {
+          "id": "CD16-1-P4",
+          "query": "For each DEXPI Equipment, return the related ECAD Device through AssetIdentifier, including both entities."
+        },
+        {
+          "id": "CD16-1-P5",
+          "query": "Which ECAD Devices pair with DEXPI Equipment based on AssetIdentifier? Show the pairs."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD19-1",
+      "type": "cross_order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": {
+          "property": "Device.LocalId",
+          "direction": "ASC"
+        },
+        "limit": 5
+      },
+      "paraphrases": [
+        {
+          "id": "CD19-1-P1",
+          "query": "Show ECAD Device and matching DEXPI InstrumentationFunction entities by AssetIdentifier, ordered by ECAD Device.LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD19-1-P2",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction pairs sharing AssetIdentifier. Return both entities, sorted by ECAD Device.LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD19-1-P3",
+          "query": "List ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier, ordered by ECAD Device.LocalId ascending, limited to 5. Return both entities."
+        },
+        {
+          "id": "CD19-1-P4",
+          "query": "Find DEXPI InstrumentationFunction entities corresponding to ECAD Device entities through AssetIdentifier; return both, ordered by ECAD Device.LocalId ascending, limited to 5."
+        },
+        {
+          "id": "CD19-1-P5",
+          "query": "Give the first five ECAD Device and DEXPI InstrumentationFunction pairs matched by AssetIdentifier, ordered by ECAD Device.LocalId ascending."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD20-1",
+      "type": "cross_order_limit",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "InstrumentationFunction",
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": {
+          "property": "InstrumentationFunction.LocalId",
+          "direction": "DESC"
+        },
+        "limit": 10
+      },
+      "paraphrases": [
+        {
+          "id": "CD20-1-P1",
+          "query": "Show DEXPI InstrumentationFunction and matching ECAD Device entities via AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-1-P2",
+          "query": "Retrieve DEXPI InstrumentationFunction and ECAD Device pairs matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-1-P3",
+          "query": "List DEXPI InstrumentationFunction and ECAD Device entities matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-1-P4",
+          "query": "Find ECAD Device entities paired with DEXPI InstrumentationFunction entities by AssetIdentifier; return both, sorted by DEXPI InstrumentationFunction.LocalId descending, limited to 10."
+        },
+        {
+          "id": "CD20-1-P5",
+          "query": "Give up to ten DEXPI InstrumentationFunction and ECAD Device pairs sharing AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD17-1",
+      "type": "cross_filter",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null,
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          }
+        ],
+        "boolean_operator": "NONE"
+      },
+      "paraphrases": [
+        {
+          "id": "CD17-1-P1",
+          "query": "Show ECAD Device and matching DEXPI InstrumentationFunction entities by AssetIdentifier where ECAD Device.DeviceType equals Pressure."
+        },
+        {
+          "id": "CD17-1-P2",
+          "query": "Find ECAD Device entities with DeviceType Pressure and their paired DEXPI InstrumentationFunction entities using AssetIdentifier."
+        },
+        {
+          "id": "CD17-1-P3",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction pairs sharing AssetIdentifier, filtering ECAD Device.DeviceType to Pressure."
+        },
+        {
+          "id": "CD17-1-P4",
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities with DeviceType Pressure through AssetIdentifier? Return both."
+        },
+        {
+          "id": "CD17-1-P5",
+          "query": "List ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier where ECAD Device.DeviceType is Pressure. Return both entities."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD18-1",
+      "type": "cross_and",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null,
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "AND"
+      },
+      "paraphrases": [
+        {
+          "id": "CD18-1-P1",
+          "query": "Show ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier where ECAD Device.DeviceType is Pressure AND ECAD Device.LocalId is PI-1301."
+        },
+        {
+          "id": "CD18-1-P2",
+          "query": "Find ECAD Device entities with DeviceType Pressure and LocalId PI-1301, paired with DEXPI InstrumentationFunction entities through AssetIdentifier. Return both."
+        },
+        {
+          "id": "CD18-1-P3",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction entities sharing AssetIdentifier when ECAD Device.DeviceType equals Pressure AND ECAD Device.LocalId equals PI-1301."
+        },
+        {
+          "id": "CD18-1-P4",
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities where Device.DeviceType = Pressure AND Device.LocalId = PI-1301? Return both via AssetIdentifier."
+        },
+        {
+          "id": "CD18-1-P5",
+          "query": "List ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier with ECAD Device.DeviceType Pressure AND ECAD Device.LocalId PI-1301. Return both entities."
+        }
+      ]
+    }
+  ]
+}
