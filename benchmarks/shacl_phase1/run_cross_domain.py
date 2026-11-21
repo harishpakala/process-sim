@@ -123,7 +123,29 @@ def main(argv=None):
     ap.add_argument("--endpoint", default="http://127.0.0.1:11434")
     ap.add_argument("--output", type=Path,
                     default=ROOT / "shacl_cross_domain_benchmark_results.json")
+    ap.add_argument("--execute-graphdb", action="store_true",
+                    help="Compile and execute each cross-domain plan before printing")
+    ap.add_argument("--graphdb-endpoint", default="http://localhost:7200/repositories/AAST")
+    ap.add_argument("--graphdb-timeout", type=float, default=60)
+    ap.add_argument("--graphs", type=Path,
+                    default=ROOT / "benchmarks/shacl_phase1/aast_instance_graphs.json")
+    ap.add_argument("--sparql-output", type=Path)
+    ap.add_argument("--execution-output", type=Path)
     args = ap.parse_args(argv)
+    if args.graphdb_timeout <= 0:
+        ap.error("--graphdb-timeout must be positive")
+    if args.execute_graphdb:
+        from process_sim.dtwise.shacl_planner.cross_domain_sparql_compiler import (
+            compile_cross_domain,
+        )
+        from process_sim.dtwise.shacl_planner.sparql_compiler import CompilationError
+        from benchmarks.shacl_phase1.execute_single_domain_sparql import execute_query
+        schema_data = json.loads(args.schema.read_text(encoding="utf-8"))
+        graph_data = json.loads(args.graphs.read_text(encoding="utf-8"))
+        approved_mappings = json.loads(args.mappings.read_text(encoding="utf-8"))
+        compiled_results, execution_results = [], []
+        sparql_output = args.sparql_output or args.output.with_name("cross_domain_sparql_results.json")
+        execution_output = args.execution_output or args.output.with_name("cross_domain_sparql_execution.json")
 
     manifest = args.benchmark or ROOT / "benchmarks/shacl_phase1" / (
         "cross_domain_baseline_queries.json" if args.suite == "baseline"
@@ -140,7 +162,10 @@ def main(argv=None):
     cache = {}
     results = []
     started_all = time.perf_counter()
-    print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9} {"QWEN":>5}  ERRORS', flush=True)
+    if args.execute_graphdb:
+        print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9} {"ROWS":>8}  GRAPHDB', flush=True)
+    else:
+        print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9} {"QWEN":>5}  ERRORS', flush=True)
     print("-" * 70, flush=True)
     for scenario in scenarios:
         expected = scenario["expected_semantics"]
@@ -170,9 +195,41 @@ def main(argv=None):
                 "qwen_calls": record.get("qwen_calls"),
                 "errors": errors, "record": record,
             })
-            print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} '
-                  f'{elapsed:>7.2f}s {str(record.get("qwen_calls", "-")):>5}  '
-                  f'{",".join(errors)}', flush=True)
+            if args.execute_graphdb:
+                base = {"id": variant["id"], "scenario_id": scenario["scenario_id"],
+                        "domains": domains, "query": variant["query"],
+                        "semantic_status": "not_checked"}
+                if not passed:
+                    compiled = {**base, "status": "semantic_mismatch", "sparql": None,
+                                "error": errors}
+                    executed = {"status": "not_compiled", "row_count": None, "error": errors}
+                else:
+                    try:
+                        sparql = compile_cross_domain(record, indices, schema_data,
+                                                      graph_data, approved_mappings)
+                        compiled = {**base, "status": "compiled", "sparql": sparql, "error": None}
+                        executed = execute_query(args.graphdb_endpoint, sparql, args.graphdb_timeout)
+                    except (CompilationError, KeyError, TypeError, ValueError) as exc:
+                        compiled = {**base, "status": "compilation_failed", "sparql": None,
+                                    "error": f"{type(exc).__name__}: {exc}"}
+                        executed = {"status": "not_compiled", "row_count": None,
+                                    "error": compiled["error"]}
+                compiled_results.append(compiled)
+                execution_results.append({**base, "compilation_status": compiled["status"],
+                                          **executed})
+                for output_path, items in ((sparql_output, compiled_results),
+                                           (execution_output, execution_results)):
+                    output_path.parent.mkdir(parents=True, exist_ok=True)
+                    output_path.write_text(json.dumps(items, indent=2, ensure_ascii=False),
+                                           encoding="utf-8")
+                count = executed.get("row_count")
+                rows_text = str(count) if count is not None else "-"
+                print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} '
+                      f'{elapsed:>7.2f}s {rows_text:>8}  {executed["status"]}', flush=True)
+            else:
+                print(f'{variant["id"]:<12} {"PASS" if passed else "FAIL":<8} '
+                      f'{elapsed:>7.2f}s {str(record.get("qwen_calls", "-")):>5}  '
+                      f'{",".join(errors)}', flush=True)
             args.output.parent.mkdir(parents=True, exist_ok=True)
             args.output.write_text(json.dumps(results, indent=2, ensure_ascii=False),
                                    encoding="utf-8")
