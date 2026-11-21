@@ -131,14 +131,14 @@ function navigatorClipboardFallback(value:string) {
  if (typeof navigator !== 'undefined' && navigator.clipboard) void navigator.clipboard.writeText(value)
 }
 async function executeShacl() {
- if (!shaclVariantId.value || shaclBusy.value) return
+ if (!shaclVariantId.value || shaclBusy.value || question.value.trim().length < 5) return
  shaclBusy.value = true
  shaclExecution.value = null
  shaclExecutionError.value = ''
  try {
   const response = await fetch('/api/ai/shacl/benchmark/execute', {
    method:'POST', headers:{'Content-Type':'application/json'},
-   body:JSON.stringify({id:shaclVariantId.value})
+   body:JSON.stringify({id:shaclVariantId.value, question:question.value.trim()})
   })
   const data = await response.json()
   if (!response.ok) throw new Error(data.error || 'SHACL execution unavailable')
@@ -168,12 +168,14 @@ function chooseShaclScope(scope: 'single'|'cross') {
  shaclExecution.value = null
  shaclScenarioId.value = ''
  shaclVariantId.value = ''
+ question.value = ''
  result.value = null
 }
 function chooseShaclScenario(id: string) {
  shaclScenarioId.value = id
  shaclExecution.value = null
  shaclVariantId.value = ''
+ question.value = ''
  result.value = null
 }
 function chooseShaclVariant(id: string) {
@@ -359,9 +361,12 @@ onMounted(hLoadRuns)
       <option value="">Select one of five questions</option>
       <option v-for="variant in shaclSelectedScenario?.paraphrases || []" :key="variant.id" :value="variant.id">{{variant.id}} · {{variant.query}}</option>
      </select></div>
+     <div class="shacl-field"><label for="shacl-question-editor">Your question</label>
+      <textarea id="shacl-question-editor" v-model="question" maxlength="1000" rows="4" :disabled="!shaclVariantId" placeholder="Select a question above, then edit it here…" @keydown.ctrl.enter="executeShacl" />
+     </div>
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
-     <div class="shacl-actions"><button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? '✨ Thinking…' : '✨ Ask DTwise'}}</button></div>
+     <div class="shacl-actions"><button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy || question.trim().length < 5" @click="executeShacl">{{shaclBusy ? '✨ Thinking…' : '✨ Ask DTwise'}}</button></div>
      <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
      <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
       <h3>Results · {{shaclExecution.id}}</h3>
@@ -402,7 +407,6 @@ onMounted(hLoadRuns)
     <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     </details>
     -->
-    <p v-if="shaclVariantId" class="subdued">Selected question: {{question}}</p>
     <!-- Legacy Unified IR question editor and Ask DTwise execution temporarily hidden.
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
@@ -531,7 +535,7 @@ select:disabled{opacity:.6;cursor:not-allowed}
 .shacl-catalog .mode-switch{margin:0;gap:8px}
 .shacl-field{display:grid;gap:7px;min-width:0}
 .shacl-field label{font-size:13px;font-weight:600}
-.shacl-field select{min-width:0;width:100%;box-sizing:border-box}
+.shacl-field select,.shacl-field textarea{min-width:0;width:100%;box-sizing:border-box}
 .shacl-catalog p{margin:0}
 .shacl-actions{display:flex;align-items:center;justify-content:flex-start;padding-top:2px}
 .shacl-output{gap:14px;min-width:0}
