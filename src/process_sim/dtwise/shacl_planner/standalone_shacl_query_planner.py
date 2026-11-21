@@ -263,12 +263,11 @@ def _explicit_sort(question):
 def _explicit_limit(question):
     number_words={'one':1,'two':2,'three':3,'four':4,'five':5,
                   'six':6,'seven':7,'eight':8,'nine':9,'ten':10}
-    number=r'(?:\\d+|'+'|'.join(number_words)+r')'
+    number=r'(?:\d+|'+'|'.join(number_words)+r')'
     patterns=[
         r'\b(?:up\s+to|at\s+most|maximum|limited\s+to|limit(?:ed)?\s+to)\s+('+number+r')\b',
         r'\b(?:first|top)\s+('+number+r')\b',
         r'\b(?:return|show|retrieve|list|give\s+me)\s+(?:the\s+)?('+number+r')\b',
-        r'\b('+number+r')\s+(?:results?|records?|entities|devices|equipment)\b',
     ]
     for pattern in patterns:
         match=re.search(pattern,question,re.I)
