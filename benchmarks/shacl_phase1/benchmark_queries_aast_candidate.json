@@ -898,7 +898,7 @@
       ]
     },
     {
-      "scenario_id": "CD21",
+      "scenario_id": "CD16-1",
       "type": "cross_retrieval",
       "expected_semantics": {
         "domains": [
@@ -918,23 +918,23 @@
       },
       "paraphrases": [
         {
-          "id": "CD21-P1",
+          "id": "CD16-1-P1",
           "query": "Retrieve DEXPI Equipment and corresponding ECAD Devices by AssetIdentifier."
         },
         {
-          "id": "CD21-P2",
+          "id": "CD16-1-P2",
           "query": "Show DEXPI Equipment together with its matching ECAD Device using AssetIdentifier."
         },
         {
-          "id": "CD21-P3",
+          "id": "CD16-1-P3",
           "query": "List DEXPI Equipment–ECAD Device pairs sharing an AssetIdentifier."
         },
         {
-          "id": "CD21-P4",
+          "id": "CD16-1-P4",
           "query": "For each DEXPI Equipment, return the related ECAD Device through AssetIdentifier, including both entities."
         },
         {
-          "id": "CD21-P5",
+          "id": "CD16-1-P5",
           "query": "Which ECAD Devices pair with DEXPI Equipment based on AssetIdentifier? Show the pairs."
         }
       ]
