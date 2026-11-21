@@ -20,7 +20,7 @@ class CompilationError(ValueError):
 
 
 def _iri(value):
-    if not isinstance(value, str) or not re.fullmatch(r"https?://[^\\s<>\\x00-\\x20]+", value):
+    if not isinstance(value, str) or not re.fullmatch(r"https?://[^\s<>\x00-\x20]+", value):
         raise CompilationError("Invalid or unsupported RDF IRI")
     return "<" + value + ">"
 
@@ -154,8 +154,8 @@ def compile_single_domain(record, index, schema):
     if not projections:
         raise CompilationError("SELECT requires projections")
     projected_vars = list(dict.fromkeys(variables[cid] for cid in projections))
-    query = "SELECT " + " ".join(projected_vars) + " WHERE {\\n  "
-    query += "\\n  ".join(lines) + "\\n}"
+    query = "SELECT " + " ".join(projected_vars) + " WHERE {\n  "
+    query += "\n  ".join(lines) + "\n}"
     orders = answer.get("order_by") or []
     if orders:
         clauses = []
@@ -163,10 +163,10 @@ def compile_single_domain(record, index, schema):
             if order.get("direction") not in ("ASC", "DESC"):
                 raise CompilationError("Invalid sort direction")
             clauses.append(order["direction"] + "(" + variables[order["property_id"]] + ")")
-        query += "\\nORDER BY " + " ".join(clauses)
+        query += "\nORDER BY " + " ".join(clauses)
     limit = answer.get("limit")
     if limit is not None:
         if type(limit) is not int or limit <= 0:
             raise CompilationError("Invalid LIMIT")
-        query += "\\nLIMIT " + str(limit)
-    return query + "\\n"
+        query += "\nLIMIT " + str(limit)
+    return query + "\n"
