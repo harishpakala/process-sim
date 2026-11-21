@@ -652,7 +652,7 @@
         },
         {
           "id": "CD15-P3",
-          "query": "List device–instrumentation-function pairs across ECAD and DEXPI matched on AssetIdentifier."
+          "query": "List ECAD Devices and DEXPI InstrumentationFunctions matched on AssetIdentifier."
         },
         {
           "id": "CD15-P4",
