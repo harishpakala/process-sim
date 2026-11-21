@@ -46,7 +46,12 @@ concept paths not returned. For entity retrieval with a property filter, project
 entity R candidate and put the property P candidate in filters; do not project P
 unless its value is separately requested. Do not add an existence path just to
 represent the domain or an ancestor already present in the projected path.
-Use filter objects with the exact key property_id (never property). Endpoint addresses require Address property projections.
+For EACH filter, output exactly three keys: property_id, operator, value.
+For equality conditions ("is", "equals", "equal to", "set to", "has value",
+"of <property> <value>"), operator MUST be the string "=". Never omit operator.
+Use filter objects with the exact key property_id (never property).
+Do not add existence_ids unless the question explicitly requires a separate
+concept's existence; an entity projection and its property filter need none. Endpoint addresses require Address property projections.
 A Device with both endpoint types projects Device and requires both sibling
 EndPoint and PLCEndPoint paths under the SAME Device, not Symbol.
 Parent-child traversal is not a sibling JOIN. Python computes JOIN from
@@ -59,7 +64,10 @@ When a necessary candidate is missing, return unresolved. If a clause cannot
 be represented, return unsupported. join_owner_id is ALWAYS null; Python derives it.
 Return EXACTLY these keys, using null/[] for unused fields. The empty arrays
 below illustrate the JSON structure only: for selected requests populate
-projection_ids with the actual offered candidate ID(s), never an example ID:
+projection_ids with the actual offered candidate ID(s), never an example ID.
+A nonempty filters array MUST contain objects shaped exactly as
+{"property_id":"<offered P candidate ID>","operator":"=","value":"<question literal>"}.
+The placeholders are descriptions, NOT literal IDs or values:
 {
  "status":"selected|ambiguous|unresolved|unsupported",
  "projection_ids":[],
