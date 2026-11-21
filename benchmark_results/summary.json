@@ -1,0 +1,20 @@
+{
+  "benchmark": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\benchmarks\\shacl_phase1\\benchmark_queries.json",
+  "pass": 93,
+  "total": 100,
+  "seconds": 1736.18,
+  "suites": {
+    "single_domain": {
+      "pass": 70,
+      "total": 70,
+      "exit_code": 0,
+      "file": "benchmark_results\\single_domain.json"
+    },
+    "cross_domain": {
+      "pass": 23,
+      "total": 30,
+      "exit_code": 1,
+      "file": "benchmark_results\\cross_domain.json"
+    }
+  }
+}
