@@ -341,37 +341,34 @@ onMounted(hLoadRuns)
  <div style="display:grid;gap:16px">
   <section v-if="page === 'engineering'" class="panel">
    <div class="panel-title">
-    <div><h2>TEP NEXUS — DTwise Engineering Query</h2><p>Phase 1 SHACL planner · SPARQL compiler · read-only GraphDB execution</p></div>
+    <div><h2>Engineering Queries</h2><p>Select a question and explore its GraphDB results.</p></div>
    </div>
    <div class="custom-query">
     <div class="shacl-catalog" aria-label="Phase 1 SHACL benchmark catalog">
-     <h3>Phase 1 · SHACL benchmark queries</h3>
-     <p class="subdued">14 single-domain scenarios (70 questions) · 11 cross-domain scenarios (55 questions). Intents are derived from the existing expected semantics; no new benchmark metadata is required.</p>
      <div class="mode-switch" role="group" aria-label="SHACL domain scope">
       <button type="button" :class="shaclScope === 'single' ? 'primary' : 'secondary'" @click="chooseShaclScope('single')">Single-domain (70)</button>
       <button type="button" :class="shaclScope === 'cross' ? 'primary' : 'secondary'" @click="chooseShaclScope('cross')">Cross-domain (55)</button>
      </div>
-     <label for="shacl-scenario">Scenario · query intent</label>
+     <div class="shacl-field"><label for="shacl-scenario">Query intent</label>
      <select id="shacl-scenario" :value="shaclScenarioId" @change="chooseShaclScenario(($event.target as HTMLSelectElement).value)">
       <option value="">Select a scenario</option>
       <option v-for="scenario in shaclVisibleScenarios" :key="scenario.scenario_id" :value="scenario.scenario_id">{{scenario.scenario_id}} · {{shaclIntent(scenario)}}</option>
-     </select>
-     <label for="shacl-variant">Benchmark paraphrase</label>
+     </select></div>
+     <div class="shacl-field"><label for="shacl-variant">Question</label>
      <select id="shacl-variant" :value="shaclVariantId" :disabled="!shaclSelectedScenario" @change="chooseShaclVariant(($event.target as HTMLSelectElement).value)">
       <option value="">Select one of five questions</option>
       <option v-for="variant in shaclSelectedScenario?.paraphrases || []" :key="variant.id" :value="variant.id">{{variant.id}} · {{variant.query}}</option>
-     </select>
+     </select></div>
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
-     <button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? '✨ Thinking…' : '✨ Ask DTwise'}}</button>
-     <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. </p>
+     <div class="shacl-actions"><button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? '✨ Thinking…' : '✨ Ask DTwise'}}</button></div>
      <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
      <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
-      <h3>SHACL execution · {{shaclExecution.id}}</h3>
+      <h3>Results · {{shaclExecution.id}}</h3>
       <p>Status: <strong>{{shaclExecution.status}}</strong> · Rows: {{shaclExecution.row_count === null ? 'Not executed' : shaclExecution.row_count}}</p>
       <p v-if="shaclExecution.error" role="alert">{{JSON.stringify(shaclExecution.error)}}</p>
       <p v-if="shaclExecution.mapping_ids.length" class="subdued">Mapping IDs: {{shaclExecution.mapping_ids.join(', ')}}</p>
-      <h3>GraphDB results table</h3>
+      <h3>Results table</h3>
       <div v-if="shaclExecution.rows.length" class="table-scroll">
        <table class="evidence-table"><thead><tr><th>#</th><th v-for="col in shaclExecution.columns" :key="col">{{col}}</th></tr></thead>
         <tbody><tr v-for="(entry,i) in shaclExecution.rows" :key="i"><td>{{i+1}}</td><td v-for="col in shaclExecution.columns" :key="col" class="mono">{{entry[col] ?? '—'}}</td></tr></tbody>
@@ -385,7 +382,7 @@ onMounted(hLoadRuns)
        <pre class="shacl-sparql">{{shaclExecution.sparql}}</pre>
       </div>
       <p v-else class="subdued">No SPARQL generated.</p>
-      <details><summary>Phase 1 plan</summary><pre class="shacl-sparql">{{JSON.stringify(shaclExecution.plan,null,2)}}</pre></details>
+      <details><summary>Planner details</summary><pre class="shacl-sparql">{{JSON.stringify(shaclExecution.plan,null,2)}}</pre></details>
      </section>
     </div>
     <!-- Legacy B01–B53 catalog temporarily hidden; restore by removing these comment markers.
@@ -530,4 +527,14 @@ select:focus-visible{outline:2px solid #79b8ff;outline-offset:2px}
 select:disabled{opacity:.6;cursor:not-allowed}
 .shacl-catalog{display:grid;gap:10px;padding:15px;border:1px solid #334a62;border-radius:9px}.shacl-catalog h3{margin:0;font-size:15px}.legacy-benchmark{display:grid;gap:10px}.legacy-benchmark[open]{padding:12px;border:1px solid #334a62;border-radius:8px}.legacy-benchmark summary{cursor:pointer;margin-bottom:10px}
 .shacl-run-button{width:fit-content;max-width:100%;justify-self:start;padding-inline:16px}\n.shacl-output{display:grid;gap:10px;border-top:1px solid #334a62;padding-top:12px}.shacl-sparql{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;font-size:12px}
+.shacl-catalog{gap:16px;padding:20px;min-width:0}
+.shacl-catalog .mode-switch{margin:0;gap:8px}
+.shacl-field{display:grid;gap:7px;min-width:0}
+.shacl-field label{font-size:13px;font-weight:600}
+.shacl-field select{min-width:0;width:100%;box-sizing:border-box}
+.shacl-catalog p{margin:0}
+.shacl-actions{display:flex;align-items:center;justify-content:flex-start;padding-top:2px}
+.shacl-output{gap:14px;min-width:0}
+.shacl-output h3{margin:0;font-size:15px}
+@media(min-width:800px){.shacl-catalog{padding:24px}.shacl-field{max-width:760px}}
 </style>
