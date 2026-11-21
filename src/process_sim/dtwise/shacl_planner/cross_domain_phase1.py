@@ -181,7 +181,7 @@ def _normalize_mapping_owner_participation(answer, candidates, graph, registry,
         owner = owner_candidates[0]
         label = owner.get('path', '').split(' → ')[-1].strip()
         if not label or not re.search(
-            r'(?<!\\w)' + re.escape(label) + r's?(?!\\w)', question, re.I
+            r'(?<!\w)' + re.escape(label) + r's?(?!\w)', question, re.I
         ):
             continue
         already_present = any(
