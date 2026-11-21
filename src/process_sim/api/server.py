@@ -399,7 +399,7 @@ class Handler(BaseHTTPRequestHandler):
             pilot = urlsplit(self.path).path.endswith("/42/run")
             try:
                 length = int(self.headers.get("Content-Length", "0"))
-                if not 0 < length <= 1024:
+                if not 0 < length <= 4096:
                     self.send_json(413, {"error": "Invalid benchmark request size"})
                     return
                 payload = json.loads(self.rfile.read(length))
@@ -460,10 +460,10 @@ class Handler(BaseHTTPRequestHandler):
                     self.send_json(413, {"error": "Invalid request size"})
                     return
                 payload = json.loads(self.rfile.read(length))
-                if not isinstance(payload, dict) or set(payload) != {"id"}:
-                    raise ValueError("Expected only a benchmark question ID")
+                if not isinstance(payload, dict) or "id" not in payload or not set(payload) <= {"id", "question"}:
+                    raise ValueError("Expected benchmark question ID and optional edited question")
                 from process_sim.api.shacl_benchmark_query import run_benchmark_question
-                self.send_json(200, run_benchmark_question(payload["id"]))
+                self.send_json(200, run_benchmark_question(payload["id"], payload.get("question")))
             except (ValueError, TypeError, json.JSONDecodeError) as exc:
                 self.send_json(400, {"error": str(exc)})
             except Exception:
