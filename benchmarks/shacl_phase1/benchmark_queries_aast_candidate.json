@@ -799,11 +799,11 @@
         },
         {
           "id": "CD18-P4",
-          "query": "Which ECAD Device–DEXPI Equipment pairs have DeviceType Sensor and DEXPI Equipment LocalId EQ_101? Match by AssetIdentifier."
+          "query": "Which ECAD Device and DEXPI Equipment pairs have ECAD Device.DeviceType = Sensor and DEXPI Equipment.LocalId = EQ_101? Match by AssetIdentifier."
         },
         {
           "id": "CD18-P5",
-          "query": "List matching devices and equipment based on AssetIdentifier, requiring both DeviceType Sensor and Equipment LocalId EQ_101."
+          "query": "List ECAD Device and DEXPI Equipment entities matched on AssetIdentifier where ECAD Device.DeviceType equals Sensor AND DEXPI Equipment.LocalId equals EQ_101. Return both entities."
         }
       ]
     },
