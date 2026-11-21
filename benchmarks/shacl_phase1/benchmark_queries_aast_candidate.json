@@ -2,8 +2,8 @@
   "benchmark_id": "shacl_phase1_data_grounded_candidate_v1",
   "description": "Copy of the Phase-1 benchmark with ECAD and DEXPI filter identifiers grounded in AAST sample; execution against compiled property paths remains pending.",
   "grounding_note": "ECAD Pressure and PI-1301 were observed together on the same device in AAST GraphDB; the exact compiled class/property paths and expected result sets have NOT yet been verified. DEXPI R-001 and K-001 were observed with dexpi:hasLocalId but are not yet confirmed to belong to the Equipment root class used by compiled queries. This remains a candidate benchmark, not a proven nonzero fixture.",
-  "scenario_count": 20,
-  "query_count": 100,
+  "scenario_count": 21,
+  "query_count": 105,
   "scenarios": [
     {
       "scenario_id": "SD01",
@@ -622,7 +622,7 @@
         }
       ]
     },
-{
+    {
       "scenario_id": "CD15",
       "type": "cross_retrieval",
       "expected_semantics": {
@@ -673,7 +673,7 @@
           "dexpi"
         ],
         "projections": [
-          "Equipment",
+          "ActuatingFunction",
           "Device"
         ],
         "filters": [],
@@ -686,23 +686,23 @@
       "paraphrases": [
         {
           "id": "CD16-P1",
-          "query": "Retrieve DEXPI Equipment and corresponding ECAD Devices by AssetIdentifier."
+          "query": "Retrieve DEXPI ActuatingFunction and corresponding ECAD Device entities by AssetIdentifier."
         },
         {
           "id": "CD16-P2",
-          "query": "Show equipment from DEXPI together with its matching ECAD Device using AssetIdentifier."
+          "query": "Show DEXPI ActuatingFunction and matching ECAD Device entities using AssetIdentifier."
         },
         {
           "id": "CD16-P3",
-          "query": "List DEXPI Equipment–ECAD Device pairs sharing an AssetIdentifier."
+          "query": "List DEXPI ActuatingFunction and ECAD Device pairs sharing an AssetIdentifier."
         },
         {
           "id": "CD16-P4",
-          "query": "For each DEXPI Equipment, return the related ECAD Device through AssetIdentifier, including both entities."
+          "query": "For each DEXPI ActuatingFunction, return the related ECAD Device through AssetIdentifier, including both entities."
         },
         {
           "id": "CD16-P5",
-          "query": "Which ECAD Devices pair with DEXPI Equipment based on AssetIdentifier? Show the pairs."
+          "query": "Which ECAD Device entities correspond to DEXPI ActuatingFunction entities based on AssetIdentifier? Return both."
         }
       ]
     },
@@ -894,6 +894,48 @@
         {
           "id": "CD20-P5",
           "query": "Which ECAD Devices correspond to DEXPI Equipment via AssetIdentifier? Return both, sorted by DEXPI Equipment LocalId descending, maximum ten."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD21",
+      "type": "cross_retrieval",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Equipment",
+          "Device"
+        ],
+        "filters": [],
+        "boolean_operator": "NONE",
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null
+      },
+      "paraphrases": [
+        {
+          "id": "CD21-P1",
+          "query": "Retrieve DEXPI Equipment and corresponding ECAD Devices by AssetIdentifier."
+        },
+        {
+          "id": "CD21-P2",
+          "query": "Show DEXPI Equipment together with its matching ECAD Device using AssetIdentifier."
+        },
+        {
+          "id": "CD21-P3",
+          "query": "List DEXPI Equipment–ECAD Device pairs sharing an AssetIdentifier."
+        },
+        {
+          "id": "CD21-P4",
+          "query": "For each DEXPI Equipment, return the related ECAD Device through AssetIdentifier, including both entities."
+        },
+        {
+          "id": "CD21-P5",
+          "query": "Which ECAD Devices pair with DEXPI Equipment based on AssetIdentifier? Show the pairs."
         }
       ]
     }
