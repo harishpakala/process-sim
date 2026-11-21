@@ -622,7 +622,7 @@
         }
       ]
     },
-    {
+{
       "scenario_id": "CD15",
       "type": "cross_retrieval",
       "expected_semantics": {
@@ -632,7 +632,7 @@
         ],
         "projections": [
           "Device",
-          "Equipment"
+          "InstrumentationFunction"
         ],
         "filters": [],
         "boolean_operator": "NONE",
@@ -644,23 +644,23 @@
       "paraphrases": [
         {
           "id": "CD15-P1",
-          "query": "Show ECAD Devices and matching DEXPI Equipment using AssetIdentifier."
+          "query": "Show ECAD Devices and matching DEXPI InstrumentationFunctions using AssetIdentifier."
         },
         {
           "id": "CD15-P2",
-          "query": "Retrieve ECAD Devices paired with DEXPI Equipment through their shared AssetIdentifier."
+          "query": "Retrieve ECAD Devices paired with DEXPI InstrumentationFunctions through their shared AssetIdentifier."
         },
         {
           "id": "CD15-P3",
-          "query": "List device–equipment pairs across ECAD and DEXPI matched on AssetIdentifier."
+          "query": "List device–instrumentation-function pairs across ECAD and DEXPI matched on AssetIdentifier."
         },
         {
           "id": "CD15-P4",
-          "query": "Which DEXPI Equipment corresponds to each ECAD Device via AssetIdentifier? Return both."
+          "query": "Which DEXPI InstrumentationFunctions correspond to each ECAD Device via AssetIdentifier? Return both."
         },
         {
           "id": "CD15-P5",
-          "query": "Give me ECAD Devices alongside their associated DEXPI Equipment, linked by AssetIdentifier."
+          "query": "Give me ECAD Devices alongside their associated DEXPI InstrumentationFunctions, linked by AssetIdentifier."
         }
       ]
     },
