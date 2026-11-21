@@ -24,7 +24,19 @@ def main(argv=None):
                     default=ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json")
     ap.add_argument("--mappings", type=Path,
                     default=ROOT / "semantic/ontology2/dtwise/cross-domain-mappings.json")
+    ap.add_argument("--generate-sparql", action="store_true",
+                    help="Compile saved single-domain plans into SPARQL")
+    ap.add_argument("--execute-graphdb", action="store_true",
+                    help="Execute compiled SELECT queries (implies --generate-sparql)")
+    ap.add_argument("--graphdb-endpoint", default="http://localhost:7200/repositories/AAST")
+    ap.add_argument("--graphdb-timeout", type=float, default=60)
+    ap.add_argument("--graph-mapping", type=Path,
+                    help="Optional domain-to-named-graph JSON mapping")
     args = ap.parse_args(argv)
+    if args.graphdb_timeout <= 0:
+        ap.error("--graphdb-timeout must be positive")
+    if args.graph_mapping and not args.execute_graphdb:
+        ap.error("--graph-mapping requires --execute-graphdb")
     manifest = json.loads(args.benchmark.read_text(encoding="utf-8"))
     scenarios = manifest["scenarios"]
     ids = [v["id"] for s in scenarios for v in s["paraphrases"]]
@@ -61,14 +73,78 @@ def main(argv=None):
                           "file": str(output)}
     passed = sum(x["pass"] for x in outputs.values())
     total = sum(x["total"] for x in outputs.values())
+    # Reuse existing compilation and read-only GraphDB execution tools.
+    # Cross-domain SPARQL compilation is not supported by this pipeline.
+    sparql_summary = {"scope": "single_domain", "eligible": 70,
+                      "cross_domain": "not_supported"}
+    if args.generate_sparql or args.execute_graphdb:
+        compiled_path = args.output_dir / "single_domain_sparql_results.json"
+        cmd = [sys.executable, "-m",
+               "benchmarks.shacl_phase1.run_single_domain_sparql",
+               "--benchmark", str(args.benchmark), "--schema", str(args.schema),
+               "--phase1-results", str(args.output_dir / "single_domain.json"),
+               "--all-single-domain", "--output", str(compiled_path)]
+        stage_started = time.perf_counter()
+        compilation = subprocess.run(cmd, cwd=ROOT, check=False)
+        sparql_summary["compilation_seconds"] = round(time.perf_counter() - stage_started, 3)
+        sparql_summary["compilation_exit_code"] = compilation.returncode
+        if compiled_path.is_file():
+            compiled = json.loads(compiled_path.read_text(encoding="utf-8"))
+            counts = {}
+            for item in compiled:
+                status = item.get("status", "unknown")
+                counts[status] = counts.get(status, 0) + 1
+            sparql_summary["compilation_status_counts"] = counts
+            sparql_summary["generated_queries"] = sum(
+                item.get("status") == "compiled" and bool(item.get("sparql"))
+                for item in compiled)
+            sparql_summary["compilation_total"] = len(compiled)
+        else:
+            sparql_summary["compilation_error"] = "Compilation output missing"
+        if args.execute_graphdb and compiled_path.is_file():
+            execution_path = args.output_dir / "single_domain_sparql_execution.json"
+            cmd = [sys.executable, "-m",
+                   "benchmarks.shacl_phase1.execute_single_domain_sparql",
+                   "--input", str(compiled_path), "--output", str(execution_path),
+                   "--endpoint", args.graphdb_endpoint,
+                   "--timeout", str(args.graphdb_timeout)]
+            if args.graph_mapping:
+                cmd += ["--graph-mapping", str(args.graph_mapping)]
+            stage_started = time.perf_counter()
+            execution = subprocess.run(cmd, cwd=ROOT, check=False)
+            sparql_summary["execution_seconds"] = round(time.perf_counter() - stage_started, 3)
+            sparql_summary["execution_exit_code"] = execution.returncode
+            if execution_path.is_file():
+                executed = json.loads(execution_path.read_text(encoding="utf-8"))
+                counts = {}
+                for item in executed:
+                    status = item.get("status", "unknown")
+                    counts[status] = counts.get(status, 0) + 1
+                sparql_summary["execution_status_counts"] = counts
+                sparql_summary["executed_queries"] = sum(
+                    item.get("status") in ("executed_with_results", "executed_zero_rows")
+                    for item in executed)
+                sparql_summary["total_result_rows"] = sum(
+                    item.get("row_count") or 0 for item in executed)
+                sparql_summary["execution_total"] = len(executed)
+                sparql_summary["semantic_correctness"] = "not_checked"
+            else:
+                sparql_summary["execution_error"] = "Execution output missing"
     summary = {"benchmark": str(args.benchmark), "pass": passed, "total": total,
                "seconds": round(time.perf_counter() - started, 2), "suites": outputs}
+    if args.generate_sparql or args.execute_graphdb:
+        summary["sparql"] = sparql_summary
     summary_path = args.output_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(f"\\nTOTAL {passed}/{total} PASS | {summary['seconds']:.2f}s", flush=True)
     print(f"Summary: {summary_path}", flush=True)
-    return 0 if total == 100 and passed == 100 and all(
-        x["exit_code"] == 0 for x in outputs.values()) else 1
+    planner_ok = total == 100 and passed == 100 and all(
+        x["exit_code"] == 0 for x in outputs.values())
+    sparql_ok = (not (args.generate_sparql or args.execute_graphdb) or
+                 (sparql_summary.get("compilation_exit_code") == 0 and
+                  (not args.execute_graphdb or
+                   sparql_summary.get("execution_exit_code") == 0)))
+    return 0 if planner_ok and sparql_ok else 1
 
 
 if __name__ == "__main__":
