@@ -363,7 +363,7 @@ onMounted(hLoadRuns)
      </select>
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
-     <button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? 'Running Phase 1 SHACL…' : 'Run selected SHACL benchmark'}}</button>
+     <button class="primary shacl-run-button" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? '✨ Thinking…' : '✨ Ask DTwise'}}</button>
      <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. </p>
      <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
      <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
