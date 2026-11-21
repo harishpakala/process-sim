@@ -106,3 +106,50 @@ def test_property_projection():
     query = compile_single_domain(record, index, schema)
     assert "SELECT ?v_P1 WHERE" in query
     assert "<" + PRED + ">" in query
+
+
+def test_nested_or_uses_union_and_keeps_sibling_paths_distinct():
+    record, index, schema = fixture()
+    left = "https://example.org/shape/Left"
+    right = "https://example.org/shape/Right"
+    edge_left = {"from": ROOT, "to": left,
+                 "predicate": "https://example.org/hasLeft",
+                 "property_shape": "https://example.org/ps/left"}
+    edge_right = {"from": ROOT, "to": right,
+                  "predicate": "https://example.org/hasRight",
+                  "property_shape": "https://example.org/ps/right"}
+    index.shapes.update({left: {}, right: {}})
+    index.edges.extend([edge_left, edge_right])
+    index.properties[left] = [{"owner": left, "predicate": PRED,
+                               "property_shape": PSHAPE}]
+    index.properties[right] = [{"owner": right, "predicate": PRED,
+                                "property_shape": PSHAPE}]
+    for cid, node, edge in [("P2", left, edge_left), ("P3", right, edge_right)]:
+        record["candidate_paths"].append({"id": cid, "kind": "property"})
+        record["candidate_registry"][cid] = {
+            "domain": "ecad", "kind": "property",
+            "node_uris": [ROOT, node], "edges": [edge],
+            "property": {"owner": node, "predicate": PRED,
+                         "property_shape": PSHAPE}}
+    record["answer"]["filters"] = [
+        {"property_id": "P2", "operator": "=", "value": "A"},
+        {"property_id": "P3", "operator": "=", "value": "B"}]
+    record["answer"]["boolean_operator"] = "OR"
+    query = compile_single_domain(record, index, schema)
+    assert " UNION " in query
+    assert "<https://example.org/hasLeft>" in query
+    assert "<https://example.org/hasRight>" in query
+    assert "?n1" in query and "?n2" in query
+    assert 'FILTER ((?v_P2 = "A"))' in query
+    assert 'FILTER ((?v_P3 = "B"))' in query
+
+
+def test_or_same_property_with_two_values():
+    record, index, schema = fixture()
+    record["answer"]["filters"] = [
+        {"property_id": "P1", "operator": "=", "value": "EQ_101"},
+        {"property_id": "P1", "operator": "=", "value": "EQ_102"}]
+    record["answer"]["boolean_operator"] = "OR"
+    query = compile_single_domain(record, index, schema)
+    assert " UNION " in query
+    assert '"EQ_101"' in query and '"EQ_102"' in query
