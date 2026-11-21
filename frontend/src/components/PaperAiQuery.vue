@@ -411,12 +411,12 @@ onMounted(hLoadRuns)
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
     <p class="subdued">Results come from the LLM-driven Unified IR pipeline. Invalid plans are rejected; no automatic fallback.</p>
-   </div>
    <button class="primary" type="button" :disabled="busy || question.trim().length < 5" @click="ask">
     {{busy ? 'Executing query…' : 'Ask DTwise'}}
    </button>
    <p v-if="error" role="alert" style="color:#b45309">{{error}}</p>
     -->
+   </div>
   </section>
   <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
