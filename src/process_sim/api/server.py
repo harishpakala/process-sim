@@ -453,6 +453,24 @@ class Handler(BaseHTTPRequestHandler):
                 logging.exception("VTKG query failed")
                 self.send_json(503, {"error": "VTKG query failed; check backend logs"})
             return
+        if urlsplit(self.path).path == "/api/ai/shacl/benchmark/execute":
+            try:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 1024:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or set(payload) != {"id"}:
+                    raise ValueError("Expected only a benchmark question ID")
+                from process_sim.api.shacl_benchmark_query import run_benchmark_question
+                self.send_json(200, run_benchmark_question(payload["id"]))
+            except (ValueError, TypeError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("SHACL benchmark execution failed")
+                self.send_json(503, {"error": "SHACL benchmark execution unavailable; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/dtwise/answer":
             from process_sim.api.dtwise_query import (
                 DtwiseUnavailable, run_question,
