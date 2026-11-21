@@ -111,7 +111,7 @@ def evaluate(record, expected):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--suite", choices=["baseline", "robustness"], default="baseline")
+    ap.add_argument("--suite", choices=["baseline", "robustness", "verified-cd20"], default="baseline")
     ap.add_argument("--benchmark", type=Path, help="Override suite manifest path")
     ap.add_argument("--schema", type=Path,
                     default=ROOT / "semantic/ontology2/dtwise/dtwise-schema-index.json")
