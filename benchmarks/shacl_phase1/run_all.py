@@ -62,6 +62,13 @@ def main(argv=None):
         ]
         if label == "cross_domain":
             cmd += ["--mappings", str(args.mappings)]
+        elif args.execute_graphdb:
+            cmd += ["--execute-graphdb", "--graphdb-endpoint", args.graphdb_endpoint,
+                    "--graphdb-timeout", str(args.graphdb_timeout),
+                    "--sparql-output", str(args.output_dir / "single_domain_sparql_results.json"),
+                    "--execution-output", str(args.output_dir / "single_domain_sparql_execution.json")]
+            if args.graph_mapping:
+                cmd += ["--graph-mapping", str(args.graph_mapping)]
         print(f"\\n=== {label} ===", flush=True)
         completed = subprocess.run(cmd, cwd=ROOT, check=False)
         if not output.is_file():
@@ -77,7 +84,7 @@ def main(argv=None):
     # Cross-domain SPARQL compilation is not supported by this pipeline.
     sparql_summary = {"scope": "single_domain", "eligible": 70,
                       "cross_domain": "not_supported"}
-    if args.generate_sparql or args.execute_graphdb:
+    if args.generate_sparql and not args.execute_graphdb:
         compiled_path = args.output_dir / "single_domain_sparql_results.json"
         cmd = [sys.executable, "-m",
                "benchmarks.shacl_phase1.run_single_domain_sparql",
@@ -130,11 +137,39 @@ def main(argv=None):
                 sparql_summary["semantic_correctness"] = "not_checked"
             else:
                 sparql_summary["execution_error"] = "Execution output missing"
+    if args.execute_graphdb:
+        compiled_path = args.output_dir / "single_domain_sparql_results.json"
+        execution_path = args.output_dir / "single_domain_sparql_execution.json"
+        if compiled_path.is_file() and execution_path.is_file():
+            compiled = json.loads(compiled_path.read_text(encoding="utf-8"))
+            executed = json.loads(execution_path.read_text(encoding="utf-8"))
+            compilation_counts = {}
+            execution_counts = {}
+            for item in compiled:
+                status = item.get("status", "unknown")
+                compilation_counts[status] = compilation_counts.get(status, 0) + 1
+            for item in executed:
+                status = item.get("status", "unknown")
+                execution_counts[status] = execution_counts.get(status, 0) + 1
+            sparql_summary.update({
+                "compilation_status_counts": compilation_counts,
+                "compilation_total": len(compiled),
+                "generated_queries": sum(bool(x.get("sparql")) and x.get("status") == "compiled" for x in compiled),
+                "execution_status_counts": execution_counts,
+                "execution_total": len(executed),
+                "executed_queries": sum(x.get("status") in ("executed_with_results", "executed_zero_rows") for x in executed),
+                "total_result_rows": sum(x.get("row_count") or 0 for x in executed),
+                "semantic_correctness": "not_checked",
+                "compilation_exit_code": 0 if len(compiled) == 70 and all(x.get("status") == "compiled" for x in compiled) else 1,
+                "execution_exit_code": 0 if len(executed) == 70 and all(x.get("status") in ("executed_with_results", "executed_zero_rows") for x in executed) else 1,
+            })
+        else:
+            sparql_summary["error"] = "Missing live compilation or execution output"
     summary = {"benchmark": str(args.benchmark), "pass": passed, "total": total,
                "seconds": round(time.perf_counter() - started, 2), "suites": outputs}
     if args.generate_sparql or args.execute_graphdb:
         summary["sparql"] = sparql_summary
-    if args.execute_graphdb and "execution_status_counts" in sparql_summary:
+    if False and args.execute_graphdb and "execution_status_counts" in sparql_summary:
         planner_rows = {}
         for label in ("single_domain", "cross_domain"):
             path = args.output_dir / (label + ".json")
