@@ -14,7 +14,7 @@ MAPPINGS = ROOT / "semantic/ontology2/dtwise/cross-domain-mappings.json"
 GRAPHS = ROOT / "benchmarks/shacl_phase1/aast_instance_graphs.json"
 
 
-def run_benchmark_question(variant_id: str) -> dict:
+def run_benchmark_question(variant_id: str, question: str | None = None) -> dict:
     if not isinstance(variant_id, str) or len(variant_id) > 32:
         raise ValueError("Invalid benchmark question ID")
     scenarios = json.loads(MANIFEST.read_text(encoding="utf-8"))["scenarios"]
@@ -23,9 +23,14 @@ def run_benchmark_question(variant_id: str) -> dict:
     if match is None:
         raise ValueError("Unknown SHACL benchmark question ID")
     scenario, variant = match
+    if question is None:
+        question = variant["query"]
+    if not isinstance(question, str) or not 5 <= len(question.strip()) <= 1000:
+        raise ValueError("Question must contain 5 to 1000 characters")
+    question = question.strip()
     sid = scenario["scenario_id"]
     domains = scenario["expected_semantics"]["domains"]
-    base = {"id": variant_id, "scenario_id": sid, "question": variant["query"],
+    base = {"id": variant_id, "scenario_id": sid, "question": question,
             "domains": domains, "status": "planning_failed", "sparql": None,
             "row_count": None, "columns": [], "rows": [], "mapping_ids": [],
             "error": None, "plan": None}
@@ -38,13 +43,13 @@ def run_benchmark_question(variant_id: str) -> dict:
         indices = {domain: load_index(SCHEMA, domain=domain) for domain in domains}
         if sid.startswith("SD"):
             from process_sim.dtwise.shacl_planner.standalone_shacl_query_planner import run_one
-            record = run_one(indices[domains[0]], variant["query"], method="expanded",
+            record = run_one(indices[domains[0]], question, method="expanded",
                              model=os.getenv("SHACL_PLANNER_MODEL", "qwen2.5-coder:7b"),
                              endpoint=os.getenv("OLLAMA_ENDPOINT", "http://127.0.0.1:11434"))
         else:
             from process_sim.dtwise.shacl_planner.cross_domain_phase1 import run_cross_domain
             record = run_cross_domain(
-                indices, variant["query"], mapping_file=MAPPINGS, method="expanded",
+                indices, question, mapping_file=MAPPINGS, method="expanded",
                 model=os.getenv("SHACL_PLANNER_MODEL", "qwen2.5-coder:7b"),
                 endpoint=os.getenv("OLLAMA_ENDPOINT", "http://127.0.0.1:11434"))
     except Exception as exc:
