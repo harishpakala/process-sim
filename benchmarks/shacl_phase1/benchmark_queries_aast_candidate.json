@@ -2,8 +2,8 @@
   "benchmark_id": "shacl_phase1_data_grounded_candidate_v1",
   "description": "Copy of the Phase-1 benchmark with ECAD and DEXPI filter identifiers grounded in AAST sample; execution against compiled property paths remains pending.",
   "grounding_note": "ECAD Pressure and PI-1301 were observed together on the same device in AAST GraphDB; the exact compiled class/property paths and expected result sets have NOT yet been verified. DEXPI R-001 and K-001 were observed with dexpi:hasLocalId but are not yet confirmed to belong to the Equipment root class used by compiled queries. This remains a candidate benchmark, not a proven nonzero fixture.",
-  "scenario_count": 23,
-  "query_count": 115,
+  "scenario_count": 25,
+  "query_count": 125,
   "scenarios": [
     {
       "scenario_id": "SD01",
@@ -1026,6 +1026,107 @@
         {
           "id": "CD20-1-P5",
           "query": "Give up to ten DEXPI InstrumentationFunction and ECAD Device pairs sharing AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD17-1",
+      "type": "cross_filter",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null,
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          }
+        ],
+        "boolean_operator": "NONE"
+      },
+      "paraphrases": [
+        {
+          "id": "CD17-1-P1",
+          "query": "Show ECAD Device and matching DEXPI InstrumentationFunction entities by AssetIdentifier where ECAD Device.DeviceType equals Pressure."
+        },
+        {
+          "id": "CD17-1-P2",
+          "query": "Find ECAD Device entities with DeviceType Pressure and their paired DEXPI InstrumentationFunction entities using AssetIdentifier."
+        },
+        {
+          "id": "CD17-1-P3",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction pairs sharing AssetIdentifier, filtering ECAD Device.DeviceType to Pressure."
+        },
+        {
+          "id": "CD17-1-P4",
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities with DeviceType Pressure through AssetIdentifier? Return both."
+        },
+        {
+          "id": "CD17-1-P5",
+          "query": "List ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier where ECAD Device.DeviceType is Pressure. Return both entities."
+        }
+      ]
+    },
+    {
+      "scenario_id": "CD18-1",
+      "type": "cross_and",
+      "expected_semantics": {
+        "domains": [
+          "ecad",
+          "dexpi"
+        ],
+        "projections": [
+          "Device",
+          "InstrumentationFunction"
+        ],
+        "join": true,
+        "mapping_id": "dexpi-ecad-asset-identifier",
+        "order_by": null,
+        "limit": null,
+        "filters": [
+          {
+            "property": "Device.DeviceType",
+            "operator": "=",
+            "value": "Pressure"
+          },
+          {
+            "property": "Device.LocalId",
+            "operator": "=",
+            "value": "PI-1301"
+          }
+        ],
+        "boolean_operator": "AND"
+      },
+      "paraphrases": [
+        {
+          "id": "CD18-1-P1",
+          "query": "Show ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier where ECAD Device.DeviceType is Pressure AND ECAD Device.LocalId is PI-1301."
+        },
+        {
+          "id": "CD18-1-P2",
+          "query": "Find ECAD Device entities with DeviceType Pressure and LocalId PI-1301, paired with DEXPI InstrumentationFunction entities through AssetIdentifier. Return both."
+        },
+        {
+          "id": "CD18-1-P3",
+          "query": "Retrieve ECAD Device and DEXPI InstrumentationFunction entities sharing AssetIdentifier when ECAD Device.DeviceType equals Pressure AND ECAD Device.LocalId equals PI-1301."
+        },
+        {
+          "id": "CD18-1-P4",
+          "query": "Which DEXPI InstrumentationFunction entities match ECAD Device entities where Device.DeviceType = Pressure AND Device.LocalId = PI-1301? Return both via AssetIdentifier."
+        },
+        {
+          "id": "CD18-1-P5",
+          "query": "List ECAD Device and DEXPI InstrumentationFunction pairs matched on AssetIdentifier with ECAD Device.DeviceType Pressure AND ECAD Device.LocalId PI-1301. Return both entities."
         }
       ]
     }
