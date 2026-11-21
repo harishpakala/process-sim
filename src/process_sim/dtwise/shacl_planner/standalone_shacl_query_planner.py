@@ -225,7 +225,7 @@ def _unsupported_intent(question):
     patterns={
       'GROUP BY':r'\b(group(?:ed|ing)?\s+by|per\s+\w+\s+type)\b',
       'HAVING':r'\bhaving\b',
-      'SUM/AVG/MIN/MAX':r'\b(sum|average|avg|minimum|maximum|min|max|total\s+(?:of|value))\b',
+      'SUM/AVG/MIN/MAX':r'\b(sum|average|avg|minimum|maximum|min|total\s+(?:of|value))\b|\bmax\s*\(',
       'DISTINCT':r'\b(distinct|unique)\b',
       'OFFSET':r'\b(offset|skip\s+(?:the\s+)?first|skip\s+\d+)\b',
       'ASK':r'^(?:are there|is there|do any|does any)\b',
@@ -236,26 +236,46 @@ def _unsupported_intent(question):
     return [name for name,pattern in patterns.items() if re.search(pattern,question,re.I)]
 
 
+def _ordering_intent(question):
+    """Detect explicit sorting language without interpreting property values as output."""
+    return bool(re.search(
+        r'\b(?:sort(?:ed|ing)?|order(?:ed|ing)?|arranged|ascending|descending|'
+        r'increasing|decreasing|alphabetically|highest|lowest|smallest|largest)\b'
+        r'|\b(?:from\s+A\s+to\s+Z|from\s+Z\s+to\s+A)\b',
+        question, re.I))
+
+
 def _explicit_sort(question):
-    m=re.search(r'\b(?:order(?:ed)?|sort(?:ed|ing)?)\s+(?:the\s+results\s+)?by\s+(.+)',question,re.I)
-    if m:
-        direction = 'DESC' if re.search(r'\b(desc|descending|highest\s+to\s+lowest)\b',m.group(1),re.I) else 'ASC'
-        return (m.group(1).split()[0], direction)
-    return None
+    """Recognize ordering and direction independently of property vocabulary."""
+    if not _ordering_intent(question):
+        return None
+    descending = bool(re.search(
+        r'\b(?:desc(?:ending)?|decreasing|highest|largest)\b|'
+        r'\bfrom\s+Z\s+to\s+A\b', question, re.I))
+    ascending = bool(re.search(
+        r'\b(?:asc(?:ending)?|increasing|lowest|smallest|alphabetically)\b|'
+        r'\bfrom\s+A\s+to\s+Z\b', question, re.I))
+    if descending and ascending:
+        return None
+    return ('explicit', 'DESC' if descending else 'ASC')
 
 
 def _explicit_limit(question):
-    number_words={'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9,'ten':10}
-    word_match=re.search(r'\bup\s+to\s+('+'|'.join(number_words)+r')\b',question,re.I)
-    if word_match:return number_words[word_match.group(1).lower()]
-    patterns=[r'\bup\s+to\s+(\d+)\b',r'\blimited\s+to\s+(\d+)\b',
-              r'\b(?:limit|return|show|top|first)\s+(\d+)\b',
-              r'\b(?:return|show)\s+(?:the\s+)?first\s+(\d+)\b']
-    for p in patterns:
-        m=re.search(p,question,re.I)
-        if m:return int(m.group(1))
+    number_words={'one':1,'two':2,'three':3,'four':4,'five':5,
+                  'six':6,'seven':7,'eight':8,'nine':9,'ten':10}
+    number=r'(?:\\d+|'+'|'.join(number_words)+r')'
+    patterns=[
+        r'\b(?:up\s+to|at\s+most|maximum|limited\s+to|limit(?:ed)?\s+to)\s+('+number+r')\b',
+        r'\b(?:first|top)\s+('+number+r')\b',
+        r'\b(?:return|show|retrieve|list|give\s+me)\s+(?:the\s+)?('+number+r')\b',
+        r'\b('+number+r')\s+(?:results?|records?|entities|devices|equipment)\b',
+    ]
+    for pattern in patterns:
+        match=re.search(pattern,question,re.I)
+        if match:
+            token=match.group(1).casefold()
+            return int(token) if token.isdigit() else number_words[token]
     return None
-
 
 def analyze_plan(answer, offered, question):
     d={'warnings':[],'errors':[],'derived_join_owner_id':None,
@@ -293,12 +313,12 @@ def analyze_plan(answer, offered, question):
         requested=_explicit_limit(question)
         if requested!=answer['limit']:d['errors'].append('Unrequested or incorrect LIMIT')
     if answer.get('order_by'):
-        if not re.search(r'\b(sort|sorted|order|ordered|ascending|descending|asc|desc)\b',question,re.I):
+        requested_sort=_explicit_sort(question)
+        if requested_sort is None:
             d['errors'].append('Unrequested ORDER BY')
-        else:
-            qdir='DESC' if re.search(r'\b(desc|descending)\b',question,re.I) else 'ASC'
-            if any(o.get('direction')!=qdir for o in answer['order_by'] if isinstance(o,dict)):
-                d['errors'].append('ORDER BY direction disagrees with question')
+        elif any(o.get('direction')!=requested_sort[1] for o in answer['order_by']
+                 if isinstance(o,dict)):
+            d['errors'].append('ORDER BY direction disagrees with question')
     return d
 
 
@@ -544,7 +564,7 @@ def requested_property_value_names(question, property_hits):
     query-specific vocabulary. Filters and mixed entity/property requests are
     left to the model and the remaining validators.
     """
-    if re.search(r'\b(?:where|filter|ordered? by|sort(?:ed)? by|whose)\b', question, re.I):
+    if re.search(r'\b(?:where|filter|ordered? by|sort(?:ed)? by|whose)\b', question, re.I) or _ordering_intent(question):
         return set()
     # Equality/value predicates describe constraints, not output properties.
     # Keep this syntactic: actual property names are always obtained from SHACL.
