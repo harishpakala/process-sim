@@ -42,6 +42,17 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
 ) + """
 For SELECT queries, include every entity the user requests as an output in projection_ids, including paired or corresponding entities. Use existence_ids only for entities needed to establish matching but not requested as outputs. Mapping endpoints never replace requested projections.
+Cross-domain identifier matching is represented ONLY by mapping_ids and
+identifier_path_ids. It is NOT a literal WHERE filter. For a question that
+requests matching entities by a shared identifier but specifies no literal
+comparison, filters MUST be [] and boolean_operator MUST be "NONE".
+Never invent, infer, or insert placeholder values such as <question literal>,
+<identifier value>, or values copied from another entity. A filter is permitted
+only when the question explicitly supplies a literal comparison value.
+Each selected identifier endpoint must be directly owned by an entity explicitly
+requested in the question and included in projection_ids, existence_ids, or
+count_target_id. Do not add endpoints from unrelated entities merely because
+they share a property predicate or are offered as mapping alternatives.
 For selected plans, include every explicitly requested WHERE comparison in filters.
 boolean_operator combines WHERE filters only, not the cross-domain JOIN.
 Use AND when the question combines multiple filter conditions with AND,
