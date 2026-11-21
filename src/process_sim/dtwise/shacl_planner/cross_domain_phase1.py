@@ -292,8 +292,10 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
     domains = tuple(sorted(indices))
     record = {'question': question, 'domains': list(domains),
               'retrieval_method': method, 'model': model, 'qwen_calls': 0}
-    if _unsupported_intent(question) and not dry_run:
+    unsupported_operations = _unsupported_intent(question)
+    if unsupported_operations and not dry_run:
         return {**record, 'status': 'unsupported_phase2',
+                'unsupported_operations': unsupported_operations,
                 'reason': 'Unsupported Phase-2 operation; no Qwen call'}
     exact_shapes, exact_properties = {}, {}
     qualified_domains, candidates, evidence = {}, [], {}
