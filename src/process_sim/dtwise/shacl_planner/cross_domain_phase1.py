@@ -43,7 +43,13 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
 ) + """
 For SELECT queries, include every entity the user requests as an output in projection_ids, including paired or corresponding entities. Use existence_ids only for entities needed to establish matching but not requested as outputs. Mapping endpoints never replace requested projections.
 Cross-domain identifier matching is represented ONLY by mapping_ids and
-identifier_path_ids. It is NOT a literal WHERE filter. For a question that
+identifier_path_ids. It is NOT a literal WHERE filter.
+When matching entities across domains using identifier equality, mapping_ids
+MUST contain the offered approved mapping ID connecting the selected owner-specific
+identifier_path_ids. The presence of the same property name or identifier
+property on both entities NEVER makes a mapping optional or authorizes a join.
+If no approved mapping connects the requested entities and endpoints, return
+unresolved; do not select identifier endpoints without their approved mapping. For a question that
 requests matching entities by a shared identifier but specifies no literal
 comparison, filters MUST be [] and boolean_operator MUST be "NONE".
 Never invent, infer, or insert placeholder values such as <question literal>,
