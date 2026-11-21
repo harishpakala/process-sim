@@ -31,7 +31,7 @@ def test_reports_unrecoverable_old_record():
     prior = {"query": ENTRY["query"], "pass": True,
              "record": {"status": "valid_response", "answer": {}}}
     result = compile_entry(ENTRY, prior, None, {})
-    assert result["status"] == "missing_candidate_registry"
+    assert result["status"] == "registry_recovery_failed"
 
 
 def test_compiles_validated_entity_record():
