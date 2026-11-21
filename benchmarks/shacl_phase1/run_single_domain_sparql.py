@@ -16,7 +16,10 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / "src"))
 
 from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index
-from process_sim.dtwise.shacl_planner.legacy_candidate_recovery import (\n    RecoveryError, recover_registry,\n)\nfrom process_sim.dtwise.shacl_planner.sparql_compiler import (
+from process_sim.dtwise.shacl_planner.legacy_candidate_recovery import (
+    RecoveryError, recover_registry,
+)
+from process_sim.dtwise.shacl_planner.sparql_compiler import (
     CompilationError, compile_single_domain,
 )
 
