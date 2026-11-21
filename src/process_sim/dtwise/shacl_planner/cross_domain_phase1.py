@@ -68,6 +68,16 @@ Use only the offered property candidate whose exact SHACL property label is
 named in the question. Copy the literal value from the question verbatim and
 use the comparison operator requested (use "=" for "is" or "equals").
 A valid cross-domain mapping does not replace or satisfy a WHERE filter.
+For an AssetIdentifier cross-domain match, NEVER put AssetIdentifier in filters
+unless the question separately specifies an explicit literal AssetIdentifier value.
+The phrase "matched on AssetIdentifier" supplies NO literal value; do not use
+"<question literal>", an unrelated LocalId value, or any other placeholder.
+For example, Device.DeviceType = Sensor with an AssetIdentifier join requires
+exactly one WHERE filter on ECAD Device.DeviceType with value Sensor and
+boolean_operator NONE. An additional Equipment.LocalId = EQ_101 condition
+requires exactly two WHERE filters: ECAD Device.DeviceType = Sensor and DEXPI
+Equipment.LocalId = EQ_101, with boolean_operator AND. Do not substitute either
+owner's AssetIdentifier or the other owner's LocalId for those filters.
 For cross-domain COUNT, count_target_id identifies the result entity being counted.
 Put other explicitly requested result entities required to establish the matching
 condition in existence_ids, even when their identifiers are mapping endpoints.
