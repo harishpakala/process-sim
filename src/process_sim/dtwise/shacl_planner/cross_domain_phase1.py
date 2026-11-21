@@ -114,7 +114,8 @@ def _explicit_shacl_comparisons(question, candidates):
                 continue
             if not operator and not re.search(
                 r'\b(?:with|where|whose|having|restrict(?:ed|ing)?|'
-                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*                prefix, re.I,
+                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*$',
+                prefix, re.I,
             ):
                 continue
             if value.casefold() in {
