@@ -224,7 +224,7 @@ def _unsupported_intent(question):
     """Conservative gate for Phase-2 features; Qwen also classifies unsupported intent."""
     patterns={
       'GROUP BY':r'\b(group(?:ed|ing)?\s+by|per\s+\w+\s+type)\b',
-      'HAVING':r'\bhaving\b',
+      'HAVING':r'\bhaving\s+(?:(?:count|sum|avg|min|max)\s*\(|[A-Za-z_]\w*\s*(?:[<>!=]=?|between\b))',
       'SUM/AVG/MIN/MAX':r'\b(sum|average|avg|minimum|min|total\s+(?:of|value))\b|\bmax\s*\(',
       'DISTINCT':r'\b(distinct|unique)\b',
       'OFFSET':r'\b(offset|skip\s+(?:the\s+)?first|skip\s+\d+)\b',
