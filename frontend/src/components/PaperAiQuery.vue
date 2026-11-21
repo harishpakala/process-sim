@@ -119,6 +119,33 @@ type ShaclScenario = {
  }
  paraphrases: Array<{id:string;query:string}>
 }
+type ShaclExecution = {
+ id:string; scenario_id:string; question:string; status:string; sparql:string|null
+ row_count:number|null; columns:string[]; rows:Array<Record<string,string>>
+ mapping_ids:string[]; error:unknown; plan:unknown
+}
+const shaclExecution = ref<ShaclExecution|null>(null)
+const shaclBusy = ref(false)
+const shaclExecutionError = ref('')
+function navigatorClipboardFallback(value:string) {
+ if (typeof navigator !== 'undefined' && navigator.clipboard) void navigator.clipboard.writeText(value)
+}
+async function executeShacl() {
+ if (!shaclVariantId.value || shaclBusy.value) return
+ shaclBusy.value = true
+ shaclExecution.value = null
+ shaclExecutionError.value = ''
+ try {
+  const response = await fetch('/api/ai/shacl/benchmark/execute', {
+   method:'POST', headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({id:shaclVariantId.value})
+  })
+  const data = await response.json()
+  if (!response.ok) throw new Error(data.error || 'SHACL execution unavailable')
+  shaclExecution.value = data as ShaclExecution
+ } catch(e) { shaclExecutionError.value = e instanceof Error ? e.message : String(e) }
+ finally { shaclBusy.value = false }
+}
 const shaclScenarios = ref<ShaclScenario[]>([])
 const shaclError = ref('')
 const shaclScope = ref<'single'|'cross'>('single')
@@ -138,17 +165,20 @@ const shaclIntent = (s: ShaclScenario): string => {
 }
 function chooseShaclScope(scope: 'single'|'cross') {
  shaclScope.value = scope
+ shaclExecution.value = null
  shaclScenarioId.value = ''
  shaclVariantId.value = ''
  result.value = null
 }
 function chooseShaclScenario(id: string) {
  shaclScenarioId.value = id
+ shaclExecution.value = null
  shaclVariantId.value = ''
  result.value = null
 }
 function chooseShaclVariant(id: string) {
  shaclVariantId.value = id
+ shaclExecution.value = null
  const item = shaclSelectedScenario.value?.paraphrases.find(p => p.id === id)
  if (item) question.value = item.query
  result.value = null
@@ -333,7 +363,30 @@ onMounted(hLoadRuns)
      </select>
      <p v-if="shaclSelectedScenario" class="subdued">Domains: {{shaclSelectedScenario.expected_semantics.domains.join(' + ')}} · Projections: {{shaclSelectedScenario.expected_semantics.projections.join(', ')}} · Filters: {{shaclSelectedScenario.expected_semantics.filters.length}}</p>
      <p v-if="shaclError" role="alert">{{shaclError}}</p>
-     <p class="subdued">Selecting a paraphrase fills the editable question below. The existing Ask DTwise button currently uses the Unified IR API, not the Phase 1 benchmark runner; benchmark-equivalent execution is not yet wired.</p>
+     <button class="primary" type="button" :disabled="!shaclVariantId || shaclBusy" @click="executeShacl">{{shaclBusy ? 'Running Phase 1 SHACL…' : 'Run selected SHACL benchmark'}}</button>
+     <p class="subdued">Runs the selected manifest question through the Phase 1 SHACL planner, SPARQL compiler and GraphDB. The separate Ask DTwise button below continues to use Unified IR.</p>
+     <p v-if="shaclExecutionError" role="alert">{{shaclExecutionError}}</p>
+     <section v-if="shaclExecution" class="shacl-output" aria-label="SHACL benchmark results">
+      <h3>SHACL execution · {{shaclExecution.id}}</h3>
+      <p>Status: <strong>{{shaclExecution.status}}</strong> · Rows: {{shaclExecution.row_count === null ? 'Not executed' : shaclExecution.row_count}}</p>
+      <p v-if="shaclExecution.error" role="alert">{{JSON.stringify(shaclExecution.error)}}</p>
+      <p v-if="shaclExecution.mapping_ids.length" class="subdued">Mapping IDs: {{shaclExecution.mapping_ids.join(', ')}}</p>
+      <h3>GraphDB results table</h3>
+      <div v-if="shaclExecution.rows.length" class="table-scroll">
+       <table class="evidence-table"><thead><tr><th>#</th><th v-for="col in shaclExecution.columns" :key="col">{{col}}</th></tr></thead>
+        <tbody><tr v-for="(entry,i) in shaclExecution.rows" :key="i"><td>{{i+1}}</td><td v-for="col in shaclExecution.columns" :key="col" class="mono">{{entry[col] ?? '—'}}</td></tr></tbody>
+       </table>
+      </div>
+      <p v-else-if="shaclExecution.status === 'executed_zero_rows'" class="subdued">Query executed successfully; GraphDB returned zero rows.</p>
+      <p v-else class="subdued">No result rows available.</p>
+      <h3>Generated SPARQL</h3>
+      <div v-if="shaclExecution.sparql">
+       <button type="button" @click="navigatorClipboardFallback(shaclExecution.sparql!)">Copy SPARQL</button>
+       <pre class="shacl-sparql">{{shaclExecution.sparql}}</pre>
+      </div>
+      <p v-else class="subdued">No SPARQL generated.</p>
+      <details><summary>Phase 1 plan</summary><pre class="shacl-sparql">{{JSON.stringify(shaclExecution.plan,null,2)}}</pre></details>
+     </section>
     </div>
     <details class="legacy-benchmark"><summary>Legacy B01–B53 benchmark catalog</summary>
     <label for="benchmark-category">Benchmark category (B01–B53)</label>
@@ -469,4 +522,5 @@ select option,select optgroup{background:#101820;color:#fff}
 select:focus-visible{outline:2px solid #79b8ff;outline-offset:2px}
 select:disabled{opacity:.6;cursor:not-allowed}
 .shacl-catalog{display:grid;gap:10px;padding:15px;border:1px solid #334a62;border-radius:9px}.shacl-catalog h3{margin:0;font-size:15px}.legacy-benchmark{display:grid;gap:10px}.legacy-benchmark[open]{padding:12px;border:1px solid #334a62;border-radius:8px}.legacy-benchmark summary{cursor:pointer;margin-bottom:10px}
+.shacl-output{display:grid;gap:10px;border-top:1px solid #334a62;padding-top:12px}.shacl-sparql{white-space:pre-wrap;overflow-wrap:anywhere;max-height:460px;overflow:auto;font-size:12px}
 </style>
