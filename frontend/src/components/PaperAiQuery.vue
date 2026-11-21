@@ -388,6 +388,7 @@ onMounted(hLoadRuns)
       <details><summary>Phase 1 plan</summary><pre class="shacl-sparql">{{JSON.stringify(shaclExecution.plan,null,2)}}</pre></details>
      </section>
     </div>
+    <!-- Legacy B01–B53 catalog temporarily hidden; restore by removing these comment markers.
     <details class="legacy-benchmark"><summary>Legacy B01–B53 benchmark catalog</summary>
     <label for="benchmark-category">Benchmark category (B01–B53)</label>
     <select id="benchmark-category" :value="category" @change="selectCategory(($event.target as HTMLSelectElement).value)">
@@ -403,6 +404,7 @@ onMounted(hLoadRuns)
     <p class="subdued">B01–B53 are grouped by manifest category; supplemental questions are labeled separately.</p>
     <p v-if="category === benchmarkStages.find(stage => stage.category === 'multi_domain_multi_hop')?.label" class="subdued">DEXPI → AssetInventory → ProductCatalog · SHACL-validated AssetIdentifier and ProductIdentifier joins. Select a query or edit it below.</p>
     </details>
+    -->
     <label for="dtwise-question">Engineering question (editable)</label>
     <textarea id="dtwise-question" v-model="question" maxlength="1000" rows="4"
       placeholder="List OPCUAconnectivity SignalNames." @keydown.ctrl.enter="ask" />
