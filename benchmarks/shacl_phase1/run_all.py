@@ -134,6 +134,30 @@ def main(argv=None):
                "seconds": round(time.perf_counter() - started, 2), "suites": outputs}
     if args.generate_sparql or args.execute_graphdb:
         summary["sparql"] = sparql_summary
+    if args.execute_graphdb and "execution_status_counts" in sparql_summary:
+        planner_rows = {}
+        for label in ("single_domain", "cross_domain"):
+            path = args.output_dir / (label + ".json")
+            for item in json.loads(path.read_text(encoding="utf-8")):
+                planner_rows[item["id"]] = item
+        execution_path = args.output_dir / "single_domain_sparql_execution.json"
+        execution_rows = json.loads(execution_path.read_text(encoding="utf-8"))
+        by_id = {item["id"]: item for item in execution_rows}
+        print("\\n=== Single-domain planner and GraphDB results ===", flush=True)
+        print(f'{"ID":<12} {"RESULT":<8} {"TIME":>9} {"ROWS":>8}  GRAPHDB', flush=True)
+        print("-" * 62, flush=True)
+        for question_id, item in planner_rows.items():
+            if not question_id.startswith("SD"):
+                continue
+            execution = by_id.get(question_id, {})
+            count = execution.get("row_count")
+            rows_text = str(count) if count is not None else "-"
+            status = execution.get("status", "not_executed")
+            print(f'{question_id:<12} {"PASS" if item.get("pass") else "FAIL":<8} '
+                  f'{item.get("seconds", 0):>7.2f}s {rows_text:>8}  {status}',
+                  flush=True)
+        print("ROWS = GraphDB result bindings; '-' = no successful execution.", flush=True)
+        print("Planner PASS does not establish GraphDB semantic correctness.", flush=True)
     summary_path = args.output_dir / "summary.json"
     summary_path.write_text(json.dumps(summary, indent=2), encoding="utf-8")
     print(f"\\nTOTAL {passed}/{total} PASS | {summary['seconds']:.2f}s", flush=True)
