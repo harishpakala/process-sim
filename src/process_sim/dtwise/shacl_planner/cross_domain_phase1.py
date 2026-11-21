@@ -137,6 +137,65 @@ def _explicit_shacl_comparisons(question, candidates):
     return comparisons
 
 
+def _normalize_mapping_owner_participation(answer, candidates, graph, registry,
+                                           exact_shapes, question):
+    """Add explicitly named, approved join owners as existence participants.
+
+    This does not infer projections, and does not repair invalid mappings.
+    """
+    if answer.get('status') != 'selected':
+        return answer
+    mids = answer.get('mapping_ids')
+    pids = answer.get('identifier_path_ids')
+    if not isinstance(mids, list) or not isinstance(pids, list):
+        return answer
+    try:
+        selected = validate_mapping_graph_selection(mids, pids, graph, registry)
+    except Exception:
+        return answer
+    if not selected:
+        return answer
+    lookup = {c['id']: c for c in candidates}
+    participants = set(answer.get('projection_ids') or []) | set(
+        answer.get('existence_ids') or [])
+    if answer.get('count_target_id'):
+        participants.add(answer['count_target_id'])
+    existence = answer.get('existence_ids')
+    if not isinstance(existence, list):
+        return answer
+    endpoints = {p['id']: p for p in graph['identifier_path_candidates']}
+    for pid in pids:
+        endpoint = endpoints.get(pid)
+        if endpoint is None:
+            continue
+        domain, owner_uri = endpoint['domain'], endpoint['owner_shape_uri']
+        if owner_uri not in exact_shapes.get(domain, set()):
+            continue
+        owner_candidates = [
+            c for c in candidates
+            if c.get('kind') == 'result' and c.get('domain') == domain
+            and (c.get('node_uris') or [None])[-1] == owner_uri
+        ]
+        if len(owner_candidates) != 1:
+            continue
+        owner = owner_candidates[0]
+        label = owner.get('path', '').split(' → ')[-1].strip()
+        if not label or not re.search(
+            r'(?<!\\w)' + re.escape(label) + r's?(?!\\w)', question, re.I
+        ):
+            continue
+        already_present = any(
+            lookup.get(cid, {}).get('kind') == 'result'
+            and lookup[cid].get('domain') == domain
+            and (lookup[cid].get('node_uris') or [None])[-1] == owner_uri
+            for cid in participants
+        )
+        if not already_present:
+            existence.append(owner['id'])
+            participants.add(owner['id'])
+    return answer
+
+
 def _cross_validate(answer, candidates, graph, registry, domains, question,
                     exact_shapes, exact_properties):
     errors = []
@@ -502,6 +561,8 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
         # endpoints, never by the single-domain join_owner_id field.
         if answer.get('status') == 'selected':
             answer['join_owner_id'] = None
+        answer = _normalize_mapping_owner_participation(
+            answer, candidates, graph, registry, exact_shapes, question)
         errors, selected = _cross_validate(
             answer, candidates, graph, registry, domains, question,
             exact_shapes, exact_properties)
