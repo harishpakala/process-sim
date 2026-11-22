@@ -81,6 +81,53 @@ def reason(graph, *, domain, engineering_function, run_id, expected_count):
            "sharedSignal": signal.get("signalId"), "engineeringFunctions": associated_functions,
            "domainsPresent": sorted(domains),
            "interpretation": "Shared operational signal identifier; physical sensor identity NOT_VERIFIED"}
-    return {"R01": r01, "R02": r02, "R03": r03,
-            "R04": {"status": "not_implemented", "reason": "No recorded command temporal evidence"},
-            "R05": {"status": "not_implemented", "reason": "Combined cross-domain temporal operator not implemented"}}
+    # Only commands explicitly connected to this run are eligible. A recorded
+    # command is an event marker, never proof that a fault physically occurred.
+    command_ids = outgoing[(run["id"], "hasRecordedCommand")]
+    commands = []
+    for command_id in command_ids:
+        command = nodes[command_id]
+        if command["type"] != "RecordedFaultCommand":
+            raise ValueError("Run command edge does not reference a recorded command")
+        t = command.get("simulationTimeHours")
+        if not isinstance(t, (int, float)) or isinstance(t, bool) or not __import__("math").isfinite(t):
+            raise ValueError("Recorded command has invalid simulation time")
+        commands.append(command)
+    commands.sort(key=lambda n: (n["simulationTimeHours"], str(n.get("eventId", ""))))
+    if not commands:
+        r04 = {"status": "insufficient_evidence",
+               "reason": "No run-linked RecordedFaultCommand nodes in this historian snapshot",
+               "events": [], "interpretation": "No temporal comparison or fault causation inferred"}
+    else:
+        events = []
+        for command in commands:
+            t = command["simulationTimeHours"]
+            before = [n for n in observations if n.get("simulationTimeHours") is not None
+                      and n["simulationTimeHours"] < t]
+            after = [n for n in observations if n.get("simulationTimeHours") is not None
+                     and n["simulationTimeHours"] > t]
+            at = [n for n in observations if n.get("simulationTimeHours") == t]
+            events.append({
+                "eventId": command.get("eventId"), "action": command.get("action"),
+                "simulationTimeHours": t, "observedAt": command.get("observedAt"),
+                "commandNodeId": command["id"],
+                "path": {"source": run["id"], "predicate": "hasRecordedCommand", "target": command["id"]},
+                "beforeCount": len(before), "atCount": len(at), "afterCount": len(after),
+                "beforeObservationIds": [n["id"] for n in before],
+                "afterObservationIds": [n["id"] for n in after],
+                "beforeMean": sum(n["value"] for n in before) / len(before) if before else None,
+                "afterMean": sum(n["value"] for n in after) / len(after) if after else None,
+            })
+        comparable = any(e["beforeCount"] and e["afterCount"] for e in events)
+        r04 = {"status": "complete" if comparable else "insufficient_evidence",
+               "reason": "Recorded event markers lack observations on both sides" if not comparable else "",
+               "events": events,
+               "interpretation": "Descriptive before/after association only; no causal attribution or verified physical fault state"}
+    if r03["status"] == "complete" and r04["status"] == "complete":
+        r05 = {"status": "complete", "sharedSignal": signal.get("signalId"),
+               "engineeringFunctions": associated_functions, "temporalEvents": r04["events"],
+               "interpretation": "Cross-domain shared-signal association with recorded-command temporal comparison; not proof of causation"}
+    else:
+        r05 = {"status": "insufficient_evidence",
+               "reason": "Requires both DEXPI and ECAD mappings plus a run-linked command with before/after observations"}
+    return {"R01": r01, "R02": r02, "R03": r03, "R04": r04, "R05": r05}
