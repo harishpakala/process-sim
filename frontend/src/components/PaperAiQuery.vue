@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import VtkgReasoning from './VtkgReasoning.vue'
+const historianMode = ref<'retrieval'|'reasoning'>('retrieval')
 
 withDefaults(defineProps<{ page?: 'engineering' | 'historian' }>(), {page: 'engineering'})
 
@@ -421,7 +423,12 @@ onMounted(hLoadRuns)
   </section>
   <section v-if="page === 'historian'" class="panel">
    <div class="panel-title"><div><h2>Semantic Historian Query</h2><p>DEXPI / ECAD → OPCUAConnectivity · GraphDB semantic join + TimescaleDB historian · read-only</p></div></div>
-   <form class="custom-query" @submit.prevent="hAsk">
+   <div class="mode-switch" role="group" aria-label="Historian query mode">
+    <button type="button" :class="historianMode === 'retrieval' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'retrieval'" @click="historianMode='retrieval'">Historian Retrieval</button>
+    <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'" @click="historianMode='reasoning'">VTKG Reasoning (prototype)</button>
+   </div>
+   <VtkgReasoning v-if="historianMode === 'reasoning'" />
+   <form v-show="historianMode === 'retrieval'" class="custom-query" @submit.prevent="hAsk">
     <label for="h-run">Simulation run (required for historian queries)</label>
     <select id="h-run" v-model="hRun" required @change="hLoadFunctions"><option value="">Select run</option><option v-for="run in hRuns" :key="run" :value="run">{{run}}</option></select>
     <button type="button" @click="hLoadRuns">Refresh runs</button>
@@ -439,7 +446,7 @@ onMounted(hLoadRuns)
     <button class="primary" type="submit"  :disabled="hBusy || !hFunction || !hRun">{{hBusy ? 'Executing…' : 'Query historian'}}</button>
     <p v-if="hError" role="alert">{{hError}}</p>
    </form>
-   <div v-if="hResult" class="result-section">
+   <div v-if="hResult && historianMode === 'retrieval'" class="result-section">
     <div v-if="hChart" class="vtkg-chart">
      <div class="vtkg-chart-scroll">
       <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + hResult.engineeringFunction">
