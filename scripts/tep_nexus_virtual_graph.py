@@ -126,6 +126,46 @@ def project(query):
     }
 
 
+def enrich_semantic(graph, initial_mapping, mappings):
+    """Merge validated signal mappings without modifying observation evidence."""
+    from copy import deepcopy
+    result = deepcopy(graph)
+    nodes = {n["id"]: n for n in result["nodes"]}
+    edges = result["edges"]
+    signal = initial_mapping["operational_signal"]
+    signal_id = _uri("signal", signal)
+    initial_key = (initial_mapping["domain"], initial_mapping["engineering_function"])
+    matches = [m for m in mappings if (m["domain"], m["engineering_function"]) == initial_key]
+    if len(matches) != 1 or matches[0]["asset_identifier"] != initial_mapping["asset_identifier"]:
+        raise ValueError("Initial mapping changed during semantic enrichment")
+    def add_node(n):
+        if n["id"] in nodes and nodes[n["id"]] != n:
+            raise ValueError("Conflicting enriched node")
+        nodes[n["id"]] = n
+    def add_edge(source, predicate, target):
+        if source not in nodes or target not in nodes:
+            raise ValueError("Dangling enriched edge")
+        edge = dict(source=source, predicate=predicate, target=target)
+        if edge not in edges:
+            edges.append(edge)
+    for m in mappings:
+        if m["operational_signal"] != signal:
+            raise ValueError("Enrichment signal mismatch")
+        f = _uri("function", m["domain"], m["engineering_function"])
+        a = _uri("asset-identifier", m["asset_identifier"])
+        add_node(dict(id=f, type="EngineeringFunction", localId=m["engineering_function"],
+                      domain=m["domain"], source="GraphDB", mappingConfidence="PROVISIONAL"))
+        add_node(dict(id=a, type="AssetIdentifier", identifier=m["asset_identifier"],
+                      source="GraphDB", physicalIdentity="NOT_VERIFIED"))
+        add_edge(f, "mapsToSignal", signal_id)
+        add_edge(f, "hasAssetIdentifier", a)
+    result["nodes"] = list(nodes.values())
+    result["semanticEnrichment"] = "complete"
+    result["capabilities"]["R02"] = result["capabilities"]["R01"] and len(mappings) > 1
+    result["capabilities"]["R03"] = len({m["domain"] for m in mappings}) > 1
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--query", default="reports/tep_nexus_fault_relative_query.json")
