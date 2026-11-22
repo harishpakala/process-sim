@@ -225,10 +225,11 @@ const experimentalChart = computed(() => {
     <p class="subdued">{{reasoning!.R03.interpretation}}</p>
     <h3>R04 · Recorded-command temporal comparison</h3>
     <template v-if="reasoning!.R04.events?.length">
-     <p role="status">Recorded command evidence found in this run. Before/after statistics are descriptive, not causal.</p>
+     <p role="status"><strong>R04: temporal calculation {{reasoning!.R04.status === 'complete' ? 'available' : 'insufficient'}}.</strong> A completed calculation does not establish that the command targets {{reasoning!.R01.signal.signalId}} or caused a change.</p>
      <div v-for="event in reasoning!.R04.events" :key="event.eventId">
-      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}} · {{event.status}}</p>
-      <p>Target: {{event.target || 'not recorded'}} · relevance: {{event.relevance}} · fault: {{event.faultId || 'not recorded'}} ({{event.faultType || 'unknown'}}) · source: {{event.eventSource || 'not recorded'}}</p>
+      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}} · temporal calculation: {{event.status}}</p>
+      <p class="command-relevance" :class="event.relevance === 'target_verified' ? 'command-relevance-matched' : 'command-relevance-unverified'" role="status"><strong>{{event.relevance === 'target_verified' ? 'Exact target match' : event.relevance === 'target_missing' ? 'Target not recorded — relevance unknown' : 'Target mismatch — signal relevance not established'}}</strong> · Command target: {{event.target || 'not recorded'}} · Selected signal: {{reasoning!.R01.signal.signalId}}</p>
+      <p>Fault: {{event.faultId || 'not recorded'}} ({{event.faultType || 'unknown'}}) · Source: {{event.eventSource || 'not recorded'}}</p>
       <p>Windows: {{event.windowBeforeSeconds.join('–')}} s before; {{event.windowAfterSeconds.join('–')}} s after ({{event.windowSeconds}} seconds per side).</p>
       <p>Before: {{event.beforeCount}} observations, mean {{event.beforeMean ?? 'unavailable'}} · At event: {{event.atCount}} · After: {{event.afterCount}} observations, mean {{event.afterMean ?? 'unavailable'}}</p>
       <details><summary>Show event provenance and selected observation IDs</summary><pre>{{JSON.stringify({commandEdge:event.path,beforeObservationIds:event.beforeObservationIds,afterObservationIds:event.afterObservationIds},null,2)}}</pre></details>
@@ -243,7 +244,7 @@ const experimentalChart = computed(() => {
      <p>Qualified recorded events: {{reasoning!.R05.temporalEvents?.length}} · Target verification: {{reasoning!.R05.targetVerification}}</p>
      <p class="subdued">{{reasoning!.R05.interpretation}}</p>
     </template>
-    <p v-else>Insufficient evidence: {{reasoning!.R05.reason}}</p>
+    <p v-else role="status"><strong>R05 not established.</strong> {{reasoning!.R05.reason}} R04 may still report a valid descriptive comparison for an unrelated command.</p>
    </template>
    <p v-else role="alert">Structured R01 reasoning is unavailable for this snapshot. Inspect the graph or backend log; a node count alone is not a reasoning result.</p>
    <details><summary>Inspect full query-scoped graph JSON</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
@@ -347,4 +348,7 @@ const experimentalChart = computed(() => {
 .evidence-table th,.evidence-table td { padding:9px; border-bottom:1px solid #334a62; text-align:left; white-space:nowrap; }
 .evidence-table code { font-size:11px; }
 .evidence-pagination { display:flex; align-items:center; gap:12px; margin:12px 0; }
+.command-relevance { padding: 10px 12px; border: 1px solid; border-radius: 6px; }
+.command-relevance-matched { border-color: #408a73; background: rgba(64,138,115,.10); }
+.command-relevance-unverified { border-color: #b88a42; background: rgba(184,138,66,.12); }
 </style>
