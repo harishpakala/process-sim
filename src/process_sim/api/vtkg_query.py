@@ -298,6 +298,19 @@ def run_historian_question(payload, *, environ=None):
             except Exception:
                 logging.exception("VTKG semantic enrichment failed")
                 graph["semanticEnrichment"] = "unavailable"
+            from tep_nexus_reasoning import reason
+            try:
+                graph["reasoning"] = reason(
+                    graph, domain=domain, engineering_function=result["engineeringFunction"],
+                    run_id=result["runId"], expected_count=result["observationCount"])
+                graph["capabilities"] = {
+                    key: graph["reasoning"][key]["status"] == "complete"
+                    for key in ("R01", "R02", "R03", "R04", "R05")
+                }
+            except Exception:
+                logging.exception("VTKG reasoning operator failed")
+                graph["reasoningStatus"] = "unavailable"
+                graph["capabilities"] = {key: False for key in ("R01", "R02", "R03", "R04", "R05")}
             result["vtkg"] = graph
             result["vtkgStatus"] = "constructed"
         except Exception:
