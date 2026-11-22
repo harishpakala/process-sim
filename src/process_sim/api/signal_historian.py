@@ -15,17 +15,49 @@ def _dsn(environ=None):
     return dsn
 
 
-def discover_signals(run_id, *, environ=None, connection_factory=psycopg.connect):
-    run = str(UUID(str(run_id)))
+MEASUREMENT_TYPES = ("Temperature", "Pressure", "Level", "Energy", "Unclassified")
+
+
+def discover_measurement_types(*, environ=None, connection_factory=psycopg.connect):
+    """Available classifications from signal metadata, including the unknown bucket."""
     with connection_factory(_dsn(environ)) as conn:
         with conn.transaction():
             conn.execute("SET TRANSACTION READ ONLY")
             with conn.cursor() as cur:
-                cur.execute("""SELECT signal_id, COUNT(*) FROM public.signal_samples
-                    WHERE run_id = %s::uuid GROUP BY signal_id ORDER BY signal_id""", (run,))
+                cur.execute("""SELECT measurement_type, COUNT(*) FROM public.signal_metadata
+                    GROUP BY measurement_type ORDER BY measurement_type""")
+                counts = dict(cur.fetchall())
+    return {"measurement_types": [{"name": name, "signal_count": counts.get(name, 0)}
+                                  for name in MEASUREMENT_TYPES],
+            "source": "TimescaleDB public.signal_metadata"}
+
+
+def discover_signals(run_id, *, measurement_type=None, environ=None, connection_factory=psycopg.connect):
+    run = str(UUID(str(run_id)))
+    if measurement_type is not None and measurement_type not in MEASUREMENT_TYPES:
+        raise ValueError("Unsupported measurement_type")
+    with connection_factory(_dsn(environ)) as conn:
+        with conn.transaction():
+            conn.execute("SET TRANSACTION READ ONLY")
+            with conn.cursor() as cur:
+                cur.execute("""SELECT s.signal_id, COUNT(*),
+                           COALESCE(m.measurement_type, 'Unclassified'), m.unit,
+                           COALESCE(m.classification_source, 'unclassified'),
+                           COALESCE(m.verification_status, 'NOT_VERIFIED')
+                    FROM public.signal_samples s
+                    LEFT JOIN public.signal_metadata m ON m.signal_id = s.signal_id
+                    WHERE s.run_id = %s::uuid
+                      AND (%s::text IS NULL OR COALESCE(m.measurement_type, 'Unclassified') = %s)
+                    GROUP BY s.signal_id, m.measurement_type, m.unit,
+                             m.classification_source, m.verification_status
+                    ORDER BY s.signal_id""", (run, measurement_type, measurement_type))
                 rows = cur.fetchall()
-    return {"run_id": run, "signals": [{"signal_id": signal, "sample_count": count}
-                                     for signal, count in rows], "source": "TimescaleDB signal_samples"}
+    return {"run_id": run, "measurement_type": measurement_type,
+            "signals": [{"signal_id": signal, "sample_count": count,
+                         "measurement_type": kind, "unit": unit,
+                         "classification_source": source, "verification_status": verification}
+                        for signal, count, kind, unit, source, verification in rows],
+            "source": "TimescaleDB signal_samples + signal_metadata"}
 
 
 def retrieve_signal(payload, *, environ=None, connection_factory=psycopg.connect):
