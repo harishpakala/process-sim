@@ -35,12 +35,12 @@ def project(query):
     nodes = {}
     edges = []
 
-    def node(identifier, kind, **attrs):
-        if identifier in nodes:
-            if nodes[identifier] != {"id": identifier, "type": kind, **attrs}:
+    def node(node_id, kind, **attrs):
+        if node_id in nodes:
+            if nodes[node_id] != {"id": node_id, "type": kind, **attrs}:
                 raise ValueError("Conflicting virtual resource identity")
         else:
-            nodes[identifier] = {"id": identifier, "type": kind, **attrs}
+            nodes[node_id] = {"id": node_id, "type": kind, **attrs}
 
     def edge(source, predicate, target):
         if source not in nodes or target not in nodes:
