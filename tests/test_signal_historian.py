@@ -66,7 +66,7 @@ class SignalHistorianTests(unittest.TestCase):
         conn = FakeConnection([("Temperature", 2)])
         result = signal_historian.discover_measurement_types(
             environ=self.env, connection_factory=lambda _: conn)
-        self.assertEqual(len(result["measurement_types"]), 5)
+        self.assertEqual(len(result["measurement_types"]), 6)
         self.assertEqual(result["measurement_types"][-1], {"name": "Unclassified", "signal_count": 0})
 
     def test_signal_values_do_not_require_graphdb(self):
