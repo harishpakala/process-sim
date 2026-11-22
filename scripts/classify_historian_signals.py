@@ -70,6 +70,21 @@ def main():
         if not args.apply:
             return
         with conn.cursor() as cur:
+            # Store every source-backed association, including ambiguous and
+            # unsupported LocalIDs; the evidence table is separate from samples.
+            for item in proposals:
+                for evidence in item["evidence"]:
+                    cur.execute("""INSERT INTO public.signal_engineering_evidence
+                        (signal_id, engineering_domain, local_id, asset_identifier,
+                         mapping_source, inferred_measurement_type, observed_at)
+                        VALUES (%s, %s, %s, %s, %s, %s, now())
+                        ON CONFLICT (signal_id, engineering_domain, local_id, asset_identifier)
+                        DO UPDATE SET mapping_source = EXCLUDED.mapping_source,
+                                      inferred_measurement_type = EXCLUDED.inferred_measurement_type,
+                                      observed_at = now()""",
+                        (item["signal_id"], evidence["domain"], evidence["local_id"],
+                         evidence["asset_identifier"], "GraphDB OPCUAConnectivity asset identifier join",
+                         evidence["candidate_type"]))
             for item in proposals:
                 if item["verification_status"] != "PROVISIONAL":
                     continue
