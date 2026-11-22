@@ -40,7 +40,39 @@ class ReasoningTests(unittest.TestCase):
         self.assertEqual(len(output["R01"]["observations"][0]["path"]), 2)
         self.assertEqual(len(output["R02"]["engineeringFunctions"]), 2)
         self.assertEqual(output["R03"]["status"], "complete")
-        self.assertEqual(output["R04"]["status"], "not_implemented")
+        self.assertEqual(output["R04"]["status"], "insufficient_evidence")
+
+    def test_r04_and_r05_with_recorded_command(self):
+        graph = fixture()
+        graph["nodes"].extend([
+            {"id": "before", "type": "VirtualObservation", "simulationTimeHours": 0.5,
+             "value": 8.0, "observedAt": "2026-11-22T09:30:00+00:00"},
+            {"id": "cmd", "type": "RecordedFaultCommand", "eventId": "event-1",
+             "action": "set", "simulationTimeHours": 0.75,
+             "observedAt": "2026-11-22T09:45:00+00:00"},
+        ])
+        graph["edges"].extend([
+            {"source": "before", "predicate": "observesSignal", "target": "s"},
+            {"source": "before", "predicate": "belongsToRun", "target": "r"},
+            {"source": "r", "predicate": "hasRecordedCommand", "target": "cmd"},
+        ])
+        result = reason(graph, domain="DEXPI", engineering_function="FI_101",
+                        run_id="run-1", expected_count=2)
+        self.assertEqual(result["R04"]["status"], "complete")
+        self.assertEqual(result["R04"]["events"][0]["beforeMean"], 8.0)
+        self.assertEqual(result["R04"]["events"][0]["afterMean"], 12.0)
+        self.assertEqual(result["R05"]["status"], "complete")
+
+    def test_r04_requires_both_sides_of_command(self):
+        graph = fixture()
+        graph["nodes"].append({"id": "cmd", "type": "RecordedFaultCommand",
+                               "eventId": "event-2", "action": "set",
+                               "simulationTimeHours": 2.0})
+        graph["edges"].append({"source": "r", "predicate": "hasRecordedCommand", "target": "cmd"})
+        result = reason(graph, domain="DEXPI", engineering_function="FI_101",
+                        run_id="run-1", expected_count=1)
+        self.assertEqual(result["R04"]["status"], "insufficient_evidence")
+        self.assertEqual(result["R05"]["status"], "insufficient_evidence")
 
     def test_r03_requires_both_domains(self):
         output = reason(fixture(False), domain="DEXPI", engineering_function="FI_101",
