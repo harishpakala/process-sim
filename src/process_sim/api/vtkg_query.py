@@ -310,6 +310,26 @@ def run_historian_question(payload, *, environ=None):
             except Exception:
                 logging.exception("VTKG semantic enrichment failed")
                 graph["semanticEnrichment"] = "unavailable"
+            # Explicit handoff between cross-domain semantic resolution and temporal reasoning.
+            # Inventory/catalog evidence is not invented from identifier equality.
+            asset_id = mapping.get("asset_identifier")
+            associated = [
+                {"domain": n.get("domain"), "localId": n.get("localId"),
+                 "virtualNodeId": n["id"], "mappingConfidence": n.get("mappingConfidence", "PROVISIONAL")}
+                for n in graph["nodes"] if n.get("type") == "EngineeringFunction"
+            ]
+            graph["crossDomainBridge"] = {
+                "status": "partial" if graph.get("semanticEnrichment") == "complete" else "unavailable",
+                "joinKey": {"type": "assetIdentifier", "value": asset_id,
+                            "verification": "SEMANTIC_ASSOCIATION_ONLY"},
+                "operationalSignal": mapping["operational_signal"],
+                "engineeringFunctions": associated,
+                "assetInventory": {"status": "NOT_RESOLVED", "evidence": []},
+                "productCatalog": {"status": "NOT_RESOLVED", "evidence": []},
+                "physicalSensorBinding": "NOT_VERIFIED",
+                "interpretation": "Shared identifier links engineering mappings to historian signal; "
+                                  "asset inventory and product catalog require separate source-backed joins.",
+            }
             from tep_nexus_reasoning import reason
             try:
                 graph["reasoning"] = reason(
