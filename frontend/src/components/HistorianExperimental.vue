@@ -46,7 +46,7 @@ type ReasoningResult = {
  R01:{status:string;function:{id:string;domain:string;localId:string};signal:{id:string;signalId:string};run:{id:string;runId:string};asset:{id:string;type:string;identifier:string};path:Array<{source:string;predicate:string;target:string}>;observationCount:number;observations:ReasoningObservation[];provenance:Record<string,string|boolean>};
  R02:{status:string;signalId:string;observationCount:number;engineeringFunctions:ReasoningFunction[];scope:string};
  R03:{status:string;sharedSignal:string;engineeringFunctions:ReasoningFunction[];domainsPresent:string[];interpretation:string};
- R04:{status:string;reason:string;interpretation?:string;events?:Array<{eventId:string;action:string;simulationTimeHours:number;beforeCount:number;atCount:number;afterCount:number;beforeMean:number|null;afterMean:number|null;path:{source:string;predicate:string;target:string}}>};R05:{status:string;reason?:string;interpretation?:string;sharedSignal?:string;engineeringFunctions?:ReasoningFunction[];temporalEvents?:unknown[]}
+ R04:{status:string;reason:string;interpretation?:string;events?:Array<{eventId:string;action:string;simulationTimeHours:number;beforeCount:number;atCount:number;afterCount:number;beforeMean:number|null;afterMean:number|null;status:string;relevance:string;target?:string;faultId?:string;faultType?:string;eventSource?:string;windowSeconds:number;windowBeforeSeconds:number[];windowAfterSeconds:number[];beforeObservationIds:string[];afterObservationIds:string[];path:{source:string;predicate:string;target:string}}>};R05:{status:string;reason?:string;interpretation?:string;sharedSignal?:string;engineeringFunctions?:ReasoningFunction[];temporalEvents?:unknown[];targetVerification?:string}
 }
 const reasoning = computed(() => (graph.value as (GraphContext & {reasoning?:ReasoningResult}) | null)?.reasoning ?? null)
 const r01 = computed(() => reasoning.value?.R01.status === 'complete' ? reasoning.value.R01 : null)
@@ -224,20 +224,23 @@ const experimentalChart = computed(() => {
     <p v-else>Insufficient cross-domain evidence in this snapshot. Domains found: {{reasoning!.R03.domainsPresent.join(', ') || 'none'}}.</p>
     <p class="subdued">{{reasoning!.R03.interpretation}}</p>
     <h3>R04 · Recorded-command temporal comparison</h3>
-    <template v-if="reasoning!.R04.status==='complete'">
+    <template v-if="reasoning!.R04.events?.length">
      <p role="status">Recorded command evidence found in this run. Before/after statistics are descriptive, not causal.</p>
      <div v-for="event in reasoning!.R04.events" :key="event.eventId">
-      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}}</p>
+      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}} · {{event.status}}</p>
+      <p>Target: {{event.target || 'not recorded'}} · relevance: {{event.relevance}} · fault: {{event.faultId || 'not recorded'}} ({{event.faultType || 'unknown'}}) · source: {{event.eventSource || 'not recorded'}}</p>
+      <p>Windows: {{event.windowBeforeSeconds.join('–')}} s before; {{event.windowAfterSeconds.join('–')}} s after ({{event.windowSeconds}} seconds per side).</p>
       <p>Before: {{event.beforeCount}} observations, mean {{event.beforeMean ?? 'unavailable'}} · At event: {{event.atCount}} · After: {{event.afterCount}} observations, mean {{event.afterMean ?? 'unavailable'}}</p>
-      <details><summary>Show command provenance edge</summary><pre>{{JSON.stringify(event.path,null,2)}}</pre></details>
+      <details><summary>Show event provenance and selected observation IDs</summary><pre>{{JSON.stringify({commandEdge:event.path,beforeObservationIds:event.beforeObservationIds,afterObservationIds:event.afterObservationIds},null,2)}}</pre></details>
      </div>
     </template>
-    <p v-else>Insufficient evidence: {{reasoning!.R04.reason}}</p>
+    <p v-if="reasoning!.R04.status!=='complete'">Insufficient evidence: {{reasoning!.R04.reason}}</p>
     <p class="subdued">{{reasoning!.R04.interpretation}}</p>
     <h3>R05 · Combined cross-domain and temporal association</h3>
     <template v-if="reasoning!.R05.status==='complete'">
-     <p role="status">Cross-domain and recorded-command evidence co-occur for signal {{reasoning!.R05.sharedSignal}}.</p>
+     <p role="status">Cross-domain mappings and exact-target recorded-command evidence are linked for signal {{reasoning!.R05.sharedSignal}}.</p>
      <p>{{reasoning!.R05.engineeringFunctions?.map(fn => fn.domain+' · '+fn.localId).join(' / ')}}</p>
+     <p>Qualified recorded events: {{reasoning!.R05.temporalEvents?.length}} · Target verification: {{reasoning!.R05.targetVerification}}</p>
      <p class="subdued">{{reasoning!.R05.interpretation}}</p>
     </template>
     <p v-else>Insufficient evidence: {{reasoning!.R05.reason}}</p>
