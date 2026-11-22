@@ -61,6 +61,10 @@ const selectedRun = ref('')
 const selectedDomain = ref<'DEXPI' | 'ECAD'>('DEXPI')
 const functions = ref<FunctionOption[]>([])
 const selectedLocalId = ref('')
+const selectedSignal = ref('')
+const knowledgeExpanded = ref(false)
+const signalOptions = computed(() => [...new Set(functions.value.map(item => item.operational_signal).filter(Boolean))].sort())
+const selectedSignalFunctions = computed(() => functions.value.filter(item => item.operational_signal === selectedSignal.value))
 const discoveryBusy = ref(false)
 const discoveryError = ref('')
 const startSeconds = ref('')
@@ -84,6 +88,7 @@ async function loadRuns() {
 
 async function loadFunctions() {
  selectedLocalId.value = ''
+ selectedSignal.value = ''
  functions.value = []
  discoveryError.value = ''
  if (!selectedRun.value) return
@@ -95,6 +100,7 @@ async function loadFunctions() {
   const data = await r.json()
   if (!r.ok) throw new Error(data.error || 'LocalID discovery failed')
   functions.value = data.functions
+  if (signalOptions.value.length === 1) selectedSignal.value = signalOptions.value[0]
  } catch (e) {
   discoveryError.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -129,10 +135,12 @@ function updateGeneratedQuestion() {
  lastGeneratedQuestion = next
 }
 watch([selectedRun, selectedDomain], () => { void loadFunctions() })
+watch(selectedSignal, () => { selectedLocalId.value = selectedSignalFunctions.value[0]?.engineering_function || ''; knowledgeExpanded.value = false })
 watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds, queryStyle], updateGeneratedQuestion)
 onMounted(() => { void loadRuns() })
 watch([selectedRun,selectedDomain,selectedLocalId,startSeconds,endSeconds,question],()=>{
  response.value=null
+ knowledgeExpanded.value=false
 })
 
 
@@ -160,7 +168,7 @@ async function run() {
   })
   const body = await r.json()
   if (!r.ok) throw new Error(body.error || 'Experimental historian query failed')
-  if (question.value===submittedQuestion && submittedContext===JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])) response.value = body as HistorianResponse
+  if (question.value===submittedQuestion && submittedContext===JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])) { response.value = body as HistorianResponse; knowledgeExpanded.value = false }
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -323,11 +331,11 @@ const experimentalChart = computed(() => {
 
 <template>
  <section class="panel">
-  <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
-  <p v-if="!response" class="subdued">One query retrieves historian measurements and, when available, builds the source-linked VTKG reasoning view below.</p>
+  <div class="panel-title"><div><h2>Simulation Historian · Engineering Knowledge Explorer</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
+  <p v-if="!response" class="subdued">Start with a run and SignalName to inspect measurements. Explore the engineering knowledge graph separately when you need cross-domain context.</p>
   <div class="historian-unified-query">
-  <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
-  <p v-if="!response">Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
+  <p v-if="!response">Start with recorded signals and simulation time; the engineering knowledge explorer is a second step.</p>
+  <p v-if="!response">Choose a run and a signal. The current API still resolves the signal through an engineering mapping; a direct TimescaleDB signal endpoint is the next backend step.</p>
   <div class="experiment-fields">
    <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
@@ -335,14 +343,16 @@ const experimentalChart = computed(() => {
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
    </select>
    <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
-   <div class="experiment-field"><label for="historian-experiment-domain">Source (optional)</label>
+   <div class="experiment-field"><label for="historian-experiment-domain">Engineering mapping source (temporary)</label>
    <select id="historian-experiment-domain" v-model="selectedDomain">
     <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
    </select></div>
-   <div class="experiment-field"><label for="historian-experiment-localid">Instrument / LocalID (optional)</label>
+   <div class="experiment-field"><label for="historian-experiment-signal">SignalName</label>
+   <select id="historian-experiment-signal" v-model="selectedSignal" :disabled="!selectedRun || discoveryBusy"><option value="">Select signal</option><option v-for="signal in signalOptions" :key="signal" :value="signal">{{signal}}</option></select></div>
+   <div class="experiment-field"><label for="historian-experiment-localid">Engineering mapping used by current API</label>
    <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
     <option value="">Select LocalID</option>
-    <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
+    <option v-for="item in selectedSignalFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
    </select></div>
    <div class="experiment-field"><label for="historian-experiment-style">How would you like to ask?</label>
    <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
@@ -351,12 +361,12 @@ const experimentalChart = computed(() => {
    <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
    <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
+   <p class="subdued experiment-wide">SignalNames shown here come from the existing GraphDB-backed discovery API, not direct TimescaleDB discovery yet. Leave time fields empty to see the complete available run.</p>
   </div>
-  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
+  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · Signal {{selectedSignal || 'not selected'}} · mapped LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
   <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
   <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
-  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
+  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Retrieving…' : 'Retrieve historian measurements'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
   <template v-if="response">
    <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
@@ -390,13 +400,13 @@ const experimentalChart = computed(() => {
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    </template>
-   <p v-if="graphReady" class="unified-ready" role="status">VTKG constructed · {{graph?.nodes.length}} nodes · {{graph?.edges.length}} edges · engineering graph and reasoning explanations shown below.</p>
+   <div v-if="graphReady" class="explore-knowledge-action"><p class="subdued">Historian data retrieved. Engineering context is available when you want to investigate the selected signal.</p><button type="button" class="primary" :aria-expanded="knowledgeExpanded" @click="knowledgeExpanded=!knowledgeExpanded">{{knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button><span class="subdued">{{graph?.nodes.length}} virtual nodes · {{graph?.edges.length}} edges</span></div>
    <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
    <h3>Query details</h3>
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
   </div>
-  <section v-if="crossDomainBridge" class="reasoning-card cross-domain-bridge" aria-label="Cross-domain reasoning bridge">
+  <section v-if="knowledgeExpanded && crossDomainBridge" class="reasoning-card cross-domain-bridge" aria-label="Cross-domain reasoning bridge">
    <div class="trace-heading"><div><h3>Cross-domain → temporal reasoning</h3><p class="subdued">One evidence chain across engineering semantics and recorded behavior.</p></div><span class="pill">{{crossDomainBridge.status === 'partial' ? 'PARTIAL BRIDGE' : 'ENRICHMENT UNAVAILABLE'}}</span></div>
    <div class="bridge-steps">
     <div class="bridge-step"><small>Engineering design</small><strong>{{(crossDomainBridge.engineeringFunctions || []).map(f => (f.domain || 'Engineering') + ' ' + (f.localId || '—')).join(' · ') || 'Not resolved'}}</strong><span>GraphDB semantic associations</span></div>
@@ -409,8 +419,8 @@ const experimentalChart = computed(() => {
    <p class="trace-limitation">The shared identifier supports semantic traceability. It does not verify a physical sensor or a catalog product. Unresolved source joins are shown explicitly.</p>
    <details><summary>Technical bridge evidence</summary><pre>{{JSON.stringify(crossDomainBridge,null,2)}}</pre></details>
   </section>
-  <div v-if="graphReady" class="unified-section-heading"><h3>Engineering graph &amp; reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
-  <div v-if="graphReady && graph" class="reasoning-dashboard">
+  <div v-if="knowledgeExpanded && graphReady" class="unified-section-heading"><h3>Engineering graph &amp; reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
+  <div v-if="knowledgeExpanded && graphReady && graph" class="reasoning-dashboard">
    <div class="reasoning-header">
     <div><h3>Live reasoning overview</h3><p class="subdued">{{r01?.function.domain || 'Engineering'}} · {{r01?.function.localId || '—'}} → {{r01?.signal.signalId || '—'}}</p></div>
     <span class="reasoning-count" role="status">{{completeCount}} / 5 operators complete</span>
@@ -671,4 +681,6 @@ const experimentalChart = computed(() => {
 .bridge-source-status > div { border:1px dashed #63768b; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:6px; }
 .bridge-source-status span { color:#fbbf24; font-size:12px; }
 @media(max-width:760px) { .bridge-steps { flex-direction:column; } .bridge-arrow { transform:rotate(90deg); } .bridge-source-status { grid-template-columns:1fr; } }
+.explore-knowledge-action { margin:18px 0; padding:16px; border:1px solid #4b667c; border-radius:12px; display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.explore-knowledge-action p { flex-basis:100%; margin:0; }
 </style>
