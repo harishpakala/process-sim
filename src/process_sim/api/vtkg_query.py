@@ -182,7 +182,7 @@ SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
         function = row["localId"]["value"].strip()
         if domain == "ECAD":
             import re
-            if not re.fullmatch(r"(?:FI|LI|PI|TI)-[0-9]+", function):
+            if not re.fullmatch(r"(?:FI|JI|LI|PI|TI)-[0-9]+", function):
                 continue
         pair = (row["assetIdentifier"]["value"].strip(), row["signalName"]["value"].strip())
         grouped.setdefault(function, set()).add(pair)
