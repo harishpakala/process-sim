@@ -66,6 +66,10 @@ const selectedLocalId = ref('')
 const selectedSignal = ref('')
 const knowledgeExpanded = ref(false)
 const signalOptions = ref<string[]>([])
+const measurementType = ref('')
+const measurementTypes = ref<Array<{name:string;signal_count:number}>>([])
+const signalDetails = ref<Record<string,{measurement_type:string;unit:string|null;verification_status:string}>>({})
+const selectedSignalDetails = computed(() => signalDetails.value[selectedSignal.value])
 const selectedSignalFunctions = computed(() => functions.value.filter(item => item.operational_signal === selectedSignal.value))
 const discoveryBusy = ref(false)
 const discoveryError = ref('')
@@ -96,10 +100,13 @@ async function loadSignals() {
  if (!run) return
  discoveryBusy.value = true
  try {
-  const r = await fetch('/api/ai/vtkg/historian/signals?run_id=' + encodeURIComponent(run))
+  const r = await fetch('/api/ai/vtkg/historian/signals?run_id=' + encodeURIComponent(run) + (measurementType.value ? '&measurement_type=' + encodeURIComponent(measurementType.value) : ''))
   const data = await r.json()
   if (!r.ok) throw new Error(data.error || 'Signal discovery failed')
-  if (selectedRun.value === run) signalOptions.value = data.signals.map((s:{signal_id:string}) => s.signal_id)
+  if (selectedRun.value === run) {
+   signalOptions.value = data.signals.map((s:{signal_id:string}) => s.signal_id)
+   signalDetails.value = Object.fromEntries(data.signals.map((s:{signal_id:string;measurement_type:string;unit:string|null;verification_status:string}) => [s.signal_id, s]))
+  }
  } catch (e) {
   if (selectedRun.value === run) discoveryError.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -120,9 +127,17 @@ function updateGeneratedQuestion() {
  if (question.value === '' || question.value === lastGeneratedQuestion) question.value = next
  lastGeneratedQuestion = next
 }
-watch(selectedRun, () => { void loadSignals() })
+async function loadMeasurementTypes() {
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/measurement-types')
+  const data = await r.json()
+  if (!r.ok) throw new Error(data.error || 'Measurement type discovery failed')
+  measurementTypes.value = data.measurement_types
+ } catch (e) { discoveryError.value = e instanceof Error ? e.message : String(e) }
+}
+watch([selectedRun,measurementType], () => { void loadSignals() })
 watch([selectedRun, selectedSignal, startSeconds, endSeconds], updateGeneratedQuestion)
-onMounted(() => { void loadRuns() })
+onMounted(() => { void loadRuns(); void loadMeasurementTypes() })
 watch([selectedRun, selectedSignal, startSeconds, endSeconds], () => {
  directResult.value = null
  response.value = null
@@ -324,14 +339,17 @@ const experimentalChart = computed(() => {
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
    </select>
    <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
+   <div class="experiment-field"><label for="historian-measurement-type">Measurement Type</label>
+   <select id="historian-measurement-type" v-model="measurementType"><option value="">All types</option><option v-for="type in measurementTypes" :key="type.name" :value="type.name">{{type.name}} ({{type.signal_count}})</option></select></div>
    <div class="experiment-field"><label for="historian-experiment-signal">SignalName</label>
    <select id="historian-experiment-signal" v-model="selectedSignal" :disabled="!selectedRun || discoveryBusy"><option value="">Select signal</option><option v-for="signal in signalOptions" :key="signal" :value="signal">{{signal}}</option></select></div>
    <div class="experiment-field"><label for="historian-experiment-start">From simulation second (optional)</label>
    <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
    <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
    <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
+   <p v-if="selectedSignalDetails" class="subdued experiment-wide">Classification: {{selectedSignalDetails.measurement_type}} · Unit: {{selectedSignalDetails.unit || 'not verified'}} · Status: {{selectedSignalDetails.verification_status}}</p>
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">SignalNames come directly from TimescaleDB. Leave time fields empty for all available simulation times; retrieval is capped at 5,000 rows.</p>
+   <p class="subdued experiment-wide">SignalNames and measurement classifications come directly from TimescaleDB. Unclassified means no verified type is available. Leave time fields empty for all simulation times; retrieval is capped at 5,000 rows.</p>
   </div>
   <p class="subdued">Run {{selectedRun || 'not selected'}} · Signal {{selectedSignal || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds.</p>
   <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
