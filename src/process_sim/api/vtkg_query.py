@@ -139,19 +139,11 @@ def discover_historian_runs(*, environ=None):
     return {"runs": runs}
 
 
-def discover_historian_functions(run_id, *, domain="DEXPI", environ=None):
-    """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
-    from uuid import UUID
-    import psycopg
+def discover_semantic_mappings(graphdb, domain):
+    """Reuse the existing domain joins independently of historian discovery."""
     import requests
-    env = os.environ if environ is None else environ
-    dsn = env.get("TEP_TIMESCALE_DSN")
-    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
-    if not dsn or not graphdb:
-        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported engineering domain")
-    run = str(UUID(str(run_id)))
     query = """
 PREFIX dexpi: <https://example.org/dexpi/>
 PREFIX opcua: <https://example.org/opcuaconnectivity/>
@@ -194,6 +186,23 @@ SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
                 continue
         pair = (row["assetIdentifier"]["value"].strip(), row["signalName"]["value"].strip())
         grouped.setdefault(function, set()).add(pair)
+    return grouped
+
+
+def discover_historian_functions(run_id, *, domain="DEXPI", environ=None):
+    """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
+    from uuid import UUID
+    import psycopg
+    import requests
+    env = os.environ if environ is None else environ
+    dsn = env.get("TEP_TIMESCALE_DSN")
+    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not dsn or not graphdb:
+        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported engineering domain")
+    run = str(UUID(str(run_id)))
+    grouped = discover_semantic_mappings(graphdb, domain)
     with psycopg.connect(dsn) as conn:
         with conn.transaction():
             conn.execute("SET TRANSACTION READ ONLY")
@@ -274,6 +283,21 @@ def run_historian_question(payload, *, environ=None):
                 "startSimulationSeconds", "endSimulationSeconds", "retrievedAtUtc")}
             graph["capabilities"] = {"R01": bool(samples), "R02": False, "R03": False,
                                      "R04": False, "R05": False}
+            try:
+                from tep_nexus_virtual_graph import enrich_semantic
+                mappings = []
+                for candidate_domain in ("DEXPI", "ECAD"):
+                    for function, pairs in discover_semantic_mappings(graphdb, candidate_domain).items():
+                        if len(pairs) != 1:
+                            continue
+                        asset, signal = next(iter(pairs))
+                        if asset and signal == mapping["operational_signal"]:
+                            mappings.append({"domain": candidate_domain, "engineering_function": function,
+                                "asset_identifier": asset, "operational_signal": signal})
+                graph = enrich_semantic(graph, mapping, mappings)
+            except Exception:
+                logging.exception("VTKG semantic enrichment failed")
+                graph["semanticEnrichment"] = "unavailable"
             result["vtkg"] = graph
             result["vtkgStatus"] = "constructed"
         except Exception:
