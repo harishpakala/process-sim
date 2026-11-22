@@ -168,6 +168,67 @@ async function run() {
   busy.value = false
  }
 }
+type TraceNode = {id:string;label:string;subtitle:string;kind:'function'|'asset'|'signal'|'run'|'observations';x:number;y:number;source?:GraphNode}
+type TraceLink = {source:string;target:string;label:string;virtual:boolean}
+const traceSelection = ref('')
+const traceZoom = ref(1)
+const tracePan = ref({x:0,y:0})
+const traceDragging = ref<{x:number;y:number;panX:number;panY:number}|null>(null)
+const traceOperator = ref('all')
+const traceGraph = computed(() => {
+ const r=r01.value
+ if (!r) return {nodes:[] as TraceNode[],links:[] as TraceLink[]}
+ const functions=reasoning.value?.R02.engineeringFunctions ?? []
+ const nodes:TraceNode[] = functions.map((fn,i)=>({
+  id:fn.id,label:`${fn.domain || 'Engineering'} · ${fn.localId || 'unknown'}`,
+  subtitle:'Engineering function',kind:'function' as const,
+  x:Math.max(110,350-(functions.length-1)*105+i*210),y:65,
+  source:graph.value?.nodes.find(node=>node.id===fn.id)
+ }))
+ nodes.push(
+  {id:r.asset.id,label:r.asset.identifier.split('/').pop() || r.asset.identifier,subtitle:'Shared asset identifier',kind:'asset',x:350,y:185,source:graph.value?.nodes.find(n=>n.id===r.asset.id)},
+  {id:r.signal.id,label:r.signal.signalId,subtitle:'Operational signal',kind:'signal',x:350,y:305,source:graph.value?.nodes.find(n=>n.id===r.signal.id)},
+  {id:r.run.id,label:'Simulation run',subtitle:r.run.runId.slice(0,13)+'…',kind:'run',x:130,y:425,source:graph.value?.nodes.find(n=>n.id===r.run.id)},
+  {id:'observation-group',label:`${r.observationCount} observations`,subtitle:'TimescaleDB · signal_samples',kind:'observations',x:540,y:425}
+ )
+ const links:TraceLink[]=[]
+ // R01/R02 graph paths are virtual reasoning edges, not raw GraphDB predicates.
+ for (const fn of functions) {
+  links.push({source:fn.id,target:r.asset.id,label:'shared asset ID',virtual:true})
+ }
+ links.push({source:r.asset.id,target:r.signal.id,label:'mapping association',virtual:true})
+ links.push({source:r.run.id,target:r.signal.id,label:'hasSignal',virtual:true})
+ links.push({source:r.signal.id,target:'observation-group',label:'observesSignal',virtual:true})
+ return {nodes,links}
+})
+const selectedTraceNode = computed(()=>traceGraph.value.nodes.find(node=>node.id===traceSelection.value) ?? null)
+const selectedTracePaths = computed(()=>{
+ const id=traceSelection.value
+ if (!id || !r01.value) return []
+ const paths=[...r01.value.path,...(reasoning.value?.R02.engineeringFunctions ?? []).flatMap(fn=>fn.path)]
+ return paths.filter(edge=>edge.source===id || edge.target===id)
+})
+const traceVisibleLinks = computed(()=>traceGraph.value.links.filter(link=>{
+ if (traceOperator.value==='all') return true
+ if (traceOperator.value==='R01') return link.target===r01.value?.signal.id || link.target==='observation-group' || link.source===r01.value?.run.id
+ if (traceOperator.value==='R02'||traceOperator.value==='R03') return link.target===r01.value?.asset.id || link.target===r01.value?.signal.id
+ return true
+}))
+function traceReset() {traceZoom.value=1;tracePan.value={x:0,y:0};traceSelection.value='';traceOperator.value='all'}
+function tracePointerDown(event:PointerEvent) {
+ if (event.button!==0 || (event.target as Element).closest('[data-trace-node]')) return
+ traceDragging.value={x:event.clientX,y:event.clientY,panX:tracePan.value.x,panY:tracePan.value.y}
+ ;(event.currentTarget as Element).setPointerCapture(event.pointerId)
+}
+function tracePointerMove(event:PointerEvent) {
+ if (!traceDragging.value) return
+ const svg=event.currentTarget as SVGSVGElement
+ const rect=svg.getBoundingClientRect()
+ tracePan.value={x:traceDragging.value.panX+(event.clientX-traceDragging.value.x)*700/rect.width,y:traceDragging.value.panY+(event.clientY-traceDragging.value.y)*510/rect.height}
+}
+function tracePointerUp() {traceDragging.value=null}
+watch(graph,traceReset)
+
 const selectedReasoningTab = ref<'overview'|'evidence'>('overview')
 const selectedEventId = ref('')
 const reasoningEvents = computed(() => reasoning.value?.R04.events ?? [])
@@ -255,14 +316,52 @@ const experimentalChart = computed(() => {
    </div>
    <template v-if="r01">
     <template v-if="selectedReasoningTab==='overview'">
-     <section class="reasoning-card" aria-label="Engineering traceability">
-      <h4>Engineering traceability</h4>
-      <div class="mapping-domains">
-       <div v-for="fn in reasoning!.R02.engineeringFunctions" :key="fn.id" class="mapping-node"><small>{{fn.domain}}</small><strong>{{fn.localId}}</strong></div>
+     <section class="reasoning-card trace-card" aria-label="Interactive engineering traceability">
+      <div class="trace-heading"><div><h4>Engineering traceability</h4><p class="subdued">Select a node to inspect its evidence. Drag the canvas to pan.</p></div>
+       <div class="trace-controls">
+        <label for="trace-path-filter">Highlight</label>
+        <select id="trace-path-filter" v-model="traceOperator"><option value="all">All associations</option><option value="R01">R01 · Observations</option><option value="R02">R02 · Reverse trace</option><option value="R03">R03 · Cross-domain</option><option value="R04">R04 · Recorded event</option><option value="R05">R05 · Combined</option></select>
+        <button type="button" class="secondary" aria-label="Zoom out" @click="traceZoom=Math.max(.6,traceZoom-.2)">−</button>
+        <button type="button" class="secondary" aria-label="Zoom in" @click="traceZoom=Math.min(2,traceZoom+.2)">+</button>
+        <button type="button" class="secondary" @click="traceReset">Reset</button>
+       </div>
       </div>
-      <div class="mapping-connector">↓ Shared operational signal · asset {{r01.asset.identifier}}</div>
-      <div class="mapping-signal"><strong>{{r01.signal.signalId}}</strong><span>{{r01.observationCount}} historian observations</span></div>
-      <p class="subdued">Engineering association from GraphDB; physical identity is not verified.</p>
+      <div class="trace-layout">
+       <div class="trace-canvas">
+        <svg viewBox="0 0 700 510" role="group" aria-label="Interactive semantic association diagram" @pointerdown="tracePointerDown" @pointermove="tracePointerMove" @pointerup="tracePointerUp" @pointercancel="tracePointerUp">
+         <g :transform="`translate(${350+tracePan.x} ${255+tracePan.y}) scale(${traceZoom}) translate(-350 -255)`">
+          <g v-for="(link,index) in traceVisibleLinks" :key="index">
+           <template v-if="traceGraph.nodes.find(n=>n.id===link.source) && traceGraph.nodes.find(n=>n.id===link.target)">
+            <line :x1="traceGraph.nodes.find(n=>n.id===link.source)!.x" :y1="traceGraph.nodes.find(n=>n.id===link.source)!.y+24" :x2="traceGraph.nodes.find(n=>n.id===link.target)!.x" :y2="traceGraph.nodes.find(n=>n.id===link.target)!.y-24" :class="['trace-edge',selectedTraceNode && link.source!==selectedTraceNode.id && link.target!==selectedTraceNode.id?'trace-muted':'']"/>
+            <text :x="(traceGraph.nodes.find(n=>n.id===link.source)!.x+traceGraph.nodes.find(n=>n.id===link.target)!.x)/2+7" :y="(traceGraph.nodes.find(n=>n.id===link.source)!.y+traceGraph.nodes.find(n=>n.id===link.target)!.y)/2-5" class="trace-edge-label">{{link.label}}</text>
+           </template>
+          </g>
+          <g v-for="node in traceGraph.nodes" :key="node.id" data-trace-node tabindex="0" role="button" :aria-label="'Inspect '+node.label" :aria-pressed="traceSelection===node.id" :transform="`translate(${node.x} ${node.y})`" class="trace-node" @click="traceSelection=node.id" @keydown.enter.prevent="traceSelection=node.id" @keydown.space.prevent="traceSelection=node.id">
+           <rect x="-92" y="-28" width="184" height="56" rx="10" :class="['trace-node-box','trace-'+node.kind,traceSelection===node.id?'trace-selected':'']"/>
+           <text text-anchor="middle" y="-5" class="trace-node-label">{{node.label.length>23?node.label.slice(0,21)+'…':node.label}}</text>
+           <text text-anchor="middle" y="13" class="trace-node-subtitle">{{node.subtitle.length>27?node.subtitle.slice(0,25)+'…':node.subtitle}}</text>
+          </g>
+         </g>
+        </svg>
+       </div>
+       <aside class="trace-inspector" aria-live="polite">
+        <template v-if="selectedTraceNode">
+         <h5>{{selectedTraceNode.label}}</h5>
+         <p class="subdued">{{selectedTraceNode.subtitle}}</p>
+         <dl><dt>Virtual node ID</dt><dd><code>{{selectedTraceNode.id}}</code></dd>
+          <template v-if="selectedTraceNode.source"><dt>Node type</dt><dd>{{selectedTraceNode.source.type}}</dd><dt>Source metadata</dt><dd><pre>{{JSON.stringify(selectedTraceNode.source,null,2)}}</pre></dd></template>
+         </dl>
+         <details v-if="selectedTracePaths.length"><summary>Reasoning source paths ({{selectedTracePaths.length}})</summary><pre>{{JSON.stringify(selectedTracePaths,null,2)}}</pre></details>
+         <template v-if="selectedTraceNode.kind==='asset'"><p>GraphDB shared asset identifier: <code>{{r01.asset.identifier}}</code></p></template>
+         <template v-if="selectedTraceNode.kind==='signal'"><p>{{r01.observationCount}} observations associated with {{r01.signal.signalId}}.</p><button type="button" class="secondary" @click="selectedReasoningTab='evidence'">Inspect observations</button></template>
+         <template v-if="selectedTraceNode.kind==='observations'"><button type="button" class="secondary" @click="selectedReasoningTab='evidence'">Open observation evidence</button></template>
+         <template v-if="selectedTraceNode.kind==='function'"><details><summary>GraphDB-derived engineering association</summary><pre>{{JSON.stringify(reasoning!.R02.engineeringFunctions.find(fn=>fn.id===selectedTraceNode!.id)?.path ?? [],null,2)}}</pre></details></template>
+        </template>
+        <template v-else><h5>Inspect an entity</h5><p class="subdued">Choose DEXPI, ECAD, the asset, signal, run, or observations to inspect the query-scoped evidence.</p></template>
+       </aside>
+      </div>
+      <div class="trace-legend"><span>● Engineering function</span><span>● Shared asset</span><span>● Operational signal</span><span>— Virtual reasoning association</span></div>
+      <p class="subdued">The lines summarize query-scoped reasoning associations, not direct source RDF triples. Source paths are available in the inspector. Physical sensor identity is NOT_VERIFIED.</p>
      </section>
      <section class="reasoning-card" aria-label="Recorded command and temporal comparison">
       <h4>Recorded command · temporal comparison</h4>
@@ -465,4 +564,33 @@ const experimentalChart = computed(() => {
 .reasoning-card summary { cursor:pointer; }
 .reasoning-raw { min-width:0; }
 @media(max-width:650px) { .reasoning-metrics { grid-template-columns:1fr; } .reasoning-metrics strong { font-size:19px; } }
+.trace-heading { display:flex; justify-content:space-between; align-items:flex-start; gap:14px; flex-wrap:wrap; }
+.trace-controls { display:flex; gap:6px; align-items:center; flex-wrap:wrap; }
+.trace-controls label { font-size:12px; color:#b5c8d9; }
+.trace-controls select { max-width:180px; background:#14263b; color:#eaf4ff; border:1px solid #3d5973; border-radius:7px; padding:7px; }
+.trace-controls button { min-width:32px; }
+.trace-layout { display:grid; grid-template-columns:minmax(0,2fr) minmax(210px,1fr); gap:12px; margin-top:12px; }
+.trace-canvas { background:#0c192a; border:1px solid #334a62; border-radius:12px; overflow:hidden; touch-action:none; cursor:grab; }
+.trace-canvas:active { cursor:grabbing; }
+.trace-canvas svg { display:block; width:100%; min-height:360px; }
+.trace-edge { stroke:#8ba5c0; stroke-width:1.8; stroke-dasharray:5 4; }
+.trace-edge-label { fill:#9fb5c9; font-size:10px; }
+.trace-muted { opacity:.18; }
+.trace-node { cursor:pointer; outline:none; }
+.trace-node:focus-visible .trace-node-box { stroke:#fff; stroke-width:3; }
+.trace-node-box { fill:#1a3551; stroke:#6387ac; stroke-width:1.6; }
+.trace-asset { fill:#33334c; stroke:#a7a3d2; }
+.trace-signal { fill:#154d47; stroke:#44ad98; }
+.trace-run,.trace-observations { fill:#283b4e; stroke:#8aa1b8; }
+.trace-selected { stroke:#fbbf24; stroke-width:3; }
+.trace-node-label { fill:#f0f8ff; font-size:13px; font-weight:600; pointer-events:none; }
+.trace-node-subtitle { fill:#b5c8d9; font-size:10px; pointer-events:none; }
+.trace-inspector { background:#14263b; border:1px solid #334a62; border-radius:10px; padding:12px; min-width:0; overflow-wrap:anywhere; }
+.trace-inspector h5 { margin:0 0 6px; font-size:15px; }
+.trace-inspector dt { font-size:11px; color:#b5c8d9; margin-top:10px; }
+.trace-inspector dd { margin:4px 0; font-size:12px; }
+.trace-inspector code { overflow-wrap:anywhere; }
+.trace-inspector pre { max-height:200px; }
+.trace-legend { display:flex; flex-wrap:wrap; gap:12px; font-size:11px; color:#b5c8d9; margin-top:10px; }
+@media(max-width:800px) { .trace-layout { grid-template-columns:minmax(0,1fr); } }
 </style>
