@@ -34,7 +34,7 @@ class HistorianTests(unittest.TestCase):
             calls.append((signal, start, end))
             return [{"value": float(i)} for i in range(402)]
         result = execute(
-            "Retrieve all recorded values for DEXPI FI_105", "FI_105",
+            "Retrieve all recorded values for DEXPI FI_105 in simulation run 077a3c31-44f4-4f3a-b06d-ad52b148fe10 for all simulation times", "FI_105",
             "077a3c31-44f4-4f3a-b06d-ad52b148fe10", "dsn", "graphdb",
             resolver=lambda url, function: mapping, retriever=retriever,
         )
@@ -44,7 +44,7 @@ class HistorianTests(unittest.TestCase):
 
     def test_function_mismatch_rejected(self):
         with self.assertRaisesRegex(ValueError, "must agree"):
-            execute("Retrieve FI_106", "FI_105",
+            execute("Retrieve FI_106 in simulation run 077a3c31-44f4-4f3a-b06d-ad52b148fe10 for all simulation times", "FI_105",
                     "077a3c31-44f4-4f3a-b06d-ad52b148fe10", "dsn", "graphdb")
 
 
