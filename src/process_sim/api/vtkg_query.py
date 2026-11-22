@@ -139,25 +139,18 @@ def discover_historian_runs(*, environ=None):
     return {"runs": runs}
 
 
-def discover_historian_functions(run_id, *, domain="DEXPI", environ=None):
-    """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
-    from uuid import UUID
-    import psycopg
+def discover_semantic_mappings(graphdb, domain):
+    """Reuse the existing domain joins independently of historian discovery."""
     import requests
-    env = os.environ if environ is None else environ
-    dsn = env.get("TEP_TIMESCALE_DSN")
-    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
-    if not dsn or not graphdb:
-        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported engineering domain")
-    run = str(UUID(str(run_id)))
     query = """
 PREFIX dexpi: <https://example.org/dexpi/>
 PREFIX opcua: <https://example.org/opcuaconnectivity/>
 SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
  GRAPH ?dg {
-  ?function a dexpi:InstrumentationFunction ;
+  VALUES ?engineeringType { dexpi:InstrumentationFunction dexpi:ActuatingFunction }
+  ?function a ?engineeringType ;
             dexpi:hasLocalId ?localId ;
             dexpi:hasAssetIdentifier ?assetIdentifier .
  }
@@ -190,10 +183,27 @@ SELECT DISTINCT ?localId ?assetIdentifier ?signalName WHERE {
         function = row["localId"]["value"].strip()
         if domain == "ECAD":
             import re
-            if not re.fullmatch(r"(?:FI|LI|PI|TI)-[0-9]+", function):
+            if not re.fullmatch(r"(?:FI|JI|LI|PI|TI)-[0-9]+", function):
                 continue
         pair = (row["assetIdentifier"]["value"].strip(), row["signalName"]["value"].strip())
         grouped.setdefault(function, set()).add(pair)
+    return grouped
+
+
+def discover_historian_functions(run_id, *, domain="DEXPI", environ=None):
+    """Only offer unique live DEXPI/OPCUA mappings with run-scoped samples."""
+    from uuid import UUID
+    import psycopg
+    import requests
+    env = os.environ if environ is None else environ
+    dsn = env.get("TEP_TIMESCALE_DSN")
+    graphdb = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not dsn or not graphdb:
+        raise VtkgUnavailable("Configure TEP_TIMESCALE_DSN and GRAPHDB_SPARQL_ENDPOINT")
+    if domain not in ("DEXPI", "ECAD"):
+        raise ValueError("Unsupported engineering domain")
+    run = str(UUID(str(run_id)))
+    grouped = discover_semantic_mappings(graphdb, domain)
     with psycopg.connect(dsn) as conn:
         with conn.transaction():
             conn.execute("SET TRANSACTION READ ONLY")
@@ -239,12 +249,184 @@ def run_historian_question(payload, *, environ=None):
     sys.path.insert(0, str(scripts))
     try:
         from tep_nexus_dexpi_historian import execute
-        return execute(payload["question"].strip(), payload["engineering_function"],
+        result = execute(payload["question"].strip(), payload["engineering_function"],
                        str(UUID(str(payload["run_id"]))), dsn, graphdb,
                        payload["start_simulation_seconds"], payload["end_simulation_seconds"],
                        domain=domain)
+        try:
+            from tep_nexus_virtual_graph import project
+            from tep_nexus_live_virtual_graph import observation_primary_key, observation_fingerprint
+            from datetime import datetime
+            mapping = dict(result["mapping"], domain=domain)
+            samples = []
+            seen = set()
+            for sample in result["observations"]:
+                stamp = datetime.fromisoformat(sample["observedAt"])
+                if stamp.tzinfo is None or stamp.utcoffset() is None:
+                    raise ValueError("Observation timestamp lacks timezone")
+                key = observation_primary_key(result["runId"], mapping["operational_signal"], stamp)
+                if key in seen:
+                    raise ValueError("Duplicate observation source key")
+                seen.add(key)
+                samples.append(dict(sample, observationPrimaryKeyHash=key,
+                    observationFingerprint=observation_fingerprint(result["runId"],
+                        mapping["operational_signal"], sample["simulationTimeHours"], sample["value"], stamp)))
+            from tep_nexus_fault_events import fetch_recorded_commands
+            commands = []
+            command_status = "retrieved"
+            try:
+                commands = fetch_recorded_commands(
+                    dsn, result["runId"],
+                    result["startSimulationSeconds"], result["endSimulationSeconds"])
+            except Exception:
+                logging.exception("Recorded fault command retrieval failed")
+                command_status = "unavailable"
+            graph = project({
+                "validatedPlan": {"engineering_function": result["engineeringFunction"]},
+                "engineeringMapping": mapping,
+                "temporalEvidence": {"runId": result["runId"], "signal": mapping["operational_signal"],
+                    "faultCommands": commands, "windows": [{"samples": samples, "truncated": result["truncated"]}]},
+            })
+            if sum(n["type"] == "VirtualObservation" for n in graph["nodes"]) != result["observationCount"]:
+                raise ValueError("Graph observation count mismatch")
+            graph["snapshotScope"] = "historian observations plus run-scoped recorded commands; query-scoped, not materialized"
+            graph["recordedCommandRetrieval"] = {"status": command_status, "count": len(commands),
+                "source": "TimescaleDB public.fault_events", "runId": result["runId"]}
+            graph["request"] = {k: result[k] for k in ("domain", "engineeringFunction", "runId",
+                "startSimulationSeconds", "endSimulationSeconds", "retrievedAtUtc")}
+            graph["capabilities"] = {"R01": bool(samples), "R02": False, "R03": False,
+                                     "R04": False, "R05": False}
+            try:
+                from tep_nexus_virtual_graph import enrich_semantic
+                mappings = []
+                for candidate_domain in ("DEXPI", "ECAD"):
+                    for function, pairs in discover_semantic_mappings(graphdb, candidate_domain).items():
+                        if len(pairs) != 1:
+                            continue
+                        asset, signal = next(iter(pairs))
+                        if asset and signal == mapping["operational_signal"]:
+                            mappings.append({"domain": candidate_domain, "engineering_function": function,
+                                "asset_identifier": asset, "operational_signal": signal})
+                graph = enrich_semantic(graph, mapping, mappings)
+            except Exception:
+                logging.exception("VTKG semantic enrichment failed")
+                graph["semanticEnrichment"] = "unavailable"
+            # Explicit handoff between cross-domain semantic resolution and temporal reasoning.
+            # Inventory/catalog evidence is not invented from identifier equality.
+            asset_id = mapping.get("asset_identifier")
+            associated = [
+                {"domain": n.get("domain"), "localId": n.get("localId"),
+                 "virtualNodeId": n["id"], "mappingConfidence": n.get("mappingConfidence", "PROVISIONAL")}
+                for n in graph["nodes"] if n.get("type") == "EngineeringFunction"
+            ]
+            graph["crossDomainBridge"] = {
+                "status": "partial" if graph.get("semanticEnrichment") == "complete" else "unavailable",
+                "joinKey": {"type": "assetIdentifier", "value": asset_id,
+                            "verification": "SEMANTIC_ASSOCIATION_ONLY"},
+                "operationalSignal": mapping["operational_signal"],
+                "engineeringFunctions": associated,
+                "assetInventory": {"status": "NOT_RESOLVED", "evidence": []},
+                "productCatalog": {"status": "NOT_RESOLVED", "evidence": []},
+                "physicalSensorBinding": "NOT_VERIFIED",
+                "interpretation": "Shared identifier links engineering mappings to historian signal; "
+                                  "asset inventory and product catalog require separate source-backed joins.",
+            }
+            from tep_nexus_reasoning import reason
+            try:
+                graph["reasoning"] = reason(
+                    graph, domain=domain, engineering_function=result["engineeringFunction"],
+                    run_id=result["runId"], expected_count=result["observationCount"])
+                if command_status != "retrieved":
+                    graph["reasoning"]["R04"] = {"status": "insufficient_evidence",
+                        "reason": "Recorded command source unavailable; cannot infer absence",
+                        "events": [], "interpretation": "No temporal comparison inferred"}
+                    graph["reasoning"]["R05"] = {"status": "insufficient_evidence",
+                        "reason": "Recorded command source unavailable"}
+                graph["capabilities"] = {
+                    key: graph["reasoning"][key]["status"] == "complete"
+                    for key in ("R01", "R02", "R03", "R04", "R05")
+                }
+            except Exception:
+                logging.exception("VTKG reasoning operator failed")
+                graph["reasoningStatus"] = "unavailable"
+                graph["capabilities"] = {key: False for key in ("R01", "R02", "R03", "R04", "R05")}
+            result["vtkg"] = graph
+            result["vtkgStatus"] = "constructed"
+        except Exception:
+            logging.exception("Historian VTKG construction failed")
+            result["vtkgStatus"] = "unavailable"
+        return result
     finally:
         sys.path.remove(str(scripts))
+
+
+def explore_signal_knowledge(payload, *, environ=None):
+    """Resolve a historian SignalName to source-backed engineering functions on demand.
+
+    No GraphDB lookup is performed by the direct historian endpoints. An unresolved
+    mapping is reported explicitly rather than fabricating an engineering identity.
+    """
+    from uuid import UUID
+    if not isinstance(payload, dict) or set(payload) != {
+        "signal_id", "run_id", "start_simulation_seconds", "end_simulation_seconds"
+    }:
+        raise ValueError("Expected signal_id, run_id and simulation-time bounds")
+    signal = payload["signal_id"]
+    if not isinstance(signal, str) or not signal.strip() or len(signal) > 256:
+        raise ValueError("Invalid signal_id")
+    run_id = str(UUID(str(payload["run_id"])))
+    import math
+    start, end = payload["start_simulation_seconds"], payload["end_simulation_seconds"]
+    for bound in (start, end):
+        if bound is not None and (isinstance(bound, bool) or not isinstance(bound, (int, float))
+                                  or not math.isfinite(bound) or bound < 0):
+            raise ValueError("Invalid simulation-time bound")
+    if start is not None and end is not None and start > end:
+        raise ValueError("Start exceeds end")
+    env = os.environ if environ is None else environ
+    endpoint = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not endpoint:
+        return {"status": "unavailable", "reason": "GraphDB is not configured",
+                "signalId": signal, "runId": run_id, "candidates": []}
+    candidates = []
+    for domain in ("DEXPI", "ECAD"):
+        for function, pairs in discover_semantic_mappings(endpoint, domain).items():
+            for asset, mapped_signal in pairs:
+                if mapped_signal == signal and asset:
+                    candidates.append({"domain": domain, "engineering_function": function,
+                                       "asset_identifier": asset, "signal_id": signal})
+    candidates.sort(key=lambda item: (item["domain"] != "DEXPI", item["domain"], item["engineering_function"]))
+    if not candidates:
+        return {"status": "unresolved", "reason": "No source-backed engineering mapping for SignalName",
+                "signalId": signal, "runId": run_id, "candidates": []}
+    # Existing R01–R05 path requires one engineering function. Keep all candidates
+    # visible, but use a deterministic primary mapping and label it explicitly.
+    primary = candidates[0]
+    # The legacy VTKG builder validates an explicit engineering LocalId and
+    # a single supported simulation-time phrase in its question contract.
+    if start is not None and end is not None:
+        interval = f"between simulation seconds {start:g} and {end:g}"
+    elif start is not None:
+        interval = f"from simulation second {start:g} onward"
+    elif end is not None:
+        interval = f"up to simulation second {end:g}"
+    else:
+        interval = "for all simulation times"
+    question = (f"Get historian values for engineering LocalId "
+                f"{primary['engineering_function']} in simulation run {run_id} "
+                f"{interval}.")
+    result = run_historian_question({
+        "question": question, "engineering_function": primary["engineering_function"],
+        "run_id": run_id, "domain": primary["domain"],
+        "start_simulation_seconds": start, "end_simulation_seconds": end,
+    }, environ=env)
+    if result.get("mapping", {}).get("operational_signal") != signal:
+        return {"status": "unresolved", "reason": "Engineering mapping changed during resolution",
+                "signalId": signal, "runId": run_id, "candidates": candidates}
+    return {"status": "constructed" if result.get("vtkgStatus") == "constructed" else "unavailable",
+            "signalId": signal, "runId": run_id, "candidates": candidates,
+            "selectedMapping": primary, "result": result,
+            "mappingSelection": "DETERMINISTIC_PRIMARY_NOT_PHYSICAL_IDENTITY"}
 
 
 def run_semantic_join_question(payload, *, environ=None):

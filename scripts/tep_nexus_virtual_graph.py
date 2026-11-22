@@ -29,18 +29,18 @@ def project(query):
         raise ValueError("Engineering mapping does not match validated plan")
     if mapping["operational_signal"] != signal:
         raise ValueError("Engineering mapping does not match historian signal")
-    if not mapping.get("asset_uri"):
-        raise ValueError("Missing source asset URI")
+    if not mapping.get("asset_uri") and not mapping.get("asset_identifier"):
+        raise ValueError("Missing source asset reference")
 
     nodes = {}
     edges = []
 
-    def node(identifier, kind, **attrs):
-        if identifier in nodes:
-            if nodes[identifier] != {"id": identifier, "type": kind, **attrs}:
+    def node(node_id, kind, **attrs):
+        if node_id in nodes:
+            if nodes[node_id] != {"id": node_id, "type": kind, **attrs}:
                 raise ValueError("Conflicting virtual resource identity")
         else:
-            nodes[identifier] = {"id": identifier, "type": kind, **attrs}
+            nodes[node_id] = {"id": node_id, "type": kind, **attrs}
 
     def edge(source, predicate, target):
         if source not in nodes or target not in nodes:
@@ -49,19 +49,23 @@ def project(query):
         if item not in edges:
             edges.append(item)
 
-    f = _uri("function", function)
+    domain = mapping.get("domain")
+    f = _uri("function", domain, function) if domain else _uri("function", function)
     s = _uri("signal", signal)
     r = _uri("run", run)
-    asset = mapping["asset_uri"]
+    asset = mapping.get("asset_uri") or _uri("asset-identifier", mapping["asset_identifier"])
     node(f, "EngineeringFunction", localId=function, source="GraphDB",
-         mappingConfidence="PROVISIONAL")
+         mappingConfidence="PROVISIONAL", **({"domain": domain} if domain else {}))
     node(s, "OperationalSignal", signalId=signal, source="GraphDB mapping / TimescaleDB key",
          physicalSensorBinding="NOT_VERIFIED")
     node(r, "SimulationRun", runId=run, identitySource="operator_supplied",
          sharedRunProvenance="NOT_VERIFIED")
-    node(asset, "EngineeringAsset", source="GraphDB", physicalIdentity="NOT_VERIFIED")
+    if mapping.get("asset_uri"):
+        node(asset, "EngineeringAsset", source="GraphDB", physicalIdentity="NOT_VERIFIED")
+    else:
+        node(asset, "AssetIdentifier", identifier=mapping["asset_identifier"], source="GraphDB", physicalIdentity="NOT_VERIFIED")
     edge(f, "mapsToSignal", s)
-    edge(f, "associatedWithAsset", asset)
+    edge(f, "associatedWithAsset" if mapping.get("asset_uri") else "hasAssetIdentifier", asset)
     edge(r, "hasSignal", s)
 
     for i, command in enumerate(evidence.get("faultCommands", [])):
@@ -73,6 +77,9 @@ def project(query):
              eventId=event_id, action=command["action"],
              simulationTimeHours=command["simulation_time_hours"],
              observedAt=command["observed_at"],
+             faultId=command.get("fault_id"), faultType=command.get("fault_type"),
+             target=command.get("target"), magnitude=command.get("magnitude"),
+             eventSource=command.get("event_source"),
              physicalFaultState="NOT_VERIFIED")
         edge(r, "hasRecordedCommand", e)
 
@@ -120,6 +127,46 @@ def project(query):
             "Recorded fault commands do not establish physical fault causation.",
         ],
     }
+
+
+def enrich_semantic(graph, initial_mapping, mappings):
+    """Merge validated signal mappings without modifying observation evidence."""
+    from copy import deepcopy
+    result = deepcopy(graph)
+    nodes = {n["id"]: n for n in result["nodes"]}
+    edges = result["edges"]
+    signal = initial_mapping["operational_signal"]
+    signal_id = _uri("signal", signal)
+    initial_key = (initial_mapping["domain"], initial_mapping["engineering_function"])
+    matches = [m for m in mappings if (m["domain"], m["engineering_function"]) == initial_key]
+    if len(matches) != 1 or matches[0]["asset_identifier"] != initial_mapping["asset_identifier"]:
+        raise ValueError("Initial mapping changed during semantic enrichment")
+    def add_node(n):
+        if n["id"] in nodes and nodes[n["id"]] != n:
+            raise ValueError("Conflicting enriched node")
+        nodes[n["id"]] = n
+    def add_edge(source, predicate, target):
+        if source not in nodes or target not in nodes:
+            raise ValueError("Dangling enriched edge")
+        edge = dict(source=source, predicate=predicate, target=target)
+        if edge not in edges:
+            edges.append(edge)
+    for m in mappings:
+        if m["operational_signal"] != signal:
+            raise ValueError("Enrichment signal mismatch")
+        f = _uri("function", m["domain"], m["engineering_function"])
+        a = _uri("asset-identifier", m["asset_identifier"])
+        add_node(dict(id=f, type="EngineeringFunction", localId=m["engineering_function"],
+                      domain=m["domain"], source="GraphDB", mappingConfidence="PROVISIONAL"))
+        add_node(dict(id=a, type="AssetIdentifier", identifier=m["asset_identifier"],
+                      source="GraphDB", physicalIdentity="NOT_VERIFIED"))
+        add_edge(f, "mapsToSignal", signal_id)
+        add_edge(f, "hasAssetIdentifier", a)
+    result["nodes"] = list(nodes.values())
+    result["semanticEnrichment"] = "complete"
+    result["capabilities"]["R02"] = result["capabilities"]["R01"] and len(mappings) > 1
+    result["capabilities"]["R03"] = len({m["domain"] for m in mappings}) > 1
+    return result
 
 
 def main():

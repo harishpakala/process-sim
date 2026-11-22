@@ -25,7 +25,8 @@ PREFIX dexpi: <https://example.org/dexpi/>
 PREFIX opcua: <https://example.org/opcuaconnectivity/>
 SELECT DISTINCT ?assetIdentifier ?signalName WHERE {
   GRAPH ?dexpiGraph {
-    ?function a dexpi:InstrumentationFunction ;
+    VALUES ?engineeringType { dexpi:InstrumentationFunction dexpi:ActuatingFunction }
+    ?function a ?engineeringType ;
               dexpi:hasLocalId ?localId ;
               dexpi:hasAssetIdentifier ?assetIdentifier .
   }
@@ -42,7 +43,7 @@ ORDER BY ?assetIdentifier ?signalName
 def resolve_signal(graphdb_url, function, *, domain="DEXPI", post=requests.post):
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported domain")
-    pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|LI|PI|TI)-[0-9]+$")
+    pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|JI|LI|PI|TI)-[0-9]+$")
     if not pattern.fullmatch(function):
         raise ValueError("Invalid engineering function LocalId")
     # JSON-quoted literal prevents SPARQL injection; the function is additionally allow-pattern checked.
@@ -166,7 +167,7 @@ def execute(question, function, run_id, dsn, graphdb_url,
         if not isinstance(function, str) or function.upper() != extracted_function:
             raise ValueError("Question and requested engineering function must agree")
     function = extracted_function
-    valid_pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|LI|PI|TI)-[0-9]+$")
+    valid_pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|JI|LI|PI|TI)-[0-9]+$")
     if not valid_pattern.fullmatch(function):
         raise ValueError("Question LocalId is invalid for the selected domain")
     for bound in (start_seconds, end_seconds):

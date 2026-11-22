@@ -51,6 +51,32 @@ class Handler(BaseHTTPRequestHandler):
                 logging.exception("Historian run discovery failed")
                 self.send_json(503, {"error": "Historian run discovery unavailable; check backend logs"})
             return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/measurement-types":
+            try:
+                from process_sim.api.signal_historian import discover_measurement_types
+                self.send_json(200, discover_measurement_types())
+            except Exception:
+                import logging
+                logging.exception("Measurement type discovery failed")
+                self.send_json(503, {"error": "Measurement types unavailable; apply signal metadata migration"})
+            return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/signals":
+            try:
+                from process_sim.api.signal_historian import discover_signals
+                ids = parse_qs(urlsplit(self.path).query).get("run_id", [])
+                if len(ids) != 1:
+                    raise ValueError("Exactly one run_id is required")
+                kinds = parse_qs(urlsplit(self.path).query).get("measurement_type", [])
+                if len(kinds) > 1:
+                    raise ValueError("At most one measurement_type is allowed")
+                self.send_json(200, discover_signals(ids[0], measurement_type=kinds[0] if kinds else None))
+            except ValueError as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Signal discovery failed")
+                self.send_json(503, {"error": "Signal discovery unavailable; check backend logs"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/historian/functions":
             try:
                 from process_sim.api.vtkg_query import discover_historian_functions
@@ -375,6 +401,38 @@ class Handler(BaseHTTPRequestHandler):
                 import logging
                 logging.exception("Experimental NL historian query failed")
                 self.send_json(503, {"error": "Experimental historian unavailable; check backend logs"})
+            return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/explore-signal":
+            try:
+                from process_sim.api.vtkg_query import explore_signal_knowledge
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                self.send_json(200, explore_signal_knowledge(payload))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Signal-first knowledge exploration failed")
+                self.send_json(503, {"error": "Knowledge explorer unavailable; check backend logs"})
+            return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/signal-values":
+            try:
+                from process_sim.api.signal_historian import retrieve_signal
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 4096:
+                    self.send_json(413, {"error": "Invalid request size"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                self.send_json(200, retrieve_signal(payload))
+            except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+                self.send_json(400, {"error": str(exc)})
+            except Exception:
+                import logging
+                logging.exception("Direct signal historian retrieval failed")
+                self.send_json(503, {"error": "Signal retrieval unavailable; check backend logs"})
             return
         if urlsplit(self.path).path == "/api/ai/vtkg/historian/answer":
             try:
