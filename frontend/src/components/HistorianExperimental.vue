@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 
 type HistorianResponse = {
  mode: string
@@ -213,6 +213,14 @@ const traceZoom = ref(1)
 const tracePan = ref({x:0,y:0})
 const traceDragging = ref<{x:number;y:number;panX:number;panY:number}|null>(null)
 const traceOperator = ref('all')
+const traceCardAnchor = ref<HTMLElement | null>(null)
+function highlightReasoningInGraph(operator: string) {
+ traceOperator.value = operator
+ traceSelection.value = ''
+ traceLinkSelection.value = ''
+ selectedReasoningTab.value = 'overview'
+ void nextTick(() => traceCardAnchor.value?.scrollIntoView({behavior:'smooth',block:'start'}))
+}
 const traceGraph = computed(() => {
  const r=r01.value
  if (!r) return {nodes:[] as TraceNode[],links:[] as TraceLink[]}
@@ -264,6 +272,8 @@ const traceVisibleLinks = computed(()=>traceGraph.value.links.filter(link=>{
  if (traceOperator.value==='all') return true
  if (traceOperator.value==='R01') return link.target===r01.value?.signal.id || link.target==='observation-group' || link.source===r01.value?.run.id
  if (traceOperator.value==='R02'||traceOperator.value==='R03') return link.target===r01.value?.asset.id || link.target===r01.value?.signal.id
+ if (traceOperator.value==='R04') return link.source===r01.value?.run.id || link.target==='observation-group'
+ if (traceOperator.value==='R05') return link.target===r01.value?.asset.id || link.source===r01.value?.asset.id || link.source===r01.value?.run.id || link.target==='observation-group'
  return true
 }))
 function traceReset() {traceZoom.value=1;tracePan.value={x:0,y:0};traceSelection.value='';traceLinkSelection.value='';traceOperator.value='all'}
@@ -453,16 +463,18 @@ const experimentalChart = computed(() => {
    </div>
    <template v-if="r01">
     <template v-if="selectedReasoningTab==='overview'">
-     <section class="reasoning-card trace-card" aria-label="Interactive engineering traceability">
+     <section ref="traceCardAnchor" class="reasoning-card trace-card" aria-label="Interactive engineering traceability">
       <div class="trace-heading"><div><h4>Engineering traceability</h4><p class="subdued">Select a node to inspect its evidence. Drag the canvas to pan.</p></div>
        <div class="trace-controls">
-        <label for="trace-path-filter">Highlight</label>
+        <label for="trace-path-filter">VTKG reasoning paths</label>
         <select id="trace-path-filter" v-model="traceOperator"><option value="all">All associations</option><option value="R01">R01 · Observations</option><option value="R02">R02 · Reverse trace</option><option value="R03">R03 · Cross-domain</option><option value="R04">R04 · Recorded event</option><option value="R05">R05 · Combined</option></select>
         <button type="button" class="secondary" aria-label="Zoom out" @click="traceZoom=Math.max(.6,traceZoom-.2)">−</button>
         <button type="button" class="secondary" aria-label="Zoom in" @click="traceZoom=Math.min(2,traceZoom+.2)">+</button>
         <button type="button" class="secondary" @click="traceReset">Reset</button>
        </div>
       </div>
+      <p v-if="traceOperator==='R05'" class="subdued" role="status">R05 combined view: engineering associations and run-to-signal observations. Exact-target recorded-command evidence is described in the reasoning panel, but is not drawn as a node here.</p>
+      <p v-else-if="traceOperator==='R04'" class="subdued" role="status">R04 temporal view: run and observation associations. Recorded commands are summarized separately, not drawn as graph nodes.</p>
       <div class="trace-layout">
        <div class="trace-canvas">
         <svg viewBox="0 0 700 510" role="group" aria-label="Interactive semantic association diagram" @pointerdown="tracePointerDown" @pointermove="tracePointerMove" @pointerup="tracePointerUp" @pointercancel="tracePointerUp">
@@ -561,7 +573,7 @@ const experimentalChart = computed(() => {
         <p>{{activeReasoningInterpretation.conclusion}}</p>
         <p><strong>Evidence:</strong> {{activeReasoningInterpretation.evidence}}</p>
         <p class="trace-limitation"><strong>What it does not prove:</strong> {{activeReasoningInterpretation.limit}}</p>
-        <button type="button" class="secondary" @click="traceOperator=activeReasoningInterpretation.id">Highlight in graph: {{activeReasoningInterpretation.id}}</button>
+        <button type="button" class="secondary" @click="highlightReasoningInGraph(activeReasoningInterpretation.id)">Show {{activeReasoningInterpretation.id}} paths in VTKG graph</button>
        </template>
       </div>
       <p v-if="reasoning!.R05.status!=='complete'" class="subdued" role="status">R05 not established: {{reasoning!.R05.reason}}. A descriptive R04 result does not establish target relevance.</p>
