@@ -5,7 +5,7 @@ BEGIN;
 CREATE TABLE IF NOT EXISTS public.signal_metadata (
     signal_id text PRIMARY KEY,
     measurement_type text NOT NULL DEFAULT 'Unclassified'
-        CHECK (measurement_type IN ('Temperature', 'Pressure', 'Level', 'Energy', 'Unclassified')),
+        CHECK (measurement_type IN ('Temperature', 'Pressure', 'Level', 'Flow', 'Energy', 'Unclassified')),
     unit text,
     classification_source text NOT NULL DEFAULT 'unclassified',
     verification_status text NOT NULL DEFAULT 'NOT_VERIFIED'
