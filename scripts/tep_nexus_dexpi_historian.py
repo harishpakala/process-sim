@@ -25,7 +25,8 @@ PREFIX dexpi: <https://example.org/dexpi/>
 PREFIX opcua: <https://example.org/opcuaconnectivity/>
 SELECT DISTINCT ?assetIdentifier ?signalName WHERE {
   GRAPH ?dexpiGraph {
-    ?function a dexpi:InstrumentationFunction ;
+    VALUES ?engineeringType { dexpi:InstrumentationFunction dexpi:ActuatingFunction }
+    ?function a ?engineeringType ;
               dexpi:hasLocalId ?localId ;
               dexpi:hasAssetIdentifier ?assetIdentifier .
   }
