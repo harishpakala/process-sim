@@ -51,13 +51,25 @@ class Handler(BaseHTTPRequestHandler):
                 logging.exception("Historian run discovery failed")
                 self.send_json(503, {"error": "Historian run discovery unavailable; check backend logs"})
             return
+        if urlsplit(self.path).path == "/api/ai/vtkg/historian/measurement-types":
+            try:
+                from process_sim.api.signal_historian import discover_measurement_types
+                self.send_json(200, discover_measurement_types())
+            except Exception:
+                import logging
+                logging.exception("Measurement type discovery failed")
+                self.send_json(503, {"error": "Measurement types unavailable; apply signal metadata migration"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/historian/signals":
             try:
                 from process_sim.api.signal_historian import discover_signals
                 ids = parse_qs(urlsplit(self.path).query).get("run_id", [])
                 if len(ids) != 1:
                     raise ValueError("Exactly one run_id is required")
-                self.send_json(200, discover_signals(ids[0]))
+                kinds = parse_qs(urlsplit(self.path).query).get("measurement_type", [])
+                if len(kinds) > 1:
+                    raise ValueError("At most one measurement_type is allowed")
+                self.send_json(200, discover_signals(ids[0], measurement_type=kinds[0] if kinds else None))
             except ValueError as exc:
                 self.send_json(400, {"error": str(exc)})
             except Exception:
