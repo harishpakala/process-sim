@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
+import VtkgReasoning from './VtkgReasoning.vue'
+const historianMode = ref<'retrieval'|'reasoning'>('retrieval')
 
 type HistorianResponse = {
  mode: string
@@ -164,6 +166,12 @@ const experimentalChart = computed(() => {
 <template>
  <section class="panel">
   <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
+  <div class="historian-mode-switch" role="group" aria-label="Historian query mode">
+   <button type="button" :class="historianMode === 'retrieval' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'retrieval'" @click="historianMode='retrieval'">Historian Retrieval</button>
+   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'" @click="historianMode='reasoning'">VTKG Reasoning (prototype)</button>
+  </div>
+  <VtkgReasoning v-if="historianMode === 'reasoning'" />
+  <div v-show="historianMode === 'retrieval'">
   <p>Ask about engineering information or explore recorded simulation data in your own words.</p>
   <p>Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
   <div class="experiment-fields">
@@ -231,10 +239,12 @@ const experimentalChart = computed(() => {
    <h3>Query details</h3>
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
+  </div>
  </section>
 </template>
 
 <style scoped>
+.historian-mode-switch { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
 .experiment-fields {
  display: grid;
  grid-template-columns: repeat(2, minmax(0, 1fr));
