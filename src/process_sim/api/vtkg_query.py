@@ -239,10 +239,47 @@ def run_historian_question(payload, *, environ=None):
     sys.path.insert(0, str(scripts))
     try:
         from tep_nexus_dexpi_historian import execute
-        return execute(payload["question"].strip(), payload["engineering_function"],
+        result = execute(payload["question"].strip(), payload["engineering_function"],
                        str(UUID(str(payload["run_id"]))), dsn, graphdb,
                        payload["start_simulation_seconds"], payload["end_simulation_seconds"],
                        domain=domain)
+        try:
+            from tep_nexus_virtual_graph import project
+            from tep_nexus_live_virtual_graph import observation_primary_key, observation_fingerprint
+            from datetime import datetime
+            mapping = dict(result["mapping"], domain=domain)
+            samples = []
+            seen = set()
+            for sample in result["observations"]:
+                stamp = datetime.fromisoformat(sample["observedAt"])
+                if stamp.tzinfo is None or stamp.utcoffset() is None:
+                    raise ValueError("Observation timestamp lacks timezone")
+                key = observation_primary_key(result["runId"], mapping["operational_signal"], stamp)
+                if key in seen:
+                    raise ValueError("Duplicate observation source key")
+                seen.add(key)
+                samples.append(dict(sample, observationPrimaryKeyHash=key,
+                    observationFingerprint=observation_fingerprint(result["runId"],
+                        mapping["operational_signal"], sample["simulationTimeHours"], sample["value"], stamp)))
+            graph = project({
+                "validatedPlan": {"engineering_function": result["engineeringFunction"]},
+                "engineeringMapping": mapping,
+                "temporalEvidence": {"runId": result["runId"], "signal": mapping["operational_signal"],
+                    "faultCommands": [], "windows": [{"samples": samples, "truncated": result["truncated"]}]},
+            })
+            if sum(n["type"] == "VirtualObservation" for n in graph["nodes"]) != result["observationCount"]:
+                raise ValueError("Graph observation count mismatch")
+            graph["snapshotScope"] = "single historian response; no additional retrieval"
+            graph["request"] = {k: result[k] for k in ("domain", "engineeringFunction", "runId",
+                "startSimulationSeconds", "endSimulationSeconds", "retrievedAtUtc")}
+            graph["capabilities"] = {"R01": bool(samples), "R02": False, "R03": False,
+                                     "R04": False, "R05": False}
+            result["vtkg"] = graph
+            result["vtkgStatus"] = "constructed"
+        except Exception:
+            logging.exception("Historian VTKG construction failed")
+            result["vtkgStatus"] = "unavailable"
+        return result
     finally:
         sys.path.remove(str(scripts))
 
