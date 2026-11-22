@@ -32,6 +32,8 @@ const queryStyles = [
 const busy = ref(false)
 const error = ref('')
 const response = ref<HistorianResponse | null>(null)
+type DirectResult = {runId:string;signalId:string;observations:Array<{simulationTimeHours:number;value:number;observedAt:string}>;observationCount:number;truncated:boolean;source:string}
+const directResult = ref<DirectResult | null>(null)
 type GraphNode = {id:string;type:string;localId?:string;domain?:string;signalId?:string;identifier?:string;runId?:string;simulationTimeHours?:number;value?:number;observedAt?:string;identityScope?:string;contentFingerprint?:string;source?:string}
 type GraphEdge = {source:string;target:string;predicate:string}
 type GraphContext = {nodes:GraphNode[];edges:GraphEdge[];capabilities:Record<string,boolean>}
@@ -63,7 +65,7 @@ const functions = ref<FunctionOption[]>([])
 const selectedLocalId = ref('')
 const selectedSignal = ref('')
 const knowledgeExpanded = ref(false)
-const signalOptions = computed(() => [...new Set(functions.value.map(item => item.operational_signal).filter(Boolean))].sort())
+const signalOptions = ref<string[]>([])
 const selectedSignalFunctions = computed(() => functions.value.filter(item => item.operational_signal === selectedSignal.value))
 const discoveryBusy = ref(false)
 const discoveryError = ref('')
@@ -86,94 +88,73 @@ async function loadRuns() {
  }
 }
 
-async function loadFunctions() {
- selectedLocalId.value = ''
+async function loadSignals() {
+ const run = selectedRun.value
  selectedSignal.value = ''
- functions.value = []
+ signalOptions.value = []
  discoveryError.value = ''
- if (!selectedRun.value) return
+ if (!run) return
  discoveryBusy.value = true
  try {
-  const url = '/api/ai/vtkg/historian/functions?run_id=' +
-    encodeURIComponent(selectedRun.value) + '&domain=' + encodeURIComponent(selectedDomain.value)
-  const r = await fetch(url)
+  const r = await fetch('/api/ai/vtkg/historian/signals?run_id=' + encodeURIComponent(run))
   const data = await r.json()
-  if (!r.ok) throw new Error(data.error || 'LocalID discovery failed')
-  functions.value = data.functions
-  if (signalOptions.value.length === 1) selectedSignal.value = signalOptions.value[0]
+  if (!r.ok) throw new Error(data.error || 'Signal discovery failed')
+  if (selectedRun.value === run) signalOptions.value = data.signals.map((s:{signal_id:string}) => s.signal_id)
  } catch (e) {
-  discoveryError.value = e instanceof Error ? e.message : String(e)
+  if (selectedRun.value === run) discoveryError.value = e instanceof Error ? e.message : String(e)
  } finally {
   discoveryBusy.value = false
  }
 }
-
 function generatedQuestion(): string {
- if (!selectedRun.value || !selectedLocalId.value) return ''
- const entity = selectedDomain.value === 'DEXPI' ? 'DEXPI InstrumentationFunction' : 'ECAD Device'
+ if (!selectedRun.value || !selectedSignal.value) return ''
  const interval = startSeconds.value !== '' && endSeconds.value !== ''
   ? ` between simulation seconds ${startSeconds.value} and ${endSeconds.value}`
   : startSeconds.value !== '' ? ` from simulation second ${startSeconds.value} onward`
   : endSeconds.value !== '' ? ` up to simulation second ${endSeconds.value}`
   : ' for all simulation times'
- const subject = `${entity} with LocalID ${selectedLocalId.value}`
- const run = `simulation run ${selectedRun.value}`
- const time = interval.trim()
- switch (queryStyle.value) {
-  case 'show': return `Show historical readings for ${subject} in ${run}, ${time}.`
-  case 'plot': return `Plot recorded measurements of ${subject} for ${run}, ${time}.`
-  case 'behave': return `How did ${subject} behave during ${run}, ${time}?`
-  case 'chart': return `Chart historical measurements for ${subject} in ${run}, ${time}.`
-  default: return `Get historian values for ${subject} for ${run}, ${time}.`
- }
+ return `Get historian values for SignalName ${selectedSignal.value} in simulation run ${selectedRun.value},${interval}.`
 }
 function updateGeneratedQuestion() {
  const next = generatedQuestion()
- if (question.value === '' || question.value === lastGeneratedQuestion) {
-  question.value = next
- }
+ if (question.value === '' || question.value === lastGeneratedQuestion) question.value = next
  lastGeneratedQuestion = next
 }
-watch([selectedRun, selectedDomain], () => { void loadFunctions() })
-watch(selectedSignal, () => { selectedLocalId.value = selectedSignalFunctions.value[0]?.engineering_function || ''; knowledgeExpanded.value = false })
-watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds, queryStyle], updateGeneratedQuestion)
+watch(selectedRun, () => { void loadSignals() })
+watch([selectedRun, selectedSignal, startSeconds, endSeconds], updateGeneratedQuestion)
 onMounted(() => { void loadRuns() })
-watch([selectedRun,selectedDomain,selectedLocalId,startSeconds,endSeconds,question],()=>{
- response.value=null
- knowledgeExpanded.value=false
+watch([selectedRun, selectedSignal, startSeconds, endSeconds], () => {
+ directResult.value = null
+ response.value = null
+ knowledgeExpanded.value = false
 })
-
-
 async function run() {
  error.value = ''
+ directResult.value = null
  response.value = null
- if (question.value.trim().length < 5) {
-  error.value = 'Enter a question to continue.'
+ if (!selectedRun.value || !selectedSignal.value) {
+  error.value = 'Select a simulation run and SignalName.'
   return
  }
- const submittedQuestion=question.value
- const submittedContext=JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])
+ const start = startSeconds.value === '' ? null : Number(startSeconds.value)
+ const end = endSeconds.value === '' ? null : Number(endSeconds.value)
+ if ([start,end].some(v => v !== null && (!Number.isFinite(v) || v < 0)) || (start !== null && end !== null && start > end)) {
+  error.value = 'Enter a valid nonnegative simulation-time range.'
+  return
+ }
+ const snapshot = JSON.stringify([selectedRun.value,selectedSignal.value,startSeconds.value,endSeconds.value])
  busy.value = true
  try {
-  const context = selectedRun.value && selectedLocalId.value ? {
-   domain: selectedDomain.value, engineering_function: selectedLocalId.value,
-   run_id: selectedRun.value,
-   start_simulation_seconds: startSeconds.value === '' ? null : Number(startSeconds.value),
-   end_simulation_seconds: endSeconds.value === '' ? null : Number(endSeconds.value)
-  } : undefined
-  const r = await fetch('/api/ai/unified/experimental/answer', {
-   method: 'POST',
-   headers: {'Content-Type':'application/json'},
-   body: JSON.stringify({question: question.value.trim(), ...(context ? {context} : {})})
+  const r = await fetch('/api/ai/vtkg/historian/signal-values', {
+   method: 'POST', headers: {'Content-Type':'application/json'},
+   body: JSON.stringify({run_id:selectedRun.value,signal_id:selectedSignal.value,start_simulation_seconds:start,end_simulation_seconds:end})
   })
   const body = await r.json()
-  if (!r.ok) throw new Error(body.error || 'Experimental historian query failed')
-  if (question.value===submittedQuestion && submittedContext===JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])) { response.value = body as HistorianResponse; knowledgeExpanded.value = false }
+  if (!r.ok) throw new Error(body.error || 'Historian retrieval failed')
+  if (snapshot === JSON.stringify([selectedRun.value,selectedSignal.value,startSeconds.value,endSeconds.value])) directResult.value = body as DirectResult
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
- } finally {
-  busy.value = false
- }
+ } finally { busy.value = false }
 }
 type TraceNode = {id:string;label:string;subtitle:string;kind:'function'|'asset'|'signal'|'run'|'observations';x:number;y:number;source?:GraphNode}
 type TraceLink = {source:string;target:string;label:string;virtual:boolean}
@@ -286,7 +267,7 @@ const activeReasoningInterpretation = computed(()=>reasoningInterpretations.valu
 const completeCount = computed(() => reasoningSummary.value.filter(item => item.status === 'complete').length)
 const eventChart = computed(() => {
  const event = selectedEvent.value
- const samples = (response.value?.result?.observations ?? [])
+ const samples = (directResult.value?.observations ?? response.value?.result?.observations ?? [])
   .filter(p => Number.isFinite(p.simulationTimeHours) && Number.isFinite(p.value))
   .map(p => ({second:p.simulationTimeHours * 3600,value:p.value}))
   .sort((a,b) => a.second-b.second)
@@ -332,10 +313,10 @@ const experimentalChart = computed(() => {
 <template>
  <section class="panel">
   <div class="panel-title"><div><h2>Simulation Historian · Engineering Knowledge Explorer</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
-  <p v-if="!response" class="subdued">Start with a run and SignalName to inspect measurements. Explore the engineering knowledge graph separately when you need cross-domain context.</p>
+  <p v-if="!directResult" class="subdued">Start with a run and SignalName to inspect measurements. Explore the engineering knowledge graph separately when you need cross-domain context.</p>
   <div class="historian-unified-query">
-  <p v-if="!response">Start with recorded signals and simulation time; the engineering knowledge explorer is a second step.</p>
-  <p v-if="!response">Choose a run and a signal. The current API still resolves the signal through an engineering mapping; a direct TimescaleDB signal endpoint is the next backend step.</p>
+  <p v-if="!directResult">Start with recorded signals and simulation time; engineering context can be explored separately.</p>
+  <p v-if="!directResult">SignalNames and values are retrieved directly from TimescaleDB, without a DEXPI or ECAD LocalID.</p>
   <div class="experiment-fields">
    <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
@@ -343,31 +324,35 @@ const experimentalChart = computed(() => {
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
    </select>
    <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
-   <div class="experiment-field"><label for="historian-experiment-domain">Engineering mapping source (temporary)</label>
-   <select id="historian-experiment-domain" v-model="selectedDomain">
-    <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
-   </select></div>
    <div class="experiment-field"><label for="historian-experiment-signal">SignalName</label>
    <select id="historian-experiment-signal" v-model="selectedSignal" :disabled="!selectedRun || discoveryBusy"><option value="">Select signal</option><option v-for="signal in signalOptions" :key="signal" :value="signal">{{signal}}</option></select></div>
-   <div class="experiment-field"><label for="historian-experiment-localid">Engineering mapping used by current API</label>
-   <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
-    <option value="">Select LocalID</option>
-    <option v-for="item in selectedSignalFunctions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
-   </select></div>
-   <div class="experiment-field"><label for="historian-experiment-style">How would you like to ask?</label>
-   <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
    <div class="experiment-field"><label for="historian-experiment-start">From simulation second (optional)</label>
    <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
    <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
    <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
    <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">SignalNames shown here come from the existing GraphDB-backed discovery API, not direct TimescaleDB discovery yet. Leave time fields empty to see the complete available run.</p>
+   <p class="subdued experiment-wide">SignalNames come directly from TimescaleDB. Leave time fields empty for all available simulation times; retrieval is capped at 5,000 rows.</p>
   </div>
-  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · Signal {{selectedSignal || 'not selected'}} · mapped LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
+  <p class="subdued">Run {{selectedRun || 'not selected'}} · Signal {{selectedSignal || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds.</p>
   <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
-  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
-  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Retrieving…' : 'Retrieve historian measurements'}}</button></div>
+  <textarea id="historian-experiment-question" v-model="question" rows="2" class="experiment-question" readonly aria-label="Generated historian query" />
+  <div style="margin-top:12px"><button class="primary" :disabled="busy || !selectedRun || !selectedSignal" @click="run">{{busy ? 'Retrieving…' : 'Retrieve historian measurements'}}</button></div>
   <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
+  <template v-if="directResult">
+   <h3>Historian result · {{directResult.signalId}}</h3>
+   <p>{{directResult.observationCount}} observations · {{directResult.source}} <span v-if="directResult.truncated">· Showing first 5,000 rows; narrow the time range for more.</span></p>
+   <div v-if="experimentalChart" class="vtkg-chart">
+    <div class="vtkg-chart-scroll">
+     <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series for '+directResult.signalId">
+      <g stroke="currentColor" opacity="0.22"><line v-for="tick in experimentalChart.yTicks" :key="'direct-grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y"/></g>
+      <polyline :points="experimentalChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5"/>
+      <g fill="currentColor" font-size="12"><text v-for="tick in experimentalChart.xTicks" :key="'direct-x-'+tick.x" :x="tick.x" y="263" text-anchor="middle">{{tick.label}} s</text><text v-for="tick in experimentalChart.yTicks" :key="'direct-y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text></g>
+     </svg>
+    </div>
+   </div>
+   <p v-else class="subdued">No numeric observations available to graph.</p>
+   <p class="subdued">Engineering knowledge is not queried during historian retrieval. VTKG signal-first exploration requires a separate backend integration.</p>
+  </template>
   <template v-if="response">
    <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
    <template v-if="response.intent === 'engineering_query'">
