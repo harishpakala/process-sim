@@ -168,6 +168,47 @@ async function run() {
   busy.value = false
  }
 }
+const selectedReasoningTab = ref<'overview'|'evidence'>('overview')
+const selectedEventId = ref('')
+const reasoningEvents = computed(() => reasoning.value?.R04.events ?? [])
+const selectedEvent = computed(() => reasoningEvents.value.find(event => event.eventId === selectedEventId.value) ?? reasoningEvents.value[0] ?? null)
+const eventDelta = computed(() => selectedEvent.value?.beforeMean != null && selectedEvent.value?.afterMean != null
+ ? selectedEvent.value.afterMean - selectedEvent.value.beforeMean : null)
+const eventPercent = computed(() => eventDelta.value != null && selectedEvent.value?.beforeMean
+ ? eventDelta.value / Math.abs(selectedEvent.value.beforeMean) * 100 : null)
+const eventSecond = computed(() => selectedEvent.value ? selectedEvent.value.simulationTimeHours * 3600 : null)
+const reasoningSummary = computed(() => [
+ {id:'R01',label:'Engineering to observations',status:reasoning.value?.R01.status ?? 'unavailable'},
+ {id:'R02',label:'Reverse traceability',status:reasoning.value?.R02.status ?? 'unavailable'},
+ {id:'R03',label:'Cross-domain shared signal',status:reasoning.value?.R03.status ?? 'unavailable'},
+ {id:'R04',label:'Recorded-command comparison',status:reasoning.value?.R04.status ?? 'unavailable'},
+ {id:'R05',label:'Combined association',status:reasoning.value?.R05.status ?? 'unavailable'}
+])
+const completeCount = computed(() => reasoningSummary.value.filter(item => item.status === 'complete').length)
+const eventChart = computed(() => {
+ const event = selectedEvent.value
+ const samples = (response.value?.result?.observations ?? [])
+  .filter(p => Number.isFinite(p.simulationTimeHours) && Number.isFinite(p.value))
+  .map(p => ({second:p.simulationTimeHours * 3600,value:p.value}))
+  .sort((a,b) => a.second-b.second)
+ if (!event || !samples.length) return null
+ const t=event.simulationTimeHours*3600
+ const window=event.windowSeconds || 30
+ const visible=samples.filter(p => p.second >= t-window && p.second <= t+window)
+ if (!visible.length) return null
+ const minV=Math.min(...visible.map(p=>p.value)),maxV=Math.max(...visible.map(p=>p.value))
+ const padding=(maxV-minV || Math.max(Math.abs(minV),1))*0.12
+ const low=minV-padding,high=maxV+padding
+ const left=64,right=716,top=22,bottom=215
+ const x=(second:number)=>left+(second-(t-window))/(2*window)*(right-left)
+ const y=(value:number)=>bottom-(value-low)/(high-low)*(bottom-top)
+ return {points:visible.map(p=>({...p,x:x(p.second),y:y(p.value)})),
+  polyline:visible.map(p=>`${x(p.second)},${y(p.value)}`).join(' '),
+  markerX:x(t),left,right,top,bottom,
+  xTicks:[t-window,t-window/2,t,t+window/2,t+window].map(second=>({x:x(second),label:second.toFixed(0)})),
+  yTicks:[0,1,2,3,4].map(i=>({y:bottom-(bottom-top)*i/4,label:(low+(high-low)*i/4).toFixed(2)}))}
+})
+watch(graph, () => { selectedReasoningTab.value='overview'; selectedEventId.value='' })
 const experimentalChart = computed(() => {
  const samples = (response.value?.result?.observations ?? [])
   .filter(p => Number.isFinite(p.simulationTimeHours) && Number.isFinite(p.value))
@@ -197,58 +238,106 @@ const experimentalChart = computed(() => {
    <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'"  :disabled="!graphReady" @click="historianMode='reasoning'">VTKG Reasoning</button>
   </div>
   <p v-if="!graphReady" class="subdued">Run a historian query to construct the VTKG and unlock live reasoning.</p>
-  <div v-if="historianMode === 'reasoning' && graphReady && graph">
-   <h3>Active VTKG context</h3>
-   <p>{{graph.nodes.length}} nodes · {{graph.edges.length}} edges · query-scoped, not materialized</p>
+  <div v-if="historianMode === 'reasoning' && graphReady && graph" class="reasoning-dashboard">
+   <div class="reasoning-header">
+    <div><h3>Live reasoning overview</h3><p class="subdued">{{r01?.function.domain || 'Engineering'}} · {{r01?.function.localId || '—'}} → {{r01?.signal.signalId || '—'}}</p></div>
+    <span class="reasoning-count" role="status">{{completeCount}} / 5 operators complete</span>
+   </div>
+   <div class="reasoning-metrics">
+    <div><span>Observations</span><strong>{{r01?.observationCount ?? 0}}</strong></div>
+    <div><span>Graph nodes</span><strong>{{graph.nodes.length}}</strong></div>
+    <div><span>Graph edges</span><strong>{{graph.edges.length}}</strong></div>
+   </div>
+   <p class="subdued">Query-scoped virtual graph · not materialized · physical sensor binding {{r01?.provenance.physicalSensorBinding || 'NOT_VERIFIED'}}</p>
+   <div class="reasoning-tabs" role="group" aria-label="Reasoning display">
+    <button type="button" :class="selectedReasoningTab==='overview'?'primary':'secondary'" :aria-pressed="selectedReasoningTab==='overview'" @click="selectedReasoningTab='overview'">Visual overview</button>
+    <button type="button" :class="selectedReasoningTab==='evidence'?'primary':'secondary'" :aria-pressed="selectedReasoningTab==='evidence'" @click="selectedReasoningTab='evidence'">Evidence explorer</button>
+   </div>
    <template v-if="r01">
-    <h3>R01 · Explainable engineering-to-observation association</h3>
-    <p><strong>{{r01.function.domain}} · {{r01.function.localId}}</strong> → <strong>{{r01.signal.signalId}}</strong> ← <strong>{{r01.observationCount}} observations</strong></p>
-    <p>Run: <code>{{r01.run.runId}}</code> · Asset reference: <code>{{r01.asset.identifier}}</code></p>
-    <p role="status">R01 validated {{r01.observationCount}} observation paths against the historian response.</p>
-    <h4>Graph evidence and provenance</h4>
-    <ol><li v-for="edge in r01.path" :key="edge.source+edge.predicate+edge.target"><code>{{edge.source}}</code> <strong>—{{edge.predicate}}→</strong> <code>{{edge.target}}</code></li></ol>
-    <p class="subdued">Engineering mapping: {{r01.provenance.engineeringMapping}} · Observations: {{r01.provenance.observations}} · Physical sensor binding: {{r01.provenance.physicalSensorBinding}} · Not materialized in GraphDB.</p>
-    <details><summary>Supporting observation evidence ({{r01.observationCount}} records)</summary>
-     <p>Each observation has explicit observesSignal and belongsToRun edges. Select an observation identity to inspect its graph path.</p>
-     <div class="evidence-scroll"><table class="evidence-table"><thead><tr><th>Simulation second</th><th>Value</th><th>Observed at</th><th>Graph evidence</th></tr></thead>
-      <tbody><tr v-for="item in visibleEvidence" :key="item.id"><td>{{((item.simulationTimeHours ?? 0)*3600).toFixed(3)}}</td><td>{{item.value}}</td><td>{{item.observedAt}}</td><td><details><summary>{{item.id.split('/').pop()}}</summary><p v-for="edge in item.path" :key="edge.predicate"><code>{{edge.source}} —{{edge.predicate}}→ {{edge.target}}</code></p><p>Content fingerprint: <code>{{item.contentFingerprint}}</code></p></details></td></tr></tbody>
-     </table></div>
-     <div class="evidence-pagination"><button type="button" class="secondary" :disabled="evidencePage===1" @click="evidencePage--">Previous</button><span>Page {{evidencePage}} of {{evidencePages}}</span><button type="button" class="secondary" :disabled="evidencePage===evidencePages" @click="evidencePage++">Next</button></div>
-    </details>
-    <h3>R02 · Reverse engineering traceability</h3>
-    <p>{{reasoning!.R02.engineeringFunctions.length}} engineering function(s) mapped to {{r01.signal.signalId}} within this query-scoped graph.</p>
-    <ul><li v-for="fn in reasoning!.R02.engineeringFunctions" :key="fn.id"><strong>{{fn.domain}} · {{fn.localId}}</strong> —mapsToSignal→ {{r01.signal.signalId}} <details><summary>Show source edge</summary><pre>{{JSON.stringify(fn.path,null,2)}}</pre></details></li></ul>
-    <p class="subdued">{{reasoning!.R02.scope}}</p>
-    <h3>R03 · Cross-domain shared signal</h3>
-    <template v-if="reasoning!.R03.status==='complete'"><p role="status">DEXPI and ECAD functions are both associated with {{reasoning!.R03.sharedSignal}}.</p><ul><li v-for="fn in reasoning!.R03.engineeringFunctions" :key="fn.id">{{fn.domain}} · {{fn.localId}}</li></ul></template>
-    <p v-else>Insufficient cross-domain evidence in this snapshot. Domains found: {{reasoning!.R03.domainsPresent.join(', ') || 'none'}}.</p>
-    <p class="subdued">{{reasoning!.R03.interpretation}}</p>
-    <h3>R04 · Recorded-command temporal comparison</h3>
-    <template v-if="reasoning!.R04.events?.length">
-     <p role="status"><strong>R04: temporal calculation {{reasoning!.R04.status === 'complete' ? 'available' : 'insufficient'}}.</strong> A completed calculation does not establish that the command targets {{reasoning!.R01.signal.signalId}} or caused a change.</p>
-     <div v-for="event in reasoning!.R04.events" :key="event.eventId">
-      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}} · temporal calculation: {{event.status}}</p>
-      <p class="command-relevance" :class="event.relevance === 'target_verified' ? 'command-relevance-matched' : 'command-relevance-unverified'" role="status"><strong>{{event.relevance === 'target_verified' ? 'Exact target match' : event.relevance === 'target_missing' ? 'Target not recorded — relevance unknown' : 'Target mismatch — signal relevance not established'}}</strong> · Command target: {{event.target || 'not recorded'}} · Selected signal: {{reasoning!.R01.signal.signalId}}</p>
-      <p>Fault: {{event.faultId || 'not recorded'}} ({{event.faultType || 'unknown'}}) · Source: {{event.eventSource || 'not recorded'}}</p>
-      <p>Windows: {{event.windowBeforeSeconds.join('–')}} s before; {{event.windowAfterSeconds.join('–')}} s after ({{event.windowSeconds}} seconds per side).</p>
-      <p>Before: {{event.beforeCount}} observations, mean {{event.beforeMean ?? 'unavailable'}} · At event: {{event.atCount}} · After: {{event.afterCount}} observations, mean {{event.afterMean ?? 'unavailable'}}</p>
-      <details><summary>Show event provenance and selected observation IDs</summary><pre>{{JSON.stringify({commandEdge:event.path,beforeObservationIds:event.beforeObservationIds,afterObservationIds:event.afterObservationIds},null,2)}}</pre></details>
-     </div>
+    <template v-if="selectedReasoningTab==='overview'">
+     <section class="reasoning-card" aria-label="Engineering traceability">
+      <h4>Engineering traceability</h4>
+      <div class="mapping-domains">
+       <div v-for="fn in reasoning!.R02.engineeringFunctions" :key="fn.id" class="mapping-node"><small>{{fn.domain}}</small><strong>{{fn.localId}}</strong></div>
+      </div>
+      <div class="mapping-connector">↓ Shared operational signal · asset {{r01.asset.identifier}}</div>
+      <div class="mapping-signal"><strong>{{r01.signal.signalId}}</strong><span>{{r01.observationCount}} historian observations</span></div>
+      <p class="subdued">Engineering association from GraphDB; physical identity is not verified.</p>
+     </section>
+     <section class="reasoning-card" aria-label="Recorded command and temporal comparison">
+      <h4>Recorded command · temporal comparison</h4>
+      <template v-if="reasoningEvents.length">
+       <label v-if="reasoningEvents.length > 1" for="reasoning-event-choice">Recorded event</label>
+       <select v-if="reasoningEvents.length > 1" id="reasoning-event-choice" v-model="selectedEventId">
+        <option v-for="ev in reasoningEvents" :key="ev.eventId" :value="ev.eventId">{{(ev.simulationTimeHours*3600).toFixed(1)}} s · {{ev.action}} · {{ev.target || 'unknown target'}}</option>
+       </select>
+       <template v-if="selectedEvent">
+        <div class="reasoning-event-header">
+         <strong>{{selectedEvent.action}} · {{eventSecond?.toFixed(1)}} s</strong>
+         <span :class="selectedEvent.relevance==='target_verified'?'reasoning-positive':'reasoning-caution'" role="status">{{selectedEvent.relevance==='target_verified'?'Exact target match':selectedEvent.relevance==='target_missing'?'Target missing':'Target mismatch'}}</span>
+        </div>
+        <p class="subdued">Command target {{selectedEvent.target || 'not recorded'}} · selected signal {{r01.signal.signalId}} · {{selectedEvent.faultId || 'Unknown fault'}} ({{selectedEvent.faultType || 'type unknown'}})</p>
+        <div v-if="eventChart" class="reasoning-plot-scroll">
+         <svg viewBox="0 0 760 270" role="img" :aria-label="'Signal values around recorded command at '+eventSecond+' seconds; vertical dashed line marks command time'">
+          <g stroke="currentColor" opacity=".16"><line v-for="tick in eventChart.yTicks" :key="tick.y" :x1="eventChart.left" :x2="eventChart.right" :y1="tick.y" :y2="tick.y"/></g>
+          <g fill="currentColor" font-size="12">
+           <text v-for="tick in eventChart.xTicks" :key="tick.x" :x="tick.x" y="235" text-anchor="middle">{{tick.label}}</text>
+           <text v-for="tick in eventChart.yTicks" :key="tick.y" x="57" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
+           <text x="390" y="260" text-anchor="middle">Simulation time (seconds)</text>
+          </g>
+          <line :x1="eventChart.markerX" :x2="eventChart.markerX" :y1="eventChart.top" :y2="eventChart.bottom" stroke="#f59e0b" stroke-width="2" stroke-dasharray="6 5"/>
+          <text :x="eventChart.markerX+6" y="17" fill="#fbbf24" font-size="12">Command</text>
+          <polyline :points="eventChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round"/>
+          <circle v-for="p in eventChart.points" :key="p.second" :cx="p.x" :cy="p.y" r="3" fill="#38bdf8"><title>{{p.second.toFixed(2)}} s · {{p.value}}</title></circle>
+         </svg>
+        </div>
+        <p v-else class="subdued">No numeric observations available for the selected event window.</p>
+        <div class="reasoning-metrics comparison-metrics">
+         <div><span>Before mean · {{selectedEvent.beforeCount}} samples</span><strong>{{selectedEvent.beforeMean?.toFixed(4) ?? 'Unavailable'}}</strong></div>
+         <div><span>After mean · {{selectedEvent.afterCount}} samples</span><strong>{{selectedEvent.afterMean?.toFixed(4) ?? 'Unavailable'}}</strong></div>
+         <div><span>Mean difference</span><strong>{{eventDelta === null ? 'Unavailable' : (eventDelta >= 0 ? '+' : '') + eventDelta.toFixed(4)}}</strong><small v-if="eventPercent !== null">{{eventPercent >= 0 ? '+' : ''}}{{eventPercent.toFixed(2)}}%</small></div>
+        </div>
+        <p class="subdued">Equal {{selectedEvent.windowSeconds}}-second windows · {{selectedEvent.atCount}} observations exactly at the command time · descriptive association only, not causal evidence.</p>
+       </template>
+      </template>
+      <p v-else class="subdued">No run-linked recorded commands available. {{reasoning!.R04.reason}}</p>
+     </section>
+     <section class="reasoning-card">
+      <h4>Reasoning checks</h4>
+      <div v-for="item in reasoningSummary" :key="item.id" class="reasoning-check">
+       <span><strong>{{item.id}}</strong> · {{item.label}}</span>
+       <span :class="item.status==='complete'?'reasoning-positive':'reasoning-caution'">{{item.status==='complete'?'✓ Complete':item.status.replaceAll('_',' ')}}</span>
+      </div>
+      <p v-if="reasoning!.R05.status!=='complete'" class="subdued" role="status">R05 not established: {{reasoning!.R05.reason}}. A descriptive R04 result does not establish target relevance.</p>
+      <p v-else class="subdued">R05 combines cross-domain mapping with {{reasoning!.R05.temporalEvents?.length ?? 0}} qualifying exact-target recorded event(s).</p>
+     </section>
     </template>
-    <p v-if="reasoning!.R04.status!=='complete'">Insufficient evidence: {{reasoning!.R04.reason}}</p>
-    <p class="subdued">{{reasoning!.R04.interpretation}}</p>
-    <h3>R05 · Combined cross-domain and temporal association</h3>
-    <template v-if="reasoning!.R05.status==='complete'">
-     <p role="status">Cross-domain mappings and exact-target recorded-command evidence are linked for signal {{reasoning!.R05.sharedSignal}}.</p>
-     <p>{{reasoning!.R05.engineeringFunctions?.map(fn => fn.domain+' · '+fn.localId).join(' / ')}}</p>
-     <p>Qualified recorded events: {{reasoning!.R05.temporalEvents?.length}} · Target verification: {{reasoning!.R05.targetVerification}}</p>
-     <p class="subdued">{{reasoning!.R05.interpretation}}</p>
+    <template v-else>
+     <section class="reasoning-card">
+      <h4>Engineering mapping evidence</h4>
+      <p>{{r01.function.domain}} {{r01.function.localId}} → {{r01.signal.signalId}} · asset {{r01.asset.identifier}}</p>
+      <details><summary>R01 source graph edges</summary><pre>{{JSON.stringify(r01.path,null,2)}}</pre></details>
+      <details><summary>R02 reverse engineering paths</summary><pre>{{JSON.stringify(reasoning!.R02.engineeringFunctions,null,2)}}</pre></details>
+      <details><summary>R03 cross-domain evidence</summary><pre>{{JSON.stringify(reasoning!.R03,null,2)}}</pre></details>
+     </section>
+     <section class="reasoning-card">
+      <h4>Observation provenance ({{r01.observationCount}} records)</h4>
+      <p class="subdued">Select an observation to inspect its graph edges and fingerprint.</p>
+      <div class="evidence-scroll"><table class="evidence-table"><thead><tr><th>Second</th><th>Value</th><th>Observed at</th><th>Evidence</th></tr></thead>
+       <tbody><tr v-for="item in visibleEvidence" :key="item.id"><td>{{((item.simulationTimeHours ?? 0)*3600).toFixed(3)}}</td><td>{{item.value}}</td><td>{{item.observedAt}}</td><td><details><summary>Inspect observation</summary><pre>{{JSON.stringify({id:item.id,path:item.path,contentFingerprint:item.contentFingerprint},null,2)}}</pre></details></td></tr></tbody>
+      </table></div>
+      <div class="evidence-pagination"><button type="button" class="secondary" :disabled="evidencePage===1" @click="evidencePage--">Previous</button><span>Page {{evidencePage}} of {{evidencePages}}</span><button type="button" class="secondary" :disabled="evidencePage===evidencePages" @click="evidencePage++">Next</button></div>
+     </section>
+     <section class="reasoning-card">
+      <h4>Recorded-command provenance</h4>
+      <details v-for="ev in reasoningEvents" :key="ev.eventId"><summary>{{ev.action}} at {{(ev.simulationTimeHours*3600).toFixed(1)}} s · {{ev.target || 'unknown target'}} · {{ev.status}}</summary><pre>{{JSON.stringify(ev,null,2)}}</pre></details>
+      <details><summary>R05 combined evidence</summary><pre>{{JSON.stringify(reasoning!.R05,null,2)}}</pre></details>
+     </section>
     </template>
-    <p v-else role="status"><strong>R05 not established.</strong> {{reasoning!.R05.reason}} R04 may still report a valid descriptive comparison for an unrelated command.</p>
    </template>
-   <p v-else role="alert">Structured R01 reasoning is unavailable for this snapshot. Inspect the graph or backend log; a node count alone is not a reasoning result.</p>
-   <details><summary>Inspect full query-scoped graph JSON</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
-   <p class="subdued">R04/R05 are enabled only with run-linked recorded commands and sufficient temporal evidence. No physical causation is inferred.</p>
+   <p v-else role="alert">Structured R01 reasoning is unavailable for this snapshot. Inspect the raw graph or backend log.</p>
+   <details class="reasoning-raw"><summary>Full query-scoped graph JSON (advanced)</summary><pre>{{JSON.stringify(graph,null,2)}}</pre></details>
+   <p class="subdued">Source-linked virtual reasoning · no physical sensor verification or causal attribution.</p>
   </div>
   <div v-show="historianMode === 'retrieval'">
   <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
@@ -351,4 +440,29 @@ const experimentalChart = computed(() => {
 .command-relevance { padding: 10px 12px; border: 1px solid; border-radius: 6px; }
 .command-relevance-matched { border-color: #408a73; background: rgba(64,138,115,.10); }
 .command-relevance-unverified { border-color: #b88a42; background: rgba(184,138,66,.12); }
+.reasoning-dashboard { display:grid; gap:16px; margin-top:16px; min-width:0; }
+.reasoning-header,.reasoning-event-header { display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; }
+.reasoning-header h3,.reasoning-card h4 { margin:0 0 6px; }
+.reasoning-count { border:1px solid #408a73; border-radius:20px; padding:7px 12px; color:#a7f3d0; font-weight:600; font-size:13px; }
+.reasoning-metrics { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; }
+.reasoning-metrics>div { display:flex; flex-direction:column; gap:5px; background:#14263b; border:1px solid #334a62; border-radius:10px; padding:14px; min-width:0; }
+.reasoning-metrics span,.reasoning-metrics small { color:#b5c8d9; font-size:12px; }
+.reasoning-metrics strong { font-size:22px; overflow-wrap:anywhere; }
+.reasoning-tabs { display:flex; flex-wrap:wrap; gap:8px; }
+.reasoning-card { border:1px solid #334a62; border-radius:12px; padding:16px; min-width:0; }
+.mapping-domains { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+.mapping-node,.mapping-signal { display:flex; flex-direction:column; align-items:center; gap:5px; background:#14263b; border:1px solid #3d5973; border-radius:10px; padding:13px 20px; }
+.mapping-node small,.mapping-signal span { color:#b5c8d9; font-size:12px; }
+.mapping-connector { text-align:center; color:#b5c8d9; font-size:12px; padding:14px 0; overflow-wrap:anywhere; }
+.mapping-signal { margin:auto; max-width:300px; border-color:#408a73; }
+.reasoning-plot-scroll { overflow-x:auto; width:100%; }
+.reasoning-plot-scroll svg { display:block; width:100%; min-width:540px; }
+.reasoning-positive { color:#86efac; font-weight:600; }
+.reasoning-caution { color:#fbbf24; font-weight:600; }
+.reasoning-check { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:10px 0; border-bottom:1px solid #334a62; flex-wrap:wrap; }
+.reasoning-card pre,.reasoning-raw pre { overflow:auto; max-height:350px; white-space:pre-wrap; overflow-wrap:anywhere; font-size:11px; }
+.reasoning-card details { margin:10px 0; }
+.reasoning-card summary { cursor:pointer; }
+.reasoning-raw { min-width:0; }
+@media(max-width:650px) { .reasoning-metrics { grid-template-columns:1fr; } .reasoning-metrics strong { font-size:19px; } }
 </style>
