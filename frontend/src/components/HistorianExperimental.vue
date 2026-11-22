@@ -171,6 +171,7 @@ async function run() {
 type TraceNode = {id:string;label:string;subtitle:string;kind:'function'|'asset'|'signal'|'run'|'observations';x:number;y:number;source?:GraphNode}
 type TraceLink = {source:string;target:string;label:string;virtual:boolean}
 const traceSelection = ref('')
+const traceLinkSelection = ref('')
 const traceZoom = ref(1)
 const tracePan = ref({x:0,y:0})
 const traceDragging = ref<{x:number;y:number;panX:number;panY:number}|null>(null)
@@ -201,6 +202,20 @@ const traceGraph = computed(() => {
  links.push({source:r.signal.id,target:'observation-group',label:'observesSignal',virtual:true})
  return {nodes,links}
 })
+const selectedTraceLink = computed(()=>traceGraph.value.links.find(link=>link.source+'|'+link.target===traceLinkSelection.value) ?? null)
+const traceLinkExplanation = computed(()=>{
+ const link=selectedTraceLink.value
+ const r=r01.value
+ if (!link || !r) return null
+ const source=traceGraph.value.nodes.find(n=>n.id===link.source)
+ const target=traceGraph.value.nodes.find(n=>n.id===link.target)
+ const fn=reasoning.value?.R02.engineeringFunctions.find(item=>item.id===link.source)
+ const paths=[...(fn?.path ?? []),...r.path].filter(edge=>edge.source===link.source || edge.target===link.target)
+ if (link.target===r.asset.id) return {title:'Engineering function → shared asset',meaning:`The engineering function ${source?.label ?? ''} is associated with asset identifier ${r.asset.identifier}. This is a cross-source join key, not proof that two engineering records refer to the same physical sensor.`,evidence:fn?.path ?? [],source:'GraphDB engineering mappings; query-scoped virtual projection',limitation:'Physical binding NOT_VERIFIED.'}
+ if (link.source===r.asset.id) return {title:'Shared asset → operational signal',meaning:`The shared asset identifier links the engineering mapping to operational signal ${r.signal.signalId}. This is an inferred semantic association assembled from source mappings, not a direct GraphDB triple.`,evidence:r.path,source:'GraphDB OPC UA connectivity mapping and VTKG projection',limitation:'OPC UA mapping may be provisional; physical sensor identity is not verified.'}
+ if (link.source===r.run.id) return {title:'Simulation run → signal',meaning:`The selected run ${r.run.runId} contains recorded observations for ${r.signal.signalId}.`,evidence:paths,source:'Historian retrieval and query-scoped run graph',limitation:'A run association does not imply engineering or physical identity.'}
+ return {title:'Signal → historian observations',meaning:`The virtual graph links ${r.signal.signalId} to ${r.observationCount} source-linked observations. Each observation has its own identity, time, value and provenance fingerprint.`,evidence:r.observations.slice(0,2).flatMap(o=>o.path),source:'TimescaleDB signal_samples; VTKG observation projection',limitation:'The grouped node summarizes observations; it is not a materialized RDF collection.'}
+})
 const selectedTraceNode = computed(()=>traceGraph.value.nodes.find(node=>node.id===traceSelection.value) ?? null)
 const selectedTracePaths = computed(()=>{
  const id=traceSelection.value
@@ -214,9 +229,9 @@ const traceVisibleLinks = computed(()=>traceGraph.value.links.filter(link=>{
  if (traceOperator.value==='R02'||traceOperator.value==='R03') return link.target===r01.value?.asset.id || link.target===r01.value?.signal.id
  return true
 }))
-function traceReset() {traceZoom.value=1;tracePan.value={x:0,y:0};traceSelection.value='';traceOperator.value='all'}
+function traceReset() {traceZoom.value=1;tracePan.value={x:0,y:0};traceSelection.value='';traceLinkSelection.value='';traceOperator.value='all'}
 function tracePointerDown(event:PointerEvent) {
- if (event.button!==0 || (event.target as Element).closest('[data-trace-node]')) return
+ if (event.button!==0 || (event.target as Element).closest('[data-trace-node], [data-trace-link]')) return
  traceDragging.value={x:event.clientX,y:event.clientY,panX:tracePan.value.x,panY:tracePan.value.y}
  ;(event.currentTarget as Element).setPointerCapture(event.pointerId)
 }
@@ -245,6 +260,22 @@ const reasoningSummary = computed(() => [
  {id:'R04',label:'Recorded-command comparison',status:reasoning.value?.R04.status ?? 'unavailable'},
  {id:'R05',label:'Combined association',status:reasoning.value?.R05.status ?? 'unavailable'}
 ])
+const selectedReasoningExplanation = ref('R01')
+const reasoningInterpretations = computed(()=>{
+ const r=reasoning.value, one=r01.value, event=selectedEvent.value
+ if (!r || !one) return []
+ const fns=r.R02.engineeringFunctions.map(fn=>`${fn.domain} ${fn.localId}`).join(' and ')
+ const exact=event?.relevance==='target_verified'
+ const delta=event?.beforeMean != null && event.afterMean != null ? event.afterMean-event.beforeMean : null
+ return [
+ {id:'R01',question:'Which engineering function leads to these readings?',conclusion:`${one.function.domain} ${one.function.localId} is associated with operational signal ${one.signal.signalId}; ${one.observationCount} historian observations are reachable through the virtual graph.`,evidence:`GraphDB engineering mapping, run ${one.run.runId}, and ${one.observationCount} source-linked observation paths.`,limit:'This is a semantic association, not verified physical sensor identity.'},
+ {id:'R02',question:'Can we trace backward from the signal?',conclusion:`Starting from ${one.signal.signalId}, the graph identifies ${r.R02.engineeringFunctions.length} engineering function(s): ${fns || 'none'}.`,evidence:'Reverse traversal of the engineering-to-signal associations in this query-scoped snapshot.',limit:'Only mappings present in this retrieved snapshot are covered.'},
+ {id:'R03',question:'Do engineering domains converge on one signal?',conclusion:r.R03.status==='complete' ? `The engineering domains ${r.R03.domainsPresent.join(' and ')} share the operational signal ${r.R03.sharedSignal}.` : 'The available graph does not establish a cross-domain shared signal.',evidence:`${r.R03.engineeringFunctions.length} engineering functions; domain evidence: ${r.R03.domainsPresent.join(', ') || 'none'}.`,limit:'Shared signal identifiers do not prove physical instrument equivalence.'},
+ {id:'R04',question:'What changed around the recorded command?',conclusion:event ? `A recorded ${event.action} command at ${(event.simulationTimeHours*3600).toFixed(1)} s targets ${event.target || 'an unspecified signal'}. ${exact?'Its target matches the selected signal.':'Its target is not verified as the selected signal.'} ${delta===null?'The before/after mean difference is unavailable.':`The descriptive mean difference is ${delta>=0?'+':''}${delta.toFixed(4)}.`}` : 'No comparable recorded command is available.',evidence:event ? `${event.beforeCount} before and ${event.afterCount} after observations in ${event.windowSeconds}-second windows; ${event.atCount} observations at the exact event time.` : r.R04.reason,limit:'Temporal proximity and matching targets do not establish causation.'},
+ {id:'R05',question:'Can cross-domain and temporal evidence be combined?',conclusion:r.R05.status==='complete' ? `The shared-signal engineering association and ${r.R05.temporalEvents?.length ?? 0} qualifying exact-target recorded command(s) form one source-linked explanation.` : `Combined evidence is not established: ${r.R05.reason || 'requirements not met'}.`,evidence:`R03: ${r.R03.status}; R04: ${r.R04.status}; exact-target evidence required for R05.`,limit:'This is an evidence-linked association, not proof of a physical fault or causal mechanism.'}
+ ].map(item=>({...item,status:r[item.id as keyof ReasoningResult].status}))
+})
+const activeReasoningInterpretation = computed(()=>reasoningInterpretations.value.find(item=>item.id===selectedReasoningExplanation.value) ?? reasoningInterpretations.value[0] ?? null)
 const completeCount = computed(() => reasoningSummary.value.filter(item => item.status === 'complete').length)
 const eventChart = computed(() => {
  const event = selectedEvent.value
@@ -330,13 +361,13 @@ const experimentalChart = computed(() => {
        <div class="trace-canvas">
         <svg viewBox="0 0 700 510" role="group" aria-label="Interactive semantic association diagram" @pointerdown="tracePointerDown" @pointermove="tracePointerMove" @pointerup="tracePointerUp" @pointercancel="tracePointerUp">
          <g :transform="`translate(${350+tracePan.x} ${255+tracePan.y}) scale(${traceZoom}) translate(-350 -255)`">
-          <g v-for="(link,index) in traceVisibleLinks" :key="index">
+          <g v-for="(link,index) in traceVisibleLinks" :key="index" data-trace-link role="button" tabindex="0" :aria-label="'Explain '+link.label" :aria-pressed="traceLinkSelection===link.source+'|'+link.target" class="trace-link-hit" @click="traceLinkSelection=link.source+'|'+link.target;traceSelection=''" @keydown.enter.prevent="traceLinkSelection=link.source+'|'+link.target;traceSelection=''" @keydown.space.prevent="traceLinkSelection=link.source+'|'+link.target;traceSelection=''">
            <template v-if="traceGraph.nodes.find(n=>n.id===link.source) && traceGraph.nodes.find(n=>n.id===link.target)">
-            <line :x1="traceGraph.nodes.find(n=>n.id===link.source)!.x" :y1="traceGraph.nodes.find(n=>n.id===link.source)!.y+24" :x2="traceGraph.nodes.find(n=>n.id===link.target)!.x" :y2="traceGraph.nodes.find(n=>n.id===link.target)!.y-24" :class="['trace-edge',selectedTraceNode && link.source!==selectedTraceNode.id && link.target!==selectedTraceNode.id?'trace-muted':'']"/>
+            <line :x1="traceGraph.nodes.find(n=>n.id===link.source)!.x" :stroke-width="12" stroke="transparent" class="trace-hit-line" :y1="traceGraph.nodes.find(n=>n.id===link.source)!.y+24" :x2="traceGraph.nodes.find(n=>n.id===link.target)!.x" :y2="traceGraph.nodes.find(n=>n.id===link.target)!.y-24"/><line :x1="traceGraph.nodes.find(n=>n.id===link.source)!.x" :y1="traceGraph.nodes.find(n=>n.id===link.source)!.y+24" :x2="traceGraph.nodes.find(n=>n.id===link.target)!.x" :y2="traceGraph.nodes.find(n=>n.id===link.target)!.y-24" :class="['trace-edge',selectedTraceNode && link.source!==selectedTraceNode.id && link.target!==selectedTraceNode.id?'trace-muted':'',traceLinkSelection===link.source+'|'+link.target?'trace-edge-selected':'']"/>
             <text :x="(traceGraph.nodes.find(n=>n.id===link.source)!.x+traceGraph.nodes.find(n=>n.id===link.target)!.x)/2+7" :y="(traceGraph.nodes.find(n=>n.id===link.source)!.y+traceGraph.nodes.find(n=>n.id===link.target)!.y)/2-5" class="trace-edge-label">{{link.label}}</text>
            </template>
           </g>
-          <g v-for="node in traceGraph.nodes" :key="node.id" data-trace-node tabindex="0" role="button" :aria-label="'Inspect '+node.label" :aria-pressed="traceSelection===node.id" :transform="`translate(${node.x} ${node.y})`" class="trace-node" @click="traceSelection=node.id" @keydown.enter.prevent="traceSelection=node.id" @keydown.space.prevent="traceSelection=node.id">
+          <g v-for="node in traceGraph.nodes" :key="node.id" data-trace-node tabindex="0" role="button" :aria-label="'Inspect '+node.label" :aria-pressed="traceSelection===node.id" :transform="`translate(${node.x} ${node.y})`" class="trace-node" @click="traceSelection=node.id;traceLinkSelection=''" @keydown.enter.prevent="traceSelection=node.id;traceLinkSelection=''" @keydown.space.prevent="traceSelection=node.id;traceLinkSelection=''">
            <rect x="-92" y="-28" width="184" height="56" rx="10" :class="['trace-node-box','trace-'+node.kind,traceSelection===node.id?'trace-selected':'']"/>
            <text text-anchor="middle" y="-5" class="trace-node-label">{{node.label.length>23?node.label.slice(0,21)+'…':node.label}}</text>
            <text text-anchor="middle" y="13" class="trace-node-subtitle">{{node.subtitle.length>27?node.subtitle.slice(0,25)+'…':node.subtitle}}</text>
@@ -345,7 +376,14 @@ const experimentalChart = computed(() => {
         </svg>
        </div>
        <aside class="trace-inspector" aria-live="polite">
-        <template v-if="selectedTraceNode">
+        <template v-if="selectedTraceLink && traceLinkExplanation">
+         <h5>{{traceLinkExplanation.title}}</h5>
+         <p>{{traceLinkExplanation.meaning}}</p>
+         <p class="subdued"><strong>Evidence source:</strong> {{traceLinkExplanation.source}}</p>
+         <p class="trace-limitation"><strong>Boundary:</strong> {{traceLinkExplanation.limitation}}</p>
+         <details><summary>Inspect supporting graph paths</summary><pre>{{JSON.stringify(traceLinkExplanation.evidence,null,2)}}</pre></details>
+        </template>
+        <template v-else-if="selectedTraceNode">
          <h5>{{selectedTraceNode.label}}</h5>
          <p class="subdued">{{selectedTraceNode.subtitle}}</p>
          <dl><dt>Virtual node ID</dt><dd><code>{{selectedTraceNode.id}}</code></dd>
@@ -357,10 +395,10 @@ const experimentalChart = computed(() => {
          <template v-if="selectedTraceNode.kind==='observations'"><button type="button" class="secondary" @click="selectedReasoningTab='evidence'">Open observation evidence</button></template>
          <template v-if="selectedTraceNode.kind==='function'"><details><summary>GraphDB-derived engineering association</summary><pre>{{JSON.stringify(reasoning!.R02.engineeringFunctions.find(fn=>fn.id===selectedTraceNode!.id)?.path ?? [],null,2)}}</pre></details></template>
         </template>
-        <template v-else><h5>Inspect an entity</h5><p class="subdued">Choose DEXPI, ECAD, the asset, signal, run, or observations to inspect the query-scoped evidence.</p></template>
+        <template v-else><h5>Inspect an entity</h5><p class="subdued">Choose a node or a connecting line to learn what it means, where its evidence comes from, and what it does not prove.</p></template>
        </aside>
       </div>
-      <div class="trace-legend"><span>● Engineering function</span><span>● Shared asset</span><span>● Operational signal</span><span>— Virtual reasoning association</span></div>
+      <div class="trace-legend"><strong>Click a line to explain its meaning.</strong><span>● Engineering function</span><span>● Shared asset</span><span>● Operational signal</span><span>— Virtual reasoning association</span></div>
       <p class="subdued">The lines summarize query-scoped reasoning associations, not direct source RDF triples. Source paths are available in the inspector. Physical sensor identity is NOT_VERIFIED.</p>
      </section>
      <section class="reasoning-card" aria-label="Recorded command and temporal comparison">
@@ -406,6 +444,19 @@ const experimentalChart = computed(() => {
       <div v-for="item in reasoningSummary" :key="item.id" class="reasoning-check">
        <span><strong>{{item.id}}</strong> · {{item.label}}</span>
        <span :class="item.status==='complete'?'reasoning-positive':'reasoning-caution'">{{item.status==='complete'?'✓ Complete':item.status.replaceAll('_',' ')}}</span>
+      </div>
+      <div class="reasoning-interpretation">
+       <h5>What does this reasoning mean?</h5>
+       <div class="interpretation-pills" role="group" aria-label="Explain reasoning operator">
+        <button v-for="item in reasoningInterpretations" :key="item.id" type="button" :class="selectedReasoningExplanation===item.id?'primary':'secondary'" :aria-pressed="selectedReasoningExplanation===item.id" @click="selectedReasoningExplanation=item.id">{{item.id}}</button>
+       </div>
+       <template v-if="activeReasoningInterpretation">
+        <h5>{{activeReasoningInterpretation.question}}</h5>
+        <p>{{activeReasoningInterpretation.conclusion}}</p>
+        <p><strong>Evidence:</strong> {{activeReasoningInterpretation.evidence}}</p>
+        <p class="trace-limitation"><strong>What it does not prove:</strong> {{activeReasoningInterpretation.limit}}</p>
+        <button type="button" class="secondary" @click="traceOperator=activeReasoningInterpretation.id">Highlight in graph: {{activeReasoningInterpretation.id}}</button>
+       </template>
       </div>
       <p v-if="reasoning!.R05.status!=='complete'" class="subdued" role="status">R05 not established: {{reasoning!.R05.reason}}. A descriptive R04 result does not establish target relevance.</p>
       <p v-else class="subdued">R05 combines cross-domain mapping with {{reasoning!.R05.temporalEvents?.length ?? 0}} qualifying exact-target recorded event(s).</p>
@@ -593,4 +644,11 @@ const experimentalChart = computed(() => {
 .trace-inspector pre { max-height:200px; }
 .trace-legend { display:flex; flex-wrap:wrap; gap:12px; font-size:11px; color:#b5c8d9; margin-top:10px; }
 @media(max-width:800px) { .trace-layout { grid-template-columns:minmax(0,1fr); } }
+.trace-link-hit { cursor:pointer; outline:none; }
+.trace-link-hit:focus-visible .trace-edge,.trace-edge-selected { stroke:#fbbf24; stroke-width:3.5; stroke-dasharray:none; }
+.trace-hit-line { pointer-events:stroke; }
+.trace-limitation { border-left:3px solid #d6a14a; padding:8px 10px; background:rgba(184,138,66,.10); font-size:13px; }
+.reasoning-interpretation { border-top:1px solid #334a62; margin-top:14px; padding-top:14px; }
+.reasoning-interpretation h5 { font-size:15px; margin:10px 0; }
+.interpretation-pills { display:flex; flex-wrap:wrap; gap:7px; }
 </style>
