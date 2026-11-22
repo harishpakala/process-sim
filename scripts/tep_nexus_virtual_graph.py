@@ -29,8 +29,8 @@ def project(query):
         raise ValueError("Engineering mapping does not match validated plan")
     if mapping["operational_signal"] != signal:
         raise ValueError("Engineering mapping does not match historian signal")
-    if not mapping.get("asset_uri"):
-        raise ValueError("Missing source asset URI")
+    if not mapping.get("asset_uri") and not mapping.get("asset_identifier"):
+        raise ValueError("Missing source asset reference")
 
     nodes = {}
     edges = []
@@ -49,19 +49,23 @@ def project(query):
         if item not in edges:
             edges.append(item)
 
-    f = _uri("function", function)
+    domain = mapping.get("domain")
+    f = _uri("function", domain, function) if domain else _uri("function", function)
     s = _uri("signal", signal)
     r = _uri("run", run)
-    asset = mapping["asset_uri"]
+    asset = mapping.get("asset_uri") or _uri("asset-identifier", mapping["asset_identifier"])
     node(f, "EngineeringFunction", localId=function, source="GraphDB",
-         mappingConfidence="PROVISIONAL")
+         mappingConfidence="PROVISIONAL", **({"domain": domain} if domain else {}))
     node(s, "OperationalSignal", signalId=signal, source="GraphDB mapping / TimescaleDB key",
          physicalSensorBinding="NOT_VERIFIED")
     node(r, "SimulationRun", runId=run, identitySource="operator_supplied",
          sharedRunProvenance="NOT_VERIFIED")
-    node(asset, "EngineeringAsset", source="GraphDB", physicalIdentity="NOT_VERIFIED")
+    if mapping.get("asset_uri"):
+        node(asset, "EngineeringAsset", source="GraphDB", physicalIdentity="NOT_VERIFIED")
+    else:
+        node(asset, "AssetIdentifier", identifier=mapping["asset_identifier"], source="GraphDB", physicalIdentity="NOT_VERIFIED")
     edge(f, "mapsToSignal", s)
-    edge(f, "associatedWithAsset", asset)
+    edge(f, "associatedWithAsset" if mapping.get("asset_uri") else "hasAssetIdentifier", asset)
     edge(r, "hasSignal", s)
 
     for i, command in enumerate(evidence.get("faultCommands", [])):
