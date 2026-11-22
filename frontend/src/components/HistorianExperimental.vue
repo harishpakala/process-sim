@@ -34,6 +34,20 @@ const queryStyles = [
 const busy = ref(false)
 const error = ref('')
 const response = ref<HistorianResponse | null>(null)
+type GraphNode = {id:string;type:string;localId?:string;domain?:string;signalId?:string;simulationTimeHours?:number;value?:number;observedAt?:string}
+type GraphEdge = {source:string;target:string;predicate:string}
+type GraphContext = {nodes:GraphNode[];edges:GraphEdge[];capabilities:Record<string,boolean>}
+const graph = computed(()=>response.value?.result?.vtkgStatus === 'constructed' ? response.value.result.vtkg as GraphContext : null)
+const graphReady = computed(()=>!!graph.value && !busy.value)
+const associated = computed(()=>{
+ const g=graph.value
+ if (!g) return []
+ const functions=g.nodes.filter(n=>n.type==='EngineeringFunction')
+ const signals=new Set(g.edges.filter(e=>e.predicate==='mapsToSignal' && functions.some(n=>n.id===e.source)).map(e=>e.target))
+ const ids=new Set(g.edges.filter(e=>e.predicate==='observesSignal' && signals.has(e.target)).map(e=>e.source))
+ return g.nodes.filter(n=>n.type==='VirtualObservation' && ids.has(n.id))
+})
+const demo = ref(false)
 
 type FunctionOption = {engineering_function: string; operational_signal: string; sample_count: number}
 const runs = ref<string[]>([])
@@ -111,15 +125,24 @@ function updateGeneratedQuestion() {
 watch([selectedRun, selectedDomain], () => { void loadFunctions() })
 watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds, queryStyle], updateGeneratedQuestion)
 onMounted(() => { void loadRuns() })
+watch([selectedRun,selectedDomain,selectedLocalId,startSeconds,endSeconds,question],()=>{
+ response.value=null
+ historianMode.value='retrieval'
+ demo.value=false
+})
 
 
 async function run() {
+ historianMode.value='retrieval'
+ demo.value=false
  error.value = ''
  response.value = null
  if (question.value.trim().length < 5) {
   error.value = 'Enter a question to continue.'
   return
  }
+ const submittedQuestion=question.value
+ const submittedContext=JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])
  busy.value = true
  try {
   const context = selectedRun.value && selectedLocalId.value ? {
@@ -135,7 +158,7 @@ async function run() {
   })
   const body = await r.json()
   if (!r.ok) throw new Error(body.error || 'Experimental historian query failed')
-  response.value = body as HistorianResponse
+  if (question.value===submittedQuestion && submittedContext===JSON.stringify([selectedRun.value,selectedDomain.value,selectedLocalId.value,startSeconds.value,endSeconds.value])) response.value = body as HistorianResponse
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
  } finally {
@@ -168,9 +191,18 @@ const experimentalChart = computed(() => {
   <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
   <div class="historian-mode-switch" role="group" aria-label="Historian query mode">
    <button type="button" :class="historianMode === 'retrieval' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'retrieval'" @click="historianMode='retrieval'">Historian Retrieval</button>
-   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'" @click="historianMode='reasoning'">VTKG Reasoning (prototype)</button>
+   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'"  :disabled="!graphReady" @click="historianMode='reasoning';demo=false">VTKG Reasoning</button>
   </div>
-  <VtkgReasoning v-if="historianMode === 'reasoning'" />
+  <p v-if="!graphReady" class="subdued">Run a historian query to construct the VTKG and unlock live reasoning.</p>
+  <div v-if="historianMode === 'reasoning' && graphReady && graph">
+   <h3>Active VTKG context</h3>
+   <p>{{graph.nodes.length}} nodes · {{graph.edges.length}} edges · query-scoped, not materialized</p>
+   <h3>R01 · Engineering-to-observation association</h3>
+   <p>{{associated.length}} associated observations via mapsToSignal / inverse observesSignal.</p>
+   <details><summary>Inspect graph evidence</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
+   <p class="subdued">R02–R05 require additional evidence or operators and are not enabled yet.</p>
+  </div>
+  <details v-if="historianMode === 'retrieval'"><summary>Illustrative R05 prototype (not live)</summary><button type="button" class="secondary" @click="demo=!demo">{{demo?'Hide':'Show'}} demonstration</button><VtkgReasoning v-if="demo"/></details>
   <div v-show="historianMode === 'retrieval'">
   <p>Ask about engineering information or explore recorded simulation data in your own words.</p>
   <p>Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
@@ -236,6 +268,8 @@ const experimentalChart = computed(() => {
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    </template>
+   <p v-if="graphReady" style="color:#4ade80">VTKG constructed · {{graph?.nodes.length}} nodes · {{graph?.edges.length}} edges. <button type="button" class="secondary" @click="historianMode='reasoning'">Explore VTKG Reasoning</button></p>
+   <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
    <h3>Query details</h3>
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
