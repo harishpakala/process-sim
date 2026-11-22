@@ -37,6 +37,8 @@ type GraphEdge = {source:string;target:string;predicate:string}
 type GraphContext = {nodes:GraphNode[];edges:GraphEdge[];capabilities:Record<string,boolean>}
 const graph = computed(()=>response.value?.result?.vtkgStatus === 'constructed' ? response.value.result.vtkg as GraphContext : null)
 const graphReady = computed(()=>!!graph.value && !busy.value)
+type CrossDomainBridge = {status:string;joinKey?:{value?:string;verification?:string};operationalSignal?:string;engineeringFunctions?:Array<{domain?:string;localId?:string;mappingConfidence?:string}>;assetInventory?:{status:string;evidence?:unknown[]};productCatalog?:{status:string;evidence?:unknown[]};physicalSensorBinding?:string;interpretation?:string}
+const crossDomainBridge = computed(() => (graph.value as (GraphContext & {crossDomainBridge?:CrossDomainBridge}) | null)?.crossDomainBridge ?? null)
 const evidencePage = ref(1)
 const pageSize = 25
 type ReasoningFunction = {id:string;domain?:string;localId?:string;path:Array<{source:string;predicate:string;target:string}>}
@@ -394,6 +396,19 @@ const experimentalChart = computed(() => {
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
   </div>
+  <section v-if="crossDomainBridge" class="reasoning-card cross-domain-bridge" aria-label="Cross-domain reasoning bridge">
+   <div class="trace-heading"><div><h3>Cross-domain → temporal reasoning</h3><p class="subdued">One evidence chain across engineering semantics and recorded behavior.</p></div><span class="pill">{{crossDomainBridge.status === 'partial' ? 'PARTIAL BRIDGE' : 'ENRICHMENT UNAVAILABLE'}}</span></div>
+   <div class="bridge-steps">
+    <div class="bridge-step"><small>Engineering design</small><strong>{{(crossDomainBridge.engineeringFunctions || []).map(f => (f.domain || 'Engineering') + ' ' + (f.localId || '—')).join(' · ') || 'Not resolved'}}</strong><span>GraphDB semantic associations</span></div>
+    <div class="bridge-arrow" aria-hidden="true">→</div>
+    <div class="bridge-step"><small>Shared asset identifier</small><strong>{{crossDomainBridge.joinKey?.value || 'Not available'}}</strong><span>Semantic join · not physical identity</span></div>
+    <div class="bridge-arrow" aria-hidden="true">→</div>
+    <div class="bridge-step"><small>Operational signal</small><strong>{{crossDomainBridge.operationalSignal || 'Not available'}}</strong><span>Historian observations &amp; recorded commands</span></div>
+   </div>
+   <div class="bridge-source-status"><div><strong>Asset Inventory</strong><span>{{crossDomainBridge.assetInventory?.status === 'NOT_RESOLVED' ? 'Relationship not yet resolved' : crossDomainBridge.assetInventory?.status || 'Not available'}}</span></div><div><strong>Product Catalog</strong><span>{{crossDomainBridge.productCatalog?.status === 'NOT_RESOLVED' ? 'Relationship not yet resolved' : crossDomainBridge.productCatalog?.status || 'Not available'}}</span></div></div>
+   <p class="trace-limitation">The shared identifier supports semantic traceability. It does not verify a physical sensor or a catalog product. Unresolved source joins are shown explicitly.</p>
+   <details><summary>Technical bridge evidence</summary><pre>{{JSON.stringify(crossDomainBridge,null,2)}}</pre></details>
+  </section>
   <div v-if="graphReady" class="unified-section-heading"><h3>Engineering graph &amp; reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
   <div v-if="graphReady && graph" class="reasoning-dashboard">
    <div class="reasoning-header">
@@ -645,4 +660,15 @@ const experimentalChart = computed(() => {
 .reasoning-interpretation { border-top:1px solid #334a62; margin-top:14px; padding-top:14px; }
 .reasoning-interpretation h5 { font-size:15px; margin:10px 0; }
 .interpretation-pills { display:flex; flex-wrap:wrap; gap:7px; }
+.cross-domain-bridge { margin:20px 0; }
+.bridge-steps { display:flex; align-items:stretch; gap:8px; margin:14px 0; }
+.bridge-step { flex:1; min-width:0; background:#14263b; border:1px solid #334a62; border-radius:10px; padding:12px; display:flex; flex-direction:column; gap:8px; overflow-wrap:anywhere; }
+.bridge-step small { color:#b5c8d9; }
+.bridge-step strong { font-size:13px; }
+.bridge-step span { color:#b5c8d9; font-size:11px; }
+.bridge-arrow { align-self:center; color:#86efac; font-size:22px; }
+.bridge-source-status { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin:12px 0; }
+.bridge-source-status > div { border:1px dashed #63768b; border-radius:8px; padding:12px; display:flex; flex-direction:column; gap:6px; }
+.bridge-source-status span { color:#fbbf24; font-size:12px; }
+@media(max-width:760px) { .bridge-steps { flex-direction:column; } .bridge-arrow { transform:rotate(90deg); } .bridge-source-status { grid-template-columns:1fr; } }
 </style>
