@@ -15,7 +15,7 @@ def _dsn(environ=None):
     return dsn
 
 
-MEASUREMENT_TYPES = ("Temperature", "Pressure", "Level", "Energy", "Unclassified")
+MEASUREMENT_TYPES = ("Temperature", "Pressure", "Level", "Flow", "Energy", "Unclassified")
 
 
 def discover_measurement_types(*, environ=None, connection_factory=psycopg.connect):
