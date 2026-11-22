@@ -26,7 +26,7 @@ class ExploreSignalTests(unittest.TestCase):
 
                 with patch("process_sim.api.vtkg_query.discover_semantic_mappings",
                            side_effect=lambda endpoint, domain:
-                           {"TI_101": {("asset-1", "XMEAS9")}} if domain == "DEXPI" else {}), \\
+                           {"TI_101": {("asset-1", "XMEAS9")}} if domain == "DEXPI" else {}), \
                      patch("process_sim.api.vtkg_query.run_historian_question", side_effect=fake_builder):
                     result = explore_signal_knowledge({
                         "signal_id": "XMEAS9", "run_id": run,
