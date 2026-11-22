@@ -403,7 +403,7 @@ const experimentalChart = computed(() => {
     </div>
    </div>
    <p v-else class="subdued">No numeric observations available to graph.</p>
-   <p class="subdued">Engineering knowledge is not queried during historian retrieval. VTKG signal-first exploration requires a separate backend integration.</p>
+   <p class="subdued">Engineering knowledge is not queried during historian retrieval. Use Explore engineering knowledge to resolve source-backed associations on demand.</p>
   </template>
   <div v-if="directResult" class="explore-knowledge-action">
    <p class="subdued">Explore engineering associations only when needed. This queries GraphDB and builds a query-scoped VTKG; historian retrieval stays independent.</p>
@@ -443,8 +443,7 @@ const experimentalChart = computed(() => {
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    </template>
-   <div v-if="false && graphReady" class="explore-knowledge-action"><p class="subdued">Historian data retrieved. Engineering context is available when you want to investigate the selected signal.</p><button type="button" class="primary" :aria-expanded="knowledgeExpanded" @click="knowledgeExpanded=!knowledgeExpanded">{{knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button><span class="subdued">{{graph?.nodes.length}} virtual nodes · {{graph?.edges.length}} edges</span></div>
-   <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
+   <p v-if="response.result.vtkgStatus==='unavailable'" role="status">VTKG construction unavailable; historian measurements remain accessible.</p>
    <h3>Query details</h3>
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
