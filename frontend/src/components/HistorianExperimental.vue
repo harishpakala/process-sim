@@ -361,13 +361,14 @@ const experimentalChart = computed(() => {
 
 <template>
  <section class="panel">
-  <div class="panel-title"><div><h2>Simulation Historian · Engineering Knowledge Explorer</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
+  <div class="panel-title"><div><h2>Simulation Historian · Virtual Twin Knowledge Graph (VTKG)</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
   <p v-if="!directResult" class="subdued">Start with a run and SignalName to inspect measurements. Explore the engineering knowledge graph separately when you need cross-domain context.</p>
+  <p class="subdued">Retrieve a SignalName directly from TimescaleDB. Build a query-scoped Virtual Twin Knowledge Graph (VTKG) on demand for engineering associations and R01–R05 reasoning.</p>
   <div class="historian-unified-query">
   <p v-if="!directResult">Start with recorded signals and simulation time; engineering context can be explored separately.</p>
   <p v-if="!directResult">SignalNames and values are retrieved directly from TimescaleDB, without a DEXPI or ECAD LocalID.</p>
   <div class="experiment-fields">
-   <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
+   <div class="experiment-field"><label for="historian-experiment-run">Simulation run</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
     <option value="">Select simulation run</option>
     <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
@@ -403,49 +404,23 @@ const experimentalChart = computed(() => {
     </div>
    </div>
    <p v-else class="subdued">No numeric observations available to graph.</p>
-   <p class="subdued">Engineering knowledge is not queried during historian retrieval. Use Explore engineering knowledge to resolve source-backed associations on demand.</p>
   </template>
   <div v-if="directResult" class="explore-knowledge-action">
-   <p class="subdued">Explore engineering associations only when needed. This queries GraphDB and builds a query-scoped VTKG; historian retrieval stays independent.</p>
-   <button type="button" class="primary" :disabled="knowledgeBusy" @click="knowledgeExpanded ? knowledgeExpanded=false : response && graphReady ? knowledgeExpanded=true : exploreKnowledge()">{{knowledgeBusy ? 'Resolving engineering evidence…' : knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button>
+   <p class="subdued">VTKG exploration is optional. It resolves engineering LocalIDs through GraphDB and constructs a virtual graph with available R01–R05 reasoning.</p>
+   <button type="button" class="primary" :disabled="knowledgeBusy" @click="knowledgeExpanded ? knowledgeExpanded=false : response && graphReady ? knowledgeExpanded=true : exploreKnowledge()">{{knowledgeBusy ? 'Resolving engineering evidence…' : knowledgeExpanded ? 'Hide engineering knowledge' : 'Build VTKG · Engineering knowledge & R01–R05'}}</button>
    <span v-if="knowledgeCandidates.length" class="subdued">{{knowledgeCandidates.length}} source-backed engineering mapping(s)</span>
    <p v-if="knowledgeError" role="status">{{knowledgeError}}</p>
   </div>
   <template v-if="response && knowledgeExpanded">
-   <h3>Engineering knowledge context</h3>
+   <h3>Virtual Twin Knowledge Graph (VTKG) · Engineering evidence</h3>
    <template v-if="response.intent === 'engineering_query'">
     <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.result, null, 2)}}</pre>
    </template>
    <template v-else>
-    <div v-if="experimentalChart" class="vtkg-chart">
-     <div class="vtkg-chart-scroll">
-      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + (response.result.engineeringFunction || response.plan.engineering_function)">
-       <g stroke="currentColor" opacity="0.22" stroke-width="1">
-        <line v-for="tick in experimentalChart.yTicks" :key="'grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y" />
-       </g>
-       <g stroke="currentColor" stroke-width="1.5">
-        <line :x1="experimentalChart.left" :y1="experimentalChart.top" :x2="experimentalChart.left" :y2="experimentalChart.bottom" />
-        <line :x1="experimentalChart.left" :y1="experimentalChart.bottom" :x2="experimentalChart.right" :y2="experimentalChart.bottom" />
-       </g>
-       <g fill="currentColor" font-size="12">
-        <text v-for="tick in experimentalChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
-        <text v-for="tick in experimentalChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
-        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
-        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
-       </g>
-       <polyline v-if="experimentalChart.points.length > 1" :points="experimentalChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
-       <circle v-for="(point,i) in experimentalChart.points" :key="i" :cx="point.x" :cy="point.y" r="2.5" fill="#38bdf8">
-        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
-       </circle>
-      </svg>
-     </div>
-    </div>
-    <p v-else class="subdued">No numeric observations available to graph.</p>
-   <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
+    <p class="subdued">VTKG mapping: {{response.result.engineeringFunction || response.plan.engineering_function}} → {{response.result.mapping?.operational_signal || 'not resolved'}}. Historian observations are charted above.</p>
    </template>
    <p v-if="response.result.vtkgStatus==='unavailable'" role="status">VTKG construction unavailable; historian measurements remain accessible.</p>
-   <h3>Query details</h3>
-   <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
+   <details><summary>VTKG query and mapping details</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
   </template>
   </div>
   <section v-if="knowledgeExpanded && crossDomainBridge" class="reasoning-card cross-domain-bridge" aria-label="Cross-domain reasoning bridge">
@@ -457,14 +432,13 @@ const experimentalChart = computed(() => {
     <div class="bridge-arrow" aria-hidden="true">→</div>
     <div class="bridge-step"><small>Operational signal</small><strong>{{crossDomainBridge.operationalSignal || 'Not available'}}</strong><span>Historian observations &amp; recorded commands</span></div>
    </div>
-   <div class="bridge-source-status"><div><strong>Asset Inventory</strong><span>{{crossDomainBridge.assetInventory?.status === 'NOT_RESOLVED' ? 'Relationship not yet resolved' : crossDomainBridge.assetInventory?.status || 'Not available'}}</span></div><div><strong>Product Catalog</strong><span>{{crossDomainBridge.productCatalog?.status === 'NOT_RESOLVED' ? 'Relationship not yet resolved' : crossDomainBridge.productCatalog?.status || 'Not available'}}</span></div></div>
-   <p class="trace-limitation">The shared identifier supports semantic traceability. It does not verify a physical sensor or a catalog product. Unresolved source joins are shown explicitly.</p>
+   <details class="trace-limitation"><summary>VTKG integration coverage · Asset Inventory and Product Catalog not connected</summary><p>The VTKG builder currently has no source-backed Asset Inventory or Product Catalog join. Both remain NOT_RESOLVED; this does not mean the relationships do not exist. A shared AssetIdentifier supports semantic association, not verified physical sensor identity.</p></details>
    <details><summary>Technical bridge evidence</summary><pre>{{JSON.stringify(crossDomainBridge,null,2)}}</pre></details>
   </section>
-  <div v-if="knowledgeExpanded && graphReady" class="unified-section-heading"><h3>Engineering graph &amp; reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
+  <div v-if="knowledgeExpanded && graphReady" class="unified-section-heading"><h3>VTKG · Virtual graph and reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
   <div v-if="knowledgeExpanded && graphReady && graph" class="reasoning-dashboard">
    <div class="reasoning-header">
-    <div><h3>Live reasoning overview</h3><p class="subdued">{{r01?.function.domain || 'Engineering'}} · {{r01?.function.localId || '—'}} → {{r01?.signal.signalId || '—'}}</p></div>
+    <div><h3>VTKG reasoning overview</h3><p class="subdued">{{r01?.function.domain || 'Engineering'}} · {{r01?.function.localId || '—'}} → {{r01?.signal.signalId || '—'}}</p></div>
     <span class="reasoning-count" role="status">{{completeCount}} / 5 operators complete</span>
    </div>
    <div class="reasoning-metrics">
