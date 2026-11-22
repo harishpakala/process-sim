@@ -40,32 +40,16 @@ const graph = computed(()=>response.value?.result?.vtkgStatus === 'constructed' 
 const graphReady = computed(()=>!!graph.value && !busy.value)
 const evidencePage = ref(1)
 const pageSize = 25
-const r01 = computed(() => {
- const g = graph.value
- if (!g || !response.value || response.value.intent !== 'historian_observations') return null
- const domain = response.value.plan.domain
- const localId = response.value.plan.engineering_function
- const runId = response.value.plan.run_id
- const functionNodes = g.nodes.filter(n => n.type === 'EngineeringFunction' && n.domain === domain && n.localId === localId)
- const runNodes = g.nodes.filter(n => n.type === 'SimulationRun' && n.runId === runId)
- if (functionNodes.length !== 1 || runNodes.length !== 1) return null
- const fn = functionNodes[0]!
- const run = runNodes[0]!
- const signalIds = new Set(g.edges.filter(e => e.source === fn.id && e.predicate === 'mapsToSignal').map(e => e.target))
- const signalNodes = g.nodes.filter(n => n.type === 'OperationalSignal' && signalIds.has(n.id))
- if (signalNodes.length !== 1) return null
- const signal = signalNodes[0]!
- if (!g.edges.some(e => e.source === run.id && e.target === signal.id && e.predicate === 'hasSignal')) return null
- const assetIds = new Set(g.edges.filter(e => e.source === fn.id && (e.predicate === 'hasAssetIdentifier' || e.predicate === 'associatedWithAsset')).map(e => e.target))
- const assets = g.nodes.filter(n => assetIds.has(n.id))
- const observationIds = new Set(g.edges.filter(e => e.target === signal.id && e.predicate === 'observesSignal').map(e => e.source))
- const runObservationIds = new Set(g.edges.filter(e => e.target === run.id && e.predicate === 'belongsToRun').map(e => e.source))
- const observations = g.nodes.filter(n => n.type === 'VirtualObservation' && observationIds.has(n.id) && runObservationIds.has(n.id))
-  .sort((a,b) => (a.simulationTimeHours ?? 0) - (b.simulationTimeHours ?? 0) || (a.observedAt ?? '').localeCompare(b.observedAt ?? ''))
- const expected = response.value.result.observationCount
- const complete = typeof expected === 'number' && observations.length === expected
- return {fn, run, signal, assets, observations, expected, complete}
-})
+type ReasoningFunction = {id:string;domain?:string;localId?:string;path:Array<{source:string;predicate:string;target:string}>}
+type ReasoningObservation = {id:string;simulationTimeHours?:number;value?:number;observedAt?:string;contentFingerprint?:string;path:Array<{source:string;predicate:string;target:string}>}
+type ReasoningResult = {
+ R01:{status:string;function:{id:string;domain:string;localId:string};signal:{id:string;signalId:string};run:{id:string;runId:string};asset:{id:string;type:string;identifier:string};path:Array<{source:string;predicate:string;target:string}>;observationCount:number;observations:ReasoningObservation[];provenance:Record<string,string|boolean>};
+ R02:{status:string;signalId:string;observationCount:number;engineeringFunctions:ReasoningFunction[];scope:string};
+ R03:{status:string;sharedSignal:string;engineeringFunctions:ReasoningFunction[];domainsPresent:string[];interpretation:string};
+ R04:{status:string;reason:string};R05:{status:string;reason:string}
+}
+const reasoning = computed(() => (graph.value as (GraphContext & {reasoning?:ReasoningResult}) | null)?.reasoning ?? null)
+const r01 = computed(() => reasoning.value?.R01.status === 'complete' ? reasoning.value.R01 : null)
 const evidencePages = computed(() => Math.max(1, Math.ceil((r01.value?.observations.length ?? 0) / pageSize)))
 const visibleEvidence = computed(() => r01.value?.observations.slice((evidencePage.value-1)*pageSize,evidencePage.value*pageSize) ?? [])
 watch(graph, () => { evidencePage.value = 1 })
@@ -217,22 +201,32 @@ const experimentalChart = computed(() => {
    <h3>Active VTKG context</h3>
    <p>{{graph.nodes.length}} nodes · {{graph.edges.length}} edges · query-scoped, not materialized</p>
    <template v-if="r01">
-    <h3>R01 · Engineering-to-observation association</h3>
-    <p><strong>{{r01.fn.domain}} · {{r01.fn.localId}}</strong> <span class="subdued">mapsToSignal →</span> <strong>{{r01.signal.signalId}}</strong> <span class="subdued">← observesSignal</span> <strong>{{r01.observations.length}} observations</strong></p>
-    <p>Simulation run: <code>{{r01.run.runId}}</code></p>
-    <p>Engineering asset reference: <code v-for="asset in r01.assets" :key="asset.id">{{asset.identifier || asset.id}} </code><span v-if="!r01.assets.length">Not present in graph</span></p>
-    <p class="subdued">Engineering mapping: provisional · Physical sensor binding: not verified · Observations: TimescaleDB · Mapping: GraphDB</p>
-    <p v-if="!r01.complete" role="alert">Graph evidence incomplete: {{r01.observations.length}} linked observations; historian reports {{r01.expected ?? 'unknown'}}. Check source evidence before relying on this result.</p>
-    <p v-else role="status">Verified graph traversal: {{r01.observations.length}} of {{r01.expected}} historian observations associated with this function, signal and run.</p>
-    <p v-if="r01.observations.length">Simulation time: {{(r01.observations[0]!.simulationTimeHours! * 3600).toFixed(3)}}–{{(r01.observations[r01.observations.length-1]!.simulationTimeHours! * 3600).toFixed(3)}} seconds · Recorded timestamps: {{r01.observations[0]!.observedAt}} to {{r01.observations[r01.observations.length-1]!.observedAt}}</p>
-    <h4>R01 · Source-linked observation evidence</h4>
-    <p class="subdued">Showing {{r01.observations.length ? (evidencePage-1)*pageSize+1 : 0}}–{{Math.min(evidencePage*pageSize,r01.observations.length)}} of {{r01.observations.length}} observations. Times are simulation seconds; timestamps are recorded source timestamps.</p>
-    <div class="evidence-scroll"><table class="evidence-table"><thead><tr><th>Simulation second</th><th>Recorded value</th><th>Observed at</th><th>Observation source identity</th></tr></thead>
-     <tbody><tr v-for="item in visibleEvidence" :key="item.id"><td>{{((item.simulationTimeHours ?? 0)*3600).toFixed(3)}}</td><td>{{item.value}}</td><td>{{item.observedAt}}</td><td><code :title="item.id">{{item.id.split('/').pop()}}</code></td></tr></tbody>
-    </table></div>
-    <div class="evidence-pagination"><button type="button" class="secondary" :disabled="evidencePage===1" @click="evidencePage--">Previous</button><span>Page {{evidencePage}} of {{evidencePages}}</span><button type="button" class="secondary" :disabled="evidencePage===evidencePages" @click="evidencePage++">Next</button></div>
+    <h3>R01 · Explainable engineering-to-observation association</h3>
+    <p><strong>{{r01.function.domain}} · {{r01.function.localId}}</strong> → <strong>{{r01.signal.signalId}}</strong> ← <strong>{{r01.observationCount}} observations</strong></p>
+    <p>Run: <code>{{r01.run.runId}}</code> · Asset reference: <code>{{r01.asset.identifier}}</code></p>
+    <p role="status">R01 validated {{r01.observationCount}} observation paths against the historian response.</p>
+    <h4>Graph evidence and provenance</h4>
+    <ol><li v-for="edge in r01.path" :key="edge.source+edge.predicate+edge.target"><code>{{edge.source}}</code> <strong>—{{edge.predicate}}→</strong> <code>{{edge.target}}</code></li></ol>
+    <p class="subdued">Engineering mapping: {{r01.provenance.engineeringMapping}} · Observations: {{r01.provenance.observations}} · Physical sensor binding: {{r01.provenance.physicalSensorBinding}} · Not materialized in GraphDB.</p>
+    <details><summary>Supporting observation evidence ({{r01.observationCount}} records)</summary>
+     <p>Each observation has explicit observesSignal and belongsToRun edges. Select an observation identity to inspect its graph path.</p>
+     <div class="evidence-scroll"><table class="evidence-table"><thead><tr><th>Simulation second</th><th>Value</th><th>Observed at</th><th>Graph evidence</th></tr></thead>
+      <tbody><tr v-for="item in visibleEvidence" :key="item.id"><td>{{((item.simulationTimeHours ?? 0)*3600).toFixed(3)}}</td><td>{{item.value}}</td><td>{{item.observedAt}}</td><td><details><summary>{{item.id.split('/').pop()}}</summary><p v-for="edge in item.path" :key="edge.predicate"><code>{{edge.source}} —{{edge.predicate}}→ {{edge.target}}</code></p><p>Content fingerprint: <code>{{item.contentFingerprint}}</code></p></details></td></tr></tbody>
+     </table></div>
+     <div class="evidence-pagination"><button type="button" class="secondary" :disabled="evidencePage===1" @click="evidencePage--">Previous</button><span>Page {{evidencePage}} of {{evidencePages}}</span><button type="button" class="secondary" :disabled="evidencePage===evidencePages" @click="evidencePage++">Next</button></div>
+    </details>
+    <h3>R02 · Reverse engineering traceability</h3>
+    <p>{{reasoning!.R02.engineeringFunctions.length}} engineering function(s) mapped to {{r01.signal.signalId}} within this query-scoped graph.</p>
+    <ul><li v-for="fn in reasoning!.R02.engineeringFunctions" :key="fn.id"><strong>{{fn.domain}} · {{fn.localId}}</strong> —mapsToSignal→ {{r01.signal.signalId}} <details><summary>Show source edge</summary><pre>{{JSON.stringify(fn.path,null,2)}}</pre></details></li></ul>
+    <p class="subdued">{{reasoning!.R02.scope}}</p>
+    <h3>R03 · Cross-domain shared signal</h3>
+    <template v-if="reasoning!.R03.status==='complete'"><p role="status">DEXPI and ECAD functions are both associated with {{reasoning!.R03.sharedSignal}}.</p><ul><li v-for="fn in reasoning!.R03.engineeringFunctions" :key="fn.id">{{fn.domain}} · {{fn.localId}}</li></ul></template>
+    <p v-else>Insufficient cross-domain evidence in this snapshot. Domains found: {{reasoning!.R03.domainsPresent.join(', ') || 'none'}}.</p>
+    <p class="subdued">{{reasoning!.R03.interpretation}}</p>
+    <h3>R04 / R05 · Not enabled</h3>
+    <p class="subdued">{{reasoning!.R04.reason}}. {{reasoning!.R05.reason}}.</p>
    </template>
-   <p v-else role="alert">R01 cannot establish the selected function → signal → run evidence path from this graph.</p>
+   <p v-else role="alert">Structured R01 reasoning is unavailable for this snapshot. Inspect the graph or backend log; a node count alone is not a reasoning result.</p>
    <details><summary>Inspect full query-scoped graph JSON</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
    <p class="subdued">R02–R05 require additional evidence or operators and are not enabled yet. No physical causation is inferred.</p>
   </div>
