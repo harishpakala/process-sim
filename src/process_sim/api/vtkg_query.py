@@ -359,6 +359,63 @@ def run_historian_question(payload, *, environ=None):
         sys.path.remove(str(scripts))
 
 
+def explore_signal_knowledge(payload, *, environ=None):
+    """Resolve a historian SignalName to source-backed engineering functions on demand.
+
+    No GraphDB lookup is performed by the direct historian endpoints. An unresolved
+    mapping is reported explicitly rather than fabricating an engineering identity.
+    """
+    from uuid import UUID
+    if not isinstance(payload, dict) or set(payload) != {
+        "signal_id", "run_id", "start_simulation_seconds", "end_simulation_seconds"
+    }:
+        raise ValueError("Expected signal_id, run_id and simulation-time bounds")
+    signal = payload["signal_id"]
+    if not isinstance(signal, str) or not signal.strip() or len(signal) > 256:
+        raise ValueError("Invalid signal_id")
+    run_id = str(UUID(str(payload["run_id"])))
+    import math
+    start, end = payload["start_simulation_seconds"], payload["end_simulation_seconds"]
+    for bound in (start, end):
+        if bound is not None and (isinstance(bound, bool) or not isinstance(bound, (int, float))
+                                  or not math.isfinite(bound) or bound < 0):
+            raise ValueError("Invalid simulation-time bound")
+    if start is not None and end is not None and start > end:
+        raise ValueError("Start exceeds end")
+    env = os.environ if environ is None else environ
+    endpoint = env.get("GRAPHDB_SPARQL_ENDPOINT")
+    if not endpoint:
+        return {"status": "unavailable", "reason": "GraphDB is not configured",
+                "signalId": signal, "runId": run_id, "candidates": []}
+    candidates = []
+    for domain in ("DEXPI", "ECAD"):
+        for function, pairs in discover_semantic_mappings(endpoint, domain).items():
+            for asset, mapped_signal in pairs:
+                if mapped_signal == signal and asset:
+                    candidates.append({"domain": domain, "engineering_function": function,
+                                       "asset_identifier": asset, "signal_id": signal})
+    candidates.sort(key=lambda item: (item["domain"] != "DEXPI", item["domain"], item["engineering_function"]))
+    if not candidates:
+        return {"status": "unresolved", "reason": "No source-backed engineering mapping for SignalName",
+                "signalId": signal, "runId": run_id, "candidates": []}
+    # Existing R01–R05 path requires one engineering function. Keep all candidates
+    # visible, but use a deterministic primary mapping and label it explicitly.
+    primary = candidates[0]
+    question = f"Get historian values for SignalName {signal} in simulation run {run_id}."
+    result = run_historian_question({
+        "question": question, "engineering_function": primary["engineering_function"],
+        "run_id": run_id, "domain": primary["domain"],
+        "start_simulation_seconds": start, "end_simulation_seconds": end,
+    }, environ=env)
+    if result.get("mapping", {}).get("operational_signal") != signal:
+        return {"status": "unresolved", "reason": "Engineering mapping changed during resolution",
+                "signalId": signal, "runId": run_id, "candidates": candidates}
+    return {"status": "constructed" if result.get("vtkgStatus") == "constructed" else "unavailable",
+            "signalId": signal, "runId": run_id, "candidates": candidates,
+            "selectedMapping": primary, "result": result,
+            "mappingSelection": "DETERMINISTIC_PRIMARY_NOT_PHYSICAL_IDENTITY"}
+
+
 def run_semantic_join_question(payload, *, environ=None):
     """Read-only semantic join, without historian access or NL model execution."""
     import re
