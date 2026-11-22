@@ -270,15 +270,27 @@ def run_historian_question(payload, *, environ=None):
                 samples.append(dict(sample, observationPrimaryKeyHash=key,
                     observationFingerprint=observation_fingerprint(result["runId"],
                         mapping["operational_signal"], sample["simulationTimeHours"], sample["value"], stamp)))
+            from tep_nexus_fault_events import fetch_recorded_commands
+            commands = []
+            command_status = "retrieved"
+            try:
+                commands = fetch_recorded_commands(
+                    dsn, result["runId"],
+                    result["startSimulationSeconds"], result["endSimulationSeconds"])
+            except Exception:
+                logging.exception("Recorded fault command retrieval failed")
+                command_status = "unavailable"
             graph = project({
                 "validatedPlan": {"engineering_function": result["engineeringFunction"]},
                 "engineeringMapping": mapping,
                 "temporalEvidence": {"runId": result["runId"], "signal": mapping["operational_signal"],
-                    "faultCommands": [], "windows": [{"samples": samples, "truncated": result["truncated"]}]},
+                    "faultCommands": commands, "windows": [{"samples": samples, "truncated": result["truncated"]}]},
             })
             if sum(n["type"] == "VirtualObservation" for n in graph["nodes"]) != result["observationCount"]:
                 raise ValueError("Graph observation count mismatch")
-            graph["snapshotScope"] = "single historian response; no additional retrieval"
+            graph["snapshotScope"] = "historian observations plus run-scoped recorded commands; query-scoped, not materialized"
+            graph["recordedCommandRetrieval"] = {"status": command_status, "count": len(commands),
+                "source": "TimescaleDB public.fault_events", "runId": result["runId"]}
             graph["request"] = {k: result[k] for k in ("domain", "engineeringFunction", "runId",
                 "startSimulationSeconds", "endSimulationSeconds", "retrievedAtUtc")}
             graph["capabilities"] = {"R01": bool(samples), "R02": False, "R03": False,
@@ -303,6 +315,12 @@ def run_historian_question(payload, *, environ=None):
                 graph["reasoning"] = reason(
                     graph, domain=domain, engineering_function=result["engineeringFunction"],
                     run_id=result["runId"], expected_count=result["observationCount"])
+                if command_status != "retrieved":
+                    graph["reasoning"]["R04"] = {"status": "insufficient_evidence",
+                        "reason": "Recorded command source unavailable; cannot infer absence",
+                        "events": [], "interpretation": "No temporal comparison inferred"}
+                    graph["reasoning"]["R05"] = {"status": "insufficient_evidence",
+                        "reason": "Recorded command source unavailable"}
                 graph["capabilities"] = {
                     key: graph["reasoning"][key]["status"] == "complete"
                     for key in ("R01", "R02", "R03", "R04", "R05")
