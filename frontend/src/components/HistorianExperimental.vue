@@ -38,7 +38,7 @@ type GraphNode = {id:string;type:string;localId?:string;domain?:string;signalId?
 type GraphEdge = {source:string;target:string;predicate:string}
 type GraphContext = {nodes:GraphNode[];edges:GraphEdge[];capabilities:Record<string,boolean>}
 const graph = computed(()=>response.value?.result?.vtkgStatus === 'constructed' ? response.value.result.vtkg as GraphContext : null)
-const graphReady = computed(()=>!!graph.value && !busy.value)
+const graphReady = computed(()=>!!graph.value && !busy.value && !knowledgeBusy.value)
 type CrossDomainBridge = {status:string;joinKey?:{value?:string;verification?:string};operationalSignal?:string;engineeringFunctions?:Array<{domain?:string;localId?:string;mappingConfidence?:string}>;assetInventory?:{status:string;evidence?:unknown[]};productCatalog?:{status:string;evidence?:unknown[]};physicalSensorBinding?:string;interpretation?:string}
 const crossDomainBridge = computed(() => (graph.value as (GraphContext & {crossDomainBridge?:CrossDomainBridge}) | null)?.crossDomainBridge ?? null)
 const evidencePage = ref(1)
@@ -65,6 +65,9 @@ const functions = ref<FunctionOption[]>([])
 const selectedLocalId = ref('')
 const selectedSignal = ref('')
 const knowledgeExpanded = ref(false)
+const knowledgeBusy = ref(false)
+const knowledgeError = ref('')
+const knowledgeCandidates = ref<Array<{domain:string;engineering_function:string;asset_identifier:string}>>([])
 const signalOptions = ref<string[]>([])
 const measurementType = ref('')
 const measurementTypes = ref<Array<{name:string;signal_count:number}>>([])
@@ -142,6 +145,8 @@ watch([selectedRun, selectedSignal, startSeconds, endSeconds], () => {
  directResult.value = null
  response.value = null
  knowledgeExpanded.value = false
+ knowledgeCandidates.value = []
+ knowledgeError.value = ''
 })
 async function run() {
  error.value = ''
@@ -170,6 +175,35 @@ async function run() {
  } catch (e) {
   error.value = e instanceof Error ? e.message : String(e)
  } finally { busy.value = false }
+}
+async function exploreKnowledge() {
+ if (!directResult.value || !selectedRun.value || !selectedSignal.value) return
+ knowledgeError.value = ''
+ knowledgeExpanded.value = false
+ knowledgeBusy.value = true
+ const snapshot = JSON.stringify([selectedRun.value,selectedSignal.value,startSeconds.value,endSeconds.value])
+ try {
+  const r = await fetch('/api/ai/vtkg/historian/explore-signal', {
+   method: 'POST', headers: {'Content-Type':'application/json'},
+   body: JSON.stringify({run_id:selectedRun.value,signal_id:selectedSignal.value,
+    start_simulation_seconds:startSeconds.value === '' ? null : Number(startSeconds.value),
+    end_simulation_seconds:endSeconds.value === '' ? null : Number(endSeconds.value)})
+  })
+  const data = await r.json()
+  if (!r.ok) throw new Error(data.error || 'Knowledge exploration failed')
+  if (snapshot !== JSON.stringify([selectedRun.value,selectedSignal.value,startSeconds.value,endSeconds.value])) return
+  knowledgeCandidates.value = data.candidates || []
+  if (data.status !== 'constructed' || !data.result) {
+   knowledgeError.value = data.reason || 'No VTKG could be constructed from this signal.'
+   return
+  }
+  response.value = {mode:'historian',intent:'historian_query',plan:{domain:data.selectedMapping.domain,
+   engineering_function:data.selectedMapping.engineering_function,run_id:selectedRun.value,
+   start_simulation_seconds:startSeconds.value === '' ? null : Number(startSeconds.value),
+   end_simulation_seconds:endSeconds.value === '' ? null : Number(endSeconds.value),shacl_evidence:null},result:data.result}
+  knowledgeExpanded.value = true
+ } catch (e) { knowledgeError.value = e instanceof Error ? e.message : String(e) }
+ finally { knowledgeBusy.value = false }
 }
 type TraceNode = {id:string;label:string;subtitle:string;kind:'function'|'asset'|'signal'|'run'|'observations';x:number;y:number;source?:GraphNode}
 type TraceLink = {source:string;target:string;label:string;virtual:boolean}
@@ -371,8 +405,14 @@ const experimentalChart = computed(() => {
    <p v-else class="subdued">No numeric observations available to graph.</p>
    <p class="subdued">Engineering knowledge is not queried during historian retrieval. VTKG signal-first exploration requires a separate backend integration.</p>
   </template>
-  <template v-if="response">
-   <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
+  <div v-if="directResult" class="explore-knowledge-action">
+   <p class="subdued">Explore engineering associations only when needed. This queries GraphDB and builds a query-scoped VTKG; historian retrieval stays independent.</p>
+   <button type="button" class="primary" :disabled="knowledgeBusy" @click="knowledgeExpanded ? knowledgeExpanded=false : response && graphReady ? knowledgeExpanded=true : exploreKnowledge()">{{knowledgeBusy ? 'Resolving engineering evidence…' : knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button>
+   <span v-if="knowledgeCandidates.length" class="subdued">{{knowledgeCandidates.length}} source-backed engineering mapping(s)</span>
+   <p v-if="knowledgeError" role="status">{{knowledgeError}}</p>
+  </div>
+  <template v-if="response && knowledgeExpanded">
+   <h3>Engineering knowledge context</h3>
    <template v-if="response.intent === 'engineering_query'">
     <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.result, null, 2)}}</pre>
    </template>
@@ -403,7 +443,7 @@ const experimentalChart = computed(() => {
     <p v-else class="subdued">No numeric observations available to graph.</p>
    <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
    </template>
-   <div v-if="graphReady" class="explore-knowledge-action"><p class="subdued">Historian data retrieved. Engineering context is available when you want to investigate the selected signal.</p><button type="button" class="primary" :aria-expanded="knowledgeExpanded" @click="knowledgeExpanded=!knowledgeExpanded">{{knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button><span class="subdued">{{graph?.nodes.length}} virtual nodes · {{graph?.edges.length}} edges</span></div>
+   <div v-if="false && graphReady" class="explore-knowledge-action"><p class="subdued">Historian data retrieved. Engineering context is available when you want to investigate the selected signal.</p><button type="button" class="primary" :aria-expanded="knowledgeExpanded" @click="knowledgeExpanded=!knowledgeExpanded">{{knowledgeExpanded ? 'Hide engineering knowledge' : 'Explore engineering knowledge & R01–R05'}}</button><span class="subdued">{{graph?.nodes.length}} virtual nodes · {{graph?.edges.length}} edges</span></div>
    <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
    <h3>Query details</h3>
    <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
