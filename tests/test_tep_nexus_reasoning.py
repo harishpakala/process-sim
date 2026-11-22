@@ -42,26 +42,47 @@ class ReasoningTests(unittest.TestCase):
         self.assertEqual(output["R03"]["status"], "complete")
         self.assertEqual(output["R04"]["status"], "insufficient_evidence")
 
-    def test_r04_and_r05_with_recorded_command(self):
+    def test_r04_balanced_windows_and_r05_exact_target(self):
         graph = fixture()
-        graph["nodes"].extend([
-            {"id": "before", "type": "VirtualObservation", "simulationTimeHours": 0.5,
-             "value": 8.0, "observedAt": "2026-11-22T09:30:00+00:00"},
-            {"id": "cmd", "type": "RecordedFaultCommand", "eventId": "event-1",
-             "action": "set", "simulationTimeHours": 0.75,
-             "observedAt": "2026-11-22T09:45:00+00:00"},
-        ])
-        graph["edges"].extend([
-            {"source": "before", "predicate": "observesSignal", "target": "s"},
-            {"source": "before", "predicate": "belongsToRun", "target": "r"},
-            {"source": "r", "predicate": "hasRecordedCommand", "target": "cmd"},
-        ])
+        graph["nodes"] = [n for n in graph["nodes"] if n["id"] != "o"]
+        graph["edges"] = [e for e in graph["edges"] if e["source"] != "o"]
+        for identifier, seconds, value in (
+            ("b1", 40, 8.0), ("b2", 43, 10.0),
+            ("a1", 49, 12.0), ("a2", 52, 14.0),
+            ("outside", 5, 1000.0),
+        ):
+            graph["nodes"].append({"id": identifier, "type": "VirtualObservation",
+                                   "simulationTimeHours": seconds / 3600,
+                                   "value": value, "observedAt": "2026-11-22T10:00:00+00:00"})
+            graph["edges"].extend([
+                {"source": identifier, "predicate": "observesSignal", "target": "s"},
+                {"source": identifier, "predicate": "belongsToRun", "target": "r"},
+            ])
+        graph["nodes"].append({"id": "cmd", "type": "RecordedFaultCommand",
+                               "eventId": "event-1", "action": "inject",
+                               "target": "XMEAS1", "faultId": "f-1",
+                               "simulationTimeHours": 46 / 3600})
+        graph["edges"].append({"source": "r", "predicate": "hasRecordedCommand", "target": "cmd"})
         result = reason(graph, domain="DEXPI", engineering_function="FI_101",
-                        run_id="run-1", expected_count=2)
+                        run_id="run-1", expected_count=5)
+        event = result["R04"]["events"][0]
         self.assertEqual(result["R04"]["status"], "complete")
-        self.assertEqual(result["R04"]["events"][0]["beforeMean"], 8.0)
-        self.assertEqual(result["R04"]["events"][0]["afterMean"], 12.0)
+        self.assertEqual(event["beforeCount"], 2)
+        self.assertEqual(event["afterCount"], 2)
+        self.assertEqual(event["beforeMean"], 9.0)
+        self.assertEqual(event["afterMean"], 13.0)
+        self.assertEqual(event["relevance"], "target_verified")
         self.assertEqual(result["R05"]["status"], "complete")
+        graph["nodes"][-1]["target"] = "XMEAS99"
+        unrelated = reason(graph, domain="DEXPI", engineering_function="FI_101",
+                           run_id="run-1", expected_count=5)
+        self.assertEqual(unrelated["R04"]["status"], "complete")
+        self.assertEqual(unrelated["R05"]["status"], "insufficient_evidence")
+        self.assertEqual(unrelated["R04"]["events"][0]["relevance"], "target_unverified")
+        graph["nodes"][-1]["target"] = None
+        missing = reason(graph, domain="DEXPI", engineering_function="FI_101",
+                         run_id="run-1", expected_count=5)
+        self.assertEqual(missing["R05"]["status"], "insufficient_evidence")
 
     def test_r04_requires_both_sides_of_command(self):
         graph = fixture()
