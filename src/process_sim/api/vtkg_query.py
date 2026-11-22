@@ -402,7 +402,19 @@ def explore_signal_knowledge(payload, *, environ=None):
     # Existing R01–R05 path requires one engineering function. Keep all candidates
     # visible, but use a deterministic primary mapping and label it explicitly.
     primary = candidates[0]
-    question = f"Get historian values for SignalName {signal} in simulation run {run_id}."
+    # The legacy VTKG builder validates an explicit engineering LocalId and
+    # a single supported simulation-time phrase in its question contract.
+    if start is not None and end is not None:
+        interval = f"between simulation seconds {start:g} and {end:g}"
+    elif start is not None:
+        interval = f"from simulation second {start:g} onward"
+    elif end is not None:
+        interval = f"up to simulation second {end:g}"
+    else:
+        interval = "for all simulation times"
+    question = (f"Get historian values for engineering LocalId "
+                f"{primary['engineering_function']} in simulation run {run_id} "
+                f"{interval}.")
     result = run_historian_question({
         "question": question, "engineering_function": primary["engineering_function"],
         "run_id": run_id, "domain": primary["domain"],
