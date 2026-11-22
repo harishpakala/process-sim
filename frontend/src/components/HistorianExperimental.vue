@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import VtkgReasoning from './VtkgReasoning.vue'
 const historianMode = ref<'retrieval'|'reasoning'>('retrieval')
 
 type HistorianResponse = {
@@ -34,20 +33,42 @@ const queryStyles = [
 const busy = ref(false)
 const error = ref('')
 const response = ref<HistorianResponse | null>(null)
-type GraphNode = {id:string;type:string;localId?:string;domain?:string;signalId?:string;simulationTimeHours?:number;value?:number;observedAt?:string}
+type GraphNode = {id:string;type:string;localId?:string;domain?:string;signalId?:string;identifier?:string;runId?:string;simulationTimeHours?:number;value?:number;observedAt?:string;identityScope?:string;contentFingerprint?:string;source?:string}
 type GraphEdge = {source:string;target:string;predicate:string}
 type GraphContext = {nodes:GraphNode[];edges:GraphEdge[];capabilities:Record<string,boolean>}
 const graph = computed(()=>response.value?.result?.vtkgStatus === 'constructed' ? response.value.result.vtkg as GraphContext : null)
 const graphReady = computed(()=>!!graph.value && !busy.value)
-const associated = computed(()=>{
- const g=graph.value
- if (!g) return []
- const functions=g.nodes.filter(n=>n.type==='EngineeringFunction')
- const signals=new Set(g.edges.filter(e=>e.predicate==='mapsToSignal' && functions.some(n=>n.id===e.source)).map(e=>e.target))
- const ids=new Set(g.edges.filter(e=>e.predicate==='observesSignal' && signals.has(e.target)).map(e=>e.source))
- return g.nodes.filter(n=>n.type==='VirtualObservation' && ids.has(n.id))
+const evidencePage = ref(1)
+const pageSize = 25
+const r01 = computed(() => {
+ const g = graph.value
+ if (!g || !response.value || response.value.intent !== 'historian_observations') return null
+ const domain = response.value.plan.domain
+ const localId = response.value.plan.engineering_function
+ const runId = response.value.plan.run_id
+ const functionNodes = g.nodes.filter(n => n.type === 'EngineeringFunction' && n.domain === domain && n.localId === localId)
+ const runNodes = g.nodes.filter(n => n.type === 'SimulationRun' && n.runId === runId)
+ if (functionNodes.length !== 1 || runNodes.length !== 1) return null
+ const fn = functionNodes[0]!
+ const run = runNodes[0]!
+ const signalIds = new Set(g.edges.filter(e => e.source === fn.id && e.predicate === 'mapsToSignal').map(e => e.target))
+ const signalNodes = g.nodes.filter(n => n.type === 'OperationalSignal' && signalIds.has(n.id))
+ if (signalNodes.length !== 1) return null
+ const signal = signalNodes[0]!
+ if (!g.edges.some(e => e.source === run.id && e.target === signal.id && e.predicate === 'hasSignal')) return null
+ const assetIds = new Set(g.edges.filter(e => e.source === fn.id && (e.predicate === 'hasAssetIdentifier' || e.predicate === 'associatedWithAsset')).map(e => e.target))
+ const assets = g.nodes.filter(n => assetIds.has(n.id))
+ const observationIds = new Set(g.edges.filter(e => e.target === signal.id && e.predicate === 'observesSignal').map(e => e.source))
+ const runObservationIds = new Set(g.edges.filter(e => e.target === run.id && e.predicate === 'belongsToRun').map(e => e.source))
+ const observations = g.nodes.filter(n => n.type === 'VirtualObservation' && observationIds.has(n.id) && runObservationIds.has(n.id))
+  .sort((a,b) => (a.simulationTimeHours ?? 0) - (b.simulationTimeHours ?? 0) || (a.observedAt ?? '').localeCompare(b.observedAt ?? ''))
+ const expected = response.value.result.observationCount
+ const complete = typeof expected === 'number' && observations.length === expected
+ return {fn, run, signal, assets, observations, expected, complete}
 })
-const demo = ref(false)
+const evidencePages = computed(() => Math.max(1, Math.ceil((r01.value?.observations.length ?? 0) / pageSize)))
+const visibleEvidence = computed(() => r01.value?.observations.slice((evidencePage.value-1)*pageSize,evidencePage.value*pageSize) ?? [])
+watch(graph, () => { evidencePage.value = 1 })
 
 type FunctionOption = {engineering_function: string; operational_signal: string; sample_count: number}
 const runs = ref<string[]>([])
@@ -128,13 +149,11 @@ onMounted(() => { void loadRuns() })
 watch([selectedRun,selectedDomain,selectedLocalId,startSeconds,endSeconds,question],()=>{
  response.value=null
  historianMode.value='retrieval'
- demo.value=false
 })
 
 
 async function run() {
  historianMode.value='retrieval'
- demo.value=false
  error.value = ''
  response.value = null
  if (question.value.trim().length < 5) {
@@ -191,21 +210,35 @@ const experimentalChart = computed(() => {
   <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
   <div class="historian-mode-switch" role="group" aria-label="Historian query mode">
    <button type="button" :class="historianMode === 'retrieval' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'retrieval'" @click="historianMode='retrieval'">Historian Retrieval</button>
-   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'"  :disabled="!graphReady" @click="historianMode='reasoning';demo=false">VTKG Reasoning</button>
+   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'"  :disabled="!graphReady" @click="historianMode='reasoning'">VTKG Reasoning</button>
   </div>
   <p v-if="!graphReady" class="subdued">Run a historian query to construct the VTKG and unlock live reasoning.</p>
   <div v-if="historianMode === 'reasoning' && graphReady && graph">
    <h3>Active VTKG context</h3>
    <p>{{graph.nodes.length}} nodes · {{graph.edges.length}} edges · query-scoped, not materialized</p>
-   <h3>R01 · Engineering-to-observation association</h3>
-   <p>{{associated.length}} associated observations via mapsToSignal / inverse observesSignal.</p>
-   <details><summary>Inspect graph evidence</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
-   <p class="subdued">R02–R05 require additional evidence or operators and are not enabled yet.</p>
+   <template v-if="r01">
+    <h3>R01 · Engineering-to-observation association</h3>
+    <p><strong>{{r01.fn.domain}} · {{r01.fn.localId}}</strong> <span class="subdued">mapsToSignal →</span> <strong>{{r01.signal.signalId}}</strong> <span class="subdued">← observesSignal</span> <strong>{{r01.observations.length}} observations</strong></p>
+    <p>Simulation run: <code>{{r01.run.runId}}</code></p>
+    <p>Engineering asset reference: <code v-for="asset in r01.assets" :key="asset.id">{{asset.identifier || asset.id}} </code><span v-if="!r01.assets.length">Not present in graph</span></p>
+    <p class="subdued">Engineering mapping: provisional · Physical sensor binding: not verified · Observations: TimescaleDB · Mapping: GraphDB</p>
+    <p v-if="!r01.complete" role="alert">Graph evidence incomplete: {{r01.observations.length}} linked observations; historian reports {{r01.expected ?? 'unknown'}}. Check source evidence before relying on this result.</p>
+    <p v-else role="status">Verified graph traversal: {{r01.observations.length}} of {{r01.expected}} historian observations associated with this function, signal and run.</p>
+    <p v-if="r01.observations.length">Simulation time: {{(r01.observations[0]!.simulationTimeHours! * 3600).toFixed(3)}}–{{(r01.observations[r01.observations.length-1]!.simulationTimeHours! * 3600).toFixed(3)}} seconds · Recorded timestamps: {{r01.observations[0]!.observedAt}} to {{r01.observations[r01.observations.length-1]!.observedAt}}</p>
+    <h4>R01 · Source-linked observation evidence</h4>
+    <p class="subdued">Showing {{r01.observations.length ? (evidencePage-1)*pageSize+1 : 0}}–{{Math.min(evidencePage*pageSize,r01.observations.length)}} of {{r01.observations.length}} observations. Times are simulation seconds; timestamps are recorded source timestamps.</p>
+    <div class="evidence-scroll"><table class="evidence-table"><thead><tr><th>Simulation second</th><th>Recorded value</th><th>Observed at</th><th>Observation source identity</th></tr></thead>
+     <tbody><tr v-for="item in visibleEvidence" :key="item.id"><td>{{((item.simulationTimeHours ?? 0)*3600).toFixed(3)}}</td><td>{{item.value}}</td><td>{{item.observedAt}}</td><td><code :title="item.id">{{item.id.split('/').pop()}}</code></td></tr></tbody>
+    </table></div>
+    <div class="evidence-pagination"><button type="button" class="secondary" :disabled="evidencePage===1" @click="evidencePage--">Previous</button><span>Page {{evidencePage}} of {{evidencePages}}</span><button type="button" class="secondary" :disabled="evidencePage===evidencePages" @click="evidencePage++">Next</button></div>
+   </template>
+   <p v-else role="alert">R01 cannot establish the selected function → signal → run evidence path from this graph.</p>
+   <details><summary>Inspect full query-scoped graph JSON</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
+   <p class="subdued">R02–R05 require additional evidence or operators and are not enabled yet. No physical causation is inferred.</p>
   </div>
-  <details v-if="historianMode === 'retrieval'"><summary>Illustrative R05 prototype (not live)</summary><button type="button" class="secondary" @click="demo=!demo">{{demo?'Hide':'Show'}} demonstration</button><VtkgReasoning v-if="demo"/></details>
   <div v-show="historianMode === 'retrieval'">
-  <p>Ask about engineering information or explore recorded simulation data in your own words.</p>
-  <p>Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
+  <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
+  <p v-if="!response">Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
   <div class="experiment-fields">
    <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
    <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
@@ -296,4 +329,4 @@ const experimentalChart = computed(() => {
 .experiment-wide { grid-column: 1 / -1; }
 .experiment-question { margin-top: 8px; resize: vertical; }
 @media (max-width: 700px) { .experiment-fields { grid-template-columns: minmax(0, 1fr); } }
-</style>
+ .evidence-scroll { overflow-x:auto; max-width:100%; }\n.evidence-table { width:100%; border-collapse:collapse; font-size:13px; }\n.evidence-table th,.evidence-table td { padding:9px; border-bottom:1px solid #334a62; text-align:left; white-space:nowrap; }\n.evidence-table code { font-size:11px; }\n.evidence-pagination { display:flex; align-items:center; gap:12px; margin:12px 0; }\n</style>
