@@ -329,4 +329,9 @@ const experimentalChart = computed(() => {
 .experiment-wide { grid-column: 1 / -1; }
 .experiment-question { margin-top: 8px; resize: vertical; }
 @media (max-width: 700px) { .experiment-fields { grid-template-columns: minmax(0, 1fr); } }
- .evidence-scroll { overflow-x:auto; max-width:100%; }\n.evidence-table { width:100%; border-collapse:collapse; font-size:13px; }\n.evidence-table th,.evidence-table td { padding:9px; border-bottom:1px solid #334a62; text-align:left; white-space:nowrap; }\n.evidence-table code { font-size:11px; }\n.evidence-pagination { display:flex; align-items:center; gap:12px; margin:12px 0; }\n</style>
+ .evidence-scroll { overflow-x:auto; max-width:100%; }
+.evidence-table { width:100%; border-collapse:collapse; font-size:13px; }
+.evidence-table th,.evidence-table td { padding:9px; border-bottom:1px solid #334a62; text-align:left; white-space:nowrap; }
+.evidence-table code { font-size:11px; }
+.evidence-pagination { display:flex; align-items:center; gap:12px; margin:12px 0; }
+</style>
