@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-const historianMode = ref<'retrieval'|'reasoning'>('retrieval')
 
 type HistorianResponse = {
  mode: string
@@ -132,12 +131,10 @@ watch([selectedRun, selectedDomain, selectedLocalId, startSeconds, endSeconds, q
 onMounted(() => { void loadRuns() })
 watch([selectedRun,selectedDomain,selectedLocalId,startSeconds,endSeconds,question],()=>{
  response.value=null
- historianMode.value='retrieval'
 })
 
 
 async function run() {
- historianMode.value='retrieval'
  error.value = ''
  response.value = null
  if (question.value.trim().length < 5) {
@@ -325,12 +322,80 @@ const experimentalChart = computed(() => {
 <template>
  <section class="panel">
   <div class="panel-title"><div><h2>Ask DTWise — Simulation Historian / VTKG</h2><p>Benchmark stage 09 · B33–B37 · parameterized simulation test cases</p></div><span class="pill">PREVIEW</span></div>
-  <div class="historian-mode-switch" role="group" aria-label="Historian query mode">
-   <button type="button" :class="historianMode === 'retrieval' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'retrieval'" @click="historianMode='retrieval'">Historian Retrieval</button>
-   <button type="button" :class="historianMode === 'reasoning' ? 'primary' : 'secondary'" :aria-pressed="historianMode === 'reasoning'"  :disabled="!graphReady" @click="historianMode='reasoning'">VTKG Reasoning</button>
+  <p v-if="!response" class="subdued">One query retrieves historian measurements and, when available, builds the source-linked VTKG reasoning view below.</p>
+  <div class="historian-unified-query">
+  <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
+  <p v-if="!response">Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
+  <div class="experiment-fields">
+   <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
+   <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
+    <option value="">Select simulation run</option>
+    <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
+   </select>
+   <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
+   <div class="experiment-field"><label for="historian-experiment-domain">Source (optional)</label>
+   <select id="historian-experiment-domain" v-model="selectedDomain">
+    <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
+   </select></div>
+   <div class="experiment-field"><label for="historian-experiment-localid">Instrument / LocalID (optional)</label>
+   <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
+    <option value="">Select LocalID</option>
+    <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
+   </select></div>
+   <div class="experiment-field"><label for="historian-experiment-style">How would you like to ask?</label>
+   <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
+   <div class="experiment-field"><label for="historian-experiment-start">From simulation second (optional)</label>
+   <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
+   <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
+   <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
+   <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
+   <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
   </div>
-  <p v-if="!graphReady" class="subdued">Run a historian query to construct the VTKG and unlock live reasoning.</p>
-  <div v-if="historianMode === 'reasoning' && graphReady && graph" class="reasoning-dashboard">
+  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
+  <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
+  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
+  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
+  <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
+  <template v-if="response">
+   <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
+   <template v-if="response.intent === 'engineering_query'">
+    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.result, null, 2)}}</pre>
+   </template>
+   <template v-else>
+    <div v-if="experimentalChart" class="vtkg-chart">
+     <div class="vtkg-chart-scroll">
+      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + (response.result.engineeringFunction || response.plan.engineering_function)">
+       <g stroke="currentColor" opacity="0.22" stroke-width="1">
+        <line v-for="tick in experimentalChart.yTicks" :key="'grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y" />
+       </g>
+       <g stroke="currentColor" stroke-width="1.5">
+        <line :x1="experimentalChart.left" :y1="experimentalChart.top" :x2="experimentalChart.left" :y2="experimentalChart.bottom" />
+        <line :x1="experimentalChart.left" :y1="experimentalChart.bottom" :x2="experimentalChart.right" :y2="experimentalChart.bottom" />
+       </g>
+       <g fill="currentColor" font-size="12">
+        <text v-for="tick in experimentalChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
+        <text v-for="tick in experimentalChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
+        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
+        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
+       </g>
+       <polyline v-if="experimentalChart.points.length > 1" :points="experimentalChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
+       <circle v-for="(point,i) in experimentalChart.points" :key="i" :cx="point.x" :cy="point.y" r="2.5" fill="#38bdf8">
+        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
+       </circle>
+      </svg>
+     </div>
+    </div>
+    <p v-else class="subdued">No numeric observations available to graph.</p>
+   <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
+   </template>
+   <p v-if="graphReady" class="unified-ready" role="status">VTKG constructed · {{graph?.nodes.length}} nodes · {{graph?.edges.length}} edges · engineering graph and reasoning explanations shown below.</p>
+   <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
+   <h3>Query details</h3>
+   <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
+  </template>
+  </div>
+  <div v-if="graphReady" class="unified-section-heading"><h3>Engineering graph &amp; reasoning</h3><p class="subdued">Interpret the same query through traceability, temporal evidence, and R01–R05 checks.</p></div>
+  <div v-if="graphReady && graph" class="reasoning-dashboard">
    <div class="reasoning-header">
     <div><h3>Live reasoning overview</h3><p class="subdued">{{r01?.function.domain || 'Engineering'}} · {{r01?.function.localId || '—'}} → {{r01?.signal.signalId || '—'}}</p></div>
     <span class="reasoning-count" role="status">{{completeCount}} / 5 operators complete</span>
@@ -489,82 +554,11 @@ const experimentalChart = computed(() => {
    <details class="reasoning-raw"><summary>Full query-scoped graph JSON (advanced)</summary><pre>{{JSON.stringify(graph,null,2)}}</pre></details>
    <p class="subdued">Source-linked virtual reasoning · no physical sensor verification or causal attribution.</p>
   </div>
-  <div v-show="historianMode === 'retrieval'">
-  <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
-  <p v-if="!response">Need a hand getting started? Choose a simulation run and instrument below, then pick a suggested way to ask. You can also type your own question at any time.</p>
-  <div class="experiment-fields">
-   <div class="experiment-field"><label for="historian-experiment-run">Simulation run (optional)</label>
-   <select id="historian-experiment-run" v-model="selectedRun" :disabled="discoveryBusy">
-    <option value="">Select simulation run</option>
-    <option v-for="runId in runs" :key="runId" :value="runId">{{runId}}</option>
-   </select>
-   <button class="experiment-refresh" type="button" :disabled="discoveryBusy" @click="loadRuns">Refresh runs</button></div>
-   <div class="experiment-field"><label for="historian-experiment-domain">Source (optional)</label>
-   <select id="historian-experiment-domain" v-model="selectedDomain">
-    <option value="DEXPI">DEXPI</option><option value="ECAD">ECAD</option>
-   </select></div>
-   <div class="experiment-field"><label for="historian-experiment-localid">Instrument / LocalID (optional)</label>
-   <select id="historian-experiment-localid" v-model="selectedLocalId" :disabled="!selectedRun || discoveryBusy">
-    <option value="">Select LocalID</option>
-    <option v-for="item in functions" :key="item.engineering_function" :value="item.engineering_function">{{item.engineering_function}}</option>
-   </select></div>
-   <div class="experiment-field"><label for="historian-experiment-style">How would you like to ask?</label>
-   <select id="historian-experiment-style" v-model="queryStyle"><option v-for="style in queryStyles" :key="style.value" :value="style.value">{{style.label}}</option></select></div>
-   <div class="experiment-field"><label for="historian-experiment-start">From simulation second (optional)</label>
-   <input id="historian-experiment-start" v-model="startSeconds" type="number" min="0" step="any" placeholder="No lower bound" /></div>
-   <div class="experiment-field"><label for="historian-experiment-end">To simulation second (optional)</label>
-   <input id="historian-experiment-end" v-model="endSeconds" type="number" min="0" step="any" placeholder="No upper bound" /></div>
-   <p class="experiment-wide" v-if="discoveryError" role="alert">{{discoveryError}}</p>
-   <p class="subdued experiment-wide">These suggestions are here to help, not to limit what you can ask. Edit the question freely. Leave the time fields empty to see the complete available run.</p>
-  </div>
-  <p class="subdued">Benchmark configuration: {{queryStyles.findIndex(item => item.value === queryStyle) + 33 < 38 ? 'B' + (queryStyles.findIndex(item => item.value === queryStyle) + 33) : '—'}} (question-style grouping, provisional) · {{selectedDomain}} · run {{selectedRun || 'not selected'}} · LocalID {{selectedLocalId || 'not selected'}} · {{startSeconds || 'start'}} to {{endSeconds || 'end'}} simulation seconds. Each run, instrument and time-window selection is a distinct test case. The B33–B37 style mapping is provisional until checked against the original VTKG benchmark definitions.</p>
-  <label class="experiment-question-label" for="historian-experiment-question">Your question</label>
-  <textarea id="historian-experiment-question" v-model="question" rows="4" class="experiment-question" placeholder="Ask a question about an instrument, simulation run, or engineering relationship…" />
-  <div style="margin-top:12px"><button class="primary" :disabled="busy" @click="run">{{busy ? 'Finding answer…' : 'Ask DTWise'}}</button></div>
-  <p v-if="error" role="alert" style="color:#b91c1c">{{error}}</p>
-  <template v-if="response">
-   <h3>{{response.intent === "engineering_query" ? "Engineering result" : "Historian result"}}</h3>
-   <template v-if="response.intent === 'engineering_query'">
-    <pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.result, null, 2)}}</pre>
-   </template>
-   <template v-else>
-    <div v-if="experimentalChart" class="vtkg-chart">
-     <div class="vtkg-chart-scroll">
-      <svg viewBox="0 0 780 295" role="img" :aria-label="'Historian time-series graph for ' + (response.result.engineeringFunction || response.plan.engineering_function)">
-       <g stroke="currentColor" opacity="0.22" stroke-width="1">
-        <line v-for="tick in experimentalChart.yTicks" :key="'grid-'+tick.y" :x1="experimentalChart.left" :x2="experimentalChart.right" :y1="tick.y" :y2="tick.y" />
-       </g>
-       <g stroke="currentColor" stroke-width="1.5">
-        <line :x1="experimentalChart.left" :y1="experimentalChart.top" :x2="experimentalChart.left" :y2="experimentalChart.bottom" />
-        <line :x1="experimentalChart.left" :y1="experimentalChart.bottom" :x2="experimentalChart.right" :y2="experimentalChart.bottom" />
-       </g>
-       <g fill="currentColor" font-size="12">
-        <text v-for="tick in experimentalChart.xTicks" :key="'x-'+tick.x" :x="tick.x" y="261" text-anchor="middle">{{tick.label}}</text>
-        <text v-for="tick in experimentalChart.yTicks" :key="'y-'+tick.y" x="64" :y="tick.y+4" text-anchor="end">{{tick.label}}</text>
-        <text x="400" y="287" text-anchor="middle">Simulation time (seconds)</text>
-        <text x="16" y="132" text-anchor="middle" transform="rotate(-90 16 132)">Recorded value</text>
-       </g>
-       <polyline v-if="experimentalChart.points.length > 1" :points="experimentalChart.polyline" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" />
-       <circle v-for="(point,i) in experimentalChart.points" :key="i" :cx="point.x" :cy="point.y" r="2.5" fill="#38bdf8">
-        <title>{{point.seconds.toFixed(2)}} s · {{point.value}}</title>
-       </circle>
-      </svg>
-     </div>
-    </div>
-    <p v-else class="subdued">No numeric observations available to graph.</p>
-   <p>Function: {{response.result.engineeringFunction || response.plan.engineering_function}} · Signal: {{response.result.mapping?.operational_signal || '—'}} · Observations: {{response.result.observationCount ?? response.result.observations?.length ?? 0}}</p>
-   </template>
-   <p v-if="graphReady" style="color:#4ade80">VTKG constructed · {{graph?.nodes.length}} nodes · {{graph?.edges.length}} edges. <button type="button" class="secondary" @click="historianMode='reasoning'">Explore VTKG Reasoning</button></p>
-   <p v-else-if="response.result.vtkgStatus==='unavailable'" role="status">Historian retrieval succeeded; VTKG construction unavailable.</p>
-   <h3>Query details</h3>
-   <details><summary>View how DTWise interpreted your question</summary><pre style="overflow:auto;white-space:pre-wrap">{{JSON.stringify(response.plan, null, 2)}}</pre></details>
-  </template>
-  </div>
  </section>
 </template>
 
 <style scoped>
-.historian-mode-switch { display:flex; flex-wrap:wrap; gap:8px; margin:12px 0; }
+.unified-section-heading { margin:24px 0 12px; padding-top:16px; border-top:1px solid #334a62; }\n.unified-ready { color:#86efac; }
 .experiment-fields {
  display: grid;
  grid-template-columns: repeat(2, minmax(0, 1fr));
