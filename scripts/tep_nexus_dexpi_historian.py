@@ -42,7 +42,7 @@ ORDER BY ?assetIdentifier ?signalName
 def resolve_signal(graphdb_url, function, *, domain="DEXPI", post=requests.post):
     if domain not in ("DEXPI", "ECAD"):
         raise ValueError("Unsupported domain")
-    pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|LI|PI|TI)-[0-9]+$")
+    pattern = FUNCTION_RE if domain == "DEXPI" else re.compile(r"^(?:FI|JI|LI|PI|TI)-[0-9]+$")
     if not pattern.fullmatch(function):
         raise ValueError("Invalid engineering function LocalId")
     # JSON-quoted literal prevents SPARQL injection; the function is additionally allow-pattern checked.
