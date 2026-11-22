@@ -77,6 +77,9 @@ def project(query):
              eventId=event_id, action=command["action"],
              simulationTimeHours=command["simulation_time_hours"],
              observedAt=command["observed_at"],
+             faultId=command.get("fault_id"), faultType=command.get("fault_type"),
+             target=command.get("target"), magnitude=command.get("magnitude"),
+             eventSource=command.get("event_source"),
              physicalFaultState="NOT_VERIFIED")
         edge(r, "hasRecordedCommand", e)
 
