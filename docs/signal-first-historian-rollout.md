@@ -57,3 +57,29 @@ Configure `GRAPHDB_SPARQL_ENDPOINT` only for the knowledge exploration path. Sel
 - A shared AssetIdentifier is semantic evidence, **not** proof of physical sensor identity.
 - Existing R01–R05 operators are engineering-function-oriented; the explorer chooses a deterministic primary source-backed mapping and reports all candidates. Further work is needed to support ambiguous mappings as first-class choices.
 - No live migration, deployment, end-to-end browser run, or CI build has been performed as part of these commits.
+
+## 5. Populate provisional measurement types from live LocalIDs
+
+The LocalID convention is `T=Temperature`, `P=Pressure`, `L=Level`, `F=Flow`, `J=Energy`. Classification is based on GraphDB DEXPI/ECAD LocalID mappings joined to OPC UA SignalNames; it is a **provisional engineering inference**, not a verified physical sensor or unit.
+
+If the initial metadata migration has not run, apply `scripts/sql/20261122_signal_metadata.sql`. If it **already ran**, additionally apply `scripts/sql/20261122_signal_metadata_flow_upgrade.sql` to add Flow to the existing constraint.
+
+From the repository root, with the Python environment and both `TEP_TIMESCALE_DSN` and `GRAPHDB_SPARQL_ENDPOINT` configured:
+
+```bash
+python -m unittest discover -s tests -p 'test_classify_historian_signals.py'
+python -m scripts.classify_historian_signals
+# Review the JSON proposals, especially conflicting and unmapped signals.
+python -m scripts.classify_historian_signals --apply
+```
+
+The script writes only consistent inferred types, with `classification_source='GraphDB DEXPI/ECAD LocalID prefix heuristic'` and `verification_status='PROVISIONAL'`. It does not overwrite already classified or verified metadata, does not invent units, and does not modify the observation hypertable.
+
+Inspect results:
+
+```sql
+SELECT signal_id, measurement_type, unit, classification_source, verification_status
+FROM public.signal_metadata ORDER BY signal_id;
+```
+
+Any signals without a consistent supported LocalID remain Unclassified. The actual database has not been accessed by these repository commits.
