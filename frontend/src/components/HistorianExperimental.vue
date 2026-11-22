@@ -46,7 +46,7 @@ type ReasoningResult = {
  R01:{status:string;function:{id:string;domain:string;localId:string};signal:{id:string;signalId:string};run:{id:string;runId:string};asset:{id:string;type:string;identifier:string};path:Array<{source:string;predicate:string;target:string}>;observationCount:number;observations:ReasoningObservation[];provenance:Record<string,string|boolean>};
  R02:{status:string;signalId:string;observationCount:number;engineeringFunctions:ReasoningFunction[];scope:string};
  R03:{status:string;sharedSignal:string;engineeringFunctions:ReasoningFunction[];domainsPresent:string[];interpretation:string};
- R04:{status:string;reason:string};R05:{status:string;reason:string}
+ R04:{status:string;reason:string;interpretation?:string;events?:Array<{eventId:string;action:string;simulationTimeHours:number;beforeCount:number;atCount:number;afterCount:number;beforeMean:number|null;afterMean:number|null;path:{source:string;predicate:string;target:string}}>};R05:{status:string;reason?:string;interpretation?:string;sharedSignal?:string;engineeringFunctions?:ReasoningFunction[];temporalEvents?:unknown[]}
 }
 const reasoning = computed(() => (graph.value as (GraphContext & {reasoning?:ReasoningResult}) | null)?.reasoning ?? null)
 const r01 = computed(() => reasoning.value?.R01.status === 'complete' ? reasoning.value.R01 : null)
@@ -223,12 +223,28 @@ const experimentalChart = computed(() => {
     <template v-if="reasoning!.R03.status==='complete'"><p role="status">DEXPI and ECAD functions are both associated with {{reasoning!.R03.sharedSignal}}.</p><ul><li v-for="fn in reasoning!.R03.engineeringFunctions" :key="fn.id">{{fn.domain}} · {{fn.localId}}</li></ul></template>
     <p v-else>Insufficient cross-domain evidence in this snapshot. Domains found: {{reasoning!.R03.domainsPresent.join(', ') || 'none'}}.</p>
     <p class="subdued">{{reasoning!.R03.interpretation}}</p>
-    <h3>R04 / R05 · Not enabled</h3>
-    <p class="subdued">{{reasoning!.R04.reason}}. {{reasoning!.R05.reason}}.</p>
+    <h3>R04 · Recorded-command temporal comparison</h3>
+    <template v-if="reasoning!.R04.status==='complete'">
+     <p role="status">Recorded command evidence found in this run. Before/after statistics are descriptive, not causal.</p>
+     <div v-for="event in reasoning!.R04.events" :key="event.eventId">
+      <p><strong>{{event.action}}</strong> · event {{event.eventId}} · simulation second {{(event.simulationTimeHours*3600).toFixed(3)}}</p>
+      <p>Before: {{event.beforeCount}} observations, mean {{event.beforeMean ?? 'unavailable'}} · At event: {{event.atCount}} · After: {{event.afterCount}} observations, mean {{event.afterMean ?? 'unavailable'}}</p>
+      <details><summary>Show command provenance edge</summary><pre>{{JSON.stringify(event.path,null,2)}}</pre></details>
+     </div>
+    </template>
+    <p v-else>Insufficient evidence: {{reasoning!.R04.reason}}</p>
+    <p class="subdued">{{reasoning!.R04.interpretation}}</p>
+    <h3>R05 · Combined cross-domain and temporal association</h3>
+    <template v-if="reasoning!.R05.status==='complete'">
+     <p role="status">Cross-domain and recorded-command evidence co-occur for signal {{reasoning!.R05.sharedSignal}}.</p>
+     <p>{{reasoning!.R05.engineeringFunctions?.map(fn => fn.domain+' · '+fn.localId).join(' / ')}}</p>
+     <p class="subdued">{{reasoning!.R05.interpretation}}</p>
+    </template>
+    <p v-else>Insufficient evidence: {{reasoning!.R05.reason}}</p>
    </template>
    <p v-else role="alert">Structured R01 reasoning is unavailable for this snapshot. Inspect the graph or backend log; a node count alone is not a reasoning result.</p>
    <details><summary>Inspect full query-scoped graph JSON</summary><pre style="overflow:auto;max-height:320px">{{JSON.stringify(graph, null, 2)}}</pre></details>
-   <p class="subdued">R02–R05 require additional evidence or operators and are not enabled yet. No physical causation is inferred.</p>
+   <p class="subdued">R04/R05 are enabled only with run-linked recorded commands and sufficient temporal evidence. No physical causation is inferred.</p>
   </div>
   <div v-show="historianMode === 'retrieval'">
   <p v-if="!response">Ask about engineering information or explore recorded simulation data in your own words.</p>
