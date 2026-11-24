@@ -56,9 +56,9 @@ def main():
        completed.add(key)
     print('Evaluations:',len(jobs)*len(a.models),'completed:',len(completed),flush=True)
     with output.open('a' if a.resume else 'x',encoding='utf-8') as f:
-      for sid,paraphrase in jobs:
-       s=scenarios[sid]; q=paraphrase['query']; qid=paraphrase['id']
-       for model in a.models:
+      for model in a.models:
+       for sid,paraphrase in jobs:
+        s=scenarios[sid]; q=paraphrase['query']; qid=paraphrase['id']
         if (qid,model) in completed: continue
         r=dict(scenario_id=sid,query_id=qid,configuration=config,question=q,model=model,expected_behavior=s['expected_behavior'],timings={},status='started',final_correctness='manual_review_required',hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS]})
         start=time.perf_counter(); stage='domain_resolution'; t=start
