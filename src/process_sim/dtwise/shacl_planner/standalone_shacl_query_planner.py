@@ -310,7 +310,33 @@ def _explicit_shacl_comparisons(question, candidates):
                 continue
             if not operator and not re.search(
                 r'\b(?:with|where|whose|having|restrict(?:ed|ing)?|'
-                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*
+                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*$',
+                prefix, re.I,
+            ):
+                continue
+            # Sorting phrases name a property but do not compare it to a value.
+            if not operator and value.casefold() in {
+                'asc', 'desc', 'ascending', 'descending', 'from',
+                'in', 'sorted', 'ordered', 'lowest', 'highest',
+            }:
+                continue
+            if value.casefold() in {
+                'and', 'or', 'by', 'where', 'with', 'through', 'using',
+                'whose', 'is', 'equals', 'equal', 'the', 'a', 'an',
+            }:
+                continue
+            comparisons.append((
+                name.casefold(),
+                {'is not': '!=', 'not equal to': '!=', 'greater than': '>',
+                 'less than': '<', 'greater than or equal to': '>=',
+                 'less than or equal to': '<='}.get(' '.join(operator.split()),
+                 operator if operator in OPS else '='),
+                value,
+            ))
+    return comparisons
+
+
+def analyze_plan(answer, offered, question):
     d={'warnings':[],'errors':[],'derived_join_owner_id':None,
        'derived_branch_join':False,'explicit_filter_literals':[]}
     if not isinstance(answer,dict):return d
