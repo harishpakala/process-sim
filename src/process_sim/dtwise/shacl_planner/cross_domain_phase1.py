@@ -31,7 +31,7 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     'Return the Phase-1 keys plus mapping_ids and identifier_path_ids. '
     'All candidate IDs are domain-qualified (e.g. ecad:R2). '
     'Select only offered mapping IDs and offered identifier paths. '
-    'For every selected mapping select its exact owner-specific identifier endpoints. '
+    'For every selected mapping select its exact owner-specific identifier endpoints, or use [] when the named owner pair uniquely determines them. '
     'Cross-domain joins use approved identifier equality; never invent RDF edges. '
     'Prefer an approved AssetIdentifier mapping when available and compatible. '
     'If no connected approved mapping exists, return unresolved with empty plan. '
@@ -172,6 +172,37 @@ def _normalize_explicit_sort_and_placeholder_filters(answer, candidates, questio
     ):
         order['direction'] = 'ASC'
     return answer
+
+def _derive_unique_mapping_endpoints(answer, graph, registry, exact_shapes):
+    """Fill omitted endpoints only when each selected mapping has one named pair."""
+    if answer.get('status') != 'selected' or answer.get('identifier_path_ids') != []:
+        return answer
+    mids = answer.get('mapping_ids')
+    if not isinstance(mids, list) or not mids or not all(isinstance(m, str) for m in mids):
+        return answer
+    edges = {e['id']: e for e in graph['mapping_candidates']}
+    paths = {p['id']: p for p in graph['identifier_path_candidates']}
+    selected = []
+    for mid in mids:
+        edge = edges.get(mid)
+        if edge is None:
+            return answer
+        pairs = []
+        for pair in edge.get('join_alternatives', []):
+            ids = (pair['left_id'], pair['right_id'])
+            if all(pid in paths and paths[pid]['owner_shape_uri'] in
+                   exact_shapes.get(paths[pid]['domain'], set()) for pid in ids):
+                pairs.append(ids)
+        if len(set(pairs)) != 1:
+            return answer
+        selected.extend(pairs[0])
+    selected = list(dict.fromkeys(selected))
+    try:
+        validate_mapping_graph_selection(mids, selected, graph, registry)
+    except Exception:
+        return answer
+    return {**answer, 'identifier_path_ids': selected}
+
 
 def _normalize_mapping_owner_participation(answer, candidates, graph, registry,
                                            exact_shapes, question):
@@ -602,6 +633,7 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
             answer['join_owner_id'] = None
         answer = _normalize_explicit_sort_and_placeholder_filters(
             answer, candidates, question)
+        answer = _derive_unique_mapping_endpoints(answer, graph, registry, exact_shapes)
         answer = _normalize_mapping_owner_participation(
             answer, candidates, graph, registry, exact_shapes, question)
         errors, selected = _cross_validate(
