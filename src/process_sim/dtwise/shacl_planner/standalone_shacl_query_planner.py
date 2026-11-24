@@ -286,53 +286,39 @@ def _explicit_limit(question):
     return None
 
 def _explicit_shacl_comparisons(question, candidates):
-    """Find explicit property comparisons using offered SHACL labels, not IDs."""
-    names = sorted({
-        c.get('property_name') for c in candidates
-        if c.get('kind') == 'property' and c.get('property_name')
-    }, key=len, reverse=True)
+    """Recognize explicit literal comparisons, not implicit prose or sorting."""
+    operators = {
+        'is': '=', 'equals': '=', 'equal to': '=', 'has value': '=',
+        'is not': '!=', 'not equal to': '!=', 'greater than': '>',
+        'less than': '<', 'greater than or equal to': '>=',
+        'less than or equal to': '<=', '=': '=', '!=': '!=',
+        '>': '>', '<': '<', '>=': '>=', '<=': '<=',
+    }
+    names = sorted({c['property_name'] for c in candidates
+                    if c.get('kind') == 'property' and c.get('property_name')})
     comparisons = []
+    op_pattern = '|'.join(re.escape(op) for op in sorted(operators, key=len, reverse=True))
+    literal = r'[A-Za-z0-9_][\w.-]*'
     for name in names:
-        pattern = (
-            r'(?<!\w)' + re.escape(name) + r'(?!\w)'
-            r'\s+(?:(?P<op>is\s+not|not\s+equal\s+to|greater\s+than\s+or\s+equal\s+to|less\s+than\s+or\s+equal\s+to|greater\s+than|less\s+than|is|equals|equal\s+to|!=|>=|<=|=|>|<|to)\s+)?'
-            r'(?P<value>[A-Za-z0-9_][\w.-]*)'
-        )
+        pattern = (r'(?<!\w)' + re.escape(name) + r'(?!\w)\s*'
+                   + r'(?P<op>' + op_pattern + r')\s+'
+                   + r'(?P<either>either\s+)?(?P<value>' + literal + r')')
         for match in re.finditer(pattern, question, re.I):
-            operator = (match.group('op') or '').casefold()
             value = match.group('value').rstrip('.,;?!')
-            prefix = question[:match.start()]
-            if operator == 'to' and value.casefold() in {
-                'connect', 'join', 'match', 'link', 'associate', 'relate',
-                'connects', 'joins', 'matches', 'links', 'associates', 'relates',
-            }:
-                # Infinitive join language is not a literal comparison.
-                continue
-            if not operator and not re.search(
-                r'\b(?:with|where|whose|having|restrict(?:ed|ing)?|'
-                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*$',
-                prefix, re.I,
-            ):
-                continue
-            # Sorting phrases name a property but do not compare it to a value.
-            if not operator and value.casefold() in {
-                'asc', 'desc', 'ascending', 'descending', 'from',
-                'in', 'sorted', 'ordered', 'lowest', 'highest',
-            }:
-                continue
             if value.casefold() in {
-                'and', 'or', 'by', 'where', 'with', 'through', 'using',
-                'whose', 'is', 'equals', 'equal', 'the', 'a', 'an',
+                'assigned', 'defined', 'used', 'required', 'available',
+                'present', 'missing', 'first', 'last', 'values', 'either',
+                'a', 'an', 'the', 'not', 'greater', 'less',
             }:
                 continue
-            comparisons.append((
-                name.casefold(),
-                {'is not': '!=', 'not equal to': '!=', 'greater than': '>',
-                 'less than': '<', 'greater than or equal to': '>=',
-                 'less than or equal to': '<='}.get(' '.join(operator.split()),
-                 operator if operator in OPS else '='),
-                value,
-            ))
+            op = operators[match.group('op').casefold()]
+            comparisons.append((name.casefold(), op, value))
+            if match.group('either'):
+                alternative = re.match(r'\s+or\s+(' + literal + r')',
+                                       question[match.end():], re.I)
+                if alternative:
+                    comparisons.append((name.casefold(), op,
+                                        alternative.group(1).rstrip('.,;?!')))
     return comparisons
 
 
