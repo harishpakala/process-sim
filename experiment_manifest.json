@@ -1,0 +1,178 @@
+﻿{
+    "schema_version":  "1.0",
+    "collected_at_utc":  "2026-11-24T06:26:51.5238482Z",
+    "purpose":  "MODELSWARD 2027 TEP NEXUS environment audit",
+    "cpu":  {
+                "status":  "collected",
+                "data":  {
+                             "Name":  "AMD Ryzen 7 PRO 8840HS w/ Radeon 780M Graphics ",
+                             "NumberOfCores":  8,
+                             "NumberOfLogicalProcessors":  16,
+                             "MaxClockSpeed":  3301
+                         }
+            },
+    "memory":  {
+                   "status":  "collected",
+                   "data":  {
+                                "RAM_GiB":  59.67
+                            }
+               },
+    "gpu":  {
+                "status":  "collected",
+                "data":  {
+                             "Name":  "AMD Radeon 780M Graphics",
+                             "DriverVersion":  "32.0.31044.1004"
+                         }
+            },
+    "nvidia":  {
+                   "status":  "not_installed_or_not_on_path"
+               },
+    "os":  {
+               "status":  "collected",
+               "data":  {
+                            "Caption":  "Microsoft Windows 11 Pro",
+                            "Version":  "10.0.26200",
+                            "BuildNumber":  "26200",
+                            "OSArchitecture":  "64-bit"
+                        }
+           },
+    "python":  {
+                   "status":  "collected",
+                   "data":  [
+                                "Python 3.12.0"
+                            ]
+               },
+    "python_packages":  {
+                            "status":  "collected",
+                            "data":  [
+                                         "[{\"name\": \"aas-core3.1\", \"version\": \"1.0.0\"}, {\"name\": \"aiofiles\", \"version\": \"25.1.0\"}, {\"name\": \"aiosqlite\", \"version\": \"0.22.1\"}, {\"name\": \"annotated-doc\", \"version\": \"0.0.6\"}, {\"name\": \"annotated-types\", \"version\": \"0.8.0\"}, {\"name\": \"anyio\", \"version\": \"4.16.0\"}, {\"name\": \"asyncua\", \"version\": \"1.1.8\"}, {\"name\": \"blinker\", \"version\": \"1.9.0\"}, {\"name\": \"certifi\", \"version\": \"2026.6.17\"}, {\"name\": \"cffi\", \"version\": \"2.1.1\"}, {\"name\": \"charset-normalizer\", \"version\": \"3.4.7\"}, {\"name\": \"click\", \"version\": \"8.4.2\"}, {\"name\": \"cloc\", \"version\": \"0.2.5\"}, {\"name\": \"colorama\", \"version\": \"0.4.6\"}, {\"name\": \"colored\", \"version\": \"2.3.2\"}, {\"name\": \"comm\", \"version\": \"0.2.3\"}, {\"name\": \"contourpy\", \"version\": \"1.3.3\"}, {\"name\": \"cryptography\", \"version\": \"50.0.0\"}, {\"name\": \"cycler\", \"version\": \"0.12.1\"}, {\"name\": \"dash\", \"version\": \"4.4.1\"}, {\"name\": \"filelock\", \"version\": \"4.2.10\"}, {\"name\": \"Flask\", \"version\": \"3.1.3\"}, {\"name\": \"flexcache\", \"version\": \"0.3\"}, {\"name\": \"flexparser\", \"version\": \"0.4\"}, {\"name\": \"fonttools\", \"version\": \"4.63.0\"}, {\"name\": \"fsspec\", \"version\": \"2026.9.0\"}, {\"name\": \"grpcio\", \"version\": \"1.85.1\"}, {\"name\": \"h11\", \"version\": \"0.16.0\"}, {\"name\": \"h2\", \"version\": \"4.4.1\"}, {\"name\": \"hf-xet\", \"version\": \"1.8.0\"}, {\"name\": \"hpack\", \"version\": \"4.2.0\"}, {\"name\": \"html5rdf\", \"version\": \"1.2.1\"}, {\"name\": \"httpcore\", \"version\": \"1.0.9\"}, {\"name\": \"httpcore2\", \"version\": \"2.16.0\"}, {\"name\": \"httpx\", \"version\": \"0.28.1\"}, {\"name\": \"httpx2\", \"version\": \"2.16.0\"}, {\"name\": \"huggingface_hub\", \"version\": \"2.4.0\"}, {\"name\": \"hyperframe\", \"version\": \"6.1.0\"}, {\"name\": \"idna\", \"version\": \"3.18\"}, {\"name\": \"importlib_metadata\", \"version\": \"9.0.0\"}, {\"name\": \"iniconfig\", \"version\": \"2.3.0\"}, {\"name\": \"itsdangerous\", \"version\": \"2.2.0\"}, {\"name\": \"janus\", \"version\": \"2.0.0\"}, {\"name\": \"Jinja2\", \"version\": \"3.1.6\"}, {\"name\": \"jiter\", \"version\": \"0.19.0\"}, {\"name\": \"joblib\", \"version\": \"1.5.3\"}, {\"name\": \"kiwisolver\", \"version\": \"1.5.0\"}, {\"name\": \"lark\", \"version\": \"1.3.1\"}, {\"name\": \"lxml\", \"version\": \"6.1.1\"}, {\"name\": \"markdown-it-py\", \"version\": \"4.3.0\"}, {\"name\": \"MarkupSafe\", \"version\": \"3.0.3\"}, {\"name\": \"matplotlib\", \"version\": \"3.11.1\"}, {\"name\": \"mdurl\", \"version\": \"0.1.2\"}, {\"name\": \"meson\", \"version\": \"1.12.0\"}, {\"name\": \"meson-python\", \"version\": \"0.20.0\"}, {\"name\": \"mpmath\", \"version\": \"1.3.0\"}, {\"name\": \"narwhals\", \"version\": \"2.24.0\"}, {\"name\": \"nest-asyncio\", \"version\": \"1.6.0\"}, {\"name\": \"networkx\", \"version\": \"3.7\"}, {\"name\": \"ninja\", \"version\": \"1.13.0\"}, {\"name\": \"numpy\", \"version\": \"2.5.2\"}, {\"name\": \"ollama\", \"version\": \"0.6.3\"}, {\"name\": \"opcua-client\", \"version\": \"0.8.4\"}, {\"name\": \"opcua-widgets\", \"version\": \"0.6.1\"}, {\"name\": \"openai\", \"version\": \"3.49.0\"}, {\"name\": \"owlrl\", \"version\": \"7.1.4\"}, {\"name\": \"packaging\", \"version\": \"26.2\"}, {\"name\": \"pandas\", \"version\": \"3.0.2\"}, {\"name\": \"pillow\", \"version\": \"12.3.0\"}, {\"name\": \"Pint\", \"version\": \"0.25.3\"}, {\"name\": \"pip\", \"version\": \"26.2.1\"}, {\"name\": \"platformdirs\", \"version\": \"4.11.0\"}, {\"name\": \"plotly\", \"version\": \"6.9.0\"}, {\"name\": \"pluggy\", \"version\": \"1.6.0\"}, {\"name\": \"portalocker\", \"version\": \"4.4.2\"}, {\"name\": \"prettytable\", \"version\": \"3.18.0\"}, {\"name\": \"protobuf\", \"version\": \"7.36.2\"}, {\"name\": \"psycopg\", \"version\": \"3.3.6\"}, {\"name\": \"psycopg-binary\", \"version\": \"3.3.6\"}, {\"name\": \"pyarrow\", \"version\": \"23.0.1\"}, {\"name\": \"pycparser\", \"version\": \"3.0\"}, {\"name\": \"pydantic\", \"version\": \"2.13.4\"}, {\"name\": \"pydantic_core\", \"version\": \"2.46.4\"}, {\"name\": \"Pygments\", \"version\": \"2.21.0\"}, {\"name\": \"pyOpenSSL\", \"version\": \"26.4.0\"}, {\"name\": \"pyparsing\", \"version\": \"3.3.2\"}, {\"name\": \"pyproject-metadata\", \"version\": \"0.12.1\"}, {\"name\": \"PyQt5\", \"version\": \"5.15.11\"}, {\"name\": \"PyQt5-Qt5\", \"version\": \"5.15.2\"}, {\"name\": \"PyQt5_sip\", \"version\": \"12.19.0\"}, {\"name\": \"pyshacl\", \"version\": \"0.31.0\"}, {\"name\": \"pytest\", \"version\": \"9.1.1\"}, {\"name\": \"pytest-asyncio\", \"version\": \"1.4.0\"}, {\"name\": \"python-dateutil\", \"version\": \"2.9.0.post0\"}, {\"name\": \"pytz\", \"version\": \"2026.3.post1\"}, {\"name\": \"PyYAML\", \"version\": \"6.0.3\"}, {\"name\": \"qdrant-client\", \"version\": \"1.20.0\"}, {\"name\": \"rdflib\", \"version\": \"7.6.0\"}, {\"name\": \"regex\", \"version\": \"2026.11.9\"}, {\"name\": \"requests\", \"version\": \"2.34.2\"}, {\"name\": \"retrying\", \"version\": \"1.4.2\"}, {\"name\": \"rich\", \"version\": \"15.0.0\"}, {\"name\": \"safetensors\", \"version\": \"0.8.0\"}, {\"name\": \"scikit-learn\", \"version\": \"1.8.0\"}, {\"name\": \"scipy\", \"version\": \"1.17.1\"}, {\"name\": \"sentence-transformers\", \"version\": \"6.3.0\"}, {\"name\": \"setuptools\", \"version\": \"84.0.0\"}, {\"name\": \"shellingham\", \"version\": \"1.5.4\"}, {\"name\": \"six\", \"version\": \"1.17.0\"}, {\"name\": \"sniffio\", \"version\": \"1.3.1\"}, {\"name\": \"sortedcontainers\", \"version\": \"2.4.0\"}, {\"name\": \"sympy\", \"version\": \"1.14.0\"}, {\"name\": \"tep\", \"version\": \"2.5.0\", \"editable_project_location\": \"C:\\\\Users\\\\haris\\\\eclipse-workspace\\\\tennessee-eastman-profbraatz\"}, {\"name\": \"threadpoolctl\", \"version\": \"3.6.0\"}, {\"name\": \"tokenizers\", \"version\": \"0.23.3\"}, {\"name\": \"torch\", \"version\": \"2.15.0\"}, {\"name\": \"tqdm\", \"version\": \"4.70.1\"}, {\"name\": \"transformers\", \"version\": \"5.22.2\"}, {\"name\": \"truststore\", \"version\": \"0.10.5\"}, {\"name\": \"typer\", \"version\": \"0.29.1\"}, {\"name\": \"typing_extensions\", \"version\": \"4.16.0\"}, {\"name\": \"typing-inspection\", \"version\": \"0.4.4\"}, {\"name\": \"tzdata\", \"version\": \"2026.1\"}, {\"name\": \"urllib3\", \"version\": \"2.7.0\"}, {\"name\": \"wcwidth\", \"version\": \"0.8.1\"}, {\"name\": \"Werkzeug\", \"version\": \"3.1.8\"}, {\"name\": \"zipp\", \"version\": \"4.1.0\"}]"
+                                     ]
+                        },
+    "ollama_version":  {
+                           "status":  "collected",
+                           "data":  [
+                                        "ollama version is 0.40.10"
+                                    ]
+                       },
+    "ollama_list":  {
+                        "status":  "collected",
+                        "data":  [
+                                     "NAME                       ID              SIZE      MODIFIED      ",
+                                     "mistral:7b                 6577803aa9a0    4.4 GB    4 minutes ago    ",
+                                     "qwen2.5-coder:3b           f72c60cabf62    1.9 GB    6 days ago       ",
+                                     "qwen2.5-coder:7b           dae161e27b0e    4.7 GB    6 days ago       ",
+                                     "nomic-embed-text:latest    0a109f422b47    274 MB    11 days ago      ",
+                                     "llama3.1:8b                46e0c10c039e    4.9 GB    4 weeks ago      "
+                                 ]
+                    },
+    "ollama_running":  {
+                           "status":  "collected",
+                           "data":  [
+                                        "NAME          ID              SIZE      PROCESSOR    CONTEXT    RUNNER      UNTIL                   ",
+                                        "mistral:7b    6577803aa9a0    5.0 GB    100% CPU     4096       llamacpp    About a minute from now    "
+                                    ]
+                       },
+    "docker_version":  {
+                           "status":  "collected",
+                           "data":  [
+                                        "Docker version 29.9.3, build 5457199"
+                                    ]
+                       },
+    "docker_containers":  {
+                              "status":  "collected",
+                              "data":  [
+
+                                       ]
+                          },
+    "git_commit":  {
+                       "status":  "collected",
+                       "data":  [
+                                    "6f1e550a36d51cb04af0a43873934d6ea409a8b8"
+                                ]
+                   },
+    "git_status":  {
+                       "status":  "collected",
+                       "data":  [
+                                    " M benchmark_results/single_domain.json",
+                                    " M benchmark_results/single_domain_sparql_results.json",
+                                    " D ebom-associations.json",
+                                    " D four-domain-results.json",
+                                    " M src/process_sim/dtwise/shacl_planner/grounding/semantic.py",
+                                    " M src/process_sim/dtwise/shacl_planner/operations/phase3_and.py",
+                                    " M src/process_sim/dtwise/shacl_planner/operations/phase4_and_join.py",
+                                    " M src/process_sim/dtwise/shacl_planner/operations/phase4_filtered_join.py",
+                                    " M src/process_sim/dtwise/shacl_planner/planning/query_intent.py",
+                                    " D tep_nexus_paper_benchmark.py",
+                                    " D unresolved-ebom-evidence.json",
+                                    "?? benchmark_results/aast_candidate/",
+                                    "?? benchmark_results/single_domain_graph_comparison.json",
+                                    "?? benchmark_results/single_domain_sparql_execution.json",
+                                    "?? benchmark_results/single_domain_sparql_validation.json",
+                                    "?? benchmarks/shacl_phase1/benchmark_queries.local-backup.json",
+                                    "?? collect_experiment_environment.ps1",
+                                    "?? reports/dtwise_phase4_router.json",
+                                    "?? sd10_candidates.json",
+                                    "?? sd10_full.json",
+                                    "?? sd10_question.json"
+                                ]
+                   },
+    "postgres_client":  {
+                            "status":  "collected",
+                            "data":  [
+                                         "psql (PostgreSQL) 18.6"
+                                     ]
+                        },
+    "service_versions_note":  "GraphDB, PostgreSQL server and TimescaleDB extension versions and actual deployment topology require separate verification. Docker image tags are not verified server versions.",
+    "inference_note":  "Installed model metadata is not the effective benchmark inference configuration.",
+    "ollama_model_metadata":  {
+                                  "endpoint":  "local default",
+                                  "status":  "collected",
+                                  "data":  [
+                                               {
+                                                   "name":  "mistral:7b",
+                                                   "digest":  "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+                                                   "size_bytes":  4372824384,
+                                                   "family":  "llama",
+                                                   "parameter_size":  "7.2B",
+                                                   "quantization":  "Q4_K_M",
+                                                   "format":  "gguf"
+                                               },
+                                               {
+                                                   "name":  "qwen2.5-coder:3b",
+                                                   "digest":  "f72c60cabf6237b07f6e632b2c48d533cef25eda2efbd34bed21c5e9c01e6225",
+                                                   "size_bytes":  1929912626,
+                                                   "family":  "qwen2",
+                                                   "parameter_size":  "3.1B",
+                                                   "quantization":  "Q4_K_M",
+                                                   "format":  "gguf"
+                                               },
+                                               {
+                                                   "name":  "qwen2.5-coder:7b",
+                                                   "digest":  "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+                                                   "size_bytes":  4683087561,
+                                                   "family":  "qwen2",
+                                                   "parameter_size":  "7.6B",
+                                                   "quantization":  "Q4_K_M",
+                                                   "format":  "gguf"
+                                               },
+                                               {
+                                                   "name":  "nomic-embed-text:latest",
+                                                   "digest":  "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+                                                   "size_bytes":  274302450,
+                                                   "family":  "nomic-bert",
+                                                   "parameter_size":  "137M",
+                                                   "quantization":  "F16",
+                                                   "format":  "gguf"
+                                               },
+                                               {
+                                                   "name":  "llama3.1:8b",
+                                                   "digest":  "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+                                                   "size_bytes":  4920753328,
+                                                   "family":  "llama",
+                                                   "parameter_size":  "8.0B",
+                                                   "quantization":  "Q4_K_M",
+                                                   "format":  "gguf"
+                                               }
+                                           ]
+                              }
+}

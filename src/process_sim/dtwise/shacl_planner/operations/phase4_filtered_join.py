@@ -3,7 +3,7 @@ import json
 import re
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_phase4_join import (
+from process_sim.dtwise.shacl_planner.operations.phase4_join import  (
     _expected_paths, validate_phase4_join_plan, compile_phase4_join_sparql,
 )
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates

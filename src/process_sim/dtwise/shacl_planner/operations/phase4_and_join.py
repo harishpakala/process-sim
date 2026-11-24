@@ -3,8 +3,8 @@ import json
 import re
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_phase4_join import (
-    _expected_paths, validate_phase4_join_plan, compile_phase4_join_sparql,
+from process_sim.dtwise.shacl_planner.operations.phase4_join import (
+    _expected_paths, validate_phase4_join_plan, compile_phase4_join_sparql
 )
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
@@ -146,7 +146,7 @@ def run_phase4_and_join_plan(index, prepared, *, model="qwen2.5-coder:7b",
     # Lazy import avoids a module-level cycle with the intent adapter.
     intent = None
     if plan["status"] == "selected" and not is_or:
-        from process_sim.dtwise.experimental_shacl_query_intent import validated_join_intent
+        from process_sim.dtwise.shacl_planner.planning.query_intent import validated_join_intent
         intent = validated_join_intent(plan, qualified)
     return {"domain": index.domain, "question": question, "plan": plan,
             "qualified": qualified, "intent": intent}

@@ -10,8 +10,7 @@ import math
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 
-from process_sim.dtwise.experimental_shacl_subgraph import _short
-
+from process_sim.dtwise.shacl_planner.grounding.subgraph import _short
 
 def schema_terms(index) -> list[dict]:
     """Only terms backed by the selected domain's indexed SHACL shapes/paths."""

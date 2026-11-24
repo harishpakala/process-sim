@@ -3,8 +3,8 @@
 An additive representation of a validated planner selection, not a new
 source of truth. Never compile a model-supplied intent without validation.
 """
-from process_sim.dtwise.experimental_shacl_phase4_join import _expected_paths
-from process_sim.dtwise.experimental_shacl_phase4_and_join import (
+from process_sim.dtwise.shacl_planner.operations.phase4_join import _expected_paths
+from process_sim.dtwise.shacl_planner.operations.phase4_and_join import (
     _filter_ids, _literals, OR_QUESTION, validate_phase4_and_join_plan,
 )
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
@@ -44,7 +44,7 @@ def validated_join_intent(plan, qualified):
 import json
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_phase4_and_join import (
+from process_sim.dtwise.shacl_planner.operations.phase4_and_join import (
     compile_phase4_and_join_sparql,
 )
 

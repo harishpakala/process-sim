@@ -1,0 +1,5 @@
+{
+  "route": "ebom_v2_catalog",
+  "status": "unsupported",
+  "reason": "UNSUPPORTED_OUTPUT_REQUEST: Phase 3 supports engineeringId, description, sourceDomain, sourceGroup only"
+}

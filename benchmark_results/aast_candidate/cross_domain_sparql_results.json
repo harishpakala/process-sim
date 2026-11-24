@@ -1,0 +1,67 @@
+[
+  {
+    "id": "CD20-1-P1",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Show DEXPI InstrumentationFunction and matching ECAD Device entities via AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "status": "compiled",
+    "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n    ?n1 <https://example.org/dexpi/hasLocalId> ?v_dexpi_P13 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\nORDER BY DESC(?v_dexpi_P13)\nLIMIT 10\n",
+    "error": null
+  },
+  {
+    "id": "CD20-1-P2",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Retrieve DEXPI InstrumentationFunction and ECAD Device pairs matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "status": "compiled",
+    "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n    ?n1 <https://example.org/dexpi/hasLocalId> ?v_dexpi_P13 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\nORDER BY DESC(?v_dexpi_P13)\nLIMIT 10\n",
+    "error": null
+  },
+  {
+    "id": "CD20-1-P3",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "List DEXPI InstrumentationFunction and ECAD Device entities matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "status": "compiled",
+    "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n    ?n1 <https://example.org/dexpi/hasLocalId> ?v_dexpi_P13 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\nORDER BY DESC(?v_dexpi_P13)\nLIMIT 10\n",
+    "error": null
+  },
+  {
+    "id": "CD20-1-P4",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Find ECAD Device entities paired with DEXPI InstrumentationFunction entities by AssetIdentifier; return both, sorted by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "status": "compiled",
+    "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n    ?n1 <https://example.org/dexpi/hasLocalId> ?v_dexpi_P13 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\nORDER BY DESC(?v_dexpi_P13)\nLIMIT 10\n",
+    "error": null
+  },
+  {
+    "id": "CD20-1-P5",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Give up to ten DEXPI InstrumentationFunction and ECAD Device pairs sharing AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending.",
+    "semantic_status": "not_checked",
+    "status": "compiled",
+    "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n    ?n1 <https://example.org/dexpi/hasLocalId> ?v_dexpi_P13 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\nORDER BY DESC(?v_dexpi_P13)\nLIMIT 10\n",
+    "error": null
+  }
+]

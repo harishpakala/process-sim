@@ -1,0 +1,632 @@
+[
+  {
+    "id": "SD01-P1",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Show ECAD Devices.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD01-P2",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "List all ECAD Devices.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD01-P3",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Retrieve the ECAD Device records.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD01-P4",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Which ECAD Devices are available?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD01-P5",
+    "scenario_id": "SD01",
+    "domain": "ecad",
+    "query": "Give me the collection of devices from ECAD.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD02-P1",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD02-P2",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "List all DEXPI Equipment records.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD02-P3",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Retrieve the equipment entities in DEXPI.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD02-P4",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Which DEXPI Equipment records are defined in the model?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD02-P5",
+    "scenario_id": "SD02",
+    "domain": "dexpi",
+    "query": "Give me the DEXPI equipment collection.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD03-P1",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Find ECAD Devices.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD03-P2",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Return the ECAD Device entities.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD03-P3",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Display the devices defined in ECAD.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD03-P4",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "I need the ECAD Device records.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD03-P5",
+    "scenario_id": "SD03",
+    "domain": "ecad",
+    "query": "Which device entities exist in the ECAD model?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD04-P1",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Show the LocalId of ECAD Devices.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD04-P2",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Device LocalId values.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD04-P3",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "For each ECAD Device, return its LocalId.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD04-P4",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Which LocalId belongs to each ECAD Device?",
+    "sparql": "SELECT ?v_P7 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD04-P5",
+    "scenario_id": "SD04",
+    "domain": "ecad",
+    "query": "Give me the LocalId values from ECAD Device records.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD05-P1",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Show DeviceType for ECAD Devices.",
+    "sparql": "SELECT ?v_P5 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P5 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD05-P2",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Retrieve each ECAD Device's DeviceType.",
+    "sparql": "SELECT ?v_P4 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD05-P3",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Which DeviceType values are recorded for ECAD Devices?",
+    "sparql": "SELECT ?v_P4 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD05-P4",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "List the DeviceType values of ECAD Devices.",
+    "sparql": "SELECT ?v_P4 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD05-P5",
+    "scenario_id": "SD05",
+    "domain": "ecad",
+    "query": "Return the DeviceType property from ECAD Device records.",
+    "sparql": "SELECT ?v_P4 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD06-P1",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Show LocalId for DEXPI Equipment.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD06-P2",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Retrieve the DEXPI Equipment LocalId property.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD06-P3",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "List equipment identifiers using DEXPI LocalId.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD06-P4",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "What LocalId is assigned to each DEXPI Equipment?",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD06-P5",
+    "scenario_id": "SD06",
+    "domain": "dexpi",
+    "query": "Give me the LocalId values of equipment in DEXPI.",
+    "sparql": "SELECT ?v_P8 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD07-P1",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Find ECAD Devices where DeviceType is Pressure.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  FILTER ((?v_P3 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD07-P2",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Show ECAD Devices with DeviceType equal to Pressure.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 .\n  FILTER ((?v_P4 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD07-P3",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have DeviceType set to Pressure?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  FILTER ((?v_P3 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD07-P4",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "Retrieve devices from ECAD whose DeviceType has value Pressure.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  FILTER ((?v_P3 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD07-P5",
+    "scenario_id": "SD07",
+    "domain": "ecad",
+    "query": "I only want ECAD Devices of DeviceType Pressure.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  FILTER ((?v_P3 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD08-P1",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Show ECAD Devices whose LocalId is PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n  FILTER ((?v_P7 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD08-P2",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Find the ECAD Device with LocalId PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD08-P3",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices where LocalId equals PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n  FILTER ((?v_P7 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD08-P4",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Which ECAD Device has the identifier PI-1301 in LocalId?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n  FILTER ((?v_P7 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD08-P5",
+    "scenario_id": "SD08",
+    "domain": "ecad",
+    "query": "Limit the ECAD Device selection to LocalId PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD09-P1",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Find DEXPI Equipment with LocalId R-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"R-001\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD09-P2",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment where LocalId equals R-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"R-001\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD09-P3",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Which equipment in DEXPI has LocalId R-001?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"R-001\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD09-P4",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "Retrieve the DEXPI Equipment identified by R-001 in LocalId.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"R-001\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD09-P5",
+    "scenario_id": "SD09",
+    "domain": "dexpi",
+    "query": "I need equipment records from DEXPI whose LocalId is R-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n  FILTER ((?v_P8 = \"R-001\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD10-P1",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Show ECAD Devices where DeviceType is Pressure AND LocalId is PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n  FILTER ((?v_P3 = \"Pressure\") && (?v_P6 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD10-P2",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Find ECAD Devices with DeviceType Pressure that also have LocalId PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n  FILTER ((?v_P3 = \"Pressure\") && (?v_P7 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD10-P3",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices satisfying both DeviceType = Pressure and LocalId = PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n  FILTER ((?v_P3 = \"Pressure\") && (?v_P6 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD10-P4",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have LocalId PI-1301 while their DeviceType is Pressure?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n  FILTER ((?v_P6 = \"PI-1301\") && (?v_P3 = \"Pressure\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD10-P5",
+    "scenario_id": "SD10",
+    "domain": "ecad",
+    "query": "I want ECAD Devices meeting these two conditions: DeviceType Pressure; LocalId PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n  FILTER ((?v_P3 = \"Pressure\") && (?v_P6 = \"PI-1301\"))\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD11-P1",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Show ECAD Devices where DeviceType is Pressure OR LocalId is PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 . FILTER ((?v_P3 = \"Pressure\")) } UNION { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 . FILTER ((?v_P6 = \"PI-1301\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD11-P2",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Find ECAD Devices with either DeviceType Pressure or LocalId PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasDeviceType> ?v_P4 . FILTER ((?v_P4 = \"Pressure\")) } UNION { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 . FILTER ((?v_P7 = \"PI-1301\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD11-P3",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Retrieve ECAD Devices satisfying at least one: DeviceType = Pressure, LocalId = PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 . FILTER ((?v_P3 = \"Pressure\")) } UNION { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 . FILTER ((?v_P6 = \"PI-1301\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD11-P4",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Which ECAD Devices have DeviceType Pressure, or alternatively have LocalId PI-1301?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 . FILTER ((?v_P3 = \"Pressure\")) } UNION { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 . FILTER ((?v_P6 = \"PI-1301\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD11-P5",
+    "scenario_id": "SD11",
+    "domain": "ecad",
+    "query": "Give me ECAD Devices if DeviceType is Pressure or their LocalId equals PI-1301.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasDeviceType> ?v_P3 . FILTER ((?v_P3 = \"Pressure\")) } UNION { ?n0 <https://example.org/ecad/hasDevice> ?n1 . ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 . FILTER ((?v_P6 = \"PI-1301\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD12-P1",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment with LocalId R-001 or K-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"R-001\")) } UNION { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"K-001\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD12-P2",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Find equipment in DEXPI whose LocalId is either R-001 or K-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"R-001\")) } UNION { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"K-001\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD12-P3",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Retrieve DEXPI Equipment if LocalId equals R-001 OR LocalId equals K-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"R-001\")) } UNION { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"K-001\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD12-P4",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Which DEXPI Equipment records have LocalId R-001 or LocalId K-001?",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"R-001\")) } UNION { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"K-001\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD12-P5",
+    "scenario_id": "SD12",
+    "domain": "dexpi",
+    "query": "Return DEXPI Equipment matching LocalId R-001 or, alternatively, K-001.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"R-001\")) } UNION { ?n0 <https://example.org/dexpi/hasEquipment> ?n1 . ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 . FILTER ((?v_P8 = \"K-001\")) }\n}\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD13-P1",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Show ECAD Devices ordered by LocalId ascending, limited to 5.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n}\nORDER BY ASC(?v_P7)\nLIMIT 5\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD13-P2",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "List the first five ECAD Devices sorted by LocalId from lowest to highest.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n}\nORDER BY ASC(?v_P6)\nLIMIT 5\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD13-P3",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Retrieve up to five ECAD Devices in increasing LocalId order.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n}\nORDER BY ASC(?v_P6)\nLIMIT 5\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD13-P4",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Give me five ECAD Devices with the smallest LocalId values first.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P7 .\n}\nORDER BY ASC(?v_P7)\nLIMIT 5\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD13-P5",
+    "scenario_id": "SD13",
+    "domain": "ecad",
+    "query": "Return ECAD Devices alphabetically by LocalId, maximum five results.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n  ?n0 <https://example.org/ecad/hasDevice> ?n1 .\n  ?n1 <https://example.org/ecad/hasLocalId> ?v_P6 .\n}\nORDER BY ASC(?v_P6)\nLIMIT 5\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD14-P1",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Show DEXPI Equipment ordered by LocalId descending, limited to 10.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\nORDER BY DESC(?v_P8)\nLIMIT 10\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD14-P2",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "List up to ten DEXPI Equipment records with highest LocalId first.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\nORDER BY DESC(?v_P8)\nLIMIT 10\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD14-P3",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Retrieve the first ten equipment entities in decreasing DEXPI LocalId order.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\nORDER BY DESC(?v_P8)\nLIMIT 10\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD14-P4",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Sort DEXPI Equipment by LocalId from Z to A and return at most ten.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\nORDER BY DESC(?v_P8)\nLIMIT 10\n",
+    "error": null,
+    "status": "compiled"
+  },
+  {
+    "id": "SD14-P5",
+    "scenario_id": "SD14",
+    "domain": "dexpi",
+    "query": "Give me ten DEXPI Equipment records, arranged by LocalId descending.",
+    "sparql": "SELECT ?n1 WHERE {\n  ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n  ?n0 <https://example.org/dexpi/hasEquipment> ?n1 .\n  ?n1 <https://example.org/dexpi/hasLocalId> ?v_P8 .\n}\nORDER BY DESC(?v_P8)\nLIMIT 10\n",
+    "error": null,
+    "status": "compiled"
+  }
+]
