@@ -52,3 +52,17 @@ def test_wrong_operator_rejected():
 def test_correct_operator_accepted():
     answer = plan(filters=[{"property_id": "P1", "operator": "=", "value": "X"}])
     assert not analyze_plan(answer, CANDIDATES, "Show Device where LocalId is X.")["errors"]
+
+
+@pytest.mark.parametrize("question,expected", [
+    ("Show LocalId is assigned to each DEXPI Equipment", []),
+    ("Show smallest LocalId values first", []),
+    ("Show highest LocalId first", []),
+    ("Show DeviceType has value Sensor", [("devicetype", "=", "Sensor")]),
+    ("Find Equipment whose LocalId is either EQ_101 or EQ_102",
+     [("localid", "=", "EQ_101"), ("localid", "=", "EQ_102")]),
+])
+def test_comparison_prose_regressions(question, expected):
+    candidates = CANDIDATES + [{"id": "P2", "kind": "property",
+                                "property_name": "DeviceType"}]
+    assert _explicit_shacl_comparisons(question, candidates) == expected
