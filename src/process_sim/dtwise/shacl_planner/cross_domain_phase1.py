@@ -23,6 +23,7 @@ from process_sim.dtwise.shacl_planner.standalone_shacl_query_planner import (
     SYSTEM_PROMPT, _schema_anchors, _explicit_filter_property_names,
     _unsupported_intent, _explicit_limit, _explicit_sort, _constraint_literals,
     build_candidates, normalize_property_only_projections, validate_output,
+    _explicit_shacl_comparisons,
 )
 
 CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
@@ -37,11 +38,14 @@ CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
     'For COUNT, use the same single-domain contract: count_target_id identifies the entity whose instances the user wants counted. Other entities needed only to establish cross-domain matches belong in existence_ids. Interpret semantic roles from the whole question, not word position or mapping direction. Do not count the matching/existence entity or raw joined rows unless that is explicitly what the user asks to count. '
     'Return EXACTLY these keys, using null/[] for unused fields:'
 ).replace(
-    '"reason":"brief explanation"\n}',
-    '"reason":"brief explanation",\n "mapping_ids":["approved-mapping-id"],\n '
+    '"reason":"brief explanation (may be empty for selected)"\n}',
+    '"reason":"brief explanation (may be empty for selected)",\n "mapping_ids":["approved-mapping-id"],\n '
     '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
 ) + """
 For SELECT queries, include every entity the user requests as an output in projection_ids, including paired or corresponding entities. Use existence_ids only for entities needed to establish matching but not requested as outputs. Mapping endpoints never replace requested projections.
+IMPORTANT: existence_ids accepts result (R) IDs ONLY, never property (P) IDs.
+Put mapping property endpoints ONLY in identifier_path_ids, not existence_ids.
+If both joined entities are requested outputs, project both and use existence_ids=[].
 Cross-domain identifier matching is represented ONLY by mapping_ids and
 identifier_path_ids. It is NOT a literal WHERE filter.
 When matching entities across domains using identifier equality, mapping_ids
@@ -105,52 +109,7 @@ def _scoped_candidates(domain, qualified):
 
 
 
-def _explicit_shacl_comparisons(question, candidates):
-    """Find explicit property comparisons using offered SHACL labels, not IDs."""
-    names = sorted({
-        c.get('property_name') for c in candidates
-        if c.get('kind') == 'property' and c.get('property_name')
-    }, key=len, reverse=True)
-    comparisons = []
-    for name in names:
-        pattern = (
-            r'(?<!\w)' + re.escape(name) + r'(?!\w)'
-            r'\s+(?:(?P<op>is|equals|equal\s+to|!=|>=|<=|=|>|<|to)\s+)?'
-            r'(?P<value>[A-Za-z0-9_][\w.-]*)'
-        )
-        for match in re.finditer(pattern, question, re.I):
-            operator = (match.group('op') or '').casefold()
-            value = match.group('value').rstrip('.,;?!')
-            prefix = question[:match.start()]
-            if operator == 'to' and value.casefold() in {
-                'connect', 'join', 'match', 'link', 'associate', 'relate',
-                'connects', 'joins', 'matches', 'links', 'associates', 'relates',
-            }:
-                # Infinitive join language is not a literal comparison.
-                continue
-            if not operator and not re.search(
-                r'\b(?:with|where|whose|having|restrict(?:ed|ing)?|'
-                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*$',
-                prefix, re.I,
-            ):
-                continue
-            # Sorting phrases name a property but do not compare it to a value.
-            if not operator and value.casefold() in {
-                'asc', 'desc', 'ascending', 'descending', 'from',
-                'in', 'sorted', 'ordered', 'lowest', 'highest',
-            }:
-                continue
-            if value.casefold() in {
-                'and', 'or', 'by', 'where', 'with', 'through', 'using',
-                'whose', 'is', 'equals', 'equal', 'the', 'a', 'an',
-            }:
-                continue
-            comparisons.append((
-                name.casefold(),
-                operator if operator in {'!=', '>', '<', '>=', '<=', '='} else '=',
-                value,
-            ))
-    return comparisons
+
 
 
 
