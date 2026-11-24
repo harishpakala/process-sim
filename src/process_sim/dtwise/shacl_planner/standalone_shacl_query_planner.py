@@ -426,6 +426,14 @@ def _matches_schema_term(question, label):
                for i in range(len(q)-len(l)+1))
 
 
+def _explicit_output_property_names(question):
+    """Recognize explicit identifier-style property value requests."""
+    return [m.group(1) for m in re.finditer(
+        r'\b(?:show|return|list|retrieve|display|get)\s+(?:the\s+)?'
+        r'([A-Za-z_][\w]*)\s+values?\s+(?:of|for|from)\b',
+        question, re.I)]
+
+
 def _explicit_filter_property_names(question):
     """Return property identifiers in simple Phase-1 comparison clauses."""
     names = []
@@ -767,6 +775,13 @@ def run_one(index, question, *, method='expanded', dry_run=False,
         record.update(status='ambiguous_property',
                       ungrounded_filter_properties=missing_properties,
                       reason='Filter property lacks exact SHACL name; no Qwen call')
+        return record
+    missing_outputs = [name for name in _explicit_output_property_names(question)
+                       if name.casefold() not in exact_property_names]
+    if missing_outputs:
+        record.update(status='ungrounded_output_property',
+                      ungrounded_output_properties=missing_outputs,
+                      reason='Requested output property lacks exact SHACL name; no model call')
         return record
     unsupported=_unsupported_intent(question)
     if unsupported and not dry_run:
