@@ -9,7 +9,7 @@ import unittest
 from pathlib import Path
 from rdflib import Graph
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 from run_selira_task_aware_comparison import (
     TASK_SHAPES, task_validation, export_review_template)
 
