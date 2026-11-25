@@ -1,0 +1,11 @@
+Reported local execution (Windows, Python 3.12.0, pytest 9.1.1).
+Focused test source revision: aa3e8e0f116769aeb0836008bba3654ce7d09a86 (branch revision inferred from preceding pull; local HEAD not independently recorded).
+python -m pytest tests/test_safsl_shacl_sc01.py tests/test_safsl_semantics_differential.py tests/test_safsl_admission.py tests/test_safsl_lifted_admission.py tests/test_safsl_sqlite_admission.py tests/selira/test_selira_f7_selective_equivalence.py tests/selira/test_automation_manager.py -q
+43 passed in 4.75s
+
+Separate runs: 12 Automation Manager tests passed in 0.93s;
+28 combined tests passed in 4.15s; 15 admission tests passed in 0.94s.
+These overlap with the 43 tests and must not be added.
+Broader tests/selira collection failed with nine import errors; first reported
+ModuleNotFoundError: No module named 'export_selira_blind_dossiers'.
+This is a transcription of user-reported terminal results, not a fresh run.
