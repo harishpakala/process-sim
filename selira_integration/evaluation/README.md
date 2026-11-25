@@ -47,7 +47,7 @@ All eight decisions matched expectations; all seven reference comparisons agreed
 
 ## Refactoring verification
 
-The combined SELiRA and SAFSL run following reassessment relocation reported 278 passed, 329 subtests passed in 13.09 s, with all eight lifecycle decisions and seven reference comparisons preserved (266 full, 96 selective logical evaluations). The preceding committed source was `49ac28746b4b84539c42706f3f87964e74405bd9`. Local HEAD and working-tree cleanliness were not independently captured. After correspondence relocation (`3e787461bce6ca3856119185184f73b4382faa3b`), the operator reported a pass without detailed counts or lifecycle output; a fully recorded final baseline remains pending.
+The combined SELiRA and SAFSL run following reassessment relocation reported 278 passed, 329 subtests passed in 13.09 s, with all eight lifecycle decisions and seven reference comparisons preserved (266 full, 96 selective logical evaluations). The preceding committed source was `49ac28746b4b84539c42706f3f87964e74405bd9`. Local HEAD and working-tree cleanliness were not independently captured. After correspondence relocation (`3e787461bce6ca3856119185184f73b4382faa3b`), the operator reported a pass without detailed counts or lifecycle output; the subsequent archival verification reported 278 passed and 329 subtests passed in 12.98 s, and the E7 excerpt confirmed full fallback and equivalence. See [post-archival verification](results/post_archival_verification.txt). Complete post-archival lifecycle output and local revision/environment metadata remain unavailable.
 
 To capture a fresh baseline in PowerShell:
 
