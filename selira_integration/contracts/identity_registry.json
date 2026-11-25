@@ -22,6 +22,75 @@
       "definition": "selira_integration/contracts/safsl/SC-01.safsl",
       "bindings": "selira_integration/contracts/bindings/SC-01.json",
       "scope": "Current ProductIdentifier lookup"
+    },
+    {
+      "qualified_id": "EngineeringCorrespondence::SC-02",
+      "local_id": "SC-02",
+      "definition": "src/process_sim/selira/legacy/correspondence/sc02_contract.py",
+      "scope": "Quantity-kind agreement between engineering and operational assertions"
+    },
+    {
+      "qualified_id": "EngineeringCorrespondence::SC-03",
+      "local_id": "SC-03",
+      "definition": "src/process_sim/selira/legacy/correspondence/sc03_contract.py",
+      "scope": "Measurement-unit dimensional compatibility and conversion"
+    },
+    {
+      "qualified_id": "EngineeringCorrespondence::SC-04",
+      "local_id": "SC-04",
+      "definition": "src/process_sim/selira/legacy/correspondence/sc04_contract.py",
+      "scope": "Task configuration and revision applicability"
+    },
+    {
+      "qualified_id": "EngineeringCorrespondence::SC-05",
+      "local_id": "SC-05",
+      "definition": "src/process_sim/selira/legacy/correspondence/sc05_contract.py",
+      "scope": "Revision-scoped operational endpoint binding"
+    },
+    {
+      "qualified_id": "LegacySemanticContracts::SC-02",
+      "local_id": "SC-02",
+      "definition": "selira_integration/contracts/specifications/SC-02.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-02.ttl",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-02.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-02.ttl",
+      "scope": "Physical Quantity Compatibility"
+    },
+    {
+      "qualified_id": "LegacySemanticContracts::SC-03",
+      "local_id": "SC-03",
+      "definition": "selira_integration/contracts/specifications/SC-03.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-03.ttl",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-03.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-03.ttl",
+      "scope": "Unit Consistency"
+    },
+    {
+      "qualified_id": "LegacySemanticContracts::SC-04",
+      "local_id": "SC-04",
+      "definition": "selira_integration/contracts/specifications/SC-04.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-04.ttl",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-04.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-04.ttl",
+      "scope": "Engineering Constraint Satisfaction"
+    },
+    {
+      "qualified_id": "LegacySemanticContracts::SC-05",
+      "local_id": "SC-05",
+      "definition": "selira_integration/contracts/specifications/SC-05.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-05.ttl",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-05.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-05.ttl",
+      "scope": "Cross-Representation Relationship Consistency"
+    },
+    {
+      "qualified_id": "LegacySemanticContracts::SC-06",
+      "local_id": "SC-06",
+      "definition": "selira_integration/contracts/specifications/SC-06.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-06.ttl",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-06.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-06.ttl",
+      "scope": "Evidence and Revision Traceability"
     }
   ]
 }
