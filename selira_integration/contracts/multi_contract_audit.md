@@ -23,3 +23,23 @@ Reuse historical EngineeringCorrespondence SC-02 (quantity-kind agreement), SC-0
 4. Extend grammar, reference semantics, compilation and manager only after binding and evidence requirements are established.
 
 This is an initial static audit, not a complete RDF population analysis, live verification or test run.
+
+## DTWISE schema index and mapping provenance (source review)
+
+Source directory: `semantic/ontology2/dtwise/`.
+
+- `dtwise-schema-index.json` indexes 424 concepts (31 classes, 224 shapes, 169 properties), 461 relationships, 198 SHACL shape paths and 18 ontology edges across the six AAS domains. It has token postings for measured, pressure, quantity, qudtquantity, qudtunit and revision. Its embedded diagnostics report zero verified mappings and `No verified mapping source was supplied; no joins inferred.` **This diagnostic describes the index build, and conflicts with the separate approved registry if interpreted as current global status.**
+- `cross-domain-mapping-candidates.json` has 13 proposals, all `verified: false`; mostly shared-identifier property names supported by SHACL schema structure, not owner-pair proofs.
+- `cross-domain-mappings.json` has the same 13 identifiers marked `verified: true`, with explicit domain-owner approval of shared key semantics and evidence relationship IDs. It covers ten AssetIdentifier pairings and three ProductIdentifier pairings. Registry notes mostly disclaim independent instance-level testing. Property-level mapping approval is not automatically a verified value match, authenticated engineering assertion, or authorization for use.
+- No listed mapping directly equates DEXPI measurement quantity kind to product technical quantity kind, TEP engineering unit to catalog unit, or establishes a revision-applicability relation. Existing 13 mappings are a **join-key foundation**, not complete SC-02/SC-03/SC-04 definitions.
+- Exact QUDT namespace normalization, quantity-kind equivalence rules, measurement basis, mass/volume and percent/length conversions, and authoritative revision evidence remain outstanding. Prior JSON instance audit found 22 DEXPI measurement functions with unique inventory/OPCUA/product value matches, but these are observations and do not resolve mapping-evidence caveats.
+
+### Recommended separation
+
+1. Retain the immutable candidate register and owner-approved key register, and record registry revision/provenance in any contract evaluation context.
+2. Use approved keys only to construct candidate focus/link populations. Check uniqueness and actual values against a consistent instance snapshot. Report conflicts, missing evidence and changing coverage explicitly.
+3. Evaluate SC-02 quantity kinds and SC-03 units using independent explicit semantics and trusted attestations; treat unsupported conversions as U, not successful matches.
+4. Model SC-04 configuration/revision applicability as context-sensitive unless required versioned source facts can be bound and qualified. `UNSPECIFIED` BOM revisions cannot yield a positive assessment.
+5. Rebuild the schema index with the approved registry as a declared input, or document diagnostics as index-build provenance rather than a live global mapping count; do not silently change the original artifacts.
+
+No compiler or manager changes, independent authentication, or post-commit test run are implied by this audit.
