@@ -1,0 +1,9 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix selira: <https://example.org/selira/> .
+# Proposed SELiRA evidence vocabulary; not yet mapped to source RDF.
+# This shape is only a readiness-gated prototype; not an engineering certification.
+selira:SC04 a sh:NodeShape ; sh:targetSubjectsOf selira:configuredRange ;
+ sh:sparql [ sh:message "Missing verified configured engineering range evidence." ; sh:select """
+ PREFIX selira: <https://example.org/selira/>
+ SELECT $this WHERE { $this selira:configuredRange ?value . FILTER NOT EXISTS { $this selira:verifiedEngineeringRange true . } }
+ """ ] .

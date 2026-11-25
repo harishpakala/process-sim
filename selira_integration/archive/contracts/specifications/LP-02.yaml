@@ -1,0 +1,6 @@
+id: LP-02
+name: Dependency Traceability
+type: lifecycle_policy
+status: prototype
+implementation: Python orchestration plus SPARQL and audit records
+notes: "SHACL alone does not perform change detection, scheduling or history management."

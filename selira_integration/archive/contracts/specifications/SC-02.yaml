@@ -1,0 +1,10 @@
+id: SC-02
+name: Physical Quantity Compatibility
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "verified engineering measurement quantity kinds agree"
+dependencies: [asset_inventory, tep, semantic_registry]
+required_authority: "verified quantity-kind annotations and approved compatibility relation"
+implementation: contracts/shapes/SC-02.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."

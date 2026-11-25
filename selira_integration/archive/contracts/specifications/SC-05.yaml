@@ -1,0 +1,10 @@
+id: SC-05
+name: Cross-Representation Relationship Consistency
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "signal, instrument and equipment relationships agree across sources"
+dependencies: [dexpi, ecad, asset_inventory, tep]
+required_authority: "approved source-specific relationship correspondences"
+implementation: contracts/shapes/SC-05.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."

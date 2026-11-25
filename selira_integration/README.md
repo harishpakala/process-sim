@@ -53,7 +53,9 @@ Paths relative to the repository root:
 | src/process_sim/selira/automation_manager.py | Local orchestration |
 | selira_integration/contracts/safsl/ | Executable contract source |
 | selira_integration/contracts/bindings/ | Semantic bindings |
-| src/process_sim/selira/correspondence/ | Historical engineering correspondence and consumer policies; original imports retained as compatibility aliases |
+| src/process_sim/selira/legacy/correspondence/ | Archived engineering correspondence and consumer policies |
+| src/process_sim/selira/correspondence/ | Compatibility aliases for archived correspondence |
+| selira_integration/archive/ | Historical contract artifact snapshots |
 | src/process_sim/selira/reassessment/ | Reference snapshot semantics and dependency-based reassessment |
 | selira_integration/formal/ | Formal models and compatibility imports |
 | selira_integration/lifecycle.py | Historical lifecycle engine and compatibility imports |
@@ -61,7 +63,7 @@ Paths relative to the repository root:
 | tests/selira/ and tests/test_safsl_*.py | Experimental and regression tests |
 | semantic/ontology2/ | Engineering RDF inputs |
 
-Earlier GraphDB adapters, handwritten shapes, SC-02–SC-06 and LP-01–LP-06 specifications remain in the repository but are not part of the current integrated SC-01 experiment. See the [archived README](README.legacy.md) for historical context.
+Earlier GraphDB adapters, handwritten shapes, SC-02–SC-06 and LP-01–LP-06 specifications remain in the repository but are not part of the current integrated SC-01 experiment. See the [archive guide](archive/README.md) and [archived README](README.legacy.md) for historical context.
 
 ## Reproduction
 

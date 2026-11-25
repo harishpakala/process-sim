@@ -4,7 +4,7 @@
     {
       "qualified_id": "EngineeringCorrespondence::SC-01",
       "local_id": "SC-01",
-      "definition": "src/process_sim/selira/correspondence/sc01_contract.py",
+      "definition": "src/process_sim/selira/legacy/correspondence/sc01_contract.py",
       "scope": "Reviewed cross-domain identity assertions"
     },
     {
@@ -12,7 +12,9 @@
       "local_id": "SC-01",
       "definition": "selira_integration/contracts/specifications/SC-01.yaml",
       "shape": "selira_integration/contracts/shapes/SC-01.ttl",
-      "scope": "Historical ProductReference to AssetIdentifier lookup"
+      "scope": "Historical ProductReference to AssetIdentifier lookup",
+      "archived_definition": "selira_integration/archive/contracts/specifications/SC-01.yaml",
+      "archived_shape": "selira_integration/archive/contracts/shapes/SC-01.ttl"
     },
     {
       "qualified_id": "AssetProductIntegrity::SC_01",

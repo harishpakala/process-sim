@@ -1,1 +1,1 @@
-"""Historical evidence-qualified engineering correspondence and consumer policies."""
+"""Compatibility package for archived engineering correspondence."""

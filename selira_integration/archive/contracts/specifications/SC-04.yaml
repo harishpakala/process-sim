@@ -1,0 +1,10 @@
+id: SC-04
+name: Engineering Constraint Satisfaction
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "installed configured range covers approved required operating envelope"
+dependencies: [asset_inventory, product_catalog, engineering_requirements]
+required_authority: "configured range, required envelope and approved comparison policy"
+implementation: contracts/shapes/SC-04.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."
