@@ -8,7 +8,7 @@ from pathlib import Path
 from process_sim.selira.inventory_catalog_audit import audit_inventory_catalog
 
 
-ROOT = Path(__file__).resolve().parents[1] / "examples" / "aas"
+ROOT = Path(__file__).resolve().parents[2] / "examples" / "aas"
 
 
 def _load(name):

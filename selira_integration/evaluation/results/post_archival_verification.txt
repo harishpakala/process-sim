@@ -1,0 +1,13 @@
+Post-archival verification (operator-reported terminal excerpts)
+Preceding committed source: ce12fe694f8cfd3bcd997512befd9abb6f0d4807
+Local HEAD, working-tree status and environment versions not supplied.
+
+278 passed, 329 subtests passed in 12.98s
+
+Lifecycle E7 excerpt:
+"selective_evaluations": 38,
+"full_evaluations": 38,
+"equivalent": true,
+"full_fallback": true
+
+Full post-archival lifecycle output was not supplied. Earlier complete lifecycle results remain archived separately.

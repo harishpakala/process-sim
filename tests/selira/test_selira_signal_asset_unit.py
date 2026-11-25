@@ -86,7 +86,7 @@ def test_real_inventory_catalog_xmeas7_correspondence_is_ambiguous_until_verifie
     import json
     from pathlib import Path
 
-    root = Path(__file__).resolve().parents[1] / "examples" / "aas"
+    root = Path(__file__).resolve().parents[2] / "examples" / "aas"
     inventory = json.loads((root / "asset_inventory_instance.json").read_text(encoding="utf-8"))
     catalog = json.loads((root / "product_catalog_instance.json").read_text(encoding="utf-8"))
     result = assess_xmeas7_pressure(catalog, inventory=inventory)

@@ -1,0 +1,16 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix selira: <https://example.org/selira/> .
+@prefix ai: <https://example.org/assetinventory/> .
+@prefix pc: <https://example.org/productcatalog/> .
+selira:SC01 a sh:NodeShape ; sh:targetSubjectsOf ai:hasProductReference ;
+ sh:sparql [ sh:message "Assigned product reference must resolve to exactly one catalog product." ; sh:select """
+ PREFIX ai: <https://example.org/assetinventory/>
+ PREFIX pc: <https://example.org/productcatalog/>
+ SELECT $this ?ref WHERE {
+  $this ai:hasProductReference ?ref .
+  FILTER(STRLEN(STR(?ref)) > 0)
+  FILTER( NOT EXISTS { ?p pc:hasAssetIdentifier ?id . FILTER(STR(?id)=STR(?ref)) }
+   || EXISTS { ?p1 pc:hasAssetIdentifier ?id1 . ?p2 pc:hasAssetIdentifier ?id2 .
+       FILTER(?p1 != ?p2 && STR(?id1)=STR(?ref) && STR(?id2)=STR(?ref)) })
+ }
+ """ ] .

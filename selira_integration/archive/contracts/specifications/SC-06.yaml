@@ -1,0 +1,10 @@
+id: SC-06
+name: Evidence and Revision Traceability
+type: semantic_contract
+status: prototype_requires_engineering_approval
+predicate: "correspondence records carry source, revision, evidence and approval"
+dependencies: [all_applicable_sources, contract_registry]
+required_authority: "versioned source and contract provenance"
+implementation: contracts/shapes/SC-06.ttl
+outcomes: [VALIDATED, INVALID, INDETERMINATE, NOT_APPLICABLE]
+notes: "Never infer engineering approval from a SHACL pass alone."

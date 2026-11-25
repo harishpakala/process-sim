@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from rdflib import Graph
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "scripts"))
 from run_selira_semantic_shacl_baseline import SHAPES, SEMANTIC, run_case
 
 

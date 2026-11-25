@@ -4,7 +4,7 @@ Author: Harish"""
 import unittest
 import sys
 from pathlib import Path
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'scripts'))
+sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'scripts'))
 
 from process_sim.selira.sc05_contract import evaluate_sc05, assess_graphdb_sc05
 from process_sim.selira.cac_contracts import evaluate_cac
