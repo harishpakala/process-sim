@@ -2,6 +2,8 @@
 from pathlib import Path
 
 import pytest
+from lark import Tree
+from process_sim.safsl.ast.nodes import AssignmentNode
 from process_sim.safsl.parser.frontend import parse_safsl
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,4 +20,13 @@ def test_policy_parses(policy, name, outputs):
     process = spec.processes[0]
     assert process.name == name
     assert {p.name for p in process.interface.ports if p.direction == "Output"} == outputs
-    assert {s.target.name for s in process.body.statements} == outputs
+    def assignments(node):
+        if isinstance(node, AssignmentNode):
+            yield node
+        elif isinstance(node, Tree):
+            for child in node.children:
+                yield from assignments(child)
+
+    statements = [a for s in process.body.statements for a in assignments(s)]
+    assert len(statements) == len(outputs)
+    assert {s.target.name for s in statements} == outputs
