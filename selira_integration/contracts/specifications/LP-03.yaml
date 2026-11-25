@@ -1,7 +1,7 @@
 id: LP-03
 name: Change Impact Assessment
 type: lifecycle_policy
-status: behavioral_specification_candidate
+status: prototype_executable
 specification: ../safsl/LP-03.safsl
 grammar: process.lark
 implementation: process_sim.selira.reassessment.multi_contract.compare
@@ -15,4 +15,4 @@ inputs:
   CandidateLookupChanged: candidate identifier lookup target set changed
 output: Affected
 fallback: select every pair if any reuse attestation is false
-notes: Host supplies projected inputs. SAFSL describes the per-pair decision, not graph projection. Python remains the executable realization.
+notes: Host supplies projected inputs. SAFSL describes the per-pair decision, not graph projection. The restricted AST evaluator executes the decision; Python supplies graph projections.
