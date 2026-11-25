@@ -53,6 +53,7 @@ Paths relative to the repository root:
 | src/process_sim/selira/automation_manager.py | Local orchestration |
 | selira_integration/contracts/safsl/ | Executable contract source |
 | selira_integration/contracts/bindings/ | Semantic bindings |
+| src/process_sim/selira/correspondence/ | Historical engineering correspondence and consumer policies; original imports retained as compatibility aliases |
 | src/process_sim/selira/reassessment/ | Reference snapshot semantics and dependency-based reassessment |
 | selira_integration/formal/ | Formal models and compatibility imports |
 | selira_integration/lifecycle.py | Historical lifecycle engine and compatibility imports |
@@ -70,6 +71,7 @@ From the repository root with process_sim and its dependencies installed:
 python selira_integration/evaluation/characterize_dataset.py
 python -m process_sim.safsl.shacl.compiler selira_integration/contracts/safsl/SC-01.safsl selira_integration/contracts/bindings/SC-01.json selira_integration/contracts/generated/SC-01
 python -m selira_integration.evaluation.sc01_lifecycle
+python -m pytest tests/selira (Get-ChildItem tests/test_safsl*.py).FullName -q
 ```
 
 See the [evaluation guide](evaluation/README.md) for the focused regression command, recorded source revisions, results and environment caveats. The integrated experiment uses local RDF files without live GraphDB or TimescaleDB.
@@ -88,8 +90,8 @@ See the [evaluation guide](evaluation/README.md) for the focused regression comm
 | Logical evaluation reduction | 63.91% |
 | Focused regression tests | 43 passed |
 
-These are previously recorded results, not a new run after documentation changes. The subsequent combined SELiRA and SAFSL regression run reported 278 passed and 329 subtests passed; the lifecycle outcomes were preserved. Counts measure logical reference evaluations, not runtime savings.
+These are previously recorded results, not a new run after documentation changes. The subsequent combined SELiRA and SAFSL regression run reported 278 passed and 329 subtests passed; the lifecycle outcomes were preserved. See the evaluation guide for the distinction between the detailed reassessment verification and the later reported correspondence pass. Counts measure logical reference evaluations, not runtime savings.
 
 ## Scope and limitations
 
-The current realization is restricted to SC-01, local in-memory orchestration and controlled perturbations of benchmark-derived RDF. Independent evidence authentication, general entity resolution, distributed transactions, persistent manager audit history and native incremental SHACL execution are outside its scope. D3 remains an architectural responsibility. Earlier experimental modules and policies are retained pending dependency audit. No production readiness or general compiler correctness is claimed.
+The current realization is restricted to SC-01, local in-memory orchestration and controlled perturbations of benchmark-derived RDF. Independent evidence authentication, general entity resolution, distributed transactions, persistent manager audit history and native incremental SHACL execution are outside its scope. D3 remains an architectural responsibility. Earlier experimental modules and policies are retained; supporting engineering and GraphDB adapters remain in their original locations. No production readiness or general compiler correctness is claimed.

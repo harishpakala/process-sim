@@ -45,6 +45,23 @@ The baseline contains 7,042 RDF triples, 43 assets and 20 products. All 38 assig
 
 All eight decisions matched expectations; all seven reference comparisons agreed. The reference workload was 96 rather than 266 logical instance evaluations (170 fewer; 63.91% reduction). E2/E3 conservatively invalidate shared lookup scopes. E6 invalidates all instances through evidence dependency; E7 forces full fallback. E6/E7 are evidence-only submissions; E7 advances the local version without RDF changes. The focused regression suite reported 43 passes.
 
+## Refactoring verification
+
+The combined SELiRA and SAFSL run following reassessment relocation reported 278 passed, 329 subtests passed in 13.09 s, with all eight lifecycle decisions and seven reference comparisons preserved (266 full, 96 selective logical evaluations). The preceding committed source was `49ac28746b4b84539c42706f3f87964e74405bd9`. Local HEAD and working-tree cleanliness were not independently captured. After correspondence relocation (`3e787461bce6ca3856119185184f73b4382faa3b`), the operator reported a pass without detailed counts or lifecycle output; a fully recorded final baseline remains pending.
+
+To capture a fresh baseline in PowerShell:
+
+```powershell
+git rev-parse HEAD
+git status --short
+python --version
+python -m pytest --version
+python -m pytest tests/selira (Get-ChildItem tests/test_safsl*.py).FullName -q
+python -m selira_integration.evaluation.sc01_lifecycle
+```
+
+Keep fresh logs separate from the original archived results.
+
 ## Archived results
 
 - [Dataset characterization](results/dataset_characterization.json)
@@ -55,4 +72,4 @@ JSON files preserve the uploaded observed data with normalized formatting. Regre
 
 ## Scope and limitations
 
-Completeness, canonical identity, applicability, dependency coverage and unchanged policy/authority are experimental caller attestations, not independent engineering approvals. The manager assumes single nonempty lexical identifiers per projected resource and checks assigned focus nodes against the asset class. Full compiled SHACL remains the admission gate when evidence and scope permit validation. The reference comparison computes both full and selective outcomes and prior outcomes; its counts are logical reassessment counts, not total operations, runtime savings or incremental SHACL performance. The store and audit history are local and in memory. The dataset is benchmark-derived and the candidate changes are controlled experimental perturbations, not observed plant changes. The broader test suite remains blocked by import errors; the 43 focused tests are not the entire repository suite or a rerun of the earlier 46-test suite.
+Completeness, canonical identity, applicability, dependency coverage and unchanged policy/authority are experimental caller attestations, not independent engineering approvals. The manager assumes single nonempty lexical identifiers per projected resource and checks assigned focus nodes against the asset class. Full compiled SHACL remains the admission gate when evidence and scope permit validation. The reference comparison computes both full and selective outcomes and prior outcomes; its counts are logical reassessment counts, not total operations, runtime savings or incremental SHACL performance. The store and audit history are local and in memory. The dataset is benchmark-derived and the candidate changes are controlled experimental perturbations, not observed plant changes. The historical 43-test focused run is distinct from the subsequent 278-test combined run; neither represents the entire repository suite.
