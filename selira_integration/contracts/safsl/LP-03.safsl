@@ -1,0 +1,21 @@
+// Per-instance decision over the union of previous and candidate scopes.
+// Inputs are supplied by the dependency projection; no graph queries here.
+Specification ChangeImpactAssessment {
+    StartTerminal=[LP_03];
+    Process LP_03 {
+        Interface {
+            Terminal Input START;
+            Terminal Output DONE;
+            Port Input CoverageAttested;
+            Port Input PolicyUnchanged;
+            Port Input AuthorityUnchanged;
+            Port Input AssignmentChanged;
+            Port Input PreviousLookupChanged;
+            Port Input CandidateLookupChanged;
+            Port Output Affected;
+        }
+        Body {
+            assign(Affected, or(not(and(CoverageAttested, PolicyUnchanged, AuthorityUnchanged)), AssignmentChanged, PreviousLookupChanged, CandidateLookupChanged));
+        }
+    }
+}
