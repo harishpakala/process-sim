@@ -4,7 +4,7 @@
     {
       "qualified_id": "EngineeringCorrespondence::SC-01",
       "local_id": "SC-01",
-      "definition": "src/process_sim/selira/sc01_contract.py",
+      "definition": "src/process_sim/selira/correspondence/sc01_contract.py",
       "scope": "Reviewed cross-domain identity assertions"
     },
     {
