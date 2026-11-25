@@ -1,5 +1,7 @@
 """Selective logical reference reassessment; not incremental SHACL."""
 from rdflib import RDF, URIRef
+from pathlib import Path
+from .policy import load_policy, evaluate_policy
 
 
 def project(graph, contracts):
@@ -29,8 +31,25 @@ def compare(before, after, contracts, *, coverage_attested=False,
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
-    affected = {k for k in universe if fallback or old.get(k) != new.get(k)
-                or (k[0], old.get(k)) in changed or (k[0], new.get(k)) in changed}
+    policy_dir = Path(__file__).resolve().parents[4] / "selira_integration/contracts/safsl"
+    impact = load_policy(policy_dir / "LP-03.safsl")
+    selection = load_policy(policy_dir / "LP-04.safsl")
+    attestations = {"CoverageAttested": coverage_attested,
+                    "PolicyUnchanged": policy_unchanged,
+                    "AuthorityUnchanged": authority_unchanged}
+    affected = set()
+    for k in universe:
+        decision = evaluate_policy(impact, {
+            **attestations,
+            "AssignmentChanged": old.get(k) != new.get(k),
+            "PreviousLookupChanged": (k[0], old.get(k)) in changed,
+            "CandidateLookupChanged": (k[0], new.get(k)) in changed,
+        })
+        selected = evaluate_policy(selection, {**attestations, **decision})
+        if selected["Reassess"] == selected["Reuse"]:
+            raise ValueError("Inconsistent policy selection")
+        if selected["Reassess"]:
+            affected.add(k)
 
     def check(k, assignments, index):
         if k not in assignments:

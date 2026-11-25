@@ -32,48 +32,12 @@ def test_policy_parses(policy, name, outputs):
     assert {s.target.name for s in statements} == outputs
 
 
-# Test-only Boolean evaluator for the restricted policy fragment.
-# This is not a general SAFSL execution engine.
 from itertools import product
-from process_sim.safsl.ast.nodes import Identifier, Operation, ExpressionStatement
+from process_sim.selira.reassessment.policy import load_policy, evaluate_policy as execute_policy
 
 
 def evaluate_policy(policy, inputs):
-    source = (ROOT / "selira_integration/contracts/safsl" / (policy + ".safsl")).read_text(encoding="utf-8")
-    process = parse_safsl(source).children[0].processes[0]
-    env = dict(inputs)
-    assert set(env) == {p.name for p in process.interface.ports if p.direction == "Input"}
-    assert all(type(v) is bool for v in env.values())
-
-    def evaluate(node):
-        if isinstance(node, Identifier):
-            return env[node.name]
-        if isinstance(node, ExpressionStatement):
-            return evaluate(node.expression)
-        if isinstance(node, Operation):
-            args = [evaluate(a) for a in node.operands]
-            if node.operator == "and":
-                return all(args)
-            if node.operator == "or":
-                return any(args)
-            if node.operator == "notS":
-                assert len(args) == 1
-                return not args[0]
-        raise AssertionError(f"Unsupported expression: {node!r}")
-
-    def execute(node):
-        if isinstance(node, Tree) and node.data == "statement":
-            assert len(node.children) == 1
-            execute(node.children[0])
-        elif isinstance(node, AssignmentNode):
-            assert node.operator == "assign"
-            env[node.target.name] = evaluate(node.value)
-        else:
-            raise AssertionError(f"Unsupported statement: {node!r}")
-
-    for statement in process.body.statements:
-        execute(statement)
-    return {p.name: env[p.name] for p in process.interface.ports if p.direction == "Output"}
+    return execute_policy(load_policy(ROOT / "selira_integration/contracts/safsl" / (policy + ".safsl")), inputs)
 
 
 @pytest.mark.parametrize("bits", list(product([False, True], repeat=6)))
