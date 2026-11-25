@@ -50,10 +50,11 @@ def run():
     asset, other = singletons[:2]
     candidate = current()
     candidate.set((asset, AI.hasProductIdentifier, refs[other]))
-    submit("E2 valid reassignment", candidate, "V", 1)
+    # Assignment changes invalidate old and new lookup scopes conservatively.
+    submit("E2 valid reassignment", candidate, "V", 2)
     candidate = current()
     candidate.set((asset, AI.hasProductIdentifier, Literal("urn:selira:experiment:missing")))
-    submit("E3 unresolved assignment", candidate, "F", 1)
+    submit("E3 unresolved assignment", candidate, "F", 2)
     for event, suffix, count in (("E4 duplicate IFM", "/IFM_TA1101", 5),
                                  ("E5 duplicate SAMSON", "/SAMSON_3241_7", 11)):
         identifier = next(v for v in products.values() if str(v).endswith(suffix))
