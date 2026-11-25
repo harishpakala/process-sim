@@ -74,6 +74,30 @@ The Tennessee Eastman reactor engineering diagrams are available in [`docs/engin
 
 ![TEP reactor electrical CAD diagram](docs/engineering-models/tep-reactor-ecad.png)
 
+## Experimental Benchmarks and Results
+
+### SHACL-grounded engineering query planning (MODELSWARD 2027)
+
+The engineering benchmark contains 46 scenarios with five lexical formulations each (230 queries), evaluated with Qwen2.5-Coder 7B, Llama 3.1 8B, and Mistral 7B (690 query-model evaluations).
+
+- [Full benchmark results (JSONL)](benchmarks/modelsward2027/full_benchmark_results.jsonl)
+- [Benchmark queries and expected behavior](benchmarks/modelsward2027/benchmark_queries_modelsward2027.json)
+- [Reference SPARQL queries](benchmarks/modelsward2027/reference_queries_modelsward2027.json)
+- [Reference query validation results](benchmarks/modelsward2027/reference_validation_results.json)
+- [Benchmark runner](benchmarks/modelsward2027/run_modelsward_benchmark.py)
+- [Benchmark notes and review status](benchmarks/modelsward2027/README.txt)
+
+The recorded result comparisons are provisional positional RDF binding comparisons, not independently verified semantic correctness labels. The benchmark manifest remains a candidate pending final review.
+
+### Semantic–temporal retrieval (TEP NEXUS)
+
+- [Recorded 36-case benchmark results and latency](docs/artifact_evaluation/README.md#3-recorded-benchmark-results-and-latency-2026-11-02)
+- [Three-arm comparative experiment: deterministic, hybrid and full LLM](docs/artifact_evaluation/README.md#6-three-arm-comparative-experiment)
+- [Recorded comparative results (324 executions)](docs/artifact_evaluation/README.md#61-recorded-comparative-results-local-execution)
+- [Artifact inventory and reproducibility boundary](docs/artifact_evaluation/README.md#8-artifact-inventory-and-reproducibility-boundary)
+
+The semantic–temporal figures are historical local experiment results based on limited-scope validation checks. The documentation records the results; the referenced historical raw result files are not accessible at their documented paths on this branch.
+
 ## Documentation
 
 - [Experimental Docker Compose development stack](docs/docker-stack.md)
