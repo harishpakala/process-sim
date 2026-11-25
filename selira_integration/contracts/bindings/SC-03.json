@@ -1,0 +1,18 @@
+{
+  "templates": {
+    "https://example.org/sm/tep-opcua-connectivity-template": {
+      "class": "https://example.org/opcuaconnectivity/SignalMapping",
+      "fields": {
+        "AssetIdentifier": "https://example.org/opcuaconnectivity/hasAssetIdentifier"
+      },
+      "target_by_predicate": true
+    },
+    "https://example.org/sm/asset-inventory-template": {
+      "class": "https://example.org/assetinventory/Asset",
+      "fields": {
+        "AssetIdentifier": "https://example.org/assetinventory/hasAssetIdentifier"
+      },
+      "lexical_match": true
+    }
+  }
+}

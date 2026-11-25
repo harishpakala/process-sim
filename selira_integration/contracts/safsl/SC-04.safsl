@@ -1,0 +1,10 @@
+Specification BomProductIntegrity {
+  Ref SubmodelTemplate sources = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfVGVtcGxhdGU=";
+  Ref SubmodelTemplate targets = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU=";
+  Contract SC_04 {
+    forall source in sources {
+      existsExactlyOne target in targets
+        where matches(source.ProductIdentifier, target.ProductIdentifier);
+    }
+  }
+}

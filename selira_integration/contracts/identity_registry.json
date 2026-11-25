@@ -91,6 +91,33 @@
       "archived_definition": "selira_integration/archive/contracts/specifications/SC-06.yaml",
       "archived_shape": "selira_integration/archive/contracts/shapes/SC-06.ttl",
       "scope": "Evidence and Revision Traceability"
+    },
+    {
+      "qualified_id": "DexpiAssetIntegrity::SC_02",
+      "local_id": "SC_02",
+      "definition": "selira_integration/contracts/safsl/SC-02.safsl",
+      "bindings": "selira_integration/contracts/bindings/SC-02.json",
+      "scope": "Proposed assigned AssetIdentifier unique resolution",
+      "mapping_id": "assetinventory-dexpi-asset-identifier",
+      "status": "candidate_pending_validation"
+    },
+    {
+      "qualified_id": "SignalAssetIntegrity::SC_03",
+      "local_id": "SC_03",
+      "definition": "selira_integration/contracts/safsl/SC-03.safsl",
+      "bindings": "selira_integration/contracts/bindings/SC-03.json",
+      "scope": "Proposed assigned AssetIdentifier unique resolution",
+      "mapping_id": "assetinventory-opcuaconnectivity-asset-identifier",
+      "status": "candidate_pending_validation"
+    },
+    {
+      "qualified_id": "BomProductIntegrity::SC_04",
+      "local_id": "SC_04",
+      "definition": "selira_integration/contracts/safsl/SC-04.safsl",
+      "bindings": "selira_integration/contracts/bindings/SC-04.json",
+      "scope": "Proposed assigned ProductIdentifier unique resolution",
+      "mapping_id": "engineeringbom-productcatalog-product-identifier",
+      "status": "candidate_pending_validation"
     }
   ]
 }
