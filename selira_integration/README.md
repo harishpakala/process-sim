@@ -18,6 +18,10 @@ SELiRA integrates declarative integrity contracts, evidence-aware qualification,
 | D3 — Information Services | Architectural responsibility, not independently evaluated |
 | Automation Manager | Local SC-01 submission orchestration |
 
+## Contract identity
+
+The label SC-01 is overloaded across three historical and current artifacts. Use the qualified identifiers in the [contract identity registry](contracts/identity_registry.json) when discussing or cataloguing these definitions across families. The registry is descriptive metadata, not a runtime resolver. Existing evaluator outputs, manifest identifiers, dependency keys and filenames remain unchanged. The current manuscript experiment refers to `AssetProductIntegrity::SC_01` (SC-01 in prose); the historical handwritten shape and engineering correspondence evaluator are distinct artifacts.
+
 ## Contract specification and compilation
 
 [SC-01](contracts/safsl/SC-01.safsl) requires each applicable asset to match exactly one distinct product resource. [Semantic bindings](contracts/bindings/SC-01.json) resolve AAS template identifiers to RDF classes and properties. The current dataset uses ai:hasProductIdentifier and pc:hasProductIdentifier, predicate-based asset focus, class-based product selection and lexical equality. Compilation produces SHACL-SPARQL shapes and a manifest recording dependencies and required completeness scopes.
@@ -49,8 +53,9 @@ Paths relative to the repository root:
 | src/process_sim/selira/automation_manager.py | Local orchestration |
 | selira_integration/contracts/safsl/ | Executable contract source |
 | selira_integration/contracts/bindings/ | Semantic bindings |
-| selira_integration/formal/ | Formal models and reference reassessment |
-| selira_integration/lifecycle.py | SC-01 snapshot reference semantics |
+| src/process_sim/selira/reassessment/ | Reference snapshot semantics and dependency-based reassessment |
+| selira_integration/formal/ | Formal models and compatibility imports |
+| selira_integration/lifecycle.py | Historical lifecycle engine and compatibility imports |
 | selira_integration/evaluation/ | Experiments and archived results |
 | tests/selira/ and tests/test_safsl_*.py | Experimental and regression tests |
 | semantic/ontology2/ | Engineering RDF inputs |
@@ -83,7 +88,7 @@ See the [evaluation guide](evaluation/README.md) for the focused regression comm
 | Logical evaluation reduction | 63.91% |
 | Focused regression tests | 43 passed |
 
-These are previously recorded results, not a new run after documentation changes. The broader suite has unresolved import/collection errors. Counts measure logical reference evaluations, not runtime savings.
+These are previously recorded results, not a new run after documentation changes. The subsequent combined SELiRA and SAFSL regression run reported 278 passed and 329 subtests passed; the lifecycle outcomes were preserved. Counts measure logical reference evaluations, not runtime savings.
 
 ## Scope and limitations
 

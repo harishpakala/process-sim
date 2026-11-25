@@ -1,0 +1,25 @@
+{
+  "description": "Descriptive qualified identifiers; no runtime dispatch or alias resolution.",
+  "contracts": [
+    {
+      "qualified_id": "EngineeringCorrespondence::SC-01",
+      "local_id": "SC-01",
+      "definition": "src/process_sim/selira/sc01_contract.py",
+      "scope": "Reviewed cross-domain identity assertions"
+    },
+    {
+      "qualified_id": "LegacyAssetProductIntegrity::SC-01",
+      "local_id": "SC-01",
+      "definition": "selira_integration/contracts/specifications/SC-01.yaml",
+      "shape": "selira_integration/contracts/shapes/SC-01.ttl",
+      "scope": "Historical ProductReference to AssetIdentifier lookup"
+    },
+    {
+      "qualified_id": "AssetProductIntegrity::SC_01",
+      "local_id": "SC_01",
+      "definition": "selira_integration/contracts/safsl/SC-01.safsl",
+      "bindings": "selira_integration/contracts/bindings/SC-01.json",
+      "scope": "Current ProductIdentifier lookup"
+    }
+  ]
+}
