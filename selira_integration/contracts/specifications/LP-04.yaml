@@ -1,6 +1,18 @@
 id: LP-04
 name: Selective Contract Revalidation
 type: lifecycle_policy
-status: prototype
-implementation: Python orchestration plus SPARQL and audit records
-notes: "SHACL alone does not perform change detection, scheduling or history management."
+status: prototype_executable
+specification: ../safsl/LP-04.safsl
+grammar: process.lark
+implementation: process_sim.selira.reassessment.multi_contract.compare
+scope: union of previous and candidate contract-focus pairs
+inputs:
+  Affected: LP-03 decision
+  CoverageAttested: caller dependency coverage attestation
+  PolicyUnchanged: caller policy stability attestation
+  AuthorityUnchanged: caller authority stability attestation
+outputs:
+  Reassess: evaluate candidate reference outcome
+  Reuse: retain previous reference outcome
+fallback: reassess every pair if any reuse attestation is false
+notes: Host performs reference evaluation, including NA for removed pairs. Not incremental SHACL. The restricted AST evaluator executes the selection within reassessment.
