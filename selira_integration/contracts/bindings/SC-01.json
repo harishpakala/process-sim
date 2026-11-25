@@ -1,0 +1,18 @@
+{
+  "templates": {
+    "https://example.org/sm/asset-inventory-template": {
+      "class": "https://example.org/assetinventory/Asset",
+      "fields": {
+        "ProductIdentifier": "https://example.org/assetinventory/hasProductIdentifier"
+      },
+      "target_by_predicate": true
+    },
+    "https://example.org/sm/product-catalog-template": {
+      "class": "https://example.org/productcatalog/Product",
+      "fields": {
+        "ProductIdentifier": "https://example.org/productcatalog/hasProductIdentifier"
+      },
+      "lexical_match": true
+    }
+  }
+}
