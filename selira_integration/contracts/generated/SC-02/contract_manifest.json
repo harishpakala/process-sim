@@ -1,0 +1,25 @@
+{
+  "specification": "DexpiAssetIntegrity",
+  "contracts": [
+    {
+      "id": "SC_02",
+      "shape": "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02",
+      "focus_template_id": "https://example.org/sm/dexpi",
+      "catalog_template_id": "https://example.org/sm/asset-inventory-template",
+      "focus_class": "https://example.org/dexpi/InstrumentationFunction",
+      "catalog_class": "https://example.org/assetinventory/Asset",
+      "focus_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "catalog_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "dependencies": [
+        "https://example.org/sm/dexpi",
+        "https://example.org/sm/asset-inventory-template"
+      ],
+      "requires_complete": [
+        "https://example.org/sm/dexpi",
+        "https://example.org/sm/asset-inventory-template"
+      ],
+      "runtime_evidence_complete": false,
+      "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+    }
+  ]
+}
