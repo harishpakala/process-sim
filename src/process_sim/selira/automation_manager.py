@@ -11,8 +11,8 @@ from threading import RLock
 from rdflib import Graph, RDF, URIRef
 from process_sim.safsl.shacl.compiler import compile_contract
 from process_sim.safsl.shacl.admission import VersionedGraphStore, admit, Decision, Verdict
-from selira_integration.lifecycle import Snapshot
-from selira_integration.formal.selective_sc01 import compare
+from .reassessment.snapshot import Snapshot
+from .reassessment.selective_sc01 import compare
 
 
 class AutomationManager:

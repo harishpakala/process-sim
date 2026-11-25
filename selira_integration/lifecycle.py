@@ -13,23 +13,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 import json
 
-@dataclass(frozen=True)
-class Snapshot:
-    revision: str
-    # asset URI -> assigned product reference (candidate references excluded)
-    assigned: dict[str, str]
-    # catalog product URI -> asset identifier
-    catalog: dict[str, str]
-    complete: bool = True
-
-def check(snapshot: Snapshot, asset: str) -> str:
-    if not snapshot.complete:
-        return "INDETERMINATE"
-    ref = snapshot.assigned.get(asset)
-    if ref is None:
-        return "NOT_APPLICABLE"
-    matches = [p for p, identifier in snapshot.catalog.items() if identifier == ref]
-    return "VALIDATED" if len(matches) == 1 else "INVALID"
+from process_sim.selira.reassessment.snapshot import Snapshot, check
 
 def detect(before: Snapshot, after: Snapshot) -> list[dict]:
     """LP-01: immutable change records for changed assigned refs and identifiers."""
