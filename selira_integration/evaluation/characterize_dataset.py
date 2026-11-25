@@ -29,7 +29,7 @@ def characterize(directory):
     rows = []
     for asset in sorted(assets, key=str):
         refs = {str(value) for value in assets_graph.objects(asset, AI.hasProductIdentifier)}
-        matches = set().union(*(index[ref] for ref in refs))
+        matches = set().union(*(index.get(ref, set()) for ref in refs))
         category = ("unassigned" if not refs else
                     "zero_matches" if not matches else
                     "one_match" if len(matches) == 1 else "multiple_matches")
