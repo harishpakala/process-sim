@@ -23,72 +23,56 @@ from process_sim.dtwise.shacl_planner.standalone_shacl_query_planner import (
     SYSTEM_PROMPT, _schema_anchors, _explicit_filter_property_names,
     _unsupported_intent, _explicit_limit, _explicit_sort, _constraint_literals,
     build_candidates, normalize_property_only_projections, validate_output,
+    _explicit_shacl_comparisons,
 )
 
-CROSS_DOMAIN_PROMPT = SYSTEM_PROMPT.replace(
-    'Return EXACTLY these keys, using null/[] for unused fields:',
-    'Return the Phase-1 keys plus mapping_ids and identifier_path_ids. '
-    'All candidate IDs are domain-qualified (e.g. ecad:R2). '
-    'Select only offered mapping IDs and offered identifier paths. '
-    'For every selected mapping select its exact owner-specific identifier endpoints. '
-    'Cross-domain joins use approved identifier equality; never invent RDF edges. '
-    'Prefer an approved AssetIdentifier mapping when available and compatible. '
-    'If no connected approved mapping exists, return unresolved with empty plan. '
-    'For COUNT, use the same single-domain contract: count_target_id identifies the entity whose instances the user wants counted. Other entities needed only to establish cross-domain matches belong in existence_ids. Interpret semantic roles from the whole question, not word position or mapping direction. Do not count the matching/existence entity or raw joined rows unless that is explicitly what the user asks to count. '
-    'Return EXACTLY these keys, using null/[] for unused fields:'
-).replace(
-    '"reason":"brief explanation"\n}',
-    '"reason":"brief explanation",\n "mapping_ids":["approved-mapping-id"],\n '
-    '"identifier_path_ids":["ecad:P1","dexpi:P2"]\n}'
-) + """
-For SELECT queries, include every entity the user requests as an output in projection_ids, including paired or corresponding entities. Use existence_ids only for entities needed to establish matching but not requested as outputs. Mapping endpoints never replace requested projections.
-Cross-domain identifier matching is represented ONLY by mapping_ids and
-identifier_path_ids. It is NOT a literal WHERE filter.
-When matching entities across domains using identifier equality, mapping_ids
-MUST contain the offered approved mapping ID connecting the selected owner-specific
-identifier_path_ids. The presence of the same property name or identifier
-property on both entities NEVER makes a mapping optional or authorizes a join.
-If no approved mapping connects the requested entities and endpoints, return
-unresolved; do not select identifier endpoints without their approved mapping. For a question that
-requests matching entities by a shared identifier but specifies no literal
-comparison, filters MUST be [] and boolean_operator MUST be "NONE".
-Never invent, infer, or insert placeholder values such as <question literal>,
-<identifier value>, or values copied from another entity. A filter is permitted
-only when the question explicitly supplies a literal comparison value.
-Each selected identifier endpoint must be directly owned by an entity explicitly
-requested in the question and included in projection_ids, existence_ids, or
-count_target_id. Do not add endpoints from unrelated entities merely because
-they share a property predicate or are offered as mapping alternatives.
-For selected plans, include every explicitly requested WHERE comparison in filters.
-boolean_operator combines WHERE filters only, not the cross-domain JOIN.
-Use AND when the question combines multiple filter conditions with AND,
-OR when it combines them with OR, and NONE only for zero or one filter.
-Do not return NONE when two or more filters are selected.
-Use only the offered property candidate whose exact SHACL property label is
-named in the question. Copy the literal value from the question verbatim and
-use the comparison operator requested (use "=" for "is" or "equals").
-A valid cross-domain mapping does not replace or satisfy a WHERE filter.
-For an AssetIdentifier cross-domain match, NEVER put AssetIdentifier in filters
-unless the question separately specifies an explicit literal AssetIdentifier value.
-The phrase "matched on AssetIdentifier" supplies NO literal value; do not use
-"<question literal>", an unrelated LocalId value, or any other placeholder.
-For example, Device.DeviceType = Sensor with an AssetIdentifier join requires
-exactly one WHERE filter on ECAD Device.DeviceType with value Sensor and
-boolean_operator NONE. An additional Equipment.LocalId = EQ_101 condition
-requires exactly two WHERE filters: ECAD Device.DeviceType = Sensor and DEXPI
-Equipment.LocalId = EQ_101, with boolean_operator AND. Do not substitute either
-owner's AssetIdentifier or the other owner's LocalId for those filters.
-For cross-domain COUNT, count_target_id identifies the result entity being counted.
-Put other explicitly requested result entities required to establish the matching
-condition in existence_ids, even when their identifiers are mapping endpoints.
-Mapping endpoints do not replace existence requirements. Do not duplicate the
-COUNT target in existence_ids.
-Before returning selected, check that no explicitly requested filter was omitted.
-If a requested filter cannot be represented by offered candidates, return
-unresolved instead of silently dropping it.
-For ambiguous/unresolved/unsupported, mapping_ids and identifier_path_ids MUST be [].
-Do not use any additional model calls. Python verifies all selections.
+CROSS_DOMAIN_PROMPT = """Select a SHACL-grounded cross-domain plan using only offered IDs.
+Return exactly one JSON object with these keys:
+{
+ "status":"selected",
+ "projection_ids":[],
+ "existence_ids":[],
+ "filters":[],
+ "boolean_operator":"NONE",
+ "count_target_id":null,
+ "order_by":[],
+ "limit":null,
+ "mapping_ids":[],
+ "reason":""
+}
+projection_ids: IDs of requested outputs (R entities or P properties).
+existence_ids: R IDs only, for required entities not returned or counted.
+mapping_ids: approved mapping IDs connecting the requested owners and domains.
+Python derives identifier endpoints and join fields; do not output them.
+For a request to show both matching entities, project both R IDs and use
+existence_ids=[] and filters=[] unless a literal condition is explicitly stated.
+A shared identifier is a join, NOT a literal filter or existence constraint.
+filters: objects with property_id (P ID), operator (=, !=, >, >=, <, <=),
+and value (literal string copied from the question). Include every explicit
+comparison; never invent values or use candidate IDs as literal values.
+boolean_operator: NONE for zero or one filter, AND or OR as requested otherwise.
+count_target_id: R ID of the entity counted, or null. Do not project or add
+the count target to existence_ids for a count-only request.
+order_by: objects with property_id and direction (ASC or DESC).
+limit: explicitly requested positive integer, otherwise null.
+If a request cannot be represented, return unresolved, ambiguous or unsupported
+with empty arrays, null count/limit, NONE, and a nonempty reason.
+Never invent properties, mappings or paths. No extra keys.
 """
+
+
+def _construct_cross_domain_plan(selection, graph, registry, exact_shapes):
+    """Expand the compact model contract without silently dropping extra fields."""
+    if not isinstance(selection, dict):
+        raise ValueError('Selection must be a JSON object')
+    expected = {'status', 'projection_ids', 'existence_ids', 'filters',
+                'boolean_operator', 'count_target_id', 'order_by', 'limit',
+                'mapping_ids', 'reason'}
+    if set(selection) != expected:
+        raise ValueError('Invalid compact cross-domain selection fields')
+    answer = {**selection, 'identifier_path_ids': [], 'join_owner_id': None,
+              'join': False}
+    return _derive_unique_mapping_endpoints(answer, graph, registry, exact_shapes)
 
 
 def _scoped_candidates(domain, qualified):
@@ -105,52 +89,7 @@ def _scoped_candidates(domain, qualified):
 
 
 
-def _explicit_shacl_comparisons(question, candidates):
-    """Find explicit property comparisons using offered SHACL labels, not IDs."""
-    names = sorted({
-        c.get('property_name') for c in candidates
-        if c.get('kind') == 'property' and c.get('property_name')
-    }, key=len, reverse=True)
-    comparisons = []
-    for name in names:
-        pattern = (
-            r'(?<!\w)' + re.escape(name) + r'(?!\w)'
-            r'\s+(?:(?P<op>is|equals|equal\s+to|!=|>=|<=|=|>|<|to)\s+)?'
-            r'(?P<value>[A-Za-z0-9_][\w.-]*)'
-        )
-        for match in re.finditer(pattern, question, re.I):
-            operator = (match.group('op') or '').casefold()
-            value = match.group('value').rstrip('.,;?!')
-            prefix = question[:match.start()]
-            if operator == 'to' and value.casefold() in {
-                'connect', 'join', 'match', 'link', 'associate', 'relate',
-                'connects', 'joins', 'matches', 'links', 'associates', 'relates',
-            }:
-                # Infinitive join language is not a literal comparison.
-                continue
-            if not operator and not re.search(
-                r'\b(?:with|where|whose|having|restrict(?:ed|ing)?|'
-                r'filter(?:ed|ing)?|of\s+type|of)\b[^.;?!]*$',
-                prefix, re.I,
-            ):
-                continue
-            # Sorting phrases name a property but do not compare it to a value.
-            if not operator and value.casefold() in {
-                'asc', 'desc', 'ascending', 'descending', 'from',
-                'in', 'sorted', 'ordered', 'lowest', 'highest',
-            }:
-                continue
-            if value.casefold() in {
-                'and', 'or', 'by', 'where', 'with', 'through', 'using',
-                'whose', 'is', 'equals', 'equal', 'the', 'a', 'an',
-            }:
-                continue
-            comparisons.append((
-                name.casefold(),
-                operator if operator in {'!=', '>', '<', '>=', '<=', '='} else '=',
-                value,
-            ))
-    return comparisons
+
 
 
 
@@ -213,6 +152,37 @@ def _normalize_explicit_sort_and_placeholder_filters(answer, candidates, questio
     ):
         order['direction'] = 'ASC'
     return answer
+
+def _derive_unique_mapping_endpoints(answer, graph, registry, exact_shapes):
+    """Fill omitted endpoints only when each selected mapping has one named pair."""
+    if answer.get('status') != 'selected' or answer.get('identifier_path_ids') != []:
+        return answer
+    mids = answer.get('mapping_ids')
+    if not isinstance(mids, list) or not mids or not all(isinstance(m, str) for m in mids):
+        return answer
+    edges = {e['id']: e for e in graph['mapping_candidates']}
+    paths = {p['id']: p for p in graph['identifier_path_candidates']}
+    selected = []
+    for mid in mids:
+        edge = edges.get(mid)
+        if edge is None:
+            return answer
+        pairs = []
+        for pair in edge.get('join_alternatives', []):
+            ids = (pair['left_id'], pair['right_id'])
+            if all(pid in paths and paths[pid]['owner_shape_uri'] in
+                   exact_shapes.get(paths[pid]['domain'], set()) for pid in ids):
+                pairs.append(ids)
+        if len(set(pairs)) != 1:
+            return answer
+        selected.extend(pairs[0])
+    selected = list(dict.fromkeys(selected))
+    try:
+        validate_mapping_graph_selection(mids, selected, graph, registry)
+    except Exception:
+        return answer
+    return {**answer, 'identifier_path_ids': selected}
+
 
 def _normalize_mapping_owner_participation(answer, candidates, graph, registry,
                                            exact_shapes, question):
@@ -630,7 +600,9 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
                             system_prompt=CROSS_DOMAIN_PROMPT)
         record['elapsed_seconds'] = round(time.perf_counter() - started, 3)
         record['raw_response'] = raw
-        answer = json.loads(raw)
+        selection = json.loads(raw)
+        record['raw_selection'] = selection
+        answer = _construct_cross_domain_plan(selection, graph, registry, exact_shapes)
         # Shared Phase-1 projection normalization handles property-only returns.
         base = {k: v for k, v in answer.items()
                 if k not in ('mapping_ids', 'identifier_path_ids')}
@@ -643,6 +615,7 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
             answer['join_owner_id'] = None
         answer = _normalize_explicit_sort_and_placeholder_filters(
             answer, candidates, question)
+        answer = _derive_unique_mapping_endpoints(answer, graph, registry, exact_shapes)
         answer = _normalize_mapping_owner_participation(
             answer, candidates, graph, registry, exact_shapes, question)
         errors, selected = _cross_validate(

@@ -1,0 +1,83 @@
+[
+  {
+    "model": "qwen2.5-coder:7b",
+    "retrieval": "expanded",
+    "exit_code": 1,
+    "seconds": 1822.05,
+    "output_dir": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\01_qwen2.5-coder_7b",
+    "benchmark_summary": {
+      "benchmark": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\benchmarks\\shacl_phase1\\benchmark_queries.json",
+      "pass": 87,
+      "total": 100,
+      "seconds": 1821.86,
+      "suites": {
+        "single_domain": {
+          "pass": 64,
+          "total": 70,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\01_qwen2.5-coder_7b\\single_domain.json"
+        },
+        "cross_domain": {
+          "pass": 23,
+          "total": 30,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\01_qwen2.5-coder_7b\\cross_domain.json"
+        }
+      }
+    }
+  },
+  {
+    "model": "llama3.1:8b",
+    "retrieval": "expanded",
+    "exit_code": 1,
+    "seconds": 1923.27,
+    "output_dir": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\02_llama3.1_8b",
+    "benchmark_summary": {
+      "benchmark": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\benchmarks\\shacl_phase1\\benchmark_queries.json",
+      "pass": 38,
+      "total": 100,
+      "seconds": 1923.13,
+      "suites": {
+        "single_domain": {
+          "pass": 38,
+          "total": 70,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\02_llama3.1_8b\\single_domain.json"
+        },
+        "cross_domain": {
+          "pass": 0,
+          "total": 30,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\02_llama3.1_8b\\cross_domain.json"
+        }
+      }
+    }
+  },
+  {
+    "model": "mistral:7b",
+    "retrieval": "expanded",
+    "exit_code": 1,
+    "seconds": 2634.01,
+    "output_dir": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\03_mistral_7b",
+    "benchmark_summary": {
+      "benchmark": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\benchmarks\\shacl_phase1\\benchmark_queries.json",
+      "pass": 33,
+      "total": 100,
+      "seconds": 2633.87,
+      "suites": {
+        "single_domain": {
+          "pass": 28,
+          "total": 70,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\03_mistral_7b\\single_domain.json"
+        },
+        "cross_domain": {
+          "pass": 5,
+          "total": 30,
+          "exit_code": 1,
+          "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\03_mistral_7b\\cross_domain.json"
+        }
+      }
+    }
+  }
+]

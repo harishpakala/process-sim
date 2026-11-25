@@ -82,7 +82,7 @@ The placeholders are descriptions, NOT literal IDs or values:
  "order_by":[],
  "limit":null,
  "join_owner_id":null,
- "reason":"brief explanation"
+ "reason":"brief explanation (may be empty for selected)"
 }
 For unsupported/ambiguous/unresolved return empty projections/existence/filters/order_by,
 count_target_id=null, limit=null, boolean_operator=NONE, join=false.
@@ -158,8 +158,10 @@ def validate_output(answer, offered):
     if limit is not None and (type(limit) is not int or limit<=0):
         errors.append('LIMIT must be positive integer')
     if answer.get('join_owner_id') is not None: errors.append('join_owner_id must be null')
-    if not isinstance(answer.get('reason'),str) or not answer['reason'].strip():
-        errors.append('Nonempty reason required')
+    if not isinstance(answer.get('reason'),str):
+        errors.append('Reason must be a string')
+    elif status != 'selected' and not answer['reason'].strip():
+        errors.append('Nonempty reason required for abstention')
     if status=='selected':
         if len(filters)<2 and answer.get('boolean_operator')!='NONE':
             errors.append('Boolean operator requires >=2 filters')
@@ -283,6 +285,43 @@ def _explicit_limit(question):
             return int(token) if token.isdigit() else number_words[token]
     return None
 
+def _explicit_shacl_comparisons(question, candidates):
+    """Recognize explicit literal comparisons, not implicit prose or sorting."""
+    operators = {
+        'is': '=', 'equals': '=', 'equal to': '=', 'has value': '=',
+        'is not': '!=', 'not equal to': '!=', 'greater than': '>',
+        'less than': '<', 'greater than or equal to': '>=',
+        'less than or equal to': '<=', '=': '=', '!=': '!=',
+        '>': '>', '<': '<', '>=': '>=', '<=': '<=',
+    }
+    names = sorted({c['property_name'] for c in candidates
+                    if c.get('kind') == 'property' and c.get('property_name')})
+    comparisons = []
+    op_pattern = '|'.join(re.escape(op) for op in sorted(operators, key=len, reverse=True))
+    literal = r'[A-Za-z0-9_][\w.-]*'
+    for name in names:
+        pattern = (r'(?<!\w)' + re.escape(name) + r'(?!\w)\s*'
+                   + r'(?P<op>' + op_pattern + r')\s+'
+                   + r'(?P<either>either\s+)?(?P<value>' + literal + r')')
+        for match in re.finditer(pattern, question, re.I):
+            value = match.group('value').rstrip('.,;?!')
+            if value.casefold() in {
+                'assigned', 'defined', 'used', 'required', 'available',
+                'present', 'missing', 'first', 'last', 'values', 'either',
+                'a', 'an', 'the', 'not', 'greater', 'less',
+            }:
+                continue
+            op = operators[match.group('op').casefold()]
+            comparisons.append((name.casefold(), op, value))
+            if match.group('either'):
+                alternative = re.match(r'\s+or\s+(' + literal + r')',
+                                       question[match.end():], re.I)
+                if alternative:
+                    comparisons.append((name.casefold(), op,
+                                        alternative.group(1).rstrip('.,;?!')))
+    return comparisons
+
+
 def analyze_plan(answer, offered, question):
     d={'warnings':[],'errors':[],'derived_join_owner_id':None,
        'derived_branch_join':False,'explicit_filter_literals':[]}
@@ -308,6 +347,13 @@ def analyze_plan(answer, offered, question):
             common=common[:next((i for i,(a,b) in enumerate(zip(common,p)) if a!=b),min(len(common),len(p)))]
         if len(common)<2:
             d['errors'].append('Selected paths share only domain root, not same entity')
+    # Check recognized explicit comparisons without guessing unrecognized syntax.
+    for name, operator, value in _explicit_shacl_comparisons(question, offered):
+        if not any((lookup.get(f.get('property_id'), {}).get('property_name') or '').casefold() == name
+                   and f.get('operator') == operator
+                   and isinstance(f.get('value'), str)
+                   and f['value'].casefold() == value.casefold() for f in filters):
+            d['errors'].append(f'Missing or mismatched WHERE comparison: {name} {operator} {value}')
     literals=_constraint_literals(question)
     d['explicit_filter_literals']=literals
     chosen={f.get('value','').casefold() for f in filters if isinstance(f.get('value'),str)}
@@ -378,6 +424,14 @@ def _matches_schema_term(question, label):
                 (qword == lword+'es' and lword.endswith(('s','x','ch','sh'))))
     return any(all(equivalent(q[i+j], word) for j,word in enumerate(l))
                for i in range(len(q)-len(l)+1))
+
+
+def _explicit_output_property_names(question):
+    """Recognize explicit identifier-style property value requests."""
+    return [m.group(1) for m in re.finditer(
+        r'\b(?:show|return|list|retrieve|display|get)\s+(?:the\s+)?'
+        r'([A-Za-z_][\w]*)\s+values?\s+(?:of|for|from)\b',
+        question, re.I)]
 
 
 def _explicit_filter_property_names(question):
@@ -721,6 +775,13 @@ def run_one(index, question, *, method='expanded', dry_run=False,
         record.update(status='ambiguous_property',
                       ungrounded_filter_properties=missing_properties,
                       reason='Filter property lacks exact SHACL name; no Qwen call')
+        return record
+    missing_outputs = [name for name in _explicit_output_property_names(question)
+                       if name.casefold() not in exact_property_names]
+    if missing_outputs:
+        record.update(status='ungrounded_output_property',
+                      ungrounded_output_properties=missing_outputs,
+                      reason='Requested output property lacks exact SHACL name; no model call')
         return record
     unsupported=_unsupported_intent(question)
     if unsupported and not dry_run:
