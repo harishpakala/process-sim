@@ -14,8 +14,8 @@ Specification SelectiveContractRevalidation {
             Port Output Reuse;
         }
         Body {
-            assign(Reassess, or(Affected, not(and(CoverageAttested, PolicyUnchanged, AuthorityUnchanged))));
-            assign(Reuse, not(Reassess));
+            assign(Reassess, or(Affected, notS(and(CoverageAttested, PolicyUnchanged, AuthorityUnchanged))));
+            assign(Reuse, notS(Reassess));
         }
     }
 }
