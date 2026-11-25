@@ -10,6 +10,7 @@ from threading import RLock
 from rdflib import Graph, RDF, URIRef
 from rdflib.namespace import SH
 from pyshacl import validate
+from .reassessment.multi_contract import compare
 from process_sim.safsl.shacl.compiler import compile_contract
 from process_sim.safsl.shacl.admission import VersionedGraphStore, Verdict
 
@@ -80,9 +81,11 @@ class MultiContractAutomationManager:
                       "Integrity satisfied" if conforms else "Integrity violated")
 
     def submit(self, candidate, *, expected_version, evidence_complete=(),
-               identity_normalized=False, applicability_confirmed=False):
+               identity_normalized=False, applicability_confirmed=False,
+               coverage_attested=False, policy_unchanged=False, authority_unchanged=False):
         with self._lock:
-            _, version = self.store.snapshot()
+            current, version = self.store.snapshot()
+            reassessment = None
             proposed = Graph()
             proposed += candidate
             outcomes = {}
@@ -100,6 +103,16 @@ class MultiContractAutomationManager:
                         outcomes[key] = {"id": entry["id"], "verdict": "U",
                                          "reason": f"Validation error: {exc}"}
                 values = {r["verdict"] for r in outcomes.values()}
+                if version > 0 and "U" not in values:
+                    try:
+                        reassessment = compare(current, proposed, self._contracts,
+                                               coverage_attested=coverage_attested,
+                                               policy_unchanged=policy_unchanged,
+                                               authority_unchanged=authority_unchanged)
+                        if not reassessment["equivalent"]:
+                            values.add("U")
+                    except Exception:
+                        values.add("U")
                 if "F" in values:
                     verdict, reason = Verdict.F, "At least one contract violated"
                 elif "U" in values:
@@ -111,6 +124,6 @@ class MultiContractAutomationManager:
                     verdict, reason = ((Verdict.V, "Validated and committed") if committed
                                        else (Verdict.U, "Concurrent update; revalidate"))
             record = {"from_version": version, "version": new_version, "verdict": verdict.value,
-                      "reason": reason, "committed": committed, "contracts": outcomes}
+                      "reason": reason, "committed": committed, "contracts": outcomes, "reassessment": reassessment}
             self.history.append(record)
             return record

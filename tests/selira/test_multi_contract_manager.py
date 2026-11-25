@@ -60,3 +60,26 @@ def test_missing_attestation_and_stale_version():
 def test_empty_scope():
     m, _, flags = fixture()
     assert m.submit(Graph(), expected_version=0, **flags)["verdict"] == "NA"
+
+
+def test_selective_shared_dependencies():
+    m, g, flags = fixture()
+    assert m.submit(g, expected_version=0, **flags)["committed"]
+    reuse = dict(coverage_attested=True, policy_unchanged=True, authority_unchanged=True)
+    g.add((N.unreferenced, RDF.type, P.Product))
+    g.add((N.unreferenced, P.hasProductIdentifier, Literal("unused")))
+    r = m.submit(g, expected_version=1, **flags, **reuse)
+    assert r["committed"] and r["reassessment"]["selective_evaluations"] == 0
+    assert r["reassessment"]["full_evaluations"] == 4
+    g.set((N.product, P.hasProductIdentifier, Literal("other")))
+    r = m.submit(g, expected_version=2, **flags, **reuse)
+    assert r["verdict"] == "F" and r["reassessment"]["equivalent"]
+    assert r["reassessment"]["selective_evaluations"] == 2
+    g.set((N.product, P.hasProductIdentifier, Literal("p")))
+    g.set((N.asset, A.hasAssetIdentifier, Literal("other")))
+    r = m.submit(g, expected_version=2, **flags, **reuse)
+    assert r["verdict"] == "F" and r["reassessment"]["equivalent"]
+    assert r["reassessment"]["selective_evaluations"] == 2
+    r = m.submit(g, expected_version=2, **flags)
+    assert r["reassessment"]["full_fallback"]
+    assert r["reassessment"]["selective_evaluations"] == 4
