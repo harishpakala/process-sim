@@ -1,0 +1,617 @@
+[
+  {
+    "question": "Show ECAD Devices where DeviceType is Sensor AND LocalId is DEV_101.",
+    "domain": "ecad",
+    "model": "qwen2.5-coder:7b",
+    "retrieval_method": "expanded",
+    "exact_concept_matches": [
+      "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+      "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU"
+    ],
+    "exact_property_names": [
+      "DeviceType",
+      "LocalId"
+    ],
+    "retrieval": {
+      "shapes": [
+        {
+          "label": "ECAD",
+          "score": 0.6797,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "ECAD",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU",
+              "description": "Electrical computer-aided design submodel describing devices, symbols, connection points, and schematic connectivity."
+            }
+          ]
+        },
+        {
+          "label": "Device",
+          "score": 0.6133,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "Device",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "description": "Electrical device represented in the engineering design."
+            }
+          ]
+        },
+        {
+          "label": "Symbol",
+          "score": 0.5247,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "Symbol",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+              "description": "Graphical or logical symbol representing an electrical design element."
+            }
+          ]
+        },
+        {
+          "label": "ElectricalNet",
+          "score": 0.4932,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "ElectricalNet",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RWxlY3RyaWNhbE5ldHMuRWxlY3RyaWNhbE5ldC9ub2RlU2hhcGU",
+              "description": "Electrical net connecting schematic endpoints."
+            }
+          ]
+        },
+        {
+          "label": "EndPoint",
+          "score": 0.4676,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "EndPoint",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "description": "Connection endpoint in the electrical design."
+            },
+            {
+              "kind": "shape",
+              "label": "EndPoint",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "description": "Connection endpoint in the electrical design."
+            }
+          ]
+        },
+        {
+          "label": "PLCEndPoint",
+          "score": 0.4659,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "PLCEndPoint",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "description": "Connection endpoint associated with a programmable logic controller."
+            },
+            {
+              "kind": "shape",
+              "label": "PLCEndPoint",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "description": "Connection endpoint associated with a programmable logic controller."
+            }
+          ]
+        },
+        {
+          "label": "Connections",
+          "score": 0.4465,
+          "members": [
+            {
+              "kind": "shape",
+              "label": "Connections",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U2NoZW1hdGljcy5Db25uZWN0aW9ucy9ub2RlU2hhcGU",
+              "description": "Collection of connections between schematic elements."
+            }
+          ]
+        }
+      ],
+      "properties": [
+        {
+          "label": "DeviceType",
+          "score": 0.6441,
+          "members": [
+            {
+              "kind": "property",
+              "label": "DeviceType",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRGV2aWNlVHlwZS9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasDeviceType",
+              "description": "hasDeviceType"
+            }
+          ]
+        },
+        {
+          "label": "LocalId",
+          "score": 0.6112,
+          "members": [
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuTG9jYWxJZC9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RWxlY3RyaWNhbE5ldHMuRWxlY3RyaWNhbE5ldC5Mb2NhbElkL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RWxlY3RyaWNhbE5ldHMuRWxlY3RyaWNhbE5ldC9ub2RlU2hhcGU",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC5Mb2NhbElkL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5FbmRQb2ludC9ub2RlU2hhcGU",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC5Mb2NhbElkL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQ29ubmVjdGlvblBvaW50cy5QTENFbmRQb2ludC9ub2RlU2hhcGU",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            },
+            {
+              "kind": "property",
+              "label": "LocalId",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuTG9jYWxJZC9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasLocalId",
+              "description": "hasLocalId"
+            }
+          ]
+        },
+        {
+          "label": "EngineeringVerificationStatus",
+          "score": 0.5317,
+          "members": [
+            {
+              "kind": "property",
+              "label": "EngineeringVerificationStatus",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25TdGF0dXMvc2hhcGU",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasEngineeringVerificationStatus",
+              "description": "hasEngineeringVerificationStatus"
+            }
+          ]
+        },
+        {
+          "label": "EngineeringVerificationEvidence",
+          "score": 0.5002,
+          "members": [
+            {
+              "kind": "property",
+              "label": "EngineeringVerificationEvidence",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRW5naW5lZXJpbmdWZXJpZmljYXRpb25FdmlkZW5jZS9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasEngineeringVerificationEvidence",
+              "description": "hasEngineeringVerificationEvidence"
+            }
+          ]
+        },
+        {
+          "label": "CrossDomainAssociationStatus",
+          "score": 0.4898,
+          "members": [
+            {
+              "kind": "property",
+              "label": "CrossDomainAssociationStatus",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQ3Jvc3NEb21haW5Bc3NvY2lhdGlvblN0YXR1cy9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasCrossDomainAssociationStatus",
+              "description": "hasCrossDomainAssociationStatus"
+            }
+          ]
+        },
+        {
+          "label": "AssetIdentifier",
+          "score": 0.4781,
+          "members": [
+            {
+              "kind": "property",
+              "label": "AssetIdentifier",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuQXNzZXRJZGVudGlmaWVyL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasAssetIdentifier",
+              "description": "hasAssetIdentifier"
+            },
+            {
+              "kind": "property",
+              "label": "AssetIdentifier",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wuQXNzZXRJZGVudGlmaWVyL3NoYXBl",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/U3ltYm9scy5TeW1ib2wvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasAssetIdentifier",
+              "description": "hasAssetIdentifier"
+            }
+          ]
+        },
+        {
+          "label": "Description",
+          "score": 0.4642,
+          "members": [
+            {
+              "kind": "property",
+              "label": "Description",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuRGVzY3JpcHRpb24vc2hhcGU",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasDescription",
+              "description": "hasDescription"
+            }
+          ]
+        },
+        {
+          "label": "ProductVerificationStatus",
+          "score": 0.4591,
+          "members": [
+            {
+              "kind": "property",
+              "label": "ProductVerificationStatus",
+              "uri": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2UuUHJvZHVjdFZlcmlmaWNhdGlvblN0YXR1cy9zaGFwZQ",
+              "owner": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+              "predicate": "https://example.org/ecad/hasProductVerificationStatus",
+              "description": "hasProductVerificationStatus"
+            }
+          ]
+        }
+      ]
+    },
+    "schema_anchors": {
+      "explicit_shape_uris": [
+        "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/RGV2aWNlcy5EZXZpY2Uvbm9kZVNoYXBl",
+        "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/c2hhcGU"
+      ],
+      "explicit_property_names": [
+        "DeviceType",
+        "LocalId"
+      ],
+      "schema_anchor_present": true
+    },
+    "candidate_focus": null,
+    "candidate_count": 23,
+    "result_candidate_count": 8,
+    "property_candidate_count": 15,
+    "candidate_paths": [
+      {
+        "id": "R1",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD"
+      },
+      {
+        "id": "R2",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Device"
+      },
+      {
+        "id": "R3",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Device → EndPoint"
+      },
+      {
+        "id": "R4",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Device → PLCEndPoint"
+      },
+      {
+        "id": "R5",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → ElectricalNet"
+      },
+      {
+        "id": "R6",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Symbol"
+      },
+      {
+        "id": "R7",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Symbol → EndPoint"
+      },
+      {
+        "id": "R8",
+        "domain": "ecad",
+        "kind": "result",
+        "path": "ECAD → Symbol → PLCEndPoint"
+      },
+      {
+        "id": "P1",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → AssetIdentifier",
+        "property_name": "AssetIdentifier"
+      },
+      {
+        "id": "P2",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → CrossDomainAssociationStatus",
+        "property_name": "CrossDomainAssociationStatus"
+      },
+      {
+        "id": "P3",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → Description",
+        "property_name": "Description"
+      },
+      {
+        "id": "P4",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → DeviceType",
+        "property_name": "DeviceType"
+      },
+      {
+        "id": "P5",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → EngineeringVerificationEvidence",
+        "property_name": "EngineeringVerificationEvidence"
+      },
+      {
+        "id": "P6",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → EngineeringVerificationStatus",
+        "property_name": "EngineeringVerificationStatus"
+      },
+      {
+        "id": "P7",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P8",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → ProductVerificationStatus",
+        "property_name": "ProductVerificationStatus"
+      },
+      {
+        "id": "P9",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → EndPoint → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P10",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Device → PLCEndPoint → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P11",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → ElectricalNet → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P12",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Symbol → AssetIdentifier",
+        "property_name": "AssetIdentifier"
+      },
+      {
+        "id": "P13",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Symbol → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P14",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Symbol → EndPoint → LocalId",
+        "property_name": "LocalId"
+      },
+      {
+        "id": "P15",
+        "domain": "ecad",
+        "kind": "property",
+        "path": "ECAD → Symbol → PLCEndPoint → LocalId",
+        "property_name": "LocalId"
+      }
+    ],
+    "system_prompt": "You are a SHACL-grounded Phase-1 query planner. Return ONE JSON object, no prose.\nOnly use candidate IDs supplied in the question. Never invent paths or literal values.\nEvery referenced concept must be explicitly named in the question (case-insensitive, simple plural allowed). Do not infer synonyms.\nA concept may have multiple verified paths: choose the path under the explicitly named owner, or abstain when ambiguous.\nWhen returning a named property value, project its P (property) candidate, not R (result) candidates.\nThe same property name may belong to multiple concepts: select only the SHACL-verified\nproperty directly owned by the requested concept. Do not select descendant or unrelated\nowners merely because their properties have the same name. If ownership is ambiguous,\nreturn ambiguous or unresolved; never project all matching paths.\nSupported: SELECT entity/property retrieval; simple comparisons (= != > >= < <=);\nAND/OR between filters; same-owner sibling branch JOIN; simple COUNT of entities;\nORDER BY ASC/DESC on a grounded property; LIMIT. All other query operations\n(including GROUP BY, HAVING, SUM, AVG, MIN, MAX, DISTINCT, OFFSET, ASK,\nOPTIONAL, UNION, MINUS, subqueries, CONSTRUCT, DESCRIBE, UPDATE) are unsupported.\nIf the question requests any unsupported operation, set status=unsupported and\nreturn empty plan fields. Never silently omit an unsupported clause.\nprojection_ids are only values/entities to RETURN; existence_ids are required\nconcept paths not returned. For entity retrieval with a property filter, project the\nentity R candidate and put the property P candidate in filters; do not project P\nunless its value is separately requested. Do not add an existence path just to\nrepresent the domain or an ancestor already present in the projected path.\nFor EACH filter, output exactly three keys: property_id, operator, value.\nFor equality conditions (\"is\", \"equals\", \"equal to\", \"set to\", \"has value\",\n\"of <property> <value>\"), operator MUST be the string \"=\". Never omit operator.\nUse filter objects with the exact key property_id (never property).\nDo not add existence_ids unless the question explicitly requires a separate\nconcept's existence; an entity projection and its property filter need none. Endpoint addresses require Address property projections.\nA Device with both endpoint types projects Device and requires both sibling\nEndPoint and PLCEndPoint paths under the SAME Device, not Symbol.\nParent-child traversal is not a sibling JOIN. Python computes JOIN from\nverified SHACL topology; always output join=false and join_owner_id=null.\nboolean_operator describes FILTER combinations ONLY: NONE for 0 or 1 filters;\nfor two or more simultaneous required conditions use AND (including \"both\",\n\"also\", \"while\", or multiple conditions separated by semicolons); use OR only\nwhen alternatives are explicitly requested. Never use NONE with multiple filters.\nCOUNT is only ungrouped COUNT of a grounded result concept, with count_target_id.\nDo not add sorting, LIMIT, COUNT, or filters unless requested. For a vague or non-exact\nproperty name, return ambiguous. LIMIT is supported (including first N).\nWhen a necessary candidate is missing, return unresolved. If a clause cannot\nbe represented, return unsupported. join_owner_id is ALWAYS null; Python derives it.\nReturn EXACTLY these keys, using null/[] for unused fields. The empty arrays\nbelow illustrate the JSON structure only: for selected requests populate\nprojection_ids with the actual offered candidate ID(s), never an example ID.\nA nonempty filters array MUST contain objects shaped exactly as\n{\"property_id\":\"<offered P candidate ID>\",\"operator\":\"=\",\"value\":\"<question literal>\"}.\nThe placeholders are descriptions, NOT literal IDs or values:\n{\n \"status\":\"selected|ambiguous|unresolved|unsupported\",\n \"projection_ids\":[],\n \"existence_ids\":[],\n \"filters\":[],\n \"boolean_operator\":\"NONE\",\n \"join\":false,\n \"count_target_id\":null,\n \"order_by\":[],\n \"limit\":null,\n \"join_owner_id\":null,\n \"reason\":\"brief explanation\"\n}\nFor unsupported/ambiguous/unresolved return empty projections/existence/filters/order_by,\ncount_target_id=null, limit=null, boolean_operator=NONE, join=false.\n",
+    "user_prompt": {
+      "domain": "ecad",
+      "question": "Show ECAD Devices where DeviceType is Sensor AND LocalId is DEV_101.",
+      "candidates": [
+        {
+          "id": "R1",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD"
+        },
+        {
+          "id": "R2",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Device"
+        },
+        {
+          "id": "R3",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Device → EndPoint"
+        },
+        {
+          "id": "R4",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Device → PLCEndPoint"
+        },
+        {
+          "id": "R5",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → ElectricalNet"
+        },
+        {
+          "id": "R6",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Symbol"
+        },
+        {
+          "id": "R7",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Symbol → EndPoint"
+        },
+        {
+          "id": "R8",
+          "domain": "ecad",
+          "kind": "result",
+          "path": "ECAD → Symbol → PLCEndPoint"
+        },
+        {
+          "id": "P1",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → AssetIdentifier",
+          "property_name": "AssetIdentifier"
+        },
+        {
+          "id": "P2",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → CrossDomainAssociationStatus",
+          "property_name": "CrossDomainAssociationStatus"
+        },
+        {
+          "id": "P3",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → Description",
+          "property_name": "Description"
+        },
+        {
+          "id": "P4",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → DeviceType",
+          "property_name": "DeviceType"
+        },
+        {
+          "id": "P5",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → EngineeringVerificationEvidence",
+          "property_name": "EngineeringVerificationEvidence"
+        },
+        {
+          "id": "P6",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → EngineeringVerificationStatus",
+          "property_name": "EngineeringVerificationStatus"
+        },
+        {
+          "id": "P7",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P8",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → ProductVerificationStatus",
+          "property_name": "ProductVerificationStatus"
+        },
+        {
+          "id": "P9",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → EndPoint → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P10",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Device → PLCEndPoint → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P11",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → ElectricalNet → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P12",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Symbol → AssetIdentifier",
+          "property_name": "AssetIdentifier"
+        },
+        {
+          "id": "P13",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Symbol → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P14",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Symbol → EndPoint → LocalId",
+          "property_name": "LocalId"
+        },
+        {
+          "id": "P15",
+          "domain": "ecad",
+          "kind": "property",
+          "path": "ECAD → Symbol → PLCEndPoint → LocalId",
+          "property_name": "LocalId"
+        }
+      ]
+    },
+    "status": "dry_run"
+  }
+]

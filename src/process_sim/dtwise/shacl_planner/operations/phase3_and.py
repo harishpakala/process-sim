@@ -7,7 +7,9 @@ import json
 import re
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
-from process_sim.dtwise.experimental_shacl_phase2_filter import _LITERAL
+
+from process_sim.dtwise.shacl_planner.operations.phase2_filter import _LITERAL
+
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_selection import SelectionContractError
 from process_sim.dtwise.experimental_shacl_sparql import _iri

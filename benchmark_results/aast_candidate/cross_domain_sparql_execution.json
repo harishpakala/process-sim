@@ -1,0 +1,72 @@
+[
+  {
+    "id": "CD20-1-P1",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Show DEXPI InstrumentationFunction and matching ECAD Device entities via AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "compilation_status": "compiled",
+    "status": "executed_with_results",
+    "row_count": 10,
+    "error": null
+  },
+  {
+    "id": "CD20-1-P2",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Retrieve DEXPI InstrumentationFunction and ECAD Device pairs matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "compilation_status": "compiled",
+    "status": "executed_with_results",
+    "row_count": 10,
+    "error": null
+  },
+  {
+    "id": "CD20-1-P3",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "List DEXPI InstrumentationFunction and ECAD Device entities matched on AssetIdentifier. Return both entities, ordered by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "compilation_status": "compiled",
+    "status": "executed_with_results",
+    "row_count": 10,
+    "error": null
+  },
+  {
+    "id": "CD20-1-P4",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Find ECAD Device entities paired with DEXPI InstrumentationFunction entities by AssetIdentifier; return both, sorted by DEXPI InstrumentationFunction.LocalId descending, limited to 10.",
+    "semantic_status": "not_checked",
+    "compilation_status": "compiled",
+    "status": "executed_with_results",
+    "row_count": 10,
+    "error": null
+  },
+  {
+    "id": "CD20-1-P5",
+    "scenario_id": "CD20-1",
+    "domains": [
+      "ecad",
+      "dexpi"
+    ],
+    "query": "Give up to ten DEXPI InstrumentationFunction and ECAD Device pairs sharing AssetIdentifier, ordered by DEXPI InstrumentationFunction.LocalId descending.",
+    "semantic_status": "not_checked",
+    "compilation_status": "compiled",
+    "status": "executed_with_results",
+    "row_count": 10,
+    "error": null
+  }
+]

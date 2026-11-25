@@ -1,0 +1,6 @@
+﻿domain,indexed_concepts,indexed_node_shapes,indexed_property_shapes,indexed_relationships,indexed_shape_paths,indexed_ontology_edges,domain_predicate_quads,typed_subjects
+dexpi,36,4,17,44,17,3,166,39
+ecad,72,9,33,90,33,6,1215,284
+assetinventory,51,2,23,50,23,1,660,43
+productcatalog,171,3,82,171,82,2,359,20
+opcuaconnectivity,37,3,15,37,15,2,291,35

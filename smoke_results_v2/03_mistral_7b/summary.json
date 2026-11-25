@@ -1,0 +1,20 @@
+{
+  "benchmark": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\benchmarks\\shacl_phase1\\benchmark_queries.json",
+  "pass": 33,
+  "total": 100,
+  "seconds": 2633.87,
+  "suites": {
+    "single_domain": {
+      "pass": 28,
+      "total": 70,
+      "exit_code": 1,
+      "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\03_mistral_7b\\single_domain.json"
+    },
+    "cross_domain": {
+      "pass": 5,
+      "total": 30,
+      "exit_code": 1,
+      "file": "C:\\Users\\haris\\Documents\\GitHub\\GRASP\\process-sim\\smoke_results_v2\\03_mistral_7b\\cross_domain.json"
+    }
+  }
+}
