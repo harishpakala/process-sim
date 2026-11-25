@@ -1,7 +1,7 @@
 id: LP-04
 name: Selective Contract Revalidation
 type: lifecycle_policy
-status: behavioral_specification_candidate
+status: prototype_executable
 specification: ../safsl/LP-04.safsl
 grammar: process.lark
 implementation: process_sim.selira.reassessment.multi_contract.compare
@@ -15,4 +15,4 @@ outputs:
   Reassess: evaluate candidate reference outcome
   Reuse: retain previous reference outcome
 fallback: reassess every pair if any reuse attestation is false
-notes: Host performs reference evaluation, including NA for removed pairs. Not incremental SHACL. SAFSL is not yet executed by the manager.
+notes: Host performs reference evaluation, including NA for removed pairs. Not incremental SHACL. The restricted AST evaluator executes the selection within reassessment.

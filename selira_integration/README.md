@@ -2,98 +2,51 @@
 
 **Contract-driven reference architecture for industrial life-cycle information**
 
-SELiRA integrates declarative integrity contracts, evidence-aware qualification, controlled admission and dependency-based reassessment. The experimental realization uses SC-01 (asset-to-product integrity) in TEP NEXUS.
+The current TEP NEXUS experiment integrates four semantic contracts and two life-cycle policies. The earlier SC-01-only experiment remains available as a historical baseline.
 
-## Architecture
+## Architecture and realization
 
-| Element | Implementation and status |
+| Element | Implementation |
 | --- | --- |
-| D1 — Semantic Representation | ONTO:NEXUS AAS-derived RDF/OWL |
-| D2 — Contract Processing | Restricted SAFSL parser and semantic bindings |
-| D2 — Constraint Compilation | SAFSL-to-SHACL compiler and manifest |
-| D2 — Graph Validation | Local pySHACL validation |
-| D2 — Evidence-Aware Qualification | Admission coordinator and caller attestations |
-| D2 — Admission Control | Local versioned graph store |
-| D2 — Dependency Management | SC-01 dependency tracker and reference evaluator |
-| D3 — Information Services | Architectural responsibility, not independently evaluated |
-| Automation Manager | Local SC-01 submission orchestration |
+| D1 Semantic Representation | ONTO:NEXUS AAS-derived RDF/OWL |
+| D2 Contract Processing and Compilation | Restricted SAFSL integrity fragment, semantic bindings, SHACL-SPARQL compiler and manifest |
+| D2 Graph Validation | Local pySHACL |
+| D2 Evidence-Aware Qualification | Caller attestations and structural validation |
+| D2 Admission Control | Multi-contract coordinator and local versioned graph store |
+| D2 Dependency Management | Graph projection and parsed SAFSL Boolean policy execution |
+| D3 Information Services | Architectural responsibility, not independently evaluated |
+| Automation Manager | Local multi-contract submission orchestration |
 
-## Contract identity
+## Current specifications
 
-The label SC-01 is overloaded across three historical and current artifacts. Use the qualified identifiers in the [contract identity registry](contracts/identity_registry.json) when discussing or cataloguing these definitions across families. The registry is descriptive metadata, not a runtime resolver. Existing evaluator outputs, manifest identifiers, dependency keys and filenames remain unchanged. The current manuscript experiment refers to `AssetProductIntegrity::SC_01` (SC-01 in prose); the historical handwritten shape and engineering correspondence evaluator are distinct artifacts.
+| ID | Source | Realization |
+| --- | --- | --- |
+| SC-01 | [Asset–Product](contracts/safsl/SC-01.safsl) | SHACL |
+| SC-02 | [DEXPI–Asset](contracts/safsl/SC-02.safsl) | SHACL |
+| SC-03 | [Signal–Asset](contracts/safsl/SC-03.safsl) | SHACL |
+| SC-04 | [BOM–Product](contracts/safsl/SC-04.safsl) | SHACL |
+| LP-03 | [Change Impact Assessment](contracts/safsl/LP-03.safsl) | Restricted Boolean AST evaluator |
+| LP-04 | [Selective Contract Revalidation](contracts/safsl/LP-04.safsl) | Restricted Boolean AST evaluator |
 
-## Contract specification and compilation
+The SCs require exactly one distinct target for each predicate-selected focus resource using explicit RDF bindings and lexical identifier matching. Unassigned resources are outside that scope. See the [identity registry](contracts/identity_registry.json) for historical identifier collisions; it is descriptive, not a runtime resolver.
 
-[SC-01](contracts/safsl/SC-01.safsl) requires each applicable asset to match exactly one distinct product resource. [Semantic bindings](contracts/bindings/SC-01.json) resolve AAS template identifiers to RDF classes and properties. The current dataset uses ai:hasProductIdentifier and pc:hasProductIdentifier, predicate-based asset focus, class-based product selection and lexical equality. Compilation produces SHACL-SPARQL shapes and a manifest recording dependencies and required completeness scopes.
+The multi-contract manager evaluates applicable contracts and admits atomically when at least one is validated and the remainder are validated or not applicable. Invalid dominates indeterminate; indeterminate blocks admission; all-not-applicable does not commit. Non-admitted submissions preserve the graph and version. Caller attestations are not independent engineering approvals.
 
-## Qualification and admission
-
-The Automation Manager compiles the contract, projects candidate snapshots, checks expected versions and coordinates reassessment and admission. It assumes one nonempty lexical identifier per projected resource and checks that assigned focus nodes are typed assets.
-
-| Outcome | Local decision |
-| --- | --- |
-| V — Validated | Commit subject to version check |
-| F — Invalid | Reject |
-| U — Indeterminate | Defer |
-| NA — Not applicable | No commit for confirmed empty scope |
-
-Non-admitted submissions preserve the admitted graph and version. Completeness, applicability and canonical identity are caller attestations, not independently authenticated evidence. Authority stability is supplied to reference reassessment; independent source authority qualification is not implemented. Full compiled SHACL remains the graph-validation gate when evidence and scope permit validation.
-
-## Dependency-based reassessment
-
-The SC-01 reference model tracks asset assignments, identifier-specific lookup scopes (including possible new matches), and completeness. Unconfirmed coverage, policy stability or authority stability triggers full reference reassessment. For successive submissions reaching the comparison stage, the manager compares selective and full reference outcomes; disagreement prevents admission. This is not a persistent outcome cache or native incremental SHACL engine.
-
-## Repository organization
-
-Paths relative to the repository root:
-
-| Path | Responsibility |
-| --- | --- |
-| src/process_sim/safsl/shacl/ | Compiler, validation and admission |
-| src/process_sim/selira/automation_manager.py | Local orchestration |
-| selira_integration/contracts/safsl/ | Executable contract source |
-| selira_integration/contracts/bindings/ | Semantic bindings |
-| src/process_sim/selira/legacy/correspondence/ | Archived engineering correspondence and consumer policies |
-| src/process_sim/selira/correspondence/ | Compatibility aliases for archived correspondence |
-| selira_integration/archive/ | Historical contract artifact snapshots |
-| src/process_sim/selira/reassessment/ | Reference snapshot semantics and dependency-based reassessment |
-| selira_integration/formal/ | Formal models and compatibility imports |
-| selira_integration/lifecycle.py | Historical lifecycle engine and compatibility imports |
-| selira_integration/evaluation/ | Experiments and archived results |
-| tests/selira/ and tests/test_safsl_*.py | Experimental and regression tests |
-| semantic/ontology2/ | Engineering RDF inputs |
-
-Earlier GraphDB adapters, handwritten shapes, SC-02–SC-06 and LP-01–LP-06 specifications remain in the repository but are not part of the current integrated SC-01 experiment. See the [archive guide](archive/README.md) and [archived README](README.legacy.md) for historical context.
+LP-03 selects affected contract-focus pairs from the union of previous and candidate scopes. LP-04 selects reassessment or reuse. Python supplies projected Boolean inputs and computes reference outcomes; the restricted evaluator executes the parsed policy assignments. Unconfirmed coverage, policy stability or authority stability triggers full fallback. No process grammar extension was introduced for these policies. The evaluator is not a general SAFSL runtime. Policy files are located relative to the repository checkout.
 
 ## Reproduction
 
-From the repository root with process_sim and its dependencies installed:
+From the repository root with dependencies installed:
 
 ```powershell
-python selira_integration/evaluation/characterize_dataset.py
-python -m process_sim.safsl.shacl.compiler selira_integration/contracts/safsl/SC-01.safsl selira_integration/contracts/bindings/SC-01.json selira_integration/contracts/generated/SC-01
-python -m selira_integration.evaluation.sc01_lifecycle
+$env:PYTHONPATH = "$PWD\src"
+python -m selira_integration.evaluation.multi_contract_baseline
+python -m selira_integration.evaluation.multi_contract_lifecycle
 python -m pytest tests/selira (Get-ChildItem tests/test_safsl*.py).FullName -q
 ```
 
-See the [evaluation guide](evaluation/README.md) for the focused regression command, recorded source revisions, results and environment caveats. The integrated experiment uses local RDF files without live GraphDB or TimescaleDB.
+See the [evaluation guide](evaluation/README.md) for historical results and the [reported multi-contract verification](evaluation/results/multi_contract_reported_verification.txt) for current console evidence.
 
-## Recorded engineering results
+## Limitations
 
-| Measure | Result |
-| --- | ---: |
-| RDF triples | 7,042 |
-| Assets / products | 43 / 20 |
-| Applicable assigned assets | 38 |
-| Candidate submissions | 8 |
-| Admissions / rejections / deferrals | 4 / 3 / 1 |
-| Selective/full reference agreement | 7/7 |
-| Full / selective logical evaluations | 266 / 96 |
-| Logical evaluation reduction | 63.91% |
-| Focused regression tests | 43 passed |
-
-These are previously recorded results, not a new run after documentation changes. The subsequent combined SELiRA and SAFSL regression run reported 278 passed and 329 subtests passed; the lifecycle outcomes were preserved. See the evaluation guide for the distinction between the detailed reassessment verification and the later reported correspondence pass. Counts measure logical reference evaluations, not runtime savings.
-
-## Scope and limitations
-
-The current realization is restricted to SC-01, local in-memory orchestration and controlled perturbations of benchmark-derived RDF. Independent evidence authentication, general entity resolution, distributed transactions, persistent manager audit history and native incremental SHACL execution are outside its scope. D3 remains an architectural responsibility. Earlier experimental modules and policies are retained; supporting engineering and GraphDB adapters remain in their original locations. No production readiness or general compiler correctness is claimed.
+Local in-memory orchestration and controlled benchmark-derived RDF changes only. Full SHACL remains the validation gate. The comparison recomputes prior and full reference outcomes; logical counts are not measured runtime savings, persistent caching or native incremental SHACL. Independent evidence authentication, general entity resolution, distributed transactions and production deployment are outside scope. Historical contracts, adapters and policies remain available; see the [archive guide](archive/README.md) and [historical README](README.legacy.md).

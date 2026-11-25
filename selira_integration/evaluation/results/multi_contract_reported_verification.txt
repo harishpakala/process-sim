@@ -1,0 +1,40 @@
+Reported operator console evidence (transcribed, not independently executed).
+Preceding committed runtime source: f5ae990a78fd481977c7735fa0c455c8d41454db
+Local HEAD, working-tree cleanliness and dependency versions not captured.
+Full generated JSON files are not included in this record.
+
+Earlier multi-contract baseline (before LP integration):
+SC-01 focus=38 unique=38 zero=0 multiple=0 SHACL=True equivalent=True
+SC-02 focus=39 unique=39 zero=0 multiple=0 SHACL=True equivalent=True
+SC-03 focus=34 unique=34 zero=0 multiple=0 SHACL=True equivalent=True
+SC-04 focus=71 unique=71 zero=0 multiple=0 SHACL=True equivalent=True
+Total focus: 182 All equivalent: True
+
+Post-integration lifecycle:
+E0 V version 1 selective/full -
+E1 V version 2 selective/full 0/182
+E2 V version 3 selective/full 1/182
+E3 F version 3 selective/full 1/182
+E4 F version 3 selective/full 6/182
+E5 F version 3 selective/full 2/182
+E6 V version 4 selective/full 1/182
+E7 F version 4 selective/full 1/182
+E8 F version 4 selective/full 1/182
+E9 U version 4 selective/full -
+E10 V version 5 selective/full 182/182
+{
+  "events": 11,
+  "admitted": 5,
+  "rejected": 5,
+  "deferred": 1,
+  "comparisons": 9,
+  "equivalent": 9,
+  "full_evaluations": 1638,
+  "selective_evaluations": 195,
+  "logical_reduction_percent": 88.0952380952381
+}
+
+Targeted regression:
+365 passed, 329 subtests passed in 24.92s
+
+Logical reference counts exclude full SHACL and other computation.
