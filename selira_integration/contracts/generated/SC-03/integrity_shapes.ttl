@@ -1,25 +1,23 @@
 @prefix selira: <https://example.org/selira/contracts#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-selira:SignalAssetIntegrity_SC_03 a sh:NodeShape ;
+selira:EcadAssetIntegrity_SC_03 a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <https://example.org/ecad/hasLocalId> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <https://example.org/ecad/hasAssetIdentifier> ] ;
     sh:sparql [ a sh:SPARQLConstraint ;
-            sh:message "SC_03: exactly one canonical product required" ;
+            sh:message "SC_03: inconsistent local and authoritative identifiers" ;
             sh:select """SELECT $this WHERE {
-  FILTER (
-    NOT EXISTS {
-      $this <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?ref .
-      ?product a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id .
-      FILTER (STR(?ref) = STR(?id))
-    }
-    ||
-    EXISTS {
-      $this <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?ref1 .
-      ?p1 a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id1 .
-      $this <https://example.org/opcuaconnectivity/hasAssetIdentifier> ?ref2 .
-      ?p2 a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id2 .
-      FILTER (?p1 != ?p2 && STR(?ref1) = STR(?id1) && STR(?ref2) = STR(?id2))
-    }
-  )
-}""" ] ;
-    sh:targetSubjectsOf <https://example.org/opcuaconnectivity/hasAssetIdentifier> .
+      $this <https://example.org/ecad/hasLocalId> ?local ; <https://example.org/ecad/hasAssetIdentifier> ?asset .
+      FILTER (!(REGEX(STR(?local), "^[A-Za-z0-9_-]+$")
+        && REGEX(STR(?asset), "^https?://[^/?#]+/([^?#]*/)?[A-Za-z0-9_-]+$")
+        && STRLEN(REPLACE(STR(?local), "[_-]", "")) > 0
+        && STRLEN(REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")) > 0
+        && (REPLACE(STR(?local), "[_-]", "") = REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", ""))))
+    }""" ] ;
+    sh:targetSubjectsOf <https://example.org/ecad/hasAssetIdentifier> .
 

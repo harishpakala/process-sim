@@ -12,6 +12,7 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.multi_contract import compare
 from process_sim.safsl.shacl.compiler import compile_contract
+from process_sim.safsl.shacl.identifier_comparison import identifier_matches
 from process_sim.safsl.shacl.admission import VersionedGraphStore, Verdict
 
 
@@ -33,9 +34,13 @@ class MultiContractAutomationManager:
             fp = URIRef(entry["focus_predicate"])
             if (shape, SH.targetSubjectsOf, fp) not in shapes:
                 raise ValueError("Only predicate-targeted integrity contracts supported")
-            target = bindings["templates"][entry["catalog_template_id"]]
-            if not target.get("lexical_match") or target.get("match_by_predicate"):
-                raise ValueError("Only lexical, class-targeted lookup supported")
+            if entry.get("kind") == "standalone_match":
+                if entry["requires_complete"] != [entry["focus_template_id"]]:
+                    raise ValueError("Standalone matches require one complete Submodel")
+            else:
+                target = bindings["templates"][entry["catalog_template_id"]]
+                if not target.get("lexical_match") or target.get("match_by_predicate"):
+                    raise ValueError("Only lexical, class-targeted lookup supported")
             self._contracts[key] = (entry, ttl)
         if not self._contracts:
             raise ValueError("At least one contract required")
@@ -48,6 +53,9 @@ class MultiContractAutomationManager:
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
+        if entry.get("kind") == "standalone_match":
+            return self._evaluate_standalone(graph, entry, ttl, evidence,
+                                             identity, applicability)
         tp = URIRef(entry["catalog_predicate"])
         tc = URIRef(entry["catalog_class"])
         focus = set(graph.subjects(fp, None))
@@ -70,6 +78,48 @@ class MultiContractAutomationManager:
             return finish(Verdict.NA, "Confirmed empty predicate-selected population")
         expected = {str(n) for n in focus
                     if len(index.get(str(next(graph.objects(n, fp))), set())) != 1}
+        conforms, report, _ = validate(graph, shacl_graph=Graph().parse(data=ttl, format="turtle"),
+                                       inference="none", advanced=False, abort_on_first=False)
+        actual = {str(n) for n in report.objects(None, SH.focusNode)}
+        result["violations"] = sorted(actual)
+        result["equivalent"] = actual == expected and bool(conforms) == (not expected)
+        if not result["equivalent"]:
+            return finish(Verdict.U, "Reference and SHACL disagreement")
+        return finish(Verdict.V if conforms else Verdict.F,
+                      "Integrity satisfied" if conforms else "Integrity violated")
+
+    def _evaluate_standalone(self, graph, entry, ttl, evidence, identity, applicability):
+        focus = set(graph.subjects(URIRef(entry["focus_predicate"]), None))
+        result = {"id": entry["id"], "focus_count": len(focus),
+                  "target_count": 0, "violations": [], "equivalent": None}
+
+        def finish(verdict, reason):
+            return dict(result, verdict=verdict.value, reason=reason)
+
+        if not identity or not applicability or not set(entry["requires_complete"]) <= evidence:
+            return finish(Verdict.U, "Required snapshot attestations missing")
+        if not focus:
+            return finish(Verdict.NA, "Confirmed empty predicate-selected population")
+        policy = entry["comparison_policy"]
+        if policy["kind"] != "normalized_asset_identifier":
+            return finish(Verdict.U, "Unsupported identifier comparison policy")
+        exceptions = tuple(tuple(pair) for pair in policy.get("exceptions", []))
+        left = URIRef(entry["left_predicate"])
+        right = URIRef(entry["right_predicate"])
+        expected = set()
+        for node in focus:
+            local = set(graph.objects(node, left))
+            asset = set(graph.objects(node, right))
+            valid = False
+            if len(local) == len(asset) == 1:
+                try:
+                    valid = identifier_matches(str(next(iter(local))),
+                                               str(next(iter(asset))),
+                                               exceptions=exceptions)
+                except ValueError:
+                    pass
+            if not valid:
+                expected.add(str(node))
         conforms, report, _ = validate(graph, shacl_graph=Graph().parse(data=ttl, format="turtle"),
                                        inference="none", advanced=False, abort_on_first=False)
         actual = {str(n) for n in report.objects(None, SH.focusNode)}

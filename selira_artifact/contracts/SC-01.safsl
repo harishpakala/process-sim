@@ -1,0 +1,10 @@
+Specification AssetProductIntegrity {
+  Ref SubmodelTemplate assets = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU=";
+  Ref SubmodelTemplate products = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9wcm9kdWN0LWNhdGFsb2ctdGVtcGxhdGU=";
+  Contract SC_01 {
+    forall asset in assets {
+      existsExactlyOne product in products
+        where matches(asset.ProductIdentifier, product.ProductIdentifier);
+    }
+  }
+}

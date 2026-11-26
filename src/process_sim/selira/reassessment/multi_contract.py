@@ -1,12 +1,24 @@
 """Selective logical reference reassessment; not incremental SHACL."""
 from rdflib import RDF, URIRef
+from rdflib.util import from_n3
 from pathlib import Path
 from .policy import load_policy, evaluate_policy
+from process_sim.safsl.shacl.identifier_comparison import identifier_matches
 
 
 def project(graph, contracts):
     assigned, index = {}, {}
     for key, (entry, _) in contracts.items():
+        if entry.get("kind") == "standalone_match":
+            fp = URIRef(entry["focus_predicate"])
+            left = URIRef(entry["left_predicate"])
+            right = URIRef(entry["right_predicate"])
+            for node in set(graph.subjects(fp, None)):
+                assigned[key, str(node)] = (
+                    tuple(sorted(v.n3() for v in graph.objects(node, left))),
+                    tuple(sorted(v.n3() for v in graph.objects(node, right))),
+                )
+            continue
         fp, tp, tc = (URIRef(entry[k]) for k in
                       ("focus_predicate", "catalog_predicate", "catalog_class"))
         for nodes, predicate, is_focus in (
@@ -54,6 +66,20 @@ def compare(before, after, contracts, *, coverage_attested=False,
     def check(k, assignments, index):
         if k not in assignments:
             return "NA"
+        entry = contracts[k[0]][0]
+        if entry.get("kind") == "standalone_match":
+            left, right = assignments[k]
+            if len(left) != 1 or len(right) != 1:
+                return "F"
+            policy = entry["comparison_policy"]
+            if policy["kind"] != "normalized_asset_identifier":
+                raise ValueError("Unsupported identifier comparison policy")
+            try:
+                valid = identifier_matches(str(from_n3(left[0])), str(from_n3(right[0])),
+                                           exceptions=tuple(tuple(p) for p in policy.get("exceptions", [])))
+            except ValueError:
+                valid = False
+            return "V" if valid else "F"
         return "V" if len(index.get((k[0], assignments[k]), set())) == 1 else "F"
 
     prior = {k: check(k, old, oi) for k in universe}

@@ -1,25 +1,23 @@
 @prefix selira: <https://example.org/selira/contracts#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 selira:DexpiAssetIntegrity_SC_02 a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <https://example.org/dexpi/hasAssetIdentifier> ],
+        [ sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:path <https://example.org/dexpi/hasLocalId> ] ;
     sh:sparql [ a sh:SPARQLConstraint ;
-            sh:message "SC_02: exactly one canonical product required" ;
+            sh:message "SC_02: inconsistent local and authoritative identifiers" ;
             sh:select """SELECT $this WHERE {
-  FILTER (
-    NOT EXISTS {
-      $this <https://example.org/dexpi/hasAssetIdentifier> ?ref .
-      ?product a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id .
-      FILTER (STR(?ref) = STR(?id))
-    }
-    ||
-    EXISTS {
-      $this <https://example.org/dexpi/hasAssetIdentifier> ?ref1 .
-      ?p1 a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id1 .
-      $this <https://example.org/dexpi/hasAssetIdentifier> ?ref2 .
-      ?p2 a <https://example.org/assetinventory/Asset> ; <https://example.org/assetinventory/hasAssetIdentifier> ?id2 .
-      FILTER (?p1 != ?p2 && STR(?ref1) = STR(?id1) && STR(?ref2) = STR(?id2))
-    }
-  )
-}""" ] ;
+      $this <https://example.org/dexpi/hasLocalId> ?local ; <https://example.org/dexpi/hasAssetIdentifier> ?asset .
+      FILTER (!(REGEX(STR(?local), "^[A-Za-z0-9_-]+$")
+        && REGEX(STR(?asset), "^https?://[^/?#]+/([^?#]*/)?[A-Za-z0-9_-]+$")
+        && STRLEN(REPLACE(STR(?local), "[_-]", "")) > 0
+        && STRLEN(REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")) > 0
+        && ((REPLACE(STR(?local), "[_-]", "") = REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "") || (STR(?local) = "SC_101" && STR(?asset) = "https://aas.example.com/M1")))))
+    }""" ] ;
     sh:targetSubjectsOf <https://example.org/dexpi/hasAssetIdentifier> .
 

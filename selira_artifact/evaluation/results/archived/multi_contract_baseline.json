@@ -1,0 +1,2195 @@
+{
+  "scope": "predicate-selected graph integrity only; no admission or authority qualification",
+  "contracts": [
+    {
+      "contract": "SC-01",
+      "manifest": {
+        "id": "SC_01",
+        "shape": "https://example.org/selira/contracts#AssetProductIntegrity_SC_01",
+        "focus_template_id": "https://example.org/sm/asset-inventory-template",
+        "catalog_template_id": "https://example.org/sm/product-catalog-template",
+        "focus_class": "https://example.org/assetinventory/Asset",
+        "catalog_class": "https://example.org/productcatalog/Product",
+        "focus_predicate": "https://example.org/assetinventory/hasProductIdentifier",
+        "catalog_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+        "dependencies": [
+          "https://example.org/sm/asset-inventory-template",
+          "https://example.org/sm/product-catalog-template"
+        ],
+        "requires_complete": [
+          "https://example.org/sm/asset-inventory-template",
+          "https://example.org/sm/product-catalog-template"
+        ],
+        "runtime_evidence_complete": false,
+        "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      },
+      "input_sha256": {
+        "assetinventory-instance.ttl": "8f08807af27d820a537704c4e26498f4fce663534dd63bb140f9eec7940e4181",
+        "productcatalog-instance.ttl": "c1dacf42853c2127ce7d710ffe6b78c58e9b1fa7f6b3d6f5198b0a3d0a79a145"
+      },
+      "source_sha256": "1df39bd1f2e9b666ee40ec79b3e3326fd7d723869ed737fe3930a8cff626b5a9",
+      "binding_sha256": "a2b60f90999f28f9bfd7d73d21514d834ea932a335ee7e81f57d661560ccfdb0",
+      "triples": 7042,
+      "focus_count": 38,
+      "target_count": 20,
+      "zero_matches": 0,
+      "unique_matches": 38,
+      "multiple_matches": 0,
+      "empty_or_multivalued_references": 0,
+      "focus_classes": [
+        "https://example.org/aas/SMC",
+        "https://example.org/assetinventory/Asset"
+      ],
+      "shacl_conforms": true,
+      "reference_violations": [],
+      "shacl_violations": [],
+      "equivalent": true,
+      "rows": [
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9DVl8xNDAx",
+          "references": [
+            "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfRmFtaWx5X0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9NXzE0MDE",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9NXzE1MDE",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9NXzEzMDE",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE2",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE5",
+          "references": [
+            "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEw",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEy",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEz",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIw",
+          "references": [
+            "https://example.org/product-types/Schneider_A9MEM3555"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIy",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzQ",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzU",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzg",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMg",
+          "references": [
+            "https://example.org/product-candidates/EKATO_HWLN_AgitatorDrivePackage_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRUtBVE9fSFdMTl9BZ2l0YXRvckRyaXZlUGFja2FnZV9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        }
+      ]
+    },
+    {
+      "contract": "SC-02",
+      "manifest": {
+        "id": "SC_02",
+        "shape": "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02",
+        "focus_template_id": "https://example.org/sm/dexpi",
+        "catalog_template_id": "https://example.org/sm/asset-inventory-template",
+        "focus_class": "https://example.org/dexpi/InstrumentationFunction",
+        "catalog_class": "https://example.org/assetinventory/Asset",
+        "focus_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+        "catalog_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+        "dependencies": [
+          "https://example.org/sm/dexpi",
+          "https://example.org/sm/asset-inventory-template"
+        ],
+        "requires_complete": [
+          "https://example.org/sm/dexpi",
+          "https://example.org/sm/asset-inventory-template"
+        ],
+        "runtime_evidence_complete": false,
+        "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      },
+      "input_sha256": {
+        "dexpi-instance.ttl": "91565028b3dc14a57f9b7348df5475c667e159b2707a5eff8cee80b21493fb5d",
+        "assetinventory-instance.ttl": "8f08807af27d820a537704c4e26498f4fce663534dd63bb140f9eec7940e4181"
+      },
+      "source_sha256": "73f8998113f00e5833a9c2506b314f35bd42966a58f18cc3b3ccd45a5ce96f98",
+      "binding_sha256": "b0328348db15c829809ba11579dab5363c297da4f97a0b8a94b6e53e1870d4d2",
+      "triples": 5683,
+      "focus_count": 39,
+      "target_count": 43,
+      "zero_matches": 0,
+      "unique_matches": 39,
+      "multiple_matches": 0,
+      "empty_or_multivalued_references": 0,
+      "focus_classes": [
+        "https://example.org/aas/SMC",
+        "https://example.org/dexpi/ActuatingFunction",
+        "https://example.org/dexpi/Equipment",
+        "https://example.org/dexpi/InstrumentationFunction"
+      ],
+      "shacl_conforms": true,
+      "reference_violations": [],
+      "shacl_violations": [],
+      "equivalent": true,
+      "rows": [
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9s",
+          "references": [
+            "https://aas.example.com/VC104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2w",
+          "references": [
+            "https://aas.example.com/VC103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9s",
+          "references": [
+            "https://aas.example.com/M1"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMg"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmU",
+          "references": [
+            "https://aas.example.com/CV1006"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl",
+          "references": [
+            "https://aas.example.com/CV1201"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2w",
+          "references": [
+            "https://aas.example.com/VC101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2w",
+          "references": [
+            "https://aas.example.com/VC102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmU",
+          "references": [
+            "https://aas.example.com/VC106"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ",
+          "references": [
+            "https://aas.example.com/VC110"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZl",
+          "references": [
+            "https://aas.example.com/VC108"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZQ",
+          "references": [
+            "https://aas.example.com/VC109"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZl",
+          "references": [
+            "https://aas.example.com/CV1301"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2Vy",
+          "references": [
+            "https://aas.example.com/TEPC001"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9Db25kZW5zZXI"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXI",
+          "references": [
+            "https://aas.example.com/TEPS001"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9TdHJpcHBlcg"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9y",
+          "references": [
+            "https://aas.example.com/TEPR001"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9SZWFjdG9y"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvcg",
+          "references": [
+            "https://aas.example.com/TEPK001"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9Db21wcmVzc29y"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvcg",
+          "references": [
+            "https://aas.example.com/TEPV001"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9TZXBhcmF0b3I"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3c",
+          "references": [
+            "https://aas.example.com/FI104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdw",
+          "references": [
+            "https://aas.example.com/FI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlcg",
+          "references": [
+            "https://aas.example.com/JI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdw",
+          "references": [
+            "https://aas.example.com/FI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdw",
+          "references": [
+            "https://aas.example.com/FI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdw",
+          "references": [
+            "https://aas.example.com/FI107"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93",
+          "references": [
+            "https://aas.example.com/FI105"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZQ",
+          "references": [
+            "https://aas.example.com/TI104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw",
+          "references": [
+            "https://aas.example.com/FI106"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbA",
+          "references": [
+            "https://aas.example.com/LI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzg"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZQ",
+          "references": [
+            "https://aas.example.com/PI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ",
+          "references": [
+            "https://aas.example.com/TI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWw",
+          "references": [
+            "https://aas.example.com/LI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93",
+          "references": [
+            "https://aas.example.com/FI110"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE5"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmU",
+          "references": [
+            "https://aas.example.com/PI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE2"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmU",
+          "references": [
+            "https://aas.example.com/TI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93",
+          "references": [
+            "https://aas.example.com/FI109"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl",
+          "references": [
+            "https://aas.example.com/TI1202"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVs",
+          "references": [
+            "https://aas.example.com/LI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJl",
+          "references": [
+            "https://aas.example.com/PI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEz"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJl",
+          "references": [
+            "https://aas.example.com/TI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdw",
+          "references": [
+            "https://aas.example.com/FI108"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0"
+          ],
+          "match_count": 1
+        }
+      ]
+    },
+    {
+      "contract": "SC-03",
+      "manifest": {
+        "id": "SC_03",
+        "shape": "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03",
+        "focus_template_id": "https://example.org/sm/tep-opcua-connectivity-template",
+        "catalog_template_id": "https://example.org/sm/asset-inventory-template",
+        "focus_class": "https://example.org/opcuaconnectivity/SignalMapping",
+        "catalog_class": "https://example.org/assetinventory/Asset",
+        "focus_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
+        "catalog_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+        "dependencies": [
+          "https://example.org/sm/tep-opcua-connectivity-template",
+          "https://example.org/sm/asset-inventory-template"
+        ],
+        "requires_complete": [
+          "https://example.org/sm/tep-opcua-connectivity-template",
+          "https://example.org/sm/asset-inventory-template"
+        ],
+        "runtime_evidence_complete": false,
+        "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      },
+      "input_sha256": {
+        "opcuaconnectivity-instance.ttl": "88161df3dd999ee5616620600c9bc48505a765ff6b1637dc2792ec700bebc913",
+        "assetinventory-instance.ttl": "8f08807af27d820a537704c4e26498f4fce663534dd63bb140f9eec7940e4181"
+      },
+      "source_sha256": "cdac3b3a7ffeb1120cd79b7fb8c97d473fbc5c6651e3761e96350c95e7ab40d5",
+      "binding_sha256": "bed79d530f6d15363c4b8e44d44498ff44e9dc5cd95302a33514f429169c85f4",
+      "triples": 6510,
+      "focus_count": 34,
+      "target_count": 43,
+      "zero_matches": 0,
+      "unique_matches": 34,
+      "multiple_matches": 0,
+      "empty_or_multivalued_references": 0,
+      "focus_classes": [
+        "https://example.org/aas/SMC",
+        "https://example.org/opcuaconnectivity/SignalMapping"
+      ],
+      "shacl_conforms": true,
+      "reference_violations": [],
+      "shacl_violations": [],
+      "equivalent": true,
+      "rows": [
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29tcHJlc3NvclBvd2Vy",
+          "references": [
+            "https://aas.example.com/JI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29tcHJlc3NvclJlY3ljbGVWYWx2ZQ",
+          "references": [
+            "https://aas.example.com/CV1006"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQ29uZGVuc2VyQ29vbGluZ1dhdGVyVmFsdmU",
+          "references": [
+            "https://aas.example.com/CV1201"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvd0NvbnRyb2w",
+          "references": [
+            "https://aas.example.com/VC104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUNGZWVkRmxvdw",
+          "references": [
+            "https://aas.example.com/FI104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93",
+          "references": [
+            "https://aas.example.com/FI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQUZlZWRGbG93Q29udHJvbA",
+          "references": [
+            "https://aas.example.com/VC103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuQWdpdGF0b3JTcGVlZENvbnRyb2w",
+          "references": [
+            "https://aas.example.com/M1"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMg"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93",
+          "references": [
+            "https://aas.example.com/FI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzI"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuREZlZWRGbG93Q29udHJvbA",
+          "references": [
+            "https://aas.example.com/VC101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93",
+          "references": [
+            "https://aas.example.com/FI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzM"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuRUZlZWRGbG93Q29udHJvbA",
+          "references": [
+            "https://aas.example.com/VC102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yQ29vbGluZ1dhdGVyT3V0bGV0VGVtcGVyYXR1cmU",
+          "references": [
+            "https://aas.example.com/TI1202"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yTGV2ZWw",
+          "references": [
+            "https://aas.example.com/LI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEy"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yTGlxdWlkVmFsdmU",
+          "references": [
+            "https://aas.example.com/CV1301"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yUHJlc3N1cmU",
+          "references": [
+            "https://aas.example.com/PI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEz"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVGVtcGVyYXR1cmU",
+          "references": [
+            "https://aas.example.com/TI102"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU2VwYXJhdG9yVW5kZXJmbG93",
+          "references": [
+            "https://aas.example.com/FI108"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE0"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMZXZlbA",
+          "references": [
+            "https://aas.example.com/LI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE1"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJMaXF1aWRQcm9kdWN0VmFsdmU",
+          "references": [
+            "https://aas.example.com/VC108"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJQcmVzc3VyZQ",
+          "references": [
+            "https://aas.example.com/PI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE2"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbUZsb3c",
+          "references": [
+            "https://aas.example.com/FI110"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE5"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJTdGVhbVZhbHZl",
+          "references": [
+            "https://aas.example.com/VC109"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJUZW1wZXJhdHVyZQ",
+          "references": [
+            "https://aas.example.com/TI103"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE4"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuU3RyaXBwZXJVbmRlcmZsb3c",
+          "references": [
+            "https://aas.example.com/FI109"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzE3"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VGbG93",
+          "references": [
+            "https://aas.example.com/FI107"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzEw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUHVyZ2VWYWx2ZQ",
+          "references": [
+            "https://aas.example.com/VC106"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl",
+          "references": [
+            "https://aas.example.com/TI104"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzIx"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl",
+          "references": [
+            "https://aas.example.com/VC110"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckZlZWRGbG93",
+          "references": [
+            "https://aas.example.com/FI106"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzY"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckxldmVs",
+          "references": [
+            "https://aas.example.com/LI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzg"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclByZXNzdXJl",
+          "references": [
+            "https://aas.example.com/PI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzc"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvclRlbXBlcmF0dXJl",
+          "references": [
+            "https://aas.example.com/TI101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzk"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVjeWNsZUZsb3c",
+          "references": [
+            "https://aas.example.com/FI105"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTUVBUzU"
+          ],
+          "match_count": 1
+        }
+      ]
+    },
+    {
+      "contract": "SC-04",
+      "manifest": {
+        "id": "SC_04",
+        "shape": "https://example.org/selira/contracts#BomProductIntegrity_SC_04",
+        "focus_template_id": "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+        "catalog_template_id": "https://example.org/sm/product-catalog-template",
+        "focus_class": "https://example.org/engineeringbom/BOMItemRecord",
+        "catalog_class": "https://example.org/productcatalog/Product",
+        "focus_predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+        "catalog_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+        "dependencies": [
+          "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+          "https://example.org/sm/product-catalog-template"
+        ],
+        "requires_complete": [
+          "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+          "https://example.org/sm/product-catalog-template"
+        ],
+        "runtime_evidence_complete": false,
+        "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      },
+      "input_sha256": {
+        "engineeringbom-instance.ttl": "ea3c8fadb548fea271085feadae55a28f05a2390e7d3f8173a28b9287ad0c81d",
+        "productcatalog-instance.ttl": "c1dacf42853c2127ce7d710ffe6b78c58e9b1fa7f6b3d6f5198b0a3d0a79a145"
+      },
+      "source_sha256": "7da1cb49039c589d08e37efd2e7d4c69721d5c9e64e1705909efbd7822534ea2",
+      "binding_sha256": "184450b8958dd1f5b9e2a6066adbf812d77f21134403f824d29ca58abd817f08",
+      "triples": 17884,
+      "focus_count": 71,
+      "target_count": 20,
+      "zero_matches": 0,
+      "unique_matches": 71,
+      "multiple_matches": 0,
+      "empty_or_multivalued_references": 0,
+      "focus_classes": [
+        "https://example.org/aas/SMC",
+        "https://example.org/engineeringbom/BOMItemRecord"
+      ],
+      "shacl_conforms": true,
+      "reference_violations": [],
+      "shacl_violations": [],
+      "equivalent": true,
+      "rows": [
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA0",
+          "references": [
+            "https://example.org/product-candidates/AtlasCopco_GT_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQXRsYXNDb3Bjb19HVF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA1",
+          "references": [
+            "https://example.org/product-candidates/Sulzer_StrippingColumn_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU3VsemVyX1N0cmlwcGluZ0NvbHVtbl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA2",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA3",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA4",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDA5",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDAx",
+          "references": [
+            "https://example.org/product-candidates/DeDietrich_HighPressureReactor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGVEaWV0cmljaF9IaWdoUHJlc3N1cmVSZWFjdG9yX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDAy",
+          "references": [
+            "https://example.org/product-candidates/AlfaLaval_Olmi_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQWxmYUxhdmFsX09sbWlfQ2FuZGlkYXRl"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDAz",
+          "references": [
+            "https://example.org/product-candidates/Didion_DSL_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRGlkaW9uX0RTTF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE0",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE1",
+          "references": [
+            "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE2",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE3",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE4",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDE5",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEw",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEx",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEy",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDEz",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI0",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI1",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI2",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI3",
+          "references": [
+            "https://example.org/product-types/Schneider_A9MEM3555"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIx",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIy",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDIz",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ0",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ1",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ2",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ3",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ4",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQ5",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQy",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDQz",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU0",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU1",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU2",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU3",
+          "references": [
+            "https://example.org/product-types/EandH_PMP51B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUE1QNTFCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU4",
+          "references": [
+            "https://example.org/product-types/EandH_Promass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvbWFzc19GMzAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDU5",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUw",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUx",
+          "references": [
+            "https://example.org/product-types/EandH_TMass_F300_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfVE1hc3NfRjMwMF9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUy",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDUz",
+          "references": [
+            "https://example.org/product-types/EandH_FMR62B_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfRk1SNjJCX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYw",
+          "references": [
+            "https://example.org/product-types/EandH_Prowirl_F200_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuRWFuZEhfUHJvd2lybF9GMjAwX0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYx",
+          "references": [
+            "https://example.org/product-types/Schneider_A9MEM3555"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU2NobmVpZGVyX0E5TUVNMzU1NQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYy",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDYz",
+          "references": [
+            "https://example.org/product-types/IFM_TA1101"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuSUZNX1RBMTEwMQ"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc3",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc4",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc5",
+          "references": [
+            "https://example.org/product-candidates/ABB_ProcessPerformance_InductionMotor_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuQUJCX1Byb2Nlc3NQZXJmb3JtYW5jZV9JbmR1Y3Rpb25Nb3Rvcl9DYW5kaWRhdGU"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy",
+          "references": [
+            "https://example.org/product-types/SAMSON_3241_7"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfNw"
+          ],
+          "match_count": 1
+        },
+        {
+          "focus": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcz",
+          "references": [
+            "https://example.org/product-candidates/SAMSON_3241_Family_Candidate"
+          ],
+          "reference_term_count": 1,
+          "matches": [
+            "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtcHJvZHVjdC1jYXRhbG9nLWluc3RhbmNl/UHJvZHVjdHMuU0FNU09OXzMyNDFfRmFtaWx5X0NhbmRpZGF0ZQ"
+          ],
+          "match_count": 1
+        }
+      ]
+    }
+  ],
+  "total_focus": 182,
+  "all_equivalent": true
+}

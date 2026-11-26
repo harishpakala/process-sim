@@ -1,25 +1,26 @@
 {
-  "specification": "SignalAssetIntegrity",
+  "specification": "EcadAssetIntegrity",
   "contracts": [
     {
       "id": "SC_03",
-      "shape": "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03",
-      "focus_template_id": "https://example.org/sm/tep-opcua-connectivity-template",
-      "catalog_template_id": "https://example.org/sm/asset-inventory-template",
-      "focus_class": "https://example.org/opcuaconnectivity/SignalMapping",
-      "catalog_class": "https://example.org/assetinventory/Asset",
-      "focus_predicate": "https://example.org/opcuaconnectivity/hasAssetIdentifier",
-      "catalog_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "shape": "https://example.org/selira/contracts#EcadAssetIntegrity_SC_03",
+      "kind": "standalone_match",
+      "focus_template_id": "https://example.org/sm/ecad",
+      "focus_class": "https://example.org/ecad/Device",
+      "focus_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "left_predicate": "https://example.org/ecad/hasLocalId",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "comparison_policy": {
+        "kind": "normalized_asset_identifier",
+        "exceptions": []
+      },
       "dependencies": [
-        "https://example.org/sm/tep-opcua-connectivity-template",
-        "https://example.org/sm/asset-inventory-template"
+        "https://example.org/sm/ecad"
       ],
       "requires_complete": [
-        "https://example.org/sm/tep-opcua-connectivity-template",
-        "https://example.org/sm/asset-inventory-template"
+        "https://example.org/sm/ecad"
       ],
-      "runtime_evidence_complete": false,
-      "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      "runtime_evidence_complete": false
     }
   ]
 }
