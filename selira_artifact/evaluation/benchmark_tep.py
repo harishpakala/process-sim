@@ -90,13 +90,13 @@ def scenarios(baseline, characterization, evidence):
     add("outdated_cache", unrelated, "V", {}, 182, stale_cache=True)
     return cases
 
-def verify_pair(full, selective, expected, violations, affected, flags):
+def verify_pair(full, selective, expected, violations, affected, flags, contract_ids):
     for result in (full, selective):
         assert result["verdict"] == expected, result
         assert result["committed"] == (expected == "V")
         if expected in {"V", "F"}:
             actual = {r["id"]: r["violations"] for r in result["contracts"].values() if r["violations"]}
-            assert actual == {k: sorted(v) for k,v in violations.items() if v}, actual
+            assert actual == {contract_ids[k]: sorted(v) for k,v in violations.items() if v}, actual
     for k in ("verdict", "committed", "version", "from_version"):
         assert full[k] == selective[k]
     assert {k:(v["verdict"],v.get("violations",[])) for k,v in full["contracts"].items()} == {k:(v["verdict"],v.get("violations",[])) for k,v in selective["contracts"].items()}
@@ -120,13 +120,18 @@ def main():
     paths = [(p, ROOT / "bindings" / (p.stem + ".json")) for p in sorted((ROOT / "contracts").glob("SC-*.safsl"))]
     prototype = SelectiveAutomationManager(paths)
     evidence = {t for m,_ in prototype._contracts.values() for t in m["requires_complete"]}
+    contract_ids = {}
+    for source, binding in paths:
+        evaluated = evaluate(source.read_text(encoding="utf-8"), json.loads(binding.read_text(encoding="utf-8")), baseline)
+        contract_ids[source.stem], = evaluated.keys()
     cases = scenarios(baseline, characterization, evidence)
     # Independent AST oracle on supported, evidence-qualified structural cases.
     for name,g,expected,violations,_,flags in cases:
         if name == "invalid_cardinality":
             continue
         for source,binding in paths:
-            rows = evaluate(source.read_text(encoding="utf-8"), json.loads(binding.read_text(encoding="utf-8")), g)[source.stem]
+            evaluated = evaluate(source.read_text(encoding="utf-8"), json.loads(binding.read_text(encoding="utf-8")), g)
+            rows, = evaluated.values()
             assert {n for n,r in rows.items() if r["cardinality"] != 1} == set(violations.get(source.stem, [])), name
     runs = []
     for rep in range(args.warmups + args.repetitions):
@@ -144,7 +149,7 @@ def main():
                 managers["selective"]._cache = (-1,a,i,q)
             order = ("full","selective") if (rep+j)%2 == 0 else ("selective","full")
             results = {s: managers[s].submit(g, **options) for s in order}
-            verify_pair(results["full"], results["selective"], expected, violations, affected, flags)
+            verify_pair(results["full"], results["selective"], expected, violations, affected, flags, contract_ids)
             for m in managers.values():
                 after, new_rev = m.store.snapshot()
                 assert new_rev == rev + int(expected == "V")
