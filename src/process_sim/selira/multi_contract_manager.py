@@ -33,9 +33,13 @@ class MultiContractAutomationManager:
             fp = URIRef(entry["focus_predicate"])
             if (shape, SH.targetSubjectsOf, fp) not in shapes:
                 raise ValueError("Only predicate-targeted integrity contracts supported")
-            target = bindings["templates"][entry["catalog_template_id"]]
-            if not target.get("lexical_match") or target.get("match_by_predicate"):
-                raise ValueError("Only lexical, class-targeted lookup supported")
+            if entry.get("kind") == "standalone_match":
+                if entry["requires_complete"] != [entry["focus_template_id"]]:
+                    raise ValueError("Standalone matches require one complete Submodel")
+            else:
+                target = bindings["templates"][entry["catalog_template_id"]]
+                if not target.get("lexical_match") or target.get("match_by_predicate"):
+                    raise ValueError("Only lexical, class-targeted lookup supported")
             self._contracts[key] = (entry, ttl)
         if not self._contracts:
             raise ValueError("At least one contract required")
@@ -48,6 +52,12 @@ class MultiContractAutomationManager:
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
+        if entry.get("kind") == "standalone_match":
+            focus = set(graph.subjects(fp, None))
+            return {"id": entry["id"], "focus_count": len(focus),
+                    "target_count": 0, "violations": [], "equivalent": None,
+                    "verdict": Verdict.U.value,
+                    "reason": "Standalone runtime evaluation not yet enabled"}
         tp = URIRef(entry["catalog_predicate"])
         tc = URIRef(entry["catalog_class"])
         focus = set(graph.subjects(fp, None))
