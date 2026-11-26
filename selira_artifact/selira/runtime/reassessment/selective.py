@@ -24,10 +24,8 @@ def project(graph, contracts):
     return assigned, index
 
 
-def compare(before, after, contracts, *, coverage_attested=False,
+def select(old, oi, new, ni, *, coverage_attested=False,
             policy_unchanged=False, authority_unchanged=False):
-    old, oi = project(before, contracts)
-    new, ni = project(after, contracts)
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
@@ -51,6 +49,15 @@ def compare(before, after, contracts, *, coverage_attested=False,
         if selected["Reassess"]:
             affected.add(k)
 
+    return affected, fallback
+
+def compare(before, after, contracts, *, coverage_attested=False,
+            policy_unchanged=False, authority_unchanged=False):
+    old, oi = project(before, contracts)
+    new, ni = project(after, contracts)
+    universe = old.keys() | new.keys()
+    affected, fallback = select(old, oi, new, ni, coverage_attested=coverage_attested,
+                                policy_unchanged=policy_unchanged, authority_unchanged=authority_unchanged)
     def check(k, assignments, index):
         if k not in assignments:
             return "NA"
