@@ -1,7 +1,7 @@
 import json
 from importlib.resources import files
 from lark import Lark, Transformer
-from ..ast.contracts import TemplateRef, UniqueRule, Contract, Specification
+from ..ast.contracts import TemplateRef, UniqueRule, MatchRule, Contract, Specification
 
 class CompilationError(ValueError):
     pass
@@ -22,9 +22,17 @@ class _ContractTransformer(Transformer):
     def unique_rule(self, items):
         return tuple(items)
 
+    def match_rule(self, items):
+        return tuple(items)
+
     def forall_rule(self, items):
-        focus_var, focus_alias, unique = items
-        product_var, product_alias, left, right = unique
+        focus_var, focus_alias, rule = items
+        if len(rule) == 2:
+            left, right = rule
+            if left[0] != focus_var or right[0] != focus_var:
+                raise CompilationError("Standalone matches requires two fields of the focus variable")
+            return MatchRule(focus_var, focus_alias, *left, *right)
+        product_var, product_alias, left, right = rule
         return UniqueRule(focus_var, focus_alias, product_var,
                           product_alias, *left, *right)
 
