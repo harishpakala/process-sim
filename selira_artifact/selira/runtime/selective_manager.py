@@ -10,7 +10,10 @@ from .automation_manager import MultiContractAutomationManager
 from .reassessment.selective import project, select
 
 class SelectiveAutomationManager(MultiContractAutomationManager):
-    def __init__(self, artifacts):
+    def __init__(self, artifacts, *, strategy="selective"):
+        if strategy not in {"full", "selective"}:
+            raise ValueError("Unknown strategy")
+        self.strategy = strategy
         super().__init__(artifacts)
         self._cache = None
 
@@ -49,7 +52,7 @@ class SelectiveAutomationManager(MultiContractAutomationManager):
                 ni = {k:v for a,i in projections.values() for k,v in i.items()}
                 affected = set(new)
                 prior = {}
-                if self._cache is not None and self._cache[0] == version and len(eligible) == len(self._contracts):
+                if self.strategy == "selective" and self._cache is not None and self._cache[0] == version and len(eligible) == len(self._contracts):
                     _, old, oi, prior = self._cache
                     try:
                         affected, fallback = select(old, oi, new, ni,
@@ -95,7 +98,7 @@ class SelectiveAutomationManager(MultiContractAutomationManager):
                         verdict, reason = "U", "Concurrent update"
             record = {"from_version": version, "version": new_version, "verdict": verdict,
                       "reason": reason, "committed": committed, "contracts": outcomes,
-                      "executed_instances": executed, "reused_instances": reused,
+                      "strategy": self.strategy, "executed_instances": executed, "reused_instances": reused,
                       "shacl_calls": calls, "full_fallback": fallback,
                       "elapsed_seconds": perf_counter()-started}
             self.history.append(record)
