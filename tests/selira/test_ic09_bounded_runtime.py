@@ -3,7 +3,7 @@ from itertools import product
 import pytest
 from rdflib import Graph, Literal, URIRef
 from process_sim.selira.reassessment.multi_contract import compare
-from test_multi_contract_manager import fixture, D, E, N
+from .test_multi_contract_manager import fixture, D, E, N
 
 @pytest.mark.parametrize("complete,identity,applicability", list(product((False, True), repeat=3)))
 @pytest.mark.parametrize("kind", ["valid", "invalid", "empty"])
