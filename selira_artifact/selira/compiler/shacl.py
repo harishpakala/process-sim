@@ -23,80 +23,8 @@ from rdflib.namespace import SH
 SELIRA = Namespace("https://example.org/selira/contracts#")
 
 
-class CompilationError(ValueError):
-    pass
-
-
-@dataclass(frozen=True)
-class TemplateRef:
-    alias: str
-    identifier: str
-
-
-@dataclass(frozen=True)
-class UniqueRule:
-    focus_variable: str
-    focus_alias: str
-    product_variable: str
-    product_alias: str
-    left_variable: str
-    left_field: str
-    right_variable: str
-    right_field: str
-
-
-@dataclass(frozen=True)
-class Contract:
-    identifier: str
-    rule: UniqueRule
-
-
-@dataclass(frozen=True)
-class Specification:
-    name: str
-    templates: tuple
-    contracts: tuple
-
-
-class _ContractTransformer(Transformer):
-    def NAME(self, token):
-        return str(token)
-
-    def STRING(self, token):
-        return json.loads(str(token))
-
-    def field(self, items):
-        return tuple(items)
-
-    def template_ref(self, items):
-        return TemplateRef(*items)
-
-    def unique_rule(self, items):
-        return tuple(items)
-
-    def forall_rule(self, items):
-        focus_var, focus_alias, unique = items
-        product_var, product_alias, left, right = unique
-        return UniqueRule(focus_var, focus_alias, product_var,
-                          product_alias, *left, *right)
-
-    def contract(self, items):
-        return Contract(*items)
-
-    def start(self, items):
-        return Specification(items[0],
-                             tuple(x for x in items[1:] if isinstance(x, TemplateRef)),
-                             tuple(x for x in items[1:] if isinstance(x, Contract)))
-
-
-def parse_contract(source: str) -> Specification:
-    grammar = files("selira.language").joinpath("grammar/contracts.lark").read_text(encoding="utf-8")
-    parser = Lark(grammar, parser="lalr", start="start")
-    try:
-        return _ContractTransformer().transform(parser.parse(source))
-    except Exception as exc:
-        raise CompilationError(f"Invalid SAFSL contract: {exc}") from exc
-
+from selira.language.parser.contracts import CompilationError, parse_contract
+from selira.language.ast.contracts import TemplateRef, UniqueRule, Contract, Specification
 
 def decode_template_id(value: str) -> str:
     """Decode existing SAFSL Base64 convention; reject malformed/noncanonical encodings."""
