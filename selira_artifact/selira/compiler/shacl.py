@@ -24,7 +24,7 @@ SELIRA = Namespace("https://example.org/selira/contracts#")
 
 
 from selira.language.parser.contracts import CompilationError, parse_contract
-from selira.language.ast.contracts import TemplateRef, UniqueRule, Contract, Specification
+from selira.language.ast.contracts import TemplateRef, UniqueRule, MatchRule, Contract, Specification
 
 def decode_template_id(value: str) -> str:
     """Decode existing SAFSL Base64 convention; reject malformed/noncanonical encodings."""
@@ -44,6 +44,66 @@ def _iri(value, label):
     if any(c in value for c in (' ', '<', '>', '"', '\n', '\r')):
         raise CompilationError(f"Unsafe characters in {label}")
     return URIRef(value)
+
+
+def _compile_match(graph, spec, contract, aliases):
+    rule = contract.rule
+    try:
+        focus_id, focus = aliases[rule.focus_alias]
+        cls = _iri(focus["class"], "focus class")
+        left = _iri(focus["fields"][rule.left_field], "left field")
+        right = _iri(focus["fields"][rule.right_field], "right field")
+    except (KeyError, TypeError) as exc:
+        raise CompilationError(f"Unresolved match binding: {exc}") from exc
+    policy = focus.get("comparison_policy", {})
+    if policy.get("kind") != "normalized_asset_identifier":
+        raise CompilationError("Standalone matches requires normalized_asset_identifier policy")
+    exceptions = policy.get("exceptions", [])
+    from selira.formal.identifier_comparison import identifier_matches
+    clauses = []
+    for pair in exceptions:
+        if not isinstance(pair, list) or len(pair) != 2 or not all(isinstance(x, str) for x in pair):
+            raise CompilationError("Invalid identifier exception pair")
+        local, asset = pair
+        identifier_matches(local, asset)
+        clauses.append(f"(STR(?local) = {Literal(local).n3()} && STR(?asset) = {Literal(asset).n3()})")
+    comparison = 'REPLACE(STR(?local), "[_-]", "") = REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")'
+    if clauses:
+        comparison = "(" + comparison + " || " + " || ".join(clauses) + ")"
+    query = f"""SELECT $this WHERE {{
+      $this <{left}> ?local ; <{right}> ?asset .
+      FILTER (!(REGEX(STR(?local), "^[A-Za-z0-9_-]+$")
+        && REGEX(STR(?asset), "^https?://[^/?#]+/([^?#]*/)?[A-Za-z0-9_-]+$")
+        && STRLEN(REPLACE(STR(?local), "[_-]", "")) > 0
+        && STRLEN(REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")) > 0
+        && ({comparison})))
+    }}"""
+    shape = SELIRA[f"{spec.name}_{contract.identifier}"]
+    graph.add((shape, RDF.type, SH.NodeShape))
+    if focus.get("target_by_predicate"):
+        graph.add((shape, SH.targetSubjectsOf, right))
+    else:
+        graph.add((shape, SH.targetClass, cls))
+    for predicate in (left, right):
+        prop = BNode()
+        graph.add((shape, SH.property, prop))
+        graph.add((prop, SH.path, predicate))
+        graph.add((prop, SH.minCount, Literal(1)))
+        graph.add((prop, SH.maxCount, Literal(1)))
+    sparql = BNode()
+    graph.add((shape, SH.sparql, sparql))
+    graph.add((sparql, RDF.type, SH.SPARQLConstraint))
+    graph.add((sparql, SH.message, Literal(f"{contract.identifier}: inconsistent local and authoritative identifiers")))
+    graph.add((sparql, SH.select, Literal(query)))
+    return {
+        "id": contract.identifier, "shape": str(shape),
+        "kind": "standalone_match", "focus_template_id": focus_id,
+        "focus_class": str(cls), "focus_predicate": str(right),
+        "left_predicate": str(left), "right_predicate": str(right),
+        "comparison_policy": policy, "dependencies": [focus_id],
+        "requires_complete": [focus_id],
+        "runtime_evidence_complete": bool(focus.get("complete")),
+    }
 
 
 def compile_contract(source: str, bindings: Mapping):
@@ -77,6 +137,9 @@ def compile_contract(source: str, bindings: Mapping):
     manifest = {"specification": spec.name, "contracts": []}
     for contract in spec.contracts:
         rule = contract.rule
+        if isinstance(rule, MatchRule):
+            manifest["contracts"].append(_compile_match(graph, spec, contract, aliases))
+            continue
         if rule.focus_alias not in aliases or rule.product_alias not in aliases:
             raise CompilationError(f"{contract.identifier}: unknown template alias")
         if (rule.left_variable, rule.right_variable) != (rule.focus_variable, rule.product_variable):
