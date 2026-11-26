@@ -3,16 +3,19 @@
     "https://example.org/sm/dexpi": {
       "class": "https://example.org/dexpi/InstrumentationFunction",
       "fields": {
+        "LocalId": "https://example.org/dexpi/hasLocalId",
         "AssetIdentifier": "https://example.org/dexpi/hasAssetIdentifier"
       },
-      "target_by_predicate": true
-    },
-    "https://example.org/sm/asset-inventory-template": {
-      "class": "https://example.org/assetinventory/Asset",
-      "fields": {
-        "AssetIdentifier": "https://example.org/assetinventory/hasAssetIdentifier"
-      },
-      "lexical_match": true
+      "target_by_predicate": true,
+      "comparison_policy": {
+        "kind": "normalized_asset_identifier",
+        "exceptions": [
+          [
+            "SC_101",
+            "https://aas.example.com/M1"
+          ]
+        ]
+      }
     }
   }
 }
