@@ -97,17 +97,17 @@
       "local_id": "SC_02",
       "definition": "selira_integration/contracts/safsl/SC-02.safsl",
       "bindings": "selira_integration/contracts/bindings/SC-02.json",
-      "scope": "Proposed assigned AssetIdentifier unique resolution",
-      "mapping_id": "assetinventory-dexpi-asset-identifier",
+      "scope": "Normalized LocalId and AssetIdentifier consistency within DEXPI",
+      "mapping_id": "dexpi-local-id-asset-identifier",
       "status": "candidate_pending_validation"
     },
     {
-      "qualified_id": "SignalAssetIntegrity::SC_03",
+      "qualified_id": "EcadAssetIntegrity::SC_03",
       "local_id": "SC_03",
       "definition": "selira_integration/contracts/safsl/SC-03.safsl",
       "bindings": "selira_integration/contracts/bindings/SC-03.json",
-      "scope": "Proposed assigned AssetIdentifier unique resolution",
-      "mapping_id": "assetinventory-opcuaconnectivity-asset-identifier",
+      "scope": "Normalized LocalId and AssetIdentifier consistency within ECAD",
+      "mapping_id": "ecad-local-id-asset-identifier",
       "status": "candidate_pending_validation"
     },
     {
