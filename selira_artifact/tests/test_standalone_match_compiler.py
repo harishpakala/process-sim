@@ -3,6 +3,7 @@ import pytest
 from rdflib import Graph, Namespace, RDF, Literal, URIRef
 from pyshacl import validate
 from selira.compiler.shacl import compile_contract
+from selira.formal.reference_evaluator import evaluate
 
 EX = Namespace("https://example.org/test/")
 BASE = "https://aas.example.com/"
@@ -34,3 +35,30 @@ def test_compiled_match(local, asset, expected):
         data.add((EX.device, EX.asset, URIRef(BASE + asset)))
     conforms, _, _ = validate(data, shacl_graph=Graph().parse(data=ttl, format="turtle"))
     assert conforms == expected
+
+    rows = evaluate(SOURCE, BINDINGS, data)["SC_02"]
+    assert rows[str(EX.device)]["conforms"] == expected
+
+
+@pytest.mark.parametrize("predicate_scope", [False, True])
+def test_multiple_values_and_scope(predicate_scope):
+    import copy
+    bindings = copy.deepcopy(BINDINGS)
+    bindings["templates"]["urn:test"]["target_by_predicate"] = predicate_scope
+    data = Graph()
+    data.add((EX.device, RDF.type, EX.Device))
+    data.add((EX.device, EX.local, Literal("M1")))
+    data.add((EX.device, EX.local, Literal("M2")))
+    data.add((EX.device, EX.asset, URIRef(BASE + "M1")))
+    data.add((EX.other, EX.asset, URIRef(BASE + "M1")))
+    data.add((EX.other, EX.local, Literal("M1")))
+    rows = evaluate(SOURCE, bindings, data)["SC_02"]
+    assert not rows[str(EX.device)]["conforms"]
+    assert (str(EX.other) in rows) == predicate_scope
+    ttl, _ = compile_contract(SOURCE, bindings)
+    conforms, report, _ = validate(data, shacl_graph=Graph().parse(data=ttl, format="turtle"))
+    from rdflib.namespace import SH
+    assert not conforms
+    assert {str(n) for n in report.objects(None, SH.focusNode)} == {
+        node for node, row in rows.items() if not row["conforms"]
+    }

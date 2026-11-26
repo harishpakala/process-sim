@@ -1,7 +1,36 @@
-"""Direct AST interpretation of the TEP lexical uniqueness fragment."""
+"""Direct AST interpretation of lexical uniqueness and standalone matches."""
 import base64
 from rdflib import RDF, URIRef
 from selira.language.parser.contracts import parse_contract
+from selira.language.ast.contracts import MatchRule
+from selira.formal.identifier_comparison import identifier_matches
+
+def _evaluate_match(rule, binding, graph):
+    policy = binding.get("comparison_policy", {})
+    if policy.get("kind") != "normalized_asset_identifier":
+        raise ValueError("Unsupported comparison policy")
+    left = URIRef(binding["fields"][rule.left_field])
+    right = URIRef(binding["fields"][rule.right_field])
+    nodes = (set(graph.subjects(right, None)) if binding.get("target_by_predicate")
+             else set(graph.subjects(RDF.type, URIRef(binding["class"]))))
+    exceptions = {tuple(pair) for pair in policy.get("exceptions", [])}
+    rows = {}
+    for node in nodes:
+        local = set(graph.objects(node, left))
+        asset = set(graph.objects(node, right))
+        valid = False
+        if len(local) == len(asset) == 1:
+            try:
+                valid = identifier_matches(str(next(iter(local))),
+                                           str(next(iter(asset))),
+                                           exceptions=exceptions)
+            except ValueError:
+                pass
+        rows[str(node)] = {"conforms": valid,
+                           "local_ids": sorted(map(str, local)),
+                           "asset_identifiers": sorted(map(str, asset))}
+    return rows
+
 
 def evaluate(source, bindings, graph):
     spec = parse_contract(source)
@@ -14,6 +43,9 @@ def evaluate(source, bindings, graph):
     results = {}
     for contract in spec.contracts:
         r = contract.rule
+        if isinstance(r, MatchRule):
+            results[contract.identifier] = _evaluate_match(r, aliases[r.focus_alias], graph)
+            continue
         if (r.left_variable, r.right_variable) != (r.focus_variable, r.product_variable):
             raise ValueError("Unsupported operands")
         s, t = aliases[r.focus_alias], aliases[r.product_alias]
