@@ -4,22 +4,28 @@
     {
       "id": "SC_02",
       "shape": "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02",
+      "kind": "standalone_match",
       "focus_template_id": "https://example.org/sm/dexpi",
-      "catalog_template_id": "https://example.org/sm/asset-inventory-template",
       "focus_class": "https://example.org/dexpi/InstrumentationFunction",
-      "catalog_class": "https://example.org/assetinventory/Asset",
       "focus_predicate": "https://example.org/dexpi/hasAssetIdentifier",
-      "catalog_predicate": "https://example.org/assetinventory/hasAssetIdentifier",
+      "left_predicate": "https://example.org/dexpi/hasLocalId",
+      "right_predicate": "https://example.org/dexpi/hasAssetIdentifier",
+      "comparison_policy": {
+        "kind": "normalized_asset_identifier",
+        "exceptions": [
+          [
+            "SC_101",
+            "https://aas.example.com/M1"
+          ]
+        ]
+      },
       "dependencies": [
-        "https://example.org/sm/dexpi",
-        "https://example.org/sm/asset-inventory-template"
+        "https://example.org/sm/dexpi"
       ],
       "requires_complete": [
-        "https://example.org/sm/dexpi",
-        "https://example.org/sm/asset-inventory-template"
+        "https://example.org/sm/dexpi"
       ],
-      "runtime_evidence_complete": false,
-      "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+      "runtime_evidence_complete": false
     }
   ]
 }
