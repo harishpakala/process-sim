@@ -56,7 +56,7 @@ def main():
         rows = [e for e in representative if e["scenario"]==n]
         for s in ("full","selective"):
             t = [e[s]["elapsed_seconds"] for e in rows]
-            for k,v in (("median_seconds",median(t)),("min_seconds",min(t)),("max_seconds",max(t)):
+            for k,v in (("median_seconds",median(t)),("min_seconds",min(t)),("max_seconds",max(t))):
                 assert isclose(v,b["summary"][n][s][k])
     print(json.dumps({"comprehensive":x,"representative":y,"hashes":hashes},indent=2))
     print("Archived records verified; no SHACL execution performed.")
