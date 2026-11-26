@@ -84,7 +84,7 @@ def test_optional_and_paraphrased_intervals(interval, expected):
 def test_experimental_executor_receives_canonical_question():
     from process_sim.api.historian_nl_experimental import canonical_historian_question
     question = f"Plot FI_101 from 100 to 300 seconds in DEXPI simulation run {RUN}"
-    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence), \\
+    with patch("process_sim.api.historian_nl_experimental._shacl_evidence", side_effect=evidence), \
          patch("process_sim.api.historian_nl_experimental.run_historian_question") as executor:
         executor.return_value = {"observationCount": 2}
         output = run_historian_nl_experiment(question)
