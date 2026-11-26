@@ -1,0 +1,13 @@
+// SAFSL source-side integrity contract subset (SC-01).
+start: "Specification" NAME "{" template_ref+ contract+ "}"
+template_ref: "Ref" "SubmodelTemplate" NAME "=" STRING ";"
+contract: "Contract" NAME "{" forall_rule "}"
+forall_rule: "forall" NAME "in" NAME "{" unique_rule "}"
+unique_rule: "existsExactlyOne" NAME "in" NAME "where" "matches" "(" field "," field ")" ";"
+field: NAME "." NAME
+NAME: /[A-Za-z_][A-Za-z0-9_]*/
+%import common.ESCAPED_STRING -> STRING
+%import common.WS
+%ignore WS
+%ignore /\/\/[^\r\n]*/
+%ignore /\/\*(.|\n)*?\*\//
