@@ -12,7 +12,7 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.multi_contract import compare
 from process_sim.safsl.shacl.compiler import compile_contract
-from process_sim.safsl.shacl.identifier_comparison import identifier_matches
+from process_sim.safsl.shacl.identifier_comparison import compare_fields
 from process_sim.safsl.shacl.admission import VersionedGraphStore, Verdict
 
 
@@ -106,9 +106,8 @@ class MultiContractAutomationManager:
         if not focus:
             return finish(Verdict.NA, "Confirmed empty predicate-selected population")
         policy = entry["comparison_policy"]
-        if policy["kind"] != "normalized_asset_identifier":
+        if policy["kind"] not in ("normalized_asset_identifier", "lexical_equality"):
             return finish(Verdict.U, "Unsupported identifier comparison policy")
-        exceptions = tuple(tuple(pair) for pair in policy.get("exceptions", []))
         left = URIRef(entry["left_predicate"])
         right = URIRef(entry["right_predicate"])
         expected = set()
@@ -118,9 +117,8 @@ class MultiContractAutomationManager:
             valid = False
             if len(local) == len(asset) == 1:
                 try:
-                    valid = identifier_matches(str(next(iter(local))),
-                                               str(next(iter(asset))),
-                                               exceptions=exceptions)
+                    valid = compare_fields(str(next(iter(local))),
+                                               str(next(iter(asset))), policy)
                 except ValueError:
                     pass
             if not valid:
