@@ -32,6 +32,7 @@ class MultiContractAutomationManager:
         self.store = VersionedGraphStore() if store is None else store
         self._lock = RLock()
         self.history = []
+        self._last_observed_version = None
         for source_path, binding_path in artifacts:
             bindings = json.loads(Path(binding_path).read_text(encoding="utf-8"))
             ttl, manifest = compile_contract(Path(source_path).read_text(encoding="utf-8"), bindings)
@@ -151,7 +152,16 @@ class MultiContractAutomationManager:
                identity_normalized=False, applicability_confirmed=False,
                coverage_attested=False, policy_unchanged=False, authority_unchanged=False):
         with self._lock:
-            current, version = self.store.snapshot()
+            try:
+                current, version = self.store.snapshot()
+            except Exception as exc:
+                record = {"from_version": self._last_observed_version,
+                          "version": self._last_observed_version, "verdict": "U",
+                          "reason": f"Repository read unresolved: {type(exc).__name__}",
+                          "committed": False, "contracts": {}, "reassessment": None}
+                self.history.append(record)
+                return record
+            self._last_observed_version = version
             reassessment = None
             proposed = Graph()
             proposed += candidate
@@ -200,5 +210,6 @@ class MultiContractAutomationManager:
 
             record = {"from_version": version, "version": new_version, "verdict": verdict.value,
                       "reason": reason, "committed": committed, "contracts": outcomes, "reassessment": reassessment}
+            self._last_observed_version = new_version
             self.history.append(record)
             return record
