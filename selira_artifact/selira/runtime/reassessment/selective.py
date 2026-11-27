@@ -36,6 +36,13 @@ def project(graph, contracts):
     return assigned, index
 
 
+def relevant_dependency_changed(key, old, new, changed):
+    """Include scope entry/exit, projected values and both lookup scopes."""
+    return (old.get(key) != new.get(key)
+            or (key[0], old.get(key)) in changed
+            or (key[0], new.get(key)) in changed)
+
+
 def select(old, oi, new, ni, *, coverage_attested=False,
             policy_unchanged=False, authority_unchanged=False, policy_paths=None):
     universe = old.keys() | new.keys()
@@ -53,9 +60,7 @@ def select(old, oi, new, ni, *, coverage_attested=False,
     for k in universe:
         decision = evaluate_policy(impact, {
             **attestations,
-            "AssignmentChanged": old.get(k) != new.get(k),
-            "PreviousLookupChanged": (k[0], old.get(k)) in changed,
-            "CandidateLookupChanged": (k[0], new.get(k)) in changed,
+            "RelevantDependencyChanged": relevant_dependency_changed(k, old, new, changed),
         })
         selected = evaluate_policy(selection, {**attestations, **decision})
         if selected["Reassess"] == selected["Reuse"]:
