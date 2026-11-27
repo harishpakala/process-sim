@@ -151,7 +151,7 @@ class MultiContractAutomationManager:
     def submit(self, candidate, *, expected_version, evidence_complete=(),
                identity_normalized=False, applicability_confirmed=False,
                coverage_attested=False, policy_unchanged=False, authority_unchanged=False,
-               native_state=None):
+               native_state=None, request_context=None):
         with self._lock:
             try:
                 current, version = self.store.snapshot()
@@ -205,8 +205,16 @@ class MultiContractAutomationManager:
                             committed, new_version = self.store.compare_and_commit(version, proposed)
                         else:
                             documents, parts = native_state
-                            committed, new_version = self.store.compare_and_commit_native(
-                                version, proposed, documents, parts)
+                            if request_context is not None:
+                                source, message_id, fingerprint, make_response = request_context
+                                self.store.set_request_context(source, message_id, fingerprint,
+                                                               make_response(outcomes, version + 1))
+                            try:
+                                committed, new_version = self.store.compare_and_commit_native(
+                                    version, proposed, documents, parts)
+                            finally:
+                                if request_context is not None:
+                                    self.store.clear_request_context()
                         verdict, reason = ((Verdict.V, "Validated and committed") if committed
                                            else (Verdict.U, "Concurrent update; revalidate"))
                     except Exception as exc:
