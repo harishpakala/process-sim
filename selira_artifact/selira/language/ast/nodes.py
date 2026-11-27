@@ -25,6 +25,7 @@ class Specification(ASTNode):
     submodels: List["SubmodelReference"] = field(default_factory=list)
     references: List["SubmodelElementReference"] = field(default_factory=list)
     processes: List["ProcessNode"] = field(default_factory=list)
+    start_terminal: Optional["StartTerminal"] = None
 
 
 
