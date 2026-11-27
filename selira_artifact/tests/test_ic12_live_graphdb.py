@@ -68,7 +68,18 @@ def test_ic12_live_graphdb_lifecycle(tmp_path):
         assert set().union(*(set(g) for g in parts.values())) == set(graph)
         for doc, adapter in registrations:
             key = doc["id"]
-            assert set(parts[str(compute_uri(key))]) == set(adapter.lift_instance(docs[key]))
+            persisted = set(parts[str(compute_uri(key))])
+            lifted = set(adapter.lift_instance(docs[key]))
+            extra, missing = persisted - lifted, lifted - persisted
+            if extra or missing:
+                def describe(triples):
+                    return "\n".join(" ".join(term.n3() for term in triple)
+                                     for triple in sorted(triples, key=lambda t: tuple(x.n3() for x in t))[:5])
+                pytest.fail(f"RDF round-trip mismatch for {key}: "
+                            f"persisted={len(persisted)}, lifted={len(lifted)}, "
+                            f"extra={len(extra)}, missing={len(missing)}\n"
+                            f"Persisted only:\n{describe(extra)}\n"
+                            f"Lifted only:\n{describe(missing)}", pytrace=False)
         return docs, version
 
     update('INSERT DATA { GRAPH <urn:selira:test:unrelated> { <urn:s> <urn:p> "sentinel" } }')
