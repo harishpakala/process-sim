@@ -86,6 +86,55 @@ WHERE {{
                 self._uncertain = True
                 raise
 
+    def native_snapshot(self):
+        """Read native JSON, commit token, version and named RDF in one SELECT."""
+        if not self._native_mode:
+            raise ValueError("Native mode required")
+        with self._lock:
+            query = f"""
+SELECT ?version ?token ?documents ?g ?s ?p ?o WHERE {{
+ GRAPH {self._metadata} {{
+  <urn:selira:repository> <urn:selira:version> ?version ;
+                         <urn:selira:commitToken> ?token .
+ }}
+ GRAPH <urn:selira:repository:native> {{
+  <urn:selira:repository> <urn:selira:documents> ?documents .
+ }}
+ OPTIONAL {{ VALUES ?g {{ {' '.join(self._graphs)} }} GRAPH ?g {{ ?s ?p ?o }} }}
+}}
+"""
+            response = self._session.post(self._endpoint,
+                data={"query": query, "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            response.raise_for_status()
+            rows = response.json()["results"]["bindings"]
+            metadata = set()
+            parts = {g[1:-1]: Graph() for g in self._graphs}
+            for row in rows:
+                v, t, d = (row[k] for k in ("version", "token", "documents"))
+                if (v["type"] != "literal" or v.get("datatype") != str(XSD.integer)
+                    or not re.fullmatch(r"[1-9][0-9]*", v["value"])
+                    or t["type"] != "literal" or not re.fullmatch(r"[0-9a-f]{32}", t["value"])
+                    or d["type"] != "literal"):
+                    raise ValueError("Invalid native snapshot metadata")
+                metadata.add((int(v["value"]), t["value"], d["value"]))
+                present = [k in row for k in ("g", "s", "p", "o")]
+                if any(present):
+                    if not all(present) or row["g"]["value"] not in parts:
+                        raise ValueError("Invalid native graph result")
+                    s, p, o = (_term(row[k]) for k in ("s", "p", "o"))
+                    if not isinstance(s, URIRef) or not isinstance(p, URIRef):
+                        raise ValueError("Invalid native RDF triple")
+                    parts[row["g"]["value"]].add((s, p, o))
+            if len(metadata) != 1:
+                raise ValueError("Missing or inconsistent native snapshot")
+            version, token, payload = metadata.pop()
+            documents = json.loads(payload)
+            if not isinstance(documents, dict) or not documents or any(
+                not isinstance(doc, dict) or key != doc.get("id") for key, doc in documents.items()):
+                raise ValueError("Invalid persisted documents")
+            return documents, parts, version, token
+
     def snapshot(self):
         # One explicit-only SELECT; no default-union or inferred triples.
         query = f"""
