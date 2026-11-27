@@ -80,3 +80,19 @@ def test_unregistered_event():
     initial = context()
     assert PolicyExecutor(ROOT).dispatch("UnregisteredEvent", initial) == (
         initial, ())
+
+
+@pytest.mark.parametrize("backends", [("sparql", "sparql"), ("ast", "sparql"),
+                                      ("sparql", "ast")])
+def test_configured_backends(configured_root, backends):
+    path = configured_root / "registry" / "contract_registry.json"
+    data = json.loads(path.read_text(encoding="utf-8"))
+    for entry, backend in zip(
+            (e for e in data["contracts"] if e["kind"] == "LP"), backends):
+        entry["backend"] = backend
+    path.write_text(json.dumps(data), encoding="utf-8")
+    executor = PolicyExecutor(configured_root)
+    reference = PolicyExecutor(ROOT)
+    for bits in product([False, True], repeat=4):
+        assert executor.dispatch(EVENT, context(*bits)) == reference.dispatch(
+            EVENT, context(*bits))
