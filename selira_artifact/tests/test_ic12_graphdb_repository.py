@@ -303,3 +303,42 @@ def test_ic12_durable_confirmed_commit(tmp_path):
         {"urn:asset": Graph(), "urn:product": Graph()}) == (True, 2)
     assert repository.pending_commit() is None
     repository._journal.close()
+
+
+@pytest.mark.parametrize("case", ["confirmed", "committed", "not_committed"])
+def test_ic12_request_journal(tmp_path, monkeypatch, case):
+    session = WriteSession(fail_write=case != "confirmed")
+    path = tmp_path / "requests.sqlite"
+    def open_repository():
+        return GraphDBRepository("http://graphdb/repositories/AAST",
+            ["urn:asset", "urn:product"], session=session,
+            native_mode=True, journal_path=path)
+    repository = open_repository()
+    docs = {"urn:asset": {"id": "urn:asset"}}
+    parts = {"urn:asset": Graph(), "urn:product": Graph()}
+    response = {"message_id": "M1", "decision": "ACCEPTED", "repository_version": 2}
+    repository.set_request_context("test", "M1", "fingerprint", response)
+    if case == "confirmed":
+        assert repository.compare_and_commit_native(1, Graph(), docs, parts) == (True, 2)
+    else:
+        with pytest.raises(RepositoryUncertain):
+            repository.compare_and_commit_native(1, Graph(), docs, parts)
+    repository.clear_request_context()
+    repository._journal.close()
+    recovered = open_repository()
+    if case != "confirmed":
+        assert recovered.request_outcome("test", "M1", "fingerprint") == {"pending": True}
+        observed = 2 if case == "committed" else 1
+        monkeypatch.setattr(recovered, "snapshot", lambda: (Graph(), observed))
+        monkeypatch.setattr(recovered, "native_snapshot",
+            lambda: (docs, parts, observed, session.token))
+        assert recovered.reconcile_pending(remote_quiescent=True) == case.upper()
+    if case == "not_committed":
+        assert recovered.request_outcome("test", "M1", "fingerprint") is None
+    else:
+        assert recovered.request_outcome("test", "M1", "fingerprint") == response
+        with pytest.raises(ValueError, match="Conflicting"):
+            recovered.request_outcome("test", "M1", "different")
+    assert recovered.request_outcome("other", "M1", "different") is None
+    assert len(session.updates) == 1
+    recovered._journal.close()
