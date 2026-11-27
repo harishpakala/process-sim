@@ -14,7 +14,7 @@ from process_sim.safsl.shacl.compiler import compile_files
     ("urn:example:original:", "SC_01"),
     ("https://example.net/renamed/", "RenamedRule"),
 ])
-@pytest.mark.parametrize("kind", ["reference", "identifier"])
+@pytest.mark.parametrize("kind", ["reference", "identifier", "lexical"])
 def test_export_equivalence(tmp_path, namespace, contract, kind):
     ns = Namespace(namespace)
     encode = lambda value: base64.b64encode(str(value).encode()).decode()
@@ -28,9 +28,9 @@ def test_export_equivalence(tmp_path, namespace, contract, kind):
             "lexical_match": True,
         },
     }
-    if kind == "identifier":
+    if kind != "reference":
         templates[str(ns.SourceTemplate)]["comparison_policy"] = {
-            "kind": "normalized_asset_identifier", "exceptions": []}
+            "kind": "lexical_equality" if kind == "lexical" else "normalized_asset_identifier", "exceptions": []}
         rule = "matches(s.Left, s.Right);"
     else:
         rule = "existsExactlyOne t in targets where matches(s.Left, t.Key);"
@@ -53,18 +53,20 @@ def test_export_equivalence(tmp_path, namespace, contract, kind):
     values = [(), ("A",), ("B",), ("A", "B")]
     assets = [(), ("https://assets.example/A",), ("https://assets.example/B",),
               ("https://assets.example/A", "https://assets.example/B")]
-    cases = itertools.product(values, assets) if kind == "identifier" else itertools.product(values, values, values)
+    cases = (itertools.product(values, values) if kind == "lexical" else
+             itertools.product(values, assets) if kind == "identifier" else
+             itertools.product(values, values, values))
     for case in cases:
         graph = Graph()
         graph.add((ns.focus, RDF.type, ns.Source))
         for value in case[0]:
             graph.add((ns.focus, ns.left, Literal(value)))
-        if kind == "identifier":
+        if kind != "reference":
             for value in case[1]:
                 graph.add((ns.focus, ns.right, Literal(value)))
             expected = bool(case[1]) and not (
                 len(case[0]) == len(case[1]) == 1
-                and case[0][0] == case[1][0].rsplit("/", 1)[-1])
+                and case[0][0] == (case[1][0] if kind == "lexical" else case[1][0].rsplit("/", 1)[-1]))
         else:
             for node, keys in zip((ns.target1, ns.target2), case[1:]):
                 graph.add((node, RDF.type, ns.Target))
