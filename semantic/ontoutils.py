@@ -841,8 +841,9 @@ def push_graph_to_graphdb(
     """
 
     # Publication guard only: lifting remains independent of governance.
-    governed = {str(compute_uri("https://example.org/sm/tep-" + domain + "-instance"))
-                for domain in ("asset-inventory", "product-catalog")}
+    governed = {str(compute_uri(identifier)) for identifier in (
+        "https://example.org/sm/tep-asset-inventory",
+        "https://example.org/sm/tep-product-catalog-instance")}
     if str(graph_uri) in governed:
         endpoint = get_graphdb_repository_url()
         check = requests.post(endpoint,
