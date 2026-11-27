@@ -22,6 +22,11 @@ def build_service(endpoint, journal, *, mode, evidence_file):
                      if domain in ("assetinventory", "productcatalog")]
     if len(registrations) != 2:
         raise ValueError("Expected SC-01 registrations")
+    if mode == "inspect":
+        store = GraphDBRepository(endpoint, [str(compute_uri(d["id"])) for d, _ in registrations],
+                                  native_mode=True)
+        return store.inspect_adoption({str(compute_uri(d["id"])): a.lift_instance(d)
+                                       for d, a in registrations})
     journal = Path(journal).resolve()
     if mode == "recover" and not journal.is_file():
         raise ValueError("Recovery requires the original persistent journal")
@@ -63,11 +68,14 @@ def main():
     parser.add_argument("--endpoint", required=True)
     parser.add_argument("--journal", required=True)
     parser.add_argument("--evidence-file", required=True)
-    parser.add_argument("--mode", choices=["initialize", "recover"], required=True)
+    parser.add_argument("--mode", choices=["inspect", "initialize", "recover"], required=True)
     parser.add_argument("--port", type=int, default=8002)
     parser.add_argument("--exclusive-writer", action="store_true", required=True)
     args = parser.parse_args()
     app = build_service(args.endpoint, args.journal, mode=args.mode, evidence_file=args.evidence_file)
+    if args.mode == 'inspect':
+        print(json.dumps(app, indent=2))
+        return
     uvicorn.run(app, host="127.0.0.1", port=args.port, workers=1)
 
 
