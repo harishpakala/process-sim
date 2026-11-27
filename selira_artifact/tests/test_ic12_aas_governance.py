@@ -239,3 +239,48 @@ def test_ic12_restart_recovery(service, monkeypatch, case):
     else:
         with pytest.raises(ValueError):
             restart()
+
+
+@pytest.mark.parametrize("case", ["confirmed", "pending"])
+def test_ic12_request_replay(service, monkeypatch, case):
+    from selira.runtime.graphdb_repository import RepositoryUncertain
+    coordinator, _ = service
+    store = coordinator._manager.store
+    original = store.compare_and_commit
+    records = {}
+    context = []
+    calls = []
+    def lookup(source, message_id, fingerprint):
+        row = records.get((source, message_id))
+        if row is None:
+            return None
+        if row[0] != fingerprint:
+            raise ValueError("Conflicting message ID reuse")
+        return row[1]
+    def set_context(*args):
+        context[:] = args
+    def native_commit(expected, graph, documents, parts):
+        calls.append(expected)
+        source, message_id, fingerprint, response = context
+        records[(source, message_id)] = (
+            fingerprint, response if case == "confirmed" else {"pending": True})
+        if case == "pending":
+            raise RepositoryUncertain("Interrupted")
+        return original(expected, graph)
+    monkeypatch.setattr(store, "request_outcome", lookup, raising=False)
+    monkeypatch.setattr(store, "set_request_context", set_context, raising=False)
+    monkeypatch.setattr(store, "clear_request_context", context.clear, raising=False)
+    monkeypatch.setattr(store, "compare_and_commit_native", native_commit, raising=False)
+    change = request(coordinator)
+    conflicting = request(coordinator, value="Different value")
+    first = coordinator.submit(change)
+    second = coordinator.submit(change)
+    assert first.decision == second.decision == (
+        "ACCEPTED" if case == "confirmed" else "DEFERRED")
+    if case == "confirmed":
+        assert first == second
+    assert len(calls) == 1
+    assert not context
+    with pytest.raises(ValueError, match="Conflicting"):
+        coordinator.submit(conflicting)
+    assert len(calls) == 1
