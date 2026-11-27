@@ -297,6 +297,61 @@ def compile_contract(source: str, bindings: Mapping):
     return graph.serialize(format="turtle"), manifest
 
 
+
+def export_sparql(ttl: str, manifest: Mapping, output_dir):
+    """Export exact SHACL queries and standalone violation queries.
+
+    Standalone export supports the compiler's current target and constraint
+    fragment, including minCount/maxCount property constraints.
+    """
+    graph = Graph().parse(data=ttl, format="turtle")
+    root = Path(output_dir)
+    for entry in manifest["contracts"]:
+        shape = URIRef(entry["shape"])
+        name = entry["id"].replace("_", "-")
+        targets = []
+        for predicate in graph.objects(shape, SH.targetSubjectsOf):
+            targets.append(f"?this {predicate.n3()} ?targetValue .")
+        for cls in graph.objects(shape, SH.targetClass):
+            targets.append(f"?this <{RDF.type}>/<http://www.w3.org/2000/01/rdf-schema#subClassOf>* {cls.n3()} .")
+        if not targets:
+            raise CompilationError("SPARQL export requires an explicit supported target")
+        target = " UNION ".join("{ " + t + " }" for t in targets)
+        queries = sorted(str(q) for constraint in graph.objects(shape, SH.sparql)
+                         for q in graph.objects(constraint, SH.select))
+        branches = []
+        for index, query in enumerate(queries, 1):
+            suffix = "" if len(queries) == 1 else f"-{index}"
+            out = root / "shacl"
+            out.mkdir(parents=True, exist_ok=True)
+            (out / f"{name}{suffix}.rq").write_text(query + "\n", encoding="utf-8")
+            header = "SELECT $this WHERE {"
+            if not query.startswith(header) or not query.rstrip().endswith("}"):
+                raise CompilationError("Unsupported generated SPARQL query structure")
+            body = query[len(header):].rstrip()[:-1]
+            branches.append("{ " + body + " }")
+        for prop in graph.objects(shape, SH.property):
+            predicate = graph.value(prop, SH.path)
+            if not isinstance(predicate, URIRef):
+                raise CompilationError("Unsupported property path for SPARQL export")
+            minimum = graph.value(prop, SH.minCount)
+            maximum = graph.value(prop, SH.maxCount)
+            if minimum is not None:
+                branches.append("{ FILTER NOT EXISTS { SELECT ?this WHERE { ?this "
+                    + predicate.n3() + " ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) >= "
+                    + str(int(minimum)) + ") } }" if int(minimum) > 0 else "{ FILTER(false) }")
+            if maximum is not None:
+                branches.append("{ { SELECT ?this WHERE { ?this " + predicate.n3()
+                    + " ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) > "
+                    + str(int(maximum)) + ") } }")
+        if not branches:
+            raise CompilationError("No supported constraints to export")
+        standalone = "SELECT DISTINCT ?this WHERE {\n  { " + target + " }\n  {\n    " + "\n    UNION ".join(branches) + "\n  }\n}\n"
+        out = root / "standalone"
+        out.mkdir(parents=True, exist_ok=True)
+        (out / f"{name}.rq").write_text(standalone, encoding="utf-8")
+
+
 def compile_files(source_path, bindings_path, output_dir):
     source = Path(source_path).read_text(encoding="utf-8")
     bindings = json.loads(Path(bindings_path).read_text(encoding="utf-8"))
@@ -305,6 +360,7 @@ def compile_files(source_path, bindings_path, output_dir):
     out.mkdir(parents=True, exist_ok=True)
     (out / "integrity_shapes.ttl").write_text(ttl, encoding="utf-8")
     (out / "contract_manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
+    export_sparql(ttl, manifest, out / "sparql")
     return manifest
 
 
