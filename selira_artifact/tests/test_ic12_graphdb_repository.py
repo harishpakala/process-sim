@@ -254,3 +254,52 @@ def test_ic12_native_snapshot(case):
     else:
         with pytest.raises(ValueError):
             repository.native_snapshot()
+
+
+@pytest.mark.parametrize("case", ["committed", "not_committed", "wrong_token", "wrong_version"])
+def test_ic12_durable_reconciliation(tmp_path, monkeypatch, case):
+    path = tmp_path / "pending.sqlite"
+    session = WriteSession(fail_write=True)
+    def open_repository():
+        return GraphDBRepository("http://graphdb/repositories/AAST",
+            ["urn:asset", "urn:product"], session=session,
+            native_mode=True, journal_path=path)
+    repository = open_repository()
+    docs = {"urn:asset": {"id": "urn:asset"}}
+    parts = {"urn:asset": Graph(), "urn:product": Graph()}
+    with pytest.raises(RepositoryUncertain):
+        repository.compare_and_commit_native(1, Graph(), docs, parts)
+    token, version_before = repository.pending_commit()
+    assert token == session.token and version_before == 1
+    repository._journal.close()
+    recovered = open_repository()
+    assert recovered.pending_commit() == (token, 1)
+    with pytest.raises(RepositoryUncertain):
+        recovered.compare_and_commit_native(1, Graph(), docs, parts)
+    with pytest.raises(RepositoryUncertain):
+        recovered.reconcile_pending()
+    observed = 1 if case == "not_committed" else 3 if case == "wrong_version" else 2
+    monkeypatch.setattr(recovered, "snapshot", lambda: (Graph(), observed))
+    monkeypatch.setattr(recovered, "native_snapshot",
+        lambda: (docs, parts, observed, "b" * 32 if case == "wrong_token" else token))
+    if case in ("committed", "not_committed"):
+        assert recovered.reconcile_pending(remote_quiescent=True) == case.upper()
+        assert recovered.pending_commit() is None
+    else:
+        with pytest.raises(RepositoryUncertain):
+            recovered.reconcile_pending(remote_quiescent=True)
+        assert recovered.pending_commit() == (token, 1)
+    assert len(session.updates) == 1
+    recovered._journal.close()
+
+
+def test_ic12_durable_confirmed_commit(tmp_path):
+    session = WriteSession()
+    repository = GraphDBRepository("http://graphdb/repositories/AAST",
+        ["urn:asset", "urn:product"], session=session,
+        native_mode=True, journal_path=tmp_path / "pending.sqlite")
+    assert repository.compare_and_commit_native(1, Graph(),
+        {"urn:asset": {"id": "urn:asset"}},
+        {"urn:asset": Graph(), "urn:product": Graph()}) == (True, 2)
+    assert repository.pending_commit() is None
+    repository._journal.close()
