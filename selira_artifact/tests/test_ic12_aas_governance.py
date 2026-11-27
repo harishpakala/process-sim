@@ -145,3 +145,59 @@ def test_ic12_governance_external_version_change(service):
     assert coordinator.submit(change).decision == "DEFERRED"
     with pytest.raises(RuntimeError, match="reconciliation"):
         coordinator.snapshot()
+
+
+@pytest.mark.parametrize("case,decision", [
+    ("valid", "ACCEPTED"), ("invalid", "REJECTED"),
+    ("evidence", "DEFERRED"), ("stale", "DEFERRED"),
+    ("uncertain", "DEFERRED")])
+def test_ic12_native_governance_commit_gate(service, monkeypatch, case, decision):
+    from semantic.ontoutils import compute_uri
+    from selira.runtime.graphdb_repository import RepositoryUncertain
+    coordinator, enabled = service
+    store = coordinator._manager.store
+    original_commit = store.compare_and_commit
+    before, _, version = coordinator.snapshot()
+    calls = []
+
+    def native_commit(expected, graph, documents, parts):
+        calls.append((expected, graph, documents, parts))
+        assert expected == version
+        assert set(parts) == {str(compute_uri(key)) for key in documents}
+        assert set().union(*(set(g) for g in parts.values())) == set(graph)
+        for key, document in documents.items():
+            assert set(parts[str(compute_uri(key))]) == set(
+                coordinator._adapters[key].lift_instance(document))
+        if case == "uncertain":
+            raise RepositoryUncertain("Unconfirmed")
+        return original_commit(expected, graph)
+
+    def forbidden(*args):
+        pytest.fail("RDF-only commit bypassed native path")
+
+    monkeypatch.setattr(store, "compare_and_commit_native", native_commit, raising=False)
+    monkeypatch.setattr(store, "compare_and_commit", forbidden)
+    if case == "invalid":
+        change = request(coordinator, field="ProductIdentifier",
+                         value="urn:nonexistent:product", asset="TEP_XMEAS1")
+    elif case == "stale":
+        change = request(coordinator, version=0)
+    else:
+        change = request(coordinator)
+    if case == "evidence":
+        enabled[0] = False
+    result = coordinator.submit(change)
+    assert result.decision == decision
+    assert len(calls) == int(case in ("valid", "uncertain"))
+    if case == "valid":
+        docs, graph, new_version = coordinator.snapshot()
+        assert docs == calls[0][2] and docs != before
+        assert set(graph) == set(calls[0][1])
+        assert new_version == version + 1
+    elif case == "uncertain":
+        assert [r.verdict for r in result.evaluated_contracts] == ["V"]
+        assert coordinator.submit(change).decision == "DEFERRED"
+        assert len(calls) == 1
+    else:
+        assert coordinator.snapshot()[0] == before
+        assert coordinator.snapshot()[2] == version
