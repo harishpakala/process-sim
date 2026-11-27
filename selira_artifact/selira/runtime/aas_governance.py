@@ -51,6 +51,9 @@ class AASGovernance:
         Caller must ensure exclusive ownership and no outstanding remote update.
         No write or version increment is performed.
         """
+        pending = getattr(self._manager.store, "pending_commit", None)
+        if pending is not None and pending() is not None:
+            raise RuntimeError("Pending commit requires reconciliation before recovery")
         documents, parts, version, token = self._manager.store.native_snapshot()
         if set(documents) != set(self._adapters):
             raise ValueError("Persisted registration mismatch")
