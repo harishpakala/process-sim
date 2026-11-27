@@ -24,7 +24,19 @@ MAX_RESPONSE = 8_000_000
 
 
 class Handler(BaseHTTPRequestHandler):
+    governance = None
+
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/governance/state":
+            if self.governance is None:
+                self.send_json(503, {"error": "Governance disabled"})
+                return
+            try:
+                docs, _, version = self.governance.snapshot()
+                self.send_json(200, {"version": version, "documents": list(docs.values())})
+            except Exception:
+                self.send_json(503, {"error": "Governance unavailable; check reconciliation status"})
+            return
         if urlsplit(self.path).path == "/api/ai/shacl/benchmark/questions":
             try:
                 from pathlib import Path
@@ -348,6 +360,25 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/governance/change":
+            if self.governance is None:
+                self.send_json(503, {"error": "Governance disabled"})
+                return
+            try:
+                from selira.runtime.aas_messages import AASChangeRequest
+                if self.headers.get("Content-Type", "").split(";")[0] != "application/json":
+                    raise ValueError("JSON required")
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= MAX_BODY:
+                    raise ValueError("Invalid request size")
+                change = AASChangeRequest.model_validate_json(self.rfile.read(length))
+                result = self.governance.submit(change)
+                self.send_json(200, result.model_dump(mode="json"))
+            except ValueError as exc:
+                self.send_json(422, {"error": str(exc)})
+            except Exception:
+                self.send_json(503, {"error": "Outcome unconfirmed; do not retry automatically"})
+            return
         if urlsplit(self.path).path == "/api/ai/vtkg/semantic/answer":
             try:
                 from process_sim.api.vtkg_query import run_semantic_join_question
@@ -740,6 +771,12 @@ class Handler(BaseHTTPRequestHandler):
 def main():
     host = os.environ.get("PROCESS_SIM_API_HOST", "127.0.0.1")
     port = int(os.environ.get("PROCESS_SIM_API_PORT", "8000"))
+    if os.getenv("TEP_SELIRA_ENABLED") == "1":
+        if host != "127.0.0.1" or os.getenv("TEP_SELIRA_EXCLUSIVE_WRITER") != "1":
+            raise RuntimeError("Embedded governance requires loopback and exclusive writer confirmation")
+        from selira.runtime.governance_server import build_service
+        Handler.governance = build_service(GRAPHDB_ENDPOINT, os.environ["TEP_SELIRA_JOURNAL"],
+            mode="recover", evidence_file=os.environ["TEP_SELIRA_EVIDENCE"], embedded=True)
     from process_sim.api.historian import start, stop
     start()
     from process_sim.api.graph_sync import start as start_graph_sync
