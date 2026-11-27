@@ -48,7 +48,7 @@ def test_export_equivalence(tmp_path, namespace, contract, kind):
     shapes = Graph().parse(out / "integrity_shapes.ttl", format="turtle")
     name = contract.replace("_", "-")
     exact = (out / "sparql/shacl" / (name + ".rq")).read_text()
-    assert exact.strip() == str(next(shapes.objects(None, SH.select))).strip()
+    assert exact.strip().splitlines() == str(next(shapes.objects(None, SH.select))).strip().splitlines()
     query = (out / "sparql/standalone" / (name + ".rq")).read_text()
     values = [(), ("A",), ("B",), ("A", "B")]
     assets = [(), ("https://assets.example/A",), ("https://assets.example/B",),
