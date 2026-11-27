@@ -2,6 +2,8 @@
 import json
 from pathlib import Path
 
+from selira.compiler.policy_sparql import compile_policy, execute_compiled
+
 from .contract_registry import load_registry
 from .event_dispatcher import EventDispatcher
 from .policy_evaluator import load_policy, evaluate_policy
@@ -21,12 +23,14 @@ class PolicyExecutor:
             binding = json.loads((root / entry["binding"]).read_text(
                 encoding="utf-8"))
             validate_binding(process, binding)
-            self._policies[entry["id"]] = (process, binding)
+            compiled = compile_policy(process) if entry["backend"] == "sparql" else None
+            self._policies[entry["id"]] = (process, binding, compiled)
 
     def _execute(self, entry, context):
-        process, binding = self._policies[entry["id"]]
+        process, binding, compiled = self._policies[entry["id"]]
         inputs = resolve_inputs(process, binding, context)
-        outputs = evaluate_policy(process, inputs)
+        outputs = (execute_compiled(compiled, inputs) if compiled is not None
+                   else evaluate_policy(process, inputs))
         return bind_outputs(process, binding, outputs)
 
     def dispatch(self, event, context):
