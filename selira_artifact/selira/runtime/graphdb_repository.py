@@ -32,6 +32,60 @@ class GraphDBRepository:
         if not self._graphs or self._metadata in self._graphs:
             raise ValueError("Expected nonempty governed graphs distinct from metadata")
 
+    def initialize_empty(self):
+        """Explicit bootstrap only; requires exclusive writer and empty governed scope.
+
+        Never adopts or clears existing instance graphs. A failed request must
+        be investigated before startup continues.
+        """
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Repository requires reconciliation")
+            native = "<urn:selira:repository:native>"
+            if native in self._graphs or native == self._metadata:
+                raise ValueError("Native graph must be reserved")
+            scopes = " ".join((*self._graphs, self._metadata, native))
+            query = f"""
+INSERT {{ GRAPH {self._metadata} {{
+ <urn:selira:repository> <urn:selira:version> "0"^^<http://www.w3.org/2001/XMLSchema#integer> .
+}} }}
+WHERE {{
+ FILTER NOT EXISTS {{
+  VALUES ?g {{ {scopes} }}
+  GRAPH ?g {{ ?s ?p ?o }}
+ }}
+}}
+"""
+            try:
+                response = self._session.post(
+                    self._endpoint + "/statements", data=query.encode("utf-8"),
+                    headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                graph, version = self.snapshot()
+                if version != 0 or len(graph):
+                    raise ValueError("Repository is not an empty bootstrap state")
+                # Verify that no native data or unexpected metadata exists.
+                check = self._session.post(
+                    self._endpoint,
+                    data={"query": f"""ASK {{
+ {{ GRAPH {native} {{ ?s ?p ?o }} }}
+ UNION
+ {{ GRAPH {self._metadata} {{ ?s ?p ?o }}
+ FILTER(!(sameTerm(?s, <urn:selira:repository>) &&
+ sameTerm(?p, <urn:selira:version>) &&
+ sameTerm(?o, "0"^^<http://www.w3.org/2001/XMLSchema#integer>))) }}
+}}""", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"},
+                    timeout=self._timeout)
+                check.raise_for_status()
+                if check.json().get("boolean") is not False:
+                    raise ValueError("Unexpected bootstrap metadata or native state")
+                return 0
+            except Exception:
+                self._uncertain = True
+                raise
+
     def snapshot(self):
         # One explicit-only SELECT; no default-union or inferred triples.
         query = f"""
