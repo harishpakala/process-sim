@@ -84,6 +84,23 @@ class GraphDBRepository:
             if not remote_quiescent:
                 raise RepositoryUncertain("Remote update may still execute")
             token, version = pending
+            if version == -1:
+                check = self._session.post(self._endpoint,
+                    data={"query": f"ASK {{ VALUES ?g {{ {self._metadata} <urn:selira:repository:native> }} GRAPH ?g {{ ?s ?p ?o }} }}", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+                check.raise_for_status()
+                if not check.json()["boolean"]:
+                    with self._journal:
+                        self._journal.execute("DELETE FROM pending WHERE slot=1")
+                    self._uncertain = False
+                    return "NOT_COMMITTED"
+                _, _, observed, actual_token = self.native_snapshot()
+                if observed != 1 or actual_token != token:
+                    raise RepositoryUncertain("Adoption identity mismatch")
+                with self._journal:
+                    self._journal.execute("DELETE FROM pending WHERE slot=1")
+                self._uncertain = False
+                return "COMMITTED"
             _, observed = self.snapshot()
             if observed == version:
                 status = "NOT_COMMITTED"
@@ -135,6 +152,43 @@ class GraphDBRepository:
             return {"graphs": differences, "reserved_metadata_present": reserved,
                     "eligible": not reserved and all(not d["extra"] and not d["missing"]
                                                      for d in differences.values())}
+
+    def adopt_qualified(self, documents, parts):
+        """Metadata-only adoption of a caller-qualified state; exclusive writer required."""
+        with self._lock:
+            if not self._native_mode or self._journal is None or self._uncertain:
+                raise ValueError("Adoption requires native mode and a clear durable journal")
+            if not documents or any(k != d.get("id") for k,d in documents.items()):
+                raise ValueError("Invalid native documents")
+            if not self.inspect_adoption(parts)["eligible"]:
+                raise ValueError("Existing RDF or reserved metadata mismatch")
+            token = uuid4().hex
+            payload = Literal(json.dumps(documents, ensure_ascii=False, sort_keys=True, allow_nan=False)).n3()
+            native = "<urn:selira:repository:native>"
+            query = f"""INSERT {{
+                GRAPH {self._metadata} {{ <urn:selira:repository> <urn:selira:version> {Literal(1, datatype=XSD.integer).n3()} ;
+                    <urn:selira:commitToken> "{token}" . }}
+                GRAPH {native} {{ <urn:selira:repository> <urn:selira:documents> {payload} . }}
+            }} WHERE {{ FILTER NOT EXISTS {{
+                VALUES ?g {{ {self._metadata} {native} }} GRAPH ?g {{ ?s ?p ?o }}
+            }} }}"""
+            with self._journal:
+                self._journal.execute("INSERT INTO pending VALUES (1, ?, -1)", (token,))
+            try:
+                response = self._session.post(self._endpoint + "/statements",
+                    data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                saved, actual, version, observed_token = self.native_snapshot()
+                if (version != 1 or observed_token != token or saved != documents
+                        or set(actual) != set(parts) or any(rdf11_triples(actual[k]) != rdf11_triples(parts[k]) for k in parts)):
+                    raise RepositoryUncertain("Adoption confirmation mismatch")
+                with self._journal:
+                    self._journal.execute("DELETE FROM pending WHERE slot=1")
+                return version
+            except Exception as exc:
+                self._uncertain = True
+                raise RepositoryUncertain("Adoption outcome unresolved") from exc
 
     def initialize_empty(self):
         """Explicit bootstrap only; requires exclusive writer and empty governed scope.
