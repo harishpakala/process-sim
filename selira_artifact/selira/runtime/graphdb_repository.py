@@ -23,9 +23,11 @@ class GraphDBRepository:
         self._lock = RLock()
         self._uncertain = False
         self._journal = None
+        self._request = None
         if journal_path is not None:
             self._journal = sqlite3.connect(str(journal_path), check_same_thread=False)
             self._journal.execute('CREATE TABLE IF NOT EXISTS pending (slot INTEGER PRIMARY KEY CHECK(slot=1), token TEXT NOT NULL, version INTEGER NOT NULL)')
+            self._journal.execute("CREATE TABLE IF NOT EXISTS requests (source TEXT, message_id TEXT, fingerprint TEXT NOT NULL, response TEXT NOT NULL, token TEXT NOT NULL, PRIMARY KEY(source,message_id))")
             self._journal.commit()
             self._uncertain = self._journal.execute('SELECT 1 FROM pending').fetchone() is not None
         if session is None:
@@ -38,6 +40,28 @@ class GraphDBRepository:
         self._metadata = _iri(metadata_graph)
         if not self._graphs or self._metadata in self._graphs:
             raise ValueError("Expected nonempty governed graphs distinct from metadata")
+
+    def request_outcome(self, source, message_id, fingerprint):
+        with self._lock:
+            if self._journal is None:
+                return None
+            row = self._journal.execute(
+                "SELECT fingerprint,response,token FROM requests WHERE source=? AND message_id=?",
+                (source, message_id)).fetchone()
+            if row is None:
+                return None
+            if row[0] != fingerprint:
+                raise ValueError("Conflicting message ID reuse")
+            if row[2]:
+                return {"pending": True}
+            return json.loads(row[1])
+
+    def set_request_context(self, source, message_id, fingerprint, response):
+        # Exclusive coordinator owns this context until its submit returns.
+        self._request = (source, message_id, fingerprint, response)
+
+    def clear_request_context(self):
+        self._request = None
 
     def pending_commit(self):
         with self._lock:
@@ -68,8 +92,12 @@ class GraphDBRepository:
                 status = "COMMITTED"
             else:
                 raise RepositoryUncertain("Unexpected repository version")
-            self._journal.execute("DELETE FROM pending WHERE slot=1")
-            self._journal.commit()
+            with self._journal:
+                if status == "NOT_COMMITTED":
+                    self._journal.execute("DELETE FROM requests WHERE token=?", (token,))
+                else:
+                    self._journal.execute("UPDATE requests SET token='' WHERE token=?", (token,))
+                self._journal.execute("DELETE FROM pending WHERE slot=1")
             self._uncertain = False
             return status
 
@@ -284,6 +312,10 @@ WHERE {{
                     raise ValueError("Durable journal requires native mode")
                 with self._journal:
                     self._journal.execute("INSERT INTO pending VALUES (1, ?, ?)", (token, version))
+                    if self._request is not None:
+                        source, message_id, fingerprint, response = self._request
+                        self._journal.execute("INSERT INTO requests VALUES (?,?,?,?,?)",
+                            (source, message_id, fingerprint, json.dumps(response), token))
             try:
                 response = self._session.post(self._endpoint + "/statements",
                     data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
@@ -297,6 +329,7 @@ WHERE {{
                 if len(rows) == 1 and rows[0]["token"]["value"] == token:
                     if self._journal is not None:
                         with self._journal:
+                            self._journal.execute("UPDATE requests SET token='' WHERE token=?", (token,))
                             self._journal.execute("DELETE FROM pending WHERE slot=1")
                     return True, version + 1
                 raise RepositoryUncertain("Commit token not confirmed")
