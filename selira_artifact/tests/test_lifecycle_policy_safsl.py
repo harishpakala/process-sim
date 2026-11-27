@@ -43,8 +43,9 @@ def evaluate_policy(policy, inputs):
 @pytest.mark.parametrize("bits", list(product([False, True], repeat=6)))
 def test_lp03_boolean_decision(bits):
     coverage, policy, authority, assignment, previous, candidate = bits
-    inputs = dict(zip(("CoverageAttested", "PolicyUnchanged", "AuthorityUnchanged",
-                       "AssignmentChanged", "PreviousLookupChanged", "CandidateLookupChanged"), bits))
+    inputs = dict(CoverageAttested=coverage, PolicyUnchanged=policy,
+                  AuthorityUnchanged=authority,
+                  RelevantDependencyChanged=assignment or previous or candidate)
     # Reference decision from multi_contract.compare.
     expected = not (coverage and policy and authority) or assignment or previous or candidate
     assert evaluate_policy("LP-03", inputs) == {"Affected": expected}
