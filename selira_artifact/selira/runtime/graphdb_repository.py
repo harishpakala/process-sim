@@ -16,7 +16,8 @@ def _iri(value):
 
 class GraphDBRepository:
     def __init__(self, endpoint, graph_iris, *, metadata_graph="urn:selira:repository:metadata",
-                 session=None, timeout=60, partition=None):
+                 session=None, timeout=60, partition=None, native_mode=False):
+        self._native_mode = native_mode
         self._partition = partition
         self._lock = RLock()
         self._uncertain = False
@@ -71,9 +72,13 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
         return graph, versions.pop()
 
     def compare_and_commit(self, expected_version, graph):
+        if self._native_mode:
+            raise ValueError('RDF-only writes disabled in native mode')
         return self._commit(expected_version, graph)
 
     def compare_and_commit_native(self, expected_version, graph, documents, parts):
+        if not self._native_mode:
+            raise ValueError('Native mode required')
         if not documents or any(key != doc.get('id') for key, doc in documents.items()):
             raise ValueError('Invalid native document identities')
         native = Literal(json.dumps(documents, ensure_ascii=True, sort_keys=True, allow_nan=False))
