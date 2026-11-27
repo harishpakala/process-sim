@@ -81,3 +81,72 @@ def test_ic12_graphdb_invalid_scope(graphs):
 def test_ic12_graphdb_read_only():
     with pytest.raises(NotImplementedError):
         repo(Session([])).compare_and_commit(0, None)
+
+
+from rdflib import Graph
+from selira.runtime.graphdb_repository import RepositoryUncertain
+
+
+class WriteSession(Session):
+    def __init__(self, *, confirm=True, fail_write=False):
+        super().__init__([{"version": version()}])
+        self.confirm = confirm
+        self.fail_write = fail_write
+        self.updates = []
+
+    def post(self, endpoint, **kwargs):
+        import re
+        if endpoint.endswith("/statements"):
+            query = kwargs["data"].decode()
+            self.updates.append(query)
+            self.token = re.search(r'<urn:selira:commitToken> "([0-9a-f]+)"', query)[1]
+            if self.fail_write:
+                raise RuntimeError("Lost connection")
+        elif "SELECT ?token" in kwargs["data"]["query"]:
+            self.rows = [{"token": {"type": "literal",
+                          "value": self.token if self.confirm else "other"}}]
+        return super().post(endpoint, **kwargs)
+
+
+def writable(session):
+    return GraphDBRepository("http://graphdb/repositories/AAST",
+                             ["urn:asset", "urn:product"], session=session,
+                             partition=lambda g: {"urn:asset": g, "urn:product": Graph()})
+
+
+def test_ic12_graphdb_confirmed_write():
+    session = WriteSession()
+    graph = Graph()
+    graph.add((URIRef("urn:s"), URIRef("urn:p"), Literal("new")))
+    assert writable(session).compare_and_commit(1, graph) == (True, 2)
+    query, = session.updates
+    assert "DELETE" in query and "INSERT" in query
+    assert 'GRAPH <urn:asset>' in query and 'GRAPH <urn:product>' in query
+    assert '<urn:s> <urn:p> "new"' in query
+    assert "FILTER NOT EXISTS" in query
+
+
+def test_ic12_graphdb_stale_write():
+    session = WriteSession()
+    assert writable(session).compare_and_commit(0, Graph()) == (False, 1)
+    assert not session.updates
+
+
+@pytest.mark.parametrize("options", [{"confirm": False}, {"fail_write": True}])
+def test_ic12_graphdb_uncertain_write(options):
+    session = WriteSession(**options)
+    repository = writable(session)
+    with pytest.raises(RepositoryUncertain):
+        repository.compare_and_commit(1, Graph())
+    with pytest.raises(RepositoryUncertain):
+        repository.compare_and_commit(1, Graph())
+    assert len(session.updates) == 1
+
+
+def test_ic12_graphdb_invalid_partition():
+    session = WriteSession()
+    repository = GraphDBRepository("http://graphdb/repositories/AAST",
+        ["urn:asset"], session=session, partition=lambda g: {"urn:other": g})
+    with pytest.raises(ValueError):
+        repository.compare_and_commit(1, Graph())
+    assert not session.updates
