@@ -329,7 +329,7 @@ def export_sparql(ttl: str, manifest: Mapping, output_dir):
             if not query.startswith(header) or not query.rstrip().endswith("}"):
                 raise CompilationError("Unsupported generated SPARQL query structure")
             body = query[len(header):].rstrip()[:-1]
-            branches.append("{ " + body + " }")
+            branches.append("{ { " + target + " } " + body + " }")
         for prop in graph.objects(shape, SH.property):
             predicate = graph.value(prop, SH.path)
             if not isinstance(predicate, URIRef):
@@ -337,7 +337,7 @@ def export_sparql(ttl: str, manifest: Mapping, output_dir):
             minimum = graph.value(prop, SH.minCount)
             maximum = graph.value(prop, SH.maxCount)
             if minimum is not None:
-                branches.append("{ FILTER NOT EXISTS { SELECT ?this WHERE { ?this "
+                branches.append("{ { " + target + " } FILTER NOT EXISTS { SELECT ?this WHERE { ?this "
                     + predicate.n3() + " ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) >= "
                     + str(int(minimum)) + ") } }" if int(minimum) > 0 else "{ FILTER(false) }")
             if maximum is not None:
