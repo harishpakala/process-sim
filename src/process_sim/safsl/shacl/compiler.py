@@ -146,8 +146,10 @@ def _compile_match(graph, spec, contract, aliases):
     except (KeyError, TypeError) as exc:
         raise CompilationError(f"Unresolved match binding: {exc}") from exc
     policy = focus.get("comparison_policy", {})
-    if policy.get("kind") != "normalized_asset_identifier":
-        raise CompilationError("Standalone matches requires normalized_asset_identifier policy")
+    if policy.get("kind") not in ("normalized_asset_identifier", "lexical_equality"):
+        raise CompilationError("Unsupported standalone comparison policy")
+    if policy["kind"] == "lexical_equality" and policy.get("exceptions"):
+        raise CompilationError("Lexical equality does not support exceptions")
     exceptions = policy.get("exceptions", [])
     from .identifier_comparison import identifier_matches
     clauses = []
@@ -168,6 +170,8 @@ def _compile_match(graph, spec, contract, aliases):
         && STRLEN(REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")) > 0
         && ({comparison})))
     }}"""
+    if policy["kind"] == "lexical_equality":
+        query = f"SELECT $this WHERE {{ $this <{left}> ?local ; <{right}> ?asset . FILTER (STR(?local) != STR(?asset)) }}"
     shape = SELIRA[f"{spec.name}_{contract.identifier}"]
     graph.add((shape, RDF.type, SH.NodeShape))
     if focus.get("target_by_predicate"):
