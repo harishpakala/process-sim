@@ -33,7 +33,8 @@ class AASGovernance:
             self._adapters[key] = adapter
         initial = self._lift(self._documents)
         result = manager.submit(initial, expected_version=0,
-                                **self._evidence(current, initial))
+                                **self._evidence(current, initial),
+                                **self._native_state(self._documents))
         if not result["committed"]:
             raise ValueError("Initial snapshot not admitted")
         self._version = result["version"]
@@ -44,6 +45,14 @@ class AASGovernance:
         for key, document in documents.items():
             graph += self._adapters[key].lift_instance(document)
         return graph
+
+    def _native_state(self, documents):
+        if not hasattr(self._manager.store, "compare_and_commit_native"):
+            return {}
+        from semantic.ontoutils import compute_uri
+        parts = {str(compute_uri(key)): self._adapters[key].lift_instance(doc)
+                 for key, doc in documents.items()}
+        return {"native_state": (deepcopy(documents), parts)}
 
     def _evidence(self, current, candidate):
         return self._provider(current, candidate) if self._provider else {}
@@ -88,7 +97,8 @@ class AASGovernance:
             # Full validation preserves all enabled contracts, including SC-01.
             # LP activation never bypasses the existing admission gate.
             result = self._manager.submit(candidate, expected_version=version,
-                                           **self._evidence(current, candidate))
+                                           **self._evidence(current, candidate),
+                                           **self._native_state(documents))
             if result["committed"]:
                 self._documents = documents
                 self._version = result["version"]
