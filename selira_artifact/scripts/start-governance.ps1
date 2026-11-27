@@ -1,6 +1,6 @@
 param(
     [Parameter(Mandatory=$true)]
-    [ValidateSet("inspect","adopt","recover","reconcile","initialize")]
+    [ValidateSet("inspect","qualify","adopt","recover","reconcile","initialize")]
     [string]$Mode,
     [string]$Endpoint = "http://localhost:7200/repositories/AAST",
     [string]$Journal = "",
