@@ -91,7 +91,7 @@ def test_selective_shared_dependencies():
 
 @pytest.mark.parametrize("number,domain,node", [("02", D, N.equipment), ("03", E, N.device)])
 def test_standalone_admission_and_reassessment(number, domain, node):
-    root = ROOT / "selira_integration/contracts"
+    root = ROOT
     m = MultiContractAutomationManager([(root / "contracts" / f"SC-{number}.safsl",
                                          root / "bindings" / f"SC-{number}.json")])
     entry, _ = next(iter(m._contracts.values()))
