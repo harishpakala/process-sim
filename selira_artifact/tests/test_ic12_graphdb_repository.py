@@ -342,3 +342,17 @@ def test_ic12_request_journal(tmp_path, monkeypatch, case):
     assert recovered.request_outcome("other", "M1", "different") is None
     assert len(session.updates) == 1
     recovered._journal.close()
+
+
+def test_ic12_rdf11_string_equivalence():
+    from rdflib import Literal, URIRef
+    from rdflib.namespace import XSD
+    from selira.runtime.graphdb_repository import rdf11_triples
+    s, p = URIRef("urn:s"), URIRef("urn:p")
+    def terms(o):
+        return rdf11_triples([(s, p, o)])
+    assert terms(Literal("abc")) == terms(Literal("abc", datatype=XSD.string))
+    assert terms(Literal("abc")) != terms(Literal("abc", lang="en"))
+    assert terms(Literal("abc")) != terms(Literal("ABC"))
+    assert terms(Literal("1")) != terms(Literal("1", datatype=XSD.integer))
+    assert terms(Literal("urn:x")) != terms(URIRef("urn:x"))
