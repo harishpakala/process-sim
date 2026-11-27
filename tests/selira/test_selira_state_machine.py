@@ -4,11 +4,11 @@
 # Author: Harish
 import unittest
 
-from selira_integration.formal.composition import (
+from archive.selira_integration.formal.composition import (
     Applicability, ContractEvaluation, ContractRule, Outcome, Role,
     RevisionContext, compose,
 )
-from selira_integration.formal.state_machine import (
+from archive.selira_integration.formal.state_machine import (
     Phase, change, create, invalidate_current, validation_complete,
 )
 

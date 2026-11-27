@@ -3,7 +3,7 @@
 # Created: 2026-10-31
 # Author: Harish
 import unittest
-from selira_integration.lifecycle import Snapshot
+from archive.selira_integration.lifecycle import Snapshot
 from process_sim.safsl.shacl.tep_nexus import (
     real_contract_source, verify_real_contract, evaluate_snapshot
 )

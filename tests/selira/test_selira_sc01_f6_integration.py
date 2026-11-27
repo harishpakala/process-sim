@@ -4,12 +4,12 @@
 # Author: Harish
 import unittest
 
-from selira_integration.lifecycle import Snapshot
-from selira_integration.formal.composition import Outcome
-from selira_integration.formal.sc01_lifecycle_adapter import (
+from archive.selira_integration.lifecycle import Snapshot
+from archive.selira_integration.formal.composition import Outcome
+from archive.selira_integration.formal.sc01_lifecycle_adapter import (
     advance, initialize,
 )
-from selira_integration.formal.state_machine import Phase
+from archive.selira_integration.formal.state_machine import Phase
 
 
 KW = dict(contract_revision="contracts-v1", authority_revision="authority-v1",

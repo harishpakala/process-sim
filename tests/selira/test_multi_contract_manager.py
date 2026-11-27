@@ -14,7 +14,7 @@ N = Namespace("urn:test:")
 
 
 def fixture():
-    manager = MultiContractAutomationManager.from_directory(ROOT / "selira_integration/contracts")
+    manager = MultiContractAutomationManager.from_directory(ROOT / "archive/selira_integration/contracts")
     graph = Graph()
     for triple in [(N.asset, RDF.type, A.Asset), (N.asset, A.hasAssetIdentifier, Literal("a")),
                    (N.asset, A.hasProductIdentifier, Literal("p")),
@@ -91,7 +91,7 @@ def test_selective_shared_dependencies():
 
 @pytest.mark.parametrize("number,domain,node", [("02", D, N.equipment), ("03", E, N.device)])
 def test_standalone_admission_and_reassessment(number, domain, node):
-    root = ROOT / "selira_integration/contracts"
+    root = ROOT / "archive/selira_integration/contracts"
     m = MultiContractAutomationManager([(root / "safsl" / f"SC-{number}.safsl",
                                          root / "bindings" / f"SC-{number}.json")])
     entry, _ = next(iter(m._contracts.values()))

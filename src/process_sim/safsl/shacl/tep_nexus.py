@@ -14,8 +14,8 @@ import base64
 import json
 from pathlib import Path
 
-from selira_integration.graphdb_snapshot import read_snapshot
-from selira_integration.lifecycle import Snapshot, check
+from archive.selira_integration.graphdb_snapshot import read_snapshot
+from archive.selira_integration.lifecycle import Snapshot, check
 from process_sim.safsl.shacl.compiler import CompilationError, parse_contract, decode_template_id
 
 ROOT = Path(__file__).resolve().parents[4]

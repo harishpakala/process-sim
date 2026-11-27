@@ -6,9 +6,9 @@ import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
-from selira_integration.graphdb_snapshot import (
+from archive.selira_integration.graphdb_snapshot import (
     _iri, snapshot_from_rows, save_snapshot, load_snapshot, read_snapshot)
-from selira_integration.lifecycle import Lifecycle, Snapshot
+from archive.selira_integration.lifecycle import Lifecycle, Snapshot
 
 class GraphDBSnapshotTests(unittest.TestCase):
     def test_named_graph_iri_validation(self):
@@ -37,7 +37,7 @@ class GraphDBSnapshotTests(unittest.TestCase):
                 {"product": "p", "identifier": "x"},
                 {"product": "p", "identifier": "y"}], complete=True)
 
-    @patch("selira_integration.graphdb_snapshot.select")
+    @patch("archive.selira_integration.graphdb_snapshot.select")
     def test_reads_explicit_named_graphs(self, select):
         select.side_effect = [
             [{"asset": "a", "ref": "x"}],
@@ -67,7 +67,7 @@ class GraphDBSnapshotTests(unittest.TestCase):
             self.assertTrue(result["unaffected_unchanged"])
 
 def LifecycleCheck(snapshot):
-    from selira_integration.lifecycle import check
+    from archive.selira_integration.lifecycle import check
     return check(snapshot, "urn:asset:1")
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from selira_integration.lifecycle import Snapshot, check, detect, impacted
+from archive.selira_integration.lifecycle import Snapshot, check, detect, impacted
 from .composition import (
     Applicability, ContractEvaluation, ContractRule, Outcome, RevisionContext,
     Role, compose,

@@ -43,7 +43,7 @@ def compare(before, after, contracts, *, coverage_attested=False,
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
-    policy_dir = Path(__file__).resolve().parents[4] / "selira_integration/contracts/safsl"
+    policy_dir = Path(__file__).resolve().parents[4] / "archive/selira_integration/contracts/safsl"
     impact_path, selection_path = policy_paths if policy_paths is not None else (
         policy_dir / "LP-03.safsl", policy_dir / "LP-04.safsl")
     impact = load_policy(Path(impact_path))

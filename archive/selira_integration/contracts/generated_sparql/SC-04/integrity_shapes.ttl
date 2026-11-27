@@ -1,0 +1,25 @@
+@prefix selira: <https://example.org/selira/contracts#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+
+selira:BomProductIntegrity_SC_04 a sh:NodeShape ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "SC_04: exactly one canonical product required" ;
+            sh:select """SELECT $this WHERE {
+  FILTER (
+    NOT EXISTS {
+      $this <https://example.org/engineeringbom/hasProductIdentifier> ?ref .
+      ?product a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id .
+      FILTER (STR(?ref) = STR(?id))
+    }
+    ||
+    EXISTS {
+      $this <https://example.org/engineeringbom/hasProductIdentifier> ?ref1 .
+      ?p1 a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id1 .
+      $this <https://example.org/engineeringbom/hasProductIdentifier> ?ref2 .
+      ?p2 a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id2 .
+      FILTER (?p1 != ?p2 && STR(?ref1) = STR(?id1) && STR(?ref2) = STR(?id2))
+    }
+  )
+}""" ] ;
+    sh:targetSubjectsOf <https://example.org/engineeringbom/hasProductIdentifier> .
+

@@ -9,8 +9,8 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from process_sim.safsl.shacl.compiler import compile_contract
 
-ROOT = Path(__file__).resolve().parents[2]
-CONTRACTS = ROOT / "selira_integration/contracts"
+ROOT = Path(__file__).resolve().parents[3]
+CONTRACTS = ROOT / "archive/selira_integration/contracts"
 RDF_ROOT = ROOT / "semantic/ontology2"
 PAIRS = {
     "SC-01": ("assetinventory", "productcatalog"),
@@ -71,7 +71,7 @@ def evaluate(sc, domains):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=ROOT / "selira_integration/evaluation/results/multi_contract_baseline.json")
+    parser.add_argument("--output", type=Path, default=ROOT / "archive/selira_integration/evaluation/results/multi_contract_baseline.json")
     args = parser.parse_args()
     results = [evaluate(sc, domains) for sc, domains in PAIRS.items()]
     payload = {"scope": "predicate-selected graph integrity only; no admission or authority qualification",

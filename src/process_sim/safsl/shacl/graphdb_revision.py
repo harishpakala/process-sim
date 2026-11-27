@@ -13,7 +13,7 @@ import hashlib
 import json
 from dataclasses import dataclass
 
-from selira_integration.graphdb_snapshot import AI, PC, _iri, select, snapshot_from_rows
+from archive.selira_integration.graphdb_snapshot import AI, PC, _iri, select, snapshot_from_rows
 
 
 @dataclass(frozen=True)

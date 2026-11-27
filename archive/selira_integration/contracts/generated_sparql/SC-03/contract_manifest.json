@@ -1,0 +1,26 @@
+{
+  "specification": "EcadAssetIntegrity",
+  "contracts": [
+    {
+      "id": "SC_03",
+      "shape": "https://example.org/selira/contracts#EcadAssetIntegrity_SC_03",
+      "kind": "standalone_match",
+      "focus_template_id": "https://example.org/sm/ecad",
+      "focus_class": "https://example.org/ecad/Device",
+      "focus_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "left_predicate": "https://example.org/ecad/hasLocalId",
+      "right_predicate": "https://example.org/ecad/hasAssetIdentifier",
+      "comparison_policy": {
+        "kind": "normalized_asset_identifier",
+        "exceptions": []
+      },
+      "dependencies": [
+        "https://example.org/sm/ecad"
+      ],
+      "requires_complete": [
+        "https://example.org/sm/ecad"
+      ],
+      "runtime_evidence_complete": false
+    }
+  ]
+}

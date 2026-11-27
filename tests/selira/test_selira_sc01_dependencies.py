@@ -4,9 +4,9 @@
 # Author: Harish
 import unittest
 
-from selira_integration.lifecycle import Snapshot, check
-from selira_integration.formal.dependency import ContractKey
-from selira_integration.formal.sc01_dependencies import impact
+from archive.selira_integration.lifecycle import Snapshot, check
+from archive.selira_integration.formal.dependency import ContractKey
+from archive.selira_integration.formal.sc01_dependencies import impact
 
 
 class SC01DependencyTests(unittest.TestCase):

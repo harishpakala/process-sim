@@ -1,0 +1,25 @@
+{
+  "specification": "AssetProductIntegrity",
+  "contracts": [
+    {
+      "id": "SC_01",
+      "shape": "https://example.org/selira/contracts#AssetProductIntegrity_SC_01",
+      "focus_template_id": "https://example.org/sm/asset-inventory-template",
+      "catalog_template_id": "https://example.org/sm/product-catalog-template",
+      "focus_class": "https://example.org/assetinventory/Asset",
+      "catalog_class": "https://example.org/productcatalog/Product",
+      "focus_predicate": "https://example.org/assetinventory/hasProductIdentifier",
+      "catalog_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "dependencies": [
+        "https://example.org/sm/asset-inventory-template",
+        "https://example.org/sm/product-catalog-template"
+      ],
+      "requires_complete": [
+        "https://example.org/sm/asset-inventory-template",
+        "https://example.org/sm/product-catalog-template"
+      ],
+      "runtime_evidence_complete": false,
+      "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+    }
+  ]
+}

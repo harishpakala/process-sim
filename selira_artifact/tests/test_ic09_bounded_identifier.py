@@ -1,4 +1,4 @@
-"""IC-09B: finite differential checks against explicit expected violations."""
+﻿"""IC-09B: finite differential checks against explicit expected violations."""
 import itertools
 import json
 from pathlib import Path
@@ -9,13 +9,13 @@ from pyshacl import validate
 from selira.compiler.shacl import compile_contract
 from selira.formal.reference_evaluator import evaluate
 
-ROOT = Path(__file__).resolve().parents[2] / "selira_integration/contracts"
+ROOT = Path(__file__).resolve().parents[1]
 LOCAL = [(), ("FI_101",), ("fi_101",), ("SC_101",), ("FI_101", "FI101")]
 ASSET = [(), ("FI101",), ("M1",), ("FI101", "M1")]
 
 @pytest.mark.parametrize("number,domain", [("02", "dexpi"), ("03", "ecad")])
 def test_bounded_identifier_compiler(number, domain):
-    source = (ROOT / "safsl" / f"SC-{number}.safsl").read_text()
+    source = (ROOT / "contracts" / f"SC-{number}.safsl").read_text()
     bindings = json.loads((ROOT / "bindings" / f"SC-{number}.json").read_text())
     ttl, _ = compile_contract(source, bindings)
     shapes = Graph().parse(data=ttl, format="turtle")
@@ -42,3 +42,5 @@ def test_bounded_identifier_compiler(number, domain):
         assert {str(n) for n in report.objects(None, SH.focusNode)} == expected
         cases += 1
     assert cases == 20
+
+
