@@ -1,5 +1,7 @@
-"""Read-side GraphDB adapter; writes and initialization are deliberately absent."""
+"""GraphDB adapter with guarded atomic SPARQL updates for an exclusive writer."""
 import re
+from threading import RLock
+from uuid import uuid4
 
 from rdflib import Graph, URIRef, Literal, BNode
 from rdflib.namespace import XSD
@@ -13,7 +15,10 @@ def _iri(value):
 
 class GraphDBRepository:
     def __init__(self, endpoint, graph_iris, *, metadata_graph="urn:selira:repository:metadata",
-                 session=None, timeout=60):
+                 session=None, timeout=60, partition=None):
+        self._partition = partition
+        self._lock = RLock()
+        self._uncertain = False
         if session is None:
             import requests
             session = requests.Session()
@@ -65,7 +70,70 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
         return graph, versions.pop()
 
     def compare_and_commit(self, expected_version, graph):
-        raise NotImplementedError("GraphDB writes require IC-12I.3")
+        if self._partition is None:
+            raise NotImplementedError("Explicit named graph partition required")
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Previous commit requires reconciliation")
+            _, version = self.snapshot()
+            if version != expected_version:
+                return False, version
+            parts = {_iri(k): v for k, v in self._partition(graph).items()}
+            if set(parts) != set(self._graphs):
+                raise ValueError("Partition must cover exactly the governed graphs")
+            if set().union(*(set(g) for g in parts.values())) != set(graph):
+                raise ValueError("Partition does not reproduce candidate")
+            for g in parts.values():
+                for s, p, o in g:
+                    if not isinstance(s, URIRef) or not isinstance(p, URIRef) or not isinstance(o, (URIRef, Literal)):
+                        raise ValueError("Writes require ground RDF triples")
+                    for term in (s, p, o):
+                        if isinstance(term, URIRef):
+                            _iri(str(term))
+            token = uuid4().hex
+            old = Literal(version, datatype=XSD.integer).n3()
+            new = Literal(version + 1, datatype=XSD.integer).n3()
+            subject = "<urn:selira:repository>"
+            vp = "<urn:selira:version>"
+            cp = "<urn:selira:commitToken>"
+            deletes = " ".join(f"GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }}" for i,g in enumerate(self._graphs))
+            # Separate OPTIONAL patterns would create a Cartesian product.
+            # UNION selects one graph's old triples per solution instead.
+            branches = " UNION ".join(f"{{ GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }} }}" for i,g in enumerate(self._graphs))
+            inserts = " ".join(f"GRAPH {g} {{ " + " ".join(
+                f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
+                for g,triples in parts.items())
+            query = f"""
+DELETE {{ GRAPH {self._metadata} {{ {subject} {vp} {old} . {subject} {cp} ?previous . }} {deletes} }}
+INSERT {{ GRAPH {self._metadata} {{ {subject} {vp} {new} . {subject} {cp} "{token}" . }} {inserts} }}
+WHERE {{
+ GRAPH {self._metadata} {{ {subject} {vp} {old} .
+ OPTIONAL {{ {subject} {cp} ?previous }} }}
+ FILTER NOT EXISTS {{ GRAPH {self._metadata} {{ {subject} {vp} ?other FILTER(!sameTerm(?other, {old})) }} }}
+ OPTIONAL {{ {branches} }}
+}}
+"""
+            try:
+                response = self._session.post(self._endpoint + "/statements",
+                    data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
+                    timeout=self._timeout)
+                response.raise_for_status()
+                check = self._session.post(self._endpoint,
+                    data={"query": f"SELECT ?token WHERE {{ GRAPH {self._metadata} {{ {subject} {vp} {new} ; {cp} ?token }} }}", "infer": "false"},
+                    headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+                check.raise_for_status()
+                rows = check.json()["results"]["bindings"]
+                if len(rows) == 1 and rows[0]["token"]["value"] == token:
+                    return True, version + 1
+                raise RepositoryUncertain("Commit token not confirmed")
+            except Exception as exc:
+                self._uncertain = True
+                raise RepositoryUncertain("Commit outcome unresolved; stop writes") from exc
+
+
+class RepositoryUncertain(RuntimeError):
+    """Do not retry automatically: the remote update may have committed."""
+
 
 
 def _term(binding):
