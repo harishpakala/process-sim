@@ -17,7 +17,10 @@ from process_sim.safsl.shacl.admission import VersionedGraphStore, Verdict
 
 
 class MultiContractAutomationManager:
-    def __init__(self, artifacts):
+    def __init__(self, artifacts, *, policy_paths=None):
+        self._policy_paths = tuple(map(Path, policy_paths)) if policy_paths is not None else None
+        if self._policy_paths is not None and len(self._policy_paths) != 2:
+            raise ValueError("Expected impact and selection policy paths")
         self._contracts = {}
         self.store = VersionedGraphStore()
         self._lock = RLock()
@@ -46,10 +49,11 @@ class MultiContractAutomationManager:
             raise ValueError("At least one contract required")
 
     @classmethod
-    def from_directory(cls, directory):
+    def from_directory(cls, directory, *, policy_paths=None):
         directory = Path(directory)
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
-                    for p in sorted((directory / "safsl").glob("SC-*.safsl"))])
+                    for p in sorted((directory / "safsl").glob("SC-*.safsl"))],
+                   policy_paths=policy_paths)
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
@@ -158,7 +162,8 @@ class MultiContractAutomationManager:
                         reassessment = compare(current, proposed, self._contracts,
                                                coverage_attested=coverage_attested,
                                                policy_unchanged=policy_unchanged,
-                                               authority_unchanged=authority_unchanged)
+                                               authority_unchanged=authority_unchanged,
+                                               policy_paths=self._policy_paths)
                         if not reassessment["equivalent"]:
                             values.add("U")
                     except Exception:
