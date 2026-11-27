@@ -1,0 +1,17 @@
+SELECT DISTINCT ?this WHERE {
+  { { ?this <https://example.org/ecad/hasAssetIdentifier> ?targetValue . } }
+  {
+    { { { ?this <https://example.org/ecad/hasAssetIdentifier> ?targetValue . } } 
+      $this <https://example.org/ecad/hasLocalId> ?local ; <https://example.org/ecad/hasAssetIdentifier> ?asset .
+      FILTER (!(REGEX(STR(?local), "^[A-Za-z0-9_-]+$")
+        && REGEX(STR(?asset), "^https?://[^/?#]+/([^?#]*/)?[A-Za-z0-9_-]+$")
+        && STRLEN(REPLACE(STR(?local), "[_-]", "")) > 0
+        && STRLEN(REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", "")) > 0
+        && (REPLACE(STR(?local), "[_-]", "") = REPLACE(REPLACE(STR(?asset), "^.*/", ""), "[_-]", ""))))
+     }
+    UNION { { { ?this <https://example.org/ecad/hasAssetIdentifier> ?targetValue . } } FILTER NOT EXISTS { SELECT ?this WHERE { ?this <https://example.org/ecad/hasAssetIdentifier> ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) >= 1) } }
+    UNION { { SELECT ?this WHERE { ?this <https://example.org/ecad/hasAssetIdentifier> ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) > 1) } }
+    UNION { { { ?this <https://example.org/ecad/hasAssetIdentifier> ?targetValue . } } FILTER NOT EXISTS { SELECT ?this WHERE { ?this <https://example.org/ecad/hasLocalId> ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) >= 1) } }
+    UNION { { SELECT ?this WHERE { ?this <https://example.org/ecad/hasLocalId> ?value . } GROUP BY ?this HAVING (COUNT(DISTINCT ?value) > 1) } }
+  }
+}

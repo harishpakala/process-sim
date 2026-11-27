@@ -1,0 +1,22 @@
+SELECT DISTINCT ?this WHERE {
+  { { ?this <https://example.org/assetinventory/hasProductIdentifier> ?targetValue . } }
+  {
+    { { { ?this <https://example.org/assetinventory/hasProductIdentifier> ?targetValue . } } 
+  FILTER (
+    NOT EXISTS {
+      $this <https://example.org/assetinventory/hasProductIdentifier> ?ref .
+      ?product a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id .
+      FILTER (STR(?ref) = STR(?id))
+    }
+    ||
+    EXISTS {
+      $this <https://example.org/assetinventory/hasProductIdentifier> ?ref1 .
+      ?p1 a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id1 .
+      $this <https://example.org/assetinventory/hasProductIdentifier> ?ref2 .
+      ?p2 a <https://example.org/productcatalog/Product> ; <https://example.org/productcatalog/hasProductIdentifier> ?id2 .
+      FILTER (?p1 != ?p2 && STR(?ref1) = STR(?id1) && STR(?ref2) = STR(?id2))
+    }
+  )
+ }
+  }
+}
