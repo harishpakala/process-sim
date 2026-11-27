@@ -18,7 +18,7 @@ def test_ic12_live_graphdb_lifecycle(tmp_path):
     from rdflib import Graph, URIRef, Literal
     from semantic.config import TARGETS
     from semantic.ontoutils import compute_uri
-    from selira.runtime.graphdb_repository import GraphDBRepository
+    from selira.runtime.graphdb_repository import GraphDBRepository, rdf11_triples
     from selira.runtime.aas_governance import AASGovernance
     from selira.runtime.automation_manager import MultiContractAutomationManager
     from selira.runtime.semantic_lifting import SemanticLiftingAdapter
@@ -68,8 +68,8 @@ def test_ic12_live_graphdb_lifecycle(tmp_path):
         assert set().union(*(set(g) for g in parts.values())) == set(graph)
         for doc, adapter in registrations:
             key = doc["id"]
-            persisted = set(parts[str(compute_uri(key))])
-            lifted = set(adapter.lift_instance(docs[key]))
+            persisted = rdf11_triples(parts[str(compute_uri(key))])
+            lifted = rdf11_triples(adapter.lift_instance(docs[key]))
             extra, missing = persisted - lifted, lifted - persisted
             if extra or missing:
                 def describe(triples):
