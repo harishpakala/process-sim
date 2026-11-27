@@ -27,6 +27,29 @@ def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=Fa
                                   native_mode=True)
         return store.inspect_adoption({str(compute_uri(d["id"])): a.lift_instance(d)
                                        for d, a in registrations})
+    if mode == "qualify":
+        from rdflib import Graph
+        parts = {str(compute_uri(d["id"])): a.lift_instance(d) for d,a in registrations}
+        store = GraphDBRepository(endpoint, list(parts), native_mode=True)
+        inspection = store.inspect_adoption(parts)
+        graph = Graph()
+        for part in parts.values():
+            graph += part
+        flags = json.loads(Path(evidence_file).read_text(encoding="utf-8"))
+        if (set(flags) != {"evidence_complete", "identity_normalized", "applicability_confirmed"}
+                or not isinstance(flags["evidence_complete"], list)
+                or any(not isinstance(x, str) for x in flags["evidence_complete"])
+                or type(flags["identity_normalized"]) is not bool
+                or type(flags["applicability_confirmed"]) is not bool):
+            raise ValueError("Invalid evidence attestation")
+        manager = MultiContractAutomationManager([(root / "contracts/SC-01.safsl",
+                                                   root / "bindings/SC-01.json")])
+        outcomes = [manager._evaluate(graph, entry, ttl, set(flags["evidence_complete"]),
+                    flags["identity_normalized"], flags["applicability_confirmed"])
+                    for entry, ttl in manager._contracts.values()]
+        values = {o["verdict"] for o in outcomes}
+        return {"inspection": inspection, "evidence": flags, "contracts": outcomes,
+                "adoption_ready": inspection["eligible"] and "V" in values and values <= {"V", "NA"}}
     journal = Path(journal).resolve()
     if mode in ("recover", "reconcile") and not journal.is_file():
         raise ValueError("Recovery requires the original persistent journal")
@@ -89,13 +112,13 @@ def main():
     parser.add_argument("--endpoint", required=True)
     parser.add_argument("--journal", required=True)
     parser.add_argument("--evidence-file", required=True)
-    parser.add_argument("--mode", choices=["inspect", "initialize", "recover", "adopt", "reconcile"], required=True)
+    parser.add_argument("--mode", choices=["qualify", "inspect", "initialize", "recover", "adopt", "reconcile"], required=True)
     parser.add_argument("--port", type=int, default=8002)
     parser.add_argument("--exclusive-writer", action="store_true", required=True)
     parser.add_argument("--remote-quiescent", action="store_true")
     args = parser.parse_args()
     app = build_service(args.endpoint, args.journal, mode=args.mode, evidence_file=args.evidence_file, remote_quiescent=args.remote_quiescent)
-    if args.mode in ('inspect', 'reconcile'):
+    if args.mode in ('inspect', 'reconcile', 'qualify'):
         print(json.dumps(app, indent=2))
         return
     uvicorn.run(app, host="127.0.0.1", port=args.port, workers=1)
