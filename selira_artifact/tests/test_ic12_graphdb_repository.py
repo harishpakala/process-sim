@@ -150,3 +150,57 @@ def test_ic12_graphdb_invalid_partition():
     with pytest.raises(ValueError):
         repository.compare_and_commit(1, Graph())
     assert not session.updates
+
+
+def native_repository(session):
+    return GraphDBRepository("http://graphdb/repositories/AAST",
+                             ["urn:asset", "urn:product"], session=session,
+                             native_mode=True)
+
+
+def test_ic12_native_combined_update():
+    import json
+    from rdflib.plugins.sparql.parser import parseUpdate
+    session = WriteSession()
+    graph = Graph()
+    graph.add((URIRef("urn:s"), URIRef("urn:p"), Literal("new")))
+    docs = {"urn:asset": {"id": "urn:asset", "idShort": 'Asset "A"\nΩ'}}
+    assert native_repository(session).compare_and_commit_native(
+        1, graph, docs, {"urn:asset": graph, "urn:product": Graph()}) == (True, 2)
+    query, = session.updates
+    parseUpdate(query)
+    assert "GRAPH <urn:selira:repository:native>" in query
+    assert "<urn:selira:documents> ?oldDocuments" in query
+    assert Literal(json.dumps(docs, ensure_ascii=True, sort_keys=True,
+                              allow_nan=False)).n3() in query
+    assert '<urn:s> <urn:p> "new"' in query
+    assert "<urn:selira:version>" in query
+    assert "<urn:selira:commitToken>" in query
+
+
+def test_ic12_native_reject_rdf_only():
+    session = WriteSession()
+    with pytest.raises(ValueError, match="RDF-only"):
+        native_repository(session).compare_and_commit(1, Graph())
+    assert not session.updates
+
+
+@pytest.mark.parametrize("case", ["identity", "partition", "union", "stale"])
+def test_ic12_native_no_invalid_write(case):
+    session = WriteSession()
+    repository = native_repository(session)
+    graph = Graph()
+    docs = {"urn:asset": {"id": "urn:asset"}}
+    parts = {"urn:asset": Graph(), "urn:product": Graph()}
+    if case == "identity":
+        docs["urn:asset"]["id"] = "urn:other"
+    elif case == "partition":
+        del parts["urn:product"]
+    elif case == "union":
+        graph.add((URIRef("urn:s"), URIRef("urn:p"), Literal("new")))
+    if case == "stale":
+        assert repository.compare_and_commit_native(0, graph, docs, parts) == (False, 1)
+    else:
+        with pytest.raises(ValueError):
+            repository.compare_and_commit_native(1, graph, docs, parts)
+    assert not session.updates
