@@ -1,0 +1,4 @@
+SELECT (?v0 AS ?o0) (?v1 AS ?o1) WHERE {
+  BIND((?i0 || (!(?i1 && ?i2 && ?i3))) AS ?v0)
+  BIND((!?v0) AS ?v1)
+}

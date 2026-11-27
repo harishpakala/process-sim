@@ -1,0 +1,17 @@
+{
+  "id": "LP-03",
+  "specification": "policies/LP-03.safsl",
+  "binding": "bindings/LP-03.json",
+  "source_sha256": "ac5afdbebd9f3d56ab6e43fe2371fe0a913bcb0df21607eff7529b95a0b06fe2",
+  "binding_sha256": "3a0bebbe9ef4ba09f4b70e31c329b2210f297ded9a030dc98432c69266edeb39",
+  "query": "sparql/LP-03.rq",
+  "inputs": {
+    "CoverageAttested": "i0",
+    "PolicyUnchanged": "i1",
+    "AuthorityUnchanged": "i2",
+    "RelevantDependencyChanged": "i3"
+  },
+  "outputs": {
+    "Affected": "o0"
+  }
+}

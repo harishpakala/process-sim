@@ -1,0 +1,18 @@
+{
+  "id": "LP-04",
+  "specification": "policies/LP-04.safsl",
+  "binding": "bindings/LP-04.json",
+  "source_sha256": "79da6d80d21322d59611e7d4d7f47f8038f1ba57604d88a51ddbbe837ff34c1d",
+  "binding_sha256": "fcc1ab88bc5a8a32725f60725b8b532a2b6a74722dabf92cf1e1b11e3bafb88e",
+  "query": "sparql/LP-04.rq",
+  "inputs": {
+    "Affected": "i0",
+    "CoverageAttested": "i1",
+    "PolicyUnchanged": "i2",
+    "AuthorityUnchanged": "i3"
+  },
+  "outputs": {
+    "Reassess": "o0",
+    "Reuse": "o1"
+  }
+}
