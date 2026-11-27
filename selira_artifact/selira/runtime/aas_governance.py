@@ -1,5 +1,6 @@
 """Exclusive in-memory AAS write coordinator; no durable transaction claims."""
 from copy import deepcopy
+from .graphdb_repository import rdf11_triples
 import hashlib
 import json
 from threading import RLock
@@ -61,7 +62,7 @@ class AASGovernance:
             raise ValueError("Persisted registration mismatch")
         _, expected = self._native_state(documents)["native_state"]
         if set(parts) != set(expected) or any(
-            set(parts[key]) != set(expected[key]) for key in expected):
+            rdf11_triples(parts[key]) != rdf11_triples(expected[key]) for key in expected):
             raise ValueError("Persisted native/RDF coherence failure")
         graph = self._lift(documents)
         evidence = self._evidence(graph, graph)
