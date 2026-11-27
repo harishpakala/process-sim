@@ -54,7 +54,8 @@ def test_ic12_publication_guard(monkeypatch, domain, reserved, blocked):
         calls.append(url)
         return Response()
     monkeypatch.setattr(o.requests, "post", post)
-    uri = o.compute_uri("https://example.org/sm/tep-" + domain + "-instance")
+    uri = o.compute_uri("https://example.org/sm/tep-" + domain +
+                        ("" if domain == "asset-inventory" else "-instance"))
     if blocked:
         with pytest.raises(RuntimeError, match="governed publication blocked"):
             o.push_graph_to_graphdb(Graph(), uri)
