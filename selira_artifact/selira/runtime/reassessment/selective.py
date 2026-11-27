@@ -2,6 +2,7 @@
 from rdflib import RDF, URIRef
 from rdflib.util import from_n3
 from pathlib import Path
+from ..policy_executor import PolicyExecutor
 from ..policy_evaluator import load_policy, evaluate_policy
 from selira.formal.identifier_comparison import compare_fields
 
@@ -44,10 +45,30 @@ def relevant_dependency_changed(key, old, new, changed):
 
 
 def select(old, oi, new, ni, *, coverage_attested=False,
-            policy_unchanged=False, authority_unchanged=False, policy_paths=None):
+            policy_unchanged=False, authority_unchanged=False, policy_paths=None, policy_executor=None):
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
+    if policy_executor is not None or policy_paths is None:
+        executor = policy_executor or PolicyExecutor(Path(__file__).resolve().parents[3])
+        affected = set()
+        for k in universe:
+            context, _ = executor.dispatch("DependencyProjectionCompleted", {
+                "evidence.coverage_attested": coverage_attested,
+                "context.policy_unchanged": policy_unchanged,
+                "context.authority_unchanged": authority_unchanged,
+                "dependency.changed": relevant_dependency_changed(k, old, new, changed),
+            })
+            reassess = context.get("selection.reassess")
+            reuse = context.get("selection.reuse")
+            if type(reassess) is not bool or type(reuse) is not bool or reassess == reuse:
+                raise ValueError("Missing or inconsistent policy selection")
+            if not reassess and (fallback or relevant_dependency_changed(k, old, new, changed)):
+                raise ValueError("Unsafe reuse decision")
+            if reassess:
+                affected.add(k)
+        return affected, fallback
+    # Compatibility for explicit legacy policy path callers.
     policy_dir = Path(__file__).resolve().parents[3] / "policies"
     impact_path, selection_path = policy_paths if policy_paths is not None else (
         policy_dir / "LP-03.safsl", policy_dir / "LP-04.safsl")
@@ -71,13 +92,13 @@ def select(old, oi, new, ni, *, coverage_attested=False,
     return affected, fallback
 
 def compare(before, after, contracts, *, coverage_attested=False,
-            policy_unchanged=False, authority_unchanged=False, policy_paths=None):
+            policy_unchanged=False, authority_unchanged=False, policy_paths=None, policy_executor=None):
     old, oi = project(before, contracts)
     new, ni = project(after, contracts)
     universe = old.keys() | new.keys()
     affected, fallback = select(old, oi, new, ni, coverage_attested=coverage_attested,
                                 policy_unchanged=policy_unchanged, authority_unchanged=authority_unchanged,
-                                policy_paths=policy_paths)
+                                policy_paths=policy_paths, policy_executor=policy_executor)
     def check(k, assignments, index):
         if k not in assignments:
             return "NA"
