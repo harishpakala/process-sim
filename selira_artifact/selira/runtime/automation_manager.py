@@ -150,7 +150,8 @@ class MultiContractAutomationManager:
 
     def submit(self, candidate, *, expected_version, evidence_complete=(),
                identity_normalized=False, applicability_confirmed=False,
-               coverage_attested=False, policy_unchanged=False, authority_unchanged=False):
+               coverage_attested=False, policy_unchanged=False, authority_unchanged=False,
+               native_state=None):
         with self._lock:
             try:
                 current, version = self.store.snapshot()
@@ -200,7 +201,12 @@ class MultiContractAutomationManager:
                     verdict, reason = Verdict.NA, "All contract populations empty"
                 else:
                     try:
-                        committed, new_version = self.store.compare_and_commit(version, proposed)
+                        if native_state is None:
+                            committed, new_version = self.store.compare_and_commit(version, proposed)
+                        else:
+                            documents, parts = native_state
+                            committed, new_version = self.store.compare_and_commit_native(
+                                version, proposed, documents, parts)
                         verdict, reason = ((Verdict.V, "Validated and committed") if committed
                                            else (Verdict.U, "Concurrent update; revalidate"))
                     except Exception as exc:
