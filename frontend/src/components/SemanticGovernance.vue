@@ -44,7 +44,7 @@ async function submit(){
  if(!window.confirm('Submit this change to the configured governed repository?'))return
  busy.value=true;error.value=''
  const f=field.value
- const message={header:{message_id:crypto.randomUUID(),source:'TEP-NEXUS-UI'},domain:{name:f.document.idShort.toLowerCase(),submodel_id:f.document.id},operation:{type:'UPDATE',id_short_path:f.path,expected_version:version.value},payload:{...f.element,value:proposed.value}}
+ const message={header:{message_id:crypto.randomUUID(),source:'TEP-NEXUS-UI'},domain:{name:f.document.id==='https://example.org/sm/tep-product-catalog-instance'?'productcatalog':'assetinventory',submodel_id:f.document.id},operation:{type:'UPDATE',id_short_path:f.path,expected_version:version.value},payload:{...f.element,value:proposed.value}}
  try{
   const response=await fetch('/api/governance/change',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(message)})
   const data=await response.json()
