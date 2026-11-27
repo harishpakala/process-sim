@@ -12,6 +12,7 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.selective import compare
 from .contract_registry import load_registry
+from .repository import VersionedRepository
 from .policy_executor import PolicyExecutor
 from selira.compiler.shacl import compile_contract
 from selira.formal.identifier_comparison import compare_fields
@@ -19,7 +20,8 @@ from selira.runtime.admission import VersionedGraphStore, Verdict
 
 
 class MultiContractAutomationManager:
-    def __init__(self, artifacts, *, policy_paths=None, policy_executor=None):
+    def __init__(self, artifacts, *, policy_paths=None, policy_executor=None,
+                 store: VersionedRepository | None = None):
         self._policy_executor = policy_executor
         if policy_paths is not None and policy_executor is not None:
             raise ValueError("Choose registry or explicit policy paths")
@@ -27,7 +29,7 @@ class MultiContractAutomationManager:
         if self._policy_paths is not None and len(self._policy_paths) != 2:
             raise ValueError("Expected impact and selection policy paths")
         self._contracts = {}
-        self.store = VersionedGraphStore()
+        self.store = VersionedGraphStore() if store is None else store
         self._lock = RLock()
         self.history = []
         for source_path, binding_path in artifacts:
@@ -54,7 +56,7 @@ class MultiContractAutomationManager:
             raise ValueError("At least one contract required")
 
     @classmethod
-    def from_directory(cls, directory, *, policy_paths=None):
+    def from_directory(cls, directory, *, policy_paths=None, store=None):
         directory = Path(directory)
         if (directory / "registry" / "contract_registry.json").exists():
             entries = load_registry(directory)
@@ -62,11 +64,11 @@ class MultiContractAutomationManager:
                 raise ValueError("Registry configuration replaces explicit policy paths")
             return cls([(directory / e["specification"], directory / e["binding"])
                         for e in entries if e["kind"] == "SC" and e["enabled"]],
-                       policy_executor=PolicyExecutor(directory))
+                       policy_executor=PolicyExecutor(directory), store=store)
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
                     for p in sorted((directory / "contracts").glob("*.safsl"))
                     if (directory / "bindings" / (p.stem + ".json")).is_file()],
-                   policy_paths=policy_paths)
+                   policy_paths=policy_paths, store=store)
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
