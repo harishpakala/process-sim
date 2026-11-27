@@ -3,7 +3,7 @@ from rdflib import RDF, URIRef
 from rdflib.util import from_n3
 from pathlib import Path
 from .policy import load_policy, evaluate_policy
-from process_sim.safsl.shacl.identifier_comparison import identifier_matches
+from process_sim.safsl.shacl.identifier_comparison import compare_fields
 
 
 def project(graph, contracts):
@@ -74,11 +74,10 @@ def compare(before, after, contracts, *, coverage_attested=False,
             if len(left) != 1 or len(right) != 1:
                 return "F"
             policy = entry["comparison_policy"]
-            if policy["kind"] != "normalized_asset_identifier":
+            if policy["kind"] not in ("normalized_asset_identifier", "lexical_equality"):
                 raise ValueError("Unsupported identifier comparison policy")
             try:
-                valid = identifier_matches(str(from_n3(left[0])), str(from_n3(right[0])),
-                                           exceptions=tuple(tuple(p) for p in policy.get("exceptions", [])))
+                valid = compare_fields(str(from_n3(left[0])), str(from_n3(right[0])), policy)
             except ValueError:
                 valid = False
             return "V" if valid else "F"
