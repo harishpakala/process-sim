@@ -10,7 +10,7 @@ from .terminal_activation import activate_policies
 
 
 class AASGovernance:
-    def __init__(self, manager, registrations, policies, *, evidence_provider=None):
+    def __init__(self, manager, registrations, policies, *, evidence_provider=None, recover=False):
         """registrations contains (native document, trusted lifting adapter) pairs.
 
         Manager must be fresh and exclusively owned by this coordinator.
@@ -23,7 +23,7 @@ class AASGovernance:
         self._documents = {}
         self._adapters = {}
         current, version = manager.store.snapshot()
-        if version != 0 or len(current):
+        if not recover and (version != 0 or len(current)):
             raise ValueError("Expected fresh governance manager")
         for document, adapter in registrations:
             key = document["id"]
@@ -31,6 +31,11 @@ class AASGovernance:
                 raise ValueError("Duplicate Submodel registration")
             self._documents[key] = deepcopy(document)
             self._adapters[key] = adapter
+        if recover:
+            self._blocked = True
+            self._version = version
+            self._recover()
+            return
         initial = self._lift(self._documents)
         result = manager.submit(initial, expected_version=0,
                                 **self._evidence(current, initial),
@@ -38,6 +43,33 @@ class AASGovernance:
         if not result["committed"]:
             raise ValueError("Initial snapshot not admitted")
         self._version = result["version"]
+        self._blocked = False
+
+    def _recover(self):
+        """Recover only a coherent, currently qualified persisted snapshot.
+
+        Caller must ensure exclusive ownership and no outstanding remote update.
+        No write or version increment is performed.
+        """
+        documents, parts, version, token = self._manager.store.native_snapshot()
+        if set(documents) != set(self._adapters):
+            raise ValueError("Persisted registration mismatch")
+        _, expected = self._native_state(documents)["native_state"]
+        if set(parts) != set(expected) or any(
+            set(parts[key]) != set(expected[key]) for key in expected):
+            raise ValueError("Persisted native/RDF coherence failure")
+        graph = self._lift(documents)
+        evidence = self._evidence(graph, graph)
+        outcomes = [self._manager._evaluate(graph, entry, ttl,
+                    set(evidence.get("evidence_complete", ())),
+                    evidence.get("identity_normalized", False),
+                    evidence.get("applicability_confirmed", False))
+                    for entry, ttl in self._manager._contracts.values()]
+        values = {outcome["verdict"] for outcome in outcomes}
+        if "V" not in values or not values <= {"V", "NA"}:
+            raise ValueError("Recovered state not qualified")
+        self._documents = deepcopy(documents)
+        self._version = version
         self._blocked = False
 
     def _lift(self, documents):
