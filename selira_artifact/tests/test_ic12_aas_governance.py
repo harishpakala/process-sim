@@ -85,3 +85,63 @@ def test_ic12_governance_snapshot_isolation(service):
     graph.remove((None, None, None))
     actual, actual_graph, actual_version = coordinator.snapshot()
     assert actual and len(actual_graph) and actual_version == version
+
+
+def test_ic12_governance_uncertain_commit(service, monkeypatch):
+    from selira.runtime.graphdb_repository import RepositoryUncertain
+    coordinator, _ = service
+    change = request(coordinator)
+    store = coordinator._manager.store
+    before, version = store.snapshot()
+    calls = []
+    def fail(*args):
+        calls.append(args)
+        raise RepositoryUncertain("Commit not confirmed")
+    monkeypatch.setattr(store, "compare_and_commit", fail)
+    result = coordinator.submit(change)
+    assert result.decision == "DEFERRED" and not result.committed
+    assert [r.verdict for r in result.evaluated_contracts] == ["V"]
+    assert result.repository_version == version
+    assert coordinator._manager.history[-1]["verdict"] == "U"
+    assert coordinator.submit(change).decision == "DEFERRED"
+    assert len(calls) == 1
+    assert set(store.snapshot()[0]) == set(before)
+    with pytest.raises(RuntimeError, match="reconciliation"):
+        coordinator.snapshot()
+
+
+def test_ic12_governance_read_failure(service, monkeypatch):
+    coordinator, _ = service
+    change = request(coordinator)
+    store = coordinator._manager.store
+    def fail():
+        raise RuntimeError("Unavailable")
+    monkeypatch.setattr(store, "snapshot", fail)
+    result = coordinator.submit(change)
+    assert result.decision == "DEFERRED" and not result.committed
+    assert not result.evaluated_contracts
+    assert result.repository_version == change.operation.expected_version
+
+
+def test_ic12_manager_read_failure(service, monkeypatch):
+    coordinator, _ = service
+    manager = coordinator._manager
+    graph, version = manager.store.snapshot()
+    def fail():
+        raise RuntimeError("Unavailable")
+    monkeypatch.setattr(manager.store, "snapshot", fail)
+    result = manager.submit(graph, expected_version=version)
+    assert result["verdict"] == "U" and not result["committed"]
+    assert result["contracts"] == {}
+    assert result["version"] == version
+
+
+def test_ic12_governance_external_version_change(service):
+    coordinator, _ = service
+    change = request(coordinator)
+    store = coordinator._manager.store
+    graph, version = store.snapshot()
+    assert store.compare_and_commit(version, graph) == (True, version + 1)
+    assert coordinator.submit(change).decision == "DEFERRED"
+    with pytest.raises(RuntimeError, match="reconciliation"):
+        coordinator.snapshot()
