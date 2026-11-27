@@ -2,6 +2,7 @@
 import re
 import json
 import sqlite3
+import logging
 from threading import RLock
 from uuid import uuid4
 
@@ -335,6 +336,7 @@ WHERE {{
                 raise RepositoryUncertain("Commit token not confirmed")
             except Exception as exc:
                 self._uncertain = True
+                logging.getLogger(__name__).exception("GraphDB commit outcome unresolved (version=%s, token=%s)", version, token)
                 raise RepositoryUncertain("Commit outcome unresolved; stop writes") from exc
 
 
