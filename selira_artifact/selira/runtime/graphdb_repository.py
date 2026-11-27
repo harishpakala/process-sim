@@ -1,6 +1,7 @@
 """GraphDB adapter with guarded atomic SPARQL updates for an exclusive writer."""
 import re
 import json
+import sqlite3
 from threading import RLock
 from uuid import uuid4
 
@@ -16,11 +17,17 @@ def _iri(value):
 
 class GraphDBRepository:
     def __init__(self, endpoint, graph_iris, *, metadata_graph="urn:selira:repository:metadata",
-                 session=None, timeout=60, partition=None, native_mode=False):
+                 session=None, timeout=60, partition=None, native_mode=False, journal_path=None):
         self._native_mode = native_mode
         self._partition = partition
         self._lock = RLock()
         self._uncertain = False
+        self._journal = None
+        if journal_path is not None:
+            self._journal = sqlite3.connect(str(journal_path), check_same_thread=False)
+            self._journal.execute('CREATE TABLE IF NOT EXISTS pending (slot INTEGER PRIMARY KEY CHECK(slot=1), token TEXT NOT NULL, version INTEGER NOT NULL)')
+            self._journal.commit()
+            self._uncertain = self._journal.execute('SELECT 1 FROM pending').fetchone() is not None
         if session is None:
             import requests
             session = requests.Session()
@@ -31,6 +38,40 @@ class GraphDBRepository:
         self._metadata = _iri(metadata_graph)
         if not self._graphs or self._metadata in self._graphs:
             raise ValueError("Expected nonempty governed graphs distinct from metadata")
+
+    def pending_commit(self):
+        with self._lock:
+            if self._journal is None:
+                return None
+            return self._journal.execute("SELECT token, version FROM pending").fetchone()
+
+    def reconcile_pending(self, *, remote_quiescent=False):
+        """Resolve a journaled attempt only after operator-confirmed quiescence.
+
+        Returns persistence status, not a new semantic admission decision.
+        Exclusive writer and dedicated journal per repository are required.
+        """
+        with self._lock:
+            pending = self.pending_commit()
+            if pending is None:
+                raise ValueError("No durable pending commit")
+            if not remote_quiescent:
+                raise RepositoryUncertain("Remote update may still execute")
+            token, version = pending
+            _, observed = self.snapshot()
+            if observed == version:
+                status = "NOT_COMMITTED"
+            elif observed == version + 1:
+                _, _, native_version, actual_token = self.native_snapshot()
+                if native_version != observed or actual_token != token:
+                    raise RepositoryUncertain("Commit identity mismatch")
+                status = "COMMITTED"
+            else:
+                raise RepositoryUncertain("Unexpected repository version")
+            self._journal.execute("DELETE FROM pending WHERE slot=1")
+            self._journal.commit()
+            self._uncertain = False
+            return status
 
     def initialize_empty(self):
         """Explicit bootstrap only; requires exclusive writer and empty governed scope.
@@ -238,6 +279,11 @@ WHERE {{
  OPTIONAL {{ {branches} }}
 }}
 """
+            if self._journal is not None:
+                if not self._native_mode:
+                    raise ValueError("Durable journal requires native mode")
+                with self._journal:
+                    self._journal.execute("INSERT INTO pending VALUES (1, ?, ?)", (token, version))
             try:
                 response = self._session.post(self._endpoint + "/statements",
                     data=query.encode("utf-8"), headers={"Content-Type": "application/sparql-update"},
@@ -249,6 +295,9 @@ WHERE {{
                 check.raise_for_status()
                 rows = check.json()["results"]["bindings"]
                 if len(rows) == 1 and rows[0]["token"]["value"] == token:
+                    if self._journal is not None:
+                        with self._journal:
+                            self._journal.execute("DELETE FROM pending WHERE slot=1")
                     return True, version + 1
                 raise RepositoryUncertain("Commit token not confirmed")
             except Exception as exc:
