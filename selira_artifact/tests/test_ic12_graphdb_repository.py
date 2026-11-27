@@ -204,3 +204,53 @@ def test_ic12_native_no_invalid_write(case):
         with pytest.raises(ValueError):
             repository.compare_and_commit_native(1, graph, docs, parts)
     assert not session.updates
+
+
+@pytest.mark.parametrize("case", ["empty", "existing", "unexpected"])
+def test_ic12_bootstrap(case):
+    from rdflib.plugins.sparql.parser import parseUpdate, parseQuery
+    class BootstrapSession(Session):
+        def post(self, endpoint, **kwargs):
+            self.kwargs = kwargs
+            if endpoint.endswith("/statements"):
+                query = kwargs["data"].decode()
+                parseUpdate(query)
+                assert "DELETE" not in query and "FILTER NOT EXISTS" in query
+            else:
+                parseQuery(kwargs["data"]["query"])
+            return self
+
+        def json(self):
+            if self.kwargs["data"]["query"].startswith("ASK"):
+                return {"boolean": case == "unexpected"}
+            return {"results": {"bindings": [
+                {"version": version("1" if case == "existing" else "0")}]}}
+    repository = native_repository(BootstrapSession([]))
+    if case == "empty":
+        assert repository.initialize_empty() == 0
+    else:
+        with pytest.raises(ValueError):
+            repository.initialize_empty()
+
+
+@pytest.mark.parametrize("case", ["valid", "missing", "duplicate", "identity", "partial"])
+def test_ic12_native_snapshot(case):
+    import json
+    row = {"version": version("2"),
+           "token": {"type": "literal", "value": "a" * 32},
+           "documents": {"type": "literal", "value": json.dumps(
+               {"urn:asset": {"id": "urn:asset" if case != "identity" else "urn:other"}})}}
+    if case == "partial":
+        row["g"] = uri("urn:asset")
+    rows = [] if case == "missing" else [row]
+    if case == "duplicate":
+        rows.append(dict(row, version=version("3")))
+    repository = native_repository(Session(rows))
+    if case == "valid":
+        docs, parts, v, token = repository.native_snapshot()
+        assert docs == {"urn:asset": {"id": "urn:asset"}}
+        assert set(parts) == {"urn:asset", "urn:product"}
+        assert v == 2 and token == "a" * 32
+    else:
+        with pytest.raises(ValueError):
+            repository.native_snapshot()
