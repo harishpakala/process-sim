@@ -36,6 +36,8 @@ class AASGovernance:
                                 **self._evidence(current, initial))
         if not result["committed"]:
             raise ValueError("Initial snapshot not admitted")
+        self._version = result["version"]
+        self._blocked = False
 
     def _lift(self, documents):
         graph = Graph()
@@ -49,17 +51,28 @@ class AASGovernance:
     def snapshot(self):
         with self._lock:
             graph, version = self._manager.store.snapshot()
+            if self._blocked or version != self._version:
+                raise RuntimeError("Native state requires reconciliation")
             return deepcopy(self._documents), graph, version
 
     def submit(self, change):
         with self._lock:
-            current, version = self._manager.store.snapshot()
+            version = self._version
             def response(decision, committed=False, traces=(), outcomes=(), new_version=version):
                 return AASChangeResponse(
                     message_id=change.header.message_id, decision=decision,
                     committed=committed, repository_version=new_version,
                     triggered_policies=[t.policy_id for t in traces],
                     evaluated_contracts=list(outcomes))
+            if self._blocked:
+                return response("DEFERRED")
+            try:
+                current, observed = self._manager.store.snapshot()
+            except Exception:
+                return response("DEFERRED")
+            if observed != version:
+                self._blocked = True
+                return response("DEFERRED")
             if change.operation.expected_version != version:
                 return response("DEFERRED")
             key = change.domain.submodel_id
@@ -78,8 +91,11 @@ class AASGovernance:
                                            **self._evidence(current, candidate))
             if result["committed"]:
                 self._documents = documents
+                self._version = result["version"]
+            elif result["reason"].startswith("Persistence unresolved") or result["version"] != version:
+                self._blocked = True
             outcomes = [ContractOutcome(contract_id=r["id"], verdict=r["verdict"])
                         for r in result["contracts"].values()]
             decision = ("ACCEPTED" if result["committed"] else
                         "REJECTED" if result["verdict"] == "F" else "DEFERRED")
-            return response(decision, result["committed"], traces, outcomes, result["version"])
+            return response(decision, result["committed"], traces, outcomes, self._version)
