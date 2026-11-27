@@ -1,0 +1,14 @@
+{
+  "policy_id": "LP-03",
+  "inputs": {
+    "CoverageAttested": "evidence.coverage_attested",
+    "PolicyUnchanged": "context.policy_unchanged",
+    "AuthorityUnchanged": "context.authority_unchanged",
+    "AssignmentChanged": "dependency.assignment_changed",
+    "PreviousLookupChanged": "dependency.previous_lookup_changed",
+    "CandidateLookupChanged": "dependency.candidate_lookup_changed"
+  },
+  "outputs": {
+    "Affected": "assessment.affected"
+  }
+}
