@@ -20,12 +20,8 @@ def test_policy_chain():
     impact, ib = policy("LP-03")
     selection, sb = policy("LP-04")
     context = {point: True for point in ib["inputs"].values()}
-    for point in ("dependency.assignment_changed",
-                  "dependency.previous_lookup_changed",
-                  "dependency.candidate_lookup_changed"):
-        context[point] = False
     for changed in (False, True):
-        context["dependency.assignment_changed"] = changed
+        context["dependency.changed"] = changed
         decision = evaluate_policy(impact, resolve_inputs(impact, ib, context))
         updated = {**context, **bind_outputs(impact, ib, decision)}
         outputs = evaluate_policy(selection, resolve_inputs(selection, sb, updated))
