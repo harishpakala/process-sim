@@ -18,7 +18,8 @@ def _iri(value):
 
 class GraphDBRepository:
     def __init__(self, endpoint, graph_iris, *, metadata_graph="urn:selira:repository:metadata",
-                 session=None, timeout=60, partition=None, native_mode=False, journal_path=None):
+                 session=None, timeout=60, partition=None, native_mode=False, journal_path=None, delta_updates=False):
+        self._delta_updates = delta_updates
         self._native_mode = native_mode
         self._partition = partition
         self._lock = RLock()
@@ -284,13 +285,35 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
             subject = "<urn:selira:repository>"
             vp = "<urn:selira:version>"
             cp = "<urn:selira:commitToken>"
-            deletes = " ".join(f"GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }}" for i,g in enumerate(self._graphs))
-            # Separate OPTIONAL patterns would create a Cartesian product.
-            # UNION selects one graph's old triples per solution instead.
-            branches = " UNION ".join(f"{{ GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }} }}" for i,g in enumerate(self._graphs))
-            inserts = " ".join(f"GRAPH {g} {{ " + " ".join(
-                f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
-                for g,triples in parts.items())
+            # In native mode read the actual named partitions, not the union.
+            # Version zero has no native snapshot yet.
+            if self._native_mode and self._delta_updates:
+                if version == 0:
+                    previous = {g: Graph() for g in self._graphs}
+                    current, observed = self.snapshot()
+                    if observed != version or len(current):
+                        raise RepositoryUncertain("Unexpected initial state")
+                else:
+                    _, old_parts, observed, _ = self.native_snapshot()
+                    if observed != version:
+                        return False, observed
+                    previous = {_iri(k): v for k, v in old_parts.items()}
+                def ground_delta(g, triples):
+                    return f"GRAPH {g} {{ " + " ".join(
+                        f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
+                deletes = " ".join(ground_delta(g, rdf11_triples(previous[g]) - rdf11_triples(parts[g]))
+                                   for g in self._graphs)
+                inserts = " ".join(ground_delta(g, rdf11_triples(parts[g]) - rdf11_triples(previous[g]))
+                                   for g in self._graphs)
+                branches = ""
+            else:
+                deletes = " ".join(f"GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }}" for i,g in enumerate(self._graphs))
+                # Separate OPTIONAL patterns would create a Cartesian product.
+                # UNION selects one graph's old triples per solution instead.
+                branches = " UNION ".join(f"{{ GRAPH {g} {{ ?s{i} ?p{i} ?o{i} }} }}" for i,g in enumerate(self._graphs))
+                inserts = " ".join(f"GRAPH {g} {{ " + " ".join(
+                    f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
+                    for g,triples in parts.items())
             native_graph = "<urn:selira:repository:native>"
             if native_graph in self._graphs or native_graph == self._metadata:
                 raise ValueError("Native graph must be reserved")
@@ -305,7 +328,7 @@ WHERE {{
  OPTIONAL {{ {subject} {cp} ?previous }} }}
  FILTER NOT EXISTS {{ GRAPH {self._metadata} {{ {subject} {vp} ?other FILTER(!sameTerm(?other, {old})) }} }}
  {native_where}
- OPTIONAL {{ {branches} }}
+ {f'OPTIONAL {{ {branches} }}' if branches else ''}
 }}
 """
             if self._journal is not None:
