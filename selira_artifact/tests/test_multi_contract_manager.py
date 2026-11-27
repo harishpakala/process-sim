@@ -6,7 +6,7 @@ ROOT = Path(__file__).resolve().parents[1]
 A = Namespace("https://example.org/assetinventory/")
 P = Namespace("https://example.org/productcatalog/")
 D = Namespace("https://example.org/dexpi/")
-O = Namespace("https://example.org/opcuaconnectivity/")
+E = Namespace("https://example.org/ecad/")
 B = Namespace("https://example.org/engineeringbom/")
 N = Namespace("urn:test:")
 
@@ -17,8 +17,10 @@ def fixture():
     for triple in [(N.asset, RDF.type, A.Asset), (N.asset, A.hasAssetIdentifier, Literal("a")),
                    (N.asset, A.hasProductIdentifier, Literal("p")),
                    (N.product, RDF.type, P.Product), (N.product, P.hasProductIdentifier, Literal("p")),
-                   (N.equipment, RDF.type, D.Equipment), (N.equipment, D.hasAssetIdentifier, Literal("a")),
-                   (N.signal, RDF.type, O.SignalMapping), (N.signal, O.hasAssetIdentifier, Literal("a")),
+                   (N.equipment, RDF.type, D.Equipment), (N.equipment, D.hasAssetIdentifier, Literal("https://aas.example.com/FI101")),
+                   (N.equipment, D.hasLocalId, Literal("FI_101")),
+                   (N.signal, RDF.type, E.Device), (N.signal, E.hasAssetIdentifier, Literal("https://aas.example.com/CV1006")),
+                   (N.signal, E.hasLocalId, Literal("CV-1006")),
                    (N.bom, RDF.type, B.BOMItemRecord), (N.bom, B.hasProductIdentifier, Literal("p"))]:
         graph.add(triple)
     evidence = {t for c, _ in manager._contracts.values() for t in c["requires_complete"]}
@@ -42,12 +44,12 @@ def test_atomic_multi_contract_admission():
     assert version == 1 and (N.product, P.hasProductIdentifier, Literal("p")) in snapshot
 
 
-def test_asset_change_affects_two_contracts():
+def test_asset_change_is_isolated():
     m, g, flags = fixture()
     g.set((N.asset, A.hasAssetIdentifier, Literal("different")))
     r = m.submit(g, expected_version=0, **flags)
-    assert r["verdict"] == "F"
-    assert {x["id"] for x in r["contracts"].values() if x["verdict"] == "F"} == {"SC_02", "SC_03"}
+    assert r["verdict"] == "V"
+    assert all(x["verdict"] == "V" for x in r["contracts"].values())
 
 
 def test_missing_attestation_and_stale_version():
@@ -76,7 +78,8 @@ def test_selective_shared_dependencies():
     assert r["verdict"] == "F" and r["reassessment"]["equivalent"]
     assert r["reassessment"]["selective_evaluations"] == 2
     g.set((N.product, P.hasProductIdentifier, Literal("p")))
-    g.set((N.asset, A.hasAssetIdentifier, Literal("other")))
+    g.set((N.equipment, D.hasLocalId, Literal("WRONG")))
+    g.set((N.signal, E.hasLocalId, Literal("WRONG")))
     r = m.submit(g, expected_version=2, **flags, **reuse)
     assert r["verdict"] == "F" and r["reassessment"]["equivalent"]
     assert r["reassessment"]["selective_evaluations"] == 2

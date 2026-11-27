@@ -1,12 +1,24 @@
 """Selective logical reference reassessment; not incremental SHACL."""
 from rdflib import RDF, URIRef
+from rdflib.util import from_n3
 from pathlib import Path
 from ..policy_evaluator import load_policy, evaluate_policy
+from selira.formal.identifier_comparison import compare_fields
 
 
 def project(graph, contracts):
     assigned, index = {}, {}
     for key, (entry, _) in contracts.items():
+        if entry.get("kind") == "standalone_match":
+            fp = URIRef(entry["focus_predicate"])
+            left = URIRef(entry["left_predicate"])
+            right = URIRef(entry["right_predicate"])
+            for node in set(graph.subjects(fp, None)):
+                assigned[key, str(node)] = (
+                    tuple(sorted(v.n3() for v in graph.objects(node, left))),
+                    tuple(sorted(v.n3() for v in graph.objects(node, right))),
+                )
+            continue
         fp, tp, tc = (URIRef(entry[k]) for k in
                       ("focus_predicate", "catalog_predicate", "catalog_class"))
         for nodes, predicate, is_focus in (
@@ -25,13 +37,15 @@ def project(graph, contracts):
 
 
 def select(old, oi, new, ni, *, coverage_attested=False,
-            policy_unchanged=False, authority_unchanged=False):
+            policy_unchanged=False, authority_unchanged=False, policy_paths=None):
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
     policy_dir = Path(__file__).resolve().parents[3] / "policies"
-    impact = load_policy(policy_dir / "LP-03.safsl")
-    selection = load_policy(policy_dir / "LP-04.safsl")
+    impact_path, selection_path = policy_paths if policy_paths is not None else (
+        policy_dir / "LP-03.safsl", policy_dir / "LP-04.safsl")
+    impact = load_policy(Path(impact_path))
+    selection = load_policy(Path(selection_path))
     attestations = {"CoverageAttested": coverage_attested,
                     "PolicyUnchanged": policy_unchanged,
                     "AuthorityUnchanged": authority_unchanged}
@@ -52,15 +66,29 @@ def select(old, oi, new, ni, *, coverage_attested=False,
     return affected, fallback
 
 def compare(before, after, contracts, *, coverage_attested=False,
-            policy_unchanged=False, authority_unchanged=False):
+            policy_unchanged=False, authority_unchanged=False, policy_paths=None):
     old, oi = project(before, contracts)
     new, ni = project(after, contracts)
     universe = old.keys() | new.keys()
     affected, fallback = select(old, oi, new, ni, coverage_attested=coverage_attested,
-                                policy_unchanged=policy_unchanged, authority_unchanged=authority_unchanged)
+                                policy_unchanged=policy_unchanged, authority_unchanged=authority_unchanged,
+                                policy_paths=policy_paths)
     def check(k, assignments, index):
         if k not in assignments:
             return "NA"
+        entry = contracts[k[0]][0]
+        if entry.get("kind") == "standalone_match":
+            left, right = assignments[k]
+            if len(left) != 1 or len(right) != 1:
+                return "F"
+            policy = entry["comparison_policy"]
+            if policy["kind"] not in ("normalized_asset_identifier", "lexical_equality"):
+                raise ValueError("Unsupported identifier comparison policy")
+            try:
+                valid = compare_fields(str(from_n3(left[0])), str(from_n3(right[0])), policy)
+            except ValueError:
+                valid = False
+            return "V" if valid else "F"
         return "V" if len(index.get((k[0], assignments[k]), set())) == 1 else "F"
 
     prior = {k: check(k, old, oi) for k in universe}

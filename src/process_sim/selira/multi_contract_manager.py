@@ -12,12 +12,15 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.multi_contract import compare
 from process_sim.safsl.shacl.compiler import compile_contract
-from process_sim.safsl.shacl.identifier_comparison import identifier_matches
+from process_sim.safsl.shacl.identifier_comparison import compare_fields
 from process_sim.safsl.shacl.admission import VersionedGraphStore, Verdict
 
 
 class MultiContractAutomationManager:
-    def __init__(self, artifacts):
+    def __init__(self, artifacts, *, policy_paths=None):
+        self._policy_paths = tuple(map(Path, policy_paths)) if policy_paths is not None else None
+        if self._policy_paths is not None and len(self._policy_paths) != 2:
+            raise ValueError("Expected impact and selection policy paths")
         self._contracts = {}
         self.store = VersionedGraphStore()
         self._lock = RLock()
@@ -46,10 +49,12 @@ class MultiContractAutomationManager:
             raise ValueError("At least one contract required")
 
     @classmethod
-    def from_directory(cls, directory):
+    def from_directory(cls, directory, *, policy_paths=None):
         directory = Path(directory)
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
-                    for p in sorted((directory / "safsl").glob("SC-*.safsl"))])
+                    for p in sorted((directory / "safsl").glob("*.safsl"))
+                    if (directory / "bindings" / (p.stem + ".json")).is_file()],
+                   policy_paths=policy_paths)
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
         fp = URIRef(entry["focus_predicate"])
@@ -101,9 +106,8 @@ class MultiContractAutomationManager:
         if not focus:
             return finish(Verdict.NA, "Confirmed empty predicate-selected population")
         policy = entry["comparison_policy"]
-        if policy["kind"] != "normalized_asset_identifier":
+        if policy["kind"] not in ("normalized_asset_identifier", "lexical_equality"):
             return finish(Verdict.U, "Unsupported identifier comparison policy")
-        exceptions = tuple(tuple(pair) for pair in policy.get("exceptions", []))
         left = URIRef(entry["left_predicate"])
         right = URIRef(entry["right_predicate"])
         expected = set()
@@ -113,9 +117,8 @@ class MultiContractAutomationManager:
             valid = False
             if len(local) == len(asset) == 1:
                 try:
-                    valid = identifier_matches(str(next(iter(local))),
-                                               str(next(iter(asset))),
-                                               exceptions=exceptions)
+                    valid = compare_fields(str(next(iter(local))),
+                                               str(next(iter(asset))), policy)
                 except ValueError:
                     pass
             if not valid:
@@ -158,7 +161,8 @@ class MultiContractAutomationManager:
                         reassessment = compare(current, proposed, self._contracts,
                                                coverage_attested=coverage_attested,
                                                policy_unchanged=policy_unchanged,
-                                               authority_unchanged=authority_unchanged)
+                                               authority_unchanged=authority_unchanged,
+                                               policy_paths=self._policy_paths)
                         if not reassessment["equivalent"]:
                             values.add("U")
                     except Exception:

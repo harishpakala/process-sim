@@ -3,17 +3,16 @@ import base64
 from rdflib import RDF, URIRef
 from selira.language.parser.contracts import parse_contract
 from selira.language.ast.contracts import MatchRule
-from selira.formal.identifier_comparison import identifier_matches
+from selira.formal.identifier_comparison import compare_fields
 
 def _evaluate_match(rule, binding, graph):
     policy = binding.get("comparison_policy", {})
-    if policy.get("kind") != "normalized_asset_identifier":
+    if policy.get("kind") not in ("normalized_asset_identifier", "lexical_equality"):
         raise ValueError("Unsupported comparison policy")
     left = URIRef(binding["fields"][rule.left_field])
     right = URIRef(binding["fields"][rule.right_field])
     nodes = (set(graph.subjects(right, None)) if binding.get("target_by_predicate")
              else set(graph.subjects(RDF.type, URIRef(binding["class"]))))
-    exceptions = {tuple(pair) for pair in policy.get("exceptions", [])}
     rows = {}
     for node in nodes:
         local = set(graph.objects(node, left))
@@ -21,9 +20,8 @@ def _evaluate_match(rule, binding, graph):
         valid = False
         if len(local) == len(asset) == 1:
             try:
-                valid = identifier_matches(str(next(iter(local))),
-                                           str(next(iter(asset))),
-                                           exceptions=exceptions)
+                valid = compare_fields(str(next(iter(local))),
+                                           str(next(iter(asset))), policy)
             except ValueError:
                 pass
         rows[str(node)] = {"conforms": valid,

@@ -3,7 +3,7 @@ from rdflib import RDF, URIRef
 from rdflib.util import from_n3
 from pathlib import Path
 from .policy import load_policy, evaluate_policy
-from process_sim.safsl.shacl.identifier_comparison import identifier_matches
+from process_sim.safsl.shacl.identifier_comparison import compare_fields
 
 
 def project(graph, contracts):
@@ -37,15 +37,17 @@ def project(graph, contracts):
 
 
 def compare(before, after, contracts, *, coverage_attested=False,
-            policy_unchanged=False, authority_unchanged=False):
+            policy_unchanged=False, authority_unchanged=False, policy_paths=None):
     old, oi = project(before, contracts)
     new, ni = project(after, contracts)
     universe = old.keys() | new.keys()
     fallback = not (coverage_attested and policy_unchanged and authority_unchanged)
     changed = {k for k in oi.keys() | ni.keys() if oi.get(k, set()) != ni.get(k, set())}
     policy_dir = Path(__file__).resolve().parents[4] / "selira_integration/contracts/safsl"
-    impact = load_policy(policy_dir / "LP-03.safsl")
-    selection = load_policy(policy_dir / "LP-04.safsl")
+    impact_path, selection_path = policy_paths if policy_paths is not None else (
+        policy_dir / "LP-03.safsl", policy_dir / "LP-04.safsl")
+    impact = load_policy(Path(impact_path))
+    selection = load_policy(Path(selection_path))
     attestations = {"CoverageAttested": coverage_attested,
                     "PolicyUnchanged": policy_unchanged,
                     "AuthorityUnchanged": authority_unchanged}
@@ -72,11 +74,10 @@ def compare(before, after, contracts, *, coverage_attested=False,
             if len(left) != 1 or len(right) != 1:
                 return "F"
             policy = entry["comparison_policy"]
-            if policy["kind"] != "normalized_asset_identifier":
+            if policy["kind"] not in ("normalized_asset_identifier", "lexical_equality"):
                 raise ValueError("Unsupported identifier comparison policy")
             try:
-                valid = identifier_matches(str(from_n3(left[0])), str(from_n3(right[0])),
-                                           exceptions=tuple(tuple(p) for p in policy.get("exceptions", [])))
+                valid = compare_fields(str(from_n3(left[0])), str(from_n3(right[0])), policy)
             except ValueError:
                 valid = False
             return "V" if valid else "F"

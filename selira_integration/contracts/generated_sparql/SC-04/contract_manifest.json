@@ -1,0 +1,25 @@
+{
+  "specification": "BomProductIntegrity",
+  "contracts": [
+    {
+      "id": "SC_04",
+      "shape": "https://example.org/selira/contracts#BomProductIntegrity_SC_04",
+      "focus_template_id": "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+      "catalog_template_id": "https://example.org/sm/product-catalog-template",
+      "focus_class": "https://example.org/engineeringbom/BOMItemRecord",
+      "catalog_class": "https://example.org/productcatalog/Product",
+      "focus_predicate": "https://example.org/engineeringbom/hasProductIdentifier",
+      "catalog_predicate": "https://example.org/productcatalog/hasProductIdentifier",
+      "dependencies": [
+        "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+        "https://example.org/sm/product-catalog-template"
+      ],
+      "requires_complete": [
+        "https://example.org/sm/TEP_EngineeringBOM_V2_Template",
+        "https://example.org/sm/product-catalog-template"
+      ],
+      "runtime_evidence_complete": false,
+      "identity_policy": "distinct RDF resources; canonicalize equivalent entities before validation"
+    }
+  ]
+}
