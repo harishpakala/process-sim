@@ -11,13 +11,18 @@ from rdflib import Graph, RDF, URIRef
 from rdflib.namespace import SH
 from pyshacl import validate
 from .reassessment.selective import compare
+from .contract_registry import load_registry
+from .policy_executor import PolicyExecutor
 from selira.compiler.shacl import compile_contract
 from selira.formal.identifier_comparison import compare_fields
 from selira.runtime.admission import VersionedGraphStore, Verdict
 
 
 class MultiContractAutomationManager:
-    def __init__(self, artifacts, *, policy_paths=None):
+    def __init__(self, artifacts, *, policy_paths=None, policy_executor=None):
+        self._policy_executor = policy_executor
+        if policy_paths is not None and policy_executor is not None:
+            raise ValueError("Choose registry or explicit policy paths")
         self._policy_paths = tuple(map(Path, policy_paths)) if policy_paths is not None else None
         if self._policy_paths is not None and len(self._policy_paths) != 2:
             raise ValueError("Expected impact and selection policy paths")
@@ -51,6 +56,13 @@ class MultiContractAutomationManager:
     @classmethod
     def from_directory(cls, directory, *, policy_paths=None):
         directory = Path(directory)
+        if (directory / "registry" / "contract_registry.json").exists():
+            entries = load_registry(directory)
+            if policy_paths is not None:
+                raise ValueError("Registry configuration replaces explicit policy paths")
+            return cls([(directory / e["specification"], directory / e["binding"])
+                        for e in entries if e["kind"] == "SC" and e["enabled"]],
+                       policy_executor=PolicyExecutor(directory))
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
                     for p in sorted((directory / "contracts").glob("*.safsl"))
                     if (directory / "bindings" / (p.stem + ".json")).is_file()],
@@ -162,7 +174,8 @@ class MultiContractAutomationManager:
                                                coverage_attested=coverage_attested,
                                                policy_unchanged=policy_unchanged,
                                                authority_unchanged=authority_unchanged,
-                                               policy_paths=self._policy_paths)
+                                               policy_paths=self._policy_paths,
+                                               policy_executor=self._policy_executor)
                         if not reassessment["equivalent"]:
                             values.add("U")
                     except Exception:
