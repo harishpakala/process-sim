@@ -94,10 +94,14 @@ class SAFSLTransformer(Transformer):
         submodels = []
         references = []
         processes = []
+        start_terminal = None
 
         for item in items[1:]:
 
-            if isinstance(item, SubmodelReference):
+            if isinstance(item, StartTerminal):
+                start_terminal = item
+
+            elif isinstance(item, SubmodelReference):
                 submodels.append(item)
 
             elif isinstance(item, ProcessNode):
@@ -111,7 +115,8 @@ class SAFSLTransformer(Transformer):
             name=name,
             submodels=submodels,
             references=references,
-            processes=processes
+            processes=processes,
+            start_terminal=start_terminal
         )
 
     def reference_path(self, items):
