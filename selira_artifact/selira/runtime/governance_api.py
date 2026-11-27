@@ -4,6 +4,7 @@ Local, synchronous research service. Evidence is supplied by a server-side
 provider, never accepted as an attestation from the HTTP request.
 """
 from typing import Literal
+from .aas_messages import AASChangeRequest, AASChangeResponse
 
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, ConfigDict, Field
@@ -45,20 +46,34 @@ class ChangeRequest(BaseModel):
     deletions: list[Triple] = Field(default_factory=list)
 
 
-def create_app(manager, *, evidence_provider=None):
+def create_app(manager=None, *, evidence_provider=None, aas_governance=None):
     """Inject a coordinator and optional trusted snapshot evidence provider.
 
     Provider receives (current, candidate) graphs and returns submit keyword
     attestations. Without a provider, the existing manager defaults apply.
     """
+    if (manager is None) == (aas_governance is None):
+        raise ValueError("Choose exactly one repository write coordinator")
     app = FastAPI(title="SELiRA Automation Manager", version="0.1.0")
 
     @app.get("/api/v1/health")
     def health():
-        return {"status": "ok", "version": manager.store.snapshot()[1]}
+        return {"status": "ok", "version": (aas_governance.snapshot()[2]
+                if aas_governance is not None else manager.store.snapshot()[1])}
+
+    @app.post("/api/v1/changes/aas", response_model=AASChangeResponse)
+    def submit_aas(change: AASChangeRequest):
+        if aas_governance is None:
+            raise HTTPException(status_code=409, detail="Native AAS governance not configured")
+        try:
+            return aas_governance.submit(change)
+        except ValueError as exc:
+            raise HTTPException(status_code=422, detail=str(exc)) from exc
 
     @app.post("/api/v1/changes")
     def submit(change: ChangeRequest):
+        if aas_governance is not None:
+            raise HTTPException(status_code=409, detail="Direct RDF writes disabled in native AAS mode")
         try:
             additions = {t.rdf() for t in change.additions}
             deletions = {t.rdf() for t in change.deletions}
