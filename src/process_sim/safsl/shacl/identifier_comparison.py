@@ -31,3 +31,12 @@ def identifier_matches(local_id: str, asset_identifier: str, *, exceptions=()) -
     if not local or not authoritative:
         raise ValueError("Empty normalized identifier")
     return local == authoritative or (local_id, asset_identifier) in exceptions
+
+
+def compare_fields(left, right, policy):
+    """Evaluate the explicitly selected lexical comparison policy."""
+    if policy["kind"] == "lexical_equality":
+        return left == right
+    if policy["kind"] == "normalized_asset_identifier":
+        return identifier_matches(left, right, exceptions=tuple(tuple(p) for p in policy.get("exceptions", [])))
+    raise ValueError("Unsupported comparison policy")
