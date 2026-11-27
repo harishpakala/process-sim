@@ -1,72 +1,91 @@
-"""Controlled multi-contract lifecycle over the TEP RDF union.
-
-All changes are in memory. Attestations are experimental inputs, not
-independent evidence of engineering authority.
-"""
+"""Real RDF baseline and controlled, in-memory lifecycle for migrated contracts."""
 import argparse
 import hashlib
 import json
 import platform
-from pathlib import Path
 from importlib.metadata import version
+from pathlib import Path
 
-from rdflib import Graph, RDF, URIRef, Literal
+from rdflib import Graph, Literal, URIRef, RDF
 from selira.runtime.automation_manager import MultiContractAutomationManager
+from selira.runtime.reassessment.selective import compare
+from selira.formal.identifier_comparison import identifier_matches
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACTS = ROOT
-DOMAINS = ("assetinventory", "productcatalog", "dexpi", "opcuaconnectivity", "engineeringbom")
+DOMAINS = ("assetinventory", "productcatalog", "dexpi", "ecad", "engineeringbom")
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", type=Path, default=ROOT / "evaluation/results/reproduced/multi_contract_lifecycle.json")
-    args = parser.parse_args()
+def run():
     manager = MultiContractAutomationManager.from_directory(CONTRACTS)
-    entries = {c["id"]: c for c, _ in manager._contracts.values()}
-    assert set(entries) == {"SC_01", "SC_02", "SC_03", "SC_04"}
-    evidence = {t for c in entries.values() for t in c["requires_complete"]}
     graph = Graph()
-    hashes = {}
     paths = [ROOT / "datasets/tep_nexus" / (d + "-instance.ttl") for d in DOMAINS]
     for path in paths:
         graph.parse(path, format="turtle")
-    for path in paths + sorted((CONTRACTS / "contracts").glob("SC-*.safsl")) + sorted((CONTRACTS / "bindings").glob("SC-*.json")):
-        hashes[str(path.relative_to(ROOT))] = hashlib.sha256(path.read_bytes()).hexdigest()
+    paths += sorted((CONTRACTS / "contracts").glob("*.safsl"))
+    paths += sorted((ROOT / "policies").glob("*.safsl"))
+    paths += sorted((CONTRACTS / "bindings").glob("SC-*.json"))
+    hashes = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
+    evidence = {t for c, _ in manager._contracts.values() for t in c["requires_complete"]}
+    flags = dict(evidence_complete=evidence, identity_normalized=True, applicability_confirmed=True)
+    reuse = dict(coverage_attested=True, policy_unchanged=True, authority_unchanged=True)
+    baseline = manager.submit(graph, expected_version=0, **flags)
+    assert not baseline["committed"], baseline
+    assert baseline["verdict"] == "F", baseline
+    assert all(r["equivalent"] is True for r in baseline["contracts"].values()), baseline
+    details = {}
+    controlled = Graph()
+    controlled += graph
+    for key, (entry, _) in manager._contracts.items():
+        if entry.get("kind") != "standalone_match":
+            continue
+        left, right = map(URIRef, (entry["left_predicate"], entry["right_predicate"]))
+        exceptions = tuple(tuple(p) for p in entry["comparison_policy"].get("exceptions", []))
+        rows = []
+        for node in sorted(set(graph.subjects(right, None)), key=str):
+            local = list(graph.objects(node, left))
+            asset = list(graph.objects(node, right))
+            valid = False
+            if len(local) == len(asset) == 1:
+                try:
+                    valid = identifier_matches(str(local[0]), str(asset[0]), exceptions=exceptions)
+                except ValueError:
+                    pass
+            rows.append(dict(node=str(node), local_ids=sorted(map(str, local)),
+                             asset_identifiers=sorted(map(str, asset)), conforms=valid))
+            if not valid:
+                # Experimental repair only: not an engineering recommendation.
+                assert len(asset) == 1
+                controlled.set((node, left, Literal(str(asset[0]).rsplit("/", 1)[-1])))
+        violations = {r["node"] for r in rows if not r["conforms"]}
+        assert violations == set(baseline["contracts"][key]["violations"])
+        details[entry["id"]] = dict(total=len(rows), consistent=len(rows)-len(violations),
+                                    inconsistent=len(violations), rows=rows)
+    assert {k: (v["total"], v["inconsistent"]) for k, v in details.items()} == {
+        "SC_02": (39, 9), "SC_03": (40, 29)}
+    repair_comparison = compare(graph, controlled, manager._contracts, **reuse)
+    assert repair_comparison["equivalent"]
+    assert repair_comparison["selective_evaluations"] == 38
+    entries = {c['id']: c for c, _ in manager._contracts.values()}
     events = []
-
-    def run(event, description, expected, mutate=None, *, initial=False,
-            complete=True, coverage=True, failures=(), affected=None):
+    def submit(name, candidate, expected, *, coverage=True, complete=True, affected=None, failures=()):
         before, rev = manager.store.snapshot()
-        candidate = Graph()
-        candidate += graph if initial else before
-        if mutate:
-            mutate(candidate)
         result = manager.submit(candidate, expected_version=rev,
-                                evidence_complete=evidence if complete else (),
-                                identity_normalized=True, applicability_confirmed=True,
-                                coverage_attested=coverage, policy_unchanged=True,
-                                authority_unchanged=True)
+                                **(flags if complete else {}),
+                                **dict(reuse, coverage_attested=coverage))
+        assert result["verdict"] == expected, (name, result)
         after, new_rev = manager.store.snapshot()
-        assert result["verdict"] == expected, (event, result)
-        assert result["committed"] == (expected == "V"), event
-        assert new_rev == rev + int(expected == "V"), event
-        assert set(after) == set(candidate if expected == "V" else before), event
-        assert {r["id"] for r in result["contracts"].values() if r["verdict"] == "F"} == set(failures), event
+        assert new_rev == rev + int(expected == "V")
+        assert set(after) == set(candidate if expected == "V" else before)
+        assert result["committed"] == (expected == "V"), name
+        assert {r["id"] for r in result["contracts"].values() if r["verdict"] == "F"} == set(failures), name
         report = result["reassessment"]
         if report is not None:
-            assert report["equivalent"], event
-            assert report["full_fallback"] == (not coverage), event
+            assert report["equivalent"], result
+            assert report["full_fallback"] == (not coverage), name
         if affected is not None:
-            assert report is not None, event
-            assert report["selective_evaluations"] == affected, event
-        events.append(dict(result, event=event, description=description,
-                           additions=len(set(candidate)-set(before)),
-                           removals=len(set(before)-set(candidate))))
-        print(event, expected, "version", new_rev,
-              "selective/full", "-" if report is None else
-              f'{report["selective_evaluations"]}/{report["full_evaluations"]}')
-
+            assert report is not None and report["selective_evaluations"] == affected, result
+        events.append(dict(result, event=name, additions=len(set(candidate)-set(before)), removals=len(set(before)-set(candidate))))
     def predicates(sc):
         c = entries[sc]
         return tuple(URIRef(c[k]) for k in ("focus_predicate", "catalog_predicate", "catalog_class"))
@@ -96,36 +115,61 @@ def main():
         g.add((fresh("unused-product"), RDF.type, tc))
         g.add((fresh("unused-product"), tp, Literal(str(fresh("unused-id")))))
 
-    run("E0", "Initial admission", "V", initial=True)
+    submit("controlled_initial_admission", controlled, "V")
     assert {r["id"]: r["focus_count"] for r in events[0]["contracts"].values()} == {
-        "SC_01": 38, "SC_02": 39, "SC_03": 34, "SC_04": 71}
-    run("E1", "Unreferenced product addition", "V", unused, affected=0)
-    run("E2", "Structurally valid asset product reassignment", "V", lambda g: reassign(g, "SC_01"), affected=1)
-    run("E3", "Unresolved asset product reference", "F", lambda g: reassign(g, "SC_01", True), failures=("SC_01",), affected=1)
-    run("E4", "Duplicate product identifier shared across contracts", "F", lambda g: duplicate(g, "SC_01", "SC_04"), failures=("SC_01", "SC_04"))
-    run("E5", "Duplicate asset identifier shared across contracts", "F", lambda g: duplicate(g, "SC_02", "SC_03"), failures=("SC_02", "SC_03"))
-    run("E6", "Structurally valid DEXPI reassignment", "V", lambda g: reassign(g, "SC_02"), affected=1)
-    run("E7", "Unresolved OPC UA asset reference", "F", lambda g: reassign(g, "SC_03", True), failures=("SC_03",), affected=1)
-    run("E8", "Unresolved BOM product reference", "F", lambda g: reassign(g, "SC_04", True), failures=("SC_04",), affected=1)
-    run("E9", "Incomplete evidence", "U", complete=False)
-    assert events[-1]["reassessment"] is None
-    run("E10", "Unconfirmed dependency coverage", "V", coverage=False, affected=182)
+        "SC_01": 38, "SC_02": 39, "SC_03": 40, "SC_04": 71}
+    for name, mutate, expected, affected, failures in (
+        ("unreferenced_product_addition", unused, "V", 0, ()),
+        ("valid_asset_product_reassignment", lambda g: reassign(g, "SC_01"), "V", 1, ()),
+        ("unresolved_asset_product_reference", lambda g: reassign(g, "SC_01", True), "F", 1, ("SC_01",)),
+        ("shared_duplicate_product_identifier", lambda g: duplicate(g, "SC_01", "SC_04"), "F", 6, ("SC_01", "SC_04")),
+        ("unresolved_bom_product_reference", lambda g: reassign(g, "SC_04", True), "F", 1, ("SC_04",)),
+    ):
+        candidate, _ = manager.store.snapshot()
+        mutate(candidate)
+        submit(name, candidate, expected, affected=affected, failures=failures)
+
+    for sc in ("SC_02", "SC_03"):
+        entry = next(e for e, _ in manager._contracts.values() if e["id"] == sc)
+        left, right = map(URIRef, (entry["left_predicate"], entry["right_predicate"]))
+        node = sorted(set(controlled.subjects(right, None)), key=str)[0]
+        candidate, _ = manager.store.snapshot()
+        candidate.set((node, left, Literal("IC09_VALID")))
+        candidate.set((node, right, URIRef("https://aas.example.com/IC09VALID")))
+        submit(sc + "_valid_identifier_reassignment", candidate, "V", affected=1)
+        candidate, _ = manager.store.snapshot()
+        candidate.set((node, left, Literal("IC08_INVALID")))
+        submit(sc + "_local_mismatch", candidate, "F", affected=1, failures=(sc,))
+        candidate, _ = manager.store.snapshot()
+        candidate.set((node, right, URIRef("https://aas.example.com/IC08INVALID")))
+        submit(sc + "_asset_mismatch", candidate, "F", affected=1, failures=(sc,))
+    candidate, _ = manager.store.snapshot()
+    candidate.add((URIRef("urn:ic08:unrelated"), URIRef("https://example.org/opcuaconnectivity/hasAssetIdentifier"), Literal("unrelated")))
+    submit("unrelated_opcua_change", candidate, "V", affected=0)
+    submit("missing_attestations", candidate, "U", complete=False)
+    submit("coverage_fallback", candidate, "V", coverage=False, affected=188)
     reports = [e["reassessment"] for e in events if e["reassessment"] is not None]
     full = sum(r["full_evaluations"] for r in reports)
     selective = sum(r["selective_evaluations"] for r in reports)
-    summary = {"events": len(events), "admitted": sum(e["committed"] for e in events),
-               "rejected": sum(e["verdict"] == "F" for e in events),
-               "deferred": sum(e["verdict"] == "U" for e in events),
-               "comparisons": len(reports), "equivalent": sum(r["equivalent"] for r in reports),
-               "full_evaluations": full, "selective_evaluations": selective,
-               "logical_reduction_percent": 100 * (full-selective)/full}
-    payload = {"scope": "controlled structural integrity; caller attestations; logical counts only",
-               "python": platform.python_version(), "rdflib": version("rdflib"),
-               "pyshacl": version("pyshacl"), "input_sha256": hashes,
-               "baseline_union_triples": len(graph), "summary": summary, "events": events}
+    return dict(scope="Real baseline; controlled in-memory repair and lifecycle; caller attestations; logical counts only",
+                python=platform.python_version(), rdflib=version("rdflib"), pyshacl=version("pyshacl"),
+                input_sha256=hashes, baseline_union_triples=len(graph), baseline=baseline,
+                identifier_details=details, repair_comparison=repair_comparison, events=events,
+                summary=dict(events=1+len(events), admitted=sum(e["committed"] for e in events),
+                             rejected=1+sum(e["verdict"] == "F" for e in events), deferred=sum(e["verdict"] == "U" for e in events),
+                             full_evaluations=full, selective_evaluations=selective,
+                             equivalent_comparisons=sum(r["equivalent"] for r in reports),
+                             comparisons=len(reports), logical_reduction_percent=100*(full-selective)/full))
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output", type=Path, default=ROOT / "evaluation/results/reproduced/multi_contract_lifecycle.json")
+    args = parser.parse_args()
+    payload = run()
     args.output.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(payload, indent=2) + "\n", encoding="utf-8")
-    print(json.dumps(summary, indent=2))
+    print(json.dumps({"baseline": payload["baseline"]["verdict"], "summary": payload["summary"]}, indent=2))
     print("Results:", args.output)
 
 
