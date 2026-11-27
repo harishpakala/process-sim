@@ -201,3 +201,41 @@ def test_ic12_native_governance_commit_gate(service, monkeypatch, case, decision
     else:
         assert coordinator.snapshot()[0] == before
         assert coordinator.snapshot()[2] == version
+
+
+@pytest.mark.parametrize("case", ["valid", "mismatch", "evidence", "registration"])
+def test_ic12_restart_recovery(service, monkeypatch, case):
+    from copy import deepcopy
+    from semantic.ontoutils import compute_uri
+    coordinator, enabled = service
+    registrations = [(doc, coordinator._adapters[key])
+                     for key, doc in coordinator.snapshot()[0].items()]
+    assert coordinator.submit(request(coordinator)).committed
+    documents, graph, version = coordinator.snapshot()
+    parts = {str(compute_uri(key)): coordinator._adapters[key].lift_instance(doc)
+             for key, doc in documents.items()}
+    persisted = deepcopy(documents)
+    if case == "mismatch":
+        next(iter(parts.values())).remove((None, None, None))
+    elif case == "registration":
+        persisted.pop(next(iter(persisted)))
+    elif case == "evidence":
+        enabled[0] = False
+    store = coordinator._manager.store
+    monkeypatch.setattr(store, "native_snapshot",
+                        lambda: (persisted, parts, version, "a" * 32), raising=False)
+    def forbidden(*args):
+        pytest.fail("Recovery must not write")
+    monkeypatch.setattr(store, "compare_and_commit", forbidden)
+    monkeypatch.setattr(store, "compare_and_commit_native", forbidden, raising=False)
+    def restart():
+        return AASGovernance(coordinator._manager, registrations, coordinator._policies,
+                             evidence_provider=coordinator._provider, recover=True)
+    if case == "valid":
+        recovered = restart()
+        actual, rdf, v = recovered.snapshot()
+        assert actual == documents and set(rdf) == set(graph) and v == version
+        assert actual != dict((doc["id"], doc) for doc, _ in registrations)
+    else:
+        with pytest.raises(ValueError):
+            restart()
