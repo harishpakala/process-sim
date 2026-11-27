@@ -1,18 +1,16 @@
 {
   "templates": {
-    "https://example.org/sm/tep-opcua-connectivity-template": {
-      "class": "https://example.org/opcuaconnectivity/SignalMapping",
+    "https://example.org/sm/ecad": {
+      "class": "https://example.org/ecad/Device",
       "fields": {
-        "AssetIdentifier": "https://example.org/opcuaconnectivity/hasAssetIdentifier"
+        "LocalId": "https://example.org/ecad/hasLocalId",
+        "AssetIdentifier": "https://example.org/ecad/hasAssetIdentifier"
       },
-      "target_by_predicate": true
-    },
-    "https://example.org/sm/asset-inventory-template": {
-      "class": "https://example.org/assetinventory/Asset",
-      "fields": {
-        "AssetIdentifier": "https://example.org/assetinventory/hasAssetIdentifier"
-      },
-      "lexical_match": true
+      "target_by_predicate": true,
+      "comparison_policy": {
+        "kind": "normalized_asset_identifier",
+        "exceptions": []
+      }
     }
   }
 }
