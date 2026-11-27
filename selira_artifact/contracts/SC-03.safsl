@@ -1,10 +1,8 @@
-Specification SignalAssetIntegrity {
-  Ref SubmodelTemplate sources = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LXRlbXBsYXRl";
-  Ref SubmodelTemplate targets = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9hc3NldC1pbnZlbnRvcnktdGVtcGxhdGU=";
+Specification EcadAssetIntegrity {
+  Ref SubmodelTemplate sources = "aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk";
   Contract SC_03 {
     forall source in sources {
-      existsExactlyOne target in targets
-        where matches(source.AssetIdentifier, target.AssetIdentifier);
+      matches(source.LocalId, source.AssetIdentifier);
     }
   }
 }
