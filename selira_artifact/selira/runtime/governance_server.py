@@ -10,7 +10,7 @@ from .graphdb_repository import GraphDBRepository
 from .semantic_lifting import SemanticLiftingAdapter
 
 
-def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=False):
+def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=False, embedded=False):
     from semantic.config import TARGETS
     from semantic.ontoutils import compute_uri
     from selira.language.parser.frontend import parse_safsl
@@ -100,6 +100,8 @@ def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=Fa
             store.adopt_qualified(documents, parts)
         service = AASGovernance(manager, registrations, policies,
                                 recover=mode in ("recover", "adopt"), evidence_provider=evidence)
+        if embedded:
+            return service
         return create_app(aas_governance=service)
     except Exception:
         store._journal.close()
