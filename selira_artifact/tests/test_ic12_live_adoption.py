@@ -58,7 +58,28 @@ def test_ic12_live_adoption(tmp_path):
         build_service(endpoint, journal, mode="adopt", evidence_file=evidence)
     assert store.inspect_adoption(parts)["eligible"]
     flags(True)
-    app = build_service(endpoint, journal, mode="adopt", evidence_file=evidence)
+    # Simulate loss of the adoption response after the server completed it.
+    from selira.runtime.graphdb_repository import RepositoryUncertain
+    class LostResponse:
+        def post(self, url, **kwargs):
+            response = requests.post(url, **kwargs)
+            if url.endswith("/statements"):
+                response.raise_for_status()
+                raise RuntimeError("Simulated lost adoption response")
+            return response
+    interrupted = GraphDBRepository(endpoint, list(parts), native_mode=True,
+                                    journal_path=journal, session=LostResponse())
+    with pytest.raises(RepositoryUncertain, match="Adoption outcome unresolved"):
+        interrupted.adopt_qualified(docs, parts)
+    assert interrupted.pending_commit()[1] == -1
+    interrupted._journal.close()
+    with pytest.raises(RuntimeError, match="reconciliation"):
+        build_service(endpoint, journal, mode="recover", evidence_file=evidence)
+    with pytest.raises(RepositoryUncertain):
+        build_service(endpoint, journal, mode="reconcile", evidence_file=evidence)
+    assert build_service(endpoint, journal, mode="reconcile", evidence_file=evidence,
+                         remote_quiescent=True) == {"status": "COMMITTED"}
+    app = build_service(endpoint, journal, mode="recover", evidence_file=evidence)
     with TestClient(app) as client:
         assert client.get("/api/v1/health").json() == {"status": "ok", "version": 1}
     saved, actual, version, token = store.native_snapshot()
