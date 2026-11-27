@@ -52,7 +52,8 @@ class MultiContractAutomationManager:
     def from_directory(cls, directory, *, policy_paths=None):
         directory = Path(directory)
         return cls([(p, directory / "bindings" / (p.stem + ".json"))
-                    for p in sorted((directory / "safsl").glob("SC-*.safsl"))],
+                    for p in sorted((directory / "safsl").glob("*.safsl"))
+                    if (directory / "bindings" / (p.stem + ".json")).is_file()],
                    policy_paths=policy_paths)
 
     def _evaluate(self, graph, entry, ttl, evidence, identity, applicability):
