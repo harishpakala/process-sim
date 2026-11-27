@@ -52,7 +52,7 @@ def test_ic12_live_graphdb_lifecycle(tmp_path):
     policies = {"LP-01": parse_safsl((ROOT / "policies/LP-01.safsl").read_text(encoding="utf-8")).children[0]}
     def open_store(transport=session):
         return GraphDBRepository(endpoint, graphs, session=transport,
-                                 native_mode=True, journal_path=journal)
+                                 native_mode=True, journal_path=journal, delta_updates=True)
     def coordinator(store, recover=False):
         manager = MultiContractAutomationManager([(ROOT / "contracts/SC-01.safsl",
                                                    ROOT / "bindings/SC-01.json")], store=store)
