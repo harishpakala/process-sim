@@ -45,7 +45,7 @@ def load_registry(root):
         kind = entry.get("kind")
         if kind not in ("SC", "LP") or type(entry.get("enabled")) is not bool:
             raise ValueError(f"Invalid kind or enabled flag: {key}")
-        if entry.get("backend") not in (("shacl",) if kind == "SC" else ("ast",)):
+        if entry.get("backend") not in (("shacl",) if kind == "SC" else ("ast", "sparql")):
             raise ValueError(f"Unsupported backend: {key}")
         artifact(entry.get("specification"), ".safsl")
         binding = read(artifact(entry.get("binding"), ".json"))
