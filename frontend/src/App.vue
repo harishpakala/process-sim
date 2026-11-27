@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
+import SemanticGovernance from './components/SemanticGovernance.vue'
 import { selectTriples } from './lib/sparql'
 import SimulationDashboard from './components/SimulationDashboard.vue'
 import FaultManagement from './components/FaultManagement.vue'
@@ -18,7 +19,7 @@ const sections = [
  {name:'ENGINEERING',items:['DEXPI Explorer','ECAD Explorer','Engineering BOM','Relationship Verification','Product Catalog']},
  {name:'SIMULATION',items:['Simulation Control','Plant Monitor','Signal Explorer','Multi-Signal Replay','Faults & Disturbances','Experiments']},
  {name:'ERP',items:['Asset Inventory','Material Master','Supplier Master','Procurement','Stock Inventory','Maintenance','Cost Management']},
- {name:'SYSTEM & SEMANTICS',items:['Traceability','Data Quality','Semantic Models','OPC UA Connectivity','Reports','Settings']}
+ {name:'SYSTEM & SEMANTICS',items:['Semantic Governance','Traceability','Data Quality','Semantic Models','OPC UA Connectivity','Reports','Settings']}
 ]
 const opened=ref<Record<string,boolean>>({'ENGINEERING':true,'SIMULATION':true,'ERP':false,'SYSTEM & SEMANTICS':false})
 const active=ref('Overview')
@@ -103,6 +104,7 @@ function navigate(page:string){active.value=page;view.value='Engineering';destin
      </div>
      <section class="panel"><div class="panel-title"><h2>Simulation quick controls</h2><span class="pill amber-pill">UI PREVIEW ONLY</span></div><div class="control-row"><button class="primary" @click="demoRunning=!demoRunning"><Play :size="16"/> {{demoRunning?'Pause preview':'Run preview'}}</button><button class="secondary" @click="demoRunning=false"><RotateCcw :size="16"/> Reset</button><span>These controls do not execute TEP.</span></div></section>
     </template>
+    <template v-else-if="active==='Semantic Governance'"><SemanticGovernance /></template>
     <template v-else-if="active==='Traceability'"><TraceabilityExplorer /></template>
     <template v-else-if="active==='OPC UA Connectivity'"><OpcuaConnectivity /></template>
     <template v-else-if="active==='Engineering BOM'"><EngineeringBom @open-record="openRecord" /></template>
