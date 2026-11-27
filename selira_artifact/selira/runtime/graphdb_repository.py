@@ -1,5 +1,6 @@
 """GraphDB adapter with guarded atomic SPARQL updates for an exclusive writer."""
 import re
+import json
 from threading import RLock
 from uuid import uuid4
 
@@ -70,7 +71,16 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
         return graph, versions.pop()
 
     def compare_and_commit(self, expected_version, graph):
-        if self._partition is None:
+        return self._commit(expected_version, graph)
+
+    def compare_and_commit_native(self, expected_version, graph, documents, parts):
+        if not documents or any(key != doc.get('id') for key, doc in documents.items()):
+            raise ValueError('Invalid native document identities')
+        native = Literal(json.dumps(documents, ensure_ascii=True, sort_keys=True, allow_nan=False))
+        return self._commit(expected_version, graph, parts=parts, native=native)
+
+    def _commit(self, expected_version, graph, *, parts=None, native=None):
+        if parts is None and self._partition is None:
             raise NotImplementedError("Explicit named graph partition required")
         with self._lock:
             if self._uncertain:
@@ -78,7 +88,7 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
             _, version = self.snapshot()
             if version != expected_version:
                 return False, version
-            parts = {_iri(k): v for k, v in self._partition(graph).items()}
+            parts = {_iri(k): v for k, v in (self._partition(graph) if parts is None else parts).items()}
             if set(parts) != set(self._graphs):
                 raise ValueError("Partition must cover exactly the governed graphs")
             if set().union(*(set(g) for g in parts.values())) != set(graph):
@@ -103,13 +113,20 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
             inserts = " ".join(f"GRAPH {g} {{ " + " ".join(
                 f"{s.n3()} {p.n3()} {o.n3()} ." for s,p,o in triples) + " }"
                 for g,triples in parts.items())
+            native_graph = "<urn:selira:repository:native>"
+            if native_graph in self._graphs or native_graph == self._metadata:
+                raise ValueError("Native graph must be reserved")
+            native_delete = f"GRAPH {native_graph} {{ {subject} <urn:selira:documents> ?oldDocuments }}" if native is not None else ""
+            native_insert = f"GRAPH {native_graph} {{ {subject} <urn:selira:documents> {native.n3()} }}" if native is not None else ""
+            native_where = f"OPTIONAL {{ {native_delete} }}" if native is not None else ""
             query = f"""
-DELETE {{ GRAPH {self._metadata} {{ {subject} {vp} {old} . {subject} {cp} ?previous . }} {deletes} }}
-INSERT {{ GRAPH {self._metadata} {{ {subject} {vp} {new} . {subject} {cp} "{token}" . }} {inserts} }}
+DELETE {{ GRAPH {self._metadata} {{ {subject} {vp} {old} . {subject} {cp} ?previous . }} {deletes} {native_delete} }}
+INSERT {{ GRAPH {self._metadata} {{ {subject} {vp} {new} . {subject} {cp} "{token}" . }} {inserts} {native_insert} }}
 WHERE {{
  GRAPH {self._metadata} {{ {subject} {vp} {old} .
  OPTIONAL {{ {subject} {cp} ?previous }} }}
  FILTER NOT EXISTS {{ GRAPH {self._metadata} {{ {subject} {vp} ?other FILTER(!sameTerm(?other, {old})) }} }}
+ {native_where}
  OPTIONAL {{ {branches} }}
 }}
 """
