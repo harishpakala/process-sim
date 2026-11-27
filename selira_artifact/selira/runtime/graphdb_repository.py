@@ -354,3 +354,10 @@ def _term(binding):
         return Literal(value, lang=binding.get("xml:lang"),
                        datatype=binding.get("datatype"), normalize=False)
     raise ValueError("Unsupported RDF result term")
+
+
+def rdf11_triples(graph):
+    """Canonicalize only RDF 1.1 simple strings, preserving other RDF terms."""
+    return {(s, p, Literal(str(o), datatype=XSD.string, normalize=False)
+                    if isinstance(o, Literal) and o.datatype is None and o.language is None
+                    else o) for s, p, o in graph}
