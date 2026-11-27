@@ -4,7 +4,7 @@ from rdflib import URIRef
 from rdflib import Graph, Namespace, RDF, Literal
 from selira.runtime.automation_manager import MultiContractAutomationManager
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 A = Namespace("https://example.org/assetinventory/")
 P = Namespace("https://example.org/productcatalog/")
 D = Namespace("https://example.org/dexpi/")
@@ -14,7 +14,7 @@ N = Namespace("urn:test:")
 
 
 def fixture():
-    manager = MultiContractAutomationManager.from_directory(ROOT / "selira_integration/contracts")
+    manager = MultiContractAutomationManager.from_directory(ROOT)
     graph = Graph()
     for triple in [(N.asset, RDF.type, A.Asset), (N.asset, A.hasAssetIdentifier, Literal("a")),
                    (N.asset, A.hasProductIdentifier, Literal("p")),
