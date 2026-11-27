@@ -350,7 +350,7 @@ class SAFSLTransformer(Transformer):
     def reference_decl(self, items):
 
         if items[0].value == "Submodel":
-            return SubmodelReference(name = items[0],
+            return SubmodelReference(name = str(items[1]),
                                     identifier = str(items[2].children[0]).strip('"'))
 
         elif items[0].value == "Property":
