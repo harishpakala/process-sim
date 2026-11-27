@@ -1,5 +1,7 @@
 """Exclusive in-memory AAS write coordinator; no durable transaction claims."""
 from copy import deepcopy
+import hashlib
+import json
 from threading import RLock
 
 from rdflib import Graph
@@ -108,6 +110,18 @@ class AASGovernance:
                     committed=committed, repository_version=new_version,
                     triggered_policies=[t.policy_id for t in traces],
                     evaluated_contracts=list(outcomes))
+            context = {}
+            lookup = getattr(self._manager.store, "request_outcome", None)
+            if lookup is not None:
+                fingerprint = hashlib.sha256(json.dumps(
+                    change.model_dump(mode="json"), sort_keys=True,
+                    ensure_ascii=False, allow_nan=False).encode("utf-8")).hexdigest()
+                source, message_id = change.header.source, change.header.message_id
+                previous = lookup(source, message_id, fingerprint)
+                if previous is not None:
+                    if previous.get("pending"):
+                        return response("DEFERRED")
+                    return AASChangeResponse.model_validate(previous)
             if self._blocked:
                 return response("DEFERRED")
             try:
@@ -131,9 +145,15 @@ class AASGovernance:
             candidate = self._lift(documents)
             # Full validation preserves all enabled contracts, including SC-01.
             # LP activation never bypasses the existing admission gate.
+            if lookup is not None:
+                def make_response(outcomes, next_version):
+                    return response("ACCEPTED", True, traces,
+                        [ContractOutcome(contract_id=r["id"], verdict=r["verdict"])
+                         for r in outcomes.values()], next_version).model_dump(mode="json")
+                context["request_context"] = (source, message_id, fingerprint, make_response)
             result = self._manager.submit(candidate, expected_version=version,
                                            **self._evidence(current, candidate),
-                                           **self._native_state(documents))
+                                           **self._native_state(documents), **context)
             if result["committed"]:
                 self._documents = documents
                 self._version = result["version"]
