@@ -840,6 +840,19 @@ def push_graph_to_graphdb(
     statement update endpoint.
     """
 
+    # Publication guard only: lifting remains independent of governance.
+    governed = {str(compute_uri("https://example.org/sm/tep-" + domain + "-instance"))
+                for domain in ("asset-inventory", "product-catalog")}
+    if str(graph_uri) in governed:
+        endpoint = get_graphdb_repository_url()
+        check = requests.post(endpoint,
+            data={"query": "ASK { VALUES ?g { <urn:selira:repository:metadata> <urn:selira:repository:native> } GRAPH ?g { ?s ?p ?o } }",
+                  "infer": "false"},
+            headers={"Accept": "application/sparql-results+json"}, timeout=60)
+        check.raise_for_status()
+        if check.json().get("boolean") is not False:
+            raise RuntimeError("SELiRA governed publication blocked; submit a native AAS change through the Automation Manager")
+
     serialized = graph.serialize(
         format="nt"
     )
