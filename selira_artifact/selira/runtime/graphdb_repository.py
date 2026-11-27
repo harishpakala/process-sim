@@ -103,6 +103,39 @@ class GraphDBRepository:
             self._uncertain = False
             return status
 
+    def inspect_adoption(self, expected_parts):
+        """Read-only preflight; no metadata or governed triples are modified."""
+        with self._lock:
+            if self._uncertain:
+                raise RepositoryUncertain("Repository requires reconciliation")
+            if {_iri(k) for k in expected_parts} != set(self._graphs):
+                raise ValueError("Adoption scope mismatch")
+            query = f"""SELECT ?g ?s ?p ?o WHERE {{
+                VALUES ?g {{ {' '.join(self._graphs)} }}
+                GRAPH ?g {{ ?s ?p ?o }}
+            }}"""
+            response = self._session.post(self._endpoint,
+                data={"query": query, "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            response.raise_for_status()
+            actual = {k: Graph() for k in expected_parts}
+            for row in response.json()["results"]["bindings"]:
+                actual[row["g"]["value"]].add(tuple(_term(row[k]) for k in ("s", "p", "o")))
+            differences = {}
+            for key, expected in expected_parts.items():
+                a, b = rdf11_triples(actual[key]), rdf11_triples(expected)
+                differences[key] = {"actual": len(a), "expected": len(b),
+                                    "extra": len(a-b), "missing": len(b-a)}
+            check = self._session.post(self._endpoint,
+                data={"query": f"ASK {{ VALUES ?g {{ {self._metadata} <urn:selira:repository:native> }} GRAPH ?g {{ ?s ?p ?o }} }}",
+                      "infer": "false"},
+                headers={"Accept": "application/sparql-results+json"}, timeout=self._timeout)
+            check.raise_for_status()
+            reserved = check.json()["boolean"]
+            return {"graphs": differences, "reserved_metadata_present": reserved,
+                    "eligible": not reserved and all(not d["extra"] and not d["missing"]
+                                                     for d in differences.values())}
+
     def initialize_empty(self):
         """Explicit bootstrap only; requires exclusive writer and empty governed scope.
 
