@@ -35,13 +35,13 @@ def service():
     return coordinator, enabled
 
 
-def request(coordinator, *, field="AssetName", value="Updated reactor", version=None):
+def request(coordinator, *, field="AssetName", value="Updated reactor", version=None, asset="TEP_Reactor"):
     documents, _, current_version = coordinator.snapshot()
     document = next(d for d in documents.values() if d["idShort"] == "AssetInventory")
     return AASChangeRequest.model_validate({
         "header": {"message_id": "MSG-1", "source": "test"},
         "domain": {"name": "assetinventory", "submodel_id": document["id"]},
-        "operation": {"type": "UPDATE", "id_short_path": "Assets.TEP_Reactor." + field,
+        "operation": {"type": "UPDATE", "id_short_path": "Assets." + asset + "." + field,
                       "expected_version": current_version if version is None else version},
         "payload": {"modelType": "Property", "idShort": field,
                     "valueType": "xs:string", "value": value}})
@@ -65,7 +65,7 @@ def test_ic12_governance_preserves_state(service, case, decision):
     coordinator, enabled = service
     before, graph, version = coordinator.snapshot()
     if case == "invalid":
-        change = request(coordinator, field="ProductIdentifier", value="urn:nonexistent:product")
+        change = request(coordinator, field="ProductIdentifier", value="urn:nonexistent:product", asset="TEP_XMEAS1")
     elif case == "evidence":
         enabled[0] = False
         change = request(coordinator)
