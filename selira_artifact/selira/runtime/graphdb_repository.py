@@ -81,7 +81,7 @@ SELECT ?version ?g ?s ?p ?o WHERE {{
             raise ValueError('Native mode required')
         if not documents or any(key != doc.get('id') for key, doc in documents.items()):
             raise ValueError('Invalid native document identities')
-        native = Literal(json.dumps(documents, ensure_ascii=True, sort_keys=True, allow_nan=False))
+        native = Literal(json.dumps(documents, ensure_ascii=False, sort_keys=True, allow_nan=False))
         return self._commit(expected_version, graph, parts=parts, native=native)
 
     def _commit(self, expected_version, graph, *, parts=None, native=None):
