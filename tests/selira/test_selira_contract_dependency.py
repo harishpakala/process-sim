@@ -3,7 +3,7 @@
 # Created: 2026-10-29
 # Author: Harish
 import unittest
-from selira_integration.formal.dependency import ContractKey, plan_impact
+from archive.selira_integration.formal.dependency import ContractKey, plan_impact
 
 
 class DependencyTests(unittest.TestCase):

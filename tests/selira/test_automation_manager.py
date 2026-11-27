@@ -15,7 +15,7 @@ P = URIRef("urn:test:product")
 
 @pytest.fixture
 def setup():
-    contracts = ROOT / "selira_integration/contracts"
+    contracts = ROOT / "archive/selira_integration/contracts"
     manager = AutomationManager(contracts / "safsl/SC-01.safsl",
                                 contracts / "bindings/SC-01.json")
     graph = Graph()

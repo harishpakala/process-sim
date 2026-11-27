@@ -1,0 +1,1757 @@
+{
+  "config": {
+    "repetitions": 3,
+    "scenarios": [
+      "duplicate:https://aas.example.com/CV1401",
+      "reassign_valid",
+      "duplicate:https://aas.example.com/VC110",
+      "duplicate:https://example.org/product-types/SAMSON_3241_7",
+      "fallback:coverage_attested"
+    ],
+    "inputs": {
+      "assetinventory-instance.ttl": "8f08807af27d820a537704c4e26498f4fce663534dd63bb140f9eec7940e4181",
+      "productcatalog-instance.ttl": "c1dacf42853c2127ce7d710ffe6b78c58e9b1fa7f6b3d6f5198b0a3d0a79a145",
+      "dexpi-instance.ttl": "91565028b3dc14a57f9b7348df5475c667e159b2707a5eff8cee80b21493fb5d",
+      "opcuaconnectivity-instance.ttl": "88161df3dd999ee5616620600c9bc48505a765ff6b1637dc2792ec700bebc913",
+      "engineeringbom-instance.ttl": "ea3c8fadb548fea271085feadae55a28f05a2390e7d3f8173a28b9287ad0c81d",
+      "bindings/SC-01.json": "a2b60f90999f28f9bfd7d73d21514d834ea932a335ee7e81f57d661560ccfdb0",
+      "bindings/SC-02.json": "b0328348db15c829809ba11579dab5363c297da4f97a0b8a94b6e53e1870d4d2",
+      "bindings/SC-03.json": "bed79d530f6d15363c4b8e44d44498ff44e9dc5cd95302a33514f429169c85f4",
+      "bindings/SC-04.json": "184450b8958dd1f5b9e2a6066adbf812d77f21134403f824d29ca58abd817f08"
+    },
+    "code_and_specs": {
+      "contracts\\SC-01.safsl": "1df39bd1f2e9b666ee40ec79b3e3326fd7d723869ed737fe3930a8cff626b5a9",
+      "bindings\\SC-01.json": "a2b60f90999f28f9bfd7d73d21514d834ea932a335ee7e81f57d661560ccfdb0",
+      "contracts\\SC-02.safsl": "73f8998113f00e5833a9c2506b314f35bd42966a58f18cc3b3ccd45a5ce96f98",
+      "bindings\\SC-02.json": "b0328348db15c829809ba11579dab5363c297da4f97a0b8a94b6e53e1870d4d2",
+      "contracts\\SC-03.safsl": "cdac3b3a7ffeb1120cd79b7fb8c97d473fbc5c6651e3761e96350c95e7ab40d5",
+      "bindings\\SC-03.json": "bed79d530f6d15363c4b8e44d44498ff44e9dc5cd95302a33514f429169c85f4",
+      "contracts\\SC-04.safsl": "7da1cb49039c589d08e37efd2e7d4c69721d5c9e64e1705909efbd7822534ea2",
+      "bindings\\SC-04.json": "184450b8958dd1f5b9e2a6066adbf812d77f21134403f824d29ca58abd817f08",
+      "policies\\LP-03.safsl": "1fa9f293290f643794e1f2926ad0bc6dfd4e6fffb02b67451465fa8164e6b11b",
+      "policies\\LP-04.safsl": "79da6d80d21322d59611e7d4d7f47f8038f1ba57604d88a51ddbbe837ff34c1d",
+      "selira\\__init__.py": "f9996c958769e3c0b1c522252075c44b2860d350f290efffd5d71b3a98bc22cc",
+      "selira\\compiler\\shacl.py": "b37137d34ae4081c8792e436189ca0315152939425050bb4524ab2e706df4b1f",
+      "selira\\compiler\\__init__.py": "6f1788d95ed7bc987f1f4ffae28a9db3a1e7363b2f21e04dbc76cd31d99224a7",
+      "selira\\formal\\reference_evaluator.py": "786fc358cfe33f972579dab802fe7bba3530ce8213ce7cdbc8ec2e2a5725a3e3",
+      "selira\\formal\\reference_semantics.py": "421a21b78b3cd3310c7fbb0f1b4d13fa986eb475656e364e24092f84b4e8f7f5",
+      "selira\\formal\\__init__.py": "cd770c00bc317489ed10251b3265dfa0da2d00aba6cdf0474534d429a19845ec",
+      "selira\\language\\__init__.py": "37a1d4e211525043c07ce54671c40ccef3b117cf88007050d116bc34b48b3398",
+      "selira\\runtime\\admission.py": "e00cb090618eeee8561adc862069c5a993e857ab2311f67fe78f9d5e6af2dfce",
+      "selira\\runtime\\automation_manager.py": "8b58b67ef203ef1da076d8574ef97ff482d933903181bd21cbf99dab3ed8c1c9",
+      "selira\\runtime\\policy_evaluator.py": "8c4fcf651f11db73ee86b7002964139cd9eb747028b40cb840b86e307340ed2e",
+      "selira\\runtime\\selective_manager.py": "5d299c63332dbd146094540ef83bcfb7deca3658c4b39e60a68efe2821423ebb",
+      "selira\\runtime\\__init__.py": "3d6aa8f6fd6196eccb2be07dfcde4e2b9987607f0c06d3b9fce09b85236f274b",
+      "selira\\language\\ast\\contracts.py": "27cdf7561ff9db80438a1cf2601ebdcd546260ba4a88d81fbee8a4338f0c03b5",
+      "selira\\language\\ast\\nodes.py": "8725f6602b0a42c2ebadc18e3921f1a943621bb6910fc8cb36e8d752b0b21235",
+      "selira\\language\\ast\\__init__.py": "00cb1cd96d7dc6352f66100df68e0aaa0264325e8a67e940bb78ef91512e53f5",
+      "selira\\language\\parser\\contracts.py": "b7accda76a1ff94727fcfe550d6b878144b060b9355f956d33bfabac8e6a09b4",
+      "selira\\language\\parser\\frontend.py": "4e6b87336fd92b967ab2b7da9ffe278698964f519c9f294522c4fd633196a8b3",
+      "selira\\language\\parser\\transformer.py": "b8df07ab671c989915ac65d4cab8f2657d943243e53b8bb3b2fa5b346a7245fd",
+      "selira\\language\\parser\\__init__.py": "00cb1cd96d7dc6352f66100df68e0aaa0264325e8a67e940bb78ef91512e53f5",
+      "selira\\runtime\\reassessment\\dependency.py": "b57e6e65bac0bc4780bc2358a250d2a27d4f490185877488ed61bea2de6f9123",
+      "selira\\runtime\\reassessment\\sc01_dependencies.py": "27f3fe357b2a7dc0dafc54d929dcbe7f57fdc5ef3d7545194556c9d23dd4e7bc",
+      "selira\\runtime\\reassessment\\selective.py": "81ee6185970e100c2e34f58f05970c7ceca121fb2a542fde903903998c4e4a62",
+      "selira\\runtime\\reassessment\\selective_sc01.py": "e577f4f90175909bec6fbebaa1e64809817e066f85277ef75eaffee07a4071f9",
+      "selira\\runtime\\reassessment\\snapshot.py": "13a37cc579ed9554caaf8c6f130e537abb5cb3f030cb0381d2cde98edb37d318",
+      "selira\\runtime\\reassessment\\__init__.py": "3d6aa8f6fd6196eccb2be07dfcde4e2b9987607f0c06d3b9fce09b85236f274b",
+      "selira\\language\\grammar\\contracts.lark": "430a98742ce83a5b815894aae140292ba0282edeb96044f5b698f67ac967a90f",
+      "selira\\language\\grammar\\process.lark": "63c2893cf2c2b75d9874e66e940ba82886dbd42afb18e78a1e3083c7e7f8d650",
+      "evaluation\\benchmark_representative_tep.py": "b295caea0930d1c3f5d3bac5e964fae3df6ddeac0d5b38ce277d9e65b35cc8ee",
+      "evaluation\\benchmark_tep.py": "8354d6e7dbec0cd205c208d700a445e2fb7a781fe9e5abf9c5725423fd0e880e",
+      "evaluation\\characterize_tep_nexus.py": "5562c5ea35afd91fc038ff8840c5a0bba6a67cdb4df832c31c3f43e7de66ee80"
+    },
+    "environment": {
+      "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+      "platform": "Windows-11-10.0.26300-SP0",
+      "machine": "AMD64",
+      "dependencies": {
+        "rdflib": "7.6.0",
+        "pyshacl": "0.31.0",
+        "lark": "1.3.1"
+      }
+    }
+  },
+  "events": [
+    {
+      "repetition": 0,
+      "scenario": "duplicate:https://aas.example.com/CV1401",
+      "expected": "V",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 52.82997589999286
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 0,
+        "reused_instances": 182,
+        "shacl_calls": 0,
+        "full_fallback": false,
+        "elapsed_seconds": 1.7358819999935804
+      }
+    },
+    {
+      "repetition": 0,
+      "scenario": "reassign_valid",
+      "expected": "V",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 1,
+        "reused_instances": 181,
+        "shacl_calls": 1,
+        "full_fallback": false,
+        "elapsed_seconds": 1.750384800005122
+      },
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 53.80388870000024
+      }
+    },
+    {
+      "repetition": 0,
+      "scenario": "duplicate:https://aas.example.com/VC110",
+      "expected": "F",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.79170650000742
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 2,
+        "reused_instances": 180,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 1.9726907000003848
+      }
+    },
+    {
+      "repetition": 0,
+      "scenario": "duplicate:https://example.org/product-types/SAMSON_3241_7",
+      "expected": "F",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 30,
+        "reused_instances": 152,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 4.614853699997184
+      },
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 51.54960779999965
+      }
+    },
+    {
+      "repetition": 0,
+      "scenario": "fallback:coverage_attested",
+      "expected": "V",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 48.36996119999094
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.86981910000031
+      }
+    },
+    {
+      "repetition": 1,
+      "scenario": "duplicate:https://aas.example.com/CV1401",
+      "expected": "V",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 0,
+        "reused_instances": 182,
+        "shacl_calls": 0,
+        "full_fallback": false,
+        "elapsed_seconds": 1.8639486000029137
+      },
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 53.54962069999601
+      }
+    },
+    {
+      "repetition": 1,
+      "scenario": "reassign_valid",
+      "expected": "V",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 51.80069899999944
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 1,
+        "reused_instances": 181,
+        "shacl_calls": 1,
+        "full_fallback": false,
+        "elapsed_seconds": 1.9216444000048796
+      }
+    },
+    {
+      "repetition": 1,
+      "scenario": "duplicate:https://aas.example.com/VC110",
+      "expected": "F",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 2,
+        "reused_instances": 180,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 2.2376943999988725
+      },
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 54.75451939999766
+      }
+    },
+    {
+      "repetition": 1,
+      "scenario": "duplicate:https://example.org/product-types/SAMSON_3241_7",
+      "expected": "F",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 51.49522789999901
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 30,
+        "reused_instances": 152,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 4.8990572999900905
+      }
+    },
+    {
+      "repetition": 1,
+      "scenario": "fallback:coverage_attested",
+      "expected": "V",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 49.12249290000182
+      },
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.024938700007624
+      }
+    },
+    {
+      "repetition": 2,
+      "scenario": "duplicate:https://aas.example.com/CV1401",
+      "expected": "V",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.59761179999623
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 0,
+        "reused_instances": 182,
+        "shacl_calls": 0,
+        "full_fallback": false,
+        "elapsed_seconds": 1.6604630000074394
+      }
+    },
+    {
+      "repetition": 2,
+      "scenario": "reassign_valid",
+      "expected": "V",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 1,
+        "reused_instances": 181,
+        "shacl_calls": 1,
+        "full_fallback": false,
+        "elapsed_seconds": 1.6969213000120362
+      },
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 47.528297300013946
+      }
+    },
+    {
+      "repetition": 2,
+      "scenario": "duplicate:https://aas.example.com/VC110",
+      "expected": "F",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 49.05515299999388
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+            ],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtb3BjdWEtY29ubmVjdGl2aXR5LWluc3RhbmNl/U2lnbmFsTWFwcGluZ3MuUmVhY3RvckNvb2xpbmdXYXRlclZhbHZl"
+            ],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 2,
+        "reused_instances": 180,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 2.0064739000081317
+      }
+    },
+    {
+      "repetition": 2,
+      "scenario": "duplicate:https://example.org/product-types/SAMSON_3241_7",
+      "expected": "F",
+      "order": [
+        "selective",
+        "full"
+      ],
+      "selective": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 30,
+        "reused_instances": 152,
+        "shacl_calls": 2,
+        "full_fallback": false,
+        "elapsed_seconds": 4.670824300003005
+      },
+      "full": {
+        "from_version": 1,
+        "version": 1,
+        "verdict": "F",
+        "reason": "Candidate not admitted",
+        "committed": false,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMA",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYxMQ",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYy",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtYXNzZXQtaW52ZW50b3J5/QXNzZXRzLlRFUF9YTVYz"
+            ],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "F",
+            "violations": [
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDI5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDM3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDMz",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY2",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY3",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY4",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDY5",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc0",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDc1",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcw",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcx",
+              "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9URVBfRW5naW5lZXJpbmdCT01fVjJfSW5zdGFuY2U/Qk9NSXRlbXMuRUJPTV8wMDcy"
+            ],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.06680800000322
+      }
+    },
+    {
+      "repetition": 2,
+      "scenario": "fallback:coverage_attested",
+      "expected": "V",
+      "order": [
+        "full",
+        "selective"
+      ],
+      "full": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "full",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 51.50414599999203
+      },
+      "selective": {
+        "from_version": 1,
+        "version": 2,
+        "verdict": "V",
+        "reason": "Qualified candidate",
+        "committed": true,
+        "contracts": {
+          "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+            "id": "SC_01",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 38
+          },
+          "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+            "id": "SC_02",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 39
+          },
+          "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+            "id": "SC_03",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 34
+          },
+          "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+            "id": "SC_04",
+            "verdict": "V",
+            "violations": [],
+            "focus_count": 71
+          }
+        },
+        "strategy": "selective",
+        "executed_instances": 182,
+        "reused_instances": 0,
+        "shacl_calls": 4,
+        "full_fallback": true,
+        "elapsed_seconds": 50.76553689999855
+      }
+    }
+  ],
+  "initializations": [
+    {
+      "from_version": 0,
+      "version": 1,
+      "verdict": "V",
+      "reason": "Qualified candidate",
+      "committed": true,
+      "contracts": {
+        "https://example.org/selira/contracts#AssetProductIntegrity_SC_01": {
+          "id": "SC_01",
+          "verdict": "V",
+          "violations": [],
+          "focus_count": 38
+        },
+        "https://example.org/selira/contracts#DexpiAssetIntegrity_SC_02": {
+          "id": "SC_02",
+          "verdict": "V",
+          "violations": [],
+          "focus_count": 39
+        },
+        "https://example.org/selira/contracts#SignalAssetIntegrity_SC_03": {
+          "id": "SC_03",
+          "verdict": "V",
+          "violations": [],
+          "focus_count": 34
+        },
+        "https://example.org/selira/contracts#BomProductIntegrity_SC_04": {
+          "id": "SC_04",
+          "verdict": "V",
+          "violations": [],
+          "focus_count": 71
+        }
+      },
+      "strategy": "selective",
+      "executed_instances": 182,
+      "reused_instances": 0,
+      "shacl_calls": 4,
+      "full_fallback": true,
+      "elapsed_seconds": 51.940405900008045
+    }
+  ],
+  "complete": true,
+  "summary": {
+    "duplicate:https://aas.example.com/CV1401": {
+      "full": {
+        "median_seconds": 52.82997589999286,
+        "min_seconds": 50.59761179999623,
+        "max_seconds": 53.54962069999601,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "selective": {
+        "median_seconds": 1.7358819999935804,
+        "min_seconds": 1.6604630000074394,
+        "max_seconds": 1.8639486000029137,
+        "executed_instances": [
+          0,
+          0,
+          0
+        ]
+      },
+      "speedup": 30.434082443500326
+    },
+    "reassign_valid": {
+      "full": {
+        "median_seconds": 51.80069899999944,
+        "min_seconds": 47.528297300013946,
+        "max_seconds": 53.80388870000024,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "selective": {
+        "median_seconds": 1.750384800005122,
+        "min_seconds": 1.6969213000120362,
+        "max_seconds": 1.9216444000048796,
+        "executed_instances": [
+          1,
+          1,
+          1
+        ]
+      },
+      "speedup": 29.593892154369634
+    },
+    "duplicate:https://aas.example.com/VC110": {
+      "full": {
+        "median_seconds": 50.79170650000742,
+        "min_seconds": 49.05515299999388,
+        "max_seconds": 54.75451939999766,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "selective": {
+        "median_seconds": 2.0064739000081317,
+        "min_seconds": 1.9726907000003848,
+        "max_seconds": 2.2376943999988725,
+        "executed_instances": [
+          2,
+          2,
+          2
+        ]
+      },
+      "speedup": 25.313913377991895
+    },
+    "duplicate:https://example.org/product-types/SAMSON_3241_7": {
+      "full": {
+        "median_seconds": 51.49522789999901,
+        "min_seconds": 50.06680800000322,
+        "max_seconds": 51.54960779999965,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "selective": {
+        "median_seconds": 4.670824300003005,
+        "min_seconds": 4.614853699997184,
+        "max_seconds": 4.8990572999900905,
+        "executed_instances": [
+          30,
+          30,
+          30
+        ]
+      },
+      "speedup": 11.024869400453765
+    },
+    "fallback:coverage_attested": {
+      "full": {
+        "median_seconds": 50.024938700007624,
+        "min_seconds": 48.36996119999094,
+        "max_seconds": 51.50414599999203,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "selective": {
+        "median_seconds": 50.76553689999855,
+        "min_seconds": 49.12249290000182,
+        "max_seconds": 50.86981910000031,
+        "executed_instances": [
+          182,
+          182,
+          182
+        ]
+      },
+      "speedup": 0.9854113982592204
+    }
+  }
+}

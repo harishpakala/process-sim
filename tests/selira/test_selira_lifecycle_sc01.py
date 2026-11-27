@@ -5,7 +5,7 @@
 import tempfile
 import unittest
 from pathlib import Path
-from selira_integration.lifecycle import Snapshot, Lifecycle, detect, impacted
+from archive.selira_integration.lifecycle import Snapshot, Lifecycle, detect, impacted
 
 class LifecycleTests(unittest.TestCase):
     def setUp(self):

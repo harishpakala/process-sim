@@ -1,16 +1,16 @@
-"""Run from repository root: python -m selira_integration.evaluation.sc01_lifecycle."""
+"""Run from repository root: python -m archive.selira_integration.evaluation.sc01_lifecycle."""
 import json
 from pathlib import Path
 from rdflib import Graph, Namespace, RDF, Literal, URIRef
 from process_sim.selira.automation_manager import AutomationManager
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 AI = Namespace("https://example.org/assetinventory/")
 PC = Namespace("https://example.org/productcatalog/")
 
 
 def run():
-    contracts = ROOT / "selira_integration/contracts"
+    contracts = ROOT / "archive/selira_integration/contracts"
     manager = AutomationManager(contracts / "safsl/SC-01.safsl",
                                 contracts / "bindings/SC-01.json")
     graph = Graph()

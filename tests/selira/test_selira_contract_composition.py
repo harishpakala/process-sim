@@ -4,7 +4,7 @@
 # Author: Harish
 import itertools
 import unittest
-from selira_integration.formal.composition import (
+from archive.selira_integration.formal.composition import (
     Outcome as O, Applicability as A, Role, LifecycleState as L,
     RevisionContext, ContractRule, ContractEvaluation, conjunction, compose,
 )

@@ -8,8 +8,8 @@ from rdflib.namespace import SH
 from pyshacl import validate
 from process_sim.safsl.shacl.compiler import compile_files
 
-ROOT = Path(__file__).resolve().parents[2]
-CONTRACTS = ROOT / "selira_integration/contracts"
+ROOT = Path(__file__).resolve().parents[3]
+CONTRACTS = ROOT / "archive/selira_integration/contracts"
 DOMAINS = ("assetinventory", "productcatalog", "dexpi", "ecad", "engineeringbom")
 EXPECTED = {"SC_01": 0, "SC_02": 9, "SC_03": 29, "SC_04": 0}
 

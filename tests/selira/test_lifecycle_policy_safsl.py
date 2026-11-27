@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
     ("LP-04", "LP_04", {"Reassess", "Reuse"}),
 ])
 def test_policy_parses(policy, name, outputs):
-    source = (ROOT / "selira_integration/contracts/safsl" / (policy + ".safsl")).read_text(encoding="utf-8")
+    source = (ROOT / "archive/selira_integration/contracts/safsl" / (policy + ".safsl")).read_text(encoding="utf-8")
     spec = parse_safsl(source).children[0]
     assert len(spec.processes) == 1
     process = spec.processes[0]
@@ -37,7 +37,7 @@ from process_sim.selira.reassessment.policy import load_policy, evaluate_policy 
 
 
 def evaluate_policy(policy, inputs):
-    return execute_policy(load_policy(ROOT / "selira_integration/contracts/safsl" / (policy + ".safsl")), inputs)
+    return execute_policy(load_policy(ROOT / "archive/selira_integration/contracts/safsl" / (policy + ".safsl")), inputs)
 
 
 @pytest.mark.parametrize("bits", list(product([False, True], repeat=6)))

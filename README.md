@@ -7,7 +7,7 @@ Harish Kumar Pakala
 
 **TEP NEXUS** is the repository's simulation-based semantic–temporal retrieval prototype. It connects AAS-derived engineering information in GraphDB with simulation-run-specific observations in TimescaleDB through explicit engineering-to-signal mappings and an on-demand Virtual Temporal Knowledge Graph (VTKG).
 
-**SELiRA** is the contract-driven reference architecture for industrial life-cycle information. Its experimental SC-01 realization integrates SAFSL-to-SHACL compilation, evidence-aware qualification, controlled local admission and dependency-based reference reassessment over TEP NEXUS engineering RDF. See the [SELiRA architecture and implementation guide](selira_integration/README.md) and [SC-01 evaluation](selira_integration/evaluation/README.md).
+**SELiRA** is the contract-driven reference architecture for industrial life-cycle information. Its experimental SC-01 realization integrates SAFSL-to-SHACL compilation, evidence-aware qualification, controlled local admission and dependency-based reference reassessment over TEP NEXUS engineering RDF. See the [SELiRA architecture and implementation guide](selira_artifact/README.md) and [SC-01 evaluation](archive/selira_integration/evaluation/README.md).
 
 ## Architecture
 
@@ -107,7 +107,7 @@ The semantic–temporal figures are historical local experiment results based on
 - [Historian and TimescaleDB setup](docs/opcua/TIMESERIES.md)
 - [Semantic lifting and GraphDB setup](semantic/README.md)
 - [TEP NEXUS evaluation and reproducibility](docs/artifact_evaluation/README.md)
-- [SELiRA research prototype](selira_integration/README.md)
+- [SELiRA research prototype](selira_artifact/README.md)
 - [Detailed project notes](docs/project-history-and-research-notes.md)
 
 ## Research

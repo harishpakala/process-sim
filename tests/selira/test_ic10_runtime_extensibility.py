@@ -27,7 +27,7 @@ def test_configuration_only_lifecycle(tmp_path):
     }), encoding="utf-8")
     policies = tmp_path / "independent-policies"
     policies.mkdir()
-    original = Path(__file__).resolve().parents[2] / "selira_integration/contracts/safsl"
+    original = Path(__file__).resolve().parents[2] / "archive/selira_integration/contracts/safsl"
     paths = []
     for name in ("LP-03", "LP-04"):
         path = policies / (name + ".safsl")

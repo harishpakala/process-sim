@@ -1,4 +1,4 @@
-"""Exercise the actual migrated integration contracts."""
+﻿"""Exercise the actual migrated integration contracts."""
 import json
 from pathlib import Path
 
@@ -9,13 +9,13 @@ from pyshacl import validate
 from selira.compiler.shacl import compile_contract
 from selira.formal.reference_evaluator import evaluate
 
-ROOT = Path(__file__).resolve().parents[2] / "selira_integration" / "contracts"
+ROOT = Path(__file__).resolve().parents[1]
 
 @pytest.mark.parametrize("number,domain,exception", [
     ("02", "dexpi", True), ("03", "ecad", False),
 ])
 def test_migrated_identifier_contract(number, domain, exception):
-    source = (ROOT / "safsl" / f"SC-{number}.safsl").read_text()
+    source = (ROOT / "contracts" / f"SC-{number}.safsl").read_text()
     bindings = json.loads((ROOT / "bindings" / f"SC-{number}.json").read_text())
     ttl, manifest = compile_contract(source, bindings)
     entry = manifest["contracts"][0]
@@ -48,3 +48,5 @@ def test_migrated_identifier_contract(number, domain, exception):
     conforms, report, _ = validate(data, shacl_graph=Graph().parse(data=ttl, format="turtle"))
     assert not conforms
     assert {str(n) for n in report.objects(None, SH.focusNode)} == expected
+
+

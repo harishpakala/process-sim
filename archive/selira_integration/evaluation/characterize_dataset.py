@@ -1,7 +1,7 @@
 """Read-only characterization of the existing TEP NEXUS SC-01 dataset.
 
 Run from the repository root:
-    python selira_integration/evaluation/characterize_dataset.py
+    python archive/selira_integration/evaluation/characterize_dataset.py
 
 Counts describe graph structure, not evidence-qualified admission.
 """
@@ -11,7 +11,7 @@ from pathlib import Path
 
 from rdflib import Graph, Namespace, RDF
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 AI = Namespace("https://example.org/assetinventory/")
 PC = Namespace("https://example.org/productcatalog/")
 
