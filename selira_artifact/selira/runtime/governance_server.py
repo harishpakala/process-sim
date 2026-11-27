@@ -49,13 +49,29 @@ def build_service(endpoint, journal, *, mode, evidence_file):
             raise RuntimeError("Pending commit requires offline reconciliation")
         if mode == "initialize":
             store.initialize_empty()
-        elif mode != "recover":
+        elif mode not in ("recover", "adopt"):
             raise ValueError("Unsupported startup mode")
         manager = MultiContractAutomationManager([(root / "contracts/SC-01.safsl",
                                                    root / "bindings/SC-01.json")], store=store)
         policies = {"LP-01": parse_safsl((root / "policies/LP-01.safsl").read_text(encoding="utf-8")).children[0]}
+        if mode == "adopt":
+            from rdflib import Graph
+            documents = {d["id"]: d for d, _ in registrations}
+            parts = {str(compute_uri(d["id"])): a.lift_instance(d) for d,a in registrations}
+            graph = Graph()
+            for part in parts.values():
+                graph += part
+            flags = evidence(graph, graph)
+            outcomes = [manager._evaluate(graph, entry, ttl,
+                        set(flags["evidence_complete"]), flags["identity_normalized"],
+                        flags["applicability_confirmed"])
+                        for entry, ttl in manager._contracts.values()]
+            values = {o["verdict"] for o in outcomes}
+            if "V" not in values or not values <= {"V", "NA"}:
+                raise ValueError(f"Adoption not qualified: {outcomes}")
+            store.adopt_qualified(documents, parts)
         service = AASGovernance(manager, registrations, policies,
-                                recover=mode == "recover", evidence_provider=evidence)
+                                recover=mode in ("recover", "adopt"), evidence_provider=evidence)
         return create_app(aas_governance=service)
     except Exception:
         store._journal.close()
@@ -68,7 +84,7 @@ def main():
     parser.add_argument("--endpoint", required=True)
     parser.add_argument("--journal", required=True)
     parser.add_argument("--evidence-file", required=True)
-    parser.add_argument("--mode", choices=["inspect", "initialize", "recover"], required=True)
+    parser.add_argument("--mode", choices=["inspect", "initialize", "recover", "adopt"], required=True)
     parser.add_argument("--port", type=int, default=8002)
     parser.add_argument("--exclusive-writer", action="store_true", required=True)
     args = parser.parse_args()
