@@ -10,7 +10,7 @@ from .graphdb_repository import GraphDBRepository
 from .semantic_lifting import SemanticLiftingAdapter
 
 
-def build_service(endpoint, journal, *, mode, evidence_file):
+def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=False):
     from semantic.config import TARGETS
     from semantic.ontoutils import compute_uri
     from selira.language.parser.frontend import parse_safsl
@@ -28,7 +28,7 @@ def build_service(endpoint, journal, *, mode, evidence_file):
         return store.inspect_adoption({str(compute_uri(d["id"])): a.lift_instance(d)
                                        for d, a in registrations})
     journal = Path(journal).resolve()
-    if mode == "recover" and not journal.is_file():
+    if mode in ("recover", "reconcile") and not journal.is_file():
         raise ValueError("Recovery requires the original persistent journal")
     journal.parent.mkdir(parents=True, exist_ok=True)
     store = GraphDBRepository(endpoint, [str(compute_uri(d["id"])) for d, _ in registrations],
@@ -44,6 +44,11 @@ def build_service(endpoint, journal, *, mode, evidence_file):
                 or type(flags["applicability_confirmed"]) is not bool):
             raise ValueError("Invalid evidence attestation types")
         return flags
+    if mode == "reconcile":
+        try:
+            return {"status": store.reconcile_pending(remote_quiescent=remote_quiescent)}
+        finally:
+            store._journal.close()
     try:
         if store.pending_commit() is not None:
             raise RuntimeError("Pending commit requires offline reconciliation")
@@ -84,12 +89,13 @@ def main():
     parser.add_argument("--endpoint", required=True)
     parser.add_argument("--journal", required=True)
     parser.add_argument("--evidence-file", required=True)
-    parser.add_argument("--mode", choices=["inspect", "initialize", "recover", "adopt"], required=True)
+    parser.add_argument("--mode", choices=["inspect", "initialize", "recover", "adopt", "reconcile"], required=True)
     parser.add_argument("--port", type=int, default=8002)
     parser.add_argument("--exclusive-writer", action="store_true", required=True)
+    parser.add_argument("--remote-quiescent", action="store_true")
     args = parser.parse_args()
-    app = build_service(args.endpoint, args.journal, mode=args.mode, evidence_file=args.evidence_file)
-    if args.mode == 'inspect':
+    app = build_service(args.endpoint, args.journal, mode=args.mode, evidence_file=args.evidence_file, remote_quiescent=args.remote_quiescent)
+    if args.mode in ('inspect', 'reconcile'):
         print(json.dumps(app, indent=2))
         return
     uvicorn.run(app, host="127.0.0.1", port=args.port, workers=1)
