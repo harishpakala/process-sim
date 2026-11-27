@@ -189,9 +189,15 @@ class MultiContractAutomationManager:
                 elif values == {"NA"}:
                     verdict, reason = Verdict.NA, "All contract populations empty"
                 else:
-                    committed, new_version = self.store.compare_and_commit(version, proposed)
-                    verdict, reason = ((Verdict.V, "Validated and committed") if committed
-                                       else (Verdict.U, "Concurrent update; revalidate"))
+                    try:
+                        committed, new_version = self.store.compare_and_commit(version, proposed)
+                        verdict, reason = ((Verdict.V, "Validated and committed") if committed
+                                           else (Verdict.U, "Concurrent update; revalidate"))
+                    except Exception as exc:
+                        committed = False
+                        new_version = version
+                        verdict, reason = Verdict.U, f"Persistence unresolved: {type(exc).__name__}"
+
             record = {"from_version": version, "version": new_version, "verdict": verdict.value,
                       "reason": reason, "committed": committed, "contracts": outcomes, "reassessment": reassessment}
             self.history.append(record)
