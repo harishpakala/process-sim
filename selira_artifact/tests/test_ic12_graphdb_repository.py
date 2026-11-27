@@ -171,7 +171,7 @@ def test_ic12_native_combined_update():
     parseUpdate(query)
     assert "GRAPH <urn:selira:repository:native>" in query
     assert "<urn:selira:documents> ?oldDocuments" in query
-    assert Literal(json.dumps(docs, ensure_ascii=True, sort_keys=True,
+    assert Literal(json.dumps(docs, ensure_ascii=False, sort_keys=True,
                               allow_nan=False)).n3() in query
     assert '<urn:s> <urn:p> "new"' in query
     assert "<urn:selira:version>" in query
