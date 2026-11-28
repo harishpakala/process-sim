@@ -100,7 +100,7 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
         <template v-if="selected">
           <div class="panel-title"><div><h2>{{ selected.partNumber || selected.designation || selected.supplierPartNumber || selected.id }}</h2><p>{{ selected.manufacturer }} · {{ selected.category }}</p></div><span class="pill">AAS PRODUCT</span></div>
           <div class="tabs"><button :class="{selected:tab==='Details'}" @click="tab='Details'">Technical details</button><button :class="{selected:tab==='Knowledge Graph'}" @click="tab='Knowledge Graph'">Knowledge graph</button><button :class="{selected:tab==='Governance'}" @click="tab='Governance'">SELiRA governance</button></div>
-          <AasElementEditor v-if="tab==='Governance'" :key="selected.uri" domain="productcatalog" :title="selected.partNumber || selected.designation || selected.id" :identity-values="[selected.assetId,selected.uri,selected.partNumber,selected.designation,selected.manufacturer]" @committed="load" />
+          <AasElementEditor v-if="tab==='Governance'" :key="selected.uri" domain="productcatalog" :title="selected.partNumber || selected.designation || selected.id" :identity-values="[selected.assetId,selected.partNumber,selected.designation]" @committed="load" />
           <template v-else-if="tab==='Details'">
             <div class="catalog-identifiers">
               <div><small>Manufacturer</small><strong>{{ selected.manufacturer }}</strong></div>
