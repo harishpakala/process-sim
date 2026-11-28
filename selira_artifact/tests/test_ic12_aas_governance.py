@@ -284,3 +284,22 @@ def test_ic12_request_replay(service, monkeypatch, case):
     with pytest.raises(ValueError, match="Conflicting"):
         coordinator.submit(conflicting)
     assert len(calls) == 1
+
+def test_ic12_qualification_context_reports_server_attestations(service):
+    coordinator, enabled = service
+    context = coordinator.qualification_context()
+    assert context["version"] == coordinator.snapshot()[2]
+    assert set(context["evidence_complete"]) == {
+        adapter.template_id for adapter in coordinator._adapters.values()
+    }
+    assert context["identity_normalized"] is True
+    assert context["applicability_confirmed"] is True
+    assert context["source"] == "server_operator_attestation"
+
+    enabled[0] = False
+    incomplete = coordinator.qualification_context()
+    assert incomplete["version"] == context["version"]
+    assert incomplete["evidence_complete"] == []
+    assert incomplete["identity_normalized"] is False
+    assert incomplete["applicability_confirmed"] is False
+
