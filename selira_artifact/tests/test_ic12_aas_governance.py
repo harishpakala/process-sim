@@ -303,3 +303,27 @@ def test_ic12_qualification_context_reports_server_attestations(service):
     assert incomplete["identity_normalized"] is False
     assert incomplete["applicability_confirmed"] is False
 
+def test_ic12_qualification_context_update_is_version_guarded(service):
+    coordinator, _ = service
+    stored = {}
+    coordinator._provider.update = lambda flags: stored.update(flags)
+    context = coordinator.qualification_context()
+    proposed = {
+        "evidence_complete": context["available_scopes"][:1],
+        "identity_normalized": False,
+        "applicability_confirmed": True,
+    }
+    updated = coordinator.update_qualification_context(
+        proposed, expected_version=context["version"])
+    assert stored == proposed
+    assert updated["evidence_complete"] == proposed["evidence_complete"]
+    assert updated["identity_normalized"] is False
+    assert updated["applicability_confirmed"] is True
+    assert updated["version"] == context["version"]
+    with pytest.raises(ValueError, match="Stale"):
+        coordinator.update_qualification_context(proposed, expected_version=-1)
+    with pytest.raises(ValueError, match="registered"):
+        coordinator.update_qualification_context(
+            {**proposed, "evidence_complete": ["urn:unregistered:template"]},
+            expected_version=context["version"])
+
