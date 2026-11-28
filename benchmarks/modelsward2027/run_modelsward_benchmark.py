@@ -26,6 +26,7 @@ def main():
     p.add_argument('--scenarios', nargs='+', help='Evaluate all paraphrases of selected scenario IDs')
     p.add_argument('--consolidated',action='store_true',help='Use the six-domain consolidated manifest')
     p.add_argument('--gold',type=Path,help='Full consolidated reference validation report')
+    p.add_argument('--query-ids',nargs='+',help='Restrict jobs to explicit query IDs')
     p.add_argument('--dry-run',action='store_true',help='Validate inputs and enumerate jobs without model or database calls')
     p.add_argument('--method',choices=['direct','ablated','full'],default='full')
     a=p.parse_args()
@@ -63,11 +64,16 @@ def main():
     if a.scenarios and set(a.scenarios)-set(scenarios): p.error('Unknown scenario IDs: '+str(sorted(set(a.scenarios)-set(scenarios))))
     selected=a.scenarios or (list(scenarios) if a.full else smoke[:a.limit])
     jobs=[(sid,p) for sid in selected for p in (scenarios[sid]['paraphrases'] if a.full or a.scenarios else scenarios[sid]['paraphrases'][:1])]
+    if a.query_ids:
+        if set(a.query_ids)-{p['id'] for _,p in jobs}: p.error('Unknown or unselected query IDs')
+        jobs=[(sid,p) for sid,p in jobs if p['id'] in a.query_ids]
     hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS,gp]}
     config=dict(full=a.full,limit=None if a.full else a.limit,models=a.models,graphdb_url=a.graphdb_url,ollama_url=a.ollama_url,retrieval='expanded',hashes=hashes)
     if a.consolidated: config['benchmark']='consolidated'; config['runner_sha256']=digest(Path(__file__))
     if a.consolidated: config['method']=a.method
     if a.scenarios: config['scenarios']=a.scenarios
+    if a.query_ids: config['query_ids']=a.query_ids
+    if a.method=='direct': config['direct_module_sha256']=digest(HERE/'direct_sparql.py')
     if a.dry_run:
         print('Domains:', ', '.join(domains))
         print('Scenarios:',len(selected),'Queries:',len(jobs),'Evaluations:',len(jobs)*len(a.models))
