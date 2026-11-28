@@ -1,0 +1,1480 @@
+{
+  "SD13": {
+    "head": {
+      "vars": [
+        "entity",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1002"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1003"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1004"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1005"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1006"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1101"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1201"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMjAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1401"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1502"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "DC-PSU-1"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5EQ1Bvd2VyU3VwcGx5"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1002"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1003"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1004"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1005"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1006"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1101"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1502"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "JI-1401"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "K1"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QTENCb3g"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1101"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "M-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NXzEzMDE"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "M-1401"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NXzE0MDE"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "M-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NXzE1MDE"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "M1"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NMQ"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1101"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1101"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1103"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1202"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMjAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1301"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1501"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAx"
+          }
+        }
+      ]
+    }
+  },
+  "SD14": {
+    "head": {
+      "vars": [
+        "entity",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "V-001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5WYXBvckxpcXVpZFNlcGFyYXRvcg"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "S-001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0U3RyaXBwZXI"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "R-001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWFjdG9y"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "K-001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5SZWN5Y2xlQ29tcHJlc3Nvcg"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "C-001"
+          },
+          "entity": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/RXF1aXBtZW50cy5Qcm9kdWN0Q29uZGVuc2Vy"
+          }
+        }
+      ]
+    }
+  },
+  "CD15": {
+    "head": {
+      "vars": [
+        "left",
+        "right",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1001"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1002"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1003"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1004"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3c"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1005"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1006"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1301"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1501"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI-1502"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "JI-1401"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlcg"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbA"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1301"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVs"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI-1501"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1301"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI-1501"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1202"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMjAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1301"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI-1501"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAx"
+          }
+        }
+      ]
+    }
+  },
+  "CD16": {
+    "head": {
+      "vars": [
+        "left",
+        "right",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI_105"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckNvb2xpbmdXYXRlck91dGxldFRlbXBlcmF0dXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMjAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI_104"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJPdXRsZXRUZW1wZXJhdHVyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI_103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVGVtcGVyYXR1cmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI_102"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclRlbXBlcmF0dXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "TI_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JUZW1wZXJhdHVyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5USV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI_103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyUHJlc3N1cmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI_102"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclByZXNzdXJl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "PI_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JQcmVzc3VyZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5QSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI_103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyTGV2ZWw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI_102"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvckxldmVs"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "LI_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JMZXZlbA"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5MSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "JI_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkNvbXByZXNzb3JQb3dlcg"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5KSV8xNDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_110"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1GbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_109"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlN0cmlwcGVyVW5kZXJmbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_108"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlNlcGFyYXRvclVuZGVyZmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_107"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlB1cmdlRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_106"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlYWN0b3JGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_105"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLlJlY3ljbGVGbG93"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_104"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFDRmVlZEZsb3c"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkVGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_102"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkRGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "FI_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/SW5zdHJ1bWVudGF0aW9uRnVuY3Rpb25zLkFGZWVkRmxvdw"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5GSV8xMDAx"
+          }
+        }
+      ]
+    }
+  },
+  "CD17": {
+    "head": {
+      "vars": [
+        "left",
+        "right",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1001"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1002"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1003"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1004"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9s"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1005"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1006"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1201"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMjAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1301"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1501"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "CV-1502"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "M1"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9s"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NMQ"
+          }
+        }
+      ]
+    }
+  },
+  "CD18": {
+    "head": {
+      "vars": [
+        "left",
+        "right",
+        "sort"
+      ]
+    },
+    "results": {
+      "bindings": [
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_111"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbmRlbnNlckNvb2xpbmdXYXRlclZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMjAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_110"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlJlYWN0b3JDb29saW5nV2F0ZXJWYWx2ZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_109"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyU3RlYW1WYWx2ZQ"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_108"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlN0cmlwcGVyTGlxdWlkUHJvZHVjdFZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xNTAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_107"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlNlcGFyYXRvckxpcXVpZFZhbHZl"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMzAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_106"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLlB1cmdlVmFsdmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA1"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_105"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkNvbXByZXNzb3JSZWN5Y2xlVmFsdmU"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA2"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_104"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFDRmVlZEZsb3dDb250cm9s"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDA0"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_103"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAx"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_102"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkVGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAz"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "VC_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkRGZWVkRmxvd0NvbnRyb2w"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5DVl8xMDAy"
+          }
+        },
+        {
+          "sort": {
+            "type": "literal",
+            "value": "SC_101"
+          },
+          "left": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/QWN0dWF0aW5nRnVuY3Rpb25zLkFnaXRhdG9yU3BlZWRDb250cm9s"
+          },
+          "right": {
+            "type": "uri",
+            "value": "http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/RGV2aWNlcy5NMQ"
+          }
+        }
+      ]
+    }
+  }
+}

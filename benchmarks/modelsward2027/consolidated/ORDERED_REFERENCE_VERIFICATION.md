@@ -1,0 +1,3 @@
+# Ordered reference verification
+
+Reused historical ordering_diagnostics.json (inference requested false). Compared all six unrestricted sequences to consolidated gold (SHA-256 b13415867bad62aecba800575935bb20b8e525050ac3f6348aaf040ba141c1b1). All top-N projected bindings match exactly in order; all sort keys and projected tuples unique. SD13 ASC 40/5, SD14 DESC 5/3, CD15 ASC 22/5, CD16 DESC 22/5, CD17 ASC 12/5, CD18 DESC 12/5 (unrestricted/limit). Total 113 unrestricted rows, 28 selected. No new database calls. This verifies agreement of recorded results, not identity of the underlying database snapshots. The ordered comparator still requires explicit role alignment and structural review.
