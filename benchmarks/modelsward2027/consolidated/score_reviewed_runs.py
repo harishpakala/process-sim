@@ -48,7 +48,7 @@ def main():
             if review and review.get('record_sha256')!=hashlib.sha256(line.encode('utf-8')).hexdigest():
                 raise ValueError(f'Review does not match raw record: {k}')
             result=evaluate(r,contracts[sid],review,refs.get(sid),ordered.get(sid))
-            groups[k[:2]].append(dict(query_id=k[2],scenario_id=sid,negative=contracts[sid]['mode']=='negative',**result))
+            groups[k[:2]].append({**result, 'query_id':k[2], 'scenario_id':sid, 'negative':contracts[sid]['mode']=='negative'})
     if set(reviews)-seen: raise ValueError('Review contains unknown run IDs')
     out=[]
     for (method,model),rows in sorted(groups.items()):
