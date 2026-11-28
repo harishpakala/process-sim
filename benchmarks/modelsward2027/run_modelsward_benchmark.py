@@ -27,7 +27,9 @@ def main():
     p.add_argument('--consolidated',action='store_true',help='Use the six-domain consolidated manifest')
     p.add_argument('--gold',type=Path,help='Full consolidated reference validation report')
     p.add_argument('--dry-run',action='store_true',help='Validate inputs and enumerate jobs without model or database calls')
+    p.add_argument('--method',choices=['direct','full'],default='full')
     a=p.parse_args()
+    if a.method=='direct' and not a.consolidated: p.error('Direct baseline requires --consolidated')
     if a.consolidated and not a.gold: p.error('--consolidated requires --gold')
     if a.gold and not a.consolidated: p.error('--gold requires --consolidated')
     if a.scenarios and a.full: p.error('--scenarios and --full are mutually exclusive')
@@ -64,6 +66,7 @@ def main():
     hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS,gp]}
     config=dict(full=a.full,limit=None if a.full else a.limit,models=a.models,graphdb_url=a.graphdb_url,ollama_url=a.ollama_url,retrieval='expanded',hashes=hashes)
     if a.consolidated: config['benchmark']='consolidated'; config['runner_sha256']=digest(Path(__file__))
+    if a.consolidated: config['method']=a.method
     if a.scenarios: config['scenarios']=a.scenarios
     if a.dry_run:
         print('Domains:', ', '.join(domains))
@@ -89,26 +92,37 @@ def main():
         start=time.perf_counter(); stage='domain_resolution'; t=start
         def mark(): r['timings'][stage]=time.perf_counter()-t
         try:
-         # Fixed display-name normalization; no scenario metadata used for routing.
-         normalized=q
-         for label,key in [('Asset Inventory','assetinventory'),('Product Catalog','productcatalog'),('OPC UA Connectivity','opcuaconnectivity'),('Engineering BOM','engineeringbom')]:
-          normalized=re.sub(r'\b'+label+r'\b',key,normalized,flags=re.I)
-         ds=resolve_domains(normalized,domains,schema=schema); mark()
-         r['resolved_domains']=list(ds)
-         expected_domains=s.get('expected_semantics',{}).get('domains')
-         r['domain_match']=None if expected_domains is None else set(ds)==set(expected_domains)
-         r['expected_rejection']=s.get('expected_semantics',{}).get('expected_rejection')
-         ix={d:indices[d] for d in ds}; stage='planning'; t=time.perf_counter()
-         opts=dict(method='expanded',model=model,endpoint=a.ollama_url)
-         record=run_one(ix[ds[0]],q,**opts) if len(ds)==1 else run_cross_domain(ix,q,mapping_file=MAPPINGS,**opts)
-         mark(); r['planner_record']=record
-         if record.get('status')!='valid_response' or record.get('validation_errors'):
-          r['status']='planning_not_valid'
-          if s['expected_behavior']=='reject': r['negative_outcome']='rejection_reason_review_required'
-          continue
-         stage='compilation'; t=time.perf_counter()
-         sparql=compile_single_domain(record,ix[ds[0]],schema) if len(ds)==1 else compile_cross_domain(record,ix,schema,graphs,mappings)
-         mark(); r['sparql']=sparql
+         if a.method=='direct':
+          from direct_sparql import direct_plan,check_select
+          stage='planning'; t=time.perf_counter()
+          record=direct_plan(q,schema,mappings,graphs,model=model,endpoint=a.ollama_url)
+          mark(); r['planner_record']=record
+          if record['status']!='valid_response':
+           r['status']=record['status']; continue
+          stage='query_policy'; t=time.perf_counter()
+          r['sparql']=record['answer']['sparql']
+          sparql=check_select(r['sparql']); mark()
+         else:
+          # Fixed display-name normalization; no scenario metadata used for routing.
+          normalized=q
+          for label,key in [('Asset Inventory','assetinventory'),('Product Catalog','productcatalog'),('OPC UA Connectivity','opcuaconnectivity'),('Engineering BOM','engineeringbom')]:
+           normalized=re.sub(r'\b'+label+r'\b',key,normalized,flags=re.I)
+          ds=resolve_domains(normalized,domains,schema=schema); mark()
+          r['resolved_domains']=list(ds)
+          expected_domains=s.get('expected_semantics',{}).get('domains')
+          r['domain_match']=None if expected_domains is None else set(ds)==set(expected_domains)
+          r['expected_rejection']=s.get('expected_semantics',{}).get('expected_rejection')
+          ix={d:indices[d] for d in ds}; stage='planning'; t=time.perf_counter()
+          opts=dict(method='expanded',model=model,endpoint=a.ollama_url)
+          record=run_one(ix[ds[0]],q,**opts) if len(ds)==1 else run_cross_domain(ix,q,mapping_file=MAPPINGS,**opts)
+          mark(); r['planner_record']=record
+          if record.get('status')!='valid_response' or record.get('validation_errors'):
+           r['status']='planning_not_valid'
+           if s['expected_behavior']=='reject': r['negative_outcome']='rejection_reason_review_required'
+           continue
+          stage='compilation'; t=time.perf_counter()
+          sparql=compile_single_domain(record,ix[ds[0]],schema) if len(ds)==1 else compile_cross_domain(record,ix,schema,graphs,mappings)
+          mark(); r['sparql']=sparql
          if not sparql.lstrip().upper().startswith('SELECT'): raise ValueError('Only SELECT allowed')
          if s['expected_behavior']=='reject':
           r['status']='negative_compiled_not_executed'; r['negative_outcome']='accepted_plan_review_required'; continue
