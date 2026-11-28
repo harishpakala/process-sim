@@ -1,6 +1,8 @@
 """Local research service; one exclusive writer, persistent journal required."""
 import argparse
 import json
+import os
+import tempfile
 from pathlib import Path
 
 from .aas_governance import AASGovernance
@@ -67,6 +69,27 @@ def build_service(endpoint, journal, *, mode, evidence_file, remote_quiescent=Fa
                 or type(flags["applicability_confirmed"]) is not bool):
             raise ValueError("Invalid evidence attestation types")
         return flags
+
+    def update_evidence(updated):
+        # Atomic replacement prevents readers from observing a partially written file.
+        target = Path(evidence_file).resolve()
+        target.parent.mkdir(parents=True, exist_ok=True)
+        fd, temporary = tempfile.mkstemp(prefix=target.name + ".", suffix=".tmp", dir=target.parent)
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as stream:
+                json.dump(updated, stream, indent=2)
+                stream.write("\\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, target)
+        except Exception:
+            try:
+                os.unlink(temporary)
+            except OSError:
+                pass
+            raise
+
+    evidence.update = update_evidence
     if mode == "reconcile":
         try:
             return {"status": store.reconcile_pending(remote_quiescent=remote_quiescent)}
