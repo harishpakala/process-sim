@@ -59,7 +59,33 @@ onMounted(refresh)
 <template>
  <section class="panel governance">
   <div class="panel-title"><div><h2>SELiRA Automation Manager</h2><p>Live native AAS changes · SC-01 · LP-01</p></div><span class="pill">Version {{version??'unavailable'}}</span></div>
-  <p>Changes affect the configured repository. Evidence is supplied by the server operator.</p>
+  <p>Changes affect the configured repository. Evidence conditions are supplied by the server operator and are not independently verified by this interface.</p>
+
+  <section class="qualification-context" aria-labelledby="qualification-context-title">
+   <div class="context-heading">
+    <div><h3 id="qualification-context-title">Qualification context</h3><p>Conditions considered alongside graph validation for SC-01.</p></div>
+    <span class="context-tag">Server supplied</span>
+   </div>
+   <div class="context-grid">
+    <article class="context-item">
+     <strong>Information completeness</strong>
+     <p>Asset Inventory and Product Catalog completeness attestations.</p>
+     <span class="context-note">Supplied externally · not verified in the UI</span>
+    </article>
+    <article class="context-item">
+     <strong>Identity normalization</strong>
+     <p>Confirmation that the configured identifier interpretation is established.</p>
+     <span class="context-note">Supplied externally · not verified in the UI</span>
+    </article>
+    <article class="context-item">
+     <strong>Contract applicability</strong>
+     <p>Whether SC-01 applies to the evaluated information.</p>
+     <span class="context-note">Separate evaluation prerequisite</span>
+    </article>
+   </div>
+   <p class="context-footnote">These are qualification inputs, not evidence-authentication features. Their current Boolean or scope values remain in the server-side evidence configuration.</p>
+  </section>
+
   <button class="secondary" :disabled="busy" @click="refresh">Refresh committed state</button>
   <p v-if="error" role="alert">{{error}}</p>
   <label>Native AAS property<select v-model="selected" :disabled="busy" @change="choose"><option v-for="f in fields" :key="f.key" :value="f.key">{{f.document.idShort}} / {{f.path}}</option></select></label>
@@ -78,4 +104,5 @@ onMounted(refresh)
 </template>
 <style scoped>
 .governance{display:grid;gap:16px}.governance label{display:grid;gap:6px}.governance select,.governance input{padding:10px;border:1px solid #8794a3;border-radius:6px;max-width:100%;color:inherit;background:transparent}.response{border-top:1px solid #8794a3;padding:12px 0;overflow-wrap:anywhere}.governance button{justify-self:start}
+.qualification-context{border:1px solid #8794a3;border-radius:8px;padding:16px;display:grid;gap:12px}.context-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.context-heading h3{margin:0 0 4px}.context-heading p,.context-item p,.context-footnote{margin:0}.context-heading p,.context-item p,.context-footnote{font-size:.9rem;opacity:.82}.context-tag{border:1px solid #8794a3;border-radius:999px;padding:4px 9px;font-size:.78rem;white-space:nowrap}.context-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.context-item{border:1px solid #8794a3;border-radius:6px;padding:12px;display:grid;gap:7px;align-content:start}.context-note{font-size:.78rem;opacity:.72}.context-footnote{border-top:1px solid #8794a3;padding-top:10px}
 </style>
