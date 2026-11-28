@@ -4,6 +4,7 @@ import EngineeringRdfGraph from './EngineeringRdfGraph.vue'
 import { ExternalLink, Package, Search, Database, FileText } from 'lucide-vue-next'
 import { selectTriples, localName, type Triple } from '../lib/sparql'
 import ProductKnowledgeGraph from './ProductKnowledgeGraph.vue'
+import AasElementEditor from './AasElementEditor.vue'
 
 const props = withDefaults(defineProps<{ focusId?: string }>(), { focusId: '' })
 const emit = defineEmits<{ (e:'open-record', destination:string, identifier:string):void }>()
@@ -15,7 +16,7 @@ const error = ref('')
 const query = ref('')
 const manufacturer = ref('All')
 const selectedId = ref('')
-const tab = ref<'Details' | 'Knowledge Graph'>('Details')
+const tab = ref<'Details' | 'Knowledge Graph' | 'Governance'>('Details')
 const relatedAssets = ref<{id:string;tag:string;status:string}[]>([])
 const productType = 'https://example.org/productcatalog/Product'
 const productNS = 'https://example.org/productcatalog/'
@@ -98,8 +99,9 @@ function label(value: string) { return value.replace(/([a-z0-9])([A-Z])/g, '$1 $
       <section class="panel catalog-detail">
         <template v-if="selected">
           <div class="panel-title"><div><h2>{{ selected.partNumber || selected.designation || selected.supplierPartNumber || selected.id }}</h2><p>{{ selected.manufacturer }} · {{ selected.category }}</p></div><span class="pill">AAS PRODUCT</span></div>
-          <div class="tabs"><button :class="{selected:tab==='Details'}" @click="tab='Details'">Technical details</button><button :class="{selected:tab==='Knowledge Graph'}" @click="tab='Knowledge Graph'">Knowledge graph</button></div>
-          <template v-if="tab==='Details'">
+          <div class="tabs"><button :class="{selected:tab==='Details'}" @click="tab='Details'">Technical details</button><button :class="{selected:tab==='Knowledge Graph'}" @click="tab='Knowledge Graph'">Knowledge graph</button><button :class="{selected:tab==='Governance'}" @click="tab='Governance'">SELiRA governance</button></div>
+          <AasElementEditor v-if="tab==='Governance'" :key="selected.uri" domain="productcatalog" :title="selected.partNumber || selected.designation || selected.id" :identity-values="[selected.assetId,selected.uri,selected.partNumber,selected.designation,selected.manufacturer]" @committed="load" />
+          <template v-else-if="tab==='Details'">
             <div class="catalog-identifiers">
               <div><small>Manufacturer</small><strong>{{ selected.manufacturer }}</strong></div>
               <div><small>Manufacturer part number</small><strong>{{ selected.partNumber || 'Not verified' }}</strong></div>
