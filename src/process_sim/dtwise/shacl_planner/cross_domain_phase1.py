@@ -12,6 +12,7 @@ import time
 from process_sim.dtwise.shacl_planner.mapping_intent import explicit_shared_key, restrict_shared_key
 
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.shacl_planner.presentation_ablation import ablate_prompt
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     _prune_explicit_candidates, compact_n_domain_prompt,
 )
@@ -411,7 +412,7 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
                      endpoint='http://127.0.0.1:11434',
                      embedding_model='nomic-embed-text:latest',
                      top_shapes=8, top_properties=8,
-                     max_candidates=128, max_depth=6):
+                     max_candidates=128, max_depth=6, ablate_owner_presentation=False):
     domains = tuple(sorted(indices))
     record = {'question': question, 'domains': list(domains),
               'retrieval_method': method, 'model': model, 'qwen_calls': 0}
@@ -594,6 +595,9 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
     record['prompt_candidate_count'] = len(prompt_candidates)
     record['prompt_join_alternatives'] = sum(
         len(m['allowed_pairs']) for m in compact['mappings'])
+    if ablate_owner_presentation:
+        prompt=ablate_prompt(prompt)
+    record['owner_presentation_ablated']=ablate_owner_presentation
     record['prompt_characters'] = len(json.dumps(prompt, ensure_ascii=False))
     record['user_prompt'] = prompt
     if dry_run:

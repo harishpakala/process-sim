@@ -20,6 +20,7 @@ from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index, extr
 from process_sim.dtwise.experimental_shacl_candidates import prepare_candidates
 from process_sim.dtwise.experimental_shacl_qualified_candidates import qualify_candidates
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
+from process_sim.dtwise.shacl_planner.presentation_ablation import ablate_prompt
 from process_sim.dtwise.shacl_planner.semantic_candidates import semantic_candidates
 from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import (
     resolve_domain, resolve_domains, DomainResolutionError,
@@ -803,7 +804,7 @@ def _path_parts(path):
 def run_one(index, question, *, method='expanded', dry_run=False,
             model='qwen2.5-coder:7b', endpoint='http://127.0.0.1:11434',
             embedding_model='nomic-embed-text:latest', top_shapes=8,
-            top_properties=8, max_candidates=128, max_depth=6):
+            top_properties=8, max_candidates=128, max_depth=6, ablate_owner_presentation=False):
     record={'question':question,'domain':index.domain,'model':model,'retrieval_method':method}
     # Phase-1 contract: at least one explicit SHACL concept label must appear.
     # Property-only anchors cannot establish a requested result concept.
@@ -853,6 +854,10 @@ def run_one(index, question, *, method='expanded', dry_run=False,
             'result_candidate_count':sum(c['kind']=='result' for c in candidates),
             'property_candidate_count':sum(c['kind']=='property' for c in candidates),
             'candidate_paths':candidates,'system_prompt':SYSTEM_PROMPT,'user_prompt':prompt})
+        if ablate_owner_presentation:
+            prompt=ablate_prompt(prompt)
+            record['user_prompt']=prompt
+        record['owner_presentation_ablated']=ablate_owner_presentation
         if dry_run:
             record['status']='dry_run'
             return record

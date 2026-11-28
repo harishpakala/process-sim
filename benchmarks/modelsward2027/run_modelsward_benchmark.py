@@ -27,9 +27,9 @@ def main():
     p.add_argument('--consolidated',action='store_true',help='Use the six-domain consolidated manifest')
     p.add_argument('--gold',type=Path,help='Full consolidated reference validation report')
     p.add_argument('--dry-run',action='store_true',help='Validate inputs and enumerate jobs without model or database calls')
-    p.add_argument('--method',choices=['direct','full'],default='full')
+    p.add_argument('--method',choices=['direct','ablated','full'],default='full')
     a=p.parse_args()
-    if a.method=='direct' and not a.consolidated: p.error('Direct baseline requires --consolidated')
+    if a.method!='full' and not a.consolidated: p.error('Comparative methods require --consolidated')
     if a.consolidated and not a.gold: p.error('--consolidated requires --gold')
     if a.gold and not a.consolidated: p.error('--gold requires --consolidated')
     if a.scenarios and a.full: p.error('--scenarios and --full are mutually exclusive')
@@ -114,6 +114,7 @@ def main():
           r['expected_rejection']=s.get('expected_semantics',{}).get('expected_rejection')
           ix={d:indices[d] for d in ds}; stage='planning'; t=time.perf_counter()
           opts=dict(method='expanded',model=model,endpoint=a.ollama_url)
+          if a.method=='ablated': opts['ablate_owner_presentation']=True
           record=run_one(ix[ds[0]],q,**opts) if len(ds)==1 else run_cross_domain(ix,q,mapping_file=MAPPINGS,**opts)
           mark(); r['planner_record']=record
           if record.get('status')!='valid_response' or record.get('validation_errors'):
