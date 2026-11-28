@@ -4,6 +4,7 @@ import EngineeringRdfGraph from './EngineeringRdfGraph.vue'
 import { Factory, Search, Network, Package } from 'lucide-vue-next'
 import { selectTriples, KG_TYPE, KG_VOCAB, localName, type Triple } from '../lib/sparql'
 import AssetStatusKnowledgeGraph from './AssetStatusKnowledgeGraph.vue'
+import AasElementEditor from './AasElementEditor.vue'
 
 const props = withDefaults(defineProps<{ focusId?: string }>(), { focusId: '' })
 const emit = defineEmits<{ (e:'open-record', destination:string, identifier:string):void }>()
@@ -100,7 +101,7 @@ const loading = ref(false)
 const error = ref('')
 const query = ref('')
 const selectedId = ref('')
-const detailTab = ref<'Status' | 'Knowledge Graph'>('Status')
+const detailTab = ref<'Status' | 'Knowledge Graph' | 'Governance'>('Status')
 
 const assets = computed<AssetRecord[]>(() => {
   const ids = [...new Set(triples.value.filter(t => t.predicate === KG_TYPE && t.object === assetType).map(t => t.subject))]
@@ -209,8 +210,9 @@ const statusLabel = (value: string) => readable(value || 'Unknown')
       <div class="catalog-property"><span>Engineering reference</span><button v-if="selected.fields.EngineeringReference" class="secondary" type="button" @click="emit('open-record',selected.fields.EngineeringReference.includes('/TEP-')?'DEXPI Explorer':'ECAD Explorer',selected.fields.EngineeringReference)">{{ selected.fields.EngineeringReference }} ↗</button><span v-else>Not mapped</span></div>
       <div class="catalog-property"><span>Candidate product</span><button v-if="selected.fields.CandidateProductReference" class="secondary" type="button" @click="emit('open-record','Product Catalog',selected.fields.CandidateProductReference)">{{ selected.fields.CandidateProductReference }} ↗</button><span v-else>Not mapped</span><small v-if="selected.fields.CandidateSelectionStatus">{{ selected.fields.CandidateSelectionStatus }} · not an installed product</small></div>
     </div>
-    <div class="tabs"><button :class="{selected:detailTab==='Status'}" @click="detailTab='Status'">Asset status</button><button :class="{selected:detailTab==='Knowledge Graph'}" @click="detailTab='Knowledge Graph'">Knowledge graph</button></div>
+    <div class="tabs"><button :class="{selected:detailTab==='Status'}" @click="detailTab='Status'">Asset status</button><button :class="{selected:detailTab==='Knowledge Graph'}" @click="detailTab='Knowledge Graph'">Knowledge graph</button><button :class="{selected:detailTab==='Governance'}" @click="detailTab='Governance'">SELiRA governance</button></div>
     <AssetStatusKnowledgeGraph v-if="detailTab==='Knowledge Graph'" :key="selected.id" :asset="selected" />
+    <AasElementEditor v-else-if="detailTab==='Governance'" :key="selected.id" domain="assetinventory" :title="selected.fields.AssetName || selected.fields.EquipmentTag || localName(selected.id)" :identity-values="[selected.fields.AssetIdentifier,selected.fields.EquipmentTag,selected.fields.AssetName,selected.id]" @committed="load" />
     <template v-else>
      <h2 class="catalog-section-title">Live operational state</h2>
      <div class="catalog-properties">
