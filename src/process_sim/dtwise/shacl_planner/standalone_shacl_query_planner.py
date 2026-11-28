@@ -401,7 +401,7 @@ def _tokens(value):
     return tuple(collapsed)
 
 
-def _matches_schema_term(question, label):
+def _schema_term_spans(question, label):
     """Exact schema tokens; allow plural query for singular schema label only.
 
     In particular, 'connection points' must not match the schema concept
@@ -413,7 +413,7 @@ def _matches_schema_term(question, label):
     q = raw_tokens(question)
     l = raw_tokens(label)
     if not l:
-        return False
+        return []
     def equivalent(qword, lword):
         if qword == lword:
             return True
@@ -422,8 +422,27 @@ def _matches_schema_term(question, label):
         return (qword == lword+'s' or
                 (lword.endswith('y') and qword == lword[:-1]+'ies') or
                 (qword == lword+'es' and lword.endswith(('s','x','ch','sh'))))
-    return any(all(equivalent(q[i+j], word) for j,word in enumerate(l))
-               for i in range(len(q)-len(l)+1))
+    return [(i, i+len(l)) for i in range(len(q)-len(l)+1)
+            if all(equivalent(q[i+j], word) for j,word in enumerate(l))]
+
+
+def _matches_schema_term(question, label):
+    return bool(_schema_term_spans(question, label))
+
+
+def _maximal_shape_hits(question, shapes):
+    """Suppress shorter concept mentions contained in longer matched mentions.
+
+    Keep all shape URIs sharing a maximal span and separate explicit mentions.
+    """
+    matches = [(uri, start, end)
+               for uri, shape in shapes.items()
+               for label in shape.get('labels', [])
+               if 'shacl shape' not in label.casefold()
+               for start, end in _schema_term_spans(question, label)]
+    return {uri for uri, start, end in matches
+            if not any(a <= start and end <= b and (a < start or end < b)
+                       for _, a, b in matches)}
 
 
 def _explicit_output_property_names(question):
@@ -451,12 +470,8 @@ def _requested_projection_concepts(question, index, shape_hits):
 def _schema_anchors(index, question):
     """Identify explicit shape/property references, including simple plurals."""
     from process_sim.dtwise.shacl_planner.grounding.subgraph import _short
-    shape_hits = set()
+    shape_hits = _maximal_shape_hits(question, index.shapes)
     property_hits = {}
-    for uri, shape in index.shapes.items():
-        labels = [v for v in shape.get('labels', []) if 'shacl shape' not in v.casefold()]
-        if any(_matches_schema_term(question, v) for v in labels):
-            shape_hits.add(uri)
     for owner, props in index.properties.items():
         for prop in props:
             labels = [prop['name'], _short(prop['predicate']),
