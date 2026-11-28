@@ -24,11 +24,16 @@ def main():
     p.add_argument('--full',action='store_true',help='Evaluate every paraphrase in the manifest')
     p.add_argument('--resume',action='store_true',help='Resume an existing output with identical configuration')
     p.add_argument('--scenarios', nargs='+', help='Evaluate all paraphrases of selected scenario IDs')
+    p.add_argument('--consolidated',action='store_true',help='Use the six-domain consolidated manifest')
+    p.add_argument('--gold',type=Path,help='Full consolidated reference validation report')
+    p.add_argument('--dry-run',action='store_true',help='Validate inputs and enumerate jobs without model or database calls')
     a=p.parse_args()
+    if a.consolidated and not a.gold: p.error('--consolidated requires --gold')
+    if a.gold and not a.consolidated: p.error('--gold requires --consolidated')
     if a.scenarios and a.full: p.error('--scenarios and --full are mutually exclusive')
-    if a.scenarios and not a.graphdb_url: p.error('--scenarios requires --graphdb-url')
+    if a.scenarios and not a.graphdb_url and not a.dry_run: p.error('--scenarios requires --graphdb-url')
     if a.scenarios and len(set(a.scenarios)) != len(a.scenarios): p.error('Duplicate scenario IDs')
-    if a.full and not a.graphdb_url: p.error('--full requires --graphdb-url')
+    if a.full and not a.graphdb_url and not a.dry_run: p.error('--full requires --graphdb-url')
     if len(set(a.models)) != len(a.models): p.error('Duplicate models')
     from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index
     from process_sim.dtwise.shacl_planner.multi_domain.domain_resolution import resolve_domains
@@ -37,21 +42,34 @@ def main():
     from process_sim.dtwise.shacl_planner.sparql_compiler import compile_single_domain
     from process_sim.dtwise.shacl_planner.cross_domain_sparql_compiler import compile_cross_domain
     schema=load(SCHEMA); mappings=load(MAPPINGS); graphs=load(GRAPHS)
-    bp=HERE/'benchmark_queries_modelsward2027.json'; rp=HERE/'reference_queries_modelsward2027.json'
-    gold=load(HERE/'reference_validation_results.json')
+    folder=HERE/'consolidated' if a.consolidated else HERE
+    bp=folder/'benchmark_queries_modelsward2027.json'; rp=folder/'reference_queries_modelsward2027.json'
+    gp=a.gold.resolve() if a.consolidated else HERE/'reference_validation_results.json'
+    gold=load(gp)
     if gold['reference_sha256']!=digest(rp): raise ValueError('Reference hash mismatch')
     refs={r['scenario_id']:r for r in gold['results']}
     scenarios={s['scenario_id']:s for s in load(bp)['scenarios']}
-    domains=['dexpi','ecad','assetinventory','productcatalog','opcuaconnectivity']
+    if a.consolidated:
+        expected={sid for sid,s in scenarios.items() if s['expected_behavior']!='reject'}
+        if gold.get('scope')!='all' or gold.get('inference_requested') is not False or set(refs)!=expected or len(gold['results'])!=len(expected) or any(r.get('status')!='pass' for r in refs.values()):
+            raise ValueError('Full successful consolidated reference report required')
+        if a.graphdb_url and gold.get('endpoint')!=a.graphdb_url: raise ValueError('Reference endpoint mismatch')
+    domains=sorted(graphs) if a.consolidated else ['dexpi','ecad','assetinventory','productcatalog','opcuaconnectivity']
     indices={d:load_index(SCHEMA,domain=d) for d in domains}
     output=HERE/a.output
     smoke=['SD01','CD01','N39','E45','SD02','CD02','N40','E46','SD03','CD03']
     if a.scenarios and set(a.scenarios)-set(scenarios): p.error('Unknown scenario IDs: '+str(sorted(set(a.scenarios)-set(scenarios))))
     selected=a.scenarios or (list(scenarios) if a.full else smoke[:a.limit])
     jobs=[(sid,p) for sid in selected for p in (scenarios[sid]['paraphrases'] if a.full or a.scenarios else scenarios[sid]['paraphrases'][:1])]
-    hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS,HERE/'reference_validation_results.json']}
+    hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS,gp]}
     config=dict(full=a.full,limit=None if a.full else a.limit,models=a.models,graphdb_url=a.graphdb_url,ollama_url=a.ollama_url,retrieval='expanded',hashes=hashes)
+    if a.consolidated: config['benchmark']='consolidated'; config['runner_sha256']=digest(Path(__file__))
     if a.scenarios: config['scenarios']=a.scenarios
+    if a.dry_run:
+        print('Domains:', ', '.join(domains))
+        print('Scenarios:',len(selected),'Queries:',len(jobs),'Evaluations:',len(jobs)*len(a.models))
+        print('Dry run: no model or GraphDB calls')
+        return
     completed=set()
     if a.resume:
      with output.open(encoding='utf-8') as previous:
@@ -73,7 +91,7 @@ def main():
         try:
          # Fixed display-name normalization; no scenario metadata used for routing.
          normalized=q
-         for label,key in [('Asset Inventory','assetinventory'),('Product Catalog','productcatalog'),('OPC UA Connectivity','opcuaconnectivity')]:
+         for label,key in [('Asset Inventory','assetinventory'),('Product Catalog','productcatalog'),('OPC UA Connectivity','opcuaconnectivity'),('Engineering BOM','engineeringbom')]:
           normalized=re.sub(r'\b'+label+r'\b',key,normalized,flags=re.I)
          ds=resolve_domains(normalized,domains,schema=schema); mark()
          r['resolved_domains']=list(ds)
@@ -115,9 +133,9 @@ def main():
          mark(); r['status']=stage+'_error'; r['error']=f'{type(e).__name__}: {e}'
         finally:
          r['timings']['total']=time.perf_counter()-start
-         r['runner_version']='4.0-full'
+         r['runner_version']='5.0-consolidated' if a.consolidated else '4.0-full'
          r['expected_semantics']=s.get('expected_semantics',{})
-         r['hashes']['reference_validation_results.json']=digest(HERE/'reference_validation_results.json')
+         r['hashes']['reference_validation_results.json']=digest(gp)
          f.write(json.dumps(r,default=str,ensure_ascii=False)+'\n'); f.flush()
          print(qid,model,r['status'],round(r['timings']['total'],3),flush=True)
     print('Saved',output)
