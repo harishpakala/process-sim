@@ -27,6 +27,15 @@ class Handler(BaseHTTPRequestHandler):
     governance = None
 
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/governance/context":
+            if self.governance is None:
+                self.send_json(503, {"error": "Governance disabled"})
+                return
+            try:
+                self.send_json(200, self.governance.qualification_context())
+            except Exception:
+                self.send_json(503, {"error": "Qualification context unavailable; check governance and reconciliation status"})
+            return
         if urlsplit(self.path).path == "/api/governance/state":
             if self.governance is None:
                 self.send_json(503, {"error": "Governance disabled"})
