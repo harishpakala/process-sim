@@ -1,0 +1,769 @@
+{
+  "status": "pending_independent_review",
+  "source_commit": "f4250e78ea03ab3d2bdf3310526428f732388d57",
+  "scenarios": [
+    {
+      "scenario_id": "SD01",
+      "question": "Show ECAD Device entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 40,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD02",
+      "question": "Show DEXPI Equipment entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Equipment"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD03",
+      "question": "Show DEXPI InstrumentationFunction entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction"
+      ],
+      "recorded_rows": 22,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD04",
+      "question": "Show LocalId values of ECAD Device entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device.LocalId"
+      ],
+      "recorded_rows": 40,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD05",
+      "question": "Show DeviceType values of ECAD Device entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device.DeviceType"
+      ],
+      "recorded_rows": 38,
+      "recorded_duplicate_rows": 31,
+      "issues": [
+        "independent_semantic_review_pending",
+        "value_multiplicity_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD06",
+      "question": "Show LocalId values of DEXPI Equipment entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Equipment.LocalId"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD07",
+      "question": "Show ECAD Device entities where DeviceType is Pressure.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 3,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD08",
+      "question": "Show ECAD Device entities where LocalId is PI-1301.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD09",
+      "question": "Show DEXPI Equipment entities where LocalId is R-001.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Equipment"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD10",
+      "question": "Show ECAD Device entities where DeviceType is Pressure AND LocalId is PI-1301.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD11",
+      "question": "Show ECAD Device entities where DeviceType is Pressure OR LocalId is PI-1301.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 4,
+      "recorded_duplicate_rows": 1,
+      "issues": [
+        "independent_semantic_review_pending",
+        "or_multiplicity_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD12",
+      "question": "Show DEXPI Equipment entities where LocalId is R-001 OR LocalId is K-001.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Equipment"
+      ],
+      "recorded_rows": 2,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "or_multiplicity_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD13",
+      "question": "Show ECAD Device entities ordered by LocalId ascending, limited to 5.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD14",
+      "question": "Show DEXPI Equipment entities ordered by LocalId descending, limited to 3.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Equipment"
+      ],
+      "recorded_rows": 3,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD15",
+      "question": "Show Asset Inventory Asset entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset"
+      ],
+      "recorded_rows": 43,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD16",
+      "question": "Show Asset Inventory Asset entities where AssetType is SimulatedEquipment.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD17",
+      "question": "Show ManufacturerName values of Product Catalog Product entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Product.ManufacturerName"
+      ],
+      "recorded_rows": 20,
+      "recorded_duplicate_rows": 7,
+      "issues": [
+        "independent_semantic_review_pending",
+        "value_multiplicity_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD18",
+      "question": "Show Product Catalog Product entities where ManufacturerName is ABB.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Product"
+      ],
+      "recorded_rows": 2,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD19",
+      "question": "Show SignalName values of OPC UA Connectivity SignalMapping entities.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "SignalMapping.SignalName"
+      ],
+      "recorded_rows": 34,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "SD20",
+      "question": "Show OPC UA Connectivity SignalMapping entities where SignalName is XMEAS7.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "SignalMapping"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD01",
+      "question": "Show Asset Inventory Asset entities and matching DEXPI ActuatingFunction entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "ActuatingFunction"
+      ],
+      "recorded_rows": 12,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD02",
+      "question": "Show Asset Inventory Asset entities and matching DEXPI Equipment entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "Equipment"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD03",
+      "question": "Show Asset Inventory Asset entities and matching DEXPI InstrumentationFunction entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "InstrumentationFunction"
+      ],
+      "recorded_rows": 22,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD04",
+      "question": "Show Asset Inventory Asset entities and matching ECAD Device entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "Device"
+      ],
+      "recorded_rows": 38,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD05",
+      "question": "Show Asset Inventory Asset entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "SignalMapping"
+      ],
+      "recorded_rows": 34,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD06",
+      "question": "Show Asset Inventory Asset entities and matching Product Catalog Product entities joined by ProductIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Asset",
+        "Product"
+      ],
+      "recorded_rows": 38,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD07",
+      "question": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "recorded_rows": 12,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD08",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 22,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD09",
+      "question": "Show DEXPI ActuatingFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "ActuatingFunction",
+        "SignalMapping"
+      ],
+      "recorded_rows": 12,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD10",
+      "question": "Show DEXPI InstrumentationFunction entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "SignalMapping"
+      ],
+      "recorded_rows": 22,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD11",
+      "question": "Show ECAD Device entities and matching OPC UA Connectivity SignalMapping entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "Device",
+        "SignalMapping"
+      ],
+      "recorded_rows": 34,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD12",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 3,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD13",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD LocalId equal to PI-1301.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD14",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier with ECAD DeviceType equal to Pressure with ECAD LocalId equal to PI-1301.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 1,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD15",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD16",
+      "question": "Show DEXPI InstrumentationFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD17",
+      "question": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by ECAD LocalId ascending, limited to 5.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "CD18",
+      "question": "Show DEXPI ActuatingFunction entities and matching ECAD Device entities joined by AssetIdentifier ordered by DEXPI LocalId descending, limited to 5.",
+      "expected_behavior": "execute_nonempty",
+      "projection_roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "recorded_rows": 5,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "ordering_tie_contract_pending"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N39",
+      "question": "Show ECAD QuantumController entities.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N40",
+      "question": "Show QuantumEfficiency values of ECAD Devices.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N41",
+      "question": "Show all LocalId values without specifying a domain.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N42",
+      "question": "Show ECAD LocalId values without specifying an entity owner.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N43",
+      "question": "Show ECAD Devices and DEXPI InstrumentationFunctions joined using LocalId.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review",
+        "accepted_negative_previously_observed_at_category_level"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "N44",
+      "question": "Delete all ECAD Devices with DeviceType Pressure.",
+      "expected_behavior": "reject",
+      "projection_roles": null,
+      "recorded_rows": null,
+      "recorded_duplicate_rows": null,
+      "issues": [
+        "independent_semantic_review_pending",
+        "negative_policy_review",
+        "accepted_negative_previously_observed_at_category_level"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "E45",
+      "question": "Show ECAD Device entities where LocalId is BENCHMARK_NONEXISTENT_001.",
+      "expected_behavior": "execute_empty",
+      "projection_roles": [
+        "Device"
+      ],
+      "recorded_rows": 0,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "empty_result_structural_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    },
+    {
+      "scenario_id": "E46",
+      "question": "Show DEXPI Equipment entities and matching ECAD Device entities joined by AssetIdentifier.",
+      "expected_behavior": "execute_empty",
+      "projection_roles": [
+        "Equipment",
+        "Device"
+      ],
+      "recorded_rows": 0,
+      "recorded_duplicate_rows": 0,
+      "issues": [
+        "independent_semantic_review_pending",
+        "empty_result_structural_review"
+      ],
+      "review_status": "pending",
+      "reviewer": null,
+      "review_evidence": null
+    }
+  ]
+}
