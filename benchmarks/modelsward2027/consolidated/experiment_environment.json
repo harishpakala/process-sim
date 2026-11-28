@@ -1,0 +1,196 @@
+{
+  "created_at_utc": "2026-11-28T16:10:25.745353+00:00",
+  "git_commit": "45e23fdb1d130afd60d3bc954cc6796eaebbd92d",
+  "git_branch": "modelsward2027/ownership-challenge",
+  "git_tracked_changes": "",
+  "environment": {
+    "python": "3.12.0 (tags/v3.12.0:0fb18b0, Oct  2 2023, 13:03:39) [MSC v.1935 64 bit (AMD64)]",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "logical_cpus": 16,
+    "packages": {
+      "rdflib": "7.6.0",
+      "requests": "2.34.2",
+      "numpy": "2.5.2",
+      "pyshacl": "0.31.0",
+      "process-sim": null
+    },
+    "gpu": {
+      "error": "[WinError 2] The system cannot find the file specified"
+    }
+  },
+  "ollama": {
+    "endpoint": "http://127.0.0.1:11434",
+    "version": {
+      "version": "0.40.18"
+    },
+    "models": {
+      "qwen2.5-coder:7b": {
+        "name": "qwen2.5-coder:7b",
+        "model": "qwen2.5-coder:7b",
+        "modified_at": "2026-11-17T10:49:40.8567644+01:00",
+        "size": 4683087561,
+        "digest": "dae161e27b0e90dd1856c8bb3209201fd6736d8eb66298e75ed87571486f4364",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen2",
+          "families": [
+            "qwen2"
+          ],
+          "parameter_size": "7.6B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 3584,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "completion",
+          "tools",
+          "insert"
+        ]
+      },
+      "llama3.1:8b": {
+        "name": "llama3.1:8b",
+        "model": "llama3.1:8b",
+        "modified_at": "2026-10-24T11:48:01.8138775+02:00",
+        "size": 4920753328,
+        "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 131072,
+          "embedding_length": 4096,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      },
+      "mistral:7b": {
+        "name": "mistral:7b",
+        "model": "mistral:7b",
+        "modified_at": "2026-11-24T07:22:32.9183252+01:00",
+        "size": 4372824384,
+        "digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M",
+          "context_length": 32768,
+          "embedding_length": 4096,
+          "runner": "ggml"
+        },
+        "capabilities": [
+          "completion",
+          "tools"
+        ]
+      }
+    },
+    "embedding_model": {
+      "name": "nomic-embed-text:latest",
+      "model": "nomic-embed-text:latest",
+      "modified_at": "2026-11-12T15:36:04.3708786+01:00",
+      "size": 274302450,
+      "digest": "0a109f422b47e3a30ba2b10eca18548e944e8a23073ee3f3e947efcf3c45e59f",
+      "details": {
+        "parent_model": "",
+        "format": "gguf",
+        "family": "nomic-bert",
+        "families": [
+          "nomic-bert"
+        ],
+        "parameter_size": "137M",
+        "quantization_level": "F16",
+        "context_length": 2048,
+        "embedding_length": 768,
+        "runner": "ggml"
+      },
+      "capabilities": [
+        "embedding"
+      ]
+    }
+  },
+  "graphdb": {
+    "endpoint": "http://localhost:7200/repositories/AAST",
+    "inference_requested": false,
+    "gold_sha256": "b13415867bad62aecba800575935bb20b8e525050ac3f6348aaf040ba141c1b1",
+    "snapshot_identity_verified": false,
+    "note": "Gold file fingerprint is not a dataset fingerprint. Live snapshot verification remains required."
+  },
+  "file_sha256": {
+    "benchmarks/modelsward2027/consolidated/benchmark_queries_modelsward2027.json": "d69e90d48185080ccd5b1135bc2032833aaaa45ba7c40e08d32d95a0316ea5b2",
+    "benchmarks/modelsward2027/consolidated/reference_queries_modelsward2027.json": "b29b44df5d6c3c1f8132f37c54b362a6f17ff1833f975806c9759e3bc072b800",
+    "benchmarks/modelsward2027/consolidated/result_contracts.json": "1c7f5a2597536335e5f70861e097060b077bdc121e7154e18c78f70f02f2e35e",
+    "benchmarks/modelsward2027/consolidated/consolidated_ordered_references.json": "33bcb4feabebc24388639e89f90ca5e55cded34f8f15459092c4a402978fa8ad",
+    "benchmarks/modelsward2027/consolidated/score_reviewed_runs.py": "db0967be2f726b6301c71089e9d97574c26516f2b4534172be1d481391a75368",
+    "benchmarks/modelsward2027/consolidated/semantic_review.py": "0c0accff690f5f9fc564dbe7010e63a3b5fa06d74e86cfe2e628c65713d48b3a",
+    "benchmarks/modelsward2027/run_modelsward_benchmark.py": "68353c05c3d958cbadb42979f46f54fe8d9c21e2721e699756f0f324aad63219",
+    "benchmarks/modelsward2027/direct_sparql.py": "1b78d4fa93da7a5ac0e028746d7980604d5c8e8e8cf5e3c2be1836d6dd97c0bf",
+    "benchmarks/modelsward2027/result_semantics.py": "c3fd75ade562e1df903ce8c0db36c69b49e8dc9b1a22a90d9ed30c52a1d159d9",
+    "benchmarks/modelsward2027/ordered_semantics.py": "ca17f673992be198d60acd90e2704bef60daa7e7a771424068d14c8d5aaca206",
+    "benchmarks/modelsward2027/rejection_semantics.py": "29653a2a2cad75046b84433b9e81e933fd39ff8defff12b9c55a7655d9bd9466",
+    "semantic/ontology2/dtwise/dtwise-schema-index.json": "70068d60f1cac29260ce5a22dfe5e88a4035eb27ba2d32488e8530f05b89eb6b",
+    "semantic/ontology2/dtwise/cross-domain-mappings.json": "7f196943d0d2d8db00e1198865b5dafea915e5cca1fbd99f5c7603afe309038e",
+    "benchmarks/shacl_phase1/aast_instance_graphs.json": "769f90ad3ee4836095009f8610ce52430dac0d22f6da9ec855f77641cea16fde",
+    "src/process_sim/dtwise/shacl_planner/__init__.py": "ec132ba9badba54c13b34e51dffcb56ad4fff084bd1a3a75948da3347cca5ea8",
+    "src/process_sim/dtwise/shacl_planner/cross_domain_phase1.py": "b728de5ece8c8e60c0ee7325ea3a4b9b7f7b60fc4b952ad607c6ca24d6c38e8b",
+    "src/process_sim/dtwise/shacl_planner/cross_domain_sparql_compiler.py": "7a843ad0c9c2076c9b966d1badad4bfc5d71a7532d3e64b1508dddb05777c57b",
+    "src/process_sim/dtwise/shacl_planner/grounding/__init__.py": "7bc4ff5d125c5ae1174e33299b8bd5ae045dc6e57e22896e4843df6228793091",
+    "src/process_sim/dtwise/shacl_planner/grounding/cross_domain.py": "b0db5e5135badeebcf6269063c1b9ed792633bf5b8cac858b6b4dfe09f283bb7",
+    "src/process_sim/dtwise/shacl_planner/grounding/property_grounding.py": "19fb998fda6391ed7fbda386975ea0eb2748bd9c7d04994f1b075b06a3578729",
+    "src/process_sim/dtwise/shacl_planner/grounding/semantic.py": "6caded4df09c306f8046b2375d9008b2c40e530b5a8cc703b32dbe67bd446405",
+    "src/process_sim/dtwise/shacl_planner/grounding/subgraph.py": "8702566ebbda483645e87693766dd90f2a9a3638cb867b01088f7c39d7d633e9",
+    "src/process_sim/dtwise/shacl_planner/legacy_candidate_recovery.py": "3a2190876172375b48265adb6a3b4688a47b0146c5c57a04f76bafe4244bbd0b",
+    "src/process_sim/dtwise/shacl_planner/mapping_intent.py": "b5e1fb173367f7dab560672b8204807fa824afccfbfb125f64bb64955d36d6c7",
+    "src/process_sim/dtwise/shacl_planner/multi_domain/__init__.py": "39b27559e429e5eb6470830d369987ceee44f4cc07ca07901c866d5be33e9dd0",
+    "src/process_sim/dtwise/shacl_planner/multi_domain/cross_domain_mappings.py": "e7096fc25465468a04c29822c65cb09f3daa3cb35fac1d1e95272c1c0f5cd8eb",
+    "src/process_sim/dtwise/shacl_planner/multi_domain/domain_resolution.py": "a5f953342cb78a9a2d4771092e4e25427fe96fec780d9e9226c21d3cfa564c6c",
+    "src/process_sim/dtwise/shacl_planner/operations/__init__.py": "3e7358da8852c801c5de77e86bd4a04fcdb418f786e216371ef5268b0548c169",
+    "src/process_sim/dtwise/shacl_planner/operations/phase1_ollama.py": "eed418ea4bd0250291eadb8032468f45ecd989360968ac2f86eed04e4750db80",
+    "src/process_sim/dtwise/shacl_planner/operations/phase2_filter.py": "d63e5d0494ca41d21b2d46d54de01f7234a21fd1393a2dee03c6d88c16b5d6e2",
+    "src/process_sim/dtwise/shacl_planner/operations/phase3_and.py": "a2498e9e39b2dab88cbc1c3dd2a6ba61c960aaba117332f52b3f2edd63fff828",
+    "src/process_sim/dtwise/shacl_planner/operations/phase4_and_join.py": "2beb18ba0e7e9f483da51961cae6cd335723f8008a4d4dff77fa5f4cf99d676e",
+    "src/process_sim/dtwise/shacl_planner/operations/phase4_filtered_join.py": "419b9fcec55eea57ed7de6fb93f2868b9594e52a2d0b703cdc73c5d2b43828c5",
+    "src/process_sim/dtwise/shacl_planner/operations/phase4_join.py": "87a217a4f1fbd5c7adc78eb6b388409d1851cf77eb9d8e0fbdaf1aedc68e26a6",
+    "src/process_sim/dtwise/shacl_planner/planning/__init__.py": "0ed5211d63215f114b35d44c497176b9fe5133f8a3d3e8aaf15e04c3b3e98fac",
+    "src/process_sim/dtwise/shacl_planner/planning/query_intent.py": "5bc6a6c004db56b999b196c675e22d7da136963e5ef231cfd646c5f207960a10",
+    "src/process_sim/dtwise/shacl_planner/planning/state_machine.py": "6353bdf2838e9862972decb909d80508620dd3a034a13404c4749ec62489c64c",
+    "src/process_sim/dtwise/shacl_planner/presentation_ablation.py": "363da5ee22f6e230cbb998a43bf4aa7a9312097780510495f296be0206cc4e5d",
+    "src/process_sim/dtwise/shacl_planner/query_classifier.py": "f538f1a1edb23510c1722ec80e1207b08e8a7b3d8607f70d5a19c5249bc71a7c",
+    "src/process_sim/dtwise/shacl_planner/semantic_candidates.py": "c47b1d4cc51c07fc5334d593446414af4804b2791e585b23f898f12b3e68232a",
+    "src/process_sim/dtwise/shacl_planner/sparql_compiler.py": "923abff2b23da9978178271a9cbcffb3b112f040a447a72b9b7433ca04943167",
+    "src/process_sim/dtwise/shacl_planner/sparql_validator.py": "0e448bfa26cb61df7e7ade4cf32403b2931dc22b9db614c905cfb38312981689",
+    "src/process_sim/dtwise/shacl_planner/standalone_shacl_query_planner.py": "511f3e5ad3b89dbc86ec448b8be54baf3f611a4bbafb206a456a5837271a936f"
+  },
+  "experiment": {
+    "methods": [
+      "direct",
+      "ablated",
+      "full"
+    ],
+    "models": [
+      "qwen2.5-coder:7b",
+      "llama3.1:8b",
+      "mistral:7b"
+    ],
+    "queries": 275,
+    "attempts": 2475,
+    "retrieval": "expanded",
+    "graphdb_timeout_seconds": 60,
+    "model_settings_note": "Inspect and record effective transport options separately; this utility does not change them."
+  }
+}
