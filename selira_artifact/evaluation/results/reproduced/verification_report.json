@@ -1,0 +1,643 @@
+{
+  "status": "passed",
+  "execution_utc": "2026-11-28T11:48:01.740392+00:00",
+  "research_baseline": "255f664de346a9f65d5cc11c3f180067d3551e16",
+  "scope": "Current-manuscript functional reproduction; no timing or independent licensing claim",
+  "regression_suite": "passed (full pytest and explicit IC14 modules)",
+  "RQ1": {
+    "configurations": 121,
+    "status": "covered by regression; integrated violation sets checked"
+  },
+  "RQ2": {
+    "qualification_admission_scenarios": 25,
+    "ic14_evidence_only": {
+      "evidence_change_cases": 6,
+      "evidence_submissions": 18,
+      "evidence_contract_assertions": 72,
+      "qualified_comparisons": 512,
+      "qualified_full_evaluations": 2048
+    },
+    "status": "covered by regression; IC14 modules explicitly executed"
+  },
+  "RQ3": {
+    "graph_dependent_comparisons": 1808,
+    "evidence_qualified_comparisons": 512,
+    "status": "covered by regression; historical bounded workload checked separately"
+  },
+  "historical_bounded": {
+    "snapshots": 36,
+    "transitions": 1296,
+    "equivalent": 1296,
+    "full_evaluations": 1215,
+    "selective_evaluations": 1084,
+    "logical_reduction_percent": 10.781893004115226
+  },
+  "historical_integrated": {
+    "events": 11,
+    "full_evaluations": 1638,
+    "selective_evaluations": 195
+  },
+  "dataset_characterization": "matches archived characterization",
+  "integrated_baseline": {
+    "total_focus": 188,
+    "focus": {
+      "SC-01": [
+        38,
+        0
+      ],
+      "SC-02": [
+        39,
+        9
+      ],
+      "SC-03": [
+        40,
+        29
+      ],
+      "SC-04": [
+        71,
+        0
+      ]
+    }
+  },
+  "integrated_current": {
+    "events": 16,
+    "admitted": 7,
+    "rejected": 8,
+    "deferred": 1,
+    "full_evaluations": 2444,
+    "selective_evaluations": 203,
+    "equivalent_comparisons": 13,
+    "comparisons": 13,
+    "logical_reduction_percent": 91.69394435351882
+  },
+  "baseline_union_triples": 30611,
+  "input_sha256": {
+    "bindings/LP-03.json": "3a0bebbe9ef4ba09f4b70e31c329b2210f297ded9a030dc98432c69266edeb39",
+    "bindings/LP-04.json": "fcc1ab88bc5a8a32725f60725b8b532a2b6a74722dabf92cf1e1b11e3bafb88e",
+    "bindings/SC-01.json": "a2b60f90999f28f9bfd7d73d21514d834ea932a335ee7e81f57d661560ccfdb0",
+    "bindings/SC-02.json": "d8103c331f82d6ee0e91645f0819f743b29ea046c38cb0db8f1c331b16171e52",
+    "bindings/SC-03.json": "236e0227b0fdb978a1d2b5b5fb096891d676f9927d1ab05d7541cc0ece7853b7",
+    "bindings/SC-04.json": "184450b8958dd1f5b9e2a6066adbf812d77f21134403f824d29ca58abd817f08",
+    "contracts/SC-01.safsl": "1df39bd1f2e9b666ee40ec79b3e3326fd7d723869ed737fe3930a8cff626b5a9",
+    "contracts/SC-02.safsl": "9158e3cd40fdc35df3b9a738f9d51a372e21f0c225588bca4b25628d86b58b1a",
+    "contracts/SC-03.safsl": "dc6deda051c1192c438004603388f8d4fb5a5b26f550ef4df0dbd33a421c5661",
+    "contracts/SC-04.safsl": "7da1cb49039c589d08e37efd2e7d4c69721d5c9e64e1705909efbd7822534ea2",
+    "datasets/tep_nexus/assetinventory-instance.ttl": "8f08807af27d820a537704c4e26498f4fce663534dd63bb140f9eec7940e4181",
+    "datasets/tep_nexus/dexpi-instance.ttl": "91565028b3dc14a57f9b7348df5475c667e159b2707a5eff8cee80b21493fb5d",
+    "datasets/tep_nexus/ecad-instance.ttl": "2578533d22bb314d63813a3f23d186c07cb81c7ced1ddf691348268d82739868",
+    "datasets/tep_nexus/engineeringbom-instance.ttl": "ea3c8fadb548fea271085feadae55a28f05a2390e7d3f8173a28b9287ad0c81d",
+    "datasets/tep_nexus/opcuaconnectivity-instance.ttl": "88161df3dd999ee5616620600c9bc48505a765ff6b1637dc2792ec700bebc913",
+    "datasets/tep_nexus/productcatalog-instance.ttl": "c1dacf42853c2127ce7d710ffe6b78c58e9b1fa7f6b3d6f5198b0a3d0a79a145",
+    "policies/LP-01.safsl": "037723e0b33b731829cdc4547a9ea8913e1739868d58c424ffcadce9e700e088",
+    "policies/LP-03.safsl": "ac5afdbebd9f3d56ab6e43fe2371fe0a913bcb0df21607eff7529b95a0b06fe2",
+    "policies/LP-04.safsl": "79da6d80d21322d59611e7d4d7f47f8038f1ba57604d88a51ddbbe837ff34c1d"
+  },
+  "environment": {
+    "python": "3.12.0",
+    "implementation": "CPython",
+    "executable": "C:\\Python312\\python.exe",
+    "platform": "Windows-11-10.0.26300-SP0",
+    "system": "Windows",
+    "release": "11",
+    "machine": "AMD64",
+    "processor": "AMD64 Family 25 Model 117 Stepping 2, AuthenticAMD",
+    "packages": [
+      {
+        "name": "aas-core3.1",
+        "version": "1.0.0"
+      },
+      {
+        "name": "aiofiles",
+        "version": "25.1.0"
+      },
+      {
+        "name": "aiosqlite",
+        "version": "0.22.1"
+      },
+      {
+        "name": "annotated-doc",
+        "version": "0.0.6"
+      },
+      {
+        "name": "annotated-types",
+        "version": "0.8.0"
+      },
+      {
+        "name": "anyio",
+        "version": "4.16.0"
+      },
+      {
+        "name": "asyncua",
+        "version": "1.1.8"
+      },
+      {
+        "name": "blinker",
+        "version": "1.9.0"
+      },
+      {
+        "name": "certifi",
+        "version": "2026.6.17"
+      },
+      {
+        "name": "cffi",
+        "version": "2.1.1"
+      },
+      {
+        "name": "charset-normalizer",
+        "version": "3.4.7"
+      },
+      {
+        "name": "click",
+        "version": "8.4.2"
+      },
+      {
+        "name": "cloc",
+        "version": "0.2.5"
+      },
+      {
+        "name": "colorama",
+        "version": "0.4.6"
+      },
+      {
+        "name": "colored",
+        "version": "2.3.2"
+      },
+      {
+        "name": "comm",
+        "version": "0.2.3"
+      },
+      {
+        "name": "contourpy",
+        "version": "1.3.3"
+      },
+      {
+        "name": "cryptography",
+        "version": "50.0.0"
+      },
+      {
+        "name": "cycler",
+        "version": "0.12.1"
+      },
+      {
+        "name": "dash",
+        "version": "4.4.1"
+      },
+      {
+        "name": "fastapi",
+        "version": "0.165.0"
+      },
+      {
+        "name": "filelock",
+        "version": "4.2.10"
+      },
+      {
+        "name": "Flask",
+        "version": "3.1.3"
+      },
+      {
+        "name": "flexcache",
+        "version": "0.3"
+      },
+      {
+        "name": "flexparser",
+        "version": "0.4"
+      },
+      {
+        "name": "fonttools",
+        "version": "4.63.0"
+      },
+      {
+        "name": "fsspec",
+        "version": "2026.9.0"
+      },
+      {
+        "name": "grpcio",
+        "version": "1.85.1"
+      },
+      {
+        "name": "h11",
+        "version": "0.16.0"
+      },
+      {
+        "name": "h2",
+        "version": "4.4.1"
+      },
+      {
+        "name": "hf-xet",
+        "version": "1.8.0"
+      },
+      {
+        "name": "hpack",
+        "version": "4.2.0"
+      },
+      {
+        "name": "html5rdf",
+        "version": "1.2.1"
+      },
+      {
+        "name": "httpcore",
+        "version": "1.0.9"
+      },
+      {
+        "name": "httpcore2",
+        "version": "2.16.0"
+      },
+      {
+        "name": "httpx",
+        "version": "0.28.1"
+      },
+      {
+        "name": "httpx2",
+        "version": "2.16.0"
+      },
+      {
+        "name": "huggingface_hub",
+        "version": "2.4.0"
+      },
+      {
+        "name": "hyperframe",
+        "version": "6.1.0"
+      },
+      {
+        "name": "idna",
+        "version": "3.18"
+      },
+      {
+        "name": "importlib_metadata",
+        "version": "9.0.0"
+      },
+      {
+        "name": "iniconfig",
+        "version": "2.3.0"
+      },
+      {
+        "name": "itsdangerous",
+        "version": "2.2.0"
+      },
+      {
+        "name": "janus",
+        "version": "2.0.0"
+      },
+      {
+        "name": "Jinja2",
+        "version": "3.1.6"
+      },
+      {
+        "name": "jiter",
+        "version": "0.19.0"
+      },
+      {
+        "name": "joblib",
+        "version": "1.5.3"
+      },
+      {
+        "name": "kiwisolver",
+        "version": "1.5.0"
+      },
+      {
+        "name": "lark",
+        "version": "1.3.1"
+      },
+      {
+        "name": "lxml",
+        "version": "6.1.1"
+      },
+      {
+        "name": "markdown-it-py",
+        "version": "4.3.0"
+      },
+      {
+        "name": "MarkupSafe",
+        "version": "3.0.3"
+      },
+      {
+        "name": "matplotlib",
+        "version": "3.11.1"
+      },
+      {
+        "name": "mdurl",
+        "version": "0.1.2"
+      },
+      {
+        "name": "meson",
+        "version": "1.12.0"
+      },
+      {
+        "name": "meson-python",
+        "version": "0.20.0"
+      },
+      {
+        "name": "mpmath",
+        "version": "1.3.0"
+      },
+      {
+        "name": "narwhals",
+        "version": "2.24.0"
+      },
+      {
+        "name": "nest-asyncio",
+        "version": "1.6.0"
+      },
+      {
+        "name": "networkx",
+        "version": "3.7"
+      },
+      {
+        "name": "ninja",
+        "version": "1.13.0"
+      },
+      {
+        "name": "numpy",
+        "version": "2.5.2"
+      },
+      {
+        "name": "ollama",
+        "version": "0.6.3"
+      },
+      {
+        "name": "opcua-client",
+        "version": "0.8.4"
+      },
+      {
+        "name": "opcua-widgets",
+        "version": "0.6.1"
+      },
+      {
+        "name": "openai",
+        "version": "3.49.0"
+      },
+      {
+        "name": "opentelemetry-api",
+        "version": "1.45.2"
+      },
+      {
+        "name": "owlrl",
+        "version": "7.1.4"
+      },
+      {
+        "name": "packaging",
+        "version": "26.2"
+      },
+      {
+        "name": "pandas",
+        "version": "3.0.2"
+      },
+      {
+        "name": "pillow",
+        "version": "12.3.0"
+      },
+      {
+        "name": "Pint",
+        "version": "0.25.3"
+      },
+      {
+        "name": "pip",
+        "version": "26.2.1"
+      },
+      {
+        "name": "platformdirs",
+        "version": "4.11.0"
+      },
+      {
+        "name": "plotly",
+        "version": "6.9.0"
+      },
+      {
+        "name": "pluggy",
+        "version": "1.6.0"
+      },
+      {
+        "name": "portalocker",
+        "version": "4.4.2"
+      },
+      {
+        "name": "prettytable",
+        "version": "3.18.0"
+      },
+      {
+        "name": "protobuf",
+        "version": "7.36.2"
+      },
+      {
+        "name": "psycopg",
+        "version": "3.3.6"
+      },
+      {
+        "name": "psycopg-binary",
+        "version": "3.3.6"
+      },
+      {
+        "name": "pyarrow",
+        "version": "23.0.1"
+      },
+      {
+        "name": "pycparser",
+        "version": "3.0"
+      },
+      {
+        "name": "pydantic",
+        "version": "2.13.4"
+      },
+      {
+        "name": "pydantic_core",
+        "version": "2.46.4"
+      },
+      {
+        "name": "Pygments",
+        "version": "2.21.0"
+      },
+      {
+        "name": "pyOpenSSL",
+        "version": "26.4.0"
+      },
+      {
+        "name": "pyparsing",
+        "version": "3.3.2"
+      },
+      {
+        "name": "pyproject-metadata",
+        "version": "0.12.1"
+      },
+      {
+        "name": "PyQt5",
+        "version": "5.15.11"
+      },
+      {
+        "name": "PyQt5-Qt5",
+        "version": "5.15.2"
+      },
+      {
+        "name": "PyQt5_sip",
+        "version": "12.19.0"
+      },
+      {
+        "name": "pyshacl",
+        "version": "0.31.0"
+      },
+      {
+        "name": "pytest",
+        "version": "9.1.1"
+      },
+      {
+        "name": "pytest-asyncio",
+        "version": "1.4.0"
+      },
+      {
+        "name": "python-dateutil",
+        "version": "2.9.0.post0"
+      },
+      {
+        "name": "pytz",
+        "version": "2026.3.post1"
+      },
+      {
+        "name": "PyYAML",
+        "version": "6.0.3"
+      },
+      {
+        "name": "qdrant-client",
+        "version": "1.20.0"
+      },
+      {
+        "name": "rdflib",
+        "version": "7.6.0"
+      },
+      {
+        "name": "regex",
+        "version": "2026.11.9"
+      },
+      {
+        "name": "requests",
+        "version": "2.34.2"
+      },
+      {
+        "name": "retrying",
+        "version": "1.4.2"
+      },
+      {
+        "name": "rich",
+        "version": "15.0.0"
+      },
+      {
+        "name": "safetensors",
+        "version": "0.8.0"
+      },
+      {
+        "name": "scikit-learn",
+        "version": "1.8.0"
+      },
+      {
+        "name": "scipy",
+        "version": "1.17.1"
+      },
+      {
+        "name": "selira-research",
+        "version": "0.1.0.dev0"
+      },
+      {
+        "name": "sentence-transformers",
+        "version": "6.3.0"
+      },
+      {
+        "name": "setuptools",
+        "version": "84.0.0"
+      },
+      {
+        "name": "shellingham",
+        "version": "1.5.4"
+      },
+      {
+        "name": "six",
+        "version": "1.17.0"
+      },
+      {
+        "name": "sniffio",
+        "version": "1.3.1"
+      },
+      {
+        "name": "sortedcontainers",
+        "version": "2.4.0"
+      },
+      {
+        "name": "starlette",
+        "version": "1.10.0"
+      },
+      {
+        "name": "sympy",
+        "version": "1.14.0"
+      },
+      {
+        "name": "tep",
+        "version": "2.5.0"
+      },
+      {
+        "name": "threadpoolctl",
+        "version": "3.6.0"
+      },
+      {
+        "name": "tokenizers",
+        "version": "0.23.3"
+      },
+      {
+        "name": "torch",
+        "version": "2.15.0"
+      },
+      {
+        "name": "tqdm",
+        "version": "4.70.1"
+      },
+      {
+        "name": "transformers",
+        "version": "5.22.2"
+      },
+      {
+        "name": "truststore",
+        "version": "0.10.5"
+      },
+      {
+        "name": "typer",
+        "version": "0.29.1"
+      },
+      {
+        "name": "typing-inspection",
+        "version": "0.4.4"
+      },
+      {
+        "name": "typing_extensions",
+        "version": "4.16.0"
+      },
+      {
+        "name": "tzdata",
+        "version": "2026.1"
+      },
+      {
+        "name": "urllib3",
+        "version": "2.7.0"
+      },
+      {
+        "name": "uvicorn",
+        "version": "0.54.0"
+      },
+      {
+        "name": "wcwidth",
+        "version": "0.8.1"
+      },
+      {
+        "name": "Werkzeug",
+        "version": "3.1.8"
+      },
+      {
+        "name": "zipp",
+        "version": "4.1.0"
+      }
+    ],
+    "key_versions": {
+      "lark": "1.3.1",
+      "rdflib": "7.6.0",
+      "pyshacl": "0.31.0",
+      "pytest": "9.1.1",
+      "selira-research": "0.1.0.dev0"
+    }
+  },
+  "licensing": "not verified; release blocked pending dataset and artifact rights review"
+}
