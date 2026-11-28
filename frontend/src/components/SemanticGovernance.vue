@@ -22,6 +22,7 @@ type GovernanceResult = {
 }
 type QualificationContext = {
   version: number
+  available_scopes: string[]
   evidence_complete: string[]
   identity_normalized: boolean
   applicability_confirmed: boolean
@@ -131,14 +132,6 @@ function loadSelectedValue() {
 
 watch(selectedDocumentId, () => selectDocument())
 watch(selectedElementKey, () => loadSelectedValue())
-
-function scopeFor(kind: 'asset' | 'product'): string {
-  const marker = kind === 'asset' ? 'asset-inventory-template' : 'product-catalog-template'
-  return qualification.value?.evidence_complete.find(scope => scope.includes(marker))
-    || (kind === 'asset'
-      ? 'https://example.org/sm/asset-inventory-template'
-      : 'https://example.org/sm/product-catalog-template')
-}
 
 function scopeLabel(scope: string): string {
   if (scope.includes('asset-inventory-template')) return 'Asset Inventory'
@@ -322,13 +315,9 @@ onMounted(refresh)
     <article class="context-item">
      <strong>Information completeness</strong>
      <span class="context-note">Select the information scopes for which completeness is being attested.</span>
-     <label class="evidence-choice">
-      <input type="checkbox" :value="scopeFor('asset')" v-model="draftEvidenceComplete" :disabled="evidenceSaving || busy" />
-      Asset Inventory
-     </label>
-     <label class="evidence-choice">
-      <input type="checkbox" :value="scopeFor('product')" v-model="draftEvidenceComplete" :disabled="evidenceSaving || busy" />
-      Product Catalog
+     <label v-for="scope in qualification.available_scopes" :key="scope" class="evidence-choice" :title="scope">
+      <input type="checkbox" :value="scope" v-model="draftEvidenceComplete" :disabled="evidenceSaving || busy" />
+      {{ scopeLabel(scope) }}
      </label>
      <span class="context-note">Currently recorded: {{ qualification.evidence_complete.length }} scope(s)</span>
     </article>
