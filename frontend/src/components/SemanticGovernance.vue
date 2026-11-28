@@ -31,6 +31,11 @@ type QualificationContext = {
 const documents = ref<AasDocument[]>([])
 const version = ref<number | null>(null)
 const qualification = ref<QualificationContext | null>(null)
+const draftEvidenceComplete = ref<string[]>([])
+const draftIdentityNormalized = ref(false)
+const draftApplicabilityConfirmed = ref(false)
+const evidenceSaving = ref(false)
+const evidenceMessage = ref('')
 const selectedDocumentId = ref('')
 const selectedElementKey = ref('')
 const selectedParentKey = ref('')
@@ -127,6 +132,14 @@ function loadSelectedValue() {
 watch(selectedDocumentId, () => selectDocument())
 watch(selectedElementKey, () => loadSelectedValue())
 
+function scopeFor(kind: 'asset' | 'product'): string {
+  const marker = kind === 'asset' ? 'asset-inventory-template' : 'product-catalog-template'
+  return qualification.value?.evidence_complete.find(scope => scope.includes(marker))
+    || (kind === 'asset'
+      ? 'https://example.org/sm/asset-inventory-template'
+      : 'https://example.org/sm/product-catalog-template')
+}
+
 function scopeLabel(scope: string): string {
   if (scope.includes('asset-inventory-template')) return 'Asset Inventory'
   if (scope.includes('product-catalog-template')) return 'Product Catalog'
@@ -160,6 +173,10 @@ async function load() {
   documents.value = state.documents
   version.value = state.version
   qualification.value = context
+  draftEvidenceComplete.value = [...context.evidence_complete]
+  draftIdentityNormalized.value = context.identity_normalized
+  draftApplicabilityConfirmed.value = context.applicability_confirmed
+  evidenceMessage.value = ''
   if (!documents.value.some(d => d.id === selectedDocumentId.value)) {
     selectedDocumentId.value = documents.value[0]?.id || ''
   } else {
@@ -179,6 +196,38 @@ async function refresh() {
     error.value = e instanceof Error ? e.message : String(e)
   } finally {
     busy.value = false
+  }
+}
+
+async function saveEvidence() {
+  if (!qualification.value || version.value === null || busy.value || evidenceSaving.value) return
+  evidenceSaving.value = true
+  evidenceMessage.value = ''
+  error.value = ''
+  try {
+    const response = await fetch('/api/governance/context', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        expected_version: version.value,
+        evidence_complete: draftEvidenceComplete.value,
+        identity_normalized: draftIdentityNormalized.value,
+        applicability_confirmed: draftApplicabilityConfirmed.value
+      })
+    })
+    const updated = await readJson(response) as QualificationContext
+    qualification.value = updated
+    draftEvidenceComplete.value = [...updated.evidence_complete]
+    draftIdentityNormalized.value = updated.identity_normalized
+    draftApplicabilityConfirmed.value = updated.applicability_confirmed
+    evidenceMessage.value = 'Attestations saved. They will be used in subsequent qualification evaluations.'
+  } catch (e) {
+    evidenceMessage.value = ''
+    error.value = e instanceof Error ? e.message : String(e)
+    // Reload to avoid leaving a stale editable draft after a failed or uncertain response.
+    await refresh()
+  } finally {
+    evidenceSaving.value = false
   }
 }
 
@@ -272,19 +321,39 @@ onMounted(refresh)
    <div v-if="qualification" class="context-grid">
     <article class="context-item">
      <strong>Information completeness</strong>
-     <span class="context-value">{{ qualification.evidence_complete.length }} scope(s) attested complete</span>
-     <ul v-if="qualification.evidence_complete.length"><li v-for="scope in qualification.evidence_complete" :key="scope" :title="scope">{{ scopeLabel(scope) }}</li></ul>
-     <span v-else class="context-note">No completeness scopes are currently attested.</span>
+     <span class="context-note">Select the information scopes for which completeness is being attested.</span>
+     <label class="evidence-choice">
+      <input type="checkbox" :value="scopeFor('asset')" v-model="draftEvidenceComplete" :disabled="evidenceSaving || busy" />
+      Asset Inventory
+     </label>
+     <label class="evidence-choice">
+      <input type="checkbox" :value="scopeFor('product')" v-model="draftEvidenceComplete" :disabled="evidenceSaving || busy" />
+      Product Catalog
+     </label>
+     <span class="context-note">Currently recorded: {{ qualification.evidence_complete.length }} scope(s)</span>
     </article>
     <article class="context-item">
      <strong>Identity normalization</strong>
-     <span class="context-value" :class="qualification.identity_normalized ? 'state-yes' : 'state-no'">{{ qualification.identity_normalized ? 'Confirmed by operator' : 'Not confirmed' }}</span>
+     <label class="evidence-choice">
+      <input type="checkbox" v-model="draftIdentityNormalized" :disabled="evidenceSaving || busy" />
+      Operator confirms identifier normalization
+     </label>
+     <span class="context-value" :class="qualification.identity_normalized ? 'state-yes' : 'state-no'">{{ qualification.identity_normalized ? 'Currently attested' : 'Not currently attested' }}</span>
     </article>
     <article class="context-item">
      <strong>Contract applicability</strong>
-     <span class="context-value" :class="qualification.applicability_confirmed ? 'state-yes' : 'state-no'">{{ qualification.applicability_confirmed ? 'Confirmed by operator' : 'Not confirmed' }}</span>
+     <label class="evidence-choice">
+      <input type="checkbox" v-model="draftApplicabilityConfirmed" :disabled="evidenceSaving || busy" />
+      Operator confirms SC-01 applicability
+     </label>
+     <span class="context-value" :class="qualification.applicability_confirmed ? 'state-yes' : 'state-no'">{{ qualification.applicability_confirmed ? 'Currently attested' : 'Not currently attested' }}</span>
     </article>
    </div>
+   <div v-if="qualification" class="evidence-actions">
+    <button class="primary" :disabled="busy || evidenceSaving || version === null" @click="saveEvidence">{{ evidenceSaving ? 'Saving attestations…' : 'Save evidence attestations' }}</button>
+    <button class="secondary" :disabled="busy || evidenceSaving" @click="refresh">Discard changes</button>
+   </div>
+   <p v-if="evidenceMessage" class="context-note state-yes" role="status">{{ evidenceMessage }}</p>
    <p v-else class="context-footnote">Qualification context is unavailable. Refresh the governance state before submitting a change.</p>
    <p class="context-footnote">These values are operator-supplied attestations read from the configured server-side evidence source. The interface does not authenticate their truth or provenance.</p>
   </section>
@@ -371,5 +440,5 @@ onMounted(refresh)
 </template>
 
 <style scoped>
-.governance{display:grid;gap:16px}.governance label{display:grid;gap:6px;font-weight:600}.governance select,.governance input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #8794a3;border-radius:6px;max-width:100%;color:inherit;background:transparent;font:inherit}.governance button{justify-self:start}.intro{margin:0;opacity:.86}.qualification-context{border:1px solid #8794a3;border-radius:8px;padding:16px;display:grid;gap:12px}.context-heading,.response-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.context-heading h3,.section-head h3{margin:0 0 4px}.context-heading p,.section-head p{margin:0;font-size:.9rem;opacity:.8}.context-tag,.decision-tag,.verdict{border:1px solid #8794a3;border-radius:999px;padding:4px 9px;font-size:.78rem;white-space:nowrap}.context-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.context-item{border:1px solid #8794a3;border-radius:6px;padding:12px;display:grid;gap:7px;align-content:start;overflow-wrap:anywhere}.context-item ul{margin:0;padding-left:18px;font-size:.82rem}.context-value{font-size:.9rem}.context-note,.context-footnote{font-size:.82rem;opacity:.76;margin:0}.context-footnote{border-top:1px solid #8794a3;padding-top:10px}.state-yes{color:#23834b}.state-no{color:#b66b24}.section-head{display:flex;justify-content:space-between;align-items:center}.action-row{display:flex;gap:10px;flex-wrap:wrap}.error{color:#b42318;overflow-wrap:anywhere}.results{display:grid;gap:10px}.response{border-top:1px solid #8794a3;padding:12px 0;display:grid;gap:7px;overflow-wrap:anywhere}.response p{margin:0;font-size:.9rem}.response small{opacity:.72}.contract-list{display:grid;gap:6px}.contract-list>div{display:flex;justify-content:space-between;align-items:center;gap:10px}.verdict{font-weight:700}.decision-tag{font-weight:600}
+.governance{display:grid;gap:16px}.governance label{display:grid;gap:6px;font-weight:600}.governance select,.governance input{width:100%;box-sizing:border-box;padding:10px;border:1px solid #8794a3;border-radius:6px;max-width:100%;color:inherit;background:transparent;font:inherit}.governance button{justify-self:start}.intro{margin:0;opacity:.86}.qualification-context{border:1px solid #8794a3;border-radius:8px;padding:16px;display:grid;gap:12px}.context-heading,.response-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.context-heading h3,.section-head h3{margin:0 0 4px}.context-heading p,.section-head p{margin:0;font-size:.9rem;opacity:.8}.context-tag,.decision-tag,.verdict{border:1px solid #8794a3;border-radius:999px;padding:4px 9px;font-size:.78rem;white-space:nowrap}.context-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:10px}.context-item{border:1px solid #8794a3;border-radius:6px;padding:12px;display:grid;gap:7px;align-content:start;overflow-wrap:anywhere}.context-item ul{margin:0;padding-left:18px;font-size:.82rem}.evidence-choice{display:flex!important;grid-template-columns:auto 1fr!important;align-items:center;gap:8px!important;font-weight:400!important;font-size:.88rem}.evidence-choice input{width:auto!important;margin:0}.evidence-actions{display:flex;gap:10px;flex-wrap:wrap}.context-value{font-size:.9rem}.context-note,.context-footnote{font-size:.82rem;opacity:.76;margin:0}.context-footnote{border-top:1px solid #8794a3;padding-top:10px}.state-yes{color:#23834b}.state-no{color:#b66b24}.section-head{display:flex;justify-content:space-between;align-items:center}.action-row{display:flex;gap:10px;flex-wrap:wrap}.error{color:#b42318;overflow-wrap:anywhere}.results{display:grid;gap:10px}.response{border-top:1px solid #8794a3;padding:12px 0;display:grid;gap:7px;overflow-wrap:anywhere}.response p{margin:0;font-size:.9rem}.response small{opacity:.72}.contract-list{display:grid;gap:6px}.contract-list>div{display:flex;justify-content:space-between;align-items:center;gap:10px}.verdict{font-weight:700}.decision-tag{font-weight:600}
 </style>
