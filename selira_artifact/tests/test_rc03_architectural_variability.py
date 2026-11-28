@@ -50,7 +50,7 @@ def test_architectural_variation(tmp_path, kind, column):
                      identity_normalized=True, applicability_confirmed=True)
         g = graph(local, asset)
         oracle = evaluate(SOURCE.read_text(), bindings, g)["SC_02"]
-        assert oracle[NODE]["conforms"] == (expected == "V")
+        assert oracle[str(NODE)]["conforms"] == (expected == "V")
         r = m.submit(g, expected_version=0, **flags)
         assert r["verdict"] == expected, r
         assert r["committed"] == (expected == "V")
