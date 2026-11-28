@@ -122,6 +122,40 @@ class AASGovernance:
                 "source": "server_operator_attestation",
             }
 
+    def update_qualification_context(self, payload, *, expected_version):
+        """Update operator-supplied attestations without changing the AAS graph."""
+        with self._lock:
+            graph, version = self._manager.store.snapshot()
+            if self._blocked or version != self._version:
+                raise RuntimeError("Native state requires reconciliation")
+            if type(expected_version) is not int or expected_version != version:
+                raise ValueError("Stale repository version; refresh before saving attestations")
+            if not callable(getattr(self._provider, "update", None)):
+                raise RuntimeError("Evidence provider is read-only")
+            if not isinstance(payload, dict) or set(payload) != {
+                    "evidence_complete", "identity_normalized", "applicability_confirmed"}:
+                raise ValueError("Invalid qualification context")
+            scopes = payload["evidence_complete"]
+            if (not isinstance(scopes, list) or any(not isinstance(x, str) for x in scopes)
+                    or len(scopes) != len(set(scopes))):
+                raise ValueError("Invalid completeness scopes")
+            allowed = {adapter.template_id for adapter in self._adapters.values()}
+            if not set(scopes) <= allowed:
+                raise ValueError("Completeness scope is not a registered Submodel template")
+            if type(payload["identity_normalized"]) is not bool or type(payload["applicability_confirmed"]) is not bool:
+                raise ValueError("Qualification attestations must be Boolean")
+            updated = {
+                "evidence_complete": sorted(scopes),
+                "identity_normalized": payload["identity_normalized"],
+                "applicability_confirmed": payload["applicability_confirmed"],
+            }
+            self._provider.update(updated)
+            return {
+                "version": version,
+                **updated,
+                "source": "server_operator_attestation",
+            }
+
     def snapshot(self):
         with self._lock:
             graph, version = self._manager.store.snapshot()
