@@ -1,0 +1,379 @@
+[
+  {
+    "model": "qwen2.5-coder:7b",
+    "total": 230,
+    "supported": 200,
+    "executed": 199,
+    "positional_agreement": 199,
+    "all_variants_agree_scenarios": 39,
+    "supported_scenarios": 40,
+    "supported_statuses": {
+      "executed": 199,
+      "planning_not_valid": 1
+    },
+    "supported_failures": [
+      {
+        "query_id": "SD13-P5",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Invalid order_by 0",
+          "ORDER BY direction disagrees with question"
+        ]
+      }
+    ],
+    "supported_latency": {
+      "median_seconds": 11.713930950005306,
+      "p95_seconds": 21.72625110001536
+    },
+    "negative_in_scope": 25,
+    "negative_statuses": {
+      "planning_not_valid": 16,
+      "domain_resolution_error": 5,
+      "negative_compiled_not_executed": 4
+    },
+    "negative_compiled": [
+      {
+        "query_id": "N43-P2",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P3",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P4",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P5",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      }
+    ],
+    "negative_details": [
+      {
+        "query_id": "N39-P1",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_entity",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Projected result R2 is not an explicitly named concept"
+        ]
+      },
+      {
+        "query_id": "N39-P2",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_entity",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Projected result R2 is not an explicitly named concept"
+        ]
+      },
+      {
+        "query_id": "N39-P3",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_entity",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Projected result R2 is not an explicitly named concept"
+        ]
+      },
+      {
+        "query_id": "N39-P4",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_entity",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Projected result R2 is not an explicitly named concept"
+        ]
+      },
+      {
+        "query_id": "N39-P5",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_entity",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Projected result R2 is not an explicitly named concept"
+        ]
+      },
+      {
+        "query_id": "N40-P1",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_property",
+        "planner_status": "ungrounded_output_property",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N40-P2",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_property",
+        "planner_status": "ungrounded_output_property",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N40-P3",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_property",
+        "planner_status": "ungrounded_output_property",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N40-P4",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_property",
+        "planner_status": "ungrounded_output_property",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N40-P5",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unknown_property",
+        "planner_status": "ungrounded_output_property",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N41-P1",
+        "status": "domain_resolution_error",
+        "error": "DomainResolutionError: Domain unresolved: no indexed NodeShape evidence; use --domain",
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": null,
+        "validation_errors": null
+      },
+      {
+        "query_id": "N41-P2",
+        "status": "domain_resolution_error",
+        "error": "DomainResolutionError: Domain unresolved: no indexed NodeShape evidence; use --domain",
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": null,
+        "validation_errors": null
+      },
+      {
+        "query_id": "N41-P3",
+        "status": "domain_resolution_error",
+        "error": "DomainResolutionError: Domain unresolved: no indexed NodeShape evidence; use --domain",
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": null,
+        "validation_errors": null
+      },
+      {
+        "query_id": "N41-P4",
+        "status": "domain_resolution_error",
+        "error": "DomainResolutionError: Domain unresolved: no indexed NodeShape evidence; use --domain",
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": null,
+        "validation_errors": null
+      },
+      {
+        "query_id": "N41-P5",
+        "status": "domain_resolution_error",
+        "error": "DomainResolutionError: Domain unresolved: no indexed NodeShape evidence; use --domain",
+        "sparql": null,
+        "expected_rejection": null,
+        "planner_status": null,
+        "validation_errors": null
+      },
+      {
+        "query_id": "N42-P1",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "ambiguous_owner",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Selected paths share only domain root, not same entity",
+          "Projected property P8 is not directly owned by a named concept",
+          "Projected property P9 is not directly owned by a named concept",
+          "Projected property P10 is not directly owned by a named concept",
+          "Projected property P11 is not directly owned by a named concept",
+          "Projected property P13 is not directly owned by a named concept",
+          "Projected property P14 is not directly owned by a named concept",
+          "Projected property P15 is not directly owned by a named concept"
+        ]
+      },
+      {
+        "query_id": "N42-P2",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "ambiguous_owner",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Selected paths share only domain root, not same entity",
+          "Projected property P8 is not directly owned by a named concept",
+          "Projected property P9 is not directly owned by a named concept",
+          "Projected property P10 is not directly owned by a named concept",
+          "Projected property P11 is not directly owned by a named concept",
+          "Projected property P13 is not directly owned by a named concept",
+          "Projected property P14 is not directly owned by a named concept",
+          "Projected property P15 is not directly owned by a named concept"
+        ]
+      },
+      {
+        "query_id": "N42-P3",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "ambiguous_owner",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Selected paths share only domain root, not same entity",
+          "Projected property P8 is not directly owned by a named concept",
+          "Projected property P9 is not directly owned by a named concept",
+          "Projected property P10 is not directly owned by a named concept",
+          "Projected property P11 is not directly owned by a named concept",
+          "Projected property P13 is not directly owned by a named concept",
+          "Projected property P14 is not directly owned by a named concept",
+          "Projected property P15 is not directly owned by a named concept"
+        ]
+      },
+      {
+        "query_id": "N42-P4",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "ambiguous_owner",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Selected paths share only domain root, not same entity",
+          "Projected property P8 is not directly owned by a named concept",
+          "Projected property P9 is not directly owned by a named concept",
+          "Projected property P10 is not directly owned by a named concept",
+          "Projected property P11 is not directly owned by a named concept",
+          "Projected property P13 is not directly owned by a named concept",
+          "Projected property P14 is not directly owned by a named concept",
+          "Projected property P15 is not directly owned by a named concept"
+        ]
+      },
+      {
+        "query_id": "N42-P5",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "ambiguous_owner",
+        "planner_status": "invalid_response",
+        "validation_errors": [
+          "Selected paths share only domain root, not same entity",
+          "Projected property P8 is not directly owned by a named concept",
+          "Projected property P9 is not directly owned by a named concept",
+          "Projected property P10 is not directly owned by a named concept",
+          "Projected property P11 is not directly owned by a named concept",
+          "Projected property P13 is not directly owned by a named concept",
+          "Projected property P14 is not directly owned by a named concept",
+          "Projected property P15 is not directly owned by a named concept"
+        ]
+      },
+      {
+        "query_id": "N43-P1",
+        "status": "planning_not_valid",
+        "error": null,
+        "sparql": null,
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "no_approved_cross_domain_mapping",
+        "validation_errors": null
+      },
+      {
+        "query_id": "N43-P2",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P3",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P4",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      },
+      {
+        "query_id": "N43-P5",
+        "status": "negative_compiled_not_executed",
+        "error": null,
+        "sparql": "SELECT DISTINCT ?n1 ?n3 WHERE {\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZGV4cGktaW5zdGFuY2U/> {\n    ?n0 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9kZXhwaQ/> .\n    ?n0 <https://example.org/dexpi/hasInstrumentationFunction> ?n1 .\n    ?n1 <https://example.org/dexpi/hasAssetIdentifier> ?v_dexpi_P9 .\n  }\n  GRAPH <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS90ZXAtZWNhZC1pbnN0YW5jZQ/> {\n    ?n2 <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> .\n    ?n2 <https://example.org/ecad/hasDevice> ?n3 .\n    ?n3 <https://example.org/ecad/hasAssetIdentifier> ?v_ecad_P1 .\n  }\n  FILTER (?v_dexpi_P9 = ?v_ecad_P1)\n}\n",
+        "expected_rejection": "unregistered_mapping",
+        "planner_status": "valid_response",
+        "validation_errors": []
+      }
+    ],
+    "excluded_N44": 5,
+    "configuration": {
+      "full": true,
+      "limit": null,
+      "models": [
+        "qwen2.5-coder:7b"
+      ],
+      "graphdb_url": "http://localhost:7200/repositories/AAST",
+      "ollama_url": "http://127.0.0.1:11434",
+      "retrieval": "expanded",
+      "hashes": {
+        "benchmark_queries_modelsward2027.json": "cd7bc38cbcadeba16268dbf4948ca87b6dce804c6b13a833fd4e0475ca701bde",
+        "reference_queries_modelsward2027.json": "5e22981615bb97629e12aacd54d105cd4ddf82662be149e1dbc60f60afba4b05",
+        "dtwise-schema-index.json": "70068d60f1cac29260ce5a22dfe5e88a4035eb27ba2d32488e8530f05b89eb6b",
+        "cross-domain-mappings.json": "7f196943d0d2d8db00e1198865b5dafea915e5cca1fbd99f5c7603afe309038e",
+        "aast_instance_graphs.json": "769f90ad3ee4836095009f8610ce52430dac0d22f6da9ec855f77641cea16fde",
+        "reference_validation_results.json": "0bdc4d250594737ee63e2d0fcdfd2984140ad4731c7ebdde808274c9a2f5589e"
+      }
+    },
+    "note": "Provisional positional comparison; structural and rejection-reason review required. N44 excluded only from negative summary."
+  }
+]

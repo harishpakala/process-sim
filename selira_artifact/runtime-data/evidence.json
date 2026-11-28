@@ -1,0 +1,8 @@
+{
+  "evidence_complete": [
+    "https://example.org/sm/asset-inventory-template",
+    "https://example.org/sm/product-catalog-template"
+  ],
+  "identity_normalized": true,
+  "applicability_confirmed": true
+}
