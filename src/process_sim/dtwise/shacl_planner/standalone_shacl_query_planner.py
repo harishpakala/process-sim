@@ -665,8 +665,39 @@ def requested_property_value_names(question, property_hits):
     return names
 
 
+def _hierarchical_property_matches(question, matches, registry, shapes, shape_hits):
+    """Keep paths covering every maximal explicit concept mention.
+
+    Restrict to simple single-property requests; coordination and mixed
+    requests remain with the existing planner. Equal-span shape alternatives
+    are grouped rather than requiring every occurrence of a repeated shape.
+    """
+    if re.search(r'\b(?:and|or|with|where|whose|while)\b|[,;]', question, re.I):
+        return matches
+    groups = defaultdict(set)
+    for uri in shape_hits:
+        for label in shapes.get(uri, {}).get('labels', []):
+            if 'shacl shape' not in label.casefold():
+                for span in _schema_term_spans(question, label):
+                    groups[span].add(uri)
+    spans = sorted(span for span in groups if not any(
+        a <= span[0] and span[1] <= b and (a,b) != span for a,b in groups))
+    if len(spans) < 2:
+        return matches
+    compatible = []
+    for candidate in matches:
+        nodes = registry.get(candidate['id'], {}).get('node_uris', [])
+        if not nodes:
+            continue
+        # The property owner must itself be explicitly mentioned; all other
+        # mentions must occur somewhere on this same verified path.
+        if all(set(nodes) & groups[span] for span in spans):
+            compatible.append(candidate)
+    return compatible if len(compatible) == 1 else matches
+
+
 def focus_unambiguous_property_candidates(question, candidates, registry,
-                                          shape_hits, property_hits):
+                                          shape_hits, property_hits, *, shapes=None):
     """Narrow a pure property-value request to its verified direct owner.
 
     Only focus when SHACL establishes exactly one direct property candidate
@@ -702,6 +733,9 @@ def focus_unambiguous_property_candidates(question, candidates, registry,
         and (c.get('property_name') or '').casefold() == name
         and (registry.get(c['id'], {}).get('node_uris') or [None])[-1] in shape_hits
     ]
+    if shapes is not None and len(matches) > 1:
+        matches = _hierarchical_property_matches(
+            question, matches, registry, shapes, shape_hits)
     if len(matches) != 1:
         return candidates, None
     prop = matches[0]
@@ -809,7 +843,8 @@ def run_one(index, question, *, method='expanded', dry_run=False,
             top_properties=top_properties,max_candidates=max_candidates,max_depth=max_depth)
         all_candidates=qualified['prompt']['candidates']
         candidates, candidate_focus = focus_unambiguous_property_candidates(
-            question, all_candidates, qualified['registry'], shape_hits, property_hits)
+            question, all_candidates, qualified['registry'], shape_hits, property_hits,
+            shapes=index.shapes)
         topology_candidates=[{**c,'node_uris':qualified['registry'].get(c['id'],{}).get('node_uris',[])}
                              for c in candidates]
         prompt={**qualified['prompt'],'candidates':candidates}
