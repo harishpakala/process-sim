@@ -95,6 +95,75 @@ class AASGovernance:
     def _evidence(self, current, candidate):
         return self._provider(current, candidate) if self._provider else {}
 
+    def qualification_context(self):
+        """Expose current operator-supplied qualification inputs read-only.
+
+        These attestations are not independently authenticated or verified by
+        the governance service; the UI must present them with that limitation.
+        """
+        with self._lock:
+            graph, version = self._manager.store.snapshot()
+            if self._blocked or version != self._version:
+                raise RuntimeError("Native state requires reconciliation")
+            flags = self._evidence(graph, graph)
+            scopes = flags.get("evidence_complete", ())
+            if not isinstance(scopes, (list, tuple, set)) or any(
+                    not isinstance(scope, str) for scope in scopes):
+                raise ValueError("Invalid completeness attestation")
+            identity = flags.get("identity_normalized", False)
+            applicability = flags.get("applicability_confirmed", False)
+            if type(identity) is not bool or type(applicability) is not bool:
+                raise ValueError("Invalid qualification attestation")
+            return {
+                "version": version,
+                "available_scopes": sorted(adapter.template_id for adapter in self._adapters.values()),
+                "evidence_complete": sorted(set(scopes)),
+                "identity_normalized": identity,
+                "applicability_confirmed": applicability,
+                "source": "server_operator_attestation",
+            }
+
+    def update_qualification_context(self, payload, *, expected_version):
+        """Update operator-supplied attestations without changing the AAS graph."""
+        with self._lock:
+            graph, version = self._manager.store.snapshot()
+            if self._blocked or version != self._version:
+                raise RuntimeError("Native state requires reconciliation")
+            if type(expected_version) is not int or expected_version != version:
+                raise ValueError("Stale repository version; refresh before saving attestations")
+            if not callable(getattr(self._provider, "update", None)):
+                raise RuntimeError("Evidence provider is read-only")
+            if not isinstance(payload, dict) or set(payload) != {
+                    "evidence_complete", "identity_normalized", "applicability_confirmed"}:
+                raise ValueError("Invalid qualification context")
+            scopes = payload["evidence_complete"]
+            if (not isinstance(scopes, list) or any(not isinstance(x, str) for x in scopes)
+                    or len(scopes) != len(set(scopes))):
+                raise ValueError("Invalid completeness scopes")
+            allowed = {adapter.template_id for adapter in self._adapters.values()}
+            if not set(scopes) <= allowed:
+                raise ValueError("Completeness scope is not a registered Submodel template")
+            if type(payload["identity_normalized"]) is not bool or type(payload["applicability_confirmed"]) is not bool:
+                raise ValueError("Qualification attestations must be Boolean")
+            updated = {
+                "evidence_complete": sorted(scopes),
+                "identity_normalized": payload["identity_normalized"],
+                "applicability_confirmed": payload["applicability_confirmed"],
+            }
+            self._provider.update(updated)
+            return {
+                "version": version,
+                "available_scopes": sorted(allowed),
+                **updated,
+                "source": "server_operator_attestation",
+            }
+
+    def template_snapshot(self):
+        """Return copies of the registered AAS templates for UI field guidance."""
+        with self._lock:
+            return {key: deepcopy(adapter.template_document)
+                    for key, adapter in self._adapters.items()}
+
     def snapshot(self):
         with self._lock:
             graph, version = self._manager.store.snapshot()

@@ -27,13 +27,22 @@ class Handler(BaseHTTPRequestHandler):
     governance = None
 
     def do_GET(self):
+        if urlsplit(self.path).path == "/api/governance/context":
+            if self.governance is None:
+                self.send_json(503, {"error": "Governance disabled"})
+                return
+            try:
+                self.send_json(200, self.governance.qualification_context())
+            except Exception:
+                self.send_json(503, {"error": "Qualification context unavailable; check governance and reconciliation status"})
+            return
         if urlsplit(self.path).path == "/api/governance/state":
             if self.governance is None:
                 self.send_json(503, {"error": "Governance disabled"})
                 return
             try:
                 docs, _, version = self.governance.snapshot()
-                self.send_json(200, {"version": version, "documents": list(docs.values())})
+                self.send_json(200, {"version": version, "documents": list(docs.values()), "templates": self.governance.template_snapshot()})
             except Exception:
                 self.send_json(503, {"error": "Governance unavailable; check reconciliation status"})
             return
@@ -360,6 +369,30 @@ class Handler(BaseHTTPRequestHandler):
         self.send_json(200, {"status": "ok", "service": "process-sim-api"})
 
     def do_POST(self):
+        if urlsplit(self.path).path == "/api/governance/context":
+            if self.governance is None:
+                self.send_json(503, {"error": "Governance disabled"})
+                return
+            try:
+                if self.headers.get("Content-Type", "").split(";")[0] != "application/json":
+                    raise ValueError("JSON required")
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 16_384:
+                    raise ValueError("Invalid request size")
+                payload = json.loads(self.rfile.read(length))
+                if not isinstance(payload, dict) or set(payload) != {
+                        "expected_version", "evidence_complete",
+                        "identity_normalized", "applicability_confirmed"}:
+                    raise ValueError("Invalid qualification context request")
+                expected_version = payload.pop("expected_version")
+                result = self.governance.update_qualification_context(
+                    payload, expected_version=expected_version)
+                self.send_json(200, result)
+            except ValueError as exc:
+                self.send_json(422, {"error": str(exc)})
+            except Exception:
+                self.send_json(503, {"error": "Qualification context was not updated; inspect backend logs"})
+            return
         if urlsplit(self.path).path == "/api/governance/change":
             if self.governance is None:
                 self.send_json(503, {"error": "Governance disabled"})
