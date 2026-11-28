@@ -1,0 +1,4 @@
+# Paired Qwen pilot (development evidence)
+45 questions per method, 40 supported and 5 N43 negatives. Direct/ablated/full respectively: executed 35/40, 40/40, 39/40; positional agreement 30/40, 40/40, 39/40; negative accepted and intercepted 5, 0, 0. Median all-job latency 19.260, 10.141, 9.961 seconds. Shared configuration hashes match. These are provisional positional metrics, not semantic accuracy.
+The presentation ablation retains deterministic ownership retrieval and validation. No additional benefit of explicit path presentation is established. The pilot is development-exposed and paraphrases are correlated. Full reference audit, snapshot identity, projection alignment, tie-aware ordering and structural review remain pending.
+Reproduce with analyze_pilot.py and the three original JSONL logs in direct, ablated, full order. Raw logs remain with the experiment operator; this commit does not archive them.
