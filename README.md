@@ -1,7 +1,6 @@
 # process-sim
 
 **Industrial process simulation and digital-twin research platform**  
-Harish Kumar Pakala
 
 `process-sim` uses the Tennessee Eastman Process (TEP) to explore process simulation, engineering information integration, operational history, and evidence-grounded retrieval.
 
