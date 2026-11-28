@@ -39,6 +39,7 @@ class SemanticLiftingAdapter:
         from semantic.template_lifting import build_template_graph
 
         self.domain = domain
+        self.template_document = deepcopy(template_document)
         template = _parse_submodel(template_document)
         self.template_id = template.id
         self._template_graph = build_template_graph(template, domain)
