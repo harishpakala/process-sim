@@ -95,6 +95,33 @@ class AASGovernance:
     def _evidence(self, current, candidate):
         return self._provider(current, candidate) if self._provider else {}
 
+    def qualification_context(self):
+        """Expose current operator-supplied qualification inputs read-only.
+
+        These attestations are not independently authenticated or verified by
+        the governance service; the UI must present them with that limitation.
+        """
+        with self._lock:
+            graph, version = self._manager.store.snapshot()
+            if self._blocked or version != self._version:
+                raise RuntimeError("Native state requires reconciliation")
+            flags = self._evidence(graph, graph)
+            scopes = flags.get("evidence_complete", ())
+            if not isinstance(scopes, (list, tuple, set)) or any(
+                    not isinstance(scope, str) for scope in scopes):
+                raise ValueError("Invalid completeness attestation")
+            identity = flags.get("identity_normalized", False)
+            applicability = flags.get("applicability_confirmed", False)
+            if type(identity) is not bool or type(applicability) is not bool:
+                raise ValueError("Invalid qualification attestation")
+            return {
+                "version": version,
+                "evidence_complete": sorted(set(scopes)),
+                "identity_normalized": identity,
+                "applicability_confirmed": applicability,
+                "source": "server_operator_attestation",
+            }
+
     def snapshot(self):
         with self._lock:
             graph, version = self._manager.store.snapshot()
