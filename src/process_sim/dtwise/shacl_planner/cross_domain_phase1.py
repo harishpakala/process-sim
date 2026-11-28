@@ -9,6 +9,8 @@ import json
 import re
 import time
 
+from process_sim.dtwise.shacl_planner.mapping_intent import explicit_shared_key, restrict_shared_key
+
 from process_sim.dtwise.experimental_shacl_ollama import ollama_select
 from process_sim.dtwise.experimental_shacl_n_domain_selection import (
     _prune_explicit_candidates, compact_n_domain_prompt,
@@ -547,6 +549,9 @@ def run_cross_domain(indices, question, *, mapping_file, method='expanded',
     # No evidence-based narrowing is possible: preserve the original choices.
     if not prompt_candidates:
         prompt_candidates, graph = original_candidates, original_graph
+    # Apply after all fallback paths so explicit intent cannot be restored away.
+    graph = restrict_shared_key(question, graph)
+    record['explicit_shared_key'] = explicit_shared_key(question)
     record.update(candidate_paths=candidates, candidate_count=len(candidates),
                   result_candidate_count=sum(c['kind'] == 'result' for c in candidates),
                   property_candidate_count=sum(c['kind'] == 'property' for c in candidates),
