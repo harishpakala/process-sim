@@ -116,6 +116,7 @@ class AASGovernance:
                 raise ValueError("Invalid qualification attestation")
             return {
                 "version": version,
+                "available_scopes": sorted(adapter.template_id for adapter in self._adapters.values()),
                 "evidence_complete": sorted(set(scopes)),
                 "identity_normalized": identity,
                 "applicability_confirmed": applicability,
