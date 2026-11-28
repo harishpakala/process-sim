@@ -23,7 +23,11 @@ def main():
     p.add_argument('--limit',type=int,default=10,choices=range(1,11))
     p.add_argument('--full',action='store_true',help='Evaluate every paraphrase in the manifest')
     p.add_argument('--resume',action='store_true',help='Resume an existing output with identical configuration')
+    p.add_argument('--scenarios', nargs='+', help='Evaluate all paraphrases of selected scenario IDs')
     a=p.parse_args()
+    if a.scenarios and a.full: p.error('--scenarios and --full are mutually exclusive')
+    if a.scenarios and not a.graphdb_url: p.error('--scenarios requires --graphdb-url')
+    if a.scenarios and len(set(a.scenarios)) != len(a.scenarios): p.error('Duplicate scenario IDs')
     if a.full and not a.graphdb_url: p.error('--full requires --graphdb-url')
     if len(set(a.models)) != len(a.models): p.error('Duplicate models')
     from process_sim.dtwise.shacl_planner.grounding.subgraph import load_index
@@ -42,9 +46,12 @@ def main():
     indices={d:load_index(SCHEMA,domain=d) for d in domains}
     output=HERE/a.output
     smoke=['SD01','CD01','N39','E45','SD02','CD02','N40','E46','SD03','CD03']
-    jobs=[(sid,p) for sid in (scenarios if a.full else smoke[:a.limit]) for p in (scenarios[sid]['paraphrases'] if a.full else scenarios[sid]['paraphrases'][:1])]
+    if a.scenarios and set(a.scenarios)-set(scenarios): p.error('Unknown scenario IDs: '+str(sorted(set(a.scenarios)-set(scenarios))))
+    selected=a.scenarios or (list(scenarios) if a.full else smoke[:a.limit])
+    jobs=[(sid,p) for sid in selected for p in (scenarios[sid]['paraphrases'] if a.full or a.scenarios else scenarios[sid]['paraphrases'][:1])]
     hashes={x.name:digest(x) for x in [bp,rp,SCHEMA,MAPPINGS,GRAPHS,HERE/'reference_validation_results.json']}
     config=dict(full=a.full,limit=None if a.full else a.limit,models=a.models,graphdb_url=a.graphdb_url,ollama_url=a.ollama_url,retrieval='expanded',hashes=hashes)
+    if a.scenarios: config['scenarios']=a.scenarios
     completed=set()
     if a.resume:
      with output.open(encoding='utf-8') as previous:
