@@ -30,18 +30,23 @@ def main():
     target = OUT / "rc02_comparative_verification.json"
     # Never leave an earlier successful RC02 report after a failed invocation.
     target.unlink(missing_ok=True)
+    print("[1/6] Running complete RC01 reproduction...", flush=True)
     rc01.main()
+    print("[1/6] RC01 reproduction completed.", flush=True)
     sys.path.insert(0, str(ROOT / "tests"))
     from test_rc02_identifier_comparison import run_identifier, D, E
     from test_rc02_qualified_comparison import test_rc02_qualified_comparison
 
+    print("[2/6] Running SC01 referential-integrity comparison...", flush=True)
     reference = bounded()
     verify(reference, (1296, 1215, 972, 1084, 1216, 1296),
            {("INVALID", "VALIDATED"): 40, ("VALIDATED", "INVALID"): 40})
+    print("[3/6] Running SC02/SC03 identifier comparisons...", flush=True)
     identifiers = [run_identifier("02", D), run_identifier("03", E)]
     for row in identifiers:
         verify(row, (256, 496, 228, 228, 256, 256), {})
         assert row["fallback_checks"] == 3
+    print("[4/6] Running evidence-qualified comparisons...", flush=True)
     qualified = []
     for coverage in (True, False):
         buffer = io.StringIO()
@@ -53,6 +58,7 @@ def main():
            {("F", "V"): 6, ("V", "F"): 6})
     verify(qualified[1], (256, 1024, 1024, 1024, 256, 256), {})
     assert [r["fallback_comparisons"] for r in qualified] == [192, 256]
+    print("[5/6] Running integrated lifecycle comparison...", flush=True)
     lifecycle = integrated()
     verify(lifecycle, (13, 2444, 197, 203, 12, 13), {("F", "V"): 6})
     failed = [r for r in lifecycle["events"] if not r["nir_equivalent"]]
