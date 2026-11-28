@@ -1,0 +1,399 @@
+{
+  "status": "provisional_pending_reference_audit",
+  "scenarios": {
+    "SD01": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD02": {
+      "mode": "set",
+      "roles": [
+        "Equipment"
+      ],
+      "requires_structural_review": true
+    },
+    "SD03": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction"
+      ],
+      "requires_structural_review": true
+    },
+    "SD04": {
+      "mode": "bag",
+      "roles": [
+        "Device.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "SD05": {
+      "mode": "bag",
+      "roles": [
+        "Device.DeviceType"
+      ],
+      "requires_structural_review": true
+    },
+    "SD06": {
+      "mode": "bag",
+      "roles": [
+        "Equipment.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "SD07": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD08": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD09": {
+      "mode": "set",
+      "roles": [
+        "Equipment"
+      ],
+      "requires_structural_review": true
+    },
+    "SD10": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD11": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD12": {
+      "mode": "set",
+      "roles": [
+        "Equipment"
+      ],
+      "requires_structural_review": true
+    },
+    "SD13": {
+      "mode": "ordered_pending",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "SD14": {
+      "mode": "ordered_pending",
+      "roles": [
+        "Equipment"
+      ],
+      "requires_structural_review": true
+    },
+    "SD15": {
+      "mode": "set",
+      "roles": [
+        "Asset"
+      ],
+      "requires_structural_review": true
+    },
+    "SD16": {
+      "mode": "set",
+      "roles": [
+        "Asset"
+      ],
+      "requires_structural_review": true
+    },
+    "SD17": {
+      "mode": "bag",
+      "roles": [
+        "Product.ManufacturerName"
+      ],
+      "requires_structural_review": true
+    },
+    "SD18": {
+      "mode": "set",
+      "roles": [
+        "Product"
+      ],
+      "requires_structural_review": true
+    },
+    "SD19": {
+      "mode": "bag",
+      "roles": [
+        "SignalMapping.SignalName"
+      ],
+      "requires_structural_review": true
+    },
+    "SD20": {
+      "mode": "set",
+      "roles": [
+        "SignalMapping"
+      ],
+      "requires_structural_review": true
+    },
+    "CD01": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "ActuatingFunction"
+      ],
+      "requires_structural_review": true
+    },
+    "CD02": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "Equipment"
+      ],
+      "requires_structural_review": true
+    },
+    "CD03": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "InstrumentationFunction"
+      ],
+      "requires_structural_review": true
+    },
+    "CD04": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD05": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "SignalMapping"
+      ],
+      "requires_structural_review": true
+    },
+    "CD06": {
+      "mode": "set",
+      "roles": [
+        "Asset",
+        "Product"
+      ],
+      "requires_structural_review": true
+    },
+    "CD07": {
+      "mode": "set",
+      "roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD08": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD09": {
+      "mode": "set",
+      "roles": [
+        "ActuatingFunction",
+        "SignalMapping"
+      ],
+      "requires_structural_review": true
+    },
+    "CD10": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction",
+        "SignalMapping"
+      ],
+      "requires_structural_review": true
+    },
+    "CD11": {
+      "mode": "set",
+      "roles": [
+        "Device",
+        "SignalMapping"
+      ],
+      "requires_structural_review": true
+    },
+    "CD12": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD13": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD14": {
+      "mode": "set",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD15": {
+      "mode": "ordered_pending",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD16": {
+      "mode": "ordered_pending",
+      "roles": [
+        "InstrumentationFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD17": {
+      "mode": "ordered_pending",
+      "roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "CD18": {
+      "mode": "ordered_pending",
+      "roles": [
+        "ActuatingFunction",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "N39": {
+      "mode": "negative",
+      "roles": [],
+      "requires_structural_review": true
+    },
+    "N40": {
+      "mode": "negative",
+      "roles": [],
+      "requires_structural_review": true
+    },
+    "N41": {
+      "mode": "negative",
+      "roles": [],
+      "requires_structural_review": true
+    },
+    "N42": {
+      "mode": "negative",
+      "roles": [],
+      "requires_structural_review": true
+    },
+    "N43": {
+      "mode": "negative",
+      "roles": [],
+      "requires_structural_review": true
+    },
+    "E45": {
+      "mode": "set",
+      "roles": [
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "E46": {
+      "mode": "set",
+      "roles": [
+        "Equipment",
+        "Device"
+      ],
+      "requires_structural_review": true
+    },
+    "H01": {
+      "mode": "bag",
+      "roles": [
+        "Device.EndPoint.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "H02": {
+      "mode": "bag",
+      "roles": [
+        "Device.EndPoint.Address"
+      ],
+      "requires_structural_review": true
+    },
+    "H03": {
+      "mode": "bag",
+      "roles": [
+        "Device.PLCEndPoint.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "H04": {
+      "mode": "bag",
+      "roles": [
+        "Device.PLCEndPoint.Address"
+      ],
+      "requires_structural_review": true
+    },
+    "H05": {
+      "mode": "bag",
+      "roles": [
+        "ActuatingFunction.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "H06": {
+      "mode": "bag",
+      "roles": [
+        "InstrumentationFunction.LocalId"
+      ],
+      "requires_structural_review": true
+    },
+    "H07": {
+      "mode": "bag",
+      "roles": [
+        "AssemblyRecord.Revision"
+      ],
+      "requires_structural_review": true
+    },
+    "H08": {
+      "mode": "bag",
+      "roles": [
+        "BOMItemRecord.Revision"
+      ],
+      "requires_structural_review": true
+    },
+    "H09": {
+      "mode": "bag",
+      "roles": [
+        "FunctionalAssociation.SourceRecordId"
+      ],
+      "requires_structural_review": true
+    },
+    "H10": {
+      "mode": "bag",
+      "roles": [
+        "ParentLink.SourceRecordId"
+      ],
+      "requires_structural_review": true
+    }
+  }
+}

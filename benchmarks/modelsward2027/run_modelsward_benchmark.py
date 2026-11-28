@@ -124,7 +124,11 @@ def main():
           stage='compilation'; t=time.perf_counter()
           sparql=compile_single_domain(record,ix[ds[0]],schema) if len(ds)==1 else compile_cross_domain(record,ix,schema,graphs,mappings)
           mark(); r['sparql']=sparql
-         if not sparql.lstrip().upper().startswith('SELECT'): raise ValueError('Only SELECT allowed')
+         if a.consolidated:
+          from direct_sparql import check_select
+          stage='query_policy'; t=time.perf_counter()
+          check_select(sparql); mark()
+         elif not sparql.lstrip().upper().startswith('SELECT'): raise ValueError('Only SELECT allowed')
          if s['expected_behavior']=='reject':
           r['status']='negative_compiled_not_executed'; r['negative_outcome']='accepted_plan_review_required'; continue
          if not a.graphdb_url:

@@ -1,0 +1,4 @@
+# Comparative scoring (provisional)
+All methods use the same scenario contracts. Set agreement ignores duplicate entity tuples; bag agreement preserves property multiplicity. Ordered cases remain pending tie-aware review against the current snapshot. Negative cases require reason-specific review; an accepted query intercepted by the harness is false acceptance, not successful rejection. Technical errors are not refusals.
+The runner records positional set, bag and sequence agreement, not semantic correctness. Review projection roles, owner paths, filters, joins, ordering and empty answers independently. Do not count matching values alone as correct. All attempted jobs remain in denominators.
+The full reference report has not yet been independently audited. No final freeze or comparative result is claimed. All consolidated methods now share the parsed SELECT policy; PREFIX declarations are permitted. 
