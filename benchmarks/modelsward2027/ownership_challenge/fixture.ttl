@@ -1,0 +1,16 @@
+@prefix f: <https://example.org/benchmark/ownership/> .
+@prefix e: <https://example.org/ecad/> .
+f:root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ;
+ e:hasDevice f:d1,f:d2 ; e:hasSymbol f:s1,f:s2 ; e:hasElectricalNet f:n1 .
+f:d1 a e:Device ; e:hasLocalId "DEV-001" ; e:hasEndPoint f:de1,f:de2 ; e:hasPLCEndPoint f:dp1 .
+f:d2 a e:Device ; e:hasLocalId "SHARED" ; e:hasEndPoint f:de3 .
+f:s1 a e:Symbol ; e:hasLocalId "SYM-001" ; e:hasEndPoint f:se1 ; e:hasPLCEndPoint f:sp1 .
+f:s2 a e:Symbol ; e:hasLocalId "SHARED" ; e:hasEndPoint f:se2 .
+f:n1 a e:ElectricalNet ; e:hasLocalId "NET-001" .
+f:de1 a e:EndPoint ; e:hasLocalId "DEP-001" ; e:hasAddress "X1" .
+f:de2 a e:EndPoint ; e:hasLocalId "DEP-002" .
+f:de3 a e:EndPoint ; e:hasAddress "X3" .
+f:se1 a e:EndPoint ; e:hasLocalId "SEP-001" ; e:hasAddress "X2" .
+f:se2 a e:EndPoint ; e:hasLocalId "SEP-002" ; e:hasAddress "X4" .
+f:dp1 a e:PLCEndPoint ; e:hasLocalId "DPLC-001" ; e:hasAddress "I10.0" .
+f:sp1 a e:PLCEndPoint ; e:hasLocalId "SPLC-001" ; e:hasAddress "Q10.0" .

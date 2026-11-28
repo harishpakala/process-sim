@@ -1,0 +1,162 @@
+[
+  {
+    "id": "OQ01",
+    "questions": [
+      "Show LocalId values of ECAD Device entities.",
+      "List LocalId values of ECAD Device entities.",
+      "Retrieve LocalId values of ECAD Device entities.",
+      "Return LocalId values of ECAD Device entities.",
+      "Display LocalId values of ECAD Device entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasDevice ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "DEV-001",
+      "SHARED"
+    ]
+  },
+  {
+    "id": "OQ02",
+    "questions": [
+      "Show LocalId values of ECAD Symbol entities.",
+      "List LocalId values of ECAD Symbol entities.",
+      "Retrieve LocalId values of ECAD Symbol entities.",
+      "Return LocalId values of ECAD Symbol entities.",
+      "Display LocalId values of ECAD Symbol entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasSymbol ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "SYM-001",
+      "SHARED"
+    ]
+  },
+  {
+    "id": "OQ03",
+    "questions": [
+      "Show LocalId values of ECAD ElectricalNet entities.",
+      "List LocalId values of ECAD ElectricalNet entities.",
+      "Retrieve LocalId values of ECAD ElectricalNet entities.",
+      "Return LocalId values of ECAD ElectricalNet entities.",
+      "Display LocalId values of ECAD ElectricalNet entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasElectricalNet ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "NET-001"
+    ]
+  },
+  {
+    "id": "OQ04",
+    "questions": [
+      "Show LocalId values of ECAD Device EndPoint entities.",
+      "List LocalId values of ECAD Device EndPoint entities.",
+      "Retrieve LocalId values of ECAD Device EndPoint entities.",
+      "Return LocalId values of ECAD Device EndPoint entities.",
+      "Display LocalId values of ECAD Device EndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasDevice/e:hasEndPoint ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "DEP-001",
+      "DEP-002"
+    ]
+  },
+  {
+    "id": "OQ05",
+    "questions": [
+      "Show LocalId values of ECAD Symbol EndPoint entities.",
+      "List LocalId values of ECAD Symbol EndPoint entities.",
+      "Retrieve LocalId values of ECAD Symbol EndPoint entities.",
+      "Return LocalId values of ECAD Symbol EndPoint entities.",
+      "Display LocalId values of ECAD Symbol EndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasSymbol/e:hasEndPoint ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "SEP-001",
+      "SEP-002"
+    ]
+  },
+  {
+    "id": "OQ06",
+    "questions": [
+      "Show LocalId values of ECAD Device PLCEndPoint entities.",
+      "List LocalId values of ECAD Device PLCEndPoint entities.",
+      "Retrieve LocalId values of ECAD Device PLCEndPoint entities.",
+      "Return LocalId values of ECAD Device PLCEndPoint entities.",
+      "Display LocalId values of ECAD Device PLCEndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasDevice/e:hasPLCEndPoint ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "DPLC-001"
+    ]
+  },
+  {
+    "id": "OQ07",
+    "questions": [
+      "Show LocalId values of ECAD Symbol PLCEndPoint entities.",
+      "List LocalId values of ECAD Symbol PLCEndPoint entities.",
+      "Retrieve LocalId values of ECAD Symbol PLCEndPoint entities.",
+      "Return LocalId values of ECAD Symbol PLCEndPoint entities.",
+      "Display LocalId values of ECAD Symbol PLCEndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasSymbol/e:hasPLCEndPoint ?owner . ?owner e:hasLocalId ?value . }",
+    "expected": [
+      "SPLC-001"
+    ]
+  },
+  {
+    "id": "OQ08",
+    "questions": [
+      "Show Address values of ECAD Device EndPoint entities.",
+      "List Address values of ECAD Device EndPoint entities.",
+      "Retrieve Address values of ECAD Device EndPoint entities.",
+      "Return Address values of ECAD Device EndPoint entities.",
+      "Display Address values of ECAD Device EndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasDevice/e:hasEndPoint ?owner . ?owner e:hasAddress ?value . }",
+    "expected": [
+      "X1",
+      "X3"
+    ]
+  },
+  {
+    "id": "OQ09",
+    "questions": [
+      "Show Address values of ECAD Symbol EndPoint entities.",
+      "List Address values of ECAD Symbol EndPoint entities.",
+      "Retrieve Address values of ECAD Symbol EndPoint entities.",
+      "Return Address values of ECAD Symbol EndPoint entities.",
+      "Display Address values of ECAD Symbol EndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasSymbol/e:hasEndPoint ?owner . ?owner e:hasAddress ?value . }",
+    "expected": [
+      "X2",
+      "X4"
+    ]
+  },
+  {
+    "id": "OQ10",
+    "questions": [
+      "Show Address values of ECAD Device PLCEndPoint entities.",
+      "List Address values of ECAD Device PLCEndPoint entities.",
+      "Retrieve Address values of ECAD Device PLCEndPoint entities.",
+      "Return Address values of ECAD Device PLCEndPoint entities.",
+      "Display Address values of ECAD Device PLCEndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasDevice/e:hasPLCEndPoint ?owner . ?owner e:hasAddress ?value . }",
+    "expected": [
+      "I10.0"
+    ]
+  },
+  {
+    "id": "OQ11",
+    "questions": [
+      "Show Address values of ECAD Symbol PLCEndPoint entities.",
+      "List Address values of ECAD Symbol PLCEndPoint entities.",
+      "Retrieve Address values of ECAD Symbol PLCEndPoint entities.",
+      "Return Address values of ECAD Symbol PLCEndPoint entities.",
+      "Display Address values of ECAD Symbol PLCEndPoint entities."
+    ],
+    "sparql": "PREFIX e: <https://example.org/ecad/> SELECT ?value WHERE { ?root a <http://org.example.com/aHR0cHM6Ly9leGFtcGxlLm9yZy9zbS9lY2Fk/> ; e:hasSymbol/e:hasPLCEndPoint ?owner . ?owner e:hasAddress ?value . }",
+    "expected": [
+      "Q10.0"
+    ]
+  }
+]
